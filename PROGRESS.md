@@ -274,9 +274,28 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
   - **Tests:** `pagetest.mjs families` 12/12; `famtest-page.mjs` 7/7; pageshot defaults and all-V2 clean; token lint
     clean.
   - **Background tasks:** none; no sub-agents.
-- **Next:** the last inner page, Contact and Price My Roof (≥6 sections × 2 versions), reusing the Price tool and the
-  area search with their recorded unmet rules fixed (validate on blur, field width, clear button, typo tolerance,
-  echo the query on no match).
+- **CONTACT AND PRICE MY ROOF PAGE COMPLETE** (`#/contact`): 7 sections × 2 versions: cover (`ct-cover`), Price My
+  Roof (`ct-price`), send a message (`ct-message`, default V2 with a live preview), hours and address (`ct-visit`,
+  default V2 with an open-now line in Shoreview time), towns we serve (`ct-area`), questions (`ct-faq`), and the call
+  band (`ct-call`).
+  - **Gates:** `GATE-ct-cover` … `GATE-ct-call` (7 files; defaults weighted 7.65-8.25).
+  - **Recorded unmet rules now met** in the Contact versions: Price My Roof validates on blur and its footprint field is
+    9ch; the town search has a clear button, typo tolerance and echoes the query on no match. (The homepage price and
+    area sections are unchanged, as judged; the fixes were carried to the reuse, as recorded at those gates.)
+  - **FAQ:** six entries in Owl's own words (Owl's FAQ block, storm page) or the lock; the warranty answer uses the lock
+    ("up to 50 years"), not Owl's FAQ wording.
+  - **Message form:** posts nothing; it opens the visitor's own email or text app, pre-filled, and says so.
+  - **Site-wide:** Contact added to the desktop nav (⟦S1450⟧); the header no longer wraps at 1024-1279px (the Call
+    button reads "Call" there).
+  - **Skills read BEFORE building** (logged): ⟦S1438⟧ doherty-threshold, plus the form, search, error, feedback and FAQ
+    skills already logged. Every tag cited in the seven gates is in the read log.
+  - **Tests:** `contacttest.mjs` 26/26; `msg2.mjs` 2/2; `pagetest.mjs` 12/12 on each of storm, nest, families,
+    contact; `routetest.mjs` 10/10 (42 sections); header at 1024/1180/1280: no wrap, no overlap; pageshot defaults
+    and all-V2 clean on home, services and contact; token lint clean.
+  - **Background tasks:** none; no sub-agents.
+- **ALL 6 PAGES BUILT:** Home 11 sections, Services 6, Storm damage 6, Protect Your Nest 6, Our families 6, Contact and
+  Price My Roof 7: 42 sections, each with exactly two versions and a gate.
+- **Next:** a whole-site pass (every page at 1440/768/390, defaults and all-V2, reduced motion), then a final site gate.
 - **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.

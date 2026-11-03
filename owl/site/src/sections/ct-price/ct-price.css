@@ -1,0 +1,32 @@
+/* Price My Roof (Contact). V1: Quiet Cubes (one object, two controls, instant feedback). V2: S1457 three named steps
+   with visible progress. Both fix the homepage tool's recorded unmet rules (S1442): validation on blur, never per
+   keystroke; a footprint field sized to its input (about 7 characters). */
+.kp-v1,.kp-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.kp1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:center}
+.kp1-lead{display:grid;gap:var(--space-16)}
+.kp1-lead .t-body{margin:0;max-width:34rem}
+.kp1-card,.kp2-card{display:grid;gap:var(--space-16);padding:var(--space-32);background:var(--surface-page);border:1.5px solid var(--text-primary);border-radius:var(--radius-m)}
+.kp-roof{display:block;width:100%;max-width:24rem;height:auto;overflow:visible}
+.kp-gable{fill:var(--surface-alt);stroke:var(--text-primary);stroke-width:4;stroke-linejoin:round;transition:d var(--dur-normal) var(--ease-travel)}
+.kp-courses{fill:none;stroke:var(--line-control);stroke-width:2;transition:d var(--dur-normal) var(--ease-travel)}
+.kp-svc{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.kp-svc legend{width:100%;margin-bottom:var(--space-8)}
+.kp-svc label{position:relative;display:inline-flex;align-items:center;min-height:var(--space-48);padding:0 var(--space-16);border:1.5px solid var(--line-control);border-radius:var(--radius-pill);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer}
+.kp-svc input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.kp-svc label:has(input:checked){border-color:var(--text-primary);background:var(--text-primary);color:var(--surface-page)}
+.kp-svc label:has(input:focus-visible){outline:2px solid var(--focus-ring);outline-offset:3px}
+.kp-field .kp-area{width:9ch;max-width:100%;box-sizing:content-box}
+.kp-pitch{width:100%;max-width:24rem;accent-color:var(--accent-fill);min-height:var(--space-48)}
+.kp-read{margin:0;font:var(--type-subheading)}
+.kp-sq{font-size:var(--step-3)}
+.kp-ctas,.kp2-nav{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+@media (max-width:1023px){.kp1-grid{grid-template-columns:1fr;gap:var(--space-32)}}
+.kp2-wrap{max-width:44rem}
+.kp2-card{margin-top:var(--space-32)}
+.kp2-progress{display:grid;gap:var(--space-8);margin:0}
+.kp2-bar{display:block;height:var(--space-4);background:var(--line-control);border-radius:2px;overflow:hidden}
+.kp2-bar i{display:block;height:100%;width:33.4%;background:var(--accent-fill);transition:width var(--dur-normal) var(--ease-out)}
+.kp2-pane{min-height:12rem;align-content:start}
+.kp2-pane[hidden]{display:none}
+.kp2-pane.field label.t-sub{font:var(--type-subheading)}
+.kp2-nav [hidden]{display:none}

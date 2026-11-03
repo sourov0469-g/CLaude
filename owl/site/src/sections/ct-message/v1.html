@@ -1,0 +1,13 @@
+<section class="km-v1" aria-labelledby="km1-h">
+  <div class="wrap km1-wrap">
+    <div class="sec-head"><p class="t-label t-num">02 · Send a message</p><h2 id="km1-h" class="t-heading">Tell us about your roof.</h2><p class="t-body muted">Write it here, then send it from your own email or text app. Nothing is stored on this page.</p></div>
+    <form class="km-form" novalidate data-km>
+      <div class="field"><label for="km-name-1">Your name</label><input id="km-name-1" name="name" autocomplete="name" required aria-describedby="km-name-1-e" class="km-w-name"><span class="err" id="km-name-1-e">Enter your name so Owl knows who to ask for.</span></div>
+      <div class="field"><label for="km-tel-1">Phone <span class="muted">(optional)</span></label><input id="km-tel-1" name="tel" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="km-tel-1-e" class="km-w-tel" data-check="tel"><span class="err" id="km-tel-1-e">Enter a 10-digit phone number, like 651 977 6027, or leave it empty.</span></div>
+      <div class="field"><label for="km-zip-1">ZIP code <span class="muted">(optional)</span></label><input id="km-zip-1" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="5" aria-describedby="km-zip-1-e" class="km-w-zip" data-check="zip"><span class="err" id="km-zip-1-e">Enter a 5-digit ZIP code, like 55126, or leave it empty.</span></div>
+      <div class="field"><label for="km-msg-1">What's going on with your roof?</label><textarea id="km-msg-1" name="msg" rows="5" required aria-describedby="km-msg-1-e" placeholder="For example: a few shingles came off in last night's wind."></textarea><span class="err" id="km-msg-1-e">Write a sentence or two about your roof.</span></div>
+      <div class="km-ctas"><button type="submit" class="btn" data-via="email">Send by email</button><button type="submit" class="btn btn--secondary" data-via="sms">{{IC:communication-text}}Send by text</button></div>
+      <p class="km-status t-small" role="status"></p>
+    </form>
+  </div>
+</section>

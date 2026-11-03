@@ -1,0 +1,21 @@
+/* Send a message. S1442 form-design: one column, top labels, optional fields marked, widths that hint at the input,
+   validation on blur, the error under its field; S0070: labels, autocomplete tokens, aria-invalid + describedby, focus
+   the first invalid field on send, a polite status region. V2 adds Quiet Cubes' instant feedback: a live preview of
+   the exact message that will be sent. */
+.km-v1,.km-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.km1-wrap{max-width:40rem}
+.km-form{display:grid;gap:var(--space-24);margin-top:var(--space-32)}
+.km-v2 .km-form{margin-top:0}
+.km-form .muted{font-weight:400}
+.km-form textarea{min-height:8rem;padding:var(--space-12) var(--space-16);font:var(--type-body);color:var(--field-fg);background:var(--field-bg);border:1.5px solid var(--field-border);border-radius:var(--radius-s);resize:vertical}
+.km-form .field[data-invalid] textarea{border-color:var(--field-error);border-width:2px}
+.km-w-name{max-width:24rem}
+.km-w-tel{max-width:14ch}
+.km-w-zip{max-width:7ch}
+.km-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.km-status{margin:0;min-height:1.5em}
+.km2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-64);align-items:start}
+.km2-preview{position:sticky;top:calc(var(--header-h,0px) + var(--space-32));display:grid;gap:var(--space-12);padding:var(--space-24);background:var(--surface-alt);border-radius:var(--radius-m)}
+.km2-preview .t-label{margin:0}
+.km2-pre{margin:0;white-space:pre-wrap;font-family:var(--font-body);color:var(--text-primary);background:var(--surface-page);padding:var(--space-16);border-radius:var(--radius-s);border:1px solid var(--line-control)}
+@media (max-width:1023px){.km2-grid{grid-template-columns:1fr;gap:var(--space-32)}.km2-preview{position:static}}

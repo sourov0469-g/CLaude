@@ -168,5 +168,39 @@
     "default": 1
    }
   ]
+ },
+ {
+  "id": "contact",
+  "title": "Contact and Price My Roof",
+  "sections": [
+   {
+    "id": "ct-cover",
+    "default": 1
+   },
+   {
+    "id": "ct-price",
+    "default": 1
+   },
+   {
+    "id": "ct-message",
+    "default": 2
+   },
+   {
+    "id": "ct-visit",
+    "default": 2
+   },
+   {
+    "id": "ct-area",
+    "default": 1
+   },
+   {
+    "id": "ct-faq",
+    "default": 1
+   },
+   {
+    "id": "ct-call",
+    "default": 1
+   }
+  ]
  }
 ]

@@ -1,0 +1,22 @@
+<section class="km-v2" aria-labelledby="km2-h">
+  <div class="wrap km2-grid">
+    <form class="km-form" novalidate data-km>
+      <div class="sec-head"><p class="t-label t-num">02 · Send a message</p><h2 id="km2-h" class="t-heading">Write to Owl.</h2></div>
+      <div class="field"><label for="km-name-2">Your name</label><input id="km-name-2" name="name" autocomplete="name" required aria-describedby="km-name-2-e" class="km-w-name"><span class="err" id="km-name-2-e">Enter your name so Owl knows who to ask for.</span></div>
+      <div class="field"><label for="km-tel-2">Phone <span class="muted">(optional)</span></label><input id="km-tel-2" name="tel" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="km-tel-2-e" class="km-w-tel" data-check="tel"><span class="err" id="km-tel-2-e">Enter a 10-digit phone number, like 651 977 6027, or leave it empty.</span></div>
+      <div class="field"><label for="km-zip-2">ZIP code <span class="muted">(optional)</span></label><input id="km-zip-2" name="zip" autocomplete="postal-code" inputmode="numeric" maxlength="5" aria-describedby="km-zip-2-e" class="km-w-zip" data-check="zip"><span class="err" id="km-zip-2-e">Enter a 5-digit ZIP code, like 55126, or leave it empty.</span></div>
+      <div class="field"><label for="km-msg-2">What's going on with your roof?</label><textarea id="km-msg-2" name="msg" rows="5" required aria-describedby="km-msg-2-e" placeholder="For example: a few shingles came off in last night's wind."></textarea><span class="err" id="km-msg-2-e">Write a sentence or two about your roof.</span></div>
+      <div class="km-ctas"><button type="submit" class="btn" data-via="email">Send by email</button><button type="submit" class="btn btn--secondary" data-via="sms">{{IC:communication-text}}Send by text</button></div>
+      <p class="km-status t-small" role="status"></p>
+    </form>
+    <aside class="km2-preview" aria-label="What Owl will receive">
+      <p class="t-label">What Owl will receive</p>
+      <pre class="km2-pre t-small">Hi Owl Roofing,
+
+(your message)
+
+– (your name)</pre>
+      <p class="t-small muted">It opens in your own email or text app, addressed to info@owlroofing.com or (651) 977-6027. You can still edit it there.</p>
+    </aside>
+  </div>
+</section>

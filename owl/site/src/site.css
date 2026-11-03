@@ -6,6 +6,9 @@ svg.logo{display:block;width:100%;height:auto}
 main:focus{outline:none}
 .tel-btn{min-height:var(--space-40);padding:var(--space-8) var(--space-16);font-size:var(--step-m1)}
 @media (max-width:1023px){.owl-header .tel-btn{display:none}}
+.owl-header .logo{flex:none}
+.owl-header nav a,.tel-btn{white-space:nowrap}
+@media (min-width:1024px) and (max-width:79.99rem){.owl-header nav{gap:var(--space-16)}.owl-header .tel-num{display:none}}
 .todo{padding:var(--section-minor) var(--gutter);border-top:1px dashed var(--line-control)}
 .vpanel{position:fixed;right:var(--space-16);bottom:var(--space-96);z-index:80;background:var(--surface-raised);border:1px solid var(--line-control);border-radius:var(--radius-m);box-shadow:var(--shadow-lifted);padding:var(--space-16);display:grid;gap:var(--space-8);max-height:70vh;overflow:auto;font:var(--type-small)}
 .vpanel[hidden]{display:none}

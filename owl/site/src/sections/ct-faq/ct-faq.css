@@ -1,0 +1,13 @@
+/* FAQ. S0618 with a small set (6 entries, fewer than 8): a simple list, no categories, no search. Answers are Owl's own
+   published words (Owl's FAQ block and storm page) or the facts lock; nothing invented. V1: accordion (native details).
+   V2: all answers open as a definition list. */
+.kf-v1,.kf-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.kf1-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.kf1-lead{display:grid;gap:var(--space-16)}
+.kf1-lead .t-body{margin:0}
+.kf1-acc .t-body{padding:0 0 var(--space-24);max-width:40rem}
+@media (max-width:1023px){.kf1-grid{grid-template-columns:1fr;gap:var(--space-24)}}
+.kf2-list{margin:var(--space-48) 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-32) var(--space-48)}
+.kf2-list div{display:grid;gap:var(--space-8);padding-top:var(--space-16);border-top:1.5px solid var(--text-primary)}
+.kf2-list dd{margin:0}
+@media (max-width:767px){.kf2-list{grid-template-columns:1fr}}

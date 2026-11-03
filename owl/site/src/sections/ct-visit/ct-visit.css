@@ -1,0 +1,19 @@
+/* Hours and address. V1: Longbow plainness (the facts, set as an address card). V2: the week as a grid with today marked
+   and an honest open-now line computed in Shoreview's time zone (S1438: instant, no spinner). Facts only from the lock. */
+.kv-v1,.kv-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.kv1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:start}
+.kv1-card{font-style:normal;display:grid;gap:var(--space-16);justify-items:start;padding:var(--space-32);background:var(--surface-page);border-radius:var(--radius-m);border:1.5px solid var(--text-primary)}
+.kv1-card p{margin:0}
+@media (max-width:1023px){.kv1-grid{grid-template-columns:1fr;gap:var(--space-24)}}
+.kv2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:center}
+.kv2-lead{display:grid;gap:var(--space-16)}
+.kv2-lead address{font-style:normal}
+.kv2-now{margin:0}
+.kv2-week{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--space-8)}
+.kv2-week li{display:grid;gap:var(--space-8);justify-items:center;padding:var(--space-16) var(--space-4);background:var(--surface-page);border:1.5px solid var(--line-control);border-radius:var(--radius-s);font:var(--type-small);text-align:center}
+.kv2-week b{font:700 var(--step-0)/1 var(--font-display)}
+.kv2-week .is-closed{color:var(--text-muted);background:transparent}
+.kv2-week .is-today{border-color:var(--text-primary);box-shadow:inset 0 calc(var(--space-4) * -1) 0 var(--accent-fill)}
+@media (max-width:1023px){.kv2-grid{grid-template-columns:1fr;gap:var(--space-32)}}
+@media (max-width:767px){.kv2-week{grid-template-columns:1fr}.kv2-week li{grid-template-columns:4rem 1fr;justify-items:start;text-align:left;padding:var(--space-12) var(--space-16)}}
+.kv-v1 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}

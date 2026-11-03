@@ -358,3 +358,10 @@ against it. The rule stands: read before building.
     bugs; similarity can override proximity to mark a boundary.
   - Interactive elements share a property non-interactive ones lack; code categories redundantly (shape + colour), and
     test groupings without colour.
+
+## Contact and Price My Roof page (read in full by tag BEFORE building; form, search, error, feedback and FAQ skills
+## were already logged above and are re-applied here)
+- ⟦S1438⟧ doherty-threshold
+  - Under 400ms keeps flow; 0-100ms feels instant; button feedback within 100ms; search results should start before
+    400ms; never flash a spinner for work that finishes faster.
+  - It is about perceived waiting, not deliberate motion: a 200ms transition is fine.

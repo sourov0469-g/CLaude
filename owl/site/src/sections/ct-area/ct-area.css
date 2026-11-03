@@ -1,0 +1,23 @@
+/* Towns we serve. V1 fixes the homepage search's recorded unmet rules (S1453): a clear button once there is a query,
+   typo tolerance (edit distance), the query echoed on no match, a result count. V2: Owl's own map beside the list. */
+.ka-v1,.ka-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.ka1-grid,.ka2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.ka1-tool{display:grid;gap:var(--space-16);justify-items:start;position:sticky;top:calc(var(--header-h,0px) + var(--space-32))}
+.ka1-tool .t-label,.ka1-tool .t-heading{margin:0}
+.ka-field{width:100%;max-width:24rem}
+.ka-box{position:relative}
+.ka-box input{width:100%;box-sizing:border-box;padding-right:var(--space-48)}
+.ka-box input::-webkit-search-cancel-button{display:none}
+.ka-clear{position:absolute;right:0;top:0;width:var(--space-48);height:var(--space-48);display:grid;place-items:center;border:0;background:transparent;color:var(--text-primary);cursor:pointer;border-radius:var(--radius-s)}
+.ka-out{margin:0;min-height:3em}
+.ka-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.ka-list li{transition:opacity var(--dur-fast) linear}
+.ka-list li.is-hit{font-weight:700}
+.ka-list li.is-hit mark{background:var(--accent-fill);color:var(--text-primary);padding:0 var(--space-2)}
+.ka-list li.is-dim{opacity:.35}
+.ka2-map{margin:0;display:grid;gap:var(--space-8)}
+.ka2-map img{width:100%;height:auto;border-radius:var(--radius-m);display:block}
+.ka2-copy{display:grid;gap:var(--space-16)}
+.ka2-copy .t-label,.ka2-copy .t-heading{margin:0}
+@media (max-width:1023px){.ka1-grid,.ka2-grid{grid-template-columns:1fr;gap:var(--space-32)}.ka1-tool{position:static}}
+.ka-clear[hidden]{display:none}

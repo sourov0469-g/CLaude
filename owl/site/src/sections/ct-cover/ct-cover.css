@@ -1,0 +1,23 @@
+/* Contact cover. V1: the number as the event (AirPods: a numeral as full-screen event) on the lawn ground. V2: S1444
+   Hick's law, three ways to reach Owl as three equal cards (S1427: one set). */
+.kc-v1,.kc-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0 var(--section-default)}
+.kc-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.kc-v1 > .wrap{position:relative;z-index:1}
+.kc1-copy{display:grid;gap:var(--space-24);justify-items:start}
+.kc1-copy .t-body{margin:0;max-width:40rem}
+.kc1-num{font:800 calc(var(--step-5) * 1.7)/1 var(--font-display);letter-spacing:-0.03em;color:var(--text-primary);text-decoration:none}
+.kc1-num:hover{color:var(--accent-text)}
+.kc1-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.kc1-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--space-24);margin-top:var(--space-64);border-top:1.5px solid var(--text-primary);background:var(--surface-page)}
+.kc1-index a{display:grid;grid-template-columns:auto 1fr auto;gap:var(--space-12);align-items:center;padding:var(--space-16) 0;min-height:var(--space-48);color:var(--text-primary);text-decoration:none;font:var(--type-body)}
+.kc1-index a span{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.kc1-index a .icon{transition:transform var(--dur-fast) var(--ease-out)}
+.kc1-index a:hover .icon{transform:translateX(var(--space-8))}
+@media (max-width:1023px){.kc1-index{grid-template-columns:1fr 1fr}.kc-bg{display:none}}
+@media (max-width:767px){.kc1-num{font-size:var(--step-4)}.kc1-index{grid-template-columns:1fr}.kc1-index a{border-bottom:1px solid var(--line-control)}}
+.kc2-ways{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-16)}
+.kc2-ways a{display:grid;gap:var(--space-8);align-content:start;height:100%;padding:var(--space-32);border:1.5px solid var(--text-primary);border-radius:var(--radius-m);color:var(--text-primary);text-decoration:none;transition:transform var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out)}
+.kc2-ways a:hover{transform:translateY(calc(var(--space-4) * -1));box-shadow:0 var(--space-4) 0 var(--accent-fill)}
+.kc2-ways li:first-child a{background:var(--accent-fill);border-color:var(--accent-fill)}
+.kc2-mail{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:767px){.kc2-ways{grid-template-columns:1fr}}

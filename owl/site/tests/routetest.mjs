@@ -13,7 +13,7 @@ await p.goto('file://' + process.argv[2] + '#/services/repair', { waitUntil: 'lo
 ok('deep link #/services/repair lands on the repair chapter', await p.evaluate(() => !document.querySelector('.page[data-page="services"]').hidden && Math.abs(document.getElementById('s-repair').getBoundingClientRect().top) < 200));
 await p.click('.owl-header > a[href="#/home"]'); await p.waitForTimeout(300);
 ok('logo returns Home', await p.evaluate(() => !document.querySelector('.page[data-page="home"]').hidden));
-ok('version panel lists all 23 sections', await p.evaluate(() => document.querySelectorAll('#vlist .vrow').length === 23));
+ok('version panel lists all 42 sections', await p.evaluate(() => document.querySelectorAll('#vlist .vrow').length === 42));
 ok('every section has exactly two versions', await p.evaluate(() => [...document.querySelectorAll('.sec')].every(s => s.querySelectorAll(':scope > .ver').length === 2)));
 ok('no element id is duplicated in the file', await p.evaluate(() => { const ids = [...document.querySelectorAll('[id]')].map(e => e.id); return ids.length === new Set(ids).size; }), '');
 ok('no JS errors', !errs.length, errs.join('|'));
