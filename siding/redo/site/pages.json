@@ -766,8 +766,49 @@
       "Three distance bands"
      ]
     ]
+   },
+   {
+    "slot": "sa5",
+    "name": "Book",
+    "mod": "p_sa5",
+    "obj": "PSa5",
+    "v": [
+     [
+      "a",
+      "Not sure? Ask"
+     ],
+     [
+      "b",
+      "We've worked in"
+     ],
+     [
+      "c",
+      "Two lines"
+     ]
+    ]
    }
   ],
-  "contact": []
+  "contact": [
+   {
+    "slot": "ct1",
+    "name": "Ways to reach us",
+    "mod": "p_ct1",
+    "obj": "PCt1",
+    "v": [
+     [
+      "a",
+      "Four lines, set large"
+     ],
+     [
+      "b",
+      "The contact card"
+     ],
+     [
+      "c",
+      "Pick a way"
+     ]
+    ]
+   }
+  ]
  }
 }
