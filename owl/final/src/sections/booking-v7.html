@@ -1,0 +1,53 @@
+<section class="sec book7" id="book-7" aria-labelledby="bk7-h">
+<style>
+.book7{overflow:hidden}
+.book7 .hd{text-align:center;margin-bottom:clamp(20px,3vw,40px)}
+.book7 .lede{margin:12px auto 0;max-width:46ch}
+.book7 .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,30px);max-width:1080px;margin:0 auto;padding:22px clamp(14px,2vw,26px) 0;border-radius:26px 26px 0 0;background:linear-gradient(180deg,#EDE4D2,#E4D9C2);box-shadow:inset 0 -14px 0 #B48A55}
+.book7 .bay{position:relative;aspect-ratio:3/5;max-height:440px;perspective:900px;overflow:hidden;border-radius:10px 10px 0 0}
+.book7 .frame{position:absolute;inset:0;border-radius:10px 10px 0 0;background:#F1EFE6;box-shadow:inset 0 0 0 10px #F1EFE6,inset 0 0 0 12px #C9C0AC}
+.book7 .way{position:absolute;inset:12px 12px 0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:18px 12px 18px 24%;border-radius:4px 4px 0 0;background:radial-gradient(120% 90% at 50% 30%,#FFE9B8,#F6C25F 70%,#EAA221);text-align:center}
+.book7 .way b{font-size:clamp(18px,1.8vw,22px);font-weight:900}
+.book7 .way a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:14px;background:#17111D;color:#F1EFE6;font-weight:800;font-size:clamp(15px,1.5vw,18px);text-decoration:none;box-shadow:0 4px 0 #000;overflow-wrap:anywhere}
+.book7 .way a:focus-visible{outline:3px solid #17111D;outline-offset:3px}
+.book7 .way p{margin:0;font-size:15px;font-weight:700;color:#3A2A10}
+.book7 .door{position:absolute;z-index:2;inset:12px 12px 0;padding:0;border-radius:4px 4px 0 0;transform-origin:left center;transform:rotateY(var(--ry,0deg));transition:transform .9s cubic-bezier(.3,1.2,.4,1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.2),12px 0 24px -16px rgba(23,17,29,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--t);cursor:pointer;backface-visibility:hidden}
+.book7 .door::before,.book7 .door::after{content:"";position:absolute;left:14%;right:14%;height:30%;border-radius:4px;box-shadow:inset 0 0 0 3px rgba(0,0,0,.18)}
+.book7 .door::before{top:8%}.book7 .door::after{bottom:8%}
+.book7 .door .no{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#FBFAF6;color:#17111D;font-weight:900;font-size:20px;box-shadow:0 3px 0 rgba(0,0,0,.25);z-index:1}
+.book7 .door .lb{position:relative;font-weight:900;font-size:clamp(17px,1.7vw,21px);z-index:1}
+.book7 .door .knob{position:absolute;right:12%;top:54%;width:14px;height:14px;border-radius:50%;background:#EAA221;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.book7 .bay:hover .door:not([aria-expanded="true"]){--ry:16deg}
+/* front doors swing in, away from the street */
+.book7 .door[aria-expanded="true"]{--ry:84deg}
+.book7 .door:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.book7 .step{height:14px;margin:0 -6px;border-radius:4px;background:#C9C0AC}
+@media (max-width:760px){.book7 .row{grid-template-columns:minmax(0,1fr);max-width:360px}.book7 .bay{aspect-ratio:6/5}}
+@media (prefers-reduced-motion:reduce){.book7 .door{transition:none}.book7 .bay:hover .door:not([aria-expanded="true"]){--ry:0deg}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Booking</span><h2 class="h2" id="bk7-h" style="margin-top:12px">Knock Knock</h2>
+  <p class="lede rv">Three ways in to book your Wise Check. Knock on whichever door suits you.</p></div>
+ <div class="row" data-owl="say:Knock knock"></div>
+</div>
+<script>
+OWL.reg('booking','7',function(root){
+  var row = root.querySelector('.row'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var D = [
+    {lb:'Call us', c:'#EAA221', t:'#17111D', in:'<b>Call Owl Roofing</b><a href="tel:+16519776027">(651) 977-6027</a><p>Mon–Sat, 08:00–18:00</p>'},
+    {lb:'Write to us', c:'#17111D', t:'#F1EFE6', in:'<b>Email any time</b><a href="mailto:info@owlroofing.com?subject=Wise%20Check%20request">info@owlroofing.com</a><p>We’ll reply during working hours.</p>'},
+    {lb:'Find us', c:'#3F6E8C', t:'#FBFAF6', in:'<b>Owl Roofing LLC</b><p>1000 County Rd E #230<br>Shoreview, MN 55126</p><p>Mon–Sat, 08:00–18:00</p>'}];
+  var doors = D.map(function(d, i){ var bay = document.createElement('div'); bay.className = 'bay';
+    bay.innerHTML = '<div class="frame" aria-hidden="true"></div>'
+      + '<button class="door" type="button" aria-expanded="false" aria-controls="bk7-in' + i + '" style="--c:' + d.c + ';--t:' + d.t + '"><span class="no" aria-hidden="true">' + (i + 1) + '</span><span class="lb">' + d.lb + '</span><span class="knob" aria-hidden="true"></span></button>'
+      + '<div class="way" id="bk7-in' + i + '" inert>' + d.in + '</div>';
+    var wrap = document.createElement('div'); wrap.appendChild(bay); var st = document.createElement('div'); st.className = 'step'; st.setAttribute('aria-hidden', 'true'); wrap.appendChild(st); row.appendChild(wrap);
+    var b = bay.querySelector('.door'); b.addEventListener('click', function(){ open(b.getAttribute('aria-expanded') === 'true' ? -1 : i); }); return b; });
+  function open(n){ doors.forEach(function(b, j){ var on = j === n, inn = root.querySelector('#bk7-in' + j); b.setAttribute('aria-expanded', on); if (on) inn.removeAttribute('inert'); else inn.setAttribute('inert', ''); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(row);
+});
+</script>
+</section>

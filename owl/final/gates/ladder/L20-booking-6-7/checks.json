@@ -1,0 +1,251 @@
+[
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "book"
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Work Order"
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "locked contacts: only (651) 977-6027; honest hand-off wording",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "an empty sheet asks for the name first and does not stamp",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "filling the sheet ticks the checklist, chips choose one",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "a valid sheet hands off to email: honest message, sheet lifts, stamp \"Over to your email\"",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "the stamp never says sent or booked",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "book"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Knock Knock"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "three doors: call, write, find",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "closed doors keep their way in out of reach (inert)",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "door 1 swings in on the locked phone and hours",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "the open door stays inside its frame (swings in, not out)",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "opening door 2 closes door 1; email is the locked address",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "keyboard opens door 3 on the locked address",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "Tab from an open door goes straight to its way in (the phone link)",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

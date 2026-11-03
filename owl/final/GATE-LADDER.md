@@ -614,3 +614,29 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Family 7's long captions ran onto the photos; they were shortened, and the phone prints got room for two lines.
 - The community print covered the patch on phones; phones now get a taller board with the patch at the top.
+
+## L20 · Booking 6 + 7 · checks 38/38 · evidence `gates/ladder/L20-booking-6-7/` · Booking now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Booking 6 · Work Order** | Lando Norris (bespoke craft object) | The form as a crew clipboard: a ruled work-order sheet under a steel clip ("Owl Roofing · Work order · Wise Check") with name, phone and address written on its lines, "What's going on?" chips, and a note. A checklist beside it ticks as the sheet fills. A valid submit hands the sheet to the visitor's own email app (`OWL.bookForm`), lifts the top sheet and stamps it "Over to your email". The phone sits on the board's strip. | 8.4 | 8.6 | 8.2 | 8.6 | **8.46** |
+| **Booking 7 · Knock Knock** | Cowboy (warmth, people first) | Three front doors on a porch strip: 1 Call us (amber), 2 Write to us (ink), 3 Find us (blue), each with a numbered plaque and knob. Pointing opens a door a crack; pressing swings it in on warm light and the way in: the tel link and hours, the email link, or the office address and hours. One open at a time; closed doors are inert; Tab from an open door lands on its link. | 8.4 | 8.4 | 8.2 | 8.6 | **8.40** |
+
+**Truth:**
+- Only the locked contacts appear: (651) 977-6027, info@owlroofing.com, Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126, Mon–Sat 08:00–18:00.
+- Booking 6 never claims a request was saved, sent, booked or confirmed (tested on the page text and the stamp). It says "Nothing is sent until you send it."
+- Roofer and life check: front doors swing in, so Booking 7's doors open inward.
+
+**Checks run:** the generic gate, plus:
+- Booking 6: locked phone and honest wording; an empty submit asks for the name, focuses it and doesn't stamp; filling the sheet ticks all four lines and chips pick one; a valid submit shows the honest hand-off message and the stamp; the stamp has no sent or booked wording.
+- Booking 7: three doors; closed panels inert; door 1 shows the tel link and hours; the open door stays inside its frame; opening door 2 closes door 1 and shows the locked email; the keyboard opens door 3 on the address; Tab from an open door lands on its link.
+
+**Ledger:**
+- **Booking 6:** form rules and hand-off ⟦S1442⟧; checklist ticks and stamp ⟦S0405⟧; keys ⟦S1388⟧; title ⟦S0451⟧.
+- **Booking 7:** door swing ⟦S0409⟧; disclosure a11y (aria-expanded, inert, tab order) ⟦S0910⟧; keys ⟦S1388⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Booking 7's door first swung outward, past 90°, toward the viewer, and its 3D projection flooded the page; doors now swing in, up to 84°, inside a clipped frame.
+- A panel class named `.in` collided with a global class and covered the section; it is renamed `.way`.
+- Booking 6's back sheet covered the phone strip; it was shortened.
+
+**Second pass of the ladder complete:** every non-hero slot now stands at 7 (Video, Explore, Wise Check, Protect, Services, Reviews, Area, Family, Booking), and the hero at 10. The homepage regression (`home-verify`) passes 50/50 after the pass. Next pass: V8 + V9 for Video → Booking.

@@ -273,3 +273,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   Roofing · Family-owned · Est. 2025 · Shoreview, MN") whose stitches sew themselves on. Drag a print anywhere (it
   lifts, tilts and settles with a damped spring); focus a print and move it with the arrow keys; "Tidy Up" eases
   them all home. Skills: ⟦S1018⟧ draggable a11y, ⟦S0489⟧ settle, ⟦S0407⟧ stitch draw-on, ⟦S1388⟧ keys.
+
+## L20 · Booking 6 + 7 (Booking stands at 5: V1 form, V2 build your visit, V3 take our card, V4 pick a day, V5 open now?)
+- **Booking 6 · "Work Order"** — reference **Lando Norris** (bespoke craft object). The booking form as a crew's
+  clipboard: a ruled work-order sheet under a steel clip, with fields written on its lines (name, phone, address),
+  "What's going on?" chips, and a note. Filling it in ticks the sheet's checklist; submitting validates, hands the
+  details to the visitor's own email app (`OWL.bookForm`, mailto), lifts the top sheet as if torn off and stamps
+  it "Over to your email". It never claims a request was saved or sent. The phone (651) 977-6027 sits on the
+  clipboard's back strip. Skills: ⟦S1442⟧ form rules, ⟦S0405⟧ micro-interaction, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+- **Booking 7 · "Knock Knock"** — reference **Cowboy** (warmth, people first). Three front doors in a row, each a
+  way in: 1 Call us (tel (651) 977-6027), 2 Write to us (info@owlroofing.com), 3 Find us (Owl Roofing LLC, 1000
+  County Rd E #230, Shoreview, MN 55126 · Mon–Sat 08:00–18:00). Pointing at a door opens it a crack (small 3D);
+  pressing it swings it open on warm light and the way in; one door open at a time; closed doors are inert. Skills:
+  ⟦S0409⟧ door swing, ⟦S0910⟧ disclosure a11y, ⟦S1388⟧ keys, ⟦S0451⟧ title.

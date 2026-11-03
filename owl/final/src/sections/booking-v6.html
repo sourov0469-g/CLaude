@@ -1,0 +1,82 @@
+<section class="sec book6" id="book-6" aria-labelledby="bk6-h">
+<style>
+.book6{overflow:hidden}
+.book6 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,60px);align-items:center}
+.book6 .lede{margin:12px 0 18px;max-width:34ch}
+.book6 .list{display:grid;gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.book6 .list li{display:flex;align-items:center;gap:10px;font-weight:700;color:#6B6570;transition:color .3s}
+.book6 .list li i{display:grid;place-items:center;width:24px;height:24px;border-radius:7px;border:2px solid #B5AE9E;transition:background .3s,border-color .3s}
+.book6 .list li i::after{content:"";width:10px;height:6px;border-left:3px solid #17111D;border-bottom:3px solid #17111D;transform:rotate(-45deg) translate(1px,-1px);opacity:0;transition:opacity .2s}
+.book6 .list li.ok{color:#17111D}
+.book6 .list li.ok i{background:#EAA221;border-color:#EAA221}
+.book6 .list li.ok i::after{opacity:1}
+.book6 .board{position:relative;padding:58px 22px 22px;border-radius:22px;background:linear-gradient(160deg,#B98C55,#9C7448);box-shadow:inset 0 2px 0 rgba(255,255,255,.25),0 44px 70px -40px rgba(23,17,29,.6);max-width:620px}
+.book6 .clip{position:absolute;left:50%;top:-14px;width:180px;height:66px;margin-left:-90px;border-radius:14px 14px 10px 10px;background:linear-gradient(180deg,#D6DADE,#9AA3A8);box-shadow:0 6px 10px -4px rgba(23,17,29,.5),inset 0 2px 0 #fff;z-index:3}
+.book6 .clip::after{content:"";position:absolute;left:50%;top:12px;width:56px;height:18px;margin-left:-28px;border-radius:9px;background:#7C868C;box-shadow:inset 0 2px 3px rgba(0,0,0,.35)}
+.book6 .back{position:absolute;left:22px;right:22px;bottom:64px;top:62px;border-radius:6px;background:#F1EFE6;transform:rotate(-1.4deg);box-shadow:0 2px 4px rgba(23,17,29,.2)}
+.book6 .sheet{position:relative;padding:26px 26px 22px;border-radius:6px;background:repeating-linear-gradient(180deg,#FFFDF7 0 39px,#D9E3EA 39px 40px);background-position:0 18px;box-shadow:0 2px 6px rgba(23,17,29,.18);transition:transform .9s cubic-bezier(.6,-.2,.3,1),opacity .9s}
+.book6 .sheet::before{content:"";position:absolute;left:58px;top:0;bottom:0;width:2px;background:rgba(214,98,98,.45)}
+.book6 .sheet.off{transform:translate(18px,-26px) rotate(3deg)}
+.book6 .ttl{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px 44px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:#8E5A12}
+.book6 .fld{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:end;gap:10px;margin-left:44px}
+.book6 .fld label{font-weight:800;font-size:15px;padding-bottom:10px}
+.book6 .fld input,.book6 .fld textarea{min-height:44px;padding:8px 4px;border:0;border-bottom:2px solid #9C9585;background:transparent;font:inherit;font-size:18px;font-weight:600;color:#17111D;border-radius:0}
+.book6 .fld textarea{resize:vertical;min-height:72px}
+.book6 .fld input:focus-visible,.book6 .fld textarea:focus-visible{outline:none;border-bottom-color:#EAA221;box-shadow:0 3px 0 #EAA221}
+.book6 .fld input[aria-invalid="true"]{border-bottom-color:#b3261e}
+.book6 .q{margin:14px 0 6px 44px;font-weight:800;font-size:15px}
+.book6 .chips{margin-left:44px}
+.book6 .chips button{font-size:15px}
+.book6 .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:18px 0 0 44px}
+.book6 .form-msg{margin:10px 0 0 44px}
+.book6 .stamp{position:absolute;right:26px;top:70px;padding:8px 14px;border:4px solid #2E7D32;border-radius:10px;color:#2E7D32;font-weight:900;font-size:18px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-8deg) scale(1.6);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none;background:rgba(255,253,247,.85)}
+.book6 .stamp.on{opacity:1;transform:rotate(-8deg) scale(1)}
+.book6 .strip{position:relative;margin-top:14px;text-align:center;color:#FBFAF6;font-weight:800;font-size:16px}
+.book6 .strip a{color:#FBFAF6;display:inline-flex;align-items:center;min-height:44px}
+@media (max-width:900px){.book6 .g{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.book6 .fld{grid-template-columns:1fr;gap:0;margin-left:14px}.book6 .fld label{padding-bottom:0;padding-top:8px}.book6 .q,.book6 .chips,.book6 .row,.book6 .form-msg,.book6 .ttl{margin-left:14px}.book6 .sheet::before{left:22px}.book6 .board{padding:56px 12px 16px}.book6 .back{left:12px;right:12px;bottom:58px}}
+@media (prefers-reduced-motion:reduce){.book6 .sheet,.book6 .stamp,.book6 .list li,.book6 .list li i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Booking</span>
+   <h2 class="h2" id="bk6-h" style="margin-top:12px">Work Order</h2>
+   <p class="lede rv">Fill in the sheet the way our crew would. We’ll call to confirm a time for your Wise Check.</p>
+   <ul class="list" aria-label="Sheet checklist"><li data-k="name"><i aria-hidden="true"></i>Your name</li><li data-k="phone"><i aria-hidden="true"></i>A phone number</li><li data-k="address"><i aria-hidden="true"></i>The address</li><li data-k="see"><i aria-hidden="true"></i>What’s going on (optional)</li></ul>
+   <p style="font-size:15px;color:var(--ink-70);max-width:36ch">Sending opens your own email app with the sheet filled in. Nothing is sent until you send it.</p>
+  </div>
+  <div class="board" data-owl="say:Fill it in">
+   <span class="clip" aria-hidden="true"></span><span class="back" aria-hidden="true"></span>
+   <form class="sheet" novalidate aria-labelledby="bk6-h">
+    <p class="ttl"><span>Owl Roofing · Work order</span><span>Wise Check</span></p>
+    <div class="fld"><label for="bk6-n">Name</label><input id="bk6-n" data-n="name" autocomplete="name" required></div>
+    <div class="fld"><label for="bk6-p">Phone</label><input id="bk6-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+    <div class="fld"><label for="bk6-a">Address</label><input id="bk6-a" data-n="address" autocomplete="street-address" required></div>
+    <p class="q" id="bk6-q">What’s going on?</p>
+    <div class="chips" data-n="What's going on" role="group" aria-labelledby="bk6-q"><button type="button" aria-pressed="false">A leak or a stain</button><button type="button" aria-pressed="false">Storm damage</button><button type="button" aria-pressed="false">An older roof</button><button type="button" aria-pressed="false">Planning a new roof</button><button type="button" aria-pressed="false">Just checking</button></div>
+    <div class="fld" style="margin-top:10px"><label for="bk6-x">Note</label><textarea id="bk6-x" data-n="note" rows="2"></textarea></div>
+    <div class="row"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Open My Email</button></div>
+    <p class="form-msg" aria-live="polite"></p>
+    <span class="stamp" aria-hidden="true">Over to your email</span>
+   </form>
+   <p class="strip">Rather talk? <a href="tel:+16519776027">(651) 977-6027</a></p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('booking','6',function(root){
+  var form = root.querySelector('form'), msg = root.querySelector('.form-msg'), stamp = root.querySelector('.stamp'), list = root.querySelector('.list'), chips = [].slice.call(root.querySelectorAll('.chips button')), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  chips.forEach(function(c){ c.addEventListener('click', function(){ var on = c.getAttribute('aria-pressed') !== 'true'; chips.forEach(function(x){ x.setAttribute('aria-pressed', x === c && on); }); tick(); }); });
+  function tick(){ ['name', 'phone', 'address'].forEach(function(k){ var i = form.querySelector('[data-n="' + k + '"]'); list.querySelector('[data-k="' + k + '"]').classList.toggle('ok', i.value.trim().length > (i.type === 'tel' ? 6 : 1)); });
+    list.querySelector('[data-k="see"]').classList.toggle('ok', chips.some(function(c){ return c.getAttribute('aria-pressed') === 'true'; })); }
+  form.addEventListener('input', tick);
+  OWL.bookForm(form, msg);
+  /* after the shared handler: only a valid hand-off lifts the sheet and stamps it */
+  form.addEventListener('submit', function(){ setTimeout(function(){ if (/err/.test(msg.className)){ stamp.classList.remove('on'); form.classList.remove('off'); return; } form.classList.add('off'); stamp.classList.add('on'); setTimeout(function(){ form.classList.remove('off'); }, 1400); }, 0); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(form);
+});
+</script>
+</section>
