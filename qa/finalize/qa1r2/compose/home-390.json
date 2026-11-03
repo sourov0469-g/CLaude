@@ -1,0 +1,24 @@
+{
+ "page": "home",
+ "W": 390,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [],
+   "widow": [
+    "hero h1.hh last line \"correctly.\" of \"Built properly. Permitted correctly.\""
+   ],
+   "measure": [],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [],
+   "widow": [
+    "hero h1.hh last line \"correctly.\" of \"Built properly. Permitted correctly.\""
+   ],
+   "measure": [],
+   "errors": []
+  }
+ }
+}

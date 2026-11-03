@@ -563,6 +563,7 @@ input, textarea { caret-color: var(--color-accent-text); }
   }
   .mbar .mbar__book { background: var(--color-accent-solid); color: var(--color-text-on-accent); box-shadow: none; }
   body { padding-bottom: 80px; }
+  :root { --mbar-h: calc(64px + env(safe-area-inset-bottom, 0px)); }   
 }
 
 
@@ -1410,7 +1411,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <div class="kg__head">
         <div>
           <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Before you sign</p>
-          <h2 class="t-head" id="kitchen-close-h-2">Three things you get first. <span class="acc">Three things we will not say.</span></h2>
+          <h2 class="t-head" id="kitchen-close-h-2">Three things first. <span class="acc">Three we won’t say.</span></h2>
         </div>
       </div>
       <div class="kg__grid">
@@ -1977,7 +1978,15 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     if (!EZ.motionOn() || !EZ.fine() || typeof Lenis === 'undefined') return;
     lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 0.9, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
-    lenisTick = function (t) { lenis && lenis.raf(t * 1000); };
+    // QA-1: Lenis 1.3.27 never settles when its target ends in exactly .5 (it rounds the value, approaching from below,
+    // and the target to different integers), so it kept writing the scroll position every frame and overrode the
+    // keyboard, the scrollbar and anchor jumps until the next wheel turn. Within 0.01px of the target, land it.
+    lenisTick = function (t) {
+      if (!lenis) return;
+      var a = lenis.animate;
+      if (a && a.isRunning && a.lerp && Math.abs(a.to - a.value) < .01) a.value = a.to;
+      lenis.raf(t * 1000);
+    };
     gsap.ticker.add(lenisTick);
     EZ.lenis = lenis;
   }
@@ -2410,6 +2419,9 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     EZ.booted = true;
     buildImages();
     gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, Flip, MotionPathPlugin);
+    // QA-1: the drawn frames share per-layer selectors and not every frame has every layer (a frame without a stamp);
+    // GSAP warned for each empty list (17 on Home). Every case was traced: no animation is missing.
+    gsap.config({ nullTargetWarn: false });
     gsap.defaults({ ease: 'power3.out', duration: .3 });   // §4 dosing default
     ScrollTrigger.config({ ignoreMobileResize: true });
 

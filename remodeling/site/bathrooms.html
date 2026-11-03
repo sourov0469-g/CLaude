@@ -563,6 +563,7 @@ input, textarea { caret-color: var(--color-accent-text); }
   }
   .mbar .mbar__book { background: var(--color-accent-solid); color: var(--color-text-on-accent); box-shadow: none; }
   body { padding-bottom: 80px; }
+  :root { --mbar-h: calc(64px + env(safe-area-inset-bottom, 0px)); }   
 }
 
 
@@ -1025,6 +1026,17 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (min-width: 700px) { .bb--list .bb__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s7) var(--s6); } }
 @media (min-width: 1200px) { .bb--list .bb__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .bb__head { grid-template-columns: 1fr; } }
+
+
+@media (max-width: 900px) {
+  #bath-build .ver:not(.bb--list) .bb__pin { gap: var(--s3); padding: calc(var(--nav-h) + var(--s3)) 0 calc(var(--s3) + var(--mbar-h, 0px)); }
+  #bath-build .ver:not(.bb--list) .bb__lead { font-size: .9375rem; line-height: 1.45; margin: 0; }
+  #bath-build .ver:not(.bb--list) .bb__stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: var(--s4); }
+  #bath-build .ver:not(.bb--list) .bb__window { order: -1; max-height: none; }
+  #bath-build .ver:not(.bb--list) .bb__i { align-content: start; gap: var(--s2); }
+  #bath-build .ver:not(.bb--list) .bb__p { font-size: .9375rem; line-height: 1.45; }
+}
+@media (max-width: 900px) and (max-height: 760px) { #bath-build .ver:not(.bb--list) .bb__lead { display: none; } }
 
 
 .br__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
@@ -1949,7 +1961,15 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     if (!EZ.motionOn() || !EZ.fine() || typeof Lenis === 'undefined') return;
     lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 0.9, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
-    lenisTick = function (t) { lenis && lenis.raf(t * 1000); };
+    // QA-1: Lenis 1.3.27 never settles when its target ends in exactly .5 (it rounds the value, approaching from below,
+    // and the target to different integers), so it kept writing the scroll position every frame and overrode the
+    // keyboard, the scrollbar and anchor jumps until the next wheel turn. Within 0.01px of the target, land it.
+    lenisTick = function (t) {
+      if (!lenis) return;
+      var a = lenis.animate;
+      if (a && a.isRunning && a.lerp && Math.abs(a.to - a.value) < .01) a.value = a.to;
+      lenis.raf(t * 1000);
+    };
     gsap.ticker.add(lenisTick);
     EZ.lenis = lenis;
   }
@@ -2382,6 +2402,9 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     EZ.booted = true;
     buildImages();
     gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, Flip, MotionPathPlugin);
+    // QA-1: the drawn frames share per-layer selectors and not every frame has every layer (a frame without a stamp);
+    // GSAP warned for each empty list (17 on Home). Every case was traced: no animation is missing.
+    gsap.config({ nullTargetWarn: false });
     gsap.defaults({ ease: 'power3.out', duration: .3 });   // §4 dosing default
     ScrollTrigger.config({ ignoreMobileResize: true });
 
@@ -3678,7 +3701,9 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       items.forEach(function (it, j) { it.classList.toggle('is-on', j === i); });
       if (groups) groups.forEach(function (g, j) { g.classList.toggle('is-off', j !== i); });
     }
-    var big = k.motion && matchMedia('(min-width: 901px) and (min-height: 640px)').matches;
+    // QA-1 (completion: pinned sections pin on real phone widths): the pinned build runs at every width with motion on;
+    // only reduced motion and very short screens get the list
+    var big = k.motion && matchMedia('(min-height: 560px)').matches;
     if (!big) {
       root.classList.add('bb--list');
       items.forEach(function (it, i) {
@@ -3697,7 +3722,8 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     function fresh(g, i, sel) { var out = []; g.querySelectorAll('.ly[data-l="' + i + '"]').forEach(function (l) { out = out.concat(Array.prototype.slice.call(l.querySelectorAll(sel))); }); return out; }
     groups.forEach(function (g, i) { gsap.set(fresh(g, i, DRAW), { drawSVG: '0%' }); gsap.set(fresh(g, i, FILL), { fillOpacity: 0 }); gsap.set(fresh(g, i, FADE), { opacity: 0 }); });
     var fw = 0;
-    function size() { var h = win.clientHeight; fw = h * BW / H; world.style.height = h + 'px'; world.style.width = (fw * 6) + 'px'; }
+    // QA-1: a bay is as large as the window allows in BOTH directions (a tall narrow phone used to crop the bay's left edge)
+    function size() { var h = win.clientHeight, w = win.clientWidth; fw = Math.min(h * BW / H, w); var wh = fw * H / BW; world.style.height = wh + 'px'; world.style.top = ((h - wh) / 2) + 'px'; world.style.width = (fw * 6) + 'px'; }
     size(); k.ro(win, function () { size(); ScrollTrigger.refresh(); });
     function camX(i) { return -(i * fw) + (win.clientWidth - fw) / 2; }
     gsap.set(world, { x: camX(0) });
@@ -3717,7 +3743,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     k.add(function () { it.kill(); intro.kill(); });
     tl.to({}, { duration: .5 });
     var st = ScrollTrigger.create({ trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 5.4); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
-      onUpdate: function (self) { var p = self.progress * tl.duration(); show(Math.min(5, Math.max(0, Math.floor(p + .2)))); fill.style.transform = 'scaleX(' + Math.min(1, p / 5).toFixed(4) + ')'; } });
+      onUpdate: function (self) { var p = self.progress * tl.duration(); show(Math.min(5, Math.max(0, Math.floor(p + .15)))); fill.style.transform = 'scaleX(' + Math.min(1, p / 5).toFixed(4) + ')'; } });
     show(0);
     k.add(function () { st.kill(); tl.kill(); world.innerHTML = ''; world.style.width = world.style.height = ''; gsap.set(world, { clearProps: 'transform' }); });
   } } });

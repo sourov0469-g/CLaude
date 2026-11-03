@@ -123,9 +123,14 @@
         tl.to(st, { p: 1, ease: 'none', duration: .78, onUpdate: apply })
           .to(frame, { scale: .965, ease: 'none', duration: .22 });
       } else {
-        // stacked: scroll leaves the house as it is (the picker stays readable and usable); the rail under the art, by touch,
-        // drag or keys, plays the reveal. A scroll-driven reveal here either finished before the art arrived or laid the
-        // caption over the room photo.
+        // stacked (QA-1, per the QA completion: a pin is never removed as a fix): the hero pins once the art and its finish
+        // picker are centred on screen, the reveal plays while pinned, and the pin releases [S1209 finite pin, S0186 scrub].
+        // Before, the reveal ran from the first pixel of scroll and finished before the picker ever arrived.
+        var stl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector('.hm__art'), start: 'center center', end: '+=60%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });
+        stl.to(st, { p: 1, ease: 'none', duration: 1, onUpdate: apply });
+        // a keyboard user who Tabs into the house art (the finish picker) lands at the pin's start, where the house is whole and
+        // the picker readable; without this, the focus scroll could land inside the reveal and the picker would be faded
+        k.on(root.querySelector('.hm__art'), 'focusin', function () { k.timeout(function () { var t = stl.scrollTrigger; if (t && t.progress > 0) window.scrollTo(0, Math.round(t.start)); }, 60); });   // after the browser's own focus scroll
       }
 
       /* ---------- V8's reacting background: three depths answer the pointer ---------- */

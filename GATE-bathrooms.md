@@ -1,5 +1,9 @@
 # GATE: Bathrooms page (Phase 4, part 2)
 
+> **Verdict in full format: `GATE-QA-1.md`, section "Bathrooms: verdict folded into round 1"** (completion point 2). It gives the real scorecard (weighted 7.9, PASS), references, WEB-SKILLS tags, and the defects found and fixed in QA round 1. That section supersedes the self-rating below.
+>
+> **Since this gate:** the build is no longer a list on phones. It pins at 360, 375, 390, 414, 768 and 1440 (QA-1 issues 7 to 10). The phone list remains only for reduced motion and very short screens.
+
 **Section count:** 5 sections plus the footer (inner-page rule: at least 5–6). Two are NEW.
 - **Order:** Hero → How a bath is built → **Rooms we build (NEW, ×2)** → Projects → **Time, money, call (NEW, ×2)**.
 - **Inherited versions** are in git history (`ce59679`).

@@ -1,0 +1,1679 @@
+{
+ "home": {
+  "390": {
+   "copy": [
+    {
+     "id": "hero",
+     "first": true,
+     "authored": 36,
+     "locked": 23,
+     "split": [
+      "A 7 Design, permits and construction under one contract",
+      "A 2 Built properly.",
+      "A 2 Permitted correctly.",
+      "A 12 Kitchens, bathrooms and whole homes across Miami‑Dade, Browa",
+      "A 3 Book a consultation",
+      "L 3 (754) 236‑0675",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 3 Licensed, bonded & insured ·",
+      "L 1 CBC1265280",
+      "L 12 Navy Blue Shaker Kitchen with Brass Hardware and a Custom Ra",
+      "A 10 Pick a finish. Every swatch is a kitchen we built."
+     ],
+     "head": "Built properly. Permitted correctly.",
+     "headWords": 4,
+     "supWords": 12,
+     "allWords": 59
+    },
+    {
+     "id": "proof",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Proof you can pick up.",
+     "headWords": 5,
+     "supWords": 19,
+     "allWords": 61
+    },
+    {
+     "id": "services",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Three drawing sets. One contractor.",
+     "headWords": 5,
+     "supWords": 16,
+     "allWords": 138
+    },
+    {
+     "id": "ba",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Same room. Different house.",
+     "headWords": 4,
+     "supWords": 15,
+     "allWords": 72
+    },
+    {
+     "id": "process",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Eight stages. You always know which.",
+     "headWords": 6,
+     "supWords": 19,
+     "allWords": 220
+    },
+    {
+     "id": "financing",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Which partner fits your project?",
+     "headWords": 5,
+     "supWords": 19,
+     "allWords": 196
+    },
+    {
+     "id": "work",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Our own photographs. Every room, finished.",
+     "headWords": 6,
+     "supWords": 28,
+     "allWords": 47
+    },
+    {
+     "id": "reviews",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "343 reviews. One average: 4.8 .",
+     "headWords": 5,
+     "supWords": 29,
+     "allWords": 60
+    },
+    {
+     "id": "towns",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "From our office to your street.",
+     "headWords": 6,
+     "supWords": 21,
+     "allWords": 256
+    },
+    {
+     "id": "consult",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Tell us in your own words.",
+     "headWords": 6,
+     "supWords": 26,
+     "allWords": 163
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "hero",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "proof",
+     "label": "Verify the licence",
+     "proof": true
+    },
+    {
+     "sec": "financing",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "work",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "reviews",
+     "label": "Read all 343 on Google",
+     "proof": true
+    },
+    {
+     "sec": "towns",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "consult",
+     "label": "Open in email",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "hero",
+    "proof",
+    "services",
+    "ba",
+    "process",
+    "financing",
+    "work",
+    "reviews",
+    "towns",
+    "consult"
+   ],
+   "contrast": [
+    {
+     "sec": "proof",
+     "cls": "pf__v nums",
+     "text": "104",
+     "ratio": 1,
+     "need": 3,
+     "px": 28,
+     "image": false,
+     "op": 1
+    },
+    {
+     "sec": "proof",
+     "cls": "pf__k",
+     "text": "municipalities across three counties",
+     "ratio": 1,
+     "need": 4.5,
+     "px": 13,
+     "image": false,
+     "op": 1
+    }
+   ],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": true,
+   "wheelSteps": 94,
+   "icons": [
+    {
+     "host": "lv",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "pj__hi",
+     "size": 16,
+     "stroke": 1,
+     "want": 1,
+     "ok": true
+    }
+   ],
+   "errors": []
+  },
+  "1440": {
+   "copy": [
+    {
+     "id": "hero",
+     "first": true,
+     "authored": 36,
+     "locked": 23,
+     "split": [
+      "A 7 Design, permits and construction under one contract",
+      "A 2 Built properly.",
+      "A 2 Permitted correctly.",
+      "A 12 Kitchens, bathrooms and whole homes across Miami‑Dade, Browa",
+      "A 3 Book a consultation",
+      "L 3 (754) 236‑0675",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 3 Licensed, bonded & insured ·",
+      "L 1 CBC1265280",
+      "L 12 Navy Blue Shaker Kitchen with Brass Hardware and a Custom Ra",
+      "A 10 Pick a finish. Every swatch is a kitchen we built."
+     ],
+     "head": "Built properly. Permitted correctly.",
+     "headWords": 4,
+     "supWords": 12,
+     "allWords": 59
+    },
+    {
+     "id": "proof",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Proof you can pick up.",
+     "headWords": 5,
+     "supWords": 19,
+     "allWords": 61
+    },
+    {
+     "id": "services",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Three drawing sets. One contractor.",
+     "headWords": 5,
+     "supWords": 16,
+     "allWords": 138
+    },
+    {
+     "id": "ba",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Same room. Different house.",
+     "headWords": 4,
+     "supWords": 15,
+     "allWords": 72
+    },
+    {
+     "id": "process",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Eight stages. You always know which.",
+     "headWords": 6,
+     "supWords": 19,
+     "allWords": 220
+    },
+    {
+     "id": "financing",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Which partner fits your project?",
+     "headWords": 5,
+     "supWords": 19,
+     "allWords": 196
+    },
+    {
+     "id": "work",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Our own photographs. Every room, finished.",
+     "headWords": 6,
+     "supWords": 28,
+     "allWords": 47
+    },
+    {
+     "id": "reviews",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "343 reviews. One average: 4.8 .",
+     "headWords": 5,
+     "supWords": 29,
+     "allWords": 60
+    },
+    {
+     "id": "towns",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "From our office to your street.",
+     "headWords": 6,
+     "supWords": 21,
+     "allWords": 256
+    },
+    {
+     "id": "consult",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Tell us in your own words.",
+     "headWords": 6,
+     "supWords": 26,
+     "allWords": 163
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "hero",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "proof",
+     "label": "Verify the licence",
+     "proof": true
+    },
+    {
+     "sec": "financing",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "work",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "reviews",
+     "label": "Read all 343 on Google",
+     "proof": true
+    },
+    {
+     "sec": "towns",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "consult",
+     "label": "Open in email",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "hero",
+    "proof",
+    "services",
+    "ba",
+    "process",
+    "financing",
+    "work",
+    "reviews",
+    "towns",
+    "consult"
+   ],
+   "contrast": [
+    {
+     "sec": "proof",
+     "cls": "pf__v nums",
+     "text": "104",
+     "ratio": 1,
+     "need": 3,
+     "px": 44,
+     "image": false,
+     "op": 1
+    },
+    {
+     "sec": "proof",
+     "cls": "pf__k",
+     "text": "municipalities across three counties",
+     "ratio": 1,
+     "need": 4.5,
+     "px": 13,
+     "image": false,
+     "op": 1
+    }
+   ],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": null,
+   "icons": [
+    {
+     "host": "settings__btn",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "lv",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  }
+ },
+ "kitchens": {
+  "390": {
+   "copy": [
+    {
+     "id": "kitchen-intro",
+     "first": true,
+     "authored": 31,
+     "locked": 18,
+     "split": [
+      "L 1 01",
+      "L 1 Kitchens",
+      "L 1 02",
+      "L 1 Bathrooms",
+      "L 1 03",
+      "L 2 Whole home",
+      "A 2 Kitchen remodeling",
+      "A 3 The room you",
+      "A 3 actually live in.",
+      "A 14 Layout, cabinetry, counters and the plumbing and electrical ",
+      "A 3 Book a consultation",
+      "L 3 (754) 236‑0675",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280",
+      "A 6 An Elbaz kitchen, photographed as delivered."
+     ],
+     "head": "The room you actually live in.",
+     "headWords": 6,
+     "supWords": 14,
+     "allWords": 49
+    },
+    {
+     "id": "kitchen-scope",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Three kinds of kitchen job. Which is yours?",
+     "headWords": 8,
+     "supWords": 16,
+     "allWords": 105
+    },
+    {
+     "id": "kitchen-sequence",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "In a kitchen, the sequence is the job.",
+     "headWords": 8,
+     "supWords": 9,
+     "allWords": 102
+    },
+    {
+     "id": "kitchen-work",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Real kitchens, photographed as delivered.",
+     "headWords": 5,
+     "supWords": 20,
+     "allWords": 85
+    },
+    {
+     "id": "kitchen-close",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "",
+     "headWords": 0,
+     "supWords": 0,
+     "allWords": 132
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "kitchen-intro",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "kitchen-close",
+     "label": "Book a consultation",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "kitchen-intro",
+    "kitchen-scope",
+    "kitchen-sequence",
+    "kitchen-work",
+    "kitchen-close"
+   ],
+   "contrast": [
+    {
+     "sec": "kitchen-scope",
+     "cls": "text",
+     "text": "Same layout",
+     "ratio": 1,
+     "need": 4.5,
+     "px": 7,
+     "image": false,
+     "op": 1
+    }
+   ],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": true,
+   "wheelSteps": 55,
+   "icons": [
+    {
+     "host": "lv",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  },
+  "1440": {
+   "copy": [
+    {
+     "id": "kitchen-intro",
+     "first": true,
+     "authored": 31,
+     "locked": 18,
+     "split": [
+      "L 1 01",
+      "L 1 Kitchens",
+      "L 1 02",
+      "L 1 Bathrooms",
+      "L 1 03",
+      "L 2 Whole home",
+      "A 2 Kitchen remodeling",
+      "A 3 The room you",
+      "A 3 actually live in.",
+      "A 14 Layout, cabinetry, counters and the plumbing and electrical ",
+      "A 3 Book a consultation",
+      "L 3 (754) 236‑0675",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280",
+      "A 6 An Elbaz kitchen, photographed as delivered."
+     ],
+     "head": "The room you actually live in.",
+     "headWords": 6,
+     "supWords": 14,
+     "allWords": 49
+    },
+    {
+     "id": "kitchen-scope",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Three kinds of kitchen job. Which is yours?",
+     "headWords": 8,
+     "supWords": 16,
+     "allWords": 105
+    },
+    {
+     "id": "kitchen-sequence",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "In a kitchen, the sequence is the job.",
+     "headWords": 8,
+     "supWords": 9,
+     "allWords": 102
+    },
+    {
+     "id": "kitchen-work",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Real kitchens, photographed as delivered.",
+     "headWords": 5,
+     "supWords": 20,
+     "allWords": 85
+    },
+    {
+     "id": "kitchen-close",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "",
+     "headWords": 0,
+     "supWords": 0,
+     "allWords": 132
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "kitchen-intro",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "kitchen-close",
+     "label": "Book a consultation",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "kitchen-intro",
+    "kitchen-scope",
+    "kitchen-sequence",
+    "kitchen-work",
+    "kitchen-close"
+   ],
+   "contrast": [
+    {
+     "sec": "kitchen-scope",
+     "cls": "text",
+     "text": "Same layout",
+     "ratio": 1,
+     "need": 4.5,
+     "px": 15.6,
+     "image": false,
+     "op": 1
+    }
+   ],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": null,
+   "icons": [
+    {
+     "host": "settings__btn",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "lv",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  }
+ },
+ "bathrooms": {
+  "390": {
+   "copy": [
+    {
+     "id": "bath-intro",
+     "first": true,
+     "authored": 23,
+     "locked": 39,
+     "split": [
+      "L 1 01",
+      "L 1 Kitchens",
+      "L 1 02",
+      "L 1 Bathrooms",
+      "L 1 03",
+      "L 2 Whole home",
+      "A 2 Bathroom remodeling",
+      "A 4 Down to the studs.",
+      "L 5 Waterproofed properly. Closed up once.",
+      "L 16 Waterproofing done properly, tile set square, glass and fixt",
+      "A 3 Book a consultation",
+      "L 3 (754) 236‑0675",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280",
+      "A 4 Point at a mark",
+      "A 8 Each is a part we are careful about.",
+      "A 2 As delivered"
+     ],
+     "head": "Down to the studs. Waterproofed properly. Closed up once.",
+     "headWords": 9,
+     "supWords": 16,
+     "allWords": 62
+    },
+    {
+     "id": "bath-build",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Down to the studs. Closed up once.",
+     "headWords": 7,
+     "supWords": 16,
+     "allWords": 97
+    },
+    {
+     "id": "bath-rooms",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Ten kinds of bathroom. One way to build.",
+     "headWords": 8,
+     "supWords": 21,
+     "allWords": 74
+    },
+    {
+     "id": "bath-work",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Real bathrooms, photographed as delivered.",
+     "headWords": 5,
+     "supWords": 18,
+     "allWords": 76
+    },
+    {
+     "id": "bath-close",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Time, money, and a real answer.",
+     "headWords": 6,
+     "supWords": 0,
+     "allWords": 101
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "bath-intro",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "bath-close",
+     "label": "Book a consultation",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "bath-intro",
+    "bath-build",
+    "bath-rooms",
+    "bath-work",
+    "bath-close"
+   ],
+   "contrast": [],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": true,
+   "wheelSteps": 60,
+   "icons": [
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "lv",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  },
+  "1440": {
+   "copy": [
+    {
+     "id": "bath-intro",
+     "first": true,
+     "authored": 23,
+     "locked": 39,
+     "split": [
+      "L 1 01",
+      "L 1 Kitchens",
+      "L 1 02",
+      "L 1 Bathrooms",
+      "L 1 03",
+      "L 2 Whole home",
+      "A 2 Bathroom remodeling",
+      "A 4 Down to the studs.",
+      "L 5 Waterproofed properly. Closed up once.",
+      "L 16 Waterproofing done properly, tile set square, glass and fixt",
+      "A 3 Book a consultation",
+      "L 3 (754) 236‑0675",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280",
+      "A 4 Point at a mark",
+      "A 8 Each is a part we are careful about.",
+      "A 2 As delivered"
+     ],
+     "head": "Down to the studs. Waterproofed properly. Closed up once.",
+     "headWords": 9,
+     "supWords": 16,
+     "allWords": 62
+    },
+    {
+     "id": "bath-build",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Down to the studs. Closed up once.",
+     "headWords": 7,
+     "supWords": 16,
+     "allWords": 97
+    },
+    {
+     "id": "bath-rooms",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Ten kinds of bathroom. One way to build.",
+     "headWords": 8,
+     "supWords": 21,
+     "allWords": 74
+    },
+    {
+     "id": "bath-work",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Real bathrooms, photographed as delivered.",
+     "headWords": 5,
+     "supWords": 18,
+     "allWords": 76
+    },
+    {
+     "id": "bath-close",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Time, money, and a real answer.",
+     "headWords": 6,
+     "supWords": 0,
+     "allWords": 101
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "bath-intro",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "bath-close",
+     "label": "Book a consultation",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "bath-intro",
+    "bath-build",
+    "bath-rooms",
+    "bath-work",
+    "bath-close"
+   ],
+   "contrast": [],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": null,
+   "icons": [
+    {
+     "host": "settings__btn",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "br__cam",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "lv",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  }
+ },
+ "renovation": {
+  "390": {
+   "copy": [
+    {
+     "id": "reno-intro",
+     "first": true,
+     "authored": 10,
+     "locked": 53,
+     "split": [
+      "L 1 01",
+      "L 1 Kitchens",
+      "L 1 02",
+      "L 1 Bathrooms",
+      "L 1 03",
+      "L 2 Whole home",
+      "A 2 Whole-home renovation",
+      "A 2 One contractor.",
+      "A 3 The whole house.",
+      "L 7 Modern Open-Concept Kitchen and Living Area Renovation",
+      "L 4 Modern Farmhouse Whole-Home Renovation",
+      "L 10 Whatever the scope, one team accountable for all of it.",
+      "L 17 Opening up plans, moving structure, and re-sequencing a hous",
+      "A 3 Book a consultation",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280"
+     ],
+     "head": "One contractor. The whole house.",
+     "headWords": 5,
+     "supWords": 17,
+     "allWords": 63
+    },
+    {
+     "id": "reno-services",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Beyond kitchens and baths, everything else.",
+     "headWords": 6,
+     "supWords": 16,
+     "allWords": 122
+    },
+    {
+     "id": "reno-disruption",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "One disruption. Not five.",
+     "headWords": 4,
+     "supWords": 29,
+     "allWords": 60
+    },
+    {
+     "id": "reno-permits",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Checked before anything is drawn.",
+     "headWords": 5,
+     "supWords": 32,
+     "allWords": 131
+    },
+    {
+     "id": "reno-stories",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Whole houses, photographed as delivered.",
+     "headWords": 5,
+     "supWords": 0,
+     "allWords": 62
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "reno-intro",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "reno-stories",
+     "label": "Book a consultation",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "reno-intro",
+    "reno-services",
+    "reno-disruption",
+    "reno-permits",
+    "reno-stories"
+   ],
+   "contrast": [],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": true,
+   "wheelSteps": 54,
+   "icons": [
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  },
+  "1440": {
+   "copy": [
+    {
+     "id": "reno-intro",
+     "first": true,
+     "authored": 10,
+     "locked": 53,
+     "split": [
+      "L 1 01",
+      "L 1 Kitchens",
+      "L 1 02",
+      "L 1 Bathrooms",
+      "L 1 03",
+      "L 2 Whole home",
+      "A 2 Whole-home renovation",
+      "A 2 One contractor.",
+      "A 3 The whole house.",
+      "L 7 Modern Open-Concept Kitchen and Living Area Renovation",
+      "L 4 Modern Farmhouse Whole-Home Renovation",
+      "L 10 Whatever the scope, one team accountable for all of it.",
+      "L 17 Opening up plans, moving structure, and re-sequencing a hous",
+      "A 3 Book a consultation",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280"
+     ],
+     "head": "One contractor. The whole house.",
+     "headWords": 5,
+     "supWords": 17,
+     "allWords": 63
+    },
+    {
+     "id": "reno-services",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Beyond kitchens and baths, everything else.",
+     "headWords": 6,
+     "supWords": 16,
+     "allWords": 122
+    },
+    {
+     "id": "reno-disruption",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "One disruption. Not five.",
+     "headWords": 4,
+     "supWords": 29,
+     "allWords": 60
+    },
+    {
+     "id": "reno-permits",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Checked before anything is drawn.",
+     "headWords": 5,
+     "supWords": 32,
+     "allWords": 131
+    },
+    {
+     "id": "reno-stories",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Whole houses, photographed as delivered.",
+     "headWords": 5,
+     "supWords": 0,
+     "allWords": 62
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "reno-intro",
+     "label": "Book a consultation",
+     "proof": true
+    },
+    {
+     "sec": "reno-stories",
+     "label": "Book a consultation",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "reno-intro",
+    "reno-services",
+    "reno-disruption",
+    "reno-permits",
+    "reno-stories"
+   ],
+   "contrast": [],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": null,
+   "icons": [
+    {
+     "host": "settings__btn",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "rp__list",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    }
+   ],
+   "errors": []
+  }
+ },
+ "contact": {
+  "390": {
+   "copy": [
+    {
+     "id": "contact-form",
+     "first": true,
+     "authored": 16,
+     "locked": 123,
+     "split": [
+      "A 3 Book a consultation",
+      "A 3 You will get",
+      "A 3 a real answer.",
+      "A 4 Not a callback form.",
+      "L 3 (754) 236‑0675",
+      "L 8 Closed now. Open today from 7am Miami time",
+      "L 6 Sun–Fri 7am–7pm · Saturday closed",
+      "L 8 19 W Flagler St #310, Miami, FL 33130",
+      "L 16 Send us a message to get a free consultation. Don't worry, w",
+      "L 3 To: Sales@elbazconstruction.com",
+      "L 6 Hello Elbaz Construction, my name is",
+      "L 6 . I would like to talk about",
+      "L 1 at",
+      "L 8 . The best way to reach me is by",
+      "L 3 ; my phone is",
+      "L 4 and my email is",
+      "L 0 .",
+      "L 17 I agree to be contacted by Elbaz Construction about this enq",
+      "L 26 Sending opens your email app with this letter addressed to S",
+      "A 3 Send the letter",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280"
+     ],
+     "head": "You will get a real answer.",
+     "headWords": 6,
+     "supWords": 4,
+     "allWords": 139
+    },
+    {
+     "id": "contact-visit",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Everything you need on one card.",
+     "headWords": 6,
+     "supWords": 24,
+     "allWords": 43
+    },
+    {
+     "id": "contact-area",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "104 municipalities. Three counties.",
+     "headWords": 4,
+     "supWords": 0,
+     "allWords": 220
+    },
+    {
+     "id": "contact-next",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "What happens next.",
+     "headWords": 3,
+     "supWords": 19,
+     "allWords": 77
+    },
+    {
+     "id": "contact-faq",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Questions, answered straight.",
+     "headWords": 3,
+     "supWords": 16,
+     "allWords": 257
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "contact-form",
+     "label": "Send the letter",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "contact-form",
+    "contact-visit",
+    "contact-area",
+    "contact-next",
+    "contact-faq"
+   ],
+   "contrast": [],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": true,
+   "wheelSteps": 46,
+   "icons": [
+    {
+     "host": "fm5__lamp",
+     "size": 16,
+     "stroke": 1,
+     "want": 1,
+     "ok": true
+    }
+   ],
+   "errors": []
+  },
+  "1440": {
+   "copy": [
+    {
+     "id": "contact-form",
+     "first": true,
+     "authored": 16,
+     "locked": 123,
+     "split": [
+      "A 3 Book a consultation",
+      "A 3 You will get",
+      "A 3 a real answer.",
+      "A 4 Not a callback form.",
+      "L 3 (754) 236‑0675",
+      "L 8 Closed now. Open today from 7am Miami time",
+      "L 6 Sun–Fri 7am–7pm · Saturday closed",
+      "L 8 19 W Flagler St #310, Miami, FL 33130",
+      "L 16 Send us a message to get a free consultation. Don't worry, w",
+      "L 3 To: Sales@elbazconstruction.com",
+      "L 6 Hello Elbaz Construction, my name is",
+      "L 6 . I would like to talk about",
+      "L 1 at",
+      "L 8 . The best way to reach me is by",
+      "L 3 ; my phone is",
+      "L 4 and my email is",
+      "L 0 .",
+      "L 17 I agree to be contacted by Elbaz Construction about this enq",
+      "L 26 Sending opens your email app with this letter addressed to S",
+      "A 3 Send the letter",
+      "L 1 4.8",
+      "L 0 ·",
+      "L 1 343",
+      "L 2 Google reviews",
+      "L 4 Licensed, bonded & insured · CBC1265280"
+     ],
+     "head": "You will get a real answer.",
+     "headWords": 6,
+     "supWords": 4,
+     "allWords": 139
+    },
+    {
+     "id": "contact-visit",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Everything you need on one card.",
+     "headWords": 6,
+     "supWords": 24,
+     "allWords": 43
+    },
+    {
+     "id": "contact-area",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "104 municipalities. Three counties.",
+     "headWords": 4,
+     "supWords": 0,
+     "allWords": 220
+    },
+    {
+     "id": "contact-next",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "What happens next.",
+     "headWords": 3,
+     "supWords": 19,
+     "allWords": 77
+    },
+    {
+     "id": "contact-faq",
+     "first": false,
+     "authored": 0,
+     "locked": 0,
+     "split": [],
+     "head": "Questions, answered straight.",
+     "headWords": 3,
+     "supWords": 16,
+     "allWords": 257
+    }
+   ],
+   "licence": true,
+   "ctas": [
+    {
+     "sec": "contact-form",
+     "label": "Send the letter",
+     "proof": true
+    }
+   ],
+   "sections": [
+    "contact-form",
+    "contact-visit",
+    "contact-area",
+    "contact-next",
+    "contact-faq"
+   ],
+   "contrast": [],
+   "call": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "reached": null,
+   "icons": [
+    {
+     "host": "settings__btn",
+     "size": 24,
+     "stroke": 1.5,
+     "want": 1.5,
+     "ok": true
+    },
+    {
+     "host": "fm5__lamp",
+     "size": 16,
+     "stroke": 1,
+     "want": 1,
+     "ok": true
+    }
+   ],
+   "errors": []
+  }
+ }
+}

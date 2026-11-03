@@ -1,0 +1,15 @@
+Lenis half-pixel stall: evidence (Bathrooms, second versions, 768 x 1024; tool: scratch stuck.js, 5 fresh loads)
+Sequence: wheel through the bath-build pin in 40px steps (Lenis multiplies by 0.9), wait 900 ms, then jump to the page end by script 3 times.
+
+BEFORE the fix (2 of 5 loads stalled; the page could not reach its end for as long as it was watched, 8 s in qa_pins):
+2 after pins {"y":7308,"sc":"smooth","run":true,"val":7308.054252167893,"to":7308.500000000008}
+2 end        {"y":7309,"sc":"smooth","run":true,"val":7308.499998325517,"to":7308.500000000008}   <- page end is 14236
+4 end        {"y":7309,"sc":"smooth","run":true,"val":7308.499998156869,"to":7308.500000000007}
+Cause: lenis 1.3.27 completes when Math.round(value) === Math.round(to). With to = n + .5 and value approaching from below,
+value rounds to n and to rounds to n + 1, forever. While "smooth" it ignores native scroll and rewrites the position every frame.
+Reach: every page with Lenis (fine pointer, motion on): after a wheel stop on a half pixel, End / PageDown / scrollbar / script jumps snap back.
+
+AFTER the fix (core.js lenisTick lands the value within 0.01 px of its target):
+2 end {"y":14236,"sc":false,"run":false,"val":7308.500000000007,"to":7308.500000000007}   <- the same .5 target, page end reached
+all 5 loads reach 14236; qa_pins full audit 36/36 pins + every page end at 6 widths x V1/V2; Bathrooms+Home 768/1440 x3 repeats: 0 failures.
+Visitor check (endkey.js): one wheel notch of 45 (target 40.5) then PageDown and End on all 5 pages at 768 and 1440: all reach the end, 0 errors.

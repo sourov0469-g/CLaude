@@ -408,7 +408,15 @@
     if (!EZ.motionOn() || !EZ.fine() || typeof Lenis === 'undefined') return;
     lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 0.9, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
-    lenisTick = function (t) { lenis && lenis.raf(t * 1000); };
+    // QA-1: Lenis 1.3.27 never settles when its target ends in exactly .5 (it rounds the value, approaching from below,
+    // and the target to different integers), so it kept writing the scroll position every frame and overrode the
+    // keyboard, the scrollbar and anchor jumps until the next wheel turn. Within 0.01px of the target, land it.
+    lenisTick = function (t) {
+      if (!lenis) return;
+      var a = lenis.animate;
+      if (a && a.isRunning && a.lerp && Math.abs(a.to - a.value) < .01) a.value = a.to;
+      lenis.raf(t * 1000);
+    };
     gsap.ticker.add(lenisTick);
     EZ.lenis = lenis;
   }
@@ -841,6 +849,9 @@
     EZ.booted = true;
     buildImages();
     gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, Flip, MotionPathPlugin);
+    // QA-1: the drawn frames share per-layer selectors and not every frame has every layer (a frame without a stamp);
+    // GSAP warned for each empty list (17 on Home). Every case was traced: no animation is missing.
+    gsap.config({ nullTargetWarn: false });
     gsap.defaults({ ease: 'power3.out', duration: .3 });   // §4 dosing default
     ScrollTrigger.config({ ignoreMobileResize: true });
 

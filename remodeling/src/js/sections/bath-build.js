@@ -46,7 +46,9 @@
       items.forEach(function (it, j) { it.classList.toggle('is-on', j === i); });
       if (groups) groups.forEach(function (g, j) { g.classList.toggle('is-off', j !== i); });
     }
-    var big = k.motion && matchMedia('(min-width: 901px) and (min-height: 640px)').matches;
+    // QA-1 (completion: pinned sections pin on real phone widths): the pinned build runs at every width with motion on;
+    // only reduced motion and very short screens get the list
+    var big = k.motion && matchMedia('(min-height: 560px)').matches;
     if (!big) {
       root.classList.add('bb--list');
       items.forEach(function (it, i) {
@@ -65,7 +67,8 @@
     function fresh(g, i, sel) { var out = []; g.querySelectorAll('.ly[data-l="' + i + '"]').forEach(function (l) { out = out.concat(Array.prototype.slice.call(l.querySelectorAll(sel))); }); return out; }
     groups.forEach(function (g, i) { gsap.set(fresh(g, i, DRAW), { drawSVG: '0%' }); gsap.set(fresh(g, i, FILL), { fillOpacity: 0 }); gsap.set(fresh(g, i, FADE), { opacity: 0 }); });
     var fw = 0;
-    function size() { var h = win.clientHeight; fw = h * BW / H; world.style.height = h + 'px'; world.style.width = (fw * 6) + 'px'; }
+    // QA-1: a bay is as large as the window allows in BOTH directions (a tall narrow phone used to crop the bay's left edge)
+    function size() { var h = win.clientHeight, w = win.clientWidth; fw = Math.min(h * BW / H, w); var wh = fw * H / BW; world.style.height = wh + 'px'; world.style.top = ((h - wh) / 2) + 'px'; world.style.width = (fw * 6) + 'px'; }
     size(); k.ro(win, function () { size(); ScrollTrigger.refresh(); });
     function camX(i) { return -(i * fw) + (win.clientWidth - fw) / 2; }
     gsap.set(world, { x: camX(0) });
@@ -85,7 +88,7 @@
     k.add(function () { it.kill(); intro.kill(); });
     tl.to({}, { duration: .5 });
     var st = ScrollTrigger.create({ trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 5.4); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
-      onUpdate: function (self) { var p = self.progress * tl.duration(); show(Math.min(5, Math.max(0, Math.floor(p + .2)))); fill.style.transform = 'scaleX(' + Math.min(1, p / 5).toFixed(4) + ')'; } });
+      onUpdate: function (self) { var p = self.progress * tl.duration(); show(Math.min(5, Math.max(0, Math.floor(p + .15)))); fill.style.transform = 'scaleX(' + Math.min(1, p / 5).toFixed(4) + ')'; } });
     show(0);
     k.add(function () { st.kill(); tl.kill(); world.innerHTML = ''; world.style.width = world.style.height = ''; gsap.set(world, { clearProps: 'transform' }); });
   } } });

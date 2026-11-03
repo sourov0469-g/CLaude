@@ -272,3 +272,22 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - the Consult privacy note's measure.
 - **Re-run on the fixed build:** 0 invisible focus stops in 767, 0 edge cuts, frames at 16.7 ms, 0 errors.
 - Zero sub-agents, zero background tasks.
+
+## QA-1 completion log (ELBAZ-QA-COMPLETION.md, binding from round 1)
+- **GATE-QA-1.md rewritten in the real format:**
+  - Design 40 / Usability 30 / Creativity 20 / Content 10: weighted 7.3, no category under 6, 0 vetoes, PASS (self-assessed);
+  - WEB-SKILLS tags behind each judgment;
+  - Lusion plus the scoped references;
+  - the copy-budget check;
+  - the pin audit.
+- **Folded verdicts:** the Bathrooms gate scores 7.9 and the assembly gate 7.3, both PASS. Pointer lines and corrections were added to `GATE-bathrooms.md` and `GATE-assembly.md`.
+- **Fixed under the completion:**
+  - the phone and tablet hero now pins with the art centred; the earlier rail-only fix had removed the pin, which was wrong under completion 3;
+  - swatch focus returns the page to the picker;
+  - Process and the Bathroom build now pin on phones and at 768 (no longer lists), clear of the call bar (`--mbar-h`), whole at 414 (width-aware sizing), and the label is in step with the camera;
+  - the Kitchens close V2 headline went from 11 words to 7.
+- **Found by the new pin tool:** a Lenis 1.3.27 half-pixel stall. After a wheel stop on n + .5 the page ignored keys, the scrollbar and jumps. Fixed in `core.js`; the vendored library is untouched.
+- **GSAP console:** the empty-target warnings were traced as benign and silenced.
+- **New tools:** `qa_pins.js` (6 widths × V1/V2: engage, play, release, no trap) and `qa_endkey.js`.
+- **Final checks:** 36/36 pins; every page end reached; 767 focus stops with 0 invisible; locks 0 fails; 0 console errors or warnings.
+- Zero sub-agents, zero background tasks.

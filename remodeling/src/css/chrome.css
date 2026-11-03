@@ -214,6 +214,7 @@
   }
   .mbar .mbar__book { background: var(--color-accent-solid); color: var(--color-text-on-accent); box-shadow: none; }
   body { padding-bottom: 80px; }
+  :root { --mbar-h: calc(64px + env(safe-area-inset-bottom, 0px)); }   /* QA-1: a pinned frame on a phone keeps its bottom clear of the call bar */
 }
 
 /* ---------- settings (theme + motion) [S1304 §6 hidden at rest, S1169/S1209 toggle] ---------- */

@@ -146,7 +146,9 @@
   EZ.section('process', { 1: { init: function (root, k) {
     var world = root.querySelector('.pr__world'), win = root.querySelector('.pr__window'), items = Array.prototype.slice.call(root.querySelectorAll('.pr__item')),
       rail = root.querySelector('.pr__rail'), fill = root.querySelector('.pr__fill'), pin = root.querySelector('.pr__pin');
-    var big = function () { return k.motion && matchMedia('(min-width: 901px) and (min-height: 640px)').matches; };
+    // QA-1 (completion: pinned sections pin on real phone widths): the pinned camera runs at every width with motion on;
+    // only reduced motion and very short screens get the list
+    var big = function () { return k.motion && matchMedia('(min-height: 560px)').matches; };
     var cur = -1, groups = null;
     // rail marks: one per stage, the week label lands as the stage arrives
     rail.innerHTML += items.map(function (it, i) { return '<span class="pr__mk" style="--x:' + (i / 7) + '"><span class="pr__mkn nums">' + it.querySelector('.pr__n .nums').textContent + '</span></span>'; }).join('');
@@ -184,8 +186,9 @@
     // sits in the middle of the window so its neighbours peek in at both edges (one continuous site)
     var fw = 0;
     function size() {
-      var h = win.clientHeight; fw = h * FW / 760;
-      world.style.height = h + 'px'; world.style.width = (fw * 8) + 'px';
+      // QA-1: as large as the window allows in BOTH directions (a tall narrow phone used to crop the frame's edges)
+      var h = win.clientHeight, w = win.clientWidth; fw = Math.min(h * FW / 760, w); var wh = fw * 760 / FW;
+      world.style.height = wh + 'px'; world.style.top = ((h - wh) / 2) + 'px'; world.style.width = (fw * 8) + 'px';
     }
     size(); k.ro(win, function () { size(); ScrollTrigger.refresh(); });
     function camX(i) { return -(i * fw) + (win.clientWidth - fw) / 2; }
@@ -214,7 +217,7 @@
       trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 7.2); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
       onUpdate: function (self) {
         var p = self.progress * tl.duration();
-        show(Math.min(7, Math.max(0, Math.floor(p + .2))));
+        show(Math.min(7, Math.max(0, Math.floor(p + .15))));
         fill.style.transform = 'scaleX(' + Math.min(1, p / 7).toFixed(4) + ')';
       }
     });

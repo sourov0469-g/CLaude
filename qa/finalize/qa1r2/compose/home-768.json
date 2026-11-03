@@ -1,0 +1,26 @@
+{
+ "page": "home",
+ "W": 768,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [
+    "ba img.bx__ib upscaled 1.35x (388px shown at 524px)",
+    "ba img.bx__ia upscaled 1.35x (388px shown at 524px)"
+   ],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [
+    "ba img.bx__ib upscaled 1.35x (388px shown at 524px)",
+    "ba img.bx__ia upscaled 1.35x (388px shown at 524px)"
+   ],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  }
+ }
+}

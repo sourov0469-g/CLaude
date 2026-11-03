@@ -1,11 +1,15 @@
 # GATE: Single-file assembly (Phase 5, part 3)
 
-**Delivered file:** `remodeling/site/elbaz-construction.html`, **ONE** HTML file of 3.68 MB with in-file navigation across all five pages (Home, Kitchens, Bathrooms, Renovation, Contact). Built by `remodeling/src/tools/assemble.py` from the five built pages.
+> **Verdict in full format: `GATE-QA-1.md`, section "Assembly: verdict folded into round 1"** (completion point 2). It gives the real scorecard (weighted 7.3, PASS), references and WEB-SKILLS tags.
+>
+> **Corrections to this page:** the file is now **3.65 MB**, not 3.68 MB (Phase 10 dropped the fonts of the retired backups). The "seven inert CSS selectors" were **removed in Phase 6**. Both are corrected in place below (the old wording struck through where it stood alone).
+
+**Delivered file:** `remodeling/site/elbaz-construction.html`, **ONE** HTML file of ~~3.68~~ 3.65 MB with in-file navigation across all five pages (Home, Kitchens, Bathrooms, Renovation, Contact). Built by `remodeling/src/tools/assemble.py` from the five built pages.
 - **Rebuild:** `python3 build.py`, then `python3 tools/assemble.py`.
 
 ## How it works
 - **Five isolated pages:** each page is kept whole, as its own document, shown in one full-viewport frame. Section CSS and scripts stay isolated: no class collisions between pages and a fresh runtime per page.
-- **Shared blocks stored once:** the image store (the union of all pages: 38 images) and GSAP. Each page template keeps only the list of its own images. The file is 3.68 MB, against 5.6 MB for the five pages separately.
+- **Shared blocks stored once:** the image store (the union of all pages: 38 images) and GSAP. Each page template keeps only the list of its own images. The file was 3.68 MB (now 3.65 MB), against 5.6 MB for the five pages separately.
 - **A bridge injected into every page:**
   - links to the other pages are handed to the shell;
   - outside links open in a new tab;
@@ -17,7 +21,7 @@
 ## The 104 inherited backups do not ship (Muse ruling 5)
 - The assembler **refuses to build** if any `.ver[data-v="b…"]` element is present. Measured: 0 on every page.
 - **Shipped versions:** Home 13, Kitchens 7, Bathrooms 7, Renovation 8, Contact 8, exactly the plan's counts.
-- Seven inert CSS selectors that once themed the old backups remain in the core stylesheet. They match nothing; flagged for a later tidy.
+- ~~Seven inert CSS selectors that once themed the old backups remain in the core stylesheet. They match nothing; flagged for a later tidy.~~ Removed in Phase 6.
 
 ## Verified (Playwright, foreground)
 | check | result |

@@ -1,0 +1,16 @@
+{
+ "page": "contact",
+ "W": 1440,
+ "frames": {
+  "n": 375,
+  "p50": 16.699999999999818,
+  "p95": 16.700000000000728,
+  "over50": 0,
+  "lt": 0
+ },
+ "overlaps": [
+  "contact-faq p. \"Four financing partners, n\" x contact-faq p. \"We build in 104 municipali\"",
+  "contact-faq p. \"Licensed, bonded & insured\" x contact-faq p. \"Call (754) 236‑0675: you w\""
+ ],
+ "errors": []
+}

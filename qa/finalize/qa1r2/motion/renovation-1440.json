@@ -1,0 +1,28 @@
+{
+ "page": "renovation",
+ "W": 1440,
+ "frames": {
+  "n": 698,
+  "p50": 16.699999999999818,
+  "p95": 16.799999999999272,
+  "over50": 0,
+  "lt": 0
+ },
+ "overlaps": [
+  "reno-services h3.sv__h \"Inside the house\" x reno-services p.sv__no \"R‑02 Sheet 2 of 3\"",
+  "reno-services p.sv__p \"Opening up plans, moving s\" x reno-services h3.sv__h \"Outside the house\"",
+  "reno-services p.sv__p \"Opening up plans, moving s\" x reno-services p.sv__p \"One contractor. The whole \"",
+  "reno-services dt. \"Project\" x reno-services h3.sv__h \"Bigger than one room\"",
+  "reno-services dd. \"Exterior and outdoor livin\" x reno-services h3.sv__h \"Bigger than one room\"",
+  "reno-services dt. \"Contractor\" x reno-services h3.sv__h \"Bigger than one room\"",
+  "reno-services dd. \"Licensed, bonded & insured\" x reno-services h3.sv__h \"Bigger than one room\"",
+  "reno-services p.sv__p \"Opening up plans, moving s\" x reno-services p.sv__p \"Whatever the scope, one te\"",
+  "reno-services dt. \"Project\" x reno-services dt. \"Project\"",
+  "reno-services dd. \"Whole-home renovation\" x reno-services dt. \"Project\"",
+  "reno-services dd. \"Whole-home renovation\" x reno-services dd. \"Exterior and outdoor livin\"",
+  "reno-services dt. \"Contractor\" x reno-services dt. \"Contractor\"",
+  "reno-services dd. \"Licensed, bonded & insured\" x reno-services dt. \"Contractor\"",
+  "reno-services dd. \"Licensed, bonded & insured\" x reno-services dd. \"Licensed, bonded & insured\""
+ ],
+ "errors": []
+}
