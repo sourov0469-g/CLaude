@@ -1,0 +1,676 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "superseded versions kept as inert backups (wise b1, wrap b1, wrap b2)",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "every homepage section is inside the home page",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Wise Check"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "§2.4 fix: the cross-section sits inside its card (nothing past the edge)",
+  "ok": true,
+  "detail": "0 parts outside"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "ridge vent has clear margin from the card edge",
+  "ok": true,
+  "detail": "41.9 px"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "all four ticked: needle to PROTECTED, CTA ready",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "See What We See"
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "mode radios: Heat sensor selected shows the heat lens",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "arrow keys move between modes",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "stage: arrow keys move the lens",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "camera: Take a photo adds photos to the strip and says so",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "Take a photo only shows in camera mode",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "the four parts come from Owl's published Wise Check list",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "When to Call for a Wise Check"
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "four panels from Owl's published cases, first open",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "opening a panel closes the others (aria-expanded)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "open panel shows its scene, line and focus parts",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "keyboard Enter opens a panel",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Same Job. Different Yard."
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "truthful: tells the Protect Your Nest System (wrap, passes, box), no storm claims",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "start: \"Before the job\", no debris, no wrap",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "wrap goes on the protected house only",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "tear-off: debris in the open yard, on the wrap for the protected house",
+  "ok": "ref: <Node>"
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "pass 2: magnet on the lawn, pass chip marked current",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "done: wrap off, strays swept, walk-through ticked, aftercare box; open yard keeps its nails",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "§2.4: no rain or drips anywhere on the protected house",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "Play runs the job by itself and can pause",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Wrap. Three Passes. A Box."
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "truthful: tells the Protect Your Nest System (wrap, passes, box), no storm claims",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "deck dealt: card 1 front, the rest inert",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "tabs: arrow key selects the next part (roving tabindex)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "End jumps to the aftercare box",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "swipe right goes back a card",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "captions say only what the photos show",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Every Step, Mapped on Your Yard"
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "truthful: tells the Protect Your Nest System (wrap, passes, box), no storm claims",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "scroll step 1: the wrap shows on the plan",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "step 2: debris lands on the wrap",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "step 4: magnet runs the lanes and picks up every nail",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "rail button 6: aftercare box at the door, title block says Done",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "plan stays sticky beside the steps",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

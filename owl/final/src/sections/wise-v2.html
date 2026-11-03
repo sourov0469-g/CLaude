@@ -22,12 +22,13 @@
 @keyframes w2pop{from{transform:translateY(-30px) rotate(0) scale(.6);opacity:0}}
 .wise2 .cta{margin-top:22px}
 .wise2 .shoot{margin-top:12px}
+.wise2 .shoot[hidden]{display:none}
 .wise2 .flash{position:absolute;inset:10px;border-radius:20px;background:#fff;opacity:0;pointer-events:none}
 .wise2 .flash.go{animation:w2flash .4s ease-out}
 @keyframes w2flash{from{opacity:.85}to{opacity:0}}
 .wise2 .air{stroke-dasharray:6 10;animation:w2air 1.4s linear infinite}
 @keyframes w2air{to{stroke-dashoffset:-32}}
-@media (max-width:900px){.wise2 .g{grid-template-columns:1fr}.wise2 .g>div:last-child{display:contents}.wise2 .hd{order:-2}.wise2 .stage{order:-1;cursor:default}.wise2 .modes{grid-template-columns:1fr 1fr}.wise2 .mode{grid-template-columns:1fr;padding:12px}.wise2 .mode i{grid-row:auto}.wise2 .mode span{display:none}}
+@media (max-width:900px){.wise2 .g{grid-template-columns:1fr}.wise2 .g>div:last-child{display:contents}.wise2 .hd{order:-2}.wise2 .stage{order:-1;cursor:default}.wise2 .modes{grid-template-columns:1fr 1fr}.wise2 .mode{grid-template-columns:1fr;padding:12px}.wise2 .mode i{grid-row:auto}.wise2 .mode span{display:none}.wise2 .shoot,.wise2 .cta{justify-self:start}}
 @media (prefers-reduced-motion:reduce){.wise2 .air{animation:none}.wise2 .strip figure{animation:none}}
 </style>
 <div class="wrap">

@@ -1818,3 +1818,22 @@ No HIGH colour finding is open.
   - Heroes: 85/85.
   - axe: 0.
 - Next: Round 3 (Wise Check + Protect Your Nest), only after Muse passes Round 2.
+
+## Owl Roofing · Upgrade Round 3 · Wise Check + Protect Your Nest (2026-11-03) · STOPPED at gate for Muse
+- Gate: `owl/final/GATE-UP-R3.md`. Evidence: `owl/final/gates/up-r3/`. Skill notes: `owl/skills/UP-R3-PACK.md`
+  (9 new skills, read in full, on top of the Round 1 and 2 packs).
+- New versions:
+  - Wise V2 See What We See (inspection lens, four modes);
+  - Wise V3 When to Call (Owl's four cases as opening panels);
+  - Protect V2 The Wrap. Three Passes. A Box. (3D deck);
+  - Protect V3 Every Step, Mapped on Your Yard (sticky yard plan scroll story).
+- Protect V1 rebuilt truthfully as "Same Job. Different Yard." (the wrap, three cleanup passes, the aftercare box).
+  The old storm version and the old V2s are hidden backups (`wrap-b1`, `wrap-b2`, `wise-b1`). Owner note in the gate.
+- §2.4 fixes: the Wise V1 cross-section stays inside its card; no drips on the protected house.
+- Checks:
+  - Round 3: 103/103.
+  - Homepage: 50/50.
+  - Round 2: 81/81.
+  - Heroes: 85/85.
+  - axe: 0.
+- Next: Round 4 (Services + Reviews), only after Muse passes Round 3.

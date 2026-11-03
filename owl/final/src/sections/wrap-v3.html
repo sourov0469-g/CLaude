@@ -14,10 +14,10 @@
 .wrap3 .step{min-height:min(62vh,560px);display:flex;flex-direction:column;justify-content:center;padding:20px 0 20px 26px;border-left:3px solid rgba(23,17,29,.1);transition:border-color .4s}
 .wrap3 .step:first-child{min-height:min(40vh,380px);justify-content:start;padding-top:8px}
 .wrap3 .step .n{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
-.wrap3 .step h3{font-size:clamp(24px,2.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:6px 0 10px;transition:opacity .4s,transform .5s var(--ease);opacity:.35;transform:translateX(-6px)}
-.wrap3 .step p{font-size:18px;max-width:34ch;color:var(--ink-70);transition:opacity .4s;opacity:.35}
+.wrap3 .step h3{font-size:clamp(24px,2.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:6px 0 10px;transition:color .4s,transform .5s var(--ease);color:#6B6570;transform:translateX(-6px)}
+.wrap3 .step p{font-size:18px;max-width:34ch;color:#6B6570;transition:color .4s}
 .wrap3 .step.on{border-color:var(--amber)}
-.wrap3 .step.on h3,.wrap3 .step.on p{opacity:1;transform:none}
+.wrap3 .step.on h3{color:var(--ink);transform:none}.wrap3 .step.on p{color:var(--ink-70)}
 .wrap3 .cta{margin-top:10px}
 /* plan layers */
 .wrap3 .ink{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
@@ -32,7 +32,7 @@
 @keyframes pn3ring{from{transform:scale(.6);opacity:.9}to{transform:scale(1.8);opacity:0}}
 .wrap3 .grid{animation:pn3grid 30s linear infinite}
 @keyframes pn3grid{to{transform:translate(20px,20px)}}
-@media (max-width:900px){.wrap3 .g{grid-template-columns:1fr}.wrap3 .plan{top:60px;z-index:2;padding:6px;max-width:340px;width:100%;justify-self:center}.wrap3 .rail{margin-top:4px}.wrap3 .rail button{height:40px}.wrap3 .step{min-height:44vh;padding-left:18px;justify-content:end}.wrap3 .step:first-child{min-height:24vh;justify-content:end}.wrap3 .steps{padding-bottom:20vh}.wrap3 .step p{font-size:17px}}
+@media (max-width:900px){.wrap3 .g{grid-template-columns:1fr}.wrap3 .plan{top:60px;z-index:2;padding:6px;max-width:340px;width:100%;justify-self:center}.wrap3 .rail{margin-top:4px}.wrap3 .step{min-height:44vh;padding-left:18px;justify-content:end}.wrap3 .step:first-child{min-height:24vh;justify-content:end}.wrap3 .steps{padding-bottom:20vh}.wrap3 .step p{font-size:17px}}
 @media (prefers-reduced-motion:reduce){.wrap3 .ink,.wrap3 .lay,.wrap3 .deb{transition:none}.wrap3 .ring,.wrap3 .grid{animation:none}}
 </style>
 <div class="wrap">
