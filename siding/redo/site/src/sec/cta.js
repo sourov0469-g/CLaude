@@ -45,7 +45,7 @@ window.Cta = (function () {
 
   // the stacked-course footer: board-and-batten columns standing on a sill; a small house at the end
   const FOOT = () => `<footer class="ft" aria-labelledby="ft-h"><h2 class="sr" id="ft-h">Austin Pro Siding, Windows &amp; Roofing</h2><div class="boards">
-    <section class="bd"><h3>Contact</h3><a href="tel:+15125500000">(512) 550-0000</a><a href="mailto:info@austinprosiding.com">info@austinprosiding.com</a><p>7801 N Lamar Blvd Suite C70<br>Austin TX 78752</p></section>
+    <section class="bd"><h3>Contact</h3><a href="tel:+15125500000">(512) 550-0000</a><a class="em" href="mailto:info@austinprosiding.com">info@<wbr>austinprosiding.com</a><p>7801 N Lamar Blvd Suite C70<br>Austin TX 78752</p></section>
     <section class="bd"><h3>Hours</h3>${HOURS.map((r) => `<p>${r[4]}</p>`).join('')}<a class="bk" href="${BOOK}">Book a free inspection</a></section>
     <section class="bd"><h3>Services</h3><a href="#siding">Siding</a><a href="#windows">Windows</a><a href="#roofing">Roofing</a><a href="#process">How a job runs</a><a href="#try">Try the job</a></section>
     <section class="bd"><h3>Area</h3><a href="#area">On your street</a><p>Austin, Round Rock, Cedar Park, Leander, Pflugerville, Georgetown, Buda</p></section>

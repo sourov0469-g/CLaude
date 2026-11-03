@@ -83,4 +83,4 @@
   .hero .lead{font-size:clamp(36px,10.4vw,46px)!important}.hero .sub{font-size:17px}
   .hero .ctas .btn{flex:1 1 100%}
 }
-.v3 .proof .stars{color:var(--lime)}
+.v3 .proof .stars{color:var(--green);padding:4px 7px;border-radius:999px;background:#fff}

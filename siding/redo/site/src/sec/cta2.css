@@ -24,7 +24,7 @@
 .ctC .fr b.sm{font-size:clamp(28px,2.8vw,40px);line-height:1.1;letter-spacing:-.02em}
 .ctC .fr .t{margin-top:12px;font:600 15px/1.45 var(--text);color:var(--ink-2);max-width:320px;margin-left:auto;margin-right:auto}
 .ctC .fr.last{background:var(--lime)}.ctC .fr.last b{color:var(--ink)}
-.st5r{display:inline-flex;gap:3px;color:#E3A82B}.st5r svg{width:22px;height:22px}
+.st5r{display:inline-flex;gap:3px;color:#0E3B2C}.st5r svg{width:22px;height:22px}
 .ctC .lens{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,#0B2E22 0,rgba(11,46,34,0) 22%,rgba(11,46,34,0) 78%,#0B2E22 100%)}
 .ctC .cn{position:absolute;right:42px;bottom:14px;z-index:4;font:700 12px/1 var(--text);color:#9FC3B2}.ctC .cn b{font:800 13px/1 var(--display);color:var(--lime)}
 .ctC.flow{height:auto}

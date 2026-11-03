@@ -106,7 +106,7 @@ def heroes():
 <div class="win" data-solid><div class="glass">{FILM}<div class="mull"></div>{PP}</div><div class="sill"></div></div></section>'''
     v5 = f'''<section class="hero v5" aria-labelledby="h1"><h1 class="lead" id="h1">{LEAD}</h1>
 <div class="strip" data-solid>{FILM}{PP}</div><div class="row"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
-    return {'1': v1, **new_heroes(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
+    return {'1': v1, **new_heroes(), **heroes3(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
 
 
 ALT = {'c2': 'A modern two-storey house with charcoal lap siding and warm wood soffits.',
@@ -160,9 +160,24 @@ def new_heroes():
     return {'2': v2, '3': v3, '4': v4, '5': v5, '6': v6}
 
 
+def heroes3():
+    """Heroes 7-10 (overnight brief). No split scaffold (closed); photos never captioned as the firm's jobs."""
+    ct2 = CTAS.split('<p class="proof"')[0]
+    star5 = '<span class="stars" aria-hidden="true">' + I['star'] * 5 + '</span>'
+    h7 = f'''<section class="hero h7v" aria-labelledby="h1"><canvas class="rec" aria-hidden="true"></canvas>
+<div class="copy"><p class="eye">Siding, windows &amp; roofing · Austin since 2009</p><h1 class="lead" id="h1" data-split>Our work, on the record.</h1>
+<p class="sub">886 documented projects since 2018: 312 on the map with photos + 574 more counted.</p>{ct2}
+<dl class="nums"><div><dt data-count="431">431</dt><dd>documented siding jobs</dd></div><div><dt data-count="388">388</dt><dd>documented window jobs</dd></div><div><dt>4.9</dt><dd>{star5}from 474 Google reviews</dd></div></dl></div>
+<p class="yr" aria-hidden="true">Records <b>2018</b></p><p class="cap" aria-hidden="true"><i class="d"></i>A documented project <i class="h"></i>Our office, N Lamar</p></section>'''
+    h8 = f'''<section class="hero h8v" aria-labelledby="h1"><div class="ph8"><img alt="{ALT['c1']}" decoding="async"><i class="warm" aria-hidden="true"></i></div>
+<div class="band" data-solid><i class="lap" aria-hidden="true"></i><div class="bin"><h1 class="lead" id="h1" data-split>The full wall or the whole house.</h1>
+<div class="rt"><p class="sub">{SUB}</p>{CTAS}</div></div></div></section>'''
+    return {'7': h7, '8': h8}
+
+
 VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
-             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
+             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)']],
@@ -197,7 +212,7 @@ if(h&&h.matches('.v1,.v2')){const k=h.matches('.v1')?'v1':'v2';window.__photo=ph
 const H2=window.__HERO2;if(h&&h.matches('.h4v')){h.querySelector('.back').src=H2.c3;h.querySelector('.front').src=H2.c3;}
 if(h&&h.matches('.h5v'))h.querySelectorAll('.c img').forEach(i=>i.src=H2.c2);
 if(h&&h.matches('.h6v'))h.querySelectorAll('.card').forEach(c=>c.querySelector('img').src=H2[c.dataset.img]);
-Hero2.wire();
+Hero2.wire();Hero3.wire();
 document.querySelectorAll('.slot video[data-film]').forEach(v=>{v.append(document.getElementById('film').content.cloneNode(true));
   v.poster=document.getElementById('film').dataset.poster;v.preload='auto';if(!RM){v.autoplay=true;v.load();v.play().catch(()=>{});}else v.load();});
 const PLAY=%PLAY%,PAUSE=%PAUSE%;
@@ -211,7 +226,7 @@ Scenes.wire(document);Services.wire(document);Svc2.wire(document);Vis.wire(docum
 def build():
     pre = prerender()
     css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS)
-    css += src('hero2.css') + src('fx.css') + src('hf.css') + '.slot{display:contents}'
+    css += src('hero2.css') + src('hero3.css') + src('fx.css') + src('hf.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
@@ -222,7 +237,7 @@ def build():
             slot('area', {'a': pre['aa'], 'b': pre['ab'], 'c': pre['ac'], 'd': pre['ad']}) + slot('book', {'a': pre['ca'], 'b': pre['cb'], 'c': pre['cc'], 'd': pre['cd']}))
     foot = pre['ft']
     boot = BOOT.replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + src('hero2.js') + ''.join(SEC(m + '.js') for m in MODS) + src('fx.js') + src('hf.js')
+    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + ''.join(SEC(m + '.js') for m in MODS) + src('fx.js') + src('hf.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">

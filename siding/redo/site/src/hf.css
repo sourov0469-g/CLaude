@@ -19,3 +19,6 @@
 .ft.up .bd:nth-child(2){transition-delay:.07s}.ft.up .bd:nth-child(3){transition-delay:.14s}.ft.up .bd:nth-child(4){transition-delay:.21s}.ft.up .bd:nth-child(5){transition-delay:.28s}.ft.up .bd:nth-child(6){transition-delay:.35s}
 .ft.up .bd:hover{transition-delay:0s}
 @media (prefers-reduced-motion:reduce){.hdr{transition:none}.ft .bd{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* C3: the email never splits mid-word; it may only break after the @ */
+.ft .bd .em{overflow-wrap:normal;word-break:keep-all;hyphens:none}

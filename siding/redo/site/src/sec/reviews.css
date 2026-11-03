@@ -1,8 +1,8 @@
 /* REVIEWS. A: the 4.9 laid course by course, a quote reader beside it. B: the rating as tags hung on a line. */
-.st5{position:relative;display:inline-block;height:22px;width:118px;color:#E3A82B}
+.st5{position:relative;display:inline-block;height:22px;width:118px;color:#0E3B2C}
 .st5 .bg,.st5 .fg{position:absolute;left:0;top:0;display:flex;gap:2px;height:100%}
 .st5 svg{width:22px;height:22px;flex:none}
-.st5 .bg{color:#DCD6C8}.st5 .fg{overflow:hidden;width:var(--f)}
+.st5 .bg{color:#D5E0D8}.st5 .fg{overflow:hidden;width:var(--f)}
 
 .rvA{min-height:100svh;padding-top:108px;padding-bottom:56px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,64px);align-items:center}
 .rvA .num{position:relative}
@@ -58,7 +58,7 @@
 .rvB .tr{display:inline-block;margin-top:6px;padding:3px 7px;border-radius:5px;background:var(--lime-l);font:700 11px/1.2 var(--text);color:var(--green)}
 .rvB .tag.big{width:clamp(190px,14vw,228px);padding:40px 18px 20px;background:var(--green);color:#fff;text-align:center;box-shadow:inset 0 -4px 0 var(--green-dd);cursor:default}
 .rvB .tag.big b{display:block;font:800 66px/1 var(--display);letter-spacing:-.03em}
-.rvB .tag.big .st5{margin:8px auto 0}.rvB .tag.big .st5 .bg{color:rgba(255,255,255,.25)}
+.rvB .tag.big .st5{margin:10px auto 0;box-sizing:content-box;padding:5px 8px;border-radius:999px;background:#fff}.rvB .tag.big .st5 .bg,.rvB .tag.big .st5 .fg{left:8px;top:5px}
 .rvB .tag.big span:last-child{display:block;margin-top:10px;font:700 14px/1.2 var(--text);color:#CFE6B0}
 .rvB .tag.big::before{background:var(--green-dd)}
 .rvB:not(.in) .tag{opacity:0;translate:0 -30px}.rvB .tag{transition:opacity .4s ease,translate .5s cubic-bezier(.3,1.4,.5,1),filter .2s ease}
@@ -80,3 +80,4 @@
   .rvB .tag{width:158px}.rvB .tag.big{width:190px}
 }
 @media (prefers-reduced-motion:reduce){.rvA .crs,.rvA .under,.rvA .sh,.rvA .qq.on,.rvB .tag,.rvdlg,.rvdlg .card{transition:none!important}.rvA .bar i{animation:none}}
+.rvB .tag.big .st5 .fg{color:var(--green)}

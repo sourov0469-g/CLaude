@@ -170,7 +170,7 @@
 
   function frame(now) { raf = 0; const dt = Math.min(1 / 30, t0 ? (now - t0) / 1000 : 1 / 60); t0 = now;
     // hide slower than show: fade the whole mask a little each frame
-    const keep = Math.pow(0.972, dt * 60); mx.globalCompositeOperation = 'destination-out'; mx.fillStyle = `rgba(0,0,0,${1 - keep})`; mx.fillRect(0, 0, MW, MH); mx.globalCompositeOperation = 'lighter';
+    const keep = Math.pow(FINE ? 0.972 : 0.93, dt * 60);   // touch: fades faster (C4) mx.globalCompositeOperation = 'destination-out'; mx.fillStyle = `rgba(0,0,0,${1 - keep})`; mx.fillRect(0, 0, MW, MH); mx.globalCompositeOperation = 'lighter';
     if (FINE && ptr.on) {
       const e = 1 - Math.pow(1 - 0.1, dt * 60); if (ptr.ex < 0) { ptr.ex = ptr.x; ptr.ey = ptr.y; } ptr.ex += (ptr.x - ptr.ex) * e; ptr.ey += (ptr.y - ptr.ey) * e;
       const idle = (now - ptr.last) / 1000, pres = Math.max(0, 1 - Math.max(0, idle - 1.6) / 1.2);       // a still cursor lets the world sink back after ~2 s
@@ -178,7 +178,7 @@
       if (ptr.lx >= 0) { const d = Math.hypot(ptr.x - ptr.lx, ptr.y - ptr.ly), n = Math.min(12, Math.floor(d / (R0() * 0.22))); for (let k = 1; k <= n; k++) stamp(ptr.lx + (ptr.x - ptr.lx) * k / n, ptr.ly + (ptr.y - ptr.ly) * k / n, R0() * 0.62, 0.16); if (n) { ptr.lx = ptr.x; ptr.ly = ptr.y; } } else { ptr.lx = ptr.x; ptr.ly = ptr.y; }
       if (pres > 0) live = now;
     }
-    if (!FINE && Math.abs(scrollV) > 0.5) { const y = scrollY, px = W * (0.5 + 0.34 * Math.sin(y / 520)), py = H * (0.4 + 0.22 * Math.sin(y / 380 + 1.3)); stamp(px, py, R0() * 1.3, Math.min(0.22, Math.abs(scrollV) / 260)); live = now; }
+    if (!FINE && Math.abs(scrollV) > 0.5) { const y = scrollY, px = W * (0.5 + 0.34 * Math.sin(y / 520)), py = H * (0.4 + 0.22 * Math.sin(y / 380 + 1.3)); stamp(px, py, R0() * 1.3, Math.min(0.035, Math.abs(scrollV) / 1400)); live = now; }
     scrollV *= Math.pow(0.85, dt * 60);
     // damped pointer parallax target (S1330)
     const a = 1 - Math.pow(1 - 0.055, dt * 60); damp.x += (damp.tx - damp.x) * a; damp.y += (damp.ty - damp.y) * a;
