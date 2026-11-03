@@ -17,7 +17,11 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
   (one storm slider, drops spark off the shield; porch waterfall removed) 8.08 · Wrap V2 "Every Layer, Guarded" (labels draw to
   the right layers; ventilation mapping fixed) 7.64 · Services V1 split-flap board (flaps settle, crew film in the window)
   8.04 · Services V2 clean index (open rows, hover photo) 7.70. Axe 0; interaction tests clean. Recommended: Wrap V1, Services V1.
-- **Next:** Round 4: Reviews (dial "5.0 / 90+ reviews") + Service area (Route Ribbon, abstract).
+- **ROUND 4 DONE (gate `owl/final/GATE-R4.md`, shots `owl/final/gates/r4/`):** Reviews V1 dial (count-up to 5.0, tabs turn
+  the bezel and flip the face) 7.94 · Reviews V2 clothesline (cards swing with the pointer) 7.80 · Area V1 Route Ribbon (type
+  your town, an owl rides to it) 8.08 · Area V2 Radius Rings (rough directions, ping, hours) 7.66. Every sheet quote removed;
+  reviews only as "5.0 · 90+ reviews". Axe 0; tests clean. Recommended: Reviews V1, Area V1.
+- **Next:** Round 5: Booking / Footer + "We Give a Hoot" family section (homepage complete at 10 sections).
 
 ---
 

@@ -30,7 +30,7 @@
 - "Everything Your Roof Needs" on a paper panel, with a drawn feather row (feather is one of brand-04's six motifs). Each
   service is a large row with a photo; **press to open** a short line and a link. On desktop a **larger photo follows the
   pointer** while you hover a row.
-- Photos: Owl's own crew film for replacement, repair and the Wise Check; Owl's own siding photo; the non-branded storm photo
+- Photos: Owl's own crew film for replacement, repair and the Wise Check; an illustrative siding photo from Owl's site (in its "unproven" set, so never presented as an Owl job); the non-branded storm photo
   allowed as illustrative under the asset rule (never captioned as an Owl job).
 
 ## Verification

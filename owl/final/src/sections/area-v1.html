@@ -1,0 +1,85 @@
+<section class="sec area1" id="areas" aria-labelledby="ar1-h">
+<style>
+.area1 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:18px 40px}
+.area1 .find{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 18px;border-radius:16px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 16px 28px -22px rgba(23,17,29,.5);min-width:min(100%,380px)}
+.area1 .find label{font-weight:700;white-space:nowrap}
+.area1 .find input{flex:1;min-width:0;min-height:46px;border:0;background:transparent;font:500 18px Inter,sans-serif;color:var(--ink);outline:none}
+.area1 .find:focus-within{box-shadow:0 0 0 3px var(--ink),0 16px 28px -22px rgba(23,17,29,.5)}
+.area1 .res{min-height:30px;margin-top:14px;font-weight:600;font-size:18px}
+.area1 .res b{background:var(--amber);padding:2px 8px;border-radius:6px}
+.area1 .stage{position:relative;margin-top:10px}
+.area1 svg.road{width:100%;height:auto;overflow:visible}
+.area1 .road .base{fill:none;stroke:#E2B65E;stroke-width:46;stroke-linecap:round;filter:drop-shadow(0 10px 8px rgba(199,135,26,.35))}
+.area1 .road .top{fill:none;stroke:url(#ar1g);stroke-width:40;stroke-linecap:round}
+.area1 .road .mid{fill:none;stroke:#FFF6E2;stroke-width:2.5;stroke-dasharray:14 14;opacity:.85}
+.area1 .road .trip{fill:none;stroke:#17111D;stroke-width:6;stroke-linecap:round;stroke-dasharray:0 99999;opacity:.85}
+.area1 .road .stop{cursor:pointer}
+.area1 .road .stop circle{fill:#FFFDF8;stroke:#17111D;stroke-width:2.5;transition:r .25s,fill .25s}
+.area1 .road .stop:hover circle,.area1 .road .stop.on circle{fill:var(--amber);r:11}
+.area1 .road .stop text{font:600 15px Inter,sans-serif;fill:var(--ink);opacity:0;transition:opacity .25s}
+.area1 .road .stop.lab text,.area1 .road .stop:hover text,.area1 .road .stop.on text{opacity:1}
+.area1 .road .hill{fill:#EFE3C6}
+.area1 .road .tree circle{fill:#9DB27A}.area1 .road .tree rect{fill:#8a6a3e}
+.area1 .owlrider{transition:transform .1s linear}
+.area1 .towns{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.area1 .towns button{min-height:40px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:500;font-size:15px;box-shadow:0 2px 0 rgba(23,17,29,.07);transition:background .2s,transform .2s}
+.area1 .towns button:hover{transform:translateY(-2px)}
+.area1 .towns button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.area1 .towns button.home{font-weight:700;box-shadow:0 0 0 2px var(--amber)}
+.area1 .ctas{display:flex;justify-content:flex-end;margin-top:26px}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <div><span class="kick">Service area</span><h2 class="h2 rv" id="ar1-h" style="margin-top:12px">From our nest to yours</h2></div>
+  <div class="find"><label for="ar1-q">Your town</label><input id="ar1-q" list="ar1-list" autocomplete="off" placeholder="Start typing"><datalist id="ar1-list"></datalist></div>
+ </div>
+ <p class="res" aria-live="polite">29 towns, one road from Shoreview.</p>
+ <div class="stage" data-owl="say:Hop on">
+  <svg class="road" viewBox="0 0 1200 420" role="img" aria-label="An abstract road from Owl's home base in Shoreview, with a stop for each town Owl serves. Not a map.">
+   <defs><linearGradient id="ar1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C25F"/><stop offset="1" stop-color="#EAA221"/></linearGradient></defs>
+   <path class="hill" d="M0 300 Q160 200 330 280 T700 250 T1200 280 V420 H0Z"/>
+   <path class="hill" d="M0 360 Q260 300 520 350 T1200 330 V420 H0Z" opacity=".7"/>
+   <path id="ar1-p" class="base" d="M70 330 C250 330 300 150 470 160 S640 330 800 300 S960 120 1130 130"/>
+   <use href="#ar1-p" class="top"/><use href="#ar1-p" class="mid"/>
+   <path class="trip" d="M70 330 C250 330 300 150 470 160 S640 330 800 300 S960 120 1130 130"/>
+   <g class="trees"></g>
+   <g class="stops"></g>
+   <g class="home" transform="translate(70 330)"><path d="M0 -70 c-22 0 -36 16 -36 34 0 26 36 50 36 50 s36 -24 36 -50 c0 -18 -14 -34 -36 -34z" fill="#EAA221" stroke="#C7871A" stroke-width="2"/><circle cy="-38" r="13" fill="#FFFDF8"/><text y="44" text-anchor="middle" style="font:700 17px Inter,sans-serif;fill:#17111D">Shoreview</text></g>
+   <g class="owlrider"><circle r="17" fill="#17111D"/><circle cx="-6" cy="-3" r="5" fill="#F1EFE6"/><circle cx="6" cy="-3" r="5" fill="#F1EFE6"/><circle cx="-6" cy="-3" r="2.2" fill="#17111D"/><circle cx="6" cy="-3" r="2.2" fill="#17111D"/><path d="M-2 3 L0 7 L2 3Z" fill="#EAA221"/><path d="M-12 -12 L-8 -19 L-4 -13 M12 -12 L8 -19 L4 -13" fill="#17111D"/></g>
+  </svg>
+ </div>
+ <div class="towns" role="group" aria-label="Towns Owl Roofing serves"></div>
+ <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check</a></div>
+</div>
+<script>
+OWL.reg('area','1',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var svg = root.querySelector('svg'), path = svg.querySelector('#ar1-p'), trip = svg.querySelector('.trip'), stopsG = svg.querySelector('.stops'), rider = svg.querySelector('.owlrider'), res = root.querySelector('.res'), q = root.querySelector('input'), dl = root.querySelector('datalist'), wrapT = root.querySelector('.towns');
+  var NS = 'http://www.w3.org/2000/svg', L = path.getTotalLength(), pos = {}, btns = {}, nodes = {}, curLen = 0, anim;
+  var tr = ''; [[160,250],[380,215],[600,270],[690,215],[930,250],[1060,210],[300,330],[1000,330]].forEach(function(p){ tr += '<g class="tree" transform="translate(' + p[0] + ' ' + p[1] + ')"><rect x="-3" y="0" width="6" height="16"/><circle r="15" cy="-6"/></g>'; });
+  svg.querySelector('.trees').innerHTML = tr;
+  T.forEach(function(t, i){
+    var len = i === 0 ? 0 : L*(.05 + .95*(i - 1)/(T.length - 2)); pos[t] = len;
+    var o = document.createElement('option'); o.value = t; dl.appendChild(o);
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.setAttribute('aria-pressed', 'false'); if (!i) b.className = 'home'; b.dataset.owl = 'peek';
+    b.addEventListener('click', function(){ go(t); }); wrapT.appendChild(b); btns[t] = b;
+    if (i === 0) return;
+    var p = path.getPointAtLength(len), g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'stop' + ([14, 18, 27].indexOf(i) > -1 ? ' lab' : '')); g.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ')');
+    var up = (i % 2) ? -1 : 1;
+    g.innerHTML = '<circle r="7"/><text y="' + (up*30 + 5) + '" text-anchor="middle">' + t + '</text>'; g.addEventListener('click', function(){ go(t); }); stopsG.appendChild(g); nodes[t] = g;
+  });
+  function place(len){ var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(L, len + 2)), a = Math.atan2(p2.y - p.y, p2.x - p.x)*180/Math.PI;
+    rider.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + (p.y - 4).toFixed(1) + ') rotate(' + (a*.25).toFixed(1) + ')'); trip.style.strokeDasharray = len.toFixed(1) + ' 99999'; }
+  function go(t){
+    Object.keys(btns).forEach(function(k){ btns[k].setAttribute('aria-pressed', k === t); if (nodes[k]) nodes[k].classList.toggle('on', k === t); });
+    res.innerHTML = t === 'Shoreview' ? '<b>Shoreview</b> is home base: 1000 County Rd E #230.' : 'Yes, we serve <b>' + t + '</b>. Book a Wise Check and we will come to you.';
+    var from = curLen, to = pos[t], t0 = performance.now(), d = OWL.reduce ? 1 : Math.min(1600, 300 + Math.abs(to - from)*1.2);
+    cancelAnimationFrame(anim); (function f(n){ var k = Math.min(1, (n - t0)/d), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2)/2; curLen = from + (to - from)*e; place(curLen); if (k < 1) anim = requestAnimationFrame(f); })(t0);
+  }
+  q.addEventListener('input', function(){ var v = q.value.trim().toLowerCase(); if (!v) return; var hit = T.filter(function(t){ return t.toLowerCase() === v; })[0];
+    if (hit) go(hit); else { var some = T.filter(function(t){ return t.toLowerCase().indexOf(v) === 0; }); res.textContent = some.length ? some.length + ' town' + (some.length > 1 ? 's' : '') + ' match: ' + some.join(', ') : 'Not on our list yet. Call (651) 977-6027 and ask.'; } });
+  place(0);
+  if (!OWL.reduce && 'IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); setTimeout(function(){ go('Roseville'); }, 400); } }, {threshold:.4}); io.observe(svg); }
+});
+</script>
+</section>

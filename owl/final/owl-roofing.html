@@ -1308,6 +1308,333 @@ OWL.reg('services','2',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="reviews" data-v="1">
+<section class="sec rev1" id="reviews" aria-labelledby="rv1-h">
+<style>
+.rev1 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,72px)}
+.rev1 .dial{position:relative;width:min(100%,560px);aspect-ratio:1;justify-self:center}
+.rev1 .dial svg{width:100%;height:100%;filter:drop-shadow(0 40px 50px rgba(23,17,29,.28))}
+.rev1 .bez{transform-origin:300px 300px;transition:transform 1s cubic-bezier(.3,1.3,.5,1)}
+.rev1 .face{position:absolute;inset:18%;display:grid;place-items:center;text-align:center;border-radius:50%}
+.rev1 .face>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:rotateY(80deg);transition:opacity .45s,transform .6s var(--ease)}
+.rev1 .face>div.on{opacity:1;transform:none}
+.rev1 .big{font-weight:800;font-size:clamp(72px,11vw,150px);line-height:.9;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.rev1 .mid{font-weight:800;font-size:clamp(40px,6vw,74px);line-height:1;letter-spacing:-.04em}
+.rev1 .sm{margin-top:10px;font-weight:700;font-size:clamp(16px,1.8vw,22px)}
+.rev1 .stars{display:flex;gap:6px;margin-bottom:12px}
+.rev1 .stars svg{width:clamp(22px,3vw,34px);height:auto;color:var(--amber);filter:drop-shadow(0 2px 0 #A86E12);transform:scale(0);transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.rev1 .stars.go svg{transform:scale(1)}
+.rev1 .tabs{display:grid;margin:26px 0 30px;border-top:1px solid rgba(234,162,33,.55)}
+.rev1 .tab{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;padding:18px 6px;border-bottom:1px solid rgba(234,162,33,.55);text-align:left;transition:background .25s,padding .25s}
+.rev1 .tab b{font-size:clamp(22px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;color:var(--ink-50);transition:color .25s}
+.rev1 .tab span{font-size:18px;color:var(--ink-70)}
+.rev1 .tab[aria-selected="true"]{background:rgba(234,162,33,.1);padding-left:14px}
+.rev1 .tab[aria-selected="true"] b{color:var(--ink)}
+@media (max-width:900px){.rev1 .g{grid-template-columns:1fr}.rev1 .tab{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="dial" data-owl="say:Hoo rated us? You did.">
+   <svg viewBox="0 0 600 600" aria-hidden="true">
+    <defs>
+     <linearGradient id="rv1b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8D488"/><stop offset=".35" stop-color="#EAA221"/><stop offset=".6" stop-color="#B9791A"/><stop offset=".85" stop-color="#F1BC55"/><stop offset="1" stop-color="#C7871A"/></linearGradient>
+     <linearGradient id="rv1c" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C7871A"/><stop offset=".5" stop-color="#F6CB76"/><stop offset="1" stop-color="#B9791A"/></linearGradient>
+     <radialGradient id="rv1f" cx="45%" cy="38%" r="70%"><stop offset="0" stop-color="#FBF0D2"/><stop offset=".7" stop-color="#EFD49A"/><stop offset="1" stop-color="#D9AE5C"/></radialGradient>
+     <radialGradient id="rv1bolt" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#FFF1CF"/><stop offset=".5" stop-color="#E2A33A"/><stop offset="1" stop-color="#8E5A12"/></radialGradient>
+    </defs>
+    <circle cx="300" cy="300" r="292" fill="url(#rv1b)"/>
+    <g class="bez"><circle cx="300" cy="300" r="266" fill="url(#rv1c)"/><g class="tk"></g><path d="M300 40 l10 18 h-20z" fill="#17111D"/></g>
+    <circle cx="300" cy="300" r="236" fill="url(#rv1f)"/>
+    <g class="bolts"></g>
+   </svg>
+   <div class="face" aria-live="polite">
+    <div class="on" data-f="1"><span class="stars"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span><span class="big">5.0</span><span class="sm">90+ reviews</span></div>
+    <div data-f="0"><span class="mid">Wise<br>Check</span><span class="sm">our roof inspection</span></div>
+    <div data-f="2"><span class="mid">A−</span><span class="sm">BBB Accredited</span><span class="sm" style="margin-top:4px">GAF Systems Plus</span></div>
+   </div>
+  </div>
+  <div>
+   <h2 class="h2 rv" id="rv1-h">Checked, rated, trusted</h2>
+   <div class="tabs" role="tablist" aria-label="Why homeowners trust Owl">
+    <button class="tab" role="tab" type="button" aria-selected="false" data-i="0" data-owl="peek" tabindex="-1"><b>Checked</b><span>The Wise Check, our careful roof inspection.</span></button>
+    <button class="tab" role="tab" type="button" aria-selected="true" data-i="1" data-owl="peek"><b>Rated</b><span>5.0 · 90+ reviews.</span></button>
+    <button class="tab" role="tab" type="button" aria-selected="false" data-i="2" data-owl="peek" tabindex="-1"><b>Trusted</b><span>BBB Accredited, A−. GAF Systems Plus Certified.</span></button>
+   </div>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','1',function(root){
+  var svg = root.querySelector('svg'), bez = svg.querySelector('.bez'), tabs = root.querySelectorAll('.tab'), faces = root.querySelectorAll('.face>div'), stars = root.querySelector('.stars'), big = root.querySelector('.big');
+  function pt(a, r){ var t = (a - 90)*Math.PI/180; return [300 + Math.cos(t)*r, 300 + Math.sin(t)*r]; }
+  var tk = ''; for (var i = 0; i < 120; i++){ var big5 = i % 5 === 0, a = pt(i*3, 262), b = pt(i*3, big5 ? 244 : 252); tk += '<line x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '" stroke="#17111D" stroke-opacity="' + (big5 ? .6 : .3) + '" stroke-width="' + (big5 ? 2 : 1) + '"/>'; }
+  svg.querySelector('.tk').innerHTML = tk;
+  var bo = ''; for (var k = 0; k < 10; k++){ var q = pt(k*36 + 18, 279); bo += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="6.5" fill="url(#rv1bolt)" stroke="#8E5A12" stroke-width=".8"/>'; }
+  svg.querySelector('.bolts').innerHTML = bo;
+  var angle = [-60, 0, 60];
+  function pick(i, focus){ tabs.forEach(function(t, j){ t.setAttribute('aria-selected', j === i); t.tabIndex = j === i ? 0 : -1; if (j === i && focus) t.focus(); });
+    faces.forEach(function(f){ f.classList.toggle('on', +f.dataset.f === i); }); bez.style.transform = 'rotate(' + angle[i] + 'deg)'; }
+  tabs.forEach(function(t, i){ t.addEventListener('click', function(){ pick(i); }); t.addEventListener('mouseenter', function(){ if (OWL.fine) pick(i); });
+    t.addEventListener('keydown', function(e){ var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0; if (d){ e.preventDefault(); pick((i + d + 3) % 3, true); } }); });
+  /* count up and fill the stars once, when the dial comes into view */
+  function run(){ stars.classList.add('go'); stars.querySelectorAll('svg').forEach(function(s, n){ s.style.transitionDelay = (n*.12) + 's'; });
+    if (OWL.reduce) return; var t0 = performance.now(); (function f(t){ var p = Math.min(1, (t - t0)/1100); big.textContent = (5*(1 - Math.pow(1 - p, 3))).toFixed(1); if (p < 1) requestAnimationFrame(f); })(t0); }
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); run(); } }, {threshold:.4}); io.observe(svg); } else run();
+  setTimeout(function(){ if (!stars.classList.contains('go')) run(); }, 5000);
+  pick(1);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="reviews" data-v="2">
+<section class="sec rev2" id="reviews-2" aria-labelledby="rv2-h">
+<style>
+.rev2 .panel{position:relative;padding:clamp(28px,4vw,52px) clamp(20px,4vw,52px) clamp(28px,4vw,44px);border-radius:32px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.45);overflow:hidden}
+.rev2 .sub{display:flex;align-items:center;gap:14px;margin-top:10px;font-size:clamp(22px,2.4vw,30px);font-weight:500}
+.rev2 .sub .st{display:inline-flex;gap:4px;color:var(--amber)}
+.rev2 .sub svg{width:26px;height:26px}
+.rev2 .line{position:relative;height:clamp(250px,22vw,290px);margin-top:clamp(18px,3vw,30px);touch-action:pan-y}
+.rev2 .line svg.rope{position:absolute;left:-60px;right:-60px;top:10px;width:calc(100% + 120px);height:80px;overflow:visible}
+.rev2 .card{position:absolute;top:0;width:clamp(150px,19%,230px);transform-origin:50% 0;will-change:transform;cursor:grab}
+.rev2 .card .peg{position:absolute;left:50%;top:-8px;width:22px;height:46px;margin-left:-11px;z-index:2;border-radius:5px;background:repeating-linear-gradient(180deg,#E9A63A 0 6px,#C7871A 6px 8px);box-shadow:0 3px 4px rgba(23,17,29,.3)}
+.rev2 .card .paper{margin-top:22px;min-height:clamp(150px,15vw,190px);padding:30px 18px 20px;border-radius:12px;background:#FFFDF8;box-shadow:0 18px 30px -14px rgba(23,17,29,.45),0 1px 0 rgba(23,17,29,.05);display:flex;flex-direction:column;gap:10px}
+.rev2 .card .st{display:flex;gap:3px;color:var(--amber)}
+.rev2 .card .st svg{width:18px;height:18px}
+.rev2 .card b{font-size:clamp(20px,2vw,28px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.rev2 .card span.s{font-size:15px;color:var(--ink-70)}
+.rev2 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:8px}
+.rev2 .foot p{font-size:16px;color:var(--ink-70)}
+@media (max-width:760px){.rev2 .line{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}.rev2 .card{position:relative;left:auto!important;top:auto!important;width:auto}.rev2 .foot p{display:none}.rev2 .sub{flex-wrap:wrap;gap:6px 12px}.rev2 svg.rope{display:none}}
+</style>
+<div class="wrap">
+ <div class="panel">
+  <h2 class="h2 rv" id="rv2-h">Hung out to admire</h2>
+  <p class="sub">5.0 · 90+ reviews <span class="st" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span></p>
+  <div class="line" data-owl="say:Give them a swing">
+   <svg class="rope" viewBox="0 0 1000 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 Q500 70 1000 4" fill="none" stroke="#5a4636" stroke-width="3"/></svg>
+  </div>
+  <div class="foot"><p>Give the cards a swing.</p><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check</a></div>
+ </div>
+</div>
+<script>
+OWL.reg('reviews','2',function(root){
+  var C = [['5.0','Star rating',1],['90+','Reviews',0],['A−','BBB Accredited',0],['GAF','Systems Plus Certified',0],['10-year','Workmanship warranty',0]];
+  var line = root.querySelector('.line'), rope = root.querySelector('.rope path'), cards = [];
+  var star = '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg>';
+  C.forEach(function(c, i){
+    var el = document.createElement('div'); el.className = 'card'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', c[0] + ' ' + c[1]);
+    el.innerHTML = '<span class="peg" aria-hidden="true"></span><div class="paper">' + (c[2] ? '<span class="st" aria-hidden="true">' + star.repeat(5) + '</span>' : '') + '<b>' + c[0] + '</b><span class="s">' + c[1] + '</span></div>';
+    line.appendChild(el); cards.push({el:el, a:0, v:0, x:0, base:(i % 2 ? 2.5 : -2.5)});
+  });
+  var W = 0, sag = 33;
+  function layout(){ W = line.clientWidth; var n = cards.length, cw = cards[0].el.offsetWidth;
+    cards.forEach(function(c, i){ var f = (i + .5)/n, x = f*W - cw/2; c.x = f; c.el.style.left = x + 'px';
+      var u = (f*W + 60)/(W + 120), y = 4*(1-u)*(1-u)*4/4 + 2*(1-u)*u*70 + u*u*4; c.el.style.top = (10 + y*80/80 - 10) + 'px'; }); }
+  layout(); addEventListener('resize', layout);
+  var mob = matchMedia('(max-width:760px)');
+  var last = null;
+  line.addEventListener('pointermove', function(e){ if (mob.matches) return; var r = line.getBoundingClientRect(), px = (e.clientX - r.left)/r.width;
+    var vx = last ? e.clientX - last : 0; last = e.clientX;
+    cards.forEach(function(c){ var d = Math.abs(px - c.x); if (d < .09) c.v += vx*.05*(1 - d/.09); }); });
+  line.addEventListener('pointerleave', function(){ last = null; });
+  cards.forEach(function(c){ c.el.addEventListener('pointerdown', function(e){ c.v += (Math.random() < .5 ? -1 : 1)*6; }); });
+  (function tick(){
+    var bounce = 0;
+    cards.forEach(function(c){ if (OWL.reduce || mob.matches){ c.el.style.transform = 'rotate(' + c.base + 'deg)'; return; }
+      var acc = -.04*(c.a - c.base) - .035*c.v; c.v += acc; c.a += c.v; c.a = Math.max(-38, Math.min(38, c.a)); bounce += Math.abs(c.v);
+      c.el.style.transform = 'rotate(' + c.a.toFixed(2) + 'deg)'; });
+    rope.setAttribute('d', 'M0 4 Q500 ' + (70 + Math.min(10, bounce*.6)).toFixed(1) + ' 1000 4');
+    requestAnimationFrame(tick); })();
+  setTimeout(function(){ cards.forEach(function(c, i){ c.v += (i % 2 ? 1 : -1)*3; }); }, 600);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="area" data-v="1">
+<section class="sec area1" id="areas" aria-labelledby="ar1-h">
+<style>
+.area1 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:18px 40px}
+.area1 .find{display:flex;align-items:center;gap:10px;padding:8px 8px 8px 18px;border-radius:16px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 16px 28px -22px rgba(23,17,29,.5);min-width:min(100%,380px)}
+.area1 .find label{font-weight:700;white-space:nowrap}
+.area1 .find input{flex:1;min-width:0;min-height:46px;border:0;background:transparent;font:500 18px Inter,sans-serif;color:var(--ink);outline:none}
+.area1 .find:focus-within{box-shadow:0 0 0 3px var(--ink),0 16px 28px -22px rgba(23,17,29,.5)}
+.area1 .res{min-height:30px;margin-top:14px;font-weight:600;font-size:18px}
+.area1 .res b{background:var(--amber);padding:2px 8px;border-radius:6px}
+.area1 .stage{position:relative;margin-top:10px}
+.area1 svg.road{width:100%;height:auto;overflow:visible}
+.area1 .road .base{fill:none;stroke:#E2B65E;stroke-width:46;stroke-linecap:round;filter:drop-shadow(0 10px 8px rgba(199,135,26,.35))}
+.area1 .road .top{fill:none;stroke:url(#ar1g);stroke-width:40;stroke-linecap:round}
+.area1 .road .mid{fill:none;stroke:#FFF6E2;stroke-width:2.5;stroke-dasharray:14 14;opacity:.85}
+.area1 .road .trip{fill:none;stroke:#17111D;stroke-width:6;stroke-linecap:round;stroke-dasharray:0 99999;opacity:.85}
+.area1 .road .stop{cursor:pointer}
+.area1 .road .stop circle{fill:#FFFDF8;stroke:#17111D;stroke-width:2.5;transition:r .25s,fill .25s}
+.area1 .road .stop:hover circle,.area1 .road .stop.on circle{fill:var(--amber);r:11}
+.area1 .road .stop text{font:600 15px Inter,sans-serif;fill:var(--ink);opacity:0;transition:opacity .25s}
+.area1 .road .stop.lab text,.area1 .road .stop:hover text,.area1 .road .stop.on text{opacity:1}
+.area1 .road .hill{fill:#EFE3C6}
+.area1 .road .tree circle{fill:#9DB27A}.area1 .road .tree rect{fill:#8a6a3e}
+.area1 .owlrider{transition:transform .1s linear}
+.area1 .towns{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.area1 .towns button{min-height:40px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:500;font-size:15px;box-shadow:0 2px 0 rgba(23,17,29,.07);transition:background .2s,transform .2s}
+.area1 .towns button:hover{transform:translateY(-2px)}
+.area1 .towns button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.area1 .towns button.home{font-weight:700;box-shadow:0 0 0 2px var(--amber)}
+.area1 .ctas{display:flex;justify-content:flex-end;margin-top:26px}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <div><span class="kick">Service area</span><h2 class="h2 rv" id="ar1-h" style="margin-top:12px">From our nest to yours</h2></div>
+  <div class="find"><label for="ar1-q">Your town</label><input id="ar1-q" list="ar1-list" autocomplete="off" placeholder="Start typing"><datalist id="ar1-list"></datalist></div>
+ </div>
+ <p class="res" aria-live="polite">29 towns, one road from Shoreview.</p>
+ <div class="stage" data-owl="say:Hop on">
+  <svg class="road" viewBox="0 0 1200 420" role="img" aria-label="An abstract road from Owl's home base in Shoreview, with a stop for each town Owl serves. Not a map.">
+   <defs><linearGradient id="ar1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C25F"/><stop offset="1" stop-color="#EAA221"/></linearGradient></defs>
+   <path class="hill" d="M0 300 Q160 200 330 280 T700 250 T1200 280 V420 H0Z"/>
+   <path class="hill" d="M0 360 Q260 300 520 350 T1200 330 V420 H0Z" opacity=".7"/>
+   <path id="ar1-p" class="base" d="M70 330 C250 330 300 150 470 160 S640 330 800 300 S960 120 1130 130"/>
+   <use href="#ar1-p" class="top"/><use href="#ar1-p" class="mid"/>
+   <path class="trip" d="M70 330 C250 330 300 150 470 160 S640 330 800 300 S960 120 1130 130"/>
+   <g class="trees"></g>
+   <g class="stops"></g>
+   <g class="home" transform="translate(70 330)"><path d="M0 -70 c-22 0 -36 16 -36 34 0 26 36 50 36 50 s36 -24 36 -50 c0 -18 -14 -34 -36 -34z" fill="#EAA221" stroke="#C7871A" stroke-width="2"/><circle cy="-38" r="13" fill="#FFFDF8"/><text y="44" text-anchor="middle" style="font:700 17px Inter,sans-serif;fill:#17111D">Shoreview</text></g>
+   <g class="owlrider"><circle r="17" fill="#17111D"/><circle cx="-6" cy="-3" r="5" fill="#F1EFE6"/><circle cx="6" cy="-3" r="5" fill="#F1EFE6"/><circle cx="-6" cy="-3" r="2.2" fill="#17111D"/><circle cx="6" cy="-3" r="2.2" fill="#17111D"/><path d="M-2 3 L0 7 L2 3Z" fill="#EAA221"/><path d="M-12 -12 L-8 -19 L-4 -13 M12 -12 L8 -19 L4 -13" fill="#17111D"/></g>
+  </svg>
+ </div>
+ <div class="towns" role="group" aria-label="Towns Owl Roofing serves"></div>
+ <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check</a></div>
+</div>
+<script>
+OWL.reg('area','1',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var svg = root.querySelector('svg'), path = svg.querySelector('#ar1-p'), trip = svg.querySelector('.trip'), stopsG = svg.querySelector('.stops'), rider = svg.querySelector('.owlrider'), res = root.querySelector('.res'), q = root.querySelector('input'), dl = root.querySelector('datalist'), wrapT = root.querySelector('.towns');
+  var NS = 'http://www.w3.org/2000/svg', L = path.getTotalLength(), pos = {}, btns = {}, nodes = {}, curLen = 0, anim;
+  var tr = ''; [[160,250],[380,215],[600,270],[690,215],[930,250],[1060,210],[300,330],[1000,330]].forEach(function(p){ tr += '<g class="tree" transform="translate(' + p[0] + ' ' + p[1] + ')"><rect x="-3" y="0" width="6" height="16"/><circle r="15" cy="-6"/></g>'; });
+  svg.querySelector('.trees').innerHTML = tr;
+  T.forEach(function(t, i){
+    var len = i === 0 ? 0 : L*(.05 + .95*(i - 1)/(T.length - 2)); pos[t] = len;
+    var o = document.createElement('option'); o.value = t; dl.appendChild(o);
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.setAttribute('aria-pressed', 'false'); if (!i) b.className = 'home'; b.dataset.owl = 'peek';
+    b.addEventListener('click', function(){ go(t); }); wrapT.appendChild(b); btns[t] = b;
+    if (i === 0) return;
+    var p = path.getPointAtLength(len), g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'stop' + ([14, 18, 27].indexOf(i) > -1 ? ' lab' : '')); g.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ')');
+    var up = (i % 2) ? -1 : 1;
+    g.innerHTML = '<circle r="7"/><text y="' + (up*30 + 5) + '" text-anchor="middle">' + t + '</text>'; g.addEventListener('click', function(){ go(t); }); stopsG.appendChild(g); nodes[t] = g;
+  });
+  function place(len){ var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(L, len + 2)), a = Math.atan2(p2.y - p.y, p2.x - p.x)*180/Math.PI;
+    rider.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + (p.y - 4).toFixed(1) + ') rotate(' + (a*.25).toFixed(1) + ')'); trip.style.strokeDasharray = len.toFixed(1) + ' 99999'; }
+  function go(t){
+    Object.keys(btns).forEach(function(k){ btns[k].setAttribute('aria-pressed', k === t); if (nodes[k]) nodes[k].classList.toggle('on', k === t); });
+    res.innerHTML = t === 'Shoreview' ? '<b>Shoreview</b> is home base: 1000 County Rd E #230.' : 'Yes, we serve <b>' + t + '</b>. Book a Wise Check and we will come to you.';
+    var from = curLen, to = pos[t], t0 = performance.now(), d = OWL.reduce ? 1 : Math.min(1600, 300 + Math.abs(to - from)*1.2);
+    cancelAnimationFrame(anim); (function f(n){ var k = Math.min(1, (n - t0)/d), e = k < .5 ? 2*k*k : 1 - Math.pow(-2*k + 2, 2)/2; curLen = from + (to - from)*e; place(curLen); if (k < 1) anim = requestAnimationFrame(f); })(t0);
+  }
+  q.addEventListener('input', function(){ var v = q.value.trim().toLowerCase(); if (!v) return; var hit = T.filter(function(t){ return t.toLowerCase() === v; })[0];
+    if (hit) go(hit); else { var some = T.filter(function(t){ return t.toLowerCase().indexOf(v) === 0; }); res.textContent = some.length ? some.length + ' town' + (some.length > 1 ? 's' : '') + ' match: ' + some.join(', ') : 'Not on our list yet. Call (651) 977-6027 and ask.'; } });
+  place(0);
+  if (!OWL.reduce && 'IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); setTimeout(function(){ go('Roseville'); }, 400); } }, {threshold:.4}); io.observe(svg); }
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="area" data-v="2">
+<section class="sec area2" id="areas-2" aria-labelledby="ar2-h">
+<style>
+.area2 .g{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(24px,5vw,64px)}
+.area2 .badge{display:inline-block;padding:8px 14px;border-radius:10px;background:var(--amber);font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 3px 0 var(--amber-edge)}
+.area2 .lede{margin:18px 0 26px;max-width:32ch}
+.area2 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:26px;max-width:520px}
+.area2 .facts div{padding:14px;border-radius:16px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.06)}
+.area2 .facts b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-70);margin-bottom:4px}
+.area2 .facts span{font-weight:700;font-size:16px;line-height:1.3}
+.area2 .find{display:flex;gap:8px;max-width:520px;margin-bottom:12px}
+.area2 .find input{flex:1;min-width:0;min-height:52px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.15);background:var(--paper);font:500 17px Inter,sans-serif;color:var(--ink)}
+.area2 .find input:focus{outline:none;border-color:var(--ink)}
+.area2 .res{min-height:28px;margin-bottom:22px;font-weight:600}
+.area2 .rad{position:relative;width:min(100%,620px);aspect-ratio:1;justify-self:center}
+.area2 .rad svg{width:100%;height:100%;overflow:visible}
+.area2 .ring{fill:none;stroke:#EAA221;transition:stroke-width .3s,opacity .3s}
+.area2 .band{fill:#EAA221;opacity:.06;transition:opacity .3s}
+.area2 .band.hot{opacity:.16}
+.area2 .sweep{transform-origin:310px 310px;animation:ar2sw 9s linear infinite}
+@keyframes ar2sw{to{transform:rotate(360deg)}}
+.area2 .dot{cursor:pointer}
+.area2 .dot circle{fill:#FFFDF8;stroke:#17111D;stroke-width:2;transition:r .25s,fill .25s}
+.area2 .dot text{font:600 13px Inter,sans-serif;fill:var(--ink);paint-order:stroke;stroke:#F1EFE6;stroke-width:4px;opacity:0;transition:opacity .2s}
+.area2 .dot:hover text,.area2 .dot.on text,.area2 .dot.lab text{opacity:1}
+.area2 .dot:hover circle,.area2 .dot.on circle{fill:var(--amber);r:9}
+.area2 .ping{fill:none;stroke:#EAA221;stroke-width:3;opacity:0}
+.area2 .ping.go{animation:ar2ping 1.2s ease-out}
+@keyframes ar2ping{0%{opacity:1;r:4}100%{opacity:0;r:46}}
+.area2 .note{font-size:14px;color:var(--ink-70);text-align:center;margin-top:6px}
+@media (max-width:900px){.area2 .g{grid-template-columns:1fr}.area2 .facts{grid-template-columns:1fr 1fr 1fr}.area2 .facts span{font-size:14px}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="badge">Service area</span>
+   <h2 class="h2 rv" id="ar2-h" style="margin-top:18px">Based in Shoreview. Roofing 29 towns.</h2>
+   <p class="lede rv">A local, family-owned crew, close enough to care.</p>
+   <div class="facts"><div><b>Home base</b><span>Shoreview</span></div><div><b>Coverage</b><span>29 towns</span></div><div><b>Hours</b><span>Mon–Sat 8:00–18:00</span></div></div>
+   <div class="find"><label class="sr" for="ar2-q">Find your town</label><input id="ar2-q" list="ar2-list" autocomplete="off" placeholder="Find your town"><datalist id="ar2-list"></datalist></div>
+   <p class="res" aria-live="polite"></p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book your Wise Check →</a>
+  </div>
+  <div class="rad" data-owl="say:Hoo's nearby?">
+   <svg viewBox="0 0 620 620" role="img" aria-label="Rings around Shoreview with a dot for each town Owl serves, grouped near, middle and farther out. Not to scale.">
+    <circle class="band" data-b="2" cx="310" cy="310" r="290"/><circle class="band" data-b="1" cx="310" cy="310" r="205"/><circle class="band" data-b="0" cx="310" cy="310" r="120"/>
+    <g class="rings"></g>
+    <g class="sweep"><path d="M310 310 L310 20 A290 290 0 0 1 455 59 Z" fill="url(#ar2sg)"/></g>
+    <defs><linearGradient id="ar2sg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EAA221" stop-opacity="0"/><stop offset="1" stop-color="#EAA221" stop-opacity=".22"/></linearGradient></defs>
+    <g class="dots"></g>
+    <circle class="ping" cx="310" cy="310" r="4"/>
+    <g transform="translate(310 300)"><path d="M0 -52 c-26 0 -42 18 -42 40 0 30 42 56 42 56 s42 -26 42 -56 c0 -22 -16 -40 -42 -40z" fill="#EAA221" stroke="#C7871A" stroke-width="2"/>
+     <circle cx="-11" cy="-18" r="9" fill="#FFFDF8"/><circle cx="11" cy="-18" r="9" fill="#FFFDF8"/><circle cx="-11" cy="-18" r="4" fill="#17111D"/><circle cx="11" cy="-18" r="4" fill="#17111D"/><path d="M-3 -8 L0 -2 L3 -8Z" fill="#17111D"/><path d="M-20 -40 L-14 -52 L-8 -42 M20 -40 L14 -52 L8 -42" fill="#C7871A"/></g>
+    <text x="310" y="378" text-anchor="middle" style="font:700 15px Inter,sans-serif;fill:#17111D">Shoreview</text>
+   </svg>
+   <p class="note">Rings group towns by distance from Shoreview. Not to scale.</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('area','2',function(root){
+  /* towns grouped near / middle / farther, at their rough compass direction from Shoreview */
+  var T = [['North Oaks',0,0],['Lino Lakes',0,12],['White Bear Lake',0,68],['Vadnais Heights',0,110],['Maplewood',0,148],['Little Canada',0,166],['Roseville',0,192],['New Brighton',0,224],['Arden Hills',0,250],['Fridley',0,238],['Mounds View',0,275],['Blaine',0,318],
+    ['Forest Lake',1,18],['Stillwater',1,98],['Oakdale',1,120],['Woodbury',1,140],['Saint Paul',1,176],['Minneapolis',1,214],['Coon Rapids',1,298],
+    ['Apple Valley',2,182],['Eagan',2,168],['Burnsville',2,196],['Bloomington',2,206],['Edina',2,218],['Eden Prairie',2,226],['Minnetonka',2,236],['Plymouth',2,252],['Maple Grove',2,284]];
+  var R = [88, 165, 248], svg = root.querySelector('svg'), NS = 'http://www.w3.org/2000/svg', dg = svg.querySelector('.dots'), ping = svg.querySelector('.ping'), res = root.querySelector('.res'), q = root.querySelector('input'), dl = root.querySelector('datalist');
+  var rg = ''; R.forEach(function(r){ rg += '<circle class="ring" cx="310" cy="310" r="' + r + '" stroke-width="2" stroke-dasharray="2 6"/>'; }); [120,205,290].forEach(function(r){ rg += '<circle class="ring" cx="310" cy="310" r="' + r + '" stroke-width="1.2" opacity=".55"/>'; });
+  svg.querySelector('.rings').innerHTML = rg;
+  var nodes = {}, used = {};
+  T.forEach(function(t){ var a = t[2], key = t[1] + ':' + Math.round(a/12); while (used[key]){ a += 9; key = t[1] + ':' + Math.round(a/12); } used[key] = 1;
+    var rad = (a - 90)*Math.PI/180, x = 310 + Math.cos(rad)*R[t[1]], y = 310 + Math.sin(rad)*R[t[1]];
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'dot' + (['Minneapolis','Saint Paul','Stillwater','Forest Lake','Maple Grove','Eagan','White Bear Lake'].indexOf(t[0]) > -1 ? ' lab' : '')); g.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')');
+    var lx = x > 310 ? 12 : -12, anchor = x > 310 ? 'start' : 'end';
+    g.innerHTML = '<circle r="6"/><text x="' + lx + '" y="4" text-anchor="' + anchor + '">' + t[0] + '</text>'; g.addEventListener('click', function(){ pick(t[0]); }); dg.appendChild(g); nodes[t[0]] = {g:g, b:t[1], x:x, y:y};
+    var o = document.createElement('option'); o.value = t[0]; dl.appendChild(o); });
+  var o0 = document.createElement('option'); o0.value = 'Shoreview'; dl.insertBefore(o0, dl.firstChild);
+  var names = ['near Shoreview', 'a little farther out', 'farther out'];
+  function pick(n){
+    Object.keys(nodes).forEach(function(k){ nodes[k].g.classList.toggle('on', k === n); });
+    svg.querySelectorAll('.band').forEach(function(b){ b.classList.toggle('hot', nodes[n] && +b.dataset.b === nodes[n].b); });
+    if (n === 'Shoreview'){ res.innerHTML = 'Shoreview is home base.'; ping.setAttribute('cx', 310); ping.setAttribute('cy', 310); }
+    else { var d = nodes[n]; res.innerHTML = 'Yes, we serve ' + n + ', ' + names[d.b] + '.'; ping.setAttribute('cx', d.x); ping.setAttribute('cy', d.y); }
+    ping.classList.remove('go'); void ping.getBBox(); ping.classList.add('go');
+  }
+  q.addEventListener('input', function(){ var v = q.value.trim().toLowerCase(); if (!v){ res.textContent = ''; return; }
+    var all = ['Shoreview'].concat(T.map(function(t){ return t[0]; })), hit = all.filter(function(t){ return t.toLowerCase() === v; })[0];
+    if (hit) pick(hit); else { var some = all.filter(function(t){ return t.toLowerCase().indexOf(v) === 0; }); res.textContent = some.length ? some.join(', ') : 'Not on our list yet. Call (651) 977-6027 and ask.'; } });
+  svg.querySelectorAll('.band').forEach(function(b){ b.addEventListener('mouseenter', function(){ b.classList.add('hot'); }); b.addEventListener('mouseleave', function(){ b.classList.remove('hot'); }); });
+  if (OWL.reduce) svg.querySelector('.sweep').style.animation = 'none';
+});
+</script>
+</section>
+
+</div>
 </main>
 <div class="owlc" aria-hidden="true">
  <svg viewBox="0 0 58 58">

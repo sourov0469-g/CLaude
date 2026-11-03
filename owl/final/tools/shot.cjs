@@ -5,5 +5,6 @@ const [,,query,out,W='1440',H='900',full='1',wait='1500',wait2='400']=process.ar
 const errs=[]; p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
 await p.goto('file://'+path.resolve(__dirname,'../owl-roofing.html')+(query||''),{waitUntil:'load'});
 await p.evaluate(()=>document.fonts.ready); await p.waitForTimeout(+wait);
+await p.evaluate(()=>document.querySelectorAll('.rv').forEach(e=>e.classList.add('in')));
 if(full==='1'){const h=await p.evaluate(()=>document.documentElement.scrollHeight); await p.setViewportSize({width:+W,height:Math.min(h,16000)}); await p.waitForTimeout(+wait2);}
 await p.screenshot({path:out}); console.log('ok',out,errs.length?('ERRORS: '+errs.join(' | ')):'no errors'); await b.close();})();
