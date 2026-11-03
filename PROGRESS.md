@@ -1837,3 +1837,15 @@ No HIGH colour finding is open.
   - Heroes: 85/85.
   - axe: 0.
 - Next: Round 4 (Services + Reviews), only after Muse passes Round 3.
+
+## Owl Roofing · Upgrade Round 4 · Services + Reviews (2026-11-03, overnight order: no stop)
+- Gate: `owl/final/GATE-UP-R4.md`. Evidence: `owl/final/gates/up-r4/`. Plan lines and skills:
+  `owl/skills/UP-R4-PACK.md`.
+- New versions:
+  - Services V2 Five Chapters (MERSI);
+  - Services V3 One Line (Lusion);
+  - Reviews V2 Earned, Not Claimed (Scout Motors);
+  - Reviews V3 Ninety-Plus (Immersive Garden).
+- The old V2s are archived as `services-b1` and `reviews-b1`. Services V1's phone row height is fixed.
+- Checks: Round 4 94/94; homepage 50/50.
+- Next: Round 5 (Area, Family, Booking, header/footer), then the overnight ladder.

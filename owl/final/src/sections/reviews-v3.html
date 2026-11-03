@@ -45,6 +45,7 @@ OWL.reg('reviews','3',function(root){
     FS = Math.max(.85, Math.min(1.7, sp/38)); M = [];
     for (var n = 0; n < 91 && cand.length; n++){ var pt = cand[Math.floor(n*cand.length/91)]; M.push({x: pt[0], y: pt[1], a: Math.atan2(pt[1] - cy, pt[0] - cx) + Math.PI/2, z: 0, v: 0, ph: n*1.7, plus: false}); }
     M[M.length - 1].plus = true;
+    field.dataset.marks = M.filter(function(m){ return m.x > 6 && m.x < W - 6 && m.y > 6 && m.y < H - 6 && !(m.x > cl && m.x < cr && m.y > ct && m.y < cb); }).length;
   }
   function splash(x, y, s){ waves.push({x: x, y: y, r: 0, s: s || 1}); if (waves.length > 6) waves.shift(); }
   function feather(m, lift){

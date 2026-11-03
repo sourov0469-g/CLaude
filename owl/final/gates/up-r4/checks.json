@@ -1,0 +1,622 @@
+[
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "superseded versions kept as inert backups (services b1, reviews b1)",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "every homepage section is inside the home page",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Now Boarding: Better Roofs"
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Our Services, in Five Chapters"
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "five chapters from the shared service list, first open",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "chapter 3: photo wipes in, title, number and list change",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "tabs: arrows and End with roving tabindex",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "One Line, Five Services"
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "Storm stop: the line morphs (three strands) and the panel changes",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "track progress fills to the active stop",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "arrow keys move along the stops",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Checked, rated, trusted"
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "reviews stated only as 5.0 · 90+ reviews; no quotes or reviewer names",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Earned, Not Claimed"
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "reviews stated only as 5.0 · 90+ reviews; no quotes or reviewer names",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "spine holds only the dated facts (2025, Feb 25 2026, today)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "undated credentials ride the side rail (licence, GAF Systems Plus, warranty)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "scrolling fills the film spine and lights the last node; count reaches 90",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Ninety-Plus and Counting"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "reviews stated only as 5.0 · 90+ reviews; no quotes or reviewer names",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "field is painted (marks drawn on the canvas)",
+  "ok": true,
+  "detail": "9628 painted samples"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "a click splashes the field (marks lift and turn amber)",
+  "ok": true,
+  "detail": "1330 amber samples"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "all 91 marks (90 + plus) visible and clear of the card at 1440",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "all 91 marks (90 + plus) visible and clear of the card at 768",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "all 91 marks (90 + plus) visible and clear of the card at 390",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "states only 5.0 · 90+ reviews and the locked chips",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

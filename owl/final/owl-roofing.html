@@ -3600,7 +3600,7 @@ OWL.reg('wrap','2',function(root){
 .svc1 .det h3{font-size:22px;letter-spacing:-.02em}
 .svc1 .det p{color:var(--ink-70);font-size:17px;margin-top:4px}
 .svc1 .call{margin-top:26px}
-@media (max-width:760px){.svc1 .board{padding:48px 12px 14px}.svc1 .row{gap:2px;padding:6px 14px}.svc1 .det{grid-template-columns:1fr}.svc1 .det img{width:100%;height:160px}}
+@media (max-width:760px){.svc1 .board{padding:48px 12px 14px}.svc1 .row{gap:2px;padding:6px 14px;min-height:44px;align-items:center}.svc1 .det{grid-template-columns:1fr}.svc1 .det img{width:100%;height:160px}}
 </style>
 <div class="wrap">
  <h2 class="h2 rv" id="sv1-h">Now Boarding: Better Roofs</h2>
@@ -4132,7 +4132,7 @@ OWL.reg('reviews','2',function(root){
 <script>
 OWL.reg('reviews','3',function(root){
   var field = root.querySelector('.field'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), card = root.querySelector('.card'), h2 = root.querySelector('h2');
-  var dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, M = [], waves = [], vis = false, lastSplash = 0, user = 0, t0 = performance.now();
+  var FS = 1, dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, M = [], waves = [], vis = false, lastSplash = 0, user = 0, t0 = performance.now();
   function layout(){
     var b = field.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     var c = card.getBoundingClientRect(), cx = c.left - b.left + c.width/2, cy = c.top - b.top + c.height/2, rx0 = 0, ry0 = 0;
@@ -4141,13 +4141,14 @@ OWL.reg('reviews','3',function(root){
     for (var sp = 72; sp >= 20; sp -= 2){ cand = []; var cols = Math.floor((W - 36)/sp), rows = Math.floor((H - 36)/sp), ox = (W - (cols - 1)*sp)/2, oy = (H - (rows - 1)*sp)/2;
       for (var r = 0; r < rows; r++) for (var q = 0; q < cols; q++){ var x = ox + q*sp + (r % 2 ? sp*.25 : -sp*.25), y = oy + r*sp; if (x < 14 || x > W - 14) continue; if (x > cl && x < cr && y > ct && y < cb) continue; cand.push([x, y]); }
       if (cand.length >= 91) break; }
-    M = [];
+    FS = Math.max(.85, Math.min(1.7, sp/38)); M = [];
     for (var n = 0; n < 91 && cand.length; n++){ var pt = cand[Math.floor(n*cand.length/91)]; M.push({x: pt[0], y: pt[1], a: Math.atan2(pt[1] - cy, pt[0] - cx) + Math.PI/2, z: 0, v: 0, ph: n*1.7, plus: false}); }
     M[M.length - 1].plus = true;
+    field.dataset.marks = M.filter(function(m){ return m.x > 6 && m.x < W - 6 && m.y > 6 && m.y < H - 6 && !(m.x > cl && m.x < cr && m.y > ct && m.y < cb); }).length;
   }
   function splash(x, y, s){ waves.push({x: x, y: y, r: 0, s: s || 1}); if (waves.length > 6) waves.shift(); }
   function feather(m, lift){
-    var k = 1 + lift*.55, col = lift > .05 ? 'rgba(' + Math.round(23 + 211*lift) + ',' + Math.round(17 + 145*lift) + ',' + Math.round(29 + 4*lift) + ',' + (.55 + .45*lift) + ')' : 'rgba(23,17,29,.42)';
+    var k = (1 + lift*.55)*FS, col = lift > .05 ? 'rgba(' + Math.round(23 + 211*lift) + ',' + Math.round(17 + 145*lift) + ',' + Math.round(29 + 4*lift) + ',' + (.55 + .45*lift) + ')' : 'rgba(23,17,29,.42)';
     ctx.save(); ctx.translate(m.x, m.y - lift*10); ctx.rotate(m.a + Math.sin(m.ph)*.08 + lift*.6); ctx.scale(k, k);
     if (m.plus){ ctx.strokeStyle = lift > .05 ? col : '#C7871A'; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-7, 0); ctx.lineTo(7, 0); ctx.moveTo(0, -7); ctx.lineTo(0, 7); ctx.stroke(); ctx.restore(); return; }
     ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(0, -12); ctx.quadraticCurveTo(7, -3, 1.5, 10); ctx.lineTo(-1.5, 10); ctx.quadraticCurveTo(-7, -3, 0, -12); ctx.fill();
