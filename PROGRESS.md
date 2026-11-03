@@ -22,7 +22,16 @@ backups untouched). The redo runs one step at a time; each step stops for Muse's
   asset inventory under the new rule (Rembrandt non-branded set and the ba2 pair identified; branded files excluded),
   and an originality guard. Scorecard gate `owl/redo/GATE-STEP-1.md`: weighted 7.70 (D 7.5 / U 8.0 / C 7.5 / Ct 8.0),
   PASS test met; the background-task incident is left for Muse to rule on.
-- **Next (only after Muse judges Step 1):** Step 2, identity and direction, with the one-paragraph difference from Elbaz.
+- **STEP 2 DONE, STOPPED for the owner's pick** (owner's choice gate `OWNER-CHOICE-GATE-2026-11-03.md`, binding): three
+  design directions on the locked identity, as clean boards in `owl/redo/direction/`: 1 Open the Roof (explorable depth,
+  a WebGL roof rendered from Owl footage textures), 2 The Crew's Own (crew-fronted film chapters on cream), 3 Field Manual
+  (numbered doctrine, split covers, hard numbers). Each board: hero with a real crew video frame, Protect Your Nest at full
+  photographic scale, motif and SVG system, cursor companion (3 reactions, touch off), background at rest and on hover,
+  type, layout and palette, and its one-line difference from Elbaz. Plus `OWL-DIRECTIONS-COMPARISON.jpg` (side by side,
+  1080 px, phone-readable), `GUIDELINES.md`, the Elbaz paragraph in the dossier, and `owl/redo/GATE-DIRECTION.md`
+  (D1 7.58, D2 7.46, D3 7.52; all pass; recommendation D1, with a D1 + D2 mix noted). Copy budgets counted by hand;
+  hex audit shows only the three locked colours and their tints. All commands in the foreground; no sub-agents.
+- **Next:** nothing until Muse relays the owner's pick or mix verbatim. No Step 3 concept images and no HTML before that.
 
 ---
 

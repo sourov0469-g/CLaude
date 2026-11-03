@@ -1,0 +1,121 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/board/board.css">
+<style>
+.hero{height:855px;background:#000}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,17,29,.85) 0%,rgba(23,17,29,0) 22%),linear-gradient(90deg,rgba(23,17,29,.94) 0%,rgba(23,17,29,.78) 34%,rgba(23,17,29,.1) 64%,rgba(23,17,29,0) 100%),linear-gradient(0deg,rgba(23,17,29,.7),rgba(23,17,29,0) 40%)}
+.nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:36px;padding:30px 56px;font:500 16px Inter}
+.nav img{height:44px}.nav .sp{flex:1}.nav a{opacity:.9}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:var(--ink);font:700 16px Inter;padding:16px 24px;border-radius:999px}
+.ghost{font:600 16px Inter;color:var(--cream);border:1px solid rgba(241,239,230,.4);padding:15px 22px;border-radius:999px}
+.hcopy{position:absolute;left:56px;bottom:84px;width:700px}
+.kick{font:600 14px Inter;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;display:flex;gap:12px;align-items:center}
+.kick:before{content:"";width:34px;height:2px;background:var(--amber)}
+.hcopy h2{font:800 78px/.98 Montserrat;letter-spacing:-.03em}
+.hcopy h2 em{font-style:normal;color:var(--amber)}
+.hcopy p{font:400 20px/1.5 Inter;opacity:.86;margin:24px 0 32px;max-width:520px}
+.hcopy .ctas{display:flex;gap:14px;align-items:center}
+.card{position:absolute;right:48px;bottom:48px;width:380px;border-radius:14px;overflow:hidden;background:rgba(23,17,29,.86);border:1px solid rgba(234,162,33,.45);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.card img{width:100%;height:190px;object-fit:cover;object-position:50% 45%;display:block}
+.card div{padding:14px 18px;font:600 14px/1.3 Inter;display:flex;justify-content:space-between;align-items:center}
+.card span{color:var(--amber)}
+.vctl{position:absolute;left:56px;bottom:30px;display:flex;gap:14px;align-items:center;font:500 13px Inter;opacity:.75}
+.vctl i{width:30px;height:30px;border-radius:50%;border:1px solid rgba(241,239,230,.5);display:grid;place-items:center;font-style:normal;font-size:10px}
+.vctl b{display:block;width:180px;height:2px;background:rgba(241,239,230,.25);position:relative}.vctl b:after{content:"";position:absolute;left:0;top:0;height:2px;width:46%;background:var(--amber)}
+.comp{position:absolute}
+/* PYN */
+.pyn{height:840px}
+.pyn img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 34%}
+.pyn .shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(23,17,29,.92) 0%,rgba(23,17,29,.3) 46%,rgba(23,17,29,0) 70%),linear-gradient(270deg,rgba(23,17,29,.85) 0%,rgba(23,17,29,.4) 34%,rgba(23,17,29,0) 50%)}
+.beatnum{position:absolute;right:56px;top:40px;font:900 180px/1 Montserrat;color:transparent;-webkit-text-stroke:2px rgba(234,162,33,.85);letter-spacing:-.04em}
+.beatnum small{font-size:60px;-webkit-text-stroke:1.5px rgba(241,239,230,.6)}
+.pcopy{position:absolute;left:56px;bottom:64px;width:620px}
+.pcopy h3{font:800 76px/.95 Montserrat;letter-spacing:-.03em}
+.pcopy p{font:400 20px/1.5 Inter;opacity:.88;margin-top:20px;max-width:540px}
+.rail{position:absolute;right:56px;bottom:64px;width:440px}
+.wrapcard{position:absolute;right:56px;top:40px;width:440px;border-radius:12px;overflow:hidden;border:1px solid rgba(234,162,33,.5);box-shadow:0 30px 60px rgba(0,0,0,.55);background:#17111D}
+.wrapcard img{display:block;width:440px;height:380px;object-fit:cover;object-position:50% 60%}
+.wrapcard figcaption{padding:12px 16px;font:500 14px Inter}.wrapcard b{color:var(--amber)}
+.rail div{display:flex;gap:16px;align-items:center;padding:14px 0;border-top:1px solid rgba(241,239,230,.22);font:600 18px Inter;opacity:.55}
+.rail div.on{opacity:1}.rail div.on b{color:var(--amber)}
+.rail b{font:700 14px Inter;letter-spacing:.1em;width:28px}
+.rail .bar{height:3px;background:rgba(241,239,230,.2);margin-top:8px;position:relative;border:0;padding:0}.rail .bar:after{content:"";position:absolute;left:0;top:0;width:25%;height:3px;background:var(--amber)}
+.sealimg{position:absolute;left:56px;top:40px;display:flex;gap:12px;align-items:center;font:600 14px Inter;letter-spacing:.12em;text-transform:uppercase}
+.sealimg img{width:64px;height:64px;border-radius:50%}
+/* motif */
+.motifs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.motifs figure{background:#1d1624;border:1px solid var(--line);border-radius:6px;height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.motifs figcaption{font:500 14px Inter;opacity:.75}
+.bgp{height:430px;background:radial-gradient(ellipse at 50% 55%,#2a2033 0%,#17111D 70%)}
+.bgp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bgp .tag{position:absolute;left:20px;top:18px;font:600 13px Inter;letter-spacing:.14em;text-transform:uppercase;background:rgba(23,17,29,.8);padding:8px 12px;border-radius:999px}
+.spec{background:#1d1624;border:1px solid var(--line);border-radius:6px;padding:34px}
+.spec .big{font:800 84px/1 Montserrat;letter-spacing:-.03em}
+.spec .mid{font:700 30px/1.15 Montserrat;margin:18px 0 10px}
+.spec .body{font:400 18px/1.55 Inter;opacity:.85;max-width:560px}
+.spec .meta{font:500 13px Inter;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-top:22px}
+</style></head><body><div class="board">
+<div class="bhead"><div><div class="num">Direction 1 of 3 · explorable depth</div><h1>Open the Roof</h1></div>
+<p>The roof is the hero object. Owl's crew film sets the scene; then the house appears as a lit 3D object built from Owl's own footage, and the pointer lifts its courses to show what sits under the shingles.</p></div>
+
+<div class="label"><span>Hero · real crew video frame designed in</span><span>Desktop 1440</span></div>
+<div class="panel hero"><img class="bg" src="/board/img/v22.jpg"><div class="shade"></div>
+ <div class="nav"><img src="/board/img/owl-logo-white.svg" alt=""><span class="sp"></span><a>Roofing</a><a>Storm damage</a><a>Wise Check</a><a>About</a><a style="font-weight:700">(651) 977-6027</a><span class="btn">Book a Wise Check</span></div>
+ <div class="hcopy"><div class="kick">Shoreview, MN · since 2025</div><h2>Open the roof.<br><em>See how we build.</em></h2>
+ <p>Roof replacement and repair across 29 towns around Shoreview. GAF Systems Plus Certified, with a 10-year workmanship guarantee.</p>
+ <div class="ctas"><span class="btn">Book a Wise Check →</span><span class="ghost">(651) 977-6027</span></div></div>
+ <div class="vctl"><i>❚❚</i><b></b></div>
+ <div class="card"><img src="/board/img/roof-hover.png"><div>Scroll to open the roof <span>↓</span></div></div>
+ <svg class="comp" style="left:560px;top:600px" width="110" height="110" viewBox="0 0 120 120"><g transform="rotate(-38 60 60)"><path d="M20 58 h70 q10 0 14 -8 l4 -7" fill="none" stroke="#F1EFE6" stroke-width="7" stroke-linecap="round"/><path d="M14 54 l8 4 -8 4 z" fill="#EAA221"/><path d="M104 46 l8 -12" stroke="#EAA221" stroke-width="4" stroke-linecap="round"/></g><circle cx="22" cy="86" r="4" fill="#EAA221"/></svg>
+</div>
+
+<div class="label"><span>Protect Your Nest · full photographic scale · pinned beat 1 of 4</span><span>Owl's own footage</span></div>
+<div class="panel pyn"><img class="bg" src="/board/img/p10.jpg"><div class="shade"></div>
+ <div class="sealimg"><img src="/board/img/get-it-right-guarantee-owl-768x768.png" alt=""></div>
+  <div class="pcopy"><h3>Protect<br>Your Nest</h3><p>We wrap your home, sweep the yard three times (crew, magnet, project manager) and leave an aftercare box when we go.</p></div>
+ <figure class="wrapcard"><img src="/board/img/owl-roofing-catchall.webp" alt=""></figure>
+ <div class="rail"><div class="on"><b>01</b>The wrap</div><div><b>02</b>Three cleanup passes</div><div><b>03</b>The aftercare box</div><div><b>04</b>Get It Right guarantee</div><div class="bar"></div></div>
+</div>
+
+<div class="label"><span>Motif and SVG system · roof courses, built in layers</span><span>Drawings support; photography leads</span></div>
+<div class="motifs">
+ <figure><svg width="300" height="150" viewBox="0 0 300 150"><defs><pattern id="tsh" patternUnits="userSpaceOnUse" width="225" height="115"><image href="/board/img/tex-shingle.jpg" width="225" height="115" preserveAspectRatio="xMidYMid slice"/></pattern><pattern id="tos" patternUnits="userSpaceOnUse" width="190" height="145"><image href="/board/img/tex-osb.jpg" width="190" height="145" preserveAspectRatio="xMidYMid slice"/></pattern></defs><g fill="url(#tsh)" stroke="#17111D" stroke-width="2.5">
+  <path d="M10 20h90v34H10zM100 20h90v34h-90zM190 20h100v34H190z"/><path d="M-35 54h90v34h-90zM55 54h90v34H55zM145 54h90v34h-90zM235 54h90v34h-90z"/><path d="M10 88h90v34H10zM100 88h90v34h-90zM190 88h100v34H190z"/></g>
+  <g fill="#F1EFE6" opacity=".22"><circle cx="30" cy="34" r="1.2"/><circle cx="62" cy="42" r="1"/><circle cx="130" cy="30" r="1.2"/><circle cx="160" cy="44" r="1"/><circle cx="220" cy="36" r="1.2"/><circle cx="80" cy="70" r="1"/><circle cx="170" cy="78" r="1.2"/><circle cx="260" cy="66" r="1"/><circle cx="40" cy="104" r="1.2"/><circle cx="210" cy="110" r="1"/></g></svg><figcaption>Course field · staggered half-tab offset</figcaption></figure>
+ <figure><svg width="300" height="150" viewBox="0 0 300 150"><defs><radialGradient id="g1"><stop offset="0" stop-color="#EAA221" stop-opacity=".95"/><stop offset="1" stop-color="#EAA221" stop-opacity="0"/></radialGradient></defs>
+  <rect x="20" y="80" width="260" height="40" fill="url(#tos)" stroke="#F1EFE6" stroke-opacity=".4"/><ellipse cx="150" cy="80" rx="110" ry="26" fill="url(#g1)"/>
+  <path d="M60 80 L240 80" stroke="#EAA221" stroke-width="3"/><g transform="rotate(-24 60 80)"><rect x="60" y="62" width="180" height="18" fill="url(#tsh)" stroke="#EAA221" stroke-opacity=".8"/></g>
+  <path d="M30 40h250" stroke="#F1EFE6" stroke-opacity=".25" stroke-dasharray="4 6"/></svg><figcaption>The lift · a tab rises, amber seam light below</figcaption></figure>
+ <figure><svg width="300" height="150" viewBox="0 0 300 150"><g transform="translate(40 20)"><path d="M0 70 l110 -50 110 50 -110 50z" fill="#2c2433" stroke="#F1EFE6" stroke-opacity=".55"/>
+  <path d="M0 52 l110 -50 110 50 -110 50z" fill="url(#tos)" stroke="#F1EFE6" stroke-opacity=".5"/>
+  <path d="M0 34 l110 -50 110 50 -110 50z" fill="#4a4250" stroke="#F1EFE6" stroke-opacity=".5"/>
+  <path d="M0 16 l110 -50 110 50 -110 50z" fill="url(#tsh)" stroke="#EAA221" stroke-width="1.5"/></g></svg><figcaption>Layer stack · shingle, underlayment, decking, rafter</figcaption></figure>
+ <figure><svg width="300" height="150" viewBox="0 0 300 150"><g stroke="#F1EFE6" stroke-opacity=".5" fill="none"><path d="M20 60h260M20 100h260"/></g>  <g fill="#EAA221"><circle cx="45" cy="80" r="5"/><circle cx="110" cy="80" r="5"/><circle cx="190" cy="80" r="5"/><circle cx="255" cy="80" r="5"/></g>
+  <g fill="#F1EFE6" opacity=".5" font-family="Inter" font-size="11" font-weight="600"><text x="20" y="130">NAIL LINE · FOUR PER TAB</text></g></svg><figcaption>Nail line · the divider between sections</figcaption></figure>
+ <figure><svg width="300" height="150" viewBox="0 0 300 150"><path d="M30 110 L150 40 L270 110" fill="none" stroke="#F1EFE6" stroke-opacity=".45" stroke-width="2"/><path d="M110 64 q40 -40 80 0 l-6 6 q-34 -30 -68 0z" fill="url(#tsh)" stroke="#EAA221" stroke-width="1.5"/><path d="M30 110 h-10 v10 h20" fill="none" stroke="#EAA221" stroke-width="2.5"/></svg><figcaption>Ridge cap and drip edge · page start and end</figcaption></figure>
+ <figure><svg width="300" height="150" viewBox="0 0 300 150"><rect x="20" y="20" width="260" height="110" rx="10" fill="#2c2433" stroke="#EAA221" stroke-opacity=".6"/><image href="/board/img/v13.jpg" x="34" y="34" width="232" height="58" preserveAspectRatio="xMidYMid slice"/><path d="M142 52 l20 11 -20 11z" fill="#F1EFE6"/><path d="M34 112h120" stroke="#EAA221" stroke-width="3"/><path d="M154 112h112" stroke="#F1EFE6" stroke-opacity=".25" stroke-width="3"/></svg><figcaption>The travelling card · crew film carries you between scenes</figcaption></figure>
+</div>
+
+<div class="label"><span>Cursor companion · the flat bar · three reactions · off on touch screens</span><span>Animated SVG</span></div>
+<div class="cc">
+ <figure><svg width="120" height="120" viewBox="0 0 120 120"><g transform="rotate(-38 60 60)"><path d="M20 58 h70 q10 0 14 -8 l4 -7" fill="none" stroke="#F1EFE6" stroke-width="7" stroke-linecap="round"/><path d="M14 54 l8 4 -8 4 z" fill="#EAA221"/></g></svg><figcaption><b>Resting</b><br>follows with a soft lag; the claw end points the way</figcaption></figure>
+ <figure><svg width="200" height="120" viewBox="0 0 200 120"><rect x="20" y="78" width="160" height="16" fill="#3a3142" stroke="#F1EFE6" stroke-opacity=".4"/><g transform="rotate(-18 60 78)"><rect x="60" y="62" width="110" height="14" fill="#4a4250" stroke="#F1EFE6" stroke-opacity=".6"/></g><ellipse cx="110" cy="80" rx="60" ry="8" fill="#EAA221" opacity=".5"/><g transform="translate(36 30) rotate(18)"><path d="M0 40 h70 q10 0 14 -8" fill="none" stroke="#F1EFE6" stroke-width="7" stroke-linecap="round"/></g></svg><figcaption><b>Over the roof</b><br>slides under a course and prises it up</figcaption></figure>
+ <figure><svg width="160" height="120" viewBox="0 0 160 120"><g transform="rotate(-8 80 60)"><rect x="30" y="40" width="100" height="34" fill="#3a3142" stroke="#EAA221" stroke-width="2"/><path d="M63 40v34M97 40v34" stroke="#EAA221" stroke-opacity=".6"/></g><path d="M80 92 v14 M72 100 h16" stroke="#EAA221" stroke-width="3" stroke-linecap="round"/></svg><figcaption><b>Over a call to action</b><br>becomes a tab set square, ready to nail</figcaption></figure>
+</div>
+
+<div class="label"><span>Background behaviour</span><span>Rendered in WebGL from Owl footage textures</span></div>
+<div class="row" style="grid-template-columns:1fr 1fr">
+ <div class="panel bgp"><img src="/board/img/roof-rest.png" style="object-position:50% 40%"><span class="tag">At rest · courses closed</span></div>
+ <div class="panel bgp"><img src="/board/img/roof-hover.png" style="object-position:50% 40%"><span class="tag" style="color:var(--amber)">On hover · courses lift, decking glows</span>
+ <svg style="position:absolute;left:372px;top:236px" width="70" height="70" viewBox="0 0 120 120"><g transform="rotate(-38 60 60)"><path d="M20 58 h70 q10 0 14 -8 l4 -7" fill="none" stroke="#F1EFE6" stroke-width="7" stroke-linecap="round"/><path d="M14 54 l8 4 -8 4 z" fill="#EAA221"/></g></svg></div>
+</div>
+<p class="cap">Shingle granules, decking and chimney brick are textures cut from Owl's own crew film. Courses close behind the pointer; nothing stays open.</p>
+
+<div class="label"><span>Type and layout feel</span><span>Locked palette</span></div>
+<div class="row" style="grid-template-columns:1.25fr 1fr">
+ <div class="spec"><div class="big">Open the roof.</div><div class="mid">Montserrat 800 for headlines</div><div class="body">Inter 400 for reading text, 18–20 px, line height 1.5. Dark full-bleed stages, one object centred, copy anchored bottom left. Hard cuts never; scenes hand over through the travelling card.</div><div class="meta">Montserrat 800 / 700 · Inter 400 / 600 · 12-column grid, 56 px margins</div></div>
+ <div><div class="sw"><div style="background:#17111D;border:1px solid var(--line)">Ink<br>#17111D · ground, 75%</div><div style="background:#EAA221;color:#17111D">Amber<br>#EAA221 · light, seams, CTAs</div><div style="background:#F1EFE6;color:#17111D">Cream<br>#F1EFE6 · type, 20%</div></div>
+ <div style="margin-top:16px;background:#1d1624;border:1px solid var(--line);border-radius:6px;padding:22px;display:flex;align-items:center;gap:22px"><img src="/board/img/owl-logo-white.svg" style="height:56px"><span style="font:500 15px/1.45 Inter;opacity:.8">Logo, name and colours unchanged. Amber is light, seams and calls to action; never a background field.</span></div></div>
+</div>
+
+<div class="elbaz"><b>How it differs from Elbaz</b>Elbaz shows finished rooms in edited video tiles on a light editorial page; Owl hands you the roof itself, a lit object on a dark stage that you open course by course.</div>
+</div></body></html>

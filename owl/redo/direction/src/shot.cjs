@@ -1,0 +1,16 @@
+const {chromium}=require('playwright'); const fs=require('fs'); const path=require('path');
+const ROOT=process.argv[2], url=process.argv[3], out=process.argv[4], W=+(process.argv[5]||1600), DSF=+(process.argv[6]||1);
+(async()=>{const b=await chromium.launch();
+const p=await b.newPage({viewport:{width:W,height:900},deviceScaleFactor:DSF});
+p.on('pageerror',e=>console.log('err',e.message));
+await p.route('http://local/**',async r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));
+ if(!fs.existsSync(f)){console.log('404',u.pathname);return r.fulfill({status:404,body:'nf'});}const ext=path.extname(f);
+ const ct={'.html':'text/html','.js':'text/javascript','.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.css':'text/css','.woff2':'font/woff2'}[ext]||'application/octet-stream';
+ r.fulfill({status:200,body:fs.readFileSync(f),headers:{'content-type':ct}});});
+await p.goto('http://local'+url,{waitUntil:'load'}); await p.evaluate(()=>document.fonts.ready); await p.waitForTimeout(400);
+const h=await p.evaluate(()=>Math.ceil(document.documentElement.scrollHeight));
+await p.setViewportSize({width:W,height:h}); await p.waitForTimeout(300);
+const fam=await p.evaluate(()=>[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family+f.weight).join(','));
+console.log('h',h,'fonts',fam);
+const c=await p.context().newCDPSession(p); const s=await c.send('Page.captureScreenshot',{format:'jpeg',quality:90,captureBeyondViewport:true});
+fs.writeFileSync(out,Buffer.from(s.data,'base64')); console.log('ok',out); await b.close();})();

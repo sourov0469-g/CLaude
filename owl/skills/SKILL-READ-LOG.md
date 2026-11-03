@@ -389,3 +389,12 @@ against it. The rule stands: read before building.
   - Transform and opacity only; refresh triggers after fonts/images; simplify on small screens via matchMedia.
   - Section handoff: the scene scales, masks or translates into the next one, never ends abruptly; never trap the reader
     too long; never let effects reduce contrast or cover the CTA.
+
+## Redo Step 2: owner's choice gate, three directions on the kept identity (read in full by tag before making boards)
+- ⟦S1312⟧ generate-reference-inspired-brand-worlds
+  - Several directions must read as one family, not colour swaps and not unrelated styles: hold 4-6 constants, vary at
+    least meaning, environment, human ritual and signature motif per direction.
+  - Extract reusable visual grammar (depth layers, palette relationships, surface, light, type logic, human presence) and
+    never reproduce protected signature elements (people, poses, exact layout, marks, letterforms).
+  - Validate every output: the meaning reads without explanation; each direction differs from the others in meaning,
+    ritual, environment and motif; at least four signature elements differ from any reference; no extra marks.

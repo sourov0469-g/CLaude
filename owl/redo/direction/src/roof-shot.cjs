@@ -1,0 +1,13 @@
+const {chromium}=require('playwright'); const fs=require('fs'); const path=require('path');
+const ROOT=process.argv[2], url=process.argv[3], out=process.argv[4], W=+(process.argv[5]||1600), H=+(process.argv[6]||900);
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});
+const p=await b.newPage({viewport:{width:W,height:H}});
+p.on('console',m=>console.log('console',m.text())); p.on('pageerror',e=>console.log('err',e.message));
+await p.route('http://local/**',async r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));
+ if(!fs.existsSync(f))return r.fulfill({status:404,body:'nf'});const ext=path.extname(f);
+ const ct={'.html':'text/html','.js':'text/javascript','.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp','.svg':'image/svg+xml','.css':'text/css','.woff2':'font/woff2'}[ext]||'application/octet-stream';
+ r.fulfill({status:200,body:fs.readFileSync(f),headers:{'content-type':ct}});});
+await p.goto('http://local'+url); await p.waitForFunction(()=>window.__done===true,null,{timeout:120000}).catch(()=>console.log('no __done'));
+await p.waitForTimeout(800);
+const c=await p.context().newCDPSession(p); const s=await c.send('Page.captureScreenshot',{format:'png'});
+fs.writeFileSync(out,Buffer.from(s.data,'base64')); console.log('ok',out); await b.close();})();

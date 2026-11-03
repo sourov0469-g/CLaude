@@ -35,6 +35,16 @@ evidence, not proof of authorship.
 
 ---
 
+## How Owl differs from Elbaz (Step 2, stated before the direction boards)
+Elbaz Construction, as the bank index records it, is editorial craft: a portrait showreel hero ("Built properly. Permitted
+correctly. Finished in record time."), a licence and coverage strip, video service tiles, drag before/after sliders, an
+eight-stage process stamped with week ranges, financing before scoping, then reviews and a call to action, on a light
+WordPress/Elementor page that curates finished rooms as a showcase. Owl's world comes from its own references instead:
+explorable depth (Igloo: a roof you open, not a tile you watch), crew warmth (Cowboy: the crew tells the job in its own
+footage, not a curated gallery of finished spaces) and engineering doctrine (Longbow: a written standard and plain numbers,
+not a promise of speed). So the Owl redo never uses Elbaz's showreel-tile grid, its week-stamped process or its
+before/after slider as a centrepiece; each of the three Step 2 directions states its own one-line difference on its board.
+
 ## 1. Igloo Inc: interactive 3D depth and play (the depth bar)
 **Evidence:** `evidence/igloo/` (intro, mouse, wheel and click sheets; digest).
 

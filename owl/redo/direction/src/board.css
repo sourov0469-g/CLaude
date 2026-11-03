@@ -1,0 +1,21 @@
+@import url(/fonts/fonts.css);
+:root{--ink:#17111D;--amber:#EAA221;--cream:#F1EFE6;--ink2:#221a2a;--line:rgba(241,239,230,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink);color:var(--cream)}
+body{width:1600px;font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.board{padding:56px 40px 48px}
+.bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.bhead .num{font:600 14px/1 Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+.bhead h1{font:800 64px/1 Montserrat;letter-spacing:-.02em;margin-top:12px}
+.bhead p{font:400 19px/1.45 Inter;max-width:640px;opacity:.82}
+.label{display:flex;justify-content:space-between;font:600 13px/1 Inter;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin:40px 0 14px}
+.panel{position:relative;overflow:hidden;border-radius:6px}
+.row{display:grid;gap:24px}
+.elbaz{margin-top:40px;padding:26px 30px;border:1px solid var(--amber);border-radius:6px;font:500 21px/1.45 Inter}
+.elbaz b{color:var(--amber);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;display:block;margin-bottom:8px}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:6px;overflow:hidden}
+.sw div{height:150px;padding:18px;font:600 15px/1.4 Inter;display:flex;flex-direction:column;justify-content:flex-end}
+.cap{font:500 14px/1.4 Inter;opacity:.7;margin-top:10px}
+.cc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cc figure{background:rgba(241,239,230,.05);border:1px solid var(--line);border-radius:6px;height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.cc figcaption{font:500 14px/1.35 Inter;text-align:center;opacity:.8;padding:0 12px}
