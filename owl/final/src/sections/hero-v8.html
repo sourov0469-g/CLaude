@@ -1,0 +1,69 @@
+<section class="sec hero8" aria-labelledby="h8-a">
+<style>
+.hero8{position:relative;overflow:hidden;min-height:clamp(620px,88vh,860px);padding:0}
+.hero8 .film{position:absolute;inset:0;clip-path:var(--clip,polygon(0 0,100% 0,100% 60%,0 30%));background:#3a3540 url({{A:crew-poster.webp}}) center/cover}
+.hero8 .film video{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;transform:translate(var(--fx,0px),var(--fy,0px));transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.hero8 .film::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,rgba(23,17,29,0) 40%,rgba(23,17,29,.35))}
+.hero8 svg.edge{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.hero8 .deck{stroke:#9C7A48;stroke-width:6;fill:none}
+.hero8 .surf{stroke:#17111D;stroke-width:3;fill:none}
+.hero8 .tab{fill:#4A4552;stroke:#2C2832;stroke-width:1}
+.hero8 .drip{stroke:#C9CDD2;stroke-width:4;fill:none;stroke-linecap:round}
+.hero8 .pitch text{font:800 15px Inter,sans-serif;fill:#17111D}
+.hero8 .pitch path{fill:none;stroke:#17111D;stroke-width:2}
+.hero8 .txt{position:absolute;left:0;right:0;bottom:0;padding:0 0 clamp(28px,4vw,56px);transform:translate(var(--tx,0px),var(--ty,0px));transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.hero8 .h1{font-size:clamp(40px,5.6vw,84px);line-height:1;letter-spacing:-.035em;max-width:12ch}
+.hero8 .lede{margin-top:16px;max-width:40ch}
+.hero8 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.hero8 .play{display:inline-flex;align-items:center;gap:10px}
+.hero8 .play i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--cream)}
+.hero8 .play i svg{width:12px;height:12px;fill:currentColor;margin-left:2px}
+.hero8 .trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-weight:600;font-size:15px}
+.hero8 .trust span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+.hero8 .cap{position:absolute;right:clamp(16px,3vw,40px);top:clamp(80px,12vh,120px);padding:7px 12px;border-radius:999px;background:rgba(251,250,246,.92);font-weight:700;font-size:14px}
+@media (max-width:760px){.hero8{min-height:860px}.hero8 .pitch{display:none}.hero8 .cap{top:auto;bottom:auto;top:76px}}
+@media (prefers-reduced-motion:reduce){.hero8 .film video,.hero8 .txt{transition:none}}
+</style>
+<div class="film" aria-hidden="true"><video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto"></video></div>
+<svg class="edge" aria-hidden="true"><g class="pitch"><path class="tri"/><text class="t12"></text><text class="t6"></text></g><path class="deck"/><g class="tabs"></g><path class="surf"/><path class="drip"/></svg>
+<span class="cap" aria-hidden="true">Owl's own crew, on the job</span>
+<div class="txt"><div class="wrap">
+ <h1 class="h1" id="h8-a">Watch Our Crew. Then Book Yours.</h1>
+ <p class="lede rv">Family-owned roofers from Shoreview, founded 2025 by Tim Brown and Noah Bergland. Every roof is built at its true pitch, course by course.</p>
+ <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><button class="btn btn-line play" type="button" data-mag data-owl="peek"><i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg></i>Watch the Full Film</button></div>
+ <div class="trust" role="list"><span role="listitem">5.0 · 90+ reviews</span><span role="listitem">GAF Systems Plus Certified</span><span role="listitem">BBB A−</span></div>
+</div></div>
+<script>
+OWL.reg('hero','8',function(root){
+  var sec = root.querySelector('section'), film = root.querySelector('.film'), svg = root.querySelector('svg.edge'), txt = root.querySelector('.txt'), h1 = root.querySelector('h1'), vid = root.querySelector('video');
+  OWL.split(h1, 60);
+  root.querySelector('.play').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  /* the split is a 6/12 roof slope (rise 6 for every 12 of run): it runs up-left from the right edge */
+  function layout(){
+    var W = sec.clientWidth, H = sec.clientHeight, t = txt.getBoundingClientRect(), s = sec.getBoundingClientRect();
+    /* as much film as the type allows: the slope must clear the top-right corner of the text block */
+    var k = .5, tr = 0; [].forEach.call(txt.querySelectorAll('.h1,.lede,.ctas > *'), function(el){ var r = el.getBoundingClientRect(); tr = Math.max(tr, r.right - s.left); });
+    var top = txt.querySelector('.h1').getBoundingClientRect().top - s.top, yR = Math.min(H*.72, top - 34 + k*(W - tr));
+    var yL = yR - k*W; svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    film.style.setProperty('--clip', yL >= 0 ? 'polygon(0 0,100% 0,100% ' + yR + 'px,0 ' + yL + 'px)' : 'polygon(' + (W - yR/k) + 'px 0,100% 0,100% ' + yR + 'px)');
+    var x0 = yL >= 0 ? 0 : W - yR/k, y0 = yL >= 0 ? yL : 0, ux = (W - x0), uy = (yR - y0), L = Math.hypot(ux, uy), nx = -uy/L, ny = ux/L;
+    function P(a, d){ return [(x0 + ux*a + nx*d).toFixed(1), (y0 + uy*a + ny*d).toFixed(1)]; }
+    svg.querySelector('.surf').setAttribute('d', 'M' + P(0, 0).join(' ') + 'L' + P(1, 0).join(' '));
+    svg.querySelector('.deck').setAttribute('d', 'M' + P(0, 16).join(' ') + 'L' + P(1, 16).join(' '));
+    /* shingle courses in section: thin wedges stepping down the slope, each lapping the one below */
+    var tabs = '', n = Math.floor(L/44); for (var i = 0; i < n; i++){ var a = i*44/L, b = (i*44 + 52)/L; tabs += '<path class="tab" d="M' + P(a, 2).join(' ') + 'L' + P(Math.min(1, b), 2).join(' ') + 'L' + P(Math.min(1, b), 12).join(' ') + 'Z"/>'; }
+    svg.querySelector('.tabs').innerHTML = tabs;
+    var e = P(1, 0); svg.querySelector('.drip').setAttribute('d', 'M' + (+e[0] - 10) + ' ' + (+e[1] - 2) + 'l12 6 v14');
+    /* the pitch mark: 12 across, 6 up, sitting on the slope */
+    var m = P(.82, 70), run = 72, rise = 36, mx = +m[0], my = +m[1];
+    svg.querySelector('.tri').setAttribute('d', 'M' + mx + ' ' + my + 'H' + (mx - run) + 'V' + (my - rise) + 'L' + mx + ' ' + my);
+    var t12 = svg.querySelector('.t12'), t6 = svg.querySelector('.t6'); t12.textContent = '12'; t6.textContent = '6';
+    t12.setAttribute('x', mx - run/2 - 8); t12.setAttribute('y', my + 18); t6.setAttribute('x', mx - run - 18); t6.setAttribute('y', my - rise/2 + 5);
+  }
+  layout(); addEventListener('resize', layout); if (document.fonts) document.fonts.ready.then(layout);
+  if (OWL.fine && !OWL.reduce) sec.addEventListener('pointermove', function(e){ var b = sec.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+    vid.style.setProperty('--fx', (-x*16).toFixed(1) + 'px'); vid.style.setProperty('--fy', (-y*12).toFixed(1) + 'px'); txt.style.setProperty('--tx', (x*8).toFixed(1) + 'px'); txt.style.setProperty('--ty', (y*6).toFixed(1) + 'px'); });
+  OWL.reveal(h1);
+});
+</script>
+</section>

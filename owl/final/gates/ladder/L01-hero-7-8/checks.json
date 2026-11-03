@@ -1,0 +1,228 @@
+[
+ {
+  "sec": "hero",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 8
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "From Eave to Ridge, We Give a Hoot"
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "the one-stroke house has drawn itself on",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "roofer check: shingle courses lie between the hips, inside the roof face",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "the owl turns its head toward the pointer (subtle, under 15°)",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "hero",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "Watch Our Crew. Then Book Yours."
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "the split is a true 6/12 pitch (rise/run = 0.5)",
+  "ok": true,
+  "detail": "polygon(299.52px 0,100% 0,100% 570.24px)"
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "pitch mark reads 6 over 12; shingle courses drawn along the slope",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "the film is Owl's own crew clip",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "Watch the Full Film opens YouTube ehKLv5DF2TQ; Escape closes",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "dialog closed",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "hero",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]
