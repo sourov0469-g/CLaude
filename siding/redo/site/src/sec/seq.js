@@ -122,5 +122,5 @@ window.Seq = (function () {
     rail.addEventListener('keydown', (e) => { if (e.target !== rail) return; if (e.key === 'ArrowRight') { e.preventDefault(); go(cur() + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur() - 1); } });
     rail.addEventListener('scroll', () => dots.forEach((d, i) => d.classList.toggle('on', i === cur())), { passive: true }); dots[0].classList.add('on'); games(root, s);
   }
-  return { A, B, wire(root) { wireA(root); wireB(root); } };
+  return { A, B, wire(root) { wireA(root); wireB(root); }, G, panel, games };
 })();

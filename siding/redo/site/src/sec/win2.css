@@ -108,8 +108,8 @@
 .wnD .row button[aria-pressed="true"] .no,.wnD .row button:hover .no{color:var(--green)}
 .wnD .row button[aria-pressed="true"] svg,.wnD .row button:hover svg{opacity:1;transform:none}
 .wnD .row button:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
-.wnD .ft{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
-.wnD .ft p{font:500 15px/1.5 var(--text);color:var(--ink-2);max-width:620px}.wnD .ft b{font:800 26px/1 var(--display);color:var(--green);margin-right:6px}
+.wnD .sft{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.wnD .sft p{font:500 15px/1.5 var(--text);color:var(--ink-2);max-width:620px}.wnD .sft b{font:800 26px/1 var(--display);color:var(--green);margin-right:6px}
 @media (max-width:1100px){.wnD .hd{grid-template-columns:1fr}.wnD .flt{grid-column:1;grid-row:auto;justify-self:start}}
 @media (max-width:860px){
   .wnD{padding-top:90px}.wnD .arc{grid-template-columns:1fr;gap:12px}

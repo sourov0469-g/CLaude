@@ -93,11 +93,12 @@
 .pcB .rule button.on{color:var(--ink)}.pcB .rule button.on i{background:var(--green)}
 .pcB .rule button:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:4px}
 @media (max-width:860px){
-  .pcA .ch{position:relative;top:0;height:auto;min-height:0;margin-bottom:18px}
-  .pcA .card{grid-template-columns:1fr;padding:26px 20px;transform:none;filter:none}
+  .pcA .ch{position:sticky;top:var(--st,76px);height:auto;min-height:0;margin-bottom:18px}
+  .pcA .card{grid-template-columns:1fr;padding:26px 20px}
   .pcA .num{font-size:72px}.pcA .clip{max-width:none}.pcA .seal{position:relative;display:block;top:0;width:104px;height:104px;margin:0 0 12px auto}
   .pcB{height:auto}.pcB .pin{position:relative;height:auto;grid-template-columns:1fr;padding:90px 0 40px}
-  .pcB .cap{position:relative;top:0;opacity:1;transform:none;margin-bottom:22px}.pcB .lft .btn{margin-top:4px}
-  .pcB .job{order:-1;height:380px}
+  .pcB .cap{position:relative;top:0;opacity:.42;transform:none;margin-bottom:22px;transition:opacity .3s ease}.pcB .cap.on{opacity:1}.pcB .lft .btn{margin-top:4px}
+  .pcB .lft{display:contents}.pcB .lft>.sec-h{order:-2}.pcB .lft>*{order:1}
+  .pcB .job{order:-1;position:sticky;top:76px;z-index:3;height:300px;margin-bottom:18px;box-shadow:0 0 0 10px #fff,0 18px 0 10px #fff,0 34px 22px -10px rgba(22,25,29,.22)}
 }
 @media (prefers-reduced-motion:reduce){.pcA .card,.pcA .clip button i,.pcA .clip button i svg,.pcA .mid,.pcA .med,.pcA .fin li,.pcA .seal,.pcB .cap{transition:none!important}}

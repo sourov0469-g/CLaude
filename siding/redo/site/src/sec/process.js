@@ -40,8 +40,12 @@ window.Proc = (function () {
   function wireA(root) {
     const s = root.querySelector('.pcA'); if (!s) return; const chs = [...s.querySelectorAll('.ch')];
     // chapters stack: the one underneath sinks back as the next slides over it
-    let raf = 0; const upd = () => { raf = 0; if (innerWidth <= 860) { bld(); return; } chs.forEach((c, i) => { const nx = chs[i + 1]; if (!nx) return; const r = nx.getBoundingClientRect(), k = Math.max(0, Math.min(1, 1 - (r.top - 84) / (innerHeight - 84)));
+    // on phones a card is often taller than the screen: it sticks once its bottom reaches the screen's bottom, so the next card
+    // still slides over it and the deck still stacks (sticky top = the smaller of the header line and screen minus card)
+    const tops = () => { const m = innerWidth <= 860; chs.forEach((c) => c.style.setProperty('--st', m ? Math.min(76, innerHeight - c.offsetHeight - 8) + 'px' : '')); };
+    let raf = 0; const upd = () => { raf = 0; const m = innerWidth <= 860, T = m ? 76 : 84; chs.forEach((c, i) => { const nx = chs[i + 1]; if (!nx) return; const r = nx.getBoundingClientRect(), k = RM ? 0 : Math.max(0, Math.min(1, 1 - (r.top - T) / (innerHeight - T)));
       c.style.setProperty('--k', k.toFixed(3)); }); bld(); };
+    tops(); addEventListener('resize', tops); new ResizeObserver(tops).observe(s);
     addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true }); addEventListener('resize', upd);
     // each chapter plays its object once in view
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.45 });
@@ -77,12 +81,14 @@ window.Proc = (function () {
     const s = root.querySelector('.pcB'); if (!s) return; const job = s.querySelector('.job'), caps = [...s.querySelectorAll('.cap')], gs = [...s.querySelectorAll('[data-g]')], pm = s.querySelector('.pm');
     const PM = ['As found: the old siding', 'Planned: lap 8.25 in, Arctic White trim', 'Going up: course by course', 'Done: walked, cleaned, warranted'];
     let raf = 0; const mob = () => innerWidth <= 860;
-    function upd() { raf = 0; const r = s.getBoundingClientRect(), tot = s.offsetHeight - innerHeight, p = mob() ? 1 : Math.max(0, Math.min(1, -r.top / tot));
+    // phones: the wall pins under the header and the captions scroll past it, each one moving the job on
+    const mobP = () => { if (RM) return 1; const a = caps[0].getBoundingClientRect().top, b = caps[caps.length - 1].getBoundingClientRect().bottom, y = innerHeight * 0.45; return Math.max(0, Math.min(1, (y - a) / Math.max(1, b - a))); };
+    function upd() { raf = 0; const r = s.getBoundingClientRect(), tot = s.offsetHeight - innerHeight, p = mob() ? mobP() : Math.max(0, Math.min(1, -r.top / tot));
       job.style.setProperty('--p', p.toFixed(3)); const c = Math.min(3, Math.floor(p * 4 - 1e-6 < 0 ? 0 : p * 4 - 1e-6));
-      caps.forEach((x, i) => x.classList.toggle('on', mob() || i === c)); gs.forEach((g, i) => g.classList.toggle('on', i <= c)); pm.textContent = PM[c]; }
+      caps.forEach((x, i) => x.classList.toggle('on', i === c || (mob() && RM))); gs.forEach((g, i) => g.classList.toggle('on', i <= c)); pm.textContent = PM[c]; }
     addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(upd); }, { passive: true }); addEventListener('resize', upd);
-    gs.forEach((g, i) => g.addEventListener('click', () => { const tot = s.offsetHeight - innerHeight; scrollTo({ top: s.offsetTop + tot * (i + 0.5) / 4, behavior: RM ? 'auto' : 'smooth' }); }));
+    gs.forEach((g, i) => g.addEventListener('click', () => { if (mob()) { caps[i].scrollIntoView({ block: 'center', behavior: RM ? 'auto' : 'smooth' }); return; } const tot = s.offsetHeight - innerHeight; scrollTo({ top: s.offsetTop + tot * (i + 0.5) / 4, behavior: RM ? 'auto' : 'smooth' }); }));
     upd();
   }
-  return { A, B, wire(root) { wireA(root); wireB(root); }, QUOTES };
+  return { A, B, wire(root) { wireA(root); wireB(root); }, QUOTES, CH };
 })();

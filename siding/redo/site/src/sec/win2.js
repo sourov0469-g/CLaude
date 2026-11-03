@@ -85,7 +85,7 @@ window.Win2 = (function () {
         <div class="flt" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-f="all">All ${J.length}</button><button type="button" aria-pressed="false" data-f="1">Windows only, ${nOnly}</button><button type="button" aria-pressed="false" data-f="0">With other trades, ${J.length - nOnly}</button></div></div>
       <div class="arc"><div class="vw" id="wnD-vw" data-solid aria-live="polite">${figs}<span class="wipe" aria-hidden="true"></span></div>
         <ol class="idx" aria-label="Window projects">${rows}</ol></div>
-      <div class="ft"><p><b>388</b> documented window jobs in all. These photographs are our own, from the project pages on this site.</p>${book}</div></section>`; };
+      <div class="sft"><p><b>388</b> documented window jobs in all. These photographs are our own, from the project pages on this site.</p>${book}</div></section>`; };
 
   function wireD(root) {
     const s = root.querySelector('.wnD'); if (!s) return;
