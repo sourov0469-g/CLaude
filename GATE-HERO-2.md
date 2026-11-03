@@ -1,4 +1,99 @@
-# GATE, hero round 2: five versions (Muse's HERO INSTRUCTION, 2026-11-03)
+# GATE, hero round 2: five versions, RECOLOURED (Muse's colour change + gate rulings, 2026-11-03)
+
+> **This revision supersedes the steel set.** Every screenshot in `siding/redo/site/gate/` is fresh and shows the recoloured five:
+> - versions 1–2 at rest AND mid-hover: `heroes-1-2-rest-and-hover.jpg` (1440) and `heroes-1-2-390-hover.jpg` (390);
+> - versions 3–5: `heroes-3-4-5.jpg`;
+> - all five at 390: `heroes-390.jpg`;
+> - every single frame: `heroN-<width>-<state>.jpg`.
+
+## A. Colour change: steel is gone
+
+**The system.** Deep green `#0E3B2C` is primary; lime `#B5DB6E` is the accent. Black and white give structure, on the warm cream ground `#F4F2EC`.
+
+**Tokens:**
+- `--green`, `--green-d #0A2C21`, `--green-dd #061A13`, `--green-l #E2ECE5`;
+- `--lime`, `--lime-d #7FA43E`, `--lime-l #EAF4D6`;
+- `--ink #16191D`, `--ink-2 #434B54`, `--ink-3 #5B636B`.
+
+The word "steel" no longer appears in any token, CSS file or build file (checked by search).
+
+**Where the colours live:**
+
+| Element | Treatment |
+|---|---|
+| Logo | Stacked Lap A in deep green, lime butt edges at 25 px and above |
+| Header phone | Deep-green button with a lime icon |
+| Key CTA "Book a free inspection" | Lime board with ink text and a deep-green slide-out tab |
+| Mobile Book | Lime board end |
+| Stars, links | Deep green |
+| Focus ring | Deep green |
+| On the dark film (V3) | Lime icons and stars |
+| The live field | Its siding shapes are tinted pale deep-green in one relief bake and pale lime in the other; the cursor's water edge tints green-lime |
+| Sample-book finishes | Real finish colours, not brand colours |
+
+**WCAG AA contrast (measured):**
+
+| Pair | Colours | Ratio | Result |
+|---|---|---|---|
+| Ink on cream | `#16191D` / `#F4F2EC` | 15.75:1 | AA |
+| Body on cream | `#434B54` / `#F4F2EC` | 7.90:1 | AA |
+| Muted on cream | `#5B636B` / `#F4F2EC` | 5.45:1 | AA. **Fixed:** was `#69727B`, 4.37:1, a fail |
+| Muted on white | `#5B636B` / `#FFFFFF` | 6.10:1 | AA |
+| White on deep green (header phone) | `#FFFFFF` / `#0E3B2C` | 12.50:1 | AA |
+| Lime on deep green | `#B5DB6E` / `#0E3B2C` | 7.93:1 | AA |
+| Ink on lime (key CTA, flat) | `#16191D` / `#B5DB6E` | 11.19:1 | AA |
+| Ink on lime (gradient top) | `#16191D` / `#C6E788` | 12.75:1 | AA |
+| Ink on lime (gradient bottom) | `#16191D` / `#A6CE5C` | 9.74:1 | AA |
+| Deep green on cream / white | `#0E3B2C` | 11.16 / 12.50:1 | AA |
+| White on the V3 film scrim, worst case | `#2E3134` | 13.08:1 | AA |
+| Lime on the V3 scrim | | 8.30:1 | AA |
+| Lime on white | `#B5DB6E` / `#FFFFFF` | 1.58:1 | **Never used for text**, only fills behind ink |
+
+**Fixed during the recolour:** V3's stars were green on the dark scrim; they are now lime.
+
+## B. White-lap ruling: base used for version 2
+
+**Version 2 is rebuilt on the finished after photo.** Evidence from the firm's own records:
+- the firm's siding page pair data (`work/data/svcpairs.json`, siding pair 3) lists Maple Run, Austin, Jul 2026, "HardiePlank Select Cedar Mill 8.25\"";
+- its **after** image is `1a8c4e79894f15220521c5d507b5ebff992814ff-1771x1425.jpg`, the same tidy, straight-on elevation as the attached `hero-base-lap-finished.webp`;
+- its **before** image is `f06a748c…-1365x1085.jpg`, the job-in-progress shot used earlier.
+
+I used the firm's **original at 1771 × 1425**, higher resolution than the attachment, same shot. Its framing crops out the roof vents and the patio furniture.
+
+**184 boards** were re-cut along the finished wall's courses, leaving the four upper windows, the two lower window units and the porch roof whole. Its label now truthfully reads "a finished Austin Pro siding job in Maple Run, Austin".
+
+## C. Film ruling
+
+Closed: the firm's own published video is approved. It is used in versions 3–5.
+
+## D. Re-audit after the recolour (1440 and 390)
+
+| Check | Result |
+|---|---|
+| JS errors, all five, both widths | 0 |
+| Horizontal scroll | None |
+| Reduced motion | Photos still (lift 0); film paused with a Play control; field static |
+| Sample-book dropdown | Opens on all five |
+| V1 hover lift / after leaving | 278 / **0** |
+| V2 (new base) hover lift / after leaving | 743 / **0** |
+
+After leaving, both canvases are the pure photograph: nothing floats.
+
+**Scores after the recolour:**
+
+| Version | Before | After | Why |
+|---|---|---|---|
+| V1 | | 8.18 | Unchanged |
+| V2 | 7.62 | **8.02** | The finished photo removes the content flag |
+| V3–V5 | | Unchanged | |
+
+The recommendation stands: **V1**.
+
+---
+
+*The original round-2 report follows (steel-era wording kept as the record; where it says steel, read deep green and lime).*
+
+## Original report
 
 **Process:** every step ran in this session's own thread. No sub-agents, no background tasks.
 

@@ -9,6 +9,7 @@
 On their points, the later ones win.
 
 **Rules in force:**
+- Colour: deep green `#0E3B2C`, lime `#B5DB6E`, black, white, warm cream. No steel.
 - The background is the site: a live Immersive Garden field with Austin's shapes, splash and cursor reaction, wherever the ground is white.
 - No big 3D.
 - No document-like sections.
@@ -26,7 +27,8 @@ On their points, the later ones win.
 | 11-03 | Hero round 1 (V1 cut photo, V2 3D house) | Rejected |
 | 11-03 | Hero sheet-cut options (s1–s3) | Rejected (missed the essence) |
 | 11-03 | Hero A (3D house) / B (photo + 3D debris) | A out (big 3D banned); B idea approved, execution, layout and image rejected |
-| 11-03 | **Hero round 2: five versions** (`siding/redo/site/out/hero-1..5.html`) | Built and audited; `GATE-HERO-2.md`. **Waiting for Muse's judgment** |
+| 11-03 | Hero round 2: five versions | Built and audited (steel) |
+| 11-03 | **Colour change: deep green #0E3B2C + lime #B5DB6E** (steel retired); V2 rebuilt on the finished after photo; film approved | Recoloured five re-audited; `GATE-HERO-2.md` updated. **Waiting for Muse's judgment** |
 
 ## Current build sources (`siding/redo/site/`)
 

@@ -68,3 +68,19 @@ for img, js, out in (('charcoal-orig.jpg', 'charcoal-boards.json', 'cb.png'), ('
     im = Image.open('media/' + img).convert('RGB'); d = ImageDraw.Draw(im)
     for b in json.load(open('media/' + js))['boards']: d.polygon([tuple(p) for p in b['p']], outline=(255, 0, 0))
     im.resize((im.width//2, im.height//2)).save('/tmp/claude-0/-home-user-CLaude/a0d00027-7873-5f85-99e1-904cc4a5c13d/scratchpad/' + out)
+
+# after photo of the same Maple Run pair (whitelap-orig.jpg, 1771x1425); measured on a 1400-wide view of rows 180..1287
+K = 1771 / 1400
+T = lambda x, y: (x * K, y * K + 180)
+def R(x0, y0, x1, y1): a, b = T(x0, y0), T(x1, y1); return (a[0], a[1], b[0], b[1])
+def P(pts): return [T(x, y) for x, y in pts]
+E = 19.6 * K
+up = wall(P([(46, 162), (1354, 150), (1354, 468), (46, 470)]), flat, T(0, 468)[1], E, 16, 46 * K, 1354 * K,
+          holes=[R(66, 184, 212, 330), R(514, 168, 666, 320), R(798, 158, 926, 344), R(1166, 140, 1310, 334), R(412, 352, 968, 480)], Lr=(200, 420), seed=13)
+ll = wall(P([(46, 486), (468, 486), (468, 752), (46, 752)]), flat, T(0, 752)[1], E, 14, 46 * K, 468 * K, holes=[R(126, 486, 342, 700)], Lr=(160, 330), seed=17)
+lr = wall(P([(914, 474), (1352, 474), (1352, 770), (914, 770)]), flat, T(0, 770)[1], E, 15, 914 * K, 1352 * K, holes=[R(1002, 472, 1254, 704)], Lr=(160, 330), seed=19)
+json.dump({'w': 1771, 'h': 1425, 'boards': up + ll + lr}, open('media/whitelap-after-boards.json', 'w'))
+print('white after', len(up + ll + lr))
+im = Image.open('media/whitelap-orig.jpg').convert('RGB'); d = ImageDraw.Draw(im)
+for b in up + ll + lr: d.polygon([tuple(p) for p in b['p']], outline=(255, 0, 0))
+im.crop((0, 180, 1771, 1287)).resize((886, 554)).save('/tmp/claude-0/-home-user-CLaude/a0d00027-7873-5f85-99e1-904cc4a5c13d/scratchpad/wab.png')

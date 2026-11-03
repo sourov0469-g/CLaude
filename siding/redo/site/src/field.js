@@ -142,8 +142,10 @@
       float grainN=h21(floor(frag*.9))*.018-.009;
       vec3 plaster=vec3(.957,.949,.925)+grainN;
       vec3 col=plaster*(.86+.18*dif)*shadow + pow(clamp(dot(reflect(-L,n),vec3(0,0,1)),0.,1.),24.)*.06*h;
-      // the splash / fluid edge: a cool steel tint where the water moves
-      col+=vec3(-.03,-.005,.03)*clamp(amt*length(vel)*2.+sp*.5,0.,1.)*ink;
+      // the brand tints the pieces: pale deep-green in one bake, pale lime in the other
+      vec3 tint=mix(vec3(.80,.89,.84),vec3(.90,.97,.76),mix_);col*=mix(vec3(1.),tint,clamp(h*1.15,0.,1.));
+      // the splash / fluid edge: a green-lime tint where the water moves
+      col+=vec3(-.025,.012,-.035)*clamp(amt*length(vel)*2.+sp*.5,0.,1.)*ink;
       gl_FragColor=vec4(col,1.);}`);
 
   /* ---------- state, input, loop ---------- */

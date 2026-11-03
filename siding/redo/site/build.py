@@ -34,9 +34,9 @@ I = {
  'play': '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5l11 7-11 7z"/></svg>',
 }
 BOOK = 'https://www.austinprosiding.com/schedule-appointment'
-SWATCH = [('Lap siding', 'HardiePlank, 8.25" boards', '#9AA3A9', '-3deg'), ('Board &amp; batten', 'Vertical panels and battens', '#3F5F7E', '2deg'),
+SWATCH = [('Lap siding', 'HardiePlank, 8.25" boards', '#B9B4A8', '-3deg'), ('Board &amp; batten', 'Vertical panels and battens', '#2F4B3F', '2deg'),
           ('Shingle &amp; shake', 'Gable accents', '#B98D63', '-1deg'), ('Trim &amp; soffit', 'Corners, fascia, frieze', '#EDE7DA', '3deg')]
-HEADER = f'''<header class="hdr"><a class="brand" href="#top" aria-label="Austin Pro Siding, Windows &amp; Roofing, home">{logo_svg(38)}<span><b>AUSTIN PRO</b><small>Siding, Windows &amp; Roofing</small></span></a>
+HEADER = f'''<header class="hdr"><a class="brand" href="#top" aria-label="Austin Pro Siding, Windows &amp; Roofing, home">{logo_svg(38, fill='#0E3B2C', butt='#7FA43E')}<span><b>AUSTIN PRO</b><small>Siding, Windows &amp; Roofing</small></span></a>
 <nav aria-label="Main"><ul class="menu"><li><button type="button" aria-expanded="false" aria-controls="book">Siding {I['chev']}</button>
 <div class="book" id="book"><div class="fan">{''.join(f'<a href="#siding"><i style="background:{c};--r:{r}"></i><b>{n}</b><small>{d}</small></a>' for n, d, c, r in SWATCH)}</div></div></li>
 <li><a href="#windows">Windows</a></li><li><a href="#roofing">Roofing</a></li><li><a href="#work">Our work</a></li></ul></nav>
@@ -49,7 +49,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape')set(false);});})();</script>'
 
 LEAD = 'The full wall or the whole house.'
 SUB = 'Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house.'
-CTAS = f'''<div class="ctas"><a class="btn" href="{BOOK}">Book a free inspection<span class="tab">{I['cal']}</span></a><a class="callx" href="tel:+15125500000">{I['phone']}(512) 550-0000</a></div>
+CTAS = f'''<div class="ctas"><a class="btn key" href="{BOOK}">Book a free inspection<span class="tab">{I['cal']}</span></a><a class="callx" href="tel:+15125500000">{I['phone']}(512) 550-0000</a></div>
 <p class="proof"><span class="stars">{I['star'] * 5}</span><span><b>4.9</b> from 474 Google reviews</span></p>'''
 
 
@@ -90,9 +90,9 @@ def v1():
 
 def v2():
     body = f'''<section class="hero v2" aria-labelledby="h1"><div class="copy"><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}</div>
-<div class="stage" data-fx="0.5" data-fy="0.5" data-mate="squint"><canvas role="img" aria-label="A two-storey house in white lap siding with a covered patio, Maple Run, Austin."></canvas>
+<div class="stage" data-fx="0.5" data-fy="0.42" data-mate="squint"><canvas role="img" aria-label="A finished Austin Pro siding job in Maple Run, Austin: a two-storey house in HardiePlank lap siding with a covered patio."></canvas>
 <div class="tag" data-solid><b>177</b><small>before-and-after pairs published</small></div><span class="hint" data-solid><i></i>Move across the siding</span></div></section>'''
-    return page(2, 'interactive photo, white-lap job', body, photo_js('.v2 .stage', 'whitelap-before-orig.jpg', 'whitelap-boards.json', [40, 120, 1320, 760], 150))
+    return page(2, 'interactive photo, white-lap job', body, photo_js('.v2 .stage', 'whitelap-orig.jpg', 'whitelap-after-boards.json', [0, 330, 1771, 1180], 150))
 
 
 def v3():
