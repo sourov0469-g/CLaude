@@ -219,3 +219,39 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects fixed:**
 - Wise 4's scrolling thread was not keyboard-focusable (axe); it now takes focus.
 - Wise 5's ladder could only be selected on its rails; every tool now has a full hit area.
+
+---
+
+## L6 · Protect Your Nest 4 + 5 · checks 32/32 · evidence `gates/ladder/L06-protect-4-5/` · Protect now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Protect 4 · Hang the Wrap** | Immersive Garden (surface reacting where the cursor moves) | A canvas cloth simulation: the black mesh wrap is pinned along the eave of a drawn hip-roofed house and hangs over the walls and shrubs to the ground, with a tarp in front. The pointer (or an idle gust) blows it like wind and it settles back, with the windows and door faintly visible through it. Beside it, the three parts in Owl's words. | 8.2 | 7.8 | 8.6 | 8.8 | **8.26** |
+| **Protect 5 · Weave the Nest** | Graza (custom-animation bar) | The name taken literally: a nest woven strand by strand in SVG. The outer weave is the wrap, the middle weave the three cleanup passes, the amber lining the aftercare box. A line-drawn owl settles into it when the weave is done (front strands are drawn over it) and blinks. Choosing a band lifts it and tells that part in Owl's words. | 8.0 | 8.0 | 8.6 | 8.6 | **8.18** |
+
+**Truth:**
+- Both say only what the system is: the wrap, three cleanup passes (crew, magnet sweep, project manager) and the aftercare box.
+- No storm story (tested).
+- Protect 4 matches Owl's wrap photo: mesh from the eaves down, and a tarp on the ground.
+
+**Checks run:** the generic gate, plus:
+- Protect 4: the truthful copy; the mesh changes where the pointer blows across it.
+- Protect 5: the truthful copy; the nest weaves and the owl settles; choosing the middle weave lifts both of its layers and tells the passes; arrow keys rove to the lining.
+
+**Ledger:**
+- **Protect 4:**
+  - cloth surface: ⟦S1363⟧ (one rAF, pointer on the section, paused unseen, static under reduced motion);
+  - wrap as photographed: ⟦S0414⟧;
+  - numbered parts: ⟦S1352⟧;
+  - CTA: ⟦S1388⟧;
+  - title: ⟦S0451⟧.
+- **Protect 5:**
+  - strand draw-on: ⟦S0407⟧;
+  - staggered weave: ⟦S0187⟧;
+  - band tabs: ⟦S1246⟧;
+  - band lift: ⟦S1330⟧;
+  - owl blink: ⟦S0407⟧;
+  - title: ⟦S0451⟧.
+
+**Defects fixed (Protect 5):**
+- The owl stood on top of the nest, and then was hidden behind it.
+- It now sits in the bowl, with a front weave drawn over it.

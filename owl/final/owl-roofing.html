@@ -4195,6 +4195,193 @@ OWL.reg('wrap','3',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="wrap" data-v="4">
+<section class="sec wrap4" id="protect-4" aria-labelledby="pn4-h">
+<style>
+.wrap4 .g{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(22px,4vw,56px);align-items:center}
+.wrap4 .stage{position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#E4ECEF,#F4F0E4 70%);box-shadow:0 2px 0 #fff inset,0 50px 80px -46px rgba(23,17,29,.55);aspect-ratio:8/5;touch-action:pan-y}
+.wrap4 canvas{position:absolute;inset:0;width:100%;height:100%}
+.wrap4 .tag{position:absolute;left:16px;top:16px;padding:7px 12px;border-radius:999px;background:rgba(251,250,246,.94);font-weight:700;font-size:14px}
+.wrap4 .lede{margin:14px 0 22px;max-width:34ch}
+.wrap4 ol{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.wrap4 li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.wrap4 li i{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--amber);font-style:normal;font-weight:900;box-shadow:0 4px 0 var(--amber-edge)}
+.wrap4 li b{display:block;font-size:18px}
+.wrap4 li span{font-size:15px;color:var(--ink-70)}
+@media (max-width:900px){.wrap4 .g{grid-template-columns:1fr}.wrap4 .stage{aspect-ratio:4/3}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="stage" data-owl="say:Make some wind">
+   <canvas role="img" aria-label="A hip-roofed house with black mesh hanging from the eaves over the walls and shrubs, and a tarp on the ground in front. Moving the pointer blows the mesh like wind."></canvas>
+   <span class="tag" aria-hidden="true">Move across the wrap</span>
+  </div>
+  <div>
+   <span class="kick">Protect Your Nest System</span>
+   <h2 class="h2" id="pn4-h" style="margin-top:12px">Hang the Wrap</h2>
+   <p class="lede rv">Before the old roof comes off, mesh goes up at the eaves and down over the walls and shrubs, and a tarp covers the ground.</p>
+   <ol>
+    <li><i>1</i><div><b>The wrap</b><span>Mesh from the eaves down, and a tarp over the lawn.</span></div></li>
+    <li><i>2</i><div><b>Three cleanup passes</b><span>The crew, a magnet sweep, then the project manager.</span></div></li>
+    <li><i>3</i><div><b>The aftercare box</b><span>Left with you when the crew goes.</span></div></li>
+   </ol>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','4',function(root){
+  var stage = root.querySelector('.stage'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, P = [], C = [], cols = 30, rows = 14, vis = false, mx = -999, my = -999, pmx = 0, pmy = 0, user = 0, gust = 0;
+  var g = {};
+  function layout(){
+    var b = stage.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g = {x0: W*.16, x1: W*.84, eave: H*.42, ridge: H*.17, ground: H*.86};
+    P = []; C = []; var dx = (g.x1 - g.x0)/(cols - 1), dy = (g.ground - g.eave)/(rows - 1);
+    for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++){ var x = g.x0 + c*dx, y = g.eave + r*dy; P.push({x: x, y: y, px: x, py: y, pin: r === 0}); }
+    for (r = 0; r < rows; r++) for (c = 0; c < cols; c++){ var i = r*cols + c; if (c < cols - 1) C.push([i, i + 1, dx]); if (r < rows - 1) C.push([i, i + cols, dy]); }
+  }
+  function house(){
+    /* sky and lawn, then the house: walls, windows, door, hip roof with courses, shrubs along the wall */
+    ctx.fillStyle = '#8DB45F'; ctx.fillRect(0, g.ground - 4, W, H - g.ground + 4);
+    ctx.fillStyle = '#E9E3D5'; ctx.fillRect(g.x0 + 8, g.eave, g.x1 - g.x0 - 16, g.ground - g.eave);
+    ctx.fillStyle = '#B9C9D3'; [[.24, .5], [.66, .5]].forEach(function(w){ ctx.fillRect(g.x0 + (g.x1 - g.x0)*w[0], g.eave + (g.ground - g.eave)*.22, (g.x1 - g.x0)*.12, (g.ground - g.eave)*.26); });
+    ctx.fillStyle = '#17111D'; ctx.fillRect(g.x0 + (g.x1 - g.x0)*.46, g.eave + (g.ground - g.eave)*.36, (g.x1 - g.x0)*.08, (g.ground - g.eave)*.64);
+    var o = (g.x1 - g.x0)*.06, ins = (g.x1 - g.x0)*.2;
+    ctx.fillStyle = '#55505D'; ctx.beginPath(); ctx.moveTo(g.x0 - o, g.eave); ctx.lineTo(g.x1 + o, g.eave); ctx.lineTo(g.x1 - ins, g.ridge); ctx.lineTo(g.x0 + ins, g.ridge); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(23,17,29,.35)'; ctx.lineWidth = 1; for (var k = 1; k < 7; k++){ var t = k/7, y = g.eave - (g.eave - g.ridge)*t, xa = (g.x0 - o) + (ins + o)*t, xb = (g.x1 + o) - (ins + o)*t; ctx.beginPath(); ctx.moveTo(xa, y); ctx.lineTo(xb, y); ctx.stroke(); }
+    ctx.fillStyle = '#F1EFE6'; ctx.fillRect(g.x0 - o - 2, g.eave - 4, (g.x1 - g.x0) + 2*o + 4, 8);
+    ctx.fillStyle = '#5E8A45'; for (var s = 0; s < 6; s++){ var sx = g.x0 + 20 + s*(g.x1 - g.x0 - 40)/5; ctx.beginPath(); ctx.arc(sx, g.ground - 14, 22, Math.PI, 0); ctx.fill(); }
+    ctx.fillStyle = 'rgba(31,28,36,.92)'; ctx.beginPath(); ctx.moveTo(g.x0 - 30, g.ground); ctx.lineTo(g.x1 + 30, g.ground); ctx.lineTo(g.x1 + 70, H); ctx.lineTo(g.x0 - 70, H); ctx.closePath(); ctx.fill();
+  }
+  function step(dt){
+    var gr = .5*(dt/16), wx = Math.sin(performance.now()/1300)*.02 + gust;
+    gust *= .96;
+    for (var i = 0; i < P.length; i++){ var p = P[i]; if (p.pin) continue; var vx = (p.x - p.px)*.985, vy = (p.y - p.py)*.985; p.px = p.x; p.py = p.y; p.x += vx + wx; p.y += vy + gr;
+      var d = Math.hypot(p.x - mx, p.y - my); if (d < 90){ var f = (1 - d/90); p.x += (mx - pmx)*f*.5 + (p.x - mx)/d*f*1.4; p.y += (my - pmy)*f*.35; }
+      if (p.y > g.ground) p.y = g.ground; }
+    for (var it = 0; it < 3; it++) for (var j = 0; j < C.length; j++){ var a = P[C[j][0]], b = P[C[j][1]], dx = b.x - a.x, dy = b.y - a.y, dist = Math.hypot(dx, dy) || 1, diff = (dist - C[j][2])/dist*.5;
+      if (!a.pin){ a.x += dx*diff; a.y += dy*diff; } if (!b.pin){ b.x -= dx*diff; b.y -= dy*diff; } }
+  }
+  function draw(){
+    ctx.clearRect(0, 0, W, H); house();
+    for (var r = 0; r < rows - 1; r++) for (var c = 0; c < cols - 1; c++){ var a = P[r*cols + c], b = P[r*cols + c + 1], d = P[(r + 1)*cols + c + 1], e = P[(r + 1)*cols + c];
+      var shade = Math.max(0, Math.min(1, (b.x - a.x)/((g.x1 - g.x0)/(cols - 1)))); ctx.fillStyle = 'rgba(' + Math.round(26 + 18*(1 - shade)) + ',' + Math.round(23 + 16*(1 - shade)) + ',' + Math.round(31 + 18*(1 - shade)) + ',.82)';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(d.x, d.y); ctx.lineTo(e.x, e.y); ctx.closePath(); ctx.fill(); }
+    ctx.strokeStyle = 'rgba(241,239,230,.12)'; ctx.lineWidth = 1; ctx.beginPath();
+    for (var k = 0; k < C.length; k++){ var p1 = P[C[k][0]], p2 = P[C[k][1]]; ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); } ctx.stroke();
+    ctx.fillStyle = '#9BA1A8'; for (var c2 = 0; c2 < cols; c2 += 3){ var q = P[c2]; ctx.beginPath(); ctx.arc(q.x, q.y + 1, 2.4, 0, 6.3); ctx.fill(); }
+  }
+  function frame(t){ if (vis){ var dt = Math.min(32, t - (frame.l || t)); frame.l = t; if (t - user > 3500 && Math.random() < .006) gust = (Math.random() - .5)*1.6; step(dt); draw(); pmx = mx; pmy = my; } requestAnimationFrame(frame); }
+  layout(); addEventListener('resize', function(){ layout(); draw(); });
+  stage.addEventListener('pointermove', function(e){ var b = stage.getBoundingClientRect(); user = performance.now(); mx = e.clientX - b.left; my = e.clientY - b.top; });
+  stage.addEventListener('pointerleave', function(){ mx = my = -999; });
+  if (OWL.reduce){ draw(); OWL.reveal(h2); return; }
+  for (var w = 0; w < 120; w++) step(16);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis) OWL.reveal(h2); }).observe(stage); else vis = true;
+  draw(); requestAnimationFrame(frame);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="wrap" data-v="5">
+<section class="sec wrap5" id="protect-5" aria-labelledby="pn5-h">
+<style>
+.wrap5 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(22px,4vw,64px);align-items:center}
+.wrap5 .lede{margin:14px 0 22px;max-width:34ch}
+.wrap5 .tabs{display:grid;gap:8px}
+.wrap5 .tabs button{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;align-items:center;width:100%;padding:12px 14px;border-radius:16px;text-align:left;transition:background .25s,box-shadow .25s}
+.wrap5 .tabs button i{grid-row:span 2;width:40px;height:40px;border-radius:50%;box-shadow:0 0 0 3px rgba(23,17,29,.1)}
+.wrap5 .tabs button b{font-size:18px}
+.wrap5 .tabs button span{font-size:15px;color:var(--ink-70)}
+.wrap5 .tabs button:hover{background:rgba(234,162,33,.1)}
+.wrap5 .tabs button[aria-selected="true"]{background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 16px 26px -20px rgba(23,17,29,.5)}
+.wrap5 .tabs button[aria-selected="true"] i{box-shadow:0 0 0 3px var(--amber)}
+.wrap5 .say{min-height:56px;margin:16px 0 18px;font-size:17px}
+.wrap5 .art{position:relative}
+.wrap5 svg{display:block;width:100%;height:auto;overflow:visible}
+.wrap5 .band{transition:transform .5s cubic-bezier(.3,1.4,.5,1),opacity .4s;cursor:pointer}
+.wrap5 .band path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.wrap5 .woven .band path{animation:pn5draw 1.1s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes pn5draw{to{stroke-dashoffset:0}}
+.wrap5 svg.has .band:not(.on){opacity:.42}
+.wrap5 .band.on{transform:translateY(-8px)}
+.wrap5 .owl{transform:translateY(-160px);opacity:0;transition:transform .9s cubic-bezier(.3,1.5,.5,1),opacity .3s}
+.wrap5 .woven .owl{transform:none;opacity:1;transition-delay:2.6s}
+.wrap5 .lid{transform-box:fill-box;transform-origin:50% 50%;transform:scaleY(0);animation:pn5blink 6s 4s infinite}
+@keyframes pn5blink{0%,94%,100%{transform:scaleY(0)}96%{transform:scaleY(1)}}
+@media (max-width:900px){.wrap5 .g{grid-template-columns:1fr}.wrap5 .art{order:-1}}
+@media (prefers-reduced-motion:reduce){.wrap5 .band path{stroke-dashoffset:0;animation:none!important}.wrap5 .owl{transform:none;opacity:1;transition:none}.wrap5 .lid{animation:none}.wrap5 .band{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Protect Your Nest System</span>
+   <h2 class="h2" id="pn5-h" style="margin-top:12px">Weave the Nest</h2>
+   <p class="lede rv">Three parts, woven together, around every roof replacement. Pick a band of the nest.</p>
+   <div class="tabs" role="tablist" aria-label="The three parts" aria-orientation="vertical"></div>
+   <p class="say" id="pn5-say" role="tabpanel" aria-live="polite"></p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+  </div>
+  <div class="art" data-owl="say:Hoo's home?">
+   <svg viewBox="0 0 600 440" role="img" aria-label="A nest woven in three bands: an outer weave for the wrap, a middle weave for the three cleanup passes, and an amber lining for the aftercare box, with an owl settled on top">
+    <ellipse cx="300" cy="372" rx="230" ry="26" fill="#17111D" opacity=".1"/>
+    <g class="bands"></g>
+    <g class="owl"><g transform="translate(300 300) scale(.9)">
+     <path d="M-40 10 C-46 -46 -28 -82 0 -82 C28 -82 46 -46 40 10 Z" fill="#FBFAF6" stroke="#17111D" stroke-width="4"/>
+     <path d="M-22 -24 Q0 -10 22 -24" fill="none" stroke="#EAA221" stroke-width="3.5"/>
+     <path d="M-44 -78 L-32 -112 L-18 -90 Q0 -98 18 -90 L32 -112 L44 -78 Q44 -44 0 -42 Q-44 -44 -44 -78Z" fill="#FBFAF6" stroke="#17111D" stroke-width="4" stroke-linejoin="round"/>
+     <circle cx="-17" cy="-72" r="12" fill="#EAA221" stroke="#17111D" stroke-width="3"/><circle cx="17" cy="-72" r="12" fill="#EAA221" stroke="#17111D" stroke-width="3"/>
+     <circle cx="-17" cy="-72" r="5" fill="#17111D"/><circle cx="17" cy="-72" r="5" fill="#17111D"/>
+     <ellipse class="lid" cx="-17" cy="-72" rx="12.5" ry="12.5" fill="#FBFAF6" stroke="#17111D" stroke-width="2.5"/><ellipse class="lid" cx="17" cy="-72" rx="12.5" ry="12.5" fill="#FBFAF6" stroke="#17111D" stroke-width="2.5"/>
+     <path d="M-6 -60 L0 -50 L6 -60Z" fill="#17111D"/>
+    </g></g>
+    <g class="fronts"></g>
+   </svg>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','5',function(root){
+  var B = [
+    {n:'The wrap', t:'Mesh from the eaves down over walls and shrubs, and a tarp over the lawn, before the old roof comes off.', rx:240, ry:96, cy:320, w:9, col:['#6E5332','#8A6A3E','#7A5A2A','#A9844F'], sw:'#7A5A2A'},
+    {n:'Three cleanup passes', t:'The crew clears as they go, a magnet sweeps the lawn and drive for nails, then the project manager walks it.', rx:190, ry:74, cy:314, w:7, col:['#A9844F','#C49A62','#B88E57','#8A6A3E'], sw:'#B88E57'},
+    {n:'The aftercare box', t:'Left with you when the crew goes.', rx:140, ry:52, cy:306, w:6, col:['#EAA221','#F6C25F','#D48F17','#F1BC55'], sw:'#EAA221'}];
+  var svg = root.querySelector('svg'), bands = root.querySelector('.bands'), fronts = root.querySelector('.fronts'), tabs = root.querySelector('.tabs'), say = root.querySelector('.say'), art = root.querySelector('.art'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(2025), NS = 'http://www.w3.org/2000/svg', els = [];
+  /* each band: strands that wrap round the bowl of the nest, front half drawn over the back */
+  B.forEach(function(b, k){ var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'band'); g.dataset.k = k; var h = '';
+    for (var i = 0; i < 18; i++){ var a0 = R()*Math.PI*2, span = Math.PI*(.5 + R()*.9), rx = b.rx*(.9 + R()*.18), ry = b.ry*(.85 + R()*.3), cy = b.cy + (R() - .5)*18, pts = [];
+      for (var s = 0; s <= 12; s++){ var a = a0 + span*s/12; pts.push([300 + Math.cos(a)*rx, cy + Math.sin(a)*ry*(Math.sin(a) > 0 ? 1 : .55)]); }
+      var d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1); for (var q = 1; q < pts.length - 1; q += 2) d += 'Q' + pts[q][0].toFixed(1) + ' ' + pts[q][1].toFixed(1) + ' ' + pts[q + 1][0].toFixed(1) + ' ' + pts[q + 1][1].toFixed(1);
+      h += '<path pathLength="1" d="' + d + '" stroke="' + b.col[i % 4] + '" stroke-width="' + (b.w*(.6 + R()*.6)).toFixed(1) + '" style="animation-delay:' + (k*.55 + i*.04).toFixed(2) + 's"/>'; }
+    g.innerHTML = h; g.addEventListener('click', function(){ pick(k); }); bands.appendChild(g); els.push(g);
+    /* a few more strands across the front of the bowl, drawn over the owl so it sits in the nest */
+    var f = document.createElementNS(NS, 'g'); f.setAttribute('class', 'band'); f.dataset.k = k; var fh = '';
+    for (var m = 0; m < 9; m++){ var b0 = Math.PI*(.12 + R()*.2), sp = Math.PI*(.45 + R()*.2), frx = b.rx*(.92 + R()*.14), fry = b.ry*(.9 + R()*.2), fcy = b.cy + (R() - .5)*12, fp = [];
+      for (var u = 0; u <= 8; u++){ var aa = b0 + sp*u/8; fp.push([300 + Math.cos(aa)*frx, fcy + Math.sin(aa)*fry]); }
+      var fd = 'M' + fp[0][0].toFixed(1) + ' ' + fp[0][1].toFixed(1); for (var v = 1; v < fp.length - 1; v += 2) fd += 'Q' + fp[v][0].toFixed(1) + ' ' + fp[v][1].toFixed(1) + ' ' + fp[v + 1][0].toFixed(1) + ' ' + fp[v + 1][1].toFixed(1);
+      fh += '<path pathLength="1" d="' + fd + '" stroke="' + b.col[m % 4] + '" stroke-width="' + (b.w*(.7 + R()*.6)).toFixed(1) + '" style="animation-delay:' + (k*.55 + .8 + m*.05).toFixed(2) + 's"/>'; }
+    f.innerHTML = fh; f.addEventListener('click', function(){ pick(k); }); fronts.appendChild(f); els.push(f); });
+  var btns = B.map(function(b, k){ var x = document.createElement('button'); x.type = 'button'; x.setAttribute('role', 'tab'); x.id = 'pn5-t' + k; x.setAttribute('aria-controls', 'pn5-say');
+    x.innerHTML = '<i style="background:' + b.sw + '"></i><b>' + b.n + '</b><span>' + ['The outer weave', 'The middle weave', 'The lining'][k] + '</span>';
+    x.addEventListener('click', function(){ pick(k); });
+    x.addEventListener('keydown', function(e){ var n = null; if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = (cur + 1) % 3; else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') n = (cur + 2) % 3; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = 2; if (n !== null){ e.preventDefault(); pick(n); btns[n].focus(); } });
+    tabs.appendChild(x); return x; });
+  function pick(k){ cur = k; svg.classList.add('has'); els.forEach(function(g){ g.classList.toggle('on', +g.dataset.k === k); });
+    btns.forEach(function(x, j){ x.setAttribute('aria-selected', j === k); x.tabIndex = j === k ? 0 : -1; }); say.setAttribute('aria-labelledby', 'pn5-t' + k); say.textContent = B[k].t; }
+  pick(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ art.classList.add('woven'); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); art.classList.add('woven'); } }, {threshold:.3}); io.observe(art);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="wrap" data-b="1">
 <section class="sec wrap1" id="protect" aria-labelledby="pn1-h">
 <style>

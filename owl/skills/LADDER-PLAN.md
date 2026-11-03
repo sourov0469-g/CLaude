@@ -79,3 +79,16 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   detection) and phone camera (photo and video documentation), drawn in SVG. Hover or focus lifts a tool off the mat
   with a real shadow and shows which part of the Wise Check it serves; the four parts are also a button list.
   Skills: ⟦S0205⟧ small 3D lift, ⟦S1330⟧ damped tilt, ⟦S1246⟧ tabs, ⟦S0407⟧ draw-on of tools, ⟦S1352⟧.
+
+## L6 · Protect 4 + 5 (Protect stood at 3: V1 Same Job · Different Yard, V2 3D deck, V3 yard plan)
+- **Protect 4 · "Hang the Wrap"** — reference **Immersive Garden** (surface that reacts where the cursor moves). A
+  canvas cloth: the black mesh wrap hangs from the eave line over the walls and shrubs of a drawn hip-roofed house,
+  with a ground tarp in front. It is a real mass-spring mesh, pinned along the eave; the cursor (or idle gusts) pushes
+  it like wind and it settles back, the house visible through the mesh. Beside it, the three parts of the system in
+  Owl's words. Skills: ⟦S1363⟧ bounded canvas simulation (one rAF, pointer on the section, paused unseen, static
+  under reduced motion), ⟦S0414⟧ (the wrap hangs from the eaves to the ground, as in Owl's photo), ⟦S0451⟧, ⟦S1388⟧.
+- **Protect 5 · "Weave the Nest"** — reference **Graza** (custom-animation quality bar). The name taken
+  literally: a nest drawn in SVG strand by strand. Three bands of weave are the three parts (the outer weave is the
+  wrap, the middle is the three cleanup passes, the lining is the aftercare box), and the owl settles on it when the
+  weave is done. Choosing a band lifts it and tells that part in Owl's words. Skills: ⟦S0407⟧ stroke draw-on, ⟦S0187⟧
+  staggered choreography, ⟦S1246⟧ tabs, ⟦S1330⟧ lift, ⟦S0451⟧.

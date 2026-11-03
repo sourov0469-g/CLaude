@@ -1,0 +1,88 @@
+<section class="sec wrap4" id="protect-4" aria-labelledby="pn4-h">
+<style>
+.wrap4 .g{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(22px,4vw,56px);align-items:center}
+.wrap4 .stage{position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#E4ECEF,#F4F0E4 70%);box-shadow:0 2px 0 #fff inset,0 50px 80px -46px rgba(23,17,29,.55);aspect-ratio:8/5;touch-action:pan-y}
+.wrap4 canvas{position:absolute;inset:0;width:100%;height:100%}
+.wrap4 .tag{position:absolute;left:16px;top:16px;padding:7px 12px;border-radius:999px;background:rgba(251,250,246,.94);font-weight:700;font-size:14px}
+.wrap4 .lede{margin:14px 0 22px;max-width:34ch}
+.wrap4 ol{list-style:none;margin:0 0 24px;padding:0;display:grid;gap:12px}
+.wrap4 li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.wrap4 li i{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--amber);font-style:normal;font-weight:900;box-shadow:0 4px 0 var(--amber-edge)}
+.wrap4 li b{display:block;font-size:18px}
+.wrap4 li span{font-size:15px;color:var(--ink-70)}
+@media (max-width:900px){.wrap4 .g{grid-template-columns:1fr}.wrap4 .stage{aspect-ratio:4/3}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="stage" data-owl="say:Make some wind">
+   <canvas role="img" aria-label="A hip-roofed house with black mesh hanging from the eaves over the walls and shrubs, and a tarp on the ground in front. Moving the pointer blows the mesh like wind."></canvas>
+   <span class="tag" aria-hidden="true">Move across the wrap</span>
+  </div>
+  <div>
+   <span class="kick">Protect Your Nest System</span>
+   <h2 class="h2" id="pn4-h" style="margin-top:12px">Hang the Wrap</h2>
+   <p class="lede rv">Before the old roof comes off, mesh goes up at the eaves and down over the walls and shrubs, and a tarp covers the ground.</p>
+   <ol>
+    <li><i>1</i><div><b>The wrap</b><span>Mesh from the eaves down, and a tarp over the lawn.</span></div></li>
+    <li><i>2</i><div><b>Three cleanup passes</b><span>The crew, a magnet sweep, then the project manager.</span></div></li>
+    <li><i>3</i><div><b>The aftercare box</b><span>Left with you when the crew goes.</span></div></li>
+   </ol>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','4',function(root){
+  var stage = root.querySelector('.stage'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, P = [], C = [], cols = 30, rows = 14, vis = false, mx = -999, my = -999, pmx = 0, pmy = 0, user = 0, gust = 0;
+  var g = {};
+  function layout(){
+    var b = stage.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g = {x0: W*.16, x1: W*.84, eave: H*.42, ridge: H*.17, ground: H*.86};
+    P = []; C = []; var dx = (g.x1 - g.x0)/(cols - 1), dy = (g.ground - g.eave)/(rows - 1);
+    for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++){ var x = g.x0 + c*dx, y = g.eave + r*dy; P.push({x: x, y: y, px: x, py: y, pin: r === 0}); }
+    for (r = 0; r < rows; r++) for (c = 0; c < cols; c++){ var i = r*cols + c; if (c < cols - 1) C.push([i, i + 1, dx]); if (r < rows - 1) C.push([i, i + cols, dy]); }
+  }
+  function house(){
+    /* sky and lawn, then the house: walls, windows, door, hip roof with courses, shrubs along the wall */
+    ctx.fillStyle = '#8DB45F'; ctx.fillRect(0, g.ground - 4, W, H - g.ground + 4);
+    ctx.fillStyle = '#E9E3D5'; ctx.fillRect(g.x0 + 8, g.eave, g.x1 - g.x0 - 16, g.ground - g.eave);
+    ctx.fillStyle = '#B9C9D3'; [[.24, .5], [.66, .5]].forEach(function(w){ ctx.fillRect(g.x0 + (g.x1 - g.x0)*w[0], g.eave + (g.ground - g.eave)*.22, (g.x1 - g.x0)*.12, (g.ground - g.eave)*.26); });
+    ctx.fillStyle = '#17111D'; ctx.fillRect(g.x0 + (g.x1 - g.x0)*.46, g.eave + (g.ground - g.eave)*.36, (g.x1 - g.x0)*.08, (g.ground - g.eave)*.64);
+    var o = (g.x1 - g.x0)*.06, ins = (g.x1 - g.x0)*.2;
+    ctx.fillStyle = '#55505D'; ctx.beginPath(); ctx.moveTo(g.x0 - o, g.eave); ctx.lineTo(g.x1 + o, g.eave); ctx.lineTo(g.x1 - ins, g.ridge); ctx.lineTo(g.x0 + ins, g.ridge); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(23,17,29,.35)'; ctx.lineWidth = 1; for (var k = 1; k < 7; k++){ var t = k/7, y = g.eave - (g.eave - g.ridge)*t, xa = (g.x0 - o) + (ins + o)*t, xb = (g.x1 + o) - (ins + o)*t; ctx.beginPath(); ctx.moveTo(xa, y); ctx.lineTo(xb, y); ctx.stroke(); }
+    ctx.fillStyle = '#F1EFE6'; ctx.fillRect(g.x0 - o - 2, g.eave - 4, (g.x1 - g.x0) + 2*o + 4, 8);
+    ctx.fillStyle = '#5E8A45'; for (var s = 0; s < 6; s++){ var sx = g.x0 + 20 + s*(g.x1 - g.x0 - 40)/5; ctx.beginPath(); ctx.arc(sx, g.ground - 14, 22, Math.PI, 0); ctx.fill(); }
+    ctx.fillStyle = 'rgba(31,28,36,.92)'; ctx.beginPath(); ctx.moveTo(g.x0 - 30, g.ground); ctx.lineTo(g.x1 + 30, g.ground); ctx.lineTo(g.x1 + 70, H); ctx.lineTo(g.x0 - 70, H); ctx.closePath(); ctx.fill();
+  }
+  function step(dt){
+    var gr = .5*(dt/16), wx = Math.sin(performance.now()/1300)*.02 + gust;
+    gust *= .96;
+    for (var i = 0; i < P.length; i++){ var p = P[i]; if (p.pin) continue; var vx = (p.x - p.px)*.985, vy = (p.y - p.py)*.985; p.px = p.x; p.py = p.y; p.x += vx + wx; p.y += vy + gr;
+      var d = Math.hypot(p.x - mx, p.y - my); if (d < 90){ var f = (1 - d/90); p.x += (mx - pmx)*f*.5 + (p.x - mx)/d*f*1.4; p.y += (my - pmy)*f*.35; }
+      if (p.y > g.ground) p.y = g.ground; }
+    for (var it = 0; it < 3; it++) for (var j = 0; j < C.length; j++){ var a = P[C[j][0]], b = P[C[j][1]], dx = b.x - a.x, dy = b.y - a.y, dist = Math.hypot(dx, dy) || 1, diff = (dist - C[j][2])/dist*.5;
+      if (!a.pin){ a.x += dx*diff; a.y += dy*diff; } if (!b.pin){ b.x -= dx*diff; b.y -= dy*diff; } }
+  }
+  function draw(){
+    ctx.clearRect(0, 0, W, H); house();
+    for (var r = 0; r < rows - 1; r++) for (var c = 0; c < cols - 1; c++){ var a = P[r*cols + c], b = P[r*cols + c + 1], d = P[(r + 1)*cols + c + 1], e = P[(r + 1)*cols + c];
+      var shade = Math.max(0, Math.min(1, (b.x - a.x)/((g.x1 - g.x0)/(cols - 1)))); ctx.fillStyle = 'rgba(' + Math.round(26 + 18*(1 - shade)) + ',' + Math.round(23 + 16*(1 - shade)) + ',' + Math.round(31 + 18*(1 - shade)) + ',.82)';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(d.x, d.y); ctx.lineTo(e.x, e.y); ctx.closePath(); ctx.fill(); }
+    ctx.strokeStyle = 'rgba(241,239,230,.12)'; ctx.lineWidth = 1; ctx.beginPath();
+    for (var k = 0; k < C.length; k++){ var p1 = P[C[k][0]], p2 = P[C[k][1]]; ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); } ctx.stroke();
+    ctx.fillStyle = '#9BA1A8'; for (var c2 = 0; c2 < cols; c2 += 3){ var q = P[c2]; ctx.beginPath(); ctx.arc(q.x, q.y + 1, 2.4, 0, 6.3); ctx.fill(); }
+  }
+  function frame(t){ if (vis){ var dt = Math.min(32, t - (frame.l || t)); frame.l = t; if (t - user > 3500 && Math.random() < .006) gust = (Math.random() - .5)*1.6; step(dt); draw(); pmx = mx; pmy = my; } requestAnimationFrame(frame); }
+  layout(); addEventListener('resize', function(){ layout(); draw(); });
+  stage.addEventListener('pointermove', function(e){ var b = stage.getBoundingClientRect(); user = performance.now(); mx = e.clientX - b.left; my = e.clientY - b.top; });
+  stage.addEventListener('pointerleave', function(){ mx = my = -999; });
+  if (OWL.reduce){ draw(); OWL.reveal(h2); return; }
+  for (var w = 0; w < 120; w++) step(16);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis) OWL.reveal(h2); }).observe(stage); else vis = true;
+  draw(); requestAnimationFrame(frame);
+});
+</script>
+</section>
