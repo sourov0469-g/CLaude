@@ -1,0 +1,18 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const F = process.argv[2]; const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const R = []; const ok = (n, c, i = '') => R.push(`${c ? 'PASS' : 'FAIL'}  ${n}${i ? '  [' + i + ']' : ''}`);
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + F + '#/families', { waitUntil: 'load' }); await p.waitForTimeout(400);
+const hs = await p.evaluate(() => [...document.querySelectorAll('.fw1-photo img')].map(i => Math.round(i.getBoundingClientRect().height)));
+ok('the two family photos are one set (same height)', hs.length === 2 && hs[0] === hs[1], hs.join(','));
+const st = () => p.evaluate(() => [...document.querySelectorAll('.fs1-steps li')].map(l => l.classList.contains('is-on') ? 1 : 0).join(''));
+await p.evaluate(() => { const t = document.querySelector('.fs1-spine').getBoundingClientRect(); scrollTo(0, scrollY + t.top - innerHeight * 0.4); }); await p.waitForTimeout(300); const a = await st();
+await p.evaluate(() => { const t = document.querySelector('.fs1-spine').getBoundingClientRect(); scrollTo(0, scrollY + t.bottom - innerHeight * 0.3); }); await p.waitForTimeout(300); const c = await st();
+ok(`story spine turns steps on as it fills (${a} -> ${c})`, a !== '1111' && c === '1111');
+ok('every image on the page has alt text', await p.evaluate(() => [...document.querySelectorAll('.page[data-page="families"] img')].every(i => i.hasAttribute('alt'))));
+ok('no "Hook Agency" and no "15+" (facts lock)', await p.evaluate(() => !/Hook Agency|15\+/.test(document.querySelector('.page[data-page="families"]').textContent)));
+ok('founders named only as the lock names them', await p.evaluate(() => { const t = document.querySelector('.page[data-page="families"]').textContent; return /Tim Brown and Noah Bergland/.test(t) && !/As the founders/.test(t); }));
+ok('no JS errors', !errs.length, errs.join('|'));
+const q = await (await b.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' })).newPage();
+await q.goto('file://' + F + '#/families', { waitUntil: 'load' }); await q.waitForTimeout(400);
+ok('reduced motion: every story step is on', await q.evaluate(() => [...document.querySelectorAll('.fs1-steps li')].every(l => l.classList.contains('is-on'))));
+console.log(R.join('\n')); await b.close();

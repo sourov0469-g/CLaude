@@ -1,0 +1,27 @@
+/* Our families cover. V1: MERSI chapter cover on B2 Rings (the people ground) with Owl's own family photo.
+   V2: S1358 image-first: the two family portraits ARE the stage, a light card anchored low, one quiet centre rail. */
+.fc-v1,.fc-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0 var(--section-default)}
+.fc-rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fc-v1 > .wrap{position:relative;z-index:1}
+.fc1-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--space-48);align-items:center}
+.fc1-copy{display:grid;gap:var(--space-24)}
+.fc1-copy .t-body{max-width:34rem}
+.fc1-chip{justify-self:start;margin:0}
+.fc1-photo{margin:0;display:grid;gap:var(--space-8)}
+.fc1-photo img{width:100%;max-width:40.3rem;height:auto;border-radius:var(--radius-m);display:block}
+.fc1-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--space-24);margin-top:var(--space-64);border-top:1.5px solid var(--text-primary)}
+.fc1-index a{display:grid;grid-template-columns:auto 1fr auto;gap:var(--space-12);align-items:center;padding:var(--space-16) 0;min-height:var(--space-48);color:var(--text-primary);text-decoration:none;font:var(--type-body)}
+.fc1-index a span{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.fc1-index a .icon{transition:transform var(--dur-fast) var(--ease-out)}
+.fc1-index a:hover .icon{transform:translateX(var(--space-8))}
+@media (max-width:1023px){.fc1-grid{grid-template-columns:1fr}.fc1-index{grid-template-columns:1fr 1fr}}
+@media (max-width:767px){.fc1-index{grid-template-columns:1fr}.fc1-index a{border-bottom:1px solid var(--line-control)}}
+.fc-v2{padding:0}
+.fc2-stage{position:relative;display:grid;grid-template-columns:1fr 1fr;height:min(88vh,46rem)}
+.fc2-half{margin:0;position:relative;overflow:hidden}
+.fc2-half img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.fc2-half figcaption{position:absolute;top:var(--space-16);left:var(--space-16);font:700 var(--step-m1)/1 var(--font-display);color:var(--text-on-deep);background:color-mix(in srgb,var(--surface-ink) 60%,transparent);padding:var(--space-4) var(--space-8);border-radius:var(--radius-s)}
+.fc2-rail{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--surface-page)}
+.fc2-card{position:absolute;left:50%;bottom:var(--space-48);transform:translateX(-50%);width:min(36rem,calc(100% - 2 * var(--gutter)));display:grid;gap:var(--space-16);justify-items:start;padding:var(--space-32);background:color-mix(in srgb,var(--surface-page) 94%,transparent);border-radius:var(--radius-m)}
+.fc2-card .t-body{margin:0}
+@media (max-width:767px){.fc2-stage{height:auto;grid-template-columns:1fr 1fr}.fc2-half{aspect-ratio:3/4}.fc2-card{position:static;transform:none;grid-column:1 / -1;width:auto;margin:0;border-radius:0;padding:var(--space-32) var(--gutter)}.fc2-rail{bottom:auto;height:0}}

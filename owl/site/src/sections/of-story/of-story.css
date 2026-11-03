@@ -1,0 +1,23 @@
+/* Our story. V1: Scout heritage timeline spine (S1325 rules: list first; one line from first dot to last; steps turn on
+   as the head passes). V2: an editorial pull quote and the full story in Owl's words. */
+.fs-v1,.fs-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.fs1-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.fs1-lead{position:sticky;top:calc(var(--header-h,0px) + var(--space-48));display:grid;gap:var(--space-16)}
+.fs1-lead .t-label,.fs1-lead .t-heading{margin:0}
+.fs1-spine{position:relative;padding-left:var(--space-48)}
+.fs1-base,.fs1-fill{position:absolute;left:var(--space-8);width:3px;border-radius:2px}
+.fs1-base{background:var(--line-control)}
+.fs1-fill{background:var(--accent-fill);transform-origin:top;transform:scaleY(0)}
+.fs1-steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-48)}
+.fs1-steps li{position:relative;display:grid;gap:var(--space-8)}
+.fs1-steps .t-label,.fs1-steps .t-body{margin:0}
+.fs1-steps .t-body{max-width:38rem}
+.fs1-dot{position:absolute;left:calc(var(--space-48) * -1 + 1.5px);top:var(--space-2);width:var(--space-16);height:var(--space-16);border-radius:50%;background:var(--surface-alt);border:3px solid var(--line-control);transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)}
+.fs1-steps li.is-on .fs1-dot{background:var(--accent-fill);border-color:var(--accent-fill)}
+@media (max-width:1023px){.fs1-grid{grid-template-columns:1fr;gap:var(--space-32)}.fs1-lead{position:static}}
+.fs2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-24) var(--space-64);align-items:start}
+.fs2-label{grid-column:1 / -1;margin:0}
+.fs2-pull{font:800 var(--step-4)/1.08 var(--font-display);letter-spacing:var(--track-display);margin:0;padding-left:var(--space-24);border-left:4px solid var(--accent-fill)}
+.fs2-text{display:grid;gap:var(--space-16)}
+.fs2-text .t-body{margin:0;max-width:38rem}
+@media (max-width:1023px){.fs2-grid{grid-template-columns:1fr}}

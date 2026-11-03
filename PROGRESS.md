@@ -261,8 +261,22 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
   - **Tests:** `pagetest.mjs nest` 12/12; `nesttest-page.mjs` 10/10; pageshot defaults and all-V2 clean; token lint
     clean; the Storm page re-checked with `pagetest.mjs storm` 12/12.
   - **Background tasks:** none; no sub-agents.
-- **Next:** the 2 remaining inner pages: Our families, then Contact and Price My Roof. Each gets at least 6 sections ×
-  2 versions, built one section at a time, with skills read before building.
+- **OUR FAMILIES PAGE COMPLETE** (`#/families`): 6 sections × 2 versions: cover (`of-cover`), our story
+  (`of-story`, Scout timeline spine), the two families (`of-crew`), core values (`of-values`), giving back
+  (`of-community`), and the call band (`of-call`).
+  - **Gates:** `GATE-of-cover`, `-of-story`, `-of-crew`, `-of-values`, `-of-community`, `-of-call` (defaults weighted
+    7.70-8.30). Cover default V1 is a page-level choice (V2 alone scores higher but repeats the next section's photos).
+  - **Skills read BEFORE building** (logged): ⟦S1358⟧ image-first-grid-layout, ⟦S1427⟧ law-of-similarity, plus those
+    already logged. Every tag cited in the six gates is in the read log.
+  - **Facts lock over Owl's pages:** founders are Tim Brown and Noah Bergland (Owl's About page calls the Berglands "the
+    founders"; not used); no agency, no "15+ years". Owl's Quincy House pledge ($100 per job in 2026, $20K goal) is
+    quoted as Owl's own and flagged in GATE-of-community for the owner.
+  - **Tests:** `pagetest.mjs families` 12/12; `famtest-page.mjs` 7/7; pageshot defaults and all-V2 clean; token lint
+    clean.
+  - **Background tasks:** none; no sub-agents.
+- **Next:** the last inner page, Contact and Price My Roof (≥6 sections × 2 versions), reusing the Price tool and the
+  area search with their recorded unmet rules fixed (validate on blur, field width, clear button, typo tolerance,
+  echo the query on no match).
 - **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.

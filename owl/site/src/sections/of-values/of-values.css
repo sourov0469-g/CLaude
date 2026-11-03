@@ -1,0 +1,16 @@
+/* Core values. V1: Longbow numbered doctrine (three principles, the words as the event). V2: Owl's "show up calmly"
+   line with the identity's nest drawing (B2 people ground is on the cover). */
+.fv-v1,.fv-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.fv1-list{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32)}
+.fv1-list li{display:grid;gap:var(--space-8);align-content:start;padding-top:var(--space-24);border-top:1.5px solid var(--text-primary)}
+.fv1-list .t-body{margin:0}
+.fv1-n{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.fv1-word{font:800 var(--step-4)/1 var(--font-display);letter-spacing:var(--track-display);margin:0}
+@media (max-width:1023px){.fv1-list{grid-template-columns:1fr}}
+.fv2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.fv2-copy{display:grid;gap:var(--space-24)}
+.fv2-copy .t-body{max-width:34rem;margin:0}
+.fv2-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.fv2-chips .chip{margin:0}
+.fv2-nest{width:100%;height:auto;overflow:visible}
+@media (max-width:1023px){.fv2-grid{grid-template-columns:1fr}.fv2-nest{max-width:24rem}}

@@ -1,0 +1,19 @@
+/* Giving back. V1: Scout film-roll photo evidence (three of Owl's own community photos, captioned only as Owl labels
+   them). V2: Longbow numerals, Owl's own pledge figures, labelled as Owl's. */
+.fy-v1,.fy-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.fy1-top{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-64);align-items:end}
+.fy1-top .t-body{margin:0;max-width:44rem}
+.fy1-strip{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:5fr 5fr 3fr;gap:var(--space-16)}
+.fy1-strip figure{margin:0;display:grid;gap:var(--space-8)}
+.fy1-strip img{width:100%;height:20rem;object-fit:cover;border-radius:var(--radius-m);display:block}
+.fy-v1 .fy1-note{margin-top:var(--space-24)}
+@media (max-width:1023px){.fy1-top{grid-template-columns:1fr;gap:var(--space-24)}.fy1-strip{grid-template-columns:1fr 1fr}.fy1-strip li:last-child{display:none}}
+@media (max-width:767px){.fy1-strip{grid-template-columns:1fr}.fy1-strip img{height:14rem}.fy1-strip li:last-child{display:block}}
+.fy2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-64);align-items:center}
+.fy2-copy{display:grid;gap:var(--space-24)}
+.fy2-copy .t-body{margin:0;max-width:36rem}
+.fy2-facts{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-24)}
+.fy2-facts li{display:grid;gap:var(--space-4);padding-top:var(--space-16);border-top:1.5px solid var(--text-primary)}
+.fy2-num{font:800 calc(var(--step-5) * 1.4)/1 var(--font-display);letter-spacing:var(--track-display)}
+.fy2-facts li:first-child .fy2-num{color:var(--accent-text)}
+@media (max-width:1023px){.fy2-grid{grid-template-columns:1fr;gap:var(--space-32)}}

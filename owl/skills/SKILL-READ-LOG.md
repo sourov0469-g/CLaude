@@ -345,3 +345,16 @@ against it. The rule stands: read before building.
   - Unfinished tasks stay active; a finite, named set of steps with visible progress pulls toward completion.
   - Checklists make open loops explicit; surface one or two at a time; always give a clear path to completion; use
     incompleteness honestly, never as guilt.
+
+## Our families page (read in full by tag BEFORE building)
+- ⟦S1358⟧ image-first-grid-layout
+  - The image is the stage, not a thumbnail; content sits as anchored overlay blocks (low or along an edge), not a
+    centred stack; quiet structural lines or corner markers give order.
+  - Washes or vignettes only as strong as readability needs; light, low-fill overlay cards; restrained palette with one
+    accent; motion is reveal and drift, not busy interaction.
+  - Avoid: the image as a decorative background behind a conventional layout; overfilling the image; heavy containers.
+- ⟦S1427⟧ law-of-similarity
+  - Shared colour, shape, size and style mark one category even at a distance; unintended differences in a set are
+    bugs; similarity can override proximity to mark a boundary.
+  - Interactive elements share a property non-interactive ones lack; code categories redundantly (shape + colour), and
+    test groupings without colour.

@@ -138,5 +138,35 @@
     "default": 1
    }
   ]
+ },
+ {
+  "id": "families",
+  "title": "Our families",
+  "sections": [
+   {
+    "id": "of-cover",
+    "default": 1
+   },
+   {
+    "id": "of-story",
+    "default": 1
+   },
+   {
+    "id": "of-crew",
+    "default": 1
+   },
+   {
+    "id": "of-values",
+    "default": 1
+   },
+   {
+    "id": "of-community",
+    "default": 1
+   },
+   {
+    "id": "of-call",
+    "default": 1
+   }
+  ]
  }
 ]

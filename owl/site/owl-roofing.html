@@ -1021,6 +1021,118 @@ main:focus{outline:none}
 .nx-v1 > .wrap,.nx-v2 > .wrap{position:relative;z-index:1}
 .nx-v2 .t-label{margin:0;color:var(--accent-text-on-deep)}
 
+/* Our families cover. V1: MERSI chapter cover on B2 Rings (the people ground) with Owl's own family photo.
+   V2: S1358 image-first: the two family portraits ARE the stage, a light card anchored low, one quiet centre rail. */
+.fc-v1,.fc-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0 var(--section-default)}
+.fc-rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fc-v1 > .wrap{position:relative;z-index:1}
+.fc1-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:var(--space-48);align-items:center}
+.fc1-copy{display:grid;gap:var(--space-24)}
+.fc1-copy .t-body{max-width:34rem}
+.fc1-chip{justify-self:start;margin:0}
+.fc1-photo{margin:0;display:grid;gap:var(--space-8)}
+.fc1-photo img{width:100%;max-width:40.3rem;height:auto;border-radius:var(--radius-m);display:block}
+.fc1-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--space-24);margin-top:var(--space-64);border-top:1.5px solid var(--text-primary)}
+.fc1-index a{display:grid;grid-template-columns:auto 1fr auto;gap:var(--space-12);align-items:center;padding:var(--space-16) 0;min-height:var(--space-48);color:var(--text-primary);text-decoration:none;font:var(--type-body)}
+.fc1-index a span{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.fc1-index a .icon{transition:transform var(--dur-fast) var(--ease-out)}
+.fc1-index a:hover .icon{transform:translateX(var(--space-8))}
+@media (max-width:1023px){.fc1-grid{grid-template-columns:1fr}.fc1-index{grid-template-columns:1fr 1fr}}
+@media (max-width:767px){.fc1-index{grid-template-columns:1fr}.fc1-index a{border-bottom:1px solid var(--line-control)}}
+.fc-v2{padding:0}
+.fc2-stage{position:relative;display:grid;grid-template-columns:1fr 1fr;height:min(88vh,46rem)}
+.fc2-half{margin:0;position:relative;overflow:hidden}
+.fc2-half img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.fc2-half figcaption{position:absolute;top:var(--space-16);left:var(--space-16);font:700 var(--step-m1)/1 var(--font-display);color:var(--text-on-deep);background:color-mix(in srgb,var(--surface-ink) 60%,transparent);padding:var(--space-4) var(--space-8);border-radius:var(--radius-s)}
+.fc2-rail{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--surface-page)}
+.fc2-card{position:absolute;left:50%;bottom:var(--space-48);transform:translateX(-50%);width:min(36rem,calc(100% - 2 * var(--gutter)));display:grid;gap:var(--space-16);justify-items:start;padding:var(--space-32);background:color-mix(in srgb,var(--surface-page) 94%,transparent);border-radius:var(--radius-m)}
+.fc2-card .t-body{margin:0}
+@media (max-width:767px){.fc2-stage{height:auto;grid-template-columns:1fr 1fr}.fc2-half{aspect-ratio:3/4}.fc2-card{position:static;transform:none;grid-column:1 / -1;width:auto;margin:0;border-radius:0;padding:var(--space-32) var(--gutter)}.fc2-rail{bottom:auto;height:0}}
+
+/* Our story. V1: Scout heritage timeline spine (S1325 rules: list first; one line from first dot to last; steps turn on
+   as the head passes). V2: an editorial pull quote and the full story in Owl's words. */
+.fs-v1,.fs-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.fs1-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.fs1-lead{position:sticky;top:calc(var(--header-h,0px) + var(--space-48));display:grid;gap:var(--space-16)}
+.fs1-lead .t-label,.fs1-lead .t-heading{margin:0}
+.fs1-spine{position:relative;padding-left:var(--space-48)}
+.fs1-base,.fs1-fill{position:absolute;left:var(--space-8);width:3px;border-radius:2px}
+.fs1-base{background:var(--line-control)}
+.fs1-fill{background:var(--accent-fill);transform-origin:top;transform:scaleY(0)}
+.fs1-steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-48)}
+.fs1-steps li{position:relative;display:grid;gap:var(--space-8)}
+.fs1-steps .t-label,.fs1-steps .t-body{margin:0}
+.fs1-steps .t-body{max-width:38rem}
+.fs1-dot{position:absolute;left:calc(var(--space-48) * -1 + 1.5px);top:var(--space-2);width:var(--space-16);height:var(--space-16);border-radius:50%;background:var(--surface-alt);border:3px solid var(--line-control);transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)}
+.fs1-steps li.is-on .fs1-dot{background:var(--accent-fill);border-color:var(--accent-fill)}
+@media (max-width:1023px){.fs1-grid{grid-template-columns:1fr;gap:var(--space-32)}.fs1-lead{position:static}}
+.fs2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-24) var(--space-64);align-items:start}
+.fs2-label{grid-column:1 / -1;margin:0}
+.fs2-pull{font:800 var(--step-4)/1.08 var(--font-display);letter-spacing:var(--track-display);margin:0;padding-left:var(--space-24);border-left:4px solid var(--accent-fill)}
+.fs2-text{display:grid;gap:var(--space-16)}
+.fs2-text .t-body{margin:0;max-width:38rem}
+@media (max-width:1023px){.fs2-grid{grid-template-columns:1fr}}
+
+/* The two families. Cowboy: family/crew-fronted, warmth through real photos, restrained colour. S1427: the two family
+   cards are one set (same frame, same type, same order) so they read as equals. */
+.fw-v1,.fw-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.fw1-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-48);margin-top:var(--space-48)}
+.fw1-card{display:grid;gap:var(--space-12);align-content:start}
+.fw1-card .t-sub,.fw1-card .t-body,.fw1-role{margin:0}
+.fw1-role{color:var(--text-muted);font-weight:700}
+.fw1-photo{margin:0 0 var(--space-12)}
+.fw1-photo img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%;border-radius:var(--radius-m);display:block}
+@media (max-width:767px){.fw1-grid{grid-template-columns:1fr}}
+.fw2-row{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:center;margin-top:var(--space-48)}
+.fw2-row--flip .fw2-photo{order:2}
+.fw2-photo{margin:0}
+.fw2-photo img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-m);display:block}
+.fw2-text{display:grid;gap:var(--space-12)}
+.fw2-text .t-body{max-width:34rem}
+@media (max-width:767px){.fw2-row{grid-template-columns:1fr;gap:var(--space-16)}.fw2-row--flip .fw2-photo{order:0}}
+
+/* Core values. V1: Longbow numbered doctrine (three principles, the words as the event). V2: Owl's "show up calmly"
+   line with the identity's nest drawing (B2 people ground is on the cover). */
+.fv-v1,.fv-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.fv1-list{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32)}
+.fv1-list li{display:grid;gap:var(--space-8);align-content:start;padding-top:var(--space-24);border-top:1.5px solid var(--text-primary)}
+.fv1-list .t-body{margin:0}
+.fv1-n{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.fv1-word{font:800 var(--step-4)/1 var(--font-display);letter-spacing:var(--track-display);margin:0}
+@media (max-width:1023px){.fv1-list{grid-template-columns:1fr}}
+.fv2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.fv2-copy{display:grid;gap:var(--space-24)}
+.fv2-copy .t-body{max-width:34rem;margin:0}
+.fv2-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.fv2-chips .chip{margin:0}
+.fv2-nest{width:100%;height:auto;overflow:visible}
+@media (max-width:1023px){.fv2-grid{grid-template-columns:1fr}.fv2-nest{max-width:24rem}}
+
+/* Giving back. V1: Scout film-roll photo evidence (three of Owl's own community photos, captioned only as Owl labels
+   them). V2: Longbow numerals, Owl's own pledge figures, labelled as Owl's. */
+.fy-v1,.fy-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.fy1-top{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:var(--space-64);align-items:end}
+.fy1-top .t-body{margin:0;max-width:44rem}
+.fy1-strip{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:5fr 5fr 3fr;gap:var(--space-16)}
+.fy1-strip figure{margin:0;display:grid;gap:var(--space-8)}
+.fy1-strip img{width:100%;height:20rem;object-fit:cover;border-radius:var(--radius-m);display:block}
+.fy-v1 .fy1-note{margin-top:var(--space-24)}
+@media (max-width:1023px){.fy1-top{grid-template-columns:1fr;gap:var(--space-24)}.fy1-strip{grid-template-columns:1fr 1fr}.fy1-strip li:last-child{display:none}}
+@media (max-width:767px){.fy1-strip{grid-template-columns:1fr}.fy1-strip img{height:14rem}.fy1-strip li:last-child{display:block}}
+.fy2-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-64);align-items:center}
+.fy2-copy{display:grid;gap:var(--space-24)}
+.fy2-copy .t-body{margin:0;max-width:36rem}
+.fy2-facts{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-24)}
+.fy2-facts li{display:grid;gap:var(--space-4);padding-top:var(--space-16);border-top:1.5px solid var(--text-primary)}
+.fy2-num{font:800 calc(var(--step-5) * 1.4)/1 var(--font-display);letter-spacing:var(--track-display)}
+.fy2-facts li:first-child .fy2-num{color:var(--accent-text)}
+@media (max-width:1023px){.fy2-grid{grid-template-columns:1fr;gap:var(--space-32)}}
+
+/* Families page end: call band + shared footer (the one deep block; Lusion resolution point; B3 Night yard). */
+.fx-v1,.fx-v2{position:relative;overflow:hidden;background:var(--surface-deep);color:var(--text-on-deep);padding:var(--section-hero) 0 calc(var(--space-160) + var(--space-96))}
+.fx-v1 > .wrap,.fx-v2 > .wrap{position:relative;z-index:1}
+.fx-v2 .t-label{margin:0;color:var(--accent-text-on-deep)}
+
 </style>
 </head>
 <body class="owl">
@@ -2281,6 +2393,224 @@ main:focus{outline:none}
 </g>
 <defs>
 <clipPath id="clipOwl9">
+<rect width="259.871" height="104.141" fill="white" transform="translate(0.0644531)"/>
+</clipPath>
+</defs>
+</svg>
+</a>
+  <nav class="cl-nav" aria-label="Footer"><a href="#/services">Services</a><a href="#/storm">Storm damage</a><a href="#/nest">Protect Your Nest</a><a href="#/families">Our families</a><a href="#/contact">Contact and Price My Roof</a></nav>
+  <address class="cl-addr t-small">Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126<br><a href="tel:+16519776027" class="t-num">(651) 977-6027</a> · <a href="mailto:info@owlroofing.com">info@owlroofing.com</a> · Mon–Sat 8:00–18:00<br><span class="t-num">MN licence #BC809662</span> · GAF Systems Plus Certified · BBB Accredited, A−</address>
+</div>
+
+</section>
+</div></div></section><section class="page" data-page="families" aria-label="Our families" hidden><div class="sec" id="s-of-cover" data-sec="of-cover" data-default="1"><div class="ver" data-v="1"><section class="fc-v1" aria-labelledby="fc1-h">
+  <svg class="fc-rings" data-bg="rings" aria-hidden="true"></svg>
+  <div class="wrap fc1-grid">
+    <div class="fc1-copy">
+      <p class="t-label">Our families</p>
+      <h1 id="fc1-h" class="t-display">Birds of a feather roof together.</h1>
+      <p class="t-body">"We're not just building a roofing company. We're building a nest—for our own family, and for the neighbors we live alongside every day."</p>
+      <p class="chip fc1-chip">Family-owned · founded 2025 · Shoreview, MN</p>
+    </div>
+    <figure class="frame fc1-photo"><img src="../assets/source/about-full.png" alt="The Brown and Bergland families together outdoors with their young children" width="645" height="311"><figcaption class="t-small muted">The Browns and the Berglands, from Owl's own site.</figcaption></figure>
+  </div>
+  <nav class="wrap fc1-index" aria-label="Chapters on this page">
+    <a href="#/families/of-story"><span class="t-num">01</span><b>Our story</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+    <a href="#/families/of-crew"><span class="t-num">02</span><b>The two families</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+    <a href="#/families/of-values"><span class="t-num">03</span><b>What we value</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+    <a href="#/families/of-community"><span class="t-num">04</span><b>Giving back</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+  </nav>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fc-v2" aria-labelledby="fc2-h">
+  <div class="fc2-stage">
+    <figure class="fc2-half"><img src="../assets/source/the-berglands-family-owned-roofing-company-shoreview.png" alt="Noah and Anya Bergland with their two young daughters" width="688" height="747"><figcaption>The Berglands</figcaption></figure>
+    <figure class="fc2-half"><img src="../assets/source/meet-the-browns-owl.webp" alt="Tim Brown and Bea Bonte with their two young children" width="650" height="485"><figcaption>The Browns</figcaption></figure>
+    <span class="fc2-rail" aria-hidden="true"></span>
+    <div class="fc2-card">
+      <p class="t-label">Our families</p>
+      <h1 id="fc2-h" class="t-title">Two families. One roofing company.</h1>
+      <p class="t-body">"Family-owned, community-driven small business." Founded in 2025 by Tim Brown and Noah Bergland.</p>
+      <a class="link" href="#/families/of-story">Read how it started</a>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-of-story" data-sec="of-story" data-default="1"><div class="ver" data-v="1"><section class="fs-v1" aria-labelledby="fs1-h">
+  <div class="wrap fs1-grid">
+    <div class="fs1-lead">
+      <p class="t-label t-num">Chapter 01 · Our story</p>
+      <h2 id="fs1-h" class="t-heading">"Sometimes, life is all about timing."</h2>
+    </div>
+    <div class="fs1-spine">
+      <span class="fs1-base" aria-hidden="true"></span><span class="fs1-fill" aria-hidden="true"></span>
+      <ol class="fs1-steps">
+        <li><span class="fs1-dot" aria-hidden="true"></span><p class="t-label">A class for new parents</p><p class="t-body">"Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes and realized that they had more in common than their due dates."</p></li>
+        <li><span class="fs1-dot" aria-hidden="true"></span><p class="t-label">Two families in the trades</p><p class="t-body">"With both families working in the trades, they formed a close friendship, sharing the highs and lows of the industry (and parenting) with each other."</p></li>
+        <li><span class="fs1-dot" aria-hidden="true"></span><p class="t-label">A no-brainer</p><p class="t-body">"So, when Noah decided to start his own roofing company, asking the Brown family to join him was a no-brainer."</p></li>
+        <li><span class="fs1-dot" aria-hidden="true"></span><p class="t-label t-num">2025 · Shoreview, MN</p><p class="t-body"><b>"Using their combined experience to create a white-glove roofing experience like no other, Owl Roofing was born."</b></p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fs-v2" aria-labelledby="fs2-h">
+  <div class="wrap fs2-grid">
+    <p class="t-label t-num fs2-label">Chapter 01 · Our story</p>
+    <h2 id="fs2-h" class="fs2-pull">"More in common than their due dates."</h2>
+    <div class="fs2-text">
+      <p class="t-body">"Sometimes, life is all about timing. Tim Brown and Bea Bonte were in a class for new parents when they overheard Noah and Anya Bergland making roofing jokes and realized that they had more in common than their due dates."</p>
+      <p class="t-body">"With both families working in the trades, they formed a close friendship, sharing the highs and lows of the industry (and parenting) with each other. So, when Noah decided to start his own roofing company, asking the Brown family to join him was a no-brainer."</p>
+      <p class="t-body"><b>Owl Roofing was born in 2025</b>, family-owned and based in Shoreview.</p>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-of-crew" data-sec="of-crew" data-default="1"><div class="ver" data-v="1"><section class="fw-v1" aria-labelledby="fw1-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="t-label t-num">Chapter 02 · The two families</p><h2 id="fw1-h" class="t-heading">Meet the Berglands. Meet the Browns.</h2></div>
+    <div class="fw1-grid">
+      <article class="fw1-card">
+        <figure class="fw1-photo"><img src="../assets/source/the-berglands-family-owned-roofing-company-shoreview.png" alt="Noah and Anya Bergland with their two young daughters" width="688" height="747" loading="lazy"></figure>
+        <h3 class="t-sub">The Berglands</h3>
+        <p class="t-small fw1-role">Noah Bergland, co-founder</p>
+        <p class="t-body">"Noah has worked in both the roofing and construction industries as a builder and project manager, while Anya has served as the lead content manager for home contracting companies."</p>
+      </article>
+      <article class="fw1-card">
+        <figure class="fw1-photo"><img src="../assets/source/meet-the-browns-owl.webp" alt="Tim Brown and Bea Bonte with their two young children" width="650" height="485" loading="lazy"></figure>
+        <h3 class="t-sub">The Browns</h3>
+        <p class="t-small fw1-role">Tim Brown, co-founder</p>
+        <p class="t-body">Tim Brown and Bea Bonte use what they have learned "to help Owl Roofing's clients feel confident in the team that they've chosen."</p>
+      </article>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fw-v2" aria-labelledby="fw2-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="t-label t-num">Chapter 02</p><h2 id="fw2-h" class="t-heading">On the job, and at home.</h2></div>
+    <div class="fw2-row">
+      <figure class="fw2-photo"><img src="../assets/source/noah-bergland-owl-roofing-768x596.jpg" alt="Noah Bergland in an Owl Roofing jacket on a roof, holding a ladder" width="768" height="596" loading="lazy"></figure>
+      <div class="fw2-text"><h3 class="t-sub">Noah Bergland, co-founder</h3><p class="t-body">"Noah has worked in both the roofing and construction industries as a builder and project manager." With Anya, "they're committed to providing each and every customer with consistent quality and above-and-beyond service."</p></div>
+    </div>
+    <div class="fw2-row fw2-row--flip">
+      <figure class="fw2-photo"><img src="../assets/source/meet-the-browns-owl.webp" alt="Tim Brown and Bea Bonte with their two young children" width="650" height="485" loading="lazy"></figure>
+      <div class="fw2-text"><h3 class="t-sub">Tim Brown, co-founder</h3><p class="t-body">With Bea Bonte, Tim helps "Owl Roofing's clients feel confident in the team that they've chosen."</p></div>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-of-values" data-sec="of-values" data-default="1"><div class="ver" data-v="1"><section class="fv-v1" aria-labelledby="fv1-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="t-label t-num">Chapter 03 · Core values</p><h2 id="fv1-h" class="t-heading">The values that help us soar.</h2><p class="t-body muted">"We believe businesses should feel human, familiar, and rooted in the places where kids grow up and memories are made."</p></div>
+    <ol class="fv1-list">
+      <li><span class="fv1-n t-num" aria-hidden="true">01</span><h3 class="fv1-word">Generosity</h3><p class="t-body">"Be generous to our community and representatives."</p></li>
+      <li><span class="fv1-n t-num" aria-hidden="true">02</span><h3 class="fv1-word">Humility</h3><p class="t-body">"Humility builds a strong foundation."</p></li>
+      <li><span class="fv1-n t-num" aria-hidden="true">03</span><h3 class="fv1-word">Integrity</h3><p class="t-body">"Do the right thing even when it's hard."</p></li>
+    </ol>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fv-v2" aria-labelledby="fv2-h">
+  <div class="wrap fv2-grid">
+    <div class="fv2-copy">
+      <p class="t-label t-num">Chapter 03</p>
+      <h2 id="fv2-h" class="t-heading">"We show up calmly."</h2>
+      <p class="t-body">"So we show up calmly, treat your home with respect, and aim to leave things better than we found them—every time."</p>
+      <ul class="fv2-chips"><li class="chip">Generosity</li><li class="chip">Humility</li><li class="chip">Integrity</li></ul>
+    </div>
+    <svg class="fv2-nest" aria-hidden="true"></svg>
+  </div>
+</section>
+</div></div><div class="sec" id="s-of-community" data-sec="of-community" data-default="1"><div class="ver" data-v="1"><section class="fy-v1" aria-labelledby="fy1-h">
+  <div class="wrap">
+    <div class="fy1-top">
+      <div class="sec-head"><p class="t-label t-num">Chapter 04 · Giving back</p><h2 id="fy1-h" class="t-heading">We give a hoot.</h2></div>
+      <p class="t-body">"For every single roofing job we complete in 2026, we will donate $100 to Quincy House." "When you choose Owl Roofing to protect your home, you are also helping to build a home for a family in need right here in our community."</p>
+    </div>
+    <ul class="fy1-strip">
+      <li><figure><img src="../assets/source/owl-pages/quincy-house-noah-bergland.jpg" alt="Noah Bergland with two men at a breakfast table" width="1438" height="1212" loading="lazy"><figcaption class="t-small muted">Noah Bergland, co-founder.</figcaption></figure></li>
+      <li><figure><img src="../assets/source/owl-pages/owl-roofing-community-involvement.webp" alt="Three women holding handwritten signs outside a house" width="991" height="660" loading="lazy"><figcaption class="t-small muted">Community involvement.</figcaption></figure></li>
+      <li><figure><img src="../assets/source/owl-pages/owl-roofing-habitat-for-humanity.webp" alt="Two people hugging outdoors" width="531" height="743" loading="lazy"><figcaption class="t-small muted">Community involvement.</figcaption></figure></li>
+    </ul>
+    <p class="fy1-note t-small muted">Owl also names "our partnerships with Habitat for Humanity". The pledge above is Owl's own, quoted from Owl's community page.</p>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fy-v2" aria-labelledby="fy2-h">
+  <div class="wrap fy2-grid">
+    <div class="fy2-copy">
+      <p class="t-label t-num">Chapter 04</p>
+      <h2 id="fy2-h" class="t-heading">Every roof helps build a home.</h2>
+      <p class="t-body">"Quincy House exists for the moments families don't plan for—when stability disappears and support matters fast."</p>
+      <p class="t-body muted">"We don't see community involvement as charity. We see it as a responsibility."</p>
+    </div>
+    <ul class="fy2-facts" aria-label="Owl's 2026 pledge to Quincy House, in Owl's own figures">
+      <li><b class="fy2-num t-num">$100</b><span class="t-small">for every roofing job Owl completes in 2026</span></li>
+      <li><b class="fy2-num t-num">$20K</b><span class="t-small">Owl's pledge goal for 2026</span></li>
+    </ul>
+  </div>
+</section>
+</div></div><div class="sec" id="s-of-call" data-sec="of-call" data-default="1"><div class="ver" data-v="1"><section class="fx-v1 on-deep" aria-labelledby="fx1-h">
+  <svg class="call-bg" data-bg="night"></svg>
+  <div class="wrap sk1-band">
+    <h2 id="fx1-h" class="t-title">We live nearby. We answer the phone.</h2>
+    <p class="t-body">"We explain things clearly. And we treat your home like it's part of the same community we're raising our kids in."</p>
+    <div class="cl1-ctas"><a class="btn btn--on-deep" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn cl-text" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text us</a></div>
+  </div>
+<div class="cl-foot wrap">
+  <a href="#/home" class="cl-logo" aria-label="Owl Roofing, home"><svg class="logo" role="img" aria-label="Owl Roofing" viewBox="0 0 260 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clipOwl10)">
+<path d="M198.146 0.704658C197.397 1.14154 196.395 2.33168 195.145 4.26753C193.894 6.20715 192.486 8.62885 190.926 11.5326C189.363 14.4402 187.691 17.7206 185.91 21.3776C184.128 25.0346 182.332 28.8009 180.52 32.6764C178.705 36.5518 176.924 40.4273 175.176 44.3028C173.425 48.1782 171.816 51.7901 170.348 55.1307C168.879 58.4752 167.595 61.4467 166.502 64.0379C165.406 66.6329 164.582 68.5838 164.017 69.8982H147.701C145.577 63.4617 143.404 57.0854 141.186 50.7694C138.967 44.4572 136.67 38.1111 134.293 31.7348C131.793 38.0508 129.431 44.3781 127.213 50.7205C124.994 57.0666 122.851 63.4579 120.791 69.8944H104.476C103.915 68.58 103.071 66.6291 101.945 64.0342C100.819 61.4392 99.5233 58.4714 98.0545 55.127C96.5856 51.7825 94.9925 48.1895 93.2714 44.3442C91.5502 40.4989 89.7876 36.6422 87.9722 32.763C86.1569 28.8875 84.3642 25.1213 82.5827 21.4642C80.8013 17.8072 79.1291 14.5268 77.5661 11.6193C76.0031 8.71171 74.5983 6.29001 73.3479 4.35415C72.0975 2.4183 71.0994 1.22817 70.3462 0.791282C73.7848 0.791282 77.2083 0.806347 80.613 0.836477C84.0177 0.870373 87.4412 0.851542 90.8798 0.791282C90.6915 0.915568 90.5822 1.11895 90.5521 1.40141C90.5182 1.68388 90.5069 1.91739 90.5069 2.1057C90.5069 3.48038 90.9287 5.52922 91.7724 8.24846C92.616 10.9677 93.7082 14.0297 95.0528 17.4381C96.3973 20.8466 97.8963 24.4396 99.5535 28.2209C101.211 32.0022 102.834 35.614 104.431 39.0489C106.024 42.4874 107.493 45.5984 108.837 48.3778C110.182 51.1611 111.229 53.2702 111.978 54.7052C114.792 47.892 117.496 41.0487 120.087 34.1716C122.678 27.2944 125.01 20.2967 127.073 13.1672C126.761 12.4817 126.324 11.51 125.759 10.2596C125.198 9.00924 124.588 7.75884 123.932 6.50845C123.277 5.25805 122.573 4.08675 121.823 2.99077C121.074 1.89856 120.354 1.13024 119.665 0.693359H140.387C140.075 0.945698 139.901 1.23947 139.871 1.58596C139.837 1.92869 139.826 2.26012 139.826 2.56895C139.826 4.06792 140.154 6.16572 140.809 8.85106C141.464 11.5402 142.293 14.508 143.295 17.7582C144.293 21.0085 145.434 24.417 146.718 27.9798C147.999 31.5427 149.264 34.9813 150.515 38.2918C151.765 41.6061 152.921 44.638 153.983 47.3873C155.045 50.1405 155.919 52.2948 156.608 53.8577C157.294 52.419 158.311 50.3401 159.655 47.6208C161 44.9016 162.454 41.8396 164.017 38.4312C165.58 35.0265 167.188 31.4636 168.845 27.7426C170.502 24.0253 172.001 20.4925 173.346 17.1481C174.69 13.8037 175.797 10.7869 176.675 8.10157C177.549 5.41624 177.989 3.41259 177.989 2.10194C177.989 1.85336 177.974 1.58596 177.944 1.30349C177.91 1.02102 177.771 0.821412 177.522 0.693359C184.4 0.817646 191.273 0.817646 198.15 0.693359L198.146 0.704658Z" fill="#F1EFE6"/>
+<path d="M196.742 69.9021C197.118 69.5255 197.427 68.3241 197.679 66.2941C197.928 64.264 198.131 61.8084 198.29 58.9348C198.444 56.0611 198.538 52.9502 198.572 49.6058C198.602 46.2614 198.617 43.0601 198.617 39.9943C198.617 36.9286 198.602 34.2131 198.572 31.8366C198.538 29.4601 198.527 27.8067 198.527 26.8689C198.527 26.368 198.542 25.385 198.572 23.9162C198.602 22.4474 198.602 20.7752 198.572 18.8996C198.538 17.024 198.478 15.0542 198.384 12.9941C198.29 10.9302 198.116 9.02446 197.868 7.27315C197.615 5.52561 197.273 4.05301 196.836 2.86664C196.399 1.68027 195.864 0.991047 195.243 0.802734H216.247C215.434 0.802734 214.763 1.52209 214.232 2.9608C213.701 4.3995 213.279 6.21107 212.967 8.39926C212.654 10.5875 212.417 13.0091 212.262 15.6644C212.104 18.3233 211.995 20.8693 211.935 23.3061C211.871 25.7428 211.841 27.916 211.841 29.8217V33.7122C211.841 38.0246 211.795 42.3369 211.701 46.6531C211.607 50.9692 211.622 55.2778 211.746 59.5939C213.871 59.7182 215.84 59.7973 217.652 59.8274C219.463 59.8613 221.245 59.8726 222.996 59.8726H241.515C243.232 59.8726 245.063 59.8575 246.998 59.8274C248.934 59.7973 250.735 59.7671 252.388 59.7332C254.045 59.7031 255.465 59.6541 256.655 59.5939C257.842 59.5336 258.591 59.4395 258.904 59.3114L259.936 69.7176L196.742 69.9059V69.9021Z" fill="#F1EFE6"/>
+<path d="M47.2744 94.8065C48.216 94.5429 49.0371 94.2002 49.7263 93.767C50.762 93.1192 51.5378 92.2718 52.0501 91.2248C52.5623 90.1778 52.8184 88.95 52.8184 87.5452C52.8184 85.9634 52.5058 84.6075 51.8806 83.4814C51.2554 82.3553 50.2912 81.4891 48.9881 80.8902C47.685 80.2876 46.0165 79.9863 43.9865 79.9863H29.332V103.74H34.2508V95.3074H42.0808L47.5682 103.74H53.1234L47.2744 94.8065ZM34.2508 91.6617V83.6999H43.753C45.2256 83.6999 46.2839 84.0388 46.9317 84.7205C47.5795 85.4022 47.9034 86.3438 47.9034 87.549V87.918C47.9034 88.6525 47.7641 89.3078 47.4854 89.8765C47.2067 90.4452 46.766 90.8859 46.1634 91.1984C45.5608 91.511 44.7586 91.6655 43.753 91.6655H34.2508V91.6617Z" fill="#F1EFE6"/>
+<path d="M73.8189 104.14C71.657 104.14 69.7212 103.838 68.0151 103.236C66.309 102.633 64.8589 101.786 63.665 100.694C62.4711 99.6015 61.5635 98.3059 60.9383 96.8144C60.3131 95.3192 60.0005 93.6809 60.0005 91.8957C60.0005 90.1105 60.3131 88.4383 60.9383 86.9431C61.5635 85.4479 62.4711 84.1485 63.665 83.045C64.8589 81.9415 66.3014 81.0866 67.9962 80.484C69.691 79.8814 71.6307 79.5801 73.8189 79.5801C76.007 79.5801 77.9165 79.8814 79.6227 80.484C81.3288 81.0866 82.7712 81.9377 83.9538 83.045C85.1364 84.1485 86.0403 85.4479 86.6655 86.9431C87.2907 88.4383 87.6033 90.0879 87.6033 91.8957C87.6033 93.7035 87.2907 95.3192 86.6655 96.8144C86.0403 98.3096 85.1327 99.6015 83.9388 100.694C82.7449 101.786 81.3024 102.633 79.6076 103.236C77.9128 103.838 75.9845 104.14 73.8189 104.14ZM73.8189 100.325C75.6455 100.325 77.2198 99.9969 78.5342 99.3378C79.8486 98.6787 80.858 97.7372 81.5623 96.5094C82.2666 95.2816 82.6168 93.8429 82.6168 92.1932V91.489C82.6168 89.8167 82.2666 88.378 81.5623 87.1728C80.858 85.9676 79.8486 85.0298 78.5342 84.3632C77.2198 83.6928 75.6455 83.3576 73.8189 83.3576C71.9922 83.3576 70.4104 83.6928 69.0847 84.3632C67.759 85.0336 66.7421 85.9676 66.0415 87.1728C65.3373 88.378 64.987 89.8167 64.987 91.489V92.1932C64.987 93.8429 65.3373 95.2816 66.0415 96.5094C66.7458 97.7372 67.759 98.6787 69.0847 99.3378C70.4104 99.9969 71.9885 100.325 73.8189 100.325Z" fill="#F1EFE6"/>
+<path d="M108.939 104.14C106.777 104.14 104.841 103.838 103.135 103.236C101.429 102.633 99.9791 101.786 98.7852 100.694C97.5913 99.6015 96.6836 98.3059 96.0584 96.8144C95.4332 95.3192 95.1206 93.6809 95.1206 91.8957C95.1206 90.1105 95.4332 88.4383 96.0584 86.9431C96.6836 85.4479 97.5913 84.1485 98.7852 83.045C99.9791 81.9415 101.422 81.0866 103.116 80.484C104.811 79.8814 106.751 79.5801 108.939 79.5801C111.127 79.5801 113.037 79.8814 114.743 80.484C116.449 81.0866 117.891 81.9377 119.074 83.045C120.257 84.1485 121.16 85.4479 121.786 86.9431C122.411 88.4383 122.723 90.0879 122.723 91.8957C122.723 93.7035 122.411 95.3192 121.786 96.8144C121.16 98.3096 120.253 99.6015 119.059 100.694C117.865 101.786 116.423 102.633 114.728 103.236C113.033 103.838 111.105 104.14 108.939 104.14ZM108.939 100.325C110.766 100.325 112.34 99.9969 113.654 99.3378C114.969 98.6787 115.978 97.7372 116.682 96.5094C117.387 95.2816 117.737 93.8429 117.737 92.1932V91.489C117.737 89.8167 117.387 88.378 116.682 87.1728C115.978 85.9676 114.969 85.0298 113.654 84.3632C112.34 83.6928 110.766 83.3576 108.939 83.3576C107.112 83.3576 105.531 83.6928 104.205 84.3632C102.879 85.0336 101.862 85.9676 101.162 87.1728C100.457 88.378 100.107 89.8167 100.107 91.489V92.1932C100.107 93.8429 100.457 95.2816 101.162 96.5094C101.866 97.7372 102.879 98.6787 104.205 99.3378C105.531 99.9969 107.109 100.325 108.939 100.325Z" fill="#F1EFE6"/>
+<path d="M151.11 83.6999V79.9863H130.603V103.74H135.521V94.2717H150.206V90.6222H135.521V83.6999H151.11Z" fill="#F1EFE6"/>
+<path d="M159.565 103.74V79.9863H164.484V103.74H159.565Z" fill="#F1EFE6"/>
+<path d="M172.728 103.74V79.9863H177.948L191.499 95.846H191.533V79.9863H196.15V103.74H192.403L177.383 86.1404H177.349V103.74H172.732H172.728Z" fill="#F1EFE6"/>
+<path class="pupil" d="M216.85 91.0256V94.5734H226.149V94.9764C226.149 95.9782 225.93 96.8294 225.497 97.5186C225.06 98.2116 224.473 98.769 223.723 99.1908C222.977 99.6164 222.122 99.9215 221.162 100.11C220.202 100.298 219.2 100.396 218.153 100.396C216.236 100.396 214.552 100.068 213.102 99.4092C211.652 98.7502 210.526 97.8086 209.724 96.5808C208.922 95.353 208.519 93.8917 208.519 92.1969V91.5265C208.519 89.8091 208.899 88.3478 209.656 87.1426C210.413 85.9374 211.475 85.0146 212.835 84.3668C214.194 83.719 215.746 83.3951 217.486 83.3951C218.801 83.3951 220.013 83.542 221.117 83.8283C222.22 84.1183 223.196 84.6154 224.043 85.3159C224.891 86.0202 225.584 86.9844 226.118 88.2084L230.367 87.0371C229.809 85.4101 228.921 84.0429 227.708 82.9394C226.491 81.8359 225.026 80.9998 223.309 80.4311C221.591 79.8624 219.674 79.5762 217.554 79.5762C214.812 79.5762 212.379 80.0884 210.259 81.1166C208.138 82.141 206.489 83.5759 205.306 85.4139C204.124 87.2556 203.532 89.4023 203.532 91.8541C203.532 94.306 204.105 96.4527 205.257 98.2944C206.406 100.136 208.022 101.567 210.108 102.592C212.195 103.616 214.631 104.132 217.418 104.132C218.936 104.132 220.413 103.944 221.851 103.563C223.29 103.183 224.582 102.558 225.731 101.692C225.983 101.5 226.216 101.296 226.442 101.078L226.687 103.733H230.668V91.018H216.85V91.0256Z" fill="#F1EFE6"/>
+<path class="pupil" d="M32.2734 18.0466C32.5332 18.992 33.52 19.5531 34.4691 19.2933C35.4182 19.0334 35.9756 18.0466 35.7157 17.0975L35.6592 16.8942C35.3993 15.9488 34.4126 15.3877 33.4635 15.6475C32.5182 15.9074 31.957 16.8942 32.2169 17.8432L32.2734 18.0466Z" fill="#F1EFE6"/>
+<path d="M43.7003 14.3376C44.107 15.2302 45.1691 15.6294 46.0617 15.2264C46.9543 14.8197 47.3535 13.7576 46.9506 12.865L46.8639 12.6729C46.4572 11.7803 45.3951 11.3811 44.5025 11.7841C43.6099 12.1908 43.2107 13.2529 43.6137 14.1455L43.7003 14.3376Z" fill="#F1EFE6"/>
+<path d="M48.088 40.6982L44.8076 37.8547L46.574 33.8926L49.8544 36.7323L48.088 40.6982Z" fill="#F1EFE6"/>
+<path d="M41.2634 39.7858L39.0225 37.0251L41.011 34.0762L43.252 36.8368L41.2634 39.7858Z" fill="#F1EFE6"/>
+<path d="M53.8803 36.9796L50.8296 35.153L51.6921 31.7031L54.7427 33.5298L53.8803 36.9796Z" fill="#F1EFE6"/>
+<path d="M35.5575 5.28363C31.9532 6.35701 29.524 8.00286 27.9007 9.83326C27.1173 9.36248 26.059 9.00092 24.8501 8.92559C21.6337 8.71845 19.1743 10.8464 19.1743 10.8464C19.1743 10.8464 21.5094 12.4696 24.1571 12.9291C24.7408 13.0308 25.302 13.0835 25.8293 13.0948C24.9969 15.0495 25.0421 16.959 25.0685 18.4052C25.1137 20.8834 25.8293 24.4538 26.0515 25.4896C26.0892 25.6779 26.1984 25.8474 26.3566 25.9641C26.3566 25.9641 27.3734 26.7964 28.2849 27.5949C30.2998 27.7342 32.4277 28.947 32.5972 31.1766C32.0135 30.0655 30.9589 29.1654 29.7424 28.9771C28.7745 28.8302 27.8329 29.0901 26.9818 29.5383C24.7258 30.9431 22.8803 33.7602 21.7429 36.7958C19.4869 42.8331 20.3645 48.6106 21.0913 51.5256C21.1064 51.552 21.1215 51.5784 21.1365 51.6047C21.2834 50.4824 21.5094 49.3713 21.8484 48.2867C22.6468 45.9365 23.788 43.6918 25.3133 41.7334C24.4433 44.5392 23.4565 47.2585 23.0121 50.1547C22.8464 51.4089 22.7485 52.6706 22.6732 53.936C22.6656 54.0415 23.0121 54.3918 23.0837 54.4859C23.2419 54.6893 23.4189 54.8814 23.5921 55.0772C23.9273 55.4576 24.2738 55.8342 24.6278 56.1996C24.7521 56.3276 24.8802 56.4519 25.0045 56.5799C25.641 52.9982 26.9177 49.3864 28.9816 46.9195C28.5372 48.2038 28.2811 49.5107 27.9873 50.8251C27.7425 51.9701 27.396 53.5782 27.2153 54.7194C27.0232 55.8493 26.8612 56.9867 26.6993 58.1279C26.8047 58.2145 26.9027 58.3011 27.0119 58.384C27.2266 58.5497 29.6596 60.2897 29.7085 60.2068C30.1341 59.5063 30.5371 58.7907 30.91 58.0638C31.8101 56.3502 32.4353 54.5989 33.3015 52.8401C33.4296 54.8399 32.8759 56.7833 32.1528 58.625C31.8327 59.4197 31.4749 60.1918 31.0757 60.9413C31.0757 60.9413 30.9853 61.1107 30.9212 61.2275C31.1171 61.4083 31.2263 61.5439 31.3016 61.6305C32.7215 63.2801 33.3354 66.7074 33.3693 66.9183C33.8024 66.8053 34.2017 66.5831 34.5331 66.3345C35.0152 65.9315 35.4445 65.4344 35.7872 64.926C35.9492 64.6096 36.0584 64.2631 36.1036 63.8714C36.1902 63.3667 36.1111 62.7378 36.0923 62.1389C36.5292 62.5683 36.7815 63.1558 36.887 63.7735C36.9548 64.0936 36.9585 64.3987 36.9209 64.6924C37.9378 64.8167 39.1091 64.9184 40.0582 64.9184C42.0505 64.9184 44.0504 64.8469 46.1068 64.4288C46.909 64.2669 47.6622 64.071 48.3816 63.8488C50.1442 63.2462 51.8051 62.4214 53.3304 61.3217C52.9048 62.331 52.1026 63.1332 51.2364 63.7885C51.8767 64.7037 52.37 66.1952 52.37 66.1952C52.9312 65.9202 53.4208 65.506 53.8351 65.0427C54.2532 64.5795 54.6185 64.0484 54.8671 63.4722C54.9688 63.2387 55.0441 63.0014 55.0893 62.7528C55.1571 62.3837 55.0403 61.9807 54.901 61.638C54.8256 61.4572 54.7352 61.2802 54.6411 61.1107C54.5695 60.9827 54.3624 60.6776 54.3624 60.6776C54.3624 60.6776 54.5997 60.4592 54.7014 60.365C54.8708 60.2144 54.8746 60.2181 55.0403 60.0637C56.6221 58.5723 57.9441 56.8549 58.9911 54.9492C59.2133 54.6742 59.3564 54.2675 59.5108 53.9549C59.6653 53.6423 59.8197 53.3071 59.9628 52.9756C61.1642 50.2263 61.8723 47.266 62.102 44.2756C62.5502 38.4718 60.3206 34.1218 58.1701 28.9545C56.4451 24.8116 55.8614 20.503 56.2116 16.6652C56.2342 16.4204 56.3434 15.686 56.3434 15.686C56.3585 15.5542 56.3434 15.4261 56.2982 15.3019C55.9819 14.4921 54.5394 10.9744 52.419 8.5678C51.598 7.63377 50.3589 6.39467 48.4795 5.47194C48.8976 5.11791 49.3156 4.68856 49.7111 4.19142C51.1611 2.37608 51.7448 -0.0117188 51.7448 -0.0117188C51.7448 -0.0117188 48.9315 0.0184112 46.9655 1.99946C46.1859 2.78284 45.6925 3.67544 45.474 4.45882C42.9808 3.95038 39.7531 4.0257 35.565 5.27233L35.5575 5.28363ZM39.5422 20.6876C40.1749 19.2903 41.5797 18.7969 42.9469 19.4862L45.0823 20.5633C45.0823 20.5633 43.6926 22.4879 42.9394 24.902C40.8491 23.501 38.5517 22.8645 38.5517 22.8645L39.5422 20.6838V20.6876ZM28.4054 19.7197C27.7463 17.3319 29.2829 14.8235 31.8327 14.123C34.3824 13.4187 36.9849 14.7859 37.644 17.1737C38.3031 19.5615 36.7665 22.0698 34.2167 22.7703C31.667 23.4746 29.0645 22.1075 28.4054 19.7197ZM60.5164 40.1101C61.7028 50.4523 55.673 64.4137 39.0187 63.3969C39.0187 63.3969 43.6474 55.9434 39.6364 48.7311C37.467 44.833 36.2543 44.0835 34.9662 41.1609C34.4992 40.0988 34.2092 38.9577 34.2242 37.7977C34.277 33.6473 37.6817 30.3217 41.8283 30.3744C43.3386 30.3932 44.9882 30.8602 46.1557 31.6474C47.1312 29.4931 49.0633 28.0092 51.5754 28.0393C57.0477 28.1071 60.008 35.6509 60.5164 40.1139V40.1101ZM50.9916 11.675C52.016 13.9309 50.8937 16.6464 48.4833 17.7424C46.0729 18.8346 43.2896 17.893 42.2652 15.637C41.2408 13.3811 42.3631 10.6656 44.7735 9.56962C47.1839 8.47741 49.9672 9.41897 50.9916 11.675Z" fill="#F1EFE6"/>
+<path d="M77.653 21.4703C75.3706 17.0035 72.3388 13.1883 68.5575 10.0322C64.7762 6.87609 60.4487 4.45439 55.5714 2.76711C54.6299 2.44321 53.6846 2.14944 52.7355 1.88581C52.3664 2.83113 51.3721 4.28114 50.1292 5.20387C52.2835 6.56725 53.4134 7.80635 54.0084 8.48427C56.2682 11.0453 57.8124 14.2542 58.076 15.1279C58.2718 15.7682 58.302 16.7248 58.302 16.7248C60.4148 19.0185 62.0984 21.8582 63.3525 25.2366C64.6669 28.7731 65.3223 32.9536 65.3223 37.7782C65.3223 41.2808 64.633 44.6365 63.2584 47.8416C62.8629 48.7681 62.426 49.6569 61.9515 50.5232C61.9515 50.5232 61.733 51.4045 61.6276 51.7811C61.5071 52.2104 61.3752 52.6398 61.2321 53.0616C60.9459 53.9128 60.6144 54.7451 60.2303 55.5549C59.1946 57.7393 57.7144 59.7392 55.9066 61.3474C56.0422 61.6976 56.1213 62.0931 56.1251 62.5714C56.1326 64.5449 54.4943 66.1041 53.1686 67.0231C52.6074 67.411 51.6771 67.7952 51.6771 67.7952C51.6771 67.7952 51.4286 66.5372 51.3118 66.0702C51.0896 65.1626 50.8749 64.7031 50.6151 64.2285C50.5134 64.2813 50.4154 64.334 50.3213 64.383C50.069 64.5298 47.8808 65.5091 46.5174 65.7953C44.397 66.2435 42.1561 66.4544 40.0545 66.4544C38.6233 66.4544 37.3767 66.3565 36.2958 66.1945C35.7158 66.9892 34.8985 67.6031 34.021 68.0324C33.8741 68.104 33.1849 68.4505 32.3487 68.6576C32.3487 68.6576 32.1943 67.5805 32.1228 67.2227C31.9495 66.3602 31.3281 63.3849 30.3413 62.2852C24.3718 59.3174 19.9352 54.0032 17.6453 47.7851C16.425 44.4821 15.8187 40.9795 15.8187 37.2735C15.8187 33.5675 16.4589 30.1515 17.7395 26.8146C19.02 23.4777 20.7713 20.5174 22.9896 17.9413C23.1629 17.7417 23.3436 17.5459 23.5207 17.3538C23.5244 16.4763 23.6901 14.7739 24.1722 13.9303C20.5679 13.5273 18.5906 12.2618 18.2969 12.0999C17.8186 11.8362 16.6472 10.9512 16.5795 10.9022C16.5795 10.9022 18.5115 9.26389 19.4757 8.74791C22.2138 7.28284 24.933 7.35817 27.5769 8.39388C29.5052 6.55595 32.0286 4.72556 35.1169 3.80283C37.7307 3.02698 39.9528 2.5336 42.4046 2.63152C43.1202 2.66165 44.1974 2.81607 44.8113 2.90269C45.0824 2.05152 45.1653 1.79542 45.7528 1.06476C45.8583 0.932944 46.1069 0.688138 46.2311 0.582683C44.3593 0.349176 42.4724 0.232422 40.5705 0.232422C35.3806 0.232422 30.3489 1.0158 25.4753 2.57503C20.598 4.13802 16.2857 6.42037 12.5345 9.4183C8.78332 12.42 5.76656 16.1373 3.48797 20.5777C1.20563 25.0181 0.0644531 30.1138 0.0644531 35.8649C0.0644531 41.616 1.15667 46.7569 3.34486 51.0994C5.53305 55.4456 8.45566 59.0688 12.1127 61.9763C15.7697 64.8839 20.018 67.0721 24.8652 68.5409C29.7086 70.0097 34.8194 70.7441 40.1938 70.7441C45.1314 70.7441 50.0388 69.9947 54.9161 68.4957C59.7934 66.9967 64.166 64.7935 68.0415 61.8859C71.917 58.9784 75.058 55.4004 77.4646 51.1484C79.8713 46.9 81.0727 42.0227 81.0727 36.5202C81.0727 31.0177 79.9315 25.9408 77.6492 21.4703H77.653Z" fill="#F1EFE6"/>
+</g>
+<defs>
+<clipPath id="clipOwl10">
+<rect width="259.871" height="104.141" fill="white" transform="translate(0.0644531)"/>
+</clipPath>
+</defs>
+</svg>
+</a>
+  <nav class="cl-nav" aria-label="Footer"><a href="#/services">Services</a><a href="#/storm">Storm damage</a><a href="#/nest">Protect Your Nest</a><a href="#/families">Our families</a><a href="#/contact">Contact and Price My Roof</a></nav>
+  <address class="cl-addr t-small">Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126<br><a href="tel:+16519776027" class="t-num">(651) 977-6027</a> · <a href="mailto:info@owlroofing.com">info@owlroofing.com</a> · Mon–Sat 8:00–18:00<br><span class="t-num">MN licence #BC809662</span> · GAF Systems Plus Certified · BBB Accredited, A−</address>
+</div>
+
+</section>
+</div><div class="ver" data-v="2" hidden><section class="fx-v2 on-deep" aria-labelledby="fx2-h">
+  <svg class="call-bg" data-bg="night"></svg>
+  <div class="wrap sk2-band">
+    <p class="t-label">Family-owned, from Shoreview</p>
+    <a class="cl2-num t-num" href="tel:+16519776027" id="fx2-h">(651) 977&#8209;6027</a>
+    <p class="t-body">Mon–Sat, 8:00 to 18:00. <a class="link" href="#/contact">Price your roof on the Contact page</a>.</p>
+  </div>
+<div class="cl-foot wrap">
+  <a href="#/home" class="cl-logo" aria-label="Owl Roofing, home"><svg class="logo" role="img" aria-label="Owl Roofing" viewBox="0 0 260 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clipOwl11)">
+<path d="M198.146 0.704658C197.397 1.14154 196.395 2.33168 195.145 4.26753C193.894 6.20715 192.486 8.62885 190.926 11.5326C189.363 14.4402 187.691 17.7206 185.91 21.3776C184.128 25.0346 182.332 28.8009 180.52 32.6764C178.705 36.5518 176.924 40.4273 175.176 44.3028C173.425 48.1782 171.816 51.7901 170.348 55.1307C168.879 58.4752 167.595 61.4467 166.502 64.0379C165.406 66.6329 164.582 68.5838 164.017 69.8982H147.701C145.577 63.4617 143.404 57.0854 141.186 50.7694C138.967 44.4572 136.67 38.1111 134.293 31.7348C131.793 38.0508 129.431 44.3781 127.213 50.7205C124.994 57.0666 122.851 63.4579 120.791 69.8944H104.476C103.915 68.58 103.071 66.6291 101.945 64.0342C100.819 61.4392 99.5233 58.4714 98.0545 55.127C96.5856 51.7825 94.9925 48.1895 93.2714 44.3442C91.5502 40.4989 89.7876 36.6422 87.9722 32.763C86.1569 28.8875 84.3642 25.1213 82.5827 21.4642C80.8013 17.8072 79.1291 14.5268 77.5661 11.6193C76.0031 8.71171 74.5983 6.29001 73.3479 4.35415C72.0975 2.4183 71.0994 1.22817 70.3462 0.791282C73.7848 0.791282 77.2083 0.806347 80.613 0.836477C84.0177 0.870373 87.4412 0.851542 90.8798 0.791282C90.6915 0.915568 90.5822 1.11895 90.5521 1.40141C90.5182 1.68388 90.5069 1.91739 90.5069 2.1057C90.5069 3.48038 90.9287 5.52922 91.7724 8.24846C92.616 10.9677 93.7082 14.0297 95.0528 17.4381C96.3973 20.8466 97.8963 24.4396 99.5535 28.2209C101.211 32.0022 102.834 35.614 104.431 39.0489C106.024 42.4874 107.493 45.5984 108.837 48.3778C110.182 51.1611 111.229 53.2702 111.978 54.7052C114.792 47.892 117.496 41.0487 120.087 34.1716C122.678 27.2944 125.01 20.2967 127.073 13.1672C126.761 12.4817 126.324 11.51 125.759 10.2596C125.198 9.00924 124.588 7.75884 123.932 6.50845C123.277 5.25805 122.573 4.08675 121.823 2.99077C121.074 1.89856 120.354 1.13024 119.665 0.693359H140.387C140.075 0.945698 139.901 1.23947 139.871 1.58596C139.837 1.92869 139.826 2.26012 139.826 2.56895C139.826 4.06792 140.154 6.16572 140.809 8.85106C141.464 11.5402 142.293 14.508 143.295 17.7582C144.293 21.0085 145.434 24.417 146.718 27.9798C147.999 31.5427 149.264 34.9813 150.515 38.2918C151.765 41.6061 152.921 44.638 153.983 47.3873C155.045 50.1405 155.919 52.2948 156.608 53.8577C157.294 52.419 158.311 50.3401 159.655 47.6208C161 44.9016 162.454 41.8396 164.017 38.4312C165.58 35.0265 167.188 31.4636 168.845 27.7426C170.502 24.0253 172.001 20.4925 173.346 17.1481C174.69 13.8037 175.797 10.7869 176.675 8.10157C177.549 5.41624 177.989 3.41259 177.989 2.10194C177.989 1.85336 177.974 1.58596 177.944 1.30349C177.91 1.02102 177.771 0.821412 177.522 0.693359C184.4 0.817646 191.273 0.817646 198.15 0.693359L198.146 0.704658Z" fill="#F1EFE6"/>
+<path d="M196.742 69.9021C197.118 69.5255 197.427 68.3241 197.679 66.2941C197.928 64.264 198.131 61.8084 198.29 58.9348C198.444 56.0611 198.538 52.9502 198.572 49.6058C198.602 46.2614 198.617 43.0601 198.617 39.9943C198.617 36.9286 198.602 34.2131 198.572 31.8366C198.538 29.4601 198.527 27.8067 198.527 26.8689C198.527 26.368 198.542 25.385 198.572 23.9162C198.602 22.4474 198.602 20.7752 198.572 18.8996C198.538 17.024 198.478 15.0542 198.384 12.9941C198.29 10.9302 198.116 9.02446 197.868 7.27315C197.615 5.52561 197.273 4.05301 196.836 2.86664C196.399 1.68027 195.864 0.991047 195.243 0.802734H216.247C215.434 0.802734 214.763 1.52209 214.232 2.9608C213.701 4.3995 213.279 6.21107 212.967 8.39926C212.654 10.5875 212.417 13.0091 212.262 15.6644C212.104 18.3233 211.995 20.8693 211.935 23.3061C211.871 25.7428 211.841 27.916 211.841 29.8217V33.7122C211.841 38.0246 211.795 42.3369 211.701 46.6531C211.607 50.9692 211.622 55.2778 211.746 59.5939C213.871 59.7182 215.84 59.7973 217.652 59.8274C219.463 59.8613 221.245 59.8726 222.996 59.8726H241.515C243.232 59.8726 245.063 59.8575 246.998 59.8274C248.934 59.7973 250.735 59.7671 252.388 59.7332C254.045 59.7031 255.465 59.6541 256.655 59.5939C257.842 59.5336 258.591 59.4395 258.904 59.3114L259.936 69.7176L196.742 69.9059V69.9021Z" fill="#F1EFE6"/>
+<path d="M47.2744 94.8065C48.216 94.5429 49.0371 94.2002 49.7263 93.767C50.762 93.1192 51.5378 92.2718 52.0501 91.2248C52.5623 90.1778 52.8184 88.95 52.8184 87.5452C52.8184 85.9634 52.5058 84.6075 51.8806 83.4814C51.2554 82.3553 50.2912 81.4891 48.9881 80.8902C47.685 80.2876 46.0165 79.9863 43.9865 79.9863H29.332V103.74H34.2508V95.3074H42.0808L47.5682 103.74H53.1234L47.2744 94.8065ZM34.2508 91.6617V83.6999H43.753C45.2256 83.6999 46.2839 84.0388 46.9317 84.7205C47.5795 85.4022 47.9034 86.3438 47.9034 87.549V87.918C47.9034 88.6525 47.7641 89.3078 47.4854 89.8765C47.2067 90.4452 46.766 90.8859 46.1634 91.1984C45.5608 91.511 44.7586 91.6655 43.753 91.6655H34.2508V91.6617Z" fill="#F1EFE6"/>
+<path d="M73.8189 104.14C71.657 104.14 69.7212 103.838 68.0151 103.236C66.309 102.633 64.8589 101.786 63.665 100.694C62.4711 99.6015 61.5635 98.3059 60.9383 96.8144C60.3131 95.3192 60.0005 93.6809 60.0005 91.8957C60.0005 90.1105 60.3131 88.4383 60.9383 86.9431C61.5635 85.4479 62.4711 84.1485 63.665 83.045C64.8589 81.9415 66.3014 81.0866 67.9962 80.484C69.691 79.8814 71.6307 79.5801 73.8189 79.5801C76.007 79.5801 77.9165 79.8814 79.6227 80.484C81.3288 81.0866 82.7712 81.9377 83.9538 83.045C85.1364 84.1485 86.0403 85.4479 86.6655 86.9431C87.2907 88.4383 87.6033 90.0879 87.6033 91.8957C87.6033 93.7035 87.2907 95.3192 86.6655 96.8144C86.0403 98.3096 85.1327 99.6015 83.9388 100.694C82.7449 101.786 81.3024 102.633 79.6076 103.236C77.9128 103.838 75.9845 104.14 73.8189 104.14ZM73.8189 100.325C75.6455 100.325 77.2198 99.9969 78.5342 99.3378C79.8486 98.6787 80.858 97.7372 81.5623 96.5094C82.2666 95.2816 82.6168 93.8429 82.6168 92.1932V91.489C82.6168 89.8167 82.2666 88.378 81.5623 87.1728C80.858 85.9676 79.8486 85.0298 78.5342 84.3632C77.2198 83.6928 75.6455 83.3576 73.8189 83.3576C71.9922 83.3576 70.4104 83.6928 69.0847 84.3632C67.759 85.0336 66.7421 85.9676 66.0415 87.1728C65.3373 88.378 64.987 89.8167 64.987 91.489V92.1932C64.987 93.8429 65.3373 95.2816 66.0415 96.5094C66.7458 97.7372 67.759 98.6787 69.0847 99.3378C70.4104 99.9969 71.9885 100.325 73.8189 100.325Z" fill="#F1EFE6"/>
+<path d="M108.939 104.14C106.777 104.14 104.841 103.838 103.135 103.236C101.429 102.633 99.9791 101.786 98.7852 100.694C97.5913 99.6015 96.6836 98.3059 96.0584 96.8144C95.4332 95.3192 95.1206 93.6809 95.1206 91.8957C95.1206 90.1105 95.4332 88.4383 96.0584 86.9431C96.6836 85.4479 97.5913 84.1485 98.7852 83.045C99.9791 81.9415 101.422 81.0866 103.116 80.484C104.811 79.8814 106.751 79.5801 108.939 79.5801C111.127 79.5801 113.037 79.8814 114.743 80.484C116.449 81.0866 117.891 81.9377 119.074 83.045C120.257 84.1485 121.16 85.4479 121.786 86.9431C122.411 88.4383 122.723 90.0879 122.723 91.8957C122.723 93.7035 122.411 95.3192 121.786 96.8144C121.16 98.3096 120.253 99.6015 119.059 100.694C117.865 101.786 116.423 102.633 114.728 103.236C113.033 103.838 111.105 104.14 108.939 104.14ZM108.939 100.325C110.766 100.325 112.34 99.9969 113.654 99.3378C114.969 98.6787 115.978 97.7372 116.682 96.5094C117.387 95.2816 117.737 93.8429 117.737 92.1932V91.489C117.737 89.8167 117.387 88.378 116.682 87.1728C115.978 85.9676 114.969 85.0298 113.654 84.3632C112.34 83.6928 110.766 83.3576 108.939 83.3576C107.112 83.3576 105.531 83.6928 104.205 84.3632C102.879 85.0336 101.862 85.9676 101.162 87.1728C100.457 88.378 100.107 89.8167 100.107 91.489V92.1932C100.107 93.8429 100.457 95.2816 101.162 96.5094C101.866 97.7372 102.879 98.6787 104.205 99.3378C105.531 99.9969 107.109 100.325 108.939 100.325Z" fill="#F1EFE6"/>
+<path d="M151.11 83.6999V79.9863H130.603V103.74H135.521V94.2717H150.206V90.6222H135.521V83.6999H151.11Z" fill="#F1EFE6"/>
+<path d="M159.565 103.74V79.9863H164.484V103.74H159.565Z" fill="#F1EFE6"/>
+<path d="M172.728 103.74V79.9863H177.948L191.499 95.846H191.533V79.9863H196.15V103.74H192.403L177.383 86.1404H177.349V103.74H172.732H172.728Z" fill="#F1EFE6"/>
+<path class="pupil" d="M216.85 91.0256V94.5734H226.149V94.9764C226.149 95.9782 225.93 96.8294 225.497 97.5186C225.06 98.2116 224.473 98.769 223.723 99.1908C222.977 99.6164 222.122 99.9215 221.162 100.11C220.202 100.298 219.2 100.396 218.153 100.396C216.236 100.396 214.552 100.068 213.102 99.4092C211.652 98.7502 210.526 97.8086 209.724 96.5808C208.922 95.353 208.519 93.8917 208.519 92.1969V91.5265C208.519 89.8091 208.899 88.3478 209.656 87.1426C210.413 85.9374 211.475 85.0146 212.835 84.3668C214.194 83.719 215.746 83.3951 217.486 83.3951C218.801 83.3951 220.013 83.542 221.117 83.8283C222.22 84.1183 223.196 84.6154 224.043 85.3159C224.891 86.0202 225.584 86.9844 226.118 88.2084L230.367 87.0371C229.809 85.4101 228.921 84.0429 227.708 82.9394C226.491 81.8359 225.026 80.9998 223.309 80.4311C221.591 79.8624 219.674 79.5762 217.554 79.5762C214.812 79.5762 212.379 80.0884 210.259 81.1166C208.138 82.141 206.489 83.5759 205.306 85.4139C204.124 87.2556 203.532 89.4023 203.532 91.8541C203.532 94.306 204.105 96.4527 205.257 98.2944C206.406 100.136 208.022 101.567 210.108 102.592C212.195 103.616 214.631 104.132 217.418 104.132C218.936 104.132 220.413 103.944 221.851 103.563C223.29 103.183 224.582 102.558 225.731 101.692C225.983 101.5 226.216 101.296 226.442 101.078L226.687 103.733H230.668V91.018H216.85V91.0256Z" fill="#F1EFE6"/>
+<path class="pupil" d="M32.2734 18.0466C32.5332 18.992 33.52 19.5531 34.4691 19.2933C35.4182 19.0334 35.9756 18.0466 35.7157 17.0975L35.6592 16.8942C35.3993 15.9488 34.4126 15.3877 33.4635 15.6475C32.5182 15.9074 31.957 16.8942 32.2169 17.8432L32.2734 18.0466Z" fill="#F1EFE6"/>
+<path d="M43.7003 14.3376C44.107 15.2302 45.1691 15.6294 46.0617 15.2264C46.9543 14.8197 47.3535 13.7576 46.9506 12.865L46.8639 12.6729C46.4572 11.7803 45.3951 11.3811 44.5025 11.7841C43.6099 12.1908 43.2107 13.2529 43.6137 14.1455L43.7003 14.3376Z" fill="#F1EFE6"/>
+<path d="M48.088 40.6982L44.8076 37.8547L46.574 33.8926L49.8544 36.7323L48.088 40.6982Z" fill="#F1EFE6"/>
+<path d="M41.2634 39.7858L39.0225 37.0251L41.011 34.0762L43.252 36.8368L41.2634 39.7858Z" fill="#F1EFE6"/>
+<path d="M53.8803 36.9796L50.8296 35.153L51.6921 31.7031L54.7427 33.5298L53.8803 36.9796Z" fill="#F1EFE6"/>
+<path d="M35.5575 5.28363C31.9532 6.35701 29.524 8.00286 27.9007 9.83326C27.1173 9.36248 26.059 9.00092 24.8501 8.92559C21.6337 8.71845 19.1743 10.8464 19.1743 10.8464C19.1743 10.8464 21.5094 12.4696 24.1571 12.9291C24.7408 13.0308 25.302 13.0835 25.8293 13.0948C24.9969 15.0495 25.0421 16.959 25.0685 18.4052C25.1137 20.8834 25.8293 24.4538 26.0515 25.4896C26.0892 25.6779 26.1984 25.8474 26.3566 25.9641C26.3566 25.9641 27.3734 26.7964 28.2849 27.5949C30.2998 27.7342 32.4277 28.947 32.5972 31.1766C32.0135 30.0655 30.9589 29.1654 29.7424 28.9771C28.7745 28.8302 27.8329 29.0901 26.9818 29.5383C24.7258 30.9431 22.8803 33.7602 21.7429 36.7958C19.4869 42.8331 20.3645 48.6106 21.0913 51.5256C21.1064 51.552 21.1215 51.5784 21.1365 51.6047C21.2834 50.4824 21.5094 49.3713 21.8484 48.2867C22.6468 45.9365 23.788 43.6918 25.3133 41.7334C24.4433 44.5392 23.4565 47.2585 23.0121 50.1547C22.8464 51.4089 22.7485 52.6706 22.6732 53.936C22.6656 54.0415 23.0121 54.3918 23.0837 54.4859C23.2419 54.6893 23.4189 54.8814 23.5921 55.0772C23.9273 55.4576 24.2738 55.8342 24.6278 56.1996C24.7521 56.3276 24.8802 56.4519 25.0045 56.5799C25.641 52.9982 26.9177 49.3864 28.9816 46.9195C28.5372 48.2038 28.2811 49.5107 27.9873 50.8251C27.7425 51.9701 27.396 53.5782 27.2153 54.7194C27.0232 55.8493 26.8612 56.9867 26.6993 58.1279C26.8047 58.2145 26.9027 58.3011 27.0119 58.384C27.2266 58.5497 29.6596 60.2897 29.7085 60.2068C30.1341 59.5063 30.5371 58.7907 30.91 58.0638C31.8101 56.3502 32.4353 54.5989 33.3015 52.8401C33.4296 54.8399 32.8759 56.7833 32.1528 58.625C31.8327 59.4197 31.4749 60.1918 31.0757 60.9413C31.0757 60.9413 30.9853 61.1107 30.9212 61.2275C31.1171 61.4083 31.2263 61.5439 31.3016 61.6305C32.7215 63.2801 33.3354 66.7074 33.3693 66.9183C33.8024 66.8053 34.2017 66.5831 34.5331 66.3345C35.0152 65.9315 35.4445 65.4344 35.7872 64.926C35.9492 64.6096 36.0584 64.2631 36.1036 63.8714C36.1902 63.3667 36.1111 62.7378 36.0923 62.1389C36.5292 62.5683 36.7815 63.1558 36.887 63.7735C36.9548 64.0936 36.9585 64.3987 36.9209 64.6924C37.9378 64.8167 39.1091 64.9184 40.0582 64.9184C42.0505 64.9184 44.0504 64.8469 46.1068 64.4288C46.909 64.2669 47.6622 64.071 48.3816 63.8488C50.1442 63.2462 51.8051 62.4214 53.3304 61.3217C52.9048 62.331 52.1026 63.1332 51.2364 63.7885C51.8767 64.7037 52.37 66.1952 52.37 66.1952C52.9312 65.9202 53.4208 65.506 53.8351 65.0427C54.2532 64.5795 54.6185 64.0484 54.8671 63.4722C54.9688 63.2387 55.0441 63.0014 55.0893 62.7528C55.1571 62.3837 55.0403 61.9807 54.901 61.638C54.8256 61.4572 54.7352 61.2802 54.6411 61.1107C54.5695 60.9827 54.3624 60.6776 54.3624 60.6776C54.3624 60.6776 54.5997 60.4592 54.7014 60.365C54.8708 60.2144 54.8746 60.2181 55.0403 60.0637C56.6221 58.5723 57.9441 56.8549 58.9911 54.9492C59.2133 54.6742 59.3564 54.2675 59.5108 53.9549C59.6653 53.6423 59.8197 53.3071 59.9628 52.9756C61.1642 50.2263 61.8723 47.266 62.102 44.2756C62.5502 38.4718 60.3206 34.1218 58.1701 28.9545C56.4451 24.8116 55.8614 20.503 56.2116 16.6652C56.2342 16.4204 56.3434 15.686 56.3434 15.686C56.3585 15.5542 56.3434 15.4261 56.2982 15.3019C55.9819 14.4921 54.5394 10.9744 52.419 8.5678C51.598 7.63377 50.3589 6.39467 48.4795 5.47194C48.8976 5.11791 49.3156 4.68856 49.7111 4.19142C51.1611 2.37608 51.7448 -0.0117188 51.7448 -0.0117188C51.7448 -0.0117188 48.9315 0.0184112 46.9655 1.99946C46.1859 2.78284 45.6925 3.67544 45.474 4.45882C42.9808 3.95038 39.7531 4.0257 35.565 5.27233L35.5575 5.28363ZM39.5422 20.6876C40.1749 19.2903 41.5797 18.7969 42.9469 19.4862L45.0823 20.5633C45.0823 20.5633 43.6926 22.4879 42.9394 24.902C40.8491 23.501 38.5517 22.8645 38.5517 22.8645L39.5422 20.6838V20.6876ZM28.4054 19.7197C27.7463 17.3319 29.2829 14.8235 31.8327 14.123C34.3824 13.4187 36.9849 14.7859 37.644 17.1737C38.3031 19.5615 36.7665 22.0698 34.2167 22.7703C31.667 23.4746 29.0645 22.1075 28.4054 19.7197ZM60.5164 40.1101C61.7028 50.4523 55.673 64.4137 39.0187 63.3969C39.0187 63.3969 43.6474 55.9434 39.6364 48.7311C37.467 44.833 36.2543 44.0835 34.9662 41.1609C34.4992 40.0988 34.2092 38.9577 34.2242 37.7977C34.277 33.6473 37.6817 30.3217 41.8283 30.3744C43.3386 30.3932 44.9882 30.8602 46.1557 31.6474C47.1312 29.4931 49.0633 28.0092 51.5754 28.0393C57.0477 28.1071 60.008 35.6509 60.5164 40.1139V40.1101ZM50.9916 11.675C52.016 13.9309 50.8937 16.6464 48.4833 17.7424C46.0729 18.8346 43.2896 17.893 42.2652 15.637C41.2408 13.3811 42.3631 10.6656 44.7735 9.56962C47.1839 8.47741 49.9672 9.41897 50.9916 11.675Z" fill="#F1EFE6"/>
+<path d="M77.653 21.4703C75.3706 17.0035 72.3388 13.1883 68.5575 10.0322C64.7762 6.87609 60.4487 4.45439 55.5714 2.76711C54.6299 2.44321 53.6846 2.14944 52.7355 1.88581C52.3664 2.83113 51.3721 4.28114 50.1292 5.20387C52.2835 6.56725 53.4134 7.80635 54.0084 8.48427C56.2682 11.0453 57.8124 14.2542 58.076 15.1279C58.2718 15.7682 58.302 16.7248 58.302 16.7248C60.4148 19.0185 62.0984 21.8582 63.3525 25.2366C64.6669 28.7731 65.3223 32.9536 65.3223 37.7782C65.3223 41.2808 64.633 44.6365 63.2584 47.8416C62.8629 48.7681 62.426 49.6569 61.9515 50.5232C61.9515 50.5232 61.733 51.4045 61.6276 51.7811C61.5071 52.2104 61.3752 52.6398 61.2321 53.0616C60.9459 53.9128 60.6144 54.7451 60.2303 55.5549C59.1946 57.7393 57.7144 59.7392 55.9066 61.3474C56.0422 61.6976 56.1213 62.0931 56.1251 62.5714C56.1326 64.5449 54.4943 66.1041 53.1686 67.0231C52.6074 67.411 51.6771 67.7952 51.6771 67.7952C51.6771 67.7952 51.4286 66.5372 51.3118 66.0702C51.0896 65.1626 50.8749 64.7031 50.6151 64.2285C50.5134 64.2813 50.4154 64.334 50.3213 64.383C50.069 64.5298 47.8808 65.5091 46.5174 65.7953C44.397 66.2435 42.1561 66.4544 40.0545 66.4544C38.6233 66.4544 37.3767 66.3565 36.2958 66.1945C35.7158 66.9892 34.8985 67.6031 34.021 68.0324C33.8741 68.104 33.1849 68.4505 32.3487 68.6576C32.3487 68.6576 32.1943 67.5805 32.1228 67.2227C31.9495 66.3602 31.3281 63.3849 30.3413 62.2852C24.3718 59.3174 19.9352 54.0032 17.6453 47.7851C16.425 44.4821 15.8187 40.9795 15.8187 37.2735C15.8187 33.5675 16.4589 30.1515 17.7395 26.8146C19.02 23.4777 20.7713 20.5174 22.9896 17.9413C23.1629 17.7417 23.3436 17.5459 23.5207 17.3538C23.5244 16.4763 23.6901 14.7739 24.1722 13.9303C20.5679 13.5273 18.5906 12.2618 18.2969 12.0999C17.8186 11.8362 16.6472 10.9512 16.5795 10.9022C16.5795 10.9022 18.5115 9.26389 19.4757 8.74791C22.2138 7.28284 24.933 7.35817 27.5769 8.39388C29.5052 6.55595 32.0286 4.72556 35.1169 3.80283C37.7307 3.02698 39.9528 2.5336 42.4046 2.63152C43.1202 2.66165 44.1974 2.81607 44.8113 2.90269C45.0824 2.05152 45.1653 1.79542 45.7528 1.06476C45.8583 0.932944 46.1069 0.688138 46.2311 0.582683C44.3593 0.349176 42.4724 0.232422 40.5705 0.232422C35.3806 0.232422 30.3489 1.0158 25.4753 2.57503C20.598 4.13802 16.2857 6.42037 12.5345 9.4183C8.78332 12.42 5.76656 16.1373 3.48797 20.5777C1.20563 25.0181 0.0644531 30.1138 0.0644531 35.8649C0.0644531 41.616 1.15667 46.7569 3.34486 51.0994C5.53305 55.4456 8.45566 59.0688 12.1127 61.9763C15.7697 64.8839 20.018 67.0721 24.8652 68.5409C29.7086 70.0097 34.8194 70.7441 40.1938 70.7441C45.1314 70.7441 50.0388 69.9947 54.9161 68.4957C59.7934 66.9967 64.166 64.7935 68.0415 61.8859C71.917 58.9784 75.058 55.4004 77.4646 51.1484C79.8713 46.9 81.0727 42.0227 81.0727 36.5202C81.0727 31.0177 79.9315 25.9408 77.6492 21.4703H77.653Z" fill="#F1EFE6"/>
+</g>
+<defs>
+<clipPath id="clipOwl11">
 <rect width="259.871" height="104.141" fill="white" transform="translate(0.0644531)"/>
 </clipPath>
 </defs>
@@ -3583,6 +3913,39 @@ window.OwlNest = (function () {
 })();
 
 /* pn-call: the Night yard is initialised for every .call-bg by call.js */
+
+/* Families cover V1: B2 Rings, Owl's own tree rings (the people ground). */
+(function () { var s = document.querySelector('.fc-rings'); s && Owl.bg.rings(s); })();
+
+/* Story V1 (S1325): the spine fills between the first and last dot centres as the reader passes; reversible. */
+(function () {
+  var r = document.querySelector('.fs-v1'); if (!r) return;
+  var sp = r.querySelector('.fs1-spine'), base = r.querySelector('.fs1-base'), fill = r.querySelector('.fs1-fill'), lis = [].slice.call(r.querySelectorAll('.fs1-steps li')), geo = null, raf = 0;
+  function measure() { var t = sp.getBoundingClientRect(), c = lis.map(function (li) { var d = li.querySelector('.fs1-dot').getBoundingClientRect(); return d.top + d.height / 2 - t.top; }); geo = { a: c[0], b: c[c.length - 1], c: c }; [base, fill].forEach(function (n) { n.style.top = geo.a + 'px'; n.style.height = (geo.b - geo.a) + 'px'; }); }
+  function update() {
+    raf = 0; if (r.closest('[hidden]')) return; if (!geo) measure();
+    var p = Owl.reduced() ? 1 : Math.max(0, Math.min(1, (innerHeight * 0.55 - sp.getBoundingClientRect().top - geo.a) / Math.max(1, geo.b - geo.a)));
+    fill.style.transform = 'scaleY(' + p.toFixed(4) + ')'; var head = geo.a + p * (geo.b - geo.a);
+    lis.forEach(function (li, k) { li.classList.toggle('is-on', geo.c[k] <= head + 1); });
+  }
+  function req() { if (!raf) raf = requestAnimationFrame(update); }
+  function re() { geo = null; req(); }
+  addEventListener('scroll', req, { passive: true }); addEventListener('resize', re); document.addEventListener('owl:version', re); addEventListener('hashchange', re);
+  document.fonts && document.fonts.ready.then(re); re();
+})();
+
+/* of-crew: static (photos and Owl's words). */
+
+/* Values V2: the nest is woven once when seen. */
+(function () {
+  var r = document.querySelector('.fv-v2'); if (!r) return; var s = r.querySelector('.fv2-nest');
+  var n = Owl.nest(s, { width: 480, height: 280, seed: 21 });
+  new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); Owl.play(n.set, 2000); } }, { threshold: 0.4 }).observe(s);
+})();
+
+/* of-community: static (Owl's photos, Owl's pledge in Owl's words). */
+
+/* of-call: the Night yard is initialised for every .call-bg by call.js */
 
 </script>
 </body>

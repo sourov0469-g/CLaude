@@ -1,0 +1,17 @@
+/* The two families. Cowboy: family/crew-fronted, warmth through real photos, restrained colour. S1427: the two family
+   cards are one set (same frame, same type, same order) so they read as equals. */
+.fw-v1,.fw-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.fw1-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-48);margin-top:var(--space-48)}
+.fw1-card{display:grid;gap:var(--space-12);align-content:start}
+.fw1-card .t-sub,.fw1-card .t-body,.fw1-role{margin:0}
+.fw1-role{color:var(--text-muted);font-weight:700}
+.fw1-photo{margin:0 0 var(--space-12)}
+.fw1-photo img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%;border-radius:var(--radius-m);display:block}
+@media (max-width:767px){.fw1-grid{grid-template-columns:1fr}}
+.fw2-row{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-48);align-items:center;margin-top:var(--space-48)}
+.fw2-row--flip .fw2-photo{order:2}
+.fw2-photo{margin:0}
+.fw2-photo img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-m);display:block}
+.fw2-text{display:grid;gap:var(--space-12)}
+.fw2-text .t-body{max-width:34rem}
+@media (max-width:767px){.fw2-row{grid-template-columns:1fr;gap:var(--space-16)}.fw2-row--flip .fw2-photo{order:0}}
