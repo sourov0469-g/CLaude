@@ -33,6 +33,8 @@ On their points, the later ones win.
 | 11-03 | **Round 3: windows + reviews** (Andersen construction researched first) | Windows A (one single-hung, morning to midnight) 8.28 and Reviews B (rating as hanging tags) 8.20 live; Windows B (bay, peelable wall) and Reviews A (4.9 laid in courses) kept as backups. `GATE-ROUND-3.md` |
 | 11-03 | **Process note (Muse, owner's order):** when the homepage is complete, STOP and deliver it for joint verification (Muse audits against the skills, then the owner); inner pages only after both pass | In force |
 | 11-03 | **Round 4: process + service area** | Process A (stacked chapters) 8.12 and On your street A (thread board, real job photos, town signs) 8.32 live; Process B (pinned wall) and Area B (finder + deck) kept as backups. `GATE-ROUND-4.md` |
+| 11-03 | **Round 5: try-the-job sequence + booking + footer + nav polish** | Try A (pinned sideways, four hand jobs) 8.16, Booking A (work-order pad, live open/closed) 8.12, stacked-course footer, phone menu sheet, scroll-spy, cursor companion (Board / Nail / Swatch / Off). `GATE-ROUND-5.md` |
+| 11-03 | **HOMEPAGE COMPLETE** (10 sections + header + footer in `site/out/site.html`) | Delivered for joint verification: Muse audits against the skills, then the owner. `GATE-HOMEPAGE.md`. **STOPPED: no inner pages until both pass** |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -52,7 +54,10 @@ On their points, the later ones win.
 | `src/sec/reviews.*` | Reviews A (4.9 in lap courses + quote reader) and B (hanging tags, breeze physics, verbatim dialog); quotes checked verbatim at build |
 | `src/sec/process.*` | Process A (four stacked chapters: checklist, price bands, scrubbed install, seal) and B (one pinned wall through the job) |
 | `src/sec/area.*` | On your street A (photo cards on a rippling thread, town signs filter) and B (neighbourhood finder + photo deck) |
+| `src/sec/seq.*` | Try the job A (pinned sideways) and B (swipe rail): board, caulk, gutter, paint games |
+| `src/sec/cta.*` | Booking A (work-order pad) and B (lap band + press button); the stacked-course footer |
+| `src/sec/nav.*` | Phone menu sheet, scroll-spy, cursor companion with three variants |
 
 ## Next
 
-Round 5: the horizontal-scroll interactivity sequence and the booking panel + stacked-course footer. Then nav polish with the cursor companion. Then **STOP at the homepage gate** for joint verification (Muse, then the owner). No inner pages until both pass.
+**Stopped at the homepage gate.** Waiting for Muse's skills audit and the owner's own review of `site/out/site.html`. Inner pages start only after both pass. Pending owner ruling: whether hero V1 is final, which would let the film (5.8 MB, used only by backup heroes) leave the live file.

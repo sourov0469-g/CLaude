@@ -14,7 +14,7 @@
 
 /* ---- A: pinned horizontal sequence ---- */
 .svA{height:330vh}
-.svA .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.svA .pin{position:sticky;top:0;height:100svh;overflow:hidden;overflow:clip;display:flex;flex-direction:column;justify-content:center}
 .svA .head{position:absolute;left:var(--gut);top:104px;display:flex;align-items:baseline;gap:18px}
 .svA .head h2{font:800 15px/1 var(--text);letter-spacing:.02em;color:var(--ink-2)}
 .svA .rail{display:flex;gap:6px;align-items:center}

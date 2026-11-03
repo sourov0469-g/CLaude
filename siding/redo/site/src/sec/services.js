@@ -14,7 +14,7 @@ window.Services = (function () {
       figs: [['$10k–$15k', 'shingle median band, 204 priced'], ['$20k–$25k', 'metal median band, 29 priced'], ['GAF', 'Master Elite']] },
   ];
   const MORE = [['Exterior painting', 320], ['Gutters', 121], ['Exterior doors', 109], ['Patio covers', 34], ['Garage doors', 9]];
-  const more = () => `<div class="more" aria-label="More trades">${MORE.map(([n, c]) => `<a href="#${n.toLowerCase().replace(/ /g, '-')}">${n} <i>${c}</i></a>`).join('')}</div>`;
+  const more = () => `<div class="more" aria-label="More trades">${MORE.map(([n, c]) => `<a href="#booking" data-trade="${n}">${n} <i>${c}</i></a>`).join('')}</div>`;
   const figs = (t) => `<div class="figs">${t.figs.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('')}</div>`;
   const book = `<a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>`;
 
@@ -44,6 +44,8 @@ window.Services = (function () {
     // header and in-page links to a trade land on that trade's resting view, not inside the moving track
     document.addEventListener('click', (e) => { const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a || mobile()) return;
       const i = T.findIndex((t) => '#' + t.id === a.getAttribute('href')); if (i < 0) return; e.preventDefault(); btns[i].click(); });
+    track.addEventListener('focusin', (e) => { if (mobile()) return; const sl = e.target.closest('.slide'); if (!sl) return; const i = [...track.children].indexOf(sl), total = sec.offsetHeight - innerHeight;
+      sec.querySelector('.pin').scrollLeft = 0; const y = sec.offsetTop + total * i / (T.length - 1) + 2; if (Math.abs(scrollY - y) > 4) scrollTo({ top: y, behavior: 'auto' }); });
     btns.forEach((b, i) => b.addEventListener('click', () => { const total = sec.offsetHeight - innerHeight; scrollTo({ top: sec.offsetTop + total * i / (T.length - 1) + 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }));
   }
   function wireB(root) {
