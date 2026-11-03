@@ -1,0 +1,227 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 5
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Ask the Owl"
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "five question chips; the thread opens with a greeting",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "asking about the attic answers with Owl's own Attic inspection words",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "an asked question is marked and the log is a live region",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "\"When should I book one?\" lists Owl's four published cases",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "4",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Kit"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "four tools mapped one-to-one to the four published parts",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "picking heat-sensor lifts that tool and says what it is for",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "arrow keys rove the list and move the lifted tool",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "pointing at a tool on the mat selects it",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "5",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

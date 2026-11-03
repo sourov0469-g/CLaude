@@ -66,3 +66,16 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   - rafters commonly 16 or 24 in on centre.
   It does not claim these as an Owl promise. Skills: ⟦S0205⟧ small 3D cards, ⟦S1330⟧ tilt, ⟦S1246⟧ tabs, ⟦S1352⟧,
   ⟦S0414⟧, ⟦S0076⟧.
+
+## L5 · Wise Check 4 + 5 (Wise stood at 3: V1 dial + checklist, V2 inspection lens, V3 case panels)
+- **Wise 4 · "Ask the Owl"** — reference **Cowboy** (warm, people-fronted, one named system). A conversation with
+  the owl: five question chips (what it covers, the attic, hidden leaks, seeing what we saw, when to book). Picking
+  one types the question into the thread, shows the owl "thinking" for a beat, then answers only from Owl's own
+  published Wise Check words (`OWL.WISE`). It ends with the booking action. Not a form, not a document. Skills:
+  ⟦S0251⟧⟦S0076⟧ plain answers, ⟦S0462⟧ chips as full hit areas, live region per ⟦S1442⟧'s feedback rules,
+  ⟦S0451⟧ title.
+- **Wise 5 · "The Kit"** — reference **Lando Norris** (bespoke craft objects, made for one business). A knolled
+  flat-lay on a cutting mat: ladder (roof evaluation), flashlight (attic inspection), heat-sensor camera (leak
+  detection) and phone camera (photo and video documentation), drawn in SVG. Hover or focus lifts a tool off the mat
+  with a real shadow and shows which part of the Wise Check it serves; the four parts are also a button list.
+  Skills: ⟦S0205⟧ small 3D lift, ⟦S1330⟧ damped tilt, ⟦S1246⟧ tabs, ⟦S0407⟧ draw-on of tools, ⟦S1352⟧.

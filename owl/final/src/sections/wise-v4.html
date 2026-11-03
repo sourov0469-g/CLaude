@@ -1,0 +1,73 @@
+<section class="sec wise4" id="wise-check-4" aria-labelledby="w4-h">
+<style>
+.wise4 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.wise4 .lede{margin:14px 0 22px;max-width:34ch}
+.wise4 .qs{display:grid;gap:8px}
+.wise4 .qs button{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 16px;border-radius:16px;text-align:left;font-weight:700;font-size:17px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.08),0 14px 24px -20px rgba(23,17,29,.5);transition:transform .2s,box-shadow .2s,opacity .3s}
+.wise4 .qs button::before{content:"?";flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--amber);font-weight:900}
+.wise4 .qs button:hover{transform:translateY(-2px)}
+.wise4 .qs button:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(23,17,29,.08)}
+.wise4 .qs button[aria-pressed="true"]{opacity:.62}
+.wise4 .qs button[aria-pressed="true"]::before{content:"✓"}
+.wise4 .chat{position:relative;border-radius:28px;background:linear-gradient(180deg,#FBF8EF,#F4EFE2);padding:clamp(18px,2.6vw,30px);min-height:clamp(420px,42vw,520px);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.55);display:flex;flex-direction:column}
+.wise4 .chat::before{content:"";position:absolute;inset:0;border-radius:inherit;background-image:radial-gradient(rgba(23,17,29,.05) 1px,transparent 1.5px);background-size:18px 18px;pointer-events:none}
+.wise4 .top{position:relative;display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:12px;border-bottom:1px solid rgba(23,17,29,.08)}
+.wise4 .av{width:46px;height:46px;border-radius:50%;background:#17111D;display:grid;place-items:center}
+.wise4 .av svg{width:34px;height:34px}
+.wise4 .top b{display:block}
+.wise4 .top span{font-size:14px;color:var(--ink-70)}
+.wise4 .log{position:relative;flex:1;display:flex;flex-direction:column;gap:10px;overflow:auto;max-height:420px;padding-right:4px}
+.wise4 .m{max-width:82%;padding:12px 16px;border-radius:18px;font-size:16px;line-height:1.45;animation:w4in .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes w4in{from{opacity:0;transform:translateY(8px) scale(.98)}}
+.wise4 .m.you{align-self:flex-end;background:var(--amber);border-bottom-right-radius:6px;font-weight:600}
+.wise4 .m.owl{align-self:flex-start;background:#fff;border-bottom-left-radius:6px;box-shadow:0 6px 14px -10px rgba(23,17,29,.5)}
+.wise4 .m.owl b{display:block;margin-bottom:2px}
+.wise4 .dots{display:inline-flex;gap:4px}
+.wise4 .dots i{width:7px;height:7px;border-radius:50%;background:#9C9585;animation:w4dot 1s infinite}
+.wise4 .dots i:nth-child(2){animation-delay:.15s}.wise4 .dots i:nth-child(3){animation-delay:.3s}
+@keyframes w4dot{50%{transform:translateY(-4px);background:#EAA221}}
+.wise4 .cta{margin-top:16px;align-self:flex-start}
+@media (max-width:900px){.wise4 .g{grid-template-columns:1fr}.wise4 .m{max-width:92%}}
+@media (prefers-reduced-motion:reduce){.wise4 .m,.wise4 .dots i{animation:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">The Wise Check</span>
+   <h2 class="h2" id="w4-h" style="margin-top:12px">Ask the Owl</h2>
+   <p class="lede rv">Five things people ask before a Wise Check. Pick one; the answers come from what we publish.</p>
+   <div class="qs" role="group" aria-label="Questions"></div>
+  </div>
+  <div class="chat" data-owl="say:Ask away">
+   <div class="top"><span class="av" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M8 12 L12 4 L16 10 Q20 8 24 10 L28 4 L32 12 Q34 26 20 34 Q6 26 8 12Z" fill="#F1EFE6"/><circle cx="15" cy="17" r="5" fill="#EAA221"/><circle cx="25" cy="17" r="5" fill="#EAA221"/><circle cx="15" cy="17" r="2" fill="#17111D"/><circle cx="25" cy="17" r="2" fill="#17111D"/><path d="M18 22 L20 26 L22 22Z" fill="#17111D"/></svg></span><div><b>Owl Roofing</b><span>About the Wise Check</span></div></div>
+   <div class="log" role="log" aria-live="polite" aria-label="Answers" tabindex="0"><p class="m owl"><b>Hoo's asking?</b>Pick a question on the left and I'll answer from what Owl Roofing publishes about the Wise Check.</p></div>
+   <a class="btn btn-amber cta" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','4',function(root){
+  var W = OWL.WISE || {parts: [], cases: []}, P = W.parts, C = W.cases;
+  function part(i){ return P[i] ? '<b>' + P[i].n + '</b>' + P[i].t : ''; }
+  var Q = [
+    ['What does a Wise Check cover?', 'Four parts: ' + P.map(function(p){ return p.n.toLowerCase(); }).join(', ') + '. On the roof itself that means ' + (P[0] ? P[0].t.charAt(0).toLowerCase() + P[0].t.slice(1) : '')],
+    ['Do you go into the attic?', part(1)],
+    ['How do you find leaks I can’t see?', part(2)],
+    ['Will I see what you saw?', part(3)],
+    ['When should I book one?', C.map(function(c){ return '<b>' + c.n + '</b>' + c.t; }).join('<br>')]
+  ];
+  var qs = root.querySelector('.qs'), log = root.querySelector('.log'), h2 = root.querySelector('h2'), busy = false;
+  OWL.split(h2);
+  function scroll(){ log.scrollTop = log.scrollHeight; }
+  Q.forEach(function(q, i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = q[0]; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function(){ if (busy) return; busy = true; b.setAttribute('aria-pressed', 'true');
+      var you = document.createElement('p'); you.className = 'm you'; you.textContent = q[0]; log.appendChild(you); scroll();
+      var wait = document.createElement('p'); wait.className = 'm owl'; wait.setAttribute('aria-hidden', 'true'); wait.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
+      setTimeout(function(){ log.appendChild(wait); scroll(); }, OWL.reduce ? 0 : 250);
+      setTimeout(function(){ wait.remove(); var a = document.createElement('p'); a.className = 'm owl'; a.innerHTML = q[1]; log.appendChild(a); scroll(); busy = false; }, OWL.reduce ? 0 : 1000);
+    }); qs.appendChild(b); });
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(log); }
+});
+</script>
+</section>

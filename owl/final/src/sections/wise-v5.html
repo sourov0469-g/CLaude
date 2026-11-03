@@ -1,0 +1,74 @@
+<section class="sec wise5" id="wise-check-5" aria-labelledby="w5-h">
+<style>
+.wise5 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.wise5 .lede{margin-top:12px;max-width:44ch}
+.wise5 .g{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:clamp(20px,3vw,48px);align-items:center}
+.wise5 .mat{position:relative;border-radius:26px;overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.7) inset,0 40px 70px -40px rgba(23,17,29,.55)}
+.wise5 .mat svg{display:block;width:100%;height:auto}
+.wise5 .tool{cursor:pointer;transition:transform .45s cubic-bezier(.3,1.4,.5,1),opacity .3s,filter .45s;filter:drop-shadow(0 3px 2px rgba(23,17,29,.25))}
+.wise5 .tool.on{transform:translate(-6px,-12px);filter:drop-shadow(0 22px 14px rgba(23,17,29,.32))}
+.wise5 .mat.has .tool:not(.on){opacity:.55}
+.wise5 .ink{stroke-dasharray:1;stroke-dashoffset:0}
+.wise5 .drawn .ink{animation:w5draw 1.6s cubic-bezier(.4,0,.2,1) both}
+@keyframes w5draw{from{stroke-dashoffset:1}}
+.wise5 .beam{opacity:0;transition:opacity .4s}
+.wise5 .tool.on .beam{opacity:.5}
+.wise5 .list{display:grid;gap:8px}
+.wise5 .list button{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;width:100%;padding:12px 14px;border-radius:16px;text-align:left;transition:background .25s,box-shadow .25s}
+.wise5 .list button i{grid-row:span 2;display:grid;place-items:center;width:36px;height:36px;border-radius:11px;font-style:normal;font-weight:800;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.1)}
+.wise5 .list button b{font-size:17px}
+.wise5 .list button span{font-size:14px;color:var(--ink-70)}
+.wise5 .list button:hover{background:rgba(234,162,33,.1)}
+.wise5 .list button[aria-selected="true"]{background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 16px 26px -20px rgba(23,17,29,.5)}
+.wise5 .list button[aria-selected="true"] i{background:var(--amber);box-shadow:0 3px 0 var(--amber-edge)}
+.wise5 .say{margin-top:14px;min-height:72px;font-size:16px}
+.wise5 .say b{display:block}
+.wise5 .cta{margin-top:12px}
+@media (max-width:900px){.wise5 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.wise5 .tool{transition:none}.wise5 .drawn .ink{animation:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">The Wise Check</span><h2 class="h2" id="w5-h" style="margin-top:12px">The Kit</h2>
+  <p class="lede rv">Four tools, one for each part of a Wise Check. Point at one, or pick it from the list.</p></div></div>
+ <div class="g">
+  <div class="mat" data-owl="say:Pick a tool">
+   <svg viewBox="0 0 900 560" role="img" aria-label="A flat-lay of four inspection tools on a cutting mat: a ladder, a flashlight, a heat-sensor camera and a phone camera">
+    <rect width="900" height="560" fill="#E3E9DE"/>
+    <g stroke="#17111D" stroke-opacity=".07"><path d="M0 40H900M0 80H900M0 120H900M0 160H900M0 200H900M0 240H900M0 280H900M0 320H900M0 360H900M0 400H900M0 440H900M0 480H900M0 520H900"/><path d="M40 0V560M80 0V560M120 0V560M160 0V560M200 0V560M240 0V560M280 0V560M320 0V560M360 0V560M400 0V560M440 0V560M480 0V560M520 0V560M560 0V560M600 0V560M640 0V560M680 0V560M720 0V560M760 0V560M800 0V560M840 0V560M880 0V560"/></g>
+    <g stroke="#EAA221" stroke-width="2"><path d="M20 552V540M60 552V546M100 552V540M140 552V546M180 552V540M220 552V546M260 552V540M300 552V546M340 552V540M380 552V546M420 552V540M460 552V546M500 552V540M540 552V546M580 552V540M620 552V546M660 552V540M700 552V546M740 552V540M780 552V546M820 552V540M860 552V546"/></g>
+    <g class="tool" data-i="0"><rect x="70" y="40" width="16" height="470" rx="4" fill="#C9CDD2"/><rect x="154" y="40" width="16" height="470" rx="4" fill="#C9CDD2"/><g fill="#AEB4BC"><rect x="86" y="80" width="68" height="10"/><rect x="86" y="150" width="68" height="10"/><rect x="86" y="220" width="68" height="10"/><rect x="86" y="290" width="68" height="10"/><rect x="86" y="360" width="68" height="10"/><rect x="86" y="430" width="68" height="10"/></g><path class="ink" pathLength="1" d="M70 40V510M170 40V510" stroke="#6E747B" stroke-width="2" fill="none"/><rect x="66" y="500" width="24" height="18" rx="4" fill="#17111D"/><rect x="150" y="500" width="24" height="18" rx="4" fill="#17111D"/></g>
+    <g class="tool" data-i="1"><path class="beam" d="M520 100 L700 40 L700 160Z" fill="#FFE9A8"/><rect x="250" y="78" width="200" height="44" rx="14" fill="#17111D"/><path d="M450 70 H500 Q520 70 520 90 V110 Q520 130 500 130 H450Z" fill="#3A3540"/><circle cx="512" cy="100" r="14" fill="#FFF4D9"/><rect x="300" y="88" width="34" height="24" rx="6" fill="#EAA221"/><path class="ink" pathLength="1" d="M250 100H520" stroke="#6E747B" stroke-width="2" fill="none" opacity=".4"/></g>
+    <g class="tool" data-i="2"><rect x="260" y="200" width="210" height="150" rx="20" fill="#3A3540"/><rect x="276" y="216" width="150" height="112" rx="8" fill="url(#w5th)"/><circle cx="446" cy="246" r="12" fill="#17111D" stroke="#9BA1A8" stroke-width="3"/><path d="M330 350 L314 470 Q312 486 328 486 H372 Q388 486 386 470 L380 350Z" fill="#2A2131"/><rect x="350" y="360" width="20" height="40" rx="6" fill="#EAA221"/><path class="ink" pathLength="1" d="M260 220 Q260 200 280 200 H450 Q470 200 470 220 V330 Q470 350 450 350 H280 Q260 350 260 330Z" stroke="#9BA1A8" stroke-width="2" fill="none"/></g>
+    <g class="tool" data-i="3"><rect x="580" y="200" width="170" height="300" rx="26" fill="#17111D"/><rect x="592" y="218" width="146" height="264" rx="16" fill="url(#w5ph)"/><path d="M612 400 L665 352 L718 400" fill="none" stroke="#17111D" stroke-width="6" stroke-linejoin="round"/><path d="M622 400 V446 H708 V400" fill="#F1EFE6" stroke="#17111D" stroke-width="4"/><circle cx="665" cy="460" r="0" fill="none"/><circle cx="728" cy="232" r="8" fill="#3A3540" stroke="#6E747B" stroke-width="2"/><path class="ink" pathLength="1" d="M606 200 H724 Q750 200 750 226 V474 Q750 500 724 500 H606 Q580 500 580 474 V226 Q580 200 606 200Z" stroke="#6E747B" stroke-width="2" fill="none"/></g>
+    <defs><linearGradient id="w5th" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A0F4A"/><stop offset=".4" stop-color="#B0306A"/><stop offset=".7" stop-color="#F08A24"/><stop offset="1" stop-color="#FFE58A"/></linearGradient><linearGradient id="w5ph" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BCD4E6"/><stop offset=".62" stop-color="#E9F0F5"/><stop offset="1" stop-color="#8DB45F"/></linearGradient></defs>
+   </svg>
+  </div>
+  <div>
+   <div class="list" role="tablist" aria-label="The four parts of a Wise Check" aria-orientation="vertical"></div>
+   <p class="say" id="w5-say" role="tabpanel" aria-live="polite"></p>
+   <a class="btn btn-amber cta" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','5',function(root){
+  var W = OWL.WISE || {parts: []}, TOOLS = ['Ladder', 'Flashlight', 'Heat-sensor camera', 'Phone camera'];
+  var mat = root.querySelector('.mat'), tools = [].slice.call(root.querySelectorAll('.tool')), list = root.querySelector('.list'), say = root.querySelector('.say'), h2 = root.querySelector('h2'), cur = -1;
+  OWL.split(h2);
+  var btns = W.parts.slice(0, 4).map(function(p, i){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.id = 'w5-t' + i; b.setAttribute('aria-controls', 'w5-say');
+    b.innerHTML = '<i>' + (i + 1) + '</i><b>' + p.n + '</b><span>' + TOOLS[i] + '</span>';
+    b.addEventListener('click', function(){ pick(i); });
+    b.addEventListener('keydown', function(e){ var n = null; if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = (cur + 1) % 4; else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') n = (cur + 3) % 4; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = 3; if (n !== null){ e.preventDefault(); pick(n); btns[n].focus(); } });
+    list.appendChild(b); return b; });
+  function pick(i){ cur = i; mat.classList.add('has');
+    tools.forEach(function(t, j){ t.classList.toggle('on', j === i); });
+    btns.forEach(function(b, j){ b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; });
+    say.setAttribute('aria-labelledby', 'w5-t' + i); say.innerHTML = '<b>' + TOOLS[i] + ': ' + W.parts[i].n + '</b>' + W.parts[i].t; }
+  tools.forEach(function(t){ var bb = t.getBBox(), r = document.createElementNS('http://www.w3.org/2000/svg', 'rect'); r.setAttribute('x', bb.x - 8); r.setAttribute('y', bb.y - 8); r.setAttribute('width', bb.width + 16); r.setAttribute('height', bb.height + 16); r.setAttribute('fill', 'transparent'); t.insertBefore(r, t.firstChild); });
+  tools.forEach(function(t, i){ t.addEventListener('pointerenter', function(){ pick(i); }); t.addEventListener('click', function(){ pick(i); }); });
+  pick(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); mat.classList.add('drawn'); } }, {threshold:.3}); io.observe(mat); }
+});
+</script>
+</section>

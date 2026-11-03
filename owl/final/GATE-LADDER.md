@@ -185,3 +185,37 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - The OSB tile was scaled down.
 
 **Open:** the OSB texture tile still reads a little blotchy at plan scale (the same tile as Round 2).
+
+---
+
+## L5 · Wise Check 4 + 5 · checks 34/34 · evidence `gates/ladder/L05-wise-4-5/` · Wise Check now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Wise 4 · Ask the Owl** | Cowboy (warm, people-fronted, one named system) | A conversation with the owl. Five question chips (what it covers, the attic, hidden leaks, seeing what we saw, when to book) type the question into the thread; the owl "thinks" for a beat, then answers only in Owl's published Wise Check words (`OWL.WISE`), and asked chips are marked. The thread is a focusable live region, and it ends with the booking action. | 8.0 | 8.2 | 7.8 | 9.0 | **8.18** |
+| **Wise 5 · The Kit** | Lando Norris (bespoke craft objects) | A knolled flat-lay on a cutting mat with an amber ruler edge: ladder (roof evaluation), flashlight (attic inspection, beam on when chosen), heat-sensor camera (leak detection, false-colour screen), phone camera (photo and video documentation). Pointing at a tool, or choosing it in the tab list, lifts it off the mat with a real shadow and says which part of the Wise Check it serves; tool outlines draw on when first seen. | 8.2 | 8.0 | 8.0 | 8.8 | **8.14** |
+
+**Truth:**
+- Every answer and every part description comes verbatim from Owl's published Wise Check list and cases (tested against `OWL.WISE`).
+- No new service claims.
+
+**Checks run:** the generic gate, plus:
+- Wise 4: five chips; the attic answer uses Owl's words; asked chips are marked; the log is live; "When should I book" lists the four published cases.
+- Wise 5: four tools map one-to-one to the four parts; picking the heat-sensor lifts it and explains it; arrow keys rove; pointing at a tool on the mat selects it.
+
+**Ledger:**
+- **Wise 4:**
+  - plain, sourced answers: ⟦S0251⟧ ⟦S0076⟧;
+  - chips: ⟦S0462⟧ ⟦S1388⟧;
+  - live thread: ⟦S1442⟧ (feedback);
+  - typing dots: ⟦S0407⟧;
+  - title: ⟦S0451⟧.
+- **Wise 5:**
+  - lift: ⟦S0205⟧;
+  - shadow and tilt: ⟦S1330⟧;
+  - tab list: ⟦S1246⟧;
+  - outline draw-on: ⟦S0407⟧;
+  - numbered parts: ⟦S1352⟧.
+
+**Defects fixed:**
+- Wise 4's scrolling thread was not keyboard-focusable (axe); it now takes focus.
+- Wise 5's ladder could only be selected on its rails; every tool now has a full hit area.
