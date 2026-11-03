@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const R = []; const ok = (n, c) => R.push(`${c ? 'PASS' : 'FAIL'}  ${n}`);
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + process.argv[2] + '#/storm/hail-wise', { waitUntil: 'load' }); await p.waitForTimeout(500);
+const vis = () => p.evaluate(() => [...document.querySelectorAll('.hw-v1 [role=tabpanel]')].map(x => x.offsetParent !== null));
+ok('one panel visible at start', JSON.stringify(await vis()) === '[true,false,false]');
+await p.focus('#hw1-t0'); await p.keyboard.press('ArrowRight'); await p.waitForTimeout(100);
+ok('ArrowRight selects Leaks and moves focus', JSON.stringify(await vis()) === '[false,true,false]' && await p.evaluate(() => document.activeElement.id === 'hw1-t1'));
+await p.keyboard.press('End'); ok('End selects Photos', JSON.stringify(await vis()) === '[false,false,true]');
+await p.keyboard.press('ArrowRight'); ok('ArrowRight wraps to Attic', JSON.stringify(await vis()) === '[true,false,false]');
+await p.click('.hw1-spot[data-k="1"]'); ok('drawing spot 2 selects Leaks', JSON.stringify(await vis()) === '[false,true,false]');
+ok('roving tabindex: one tab in tab order', await p.evaluate(() => [...document.querySelectorAll('.hw-v1 [role=tab]')].filter(t => t.tabIndex === 0).length === 1));
+ok('spots are out of tab order and hidden from AT', await p.evaluate(() => [...document.querySelectorAll('.hw1-spot')].every(s => s.tabIndex === -1 && s.getAttribute('aria-hidden') === 'true')));
+ok('tabs are at least 44px tall', await p.evaluate(() => [...document.querySelectorAll('.hw-v1 [role=tab]')].every(t => t.getBoundingClientRect().height >= 44)));
+ok('no JS errors', !errs.length);
+console.log(R.join('\n')); await b.close();

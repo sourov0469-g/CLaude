@@ -1,0 +1,29 @@
+/* The Wise Check. V1: Quiet Cubes (one object, few controls, instant feedback): a drawn cutaway house; three tabs light
+   the part of the house each check covers. V2: the three checks as a plain list beside Owl's badge. */
+.hw-v1,.hw-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.hw-cam{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.hw1-head{display:flex;gap:var(--space-32);align-items:flex-start}
+.hw1-head img,.hw2-lead img{width:var(--space-80);height:auto;flex:none}
+.hw1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-48);align-items:center;margin-top:var(--space-48)}
+.hw1-art{position:relative}
+.hw1-svg{width:100%;height:auto;display:block;overflow:visible}
+.hw1-spot{position:absolute;transform:translate(-50%,-50%);width:var(--space-40);height:var(--space-40);border-radius:50%;border:2px solid var(--text-primary);background:var(--surface-page);font:700 var(--step-m1)/1 var(--font-display);color:var(--text-primary);cursor:pointer;transition:background var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out)}
+.hw1-spot:hover{transform:translate(-50%,-50%) scale(1.08)}
+.hw1-spot.is-on{background:var(--accent-fill);border-color:var(--accent-fill)}
+.hw1-panel{display:grid;gap:var(--space-24);justify-items:start}
+.hw1-tabs{display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.hw1-tabs button{display:inline-flex;align-items:center;gap:var(--space-8);min-height:var(--space-48);padding:0 var(--space-16);border-radius:var(--radius-pill);border:1.5px solid var(--line-control);background:var(--surface-page);color:var(--text-primary);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer}
+.hw1-tabs button[aria-selected="true"]{border-color:var(--text-primary);box-shadow:inset 0 -3px 0 var(--accent-fill)}
+.hw1-pane{display:grid;gap:var(--space-8);min-height:9.5rem;align-content:start}
+.hw1-pane[hidden]{display:none}
+.hw1-pane .t-body{max-width:32rem}
+@media (max-width:1023px){.hw1-grid{grid-template-columns:1fr}.hw1-pane{min-height:0}}
+@media (max-width:767px){.hw1-head{flex-direction:column;gap:var(--space-16)}.hw1-spot{width:var(--space-32);height:var(--space-32)}}
+.hw2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.hw2-lead{display:grid;gap:var(--space-24);justify-items:start}
+.hw2-lead .t-label,.hw2-lead .t-heading,.hw2-lead .t-body{margin:0}
+.hw2-list{list-style:none;margin:0;padding:0;display:grid;border-top:1.5px solid var(--text-primary)}
+.hw2-list li{display:grid;grid-template-columns:auto 1fr;gap:var(--space-24);align-items:start;padding:var(--space-32) 0;border-bottom:1px solid var(--line-control)}
+.hw2-list li div{display:grid;gap:var(--space-8)}
+.hw2-list .icon{color:var(--text-primary)}
+@media (max-width:1023px){.hw2-grid{grid-template-columns:1fr;gap:var(--space-48)}}

@@ -230,8 +230,27 @@ this thread, with no `run_in_background`; nothing was left to fold back in.
     - The page with defaults and all-V2: no overflow at 1440/390, one h1, no errors.
   - **Copy left out:** Owl's own "Nail-Free Guarantee" line, because it contradicts Owl's homepage cleanup text and is
     not in the facts lock.
-- **Next:** the 4 remaining inner pages: Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Each
-  gets at least 6 sections × 2 versions, built one section at a time, with skills read before building.
+- **STORM DAMAGE PAGE COMPLETE** (`#/storm`): 6 sections × 2 versions, built one at a time: cover (`hail-cover`),
+  assess/secure/plan (`hail-respond`), the insurance paperwork (`hail-claim`), the Wise Check (`hail-wise`), built for
+  Minnesota weather (`hail-built`), and the page-end call band (`hail-call`).
+  - **Gates:** `GATE-hail-cover`, `-hail-respond`, `-hail-claim`, `-hail-wise`, `-hail-built`, `-hail-call`. Defaults:
+    V1 throughout (weighted 7.70-8.20; V2s 7.60-7.85).
+  - **References:** MERSI chapter cover; Longbow numbered doctrine and numerals; Lusion flow (claim path, call band);
+    Quiet Cubes (Wise Check cutaway, weather toggle).
+  - **Skills read before building:** ⟦S0618⟧ faq-page, ⟦S1325⟧ scroll-progress-timeline, ⟦S1424⟧ law-of-continuity
+    (logged), plus those already logged.
+  - **Honest record:** ⟦S0070⟧, ⟦S0400⟧ and ⟦S1449⟧ had been cited (also in GATE-game) without being logged. Read in full
+    at this audit, after building; marked as such in the gates and the log. The ⟦S0070⟧ audit produced one fix
+    (Wise Check panels reachable with Tab).
+  - **Copy:** only Owl's storm-page words and the facts lock; the Kristin Pavelka review on Owl's page is not used. No FAQ
+    section: Owl's FAQ text is not in hand and ⟦S0618⟧ says not to invent entries.
+  - **Tests:** `stormtest-page.mjs` 13/13 (routing, one h1, chapter and deep links, alternating surfaces with one deep
+    block, 23 sections × 2 versions, no duplicate ids, one locked number, no errors); `stormrm.mjs` 6/6 reduced motion;
+    `wisetest.mjs` 9/9; `builttest.mjs` 6/6; `routetest.mjs` 10/10; pageshot defaults and all-V2: no overflow at
+    1440/390, one h1, no errors; token lint clean.
+  - **Background tasks:** none started; no sub-agents. All work in this thread.
+- **Next:** the 3 remaining inner pages: Protect Your Nest, Our families, Contact and Price My Roof. Each gets at least
+  6 sections × 2 versions, built one section at a time, with skills read before building.
 - **Previously:** the 5 inner pages, each with at least 6 sections and two versions per section, one section at a time:
   Services, Storm damage, Protect Your Nest, Our families, Contact and Price My Roof. Until they exist, nav links to them
   fall back to Home; this is noted in each gate.

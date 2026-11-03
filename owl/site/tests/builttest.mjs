@@ -1,0 +1,16 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const R = []; const ok = (n, c) => R.push(`${c ? 'PASS' : 'FAIL'}  ${n}`);
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + process.argv[2] + '?v=hail-built:2#/storm/hail-built', { waitUntil: 'load' }); await p.waitForTimeout(600);
+const op = () => p.evaluate(() => [...document.querySelectorAll('.hb2-svg > g')].map(g => +getComputedStyle(g).opacity));
+ok('snow shows first', JSON.stringify(await op()) === '[1,0,0]');
+await p.click('.hb2-pick [data-w="wind"]'); await p.waitForTimeout(600);
+ok('High winds swaps the weather', JSON.stringify(await op()) === '[0,1,0]');
+ok('aria-pressed follows the choice', await p.evaluate(() => [...document.querySelectorAll('.hb2-pick button')].map(b => b.getAttribute('aria-pressed')).join() === 'false,true,false'));
+await p.focus('.hb2-pick [data-w="hail"]'); await p.keyboard.press('Enter'); await p.waitForTimeout(600);
+ok('keyboard Enter picks Intense hail', JSON.stringify(await op()) === '[0,0,1]');
+await p.screenshot({ path: 'hb2-hail.png', clip: { x: 0, y: 0, width: 1440, height: 900 } });
+await p.goto('file://' + process.argv[2] + '#/storm/hail-built', { waitUntil: 'load' }); await p.waitForTimeout(1800);
+ok('V1 numerals settle at the real values', await p.evaluate(() => [...document.querySelectorAll('.hb1-facts [data-to]')].map(n => n.textContent).join() === '10,50'));
+ok('no JS errors', !errs.length);
+console.log(R.join('\n')); await b.close();

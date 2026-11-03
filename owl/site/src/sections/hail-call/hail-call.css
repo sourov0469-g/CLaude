@@ -1,0 +1,5 @@
+/* Storm page end: call band + shared footer (the page's one deep block; Lusion: the journey resolves at one point; B3 Night yard).
+   Band layout classes (sk1-band, sk2-band, cl1-ctas, cl2-num) are shared with the other page-end bands. */
+.hx-v1,.hx-v2{position:relative;overflow:hidden;background:var(--surface-deep);color:var(--text-on-deep);padding:var(--section-hero) 0 calc(var(--space-160) + var(--space-96))}
+.hx-v1 > .wrap,.hx-v2 > .wrap{position:relative;z-index:1}
+.hx-v2 .t-label{margin:0;color:var(--accent-text-on-deep)}

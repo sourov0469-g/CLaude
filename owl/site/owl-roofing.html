@@ -753,6 +753,158 @@ main:focus{outline:none}
 .sk2-band{display:grid;gap:var(--space-16)}
 .sk2-band .t-body{margin:0}
 
+/* Storm damage cover (MERSI chapter system: a cover with the chapter index; Owl's own storm-page words) */
+.hc-v1,.hc-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0 var(--section-default)}
+.hc-v1{padding-top:0}
+.hc1-stage{position:relative;padding:var(--section-hero) 0 var(--space-64)}
+.hc-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.hc1-stage > .wrap{position:relative;z-index:1}
+.hc1-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.hc1-copy{display:grid;gap:var(--space-24)}
+.hc1-copy .t-label,.hc1-copy .t-body{margin:0}
+.hc1-copy .t-body{max-width:38rem}
+.hc1-ctas,.hc2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.hc1-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.hc1-chips .chip{margin:0}
+.hc1-art{width:100%;height:auto;overflow:visible}
+.hc1-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--space-24);margin-top:var(--space-32);border-top:1.5px solid var(--text-primary)}
+.hc1-index a{display:grid;grid-template-columns:auto 1fr auto;gap:var(--space-12);align-items:center;padding:var(--space-16) 0;min-height:var(--space-48);color:var(--text-primary);text-decoration:none;font:var(--type-body)}
+.hc1-index a span{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.hc1-index a .icon{transition:transform var(--dur-fast) var(--ease-out)}
+.hc1-index a:hover .icon{transform:translateX(var(--space-8))}
+@media (max-width:1023px){.hc1-grid{grid-template-columns:1fr}.hc1-art{max-width:28rem}.hc1-index{grid-template-columns:1fr 1fr}}
+@media (max-width:767px){.hc1-index{grid-template-columns:1fr}.hc1-index a{border-bottom:1px solid var(--line-control)}}
+.hc2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr) minmax(0,4fr);gap:var(--space-48);align-items:center}
+.hc2-copy{display:grid;gap:var(--space-24)}
+.hc2-copy .t-body{margin:0;max-width:34rem}
+.hc2-copy .hc2-icon{width:var(--space-64);height:var(--space-64);color:var(--text-primary)}
+.hc2-svg{width:100%;height:auto;max-width:15rem;display:block;margin-inline:auto;overflow:visible}
+.hc2-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-24)}
+.hc2-list li{display:grid;gap:var(--space-4);padding:0 0 var(--space-24) var(--space-40);position:relative;border-bottom:1px solid var(--line-control)}
+.hc2-list li:last-child{border-bottom:0;padding-bottom:0}
+.hc2-list li::before{content:'';position:absolute;left:var(--space-4);top:var(--space-4);width:var(--space-12);height:var(--space-24);border:solid var(--text-primary);border-width:0 3px 3px 0;transform:rotate(40deg)}
+@media (max-width:1023px){.hc2-grid{grid-template-columns:1fr 1fr}.hc2-copy{grid-column:1/-1}}
+@media (max-width:767px){.hc2-grid{grid-template-columns:1fr}.hc2-svg{max-width:12rem}}
+@media (max-width:1023px){.hc-bg{display:none}}
+
+/* Assess, secure, plan (Longbow: numbered doctrine, numerals as events; S1325 timeline rules for V2's pinned chapters) */
+.hr-v1,.hr-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.hr1-list{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32);border-top:1.5px solid var(--text-primary)}
+.hr1-list li{display:grid;gap:var(--space-12);align-content:start;padding-top:var(--space-24)}
+.hr1-list .t-sub,.hr1-list .t-small{margin:0}
+.hr1-n{font:800 var(--step-4)/1 var(--font-display);letter-spacing:var(--track-display);color:var(--text-primary)}
+.hr1-list li:first-child .hr1-n{color:var(--accent-text)}
+.hr1-art{width:100%;max-width:16rem;height:auto;overflow:visible}
+@media (max-width:1023px){.hr1-list{grid-template-columns:1fr}.hr1-list li{grid-template-columns:auto 1fr;column-gap:var(--space-24)}.hr1-list li > *:not(.hr1-n){grid-column:2}.hr1-n{grid-row:1 / span 3}.hr1-art{max-width:12rem}}
+.hr-v2{padding:0}
+.hr2-stage{height:300vh}
+.hr2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-48);align-items:center;padding-block:var(--space-48)}
+.hr2-copy{display:grid;gap:var(--space-24);justify-items:start}
+.hr2-copy .t-label,.hr2-copy .t-heading{margin:0}
+.hr2-steps{list-style:none;margin:0;padding:0 0 0 var(--space-24);display:grid;gap:var(--space-16);border-left:3px solid var(--line-control)}
+.hr2-steps li{display:grid;gap:var(--space-4);position:relative;opacity:.55;transition:opacity var(--dur-fast) var(--ease-out)}
+.hr2-steps li::before{content:'';position:absolute;left:calc(var(--space-24) * -1 - var(--space-8) - 1.5px);top:var(--space-8);width:var(--space-12);height:var(--space-12);border-radius:50%;background:var(--surface-alt);border:2px solid var(--line-control)}
+.hr2-steps li[aria-current="step"]{opacity:1}
+.hr2-steps li[aria-current="step"]::before,.hr2-steps li.is-done::before{background:var(--accent-fill);border-color:var(--accent-fill)}
+.hr2-art{width:100%;height:auto;max-height:70vh;overflow:visible}
+@media (max-width:1023px){.hr2-stage{height:auto}.hr2-stage .pin{position:static;min-height:auto}.hr2-grid{grid-template-columns:1fr;padding-block:var(--section-default)}.hr2-steps li{opacity:1}.hr2-art{max-width:30rem}}
+@media (prefers-reduced-motion:reduce){.hr2-stage{height:auto}.hr2-steps li{opacity:1}}
+
+/* Insurance paperwork. V1: S1325 scroll-progress timeline (left rail, one truthful line, first-to-last dot).
+   V2: Lusion flow (one path through the page): the report travels roof -> Owl -> insurer. Owl's own words throughout. */
+.hk-v1,.hk-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.hk1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.hk1-lead{display:grid;gap:var(--space-24);justify-items:start;position:sticky;top:calc(var(--header-h,0px) + var(--space-48))}
+.hk1-lead .t-label,.hk1-lead .t-heading,.hk1-lead .t-body{margin:0}
+.hk1-line{position:relative;padding-left:var(--space-48)}
+.hk1-base,.hk1-fill{position:absolute;left:var(--space-8);width:3px;border-radius:2px}
+.hk1-base{background:var(--line-control)}
+.hk1-fill{background:var(--accent-fill);transform-origin:top;transform:scaleY(0)}
+.hk1-steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-64)}
+.hk1-steps li{position:relative;display:grid;gap:var(--space-8);scroll-margin-top:calc(var(--header-h,0px) + var(--space-24))}
+.hk1-steps .t-label,.hk1-steps .t-sub,.hk1-steps .t-body{margin:0}
+.hk1-steps .t-body{max-width:36rem}
+.hk1-dot{position:absolute;left:calc(var(--space-48) * -1 + 1.5px);top:var(--space-4);width:var(--space-16);height:var(--space-16);border-radius:50%;background:var(--surface-page);border:3px solid var(--line-control);transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)}
+.hk1-steps li.is-on .hk1-dot{background:var(--accent-fill);border-color:var(--accent-fill)}
+@media (max-width:1023px){.hk1-grid{grid-template-columns:1fr;gap:var(--space-48)}.hk1-lead{position:static}}
+.hk2-flow{position:relative;margin-top:var(--space-48)}
+.hk2-track{position:absolute;left:16.66%;right:16.66%;top:var(--space-40);border-top:3px dotted var(--line-control)}
+.hk2-nodes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32);position:relative}
+.hk2-nodes li{display:grid;justify-items:center;text-align:center;gap:var(--space-8);align-content:start}
+.hk2-nodes .t-small{max-width:18rem}
+.hk2-node{display:grid;place-items:center;width:var(--space-80);height:var(--space-80);border-radius:50%;background:var(--surface-page);border:2px solid var(--text-primary);margin-bottom:var(--space-8)}
+.hk2-node svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hk2-node--owl{background:var(--accent-fill);border-color:var(--accent-fill)}
+.hk2-doc{position:absolute;left:0;top:0;width:var(--space-48);height:auto;z-index:1;fill:var(--surface-page);stroke:var(--text-primary);stroke-width:3;stroke-linecap:round;pointer-events:none}
+.hk2-seal{fill:none;stroke:var(--accent-fill)}
+.hk-v2 .hk2-close{margin:var(--space-64) auto 0;max-width:44rem;text-align:center}
+@media (max-width:767px){
+  .hk2-track{left:var(--space-32);right:auto;top:var(--space-32);bottom:var(--space-32);border-top:0;border-left:3px dotted var(--line-control)}
+  .hk2-nodes{grid-template-columns:1fr;gap:var(--space-32)}
+  .hk2-nodes li{grid-template-columns:var(--space-64) 1fr;justify-items:start;text-align:left;column-gap:var(--space-16)}
+  .hk2-nodes li > :not(.hk2-node){grid-column:2}
+  .hk2-node{grid-row:1 / span 2;margin:0}
+  .hk-v2 .hk2-close{text-align:left}
+  .hk2-doc{display:none}
+  .hk2-node{width:var(--space-64);height:var(--space-64)}
+}
+
+/* The Wise Check. V1: Quiet Cubes (one object, few controls, instant feedback): a drawn cutaway house; three tabs light
+   the part of the house each check covers. V2: the three checks as a plain list beside Owl's badge. */
+.hw-v1,.hw-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.hw-cam{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.hw1-head{display:flex;gap:var(--space-32);align-items:flex-start}
+.hw1-head img,.hw2-lead img{width:var(--space-80);height:auto;flex:none}
+.hw1-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-48);align-items:center;margin-top:var(--space-48)}
+.hw1-art{position:relative}
+.hw1-svg{width:100%;height:auto;display:block;overflow:visible}
+.hw1-spot{position:absolute;transform:translate(-50%,-50%);width:var(--space-40);height:var(--space-40);border-radius:50%;border:2px solid var(--text-primary);background:var(--surface-page);font:700 var(--step-m1)/1 var(--font-display);color:var(--text-primary);cursor:pointer;transition:background var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out)}
+.hw1-spot:hover{transform:translate(-50%,-50%) scale(1.08)}
+.hw1-spot.is-on{background:var(--accent-fill);border-color:var(--accent-fill)}
+.hw1-panel{display:grid;gap:var(--space-24);justify-items:start}
+.hw1-tabs{display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.hw1-tabs button{display:inline-flex;align-items:center;gap:var(--space-8);min-height:var(--space-48);padding:0 var(--space-16);border-radius:var(--radius-pill);border:1.5px solid var(--line-control);background:var(--surface-page);color:var(--text-primary);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer}
+.hw1-tabs button[aria-selected="true"]{border-color:var(--text-primary);box-shadow:inset 0 -3px 0 var(--accent-fill)}
+.hw1-pane{display:grid;gap:var(--space-8);min-height:9.5rem;align-content:start}
+.hw1-pane[hidden]{display:none}
+.hw1-pane .t-body{max-width:32rem}
+@media (max-width:1023px){.hw1-grid{grid-template-columns:1fr}.hw1-pane{min-height:0}}
+@media (max-width:767px){.hw1-head{flex-direction:column;gap:var(--space-16)}.hw1-spot{width:var(--space-32);height:var(--space-32)}}
+.hw2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.hw2-lead{display:grid;gap:var(--space-24);justify-items:start}
+.hw2-lead .t-label,.hw2-lead .t-heading,.hw2-lead .t-body{margin:0}
+.hw2-list{list-style:none;margin:0;padding:0;display:grid;border-top:1.5px solid var(--text-primary)}
+.hw2-list li{display:grid;grid-template-columns:auto 1fr;gap:var(--space-24);align-items:start;padding:var(--space-32) 0;border-bottom:1px solid var(--line-control)}
+.hw2-list li div{display:grid;gap:var(--space-8)}
+.hw2-list .icon{color:var(--text-primary)}
+@media (max-width:1023px){.hw2-grid{grid-template-columns:1fr;gap:var(--space-48)}}
+
+/* Built for Minnesota weather. V1: Longbow (craft as hard numbers; the numerals are the event). V2: Quiet Cubes
+   (one object, three controls, instant feedback): a drawn roof under snow, wind or hail. Facts only from the lock. */
+.hb-v1,.hb-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.hb1-top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-64);align-items:end}
+.hb1-top .t-body{margin:0;max-width:40rem}
+.hb1-facts{list-style:none;margin:var(--space-64) 0 var(--space-48);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32)}
+.hb1-facts li{display:grid;gap:var(--space-8);align-content:start;padding-top:var(--space-24);border-top:1.5px solid var(--text-primary)}
+.hb1-num{font:800 calc(var(--step-5) * 1.6)/1 var(--font-display);letter-spacing:var(--track-display);color:var(--text-primary)}
+.hb1-num small{font:700 var(--step-0)/1 var(--font-display);letter-spacing:0;color:var(--text-muted);margin-right:var(--space-4)}
+.hb1-facts li:first-child .hb1-num{color:var(--accent-text)}
+@media (max-width:1023px){.hb1-top{grid-template-columns:1fr;gap:var(--space-24)}.hb1-facts{grid-template-columns:1fr}}
+.hb2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-48);align-items:center}
+.hb2-copy{display:grid;gap:var(--space-24);justify-items:start}
+.hb2-copy .t-label,.hb2-copy .t-heading,.hb2-copy .t-body{margin:0}
+.hb2-pick{display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.hb2-pick button{min-height:var(--space-48);padding:0 var(--space-16);border-radius:var(--radius-pill);border:1.5px solid var(--line-control);background:var(--surface-page);color:var(--text-primary);font:700 var(--step-m1)/1 var(--font-display);cursor:pointer}
+.hb2-pick button[aria-pressed="true"]{background:var(--text-primary);border-color:var(--text-primary);color:var(--surface-page)}
+.hb2-svg{width:100%;height:auto;overflow:visible}
+@media (max-width:1023px){.hb2-grid{grid-template-columns:1fr}.hb2-svg{max-width:32rem}}
+
+/* Storm page end: call band + shared footer (the page's one deep block; Lusion: the journey resolves at one point; B3 Night yard).
+   Band layout classes (sk1-band, sk2-band, cl1-ctas, cl2-num) are shared with the other page-end bands. */
+.hx-v1,.hx-v2{position:relative;overflow:hidden;background:var(--surface-deep);color:var(--text-on-deep);padding:var(--section-hero) 0 calc(var(--space-160) + var(--space-96))}
+.hx-v1 > .wrap,.hx-v2 > .wrap{position:relative;z-index:1}
+.hx-v2 .t-label{margin:0;color:var(--accent-text-on-deep)}
+
 </style>
 </head>
 <body class="owl">
@@ -1560,6 +1712,257 @@ main:focus{outline:none}
 </g>
 <defs>
 <clipPath id="clipOwl5">
+<rect width="259.871" height="104.141" fill="white" transform="translate(0.0644531)"/>
+</clipPath>
+</defs>
+</svg>
+</a>
+  <nav class="cl-nav" aria-label="Footer"><a href="#/services">Services</a><a href="#/storm">Storm damage</a><a href="#/nest">Protect Your Nest</a><a href="#/families">Our families</a><a href="#/contact">Contact and Price My Roof</a></nav>
+  <address class="cl-addr t-small">Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126<br><a href="tel:+16519776027" class="t-num">(651) 977-6027</a> · <a href="mailto:info@owlroofing.com">info@owlroofing.com</a> · Mon–Sat 8:00–18:00<br><span class="t-num">MN licence #BC809662</span> · GAF Systems Plus Certified · BBB Accredited, A−</address>
+</div>
+
+</section>
+</div></div></section><section class="page" data-page="storm" aria-label="Storm damage" hidden><div class="sec" id="s-hail-cover" data-sec="hail-cover" data-default="1"><div class="ver" data-v="1"><section class="hc-v1" aria-labelledby="hc1-h">
+  <div class="hc1-stage">
+  <svg class="hc-bg" data-bg="lawn"></svg>
+  <div class="wrap hc1-grid">
+    <div class="hc1-copy">
+      <p class="t-label">MN's storm damage experts</p>
+      <h1 id="hc1-h" class="t-display">Mother Nature doesn't stand a chance.</h1>
+      <p class="t-body">"One minute you're enjoying a sunny afternoon, and the next, hail is auditioning for a spot in a heavy metal band on your roof." We respond quickly to assess the situation, secure your home from further damage, and create a clear plan to get things back to normal.</p>
+      <div class="hc1-ctas"><a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn btn--secondary" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text a photo of the damage</a></div>
+      <ul class="hc1-chips"><li class="chip">Insurance assistance available</li><li class="chip">Free estimates</li><li class="chip">A locally owned company</li></ul>
+    </div>
+    <svg class="hc1-art" viewBox="0 0 520 400" role="img" aria-label="A drawing: a storm cloud drops hail on a house roof, and three marks are circled for the inspection"></svg>
+  </div>
+  </div>
+  <nav class="wrap hc1-index" aria-label="Chapters on this page">
+    <a href="#/storm/hail-respond"><span class="t-num">01</span><b>Assess, secure, plan</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+    <a href="#/storm/hail-claim"><span class="t-num">02</span><b>The paperwork</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+    <a href="#/storm/hail-wise"><span class="t-num">03</span><b>The Wise Check</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+    <a href="#/storm/hail-built"><span class="t-num">04</span><b>Built for MN weather</b><svg class="icon icon--arrow" aria-hidden="true"><use href="#icon-navigation-arrow-right"/></svg></a>
+  </nav>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="hc-v2" aria-labelledby="hc2-h">
+  <div class="wrap hc2-grid">
+    <div class="hc2-copy">
+      <svg class="icon hc2-icon" aria-hidden="true"><use href="#icon-status-hail"/></svg>
+      <h1 id="hc2-h" class="t-display">Storm hit? Text us a photo.</h1>
+      <p class="t-body">"When a storm hits, the last thing you need is more stress. That's where we come in." Send a picture of what you see, or call. A real person at Owl answers, Monday to Saturday, 8:00 to 18:00.</p>
+      <div class="hc2-ctas"><a class="btn" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text a photo of the damage</a><a class="btn btn--secondary" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a></div>
+    </div>
+    <div class="hc2-phone" aria-hidden="true">
+      <svg class="hc2-svg" viewBox="0 0 300 520"></svg>
+    </div>
+    <ol class="hc2-list">
+      <li><b class="t-sub">Insurance assistance available</b><span class="t-small muted">We work directly with your adjuster.</span></li>
+      <li><b class="t-sub">Free estimates</b><span class="t-small muted">"Free, accurate, and designed to let you make an educated decision."</span></li>
+      <li><b class="t-sub">A locally owned company</b><span class="t-small muted">Family-owned, from Shoreview.</span></li>
+    </ol>
+  </div>
+</section>
+</div></div><div class="sec" id="s-hail-respond" data-sec="hail-respond" data-default="1"><div class="ver" data-v="1"><section class="hr-v1" aria-labelledby="hr1-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="t-label t-num">Chapter 01</p><h2 id="hr1-h" class="t-heading">We've seen it all.</h2><p class="t-body muted">"From wind damage that's lifted shingles to hail that's left its mark." When a storm hits, Owl does three things, in this order.</p></div>
+    <ol class="hr1-list">
+      <li><span class="hr1-n t-num" aria-hidden="true">01</span><svg class="hr1-art" viewBox="0 0 240 140" aria-hidden="true" data-art="assess"></svg><h3 class="t-sub">Assess the situation</h3><p class="t-small">A thorough, professional inspection, "documenting every bit of damage with detailed reports and clear photos."</p></li>
+      <li><span class="hr1-n t-num" aria-hidden="true">02</span><svg class="hr1-art" viewBox="0 0 240 140" aria-hidden="true" data-art="secure"></svg><h3 class="t-sub">Secure your home</h3><p class="t-small">"We respond quickly to assess the situation, secure your home from further damage."</p></li>
+      <li><span class="hr1-n t-num" aria-hidden="true">03</span><svg class="hr1-art" viewBox="0 0 240 140" aria-hidden="true" data-art="plan"></svg><h3 class="t-sub">Make a clear plan</h3><p class="t-small">"A clear plan to get things back to normal", with an estimate that is "free, accurate, and designed to let you make an educated decision."</p></li>
+    </ol>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="hr-v2" aria-labelledby="hr2-h">
+  <div class="hr2-stage beat-stage">
+    <div class="pin">
+      <div class="wrap hr2-grid">
+        <div class="hr2-copy">
+          <p class="t-label t-num">Chapter 01</p>
+          <h2 id="hr2-h" class="t-heading">Assess. Secure. Plan.</h2>
+          <ol class="hr2-steps">
+            <li data-i="0"><b class="t-sub">Assess the situation</b><span class="t-small">"From wind damage that's lifted shingles to hail that's left its mark", documented "with detailed reports and clear photos."</span></li>
+            <li data-i="1"><b class="t-sub">Secure your home</b><span class="t-small">"We respond quickly to … secure your home from further damage."</span></li>
+            <li data-i="2"><b class="t-sub">Make a clear plan</b><span class="t-small">"A clear plan to get things back to normal", with a free estimate.</span></li>
+          </ol>
+          <a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a>
+        </div>
+        <svg class="hr2-art" viewBox="0 0 560 420" role="img" aria-label="A drawing of a roof: hail marks and a lifted shingle are circled, the area is secured, then a three-line plan is ticked off"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+</div></div><div class="sec" id="s-hail-claim" data-sec="hail-claim" data-default="1"><div class="ver" data-v="1"><section class="hk-v1" aria-labelledby="hk1-h">
+  <div class="wrap hk1-grid">
+    <div class="hk1-lead">
+      <p class="t-label t-num">Chapter 02</p>
+      <h2 id="hk1-h" class="t-heading">We'll handle the paperwork for you.</h2>
+      <p class="t-body muted">"Dealing with insurance claims can feel like trying to solve a riddle in a foreign language. We specialize in making this process simple for you."</p>
+      <a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call about a claim</span></a>
+    </div>
+    <div class="hk1-line">
+      <span class="hk1-base" aria-hidden="true"></span><span class="hk1-fill" aria-hidden="true"></span>
+      <ol class="hk1-steps">
+        <li><span class="hk1-dot" aria-hidden="true"></span><p class="t-label t-num">Step 1</p><h3 class="t-sub">A thorough inspection</h3><p class="t-body">"Our team will conduct a thorough, professional inspection of your property."</p></li>
+        <li><span class="hk1-dot" aria-hidden="true"></span><p class="t-label t-num">Step 2</p><h3 class="t-sub">Every bit of damage, documented</h3><p class="t-body">"Documenting every bit of damage with detailed reports and clear photos."</p></li>
+        <li><span class="hk1-dot" aria-hidden="true"></span><p class="t-label t-num">Step 3</p><h3 class="t-sub">Your insurer gets what it needs</h3><p class="t-body">"We provide your insurance company with all the necessary information to support your claim, ensuring they understand the full extent of the work required."</p></li>
+        <li><span class="hk1-dot" aria-hidden="true"></span><p class="t-label t-num">Step 4</p><h3 class="t-sub">We work with your adjuster</h3><p class="t-body">"We'll work directly with your adjuster to make sure the process is smooth, fair, and transparent, so you get the coverage you deserve without the headache."</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="hk-v2" aria-labelledby="hk2-h">
+  <div class="wrap">
+    <div class="sec-head"><p class="t-label t-num">Chapter 02</p><h2 id="hk2-h" class="t-heading">The paperwork goes through us.</h2><p class="t-body muted">"Dealing with insurance claims can feel like trying to solve a riddle in a foreign language." Owl carries the report from your roof to your insurer.</p></div>
+    <div class="hk2-flow">
+      <span class="hk2-track" aria-hidden="true"></span>
+      <svg class="hk2-doc" viewBox="0 0 48 60" aria-hidden="true"><rect x="3" y="3" width="42" height="54" rx="4"/><path class="hk2-lines" d="M12 18 H36 M12 28 H36 M12 38 H28"/><circle class="hk2-seal" cx="34" cy="46" r="6"/></svg>
+      <ol class="hk2-nodes">
+        <li><span class="hk2-node"><svg class="icon icon--32" aria-hidden="true"><use href="#icon-content-house"/></svg></span><b class="t-sub">Your roof</b><span class="t-small muted">"A thorough, professional inspection of your property."</span></li>
+        <li><span class="hk2-node hk2-node--owl"><svg class="icon icon--32" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="9" width="24" height="17" rx="3"/><path d="M11 9 L13 5 H19 L21 9"/><circle cx="16" cy="17.5" r="5"/></svg></span><b class="t-sub">Owl's report</b><span class="t-small muted">"Detailed reports and clear photos" of "every bit of damage."</span></li>
+        <li><span class="hk2-node"><svg class="icon icon--32" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8 H12 L15 11 H29 V26 H3 Z"/><path d="M11 18.5 l3.5 3.5 l7 -7"/></svg></span><b class="t-sub">Your insurer and adjuster</b><span class="t-small muted">"All the necessary information to support your claim." We work directly with your adjuster.</span></li>
+      </ol>
+    </div>
+    <p class="hk2-close t-body"><b>"Smooth, fair, and transparent, so you get the coverage you deserve without the headache."</b> <a class="link" href="tel:+16519776027">Call (651) 977-6027 about a claim</a></p>
+  </div>
+</section>
+</div></div><div class="sec" id="s-hail-wise" data-sec="hail-wise" data-default="1"><div class="ver" data-v="1"><section class="hw-v1" aria-labelledby="hw1-h">
+  <div class="wrap">
+    <div class="hw1-head">
+      <img src="../assets/source/owl-pages/Wise-Check.png" alt="Owl's Wise Check badge" width="88" height="105" loading="lazy">
+      <div class="sec-head"><p class="t-label t-num">Chapter 03 · Our top-to-bottom inspection</p><h2 id="hw1-h" class="t-heading">The Wise Check.</h2><p class="t-body muted">"Owl Roofing's thorough, no-guesswork roof assessment designed to give you total clarity before you make any decisions."</p></div>
+    </div>
+    <div class="hw1-grid">
+      <div class="hw1-art">
+        <svg class="hw1-svg" viewBox="0 0 600 420" aria-hidden="true"></svg>
+        <button class="hw1-spot" type="button" data-k="0" tabindex="-1" aria-hidden="true" style="left:50%;top:40%">1</button>
+        <button class="hw1-spot" type="button" data-k="1" tabindex="-1" aria-hidden="true" style="left:79%;top:67%">2</button>
+        <button class="hw1-spot" type="button" data-k="2" tabindex="-1" aria-hidden="true" style="left:29%;top:11%">3</button>
+      </div>
+      <div class="hw1-panel">
+        <div class="hw1-tabs" role="tablist" aria-label="The three parts of the Wise Check">
+          <button role="tab" id="hw1-t0" aria-controls="hw1-p0" aria-selected="true" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-content-attic"/></svg>Attic</button>
+          <button role="tab" id="hw1-t1" aria-controls="hw1-p1" aria-selected="false" tabindex="-1" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-content-heat-sensor"/></svg>Leaks</button>
+          <button role="tab" id="hw1-t2" aria-controls="hw1-p2" aria-selected="false" tabindex="-1" type="button"><svg class="icon hw-cam" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7 L9.5 4 H14.5 L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>Photos</button>
+        </div>
+        <div role="tabpanel" tabindex="0" id="hw1-p0" aria-labelledby="hw1-t0" class="hw1-pane"><h3 class="t-sub">Attic inspection</h3><p class="t-body">"We inspect your attic whenever possible to spot ventilation, moisture, and insulation red flags that can shorten roof life or create hidden damage."</p></div>
+        <div role="tabpanel" tabindex="0" id="hw1-p1" aria-labelledby="hw1-t1" class="hw1-pane" hidden><h3 class="t-sub">Heat-sensor leak detection</h3><p class="t-body">"When leaks are suspected, we use advanced leak detection methods (including heat-sensing options when applicable) to locate the source quickly and accurately."</p></div>
+        <div role="tabpanel" tabindex="0" id="hw1-p2" aria-labelledby="hw1-t2" class="hw1-pane" hidden><h3 class="t-sub">Photo reporting</h3><p class="t-body">"You'll receive full photo and video documentation of your roof, so you can clearly see what we see and use it for peace of mind or insurance support."</p></div>
+        <a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call for your Wise Check</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="hw-v2" aria-labelledby="hw2-h">
+  <div class="wrap hw2-grid">
+    <div class="hw2-lead">
+      <img src="../assets/source/owl-pages/Wise-Check.png" alt="Owl's Wise Check badge" width="88" height="105" loading="lazy">
+      <p class="t-label t-num">Chapter 03</p>
+      <h2 id="hw2-h" class="t-heading">After a storm, start with the Wise Check.</h2>
+      <p class="t-body muted">"We go beyond the surface with a detailed roof and attic evaluation, clear photo and video documentation, and leak detection tools that help pinpoint issues other contractors often miss."</p>
+      <a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call for your Wise Check</span></a>
+    </div>
+    <ol class="hw2-list">
+      <li><svg class="icon icon--48" aria-hidden="true"><use href="#icon-content-attic"/></svg><div><h3 class="t-sub">Attic inspection</h3><p class="t-body">"Ventilation, moisture, and insulation red flags that can shorten roof life or create hidden damage."</p></div></li>
+      <li><svg class="icon icon--48" aria-hidden="true"><use href="#icon-content-heat-sensor"/></svg><div><h3 class="t-sub">Heat-sensor leak detection</h3><p class="t-body">"Including heat-sensing options when applicable", to "locate the source quickly and accurately."</p></div></li>
+      <li><svg class="icon icon--48 hw-cam" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7 L9.5 4 H14.5 L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg><div><h3 class="t-sub">Photo reporting</h3><p class="t-body">"Full photo and video documentation of your roof", to use "for peace of mind or insurance support."</p></div></li>
+    </ol>
+  </div>
+</section>
+</div></div><div class="sec" id="s-hail-built" data-sec="hail-built" data-default="1"><div class="ver" data-v="1"><section class="hb-v1" aria-labelledby="hb1-h">
+  <div class="wrap">
+    <div class="hb1-top">
+      <div class="sec-head"><p class="t-label t-num">Chapter 04</p><h2 id="hb1-h" class="t-heading">Built to withstand Minnesota weather.</h2></div>
+      <p class="t-body">"Fixing a storm-damaged roof is one thing; building one that's ready for the next storm is another. <b>We don't just repair—we upgrade.</b>" Owl uses "top-quality materials and proven installation techniques designed to withstand whatever Minnesota throws at them", from heavy snow loads to high winds and intense hail.</p>
+    </div>
+    <ul class="hb1-facts">
+      <li><span class="hb1-num t-num" data-to="10">10</span><b class="t-sub">year Get It Right Guarantee</b><span class="t-small muted">Owl's workmanship guarantee, on every roof.</span></li>
+      <li><span class="hb1-num t-num"><small>up to</small><span data-to="50">50</span></span><b class="t-sub">year manufacturer warranties</b><span class="t-small muted">On top of Owl's own guarantee.</span></li>
+      <li><span class="hb1-num hb1-num--word">GAF</span><b class="t-sub">Systems Plus Certified</b><span class="t-small muted">A GAF contractor certification.</span></li>
+    </ul>
+    <a class="btn" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a>
+  </div>
+</section>
+</div><div class="ver" data-v="2" hidden><section class="hb-v2" aria-labelledby="hb2-h">
+  <div class="wrap hb2-grid">
+    <div class="hb2-copy">
+      <p class="t-label t-num">Chapter 04</p>
+      <h2 id="hb2-h" class="t-heading">Whatever Minnesota throws at it.</h2>
+      <p class="t-body muted">"We understand the specific challenges of the local climate, from heavy snow loads to high winds and intense hail." Choose the weather.</p>
+      <div class="hb2-pick" role="group" aria-label="Choose the weather">
+        <button type="button" aria-pressed="true" data-w="snow">Heavy snow</button><button type="button" aria-pressed="false" data-w="wind">High winds</button><button type="button" aria-pressed="false" data-w="hail">Intense hail</button>
+      </div>
+      <p class="t-body">"We don't just repair—we upgrade." Every Owl roof carries the 10-year Get It Right Guarantee, with up to 50-year manufacturer warranties.</p>
+    </div>
+    <svg class="hb2-svg" viewBox="0 0 560 400" role="img" aria-label="A drawn house roof under the chosen weather: heavy snow, high winds or intense hail"></svg>
+  </div>
+</section>
+</div></div><div class="sec" id="s-hail-call" data-sec="hail-call" data-default="1"><div class="ver" data-v="1"><section class="hx-v1 on-deep" aria-labelledby="hx1-h">
+  <svg class="call-bg" data-bg="night"></svg>
+  <div class="wrap sk1-band">
+    <h2 id="hx1-h" class="t-title">Storm damage? We actually answer the phone.</h2>
+    <p class="t-body">Call, or text a photo of the damage. Insurance assistance available, and the estimate is free.</p>
+    <div class="cl1-ctas"><a class="btn btn--on-deep" href="tel:+16519776027"><svg class="icon icon--phone" aria-hidden="true"><use href="#icon-communication-phone"/></svg><span class="t-num">Call (651) 977-6027</span></a><a class="btn cl-text" href="sms:+16519776027"><svg class="icon" aria-hidden="true"><use href="#icon-communication-text"/></svg>Text a photo</a></div>
+  </div>
+<div class="cl-foot wrap">
+  <a href="#/home" class="cl-logo" aria-label="Owl Roofing, home"><svg class="logo" role="img" aria-label="Owl Roofing" viewBox="0 0 260 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clipOwl6)">
+<path d="M198.146 0.704658C197.397 1.14154 196.395 2.33168 195.145 4.26753C193.894 6.20715 192.486 8.62885 190.926 11.5326C189.363 14.4402 187.691 17.7206 185.91 21.3776C184.128 25.0346 182.332 28.8009 180.52 32.6764C178.705 36.5518 176.924 40.4273 175.176 44.3028C173.425 48.1782 171.816 51.7901 170.348 55.1307C168.879 58.4752 167.595 61.4467 166.502 64.0379C165.406 66.6329 164.582 68.5838 164.017 69.8982H147.701C145.577 63.4617 143.404 57.0854 141.186 50.7694C138.967 44.4572 136.67 38.1111 134.293 31.7348C131.793 38.0508 129.431 44.3781 127.213 50.7205C124.994 57.0666 122.851 63.4579 120.791 69.8944H104.476C103.915 68.58 103.071 66.6291 101.945 64.0342C100.819 61.4392 99.5233 58.4714 98.0545 55.127C96.5856 51.7825 94.9925 48.1895 93.2714 44.3442C91.5502 40.4989 89.7876 36.6422 87.9722 32.763C86.1569 28.8875 84.3642 25.1213 82.5827 21.4642C80.8013 17.8072 79.1291 14.5268 77.5661 11.6193C76.0031 8.71171 74.5983 6.29001 73.3479 4.35415C72.0975 2.4183 71.0994 1.22817 70.3462 0.791282C73.7848 0.791282 77.2083 0.806347 80.613 0.836477C84.0177 0.870373 87.4412 0.851542 90.8798 0.791282C90.6915 0.915568 90.5822 1.11895 90.5521 1.40141C90.5182 1.68388 90.5069 1.91739 90.5069 2.1057C90.5069 3.48038 90.9287 5.52922 91.7724 8.24846C92.616 10.9677 93.7082 14.0297 95.0528 17.4381C96.3973 20.8466 97.8963 24.4396 99.5535 28.2209C101.211 32.0022 102.834 35.614 104.431 39.0489C106.024 42.4874 107.493 45.5984 108.837 48.3778C110.182 51.1611 111.229 53.2702 111.978 54.7052C114.792 47.892 117.496 41.0487 120.087 34.1716C122.678 27.2944 125.01 20.2967 127.073 13.1672C126.761 12.4817 126.324 11.51 125.759 10.2596C125.198 9.00924 124.588 7.75884 123.932 6.50845C123.277 5.25805 122.573 4.08675 121.823 2.99077C121.074 1.89856 120.354 1.13024 119.665 0.693359H140.387C140.075 0.945698 139.901 1.23947 139.871 1.58596C139.837 1.92869 139.826 2.26012 139.826 2.56895C139.826 4.06792 140.154 6.16572 140.809 8.85106C141.464 11.5402 142.293 14.508 143.295 17.7582C144.293 21.0085 145.434 24.417 146.718 27.9798C147.999 31.5427 149.264 34.9813 150.515 38.2918C151.765 41.6061 152.921 44.638 153.983 47.3873C155.045 50.1405 155.919 52.2948 156.608 53.8577C157.294 52.419 158.311 50.3401 159.655 47.6208C161 44.9016 162.454 41.8396 164.017 38.4312C165.58 35.0265 167.188 31.4636 168.845 27.7426C170.502 24.0253 172.001 20.4925 173.346 17.1481C174.69 13.8037 175.797 10.7869 176.675 8.10157C177.549 5.41624 177.989 3.41259 177.989 2.10194C177.989 1.85336 177.974 1.58596 177.944 1.30349C177.91 1.02102 177.771 0.821412 177.522 0.693359C184.4 0.817646 191.273 0.817646 198.15 0.693359L198.146 0.704658Z" fill="#F1EFE6"/>
+<path d="M196.742 69.9021C197.118 69.5255 197.427 68.3241 197.679 66.2941C197.928 64.264 198.131 61.8084 198.29 58.9348C198.444 56.0611 198.538 52.9502 198.572 49.6058C198.602 46.2614 198.617 43.0601 198.617 39.9943C198.617 36.9286 198.602 34.2131 198.572 31.8366C198.538 29.4601 198.527 27.8067 198.527 26.8689C198.527 26.368 198.542 25.385 198.572 23.9162C198.602 22.4474 198.602 20.7752 198.572 18.8996C198.538 17.024 198.478 15.0542 198.384 12.9941C198.29 10.9302 198.116 9.02446 197.868 7.27315C197.615 5.52561 197.273 4.05301 196.836 2.86664C196.399 1.68027 195.864 0.991047 195.243 0.802734H216.247C215.434 0.802734 214.763 1.52209 214.232 2.9608C213.701 4.3995 213.279 6.21107 212.967 8.39926C212.654 10.5875 212.417 13.0091 212.262 15.6644C212.104 18.3233 211.995 20.8693 211.935 23.3061C211.871 25.7428 211.841 27.916 211.841 29.8217V33.7122C211.841 38.0246 211.795 42.3369 211.701 46.6531C211.607 50.9692 211.622 55.2778 211.746 59.5939C213.871 59.7182 215.84 59.7973 217.652 59.8274C219.463 59.8613 221.245 59.8726 222.996 59.8726H241.515C243.232 59.8726 245.063 59.8575 246.998 59.8274C248.934 59.7973 250.735 59.7671 252.388 59.7332C254.045 59.7031 255.465 59.6541 256.655 59.5939C257.842 59.5336 258.591 59.4395 258.904 59.3114L259.936 69.7176L196.742 69.9059V69.9021Z" fill="#F1EFE6"/>
+<path d="M47.2744 94.8065C48.216 94.5429 49.0371 94.2002 49.7263 93.767C50.762 93.1192 51.5378 92.2718 52.0501 91.2248C52.5623 90.1778 52.8184 88.95 52.8184 87.5452C52.8184 85.9634 52.5058 84.6075 51.8806 83.4814C51.2554 82.3553 50.2912 81.4891 48.9881 80.8902C47.685 80.2876 46.0165 79.9863 43.9865 79.9863H29.332V103.74H34.2508V95.3074H42.0808L47.5682 103.74H53.1234L47.2744 94.8065ZM34.2508 91.6617V83.6999H43.753C45.2256 83.6999 46.2839 84.0388 46.9317 84.7205C47.5795 85.4022 47.9034 86.3438 47.9034 87.549V87.918C47.9034 88.6525 47.7641 89.3078 47.4854 89.8765C47.2067 90.4452 46.766 90.8859 46.1634 91.1984C45.5608 91.511 44.7586 91.6655 43.753 91.6655H34.2508V91.6617Z" fill="#F1EFE6"/>
+<path d="M73.8189 104.14C71.657 104.14 69.7212 103.838 68.0151 103.236C66.309 102.633 64.8589 101.786 63.665 100.694C62.4711 99.6015 61.5635 98.3059 60.9383 96.8144C60.3131 95.3192 60.0005 93.6809 60.0005 91.8957C60.0005 90.1105 60.3131 88.4383 60.9383 86.9431C61.5635 85.4479 62.4711 84.1485 63.665 83.045C64.8589 81.9415 66.3014 81.0866 67.9962 80.484C69.691 79.8814 71.6307 79.5801 73.8189 79.5801C76.007 79.5801 77.9165 79.8814 79.6227 80.484C81.3288 81.0866 82.7712 81.9377 83.9538 83.045C85.1364 84.1485 86.0403 85.4479 86.6655 86.9431C87.2907 88.4383 87.6033 90.0879 87.6033 91.8957C87.6033 93.7035 87.2907 95.3192 86.6655 96.8144C86.0403 98.3096 85.1327 99.6015 83.9388 100.694C82.7449 101.786 81.3024 102.633 79.6076 103.236C77.9128 103.838 75.9845 104.14 73.8189 104.14ZM73.8189 100.325C75.6455 100.325 77.2198 99.9969 78.5342 99.3378C79.8486 98.6787 80.858 97.7372 81.5623 96.5094C82.2666 95.2816 82.6168 93.8429 82.6168 92.1932V91.489C82.6168 89.8167 82.2666 88.378 81.5623 87.1728C80.858 85.9676 79.8486 85.0298 78.5342 84.3632C77.2198 83.6928 75.6455 83.3576 73.8189 83.3576C71.9922 83.3576 70.4104 83.6928 69.0847 84.3632C67.759 85.0336 66.7421 85.9676 66.0415 87.1728C65.3373 88.378 64.987 89.8167 64.987 91.489V92.1932C64.987 93.8429 65.3373 95.2816 66.0415 96.5094C66.7458 97.7372 67.759 98.6787 69.0847 99.3378C70.4104 99.9969 71.9885 100.325 73.8189 100.325Z" fill="#F1EFE6"/>
+<path d="M108.939 104.14C106.777 104.14 104.841 103.838 103.135 103.236C101.429 102.633 99.9791 101.786 98.7852 100.694C97.5913 99.6015 96.6836 98.3059 96.0584 96.8144C95.4332 95.3192 95.1206 93.6809 95.1206 91.8957C95.1206 90.1105 95.4332 88.4383 96.0584 86.9431C96.6836 85.4479 97.5913 84.1485 98.7852 83.045C99.9791 81.9415 101.422 81.0866 103.116 80.484C104.811 79.8814 106.751 79.5801 108.939 79.5801C111.127 79.5801 113.037 79.8814 114.743 80.484C116.449 81.0866 117.891 81.9377 119.074 83.045C120.257 84.1485 121.16 85.4479 121.786 86.9431C122.411 88.4383 122.723 90.0879 122.723 91.8957C122.723 93.7035 122.411 95.3192 121.786 96.8144C121.16 98.3096 120.253 99.6015 119.059 100.694C117.865 101.786 116.423 102.633 114.728 103.236C113.033 103.838 111.105 104.14 108.939 104.14ZM108.939 100.325C110.766 100.325 112.34 99.9969 113.654 99.3378C114.969 98.6787 115.978 97.7372 116.682 96.5094C117.387 95.2816 117.737 93.8429 117.737 92.1932V91.489C117.737 89.8167 117.387 88.378 116.682 87.1728C115.978 85.9676 114.969 85.0298 113.654 84.3632C112.34 83.6928 110.766 83.3576 108.939 83.3576C107.112 83.3576 105.531 83.6928 104.205 84.3632C102.879 85.0336 101.862 85.9676 101.162 87.1728C100.457 88.378 100.107 89.8167 100.107 91.489V92.1932C100.107 93.8429 100.457 95.2816 101.162 96.5094C101.866 97.7372 102.879 98.6787 104.205 99.3378C105.531 99.9969 107.109 100.325 108.939 100.325Z" fill="#F1EFE6"/>
+<path d="M151.11 83.6999V79.9863H130.603V103.74H135.521V94.2717H150.206V90.6222H135.521V83.6999H151.11Z" fill="#F1EFE6"/>
+<path d="M159.565 103.74V79.9863H164.484V103.74H159.565Z" fill="#F1EFE6"/>
+<path d="M172.728 103.74V79.9863H177.948L191.499 95.846H191.533V79.9863H196.15V103.74H192.403L177.383 86.1404H177.349V103.74H172.732H172.728Z" fill="#F1EFE6"/>
+<path class="pupil" d="M216.85 91.0256V94.5734H226.149V94.9764C226.149 95.9782 225.93 96.8294 225.497 97.5186C225.06 98.2116 224.473 98.769 223.723 99.1908C222.977 99.6164 222.122 99.9215 221.162 100.11C220.202 100.298 219.2 100.396 218.153 100.396C216.236 100.396 214.552 100.068 213.102 99.4092C211.652 98.7502 210.526 97.8086 209.724 96.5808C208.922 95.353 208.519 93.8917 208.519 92.1969V91.5265C208.519 89.8091 208.899 88.3478 209.656 87.1426C210.413 85.9374 211.475 85.0146 212.835 84.3668C214.194 83.719 215.746 83.3951 217.486 83.3951C218.801 83.3951 220.013 83.542 221.117 83.8283C222.22 84.1183 223.196 84.6154 224.043 85.3159C224.891 86.0202 225.584 86.9844 226.118 88.2084L230.367 87.0371C229.809 85.4101 228.921 84.0429 227.708 82.9394C226.491 81.8359 225.026 80.9998 223.309 80.4311C221.591 79.8624 219.674 79.5762 217.554 79.5762C214.812 79.5762 212.379 80.0884 210.259 81.1166C208.138 82.141 206.489 83.5759 205.306 85.4139C204.124 87.2556 203.532 89.4023 203.532 91.8541C203.532 94.306 204.105 96.4527 205.257 98.2944C206.406 100.136 208.022 101.567 210.108 102.592C212.195 103.616 214.631 104.132 217.418 104.132C218.936 104.132 220.413 103.944 221.851 103.563C223.29 103.183 224.582 102.558 225.731 101.692C225.983 101.5 226.216 101.296 226.442 101.078L226.687 103.733H230.668V91.018H216.85V91.0256Z" fill="#F1EFE6"/>
+<path class="pupil" d="M32.2734 18.0466C32.5332 18.992 33.52 19.5531 34.4691 19.2933C35.4182 19.0334 35.9756 18.0466 35.7157 17.0975L35.6592 16.8942C35.3993 15.9488 34.4126 15.3877 33.4635 15.6475C32.5182 15.9074 31.957 16.8942 32.2169 17.8432L32.2734 18.0466Z" fill="#F1EFE6"/>
+<path d="M43.7003 14.3376C44.107 15.2302 45.1691 15.6294 46.0617 15.2264C46.9543 14.8197 47.3535 13.7576 46.9506 12.865L46.8639 12.6729C46.4572 11.7803 45.3951 11.3811 44.5025 11.7841C43.6099 12.1908 43.2107 13.2529 43.6137 14.1455L43.7003 14.3376Z" fill="#F1EFE6"/>
+<path d="M48.088 40.6982L44.8076 37.8547L46.574 33.8926L49.8544 36.7323L48.088 40.6982Z" fill="#F1EFE6"/>
+<path d="M41.2634 39.7858L39.0225 37.0251L41.011 34.0762L43.252 36.8368L41.2634 39.7858Z" fill="#F1EFE6"/>
+<path d="M53.8803 36.9796L50.8296 35.153L51.6921 31.7031L54.7427 33.5298L53.8803 36.9796Z" fill="#F1EFE6"/>
+<path d="M35.5575 5.28363C31.9532 6.35701 29.524 8.00286 27.9007 9.83326C27.1173 9.36248 26.059 9.00092 24.8501 8.92559C21.6337 8.71845 19.1743 10.8464 19.1743 10.8464C19.1743 10.8464 21.5094 12.4696 24.1571 12.9291C24.7408 13.0308 25.302 13.0835 25.8293 13.0948C24.9969 15.0495 25.0421 16.959 25.0685 18.4052C25.1137 20.8834 25.8293 24.4538 26.0515 25.4896C26.0892 25.6779 26.1984 25.8474 26.3566 25.9641C26.3566 25.9641 27.3734 26.7964 28.2849 27.5949C30.2998 27.7342 32.4277 28.947 32.5972 31.1766C32.0135 30.0655 30.9589 29.1654 29.7424 28.9771C28.7745 28.8302 27.8329 29.0901 26.9818 29.5383C24.7258 30.9431 22.8803 33.7602 21.7429 36.7958C19.4869 42.8331 20.3645 48.6106 21.0913 51.5256C21.1064 51.552 21.1215 51.5784 21.1365 51.6047C21.2834 50.4824 21.5094 49.3713 21.8484 48.2867C22.6468 45.9365 23.788 43.6918 25.3133 41.7334C24.4433 44.5392 23.4565 47.2585 23.0121 50.1547C22.8464 51.4089 22.7485 52.6706 22.6732 53.936C22.6656 54.0415 23.0121 54.3918 23.0837 54.4859C23.2419 54.6893 23.4189 54.8814 23.5921 55.0772C23.9273 55.4576 24.2738 55.8342 24.6278 56.1996C24.7521 56.3276 24.8802 56.4519 25.0045 56.5799C25.641 52.9982 26.9177 49.3864 28.9816 46.9195C28.5372 48.2038 28.2811 49.5107 27.9873 50.8251C27.7425 51.9701 27.396 53.5782 27.2153 54.7194C27.0232 55.8493 26.8612 56.9867 26.6993 58.1279C26.8047 58.2145 26.9027 58.3011 27.0119 58.384C27.2266 58.5497 29.6596 60.2897 29.7085 60.2068C30.1341 59.5063 30.5371 58.7907 30.91 58.0638C31.8101 56.3502 32.4353 54.5989 33.3015 52.8401C33.4296 54.8399 32.8759 56.7833 32.1528 58.625C31.8327 59.4197 31.4749 60.1918 31.0757 60.9413C31.0757 60.9413 30.9853 61.1107 30.9212 61.2275C31.1171 61.4083 31.2263 61.5439 31.3016 61.6305C32.7215 63.2801 33.3354 66.7074 33.3693 66.9183C33.8024 66.8053 34.2017 66.5831 34.5331 66.3345C35.0152 65.9315 35.4445 65.4344 35.7872 64.926C35.9492 64.6096 36.0584 64.2631 36.1036 63.8714C36.1902 63.3667 36.1111 62.7378 36.0923 62.1389C36.5292 62.5683 36.7815 63.1558 36.887 63.7735C36.9548 64.0936 36.9585 64.3987 36.9209 64.6924C37.9378 64.8167 39.1091 64.9184 40.0582 64.9184C42.0505 64.9184 44.0504 64.8469 46.1068 64.4288C46.909 64.2669 47.6622 64.071 48.3816 63.8488C50.1442 63.2462 51.8051 62.4214 53.3304 61.3217C52.9048 62.331 52.1026 63.1332 51.2364 63.7885C51.8767 64.7037 52.37 66.1952 52.37 66.1952C52.9312 65.9202 53.4208 65.506 53.8351 65.0427C54.2532 64.5795 54.6185 64.0484 54.8671 63.4722C54.9688 63.2387 55.0441 63.0014 55.0893 62.7528C55.1571 62.3837 55.0403 61.9807 54.901 61.638C54.8256 61.4572 54.7352 61.2802 54.6411 61.1107C54.5695 60.9827 54.3624 60.6776 54.3624 60.6776C54.3624 60.6776 54.5997 60.4592 54.7014 60.365C54.8708 60.2144 54.8746 60.2181 55.0403 60.0637C56.6221 58.5723 57.9441 56.8549 58.9911 54.9492C59.2133 54.6742 59.3564 54.2675 59.5108 53.9549C59.6653 53.6423 59.8197 53.3071 59.9628 52.9756C61.1642 50.2263 61.8723 47.266 62.102 44.2756C62.5502 38.4718 60.3206 34.1218 58.1701 28.9545C56.4451 24.8116 55.8614 20.503 56.2116 16.6652C56.2342 16.4204 56.3434 15.686 56.3434 15.686C56.3585 15.5542 56.3434 15.4261 56.2982 15.3019C55.9819 14.4921 54.5394 10.9744 52.419 8.5678C51.598 7.63377 50.3589 6.39467 48.4795 5.47194C48.8976 5.11791 49.3156 4.68856 49.7111 4.19142C51.1611 2.37608 51.7448 -0.0117188 51.7448 -0.0117188C51.7448 -0.0117188 48.9315 0.0184112 46.9655 1.99946C46.1859 2.78284 45.6925 3.67544 45.474 4.45882C42.9808 3.95038 39.7531 4.0257 35.565 5.27233L35.5575 5.28363ZM39.5422 20.6876C40.1749 19.2903 41.5797 18.7969 42.9469 19.4862L45.0823 20.5633C45.0823 20.5633 43.6926 22.4879 42.9394 24.902C40.8491 23.501 38.5517 22.8645 38.5517 22.8645L39.5422 20.6838V20.6876ZM28.4054 19.7197C27.7463 17.3319 29.2829 14.8235 31.8327 14.123C34.3824 13.4187 36.9849 14.7859 37.644 17.1737C38.3031 19.5615 36.7665 22.0698 34.2167 22.7703C31.667 23.4746 29.0645 22.1075 28.4054 19.7197ZM60.5164 40.1101C61.7028 50.4523 55.673 64.4137 39.0187 63.3969C39.0187 63.3969 43.6474 55.9434 39.6364 48.7311C37.467 44.833 36.2543 44.0835 34.9662 41.1609C34.4992 40.0988 34.2092 38.9577 34.2242 37.7977C34.277 33.6473 37.6817 30.3217 41.8283 30.3744C43.3386 30.3932 44.9882 30.8602 46.1557 31.6474C47.1312 29.4931 49.0633 28.0092 51.5754 28.0393C57.0477 28.1071 60.008 35.6509 60.5164 40.1139V40.1101ZM50.9916 11.675C52.016 13.9309 50.8937 16.6464 48.4833 17.7424C46.0729 18.8346 43.2896 17.893 42.2652 15.637C41.2408 13.3811 42.3631 10.6656 44.7735 9.56962C47.1839 8.47741 49.9672 9.41897 50.9916 11.675Z" fill="#F1EFE6"/>
+<path d="M77.653 21.4703C75.3706 17.0035 72.3388 13.1883 68.5575 10.0322C64.7762 6.87609 60.4487 4.45439 55.5714 2.76711C54.6299 2.44321 53.6846 2.14944 52.7355 1.88581C52.3664 2.83113 51.3721 4.28114 50.1292 5.20387C52.2835 6.56725 53.4134 7.80635 54.0084 8.48427C56.2682 11.0453 57.8124 14.2542 58.076 15.1279C58.2718 15.7682 58.302 16.7248 58.302 16.7248C60.4148 19.0185 62.0984 21.8582 63.3525 25.2366C64.6669 28.7731 65.3223 32.9536 65.3223 37.7782C65.3223 41.2808 64.633 44.6365 63.2584 47.8416C62.8629 48.7681 62.426 49.6569 61.9515 50.5232C61.9515 50.5232 61.733 51.4045 61.6276 51.7811C61.5071 52.2104 61.3752 52.6398 61.2321 53.0616C60.9459 53.9128 60.6144 54.7451 60.2303 55.5549C59.1946 57.7393 57.7144 59.7392 55.9066 61.3474C56.0422 61.6976 56.1213 62.0931 56.1251 62.5714C56.1326 64.5449 54.4943 66.1041 53.1686 67.0231C52.6074 67.411 51.6771 67.7952 51.6771 67.7952C51.6771 67.7952 51.4286 66.5372 51.3118 66.0702C51.0896 65.1626 50.8749 64.7031 50.6151 64.2285C50.5134 64.2813 50.4154 64.334 50.3213 64.383C50.069 64.5298 47.8808 65.5091 46.5174 65.7953C44.397 66.2435 42.1561 66.4544 40.0545 66.4544C38.6233 66.4544 37.3767 66.3565 36.2958 66.1945C35.7158 66.9892 34.8985 67.6031 34.021 68.0324C33.8741 68.104 33.1849 68.4505 32.3487 68.6576C32.3487 68.6576 32.1943 67.5805 32.1228 67.2227C31.9495 66.3602 31.3281 63.3849 30.3413 62.2852C24.3718 59.3174 19.9352 54.0032 17.6453 47.7851C16.425 44.4821 15.8187 40.9795 15.8187 37.2735C15.8187 33.5675 16.4589 30.1515 17.7395 26.8146C19.02 23.4777 20.7713 20.5174 22.9896 17.9413C23.1629 17.7417 23.3436 17.5459 23.5207 17.3538C23.5244 16.4763 23.6901 14.7739 24.1722 13.9303C20.5679 13.5273 18.5906 12.2618 18.2969 12.0999C17.8186 11.8362 16.6472 10.9512 16.5795 10.9022C16.5795 10.9022 18.5115 9.26389 19.4757 8.74791C22.2138 7.28284 24.933 7.35817 27.5769 8.39388C29.5052 6.55595 32.0286 4.72556 35.1169 3.80283C37.7307 3.02698 39.9528 2.5336 42.4046 2.63152C43.1202 2.66165 44.1974 2.81607 44.8113 2.90269C45.0824 2.05152 45.1653 1.79542 45.7528 1.06476C45.8583 0.932944 46.1069 0.688138 46.2311 0.582683C44.3593 0.349176 42.4724 0.232422 40.5705 0.232422C35.3806 0.232422 30.3489 1.0158 25.4753 2.57503C20.598 4.13802 16.2857 6.42037 12.5345 9.4183C8.78332 12.42 5.76656 16.1373 3.48797 20.5777C1.20563 25.0181 0.0644531 30.1138 0.0644531 35.8649C0.0644531 41.616 1.15667 46.7569 3.34486 51.0994C5.53305 55.4456 8.45566 59.0688 12.1127 61.9763C15.7697 64.8839 20.018 67.0721 24.8652 68.5409C29.7086 70.0097 34.8194 70.7441 40.1938 70.7441C45.1314 70.7441 50.0388 69.9947 54.9161 68.4957C59.7934 66.9967 64.166 64.7935 68.0415 61.8859C71.917 58.9784 75.058 55.4004 77.4646 51.1484C79.8713 46.9 81.0727 42.0227 81.0727 36.5202C81.0727 31.0177 79.9315 25.9408 77.6492 21.4703H77.653Z" fill="#F1EFE6"/>
+</g>
+<defs>
+<clipPath id="clipOwl6">
+<rect width="259.871" height="104.141" fill="white" transform="translate(0.0644531)"/>
+</clipPath>
+</defs>
+</svg>
+</a>
+  <nav class="cl-nav" aria-label="Footer"><a href="#/services">Services</a><a href="#/storm">Storm damage</a><a href="#/nest">Protect Your Nest</a><a href="#/families">Our families</a><a href="#/contact">Contact and Price My Roof</a></nav>
+  <address class="cl-addr t-small">Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126<br><a href="tel:+16519776027" class="t-num">(651) 977-6027</a> · <a href="mailto:info@owlroofing.com">info@owlroofing.com</a> · Mon–Sat 8:00–18:00<br><span class="t-num">MN licence #BC809662</span> · GAF Systems Plus Certified · BBB Accredited, A−</address>
+</div>
+
+</section>
+</div><div class="ver" data-v="2" hidden><section class="hx-v2 on-deep" aria-labelledby="hx2-h">
+  <svg class="call-bg" data-bg="night"></svg>
+  <div class="wrap sk2-band">
+    <p class="t-label">After the hail</p>
+    <a class="cl2-num t-num" href="tel:+16519776027" id="hx2-h">(651) 977&#8209;6027</a>
+    <p class="t-body">Mon–Sat, 8:00 to 18:00. Or <a class="link" href="sms:+16519776027">text a photo of the damage</a> and ask for the Wise Check.</p>
+  </div>
+<div class="cl-foot wrap">
+  <a href="#/home" class="cl-logo" aria-label="Owl Roofing, home"><svg class="logo" role="img" aria-label="Owl Roofing" viewBox="0 0 260 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clipOwl7)">
+<path d="M198.146 0.704658C197.397 1.14154 196.395 2.33168 195.145 4.26753C193.894 6.20715 192.486 8.62885 190.926 11.5326C189.363 14.4402 187.691 17.7206 185.91 21.3776C184.128 25.0346 182.332 28.8009 180.52 32.6764C178.705 36.5518 176.924 40.4273 175.176 44.3028C173.425 48.1782 171.816 51.7901 170.348 55.1307C168.879 58.4752 167.595 61.4467 166.502 64.0379C165.406 66.6329 164.582 68.5838 164.017 69.8982H147.701C145.577 63.4617 143.404 57.0854 141.186 50.7694C138.967 44.4572 136.67 38.1111 134.293 31.7348C131.793 38.0508 129.431 44.3781 127.213 50.7205C124.994 57.0666 122.851 63.4579 120.791 69.8944H104.476C103.915 68.58 103.071 66.6291 101.945 64.0342C100.819 61.4392 99.5233 58.4714 98.0545 55.127C96.5856 51.7825 94.9925 48.1895 93.2714 44.3442C91.5502 40.4989 89.7876 36.6422 87.9722 32.763C86.1569 28.8875 84.3642 25.1213 82.5827 21.4642C80.8013 17.8072 79.1291 14.5268 77.5661 11.6193C76.0031 8.71171 74.5983 6.29001 73.3479 4.35415C72.0975 2.4183 71.0994 1.22817 70.3462 0.791282C73.7848 0.791282 77.2083 0.806347 80.613 0.836477C84.0177 0.870373 87.4412 0.851542 90.8798 0.791282C90.6915 0.915568 90.5822 1.11895 90.5521 1.40141C90.5182 1.68388 90.5069 1.91739 90.5069 2.1057C90.5069 3.48038 90.9287 5.52922 91.7724 8.24846C92.616 10.9677 93.7082 14.0297 95.0528 17.4381C96.3973 20.8466 97.8963 24.4396 99.5535 28.2209C101.211 32.0022 102.834 35.614 104.431 39.0489C106.024 42.4874 107.493 45.5984 108.837 48.3778C110.182 51.1611 111.229 53.2702 111.978 54.7052C114.792 47.892 117.496 41.0487 120.087 34.1716C122.678 27.2944 125.01 20.2967 127.073 13.1672C126.761 12.4817 126.324 11.51 125.759 10.2596C125.198 9.00924 124.588 7.75884 123.932 6.50845C123.277 5.25805 122.573 4.08675 121.823 2.99077C121.074 1.89856 120.354 1.13024 119.665 0.693359H140.387C140.075 0.945698 139.901 1.23947 139.871 1.58596C139.837 1.92869 139.826 2.26012 139.826 2.56895C139.826 4.06792 140.154 6.16572 140.809 8.85106C141.464 11.5402 142.293 14.508 143.295 17.7582C144.293 21.0085 145.434 24.417 146.718 27.9798C147.999 31.5427 149.264 34.9813 150.515 38.2918C151.765 41.6061 152.921 44.638 153.983 47.3873C155.045 50.1405 155.919 52.2948 156.608 53.8577C157.294 52.419 158.311 50.3401 159.655 47.6208C161 44.9016 162.454 41.8396 164.017 38.4312C165.58 35.0265 167.188 31.4636 168.845 27.7426C170.502 24.0253 172.001 20.4925 173.346 17.1481C174.69 13.8037 175.797 10.7869 176.675 8.10157C177.549 5.41624 177.989 3.41259 177.989 2.10194C177.989 1.85336 177.974 1.58596 177.944 1.30349C177.91 1.02102 177.771 0.821412 177.522 0.693359C184.4 0.817646 191.273 0.817646 198.15 0.693359L198.146 0.704658Z" fill="#F1EFE6"/>
+<path d="M196.742 69.9021C197.118 69.5255 197.427 68.3241 197.679 66.2941C197.928 64.264 198.131 61.8084 198.29 58.9348C198.444 56.0611 198.538 52.9502 198.572 49.6058C198.602 46.2614 198.617 43.0601 198.617 39.9943C198.617 36.9286 198.602 34.2131 198.572 31.8366C198.538 29.4601 198.527 27.8067 198.527 26.8689C198.527 26.368 198.542 25.385 198.572 23.9162C198.602 22.4474 198.602 20.7752 198.572 18.8996C198.538 17.024 198.478 15.0542 198.384 12.9941C198.29 10.9302 198.116 9.02446 197.868 7.27315C197.615 5.52561 197.273 4.05301 196.836 2.86664C196.399 1.68027 195.864 0.991047 195.243 0.802734H216.247C215.434 0.802734 214.763 1.52209 214.232 2.9608C213.701 4.3995 213.279 6.21107 212.967 8.39926C212.654 10.5875 212.417 13.0091 212.262 15.6644C212.104 18.3233 211.995 20.8693 211.935 23.3061C211.871 25.7428 211.841 27.916 211.841 29.8217V33.7122C211.841 38.0246 211.795 42.3369 211.701 46.6531C211.607 50.9692 211.622 55.2778 211.746 59.5939C213.871 59.7182 215.84 59.7973 217.652 59.8274C219.463 59.8613 221.245 59.8726 222.996 59.8726H241.515C243.232 59.8726 245.063 59.8575 246.998 59.8274C248.934 59.7973 250.735 59.7671 252.388 59.7332C254.045 59.7031 255.465 59.6541 256.655 59.5939C257.842 59.5336 258.591 59.4395 258.904 59.3114L259.936 69.7176L196.742 69.9059V69.9021Z" fill="#F1EFE6"/>
+<path d="M47.2744 94.8065C48.216 94.5429 49.0371 94.2002 49.7263 93.767C50.762 93.1192 51.5378 92.2718 52.0501 91.2248C52.5623 90.1778 52.8184 88.95 52.8184 87.5452C52.8184 85.9634 52.5058 84.6075 51.8806 83.4814C51.2554 82.3553 50.2912 81.4891 48.9881 80.8902C47.685 80.2876 46.0165 79.9863 43.9865 79.9863H29.332V103.74H34.2508V95.3074H42.0808L47.5682 103.74H53.1234L47.2744 94.8065ZM34.2508 91.6617V83.6999H43.753C45.2256 83.6999 46.2839 84.0388 46.9317 84.7205C47.5795 85.4022 47.9034 86.3438 47.9034 87.549V87.918C47.9034 88.6525 47.7641 89.3078 47.4854 89.8765C47.2067 90.4452 46.766 90.8859 46.1634 91.1984C45.5608 91.511 44.7586 91.6655 43.753 91.6655H34.2508V91.6617Z" fill="#F1EFE6"/>
+<path d="M73.8189 104.14C71.657 104.14 69.7212 103.838 68.0151 103.236C66.309 102.633 64.8589 101.786 63.665 100.694C62.4711 99.6015 61.5635 98.3059 60.9383 96.8144C60.3131 95.3192 60.0005 93.6809 60.0005 91.8957C60.0005 90.1105 60.3131 88.4383 60.9383 86.9431C61.5635 85.4479 62.4711 84.1485 63.665 83.045C64.8589 81.9415 66.3014 81.0866 67.9962 80.484C69.691 79.8814 71.6307 79.5801 73.8189 79.5801C76.007 79.5801 77.9165 79.8814 79.6227 80.484C81.3288 81.0866 82.7712 81.9377 83.9538 83.045C85.1364 84.1485 86.0403 85.4479 86.6655 86.9431C87.2907 88.4383 87.6033 90.0879 87.6033 91.8957C87.6033 93.7035 87.2907 95.3192 86.6655 96.8144C86.0403 98.3096 85.1327 99.6015 83.9388 100.694C82.7449 101.786 81.3024 102.633 79.6076 103.236C77.9128 103.838 75.9845 104.14 73.8189 104.14ZM73.8189 100.325C75.6455 100.325 77.2198 99.9969 78.5342 99.3378C79.8486 98.6787 80.858 97.7372 81.5623 96.5094C82.2666 95.2816 82.6168 93.8429 82.6168 92.1932V91.489C82.6168 89.8167 82.2666 88.378 81.5623 87.1728C80.858 85.9676 79.8486 85.0298 78.5342 84.3632C77.2198 83.6928 75.6455 83.3576 73.8189 83.3576C71.9922 83.3576 70.4104 83.6928 69.0847 84.3632C67.759 85.0336 66.7421 85.9676 66.0415 87.1728C65.3373 88.378 64.987 89.8167 64.987 91.489V92.1932C64.987 93.8429 65.3373 95.2816 66.0415 96.5094C66.7458 97.7372 67.759 98.6787 69.0847 99.3378C70.4104 99.9969 71.9885 100.325 73.8189 100.325Z" fill="#F1EFE6"/>
+<path d="M108.939 104.14C106.777 104.14 104.841 103.838 103.135 103.236C101.429 102.633 99.9791 101.786 98.7852 100.694C97.5913 99.6015 96.6836 98.3059 96.0584 96.8144C95.4332 95.3192 95.1206 93.6809 95.1206 91.8957C95.1206 90.1105 95.4332 88.4383 96.0584 86.9431C96.6836 85.4479 97.5913 84.1485 98.7852 83.045C99.9791 81.9415 101.422 81.0866 103.116 80.484C104.811 79.8814 106.751 79.5801 108.939 79.5801C111.127 79.5801 113.037 79.8814 114.743 80.484C116.449 81.0866 117.891 81.9377 119.074 83.045C120.257 84.1485 121.16 85.4479 121.786 86.9431C122.411 88.4383 122.723 90.0879 122.723 91.8957C122.723 93.7035 122.411 95.3192 121.786 96.8144C121.16 98.3096 120.253 99.6015 119.059 100.694C117.865 101.786 116.423 102.633 114.728 103.236C113.033 103.838 111.105 104.14 108.939 104.14ZM108.939 100.325C110.766 100.325 112.34 99.9969 113.654 99.3378C114.969 98.6787 115.978 97.7372 116.682 96.5094C117.387 95.2816 117.737 93.8429 117.737 92.1932V91.489C117.737 89.8167 117.387 88.378 116.682 87.1728C115.978 85.9676 114.969 85.0298 113.654 84.3632C112.34 83.6928 110.766 83.3576 108.939 83.3576C107.112 83.3576 105.531 83.6928 104.205 84.3632C102.879 85.0336 101.862 85.9676 101.162 87.1728C100.457 88.378 100.107 89.8167 100.107 91.489V92.1932C100.107 93.8429 100.457 95.2816 101.162 96.5094C101.866 97.7372 102.879 98.6787 104.205 99.3378C105.531 99.9969 107.109 100.325 108.939 100.325Z" fill="#F1EFE6"/>
+<path d="M151.11 83.6999V79.9863H130.603V103.74H135.521V94.2717H150.206V90.6222H135.521V83.6999H151.11Z" fill="#F1EFE6"/>
+<path d="M159.565 103.74V79.9863H164.484V103.74H159.565Z" fill="#F1EFE6"/>
+<path d="M172.728 103.74V79.9863H177.948L191.499 95.846H191.533V79.9863H196.15V103.74H192.403L177.383 86.1404H177.349V103.74H172.732H172.728Z" fill="#F1EFE6"/>
+<path class="pupil" d="M216.85 91.0256V94.5734H226.149V94.9764C226.149 95.9782 225.93 96.8294 225.497 97.5186C225.06 98.2116 224.473 98.769 223.723 99.1908C222.977 99.6164 222.122 99.9215 221.162 100.11C220.202 100.298 219.2 100.396 218.153 100.396C216.236 100.396 214.552 100.068 213.102 99.4092C211.652 98.7502 210.526 97.8086 209.724 96.5808C208.922 95.353 208.519 93.8917 208.519 92.1969V91.5265C208.519 89.8091 208.899 88.3478 209.656 87.1426C210.413 85.9374 211.475 85.0146 212.835 84.3668C214.194 83.719 215.746 83.3951 217.486 83.3951C218.801 83.3951 220.013 83.542 221.117 83.8283C222.22 84.1183 223.196 84.6154 224.043 85.3159C224.891 86.0202 225.584 86.9844 226.118 88.2084L230.367 87.0371C229.809 85.4101 228.921 84.0429 227.708 82.9394C226.491 81.8359 225.026 80.9998 223.309 80.4311C221.591 79.8624 219.674 79.5762 217.554 79.5762C214.812 79.5762 212.379 80.0884 210.259 81.1166C208.138 82.141 206.489 83.5759 205.306 85.4139C204.124 87.2556 203.532 89.4023 203.532 91.8541C203.532 94.306 204.105 96.4527 205.257 98.2944C206.406 100.136 208.022 101.567 210.108 102.592C212.195 103.616 214.631 104.132 217.418 104.132C218.936 104.132 220.413 103.944 221.851 103.563C223.29 103.183 224.582 102.558 225.731 101.692C225.983 101.5 226.216 101.296 226.442 101.078L226.687 103.733H230.668V91.018H216.85V91.0256Z" fill="#F1EFE6"/>
+<path class="pupil" d="M32.2734 18.0466C32.5332 18.992 33.52 19.5531 34.4691 19.2933C35.4182 19.0334 35.9756 18.0466 35.7157 17.0975L35.6592 16.8942C35.3993 15.9488 34.4126 15.3877 33.4635 15.6475C32.5182 15.9074 31.957 16.8942 32.2169 17.8432L32.2734 18.0466Z" fill="#F1EFE6"/>
+<path d="M43.7003 14.3376C44.107 15.2302 45.1691 15.6294 46.0617 15.2264C46.9543 14.8197 47.3535 13.7576 46.9506 12.865L46.8639 12.6729C46.4572 11.7803 45.3951 11.3811 44.5025 11.7841C43.6099 12.1908 43.2107 13.2529 43.6137 14.1455L43.7003 14.3376Z" fill="#F1EFE6"/>
+<path d="M48.088 40.6982L44.8076 37.8547L46.574 33.8926L49.8544 36.7323L48.088 40.6982Z" fill="#F1EFE6"/>
+<path d="M41.2634 39.7858L39.0225 37.0251L41.011 34.0762L43.252 36.8368L41.2634 39.7858Z" fill="#F1EFE6"/>
+<path d="M53.8803 36.9796L50.8296 35.153L51.6921 31.7031L54.7427 33.5298L53.8803 36.9796Z" fill="#F1EFE6"/>
+<path d="M35.5575 5.28363C31.9532 6.35701 29.524 8.00286 27.9007 9.83326C27.1173 9.36248 26.059 9.00092 24.8501 8.92559C21.6337 8.71845 19.1743 10.8464 19.1743 10.8464C19.1743 10.8464 21.5094 12.4696 24.1571 12.9291C24.7408 13.0308 25.302 13.0835 25.8293 13.0948C24.9969 15.0495 25.0421 16.959 25.0685 18.4052C25.1137 20.8834 25.8293 24.4538 26.0515 25.4896C26.0892 25.6779 26.1984 25.8474 26.3566 25.9641C26.3566 25.9641 27.3734 26.7964 28.2849 27.5949C30.2998 27.7342 32.4277 28.947 32.5972 31.1766C32.0135 30.0655 30.9589 29.1654 29.7424 28.9771C28.7745 28.8302 27.8329 29.0901 26.9818 29.5383C24.7258 30.9431 22.8803 33.7602 21.7429 36.7958C19.4869 42.8331 20.3645 48.6106 21.0913 51.5256C21.1064 51.552 21.1215 51.5784 21.1365 51.6047C21.2834 50.4824 21.5094 49.3713 21.8484 48.2867C22.6468 45.9365 23.788 43.6918 25.3133 41.7334C24.4433 44.5392 23.4565 47.2585 23.0121 50.1547C22.8464 51.4089 22.7485 52.6706 22.6732 53.936C22.6656 54.0415 23.0121 54.3918 23.0837 54.4859C23.2419 54.6893 23.4189 54.8814 23.5921 55.0772C23.9273 55.4576 24.2738 55.8342 24.6278 56.1996C24.7521 56.3276 24.8802 56.4519 25.0045 56.5799C25.641 52.9982 26.9177 49.3864 28.9816 46.9195C28.5372 48.2038 28.2811 49.5107 27.9873 50.8251C27.7425 51.9701 27.396 53.5782 27.2153 54.7194C27.0232 55.8493 26.8612 56.9867 26.6993 58.1279C26.8047 58.2145 26.9027 58.3011 27.0119 58.384C27.2266 58.5497 29.6596 60.2897 29.7085 60.2068C30.1341 59.5063 30.5371 58.7907 30.91 58.0638C31.8101 56.3502 32.4353 54.5989 33.3015 52.8401C33.4296 54.8399 32.8759 56.7833 32.1528 58.625C31.8327 59.4197 31.4749 60.1918 31.0757 60.9413C31.0757 60.9413 30.9853 61.1107 30.9212 61.2275C31.1171 61.4083 31.2263 61.5439 31.3016 61.6305C32.7215 63.2801 33.3354 66.7074 33.3693 66.9183C33.8024 66.8053 34.2017 66.5831 34.5331 66.3345C35.0152 65.9315 35.4445 65.4344 35.7872 64.926C35.9492 64.6096 36.0584 64.2631 36.1036 63.8714C36.1902 63.3667 36.1111 62.7378 36.0923 62.1389C36.5292 62.5683 36.7815 63.1558 36.887 63.7735C36.9548 64.0936 36.9585 64.3987 36.9209 64.6924C37.9378 64.8167 39.1091 64.9184 40.0582 64.9184C42.0505 64.9184 44.0504 64.8469 46.1068 64.4288C46.909 64.2669 47.6622 64.071 48.3816 63.8488C50.1442 63.2462 51.8051 62.4214 53.3304 61.3217C52.9048 62.331 52.1026 63.1332 51.2364 63.7885C51.8767 64.7037 52.37 66.1952 52.37 66.1952C52.9312 65.9202 53.4208 65.506 53.8351 65.0427C54.2532 64.5795 54.6185 64.0484 54.8671 63.4722C54.9688 63.2387 55.0441 63.0014 55.0893 62.7528C55.1571 62.3837 55.0403 61.9807 54.901 61.638C54.8256 61.4572 54.7352 61.2802 54.6411 61.1107C54.5695 60.9827 54.3624 60.6776 54.3624 60.6776C54.3624 60.6776 54.5997 60.4592 54.7014 60.365C54.8708 60.2144 54.8746 60.2181 55.0403 60.0637C56.6221 58.5723 57.9441 56.8549 58.9911 54.9492C59.2133 54.6742 59.3564 54.2675 59.5108 53.9549C59.6653 53.6423 59.8197 53.3071 59.9628 52.9756C61.1642 50.2263 61.8723 47.266 62.102 44.2756C62.5502 38.4718 60.3206 34.1218 58.1701 28.9545C56.4451 24.8116 55.8614 20.503 56.2116 16.6652C56.2342 16.4204 56.3434 15.686 56.3434 15.686C56.3585 15.5542 56.3434 15.4261 56.2982 15.3019C55.9819 14.4921 54.5394 10.9744 52.419 8.5678C51.598 7.63377 50.3589 6.39467 48.4795 5.47194C48.8976 5.11791 49.3156 4.68856 49.7111 4.19142C51.1611 2.37608 51.7448 -0.0117188 51.7448 -0.0117188C51.7448 -0.0117188 48.9315 0.0184112 46.9655 1.99946C46.1859 2.78284 45.6925 3.67544 45.474 4.45882C42.9808 3.95038 39.7531 4.0257 35.565 5.27233L35.5575 5.28363ZM39.5422 20.6876C40.1749 19.2903 41.5797 18.7969 42.9469 19.4862L45.0823 20.5633C45.0823 20.5633 43.6926 22.4879 42.9394 24.902C40.8491 23.501 38.5517 22.8645 38.5517 22.8645L39.5422 20.6838V20.6876ZM28.4054 19.7197C27.7463 17.3319 29.2829 14.8235 31.8327 14.123C34.3824 13.4187 36.9849 14.7859 37.644 17.1737C38.3031 19.5615 36.7665 22.0698 34.2167 22.7703C31.667 23.4746 29.0645 22.1075 28.4054 19.7197ZM60.5164 40.1101C61.7028 50.4523 55.673 64.4137 39.0187 63.3969C39.0187 63.3969 43.6474 55.9434 39.6364 48.7311C37.467 44.833 36.2543 44.0835 34.9662 41.1609C34.4992 40.0988 34.2092 38.9577 34.2242 37.7977C34.277 33.6473 37.6817 30.3217 41.8283 30.3744C43.3386 30.3932 44.9882 30.8602 46.1557 31.6474C47.1312 29.4931 49.0633 28.0092 51.5754 28.0393C57.0477 28.1071 60.008 35.6509 60.5164 40.1139V40.1101ZM50.9916 11.675C52.016 13.9309 50.8937 16.6464 48.4833 17.7424C46.0729 18.8346 43.2896 17.893 42.2652 15.637C41.2408 13.3811 42.3631 10.6656 44.7735 9.56962C47.1839 8.47741 49.9672 9.41897 50.9916 11.675Z" fill="#F1EFE6"/>
+<path d="M77.653 21.4703C75.3706 17.0035 72.3388 13.1883 68.5575 10.0322C64.7762 6.87609 60.4487 4.45439 55.5714 2.76711C54.6299 2.44321 53.6846 2.14944 52.7355 1.88581C52.3664 2.83113 51.3721 4.28114 50.1292 5.20387C52.2835 6.56725 53.4134 7.80635 54.0084 8.48427C56.2682 11.0453 57.8124 14.2542 58.076 15.1279C58.2718 15.7682 58.302 16.7248 58.302 16.7248C60.4148 19.0185 62.0984 21.8582 63.3525 25.2366C64.6669 28.7731 65.3223 32.9536 65.3223 37.7782C65.3223 41.2808 64.633 44.6365 63.2584 47.8416C62.8629 48.7681 62.426 49.6569 61.9515 50.5232C61.9515 50.5232 61.733 51.4045 61.6276 51.7811C61.5071 52.2104 61.3752 52.6398 61.2321 53.0616C60.9459 53.9128 60.6144 54.7451 60.2303 55.5549C59.1946 57.7393 57.7144 59.7392 55.9066 61.3474C56.0422 61.6976 56.1213 62.0931 56.1251 62.5714C56.1326 64.5449 54.4943 66.1041 53.1686 67.0231C52.6074 67.411 51.6771 67.7952 51.6771 67.7952C51.6771 67.7952 51.4286 66.5372 51.3118 66.0702C51.0896 65.1626 50.8749 64.7031 50.6151 64.2285C50.5134 64.2813 50.4154 64.334 50.3213 64.383C50.069 64.5298 47.8808 65.5091 46.5174 65.7953C44.397 66.2435 42.1561 66.4544 40.0545 66.4544C38.6233 66.4544 37.3767 66.3565 36.2958 66.1945C35.7158 66.9892 34.8985 67.6031 34.021 68.0324C33.8741 68.104 33.1849 68.4505 32.3487 68.6576C32.3487 68.6576 32.1943 67.5805 32.1228 67.2227C31.9495 66.3602 31.3281 63.3849 30.3413 62.2852C24.3718 59.3174 19.9352 54.0032 17.6453 47.7851C16.425 44.4821 15.8187 40.9795 15.8187 37.2735C15.8187 33.5675 16.4589 30.1515 17.7395 26.8146C19.02 23.4777 20.7713 20.5174 22.9896 17.9413C23.1629 17.7417 23.3436 17.5459 23.5207 17.3538C23.5244 16.4763 23.6901 14.7739 24.1722 13.9303C20.5679 13.5273 18.5906 12.2618 18.2969 12.0999C17.8186 11.8362 16.6472 10.9512 16.5795 10.9022C16.5795 10.9022 18.5115 9.26389 19.4757 8.74791C22.2138 7.28284 24.933 7.35817 27.5769 8.39388C29.5052 6.55595 32.0286 4.72556 35.1169 3.80283C37.7307 3.02698 39.9528 2.5336 42.4046 2.63152C43.1202 2.66165 44.1974 2.81607 44.8113 2.90269C45.0824 2.05152 45.1653 1.79542 45.7528 1.06476C45.8583 0.932944 46.1069 0.688138 46.2311 0.582683C44.3593 0.349176 42.4724 0.232422 40.5705 0.232422C35.3806 0.232422 30.3489 1.0158 25.4753 2.57503C20.598 4.13802 16.2857 6.42037 12.5345 9.4183C8.78332 12.42 5.76656 16.1373 3.48797 20.5777C1.20563 25.0181 0.0644531 30.1138 0.0644531 35.8649C0.0644531 41.616 1.15667 46.7569 3.34486 51.0994C5.53305 55.4456 8.45566 59.0688 12.1127 61.9763C15.7697 64.8839 20.018 67.0721 24.8652 68.5409C29.7086 70.0097 34.8194 70.7441 40.1938 70.7441C45.1314 70.7441 50.0388 69.9947 54.9161 68.4957C59.7934 66.9967 64.166 64.7935 68.0415 61.8859C71.917 58.9784 75.058 55.4004 77.4646 51.1484C79.8713 46.9 81.0727 42.0227 81.0727 36.5202C81.0727 31.0177 79.9315 25.9408 77.6492 21.4703H77.653Z" fill="#F1EFE6"/>
+</g>
+<defs>
+<clipPath id="clipOwl7">
 <rect width="259.871" height="104.141" fill="white" transform="translate(0.0644531)"/>
 </clipPath>
 </defs>
@@ -2500,6 +2903,253 @@ window.OwlNest = (function () {
 
 
 /* the Night yard background is initialised for every .call-bg by call.js; nothing to add here */
+
+/* storm cover. V1: hail falls once on the drawn house (ease-in: falling things), then three marks are circled (assess).
+   V2: a drawn phone; the photo message slides up once and a reply starts typing (no words are invented). */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  var INK = 'stroke:var(--text-primary)', MUTE = 'stroke:var(--line-control)', AMB = 'stroke:var(--accent-fill)';
+  function once(node, fn, dur) { fn(Owl.reduced() ? 1 : 0); new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); Owl.play(fn, dur); } }, { threshold: 0.4 }).observe(node); }
+  var r1 = document.querySelector('.hc-v1');
+  if (r1) {
+    Owl.bg.lawn(r1.querySelector('.hc-bg'), { sweep: false });
+    var s = r1.querySelector('.hc1-art');
+    el('path', { d: 'M178 104 A50 50 0 0 1 190 20 A66 66 0 0 1 312 24 A46 46 0 0 1 356 104 Z', fill: 'var(--surface-page)', 'stroke-width': 4, 'stroke-linejoin': 'round', style: INK }, s);
+    el('path', { d: 'M196 126 l-8 18 M232 128 l-8 18 M268 126 l-8 18 M304 128 l-8 18 M340 126 l-8 18', 'stroke-width': 2.5, 'stroke-linecap': 'round', style: MUTE }, s);
+    el('path', { d: 'M96 384 V266 M424 384 V266 M70 384 H450', fill: 'none', 'stroke-width': 4, 'stroke-linecap': 'round', style: INK }, s);
+    el('path', { d: 'M60 280 L260 168 L460 280', fill: 'none', 'stroke-width': 4, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', style: INK }, s);
+    el('path', { d: 'M118 248 H402 M168 220 H352 M216 194 H304', 'stroke-width': 2, style: MUTE }, s);
+    el('path', { d: 'M226 384 V318 H294 V384', fill: 'none', 'stroke-width': 3, style: INK }, s);
+    el('rect', { x: 132, y: 300, width: 52, height: 40, fill: 'none', 'stroke-width': 3, style: INK }, s);
+    el('rect', { x: 336, y: 300, width: 52, height: 40, fill: 'none', 'stroke-width': 3, style: INK }, s);
+    var roofY = function (x) { return 280 - (200 - Math.abs(x - 260)) * 0.56 - 4; };
+    var stones = [];
+    for (var i = 0; i < 16; i++) { var x = 170 + ((i * 41) % 190) + Owl.seeded(i, 71) * 14; stones.push({ n: el('circle', { cx: x.toFixed(1), cy: 110, r: 4 + (i % 3), fill: 'none', 'stroke-width': 2.5, style: INK }, s), y0: 112 + Owl.seeded(i, 72) * 12, y1: roofY(x), t: (i % 8) * 0.045 + (i >= 8 ? 0.2 : 0) }); }
+    var marks = [[196, 218], [262, 190], [320, 226]].map(function (m) {
+      return { dot: el('ellipse', { cx: m[0], cy: m[1], rx: 6, ry: 3, fill: 'none', 'stroke-width': 2.5, style: AMB + ';opacity:0' }, s),
+        ring: el('circle', { cx: m[0], cy: m[1], r: 15, fill: 'none', 'stroke-width': 2, 'stroke-dasharray': '4 4', pathLength: 100, style: INK + ';opacity:0' }, s) };
+    });
+    once(s, function (p) {
+      stones.forEach(function (st) { var t = Owl.EASE.in(Owl.seg(p, st.t, st.t + 0.32)); st.n.setAttribute('cy', (st.y0 + (st.y1 - st.y0) * t).toFixed(1)); st.n.style.opacity = t >= 1 ? 0 : 1; });
+      marks.forEach(function (m, k) { m.dot.style.opacity = Owl.seg(p, 0.55 + k * 0.05, 0.62 + k * 0.05); var q = Owl.EASE.out(Owl.seg(p, 0.72 + k * 0.08, 0.9 + k * 0.03)); m.ring.style.opacity = q > 0 ? 1 : 0; m.ring.setAttribute('transform', 'rotate(' + (-90 + q * 90) + ' ' + m.ring.getAttribute('cx') + ' ' + m.ring.getAttribute('cy') + ')'); m.ring.style.strokeDashoffset = (1 - q) * 100; });
+    }, 2400);
+  }
+  var r2 = document.querySelector('.hc-v2');
+  if (r2) {
+    var v = r2.querySelector('.hc2-svg');
+    el('rect', { x: 10, y: 10, width: 280, height: 500, rx: 40, fill: 'var(--surface-page)', 'stroke-width': 4, style: INK }, v);
+    el('path', { d: 'M120 34 H180', 'stroke-width': 5, 'stroke-linecap': 'round', style: MUTE }, v);
+    el('path', { d: 'M30 470 H270 M30 96 H270', 'stroke-width': 2, style: MUTE }, v);
+    var nm = el('text', { x: 150, y: 80, 'text-anchor': 'middle', style: 'fill:var(--text-primary);font:700 18px var(--font-display)' }, v); nm.textContent = 'Owl Roofing';
+    var g = el('g', {}, v);
+    el('rect', { x: 110, y: 150, width: 160, height: 150, rx: 18, fill: 'var(--surface-alt)', 'stroke-width': 3, style: INK }, g);
+    el('path', { d: 'M126 260 L190 210 L254 260', fill: 'none', 'stroke-width': 3, 'stroke-linejoin': 'round', style: INK }, g);
+    [[170, 234], [206, 226], [224, 244]].forEach(function (d) { el('ellipse', { cx: d[0], cy: d[1], rx: 5, ry: 2.5, fill: 'none', 'stroke-width': 2.5, style: AMB }, g); });
+    el('path', { d: 'M126 286 H200', 'stroke-width': 3, 'stroke-linecap': 'round', style: MUTE }, g);
+    var reply = el('g', {}, v);
+    el('rect', { x: 30, y: 318, width: 90, height: 44, rx: 18, fill: 'none', 'stroke-width': 3, style: INK }, reply);
+    var dots = [56, 75, 94].map(function (x) { return el('circle', { cx: x, cy: 340, r: 4.5, style: 'fill:var(--text-primary)' }, reply); });
+    once(v, function (p) {
+      var a = Owl.EASE.out(Owl.seg(p, 0, 0.45)); g.setAttribute('transform', 'translate(0 ' + ((1 - a) * 60).toFixed(1) + ')'); g.style.opacity = a;
+      var b = Owl.EASE.out(Owl.seg(p, 0.55, 0.8)); reply.style.opacity = b; reply.setAttribute('transform', 'translate(0 ' + ((1 - b) * 16).toFixed(1) + ')');
+      dots.forEach(function (d, k) { d.style.opacity = p >= 1 ? 1 : 0.35 + 0.65 * Owl.seg(p, 0.8 + k * 0.05, 0.86 + k * 0.05); });
+    }, 1800);
+  }
+})();
+
+/* Assess, secure, plan. V1: three small drawings play once each as they enter (staggered).
+   V2: one drawn roof on a pinned stage; scroll moves it through the three states and marks the current step. */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  var INK = 'stroke:var(--text-primary)', MUTE = 'stroke:var(--line-control)', AMB = 'stroke:var(--accent-fill)';
+  function ring(svg, cx, cy, r) { return el('circle', { cx: cx, cy: cy, r: r, fill: 'none', 'stroke-width': 2, 'stroke-dasharray': '4 4', pathLength: 100, transform: 'rotate(-90 ' + cx + ' ' + cy + ')', style: INK }, svg); }
+  function tick(svg, x, y) { return el('path', { d: 'M' + x + ' ' + y + ' l6 6 l12 -14', fill: 'none', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', pathLength: 1, 'stroke-dasharray': 1, style: AMB }, svg); }
+  function roof(svg, d, courses) { el('path', { d: d, fill: 'none', 'stroke-width': 4, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', style: INK }, svg); el('path', { d: courses, 'stroke-width': 2, style: MUTE }, svg); }
+  var r1 = document.querySelector('.hr-v1');
+  if (r1) {
+    r1.querySelectorAll('.hr1-art').forEach(function (s, idx) {
+      var set;
+      if (s.dataset.art === 'assess') {
+        roof(s, 'M10 130 L120 40 L230 130', 'M50 108 H190 M80 84 H160');
+        var ms = [[90, 96], [148, 78]].map(function (m) { el('ellipse', { cx: m[0], cy: m[1], rx: 6, ry: 3, fill: 'none', 'stroke-width': 2.5, style: AMB }, s); return ring(s, m[0], m[1], 14); });
+        set = function (p) { ms.forEach(function (r, k) { r.style.strokeDashoffset = (1 - Owl.EASE.out(Owl.seg(p, k * 0.3, 0.6 + k * 0.3))) * 100; }); };
+      } else if (s.dataset.art === 'secure') {
+        roof(s, 'M10 130 L120 40 L230 130', 'M50 108 H190 M80 84 H160');
+        var sh = el('rect', { x: 128, y: 74, width: 30, height: 10, fill: 'var(--surface-alt)', 'stroke-width': 2.5, style: INK }, s);
+        var band = el('rect', { x: 70, y: 62, width: 0, height: 52, rx: 4, fill: 'none', 'stroke-width': 3, style: AMB }, s);
+        set = function (p) { var a = Owl.EASE.out(Owl.seg(p, 0, 0.5)); sh.setAttribute('transform', 'rotate(' + (-24 * (1 - a)).toFixed(1) + ' 128 84)'); band.setAttribute('width', (110 * Owl.EASE.out(Owl.seg(p, 0.45, 1))).toFixed(1)); };
+      } else {
+        el('rect', { x: 66, y: 8, width: 108, height: 128, rx: 8, fill: 'none', 'stroke-width': 3, style: INK }, s);
+        el('path', { d: 'M100 8 V2 H140 V8', fill: 'none', 'stroke-width': 3, style: INK }, s);
+        var ts = [40, 72, 104].map(function (y) { el('path', { d: 'M110 ' + (y + 2) + ' H160', 'stroke-width': 3, 'stroke-linecap': 'round', style: MUTE }, s); return tick(s, 80, y); });
+        set = function (p) { ts.forEach(function (t, k) { t.style.strokeDashoffset = 1 - Owl.EASE.out(Owl.seg(p, k * 0.3, 0.4 + k * 0.3)); }); };
+      }
+      set(Owl.reduced() ? 1 : 0);
+      new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); setTimeout(function () { Owl.play(set, 1100); }, idx * 220); } }, { threshold: 0.6 }).observe(s);
+    });
+  }
+  var r2 = document.querySelector('.hr-v2');
+  if (r2) {
+    var s = r2.querySelector('.hr2-art'), items = [].slice.call(r2.querySelectorAll('.hr2-steps li'));
+    roof(s, 'M20 330 L240 120 L460 330', 'M74 288 H406 M120 244 H360 M166 200 H314 M210 158 H270');
+    el('path', { d: 'M64 330 V410 M416 330 V410 M30 410 H450 M212 410 V350 H268 V410', fill: 'none', 'stroke-width': 4, 'stroke-linecap': 'round', style: INK }, s);
+    var marks = [[170, 266], [300, 226]].map(function (m) { var d = el('ellipse', { cx: m[0], cy: m[1], rx: 8, ry: 4, fill: 'none', 'stroke-width': 3, style: AMB }, s); return { d: d, r: ring(s, m[0], m[1], 22) }; });
+    var sh = el('rect', { x: 232, y: 270, width: 46, height: 14, fill: 'var(--surface-alt)', 'stroke-width': 3, style: INK }, s);
+    var shR = ring(s, 255, 274, 34);
+    var band = el('rect', { x: 140, y: 196, width: 0, height: 104, rx: 6, fill: 'none', 'stroke-width': 4, style: AMB }, s);
+    var card = el('g', {}, s);
+    el('rect', { x: 430, y: 40, width: 120, height: 150, rx: 10, fill: 'var(--surface-page)', 'stroke-width': 3, style: INK }, card);
+    var ts = [70, 110, 150].map(function (y) { el('path', { d: 'M482 ' + (y + 2) + ' H530', 'stroke-width': 3, 'stroke-linecap': 'round', style: MUTE }, card); return tick(s, 452, y); });
+    ts.forEach(function (t) { card.appendChild(t); });
+    var render = function (p) {
+      var a = Owl.seg(p, 0.02, 0.3), b = Owl.seg(p, 0.36, 0.62), c = Owl.seg(p, 0.68, 0.95);
+      marks.forEach(function (m, k) { m.d.style.opacity = Owl.seg(a, k * 0.2, k * 0.2 + 0.2); m.r.style.strokeDashoffset = (1 - Owl.EASE.out(Owl.seg(a, 0.3 + k * 0.2, 0.7 + k * 0.2))) * 100; });
+      shR.style.strokeDashoffset = (1 - Owl.EASE.out(Owl.seg(a, 0.5, 1))) * 100;
+      sh.setAttribute('transform', 'rotate(' + (-26 * (1 - Owl.EASE.out(Owl.seg(b, 0, 0.5)))).toFixed(1) + ' 232 284)');
+      band.setAttribute('width', (200 * Owl.EASE.out(Owl.seg(b, 0.4, 1))).toFixed(1));
+      card.style.opacity = Owl.seg(c, 0, 0.25); card.setAttribute('transform', 'translate(0 ' + (16 * (1 - Owl.EASE.out(Owl.seg(c, 0, 0.3)))).toFixed(1) + ')');
+      ts.forEach(function (t, k) { t.style.strokeDashoffset = 1 - Owl.EASE.out(Owl.seg(c, 0.3 + k * 0.22, 0.5 + k * 0.22)); });
+      var cur = p < 0.33 ? 0 : p < 0.66 ? 1 : 2;
+      items.forEach(function (li, k) { if (k === cur) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); li.classList.toggle('is-done', k < cur); });
+    };
+    var mobile = function () { return innerWidth < 1024; };
+    if (Owl.reduced() || mobile()) render(1);
+    Owl.pinScrub(r2.querySelector('.hr2-stage'), function (p) { if (r2.closest('[hidden]')) return; render(mobile() ? 1 : p); });
+  }
+})();
+
+/* Insurance paperwork.
+   V1 (S1325): base line and fill run from the first dot centre to the last; one normalised scroll value fills the line
+   (scaleY, compositor only) and a step turns on when the line head crosses its dot. Passive scroll never moves focus.
+   V2: the report travels roof -> Owl -> insurer once when the flow is seen; at Owl it gets its lines and seal. */
+(function () {
+  var r1 = document.querySelector('.hk-v1');
+  if (r1) {
+    var line = r1.querySelector('.hk1-line'), base = r1.querySelector('.hk1-base'), fill = r1.querySelector('.hk1-fill'), lis = [].slice.call(r1.querySelectorAll('.hk1-steps li')), geo = null, raf = 0;
+    var measure = function () {
+      var lr = line.getBoundingClientRect(), dots = lis.map(function (li) { var d = li.querySelector('.hk1-dot').getBoundingClientRect(); return d.top + d.height / 2 - lr.top; });
+      geo = { a: dots[0], b: dots[dots.length - 1], dots: dots };
+      [base, fill].forEach(function (n) { n.style.top = geo.a + 'px'; n.style.height = (geo.b - geo.a) + 'px'; });
+    };
+    var update = function () {
+      raf = 0; if (r1.closest('[hidden]')) return; if (!geo) measure();
+      var top = line.getBoundingClientRect().top, anchor = innerHeight * 0.55 - top;
+      var p = Owl.reduced() ? 1 : Math.max(0, Math.min(1, (anchor - geo.a) / Math.max(1, geo.b - geo.a)));
+      fill.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+      var head = geo.a + p * (geo.b - geo.a);
+      lis.forEach(function (li, k) { li.classList.toggle('is-on', geo.dots[k] <= head + 1); });
+    };
+    var req = function () { if (!raf) raf = requestAnimationFrame(update); };
+    var remeasure = function () { geo = null; req(); };
+    addEventListener('scroll', req, { passive: true }); addEventListener('resize', remeasure); document.addEventListener('owl:version', remeasure); addEventListener('hashchange', remeasure);
+    document.fonts && document.fonts.ready.then(remeasure);
+    remeasure();
+  }
+  var r2 = document.querySelector('.hk-v2');
+  if (r2) {
+    var flow = r2.querySelector('.hk2-flow'), doc = r2.querySelector('.hk2-doc'), lines = doc.querySelector('.hk2-lines'), seal = doc.querySelector('.hk2-seal'), nodes = [].slice.call(r2.querySelectorAll('.hk2-node')), last = 0;
+    lines.setAttribute('pathLength', 1); lines.style.strokeDasharray = 1;
+    var pts = function () { var fr = flow.getBoundingClientRect(); return nodes.map(function (n) { var r = n.getBoundingClientRect(); return [r.left - fr.left + r.width * 0.72, r.top - fr.top - r.height * 0.42]; }); };
+    var set = function (p) {
+      last = p; var P = pts(); if (!P[0][0] && !P[2][0]) return;
+      var a = Owl.EASE.travel(Owl.seg(p, 0, 0.35)), b = Owl.EASE.travel(Owl.seg(p, 0.58, 0.95)), x, y;
+      if (p < 0.58) { x = P[0][0] + (P[1][0] - P[0][0]) * a; y = P[0][1] + (P[1][1] - P[0][1]) * a; }
+      else { x = P[1][0] + (P[2][0] - P[1][0]) * b; y = P[1][1] + (P[2][1] - P[1][1]) * b; }
+      doc.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+      lines.style.strokeDashoffset = 1 - Owl.EASE.out(Owl.seg(p, 0.36, 0.5));
+      seal.style.opacity = Owl.seg(p, 0.48, 0.56);
+    };
+    set(Owl.reduced() ? 1 : 0);
+    addEventListener('resize', function () { set(last); }); document.addEventListener('owl:version', function () { set(last); }); addEventListener('hashchange', function () { setTimeout(function () { set(last); }, 50); });
+    new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); Owl.play(set, 2600); } }, { threshold: 0.5 }).observe(flow);
+  }
+})();
+
+/* Wise Check V1: tabs (ARIA tabs, arrow keys, roving tabindex) light the part of the drawn house each check covers.
+   The numbered spots on the drawing are a mouse shortcut to the same tabs, never the only control. */
+(function () {
+  var r = document.querySelector('.hw-v1'); if (!r) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  var INK = 'stroke:var(--text-primary)', MUTE = 'stroke:var(--line-control)', AMB = 'stroke:var(--accent-fill)';
+  var s = r.querySelector('.hw1-svg');
+  var attic = el('path', { d: 'M104 228 L300 96 L496 228 Z', style: 'fill:var(--accent-fill);opacity:0;transition:opacity var(--dur-normal) var(--ease-out)' }, s);
+  el('path', { d: 'M110 230 V400 M490 230 V400 M70 400 H530', fill: 'none', 'stroke-width': 4, 'stroke-linecap': 'round', style: INK }, s);
+  el('path', { d: 'M104 230 H496', 'stroke-width': 3, style: INK }, s);
+  el('path', { d: 'M170 186 V230 M235 142 V230 M300 98 V230 M365 142 V230 M430 186 V230', 'stroke-width': 2, 'stroke-dasharray': '5 6', style: MUTE }, s);
+  var zig = 'M112 224'; for (var x = 112; x < 488; x += 12) zig += ' L' + (x + 6) + ' 216 L' + (x + 12) + ' 224';
+  el('path', { d: zig, fill: 'none', 'stroke-width': 2, 'stroke-linejoin': 'round', style: MUTE }, s);
+  el('path', { d: 'M56 232 L300 68 L544 232', fill: 'none', 'stroke-width': 5, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', style: INK }, s);
+  el('rect', { x: 160, y: 290, width: 70, height: 56, fill: 'none', 'stroke-width': 3, style: INK }, s);
+  el('path', { d: 'M266 400 V316 H334 V400', fill: 'none', 'stroke-width': 3, style: INK }, s);
+  el('path', { d: 'M438 238 C438 238 428 252 428 258 A10 10 0 0 0 448 258 C448 252 438 238 438 238 Z', fill: 'none', 'stroke-width': 3, style: INK }, s);
+  el('ellipse', { cx: 438, cy: 234, rx: 18, ry: 4, fill: 'none', 'stroke-width': 2, style: MUTE }, s);
+  var heat = [16, 30, 44].map(function (rr) { return el('circle', { cx: 438, cy: 250, r: rr, fill: 'none', 'stroke-width': 2.5, 'stroke-dasharray': '6 6', style: AMB + ';opacity:0;transition:opacity var(--dur-normal) var(--ease-out)' }, s); });
+  var cam = el('g', { style: 'opacity:.35;transition:opacity var(--dur-normal) var(--ease-out)' }, s);
+  el('rect', { x: 112, y: 54, width: 40, height: 28, rx: 5, fill: 'var(--surface-alt)', 'stroke-width': 3, style: INK }, cam);
+  el('circle', { cx: 132, cy: 68, r: 7, fill: 'none', 'stroke-width': 3, style: INK }, cam);
+  var frame = el('path', { d: 'M40 44 h28 M40 44 v28 M560 44 h-28 M560 44 v28 M40 252 h28 M40 252 v-28 M560 252 h-28 M560 252 v-28', fill: 'none', 'stroke-width': 4, 'stroke-linecap': 'round', style: AMB + ';opacity:0;transition:opacity var(--dur-normal) var(--ease-out)' }, s);
+  var tabs = [].slice.call(r.querySelectorAll('[role="tab"]')), panes = [].slice.call(r.querySelectorAll('[role="tabpanel"]')), spots = [].slice.call(r.querySelectorAll('.hw1-spot'));
+  function pick(k, focus) {
+    tabs.forEach(function (t, i) { var on = i === k; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; panes[i].hidden = !on; spots[i].classList.toggle('is-on', on); });
+    if (focus) tabs[k].focus();
+    attic.style.opacity = k === 0 ? 0.22 : 0;
+    heat.forEach(function (h) { h.style.opacity = k === 1 ? 1 : 0; });
+    frame.style.opacity = k === 2 ? 1 : 0; cam.style.opacity = k === 2 ? 1 : 0.35;
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(i); });
+    t.addEventListener('keydown', function (e) {
+      var n = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (n === undefined) return; e.preventDefault(); pick((n + tabs.length) % tabs.length, true);
+    });
+  });
+  spots.forEach(function (b, i) { b.addEventListener('click', function () { pick(i); }); });
+  pick(0);
+})();
+
+/* Built for MN weather. V1: the real numbers count up once when seen (10, 50; nothing invented).
+   V2: three pressed-state buttons swap the weather on one drawn roof; the roof itself never changes. */
+(function () {
+  var r1 = document.querySelector('.hb-v1');
+  if (r1) {
+    var nums = [].slice.call(r1.querySelectorAll('[data-to]'));
+    var set = function (p) { nums.forEach(function (n) { n.textContent = Math.round(+n.dataset.to * Owl.EASE.out(p)); }); };
+    set(Owl.reduced() ? 1 : 0);
+    new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); Owl.play(set, 1200); } }, { threshold: 0.6 }).observe(r1.querySelector('.hb1-facts'));
+  }
+  var r2 = document.querySelector('.hb-v2'); if (!r2) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; }
+  var INK = 'stroke:var(--text-primary)', MUTE = 'stroke:var(--line-control)', AMB = 'stroke:var(--accent-fill)';
+  var s = r2.querySelector('.hb2-svg');
+  var layers = { snow: el('g', {}, s), wind: el('g', {}, s), hail: el('g', {}, s) };
+  el('path', { d: 'M110 300 V380 M450 300 V380 M70 380 H490 M246 380 V320 H314 V380', fill: 'none', 'stroke-width': 4, 'stroke-linecap': 'round', style: INK }, s);
+  el('path', { d: 'M150 268 H410 M196 236 H364 M240 206 H320', 'stroke-width': 2, style: MUTE }, s);
+  el('path', { d: 'M70 304 L280 160 L490 304', fill: 'none', 'stroke-width': 5, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', style: INK }, s);
+  // snow: a drawn load on both planes, with three weight arrows
+  el('path', { d: 'M84 294 C92 276 104 258 124 248 L266 146 C274 128 286 128 294 146 L436 248 C456 258 468 276 476 294 L280 162 Z', fill: 'var(--surface-page)', 'stroke-width': 3, 'stroke-linejoin': 'round', style: INK }, layers.snow);
+  [[170, 150], [280, 66], [390, 150]].forEach(function (a) { el('path', { d: 'M' + a[0] + ' ' + a[1] + ' v44 m-10 -12 l10 12 l10 -12', fill: 'none', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: AMB }, layers.snow); });
+  // wind: three long gust lines with curls
+  [[20, 120, 330], [40, 170, 420], [10, 220, 300]].forEach(function (w, i) { el('path', { d: 'M' + w[0] + ' ' + w[1] + ' H' + w[2] + ' c26 0 26 -30 6 -30 c-12 0 -14 14 -4 16', fill: 'none', 'stroke-width': 3, 'stroke-linecap': 'round', style: i === 1 ? AMB : INK, 'class': 'gust' }, layers.wind); });
+  // hail: stones with motion ticks
+  for (var i = 0; i < 18; i++) { var x = 90 + (i * 53) % 380 + Owl.seeded(i, 81) * 20, y = 40 + (i * 37) % 120; el('circle', { cx: x.toFixed(1), cy: y, r: 5 + (i % 3), fill: 'none', 'stroke-width': 2.5, style: i % 5 === 0 ? AMB : INK }, layers.hail); el('path', { d: 'M' + (x + 4).toFixed(1) + ' ' + (y - 12) + ' l4 -10', 'stroke-width': 2, 'stroke-linecap': 'round', style: MUTE }, layers.hail); }
+  var btns = [].slice.call(r2.querySelectorAll('.hb2-pick button'));
+  function pick(w) {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === w); });
+    Object.keys(layers).forEach(function (k) {
+      var g = layers[k], on = k === w;
+      if (Owl.reduced()) { g.style.opacity = on ? 1 : 0; return; }
+      g.animate(on ? [{ opacity: 0, transform: k === 'wind' ? 'translateX(-40px)' : 'translateY(-24px)' }, { opacity: 1, transform: 'none' }] : [{ opacity: getComputedStyle(g).opacity }, { opacity: 0 }], { duration: on ? 420 : 160, easing: on ? 'cubic-bezier(.23,1,.32,1)' : 'linear', fill: 'forwards' });
+    });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { pick(b.dataset.w); }); });
+  Object.keys(layers).forEach(function (k) { layers[k].style.opacity = k === 'snow' ? 1 : 0; });
+})();
+
+/* hail-call: the Night yard is initialised for every .call-bg by call.js */
 
 </script>
 </body>

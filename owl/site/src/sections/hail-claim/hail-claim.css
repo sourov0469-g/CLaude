@@ -1,0 +1,38 @@
+/* Insurance paperwork. V1: S1325 scroll-progress timeline (left rail, one truthful line, first-to-last dot).
+   V2: Lusion flow (one path through the page): the report travels roof -> Owl -> insurer. Owl's own words throughout. */
+.hk-v1,.hk-v2{position:relative;background:var(--surface-page);padding:var(--section-default) 0}
+.hk1-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-64);align-items:start}
+.hk1-lead{display:grid;gap:var(--space-24);justify-items:start;position:sticky;top:calc(var(--header-h,0px) + var(--space-48))}
+.hk1-lead .t-label,.hk1-lead .t-heading,.hk1-lead .t-body{margin:0}
+.hk1-line{position:relative;padding-left:var(--space-48)}
+.hk1-base,.hk1-fill{position:absolute;left:var(--space-8);width:3px;border-radius:2px}
+.hk1-base{background:var(--line-control)}
+.hk1-fill{background:var(--accent-fill);transform-origin:top;transform:scaleY(0)}
+.hk1-steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-64)}
+.hk1-steps li{position:relative;display:grid;gap:var(--space-8);scroll-margin-top:calc(var(--header-h,0px) + var(--space-24))}
+.hk1-steps .t-label,.hk1-steps .t-sub,.hk1-steps .t-body{margin:0}
+.hk1-steps .t-body{max-width:36rem}
+.hk1-dot{position:absolute;left:calc(var(--space-48) * -1 + 1.5px);top:var(--space-4);width:var(--space-16);height:var(--space-16);border-radius:50%;background:var(--surface-page);border:3px solid var(--line-control);transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)}
+.hk1-steps li.is-on .hk1-dot{background:var(--accent-fill);border-color:var(--accent-fill)}
+@media (max-width:1023px){.hk1-grid{grid-template-columns:1fr;gap:var(--space-48)}.hk1-lead{position:static}}
+.hk2-flow{position:relative;margin-top:var(--space-48)}
+.hk2-track{position:absolute;left:16.66%;right:16.66%;top:var(--space-40);border-top:3px dotted var(--line-control)}
+.hk2-nodes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32);position:relative}
+.hk2-nodes li{display:grid;justify-items:center;text-align:center;gap:var(--space-8);align-content:start}
+.hk2-nodes .t-small{max-width:18rem}
+.hk2-node{display:grid;place-items:center;width:var(--space-80);height:var(--space-80);border-radius:50%;background:var(--surface-page);border:2px solid var(--text-primary);margin-bottom:var(--space-8)}
+.hk2-node svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hk2-node--owl{background:var(--accent-fill);border-color:var(--accent-fill)}
+.hk2-doc{position:absolute;left:0;top:0;width:var(--space-48);height:auto;z-index:1;fill:var(--surface-page);stroke:var(--text-primary);stroke-width:3;stroke-linecap:round;pointer-events:none}
+.hk2-seal{fill:none;stroke:var(--accent-fill)}
+.hk-v2 .hk2-close{margin:var(--space-64) auto 0;max-width:44rem;text-align:center}
+@media (max-width:767px){
+  .hk2-track{left:var(--space-32);right:auto;top:var(--space-32);bottom:var(--space-32);border-top:0;border-left:3px dotted var(--line-control)}
+  .hk2-nodes{grid-template-columns:1fr;gap:var(--space-32)}
+  .hk2-nodes li{grid-template-columns:var(--space-64) 1fr;justify-items:start;text-align:left;column-gap:var(--space-16)}
+  .hk2-nodes li > :not(.hk2-node){grid-column:2}
+  .hk2-node{grid-row:1 / span 2;margin:0}
+  .hk-v2 .hk2-close{text-align:left}
+  .hk2-doc{display:none}
+  .hk2-node{width:var(--space-64);height:var(--space-64)}
+}

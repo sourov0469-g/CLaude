@@ -1,0 +1,33 @@
+/* Storm damage cover (MERSI chapter system: a cover with the chapter index; Owl's own storm-page words) */
+.hc-v1,.hc-v2{position:relative;overflow:hidden;background:var(--surface-page);padding:var(--section-hero) 0 var(--section-default)}
+.hc-v1{padding-top:0}
+.hc1-stage{position:relative;padding:var(--section-hero) 0 var(--space-64)}
+.hc-bg{position:absolute;left:0;right:0;bottom:0;height:min(100%,100vh)}
+.hc1-stage > .wrap{position:relative;z-index:1}
+.hc1-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,5fr);gap:var(--space-48);align-items:center}
+.hc1-copy{display:grid;gap:var(--space-24)}
+.hc1-copy .t-label,.hc1-copy .t-body{margin:0}
+.hc1-copy .t-body{max-width:38rem}
+.hc1-ctas,.hc2-ctas{display:flex;flex-wrap:wrap;gap:var(--space-12)}
+.hc1-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.hc1-chips .chip{margin:0}
+.hc1-art{width:100%;height:auto;overflow:visible}
+.hc1-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--space-24);margin-top:var(--space-32);border-top:1.5px solid var(--text-primary)}
+.hc1-index a{display:grid;grid-template-columns:auto 1fr auto;gap:var(--space-12);align-items:center;padding:var(--space-16) 0;min-height:var(--space-48);color:var(--text-primary);text-decoration:none;font:var(--type-body)}
+.hc1-index a span{font:700 var(--step-m1)/1 var(--font-display);color:var(--text-muted)}
+.hc1-index a .icon{transition:transform var(--dur-fast) var(--ease-out)}
+.hc1-index a:hover .icon{transform:translateX(var(--space-8))}
+@media (max-width:1023px){.hc1-grid{grid-template-columns:1fr}.hc1-art{max-width:28rem}.hc1-index{grid-template-columns:1fr 1fr}}
+@media (max-width:767px){.hc1-index{grid-template-columns:1fr}.hc1-index a{border-bottom:1px solid var(--line-control)}}
+.hc2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr) minmax(0,4fr);gap:var(--space-48);align-items:center}
+.hc2-copy{display:grid;gap:var(--space-24)}
+.hc2-copy .t-body{margin:0;max-width:34rem}
+.hc2-copy .hc2-icon{width:var(--space-64);height:var(--space-64);color:var(--text-primary)}
+.hc2-svg{width:100%;height:auto;max-width:15rem;display:block;margin-inline:auto;overflow:visible}
+.hc2-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-24)}
+.hc2-list li{display:grid;gap:var(--space-4);padding:0 0 var(--space-24) var(--space-40);position:relative;border-bottom:1px solid var(--line-control)}
+.hc2-list li:last-child{border-bottom:0;padding-bottom:0}
+.hc2-list li::before{content:'';position:absolute;left:var(--space-4);top:var(--space-4);width:var(--space-12);height:var(--space-24);border:solid var(--text-primary);border-width:0 3px 3px 0;transform:rotate(40deg)}
+@media (max-width:1023px){.hc2-grid{grid-template-columns:1fr 1fr}.hc2-copy{grid-column:1/-1}}
+@media (max-width:767px){.hc2-grid{grid-template-columns:1fr}.hc2-svg{max-width:12rem}}
+@media (max-width:1023px){.hc-bg{display:none}}

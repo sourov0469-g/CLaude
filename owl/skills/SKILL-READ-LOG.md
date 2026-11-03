@@ -275,3 +275,59 @@ checks the built section against the rules and records any rule it does not meet
   - **Errors and empty states:** errors say how to fix, beside the field; empty states point forward.
   - **Placeholders:** show a realistic example.
   - **Mechanics:** one capitalisation policy; no "successfully" and no "please"; no "Oops".
+
+## Storm damage page (read in full by tag before building, except where marked)
+- ⟦S0618⟧ open-design/faq-page
+  - **Structure:** header, search, 3-4 category pills, accordion (`<details>`/`<summary>` or ARIA), "Still have
+    questions?" CTA.
+  - **Content:** 12-18 real entries; **with fewer than 8, ask for more content**; with 1-5, no categories or search.
+    Answers 2-4 sentences; questions specific, never placeholders.
+  - **Applied:** Owl's FAQ text is not in hand, so no FAQ was built on the Storm page rather than inventing answers
+    (recorded in GATE-hail-call).
+- ⟦S1325⟧ scroll-progress-timeline
+  - **Structure first:** an ordered list with real headings; the line and dots only enhance it.
+  - **The line:** a quiet base plus one fill (`transform-origin: top`), measured from the first point centre to the
+    last; one normalised value as `scaleY` in a single rAF; a step is active when the head crosses its centre;
+    re-measure after fonts, images, resize and content changes.
+  - **Layout:** a left rail for long copy; collapse to a left rail on phones; pinned chapters only when each step has a
+    distinct visual state, and the pin is finite.
+  - **State and navigation:** inactive steps stay readable; `aria-current="step"` without a live region; never move
+    focus on passive scroll; a decorative dot is never the only control; `scroll-margin` under a sticky header.
+  - **Reduced motion:** the full line or reached states, no scrub, no pin.
+- ⟦S1424⟧ law-of-continuity
+  - The eye follows unbroken paths: a connecting line turns items into a sequence; arrows extend the path.
+  - Interrupted continuity (a larger gap, a divider) signals a new group; alignment breaks read as boundaries or errors.
+  - Decide the reading path (enter, travel, land) before placing elements; audit alignment at every breakpoint.
+
+## Read at the Storm page audit, AFTER building (honest record)
+These three were cited as evidence without having been logged: ⟦S0070⟧ and ⟦S0400⟧ in GATE-game (accepted earlier)
+and all three in the first draft of the Storm gates. I read each in full now, by tag, and checked the built work
+against it. The rule stands: read before building.
+- ⟦S0070⟧ better-accessibility
+  - **Findings cite WCAG 2.2 A/AA by number**; the 44/40px targets and the one-h1 outline are recommendations.
+  - **Native first:** `<button>` for actions, `<a href>` for navigation; a role is a promise of the full key map.
+  - **Focus:** `:focus-visible` rings at 3:1; never hidden under sticky chrome (2.4.11); roving tabindex in composite
+    widgets; positive tabindex never; route changes move focus to `<main>` or the h1.
+  - **Targets:** 24×24 minimum (2.5.8), aim 44/40; decorative layers get `pointer-events:none`; every drag has a
+    single-pointer alternative (2.5.7).
+  - **Names:** icon-only controls get a name; visible label text is in the name (2.5.3); `aria-hidden` never on a
+    focusable element (hiding something interactive means removing it from the tab order too).
+  - **Tabs (APG):** arrows move and wrap, Home/End, Tab exits to the panel.
+  - **Motion:** opt-in; replace slides with fades under reduced motion; anything moving over 5s on its own has a pause
+    (2.2.2). **Reflow** at 320px and 200% text.
+  - **Applied to the Storm page:** the Wise Check tab panels hold no focusable content, so each now takes
+    `tabindex="0"` (Tab exits to the panel). The drawing's spots are `aria-hidden` *and* out of the tab order. All
+    other checks held (names, roles, targets ≥44px, no positive tabindex, decorative SVG hidden, no pointer-swallowing
+    layers).
+- ⟦S0400⟧ iart-ai/accessible-animation
+  - **Tier, do not nuke:** Tier 1 remove (parallax, large slides, pinned scroll scenes, spin); Tier 2 soften to short
+    fades (≤200ms); Tier 3 keep (opacity and colour transitions, focus rings, progress).
+  - **JS motion** is gated with `matchMedia`; listen for live changes; use `0.01ms`, not `0s`, in global nets.
+  - **Verify both paths** with the preference emulated; auto-motion over 5s keeps a pause control.
+  - **Applied:** Storm page pins are Tier 1 and are removed under reduced motion (V2 respond is static); drawings start
+    at their final state; the Wise Check and weather swaps are Tier 3 opacity changes. Verified with
+    `stormrm.mjs` (reduced-motion emulation, 6/6).
+- ⟦S1449⟧ millers-law
+  - Working memory holds about 4±1 meaningful chunks; chunking is the strategy, not "7 items".
+  - Group menus, forms and steps into 3-5 named chunks; make the chunks explicit with headings, space and dividers.
+  - **Applied:** three principles, four claim steps, three Wise Check parts, three guarantee facts, four chapters.

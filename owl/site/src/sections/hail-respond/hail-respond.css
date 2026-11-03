@@ -1,0 +1,22 @@
+/* Assess, secure, plan (Longbow: numbered doctrine, numerals as events; S1325 timeline rules for V2's pinned chapters) */
+.hr-v1,.hr-v2{position:relative;background:var(--surface-alt);padding:var(--section-default) 0}
+.hr1-list{list-style:none;margin:var(--space-48) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-32);border-top:1.5px solid var(--text-primary)}
+.hr1-list li{display:grid;gap:var(--space-12);align-content:start;padding-top:var(--space-24)}
+.hr1-list .t-sub,.hr1-list .t-small{margin:0}
+.hr1-n{font:800 var(--step-4)/1 var(--font-display);letter-spacing:var(--track-display);color:var(--text-primary)}
+.hr1-list li:first-child .hr1-n{color:var(--accent-text)}
+.hr1-art{width:100%;max-width:16rem;height:auto;overflow:visible}
+@media (max-width:1023px){.hr1-list{grid-template-columns:1fr}.hr1-list li{grid-template-columns:auto 1fr;column-gap:var(--space-24)}.hr1-list li > *:not(.hr1-n){grid-column:2}.hr1-n{grid-row:1 / span 3}.hr1-art{max-width:12rem}}
+.hr-v2{padding:0}
+.hr2-stage{height:300vh}
+.hr2-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-48);align-items:center;padding-block:var(--space-48)}
+.hr2-copy{display:grid;gap:var(--space-24);justify-items:start}
+.hr2-copy .t-label,.hr2-copy .t-heading{margin:0}
+.hr2-steps{list-style:none;margin:0;padding:0 0 0 var(--space-24);display:grid;gap:var(--space-16);border-left:3px solid var(--line-control)}
+.hr2-steps li{display:grid;gap:var(--space-4);position:relative;opacity:.55;transition:opacity var(--dur-fast) var(--ease-out)}
+.hr2-steps li::before{content:'';position:absolute;left:calc(var(--space-24) * -1 - var(--space-8) - 1.5px);top:var(--space-8);width:var(--space-12);height:var(--space-12);border-radius:50%;background:var(--surface-alt);border:2px solid var(--line-control)}
+.hr2-steps li[aria-current="step"]{opacity:1}
+.hr2-steps li[aria-current="step"]::before,.hr2-steps li.is-done::before{background:var(--accent-fill);border-color:var(--accent-fill)}
+.hr2-art{width:100%;height:auto;max-height:70vh;overflow:visible}
+@media (max-width:1023px){.hr2-stage{height:auto}.hr2-stage .pin{position:static;min-height:auto}.hr2-grid{grid-template-columns:1fr;padding-block:var(--section-default)}.hr2-steps li{opacity:1}.hr2-art{max-width:30rem}}
+@media (prefers-reduced-motion:reduce){.hr2-stage{height:auto}.hr2-steps li{opacity:1}}

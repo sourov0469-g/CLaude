@@ -1,0 +1,12 @@
+import { createRequire } from 'node:module'; const require = createRequire(import.meta.url); const { chromium } = require('playwright');
+const F = process.argv[2]; const b = await chromium.launch({ args: ['--allow-file-access-from-files'] }); const R = []; const ok = (n, c, i = '') => R.push(`${c ? 'PASS' : 'FAIL'}  ${n}${i ? '  [' + i + ']' : ''}`);
+const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }); const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+await p.goto('file://' + F + '?v=hail-respond:2,hail-claim:1#/storm', { waitUntil: 'load' }); await p.waitForTimeout(400);
+ok('V2 respond stage is not pinned (static height)', await p.evaluate(() => { const s = document.querySelector('.hr2-stage'); return s.getBoundingClientRect().height < innerHeight * 1.5; }));
+ok('V2 respond shows the final state (plan ticks drawn)', await p.evaluate(() => [...document.querySelectorAll('.hr2-art path[pathLength="1"]')].every(t => +t.style.strokeDashoffset === 0)));
+await p.evaluate(() => document.getElementById('s-hail-claim').scrollIntoView()); await p.waitForTimeout(300); null;
+ok('claim line is full and every step is on', await p.evaluate(() => document.querySelector('.hk1-fill').style.transform === 'scaleY(1)' && [...document.querySelectorAll('.hk1-steps li')].every(l => l.classList.contains('is-on'))));
+ok('cover hail at rest (final state, circles drawn)', await p.evaluate(() => [...document.querySelectorAll('.hc1-art circle[pathLength]')].every(c => +c.style.strokeDashoffset === 0)));
+ok('built numerals show real values at once', await p.evaluate(() => [...document.querySelectorAll('.hb1-facts [data-to]')].map(n => n.textContent).join() === '10,50'));
+ok('no JS errors', !errs.length, errs.join('|'));
+console.log(R.join('\n')); await b.close();

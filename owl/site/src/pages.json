@@ -78,5 +78,35 @@
     "default": 1
    }
   ]
+ },
+ {
+  "id": "storm",
+  "title": "Storm damage",
+  "sections": [
+   {
+    "id": "hail-cover",
+    "default": 1
+   },
+   {
+    "id": "hail-respond",
+    "default": 1
+   },
+   {
+    "id": "hail-claim",
+    "default": 1
+   },
+   {
+    "id": "hail-wise",
+    "default": 1
+   },
+   {
+    "id": "hail-built",
+    "default": 1
+   },
+   {
+    "id": "hail-call",
+    "default": 1
+   }
+  ]
  }
 ]
