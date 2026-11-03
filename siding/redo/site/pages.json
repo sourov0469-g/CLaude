@@ -604,6 +604,46 @@
       "The years"
      ]
     ]
+   },
+   {
+    "slot": "ab2",
+    "name": "The story",
+    "mod": "p_ab2",
+    "obj": "PAb2",
+    "v": [
+     [
+      "a",
+      "A letter from the office"
+     ],
+     [
+      "b",
+      "Three dates"
+     ],
+     [
+      "c",
+      "Plain questions"
+     ]
+    ]
+   },
+   {
+    "slot": "ab3",
+    "name": "Credentials",
+    "mod": "p_ab3",
+    "obj": "PAb3",
+    "v": [
+     [
+      "a",
+      "Four seals"
+     ],
+     [
+      "b",
+      "The plaque"
+     ],
+     [
+      "c",
+      "Where each shows up"
+     ]
+    ]
    }
   ],
   "area": [],

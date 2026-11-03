@@ -19,7 +19,7 @@ window.PAb1 = (function () {
   const Bv = () => `<section class="sec ab1B" id="about-top" aria-labelledby="ab1B-h">
     <p class="pkick">About Austin Pro</p><h1 class="sec-h" id="ab1B-h" data-split>Two firms, one company since 2018.</h1>
     <div class="mrg" data-solid><svg viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true"><path class="l1" d="M20 60H560C640 60 640 130 720 130H980" pathLength="1"/><path class="l2" d="M300 200H560C640 200 640 130 720 130" pathLength="1"/></svg>
-      <p class="n1"><b>Austin Pro</b><span>since 2009</span></p><p class="n2"><b>Sanders Roofing &amp; Exteriors</b></p><p class="n3"><b>2018</b><span>Austin Pro Siding, Windows &amp; Roofing</span></p></div>
+      <p class="n1"><b>Austin Pro</b><span>since 2009</span></p><p class="n2"><b>Sanders Roofing &amp; Exteriors</b></p><p class="n3"><b>2018</b><span>Merged</span></p></div>
     <p class="sub3">Since 2009; merged with Sanders Roofing &amp; Exteriors in 2018.</p></section>`;
 
   const X = (y) => (((y - 2009) / (2026 - 2009)) * 100).toFixed(2) + '%';
