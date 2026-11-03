@@ -1,0 +1,17 @@
+{
+ "page": "bathrooms",
+ "W": 1440,
+ "frames": {
+  "n": 804,
+  "p50": 16.699999999999818,
+  "p95": 16.700000000000728,
+  "over50": 0,
+  "lt": 0
+ },
+ "overlaps": [
+  "bath-build p.bb__n \"01\" x bath-build p.bb__n \"02\"",
+  "bath-build h3.bb__t \"Down to the studs\" x bath-build h3.bb__t \"Backer board\"",
+  "bath-build p.bb__p \"Down to the studs.\" x bath-build p.bb__p \"Backer board is water-resi\""
+ ],
+ "errors": []
+}

@@ -4,7 +4,7 @@
 .bw__head .t-head, .bw__lead { margin: 0; }
 .bw__lead { max-width: 46ch; color: var(--color-text-secondary); }
 .bw__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
-.bw__seam { display: grid; place-items: center; padding: var(--s5); background: var(--color-bg-subtle); border: 1px solid var(--color-border); }
+.bw__seam { display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: var(--s5); background: var(--color-bg-subtle); border: 1px solid var(--color-border); }
 .bw__print { --pw: 604px; --arn: 1.06; }
 
 /* the seam: the same parts as the kitchen page (scoped copy) */
@@ -31,14 +31,14 @@
 .bw__fl[aria-pressed="true"] { background: var(--color-text); color: var(--color-surface); border-color: var(--color-text); }
 .bw__fl:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
 .bw__stack { position: relative; height: min(64svh, 600px); }
-.bw__card { position: absolute; left: 50%; top: 0; height: 100%; aspect-ratio: var(--a, 3 / 4); max-width: 100%; translate: -50% 0; padding: 12px 12px 16px; background: var(--color-surface); border: 1px solid var(--color-text); box-shadow: 0 18px 30px -22px color-mix(in srgb, var(--color-shadow, #000) 60%, transparent); cursor: zoom-in; }
+.bw__card { position: absolute; left: 50%; top: 0; height: 100%; aspect-ratio: var(--a, 3 / 4); max-width: 100%; transform: translateX(-50%); padding: 12px 12px 16px; background: var(--color-surface); border: 1px solid var(--color-text); box-shadow: 0 18px 30px -22px color-mix(in srgb, var(--color-shadow, #000) 60%, transparent); cursor: zoom-in; }
 .bw__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .bw__card:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; }
 .bw__t { margin: 0; min-height: 2.8em; font: 600 1.0625rem/1.35 var(--f-display); text-align: center; }
 .bw__ctl { display: flex; justify-content: center; gap: var(--s3); }
 
 @media (max-width: 900px) {
-  .bw__head, .bw__grid { grid-template-columns: 1fr; }
+  .bw__head, .bw__grid { grid-template-columns: minmax(0, 1fr); }   /* QA-1: 1fr let the deck's 630px minimum push it past a 390 screen */
   .bw__seam { padding: var(--s3); }
   .bw__stack { height: 70vw; max-height: 480px; }
 }

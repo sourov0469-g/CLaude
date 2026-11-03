@@ -90,7 +90,8 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 8 | Device matrix: every page at 8 sizes, phones also touch-emulated (60 runs): errors, scroll release, overflow, the phone, target sizes | PASS (Muse): `GATE-phase8.md` |
 | 9 | Every animation tested repeatedly (20 runs, 194 anchors, both directions) and the final evidence pack (every version of every section at 1440 and 390) | PASS (Muse): `GATE-phase9.md` |
 | 10 | The locks audited on the delivered file: facts, numbers, type, single file, nothing published, no model IDs | PASS (Muse): `GATE-phase10.md` |
-| 11 | Every click state triggered: every control pressed, every form submitted empty and complete, every focus stop walked (20 runs) | **done**: `GATE-phase11.md`; awaiting Muse |
+| 11 | Every click state triggered: every control pressed, every form submitted empty and complete, every focus stop walked (20 runs) | done: `GATE-phase11.md` |
+| QA-1 | Owner's finalize brief: deep visual QA round 1 (interaction, motion, composition; section minimums) | **done**: `GATE-QA-1.md`; rounds 2 to 5 to follow |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -258,3 +259,16 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - 1018 focus stops, every one visible.
 - **Fixed:** Consult V2's textarea focus underline was detached (about 8px below the field line). `display: block`, and it now lands on the line like the inputs.
 - **Process:** one batch overran the 10-minute limit and was moved to the background by the harness. I stopped it at once and reran in foreground batches. Zero sub-agents.
+
+## QA-1 log (owner's finalize brief, round 1 of at least 5)
+- **Structure:** Home 10, Kitchens 5, Bathrooms 5, Renovation 5, Contact 5. All meet the minimums.
+- **Muse ruling:** the stud seam stays as the only before/after presentation.
+- **New tools:** `qa_interact.js`, `qa_motion.js` and `qa_compose.js`, plus a real Tab walk.
+- **Fixed:**
+  - the phone and tablet hero showed no finish picker (it faded before it arrived); stacked layouts now keep the house and let the rail play the reveal;
+  - the Contact FAQ's closed answer held a Tab stop; it is now `inert`;
+  - the Bathrooms projects deck was 630px wide on a 390 phone (filters and the before/after print cut off); `minmax(0, 1fr)`;
+  - the Bathrooms photo fan was off-centre (the CSS translate was lost under GSAP); `xPercent: -50`;
+  - the Consult privacy note's measure.
+- **Re-run on the fixed build:** 0 invisible focus stops in 767, 0 edge cuts, frames at 16.7 ms, 0 errors.
+- Zero sub-agents, zero background tasks.

@@ -36,7 +36,7 @@
     function layout(anim) {   // the top card first; three more peek behind it at small angles
       cards().forEach(function (c) {
         var d = order.indexOf(+c.dataset.i);
-        var vars = { rotation: d < 0 ? 0 : TILT[Math.min(d, 4)], y: Math.min(d, 3) * 6, scale: 1 - Math.min(d, 3) * .03, zIndex: 100 - d, autoAlpha: d < 0 || d > 3 ? 0 : 1, x: 0 };
+        var vars = { rotation: d < 0 ? 0 : TILT[Math.min(d, 4)], y: Math.min(d, 3) * 6, scale: 1 - Math.min(d, 3) * .03, zIndex: 100 - d, autoAlpha: d < 0 || d > 3 ? 0 : 1, x: 0, xPercent: -50 };   // QA-1: centred in GSAP's own terms (the CSS translate was lost when GSAP took the transform, so cards sat right of centre)
         c.tabIndex = d === 0 ? 0 : -1; c.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
         if (anim && k.motion) gsap.to(c, Object.assign({ duration: .45, ease: 'power4.out', overwrite: 'auto' }, vars)); else gsap.set(c, vars);
       });

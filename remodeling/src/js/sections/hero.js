@@ -115,12 +115,17 @@
     if (k.motion) {
       /* ---------- scroll: a short pin (70% of a viewport) plays the reveal, then the frame pulls back (Z-pull exit,
          the carrier into Proof) and the pin releases [S0186 ease none, S1209 finite pin, S0576 shrinking exit] ---------- */
-      if (!k.mobile) {
+      // QA-1: the choice follows the layout, not the pointer: a stacked hero (900px and under, phones and tablets) puts the art
+      // below the headline; before, the scroll reveal finished first and the finish picker was never seen on a phone or tablet
+      var stacked = k.mobile || matchMedia('(max-width: 900px)').matches;
+      if (!stacked) {
         var tl = gsap.timeline({ scrollTrigger: { trigger: root, start: function () { return 'top ' + parseFloat(getComputedStyle(sec).paddingTop) + 'px'; }, end: '+=70%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });   // pin the version where it already sits under the nav (start = scroll 0)
         tl.to(st, { p: 1, ease: 'none', duration: .78, onUpdate: apply })
           .to(frame, { scale: .965, ease: 'none', duration: .22 });
       } else {
-        gsap.to(st, { p: 1, ease: 'none', onUpdate: apply, scrollTrigger: { trigger: frame, start: 'top 20%', end: 'bottom 40%', scrub: .8 } });
+        // stacked: scroll leaves the house as it is (the picker stays readable and usable); the rail under the art, by touch,
+        // drag or keys, plays the reveal. A scroll-driven reveal here either finished before the art arrived or laid the
+        // caption over the room photo.
       }
 
       /* ---------- V8's reacting background: three depths answer the pointer ---------- */

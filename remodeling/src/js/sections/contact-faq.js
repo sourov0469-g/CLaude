@@ -17,10 +17,10 @@
       var host = root.querySelector('.fq__list');
       host.innerHTML = Q.map(function (q, i) {
         return '<div class="fq__item"><h3 style="margin:0"><button type="button" class="fq__btn" id="fq-b' + i + '" aria-expanded="false" aria-controls="fq-p' + i + '"><span>' + q[0] + '</span><span class="fq__ic" aria-hidden="true"></span></button></h3>' +
-          '<div class="fq__panel" id="fq-p' + i + '" role="region" aria-labelledby="fq-b' + i + '"><div><p>' + q[1] + '</p></div></div></div>';
+          '<div class="fq__panel" id="fq-p' + i + '" role="region" aria-labelledby="fq-b' + i + '" inert><div><p>' + q[1] + '</p></div></div></div>';
       }).join('');
       host.querySelectorAll('.fq__btn').forEach(function (b) {
-        k.on(b, 'click', function () { var on = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', on ? 'true' : 'false'); b.closest('.fq__item').classList.toggle('is-open', on); });
+        k.on(b, 'click', function () { var on = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', on ? 'true' : 'false'); b.closest('.fq__item').classList.toggle('is-open', on); document.getElementById(b.getAttribute('aria-controls')).inert = !on; });   // QA-1: a closed answer is not a Tab stop
       });
       k.add(function () { host.innerHTML = ''; });
       EZ.reveal(k, root.querySelectorAll('.fq__side > *'));

@@ -1,0 +1,36 @@
+{
+ "page": "home",
+ "W": 1440,
+ "frames": {
+  "n": 1530,
+  "p50": 16.69999999999891,
+  "p95": 16.700000000000728,
+  "over50": 1,
+  "lt": 0
+ },
+ "overlaps": [
+  "services dt. \"Project\" x services h3.sv__h \"Bathrooms\"",
+  "services dd. \"Kitchen remodeling\" x services h3.sv__h \"Bathrooms\"",
+  "services dt. \"Contractor\" x services h3.sv__h \"Bathrooms\"",
+  "services dd. \"Licensed, bonded & insured\" x services h3.sv__h \"Bathrooms\"",
+  "services h3.sv__h \"Kitchens\" x services p.sv__no \"A‑02 Sheet 2 of 3\"",
+  "services p.sv__p \"The room you actually live\" x services h3.sv__h \"Bathrooms\"",
+  "services p.sv__time \"6–12 weeks of construction\" x services p.sv__p \"Waterproofing done properl\"",
+  "services dt. \"Project\" x services h3.sv__h \"Whole homes\"",
+  "services dd. \"Kitchen remodeling\" x services h3.sv__h \"Whole homes\"",
+  "services dt. \"Contractor\" x services h3.sv__h \"Whole homes\"",
+  "services dd. \"Licensed, bonded & insured\" x services h3.sv__h \"Whole homes\"",
+  "services dt. \"Project\" x services p.sv__p \"One contractor. The whole \"",
+  "services dd. \"Bathroom remodeling\" x services p.sv__p \"One contractor. The whole \"",
+  "services dt. \"Contractor\" x services p.sv__p \"One contractor. The whole \"",
+  "services dt. \"Project\" x services dt. \"Project\"",
+  "services dd. \"Kitchen remodeling\" x services dt. \"Project\"",
+  "services dd. \"Kitchen remodeling\" x services dd. \"Bathroom remodeling\"",
+  "services dt. \"Contractor\" x services dt. \"Contractor\"",
+  "services dd. \"Licensed, bonded & insured\" x services dt. \"Contractor\"",
+  "services dd. \"Licensed, bonded & insured\" x services dd. \"Licensed, bonded & insured\"",
+  "process h3.pr__t \"Construction\" x process h3.pr__t \"Quality review\"",
+  "process p.pr__p \"One point of contact, insp\" x process p.pr__p \"We walk the work against t\""
+ ],
+ "errors": []
+}

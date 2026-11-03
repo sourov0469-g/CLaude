@@ -1,0 +1,34 @@
+{
+ "page": "home",
+ "W": 1440,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [
+    "ba img.bx__ib upscaled 1.35x (388px shown at 524px)",
+    "ba img.bx__ia upscaled 1.35x (388px shown at 524px)"
+   ],
+   "widow": [
+    "hero h1.hh last line \"correctly.\" of \"Built properly. Permitted correctly.\""
+   ],
+   "measure": [
+    "consult p.c-note about 118 characters a line"
+   ],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [
+    "ba img.bx__ib upscaled 1.35x (388px shown at 524px)",
+    "ba img.bx__ia upscaled 1.35x (388px shown at 524px)"
+   ],
+   "widow": [
+    "hero h1.hh last line \"correctly.\" of \"Built properly. Permitted correctly.\""
+   ],
+   "measure": [
+    "consult p.c-note about 106 characters a line"
+   ],
+   "errors": []
+  }
+ }
+}

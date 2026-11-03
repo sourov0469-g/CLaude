@@ -1,0 +1,21 @@
+{
+ "page": "contact",
+ "W": 390,
+ "frames": {
+  "n": 529,
+  "p50": 16.699999999999818,
+  "p95": 16.799999999999272,
+  "over50": 0,
+  "lt": 0
+ },
+ "overlaps": [
+  "contact-faq p. \"A single bathroom might ru\" x contact-faq p. \"We pull the permits in our\"",
+  "contact-faq p. \"We pull the permits in our\" x contact-faq p. \"Miami-Dade and Broward sit\"",
+  "contact-faq p. \"Miami-Dade and Broward sit\" x contact-faq p. \"Four financing partners, n\"",
+  "contact-faq p. \"Four financing partners, n\" x contact-faq p. \"We build in 104 municipali\"",
+  "contact-faq p. \"Four financing partners, n\" x contact-faq p. \"Send us a message to get a\"",
+  "contact-faq p. \"We build in 104 municipali\" x contact-faq p. \"Send us a message to get a\"",
+  "contact-faq p. \"Licensed, bonded & insured\" x contact-faq p. \"Call (754) 236‑0675: you w\""
+ ],
+ "errors": []
+}

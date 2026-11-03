@@ -1,0 +1,22 @@
+{
+ "page": "contact",
+ "W": 1440,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [
+    "contact-visit img.vs1__logo upscaled 1.28x (145px shown at 186px)"
+   ],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  }
+ }
+}

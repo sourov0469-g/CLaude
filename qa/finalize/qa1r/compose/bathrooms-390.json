@@ -1,0 +1,20 @@
+{
+ "page": "bathrooms",
+ "W": 390,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  }
+ }
+}

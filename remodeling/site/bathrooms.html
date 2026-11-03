@@ -671,7 +671,7 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .nav__links a[aria-current="page"] { color: var(--color-accent-text); box-shadow: inset 0 -3px 0 var(--color-accent-border); }
 .sheet__pages a[aria-current="page"], .foot__col a[aria-current="page"] { color: var(--color-accent-text); }
-.sheet__h { margin: 16px 0 8px; font: 600 .75rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
+.sheet__h { margin: var(--s7) 0 var(--s2); font: 600 .75rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
 
 
 .vswitch[data-count="1"] { display: none !important; }
@@ -683,6 +683,8 @@ input, textarea { caret-color: var(--color-accent-text); }
 .kch__c.is-on { color: var(--color-text); }
 .kch__c.is-on::after { content: ""; position: absolute; left: 0; right: var(--s5); bottom: -1px; height: 3px; background: var(--color-accent-solid); }
 @media (hover: hover) and (pointer: fine) { .kch__c:not(.is-on):hover { color: var(--color-text); } }
+
+.sheet .sheet__h + ul { margin-top: 0; }
 
 
 
@@ -1076,7 +1078,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
 .bw__head .t-head, .bw__lead { margin: 0; }
 .bw__lead { max-width: 46ch; color: var(--color-text-secondary); }
 .bw__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
-.bw__seam { display: grid; place-items: center; padding: var(--s5); background: var(--color-bg-subtle); border: 1px solid var(--color-border); }
+.bw__seam { display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: var(--s5); background: var(--color-bg-subtle); border: 1px solid var(--color-border); }
 .bw__print { --pw: 604px; --arn: 1.06; }
 
 
@@ -1103,14 +1105,14 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
 .bw__fl[aria-pressed="true"] { background: var(--color-text); color: var(--color-surface); border-color: var(--color-text); }
 .bw__fl:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
 .bw__stack { position: relative; height: min(64svh, 600px); }
-.bw__card { position: absolute; left: 50%; top: 0; height: 100%; aspect-ratio: var(--a, 3 / 4); max-width: 100%; translate: -50% 0; padding: 12px 12px 16px; background: var(--color-surface); border: 1px solid var(--color-text); box-shadow: 0 18px 30px -22px color-mix(in srgb, var(--color-shadow, #000) 60%, transparent); cursor: zoom-in; }
+.bw__card { position: absolute; left: 50%; top: 0; height: 100%; aspect-ratio: var(--a, 3 / 4); max-width: 100%; transform: translateX(-50%); padding: 12px 12px 16px; background: var(--color-surface); border: 1px solid var(--color-text); box-shadow: 0 18px 30px -22px color-mix(in srgb, var(--color-shadow, #000) 60%, transparent); cursor: zoom-in; }
 .bw__card img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .bw__card:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; }
 .bw__t { margin: 0; min-height: 2.8em; font: 600 1.0625rem/1.35 var(--f-display); text-align: center; }
 .bw__ctl { display: flex; justify-content: center; gap: var(--s3); }
 
 @media (max-width: 900px) {
-  .bw__head, .bw__grid { grid-template-columns: 1fr; }
+  .bw__head, .bw__grid { grid-template-columns: minmax(0, 1fr); }   
   .bw__seam { padding: var(--s3); }
   .bw__stack { height: 70vw; max-height: 480px; }
 }
@@ -3824,7 +3826,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     function layout(anim) {   // the top card first; three more peek behind it at small angles
       cards().forEach(function (c) {
         var d = order.indexOf(+c.dataset.i);
-        var vars = { rotation: d < 0 ? 0 : TILT[Math.min(d, 4)], y: Math.min(d, 3) * 6, scale: 1 - Math.min(d, 3) * .03, zIndex: 100 - d, autoAlpha: d < 0 || d > 3 ? 0 : 1, x: 0 };
+        var vars = { rotation: d < 0 ? 0 : TILT[Math.min(d, 4)], y: Math.min(d, 3) * 6, scale: 1 - Math.min(d, 3) * .03, zIndex: 100 - d, autoAlpha: d < 0 || d > 3 ? 0 : 1, x: 0, xPercent: -50 };   // QA-1: centred in GSAP's own terms (the CSS translate was lost when GSAP took the transform, so cards sat right of centre)
         c.tabIndex = d === 0 ? 0 : -1; c.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
         if (anim && k.motion) gsap.to(c, Object.assign({ duration: .45, ease: 'power4.out', overwrite: 'auto' }, vars)); else gsap.set(c, vars);
       });
