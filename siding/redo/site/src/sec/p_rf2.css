@@ -1,0 +1,35 @@
+/* ROOFING · Cost */
+.rf2A,.rf2B,.rf2C{padding:96px var(--gut) 72px}
+.rf2A .hd .sec-p,.rf2B .hd .sec-p,.rf2C .hd .sec-p{margin-top:10px;font-size:17px;max-width:64ch}
+
+/* A — two roofs */
+.rf2A .two5{margin:26px 0 22px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,24px)}
+.rf2A .rcard{margin:0;border-radius:24px;overflow:hidden;background:#F6F9F4;box-shadow:inset 0 0 0 1px #E3EBE4}
+.rf2A .rcard svg{display:block;width:100%;height:auto;background:#E6EEE8}
+.rf2A .sh2 rect{fill:#3C4642;stroke:#2A312E;stroke-width:1.5}.rf2A .mt{fill:#5E6E68}.rf2A .sm4 path{stroke:#8FA19A;stroke-width:3}
+.rf2A figcaption{padding:20px 22px 24px}.rf2A figcaption small{font:800 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.rf2A figcaption b{display:block;margin-top:8px;font:800 clamp(38px,4vw,58px)/1 var(--display);letter-spacing:-.04em;color:var(--green)}.rf2A figcaption span{display:block;margin-top:8px;font:600 15px/1.4 var(--text);color:var(--ink-2)}
+.rf2A .rcard.m{background:#0E3B2C}.rf2A .rcard.m small{color:#B5DB6E}.rf2A .rcard.m b{color:#fff}.rf2A .rcard.m span{color:rgba(255,255,255,.8)}
+@media (max-width:760px){.rf2A .two5{grid-template-columns:1fr}}
+
+/* B — up the pitch */
+.rf2B .slp{margin-top:24px;padding:clamp(16px,2.4vw,30px);border-radius:24px;background:#F6F9F4;box-shadow:inset 0 0 0 1px #E3EBE4}
+.rf2B svg{display:block;width:100%;height:auto;overflow:visible}
+.rf2B .deck{stroke:#DCD3C2;stroke-width:60;stroke-linecap:round}
+.rf2B .rail{stroke:#C9D6CC;stroke-linecap:round}.rf2B .mh4{stroke:#CFE5A8;stroke-linecap:butt}.rf2B .md4{stroke:#0E3B2C}
+.rf2B .mtl{stroke:#7FA43E;stroke-dasharray:6 4;opacity:0;transition:opacity .3s ease}.rf2B.met .mtl{opacity:1}
+.rf2B .tk5 path{stroke:#9AA59F;stroke-width:1.5}.rf2B .tk5 text{font:700 13px var(--text);fill:#6B776F}
+.rf2B .key3{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+.rf2B .key3 p,.rf2B .key3 label{display:flex;align-items:center;gap:8px;font:500 15.5px/1.4 var(--text);color:var(--ink-2)}.rf2B .key3 b{color:var(--ink)}
+.rf2B .key3 i{width:18px;height:18px;border-radius:4px}.rf2B .a1{background:#CFE5A8}.rf2B .a2{background:#0E3B2C}
+.rf2B .key3 label{cursor:pointer}.rf2B .key3 input{width:20px;height:20px;accent-color:#0E3B2C}
+
+/* C — the plain table */
+.rf2C .vh8{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.rf2C .tb5{margin-top:24px;width:100%;max-width:880px;border-collapse:collapse}
+.rf2C .tb5 th,.rf2C .tb5 td{padding:16px 14px;border-bottom:1px solid #E3EBE4;text-align:left}
+.rf2C thead th{font:800 13px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:3px solid #0E3B2C}
+.rf2C tbody th{font:600 15.5px/1.3 var(--text);color:var(--ink-2)}
+.rf2C tbody td{font:800 clamp(20px,2.2vw,30px)/1 var(--display);letter-spacing:-.02em;color:var(--green)}
+.rf2C tbody td.np{font:600 14.5px/1.3 var(--text);letter-spacing:0;color:var(--ink-3)}
+.rf2C .ft11{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-top:22px;max-width:880px}.rf2C .ft11 p{font:600 15.5px/1.5 var(--text);color:var(--ink-2);max-width:46ch}

@@ -1,0 +1,36 @@
+/* ROOFING · Opener A — under the gable */
+.rf1A{padding:110px var(--gut) 70px}
+.rf1A .gab{max-width:1100px;margin:0 auto}
+.rf1A .tri{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:clamp(80px,12vw,180px) 20% clamp(26px,3vw,40px);background:#0E3B2C;clip-path:polygon(50% 0,100% 100%,0 100%);color:#fff}
+.rf1A .tri .pkick{color:#B5DB6E}.rf1A .tri .sec-h{margin-top:10px;color:#fff;font-size:clamp(30px,5vw,76px);line-height:1}
+.rf1A .crs3{list-style:none;display:grid}
+.rf1A .crs3 li{display:flex;align-items:baseline;justify-content:center;gap:14px;padding:14px 20px;background:#2F3532;border-bottom:3px solid rgba(0,0,0,.35);color:#fff;
+  background-image:repeating-linear-gradient(90deg,transparent 0 68px,rgba(0,0,0,.35) 68px 70px);background-position:calc(var(--i) * 34px) 0}
+.rf1A .crs3 li:nth-child(even){background-color:#3C4642}
+.rf1A .crs3 b{font:800 clamp(26px,2.8vw,40px)/1 var(--display);letter-spacing:-.03em;color:#B5DB6E}.rf1A .crs3 span{font:600 15px/1.3 var(--text);color:rgba(255,255,255,.85)}
+.rf1A .ft10{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;max-width:1100px;margin:26px auto 0}
+.rf1A .ft10 p{font:500 16.5px/1.5 var(--text);color:var(--ink-2);max-width:54ch}
+@media (max-width:620px){.rf1A .tri{padding:90px 12% 22px}.rf1A .crs3 li{flex-direction:column;align-items:center;gap:4px;text-align:center}}
+
+/* ROOFING · Opener B — one day */
+.rf1B{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center;padding:120px var(--gut) 70px}
+.rf1B .sec-h{margin-top:14px;font-size:clamp(36px,4.4vw,64px);line-height:1.02}
+.rf1B .pf4{margin:24px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.rf1B .pf4 div{padding-top:10px;border-top:2px solid #DCE5DE}.rf1B .pf4 dt{font:800 clamp(26px,2.6vw,38px)/1 var(--display);color:var(--green)}.rf1B .pf4 dd{margin-top:6px;font:600 14px/1.35 var(--text);color:var(--ink-2)}
+.rf1B .r{display:grid;gap:14px}
+.rf1B figure.pq2.hero3{padding:clamp(26px,3.4vw,46px);border-radius:26px;background:#0E3B2C;box-shadow:none}
+.rf1B figure.pq2.hero3 blockquote p{font:800 clamp(28px,3.4vw,50px)/1.12 var(--display);letter-spacing:-.025em;color:#fff}
+.rf1B figure.pq2.hero3 figcaption,.rf1B figure.pq2.hero3 figcaption b{color:#B5DB6E}
+@media (max-width:900px){.rf1B{grid-template-columns:1fr;padding-top:100px}}
+
+/* ROOFING · Opener C — the photo, gabled */
+.rf1C{padding:100px var(--gut) 70px}
+.rf1C .gph{position:relative;margin:0;aspect-ratio:16/8;max-height:52vh;width:100%;clip-path:polygon(50% 0,100% 34%,100% 100%,0 100%,0 34%);background:#E6EEE8}
+.rf1C .gph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rf1C figcaption{position:absolute;right:14px;bottom:14px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.92);font:700 12.5px/1.3 var(--text);color:var(--ink)}
+.rf1C .base{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) auto;gap:20px 30px;align-items:end;padding:26px 0 0;border-top:6px solid #0E3B2C}
+.rf1C .sec-h{margin-top:10px;font-size:clamp(36px,4.4vw,64px);line-height:1}
+.rf1C .pr4{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rf1C .pr4 b{display:block;font:800 clamp(24px,2.4vw,34px)/1 var(--display);color:var(--green)}.rf1C .pr4 span{display:block;margin-top:4px;font:600 13px/1.3 var(--text);color:var(--ink-2)}
+@media (max-width:1000px){.rf1C .base{grid-template-columns:1fr}.rf1C .gph{aspect-ratio:4/3;clip-path:polygon(50% 0,100% 26%,100% 100%,0 100%,0 26%)}}
+@media (max-width:520px){.rf1C .pr4{grid-template-columns:1fr 1fr}}

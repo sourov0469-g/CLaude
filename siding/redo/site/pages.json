@@ -278,7 +278,48 @@
     ]
    }
   ],
-  "roofing": [],
+  "roofing": [
+   {
+    "slot": "rf1",
+    "name": "Opener",
+    "mod": "p_rf1",
+    "obj": "PRf1",
+    "v": [
+     [
+      "a",
+      "Under the gable"
+     ],
+     [
+      "b",
+      "One day"
+     ],
+     [
+      "c",
+      "The photo, gabled"
+     ]
+    ]
+   },
+   {
+    "slot": "rf2",
+    "name": "What a roof costs",
+    "mod": "p_rf2",
+    "obj": "PRf2",
+    "v": [
+     [
+      "a",
+      "Two roofs, two bands"
+     ],
+     [
+      "b",
+      "Up the pitch"
+     ],
+     [
+      "c",
+      "The plain table"
+     ]
+    ]
+   }
+  ],
   "work": [],
   "reviews": [],
   "about": [],
