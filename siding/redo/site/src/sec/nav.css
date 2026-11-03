@@ -40,3 +40,16 @@ html.locked{overflow:hidden}
 .cswitch button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
 .cswitch[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.msheet,.mcard,.mcard nav a,.comp .cv,.comp .ctag{transition:none!important}.comp.press .cv{animation:none}}
+/* page views: "More" in the header, the Siding page link in the fan, the page list in the phone menu */
+.menu .pm9d{position:absolute;right:0;top:54px;min-width:220px;padding:8px;background:#fff;border-radius:14px;box-shadow:0 2px 0 #E9E5DB,0 24px 40px -20px rgba(22,25,29,.4);
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .15s ease,transform .18s ease,visibility 0s .18s}
+.menu .pm9d.open{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,transform .22s var(--ease-out)}
+.menu .pm9d a{display:block;padding:12px 14px;border-radius:8px;font:700 15px/1.2 var(--text);color:var(--ink-2);text-decoration:none}
+.menu .pm9d a:hover,.menu .pm9d a[aria-current]{background:#F1EEE6;color:var(--ink)}.menu .pm9d a:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
+.book .all9{flex:none;display:block;margin-top:12px;padding:12px 14px;border-radius:10px;background:#F1F5EF;font:800 14.5px/1.2 var(--text);color:var(--green)}
+.msheet .pg9 a[aria-current],.msheet nav a[aria-current]{color:var(--green)}
+@media (prefers-reduced-motion:reduce){.menu .pm9d{transition:none}}
+/* page views add "More": on narrow desktops the phone goes icon-only (its sr label stays) so nothing wraps */
+.hdr:has(.pm9) .menu>li>a,.hdr:has(.pm9) .menu>li>button{white-space:nowrap}
+@media (min-width:861px) and (max-width:1180px){.hdr:has(.pm9) .tel span{display:none}.hdr:has(.pm9) .tel{padding:0 15px}.hdr:has(.pm9) .menu>li>a,.hdr:has(.pm9) .menu>li>button{padding:0 11px}}
+@media (min-width:861px) and (max-width:960px){.hdr:has(.pm9) .brand small{display:none}}

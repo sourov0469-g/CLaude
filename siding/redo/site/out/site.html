@@ -2954,6 +2954,19 @@ html.locked{overflow:hidden}
 .cswitch button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
 .cswitch[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.msheet,.mcard,.mcard nav a,.comp .cv,.comp .ctag{transition:none!important}.comp.press .cv{animation:none}}
+/* page views: "More" in the header, the Siding page link in the fan, the page list in the phone menu */
+.menu .pm9d{position:absolute;right:0;top:54px;min-width:220px;padding:8px;background:#fff;border-radius:14px;box-shadow:0 2px 0 #E9E5DB,0 24px 40px -20px rgba(22,25,29,.4);
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .15s ease,transform .18s ease,visibility 0s .18s}
+.menu .pm9d.open{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,transform .22s var(--ease-out)}
+.menu .pm9d a{display:block;padding:12px 14px;border-radius:8px;font:700 15px/1.2 var(--text);color:var(--ink-2);text-decoration:none}
+.menu .pm9d a:hover,.menu .pm9d a[aria-current]{background:#F1EEE6;color:var(--ink)}.menu .pm9d a:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
+.book .all9{flex:none;display:block;margin-top:12px;padding:12px 14px;border-radius:10px;background:#F1F5EF;font:800 14.5px/1.2 var(--text);color:var(--green)}
+.msheet .pg9 a[aria-current],.msheet nav a[aria-current]{color:var(--green)}
+@media (prefers-reduced-motion:reduce){.menu .pm9d{transition:none}}
+/* page views add "More": on narrow desktops the phone goes icon-only (its sr label stays) so nothing wraps */
+.hdr:has(.pm9) .menu>li>a,.hdr:has(.pm9) .menu>li>button{white-space:nowrap}
+@media (min-width:861px) and (max-width:1180px){.hdr:has(.pm9) .tel span{display:none}.hdr:has(.pm9) .tel{padding:0 15px}.hdr:has(.pm9) .menu>li>a,.hdr:has(.pm9) .menu>li>button{padding:0 11px}}
+@media (min-width:861px) and (max-width:960px){.hdr:has(.pm9) .brand small{display:none}}
 /* SIDING · Opener A — split cover */
 .sd1A{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,64px);align-items:center;padding:120px var(--gut) 70px}
 .sd1A .sec-h{margin-top:14px;font-size:clamp(40px,5.2vw,80px);line-height:1}
@@ -9914,7 +9927,48 @@ window.Nav = (function () {
       el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`; cv.style.transform = `rotate(${rot.toFixed(1)}deg)`;
       if (Math.abs(tx + 22 - x) + Math.abs(ty + 20 - y) + Math.abs(rot) > 0.3) raf = requestAnimationFrame(tick); }
   }
-  return { wire() { menu(); spy(); companion(); } };
+  /* PAGE VIEWS. On a subpage the homepage anchors in the header, menu and footer have no target, so they are pointed at
+     the page views (or back to the homepage section). On the homepage the default header is unchanged; ?hnav=pages is the
+     switchable alternative that points it at the page views. Links keep ?review and ?hnav so the audit view carries over. */
+  function pages() {
+    const q = new URLSearchParams(location.search), PG = window.__PAGES || [], cur = (document.querySelector('main') || {}).dataset?.page || 'home';
+    const PV = cur !== 'home' || q.get('hnav') === 'pages'; if (!PV || !PG.length) return false;
+    const href = (pg, hash = '') => { const p = []; if (q.has('review')) p.push('review'); if (q.get('hnav') === 'pages') p.push('hnav=pages'); if (pg) p.push('page=' + pg); return '?' + p.join('&') + hash; };
+    const NAME = Object.fromEntries(PG);
+    // header: the four items go to their pages, and "More" holds the other four
+    const menuEl = document.querySelector('.hdr .menu'); if (menuEl) {
+      const sid = menuEl.querySelector('li > button'); menuEl.querySelectorAll('.book a').forEach((a) => (a.href = href('siding')));
+      const fan = menuEl.querySelector('.book'); if (fan && !fan.querySelector('.all9')) fan.insertAdjacentHTML('beforeend', `<a class="all9" href="${href('siding')}">The Siding page →</a>`);
+      const T = { Windows: 'windows', Roofing: 'roofing', 'Our work': 'work' };
+      menuEl.querySelectorAll(':scope > li > a').forEach((a) => { const k = T[a.textContent.trim()]; if (k) { a.href = href(k); if (k === cur) a.setAttribute('aria-current', 'page'); } });
+      if (sid && cur === 'siding') sid.setAttribute('aria-current', 'page');
+      const rest = ['reviews', 'about', 'area', 'contact'].filter((k) => NAME[k]);
+      const li = document.createElement('li'); li.className = 'pm9';
+      li.innerHTML = `<button type="button" aria-expanded="false" aria-controls="pm9">More <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <div class="pm9d" id="pm9">${rest.map((k) => `<a href="${href(k)}"${k === cur ? ' aria-current="page"' : ''}>${NAME[k]}</a>`).join('')}</div>`;
+      menuEl.append(li); const b = li.querySelector('button'), d = li.querySelector('.pm9d');
+      if (rest.includes(cur)) b.setAttribute('aria-current', 'page');
+      const set = (o) => { b.setAttribute('aria-expanded', o); d.classList.toggle('open', o); };
+      b.addEventListener('click', () => set(b.getAttribute('aria-expanded') !== 'true'));
+      li.addEventListener('mouseenter', () => matchMedia('(hover:hover)').matches && set(true)); li.addEventListener('mouseleave', () => set(false));
+      li.addEventListener('focusout', (e) => { if (!li.contains(e.relatedTarget)) set(false); });
+      addEventListener('keydown', (e) => { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { set(false); b.focus(); } });
+    }
+    // the brand goes home
+    if (cur !== 'home') { const br = document.querySelector('.hdr .brand'); if (br) br.href = href(''); }
+    // the phone menu: every page, then (on the homepage) its sections
+    const nav = document.querySelector('#menu nav'); if (nav) {
+      const pl = [['', 'Homepage'], ...PG].map(([k, n], i) => `<a href="${href(k)}" style="--i:${i}"${k === (cur === 'home' ? '' : cur) ? ' aria-current="page"' : ''}>${n}</a>`).join('');
+      if (cur !== 'home') { nav.setAttribute('aria-label', 'Pages'); nav.innerHTML = pl; }
+      else nav.insertAdjacentHTML('beforebegin', `<nav class="pg9" aria-label="Pages">${pl}</nav>`);
+    }
+    // anything left that points at a missing homepage anchor: its page if it has one, else the homepage section
+    const TO = { siding: 'siding', windows: 'windows', roofing: 'roofing', reviews: 'reviews', area: 'area' };
+    document.querySelectorAll('a[href^="#"]').forEach((a) => { const id = a.getAttribute('href').slice(1); if (!id || document.getElementById(id)) return; a.href = TO[id] ? href(TO[id]) : href('', '#' + id); });
+    return true;
+  }
+
+  return { wire() { menu(); const pv = pages(); if (!pv || (document.querySelector('main') || {}).dataset?.page === 'home') spy(); companion(); } };
 })();
 /* SIDING PAGE · 1 Opener (the page's one h1). Facts only as already published on the homepage: 431 documented siding jobs;
    James Hardie Elite Preferred + President's Club 2025; 30-year James Hardie non-prorated + lifetime workmanship on labor;
@@ -11487,9 +11541,13 @@ window.PCt3 = (function () {
   const link = (slot, v) => { const p = new URLSearchParams(location.search); p.delete('review'); p.set(slot, v); return '?review&' + p.toString(); };
   const live = (slot) => (document.querySelector(`.slot[data-slot="${slot}"]`) || {}).dataset?.v;
   const PG = window.__PAGES || [], cur = new URLSearchParams(location.search).get('page') || 'home';
-  const plink = (pg) => { const p = new URLSearchParams(); if (pg !== 'home') p.set('page', pg); return '?review' + (p.toString() ? '&' + p.toString() : ''); };
+  const plink = (pg) => { const p = new URLSearchParams(); if (new URLSearchParams(location.search).get('hnav') === 'pages') p.set('hnav', 'pages'); if (pg !== 'home') p.set('page', pg); return '?review' + (p.toString() ? '&' + p.toString() : ''); };
   const pages = PG.length ? `<div class="row pgs"><b>Page</b><div class="vs">${[['home', 'Homepage'], ...PG].map(([k, n]) => `<a href="${plink(k)}" aria-current="${cur === k}">${n}</a>`).join('')}</div></div>` : '';
-  el.innerHTML = `<header><div><b>Review</b> <span>every version, live in place</span></div><button type="button">Hide</button></header><div class="body">${pages}${Object.keys(V).filter((slot) => document.querySelector(`.slot[data-slot="${slot}"]`)).map((slot) =>
+  // header links on the homepage: the default (homepage sections) or the page views (?hnav=pages); subpages always use page views
+  const hl = (on) => { const p = new URLSearchParams(location.search); p.delete('review'); if (on) p.set('hnav', 'pages'); else p.delete('hnav'); const t = p.toString(); return '?review' + (t ? '&' + t : ''); };
+  const hon = new URLSearchParams(location.search).get('hnav') === 'pages';
+  const hnav = cur === 'home' && PG.length ? `<div class="row"><b>Header links</b><div class="vs"><a href="${hl(false)}" aria-current="${!hon}"><span class="n">A</span>Homepage sections</a><a href="${hl(true)}" aria-current="${hon}"><span class="n">B</span>Page views</a></div></div>` : '';
+  el.innerHTML = `<header><div><b>Review</b> <span>every version, live in place</span></div><button type="button">Hide</button></header><div class="body">${pages}${hnav}${Object.keys(V).filter((slot) => document.querySelector(`.slot[data-slot="${slot}"]`)).map((slot) =>
     `<div class="row"><b>${NAMES[slot] || slot}</b><div class="vs">${V[slot].map(([v, label]) => `<a href="${link(slot, v)}" aria-current="${live(slot) === v}"><span class="n">${v.toUpperCase()}</span>${label}</a>`).join('')}</div></div>`).join('')}</div>`;
   document.body.append(el);
   el.querySelector('header button').addEventListener('click', (e) => { const m = el.classList.toggle('min'); e.target.textContent = m ? 'Show' : 'Hide'; });

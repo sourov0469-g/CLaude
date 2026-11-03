@@ -74,5 +74,46 @@ window.Nav = (function () {
       el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`; cv.style.transform = `rotate(${rot.toFixed(1)}deg)`;
       if (Math.abs(tx + 22 - x) + Math.abs(ty + 20 - y) + Math.abs(rot) > 0.3) raf = requestAnimationFrame(tick); }
   }
-  return { wire() { menu(); spy(); companion(); } };
+  /* PAGE VIEWS. On a subpage the homepage anchors in the header, menu and footer have no target, so they are pointed at
+     the page views (or back to the homepage section). On the homepage the default header is unchanged; ?hnav=pages is the
+     switchable alternative that points it at the page views. Links keep ?review and ?hnav so the audit view carries over. */
+  function pages() {
+    const q = new URLSearchParams(location.search), PG = window.__PAGES || [], cur = (document.querySelector('main') || {}).dataset?.page || 'home';
+    const PV = cur !== 'home' || q.get('hnav') === 'pages'; if (!PV || !PG.length) return false;
+    const href = (pg, hash = '') => { const p = []; if (q.has('review')) p.push('review'); if (q.get('hnav') === 'pages') p.push('hnav=pages'); if (pg) p.push('page=' + pg); return '?' + p.join('&') + hash; };
+    const NAME = Object.fromEntries(PG);
+    // header: the four items go to their pages, and "More" holds the other four
+    const menuEl = document.querySelector('.hdr .menu'); if (menuEl) {
+      const sid = menuEl.querySelector('li > button'); menuEl.querySelectorAll('.book a').forEach((a) => (a.href = href('siding')));
+      const fan = menuEl.querySelector('.book'); if (fan && !fan.querySelector('.all9')) fan.insertAdjacentHTML('beforeend', `<a class="all9" href="${href('siding')}">The Siding page →</a>`);
+      const T = { Windows: 'windows', Roofing: 'roofing', 'Our work': 'work' };
+      menuEl.querySelectorAll(':scope > li > a').forEach((a) => { const k = T[a.textContent.trim()]; if (k) { a.href = href(k); if (k === cur) a.setAttribute('aria-current', 'page'); } });
+      if (sid && cur === 'siding') sid.setAttribute('aria-current', 'page');
+      const rest = ['reviews', 'about', 'area', 'contact'].filter((k) => NAME[k]);
+      const li = document.createElement('li'); li.className = 'pm9';
+      li.innerHTML = `<button type="button" aria-expanded="false" aria-controls="pm9">More <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <div class="pm9d" id="pm9">${rest.map((k) => `<a href="${href(k)}"${k === cur ? ' aria-current="page"' : ''}>${NAME[k]}</a>`).join('')}</div>`;
+      menuEl.append(li); const b = li.querySelector('button'), d = li.querySelector('.pm9d');
+      if (rest.includes(cur)) b.setAttribute('aria-current', 'page');
+      const set = (o) => { b.setAttribute('aria-expanded', o); d.classList.toggle('open', o); };
+      b.addEventListener('click', () => set(b.getAttribute('aria-expanded') !== 'true'));
+      li.addEventListener('mouseenter', () => matchMedia('(hover:hover)').matches && set(true)); li.addEventListener('mouseleave', () => set(false));
+      li.addEventListener('focusout', (e) => { if (!li.contains(e.relatedTarget)) set(false); });
+      addEventListener('keydown', (e) => { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { set(false); b.focus(); } });
+    }
+    // the brand goes home
+    if (cur !== 'home') { const br = document.querySelector('.hdr .brand'); if (br) br.href = href(''); }
+    // the phone menu: every page, then (on the homepage) its sections
+    const nav = document.querySelector('#menu nav'); if (nav) {
+      const pl = [['', 'Homepage'], ...PG].map(([k, n], i) => `<a href="${href(k)}" style="--i:${i}"${k === (cur === 'home' ? '' : cur) ? ' aria-current="page"' : ''}>${n}</a>`).join('');
+      if (cur !== 'home') { nav.setAttribute('aria-label', 'Pages'); nav.innerHTML = pl; }
+      else nav.insertAdjacentHTML('beforebegin', `<nav class="pg9" aria-label="Pages">${pl}</nav>`);
+    }
+    // anything left that points at a missing homepage anchor: its page if it has one, else the homepage section
+    const TO = { siding: 'siding', windows: 'windows', roofing: 'roofing', reviews: 'reviews', area: 'area' };
+    document.querySelectorAll('a[href^="#"]').forEach((a) => { const id = a.getAttribute('href').slice(1); if (!id || document.getElementById(id)) return; a.href = TO[id] ? href(TO[id]) : href('', '#' + id); });
+    return true;
+  }
+
+  return { wire() { menu(); const pv = pages(); if (!pv || (document.querySelector('main') || {}).dataset?.page === 'home') spy(); companion(); } };
 })();
