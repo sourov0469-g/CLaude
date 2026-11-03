@@ -186,3 +186,19 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   swells a little with speed and leaves a ripple ring. Keys: Eave · Field · Ridge glide the lens; arrow keys move it
   when the roof is focused; touch taps place it. Skills: ⟦S1324⟧ reveal-hover masks (CSS mask, eased pointer),
   ⟦S1323⟧ ripple emission per distance, ⟦S0526⟧ anatomy, ⟦S1107⟧ keyboard, ⟦S1388⟧ 3D keys.
+
+## L14 · Wise Check 6 + 7 (Wise stands at 5: V1 dial + checklist, V2 lens modes, V3 case panels, V4 chat, V5 kit flat-lay)
+- **Wise 6 · "Contact Sheet"** — reference **Scout Motors** (film-roll photo evidence). A light table with a strip of
+  film: eight drawn frames, the four published parts of the Wise Check and Owl's four published "when to call"
+  cases. Drag the strip (with inertia), use Prev/Next, or arrow through the frames. Choosing a frame circles it in
+  amber grease pencil, as on a real contact sheet, and a loupe shows it enlarged beside Owl's own line; a case frame
+  also names the parts it focuses on (`OWL.WISE`). The frames are drawn illustrations, labelled as such, never
+  photos. Skills: ⟦S0407⟧ grease-pencil draw-on, ⟦S1018⟧ draggable a11y, ⟦S1107⟧ keyboard, ⟦S1388⟧ keys,
+  ⟦S0451⟧ title.
+- **Wise 7 · "The Route"** — reference **Lusion** (one line carries the visitor). A cutaway house. As the section
+  scrolls through, one dotted route draws itself: up the ladder and over the roof (roof evaluation), in through the
+  hatch to the attic (attic inspection, a flashlight cone), down to the ceiling below a stain (heat-sensor leak
+  detection, a false-colour patch), and to the table where the photos and video are shown (documentation). Each
+  station lights its card with Owl's published line. The cards are keys that move the route to their station. No
+  order of work is claimed: the stations are numbered as Owl lists the parts. Skills: ⟦S0407⟧ path draw, ⟦S1325⟧
+  progress, ⟦S0526⟧ anatomy cutaway, ⟦S1388⟧ keys, ⟦S0451⟧ title.

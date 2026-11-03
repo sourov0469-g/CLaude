@@ -1,0 +1,113 @@
+<section class="sec wise7" id="wise-check-7" aria-labelledby="w7-h">
+<style>
+.wise7{overflow:hidden}
+.wise7 .hd{margin-bottom:clamp(18px,2.6vw,30px)}
+.wise7 .lede{margin-top:12px;max-width:46ch}
+.wise7 .g{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,.6fr);gap:clamp(20px,3vw,48px);align-items:center}
+.wise7 .fig{position:relative;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#E6EEF1 0,#F4F2EA 70%);box-shadow:0 2px 0 #fff inset,0 40px 70px -44px rgba(23,17,29,.55)}
+.wise7 svg{display:block;width:100%;height:auto;max-width:none}
+.wise7 .route{fill:none;stroke:#17111D;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:.1 13}
+.wise7 .mp{fill:none;stroke:#fff;stroke-width:18;stroke-linecap:round;stroke-linejoin:round}
+.wise7 .tip{fill:#EAA221;stroke:#fff;stroke-width:4}
+.wise7 .tipr{fill:none;stroke:#EAA221;stroke-width:2;opacity:.6}
+.wise7 .fx{opacity:0;transition:opacity .5s}
+.wise7 .fx.on{opacity:1}
+.wise7 .st{fill:#FBFAF6;stroke:#17111D;stroke-width:3;transition:fill .3s}
+.wise7 .st.on{fill:#EAA221}
+.wise7 .stn{font:800 15px/1 var(--font,inherit);fill:#17111D;text-anchor:middle;pointer-events:none}
+.wise7 .cards{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.wise7 .card{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;width:100%;min-height:56px;padding:12px 14px;border-radius:18px;text-align:left;background:linear-gradient(180deg,#FFFFFF,#F4EFE4);box-shadow:0 4px 0 #D6CDB9,0 12px 20px -16px rgba(23,17,29,.45);transition:transform .15s,box-shadow .15s,background .25s}
+.wise7 .card i{grid-row:span 2;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#F1EFE6;color:#17111D;font-style:normal;transition:background .25s}
+.wise7 .card i svg{width:30px;height:30px}
+.wise7 .card b{font-size:17px}
+.wise7 .card span{font-size:14px;color:var(--ink-70)}
+.wise7 .card:hover{transform:translateY(-2px)}
+.wise7 .card[aria-current="step"]{background:linear-gradient(180deg,#FFF7E6,#FBEBC8);box-shadow:0 2px 0 var(--amber-edge),0 0 0 2px var(--amber)}
+.wise7 .card[aria-current="step"] i{background:var(--amber)}
+.wise7 .card.past i{background:#F6DFA9}
+.wise7 .card:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wise7 .foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:18px}
+.wise7 .note{margin-top:14px;font-size:14px;color:var(--ink-70)}
+@media (max-width:980px){.wise7 .g{grid-template-columns:1fr}.wise7 .cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.wise7 .cards{grid-template-columns:1fr}.wise7 .card span{display:none}}
+@media (prefers-reduced-motion:reduce){.wise7 .fx,.wise7 .st,.wise7 .card,.wise7 .card i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">The Wise Check</span><h2 class="h2" id="w7-h" style="margin-top:12px">The Route</h2>
+  <p class="lede rv">Where each part of a Wise Check happens on a house: on the roof, in the attic, under the ceiling, and in the photos you get to see. Scroll and follow the line.</p></div>
+ <div class="g">
+  <div class="fig" data-owl="say:Follow the line">
+   <svg viewBox="0 0 1000 640" role="img" aria-label="A cutaway house with a dotted route over the roof, into the attic, under a ceiling stain and to a table where photos are shown"></svg>
+  </div>
+  <div>
+   <ol class="cards" aria-label="The four parts, in the order Owl lists them"></ol>
+   <div class="foot"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+   <p class="note">Numbered as Owl lists the parts, not as a fixed order of work.</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','7',function(root){
+  var W = OWL.WISE, svg = root.querySelector('svg'), fig = root.querySelector('.fig'), list = root.querySelector('.cards'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var V = [[968, 600], [868, 600], [814, 352], [736, 300], [664, 254], [814, 352], [868, 600], [786, 592], [300, 592], [300, 400], [300, 336], [404, 336], [300, 336], [300, 420], [452, 420], [600, 520], [628, 520]], ST = [4, 11, 14, 16];
+  var h = '<rect y="600" width="1000" height="40" fill="#8DB45F"/><path d="M0 600H1000" stroke="#6F9447" stroke-width="3"/>';
+  /* house: walls, rooms, ceiling with hatch */
+  h += '<rect x="220" y="362" width="540" height="238" fill="#E9E1CF"/><rect x="232" y="372" width="516" height="228" fill="#FBFAF6"/><rect x="232" y="586" width="516" height="14" fill="#D9CFBA"/>';
+  h += '<rect x="404" y="426" width="96" height="74" rx="4" fill="#CFE1EA" stroke="#B5AE9E" stroke-width="3"/><path d="M452 426V500M404 463H500" stroke="#B5AE9E" stroke-width="3"/>';
+  h += '<rect x="748" y="498" width="12" height="102" fill="#FBFAF6"/><path d="M748 498L796 516V600" fill="#C9A57A" stroke="#9C7A52" stroke-width="2"/>';
+  h += '<rect x="220" y="358" width="540" height="14" fill="#D9CFBA"/><rect x="282" y="358" width="40" height="14" fill="#3F353B"/>';
+  h += '<g stroke="#B48E5A" stroke-width="4"><path d="M284 372V600M316 372V600"/><path d="M284 400H316M284 440H316M284 480H316M284 520H316M284 560H316"/></g>';
+  h += '<ellipse cx="452" cy="378" rx="40" ry="6" fill="#C9A57A" opacity=".6"/>';
+  h += '<path d="M560 540H704M572 540V590M692 540V590" stroke="#9C7A52" stroke-width="7" stroke-linecap="round"/><rect x="606" y="522" width="52" height="18" rx="3" fill="#17111D"/>';
+  /* roof and attic */
+  h += '<polygon points="176,374 490,150 804,374" fill="#5B5662"/><polygon points="210,358 490,170 770,358" fill="#3F353B"/>';
+  h += '<path d="M490 170V358M390 237V358M590 237V358" stroke="#6B5A4A" stroke-width="5"/><path d="M216 346q20-12 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0V358H216z" fill="#E7C98F"/>';
+  for (var c = 0; c < 9; c++){ var t = c/9; h += '<path d="M' + (176 + 314*t).toFixed(0) + ' ' + (374 - 224*t).toFixed(0) + 'l' + (34*Math.cos(.62)).toFixed(0) + ' ' + (24).toFixed(0) + 'M' + (804 - 314*t).toFixed(0) + ' ' + (374 - 224*t).toFixed(0) + 'l-' + (34*Math.cos(.62)).toFixed(0) + ' 24" stroke="#17111D" stroke-opacity=".25" stroke-width="2"/>'; }
+  h += '<rect x="606" y="200" width="40" height="80" fill="#A4553D"/><path d="M606 216h40M606 234h40M606 252h40" stroke="#7E3E2C" stroke-width="2"/><path d="M600 262l52 0 0 10-52 0z" fill="#9AA3A8"/>';
+  /* ladder */
+  h += '<g stroke="#9C9585" stroke-width="5" stroke-linecap="round"><path d="M850 600L796 352M884 600L830 352"/>';
+  for (var r = 1; r < 9; r++){ var k = r/9; h += '<path d="M' + (850 - 54*k).toFixed(0) + ' ' + (600 - 248*k).toFixed(0) + 'H' + (884 - 54*k).toFixed(0) + '"/>'; }
+  h += '</g>';
+  /* station effects */
+  h += '<g class="fx f0"><circle cx="672" cy="266" r="30" fill="none" stroke="#EAA221" stroke-width="6"/><path d="M693 287l20 20" stroke="#EAA221" stroke-width="8" stroke-linecap="round"/></g>';
+  h += '<g class="fx f1"><path d="M410 328L250 268 300 236z" fill="#FFF3C4" opacity=".6"/><rect x="398" y="322" width="22" height="10" rx="3" fill="#17111D" transform="rotate(20 409 327)"/></g>';
+  h += '<defs><radialGradient id="w7h" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#2E6FD0"/><stop offset=".45" stop-color="#3FA7C9"/><stop offset=".75" stop-color="#E9D24A"/><stop offset="1" stop-color="#E2832E" stop-opacity="0"/></radialGradient>';
+  h += '<mask id="w7m" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="640"><path class="mp" d=""/></mask></defs>';
+  h += '<g class="fx f2"><ellipse cx="452" cy="380" rx="62" ry="14" fill="url(#w7h)"/><rect x="438" y="404" width="30" height="22" rx="5" fill="#17111D"/><rect x="444" y="398" width="18" height="8" rx="2" fill="#17111D"/></g>';
+  h += '<g class="fx f3"><rect x="610" y="525" width="44" height="12" fill="#CFE1EA"/><rect x="612" y="527" width="12" height="8" fill="#5B5662"/><rect x="626" y="527" width="12" height="8" fill="#A4553D"/><rect x="640" y="527" width="12" height="8" fill="#5BA3D9"/><path d="M606 508l26-30 26 30" fill="none" stroke="#EAA221" stroke-width="3" stroke-dasharray="3 6"/></g>';
+  /* the route */
+  h += '<path class="route" d="" mask="url(#w7m)"/>';
+  var OFF = [[0, -38], [0, -34], [48, 4], [0, -70]];
+  ST.forEach(function(s, i){ var x = V[s][0] + OFF[i][0], y = V[s][1] + OFF[i][1]; h += '<g class="stg"><circle class="st" cx="' + x + '" cy="' + y + '" r="15"/><text class="stn" x="' + x + '" y="' + (y + 5) + '">' + (i + 1) + '</text></g>'; });
+  h += '<circle class="tipr" r="16"/><circle class="tip" r="9"/>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var d = 'M' + V.map(function(p){ return p.join(' '); }).join(' L ');
+  var route = svg.querySelector('.route'), mp = svg.querySelector('.mp'), tip = svg.querySelector('.tip'), tipr = svg.querySelector('.tipr'), sts = [].slice.call(svg.querySelectorAll('.st')), fx = [0, 1, 2, 3].map(function(i){ return svg.querySelector('.f' + i); });
+  route.setAttribute('d', d); mp.setAttribute('d', d);
+  var L = [0]; for (var i = 1; i < V.length; i++) L.push(L[i - 1] + Math.hypot(V[i][0] - V[i - 1][0], V[i][1] - V[i - 1][1])); var T = L[L.length - 1];
+  mp.style.strokeDasharray = T.toFixed(1);
+  var SP = ST.map(function(s){ return L[s]/T; });
+  /* each station gets an equal share of the scroll, however long the walk between them */
+  function toRoute(q){ var k = Math.min(3.9999, q*4), i = Math.floor(k), a = i ? SP[i - 1] : 0; return a + (SP[i] - a)*(k - i); }
+  var cards = W.parts.map(function(p, i){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.className = 'card';
+    b.innerHTML = '<i><svg viewBox="0 0 64 64" aria-hidden="true">' + p.ico + '</svg></i><b>' + (i + 1) + '. ' + p.n + '</b><span>' + p.t + '</span>';
+    b.addEventListener('click', function(){ lock = scrollY; tgt = (i + 1)/4; if (OWL.reduce){ shown = tgt; paint(); } else kick(); });
+    li.appendChild(b); list.appendChild(li); return b; });
+  var shown = 0, tgt = 0, raf = 0, lock = null, now = -1;
+  function at(dd){ for (var i = 1; i < V.length; i++) if (dd <= L[i]){ var k = (dd - L[i - 1])/Math.max(.01, L[i] - L[i - 1]); return [V[i - 1][0] + (V[i][0] - V[i - 1][0])*k, V[i - 1][1] + (V[i][1] - V[i - 1][1])*k]; } return V[V.length - 1]; }
+  function paint(){ var rf = toRoute(shown), dd = rf*T, q = at(dd); mp.style.strokeDashoffset = (T - dd).toFixed(1);
+    tip.setAttribute('cx', q[0].toFixed(1)); tip.setAttribute('cy', q[1].toFixed(1)); tipr.setAttribute('cx', q[0].toFixed(1)); tipr.setAttribute('cy', q[1].toFixed(1));
+    var n = -1; SP.forEach(function(s, i){ var on = rf >= s - .004; if (on) n = i; sts[i].classList.toggle('on', on); fx[i].classList.toggle('on', on); });
+    if (n !== now){ now = n; cards.forEach(function(c, i){ if (i === n) c.setAttribute('aria-current', 'step'); else c.removeAttribute('aria-current'); c.classList.toggle('past', i < n); }); } }
+  var last = 0;
+  function loop(t){ var dt = last ? Math.min(100, t - last) : 16.7; last = t; var dlt = tgt - shown; shown += dlt*(1 - Math.pow(.88, dt/16.7)); if (Math.abs(tgt - shown) < .002) shown = tgt; paint(); if (shown !== tgt) raf = requestAnimationFrame(loop); else { raf = 0; last = 0; } }
+  function kick(){ if (!raf) raf = requestAnimationFrame(loop); }
+  function fromScroll(){ if (lock !== null){ if (Math.abs(scrollY - lock) < 80) return; lock = null; }
+    var b = fig.getBoundingClientRect(), span = b.height*.95 + innerHeight*.2; tgt = Math.max(0, Math.min(1, (innerHeight*.8 - b.top)/span)); kick(); }
+  if (OWL.reduce){ shown = tgt = 1; paint(); OWL.reveal(h2); return; }
+  paint(); addEventListener('scroll', fromScroll, {passive: true}); addEventListener('resize', fromScroll); fromScroll();
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.2}); io.observe(fig); } else OWL.reveal(h2);
+});
+</script>
+</section>

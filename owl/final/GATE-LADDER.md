@@ -467,3 +467,28 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - **Explore 7:** CSS mask reveal with eased pointer ⟦S1324⟧; ripple emitted per distance ⟦S1323⟧; anatomy ⟦S0526⟧; keyboard lens ⟦S1107⟧; zone keys ⟦S1388⟧.
 
 **Defect found and fixed in the round:** Explore 7 first drew its four layers as live SVG under moving masks, which repainted ~2,000 shapes a frame and slowed the lens under load (three checks failed in the full run). Each layer is now drawn once as an image, and the lens easing is time-based, so it arrives on time at any frame rate.
+
+## L14 · Wise Check 6 + 7 · checks 42/42 · evidence `gates/ladder/L14-wise-6-7/` · Wise Check now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Wise 6 · Contact Sheet** | Scout Motors (film-roll photo evidence) | A light table (it flickers on like a tube) holding a strip of film with eight drawn frames: the four published parts of the Wise Check, then Owl's four published "when to call" cases. Drag the strip with inertia, use Prev/Next, or arrow/Home/End through the frames. The chosen frame is circled in amber grease pencil and shown enlarged in a loupe beside Owl's own line; a case frame also names the parts it looks at. Labelled "The frames are drawings, not job photos." | 8.4 | 8.0 | 8.2 | 8.6 | **8.30** |
+| **Wise 7 · The Route** | Lusion (one line carries the visitor) | A cutaway house. Scrolling draws one dotted route with an amber marker: up the ladder to the chimney flashing (roof evaluation, magnifier), in through the hatch to the attic (attic inspection, flashlight cone), under the ceiling stain (heat-sensor leak detection, false-colour patch), to the table where photos are shown (documentation). Each station gets an equal share of the scroll and lights its card; the cards are keys that move the route. | 8.4 | 8.2 | 8.2 | 8.6 | **8.34** |
+
+**Truth:**
+- Every name and line comes from `OWL.WISE` (Owl's published Wise Check words), tested string for string. No durations, prices or promises are added.
+- Wise 6's frames are labelled as drawings. Wise 7 states that the stations are numbered as Owl lists the parts, not as a fixed order of work.
+- Roofer check: the heat-sensor frame shows the damp patch reading cooler (blue) than the dry ceiling around it, which is how moisture shows on a thermal camera.
+
+**Checks run:** the generic gate, plus:
+- Wise 6: eight frames in data order; frame 1 chosen with Owl's words; Next ×2 lands on heat-sensor; End brings frame 8 into view; case frames list their parts from data; dragging moves the strip without picking a frame; the drawings label.
+- Wise 7: card text from data; nothing lit at the start; 60% scroll lights stations 1–2 with the flashlight on and the heat patch off; the end lights all four; a card moves the route back to station 3; the route is masked up to the marker; the no-fixed-order note.
+
+**Ledger:**
+- **Wise 6:** grease-pencil draw-on ⟦S0407⟧; draggable strip with keyboard and button alternatives ⟦S1018⟧ ⟦S1107⟧; 3D keys ⟦S1388⟧; title ⟦S0451⟧.
+- **Wise 7:** route draw through a mask ⟦S0407⟧; scroll progress ⟦S1325⟧; anatomy cutaway ⟦S0526⟧; station keys ⟦S1388⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Wise 7's long floor walk took most of the scroll, so station 2 only lit at 78%; each station now gets an equal share.
+- Its easing was frame-rate bound and missed the end under load; it is now time-based.
+- Idle grease-pencil dots showed on unchosen frames; they are now hidden.
+- The phone loupe touched the gutter; it is now inset.

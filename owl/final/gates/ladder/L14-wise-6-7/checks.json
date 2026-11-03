@@ -1,0 +1,275 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Contact Sheet"
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "eight frames: the four published parts, then the four published cases",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "frame 1 is chosen and circled; its words are Owl's",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "Next moves to frame 3 (heat-sensor leak detection)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "End jumps to the last frame and the strip brings it into view",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "a case frame names the parts it focuses on, from the data",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "dragging the strip moves it",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "a drag does not pick a frame by accident",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "the frames are labelled as drawings, not job photos",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Route"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "four station cards in Owl's published words",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "at the start no station is lit",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "scrolling draws the route: halfway lights the roof and attic stations",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "the attic flashlight is on at station 2",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "the end of the route reaches documentation: all four lit",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "a card moves the route to its station (heat sensor)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "the route is masked, drawn only up to the marker",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "no fixed order of work is claimed",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

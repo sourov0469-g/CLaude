@@ -17,5 +17,36 @@ module.exports = {
     const b = await p.evaluate(S => { const r = document.querySelector(S + ' .tool[data-i="0"]').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }, S);
     await p.mouse.move(b.x, b.y); await p.waitForTimeout(400);
     rec('pointing at a tool on the mat selects it', await p.evaluate(S => document.querySelector(S + ' #w5-t0').getAttribute('aria-selected') === 'true', S));
+  },
+  '6': async (p, S, rec) => {
+    await p.waitForTimeout(1500);
+    rec('eight frames: the four published parts, then the four published cases', await p.evaluate(S => { const n = [...document.querySelectorAll(S + ' .fr')].map(b => b.getAttribute('aria-label').replace(/^Frame \d: /, '')); return n.length === 8 && n.join('|') === OWL.WISE.parts.map(x => x.n).concat(OWL.WISE.cases.map(x => x.n)).join('|'); }, S));
+    rec('frame 1 is chosen and circled; its words are Owl\'s', await p.evaluate(S => document.querySelector(S + ' .fr').getAttribute('aria-pressed') === 'true' && document.querySelector(S + ' .cap p').textContent === OWL.WISE.parts[0].t, S));
+    await p.click(S + ' .nx'); await p.click(S + ' .nx'); await p.waitForTimeout(500);
+    rec('Next moves to frame 3 (heat-sensor leak detection)', await p.evaluate(S => document.querySelector(S + ' .cap h3').textContent === 'Heat-sensor leak detection' && document.querySelectorAll(S + ' .fr[aria-pressed="true"]').length === 1, S));
+    await p.focus(S + ' .fr:nth-child(3)'); await p.keyboard.press('End'); await p.waitForTimeout(800);
+    rec('End jumps to the last frame and the strip brings it into view', await p.evaluate(S => { const t = document.querySelector(S + ' .table').getBoundingClientRect(), f = document.querySelector(S + ' .fr:nth-child(8)').getBoundingClientRect(); return document.querySelector(S + ' .cap h3').textContent === 'Just checking' && f.left >= t.left - 2 && f.right <= t.right + 2; }, S));
+    rec('a case frame names the parts it focuses on, from the data', await p.evaluate(S => [...document.querySelectorAll(S + ' .cap li')].length === OWL.WISE.cases[3].f.length, S));
+    const tb = await p.evaluate(S => { const r = document.querySelector(S + ' .table').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, S);
+    const x0 = await p.evaluate(S => document.querySelector(S + ' .film').style.transform, S);
+    await p.mouse.move(tb[0] + tb[2] * .3, tb[1] + tb[3] / 2); await p.mouse.down(); await p.mouse.move(tb[0] + tb[2] * .7, tb[1] + tb[3] / 2, { steps: 10 }); await p.mouse.up(); await p.waitForTimeout(900);
+    rec('dragging the strip moves it', await p.evaluate(([S, x0]) => document.querySelector(S + ' .film').style.transform !== x0, [S, x0]));
+    rec('a drag does not pick a frame by accident', await p.evaluate(S => document.querySelector(S + ' .cap h3').textContent === 'Just checking', S));
+    rec('the frames are labelled as drawings, not job photos', await p.evaluate(S => /drawings, not job photos/.test(document.querySelector(S).innerText), S));
+  },
+  '7': async (p, S, rec) => {
+    rec('four station cards in Owl\'s published words', await p.evaluate(S => [...document.querySelectorAll(S + ' .card span')].map(s => s.textContent).join('|') === OWL.WISE.parts.map(x => x.t).join('|'), S));
+    const go = k => p.evaluate(([S, k]) => { const f = document.querySelector(S + ' .fig'), b = f.getBoundingClientRect(), span = b.height * .95 + innerHeight * .2; scrollTo({ top: scrollY + b.top - (innerHeight * .8 - k * span), behavior: 'instant' }); }, [S, k]);
+    await go(0.02); await p.waitForTimeout(1200);
+    rec('at the start no station is lit', await p.evaluate(S => document.querySelectorAll(S + ' .st.on').length === 0, S));
+    await go(0.6); await p.waitForTimeout(1500);
+    rec('scrolling draws the route: halfway lights the roof and attic stations', await p.evaluate(S => document.querySelectorAll(S + ' .st.on').length === 2 && document.querySelector(S + ' .card[aria-current="step"] b').textContent.startsWith('2.'), S));
+    rec('the attic flashlight is on at station 2', await p.evaluate(S => document.querySelector(S + ' .f1').classList.contains('on') && !document.querySelector(S + ' .f2').classList.contains('on'), S));
+    await go(1); await p.waitForTimeout(1600);
+    rec('the end of the route reaches documentation: all four lit', await p.evaluate(S => document.querySelectorAll(S + ' .st.on').length === 4 && document.querySelector(S + ' .card[aria-current="step"] b').textContent.startsWith('4.'), S));
+    await p.click(S + ' .card >> nth=2'); await p.waitForTimeout(1600);
+    rec('a card moves the route to its station (heat sensor)', await p.evaluate(S => document.querySelectorAll(S + ' .st.on').length === 3 && document.querySelector(S + ' .f2').classList.contains('on') && !document.querySelector(S + ' .f3').classList.contains('on'), S));
+    rec('the route is masked, drawn only up to the marker', await p.evaluate(S => { const m = document.querySelector(S + ' .mp'); return parseFloat(m.style.strokeDashoffset) > 0; }, S));
+    rec('no fixed order of work is claimed', await p.evaluate(S => /not as a fixed order of work/.test(document.querySelector(S).innerText), S));
   }
 };
