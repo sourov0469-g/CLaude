@@ -482,7 +482,48 @@
     ]
    }
   ],
-  "reviews": [],
+  "reviews": [
+   {
+    "slot": "rv1",
+    "name": "Opener",
+    "mod": "p_rv1",
+    "obj": "PRv1",
+    "v": [
+     [
+      "a",
+      "The score"
+     ],
+     [
+      "b",
+      "Thirty names"
+     ],
+     [
+      "c",
+      "One voice first"
+     ]
+    ]
+   },
+   {
+    "slot": "rv2",
+    "name": "The reviews",
+    "mod": "p_rv2",
+    "obj": "PRv2",
+    "v": [
+     [
+      "a",
+      "The full wall"
+     ],
+     [
+      "b",
+      "Sorted your way"
+     ],
+     [
+      "c",
+      "Index and reader"
+     ]
+    ]
+   }
+  ],
   "about": [],
   "area": [],
   "contact": []

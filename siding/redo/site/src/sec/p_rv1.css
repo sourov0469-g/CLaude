@@ -1,0 +1,19 @@
+/* REVIEWS · Opener */
+.rv1A,.rv1C{padding:120px var(--gut) 76px}
+.rv1A .sub2,.rv1B .sub2,.rv1C .sub2{margin-top:16px;font:600 17px/1.5 var(--text);color:var(--ink-2)}
+/* A — the score */
+.rv1A .sec-h{margin-top:12px;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .25em}
+.rv1A .sc2{font:800 clamp(140px,26vw,380px)/.82 var(--display);letter-spacing:-.06em;color:var(--green)}
+.rv1A .ln6{font:800 clamp(28px,3.6vw,56px)/1.05 var(--display);letter-spacing:-.02em;color:var(--ink);max-width:10ch}
+.rv1A .sub2{margin-bottom:24px}
+/* B — thirty names */
+.rv1B{position:relative;overflow:hidden;padding:110px var(--gut) 90px;background:#0E3B2C}
+.rv1B .names{position:absolute;inset:40px var(--gut);font:800 clamp(24px,3.4vw,52px)/1.08 var(--display);letter-spacing:-.02em;color:rgba(181,219,110,.14);text-align:justify;pointer-events:none}
+.rv1B .names span:nth-child(3n){color:rgba(255,255,255,.08)}
+.rv1B .ov2{position:relative;max-width:760px;padding:clamp(24px,3vw,40px);border-radius:24px;background:rgba(14,59,44,.88);backdrop-filter:blur(2px)}
+.rv1B .pkick{color:#B5DB6E}.rv1B .sec-h{margin-top:10px;color:#fff;font-size:clamp(36px,5vw,76px);line-height:1}
+.rv1B .sub2{color:rgba(255,255,255,.85);margin-bottom:22px}
+/* C — one voice first */
+.rv1C .sec-h{margin-top:12px;font-size:clamp(40px,5.4vw,84px);line-height:1}
+.rv1C figure.pq2.open2{margin-top:28px;padding:clamp(24px,3.4vw,44px);border-radius:26px;background:#F6F9F4;box-shadow:inset 6px 0 0 #B5DB6E;max-width:1000px}
+.rv1C figure.pq2.open2 blockquote p{font:800 clamp(26px,3.2vw,48px)/1.15 var(--display);letter-spacing:-.02em;color:var(--ink)}
