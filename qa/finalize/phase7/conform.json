@@ -214,7 +214,7 @@
     true
    ],
    "reached": true,
-   "wheelSteps": 85,
+   "wheelSteps": 86,
    "icons": [
     {
      "host": "lv",
@@ -590,7 +590,7 @@
     true
    ],
    "reached": true,
-   "wheelSteps": 60,
+   "wheelSteps": 55,
    "icons": [
     {
      "host": "lv",
