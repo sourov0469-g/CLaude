@@ -57,7 +57,68 @@ def heroes():
 <div class="win" data-solid><div class="glass">{FILM}<div class="mull"></div>{PP}</div><div class="sill"></div></div></section>'''
     v5 = f'''<section class="hero v5" aria-labelledby="h1"><h1 class="lead" id="h1">{LEAD}</h1>
 <div class="strip" data-solid>{FILM}{PP}</div><div class="row"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
-    return {'1': v1, '2': v2, '3': v3, '4': v4, '5': v5}
+    return {'1': v1, **new_heroes(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
+
+
+ALT = {'c2': 'A modern two-storey house with charcoal lap siding and warm wood soffits.',
+       'c1': 'A black board-and-batten house at dusk with warm light in the windows.',
+       'c3': 'A craftsman-style house at dusk with board-and-batten siding and stone.'}
+ARROW = lambda d: f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+LAPCHIP = '<svg viewBox="0 0 44 44" aria-hidden="true"><rect x="2" y="2" width="40" height="40" rx="9" fill="#0E3B2C"/><g fill="#B5DB6E"><rect x="8" y="10" width="28" height="5" rx="1"/><rect x="8" y="19" width="28" height="5" rx="1" opacity=".8"/><rect x="8" y="28" width="28" height="5" rx="1" opacity=".6"/></g></svg>'
+
+
+def matte_url():
+    from PIL import Image
+    import base64, io
+    m = Image.open(os.path.join(HERE, 'media', 'cand3-matte.png')).convert('L'); rgba = Image.new('RGBA', m.size, (0, 0, 0, 0)); rgba.putalpha(m)
+    b = io.BytesIO(); rgba.save(b, 'PNG', optimize=True); return 'data:image/png;base64,' + base64.b64encode(b.getvalue()).decode()
+
+
+def hero2_data():
+    from PIL import Image
+    import base64, io
+    def png(p):
+        b = io.BytesIO(); Image.open(os.path.join(HERE, 'media', p)).save(b, 'PNG', optimize=True); return 'data:image/png;base64,' + base64.b64encode(b.getvalue()).decode()
+    return {'c2': jpeg(os.path.join(HERE, 'media', 'hero-cand-2.png'), 1200, 86), 'c2d': png('cand2-depth.png'),
+            'c1': jpeg(os.path.join(HERE, 'media', 'hero-cand-1.jpg'), 1024, 84), 'c1d': png('cand1-depth.png'),
+            'c3': jpeg(os.path.join(HERE, 'media', 'hero-cand-3.jpg'), 1200, 86)}
+
+
+def new_heroes():
+    """Five new heroes on Muse's supplied photographs (never captioned as the firm's jobs). Photos load from one
+    embedded copy (window.__HERO2) so no version duplicates an image."""
+    creds = '<div class="creds2"><span>GAF Master Elite</span><span>James Hardie Elite Preferred</span><span>Andersen Certified Premier</span></div>'
+    copy = lambda: f'<h1 class="lead" id="h1" data-split>{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}'
+    hint = '<span class="hint2" data-solid><i></i>Move to look around</span>'
+    v2 = f'''<section class="hero h2v" aria-labelledby="h1"><div class="copy">{copy()}{creds}</div>
+<div class="hph" role="img" aria-label="{ALT['c2']}">{hint}<div class="chip" data-solid>{LAPCHIP}<div><b>Lap siding</b><small>The full wall, course by course</small></div></div></div></section>'''
+    steps = ['One project manager walks every side.', 'Every trade priced on one visit.', 'Built, then walked through with you.']
+    v3 = f'''<section class="hero h3v" aria-labelledby="h1"><div class="pin"><div class="copy"><h1 class="lead" id="h1" data-split>{LEAD}</h1>
+<div class="steps" aria-live="polite">{''.join(f'<p class="step{" on" if not i else ""}"><b>0{i + 1}</b>{t}</p>' for i, t in enumerate(steps))}</div><p class="sub">{SUB}</p>{CTAS}</div>
+<div class="hph" role="img" aria-label="{ALT['c1']}"><span class="rail" aria-hidden="true"></span>{hint}</div></div></section>'''
+    v4 = f'''<section class="hero h4v" aria-labelledby="h1" style="--matte:url({matte_url()})"><div class="layers"><img class="back" alt="{ALT['c3']}" decoding="async">
+<h1 class="lead" id="h1"><span class="ln">The full wall or</span><span class="ln">the whole house.</span></h1><img class="front" alt="" aria-hidden="true" decoding="async"></div>
+<div class="card" data-solid><p class="sub">{SUB}</p>{CTAS}</div></section>'''
+    n = 11
+    courses = ''.join(f'<div class="c" style="top:{i * 100 / n:.3f}%;height:{100 / n + 0.35:.3f}%;--side:{-1 if i % 2 else 1};--d:{(n - 1 - i) * 0.07:.2f}s"><img alt="" decoding="async"></div>' for i in range(n))
+    v5 = f'''<section class="hero h5v" aria-labelledby="h1"><div class="copy">{copy()}{creds}</div>
+<div class="courses" role="img" aria-label="{ALT['c2']} The photograph is hung as lap courses, the bottom course first.">{courses}<span class="tag5" data-solid>Every course, from the bottom up</span></div></section>'''
+    cards = [('c2', 'Lap siding'), ('c1', 'Board and batten'), ('c3', 'Board and batten with stone')]
+    v6 = f'''<section class="hero h6v" aria-labelledby="h1"><div class="copy">{copy()}{creds}</div>
+<div class="stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Three siding styles. Arrow keys or the buttons change the front card.">
+<div class="deck">{''.join(f'<figure class="card" data-label="{lb}" data-img="{k}"><img alt="{ALT[k]}" decoding="async"><figcaption class="lb">{lb}</figcaption></figure>' for k, lb in cards)}</div>
+<div class="ctl"><span class="now" aria-live="polite"></span><button type="button" data-go="-1" aria-label="Previous style">{ARROW(-1)}</button><button type="button" data-go="1" aria-label="Next style">{ARROW(1)}</button></div></div></section>'''
+    return {'2': v2, '3': v3, '4': v4, '5': v5, '6': v6}
+
+
+VERSIONS = {
+    'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
+             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
+    'services': [['a', 'Sideways sequence'], ['b', 'Word switcher']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall']],
+    'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags']],
+    'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail']],
+    'area': [['a', 'Thread board'], ['b', 'Street finder']], 'book': [['a', 'Work order'], ['b', 'Press the board']]}
+SLOTNAMES = {'hero': 'Hero', 'services': 'Services', 'vis': 'Visualiser', 'windows': 'Windows', 'reviews': 'Reviews', 'process': 'Process', 'try': 'Try the job', 'area': 'On your street', 'book': 'Booking'}
 
 
 def slot(name, versions):
@@ -84,6 +145,10 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* hero: interactive photo, or the film */
 const P=window.__PHOTOS,h=document.querySelector('.slot[data-slot=hero] .hero');
 if(h&&h.matches('.v1,.v2')){const k=h.matches('.v1')?'v1':'v2';window.__photo=photoHero(h.querySelector('.stage'),P[k]);}
+const H2=window.__HERO2;if(h&&h.matches('.h4v')){h.querySelector('.back').src=H2.c3;h.querySelector('.front').src=H2.c3;}
+if(h&&h.matches('.h5v'))h.querySelectorAll('.c img').forEach(i=>i.src=H2.c2);
+if(h&&h.matches('.h6v'))h.querySelectorAll('.card').forEach(c=>c.querySelector('img').src=H2[c.dataset.img]);
+Hero2.wire();
 document.querySelectorAll('.slot video[data-film]').forEach(v=>{v.append(document.getElementById('film').content.cloneNode(true));
   v.poster=document.getElementById('film').dataset.poster;v.preload='auto';if(!RM){v.autoplay=true;v.load();v.play().catch(()=>{});}else v.load();});
 const PLAY=%PLAY%,PAUSE=%PAUSE%;
@@ -97,7 +162,8 @@ Scenes.wire(document);Services.wire(document);Vis.wire(document);Win.wire(docume
 def build():
     pre = prerender()
     css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS)
-    css += '.slot{display:contents}'
+    css += src('hero2.css') + src('fx.css') + '.slot{display:contents}'
+    css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
@@ -107,12 +173,12 @@ def build():
             slot('area', {'a': pre['aa'], 'b': pre['ab']}) + slot('book', {'a': pre['ca'], 'b': pre['cb']}))
     foot = pre['ft']
     boot = BOOT.replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + ''.join(SEC(m + '.js') for m in MODS)
+    js = src('photo-hero.js') + src('hero2.js') + ''.join(SEC(m + '.js') for m in MODS) + src('fx.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main>{main}</main>{foot}{MBAR}{film}
-<script>{src('field.js')}</script>{HEAD_JS}<script>window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':

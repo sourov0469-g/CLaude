@@ -35,6 +35,8 @@ On their points, the later ones win.
 | 11-03 | **Round 4: process + service area** | Process A (stacked chapters) 8.12 and On your street A (thread board, real job photos, town signs) 8.32 live; Process B (pinned wall) and Area B (finder + deck) kept as backups. `GATE-ROUND-4.md` |
 | 11-03 | **Round 5: try-the-job sequence + booking + footer + nav polish** | Try A (pinned sideways, four hand jobs) 8.16, Booking A (work-order pad, live open/closed) 8.12, stacked-course footer, phone menu sheet, scroll-spy, cursor companion (Board / Nail / Swatch / Off). `GATE-ROUND-5.md` |
 | 11-03 | **HOMEPAGE COMPLETE** (10 sections + header + footer in `site/out/site.html`) | Delivered for joint verification: Muse audits against the skills, then the owner. `GATE-HOMEPAGE.md`. **STOPPED: no inner pages until both pass** |
+| 11-03 | **Owner's verdict: 2/10, not signed off.** AUSTIN-UPGRADE-BRIEF: white ground + hidden depth world, 6 hero versions, 3+ per section, review switcher, skill ledger per gate | In force (where it conflicts, it wins) |
+| 11-03 | **Upgrade Round 1:** pure white ground; WebGL world of the trades at work revealed around the cursor (5 scenes × 3 planes, scroll cross-fade, touch scroll reveal); hero V2–V6 on Muse's photos (depth window, pinned dusk portrait, title between sky and house, lap courses, three-house deck); magnetic buttons; `?review` switcher | `GATE-UPGRADE-R1.md`. **Waiting for Muse before Round 2.** Illustration set requested |
 
 ## Current build sources (`siding/redo/site/`)
 
@@ -57,7 +59,11 @@ On their points, the later ones win.
 | `src/sec/seq.*` | Try the job A (pinned sideways) and B (swipe rail): board, caulk, gutter, paint games |
 | `src/sec/cta.*` | Booking A (work-order pad) and B (lap band + press button); the stacked-course footer |
 | `src/sec/nav.*` | Phone menu sheet, scroll-spy, cursor companion with three variants |
+| `src/world.js` | The hidden world: WebGL reveal mask, 5 scenes of crews at work in 3 parallax planes, scroll cross-fade, touch reveal |
+| `src/hero2.*` | Hero V2–V6 and the depth-photo engine (hand-traced depth maps) |
+| `src/fx.*` | White ground, upgraded buttons, review switcher |
+| `depth.py` | Depth maps and the V4 house matte for Muse's three photographs |
 
 ## Next
 
-**Stopped at the homepage gate.** Waiting for Muse's skills audit and the owner's own review of `site/out/site.html`. Inner pages start only after both pass. Pending owner ruling: whether hero V1 is final, which would let the film (5.8 MB, used only by backup heroes) leave the live file.
+**Waiting for Muse's judgment on Upgrade Round 1.** Then Round 2: Services + Visualiser, at least 2 new versions each (3 total), per the upgrade brief. Inner pages stay frozen.

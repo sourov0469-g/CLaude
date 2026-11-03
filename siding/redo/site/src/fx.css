@@ -1,0 +1,37 @@
+/* UPGRADE LAYER (brief §2, §5): pure white ground, the world canvas behind it, reference-grade buttons, review switcher. */
+html{background:#FFFFFF}
+.world{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block;pointer-events:none}
+
+/* Buttons: a lifted board that leans toward the cursor (magnetic, label travels further than the face), a light sweep
+   across the face on hover, and a press that sinks the face into its edge with a fast return (S0405: 100–250 ms,
+   transform only, instant press feedback ~0.97, ease-out in, faster out). */
+.btn{transform:translate3d(var(--mx,0px),var(--my,0px),0);transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .2s cubic-bezier(.16,1,.3,1)}
+.btn>*{transform:translate3d(calc(var(--mx,0px) * .45),calc(var(--my,0px) * .45),0);transition:transform .22s cubic-bezier(.16,1,.3,1)}
+.btn:hover{transform:translate3d(var(--mx,0px),calc(var(--my,0px) - 3px),0)}
+.btn:active{transform:translate3d(var(--mx,0px),calc(var(--my,0px) + 3px),0) scale(.975);transition-duration:.09s}
+.btn::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-60%;width:40%;z-index:-1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.42) 50%,rgba(255,255,255,0));transform:translateX(0) skewX(-16deg);opacity:0}
+.btn:hover::after{animation:sweep .75s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes sweep{0%{opacity:0;transform:translateX(0) skewX(-16deg)}15%{opacity:1}100%{opacity:0;transform:translateX(520%) skewX(-16deg)}}
+.btn.key{text-shadow:0 1px 0 rgba(255,255,255,.35)}
+.btn.light{background:linear-gradient(180deg,#fff,#F2F5F3);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px #E1E6E3,0 4px 0 #D3DBD6,0 16px 26px -16px rgba(22,25,29,.35)}
+.btn.light:hover{box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px #D6DED9,0 7px 0 #D3DBD6,0 22px 30px -16px rgba(22,25,29,.42)}
+.btn.light:active{box-shadow:inset 0 0 0 1px #D6DED9,0 1px 0 #D3DBD6}
+@media (prefers-reduced-motion:reduce){.btn,.btn>*{transform:none!important}.btn:hover::after{animation:none}}
+
+/* Review switcher: only with ?review in the address. Every version of every slot, one click away. */
+.rv{position:fixed;right:14px;bottom:14px;z-index:200;width:min(360px,calc(100vw - 28px));max-height:min(78svh,640px);display:flex;flex-direction:column;border-radius:16px;background:#0F1512;color:#fff;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6);font:500 13px/1.3 var(--text);overflow:hidden}
+.rv header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.1)}
+.rv header b{font:800 14px/1 var(--display);letter-spacing:.02em}.rv header span{color:#9FB3A8;font-size:12px}
+.rv header button{border:0;border-radius:8px;height:30px;padding:0 10px;background:rgba(255,255,255,.1);color:#fff;font:700 12px/1 var(--text);cursor:pointer}
+.rv .body{overflow:auto;padding:8px 10px 12px}
+.rv .row{padding:8px 4px;border-bottom:1px solid rgba(255,255,255,.07)}
+.rv .row>b{display:block;font:800 12px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;color:#B5DB6E;margin-bottom:7px}
+.rv .vs{display:flex;flex-wrap:wrap;gap:5px}
+.rv a{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.08);color:#E8EFEA;font:600 12px/1.25 var(--text)}
+.rv a:hover{background:rgba(255,255,255,.16)}
+.rv a[aria-current="true"]{background:#B5DB6E;color:#16191D}
+.rv a .n{font:800 12px/1 var(--display)}
+.rv a:focus-visible{outline:2px solid #B5DB6E;outline-offset:2px}
+.rv.min .body{display:none}
