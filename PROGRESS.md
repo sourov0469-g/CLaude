@@ -36,7 +36,11 @@ Protocol: homepage first, two sections per round, two versions each; commit + PR
 - **ROUND 8 DONE (gate `owl/final/GATE-R8.md`, shots `owl/final/gates/r8/`):** Protect Your Nest page (#/protect-your-nest):
   hero V1 woven nest with Owl's photos 8.14 / V2 drag-to-wrap the house 7.96; passes V1 magnet sweep game (the site's one
   game) 8.20 / V2 three animated pass scenes 7.70. Axe 0; all round tests pass; no phone overflow.
-- **Next:** About page, then Service Area and Contact; then deepen inner pages to 5–6+ sections each.
+- **Muse picks so far:** Protect Your Nest hero V1 "the nest" and passes V1 (magnet sweep game).
+- **ROUND 9 DONE (gate `owl/final/GATE-R9.md`, shots `owl/final/gates/r9/`):** About page (#/about, new header/footer link):
+  hero V1 watching owl mascot 8.06 / V2 crew photo + count-up 7.98; values V1 four words with proof 7.98 / V2 four feathers
+  7.90. Locked facts only (one invented motive removed before build). Axe 0; tests clean; no phone overflow.
+- **Next:** Service Area page, then Contact; then deepen inner pages to 5–6+ sections each.
 
 ---
 

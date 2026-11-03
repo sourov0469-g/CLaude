@@ -1,0 +1,39 @@
+<section class="sec pghero ab2" id="about-top-2" aria-labelledby="ab2-h">
+<style>
+.ab2 .ph{position:relative;margin-top:6px;border-radius:30px;overflow:hidden;aspect-ratio:21/9;box-shadow:0 0 0 10px var(--paper),0 40px 70px -36px rgba(23,17,29,.55)}
+.ab2 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 40%;transform:scale(1.04);transition:transform 1.2s var(--ease)}
+.ab2 .ph:hover img{transform:scale(1)}
+.ab2 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,246,240,.96) 0%,rgba(248,246,240,.82) 34%,rgba(248,246,240,0) 62%)}
+.ab2 .tx{position:absolute;left:clamp(20px,4vw,52px);top:50%;transform:translateY(-50%);z-index:2;max-width:min(520px,52%)}
+.ab2 .tx p{margin-top:14px;font-size:clamp(16px,1.5vw,20px);color:var(--ink-70)}
+.ab2 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.ab2 .n{padding:20px;border-radius:22px;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.06),0 18px 30px -24px rgba(23,17,29,.5)}
+.ab2 .n b{display:block;font-size:clamp(34px,4vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.ab2 .n span{display:block;margin-top:8px;font-weight:600;color:var(--ink-70)}
+.ab2 .n:hover{transform:translateY(-3px);transition:transform .25s var(--ease)}
+@media (max-width:900px){.ab2 .ph{aspect-ratio:4/5}.ab2 .ph::after{background:linear-gradient(0deg,rgba(248,246,240,.97) 0%,rgba(248,246,240,.88) 44%,rgba(248,246,240,0) 70%)}.ab2 .tx{top:auto;bottom:22px;transform:none;max-width:none;right:20px}.ab2 .nums{grid-template-columns:1fr 1fr}}
+</style>
+<div class="wrap">
+ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>About</span></nav>
+ <div class="ph" data-owl="say:That's our crew">
+  <img src="{{A:fam-crew.webp}}" alt="The Owl crew at work on a roof">
+  <div class="tx"><h1 class="h1" id="ab2-h" style="font-size:clamp(34px,4.6vw,68px)">The Family Behind the Owl</h1><p>Family-owned and founded in Shoreview in 2025 by Tim Brown and Noah Bergland.</p></div>
+ </div>
+ <div class="nums">
+  <div class="n"><b data-to="2025">2025</b><span>Founded in Shoreview</span></div>
+  <div class="n"><b data-to="29">29</b><span>Towns served</span></div>
+  <div class="n"><b data-to="10" data-suf="-yr">10-yr</b><span>Workmanship warranty</span></div>
+  <div class="n"><b data-to="5" data-dec="1">5.0</b><span>From 90+ reviews</span></div>
+ </div>
+</div>
+<script>
+OWL.reg('abhero','2',function(root){
+  var bs = root.querySelectorAll('.n b');
+  function run(){ if (OWL.reduce) return; var t0 = performance.now();
+    (function f(t){ var k = Math.min(1, (t - t0)/1300), e = 1 - Math.pow(1 - k, 3);
+      bs.forEach(function(b){ var to = +b.dataset.to, from = to > 1000 ? to - 25 : 0, v = from + (to - from)*e; b.textContent = (b.dataset.dec ? v.toFixed(1) : Math.round(v)) + (b.dataset.suf || ''); });
+      if (k < 1) requestAnimationFrame(f); })(t0); }
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); run(); } }, {threshold:.4}); io.observe(root.querySelector('.nums')); }
+});
+</script>
+</section>

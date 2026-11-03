@@ -1,0 +1,46 @@
+<section class="sec av2" id="values-2" aria-labelledby="av2-h">
+<style>
+.av2 .g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,64px);align-items:center}
+.av2 .fan{position:relative;width:min(100%,620px);aspect-ratio:620/440;justify-self:center}
+.av2 .fan svg{width:100%;height:100%;overflow:visible}
+.av2 .fe{cursor:pointer;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.av2 .fe .vane{transition:fill .3s}
+.av2 .fe.on .vane{fill:url(#av2on)}
+.av2 .fe:focus{outline:none}.av2 .fe:focus-visible .vane{stroke:#17111D;stroke-width:3}
+.av2 .fe text{font:800 22px Inter,sans-serif;fill:#F1EFE6;letter-spacing:-.5px}
+.av2 .fe.on text{fill:#17111D}
+.av2 .card{padding:clamp(22px,3vw,34px);border-radius:26px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 60px -40px rgba(23,17,29,.5)}
+.av2 .card .lab{font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-70)}
+.av2 .card h3{font-size:clamp(28px,3vw,42px);font-weight:800;letter-spacing:-.03em;margin:6px 0 10px}
+.av2 .card p{font-size:19px;color:var(--ink-70);margin-bottom:22px}
+@media (max-width:900px){.av2 .g{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <span class="kick">What we stand for</span>
+ <h2 class="h2 rv" id="av2-h" style="margin-top:12px">Four Feathers, Four Promises</h2>
+ <div class="g" style="margin-top:clamp(18px,3vw,30px)">
+  <div class="fan" data-owl="say:Pick a feather"><svg viewBox="0 0 620 440" role="group" aria-label="Choose a value">
+   <defs><linearGradient id="av2g" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#17111D"/><stop offset=".6" stop-color="#3a3142"/><stop offset="1" stop-color="#8E5A12"/></linearGradient>
+    <linearGradient id="av2on" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#C7871A"/><stop offset=".6" stop-color="#EAA221"/><stop offset="1" stop-color="#F6CB76"/></linearGradient></defs>
+   <g class="fes"></g><circle cx="310" cy="420" r="16" fill="#17111D"/>
+  </svg></div>
+  <div class="card" aria-live="polite"><span class="lab">The proof</span><h3></h3><p></p><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+ </div>
+</div>
+<script>
+OWL.reg('abvalues','2',function(root){
+  var V = [['Friendly','Family-owned since 2025. We Give a Hoot.'],['Trustworthy','BBB Accredited, A−. Licensed in Minnesota, #BC809662.'],['Expert','GAF Systems Plus Certified.'],['Reassuring','A 10-year workmanship warranty, plus up-to-50-year manufacturer warranties.']];
+  var g = root.querySelector('.fes'), card = root.querySelector('.card'), NS = 'http://www.w3.org/2000/svg', fs = [], ang = [-48, -16, 16, 48];
+  V.forEach(function(v, i){ var e = document.createElementNS(NS, 'g'); e.setAttribute('class', 'fe'); e.setAttribute('tabindex', '0'); e.setAttribute('role', 'button'); e.setAttribute('aria-label', v[0]); e.setAttribute('aria-pressed', 'false');
+    var barbs = ''; for (var k = 1; k < 18; k++){ var y = 410 - k*19, w = 52*Math.sin(Math.PI*k/18); barbs += '<path d="M310 ' + y + ' l' + (-w) + ' ' + (-14) + ' M310 ' + y + ' l' + w + ' ' + (-14) + '" stroke="#F1EFE6" stroke-opacity=".22" stroke-width="1.2"/>'; }
+    e.innerHTML = '<path class="vane" d="M310 410 C250 330 254 170 310 66 C366 170 370 330 310 410Z" fill="url(#av2g)"/>' + barbs + '<path d="M310 420 L310 70" stroke="#F1EFE6" stroke-width="3" stroke-opacity=".7"/><text x="310" y="250" text-anchor="middle" transform="rotate(-90 310 250)">' + v[0] + '</text>';
+    e.style.transformOrigin = '310px 420px'; e.style.transform = 'rotate(' + ang[i] + 'deg)';
+    e.addEventListener('click', function(){ pick(i); }); e.addEventListener('mouseenter', function(){ if (OWL.fine) pick(i); });
+    e.addEventListener('keydown', function(ev){ if (ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); pick(i); } if (ev.key === 'ArrowRight'){ ev.preventDefault(); pick((i + 1) % 4); fs[(i + 1) % 4].focus(); } if (ev.key === 'ArrowLeft'){ ev.preventDefault(); pick((i + 3) % 4); fs[(i + 3) % 4].focus(); } });
+    g.appendChild(e); fs.push(e); });
+  function pick(i){ fs.forEach(function(e, j){ var on = j === i; e.classList.toggle('on', on); e.setAttribute('aria-pressed', on); e.style.transform = 'rotate(' + ang[j] + 'deg)' + (on ? ' translateY(-22px) scale(1.04)' : ''); if (on) g.appendChild(e); });
+    card.querySelector('h3').textContent = V[i][0]; card.querySelector('p').textContent = V[i][1]; }
+  pick(0);
+});
+</script>
+</section>
