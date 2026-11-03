@@ -507,6 +507,14 @@
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -574,7 +582,7 @@
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],

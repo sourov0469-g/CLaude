@@ -1,166 +1,91 @@
-<section id="financing" class="sec financing g-field" data-section="financing" aria-labelledby="financing-h">
-  <!-- FINALIZE · Home 6 · Financing: TWO fresh concepts (Muse ruling 1; PHASE1-PLAN.md). None of the earlier versions is
-       reused (they are in git history, ce59679). Every figure is the firm's own /financing/ wording and is attributed to the
-       lender that publishes it (FACTS.md "Financing"). No calculator, no invented number, no rate. -->
-
-  <!-- V1 · The route finder: a drawn site plan with a fork in the road. Pick what you are building; the route draws from
-       your house to the partners that usually fit it, and the reason is written underneath. -->
-  <div class="ver rf" data-v="1">
-    <div class="wrap rf__grid">
-      <div class="rf__side">
+<section id="financing" class="sec financing g-surface" data-section="financing" aria-labelledby="financing-h">
+  <!-- OWNER (after the finalize): both earlier versions are retired ("the road is very bad; the ledger is a document").
+       ONE visual version: four partner cards, one published figure on each face. Pick what you are building and the cards
+       that usually fit come forward; point at a card and it tilts to you; click or tap turns it over to how you repay.
+       Every figure and line is the partners' own as the firm publishes them (FACTS.md "Financing"); the routing is the
+       firm's framing. The firm is not a lender: the line stays, beside the action. -->
+  <div class="ver fn" data-v="1">
+    <div class="wrap fn__head">
+      <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h">Which partner <span class="acc">fits your project?</span></h2>
-        <p class="t-lead rf__lead">Pick what you are building. The road draws to the partners that usually fit it, with the reason underneath.</p>
-        <fieldset class="rf__ask">
-          <legend class="rf__q">What are you building?</legend>
-          <p class="rf__grp" aria-hidden="true">Inside the home</p>
-          <div class="rf__opts">
-            <label class="rf__o"><input type="radio" name="rf-kind" value="kitchen"><span>Kitchen</span></label>
-            <label class="rf__o"><input type="radio" name="rf-kind" value="bath"><span>Bathroom</span></label>
-            <label class="rf__o"><input type="radio" name="rf-kind" value="floor"><span>Flooring</span></label>
-          </div>
-          <p class="rf__grp" aria-hidden="true">Outside and energy</p>
-          <div class="rf__opts">
-            <label class="rf__o"><input type="radio" name="rf-kind" value="roof"><span>Roof, windows or doors</span></label>
-            <label class="rf__o"><input type="radio" name="rf-kind" value="hvac"><span>HVAC or storm protection</span></label>
-          </div>
-          <div class="rf__opts rf__opts--ns">
-            <label class="rf__o rf__o--ns"><input type="radio" name="rf-kind" value="unsure"><span>Not sure yet</span></label>
-          </div>
-        </fieldset>
-        <p class="rf__why" aria-live="polite">Pick one, and the road shows which of the four partners usually fit.</p>
-        <div class="rf__act">
-          <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-          <p class="rf__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
-        </div>
+        <h2 class="t-head" id="financing-h">Four partners. <span class="acc">Two kinds of money.</span></h2>
       </div>
-
-      <div class="rf__map" aria-hidden="true">
-        <svg class="rf__svg" viewBox="0 0 640 540" focusable="false">
-          <g class="rf__lots">
-            <path class="rf__lot" d="M28 36 H292 V176 H28 Z"/>
-            <path class="rf__lot" d="M348 36 H612 V176 H348 Z"/>
-            <text class="rf__lotn" x="40" y="62">Consumer credit</text>
-            <text class="rf__lotn" x="360" y="62">Property-assessed</text>
-          </g>
-          <g class="rf__roads">
-            <path class="rf__edge" d="M304 482 V318 C304 262 160 262 160 196 M336 482 V318 C336 262 480 262 480 196"/>
-            <path class="rf__edge" d="M304 318 C304 286 336 286 336 318"/>
-            <path class="rf__mid" d="M320 482 V312 C320 252 160 252 160 176 M320 312 C320 252 480 252 480 176"/>
-            <path class="rf__spur" d="M160 176 L96 128 M160 176 L224 128 M480 176 L416 128 M480 176 L544 128"/>
-          </g>
-          <g class="rf__posts">
-            <g class="rf__post" data-p="syn"><path class="rf__pole" d="M96 128 V88"/><rect class="rf__board" x="42" y="78" width="108" height="26" rx="3"/><text class="rf__bt" x="96" y="96">Synchrony</text></g>
-            <g class="rf__post" data-p="sfc"><path class="rf__pole" d="M224 128 V88"/><rect class="rf__board" x="164" y="78" width="120" height="26" rx="3"/><text class="rf__bt" x="224" y="96">Service Finance</text></g>
-            <g class="rf__post" data-p="ygr"><path class="rf__pole" d="M416 128 V88"/><rect class="rf__board" x="364" y="78" width="104" height="26" rx="3"/><text class="rf__bt" x="416" y="96">Ygrene</text></g>
-            <g class="rf__post" data-p="rnw"><path class="rf__pole" d="M544 128 V88"/><rect class="rf__board" x="486" y="78" width="116" height="26" rx="3"/><text class="rf__bt" x="544" y="96">RenewPACE</text></g>
-          </g>
-          <g class="rf__routes">
-            <path class="rf__route" data-p="syn" d="M320 482 V312 C320 252 160 252 160 176 L96 128"/>
-            <path class="rf__route" data-p="sfc" d="M320 482 V312 C320 252 160 252 160 176 L224 128"/>
-            <path class="rf__route" data-p="ygr" d="M320 482 V312 C320 252 480 252 480 176 L416 128"/>
-            <path class="rf__route" data-p="rnw" d="M320 482 V312 C320 252 480 252 480 176 L544 128"/>
-          </g>
-          <g class="rf__home">
-            <path class="rf__hw" d="M286 530 V496 H354 V530 Z"/>
-            <path class="rf__hr" d="M276 500 L320 470 L364 500"/>
-            <path class="rf__hd" d="M312 530 V510 H328 V530"/>
-            <text class="rf__ht" x="372" y="522">Your project</text>
-          </g>
-        </svg>
+      <div class="fn__pick">
+        <p class="fn__q" id="fn-q">What are you building?</p>
+        <div class="fn__chips" role="group" aria-labelledby="fn-q">
+          <button type="button" class="fn__chip" data-k="kitchen" aria-pressed="false">Kitchen</button>
+          <button type="button" class="fn__chip" data-k="bath" aria-pressed="false">Bathroom</button>
+          <button type="button" class="fn__chip" data-k="floor" aria-pressed="false">Flooring</button>
+          <button type="button" class="fn__chip" data-k="roof" aria-pressed="false">Roof, windows or doors</button>
+          <button type="button" class="fn__chip" data-k="hvac" aria-pressed="false">HVAC or storm protection</button>
+          <button type="button" class="fn__chip" data-k="unsure" aria-pressed="true">Not sure yet</button>
+        </div>
       </div>
     </div>
-
-    <ul class="wrap rf__cards" role="list">
-      <li class="rf__c" data-p="syn">
-        <p class="rf__ck">Consumer credit</p>
-        <h3 class="rf__cn">Synchrony</h3>
-        <p class="rf__cw">Project Card, revolving credit</p>
-        <p class="rf__fig"><span class="rf__n nums">6&ndash;132</span><span class="rf__fl">Published special-financing term range, in months</span></p>
-        <p class="rf__cx"><span class="nums">1</span> card, reusable across projects</p>
-        <p class="rf__by">As published by Synchrony</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-      <li class="rf__c" data-p="sfc">
-        <p class="rf__ck">Consumer credit</p>
-        <h3 class="rf__cn">Service Finance Company</h3>
-        <p class="rf__cw">Fixed installment loan</p>
-        <p class="rf__fig"><span class="rf__n nums">30</span><span class="rf__fl">Days after completion until the first payment</span></p>
-        <p class="rf__cx"><span class="nums">0</span> pre-payment penalty</p>
-        <p class="rf__by">As published by Service Finance Company, NMLS 140908</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-      <li class="rf__c" data-p="ygr">
-        <p class="rf__ck">Property-assessed</p>
-        <h3 class="rf__cn">Ygrene</h3>
-        <p class="rf__cw">Florida PACE, not a loan, repaid with property taxes</p>
-        <p class="rf__fig"><span class="rf__n nums">20</span><span class="rf__fl">Year maximum published residential term</span></p>
-        <p class="rf__cx">Soft credit pull</p>
-        <p class="rf__by">As published by Ygrene</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-      <li class="rf__c" data-p="rnw">
-        <p class="rf__ck">Property-assessed</p>
-        <h3 class="rf__cn">Renew Financial</h3>
-        <p class="rf__cw">RenewPACE, repaid with property taxes</p>
-        <p class="rf__fig"><span class="rf__n nums">$250K</span><span class="rf__fl">Published maximum, and up to 20% of property value</span></p>
-        <p class="rf__cx">No application fee</p>
-        <p class="rf__by">As published by Renew Financial, NMLS 1788120</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-    </ul>
-  </div>
-
-  <!-- V2 · Two kinds of money: an open ledger, two pages. Consumer credit on the left, property-assessed on the right, in the
-       firm's own framing ("Two are consumer credit and two are property-assessed"). The scroll writes the ledger line by line
-       (rule, then words), and each published figure lands as an event. Real tables underneath: row headers, captions. -->
-  <div class="ver km" data-v="2" hidden>
     <div class="wrap">
-      <div class="km__head">
-        <div>
-          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-          <h2 class="t-head" id="financing-h-2">Two kinds of money. <span class="acc">Four partners.</span></h2>
-        </div>
-        <p class="t-lead km__lead">Revolving credit, fixed installments, or repayment through your property tax bill. They are genuinely different products.</p>
-      </div>
-
-      <div class="km__book">
-        <div class="km__page">
-          <table class="km__t">
-            <caption class="km__cap"><span class="km__kind">Consumer credit</span><span class="km__sub">Synchrony and Service Finance</span></caption>
-            <thead><tr><td class="km__gut"></td><th scope="col">Synchrony</th><th scope="col">Service Finance</th></tr></thead>
-            <tbody>
-              <tr class="km__r"><th scope="row">What it is</th><td>Project Card, revolving credit</td><td>Fixed installment loan</td></tr>
-              <tr class="km__r"><th scope="row">How you repay</th><td>On the card, as revolving credit</td><td>In fixed installments</td></tr>
-              <tr class="km__r km__r--fig"><th scope="row">Published figure</th><td><span class="km__n nums">6&ndash;132</span><span class="km__fl">special-financing term range, in months</span></td><td><span class="km__n nums">30</span><span class="km__fl">days after completion until the first payment</span></td></tr>
-              <tr class="km__r"><th scope="row">Also published</th><td><span class="nums">1</span> card, reusable across projects</td><td><span class="nums">0</span> pre-payment penalty</td></tr>
-              <tr class="km__r km__r--q"><th scope="row">Usually fits</th><td>&ldquo;Useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.&rdquo;</td><td>&ldquo;A natural fit for a defined, single-trade scope where the number does not move once it is set.&rdquo;</td></tr>
-            </tbody>
-          </table>
-          <p class="km__foot">Service Finance Company: NMLS 140908, a subsidiary of Truist Bank.</p>
-        </div>
-        <div class="km__spine" aria-hidden="true"></div>
-        <div class="km__page">
-          <table class="km__t">
-            <caption class="km__cap"><span class="km__kind">Property-assessed</span><span class="km__sub">Ygrene and RenewPACE, repaid with property taxes</span></caption>
-            <thead><tr><td class="km__gut"></td><th scope="col">Ygrene</th><th scope="col">RenewPACE</th></tr></thead>
-            <tbody>
-              <tr class="km__r"><th scope="row">What it is</th><td>Florida PACE. Not a loan.</td><td>PACE, from Renew Financial</td></tr>
-              <tr class="km__r"><th scope="row">How you repay</th><td>Through your property tax bill</td><td>Through your property tax bill</td></tr>
-              <tr class="km__r km__r--fig"><th scope="row">Published figure</th><td><span class="km__n nums">20</span><span class="km__fl">year maximum published residential term</span></td><td><span class="km__n nums">$250K</span><span class="km__fl">published maximum, and up to 20% of property value</span></td></tr>
-              <tr class="km__r"><th scope="row">Also published</th><td>Soft credit pull</td><td>No application fee</td></tr>
-              <tr class="km__r km__r--q"><th scope="row">Usually fits</th><td>Roofing, windows and doors, HVAC, and wind-resistance and storm protection, among Ygrene&rsquo;s Florida categories</td><td>Live across all three counties</td></tr>
-            </tbody>
-          </table>
-          <p class="km__foot">Renew Financial: NMLS 1788120. <span class="km__note">PACE covers specific improvements. A kitchen remodel is generally not one of them.</span></p>
-        </div>
-      </div>
-
-      <div class="km__sum">
-        <p class="km__total">Four financing partners, not one.</p>
-        <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-        <p class="km__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
-      </div>
+      <ul class="fn__deck">
+        <li class="fn__slot" data-p="syn"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Synchrony, consumer credit: 6 to 132 months, the published special-financing term range. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
+            <span class="fn__big nums">6&ndash;132</span><span class="fn__unit">months, published special-financing term range</span>
+            <span class="fn__name">Synchrony</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">Synchrony</span>
+            <span class="fn__row"><b>What it is</b>Project Card, revolving credit</span>
+            <span class="fn__row"><b>How you repay</b>On the card, as revolving credit</span>
+            <span class="fn__row"><b>Also</b><span class="nums">1</span> card, reusable across projects</span>
+            <span class="fn__src">As published by Synchrony</span>
+          </span>
+        </button></li>
+        <li class="fn__slot" data-p="sfc"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Service Finance Company, consumer credit: 30 days after completion until the first payment. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
+            <span class="fn__big nums">30</span><span class="fn__unit">days after completion until the first payment</span>
+            <span class="fn__name">Service Finance</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">Service Finance</span>
+            <span class="fn__row"><b>What it is</b>Fixed installment loan</span>
+            <span class="fn__row"><b>How you repay</b>In fixed installments</span>
+            <span class="fn__row"><b>Also</b><span class="nums">0</span> pre-payment penalty</span>
+            <span class="fn__src">As published by Service Finance Company, NMLS 140908</span>
+          </span>
+        </button></li>
+        <li class="fn__slot" data-p="ygr"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="Ygrene, property-assessed: 20 year maximum published residential term. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
+            <span class="fn__big nums">20</span><span class="fn__unit">year maximum published residential term</span>
+            <span class="fn__name">Ygrene</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">Ygrene</span>
+            <span class="fn__row"><b>What it is</b>Florida PACE. Not a loan.</span>
+            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
+            <span class="fn__row"><b>Also</b>Soft credit pull</span>
+            <span class="fn__src">As published by Ygrene</span>
+          </span>
+        </button></li>
+        <li class="fn__slot" data-p="rnw"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="RenewPACE, property-assessed: 250 thousand dollars published maximum, and up to 20 percent of property value. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
+            <span class="fn__big nums">$250K</span><span class="fn__unit">published maximum, and up to 20% of property value</span>
+            <span class="fn__name">RenewPACE</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">RenewPACE</span>
+            <span class="fn__row"><b>What it is</b>PACE, from Renew Financial</span>
+            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
+            <span class="fn__row"><b>Also</b>No application fee</span>
+            <span class="fn__src">As published by Renew Financial, NMLS 1788120</span>
+          </span>
+        </button></li>
+      </ul>
+      <p class="fn__why" aria-live="polite">Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.</p>
+    </div>
+    <div class="wrap fn__foot">
+      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+      <p class="fn__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
     </div>
   </div>
 </section>

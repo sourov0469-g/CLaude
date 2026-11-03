@@ -667,9 +667,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }
@@ -936,6 +936,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }
@@ -1303,219 +1304,112 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
 
-.process { padding-block: 0; }
-.pr__pin { height: 100svh; display: grid; grid-template-rows: auto 1fr auto; gap: var(--s4); padding: calc(var(--nav-h) + var(--s5)) 0 var(--s5); box-sizing: border-box; }
-.pr__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
-.pr__head .eyebrow { margin: 0 0 var(--s3); }
-.pr__head .t-head { margin: 0; }
-.pr__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); }
+.pc { --u: 17; }
+.pc__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
+.pc__head .eyebrow { margin: 0 0 var(--s3); }
+.pc__head .t-head, .pc__lead { margin: 0; }
+.pc__lead { max-width: 44ch; color: var(--color-text-secondary); }
 
-.pr__stage { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); grid-template-rows: minmax(0, 1fr); gap: var(--s7); align-items: center; min-height: 0; height: 100%; }
-.pr__list { list-style: none; margin: 0; padding: 0; display: grid; }
-.pr__item { grid-area: 1 / 1; display: grid; gap: var(--s3); align-content: center; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity 120ms var(--ez-in, ease-in), transform 120ms var(--ez-in, ease-in), visibility 0s linear 120ms; }   
-.pr__item.is-on { opacity: 1; visibility: visible; transform: none; transition: opacity 240ms var(--ez-out) 110ms, transform 380ms var(--ez-out) 110ms, visibility 0s; }   
-.pr__n { margin: 0; display: flex; align-items: baseline; gap: var(--s4); }
-.pr__n > .nums { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
-.pr__wk { font: 600 .9375rem/1.2 var(--f-text); padding: 4px 12px; border: 1.5px solid var(--color-text); }
-.pr__t { margin: 0; font: 600 clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem)/1.05 var(--f-display); letter-spacing: -.02em; }
-.pr__p { margin: 0; max-width: 38ch; color: var(--color-text-secondary); font-size: 1.0625rem; line-height: 1.5; }
+.pc__body { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s7); align-items: start; margin-top: var(--s7); }
+.pc__chart { --lab: 13.5rem; }
+.pc__axis { position: relative; height: 1.75rem; margin-left: var(--lab); border-bottom: 1.5px solid var(--color-text);
+  background: repeating-linear-gradient(90deg, var(--color-border) 0 1px, transparent 1px calc(100% / var(--u))); }
+.pc__axis span { position: absolute; left: calc(var(--x) / var(--u) * 100%); top: 0; transform: translateX(-50%); font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); white-space: nowrap; }
+.pc__axis .pc__ax-v { color: var(--color-accent-text, var(--clay-600, #A45540)); }
+.pc__axis::before { content: 'Week'; position: absolute; right: 100%; top: 0; padding-right: var(--s3); font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); }
+.pc__rows { list-style: none; margin: 0; padding: 0; }
+.pc__row { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr); align-items: center; width: 100%; min-height: 48px; padding: 0; background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text); cursor: pointer; }
+.pc__lab { display: flex; align-items: baseline; gap: var(--s3); padding-right: var(--s3); font: 600 1rem/1.25 var(--f-display); color: var(--color-text-secondary); transition: color 160ms var(--ez-out); }
+.pc__lab .nums { font: 600 .75rem/1 var(--f-text); color: var(--color-accent-text, var(--clay-600, #A45540)); }
+.pc__track { position: relative; height: 48px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-border) 55%, transparent) 0 1px, transparent 1px calc(100% / var(--u))); }
+.pc__bar { position: absolute; top: 14px; height: 20px; left: calc(var(--s) / var(--u) * 100%); width: calc((var(--e) - var(--s)) / var(--u) * 100%);
+  background: color-mix(in srgb, var(--clay-500, #C5735C) 45%, var(--color-bg, #fff)); border: 1.5px solid var(--color-text); border-radius: 3px; transform-origin: 0 50%;
+  transition: background-color 180ms var(--ez-out), transform 220ms var(--ez-out), box-shadow 180ms var(--ez-out); }
 
-.pr__window { position: relative; height: 100%; max-height: 620px; overflow: hidden; background: var(--color-surface); border: 1.5px solid var(--color-text); }
-.pr__f { transition: opacity 400ms var(--ez-out); }
-.pr__f.is-off { opacity: .22; }
-.pr__world { position: absolute; left: 0; top: 0; display: block; max-width: none; max-height: none; will-change: transform; overflow: visible; }
+.pc__row--open .pc__bar { border-right-style: dashed; border-radius: 3px 0 0 3px;
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--clay-500, #C5735C) 45%, var(--color-bg, #fff)) 0 8px, var(--color-bg, #fff) 8px 12px); }
 
+.pc__row--end .pc__bar { width: 18px; height: 18px; top: 15px; left: calc(var(--s) / var(--u) * 100% - 2px); border-radius: 2px; transform: rotate(45deg); background: var(--color-accent-solid); }
+.pc__row:hover .pc__lab, .pc__row.is-on .pc__lab { color: var(--color-text); }
+.pc__row.is-on .pc__bar { background: var(--color-accent-solid); box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--clay-700, #7F3F2F) 70%, transparent); }
+.pc__row--open.is-on .pc__bar { background: repeating-linear-gradient(135deg, var(--color-accent-solid) 0 8px, var(--color-bg, #fff) 8px 12px); }
+.pc__row:hover:not(.is-on) .pc__bar { background-color: color-mix(in srgb, var(--clay-500, #C5735C) 70%, var(--color-bg, #fff)); }
+.pc__row:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -2px; }
 
-.pr__world .d, .pr__mini .d { fill: none; stroke: var(--color-text); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
-.pr__world .dt, .pr__mini .dt { fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.pr__world [class*="f-"].d, .pr__mini [class*="f-"].d { stroke-width: 3.2; }
-.f-sand { fill: var(--sand-100, #F7F1EA) !important; }
-.f-paper { fill: var(--color-surface) !important; }
-.f-clay { fill: var(--clay-500, #C5735C) !important; }
-.f-clayl { fill: var(--clay-100, #F9E3DD) !important; }
-.f-none { fill: none !important; }
-.pr__world .dash, .pr__mini .dash { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2.4; stroke-dasharray: 12 10; }
-.pr__world .roof, .pr__mini .roof { stroke: var(--clay-600, #A45540); stroke-width: 9; }
-.pr__world .tx, .pr__mini .tx { font: 600 26px/1 var(--f-text); fill: var(--color-text); }
-.pr__world .tx-s, .pr__mini .tx-s { font-size: 21px; font-weight: 500; }
-.pr__world .tx-stamp, .pr__mini .tx-stamp { font-size: 15px; font-weight: 700; letter-spacing: .06em; fill: var(--clay-700, #884432); }
-.pr__world .stampc, .pr__mini .stampc { stroke: var(--clay-700, #884432); }
-.pr__world .tick, .pr__mini .tick { stroke: var(--clay-600, #A45540); stroke-width: 4; }
-
-
-.pr__railw { display: grid; gap: var(--s2); }
-.pr__rail { position: relative; height: 34px; }
-.pr__rail::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--color-border); }
-.pr__fill { position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: var(--color-text); transform-origin: 0 50%; transform: scaleX(0); }
-.pr__mk { position: absolute; top: 4px; left: calc(var(--x) * 100%); width: 14px; height: 14px; margin-left: -7px; background: var(--color-surface); border: 2px solid var(--color-border-strong); transition: background-color 200ms var(--ez-out), border-color 200ms var(--ez-out); }
-.pr__mk.is-on { background: var(--color-accent-solid); border-color: var(--color-text); }
-.pr__mkn { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font: 600 .75rem/1 var(--f-text); color: var(--color-text-secondary); }
-.pr__mk.is-on .pr__mkn { color: var(--color-text); }
-.pr__note { margin: var(--s2) 0 0; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-
-
-.pr--list .pr__pin { height: auto; padding-top: var(--section-y, 96px); }
-.pr--list .pr__stage { grid-template-columns: 1fr; grid-template-rows: none; height: auto; }
-.pr--list .pr__window, .pr--list .pr__railw .pr__rail { display: none; }
-.pr--list .pr__list { gap: var(--s7); }
-.pr--list .pr__item { grid-area: auto; align-content: start; opacity: 1; visibility: visible; transform: none; }
-.pr__mini { width: 100%; height: auto; border: 1.5px solid var(--color-text); background: var(--color-surface); margin-bottom: var(--s3); }
-@media (max-width: 900px) { .pr__head { grid-template-columns: 1fr; } }
-
-@media (min-width: 700px) { .pr--list .pr__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s7) var(--s6); } }
-@media (min-width: 1200px) { .pr--list .pr__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } .pr--list .pr__n > .nums { font-size: 3rem; } .pr--list .pr__t { font-size: 1.375rem; } .pr--list .pr__p { font-size: 1rem; } }
-
+.pc__card { position: sticky; top: calc(var(--nav-h) + var(--s5)); padding: var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); }
+.pc__k { display: flex; align-items: baseline; gap: var(--s4); margin: 0 0 var(--s3); }
+.pc__no { font: 600 clamp(2.75rem, 2rem + 2vw, 3.75rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.pc__wk { font: 600 .875rem/1.2 var(--f-text); padding: 4px 12px; border: 1.5px solid var(--color-text); }
+.pc__t { margin: 0 0 var(--s2); font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
+.pc__p { margin: 0; color: var(--color-text-secondary); line-height: 1.5; }
+.pc__note { margin: var(--s4) 0 0; padding-top: var(--s3); border-top: 1px solid var(--color-border); font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.pc__card.is-swap .pc__t, .pc__card.is-swap .pc__p, .pc__card.is-swap .pc__k { animation: pc-in 260ms var(--ez-out); }
+@keyframes pc-in { from { opacity: 0; transform: translateY(6px); } }
 
 @media (max-width: 900px) {
-  .process .ver:not(.pr--list) .pr__pin { gap: var(--s3); padding: calc(var(--nav-h) + var(--s3)) 0 calc(var(--s3) + var(--mbar-h, 0px)); }
-  .process .ver:not(.pr--list) .pr__head { gap: var(--s2); }
-  .process .ver:not(.pr--list) .pr__head .eyebrow { margin-bottom: var(--s2); }
-  .process .ver:not(.pr--list) .pr__lead { font-size: .9375rem; line-height: 1.45; }
-  .process .ver:not(.pr--list) .pr__stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: var(--s4); }
-  .process .ver:not(.pr--list) .pr__window { order: -1; max-height: none; }
-  .process .ver:not(.pr--list) .pr__item { align-content: start; gap: var(--s2); }
-  .process .ver:not(.pr--list) .pr__n > .nums { font-size: 2.5rem; }
-  .process .ver:not(.pr--list) .pr__t { font-size: 1.375rem; }
-  .process .ver:not(.pr--list) .pr__p { font-size: .9375rem; line-height: 1.45; }
+  .pc__head, .pc__body { grid-template-columns: minmax(0, 1fr); }
+  .pc__body { margin-top: var(--s5); gap: var(--s5); }
+  .pc__chart { --lab: 9.5rem; }
+  .pc__lab { font-size: .8125rem; gap: var(--s2); }
+  .pc__axis span:not(:first-child):not(.pc__ax-v) { display: none; }
+  .pc__axis .pc__ax-v { left: auto; right: 0; transform: none; font-size: .6875rem; }
+  .pc__axis span:first-child { transform: none; left: 0; }
+  .pc__card { position: static; padding: var(--s5); }
 }
-@media (max-width: 900px) and (max-height: 760px) { .process .ver:not(.pr--list) .pr__lead { display: none; } }
+@media (prefers-reduced-motion: reduce) { .pc__card.is-swap * { animation: none !important; } }
 
 
+.fn__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: end; gap: var(--s5) var(--s8); }
+.fn__head .eyebrow { margin: 0 0 var(--s3); }
+.fn__head .t-head { margin: 0; }
+.fn__q { margin: 0 0 var(--s3); font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.fn__chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.fn__chip { min-height: 40px; padding: 8px 16px; font: 600 .875rem/1.2 var(--f-text); color: var(--color-text); background: var(--color-bg, #fff); border: 1.5px solid var(--color-text); border-radius: 999px; cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), transform 160ms var(--ez-out); }
+.fn__chip:hover { transform: translateY(-2px); }
+.fn__chip[aria-pressed="true"] { background: var(--color-text); color: var(--color-bg, #fff); }
+.fn__chip:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
 
+.fn__deck { list-style: none; margin: var(--s7) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s5); perspective: 1200px; }
+.fn__slot { transition: transform 420ms var(--ez-out), opacity 320ms var(--ez-out), filter 320ms var(--ez-out); }
+.fn__slot.is-out { opacity: .32; transform: translateY(14px) scale(.96); filter: saturate(.4); }
+.fn__slot.is-in { transform: translateY(-10px); }
+.fn__card { position: relative; display: block; width: 100%; aspect-ratio: 1.586 / 1.62; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; color: inherit;
+  transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(calc(var(--ry, 0deg) + var(--flip, 0deg))); transition: transform 520ms var(--ez-out); }
+.fn__card.is-tilting { transition: transform 120ms linear; }
+.fn__card[aria-pressed="true"] { --flip: 180deg; }
+.fn__card:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 4px; border-radius: 18px; }
+.fn__face { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto auto; padding: var(--s5); border-radius: 16px; border: 1.5px solid var(--color-text); backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden;
+  box-shadow: 0 18px 34px -22px color-mix(in srgb, var(--color-shadow, #000) 60%, transparent); }
+.fn__card--cc .fn__face { background: var(--color-accent-solid); color: #fff; }
+.fn__card--pa .fn__face { background: var(--color-text); color: #fff; }
+.fn__front::after { content: ''; position: absolute; inset: auto -30% -55% auto; width: 90%; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid color-mix(in srgb, #fff 22%, transparent); }   
+.fn__kind { font: 600 .75rem/1.2 var(--f-text); letter-spacing: .04em; text-transform: uppercase; opacity: .85; }
+.fn__chipic { position: absolute; top: var(--s5); right: var(--s5); width: 34px; height: 26px; border-radius: 5px; background: linear-gradient(135deg, #E8D3B5, #C9A877); box-shadow: inset 0 0 0 1px color-mix(in srgb, #000 25%, transparent); }
+.fn__chipic::before { content: ''; position: absolute; inset: 8px 0; border-block: 1px solid color-mix(in srgb, #000 30%, transparent); }
+.fn__house { position: absolute; top: var(--s5); right: var(--s5); width: 34px; height: 30px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.fn__big { align-self: end; font: 600 clamp(2.5rem, 1.6rem + 2.4vw, 3.75rem)/.9 var(--f-display); letter-spacing: -.035em; }
+.fn__unit { margin-top: var(--s2); font: 400 .875rem/1.35 var(--f-text); opacity: .9; max-width: 22ch; }
+.fn__name { margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid color-mix(in srgb, #fff 35%, transparent); font: 600 1.125rem/1.2 var(--f-display); }
+.fn__back { transform: rotateY(180deg); grid-template-rows: auto; align-content: start; gap: var(--s3); }
+.fn__back .fn__name { margin: 0 0 var(--s1); padding: 0; border: 0; }
+.fn__row { display: block; font: 400 .9375rem/1.35 var(--f-text); }
+.fn__row b { display: block; margin-bottom: 2px; font: 600 .6875rem/1.2 var(--f-text); letter-spacing: .04em; text-transform: uppercase; opacity: .75; }
+.fn__src { margin-top: auto; font: 400 .75rem/1.35 var(--f-text); opacity: .75; }
 
-.rf__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s8); align-items: start; }
-.rf__side { display: grid; gap: var(--s4); align-content: start; }
-.rf__side .eyebrow, .rf__side .t-head, .rf__lead { margin: 0; }
-.rf__lead { max-width: 42ch; color: var(--color-text-secondary); }
+.fn__why { max-width: 70ch; margin: var(--s6) 0 0; padding-left: var(--s4); border-left: 3px solid var(--color-accent-solid); color: var(--color-text); }
+.fn__foot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5) var(--s8); align-items: center; margin-top: var(--s6); }
+.fn__not { margin: 0; font: 400 .8125rem/1.45 var(--f-text); color: var(--color-text-secondary); max-width: 60ch; }
 
-.rf__ask { margin: var(--s3) 0 0; padding: 0; border: 0; display: grid; gap: var(--s2); min-width: 0; }
-.rf__q { padding: 0; margin-bottom: var(--s2); font: 600 1.0625rem/1.3 var(--f-display); }
-.rf__grp { margin: var(--s2) 0 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
-.rf__opts { display: flex; flex-wrap: wrap; gap: var(--s2); }
-.rf__opts--ns { margin-top: var(--s3); }
-.rf__o { position: relative; display: inline-flex; cursor: pointer; }
-.rf__o input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
-.rf__o span {
-  display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s4);
-  font: 500 .9375rem/1.2 var(--f-text); color: var(--color-text);
-  background: var(--color-surface); border: 1.5px solid var(--color-border-strong);
-  transition: background-color 150ms var(--ez-out), border-color 150ms var(--ez-out), color 150ms var(--ez-out);
+@media (max-width: 1100px) { .fn__deck { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fn__card { aspect-ratio: 1.586 / 1.25; } }
+@media (max-width: 900px) { .fn__head, .fn__foot { grid-template-columns: minmax(0, 1fr); } .fn__deck { margin-top: var(--s5); } }
+@media (max-width: 560px) {
+  .fn__deck { grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+  .fn__card { aspect-ratio: 1.9 / 1; }
+  .fn__face { padding: var(--s4); }
+  .fn__slot.is-out { transform: scale(.97); }
 }
-.rf__o--ns span { border-style: dashed; }
-@media (hover: hover) and (pointer: fine) { .rf__o:hover span { border-color: var(--color-text); } }
-.rf__o input:checked + span { background: var(--color-text); border-color: var(--color-text); color: var(--color-surface); }
-.rf__o input:focus-visible + span { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
-
-.rf__why { margin: var(--s2) 0 0; min-height: 7.5em; max-width: 46ch; font: 400 1rem/1.5 var(--f-text); color: var(--color-text); padding-left: var(--s4); border-left: 3px solid var(--color-accent-solid); }
-.rf__act { display: grid; gap: var(--s3); justify-items: start; }
-.rf__not { margin: 0; max-width: 46ch; font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-
-
-.rf__map { position: relative; padding: var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); }
-.rf__svg { display: block; width: 100%; height: auto; max-height: 72svh; overflow: visible; }
-.rf__lot { fill: var(--sand-100, #F7F1EA); stroke: var(--color-text); stroke-width: 1.25; stroke-dasharray: 6 5; }
-.rf__lotn { font: 600 15px/1 var(--f-text); fill: var(--color-text-secondary); letter-spacing: .02em; }
-.rf__edge { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linecap: round; }
-.rf__mid { fill: none; stroke: var(--color-border-strong); stroke-width: 1.25; stroke-dasharray: 8 8; }
-.rf__spur { fill: none; stroke: var(--color-border-strong); stroke-width: 1.25; stroke-dasharray: 4 5; }
-.rf__pole { fill: none; stroke: var(--color-text); stroke-width: 2; }
-.rf__board { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.5; transition: fill 250ms var(--ez-out); }
-.rf__bt { font: 600 13px/1 var(--f-text); fill: var(--color-text); text-anchor: middle; transition: fill 250ms var(--ez-out); }
-.rf__post.is-fit .rf__board { fill: var(--color-accent-solid); }
-.rf__post.is-fit .rf__bt { fill: var(--color-text-on-accent, #fff); }
-.rf__route { fill: none; stroke: var(--color-accent-solid); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-.rf__hw { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
-.rf__hr { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-.rf__hd { fill: var(--sand-100, #F7F1EA); stroke: var(--color-text); stroke-width: 1.5; }
-.rf__ht { font: 600 14px/1 var(--f-text); fill: var(--color-text); }
-
-
-.rf__cards { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s4); align-items: stretch; margin-top: var(--s8); padding-top: 0; }
-.rf__c {
-  position: relative; display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: var(--s2); padding: var(--s5) var(--s4) var(--s4);
-  background: var(--color-surface); border: 1.5px solid var(--color-border-strong);
-  transition: opacity 250ms var(--ez-out), border-color 250ms var(--ez-out);
-}
-.rf__c::before { content: ""; position: absolute; left: -1.5px; right: -1.5px; top: -1.5px; height: 5px; background: var(--color-accent-solid); transform: scaleX(0); transform-origin: 0 50%; transition: transform 400ms var(--ez-out); }
-.rf__c.is-fit { border-color: var(--color-text); }
-.rf__c.is-fit::before { transform: none; }
-.rf__c.is-not { opacity: .45; }
-.rf__ck { margin: 0; font: 600 .75rem/1 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
-.rf__cn { font: 600 1.25rem/1.15 var(--f-display); letter-spacing: -.01em; }
-.rf__cw { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-.rf__fig { margin: var(--s2) 0 0; display: grid; gap: 4px; padding-top: var(--s3); border-top: 1px solid var(--color-border); }
-.rf__n { font: 600 2.25rem/1 var(--f-display); letter-spacing: -.03em; color: var(--color-text); display: inline-block; }
-.rf__fl { font: 400 .875rem/1.35 var(--f-text); color: var(--color-text-secondary); }
-.rf__cx { margin: 0; font: 500 .9375rem/1.35 var(--f-text); }
-.rf__by { margin: auto 0 0; padding-top: var(--s2); font: 400 .75rem/1.35 var(--f-text); color: var(--color-text-secondary); }
-
-@media (max-width: 1100px) { .rf__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 900px) {
-  
-  .rf__grid { grid-template-columns: 1fr; gap: var(--s4); }
-  .rf__side { display: contents; }
-  .rf__map { order: 1; padding: var(--s2); margin-top: var(--s2); }
-  .rf__why { order: 2; min-height: 0; }
-  .rf__act { order: 3; }
-}
-@media (max-width: 560px) { .rf__cards { grid-template-columns: 1fr; } .rf__lotn { font-size: 22px; } .rf__bt { font-size: 19px; } }
-
-
-.km__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
-.km__head .eyebrow { margin: 0 0 var(--s3); }
-.km__head .t-head, .km__lead { margin: 0; }
-.km__lead { max-width: 46ch; color: var(--color-text-secondary); }
-
-.km__book { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); background: var(--color-surface); border: 1.5px solid var(--color-text); box-shadow: 0 22px 40px -28px color-mix(in srgb, var(--color-shadow, #000) 45%, transparent); }
-.km__page { position: relative; padding: var(--s6) var(--s6) var(--s5); }
-.km__spine { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 10%, transparent) 45%, color-mix(in srgb, var(--color-text) 10%, transparent) 55%, transparent); border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border); }
-
-.km__t { width: 100%; border-collapse: collapse; table-layout: fixed; position: relative; }
-.km__t col, .km__gut { width: 128px; }
-.km__cap { caption-side: top; text-align: left; padding-bottom: var(--s4); }
-.km__cap > span { display: block; }
-.km__sub { margin-top: 4px; }
-.km__gut, .km__r th { border-right: 1.5px solid var(--clay-300, #ECB3A4); }   
-.km__r td:first-of-type, .km__t thead th:first-of-type { padding-left: var(--s4); }
-.km__kind { font: 600 1.5rem/1.1 var(--f-display); letter-spacing: -.015em; }
-.km__sub { font: 400 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
-.km__t thead th { text-align: left; padding: 0 var(--s3) var(--s3); font: 600 1.0625rem/1.2 var(--f-display); border-bottom: 2px solid var(--color-text); }
-.km__t thead .km__gut { border-bottom: 2px solid var(--color-text); }
-.km__r { position: relative; }
-.km__r th, .km__r td { vertical-align: top; text-align: left; padding: var(--s3) var(--s3) var(--s3); font: 400 .9375rem/1.45 var(--f-text); background-image: linear-gradient(var(--color-border-strong), var(--color-border-strong)); background-repeat: no-repeat; background-position: 0 100%; background-size: calc(var(--rule, 1) * 100%) 1px; }
-.km__r th { padding-left: 0; font: 600 .75rem/1.6 var(--f-text); letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-secondary); }
-.km__r td > * , .km__r td { transition: background-color 200ms var(--ez-out); }
-.km__r--q td { font-style: italic; color: var(--color-text-secondary); }
-.km__n { display: block; font: 600 2rem/1 var(--f-display); letter-spacing: -.03em; color: var(--color-accent-solid); margin-bottom: 8px; }
-.km__fl { display: block; font-size: .875rem; color: var(--color-text-secondary); }
-.km__t td.is-col, .km__t th.is-col { background-color: color-mix(in srgb, var(--clay-100, #F9E3DD) 55%, transparent); }
-.km__foot { margin: var(--s4) 0 0; font: 400 .75rem/1.45 var(--f-text); color: var(--color-text-secondary); }
-.km__note { display: block; margin-top: var(--s2); padding: var(--s2) var(--s3); border: 1px dashed var(--clay-600, #A45540); color: var(--color-text); font-size: .8125rem; }
-
-.km__sum { display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: var(--s5); margin-top: var(--s6); padding-top: var(--s5); border-top: 3px double var(--color-text); }
-.km__total { margin: 0; font: 600 1.375rem/1.2 var(--f-display); letter-spacing: -.01em; }
-.km__not { margin: 0; max-width: 52ch; font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-
-@media (max-width: 1100px) {
-  .km__book { grid-template-columns: 1fr; }
-  .km__spine { height: 18px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-text) 10%, transparent) 45%, color-mix(in srgb, var(--color-text) 10%, transparent) 55%, transparent); border: 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-  .km__sum { grid-template-columns: 1fr; justify-items: start; gap: var(--s3); }
-}
-@media (max-width: 900px) { .km__head { grid-template-columns: 1fr; } }
-@media (max-width: 600px) {
-  
-  .km__t thead tr, .km__t tr.km__r { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-  .km__t thead .km__gut { display: none; }
-  .km__r th { grid-column: 1 / -1; border-right: 0; padding: var(--s2) 0 0 !important; background-image: none; }
-  .km__r td:first-of-type, .km__t thead th:first-of-type { padding-left: 0; }
-  .km__page { padding: var(--s5) var(--s3) var(--s4); }
-  .km__t col, .km__gut { width: 84px; }
-  .km__r th, .km__r td { padding: var(--s2) var(--s2); font-size: .875rem; }
-  .km__r th { font-size: .6875rem; letter-spacing: .02em; }
-  .km__t thead th { padding: 0 var(--s2) var(--s2); font-size: .9375rem; }
-  .km__n { font-size: 1.5rem; }
-  .km__fl { font-size: .8125rem; }
-}
+@media (prefers-reduced-motion: reduce) { .fn__card, .fn__slot { transition: none; } }
 
 
 
@@ -1660,43 +1554,24 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .rv__head .t-head, .rv__lead { margin: 0; }
 .rv__lead { max-width: 46ch; color: var(--color-text-secondary); }
 
-.rv__stage { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s7); align-items: center; margin-top: var(--s8); }
-.rv__sky { padding-block: var(--s5) 0; }
-.rv__sky { margin: 0; display: grid; gap: var(--s5); }
-.rv__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rv__svg .ms { fill: var(--clay-500, #C5735C); }
-.rv__svg .ms.is-in { fill: var(--color-accent-solid); }
-.rv__svg .big { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
-.rv__svg .gap { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-dasharray: 4 4; }   
-.rv__avg { display: flex; align-items: baseline; gap: var(--s4); padding-top: var(--s4); border-top: 2px solid var(--color-text); }
-.rv__n { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-text); }
-.rv__of { font: 400 1rem/1.4 var(--f-text); color: var(--color-text-secondary); max-width: 28ch; }
+.rv__sky { margin: var(--s7) 0 0; display: grid; gap: var(--s4); }
+.rv__cv { display: block; width: 100%; aspect-ratio: 2.3 / 1; max-height: 62svh; touch-action: pan-y; cursor: crosshair; }
+.rv__avg { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s2) var(--s5); padding-top: var(--s4); border-top: 2px solid var(--color-text); }
+.rv__of { font: 400 1rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.rv__of .nums:first-child { font: 600 1.25rem/1 var(--f-display); color: var(--color-text); }
+.rv__hint { font: 600 .8125rem/1.4 var(--f-text); color: var(--color-accent-text, var(--clay-600, #A45540)); }
 
-
-.rv__book { margin: 0; padding: var(--s5) var(--s5) var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); }
-.rv__tally { display: block; width: 100%; height: auto; }
-.rv__tally .st { fill: none; stroke: var(--color-text); stroke-width: 2.6; stroke-linecap: round; }
-.rv__tally .st--d { stroke: var(--color-accent-solid); }
-.rv__tally .gate rect { fill: transparent; stroke: none; rx: 4; transition: fill 150ms var(--ez-out); }
-.rv__tally .gate { outline: none; cursor: default; }
-.rv__tally .gate.is-hot rect { fill: color-mix(in srgb, var(--clay-100, #F9E3DD) 80%, transparent); }
-.rv__tally .gate:focus-visible rect { stroke: var(--color-focus-ring); stroke-width: 2; }
-.rv__cap { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); justify-content: space-between; margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--color-border); font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-.rv__tip { font-weight: 600; color: var(--color-text); }
-
-.rv__acts { display: flex; gap: var(--s3); margin-top: var(--s6); }
+.rv__acts { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
 
 @media (max-width: 900px) {
   .rv__head { grid-template-columns: 1fr; }
-  .rv__stage { grid-template-columns: 1fr; margin-top: var(--s6); gap: var(--s6); }
-  .rv__book { padding: var(--s4) var(--s3) var(--s3); }
+  .rv__sky { margin-top: var(--s5); }
+  .rv__cv { aspect-ratio: 1.5 / 1; }
 }
+@media (prefers-reduced-motion: reduce) { .rv__hint, .rv__again { display: none; } }
 
 
-.rv__tally .gate .hit, .rv__tally .gate.is-hot .hit, .rv__tally .gate:focus-visible .hit { fill: transparent; stroke: none; }
-
-
-.tw__grid { display: grid; grid-template-columns: minmax(0, 4fr) auto minmax(0, 5fr); gap: var(--s7); align-items: start; }
+.tw__grid { display: grid; grid-template-columns: minmax(0, 5fr) auto minmax(0, 4fr); gap: var(--s7); align-items: start; }
 .tw__side { display: grid; gap: var(--s4); align-content: start; }
 .tw__side .eyebrow, .tw__side .t-head, .tw__lead { margin: 0; }
 .tw__lead { max-width: 40ch; color: var(--color-text-secondary); }
@@ -1740,7 +1615,19 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .tw__svg .flag path { stroke: var(--color-text); stroke-width: 5; }
 
 
-.tw__all { display: grid; gap: var(--s4); align-content: start; }
+.tw__all { display: grid; gap: var(--s3); align-content: start; }
+
+.tw__c { border: 1.5px solid var(--color-text); background: var(--color-surface, #fff); }
+.tw__cb { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: var(--s4); align-items: center; width: 100%; padding: var(--s4) var(--s5); background: none; border: 0; text-align: left; color: var(--color-text); cursor: pointer; transition: background-color 160ms var(--ez-out); }
+.tw__cb:hover, .tw__c.is-open .tw__cb { background: var(--clay-100, #F9E3DD); }
+.tw__cb:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -2px; }
+.tw__cc { grid-row: 1 / 3; font: 600 2.75rem/.9 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.tw__cn { font: 600 1.125rem/1.2 var(--f-display); }
+.tw__cl { grid-column: 2; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.tw__chev { grid-row: 1 / 3; grid-column: 3; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; transition: transform 200ms var(--ez-out); }
+.tw__c.is-open .tw__chev { transform: rotate(180deg); }
+.tw__c .tw__ul { padding: var(--s2) var(--s4) var(--s4); }
+.tw__svg .cty.is-hot { fill: color-mix(in srgb, var(--clay-500, #C5735C) 22%, transparent); }
 .tw__c h3 { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); margin: 0 0 8px; padding-bottom: 8px; border-bottom: 2px solid var(--color-text); font: 600 1.0625rem/1.2 var(--f-display); }
 .tw__c h3 span { font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
 .tw__ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 2px; }
@@ -1759,6 +1646,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
 .tw__show { display: none; margin-top: var(--s2); min-height: 44px; padding: 0 var(--s4); font: 600 .9375rem/1 var(--f-text); color: var(--color-text); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: var(--radius); cursor: pointer; }
 @media (max-width: 900px) { .tw__show { display: inline-flex; align-items: center; } }
+.tw__ans:empty { display: none; }   
 
 
 #consult .t-head { color: var(--color-text); }
@@ -1871,6 +1759,42 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   .cf__plan { grid-template-columns: 1fr 1fr; grid-template-rows: 80px 80px 80px; }
   .cf__room--k { grid-column: 1; grid-row: 1 / 3; } .cf__room--b { grid-column: 2; grid-row: 1; } .cf__room--d { grid-column: 2; grid-row: 2; } .cf__room--l { grid-column: 1; grid-row: 3; } .cf__room--o { grid-column: 2; grid-row: 3; }
 }
+
+
+.cl { margin-top: var(--s4); display: grid; gap: var(--s3); }
+.cl__call { position: relative; display: flex; align-items: center; gap: var(--s4); padding: var(--s4) var(--s5); color: var(--color-text); text-decoration: none; background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); overflow: hidden; isolation: isolate;
+  transform: translate(var(--mx, 0px), var(--my, 0px)); transition: transform 260ms var(--ez-out), color 260ms var(--ez-out), box-shadow 260ms var(--ez-out); }
+.cl__call::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--color-accent-solid); transform: scaleX(0); transform-origin: 0 50%; transition: transform 380ms var(--ez-out); }
+.cl__call:hover, .cl__call:focus-visible { color: #fff; box-shadow: 0 14px 28px -18px color-mix(in srgb, var(--color-shadow, #000) 70%, transparent); }
+.cl__call:hover::before, .cl__call:focus-visible::before { transform: scaleX(1); }
+.cl__call:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+.cl__hs { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--color-accent-solid); transition: background-color 260ms var(--ez-out); }
+.cl__call:hover .cl__hs, .cl__call:focus-visible .cl__hs { background: #fff; }
+.cl__hs svg { width: 28px; height: 28px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; transition: stroke 260ms var(--ez-out); }
+.cl__call:hover .cl__hs svg, .cl__call:focus-visible .cl__hs svg { stroke: var(--color-accent-solid); animation: cl-ring 900ms var(--ez-out) 1; }
+.cl__hs .w { opacity: 0; transition: opacity 200ms var(--ez-out); }
+.cl__call:hover .cl__hs .w, .cl__call:focus-visible .cl__hs .w { opacity: 1; animation: cl-wave 900ms ease-in-out infinite; }
+.cl__txt { display: grid; gap: 4px; min-width: 0; }
+.cl__k { font: 600 .8125rem/1.3 var(--f-text); opacity: .8; }
+.cl__num { font: 600 clamp(1.5rem, 1.1rem + 1.2vw, 2rem)/1.05 var(--f-display); letter-spacing: -.02em; white-space: nowrap; }
+.cl__num .d { display: inline-block; }
+.cl__call:hover .cl__num .d, .cl__call:focus-visible .cl__num .d { animation: cl-dial 520ms var(--ez-out) both; animation-delay: calc(var(--i) * 32ms); }
+@keyframes cl-dial { 40% { transform: translateY(-7px); } 100% { transform: none; } }
+@keyframes cl-ring { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(-16deg); } 30% { transform: rotate(14deg); } 45% { transform: rotate(-10deg); } 60% { transform: rotate(7deg); } 75% { transform: rotate(-3deg); } }
+@keyframes cl-wave { 50% { opacity: .35; } }
+.cl__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2) var(--s4); }
+.cl__st { margin: 0; display: flex; align-items: center; gap: 8px; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.cl__lamp { position: relative; width: 10px; height: 10px; border-radius: 50%; background: var(--color-text-secondary); }
+.cl.is-open .cl__lamp { background: #2F8F5B; }
+.cl.is-open .cl__lamp::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid #2F8F5B; animation: cl-pulse 1.8s ease-out infinite; }
+@keyframes cl-pulse { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+.cl__copy { min-height: 36px; padding: 6px 14px; font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text); background: none; border: 1.5px solid var(--color-text); border-radius: 999px; cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out); }
+.cl__copy:hover { background: var(--color-text); color: var(--color-bg, #fff); }
+.cl__copy.is-done { background: #2F8F5B; border-color: #2F8F5B; color: #fff; }
+.cl__copy:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.cl__facts { margin-top: var(--s2); }
+@media (prefers-reduced-motion: reduce) { .cl__call, .cl__call::before { transition: none; } .cl__num .d, .cl__hs svg, .cl__hs .w, .cl__lamp::after { animation: none !important; } }
+.cl__facts dd { font: 400 1rem/1.45 var(--f-text); }
 
 </style>
 <script type="application/ld+json">
@@ -2176,196 +2100,124 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
 <section id="process" class="sec process g-surface" data-section="process" aria-labelledby="process-h">
   
-  <div class="ver pr" data-v="1">
-    <div class="pr__pin">
-      <div class="wrap pr__head">
-        <div>
-          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-          <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
-        </div>
-        <p class="t-lead pr__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
+  <div class="ver pc" data-v="1">
+    <div class="wrap pc__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
       </div>
-      <div class="wrap pr__stage">
-        <ol class="pr__list">
-          <li class="pr__item" data-i="0"><p class="pr__n"><span class="nums">01</span><span class="pr__wk">Week <span class="nums">1</span></span></p><h3 class="pr__t">Consultation</h3><p class="pr__p">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p></li>
-          <li class="pr__item" data-i="1"><p class="pr__n"><span class="nums">02</span><span class="pr__wk">Week <span class="nums">1&ndash;2</span></span></p><h3 class="pr__t">Site evaluation</h3><p class="pr__p">Flood zone, HVHZ requirements, permit history, HOA or historic review, and what is behind the walls.</p></li>
-          <li class="pr__item" data-i="2"><p class="pr__n"><span class="nums">03</span><span class="pr__wk">Weeks <span class="nums">2&ndash;5</span></span></p><h3 class="pr__t">Design and planning</h3><p class="pr__p">Layouts, finishes and system choices, with the real trade-offs explained rather than one pre-set package.</p></li>
-          <li class="pr__item" data-i="3"><p class="pr__n"><span class="nums">04</span><span class="pr__wk">Weeks <span class="nums">5&ndash;6</span></span></p><h3 class="pr__t">Proposal and scope</h3><p class="pr__p">A written scope that says what is included, what is not, and where contingencies are likely. Priced against the drawings, not a guess.</p></li>
-          <li class="pr__item" data-i="4"><p class="pr__n"><span class="nums">05</span><span class="pr__wk">Weeks <span class="nums">6&ndash;12</span></span></p><h3 class="pr__t">Permitting</h3><p class="pr__p">Permits pulled directly, and every product checked for its Notice of Acceptance or Florida Product Approval.</p></li>
-          <li class="pr__item" data-i="5"><p class="pr__n"><span class="nums">06</span><span class="pr__wk">Varies</span></p><h3 class="pr__t">Construction</h3><p class="pr__p">One point of contact, inspections at each stage, and a site that gets cleaned at the end of the day.</p></li>
-          <li class="pr__item" data-i="6"><p class="pr__n"><span class="nums">07</span><span class="pr__wk">Final <span class="nums">1&ndash;2</span> weeks</span></p><h3 class="pr__t">Quality review</h3><p class="pr__p">We walk the work against the scope before we call it finished.</p></li>
-          <li class="pr__item" data-i="7"><p class="pr__n"><span class="nums">08</span><span class="pr__wk">Closeout</span></p><h3 class="pr__t">Completion and handover</h3><p class="pr__p">Final inspection, a walkthrough together, and registration of manufacturer and workmanship warranties.</p></li>
+      <p class="t-lead pc__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
+    </div>
+    <div class="wrap pc__body">
+      <div class="pc__chart">
+        <div class="pc__axis" aria-hidden="true">
+          <span style="--x:.5">1</span><span style="--x:2.5">3</span><span style="--x:4.5">5</span><span style="--x:6.5">7</span><span style="--x:8.5">9</span><span style="--x:10.5">11</span><span class="pc__ax-v" style="--x:14">Construction varies</span>
+        </div>
+        <ol class="pc__rows">
+          <li><button type="button" class="pc__row" data-i="0" style="--s:0;--e:1"><span class="pc__lab"><span class="nums">01</span>Consultation</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="1" style="--s:0;--e:2"><span class="pc__lab"><span class="nums">02</span>Site evaluation</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="2" style="--s:1;--e:5"><span class="pc__lab"><span class="nums">03</span>Design and planning</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="3" style="--s:4;--e:6"><span class="pc__lab"><span class="nums">04</span>Proposal and scope</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="4" style="--s:5;--e:12"><span class="pc__lab"><span class="nums">05</span>Permitting</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row pc__row--open" data-i="5" style="--s:12;--e:16.4"><span class="pc__lab"><span class="nums">06</span>Construction</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="6" style="--s:15;--e:16.4"><span class="pc__lab"><span class="nums">07</span>Quality review</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row pc__row--end" data-i="7" style="--s:16.4;--e:17"><span class="pc__lab"><span class="nums">08</span>Completion and handover</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
         </ol>
-        <div class="pr__window" aria-hidden="true" data-buddy-watch>
-          <svg class="pr__world" viewBox="0 80 8000 760" preserveAspectRatio="xMinYMin meet" focusable="false"></svg>
-        </div>
       </div>
-      <div class="wrap pr__railw">
-        <div class="pr__rail" aria-hidden="true"><span class="pr__fill"></span></div>
-        <p class="pr__note">Timelines vary by scope and jurisdiction.</p>
-      </div>
+      <aside class="pc__card" aria-live="polite">
+        <p class="pc__k"><span class="pc__no nums">01</span><span class="pc__wk">Week 1</span></p>
+        <h3 class="pc__t">Consultation</h3>
+        <p class="pc__p">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
+        <p class="pc__note">Timelines vary by scope and jurisdiction.</p>
+      </aside>
     </div>
   </div>
 </section>
 
-<section id="financing" class="sec financing g-field" data-section="financing" aria-labelledby="financing-h">
+<section id="financing" class="sec financing g-surface" data-section="financing" aria-labelledby="financing-h">
   
-
-  
-  <div class="ver rf" data-v="1">
-    <div class="wrap rf__grid">
-      <div class="rf__side">
+  <div class="ver fn" data-v="1">
+    <div class="wrap fn__head">
+      <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-        <h2 class="t-head" id="financing-h">Which partner <span class="acc">fits your project?</span></h2>
-        <p class="t-lead rf__lead">Pick what you are building. The road draws to the partners that usually fit it, with the reason underneath.</p>
-        <fieldset class="rf__ask">
-          <legend class="rf__q">What are you building?</legend>
-          <p class="rf__grp" aria-hidden="true">Inside the home</p>
-          <div class="rf__opts">
-            <label class="rf__o"><input type="radio" name="rf-kind" value="kitchen"><span>Kitchen</span></label>
-            <label class="rf__o"><input type="radio" name="rf-kind" value="bath"><span>Bathroom</span></label>
-            <label class="rf__o"><input type="radio" name="rf-kind" value="floor"><span>Flooring</span></label>
-          </div>
-          <p class="rf__grp" aria-hidden="true">Outside and energy</p>
-          <div class="rf__opts">
-            <label class="rf__o"><input type="radio" name="rf-kind" value="roof"><span>Roof, windows or doors</span></label>
-            <label class="rf__o"><input type="radio" name="rf-kind" value="hvac"><span>HVAC or storm protection</span></label>
-          </div>
-          <div class="rf__opts rf__opts--ns">
-            <label class="rf__o rf__o--ns"><input type="radio" name="rf-kind" value="unsure"><span>Not sure yet</span></label>
-          </div>
-        </fieldset>
-        <p class="rf__why" aria-live="polite">Pick one, and the road shows which of the four partners usually fit.</p>
-        <div class="rf__act">
-          <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-          <p class="rf__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
-        </div>
+        <h2 class="t-head" id="financing-h">Four partners. <span class="acc">Two kinds of money.</span></h2>
       </div>
-
-      <div class="rf__map" aria-hidden="true">
-        <svg class="rf__svg" viewBox="0 0 640 540" focusable="false">
-          <g class="rf__lots">
-            <path class="rf__lot" d="M28 36 H292 V176 H28 Z"/>
-            <path class="rf__lot" d="M348 36 H612 V176 H348 Z"/>
-            <text class="rf__lotn" x="40" y="62">Consumer credit</text>
-            <text class="rf__lotn" x="360" y="62">Property-assessed</text>
-          </g>
-          <g class="rf__roads">
-            <path class="rf__edge" d="M304 482 V318 C304 262 160 262 160 196 M336 482 V318 C336 262 480 262 480 196"/>
-            <path class="rf__edge" d="M304 318 C304 286 336 286 336 318"/>
-            <path class="rf__mid" d="M320 482 V312 C320 252 160 252 160 176 M320 312 C320 252 480 252 480 176"/>
-            <path class="rf__spur" d="M160 176 L96 128 M160 176 L224 128 M480 176 L416 128 M480 176 L544 128"/>
-          </g>
-          <g class="rf__posts">
-            <g class="rf__post" data-p="syn"><path class="rf__pole" d="M96 128 V88"/><rect class="rf__board" x="42" y="78" width="108" height="26" rx="3"/><text class="rf__bt" x="96" y="96">Synchrony</text></g>
-            <g class="rf__post" data-p="sfc"><path class="rf__pole" d="M224 128 V88"/><rect class="rf__board" x="164" y="78" width="120" height="26" rx="3"/><text class="rf__bt" x="224" y="96">Service Finance</text></g>
-            <g class="rf__post" data-p="ygr"><path class="rf__pole" d="M416 128 V88"/><rect class="rf__board" x="364" y="78" width="104" height="26" rx="3"/><text class="rf__bt" x="416" y="96">Ygrene</text></g>
-            <g class="rf__post" data-p="rnw"><path class="rf__pole" d="M544 128 V88"/><rect class="rf__board" x="486" y="78" width="116" height="26" rx="3"/><text class="rf__bt" x="544" y="96">RenewPACE</text></g>
-          </g>
-          <g class="rf__routes">
-            <path class="rf__route" data-p="syn" d="M320 482 V312 C320 252 160 252 160 176 L96 128"/>
-            <path class="rf__route" data-p="sfc" d="M320 482 V312 C320 252 160 252 160 176 L224 128"/>
-            <path class="rf__route" data-p="ygr" d="M320 482 V312 C320 252 480 252 480 176 L416 128"/>
-            <path class="rf__route" data-p="rnw" d="M320 482 V312 C320 252 480 252 480 176 L544 128"/>
-          </g>
-          <g class="rf__home">
-            <path class="rf__hw" d="M286 530 V496 H354 V530 Z"/>
-            <path class="rf__hr" d="M276 500 L320 470 L364 500"/>
-            <path class="rf__hd" d="M312 530 V510 H328 V530"/>
-            <text class="rf__ht" x="372" y="522">Your project</text>
-          </g>
-        </svg>
+      <div class="fn__pick">
+        <p class="fn__q" id="fn-q">What are you building?</p>
+        <div class="fn__chips" role="group" aria-labelledby="fn-q">
+          <button type="button" class="fn__chip" data-k="kitchen" aria-pressed="false">Kitchen</button>
+          <button type="button" class="fn__chip" data-k="bath" aria-pressed="false">Bathroom</button>
+          <button type="button" class="fn__chip" data-k="floor" aria-pressed="false">Flooring</button>
+          <button type="button" class="fn__chip" data-k="roof" aria-pressed="false">Roof, windows or doors</button>
+          <button type="button" class="fn__chip" data-k="hvac" aria-pressed="false">HVAC or storm protection</button>
+          <button type="button" class="fn__chip" data-k="unsure" aria-pressed="true">Not sure yet</button>
+        </div>
       </div>
     </div>
-
-    <ul class="wrap rf__cards" role="list">
-      <li class="rf__c" data-p="syn">
-        <p class="rf__ck">Consumer credit</p>
-        <h3 class="rf__cn">Synchrony</h3>
-        <p class="rf__cw">Project Card, revolving credit</p>
-        <p class="rf__fig"><span class="rf__n nums">6&ndash;132</span><span class="rf__fl">Published special-financing term range, in months</span></p>
-        <p class="rf__cx"><span class="nums">1</span> card, reusable across projects</p>
-        <p class="rf__by">As published by Synchrony</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-      <li class="rf__c" data-p="sfc">
-        <p class="rf__ck">Consumer credit</p>
-        <h3 class="rf__cn">Service Finance Company</h3>
-        <p class="rf__cw">Fixed installment loan</p>
-        <p class="rf__fig"><span class="rf__n nums">30</span><span class="rf__fl">Days after completion until the first payment</span></p>
-        <p class="rf__cx"><span class="nums">0</span> pre-payment penalty</p>
-        <p class="rf__by">As published by Service Finance Company, NMLS 140908</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-      <li class="rf__c" data-p="ygr">
-        <p class="rf__ck">Property-assessed</p>
-        <h3 class="rf__cn">Ygrene</h3>
-        <p class="rf__cw">Florida PACE, not a loan, repaid with property taxes</p>
-        <p class="rf__fig"><span class="rf__n nums">20</span><span class="rf__fl">Year maximum published residential term</span></p>
-        <p class="rf__cx">Soft credit pull</p>
-        <p class="rf__by">As published by Ygrene</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-      <li class="rf__c" data-p="rnw">
-        <p class="rf__ck">Property-assessed</p>
-        <h3 class="rf__cn">Renew Financial</h3>
-        <p class="rf__cw">RenewPACE, repaid with property taxes</p>
-        <p class="rf__fig"><span class="rf__n nums">$250K</span><span class="rf__fl">Published maximum, and up to 20% of property value</span></p>
-        <p class="rf__cx">No application fee</p>
-        <p class="rf__by">As published by Renew Financial, NMLS 1788120</p>
-        <span class="rf__fit sr-only"></span>
-      </li>
-    </ul>
-  </div>
-
-  
-  <div class="ver km" data-v="2" hidden>
     <div class="wrap">
-      <div class="km__head">
-        <div>
-          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
-          <h2 class="t-head" id="financing-h-2">Two kinds of money. <span class="acc">Four partners.</span></h2>
-        </div>
-        <p class="t-lead km__lead">Revolving credit, fixed installments, or repayment through your property tax bill. They are genuinely different products.</p>
-      </div>
-
-      <div class="km__book">
-        <div class="km__page">
-          <table class="km__t">
-            <caption class="km__cap"><span class="km__kind">Consumer credit</span><span class="km__sub">Synchrony and Service Finance</span></caption>
-            <thead><tr><td class="km__gut"></td><th scope="col">Synchrony</th><th scope="col">Service Finance</th></tr></thead>
-            <tbody>
-              <tr class="km__r"><th scope="row">What it is</th><td>Project Card, revolving credit</td><td>Fixed installment loan</td></tr>
-              <tr class="km__r"><th scope="row">How you repay</th><td>On the card, as revolving credit</td><td>In fixed installments</td></tr>
-              <tr class="km__r km__r--fig"><th scope="row">Published figure</th><td><span class="km__n nums">6&ndash;132</span><span class="km__fl">special-financing term range, in months</span></td><td><span class="km__n nums">30</span><span class="km__fl">days after completion until the first payment</span></td></tr>
-              <tr class="km__r"><th scope="row">Also published</th><td><span class="nums">1</span> card, reusable across projects</td><td><span class="nums">0</span> pre-payment penalty</td></tr>
-              <tr class="km__r km__r--q"><th scope="row">Usually fits</th><td>&ldquo;Useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.&rdquo;</td><td>&ldquo;A natural fit for a defined, single-trade scope where the number does not move once it is set.&rdquo;</td></tr>
-            </tbody>
-          </table>
-          <p class="km__foot">Service Finance Company: NMLS 140908, a subsidiary of Truist Bank.</p>
-        </div>
-        <div class="km__spine" aria-hidden="true"></div>
-        <div class="km__page">
-          <table class="km__t">
-            <caption class="km__cap"><span class="km__kind">Property-assessed</span><span class="km__sub">Ygrene and RenewPACE, repaid with property taxes</span></caption>
-            <thead><tr><td class="km__gut"></td><th scope="col">Ygrene</th><th scope="col">RenewPACE</th></tr></thead>
-            <tbody>
-              <tr class="km__r"><th scope="row">What it is</th><td>Florida PACE. Not a loan.</td><td>PACE, from Renew Financial</td></tr>
-              <tr class="km__r"><th scope="row">How you repay</th><td>Through your property tax bill</td><td>Through your property tax bill</td></tr>
-              <tr class="km__r km__r--fig"><th scope="row">Published figure</th><td><span class="km__n nums">20</span><span class="km__fl">year maximum published residential term</span></td><td><span class="km__n nums">$250K</span><span class="km__fl">published maximum, and up to 20% of property value</span></td></tr>
-              <tr class="km__r"><th scope="row">Also published</th><td>Soft credit pull</td><td>No application fee</td></tr>
-              <tr class="km__r km__r--q"><th scope="row">Usually fits</th><td>Roofing, windows and doors, HVAC, and wind-resistance and storm protection, among Ygrene&rsquo;s Florida categories</td><td>Live across all three counties</td></tr>
-            </tbody>
-          </table>
-          <p class="km__foot">Renew Financial: NMLS 1788120. <span class="km__note">PACE covers specific improvements. A kitchen remodel is generally not one of them.</span></p>
-        </div>
-      </div>
-
-      <div class="km__sum">
-        <p class="km__total">Four financing partners, not one.</p>
-        <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-        <p class="km__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
-      </div>
+      <ul class="fn__deck">
+        <li class="fn__slot" data-p="syn"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Synchrony, consumer credit: 6 to 132 months, the published special-financing term range. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
+            <span class="fn__big nums">6&ndash;132</span><span class="fn__unit">months, published special-financing term range</span>
+            <span class="fn__name">Synchrony</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">Synchrony</span>
+            <span class="fn__row"><b>What it is</b>Project Card, revolving credit</span>
+            <span class="fn__row"><b>How you repay</b>On the card, as revolving credit</span>
+            <span class="fn__row"><b>Also</b><span class="nums">1</span> card, reusable across projects</span>
+            <span class="fn__src">As published by Synchrony</span>
+          </span>
+        </button></li>
+        <li class="fn__slot" data-p="sfc"><button type="button" class="fn__card fn__card--cc" aria-pressed="false" aria-label="Service Finance Company, consumer credit: 30 days after completion until the first payment. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Consumer credit</span><span class="fn__chipic" aria-hidden="true"></span>
+            <span class="fn__big nums">30</span><span class="fn__unit">days after completion until the first payment</span>
+            <span class="fn__name">Service Finance</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">Service Finance</span>
+            <span class="fn__row"><b>What it is</b>Fixed installment loan</span>
+            <span class="fn__row"><b>How you repay</b>In fixed installments</span>
+            <span class="fn__row"><b>Also</b><span class="nums">0</span> pre-payment penalty</span>
+            <span class="fn__src">As published by Service Finance Company, NMLS 140908</span>
+          </span>
+        </button></li>
+        <li class="fn__slot" data-p="ygr"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="Ygrene, property-assessed: 20 year maximum published residential term. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
+            <span class="fn__big nums">20</span><span class="fn__unit">year maximum published residential term</span>
+            <span class="fn__name">Ygrene</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">Ygrene</span>
+            <span class="fn__row"><b>What it is</b>Florida PACE. Not a loan.</span>
+            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
+            <span class="fn__row"><b>Also</b>Soft credit pull</span>
+            <span class="fn__src">As published by Ygrene</span>
+          </span>
+        </button></li>
+        <li class="fn__slot" data-p="rnw"><button type="button" class="fn__card fn__card--pa" aria-pressed="false" aria-label="RenewPACE, property-assessed: 250 thousand dollars published maximum, and up to 20 percent of property value. Turn over for how you repay.">
+          <span class="fn__face fn__front">
+            <span class="fn__kind">Property-assessed</span><svg class="fn__house" viewBox="0 0 32 28" aria-hidden="true" focusable="false"><path d="M3 13 L16 3 L29 13 M7 10 V26 H25 V10 M13 26 V18 H19 V26"/></svg>
+            <span class="fn__big nums">$250K</span><span class="fn__unit">published maximum, and up to 20% of property value</span>
+            <span class="fn__name">RenewPACE</span>
+          </span>
+          <span class="fn__face fn__back">
+            <span class="fn__name">RenewPACE</span>
+            <span class="fn__row"><b>What it is</b>PACE, from Renew Financial</span>
+            <span class="fn__row"><b>How you repay</b>Through your property tax bill</span>
+            <span class="fn__row"><b>Also</b>No application fee</span>
+            <span class="fn__src">As published by Renew Financial, NMLS 1788120</span>
+          </span>
+        </button></li>
+      </ul>
+      <p class="fn__why" aria-live="polite">Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.</p>
+    </div>
+    <div class="wrap fn__foot">
+      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+      <p class="fn__not">Elbaz Construction is not a lender and does not approve, decline or fund applications. Every rate, term and approval decision comes from the financing partner.</p>
     </div>
   </div>
 </section>
@@ -2433,22 +2285,22 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     <div class="wrap rv__head">
       <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Google reviews</p>
-        <h2 class="t-head" id="reviews-h"><span class="nums">343</span> reviews. <span class="acc">One average: <span class="nums">4.8</span>.</span></h2>
+        <h2 class="t-head" id="reviews-h"><span class="nums">343</span> reviews. <span class="acc">One average.</span></h2>
       </div>
-      <p class="t-lead rv__lead">Every small star is one review on our Google listing. Scroll, and they come together into the average. The ledger counts them as they land, five to a gate.</p>
+      <p class="t-lead rv__lead">Every star here is one review on our Google listing. Run your pointer through them: they scatter, then find their way back to the average.</p>
     </div>
-    <div class="wrap rv__stage">
+    <div class="wrap">
       <figure class="rv__sky">
-        <svg class="rv__svg" viewBox="0 92 600 140" role="img" aria-label="343 small stars, one per Google review, gathered into five large stars. Four are full and the fifth is filled to eight tenths: an average of 4.8 out of 5."></svg>
-        <figcaption class="rv__avg"><span class="rv__n nums">4.8</span><span class="rv__of">out of <span class="nums">5</span>, the average across all <span class="nums">343</span> Google reviews</span></figcaption>
-      </figure>
-      <figure class="rv__book">
-        <svg class="rv__tally" role="group" aria-label="A tally of 343 strokes: 68 full gates of five and three more strokes. The arrow keys count along it."></svg>
-        <figcaption class="rv__cap"><span>One stroke per review, five to a gate.</span> <span class="rv__tip" aria-live="polite"></span></figcaption>
+        <canvas class="rv__cv" role="img" aria-label="343 small stars, one per Google review, gathered into the figure 4.8: the average out of 5."></canvas>
+        <figcaption class="rv__avg">
+          <span class="rv__of"><span class="nums">4.8</span> out of <span class="nums">5</span>, the average across all <span class="nums">343</span> Google reviews</span>
+          <span class="rv__hint" aria-hidden="true">Move through the stars</span>
+        </figcaption>
       </figure>
     </div>
     <div class="wrap rv__acts">
       <a class="btn" href="https://www.google.com/maps?cid=17916885921843924422" rel="noopener"><span class="btn__label">Read all <span class="nums">343</span> on Google</span></a>
+      <button type="button" class="btn btn--ghost rv__again"><span class="btn__label">Scatter them</span></button>
     </div>
   </div>
 </section>
@@ -2460,7 +2312,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       <div class="tw__side">
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
         <h2 class="t-head" id="towns-h">From our office <span class="acc">to your street.</span></h2>
-        <p class="t-lead tw__lead"><span class="nums">104</span> municipalities across Miami&#8209;Dade, Broward and Palm Beach. Type your town, or pick it on the map or the list.</p>
+        <p class="t-lead tw__lead"><span class="nums">104</span> municipalities across Miami&#8209;Dade, Broward and Palm Beach. Type your town, or pick it on the map.</p>
         <div class="tw__field">
           <label class="tw__lbl" for="tw-q">Your town or city</label>
           <div class="tw__box">
@@ -2493,11 +2345,21 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Book a consultation</p>
         <h2 class="t-head" id="consult-h">Tell us in <span class="acc">your own words.</span></h2>
         <p class="t-lead gs__lead">Fill in the note. It reads like a message because it is one: it becomes the email we receive. A real consultation, not a sales visit.</p>
-        <dl class="consult__facts">
-          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a></dd></div>
-          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
-          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
-        </dl>
+        
+        <div class="cl">
+          <a class="cl__call" href="tel:+17542360675">
+            <span class="cl__hs" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M13 8q-7 16 0 32l8-3 2-10-5-2q-2-4 0-8l5-2-2-10z"/><path class="w" d="M28 17q4 7 0 14M34 12q7 12 0 24"/></svg></span>
+            <span class="cl__txt"><span class="cl__k">Call. A real answer, not a callback form.</span><span class="cl__num nums">(754)&nbsp;236&#8209;0675</span></span>
+          </a>
+          <div class="cl__row">
+            <p class="cl__st" aria-live="polite"><span class="cl__lamp" aria-hidden="true"></span><span class="cl__stt">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+            <button type="button" class="cl__copy" data-n="(754) 236-0675"><span class="cl__cl">Copy number</span></button>
+          </div>
+          <dl class="consult__facts cl__facts">
+            <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+            <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+          </dl>
+        </div>
       </div>
       <form class="gs__note c-form" novalidate aria-labelledby="consult-h">
         <p class="gs__s">Hi, my name is <span class="gs__b"><input id="gs-name" name="name" type="text" autocomplete="name" aria-label="Full name, required" placeholder="your full name" size="16" required></span>.</p>
@@ -4587,6 +4449,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -4654,7 +4524,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -5185,249 +5055,63 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   } } });
 })();
 
-/* FINALIZE · Home 5 · Process: eight frames of one continuous drawn site; the camera travels across it while the
-   section is pinned, each frame draws itself as it arrives (strokes first, then fills [S0362]), the words stay still
-   and swap per stage, and the week marks land on the rail. One pinned master timeline, scrubbed, reversible
-   [S1326, S0186 ease none, S1209 finite pin: ~1 viewport per frame]. Phones and reduced motion: the ordered list is the
-   story, each stage gets its own frame drawn inline (no pin). The companion watches from the corner during the pin. */
+/* OWNER · Home 5 · How a job runs: one calendar on one screen (the long pinned drawing is retired at the owner's word).
+   The bars draw in, in order, as the section arrives (once); pointer, tap or focus on a stage lights its bar and the card
+   gives the firm's line. Arrow keys walk the stages. Reduced motion: the chart drawn, still [S0186, S1018, S0400]. */
 (function () {
-  var NS = 'http://www.w3.org/2000/svg', G = 760, FW = 1000;
-
-  /* ---------- the drawing kit (one language: ink line 3.2, sand and paper fills, one clay accent) ---------- */
-  function P(d, c) { return '<path class="' + (c || 'd') + '" d="' + d + '"/>'; }
-  function C(x, y, r, c) { return '<circle class="' + (c || 'd') + '" cx="' + x + '" cy="' + y + '" r="' + r + '"/>'; }
-  function R(x, y, w, h, c, rx) { return '<rect class="' + (c || 'd') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"' + (rx ? ' rx="' + rx + '"' : '') + '/>'; }
-  function T(x, y, s, c, a) { return '<text class="' + (c || 'tx') + '" x="' + x + '" y="' + y + '"' + (a ? ' text-anchor="' + a + '"' : '') + '>' + s + '</text>'; }
-  function hat(x, y) {   // hard hat sitting ON the head (brim across the brow): the same rule as the companion
-    return P('M' + (x - 25) + ' ' + (y - 6) + ' C' + (x - 25) + ' ' + (y - 34) + ' ' + (x + 25) + ' ' + (y - 34) + ' ' + (x + 25) + ' ' + (y - 6) + ' Z', 'f-clay d') +
-      P('M' + (x - 32) + ' ' + (y - 6) + ' H' + (x + 32), 'd');
-  }
-  // a standing person: feet at (x, G); arms: 'down' | 'point' | 'hold' | 'raise' | 'give'; dir 1 faces right, -1 left
-  function stand(x, o) {
-    o = o || {}; var d = o.dir || 1, top = G - 220, hy = G - 252, s = '';
-    s += P('M' + (x - 12) + ' ' + G + ' L' + (x - 9) + ' ' + (G - 108) + ' M' + (x + 12) + ' ' + G + ' L' + (x + 9) + ' ' + (G - 108));
-    s += P('M' + (x - 22) + ' ' + G + ' h-14 M' + (x + 22) + ' ' + G + ' h14');
-    s += P('M' + (x - 27) + ' ' + (G - 104) + ' L' + (x - 30) + ' ' + (top + 18) + ' Q' + (x - 30) + ' ' + top + ' ' + (x - 12) + ' ' + top + ' L' + (x + 12) + ' ' + top + ' Q' + (x + 30) + ' ' + top + ' ' + (x + 30) + ' ' + (top + 18) + ' L' + (x + 27) + ' ' + (G - 104) + ' Z', (o.shirt || 'f-sand') + ' d');
-    s += C(x, hy, 23, 'f-paper d');
-    s += P('M' + (x + d * 9) + ' ' + (hy - 3) + ' v4', 'dt');   // the eye, looking the way it faces
-    var sh = top + 14, a = o.arms || 'down';
-    if (a === 'down') s += P('M' + (x - 28) + ' ' + sh + ' L' + (x - 34) + ' ' + (G - 100) + ' M' + (x + 28) + ' ' + sh + ' L' + (x + 34) + ' ' + (G - 100));
-    if (a === 'point') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 34 * d) + ' ' + (G - 100) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 70 * d) + ' ' + (sh - 30) + ' L' + (x + 112 * d) + ' ' + (sh - 52));
-    if (a === 'hold') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 30 * d) + ' ' + (G - 112) + ' L' + (x + 20 * d) + ' ' + (G - 132) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 36 * d) + ' ' + (G - 112) + ' L' + (x + 56 * d) + ' ' + (G - 140));
-    if (a === 'raise') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 34 * d) + ' ' + (G - 100) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 48 * d) + ' ' + (sh - 60) + ' L' + (x + 56 * d) + ' ' + (sh - 118));
-    if (a === 'give') s += P('M' + (x - 28 * d) + ' ' + sh + ' L' + (x - 34 * d) + ' ' + (G - 100) + ' M' + (x + 28 * d) + ' ' + sh + ' L' + (x + 64 * d) + ' ' + (sh + 40) + ' L' + (x + 104 * d) + ' ' + (sh + 34));
-    if (o.hat) s += hat(x, hy - 12);
-    return s;
-  }
-  // a seated person on a chair, facing dir; hands rest on a table at height ty
-  function sit(x, d, ty, o) {
-    o = o || {}; var seat = G - 120, hy = seat - 168, s = '';
-    s += P('M' + (x - 34 * d) + ' ' + G + ' V' + seat + ' H' + (x + 30 * d) + ' V' + G + ' M' + (x - 34 * d) + ' ' + seat + ' V' + (seat - 120), 'd');   // chair
-    s += P('M' + (x - 10 * d) + ' ' + (seat - 4) + ' H' + (x + 54 * d) + ' L' + (x + 58 * d) + ' ' + G + ' h' + (16 * d));        // legs
-    s += P('M' + (x - 26 * d) + ' ' + (seat - 4) + ' L' + (x - 22 * d) + ' ' + (seat - 118) + ' Q' + (x - 18 * d) + ' ' + (seat - 132) + ' ' + (x - 2 * d) + ' ' + (seat - 132) + ' L' + (x + 14 * d) + ' ' + (seat - 132) + ' Q' + (x + 28 * d) + ' ' + (seat - 128) + ' ' + (x + 30 * d) + ' ' + (seat - 112) + ' L' + (x + 24 * d) + ' ' + (seat - 4) + ' Z', (o.shirt || 'f-sand') + ' d');
-    s += C(x + 4 * d, hy, 23, 'f-paper d');
-    s += P('M' + (x + 14 * d) + ' ' + (hy - 3) + ' v4', 'dt');
-    s += P('M' + (x + 20 * d) + ' ' + (seat - 116) + ' L' + (x + 52 * d) + ' ' + (ty - 10) + ' L' + (x + 92 * d) + ' ' + (ty - 4));                 // arm to the table
-    if (o.hat) s += hat(x + 4 * d, hy - 12);
-    return s;
-  }
-  function steam(x, y) { return P('M' + x + ' ' + y + ' c-8 -14 8 -22 0 -36 M' + (x + 12) + ' ' + y + ' c-8 -14 8 -22 0 -36', 'dt steam'); }
-  function house(x, w, h, roof, noRight) {   // an elevation: walls, roof, door, two windows
-    var y = G - h, s = '';
-    s += R(x, y, w, h, 'f-paper d');
-    s += P('M' + (x - 30) + ' ' + (y + 6) + ' L' + (x + w / 2) + ' ' + (y - roof) + ' L' + (x + w + 30) + ' ' + (y + 6), 'd roof');
-    s += R(x + w / 2 - 34, G - 150, 68, 150, 'f-sand d');
-    s += R(x + 40, y + 70, 110, 90, 'f-paper d') + P('M' + (x + 95) + ' ' + (y + 70) + ' v90 M' + (x + 40) + ' ' + (y + 115) + ' h110', 'dt');
-    if (!noRight) s += R(x + w - 150, y + 70, 110, 90, 'f-paper d') + P('M' + (x + w - 95) + ' ' + (y + 70) + ' v90 M' + (x + w - 150) + ' ' + (y + 115) + ' h110', 'dt');
-    return s;
-  }
-  function lines(x, y, n, w, gap) { var s = ''; for (var i = 0; i < n; i++) s += P('M' + x + ' ' + (y + i * gap) + ' h' + (w - (i % 3) * 38), 'dt writes'); return s; }
-  function tick(x, y) { return P('M' + x + ' ' + y + ' l10 10 l20 -24', 'd tick'); }
-
-  /* ---------- the eight frames ---------- */
-  var FR = [];
-  // 1 · Consultation: two people at a kitchen table over a drawing; a cup steams; the Elbaz hat rests on the table
-  FR.push(function () {
-    var s = '';
-    s += P('M120 ' + G + ' H880', 'd');                                                       // floor line
-    s += R(300, G - 160, 400, 14, 'f-sand d') + P('M330 ' + (G - 146) + ' V' + G + ' M670 ' + (G - 146) + ' V' + G);   // table
-    s += sit(250, 1, G - 160, { hat: false, shirt: 'f-clayl' });                              // the homeowner
-    s += sit(750, -1, G - 160, { shirt: 'f-sand' });                                          // the Elbaz rep
-    s += P('M420 ' + (G - 162) + ' L560 ' + (G - 176) + ' L590 ' + (G - 162) + ' Z', 'f-paper d');   // the drawing on the table
-    s += P('M455 ' + (G - 166) + ' h80 M470 ' + (G - 170) + ' h50', 'dt writes');
-    s += R(608, G - 186, 22, 26, 'f-paper d', 3) + P('M630 ' + (G - 178) + ' q10 4 0 12', 'd') + steam(612, G - 194);   // cup
-    s += P('M652 ' + (G - 160) + ' C652 ' + (G - 186) + ' 700 ' + (G - 186) + ' 700 ' + (G - 160) + ' Z', 'f-clay d') + P('M644 ' + (G - 160) + ' H708', 'd');   // the hat, on the table
-    s += P('M180 300 h90 M180 330 h60', 'dt') + R(150, 240, 150, 120, 'd');                   // a window on the wall
-    return s;
-  });
-  // 2 · Site evaluation: the house, a flood line rising, an HVHZ wind arrow, a wall opened to show what is behind it
-  FR.push(function () {
-    var s = house(220, 520, 300, 150, true);
-    s += P('M80 ' + (G - 60) + ' H920', 'dash flood');
-    s += T(84, G - 72, 'Flood zone', 'tx tx-s');
-    s += P('M760 220 c60 -20 120 20 180 0 M780 260 c50 -16 100 16 150 0', 'd wind') + P('M930 210 l12 10 l-14 8', 'd wind');
-    s += T(780, 200, 'HVHZ', 'tx tx-s');
-    s += R(590, G - 230, 110, 100, 'f-clayl d') + P('M612 ' + (G - 230) + ' v100 M645 ' + (G - 230) + ' v100 M678 ' + (G - 230) + ' v100', 'dt') + P('M596 ' + (G - 190) + ' h98', 'd pipe');   // the wall opened: studs and a pipe
-    s += stand(870, { dir: -1, arms: 'point', hat: true, shirt: 'f-sand' });
-    return s;
-  });
-  // 3 · Design and planning: a plan drawing (walls, a door swing, an island), dimensions, a fan of finish swatches
-  FR.push(function () {
-    var s = '';
-    s += R(150, 160, 520, 420, 'f-paper d') + P('M150 160 h520 v420 h-520 z', 'd wall');
-    s += P('M150 360 h160 M400 360 h270', 'd wall') + P('M310 270 a90 90 0 0 1 90 90', 'dt') + P('M310 360 v-90', 'd');   // door swing
-    s += R(330, 450, 180, 64, 'f-sand d') + T(420, 490, 'Island', 'tx tx-s', 'middle');
-    s += P('M150 620 v24 M670 620 v24 M150 632 h520', 'dt dim') + T(410, 660, 'Layout option B', 'tx tx-s', 'middle');
-    s += R(730, 230, 90, 90, 'f-clay d swatch') + R(760, 290, 90, 90, 'f-sand d swatch') + R(790, 350, 90, 90, 'f-paper d swatch');
-    s += T(730, 480, 'Finishes', 'tx tx-s');
-    return s;
-  });
-  // 4 · Proposal and scope: a written scope; lines write themselves; included ticks, one excluded, a contingency note
-  FR.push(function () {
-    var s = R(250, 120, 420, 580, 'f-paper d') + P('M250 180 h420', 'd');
-    s += T(280, 160, 'Scope of work', 'tx');
-    for (var i = 0; i < 5; i++) { s += lines(330, 230 + i * 70, 2, 300, 22); s += tick(286, 222 + i * 70); }
-    s += P('M286 590 l24 24 M310 590 l-24 24', 'd cross') + lines(330, 600, 1, 260, 0) + T(330, 640, 'Not included', 'tx tx-s');
-    s += R(700, 300, 200, 140, 'f-clayl d') + T(716, 340, 'Contingency', 'tx tx-s') + lines(716, 370, 3, 160, 22);
-    s += P('M670 360 L700 360', 'dt');
-    return s;
-  });
-  // 5 · Permitting: a permit file, then (stillness) the approval stamp lands; a product tag with its approval
-  FR.push(function () {
-    var s = R(230, 160, 380, 500, 'f-sand d') + R(250, 140, 380, 500, 'f-paper d');
-    s += T(280, 200, 'Permit file', 'tx') + lines(280, 240, 6, 300, 30);
-    s += '<g class="stamp">' + C(500, 520, 70, 'f-none d stampc') + C(500, 520, 56, 'f-none dt stampc') + T(500, 512, 'NOTICE OF', 'tx tx-stamp', 'middle') + T(500, 540, 'ACCEPTANCE', 'tx tx-stamp', 'middle') + '</g>';
-    s += R(690, 320, 236, 110, 'f-paper d', 8) + C(714, 375, 8, 'd') + T(734, 368, 'Florida Product', 'tx tx-s') + T(734, 396, 'Approval', 'tx tx-s');
-    s += P('M680 375 C656 380 640 420 610 430', 'dt');
-    return s;
-  });
-  // 6 · Construction: studs rise in a wall frame, a ladder, a worker, and the broom at the end of the day
-  FR.push(function () {
-    var s = P('M100 ' + G + ' H900', 'd') + P('M160 260 H700 M160 ' + (G - 12) + ' H700', 'd plate');
-    for (var i = 0; i < 9; i++) s += P('M' + (180 + i * 64) + ' ' + (G - 12) + ' V260', 'd stud');
-    s += P('M760 ' + G + ' L840 300 M820 ' + G + ' L880 300 M772 690 L826 690 M786 610 L838 610 M800 530 L850 530 M812 450 L860 450 M826 370 L870 370', 'd ladder');
-    s += stand(620, { dir: -1, arms: 'raise', hat: true, shirt: 'f-clayl' });
-    s += P('M126 ' + (G - 46) + ' L152 470', 'd broom') + P('M110 ' + (G - 46) + ' h34 l12 46 h-58 z', 'f-sand d broom') + P('M114 ' + (G - 30) + ' l-3 30 M127 ' + (G - 30) + ' v30 M140 ' + (G - 30) + ' l3 30', 'dt broom');
-    return s;
-  });
-  // 7 · Quality review: two people walk the room with the scope; the checklist ticks along
-  FR.push(function () {
-    var s = P('M100 ' + G + ' H900', 'd') + R(560, 220, 300, 330, 'f-paper d') + T(580, 256, 'Walkthrough', 'tx');
-    for (var i = 0; i < 5; i++) { s += lines(620, 300 + i * 50, 1, 200, 0); s += tick(578, 292 + i * 50); }
-    s += stand(240, { dir: 1, arms: 'give', hat: true, shirt: 'f-sand' }) + R(338, G - 200, 46, 60, 'f-paper d', 3) + P('M346 ' + (G - 184) + ' h30 M346 ' + (G - 170) + ' h22', 'dt');   // the scope, on a clipboard
-    s += stand(470, { dir: 1, arms: 'point', shirt: 'f-clayl' });
-    return s;
-  });
-  // 8 · Completion and handover: the finished house, keys passed hand to hand, warranty cards registered
-  FR.push(function () {
-    var s = house(120, 380, 260, 120);
-    s += stand(600, { dir: 1, arms: 'give', hat: true, shirt: 'f-sand' }) + stand(880, { dir: -1, arms: 'give', shirt: 'f-clayl' });
-    s += C(722, G - 172, 9, 'd key') + P('M731 ' + (G - 172) + ' h24 v8 M747 ' + (G - 172) + ' v6', 'd key');
-    s += R(610, 236, 170, 100, 'f-paper d', 6) + T(626, 270, 'Warranty', 'tx tx-s');
-    s += R(660, 290, 170, 100, 'f-paper d', 6) + T(676, 326, 'Registered', 'tx tx-s') + tick(780, 350);
-    return s;
-  });
-
-  function frameSVG(i) { return '<g class="pr__f" data-i="' + i + '" transform="translate(' + (i * FW) + ' 0)">' + FR[i]() + '</g>'; }
-
-  EZ.section('process', { 1: { init: function (root, k) {
-    var world = root.querySelector('.pr__world'), win = root.querySelector('.pr__window'), items = Array.prototype.slice.call(root.querySelectorAll('.pr__item')),
-      rail = root.querySelector('.pr__rail'), fill = root.querySelector('.pr__fill'), pin = root.querySelector('.pr__pin');
-    // QA-1 (completion: pinned sections pin on real phone widths): the pinned camera runs at every width with motion on;
-    // only reduced motion and very short screens get the list
-    var big = function () { return k.motion && matchMedia('(min-height: 560px)').matches; };
-    var cur = -1, groups = null;
-    // rail marks: one per stage, the week label lands as the stage arrives
-    rail.innerHTML += items.map(function (it, i) { return '<span class="pr__mk" style="--x:' + (i / 7) + '"><span class="pr__mkn nums">' + it.querySelector('.pr__n .nums').textContent + '</span></span>'; }).join('');
-    var marks = Array.prototype.slice.call(rail.querySelectorAll('.pr__mk'));
-    function show(i) {
-      if (i === cur) return; cur = i;
-      items.forEach(function (it, j) { it.classList.toggle('is-on', j === i); });
-      marks.forEach(function (m, j) { m.classList.toggle('is-on', j <= i); });
-      if (groups) groups.forEach(function (g, j) { g.classList.toggle('is-off', j !== i); });   // neighbours stay visible, quieter
-    }
-
-    if (!big()) {
-      // the list is the story: each stage gets its own frame, drawn inline (a viewBox onto the same continuous site)
-      root.classList.add('pr--list');
-      items.forEach(function (it, i) {
-        var s = document.createElementNS(NS, 'svg');
-        s.setAttribute('viewBox', (i * FW) + ' 80 ' + FW + ' 760'); s.setAttribute('class', 'pr__mini'); s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
-        s.innerHTML = frameSVG(i);
-        it.insertBefore(s, it.firstChild);
-      });
-      k.add(function () { root.classList.remove('pr--list'); root.querySelectorAll('.pr__mini').forEach(function (n) { n.remove(); }); });
-      return;
-    }
-
-    world.innerHTML = FR.map(function (f, i) { return frameSVG(i); }).join('');
-    groups = Array.prototype.slice.call(world.querySelectorAll('.pr__f'));
-    // every frame starts undrawn; strokes draw first, fills follow (no fill ever flashes over its drawing)
-    groups.forEach(function (g) {
-      gsap.set(g.querySelectorAll('.d, .dt'), { drawSVG: '0%' });
-      gsap.set(g.querySelectorAll('[class*="f-"]'), { fillOpacity: 0 });   // the outline draws visibly, the fill follows
-      gsap.set(g.querySelectorAll('.tx, .dash'), { opacity: 0 });
-      gsap.set(g.querySelectorAll('.stamp'), { scale: 1.6, opacity: 0, transformOrigin: '500px 520px' });
-    });
-    // the world is sized explicitly: its height is the window's, each frame is 1000/900 of that, and the frame on show
-    // sits in the middle of the window so its neighbours peek in at both edges (one continuous site)
-    var fw = 0;
-    function size() {
-      // QA-1: as large as the window allows in BOTH directions (a tall narrow phone used to crop the frame's edges)
-      var h = win.clientHeight, w = win.clientWidth; fw = Math.min(h * FW / 760, w); var wh = fw * 760 / FW;
-      world.style.height = wh + 'px'; world.style.top = ((h - wh) / 2) + 'px'; world.style.width = (fw * 8) + 'px';
-    }
-    size(); k.ro(win, function () { size(); ScrollTrigger.refresh(); });
-    function camX(i) { return -(i * fw) + (win.clientWidth - fw) / 2; }
-    gsap.set(world, { x: camX(0) });
-    var tl = gsap.timeline({ defaults: { ease: 'none' } });
-    groups.forEach(function (g, i) {
-      var t0 = i;                         // frame i owns [i, i+1) of the master timeline
-      if (i > 0) tl.fromTo(world, { x: function () { return camX(i - 1); } }, { x: function () { return camX(i); }, duration: .3, ease: 'power2.inOut', immediateRender: false }, t0 - .3);   // the camera travels
-      if (i === 0) return;                // frame 1 is drawn as the section arrives (below), never an empty window
-      tl.to(g.querySelectorAll('.d, .dt'), { drawSVG: '100%', duration: .26, stagger: { amount: .14 } }, t0 - .12)
-        .to(g.querySelectorAll('[class*="f-"]'), { fillOpacity: 1, duration: .12, stagger: { amount: .06 } }, t0 + .1)
-        .to(g.querySelectorAll('.dash'), { opacity: 1, duration: .12 }, t0 + .1)
-        .to(g.querySelectorAll('.tx'), { opacity: 1, duration: .1 }, t0 + .18);
-      if (i === 4) tl.to(g.querySelectorAll('.stamp'), { scale: 1, opacity: 1, duration: .1, ease: 'power4.in' }, t0 + .4);   // stillness, then the stamp lands
-    });
-    tl.to({}, { duration: .5 });           // the last frame holds before the release
-    // frame 1 (the consultation) draws itself as the section comes into view: strokes, then fills, then words
-    var g0 = groups[0];
-    var intro = gsap.timeline({ paused: true })
-      .to(g0.querySelectorAll('.d, .dt'), { drawSVG: '100%', duration: .9, ease: 'power2.inOut', stagger: { amount: .6 } })
-      .to(g0.querySelectorAll('[class*="f-"]'), { fillOpacity: 1, duration: .4, ease: 'power2.out', stagger: { amount: .3 } }, '-=.5')
-      .to(g0.querySelectorAll('.dash, .tx'), { opacity: 1, duration: .4, ease: 'power2.out' }, '<');
-    var it = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: function () { intro.play(); } });
-    k.add(function () { it.kill(); intro.kill(); });
-    var st = ScrollTrigger.create({
-      trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 7.2); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
-      onUpdate: function (self) {
-        var p = self.progress * tl.duration();
-        show(Math.min(7, Math.max(0, Math.floor(p + .15))));
-        fill.style.transform = 'scaleX(' + Math.min(1, p / 7).toFixed(4) + ')';
+  var ST = [
+    ['Week 1', 'Consultation', 'We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.'],
+    ['Week 1–2', 'Site evaluation', 'Flood zone, HVHZ requirements, permit history, HOA or historic review, and what is behind the walls.'],
+    ['Weeks 2–5', 'Design and planning', 'Layouts, finishes and system choices, with the real trade-offs explained rather than one pre-set package.'],
+    ['Weeks 5–6', 'Proposal and scope', 'A written scope that says what is included, what is not, and where contingencies are likely. Priced against the drawings, not a guess.'],
+    ['Weeks 6–12', 'Permitting', 'Permits pulled directly, and every product checked for its Notice of Acceptance or Florida Product Approval.'],
+    ['Varies', 'Construction', 'One point of contact, inspections at each stage, and a site that gets cleaned at the end of the day.'],
+    ['Final 1–2 weeks', 'Quality review', 'We walk the work against the scope before we call it finished.'],
+    ['Closeout', 'Completion and handover', 'Final inspection, a walkthrough together, and registration of manufacturer and workmanship warranties.']
+  ];
+  EZ.section('process', {
+    1: { init: function (root, k) {
+      var rows = Array.prototype.slice.call(root.querySelectorAll('.pc__row')), card = root.querySelector('.pc__card');
+      var no = card.querySelector('.pc__no'), wk = card.querySelector('.pc__wk'), t = card.querySelector('.pc__t'), p = card.querySelector('.pc__p');
+      var cur = -1;
+      function pick(i) {
+        if (i === cur) return; cur = i;
+        rows.forEach(function (r, j) { r.classList.toggle('is-on', j === i); r.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
+        no.textContent = (i < 9 ? '0' : '') + (i + 1); wk.textContent = ST[i][0]; t.textContent = ST[i][1]; p.textContent = ST[i][2];
+        card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
       }
-    });
-    show(0);
-    k.add(function () { st.kill(); tl.kill(); world.innerHTML = ''; world.style.width = world.style.height = ''; gsap.set(world, { clearProps: 'transform' }); });
-  } } });
+      rows.forEach(function (r, i) {
+        k.on(r, 'pointerenter', function (e) { if (e.pointerType === 'mouse') pick(i); });
+        k.on(r, 'focus', function () { pick(i); });
+        k.on(r, 'click', function () { pick(i); });
+        k.on(r, 'keydown', function (e) {
+          var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return;
+          e.preventDefault(); rows[(i + d + rows.length) % rows.length].focus();
+        });
+      });
+      pick(0);
+      k.add(function () { rows.forEach(function (r) { r.classList.remove('is-on'); r.removeAttribute('aria-pressed'); }); cur = -1; });
+      EZ.reveal(k, root.querySelectorAll('.pc__head > *, .pc__card'));
+      if (!k.motion) return;
+      // the bars draw in, in order, once the chart is on screen
+      var bars = root.querySelectorAll('.pc__bar');
+      gsap.set(bars, { scaleX: 0 });
+      var tl = gsap.timeline({ paused: true }).to(bars, { scaleX: 1, duration: .55, ease: 'power3.out', stagger: .09 });
+      var st = ScrollTrigger.create({ trigger: root.querySelector('.pc__chart'), start: 'top 78%', once: true, onEnter: function () { tl.play(); } });
+      k.add(function () { st.kill(); tl.kill(); gsap.set(bars, { clearProps: 'transform' }); });
+    } }
+  });
 })();
 
-/* FINALIZE · Home 6 · Financing.
-   V1 · the route finder: pick what you are building; the clay road draws from your house through the fork to the partners
-   that usually fit (stroke on a path, power2.inOut, the eye follows it [S0362]); a road that no longer fits retracts back
-   toward the house (power4.in, quick) before the new one draws; each signpost lights as the road reaches it, and the
-   partner's published figure lands on its card as an event. The routing is the firm's own framing (FACTS.md "Financing":
-   interior finish work -> consumer credit; Ygrene's Florida categories and Service Finance's typical projects for the
-   outside and energy work; "a kitchen remodel is generally not one of them").
-   V2 · two kinds of money: the scroll writes an open ledger line by line on both pages at once (the rule draws, then the
-   words), each published figure lands like a stamp; scrubbed and reversible [S1326]. Real tables underneath. */
+/* OWNER · Home 6 · Financing: four partner cards (both earlier versions retired at the owner's word). Pick what you are
+   building and the cards that usually fit come forward (the routing is the firm's own framing, FACTS.md "Financing");
+   the pointer tilts a card toward you; click, tap or Enter turns it over to how you repay. The cards deal in as the
+   section arrives. Reduced motion: no tilt, no deal; the flip is instant [S0340 physics, S1018 keyboard, S0400]. */
 (function () {
   var ROUTES = {
     kitchen: ['syn', 'sfc'], bath: ['syn', 'sfc'], floor: ['syn', 'sfc'],
     roof: ['sfc', 'ygr', 'rnw'], hvac: ['sfc', 'ygr', 'rnw'], unsure: ['syn', 'sfc', 'ygr', 'rnw']
   };
-  var NAMES = { syn: 'Synchrony', sfc: 'Service Finance', ygr: 'Ygrene', rnw: 'RenewPACE' };
   var WHY = {
     kitchen: 'Interior finish work, so consumer credit is the usual route. PACE covers specific improvements; a kitchen remodel is generally not one of them.',
     bath: 'Interior finish work, so consumer credit is the usual route. Synchrony’s card is “useful if a kitchen now is likely to be followed by a bathroom or a flooring run later.”',
@@ -5436,109 +5120,36 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     hvac: 'HVAC, and wind-resistance and storm protection, are among Ygrene’s Florida PACE categories. HVAC is a typical Service Finance project as well.',
     unsure: 'Four financing partners, not one. Two are consumer credit and two are property-assessed, so more than one kind of answer is possible.'
   };
-  function list(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; }
-
   EZ.section('financing', {
     1: { init: function (root, k) {
-      var routes = {}, posts = {}, cards = {};
-      root.querySelectorAll('.rf__route').forEach(function (r) { routes[r.dataset.p] = r; });
-      root.querySelectorAll('.rf__post').forEach(function (p) { posts[p.dataset.p] = p; });
-      root.querySelectorAll('.rf__c').forEach(function (c) { cards[c.dataset.p] = c; });
-      var why = root.querySelector('.rf__why'), on = {};
-      var map = root.querySelector('.rf__map');
-      var edges = map.querySelectorAll('.rf__edge, .rf__pole, .rf__hw, .rf__hr, .rf__hd, .rf__lot');
-      var marks = map.querySelectorAll('.rf__mid, .rf__spur, .rf__board, .rf__bt, .rf__lotn, .rf__ht');
-      Object.keys(routes).forEach(function (p) { gsap.set(routes[p], { drawSVG: '0% 0%', opacity: 0 }); });
-      // Phase 6: on phones the signposts grow to two-line boards so their names read at ~11px (they were ~8px)
-      if (matchMedia('(max-width: 560px)').matches) {
-        map.querySelectorAll('.rf__post').forEach(function (g) {
-          var tx = g.querySelector('.rf__bt'), bd = g.querySelector('.rf__board'), x = +tx.getAttribute('x'), words = tx.textContent.split(' ');
-          var lines = words.length > 1 ? words : (tx.textContent === 'RenewPACE' ? ['Renew', 'PACE'] : [tx.textContent]);
-          tx.textContent = ''; lines.forEach(function (w, i) { var ts = document.createElementNS('http://www.w3.org/2000/svg', 'tspan'); ts.setAttribute('x', x); ts.setAttribute('dy', i ? 20 : 0); ts.textContent = w; tx.appendChild(ts); });
-          tx.setAttribute('y', lines.length > 1 ? 72 : 82);
-          bd.setAttribute('x', x - 60); bd.setAttribute('width', 120); bd.setAttribute('y', 52); bd.setAttribute('height', 52);
-          g.querySelector('.rf__pole').setAttribute('d', 'M' + x + ' 128 V104');
+      var chips = Array.prototype.slice.call(root.querySelectorAll('.fn__chip')), slots = Array.prototype.slice.call(root.querySelectorAll('.fn__slot'));
+      var cards = Array.prototype.slice.call(root.querySelectorAll('.fn__card')), why = root.querySelector('.fn__why');
+      function pick(key) {
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.k === key ? 'true' : 'false'); });
+        var fit = ROUTES[key], all = key === 'unsure';
+        slots.forEach(function (s) { var on = fit.indexOf(s.dataset.p) > -1; s.classList.toggle('is-in', on && !all); s.classList.toggle('is-out', !on); });
+        why.textContent = WHY[key];
+      }
+      chips.forEach(function (c) { k.on(c, 'click', function () { pick(c.dataset.k); }); });
+      cards.forEach(function (c) {
+        k.on(c, 'click', function () { c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); });
+        if (!k.motion || !k.fine) return;
+        k.on(c, 'pointermove', function (e) {
+          if (e.pointerType !== 'mouse') return;
+          var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+          c.classList.add('is-tilting'); c.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg'); c.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg');
         });
-      }
-
-      if (k.motion) {
-        // the plan draws itself as it arrives: lots and roads first, then the dashes, boards and words
-        gsap.set(edges, { drawSVG: '0%' }); gsap.set(marks, { opacity: 0 });
-        var intro = gsap.timeline({ paused: true })
-          .to(edges, { drawSVG: '100%', duration: .8, ease: 'power2.inOut', stagger: { amount: .4 } })
-          .to(marks, { opacity: 1, duration: .4, ease: 'power2.out', stagger: { amount: .25 } }, '-=.35');
-        var st = ScrollTrigger.create({ trigger: map, start: 'top 80%', once: true, onEnter: function () { intro.play(); } });
-        k.add(function () { st.kill(); intro.kill(); });
-      }
-
-      function choose(kind) {
-        var fits = ROUTES[kind] || [];
-        why.textContent = WHY[kind] + ' Usually fits: ' + list(fits.map(function (p) { return NAMES[p]; })) + '.';
-        Object.keys(routes).forEach(function (p) {
-          var r = routes[p], fit = fits.indexOf(p) > -1, was = !!on[p];
-          on[p] = fit;
-          cards[p].classList.toggle('is-fit', fit);
-          cards[p].classList.toggle('is-not', !fit);
-          cards[p].querySelector('.rf__fit').textContent = fit ? 'Usually fits this project.' : 'Not the usual route for this project.';
-          if (!k.motion) { gsap.set(r, { drawSVG: fit ? '0% 100%' : '0% 0%', opacity: fit ? 1 : 0 }); posts[p].classList.toggle('is-fit', fit); return; }
-          if (fit && !was) {
-            posts[p].classList.remove('is-fit');
-            gsap.timeline({ overwrite: true })
-              .set(r, { opacity: 1 })
-              .fromTo(r, { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', duration: .9, ease: 'power2.inOut' }, .18)
-              .add(function () { posts[p].classList.add('is-fit'); }, .9)
-              .fromTo(cards[p].querySelector('.rf__n'), { y: -12, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: 'power4.out' }, .95);
-          } else if (!fit && was) {
-            posts[p].classList.remove('is-fit');
-            gsap.timeline({ overwrite: true })
-              .to(r, { drawSVG: '0% 0%', duration: .3, ease: 'power4.in' })
-              .set(r, { opacity: 0 });
-          }
-        });
-      }
-      root.querySelectorAll('.rf__o input').forEach(function (inp) {
-        k.on(inp, 'change', function () { if (inp.checked) choose(inp.value); });
+        k.on(c, 'pointerleave', function () { c.classList.remove('is-tilting'); c.style.removeProperty('--ry'); c.style.removeProperty('--rx'); });
       });
-      k.add(function () { root.querySelectorAll('.rf__o input').forEach(function (i) { i.checked = false; }); });
-    } },
-
-    2: { init: function (root, k) {
-      var tables = Array.prototype.slice.call(root.querySelectorAll('.km__t'));
-      // the column under the hand is the one being read: its cells take the clay wash
-      tables.forEach(function (t) {
-        function mark(ix) { t.querySelectorAll('th, td').forEach(function (c) { c.classList.toggle('is-col', ix > 0 && c.cellIndex === ix); }); }
-        k.on(t, 'pointerover', function (e) { var c = e.target.closest('th, td'); if (c) mark(c.cellIndex); });
-        k.on(t, 'pointerleave', function () { mark(-1); });
-      });
-      // a ledger spread: line i on the left page sits level with line i on the right (only while the pages are side by side)
-      var lRows = tables[0].querySelectorAll('.km__r, thead tr'), rRows = tables[1].querySelectorAll('.km__r, thead tr');
-      function level() {
-        var side = tables[0].getBoundingClientRect().top === tables[1].getBoundingClientRect().top;
-        for (var n = 0; n < lRows.length; n++) { lRows[n].style.height = rRows[n].style.height = ''; }
-        if (!side) return;
-        for (var m = 0; m < lRows.length; m++) { var hh = Math.max(lRows[m].offsetHeight, rRows[m].offsetHeight) + 'px'; lRows[m].style.height = rRows[m].style.height = hh; }
-      }
-      level(); k.ro(root.querySelector('.km__book'), level);
-      k.add(function () { for (var n = 0; n < lRows.length; n++) { lRows[n].style.height = rRows[n].style.height = ''; } });
+      pick('unsure');
+      k.add(function () { cards.forEach(function (c) { c.setAttribute('aria-pressed', 'false'); c.style.removeProperty('--ry'); c.style.removeProperty('--rx'); }); slots.forEach(function (s) { s.classList.remove('is-in', 'is-out'); }); });
+      EZ.reveal(k, root.querySelectorAll('.fn__head > *, .fn__why, .fn__foot > *'));
       if (!k.motion) return;
-      var rowsL = tables[0].querySelectorAll('.km__r'), rowsR = tables[1].querySelectorAll('.km__r');
-      var all = root.querySelectorAll('.km__r th, .km__r td');
-      gsap.set(all, { '--rule': 0 });
-      gsap.set(root.querySelectorAll('.km__r th > *, .km__r td'), { opacity: 0, y: 8 });
-      gsap.set(root.querySelectorAll('.km__r th'), { opacity: 0 });
-      var tl = gsap.timeline({ defaults: { ease: 'none' } });
-      for (var i = 0; i < rowsL.length; i++) {
-        var pair = [rowsL[i], rowsR[i]], cells = [], heads = [];
-        pair.forEach(function (r) { cells = cells.concat(Array.prototype.slice.call(r.querySelectorAll('td'))); heads.push(r.querySelector('th')); });
-        tl.to(pair.map(function (r) { return r.querySelectorAll('th, td'); }).reduce(function (a, n) { return a.concat(Array.prototype.slice.call(n)); }, []), { '--rule': 1, duration: .5 }, i)
-          .to(heads, { opacity: 1, duration: .25 }, i + .15)
-          .to(cells, { opacity: 1, y: 0, duration: .35, stagger: .06 }, i + .3);
-        var nums = [];
-        pair.forEach(function (r) { nums = nums.concat(Array.prototype.slice.call(r.querySelectorAll('.km__n'))); });
-        if (nums.length) tl.fromTo(nums, { scale: 1.35, opacity: 0, transformOrigin: '0% 100%' }, { scale: 1, opacity: 1, duration: .15, ease: 'power4.in', stagger: .08 }, i + .45);
-      }
-      var st = ScrollTrigger.create({ trigger: root.querySelector('.km__book'), start: 'top 72%', end: 'bottom 96%', scrub: .6, animation: tl });
-      k.add(function () { st.kill(); tl.kill(); gsap.set(root.querySelectorAll('.km__r th, .km__r td, .km__r th > *, .km__n'), { clearProps: 'all' }); });
+      // the four cards are dealt in, left to right, as the deck reaches the screen
+      gsap.set(cards, { y: 60, rotate: function (i) { return (i - 1.5) * 4; }, opacity: 0 });
+      var st = ScrollTrigger.create({ trigger: root.querySelector('.fn__deck'), start: 'top 85%', once: true,
+        onEnter: function () { gsap.to(cards, { y: 0, rotate: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .09, clearProps: 'transform,opacity' }); } });
+      k.add(function () { st.kill(); gsap.set(cards, { clearProps: 'all' }); });
     } }
   });
 })();
@@ -5778,111 +5389,128 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   });
 })();
 
-/* FINALIZE · Home 8 · Reviews (one version, the owner's merge). 343 small stars, one per published Google review, start
-   scattered over the sky (V2); one scrubbed timeline brings them together into five large stars, left to right, the fifth
-   filled to eight tenths of its width (4.8 of 5). The large outlines draw first so the shapes are waiting; each small star
-   that lands scratches its stroke into the ledger beside it (V1), five to a gate. Reversible [S1326]; no idle motion.
-   Reduced motion: the gathered stars and the full ledger, still. Only the two published figures are used. */
+/* OWNER · Home 8 · Reviews: the constellation (restored from the earlier build the owner liked). 343 small stars, one per
+   published Google review, fly in together when the section arrives and assemble into the figure 4.8 (sampled from the
+   display face). The pointer pushes them away; they spring back to the average on their own. Touch: a tap scatters them;
+   the "Scatter them" button does the same for keyboards. Reduced motion: the assembled figure, still. Only the two
+   published figures are used [S0687 constellation FX, S0340 spring physics, Q41 DPR cap + 40fps ceiling]. */
 (function () {
-  var COUNT = 343, AVG = 4.8;
-  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-  function starPts(cx, cy, R, r) {
-    var p = [];
-    for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R; p.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); }
-    return p;
-  }
-  function inside(pt, poly) {
-    var c = false;
-    for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-      if (((poly[i][1] > pt[1]) !== (poly[j][1] > pt[1])) && (pt[0] < (poly[j][0] - poly[i][0]) * (pt[1] - poly[i][1]) / (poly[j][1] - poly[i][1]) + poly[i][0])) c = !c;
-    }
-    return c;
-  }
-  function d(poly) { return 'M' + poly.map(function (q) { return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('L') + 'Z'; }
-
-  EZ.section('reviews', { 1: { init: function (root, k) {
-    var svg = root.querySelector('.rv__svg'), tally = root.querySelector('.rv__tally'), tip = root.querySelector('.rv__tip'), book = root.querySelector('.rv__book');
-    var R = 56, r = 23, CY = 160, CX = [62, 181, 300, 419, 538], HALF = R * Math.cos(Math.PI / 10);
-
-    // ---- the five large stars, and the 343 places inside them (the fifth only up to 0.8 of its width) ----
-    var polys = CX.map(function (cx) { return starPts(cx, CY, R, r); }), cand = [];
-    var limit = CX[4] - HALF + (AVG - 4) * 2 * HALF;
-    for (var y = CY - R; y <= CY + R; y += 4.6) {
-      for (var x = CX[0] - HALF; x <= CX[4] + HALF; x += 4.6) {
-        var row = Math.round((y - CY + R) / 4.6), xx = x + (row % 2 ? 2.3 : 0);
-        for (var s = 0; s < 5; s++) if (inside([xx, y], polys[s]) && (s < 4 || xx <= limit)) { cand.push([xx, y]); break; }
-      }
-    }
-    // exactly 343, spread evenly over the candidates; ordered left to right so they land in a wave
-    var tg = [];
-    for (var i = 0; i < COUNT; i++) tg.push(cand[Math.floor(i * cand.length / COUNT)]);
-    tg.sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
-    var mini = 'M0 -3.4L.8 -1.1L3.2 -1.1L1.3 .4L2 2.8L0 1.4L-2 2.8L-1.3 .4L-3.2 -1.1L-.8 -1.1Z';
-    var out = polys.map(function (p) { return '<path class="big" d="' + d(p) + '"/>'; }).join('');
-    out += '<path class="gap" d="M' + limit.toFixed(1) + ' ' + (CY - R * .62).toFixed(1) + 'V' + (CY + R * .86).toFixed(1) + '"/>';
-    out += tg.map(function () { return '<path class="ms" d="' + mini + '"/>'; }).join('');
-    svg.innerHTML = out;
-    var stars = Array.prototype.slice.call(svg.querySelectorAll('.ms')), bigs = svg.querySelectorAll('.big, .gap');
-    if (stars.length !== COUNT) { svg.innerHTML = ''; return; }   // the drawing is the figure: never show a wrong count
-
-    // ---- the ledger: 343 strokes in gates of five, ten gates to a line ----
-    var strokes = [], gates = [], per = matchMedia('(max-width: 480px)').matches ? 7 : 10; // Phase 8: seven gates a line on phones, so each gate is a 24px target
-    (function build() {
-      var W = per * 70, gw = 70, rows = Math.ceil(COUNT / 5 / per), rh = 56, H = rows * rh, s = '', n = 0;
-      tally.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      for (var rr = 0; rr < rows; rr++) s += '<path d="M0 ' + (rr * rh + 52) + 'H' + W + '" stroke="var(--color-border)" stroke-width="1"/>';
-      for (var g = 0; n < COUNT; g++) {
-        var col = g % per, row = Math.floor(g / per), x = col * gw + gw * .22, y = row * rh + 8, from = n + 1, body = '', j;
-        for (j = 0; j < 4 && n < COUNT; j++, n++) {
-          var lean = ((g * 7 + j * 3) % 5 - 2) * .9, top = y + ((g + j) % 3), bot = y + 38 - ((g * 3 + j) % 4);
-          body += '<path class="st" d="M' + (x + j * 9) + ' ' + top + 'L' + (x + j * 9 + lean) + ' ' + bot + '"/>';
+  var COUNT = 343;
+  EZ.section('reviews', {
+    1: { init: function (root, k) {
+      var cv = root.querySelector('.rv__cv'), ctx = cv.getContext('2d');
+      var stars = [], links = [], W = 0, H = 0, dpr = 1, ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0, landed = false;
+      var css = getComputedStyle(root), INK = css.getPropertyValue('--color-text').trim() || '#1c1a17', ACC = css.getPropertyValue('--color-accent-solid').trim() || '#A45540';
+      function sample() {
+        var o = document.createElement('canvas'); o.width = W; o.height = H;
+        var c = o.getContext('2d');
+        c.fillStyle = '#000'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.font = '600 ' + Math.round(Math.min(H * 1.02, W * .5)) + 'px ' + (css.getPropertyValue('--f-display').trim() || 'Poppins, Arial, sans-serif');
+        c.fillText('4.8', W / 2, H * .54);
+        var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 150));
+        for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) if (d[(y * W + x) * 4 + 3] > 128) cand.push([x, y]);
+        for (var i = cand.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = cand[i]; cand[i] = cand[j]; cand[j] = t; }
+        var gap = Math.sqrt(cand.length * step * step / COUNT) * .95, pts = [];
+        for (var tries = 0; tries < 8; tries++) {
+          pts = [];
+          for (var m = 0; m < cand.length && pts.length < COUNT; m++) {
+            var p = cand[m], ok = true;
+            for (var q = 0; q < pts.length; q++) { var dx = pts[q][0] - p[0], dy = pts[q][1] - p[1]; if (dx * dx + dy * dy < gap * gap) { ok = false; break; } }
+            if (ok) pts.push(p);
+          }
+          if (pts.length >= COUNT) break;
+          gap *= .85;
         }
-        if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 31) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
-        var lbl = from === n ? 'Review ' + from : 'Reviews ' + from + ' to ' + n;
-        s += '<g class="gate" tabindex="' + (g ? -1 : 0) + '" role="img" aria-label="' + lbl + '" data-l="' + lbl + '"><rect class="hit" x="' + (col * gw) + '" y="' + (row * rh) + '" width="' + gw + '" height="' + rh + '"/><rect x="' + (x - 9) + '" y="' + (y - 5) + '" width="' + (gw * .84) + '" height="48"/>' + body + '</g>';
+        while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
+        return pts.slice(0, COUNT);
       }
-      tally.innerHTML = s;
-      strokes = Array.prototype.slice.call(tally.querySelectorAll('.st'));
-      gates = Array.prototype.slice.call(tally.querySelectorAll('.gate'));
-    })();
-    function hot(g) { gates.forEach(function (x) { x.classList.toggle('is-hot', x === g); }); tip.textContent = g ? g.dataset.l : ''; }
-    k.on(tally, 'pointerover', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
-    k.on(tally, 'pointerleave', function () { if (!tally.contains(document.activeElement)) hot(null); });
-    k.on(tally, 'focusin', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
-    k.on(tally, 'focusout', function (e) { if (!tally.contains(e.relatedTarget)) hot(null); });
-    // Phase 8: one tab stop for the whole ledger (roving tabindex); the arrow keys count along it, Home and End jump [S1018]
-    k.on(tally, 'keydown', function (e) {
-      var i = gates.indexOf(document.activeElement); if (i < 0) return;
-      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'ArrowDown' ? i + per : e.key === 'ArrowUp' ? i - per : e.key === 'Home' ? 0 : e.key === 'End' ? gates.length - 1 : null;
-      if (j === null) return; e.preventDefault(); j = Math.max(0, Math.min(gates.length - 1, j));
-      gates[i].setAttribute('tabindex', '-1'); gates[j].setAttribute('tabindex', '0'); gates[j].focus();
-    });
-    k.add(function () { svg.innerHTML = ''; tally.innerHTML = ''; tip.textContent = ''; });
-
-    // the still state is the gathered one
-    stars.forEach(function (st, i) { gsap.set(st, { x: tg[i][0], y: tg[i][1] }); });
-    EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__acts'));
-    if (!k.motion) return;
-
-    // ---- the scattered sky, then one scrubbed gathering ----
-    var R2 = rng(343), avg = root.querySelector('.rv__avg');
-    stars.forEach(function (st) {
-      gsap.set(st, { x: -10 + R2() * 620, y: 84 + R2() * 156, rotation: R2() * 180, scale: .5 + R2() * 1.1, opacity: .35 + R2() * .5, transformOrigin: '50% 50%' });
-    });
-    gsap.set(strokes, { scale: .1, autoAlpha: 0, transformOrigin: '50% 100%' });
-    gsap.set(bigs, { drawSVG: '0%' });
-    gsap.set(avg, { autoAlpha: 0, y: 14 });
-    var tl = gsap.timeline({ defaults: { ease: 'none' } });
-    tl.to(bigs, { drawSVG: '100%', duration: .22, ease: 'power2.inOut', stagger: .03 }, 0);
-    stars.forEach(function (st, i) {
-      var t0 = .08 + (tg[i][0] / 600) * .56;
-      tl.to(st, { x: tg[i][0], y: tg[i][1], rotation: 0, scale: 1, opacity: 1, duration: .32, ease: 'power2.inOut' }, t0);
-      tl.to(strokes[i], { scale: 1, autoAlpha: 1, duration: .015 }, t0 + .3);
-    });
-    tl.to(avg, { autoAlpha: 1, y: 0, duration: .08, ease: 'power4.out' }, .96);
-    var st = ScrollTrigger.create({ trigger: root.querySelector('.rv__stage'), start: 'top 82%', end: 'bottom 72%', scrub: .6, animation: tl });
-    k.add(function () { st.kill(); tl.kill(); gsap.set(strokes, { clearProps: 'all' }); gsap.set(avg, { clearProps: 'all' }); });
-  } } });
+      function layout(fresh) {
+        var r = cv.getBoundingClientRect();
+        W = Math.round(r.width); H = Math.round(r.height);
+        if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        var pts = sample(), unit = Math.max(1, Math.min(W, H) / 260);
+        pts.forEach(function (p, i) {
+          var s = stars[i];
+          if (!s || fresh) {
+            // they wait off the figure, spread wide, until the section arrives
+            var a = Math.random() * Math.PI * 2, rr = Math.max(W, H) * (.45 + Math.random() * .5);
+            s = stars[i] = { x: W / 2 + Math.cos(a) * rr, y: H / 2 + Math.sin(a) * rr * .6, vx: 0, vy: 0, r: (1.5 + Math.random() * 1.7) * unit, ph: Math.random() * 6.28, k: .035 + Math.random() * .025 };
+          }
+          s.tx = p[0]; s.ty = p[1];
+        });
+        links = stars.map(function (s, i) {
+          var best = -1, bd = 1e9;
+          for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
+          return best;
+        });
+        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
+        else if (!running) draw(0);
+      }
+      function star5(x, y, r) {
+        ctx.moveTo(x, y - r);
+        for (var i = 1; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+        ctx.closePath();
+      }
+      function draw(t) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalAlpha = .16; ctx.strokeStyle = INK; ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (var i = 0; i < stars.length; i++) {
+          var a = stars[i], b = stars[links[i]]; if (!b) continue;
+          var dx = a.x - b.x, dy = a.y - b.y; if (dx * dx + dy * dy > 1600) continue;   // the lines only hold while the stars are home
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        }
+        ctx.stroke();
+        ctx.fillStyle = ACC;
+        for (var n = 0; n < stars.length; n++) {
+          var s = stars[n];
+          ctx.globalAlpha = .7 + .3 * Math.sin(t * .002 + s.ph);
+          ctx.beginPath(); star5(s.x, s.y, s.r * 1.6); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 22) return;
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        var R = Math.max(80, W * .085), R2 = R * R, moving = 0;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var ax = (s.tx - s.x) * s.k, ay = (s.ty - s.y) * s.k;
+          var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 4.6; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
+          s.x += s.vx * dt; s.y += s.vy * dt;
+          if (Math.abs(s.vx) + Math.abs(s.vy) > .05) moving++;
+        }
+        draw(t);
+        if (!moving && ptr.x < -999) { landed = true; }
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(cx, cy) {
+        stars.forEach(function (s) {
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 16 + Math.random() * 20;
+          s.vx += dx / d * f; s.vy += dy / d * f;
+        });
+        run();
+      }
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(cv, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; links = []; ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.on(cv, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var r = cv.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; run(); });
+      k.on(cv, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(cv, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = cv.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
+      k.on(root.querySelector('.rv__again'), 'click', function () { scatter(); });
+      // they fly in together when the figure comes into view (once the canvas is half on screen)
+      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: .35 });
+      EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__avg, .rv__acts'));
+    } }
+  });
 })();
 
 /* FINALIZE · Home 9 · Towns (one version: mostly V4 + a little V1 and V2). The 104 municipalities as published (FACTS.md),
@@ -5921,8 +5549,17 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     // ---- all 104, at once ----
     all.innerHTML = NS_ORDER.map(function (c) {
       var list = T.map(function (t, i) { return t.c === c ? '<li><button type="button" class="tw__t" data-i="' + i + '" tabindex="-1">' + esc(t.n) + '</button></li>' : ''; }).join('');
-      return '<div class="tw__c"><h3>' + c.replace('-', '&#8209;') + ' <span><span class="nums">' + D.towns[c].length + '</span> municipalities</span></h3><ul class="tw__ul" aria-label="' + c + ' municipalities">' + list + '</ul></div>';
+      // OWNER: 104 names at once was too much. Each county is a tile (its count, its name); opening it lists its towns
+      return '<div class="tw__c" data-c="' + c + '"><button type="button" class="tw__cb" aria-expanded="false"><span class="tw__cc nums">' + D.towns[c].length + '</span><span class="tw__cn">' + c.replace('-', '&#8209;') + '</span><span class="tw__cl">municipalities</span><svg class="tw__chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6 L8 10 L12 6"/></svg></button><ul class="tw__ul" aria-label="' + c + ' municipalities" hidden>' + list + '</ul></div>';
     }).join('');
+    all.querySelectorAll('.tw__cb').forEach(function (b) {
+      var box = b.parentNode, ul = box.querySelector('.tw__ul'), c = box.dataset.c;
+      function lit(on) { ctys.forEach(function (x) { x.classList.toggle('is-hot', on && x.dataset.c === c); }); }
+      k.on(b, 'click', function () { var open = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', open ? 'true' : 'false'); ul.hidden = !open; box.classList.toggle('is-open', open);
+        ul.querySelectorAll('.tw__t').forEach(function (t) { t.tabIndex = open ? 0 : -1; }); });
+      k.on(b, 'pointerenter', function () { lit(true); }); k.on(b, 'pointerleave', function () { lit(false); });
+      k.on(b, 'focus', function () { lit(true); }); k.on(b, 'blur', function () { lit(false); });
+    });
     var names = Array.prototype.slice.call(all.querySelectorAll('.tw__t'));
     k.add(function () { svg.innerHTML = ''; all.innerHTML = ''; ans.innerHTML = ''; inp.value = ''; opts.hidden = true; opts.innerHTML = ''; clr.hidden = true; });
 
@@ -6116,6 +5753,25 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   EZ.section('consult', {
     1: { init: function (root, k) {
+      // OWNER · the call card: digits dial in a wave, the live open/closed light, copy with a confirmation, a gentle lean
+      (function () {
+        var cl = root.querySelector('.cl'); if (!cl) return;
+        var num = cl.querySelector('.cl__num'), call = cl.querySelector('.cl__call'), st = cl.querySelector('.cl__stt'), cp = cl.querySelector('.cl__copy'), cpl = cp.querySelector('.cl__cl');
+        var raw = num.textContent; num.setAttribute('aria-label', raw.replace(/\u00a0/g, ' ').replace(/\u2011/g, '-'));
+        num.innerHTML = raw.split('').map(function (ch, i) { return '<span class="d" aria-hidden="true" style="--i:' + i + '">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>'; }).join('');
+        function upd() { var o = EZ.openStatus(); cl.classList.toggle('is-open', o.open); st.textContent = o.text; }
+        upd(); var iv = setInterval(upd, 30000); k.add(function () { clearInterval(iv); num.textContent = raw; cl.classList.remove('is-open'); });
+        var tm = 0;
+        k.on(cp, 'click', function () {
+          function done() { cp.classList.add('is-done'); cpl.textContent = 'Copied'; clearTimeout(tm); tm = setTimeout(function () { cp.classList.remove('is-done'); cpl.textContent = 'Copy number'; }, 1800); }
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(cp.dataset.n).then(done, function () { cpl.textContent = cp.dataset.n; });
+          else cpl.textContent = cp.dataset.n;
+        });
+        k.add(function () { clearTimeout(tm); });
+        if (!k.motion || !k.fine) return;
+        k.on(call, 'pointermove', function (e) { var r = call.getBoundingClientRect(); call.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5) * 8 + 'px'); call.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5) * 6 + 'px'); });
+        k.on(call, 'pointerleave', function () { call.style.removeProperty('--mx'); call.style.removeProperty('--my'); });
+      })();
       var form = root.querySelector('.gs__note'), other = root.querySelector('.gs__other'), otherIn = other.querySelector('input');
       var firstP = form.querySelector('input[name="project"]'); firstP.id = 'gs-project';
       liveClear(form, k);
@@ -6793,9 +6449,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }
@@ -7062,6 +6718,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }
@@ -9616,6 +9273,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -9683,7 +9348,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -10633,9 +10298,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }
@@ -10902,6 +10567,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }
@@ -11074,6 +10740,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .br__ph { position: relative; aspect-ratio: 4 / 5; max-height: 52svh; background: var(--sand-100, #F7F1EA); border: 1.5px solid var(--color-text); overflow: hidden; }
 .br__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 300ms var(--ez-out); }
 .br__prev.has-img .br__img { opacity: 1; }
+
+.br__plan { position: absolute; inset: 6%; width: 88%; height: 88%; opacity: 0; transition: opacity 300ms var(--ez-out); }
+.br__prev.has-plan .br__plan { opacity: 1; }
+.br__plan .w { fill: none; stroke: var(--color-text); stroke-width: 9; stroke-linejoin: miter; }
+.br__plan .f { fill: var(--color-bg, #fff); stroke: var(--color-text); stroke-width: 2.2; stroke-linejoin: round; }
+.br__plan .dd { fill: none; stroke: var(--color-text-secondary); stroke-width: 1.8; stroke-dasharray: 6 6; }
+.br__plan .a { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 3; stroke-linecap: round; }
+.br__plan .lb { font: 500 13px/1 var(--f-text); fill: var(--color-text-secondary); }
 .br__cap { margin-top: var(--s2); min-height: 2.8em; font: 400 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
 .br__list { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--color-text); }
 .br__r { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); width: 100%; padding: var(--s3) 0; background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text-secondary); font: 600 clamp(1.75rem, 1rem + 2.4vw, 3.25rem)/1.05 var(--f-display); letter-spacing: -.025em; transition: color 200ms var(--ez-out), padding 300ms var(--ez-out); }
@@ -11327,7 +11001,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Rooms we build</p>
         <h2 class="t-head" id="bath-rooms-h">Ten kinds of bathroom. <span class="acc">One way to build.</span></h2>
         <p class="t-lead br__lead">Point at a room to see one we built. A camera mark means we have a photographed project of that kind.</p>
-        <figure class="br__prev" aria-live="polite"><div class="br__ph"><img class="br__img" alt=""></div><figcaption class="br__cap">Pick a room.</figcaption></figure>
+        <figure class="br__prev" aria-live="polite"><div class="br__ph"><img class="br__img" alt=""><svg class="br__plan" viewBox="0 0 400 500" aria-hidden="true" focusable="false"></svg></div><figcaption class="br__cap">Pick a room.</figcaption></figure>
       </div>
       <ol class="br__list"></ol>
     </div>
@@ -13439,6 +13113,14 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -13506,7 +13188,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -13708,7 +13390,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     var it = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: function () { intro.play(); } });
     k.add(function () { it.kill(); intro.kill(); });
     tl.to({}, { duration: .5 });
-    var st = ScrollTrigger.create({ trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 5.4); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
+    var st = ScrollTrigger.create({ trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 2.6); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
       onUpdate: function (self) { var p = self.progress * tl.duration(); show(Math.min(5, Math.max(0, Math.floor(p + .15)))); fill.style.transform = 'scaleX(' + Math.min(1, p / 5).toFixed(4) + ')'; } });
     show(0);
     k.add(function () { st.kill(); tl.kill(); world.innerHTML = ''; world.style.width = world.style.height = ''; gsap.set(world, { clearProps: 'transform' }); });
@@ -13727,6 +13409,24 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     ['Vanity & Storage', 'b-navy-niche', 'Navy Vanity Bathroom Remodel with Backlit Tile Niche'],
     ['Bathtub-to-Shower Conversion'], ['Small Bathroom'], ['Powder Room'], ['ADA & Accessible'], ['Luxury']
   ];
+  // OWNER (rooms 06–10 looked like broken images): the firm has no photograph of these five, and none is borrowed. Each gets
+  // a drawn floor plan in the site's line language instead, captioned as drawn [S1421 one illustration language].
+  function W(d) { return '<path class="w" d="' + d + '"/>'; }
+  function F(d) { return '<path class="f" d="' + d + '"/>'; }
+  function Dd(d) { return '<path class="dd" d="' + d + '"/>'; }
+  function A(d) { return '<path class="a" d="' + d + '"/>'; }
+  function L(x, y, t) { return '<text class="lb" x="' + x + '" y="' + y + '">' + t + '</text>'; }
+  var ROOM = W('M60 60 H340 V440 H210 M150 440 H60 Z') + A('M150 440 A60 60 0 0 1 210 380') + Dd('M210 380 V440');   // walls, door and its swing
+  var WC = function (x, y) { return F('M' + x + ' ' + y + ' h44 v18 h-44 Z') + F('M' + (x + 6) + ' ' + (y + 18) + ' h32 v14 q0 30 -16 30 q-16 0 -16 -30 Z'); };
+  var SINK = function (x, y, w) { return F('M' + x + ' ' + y + ' h' + w + ' v44 h-' + w + ' Z') + '<ellipse class="f" cx="' + (x + w / 2) + '" cy="' + (y + 24) + '" rx="' + (w / 2 - 10) + '" ry="13"/>'; };
+  var DRAIN = function (x, y) { return '<circle class="f" cx="' + x + '" cy="' + y + '" r="6"/>'; };
+  var PLANS = {
+    5: ROOM + Dd('M66 66 H180 V250 H66 Z') + L(78, 160, 'old tub') + F('M196 66 H334 V250 H196 Z') + A('M196 250 H334') + DRAIN(265, 158) + L(214, 236, 'walk-in shower') + A('M150 158 L186 158 M176 148 L186 158 L176 168') + WC(270, 300) + SINK(80, 300, 110),
+    6: W('M110 90 H290 V440 H220 M170 440 H110 Z') + A('M170 440 A50 50 0 0 1 220 390') + F('M116 96 H284 V210 H116 Z') + A('M116 210 H284') + DRAIN(200, 150) + L(150, 200, 'shower') + WC(226, 250) + SINK(122, 250, 90) + L(130, 320, '5 × 8 ft'),
+    7: W('M120 140 H280 V420 H220 M170 420 H120 Z') + A('M170 420 A50 50 0 0 1 220 370') + WC(178, 146) + '<circle class="f" cx="160" cy="300" r="22"/>' + F('M152 322 h16 v40 h-16 Z') + L(138, 260, 'pedestal sink') + L(176, 222, 'WC'),
+    8: W('M60 60 H340 V440 H240 M140 440 H60 Z') + A('M140 440 A100 100 0 0 1 240 340') + F('M66 66 H210 V230 H66 Z') + DRAIN(138, 148) + L(76, 222, 'roll-in, no curb') + A('M216 90 V200 M120 236 H206 M300 250 V330') + '<circle class="dd" cx="230" cy="330" r="75"/>' + L(196, 334, '60 in turn') + WC(286, 72) + L(250, 210, 'grab bars'),
+    9: ROOM + '<ellipse class="f" cx="140" cy="170" rx="62" ry="96"/><ellipse class="f" cx="140" cy="170" rx="48" ry="80"/>' + L(104, 290, 'freestanding tub') + F('M240 66 H334 V250 H240 Z') + A('M240 66 V250') + DRAIN(287, 158) + SINK(230, 300, 104) + F('M236 352 h96') + L(240, 372, 'double vanity')
+  };
   var CAM = '<svg class="br__cam" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 8 H8 L10 5 H14 L16 8 H21 V19 H3 Z"/><circle cx="12" cy="13" r="3.5"/></svg>';
   function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
   function viewer() { return ROOMS.filter(function (r) { return r[1]; }).map(function (r) { return { key: r[1], title: r[2], alt: r[2] + ', an Elbaz project' }; }); }
@@ -13734,9 +13434,10 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
   EZ.section('bath-rooms', {
     1: { init: function (root, k) {
       var list = root.querySelector('.br__list'), prev = root.querySelector('.br__prev'), img = root.querySelector('.br__img'), cap = root.querySelector('.br__cap');
+      var plan = root.querySelector('.br__plan');
       list.innerHTML = ROOMS.map(function (r, i) {
         var n = '<span class="br__t"><span class="nums">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' + esc(r[0]) + '</span>';
-        return '<li>' + (r[1] ? '<button type="button" class="br__r" data-i="' + i + '" aria-describedby="br-cap">' + n + CAM + '</button>' : '<p class="br__r" data-i="' + i + '">' + n + '</p>') + '</li>';
+        return '<li><button type="button" class="br__r" data-i="' + i + '" aria-describedby="br-cap">' + n + (r[1] ? CAM : '') + '</button></li>';   // owner: every room answers (photo or drawn plan)
       }).join('');
       cap.id = 'br-cap';
       var rows = Array.prototype.slice.call(list.querySelectorAll('.br__r')), on = -1;
@@ -13745,7 +13446,8 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
         rows.forEach(function (r) { r.classList.toggle('is-on', +r.dataset.i === i); });
         var r = ROOMS[i];
         if (r && r[1]) { img.src = EZ.img(r[1]); img.alt = r[2] + ', an Elbaz project'; prev.classList.add('has-img'); cap.textContent = r[0] + ': ' + r[2] + '.'; }
-        else { prev.classList.remove('has-img'); img.alt = ''; cap.textContent = r ? r[0] + '. Ask us about it on the consultation.' : 'Pick a room.'; }
+        else { prev.classList.remove('has-img'); img.alt = ''; plan.innerHTML = PLANS[i] || ''; prev.classList.toggle('has-plan', !!PLANS[i]); cap.textContent = r ? r[0] + ': drawn, not photographed. Ask us about it on the consultation.' : 'Pick a room.'; }
+        if (r && r[1]) prev.classList.remove('has-plan');
       }
       rows.forEach(function (row) {
         var i = +row.dataset.i;
@@ -13753,7 +13455,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
         if (row.tagName === 'BUTTON') { k.on(row, 'focus', function () { pick(i); }); k.on(row, 'click', function () { pick(i); }); }
       });
       pick(0);
-      k.add(function () { list.innerHTML = ''; on = -1; prev.classList.remove('has-img'); });
+      k.add(function () { list.innerHTML = ''; on = -1; prev.classList.remove('has-img', 'has-plan'); plan.innerHTML = ''; });
       EZ.reveal(k, root.querySelectorAll('.br__side > :not(.br__prev)'));
       if (k.motion) {
         gsap.set(rows, { y: 14, autoAlpha: 0 });
@@ -14497,9 +14199,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }
@@ -14766,6 +14468,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }
@@ -14967,32 +14670,56 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (max-width: 900px) { .dc__head, .dp__grid { grid-template-columns: 1fr; } .dc__seg { font-size: .75rem; padding: 0 8px; } .dc__tag { width: 20px; height: 20px; font-size: .625rem; } .dc__bar { height: 44px; } }
 
 
-.rp__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.rp__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
 .rp__head .eyebrow { margin: 0 0 var(--s3); }
 .rp__head .t-head, .rp__lead { margin: 0; }
-.rp__lead { max-width: 52ch; color: var(--color-text-secondary); }
-.rp__sheets { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s5); align-items: stretch; }
-.rp__sheet { position: relative; display: grid; align-content: start; gap: var(--s3); padding: var(--s6); background: var(--color-surface); border: 1.5px solid var(--color-text); background-image: repeating-linear-gradient(180deg, transparent 0 39px, var(--color-border) 39px 40px); }
-.rp__wk { margin: 0; display: inline-block; justify-self: start; padding: 4px 12px; border: 1.5px solid var(--color-text); font: 600 .875rem/1.2 var(--f-text); background: var(--color-surface); }
-.rp__t { margin: 0; font: 600 1.75rem/1.1 var(--f-display); letter-spacing: -.02em; }
-.rp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
-.rp__list li { display: grid; grid-template-columns: 24px 1fr; gap: var(--s3); align-items: start; font: 500 1.0625rem/1.45 var(--f-text); padding: 8px 0; }
-.rp__list svg { width: 24px; height: 24px; margin-top: 2px; }
-.rp__list rect { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.5; }
-.rp__list .tk { fill: none; stroke: var(--color-accent-solid); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.rp__zones { display: grid; gap: var(--s2); margin-top: var(--s3); padding-top: var(--s4); border-top: 1px dashed var(--color-border-strong); }
-.rp__zh { margin: 0 0 var(--s2); font: 600 .8125rem/1 var(--f-text); letter-spacing: .05em; text-transform: uppercase; color: var(--color-text-secondary); }
-.rp__z { display: grid; grid-template-columns: 8.5rem 1fr; gap: var(--s3); padding: var(--s3); background: var(--color-bg); border: 1px solid var(--color-border-strong); font: 400 .9375rem/1.45 var(--f-text); }
-.rp__z b { font: 600 1rem/1.3 var(--f-display); }
-.rp__z--h { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--clay-100, #F9E3DD) 80%, transparent) 0 8px, var(--color-surface) 8px 16px); border-color: var(--clay-600, #A45540); }
-.rp__stamp { position: absolute; right: var(--s5); top: var(--s5); display: grid; place-items: center; width: 104px; height: 104px; margin: 0; border-radius: 50%; border: 3px double var(--clay-700, #884432); color: var(--clay-700, #884432); font: 700 .6875rem/1.3 var(--f-text); letter-spacing: .08em; text-align: center; rotate: -12deg; align-content: center; }
-.rp__note { margin: var(--s4) 0 0; font: 600 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-@media (max-width: 900px) {
-  .rp__head, .rp__sheets { grid-template-columns: 1fr; }
-  .rp__sheet { padding: var(--s5) var(--s4); }
-  .rp__z { grid-template-columns: 1fr; gap: 4px; }
-  .rp__stamp { width: 84px; height: 84px; font-size: .5625rem; right: var(--s3); top: var(--s3); }
+.rp__lead { max-width: 46ch; color: var(--color-text-secondary); }
+.rp__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s6); margin-top: var(--s7); align-items: stretch; }
+.rp__panel { padding: var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); }
+.rp__wk { display: inline-block; margin: 0 0 var(--s3); padding: 4px 12px; font: 600 .875rem/1.2 var(--f-text); border: 1.5px solid var(--color-text); }
+.rp__t { margin: 0 0 var(--s4); font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
+
+.rp__checks { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.rp__ck { display: grid; grid-template-columns: 44px minmax(0, 1fr) 26px; align-items: center; gap: var(--s3); padding: var(--s2) var(--s3) var(--s2) var(--s2); border: 1px solid var(--color-border); background: var(--color-bg, #fff);
+  transition: transform 200ms var(--ez-out), border-color 200ms var(--ez-out), background-color 300ms var(--ez-out); }
+.rp__ck:hover { transform: translateX(6px); border-color: var(--color-text); }
+.rp__ic { width: 44px; height: 44px; padding: 9px; border-radius: 50%; background: var(--clay-100, #F9E3DD); fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: background-color 300ms var(--ez-out); }
+.rp__ck span { font: 600 .9375rem/1.3 var(--f-text); }
+.rp__tick { width: 26px; height: 26px; fill: none; stroke: var(--color-accent-solid); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 420ms var(--ez-out); }
+.rp__ck.is-done .rp__tick { stroke-dashoffset: 0; }
+.rp__ck.is-done .rp__ic { background: color-mix(in srgb, var(--clay-500, #C5735C) 30%, var(--color-bg, #fff)); }
+
+.rp__pulled { margin: 0 0 var(--s5); max-width: 52ch; color: var(--color-text-secondary); }
+.rp__cty { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--s5); align-items: stretch; }
+.rp__strip { position: relative; display: grid; grid-template-rows: 34fr 24fr 42fr; min-height: 300px; border: 1.5px solid var(--color-text); border-right-width: 4px; }
+.rp__pat { position: absolute; }
+.rp__pat path { stroke: color-mix(in srgb, var(--clay-500, #C5735C) 55%, transparent); stroke-width: 3; }
+.rp__c { position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: var(--s3); text-align: left; color: var(--color-text); background: var(--color-bg, #fff); border: 0; border-bottom: 1.5px solid var(--color-text); cursor: pointer; overflow: hidden;
+  transition: background-color 200ms var(--ez-out), color 200ms var(--ez-out); }
+.rp__c:last-child { border-bottom: 0; }
+.rp__c--h { background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--clay-500, #C5735C) 22%, var(--color-bg, #fff)) 0 6px, var(--color-bg, #fff) 6px 12px); }
+.rp__c:hover { background-color: var(--clay-100, #F9E3DD); }
+.rp__c[aria-pressed="true"] { background: var(--color-text); color: #fff; }
+.rp__c:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -3px; }
+.rp__cn { font: 600 1rem/1.2 var(--f-display); }
+.rp__hz { font: 600 .6875rem/1 var(--f-text); letter-spacing: .08em; padding: 3px 6px; border: 1.5px solid currentColor; }
+.rp__card { position: relative; display: grid; align-content: start; gap: var(--s3); padding: var(--s5); background: var(--sand-100, #F7F1EA); border: 1.5px dashed var(--color-text); overflow: hidden; }
+.rp__cname { margin: 0; font: 600 1.375rem/1.1 var(--f-display); }
+.rp__rule { margin: 0; font-size: 1rem; line-height: 1.5; max-width: 34ch; }
+.rp__stamp { justify-self: end; align-self: end; margin: var(--s4) 0 0; display: grid; place-items: center; padding: 10px 16px; font: 700 .8125rem/1.15 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-solid); border: 3px double var(--color-accent-solid); border-radius: 6px; transform: rotate(-8deg); }
+.rp__card.is-stamp .rp__stamp { animation: rp-thump 420ms cubic-bezier(.2, .9, .3, 1.4); }
+@keyframes rp-thump { 0% { opacity: 0; transform: rotate(-14deg) scale(1.9); } 70% { opacity: 1; transform: rotate(-7deg) scale(.94); } 100% { transform: rotate(-8deg) scale(1); } }
+.rp__card.is-swap .rp__cname, .rp__card.is-swap .rp__rule { animation: rp-in 260ms var(--ez-out); }
+@keyframes rp-in { from { opacity: 0; transform: translateY(6px); } }
+.rp__note { margin: var(--s5) 0 0; font: 400 .875rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 1000px) { .rp__head, .rp__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) {
+  .rp__panel { padding: var(--s4); }
+  .rp__cty { grid-template-columns: minmax(0, 1fr); }
+  .rp__strip { min-height: 220px; }
 }
+@media (prefers-reduced-motion: reduce) { .rp__tick, .rp__ck { transition: none; } .rp__card * { animation: none !important; } }
 
 
 .sc__head { margin-bottom: var(--s7); }
@@ -15273,34 +15000,37 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Planning and permitting</p>
           <h2 class="t-head" id="reno-permits-h">Checked before <span class="acc">anything is drawn.</span></h2>
         </div>
-        <p class="t-lead rp__lead">We pull the permits in our own name, verify every product against its Notice of Acceptance before it is ordered, and keep one person accountable from the first walkthrough to final inspection.</p>
+        <p class="t-lead rp__lead">We pull the permits in our own name and verify every product against its Notice of Acceptance before it is ordered.</p>
       </div>
-      <div class="rp__sheets">
-        <article class="rp__sheet" aria-labelledby="rp-s1">
+      <div class="rp__grid">
+        <article class="rp__panel" aria-labelledby="rp-s1">
           <p class="rp__wk">Week <span class="nums">1&ndash;2</span></p>
           <h3 class="rp__t" id="rp-s1">Site evaluation</h3>
-          <ul class="rp__list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Flood zone</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>High-Velocity Hurricane Zone requirements</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Permit history</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>HOA or historic review</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>What is behind the walls</li>
+          <ul class="rp__checks">
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c3 0 3-2 6-2s3 2 6 2 3-2 6-2M2 20c3 0 3-2 6-2s3 2 6 2 3-2 6-2M12 3v7M9 7l3 3 3-3"/></svg><span>Flood zone</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4M12 4c-5 0-8 3-8 8M12 20c5 0 8-3 8-8M4 12c0 3 2 5 5 6M20 12c0-3-2-5-5-6"/></svg><span>High-Velocity Hurricane Zone requirements</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7h7l2 2h9v10H3zM3 7V5h7l2 2M7 13h10M7 16h6"/></svg><span>Permit history</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9l9-5 9 5M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/></svg><span>HOA or historic review</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h16v16H4zM8 4v16M12 4v16M16 4v16M4 9h16"/></svg><span>What is behind the walls</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
           </ul>
         </article>
-        <article class="rp__sheet rp__sheet--p" aria-labelledby="rp-s2">
+        <article class="rp__panel rp__panel--p" aria-labelledby="rp-s2">
           <p class="rp__wk">Weeks <span class="nums">6&ndash;12</span></p>
           <h3 class="rp__t" id="rp-s2">Permitting</h3>
-          <ul class="rp__list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Permits pulled directly</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Every product checked for its Notice of Acceptance or Florida Product Approval</li>
-          </ul>
-          <div class="rp__zones">
-            <p class="rp__zh">Code context, by county</p>
-            <div class="rp__z rp__z--h"><b>Miami&#8209;Dade</b><span>High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</span></div>
-            <div class="rp__z rp__z--h"><b>Broward</b><span>High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</span></div>
-            <div class="rp__z"><b>Palm Beach</b><span>Outside the HVHZ, under Wind-Borne Debris Region rules.</span></div>
+          <p class="rp__pulled">Permits pulled directly. Every product checked for its Notice of Acceptance or Florida Product Approval.</p>
+          <div class="rp__cty">
+            <div class="rp__strip" role="group" aria-label="Pick a county">
+              <svg class="rp__pat" width="0" height="0" aria-hidden="true" focusable="false"><defs><pattern id="rp-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V10" /></pattern></defs></svg>
+              <button type="button" class="rp__c" data-c="pb" aria-pressed="false" style="--h:34"><span class="rp__cn">Palm Beach</span></button>
+              <button type="button" class="rp__c rp__c--h" data-c="br" aria-pressed="false" style="--h:24"><span class="rp__cn">Broward</span><span class="rp__hz">HVHZ</span></button>
+              <button type="button" class="rp__c rp__c--h" data-c="md" aria-pressed="true" style="--h:42"><span class="rp__cn">Miami&#8209;Dade</span><span class="rp__hz">HVHZ</span></button>
+            </div>
+            <div class="rp__card" aria-live="polite">
+              <p class="rp__cname">Miami&#8209;Dade</p>
+              <p class="rp__rule">High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</p>
+              <p class="rp__stamp" aria-hidden="true"><span class="rp__s1">Notice of</span><span class="rp__s2">Acceptance</span></p>
+            </div>
           </div>
-          <p class="rp__stamp" aria-hidden="true"><span>NOTICE OF</span><span>ACCEPTANCE</span></p>
         </article>
       </div>
       <p class="rp__note">Timelines vary by scope and jurisdiction. Permit review can add weeks.</p>
@@ -17336,6 +17066,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -17403,7 +17141,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -17595,20 +17333,41 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   });
 })();
 
-/* FINALIZE · Renovation 4 · Permits and approvals. The ticks are drawn in order as the sheets scroll in (scrubbed,
-   reversible: the checklist reads in the order the work happens), then the Notice of Acceptance stamp lands once
-   (stillness, then power4.in). Reduced motion: everything ticked, stamp in place. */
+/* OWNER · Renovation 4 · Planning and permitting. The five site-evaluation checks tick one by one as the panel comes into
+   view (once); the county strip is a picker: each county's rule (FACTS.md) lands on the card under a stamp that thumps
+   down. Arrow keys move between counties. Reduced motion: all ticked, no thump [S0362 draw, S1018, S0400]. */
 (function () {
-  EZ.section('reno-permits', { 1: { init: function (root, k) {
-    EZ.reveal(k, root.querySelectorAll('.rp__head > *'));
-    if (!k.motion) return;
-    var ticks = root.querySelectorAll('.rp__list .tk'), stamp = root.querySelector('.rp__stamp');
-    gsap.set(ticks, { drawSVG: '0%' }); gsap.set(stamp, { scale: 1.6, autoAlpha: 0 });
-    var tl = gsap.timeline().to(ticks, { drawSVG: '100%', duration: .3, ease: 'none', stagger: .25 });
-    var st = ScrollTrigger.create({ trigger: root.querySelector('.rp__sheets'), start: 'top 75%', end: 'bottom 70%', scrub: .5, animation: tl });
-    var ss = ScrollTrigger.create({ trigger: stamp, start: 'top 60%', once: true, onEnter: function () { gsap.to(stamp, { scale: 1, autoAlpha: 1, duration: .18, ease: 'power4.in', delay: .3 }); } });
-    k.add(function () { st.kill(); tl.kill(); ss.kill(); gsap.set([ticks, stamp], { clearProps: 'all' }); });
-  } } });
+  var C = {
+    pb: ['Palm Beach', 'Outside the HVHZ, under Wind-Borne Debris Region rules.', ['Wind-Borne', 'Debris Region']],
+    br: ['Broward', 'High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.', ['Notice of', 'Acceptance']],
+    md: ['Miami‑Dade', 'High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.', ['Notice of', 'Acceptance']]
+  };
+  EZ.section('reno-permits', {
+    1: { init: function (root, k) {
+      var cks = Array.prototype.slice.call(root.querySelectorAll('.rp__ck')), bs = Array.prototype.slice.call(root.querySelectorAll('.rp__c'));
+      var card = root.querySelector('.rp__card'), nm = card.querySelector('.rp__cname'), rule = card.querySelector('.rp__rule'), s1 = card.querySelector('.rp__s1'), s2 = card.querySelector('.rp__s2');
+      var cur = 'md';
+      function pick(c, anim) {
+        cur = c; bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.c === c ? 'true' : 'false'); });
+        nm.textContent = C[c][0]; rule.textContent = C[c][1]; s1.textContent = C[c][2][0]; s2.textContent = C[c][2][1];
+        if (anim) { card.classList.remove('is-swap', 'is-stamp'); void card.offsetWidth; card.classList.add('is-swap', 'is-stamp'); }
+      }
+      bs.forEach(function (b, i) {
+        k.on(b, 'click', function () { pick(b.dataset.c, true); });
+        k.on(b, 'keydown', function (e) { var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return; e.preventDefault(); var n = bs[(i + d + bs.length) % bs.length]; n.focus(); pick(n.dataset.c, true); });
+      });
+      pick('md', false);
+      var tms = [];
+      k.add(function () { tms.forEach(clearTimeout); cks.forEach(function (c) { c.classList.remove('is-done'); }); card.classList.remove('is-swap', 'is-stamp'); });
+      EZ.reveal(k, root.querySelectorAll('.rp__head > *, .rp__panel'));
+      if (!k.motion) { cks.forEach(function (c) { c.classList.add('is-done'); }); return; }
+      var st = ScrollTrigger.create({ trigger: root.querySelector('.rp__checks'), start: 'top 75%', once: true, onEnter: function () {
+        cks.forEach(function (c, i) { tms.push(setTimeout(function () { c.classList.add('is-done'); }, 260 + i * 220)); });
+        tms.push(setTimeout(function () { card.classList.add('is-stamp'); }, 260 + cks.length * 220));
+      } });
+      k.add(function () { st.kill(); });
+    } }
+  });
 })();
 
 /* FINALIZE · Renovation 5 · Whole-home stories + CTA. The firm's whole-home and outdoor projects, titles verbatim.
@@ -18276,9 +18035,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }
@@ -18545,6 +18304,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }
@@ -21043,6 +20803,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -21110,7 +20878,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],

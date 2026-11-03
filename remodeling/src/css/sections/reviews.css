@@ -1,40 +1,21 @@
-/* FINALIZE · Home 8 · Reviews: the stars come together (V2) beside the tally ledger (V1). One version. */
+/* OWNER · Home 8 · Reviews: the constellation. 343 stars assemble into 4.8; the pointer scatters them, they spring home. */
 .rv__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
 .rv__head .eyebrow { margin: 0 0 var(--s3); }
 .rv__head .t-head, .rv__lead { margin: 0; }
 .rv__lead { max-width: 46ch; color: var(--color-text-secondary); }
 
-.rv__stage { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s7); align-items: center; margin-top: var(--s8); }
-.rv__sky { padding-block: var(--s5) 0; }
-.rv__sky { margin: 0; display: grid; gap: var(--s5); }
-.rv__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.rv__svg .ms { fill: var(--clay-500, #C5735C); }
-.rv__svg .ms.is-in { fill: var(--color-accent-solid); }
-.rv__svg .big { fill: none; stroke: var(--color-text); stroke-width: 2; stroke-linejoin: round; }
-.rv__svg .gap { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-dasharray: 4 4; }   /* Phase 6: the 0.8 mark, legible (it was quiet) */
-.rv__avg { display: flex; align-items: baseline; gap: var(--s4); padding-top: var(--s4); border-top: 2px solid var(--color-text); }
-.rv__n { font: 600 clamp(3.5rem, 2rem + 4vw, 5.5rem)/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-text); }
-.rv__of { font: 400 1rem/1.4 var(--f-text); color: var(--color-text-secondary); max-width: 28ch; }
+.rv__sky { margin: var(--s7) 0 0; display: grid; gap: var(--s4); }
+.rv__cv { display: block; width: 100%; aspect-ratio: 2.3 / 1; max-height: 62svh; touch-action: pan-y; cursor: crosshair; }
+.rv__avg { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s2) var(--s5); padding-top: var(--s4); border-top: 2px solid var(--color-text); }
+.rv__of { font: 400 1rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.rv__of .nums:first-child { font: 600 1.25rem/1 var(--f-display); color: var(--color-text); }
+.rv__hint { font: 600 .8125rem/1.4 var(--f-text); color: var(--color-accent-text, var(--clay-600, #A45540)); }
 
-/* the ledger: a ruled page; gates of five */
-.rv__book { margin: 0; padding: var(--s5) var(--s5) var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); }
-.rv__tally { display: block; width: 100%; height: auto; }
-.rv__tally .st { fill: none; stroke: var(--color-text); stroke-width: 2.6; stroke-linecap: round; }
-.rv__tally .st--d { stroke: var(--color-accent-solid); }
-.rv__tally .gate rect { fill: transparent; stroke: none; rx: 4; transition: fill 150ms var(--ez-out); }
-.rv__tally .gate { outline: none; cursor: default; }
-.rv__tally .gate.is-hot rect { fill: color-mix(in srgb, var(--clay-100, #F9E3DD) 80%, transparent); }
-.rv__tally .gate:focus-visible rect { stroke: var(--color-focus-ring); stroke-width: 2; }
-.rv__cap { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); justify-content: space-between; margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--color-border); font: 400 .8125rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-.rv__tip { font-weight: 600; color: var(--color-text); }
-
-.rv__acts { display: flex; gap: var(--s3); margin-top: var(--s6); }
+.rv__acts { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
 
 @media (max-width: 900px) {
   .rv__head { grid-template-columns: 1fr; }
-  .rv__stage { grid-template-columns: 1fr; margin-top: var(--s6); gap: var(--s6); }
-  .rv__book { padding: var(--s4) var(--s3) var(--s3); }
+  .rv__sky { margin-top: var(--s5); }
+  .rv__cv { aspect-ratio: 1.5 / 1; }
 }
-
-/* Phase 8: each gate's pointer target is its whole cell (no dead gaps between gates); the drawn highlight stays inside */
-.rv__tally .gate .hit, .rv__tally .gate.is-hot .hit, .rv__tally .gate:focus-visible .hit { fill: transparent; stroke: none; }
+@media (prefers-reduced-motion: reduce) { .rv__hint, .rv__again { display: none; } }

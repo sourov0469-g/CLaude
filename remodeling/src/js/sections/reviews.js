@@ -1,106 +1,123 @@
-/* FINALIZE · Home 8 · Reviews (one version, the owner's merge). 343 small stars, one per published Google review, start
-   scattered over the sky (V2); one scrubbed timeline brings them together into five large stars, left to right, the fifth
-   filled to eight tenths of its width (4.8 of 5). The large outlines draw first so the shapes are waiting; each small star
-   that lands scratches its stroke into the ledger beside it (V1), five to a gate. Reversible [S1326]; no idle motion.
-   Reduced motion: the gathered stars and the full ledger, still. Only the two published figures are used. */
+/* OWNER · Home 8 · Reviews: the constellation (restored from the earlier build the owner liked). 343 small stars, one per
+   published Google review, fly in together when the section arrives and assemble into the figure 4.8 (sampled from the
+   display face). The pointer pushes them away; they spring back to the average on their own. Touch: a tap scatters them;
+   the "Scatter them" button does the same for keyboards. Reduced motion: the assembled figure, still. Only the two
+   published figures are used [S0687 constellation FX, S0340 spring physics, Q41 DPR cap + 40fps ceiling]. */
 (function () {
-  var COUNT = 343, AVG = 4.8;
-  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-  function starPts(cx, cy, R, r) {
-    var p = [];
-    for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R; p.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); }
-    return p;
-  }
-  function inside(pt, poly) {
-    var c = false;
-    for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-      if (((poly[i][1] > pt[1]) !== (poly[j][1] > pt[1])) && (pt[0] < (poly[j][0] - poly[i][0]) * (pt[1] - poly[i][1]) / (poly[j][1] - poly[i][1]) + poly[i][0])) c = !c;
-    }
-    return c;
-  }
-  function d(poly) { return 'M' + poly.map(function (q) { return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('L') + 'Z'; }
-
-  EZ.section('reviews', { 1: { init: function (root, k) {
-    var svg = root.querySelector('.rv__svg'), tally = root.querySelector('.rv__tally'), tip = root.querySelector('.rv__tip'), book = root.querySelector('.rv__book');
-    var R = 56, r = 23, CY = 160, CX = [62, 181, 300, 419, 538], HALF = R * Math.cos(Math.PI / 10);
-
-    // ---- the five large stars, and the 343 places inside them (the fifth only up to 0.8 of its width) ----
-    var polys = CX.map(function (cx) { return starPts(cx, CY, R, r); }), cand = [];
-    var limit = CX[4] - HALF + (AVG - 4) * 2 * HALF;
-    for (var y = CY - R; y <= CY + R; y += 4.6) {
-      for (var x = CX[0] - HALF; x <= CX[4] + HALF; x += 4.6) {
-        var row = Math.round((y - CY + R) / 4.6), xx = x + (row % 2 ? 2.3 : 0);
-        for (var s = 0; s < 5; s++) if (inside([xx, y], polys[s]) && (s < 4 || xx <= limit)) { cand.push([xx, y]); break; }
-      }
-    }
-    // exactly 343, spread evenly over the candidates; ordered left to right so they land in a wave
-    var tg = [];
-    for (var i = 0; i < COUNT; i++) tg.push(cand[Math.floor(i * cand.length / COUNT)]);
-    tg.sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
-    var mini = 'M0 -3.4L.8 -1.1L3.2 -1.1L1.3 .4L2 2.8L0 1.4L-2 2.8L-1.3 .4L-3.2 -1.1L-.8 -1.1Z';
-    var out = polys.map(function (p) { return '<path class="big" d="' + d(p) + '"/>'; }).join('');
-    out += '<path class="gap" d="M' + limit.toFixed(1) + ' ' + (CY - R * .62).toFixed(1) + 'V' + (CY + R * .86).toFixed(1) + '"/>';
-    out += tg.map(function () { return '<path class="ms" d="' + mini + '"/>'; }).join('');
-    svg.innerHTML = out;
-    var stars = Array.prototype.slice.call(svg.querySelectorAll('.ms')), bigs = svg.querySelectorAll('.big, .gap');
-    if (stars.length !== COUNT) { svg.innerHTML = ''; return; }   // the drawing is the figure: never show a wrong count
-
-    // ---- the ledger: 343 strokes in gates of five, ten gates to a line ----
-    var strokes = [], gates = [], per = matchMedia('(max-width: 480px)').matches ? 7 : 10; // Phase 8: seven gates a line on phones, so each gate is a 24px target
-    (function build() {
-      var W = per * 70, gw = 70, rows = Math.ceil(COUNT / 5 / per), rh = 56, H = rows * rh, s = '', n = 0;
-      tally.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      for (var rr = 0; rr < rows; rr++) s += '<path d="M0 ' + (rr * rh + 52) + 'H' + W + '" stroke="var(--color-border)" stroke-width="1"/>';
-      for (var g = 0; n < COUNT; g++) {
-        var col = g % per, row = Math.floor(g / per), x = col * gw + gw * .22, y = row * rh + 8, from = n + 1, body = '', j;
-        for (j = 0; j < 4 && n < COUNT; j++, n++) {
-          var lean = ((g * 7 + j * 3) % 5 - 2) * .9, top = y + ((g + j) % 3), bot = y + 38 - ((g * 3 + j) % 4);
-          body += '<path class="st" d="M' + (x + j * 9) + ' ' + top + 'L' + (x + j * 9 + lean) + ' ' + bot + '"/>';
+  var COUNT = 343;
+  EZ.section('reviews', {
+    1: { init: function (root, k) {
+      var cv = root.querySelector('.rv__cv'), ctx = cv.getContext('2d');
+      var stars = [], links = [], W = 0, H = 0, dpr = 1, ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0, landed = false;
+      var css = getComputedStyle(root), INK = css.getPropertyValue('--color-text').trim() || '#1c1a17', ACC = css.getPropertyValue('--color-accent-solid').trim() || '#A45540';
+      function sample() {
+        var o = document.createElement('canvas'); o.width = W; o.height = H;
+        var c = o.getContext('2d');
+        c.fillStyle = '#000'; c.textAlign = 'center'; c.textBaseline = 'middle';
+        c.font = '600 ' + Math.round(Math.min(H * 1.02, W * .5)) + 'px ' + (css.getPropertyValue('--f-display').trim() || 'Poppins, Arial, sans-serif');
+        c.fillText('4.8', W / 2, H * .54);
+        var d = c.getImageData(0, 0, W, H).data, cand = [], step = Math.max(3, Math.round(Math.min(W, H) / 150));
+        for (var y = 0; y < H; y += step) for (var x = 0; x < W; x += step) if (d[(y * W + x) * 4 + 3] > 128) cand.push([x, y]);
+        for (var i = cand.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = cand[i]; cand[i] = cand[j]; cand[j] = t; }
+        var gap = Math.sqrt(cand.length * step * step / COUNT) * .95, pts = [];
+        for (var tries = 0; tries < 8; tries++) {
+          pts = [];
+          for (var m = 0; m < cand.length && pts.length < COUNT; m++) {
+            var p = cand[m], ok = true;
+            for (var q = 0; q < pts.length; q++) { var dx = pts[q][0] - p[0], dy = pts[q][1] - p[1]; if (dx * dx + dy * dy < gap * gap) { ok = false; break; } }
+            if (ok) pts.push(p);
+          }
+          if (pts.length >= COUNT) break;
+          gap *= .85;
         }
-        if (n < COUNT && j === 4) { body += '<path class="st st--d" d="M' + (x - 5) + ' ' + (y + 31) + 'L' + (x + 33) + ' ' + (y + 6) + '"/>'; n++; }
-        var lbl = from === n ? 'Review ' + from : 'Reviews ' + from + ' to ' + n;
-        s += '<g class="gate" tabindex="' + (g ? -1 : 0) + '" role="img" aria-label="' + lbl + '" data-l="' + lbl + '"><rect class="hit" x="' + (col * gw) + '" y="' + (row * rh) + '" width="' + gw + '" height="' + rh + '"/><rect x="' + (x - 9) + '" y="' + (y - 5) + '" width="' + (gw * .84) + '" height="48"/>' + body + '</g>';
+        while (pts.length < COUNT && cand.length) pts.push(cand[pts.length % cand.length]);
+        return pts.slice(0, COUNT);
       }
-      tally.innerHTML = s;
-      strokes = Array.prototype.slice.call(tally.querySelectorAll('.st'));
-      gates = Array.prototype.slice.call(tally.querySelectorAll('.gate'));
-    })();
-    function hot(g) { gates.forEach(function (x) { x.classList.toggle('is-hot', x === g); }); tip.textContent = g ? g.dataset.l : ''; }
-    k.on(tally, 'pointerover', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
-    k.on(tally, 'pointerleave', function () { if (!tally.contains(document.activeElement)) hot(null); });
-    k.on(tally, 'focusin', function (e) { var g = e.target.closest('.gate'); if (g) hot(g); });
-    k.on(tally, 'focusout', function (e) { if (!tally.contains(e.relatedTarget)) hot(null); });
-    // Phase 8: one tab stop for the whole ledger (roving tabindex); the arrow keys count along it, Home and End jump [S1018]
-    k.on(tally, 'keydown', function (e) {
-      var i = gates.indexOf(document.activeElement); if (i < 0) return;
-      var j = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'ArrowDown' ? i + per : e.key === 'ArrowUp' ? i - per : e.key === 'Home' ? 0 : e.key === 'End' ? gates.length - 1 : null;
-      if (j === null) return; e.preventDefault(); j = Math.max(0, Math.min(gates.length - 1, j));
-      gates[i].setAttribute('tabindex', '-1'); gates[j].setAttribute('tabindex', '0'); gates[j].focus();
-    });
-    k.add(function () { svg.innerHTML = ''; tally.innerHTML = ''; tip.textContent = ''; });
-
-    // the still state is the gathered one
-    stars.forEach(function (st, i) { gsap.set(st, { x: tg[i][0], y: tg[i][1] }); });
-    EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__acts'));
-    if (!k.motion) return;
-
-    // ---- the scattered sky, then one scrubbed gathering ----
-    var R2 = rng(343), avg = root.querySelector('.rv__avg');
-    stars.forEach(function (st) {
-      gsap.set(st, { x: -10 + R2() * 620, y: 84 + R2() * 156, rotation: R2() * 180, scale: .5 + R2() * 1.1, opacity: .35 + R2() * .5, transformOrigin: '50% 50%' });
-    });
-    gsap.set(strokes, { scale: .1, autoAlpha: 0, transformOrigin: '50% 100%' });
-    gsap.set(bigs, { drawSVG: '0%' });
-    gsap.set(avg, { autoAlpha: 0, y: 14 });
-    var tl = gsap.timeline({ defaults: { ease: 'none' } });
-    tl.to(bigs, { drawSVG: '100%', duration: .22, ease: 'power2.inOut', stagger: .03 }, 0);
-    stars.forEach(function (st, i) {
-      var t0 = .08 + (tg[i][0] / 600) * .56;
-      tl.to(st, { x: tg[i][0], y: tg[i][1], rotation: 0, scale: 1, opacity: 1, duration: .32, ease: 'power2.inOut' }, t0);
-      tl.to(strokes[i], { scale: 1, autoAlpha: 1, duration: .015 }, t0 + .3);
-    });
-    tl.to(avg, { autoAlpha: 1, y: 0, duration: .08, ease: 'power4.out' }, .96);
-    var st = ScrollTrigger.create({ trigger: root.querySelector('.rv__stage'), start: 'top 82%', end: 'bottom 72%', scrub: .6, animation: tl });
-    k.add(function () { st.kill(); tl.kill(); gsap.set(strokes, { clearProps: 'all' }); gsap.set(avg, { clearProps: 'all' }); });
-  } } });
+      function layout(fresh) {
+        var r = cv.getBoundingClientRect();
+        W = Math.round(r.width); H = Math.round(r.height);
+        if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        var pts = sample(), unit = Math.max(1, Math.min(W, H) / 260);
+        pts.forEach(function (p, i) {
+          var s = stars[i];
+          if (!s || fresh) {
+            // they wait off the figure, spread wide, until the section arrives
+            var a = Math.random() * Math.PI * 2, rr = Math.max(W, H) * (.45 + Math.random() * .5);
+            s = stars[i] = { x: W / 2 + Math.cos(a) * rr, y: H / 2 + Math.sin(a) * rr * .6, vx: 0, vy: 0, r: (1.5 + Math.random() * 1.7) * unit, ph: Math.random() * 6.28, k: .035 + Math.random() * .025 };
+          }
+          s.tx = p[0]; s.ty = p[1];
+        });
+        links = stars.map(function (s, i) {
+          var best = -1, bd = 1e9;
+          for (var j = 0; j < stars.length; j++) { if (j === i) continue; var dx = stars[j].tx - s.tx, dy = stars[j].ty - s.ty, dd = dx * dx + dy * dy; if (dd < bd) { bd = dd; best = j; } }
+          return best;
+        });
+        if (!k.motion) { stars.forEach(function (s) { s.x = s.tx; s.y = s.ty; }); draw(0); }
+        else if (!running) draw(0);
+      }
+      function star5(x, y, r) {
+        ctx.moveTo(x, y - r);
+        for (var i = 1; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * .45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+        ctx.closePath();
+      }
+      function draw(t) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalAlpha = .16; ctx.strokeStyle = INK; ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (var i = 0; i < stars.length; i++) {
+          var a = stars[i], b = stars[links[i]]; if (!b) continue;
+          var dx = a.x - b.x, dy = a.y - b.y; if (dx * dx + dy * dy > 1600) continue;   // the lines only hold while the stars are home
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+        }
+        ctx.stroke();
+        ctx.fillStyle = ACC;
+        for (var n = 0; n < stars.length; n++) {
+          var s = stars[n];
+          ctx.globalAlpha = .7 + .3 * Math.sin(t * .002 + s.ph);
+          ctx.beginPath(); star5(s.x, s.y, s.r * 1.6); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 22) return;
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        var R = Math.max(80, W * .085), R2 = R * R, moving = 0;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var ax = (s.tx - s.x) * s.k, ay = (s.ty - s.y) * s.k;
+          var dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 4.6; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .86; s.vy = (s.vy + ay * dt) * .86;
+          s.x += s.vx * dt; s.y += s.vy * dt;
+          if (Math.abs(s.vx) + Math.abs(s.vy) > .05) moving++;
+        }
+        draw(t);
+        if (!moving && ptr.x < -999) { landed = true; }
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(cx, cy) {
+        stars.forEach(function (s) {
+          var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 16 + Math.random() * 20;
+          s.vx += dx / d * f; s.vy += dy / d * f;
+        });
+        run();
+      }
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(cv, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; links = []; ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.on(cv, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var r = cv.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; run(); });
+      k.on(cv, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(cv, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = cv.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
+      k.on(root.querySelector('.rv__again'), 'click', function () { scatter(); });
+      // they fly in together when the figure comes into view (once the canvas is half on screen)
+      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: .35 });
+      EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__avg, .rv__acts'));
+    } }
+  });
 })();

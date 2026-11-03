@@ -257,9 +257,9 @@
 /* giant two-tone wordmark: the brand stamp under the close [BANK pattern: OFFF Forum footer wordmark] */
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   /* owner: the two words read as one name, no gap between them */
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }

@@ -606,9 +606,9 @@ input, textarea { caret-color: var(--color-accent-text); }
 
 .foot__mark {
   margin: 0 0 var(--s9); padding-top: var(--s7);
-  display: flex; justify-content: space-between; gap: .12em;
+  display: flex; justify-content: flex-start; gap: .22em;   
   font-family: var(--f-display); font-weight: 400; line-height: .8; letter-spacing: -.005em;
-  font-size: clamp(3rem, 11.9vw, 14.5rem);
+  font-size: clamp(3rem, 12.9vw, 16rem);
   padding-inline: var(--margin); white-space: nowrap;
 }
 .foot__mark span:first-child { color: var(--color-text); }
@@ -875,6 +875,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }
@@ -1076,32 +1077,56 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (max-width: 900px) { .dc__head, .dp__grid { grid-template-columns: 1fr; } .dc__seg { font-size: .75rem; padding: 0 8px; } .dc__tag { width: 20px; height: 20px; font-size: .625rem; } .dc__bar { height: 44px; } }
 
 
-.rp__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); margin-bottom: var(--s7); }
+.rp__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
 .rp__head .eyebrow { margin: 0 0 var(--s3); }
 .rp__head .t-head, .rp__lead { margin: 0; }
-.rp__lead { max-width: 52ch; color: var(--color-text-secondary); }
-.rp__sheets { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s5); align-items: stretch; }
-.rp__sheet { position: relative; display: grid; align-content: start; gap: var(--s3); padding: var(--s6); background: var(--color-surface); border: 1.5px solid var(--color-text); background-image: repeating-linear-gradient(180deg, transparent 0 39px, var(--color-border) 39px 40px); }
-.rp__wk { margin: 0; display: inline-block; justify-self: start; padding: 4px 12px; border: 1.5px solid var(--color-text); font: 600 .875rem/1.2 var(--f-text); background: var(--color-surface); }
-.rp__t { margin: 0; font: 600 1.75rem/1.1 var(--f-display); letter-spacing: -.02em; }
-.rp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
-.rp__list li { display: grid; grid-template-columns: 24px 1fr; gap: var(--s3); align-items: start; font: 500 1.0625rem/1.45 var(--f-text); padding: 8px 0; }
-.rp__list svg { width: 24px; height: 24px; margin-top: 2px; }
-.rp__list rect { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.5; }
-.rp__list .tk { fill: none; stroke: var(--color-accent-solid); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.rp__zones { display: grid; gap: var(--s2); margin-top: var(--s3); padding-top: var(--s4); border-top: 1px dashed var(--color-border-strong); }
-.rp__zh { margin: 0 0 var(--s2); font: 600 .8125rem/1 var(--f-text); letter-spacing: .05em; text-transform: uppercase; color: var(--color-text-secondary); }
-.rp__z { display: grid; grid-template-columns: 8.5rem 1fr; gap: var(--s3); padding: var(--s3); background: var(--color-bg); border: 1px solid var(--color-border-strong); font: 400 .9375rem/1.45 var(--f-text); }
-.rp__z b { font: 600 1rem/1.3 var(--f-display); }
-.rp__z--h { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--clay-100, #F9E3DD) 80%, transparent) 0 8px, var(--color-surface) 8px 16px); border-color: var(--clay-600, #A45540); }
-.rp__stamp { position: absolute; right: var(--s5); top: var(--s5); display: grid; place-items: center; width: 104px; height: 104px; margin: 0; border-radius: 50%; border: 3px double var(--clay-700, #884432); color: var(--clay-700, #884432); font: 700 .6875rem/1.3 var(--f-text); letter-spacing: .08em; text-align: center; rotate: -12deg; align-content: center; }
-.rp__note { margin: var(--s4) 0 0; font: 600 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
-@media (max-width: 900px) {
-  .rp__head, .rp__sheets { grid-template-columns: 1fr; }
-  .rp__sheet { padding: var(--s5) var(--s4); }
-  .rp__z { grid-template-columns: 1fr; gap: 4px; }
-  .rp__stamp { width: 84px; height: 84px; font-size: .5625rem; right: var(--s3); top: var(--s3); }
+.rp__lead { max-width: 46ch; color: var(--color-text-secondary); }
+.rp__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s6); margin-top: var(--s7); align-items: stretch; }
+.rp__panel { padding: var(--s6); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); }
+.rp__wk { display: inline-block; margin: 0 0 var(--s3); padding: 4px 12px; font: 600 .875rem/1.2 var(--f-text); border: 1.5px solid var(--color-text); }
+.rp__t { margin: 0 0 var(--s4); font: 600 1.5rem/1.15 var(--f-display); letter-spacing: -.015em; }
+
+.rp__checks { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.rp__ck { display: grid; grid-template-columns: 44px minmax(0, 1fr) 26px; align-items: center; gap: var(--s3); padding: var(--s2) var(--s3) var(--s2) var(--s2); border: 1px solid var(--color-border); background: var(--color-bg, #fff);
+  transition: transform 200ms var(--ez-out), border-color 200ms var(--ez-out), background-color 300ms var(--ez-out); }
+.rp__ck:hover { transform: translateX(6px); border-color: var(--color-text); }
+.rp__ic { width: 44px; height: 44px; padding: 9px; border-radius: 50%; background: var(--clay-100, #F9E3DD); fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: background-color 300ms var(--ez-out); }
+.rp__ck span { font: 600 .9375rem/1.3 var(--f-text); }
+.rp__tick { width: 26px; height: 26px; fill: none; stroke: var(--color-accent-solid); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 420ms var(--ez-out); }
+.rp__ck.is-done .rp__tick { stroke-dashoffset: 0; }
+.rp__ck.is-done .rp__ic { background: color-mix(in srgb, var(--clay-500, #C5735C) 30%, var(--color-bg, #fff)); }
+
+.rp__pulled { margin: 0 0 var(--s5); max-width: 52ch; color: var(--color-text-secondary); }
+.rp__cty { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--s5); align-items: stretch; }
+.rp__strip { position: relative; display: grid; grid-template-rows: 34fr 24fr 42fr; min-height: 300px; border: 1.5px solid var(--color-text); border-right-width: 4px; }
+.rp__pat { position: absolute; }
+.rp__pat path { stroke: color-mix(in srgb, var(--clay-500, #C5735C) 55%, transparent); stroke-width: 3; }
+.rp__c { position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: var(--s3); text-align: left; color: var(--color-text); background: var(--color-bg, #fff); border: 0; border-bottom: 1.5px solid var(--color-text); cursor: pointer; overflow: hidden;
+  transition: background-color 200ms var(--ez-out), color 200ms var(--ez-out); }
+.rp__c:last-child { border-bottom: 0; }
+.rp__c--h { background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--clay-500, #C5735C) 22%, var(--color-bg, #fff)) 0 6px, var(--color-bg, #fff) 6px 12px); }
+.rp__c:hover { background-color: var(--clay-100, #F9E3DD); }
+.rp__c[aria-pressed="true"] { background: var(--color-text); color: #fff; }
+.rp__c:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: -3px; }
+.rp__cn { font: 600 1rem/1.2 var(--f-display); }
+.rp__hz { font: 600 .6875rem/1 var(--f-text); letter-spacing: .08em; padding: 3px 6px; border: 1.5px solid currentColor; }
+.rp__card { position: relative; display: grid; align-content: start; gap: var(--s3); padding: var(--s5); background: var(--sand-100, #F7F1EA); border: 1.5px dashed var(--color-text); overflow: hidden; }
+.rp__cname { margin: 0; font: 600 1.375rem/1.1 var(--f-display); }
+.rp__rule { margin: 0; font-size: 1rem; line-height: 1.5; max-width: 34ch; }
+.rp__stamp { justify-self: end; align-self: end; margin: var(--s4) 0 0; display: grid; place-items: center; padding: 10px 16px; font: 700 .8125rem/1.15 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-solid); border: 3px double var(--color-accent-solid); border-radius: 6px; transform: rotate(-8deg); }
+.rp__card.is-stamp .rp__stamp { animation: rp-thump 420ms cubic-bezier(.2, .9, .3, 1.4); }
+@keyframes rp-thump { 0% { opacity: 0; transform: rotate(-14deg) scale(1.9); } 70% { opacity: 1; transform: rotate(-7deg) scale(.94); } 100% { transform: rotate(-8deg) scale(1); } }
+.rp__card.is-swap .rp__cname, .rp__card.is-swap .rp__rule { animation: rp-in 260ms var(--ez-out); }
+@keyframes rp-in { from { opacity: 0; transform: translateY(6px); } }
+.rp__note { margin: var(--s5) 0 0; font: 400 .875rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 1000px) { .rp__head, .rp__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) {
+  .rp__panel { padding: var(--s4); }
+  .rp__cty { grid-template-columns: minmax(0, 1fr); }
+  .rp__strip { min-height: 220px; }
 }
+@media (prefers-reduced-motion: reduce) { .rp__tick, .rp__ck { transition: none; } .rp__card * { animation: none !important; } }
 
 
 .sc__head { margin-bottom: var(--s7); }
@@ -1382,34 +1407,37 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Planning and permitting</p>
           <h2 class="t-head" id="reno-permits-h">Checked before <span class="acc">anything is drawn.</span></h2>
         </div>
-        <p class="t-lead rp__lead">We pull the permits in our own name, verify every product against its Notice of Acceptance before it is ordered, and keep one person accountable from the first walkthrough to final inspection.</p>
+        <p class="t-lead rp__lead">We pull the permits in our own name and verify every product against its Notice of Acceptance before it is ordered.</p>
       </div>
-      <div class="rp__sheets">
-        <article class="rp__sheet" aria-labelledby="rp-s1">
+      <div class="rp__grid">
+        <article class="rp__panel" aria-labelledby="rp-s1">
           <p class="rp__wk">Week <span class="nums">1&ndash;2</span></p>
           <h3 class="rp__t" id="rp-s1">Site evaluation</h3>
-          <ul class="rp__list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Flood zone</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>High-Velocity Hurricane Zone requirements</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Permit history</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>HOA or historic review</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>What is behind the walls</li>
+          <ul class="rp__checks">
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c3 0 3-2 6-2s3 2 6 2 3-2 6-2M2 20c3 0 3-2 6-2s3 2 6 2 3-2 6-2M12 3v7M9 7l3 3 3-3"/></svg><span>Flood zone</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4M12 4c-5 0-8 3-8 8M12 20c5 0 8-3 8-8M4 12c0 3 2 5 5 6M20 12c0-3-2-5-5-6"/></svg><span>High-Velocity Hurricane Zone requirements</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7h7l2 2h9v10H3zM3 7V5h7l2 2M7 13h10M7 16h6"/></svg><span>Permit history</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9l9-5 9 5M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/></svg><span>HOA or historic review</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h16v16H4zM8 4v16M12 4v16M16 4v16M4 9h16"/></svg><span>What is behind the walls</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
           </ul>
         </article>
-        <article class="rp__sheet rp__sheet--p" aria-labelledby="rp-s2">
+        <article class="rp__panel rp__panel--p" aria-labelledby="rp-s2">
           <p class="rp__wk">Weeks <span class="nums">6&ndash;12</span></p>
           <h3 class="rp__t" id="rp-s2">Permitting</h3>
-          <ul class="rp__list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Permits pulled directly</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Every product checked for its Notice of Acceptance or Florida Product Approval</li>
-          </ul>
-          <div class="rp__zones">
-            <p class="rp__zh">Code context, by county</p>
-            <div class="rp__z rp__z--h"><b>Miami&#8209;Dade</b><span>High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</span></div>
-            <div class="rp__z rp__z--h"><b>Broward</b><span>High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</span></div>
-            <div class="rp__z"><b>Palm Beach</b><span>Outside the HVHZ, under Wind-Borne Debris Region rules.</span></div>
+          <p class="rp__pulled">Permits pulled directly. Every product checked for its Notice of Acceptance or Florida Product Approval.</p>
+          <div class="rp__cty">
+            <div class="rp__strip" role="group" aria-label="Pick a county">
+              <svg class="rp__pat" width="0" height="0" aria-hidden="true" focusable="false"><defs><pattern id="rp-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V10" /></pattern></defs></svg>
+              <button type="button" class="rp__c" data-c="pb" aria-pressed="false" style="--h:34"><span class="rp__cn">Palm Beach</span></button>
+              <button type="button" class="rp__c rp__c--h" data-c="br" aria-pressed="false" style="--h:24"><span class="rp__cn">Broward</span><span class="rp__hz">HVHZ</span></button>
+              <button type="button" class="rp__c rp__c--h" data-c="md" aria-pressed="true" style="--h:42"><span class="rp__cn">Miami&#8209;Dade</span><span class="rp__hz">HVHZ</span></button>
+            </div>
+            <div class="rp__card" aria-live="polite">
+              <p class="rp__cname">Miami&#8209;Dade</p>
+              <p class="rp__rule">High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</p>
+              <p class="rp__stamp" aria-hidden="true"><span class="rp__s1">Notice of</span><span class="rp__s2">Acceptance</span></p>
+            </div>
           </div>
-          <p class="rp__stamp" aria-hidden="true"><span>NOTICE OF</span><span>ACCEPTANCE</span></p>
         </article>
       </div>
       <p class="rp__note">Timelines vary by scope and jurisdiction. Permit review can add weeks.</p>
@@ -3506,6 +3534,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     return { h: 76, svg: '<path class="dv-l" d="M0 64H' + w + '"/><path class="dv-ink" d="' + d + '"/>',
       anim: function (svg, st) { return scrubDraw(svg, st, '.dv-l, .dv-ink'); } };
   };
+  // 7 projects -> reviews (owner: the tally read as clutter): one ink line runs on and ends in a single star, the hand-off
+  //   into the stars of the reviews
+  DIV.spark = function (w) {
+    var cx = f(w * .9), cy = 36, pts = '';
+    for (var i = 0; i < 10; i++) { var r = i % 2 ? 4.6 : 11, a = -Math.PI / 2 + i * Math.PI / 5; pts += (i ? 'L' : 'M') + f(cx + r * Math.cos(a)) + ' ' + f(cy + r * Math.sin(a)); }
+    return { h: 72, svg: '<path class="dv-ink" d="M0 36H' + f(w * .9 - 22) + '"/><path class="dv-star" d="' + pts + 'Z"/>',
+      anim: function (svg, st) { return scrubDraw(svg, st, '.dv-ink', function (tl) { tl.fromTo(svg.querySelector('.dv-star'), { scale: 0, rotate: -72, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: .3, ease: 'back.out(2)' }, .75); }); } };
+  };
   // 8 reviews -> towns: the five stars become five pins on a survey line, on their way to the map
   DIV.pins = function (w) {
     var pins = '';
@@ -3573,7 +3609,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'tally'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -3765,20 +3801,41 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   });
 })();
 
-/* FINALIZE · Renovation 4 · Permits and approvals. The ticks are drawn in order as the sheets scroll in (scrubbed,
-   reversible: the checklist reads in the order the work happens), then the Notice of Acceptance stamp lands once
-   (stillness, then power4.in). Reduced motion: everything ticked, stamp in place. */
+/* OWNER · Renovation 4 · Planning and permitting. The five site-evaluation checks tick one by one as the panel comes into
+   view (once); the county strip is a picker: each county's rule (FACTS.md) lands on the card under a stamp that thumps
+   down. Arrow keys move between counties. Reduced motion: all ticked, no thump [S0362 draw, S1018, S0400]. */
 (function () {
-  EZ.section('reno-permits', { 1: { init: function (root, k) {
-    EZ.reveal(k, root.querySelectorAll('.rp__head > *'));
-    if (!k.motion) return;
-    var ticks = root.querySelectorAll('.rp__list .tk'), stamp = root.querySelector('.rp__stamp');
-    gsap.set(ticks, { drawSVG: '0%' }); gsap.set(stamp, { scale: 1.6, autoAlpha: 0 });
-    var tl = gsap.timeline().to(ticks, { drawSVG: '100%', duration: .3, ease: 'none', stagger: .25 });
-    var st = ScrollTrigger.create({ trigger: root.querySelector('.rp__sheets'), start: 'top 75%', end: 'bottom 70%', scrub: .5, animation: tl });
-    var ss = ScrollTrigger.create({ trigger: stamp, start: 'top 60%', once: true, onEnter: function () { gsap.to(stamp, { scale: 1, autoAlpha: 1, duration: .18, ease: 'power4.in', delay: .3 }); } });
-    k.add(function () { st.kill(); tl.kill(); ss.kill(); gsap.set([ticks, stamp], { clearProps: 'all' }); });
-  } } });
+  var C = {
+    pb: ['Palm Beach', 'Outside the HVHZ, under Wind-Borne Debris Region rules.', ['Wind-Borne', 'Debris Region']],
+    br: ['Broward', 'High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.', ['Notice of', 'Acceptance']],
+    md: ['Miami‑Dade', 'High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.', ['Notice of', 'Acceptance']]
+  };
+  EZ.section('reno-permits', {
+    1: { init: function (root, k) {
+      var cks = Array.prototype.slice.call(root.querySelectorAll('.rp__ck')), bs = Array.prototype.slice.call(root.querySelectorAll('.rp__c'));
+      var card = root.querySelector('.rp__card'), nm = card.querySelector('.rp__cname'), rule = card.querySelector('.rp__rule'), s1 = card.querySelector('.rp__s1'), s2 = card.querySelector('.rp__s2');
+      var cur = 'md';
+      function pick(c, anim) {
+        cur = c; bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.c === c ? 'true' : 'false'); });
+        nm.textContent = C[c][0]; rule.textContent = C[c][1]; s1.textContent = C[c][2][0]; s2.textContent = C[c][2][1];
+        if (anim) { card.classList.remove('is-swap', 'is-stamp'); void card.offsetWidth; card.classList.add('is-swap', 'is-stamp'); }
+      }
+      bs.forEach(function (b, i) {
+        k.on(b, 'click', function () { pick(b.dataset.c, true); });
+        k.on(b, 'keydown', function (e) { var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return; e.preventDefault(); var n = bs[(i + d + bs.length) % bs.length]; n.focus(); pick(n.dataset.c, true); });
+      });
+      pick('md', false);
+      var tms = [];
+      k.add(function () { tms.forEach(clearTimeout); cks.forEach(function (c) { c.classList.remove('is-done'); }); card.classList.remove('is-swap', 'is-stamp'); });
+      EZ.reveal(k, root.querySelectorAll('.rp__head > *, .rp__panel'));
+      if (!k.motion) { cks.forEach(function (c) { c.classList.add('is-done'); }); return; }
+      var st = ScrollTrigger.create({ trigger: root.querySelector('.rp__checks'), start: 'top 75%', once: true, onEnter: function () {
+        cks.forEach(function (c, i) { tms.push(setTimeout(function () { c.classList.add('is-done'); }, 260 + i * 220)); });
+        tms.push(setTimeout(function () { card.classList.add('is-stamp'); }, 260 + cks.length * 220));
+      } });
+      k.add(function () { st.kill(); });
+    } }
+  });
 })();
 
 /* FINALIZE · Renovation 5 · Whole-home stories + CTA. The firm's whole-home and outdoor projects, titles verbatim.

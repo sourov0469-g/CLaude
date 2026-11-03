@@ -87,7 +87,7 @@
     var it = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: function () { intro.play(); } });
     k.add(function () { it.kill(); intro.kill(); });
     tl.to({}, { duration: .5 });
-    var st = ScrollTrigger.create({ trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 5.4); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
+    var st = ScrollTrigger.create({ trigger: pin, start: 'top top', end: function () { return '+=' + Math.round(innerHeight * 2.6); }, pin: true, scrub: .8, animation: tl, invalidateOnRefresh: true,
       onUpdate: function (self) { var p = self.progress * tl.duration(); show(Math.min(5, Math.max(0, Math.floor(p + .15)))); fill.style.transform = 'scaleX(' + Math.min(1, p / 5).toFixed(4) + ')'; } });
     show(0);
     k.add(function () { st.kill(); tl.kill(); world.innerHTML = ''; world.style.width = world.style.height = ''; gsap.set(world, { clearProps: 'transform' }); });

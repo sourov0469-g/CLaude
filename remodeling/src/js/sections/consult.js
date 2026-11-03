@@ -66,6 +66,25 @@
 
   EZ.section('consult', {
     1: { init: function (root, k) {
+      // OWNER · the call card: digits dial in a wave, the live open/closed light, copy with a confirmation, a gentle lean
+      (function () {
+        var cl = root.querySelector('.cl'); if (!cl) return;
+        var num = cl.querySelector('.cl__num'), call = cl.querySelector('.cl__call'), st = cl.querySelector('.cl__stt'), cp = cl.querySelector('.cl__copy'), cpl = cp.querySelector('.cl__cl');
+        var raw = num.textContent; num.setAttribute('aria-label', raw.replace(/\u00a0/g, ' ').replace(/\u2011/g, '-'));
+        num.innerHTML = raw.split('').map(function (ch, i) { return '<span class="d" aria-hidden="true" style="--i:' + i + '">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>'; }).join('');
+        function upd() { var o = EZ.openStatus(); cl.classList.toggle('is-open', o.open); st.textContent = o.text; }
+        upd(); var iv = setInterval(upd, 30000); k.add(function () { clearInterval(iv); num.textContent = raw; cl.classList.remove('is-open'); });
+        var tm = 0;
+        k.on(cp, 'click', function () {
+          function done() { cp.classList.add('is-done'); cpl.textContent = 'Copied'; clearTimeout(tm); tm = setTimeout(function () { cp.classList.remove('is-done'); cpl.textContent = 'Copy number'; }, 1800); }
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(cp.dataset.n).then(done, function () { cpl.textContent = cp.dataset.n; });
+          else cpl.textContent = cp.dataset.n;
+        });
+        k.add(function () { clearTimeout(tm); });
+        if (!k.motion || !k.fine) return;
+        k.on(call, 'pointermove', function (e) { var r = call.getBoundingClientRect(); call.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5) * 8 + 'px'); call.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5) * 6 + 'px'); });
+        k.on(call, 'pointerleave', function () { call.style.removeProperty('--mx'); call.style.removeProperty('--my'); });
+      })();
       var form = root.querySelector('.gs__note'), other = root.querySelector('.gs__other'), otherIn = other.querySelector('input');
       var firstP = form.querySelector('input[name="project"]'); firstP.id = 'gs-project';
       liveClear(form, k);

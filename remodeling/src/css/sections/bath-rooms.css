@@ -7,6 +7,14 @@
 .br__ph { position: relative; aspect-ratio: 4 / 5; max-height: 52svh; background: var(--sand-100, #F7F1EA); border: 1.5px solid var(--color-text); overflow: hidden; }
 .br__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 300ms var(--ez-out); }
 .br__prev.has-img .br__img { opacity: 1; }
+/* owner: the five rooms without a photo show a drawn plan, never an empty frame */
+.br__plan { position: absolute; inset: 6%; width: 88%; height: 88%; opacity: 0; transition: opacity 300ms var(--ez-out); }
+.br__prev.has-plan .br__plan { opacity: 1; }
+.br__plan .w { fill: none; stroke: var(--color-text); stroke-width: 9; stroke-linejoin: miter; }
+.br__plan .f { fill: var(--color-bg, #fff); stroke: var(--color-text); stroke-width: 2.2; stroke-linejoin: round; }
+.br__plan .dd { fill: none; stroke: var(--color-text-secondary); stroke-width: 1.8; stroke-dasharray: 6 6; }
+.br__plan .a { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 3; stroke-linecap: round; }
+.br__plan .lb { font: 500 13px/1 var(--f-text); fill: var(--color-text-secondary); }
 .br__cap { margin-top: var(--s2); min-height: 2.8em; font: 400 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
 .br__list { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--color-text); }
 .br__r { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); width: 100%; padding: var(--s3) 0; background: none; border: 0; border-bottom: 1px solid var(--color-border); text-align: left; color: var(--color-text-secondary); font: 600 clamp(1.75rem, 1rem + 2.4vw, 3.25rem)/1.05 var(--f-display); letter-spacing: -.025em; transition: color 200ms var(--ez-out), padding 300ms var(--ez-out); }

@@ -1,7 +1,7 @@
 {
  "pages": {
   "home v1": {
-   "runs": 751,
+   "runs": 677,
    "tel": [
     "tel:+17542360675"
    ],
@@ -20,7 +20,7 @@
    }
   },
   "home v2": {
-   "runs": 709,
+   "runs": 623,
    "tel": [
     "tel:+17542360675"
    ],
@@ -99,7 +99,7 @@
    }
   },
   "renovation v1": {
-   "runs": 268,
+   "runs": 267,
    "tel": [
     "tel:+17542360675"
    ],
@@ -113,7 +113,7 @@
    }
   },
   "renovation v2": {
-   "runs": 264,
+   "runs": 263,
    "tel": [
     "tel:+17542360675"
    ],
@@ -183,8 +183,8 @@
   }
  ],
  "fonts": {
-  "Roboto": 1541,
-  "Elbaz Display": 641
+  "Roboto": 1321,
+  "Elbaz Display": 636
  },
  "requests": [],
  "baPairs": [

@@ -11,11 +11,22 @@
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Book a consultation</p>
         <h2 class="t-head" id="consult-h">Tell us in <span class="acc">your own words.</span></h2>
         <p class="t-lead gs__lead">Fill in the note. It reads like a message because it is one: it becomes the email we receive. A real consultation, not a sales visit.</p>
-        <dl class="consult__facts">
-          <div><dt>Call</dt><dd><a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a></dd></div>
-          <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
-          <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
-        </dl>
+        <!-- OWNER: the number was flat. A call card: the handset rings and the digits dial on hover, a live open/closed
+             light (the published hours only), a copy button that confirms, and the card leans toward the pointer. -->
+        <div class="cl">
+          <a class="cl__call" href="tel:+17542360675">
+            <span class="cl__hs" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M13 8q-7 16 0 32l8-3 2-10-5-2q-2-4 0-8l5-2-2-10z"/><path class="w" d="M28 17q4 7 0 14M34 12q7 12 0 24"/></svg></span>
+            <span class="cl__txt"><span class="cl__k">Call. A real answer, not a callback form.</span><span class="cl__num nums">(754)&nbsp;236&#8209;0675</span></span>
+          </a>
+          <div class="cl__row">
+            <p class="cl__st" aria-live="polite"><span class="cl__lamp" aria-hidden="true"></span><span class="cl__stt">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+            <button type="button" class="cl__copy" data-n="(754) 236-0675"><span class="cl__cl">Copy number</span></button>
+          </div>
+          <dl class="consult__facts cl__facts">
+            <div><dt>Hours</dt><dd>Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed</dd></div>
+            <div><dt>Office</dt><dd>19 W Flagler St #310, Miami, FL 33130</dd></div>
+          </dl>
+        </div>
       </div>
       <form class="gs__note c-form" novalidate aria-labelledby="consult-h">
         <p class="gs__s">Hi, my name is <span class="gs__b"><input id="gs-name" name="name" type="text" autocomplete="name" aria-label="Full name, required" placeholder="your full name" size="16" required></span>.</p>

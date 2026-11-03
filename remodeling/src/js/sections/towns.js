@@ -34,8 +34,17 @@
     // ---- all 104, at once ----
     all.innerHTML = NS_ORDER.map(function (c) {
       var list = T.map(function (t, i) { return t.c === c ? '<li><button type="button" class="tw__t" data-i="' + i + '" tabindex="-1">' + esc(t.n) + '</button></li>' : ''; }).join('');
-      return '<div class="tw__c"><h3>' + c.replace('-', '&#8209;') + ' <span><span class="nums">' + D.towns[c].length + '</span> municipalities</span></h3><ul class="tw__ul" aria-label="' + c + ' municipalities">' + list + '</ul></div>';
+      // OWNER: 104 names at once was too much. Each county is a tile (its count, its name); opening it lists its towns
+      return '<div class="tw__c" data-c="' + c + '"><button type="button" class="tw__cb" aria-expanded="false"><span class="tw__cc nums">' + D.towns[c].length + '</span><span class="tw__cn">' + c.replace('-', '&#8209;') + '</span><span class="tw__cl">municipalities</span><svg class="tw__chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6 L8 10 L12 6"/></svg></button><ul class="tw__ul" aria-label="' + c + ' municipalities" hidden>' + list + '</ul></div>';
     }).join('');
+    all.querySelectorAll('.tw__cb').forEach(function (b) {
+      var box = b.parentNode, ul = box.querySelector('.tw__ul'), c = box.dataset.c;
+      function lit(on) { ctys.forEach(function (x) { x.classList.toggle('is-hot', on && x.dataset.c === c); }); }
+      k.on(b, 'click', function () { var open = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', open ? 'true' : 'false'); ul.hidden = !open; box.classList.toggle('is-open', open);
+        ul.querySelectorAll('.tw__t').forEach(function (t) { t.tabIndex = open ? 0 : -1; }); });
+      k.on(b, 'pointerenter', function () { lit(true); }); k.on(b, 'pointerleave', function () { lit(false); });
+      k.on(b, 'focus', function () { lit(true); }); k.on(b, 'blur', function () { lit(false); });
+    });
     var names = Array.prototype.slice.call(all.querySelectorAll('.tw__t'));
     k.add(function () { svg.innerHTML = ''; all.innerHTML = ''; ans.innerHTML = ''; inp.value = ''; opts.hidden = true; opts.innerHTML = ''; clr.hidden = true; });
 

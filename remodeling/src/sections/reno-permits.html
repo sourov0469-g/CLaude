@@ -1,8 +1,9 @@
 <section id="reno-permits" class="sec rpermit g-base" data-section="reno-permits" aria-labelledby="reno-permits-h">
-  <!-- FINALIZE · Renovation 4 · Permits and approvals: ONE version, V2 deepened (owner). Two sheets: the site evaluation
-       (week 1-2), ticked off in order as it scrolls in, and permitting (weeks 6-12): permits pulled directly, every product
-       checked for its Notice of Acceptance or Florida Product Approval, and the firm's code context county by county
-       (HVHZ in Miami-Dade and Broward; Palm Beach outside HVHZ, under Wind-Borne Debris Region rules). FACTS.md only. -->
+  <!-- OWNER (after the finalize): "document type, no creativity". Two visual panels instead of two sheets. Left: the site
+       evaluation (week 1-2) as five drawn checks that tick as they come into view. Right: permitting (weeks 6-12) as the
+       three counties stacked north to south, the HVHZ counties hatched; pick one and its rule is stamped onto the card.
+       Every line is the firm's own (FACTS.md: site evaluation list; permits pulled directly; Notice of Acceptance or
+       Florida Product Approval; HVHZ in Miami-Dade and Broward; Palm Beach outside the HVHZ, Wind-Borne Debris Region). -->
   <div class="ver rp" data-v="1">
     <div class="wrap">
       <div class="rp__head">
@@ -10,34 +11,37 @@
           <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Planning and permitting</p>
           <h2 class="t-head" id="reno-permits-h">Checked before <span class="acc">anything is drawn.</span></h2>
         </div>
-        <p class="t-lead rp__lead">We pull the permits in our own name, verify every product against its Notice of Acceptance before it is ordered, and keep one person accountable from the first walkthrough to final inspection.</p>
+        <p class="t-lead rp__lead">We pull the permits in our own name and verify every product against its Notice of Acceptance before it is ordered.</p>
       </div>
-      <div class="rp__sheets">
-        <article class="rp__sheet" aria-labelledby="rp-s1">
+      <div class="rp__grid">
+        <article class="rp__panel" aria-labelledby="rp-s1">
           <p class="rp__wk">Week <span class="nums">1&ndash;2</span></p>
           <h3 class="rp__t" id="rp-s1">Site evaluation</h3>
-          <ul class="rp__list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Flood zone</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>High-Velocity Hurricane Zone requirements</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Permit history</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>HOA or historic review</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>What is behind the walls</li>
+          <ul class="rp__checks">
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c3 0 3-2 6-2s3 2 6 2 3-2 6-2M2 20c3 0 3-2 6-2s3 2 6 2 3-2 6-2M12 3v7M9 7l3 3 3-3"/></svg><span>Flood zone</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4M12 4c-5 0-8 3-8 8M12 20c5 0 8-3 8-8M4 12c0 3 2 5 5 6M20 12c0-3-2-5-5-6"/></svg><span>High-Velocity Hurricane Zone requirements</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 7h7l2 2h9v10H3zM3 7V5h7l2 2M7 13h10M7 16h6"/></svg><span>Permit history</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9l9-5 9 5M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/></svg><span>HOA or historic review</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
+            <li class="rp__ck"><svg class="rp__ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h16v16H4zM8 4v16M12 4v16M16 4v16M4 9h16"/></svg><span>What is behind the walls</span><svg class="rp__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></li>
           </ul>
         </article>
-        <article class="rp__sheet rp__sheet--p" aria-labelledby="rp-s2">
+        <article class="rp__panel rp__panel--p" aria-labelledby="rp-s2">
           <p class="rp__wk">Weeks <span class="nums">6&ndash;12</span></p>
           <h3 class="rp__t" id="rp-s2">Permitting</h3>
-          <ul class="rp__list">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Permits pulled directly</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20"/><path class="tk" d="M6 12 L10 16 L18 7"/></svg>Every product checked for its Notice of Acceptance or Florida Product Approval</li>
-          </ul>
-          <div class="rp__zones">
-            <p class="rp__zh">Code context, by county</p>
-            <div class="rp__z rp__z--h"><b>Miami&#8209;Dade</b><span>High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</span></div>
-            <div class="rp__z rp__z--h"><b>Broward</b><span>High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</span></div>
-            <div class="rp__z"><b>Palm Beach</b><span>Outside the HVHZ, under Wind-Borne Debris Region rules.</span></div>
+          <p class="rp__pulled">Permits pulled directly. Every product checked for its Notice of Acceptance or Florida Product Approval.</p>
+          <div class="rp__cty">
+            <div class="rp__strip" role="group" aria-label="Pick a county">
+              <svg class="rp__pat" width="0" height="0" aria-hidden="true" focusable="false"><defs><pattern id="rp-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V10" /></pattern></defs></svg>
+              <button type="button" class="rp__c" data-c="pb" aria-pressed="false" style="--h:34"><span class="rp__cn">Palm Beach</span></button>
+              <button type="button" class="rp__c rp__c--h" data-c="br" aria-pressed="false" style="--h:24"><span class="rp__cn">Broward</span><span class="rp__hz">HVHZ</span></button>
+              <button type="button" class="rp__c rp__c--h" data-c="md" aria-pressed="true" style="--h:42"><span class="rp__cn">Miami&#8209;Dade</span><span class="rp__hz">HVHZ</span></button>
+            </div>
+            <div class="rp__card" aria-live="polite">
+              <p class="rp__cname">Miami&#8209;Dade</p>
+              <p class="rp__rule">High-Velocity Hurricane Zone: products need a valid Miami-Dade Notice of Acceptance.</p>
+              <p class="rp__stamp" aria-hidden="true"><span class="rp__s1">Notice of</span><span class="rp__s2">Acceptance</span></p>
+            </div>
           </div>
-          <p class="rp__stamp" aria-hidden="true"><span>NOTICE OF</span><span>ACCEPTANCE</span></p>
         </article>
       </div>
       <p class="rp__note">Timelines vary by scope and jurisdiction. Permit review can add weeks.</p>

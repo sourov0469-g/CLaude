@@ -187,6 +187,7 @@ html.has-buddy select { cursor: default !important; }
 .dv-l, .dv-a { fill: none; stroke: var(--color-art-line-soft); stroke-width: 1.4; }
 /* FINALIZE · the seam line: one ink stroke language for the Home hand-offs */
 .dv-ink { fill: none; stroke: var(--color-text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.dv-star { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.4; stroke-linejoin: round; }   /* owner: projects -> reviews hand-off */
 .dv-ink2 { fill: none; stroke: var(--color-border-strong); stroke-width: 1; }
 .dv-wire { fill: none; stroke: var(--color-text); stroke-width: 1; }
 .dv-hook, .dv-pinh { fill: var(--color-text); }

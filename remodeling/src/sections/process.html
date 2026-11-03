@@ -1,38 +1,38 @@
 <section id="process" class="sec process g-surface" data-section="process" aria-labelledby="process-h">
-  <!-- FINALIZE · Home 5 · Process: the owner's V1 direction with the NEW 8-frame horizontal animation (replaces the car).
-       Required pattern (owner): nothing starts early; the animation comes into full view, PINS, plays through while he
-       keeps scrolling, then releases. Frame 1 is a high-quality consultation. One continuous drawn site, the camera
-       travels across it (Immersive Garden); the words stay still while the world changes; week marks land on a rail as
-       events (AirPods). Stage titles, week marks and lines are the firm's own (FACTS.md "The eight-stage process").
-       The ordered list is the real content: on phones and with reduced motion it IS the section (S1326/S1325). -->
-  <div class="ver pr" data-v="1">
-    <div class="pr__pin">
-      <div class="wrap pr__head">
-        <div>
-          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-          <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
-        </div>
-        <p class="t-lead pr__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
+  <!-- OWNER (after the finalize): the long pinned drawing is retired ("too long, shows nothing"). The job is ONE calendar
+       on one screen: eight bars on a week axis, drawn in as the section arrives. Point at, tap or focus a stage and its
+       bar lights while the card beside it gives the firm's own line. Week marks and lines are the firm's (FACTS.md "The
+       eight-stage process"); construction keeps its "Varies" (an open-ended bar, no invented length). -->
+  <div class="ver pc" data-v="1">
+    <div class="wrap pc__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
+        <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
       </div>
-      <div class="wrap pr__stage">
-        <ol class="pr__list">
-          <li class="pr__item" data-i="0"><p class="pr__n"><span class="nums">01</span><span class="pr__wk">Week <span class="nums">1</span></span></p><h3 class="pr__t">Consultation</h3><p class="pr__p">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p></li>
-          <li class="pr__item" data-i="1"><p class="pr__n"><span class="nums">02</span><span class="pr__wk">Week <span class="nums">1&ndash;2</span></span></p><h3 class="pr__t">Site evaluation</h3><p class="pr__p">Flood zone, HVHZ requirements, permit history, HOA or historic review, and what is behind the walls.</p></li>
-          <li class="pr__item" data-i="2"><p class="pr__n"><span class="nums">03</span><span class="pr__wk">Weeks <span class="nums">2&ndash;5</span></span></p><h3 class="pr__t">Design and planning</h3><p class="pr__p">Layouts, finishes and system choices, with the real trade-offs explained rather than one pre-set package.</p></li>
-          <li class="pr__item" data-i="3"><p class="pr__n"><span class="nums">04</span><span class="pr__wk">Weeks <span class="nums">5&ndash;6</span></span></p><h3 class="pr__t">Proposal and scope</h3><p class="pr__p">A written scope that says what is included, what is not, and where contingencies are likely. Priced against the drawings, not a guess.</p></li>
-          <li class="pr__item" data-i="4"><p class="pr__n"><span class="nums">05</span><span class="pr__wk">Weeks <span class="nums">6&ndash;12</span></span></p><h3 class="pr__t">Permitting</h3><p class="pr__p">Permits pulled directly, and every product checked for its Notice of Acceptance or Florida Product Approval.</p></li>
-          <li class="pr__item" data-i="5"><p class="pr__n"><span class="nums">06</span><span class="pr__wk">Varies</span></p><h3 class="pr__t">Construction</h3><p class="pr__p">One point of contact, inspections at each stage, and a site that gets cleaned at the end of the day.</p></li>
-          <li class="pr__item" data-i="6"><p class="pr__n"><span class="nums">07</span><span class="pr__wk">Final <span class="nums">1&ndash;2</span> weeks</span></p><h3 class="pr__t">Quality review</h3><p class="pr__p">We walk the work against the scope before we call it finished.</p></li>
-          <li class="pr__item" data-i="7"><p class="pr__n"><span class="nums">08</span><span class="pr__wk">Closeout</span></p><h3 class="pr__t">Completion and handover</h3><p class="pr__p">Final inspection, a walkthrough together, and registration of manufacturer and workmanship warranties.</p></li>
+      <p class="t-lead pc__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
+    </div>
+    <div class="wrap pc__body">
+      <div class="pc__chart">
+        <div class="pc__axis" aria-hidden="true">
+          <span style="--x:.5">1</span><span style="--x:2.5">3</span><span style="--x:4.5">5</span><span style="--x:6.5">7</span><span style="--x:8.5">9</span><span style="--x:10.5">11</span><span class="pc__ax-v" style="--x:14">Construction varies</span>
+        </div>
+        <ol class="pc__rows">
+          <li><button type="button" class="pc__row" data-i="0" style="--s:0;--e:1"><span class="pc__lab"><span class="nums">01</span>Consultation</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="1" style="--s:0;--e:2"><span class="pc__lab"><span class="nums">02</span>Site evaluation</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="2" style="--s:1;--e:5"><span class="pc__lab"><span class="nums">03</span>Design and planning</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="3" style="--s:4;--e:6"><span class="pc__lab"><span class="nums">04</span>Proposal and scope</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="4" style="--s:5;--e:12"><span class="pc__lab"><span class="nums">05</span>Permitting</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row pc__row--open" data-i="5" style="--s:12;--e:16.4"><span class="pc__lab"><span class="nums">06</span>Construction</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row" data-i="6" style="--s:15;--e:16.4"><span class="pc__lab"><span class="nums">07</span>Quality review</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
+          <li><button type="button" class="pc__row pc__row--end" data-i="7" style="--s:16.4;--e:17"><span class="pc__lab"><span class="nums">08</span>Completion and handover</span><span class="pc__track"><span class="pc__bar"></span></span></button></li>
         </ol>
-        <div class="pr__window" aria-hidden="true" data-buddy-watch>
-          <svg class="pr__world" viewBox="0 80 8000 760" preserveAspectRatio="xMinYMin meet" focusable="false"></svg>
-        </div>
       </div>
-      <div class="wrap pr__railw">
-        <div class="pr__rail" aria-hidden="true"><span class="pr__fill"></span></div>
-        <p class="pr__note">Timelines vary by scope and jurisdiction.</p>
-      </div>
+      <aside class="pc__card" aria-live="polite">
+        <p class="pc__k"><span class="pc__no nums">01</span><span class="pc__wk">Week 1</span></p>
+        <h3 class="pc__t">Consultation</h3>
+        <p class="pc__p">We walk the property, talk through what you actually want to change, and give you an honest read on scope and budget before anyone quotes a number.</p>
+        <p class="pc__note">Timelines vary by scope and jurisdiction.</p>
+      </aside>
     </div>
   </div>
 </section>
