@@ -1,0 +1,87 @@
+<section class="sec explore1" id="explore" aria-labelledby="ex1-h">
+<style>
+.explore1 .g{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:center;gap:clamp(24px,5vw,72px)}
+.explore1 .lede{margin:18px 0 28px;max-width:34ch}
+.explore1 .list{display:grid;gap:12px;max-width:440px}
+.explore1 .opt{display:flex;align-items:center;gap:14px;min-height:56px;padding:0 20px;border-radius:16px;background:var(--paper);font-weight:600;font-size:18px;text-align:left;box-shadow:0 3px 0 rgba(23,17,29,.06),0 12px 24px -18px rgba(23,17,29,.45);transition:background .25s,transform .25s var(--ease),box-shadow .25s}
+.explore1 .opt:hover{transform:translateX(4px)}
+.explore1 .opt i{width:22px;height:22px;border-radius:50%;border:2px solid rgba(23,17,29,.35);display:grid;place-items:center;flex:none;transition:.25s}
+.explore1 .opt[aria-checked="true"]{background:var(--amber);box-shadow:0 5px 0 var(--amber-edge),0 16px 26px -14px rgba(199,135,26,.8)}
+.explore1 .opt[aria-checked="true"] i{border-color:var(--ink);background:var(--paper)}
+.explore1 .opt[aria-checked="true"] i::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink)}
+.explore1 .info{margin-top:22px;max-width:440px;min-height:84px;padding:18px 20px;border-left:4px solid var(--amber);background:rgba(248,246,240,.7);border-radius:0 14px 14px 0;font-size:17px;line-height:1.5}
+.explore1 .info b{display:block;font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.explore1 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:28px}
+.explore1 .tel{font-weight:700;font-size:18px;text-underline-offset:5px}
+.explore1 .stk{position:relative;width:min(100%,560px);aspect-ratio:740/1040;justify-self:center}
+.explore1 .stk img{position:absolute;inset:0;width:100%;height:100%}
+.explore1 .stk .base{transition:filter .5s,opacity .5s}
+.explore1 .stk.sel .base{filter:saturate(.35) brightness(1.08);opacity:.42}
+.explore1 .lay{opacity:0;transform:translateY(0);transition:opacity .45s var(--ease),transform .55s var(--ease),filter .45s;filter:drop-shadow(0 0 0 rgba(23,17,29,0))}
+.explore1 .lay.on{opacity:1;transform:translate(-10px,-14px);filter:drop-shadow(10px 18px 14px rgba(23,17,29,.35))}
+.explore1 svg.hit{position:absolute;inset:0;width:100%;height:100%}
+.explore1 svg.hit polygon{fill:transparent;cursor:pointer;outline:none}
+.explore1 svg.hit polygon:hover{fill:rgba(234,162,33,.14)}
+.explore1 .pin{position:absolute;display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;white-space:nowrap;padding:7px 12px;border-radius:999px;background:var(--ink);color:var(--cream);opacity:0;transform:translateY(6px);transition:.35s var(--ease);pointer-events:none}
+.explore1 .pin.on{opacity:1;transform:none}
+.explore1 .pin::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
+@media (max-width:900px){.explore1 .g{grid-template-columns:1fr;gap:18px}.explore1 .g>div:first-child{display:contents}.explore1 .h2{order:1}.explore1 .lede{order:2;margin:0}.explore1 .stk{order:3;width:min(100%,380px)}.explore1 .list{order:4;max-width:none;grid-template-columns:1fr 1fr}.explore1 .info{order:5;max-width:none;margin:0}.explore1 .ctas{order:6;margin:0}.explore1 .pin{translate:-100% -50%!important}.explore1 .opt{font-size:16px;padding:0 12px;gap:10px}.explore1 .tel{flex-basis:100%}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2 rv" id="ex1-h">Explore Your Roof, Layer by Layer</h2>
+   <p class="lede rv">See exactly what sits between the weather and your home.</p>
+   <div class="list" role="radiogroup" aria-label="Roof layers">
+    <button class="opt" type="button" role="radio" aria-checked="true" data-k="shingles" data-owl="peek"><i></i>Shingles</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="underlayment" data-owl="peek" tabindex="-1"><i></i>Underlayment</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="decking" data-owl="peek" tabindex="-1"><i></i>Decking</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="insulation" data-owl="peek" tabindex="-1"><i></i>Insulation</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="ventilation" data-owl="peek" tabindex="-1"><i></i>Ventilation</button>
+   </div>
+   <p class="info" aria-live="polite"><b>Shingles</b><span>The weather face of the roof. It sheds rain and snow and takes the sun.</span></p>
+   <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="tel" href="tel:+16519776027">(651) 977-6027</a></div>
+  </div>
+  <div class="stk" data-owl="say:Pick a layer">
+   <img class="base" src="{{A:explore-stack.webp}}" alt="An exploded roof: shingles, underlayment, decking, insulation and a ventilation layer above a house" width="740" height="1040">
+   <svg class="hit" viewBox="0 0 740 1040" aria-hidden="true"></svg>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','1',function(root){
+  var P = {
+    shingles:{p:[[68,210],[238,24],[580,92],[692,196],[402,292]], at:[700,120], t:'The weather face of the roof. It sheds rain and snow and takes the sun.'},
+    underlayment:{p:[[82,305],[300,248],[668,293],[668,306],[388,390],[82,318]], at:[680,300], t:'A water-resistant sheet under the shingles: a second line of defence if water gets past them.'},
+    decking:{p:[[84,405],[305,352],[666,400],[666,416],[388,502],[84,422]], at:[680,405], t:'The wood boards the whole roof is fastened to. Soft or rotten spots need replacing first.'},
+    insulation:{p:[[84,548],[98,505],[330,462],[645,498],[660,548],[410,630],[84,556]], at:[672,520], t:'Keeps heat in the house and out of the attic, which helps stop ice dams in a Minnesota winter.'},
+    ventilation:{p:[[84,636],[140,606],[290,586],[520,598],[600,604],[660,626],[655,646],[350,722],[86,652]], at:[670,630], t:'Intake and exhaust vents move air through the attic so heat and moisture can escape.'}
+  };
+  var stk = root.querySelector('.stk'), svg = root.querySelector('svg.hit'), base = root.querySelector('.base'), opts = root.querySelectorAll('.opt'), info = root.querySelector('.info');
+  var layers = {}, pins = {};
+  Object.keys(P).forEach(function(k){
+    var pts = P[k].p.map(function(q){ return q.join(','); }).join(' ');
+    var poly = document.createElementNS('http://www.w3.org/2000/svg','polygon'); poly.setAttribute('points', pts); poly.dataset.k = k; svg.appendChild(poly);
+    var im = document.createElement('img'); im.className = 'lay'; im.src = base.src; im.alt = ''; im.setAttribute('aria-hidden','true');
+    im.style.clipPath = 'polygon(' + P[k].p.map(function(q){ return (q[0]/7.4).toFixed(2) + '% ' + (q[1]/10.4).toFixed(2) + '%'; }).join(',') + ')';
+    stk.insertBefore(im, svg); layers[k] = im;
+    var pin = document.createElement('span'); pin.className = 'pin'; pin.textContent = k.charAt(0).toUpperCase() + k.slice(1);
+    pin.style.left = (P[k].at[0]/7.4) + '%'; pin.style.top = (P[k].at[1]/10.4) + '%'; pin.style.translate = '-30% -50%'; stk.appendChild(pin); pins[k] = pin;
+  });
+  function pick(k, focus){
+    stk.classList.add('sel');
+    Object.keys(P).forEach(function(n){ layers[n].classList.toggle('on', n === k); pins[n].classList.toggle('on', n === k); });
+    opts.forEach(function(o){ var on = o.dataset.k === k; o.setAttribute('aria-checked', on); o.tabIndex = on ? 0 : -1; if (on && focus) o.focus(); });
+    info.querySelector('b').textContent = k.charAt(0).toUpperCase() + k.slice(1); info.querySelector('span').textContent = P[k].t;
+  }
+  opts.forEach(function(o, i){
+    o.addEventListener('click', function(){ pick(o.dataset.k); });
+    o.addEventListener('keydown', function(e){ var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0;
+      if (d){ e.preventDefault(); pick(opts[(i + d + opts.length) % opts.length].dataset.k, true); } });
+  });
+  svg.addEventListener('click', function(e){ var k = e.target.dataset && e.target.dataset.k; if (k) pick(k); });
+  svg.addEventListener('mouseover', function(e){ var k = e.target.dataset && e.target.dataset.k; if (k && OWL.fine) pick(k); });
+  pick('shingles');
+});
+</script>
+</section>

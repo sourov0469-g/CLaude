@@ -1,0 +1,97 @@
+<section class="sec video3" aria-labelledby="v3-h">
+<style>
+/* Video V3 · Roofline Theatre — the film's own light spills onto the cream page around it (a living background fed
+   by the film), the screen leans a little toward the cursor, and the timeline is a gable roofline: progress climbs
+   from the left eave to the ridge and down the far side; each moment is a vent on the roof.
+   ⟦S0385⟧ one small canvas, 30 fps, fallback = poster glow · ⟦S1330⟧ damped tilt · ⟦S0407⟧ roofline progress
+   ⟦S1273⟧ moments written out · ⟦S1107⟧ vents are buttons · ⟦S0544⟧ causal motion · ⟦S0451⟧ title */
+.video3{text-align:center;overflow:hidden}
+.video3 .lede{margin:14px auto 0;max-width:56ch}
+.video3 .theatre{position:relative;max-width:1080px;margin:clamp(30px,4vw,52px) auto 0;perspective:1400px;--rx:0deg;--ry:0deg}
+.video3 .glow{position:absolute;inset:-9% -7%;width:114%;height:118%;filter:blur(46px) saturate(1.35);opacity:.62;pointer-events:none;transition:opacity 1s}
+.video3 .screen{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#211C1F;transform:rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 30px 60px -30px rgba(23,17,29,.6)}
+.video3 .screen video{width:100%;height:100%;object-fit:cover}
+.video3 .sheen{position:absolute;inset:0;background:radial-gradient(60% 50% at var(--sx,30%) var(--sy,20%),rgba(255,255,255,.18),transparent 60%);pointer-events:none;mix-blend-mode:screen}
+.video3 .now{position:absolute;left:18px;bottom:16px;text-align:left;max-width:min(70%,460px);color:#FFFDF8;background:rgba(23,17,29,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 14px;border-radius:12px;font-size:15px;line-height:1.4}
+.video3 .now b{display:block;font-size:16px}
+.video3 .pp{position:absolute;right:16px;bottom:16px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:var(--ink);background:radial-gradient(circle at 35% 30%,#FAD07A,#EAA221 55%,#C7871A);box-shadow:0 5px 0 #9C6614,0 12px 20px -8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .12s,box-shadow .12s}
+.video3 .pp:active{transform:translateY(4px);box-shadow:0 1px 0 #9C6614,0 4px 8px -4px rgba(0,0,0,.6)}
+.video3 .pp svg{width:22px;height:22px}
+/* roofline timeline */
+.video3 .roofline{position:relative;max-width:1080px;margin:clamp(26px,3vw,40px) auto 0;height:150px}
+.video3 .roofline svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.video3 .roofline .base{fill:none;stroke:rgba(23,17,29,.16);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.video3 .roofline .prog{fill:none;stroke:var(--amber);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.video3 .roofline .eave{fill:none;stroke:rgba(23,17,29,.35);stroke-width:2;stroke-dasharray:4 6}
+.video3 .vent{position:absolute;translate:-50% -50%;width:44px;height:44px;display:grid;place-items:center;padding:0;background:none}
+.video3 .vent i{width:20px;height:20px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 3px var(--ink),0 6px 10px -4px rgba(23,17,29,.5);transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .2s}
+.video3 .vent span{position:absolute;top:calc(100% + 2px);left:50%;translate:-50% 0;font-weight:700;font-size:14px;white-space:nowrap;padding:3px 8px;border-radius:999px;transition:background .2s,color .2s}
+.video3 .vent:hover i{transform:scale(1.2)}
+.video3 .vent[aria-current="true"] i{background:var(--amber);transform:scale(1.25)}
+.video3 .vent[aria-current="true"] span{background:var(--ink);color:var(--cream)}
+.video3 .vent.up span{top:auto;bottom:calc(100% + 2px)}
+.video3 .ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:18px}
+@media (max-width:760px){.video3 .roofline{height:110px}.video3 .vent span{display:none}.video3 .vent[aria-current="true"] span{display:block}.video3 .now{position:static;max-width:none;margin-top:12px;color:var(--ink);background:var(--paper);text-align:left}}
+@media (prefers-reduced-motion:reduce){.video3 .screen{transform:none}.video3 .vent i{transition:none}}
+</style>
+<div class="wrap">
+ <span class="kick">Owl's own film</span>
+ <h2 class="h2" id="v3-h" style="margin-top:12px">Our Crew, Up Close</h2>
+ <p class="lede">Fifteen seconds from real Owl jobs: our own roofers, our own materials. Pick a vent on the roofline to jump to that moment.</p>
+ <div class="theatre" data-owl="say:Our crew">
+  <canvas class="glow" width="32" height="18" aria-hidden="true"></canvas>
+  <div class="screen">
+   <video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline autoplay preload="auto" aria-label="Owl Roofing's crew at work. Each moment is described under the film."></video>
+   <div class="sheen" aria-hidden="true"></div>
+   <p class="now" aria-live="polite"><b></b><span></span></p>
+   <button class="pp" type="button" aria-label="Pause the film"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+  </div>
+ </div>
+ <div class="roofline" role="group" aria-label="Moments in the film">
+  <svg viewBox="0 0 1000 150" preserveAspectRatio="none" aria-hidden="true"><path class="eave" d="M0 128 H1000"/><path class="base" d="M30 128 L500 22 L970 128"/><path class="prog" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M30 128 L500 22 L970 128"/></svg>
+ </div>
+ <div class="ctas">
+  <button class="btn-plate" type="button" data-owl="hoot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Watch the Full Film</button>
+  <a class="btn-plate alt" href="#book" data-owl="peek">Book a Wise Check</a>
+ </div>
+</div>
+<script>
+OWL.reg('video','3',function(root){
+  var M = [[0, 'Rafters', 'Two of the crew on open rafters, laying new decking.'],
+           [3.1, 'Materials', 'A bundle of GAF shingles carried up to the roof.'],
+           [6.4, 'The crew', 'One of the crew on the job, a shingle in hand.'],
+           [9.2, 'Finished roof', 'Walking a finished roof of dark architectural shingles.'],
+           [13, 'Decking', 'A sheet of OSB decking carried in for the next roof.']];
+  var h2 = root.querySelector('h2'), v = root.querySelector('video'), th = root.querySelector('.theatre'), scr = root.querySelector('.screen'), glow = root.querySelector('canvas.glow'), g = glow.getContext('2d'), now = root.querySelector('.now'), pp = root.querySelector('.pp'), rl = root.querySelector('.roofline'), prog = rl.querySelector('.prog'), base = rl.querySelector('.base');
+  OWL.split(h2); if ('IntersectionObserver' in window){ var io0 = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io0.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io0.observe(root); } else OWL.reveal(h2);
+  root.querySelector('.btn-plate').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  var dur = 15.5, L = base.getTotalLength(), vents = [];
+  /* vents sit on the roofline at the moment's place in time */
+  M.forEach(function(m, i){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'vent'; b.setAttribute('aria-label', m[1] + ', ' + Math.floor(m[0]) + ' seconds: ' + m[2]);
+    b.innerHTML = '<i aria-hidden="true"></i><span aria-hidden="true">' + m[1] + '</span>';
+    b.addEventListener('click', function(){ v.currentTime = m[0]; OWL.play(v); sync(); });
+    rl.appendChild(b); vents.push(b);
+  });
+  function place(){ var w = rl.clientWidth, h = rl.clientHeight; M.forEach(function(m, i){ var p = base.getPointAtLength(L * m[0] / dur); vents[i].style.left = (p.x / 1000 * w) + 'px'; vents[i].style.top = (p.y / 150 * h) + 'px'; vents[i].classList.toggle('up', p.y < 80 && i % 2 === 0); }); }
+  place(); addEventListener('resize', place);
+  v.addEventListener('loadedmetadata', function(){ dur = v.duration || dur; place(); });
+  function which(t){ var k = 0; M.forEach(function(m, i){ if (t >= m[0] - .05) k = i; }); return k; }
+  var lastK = -1;
+  function sync(){ var t = v.currentTime || 0, k = which(t); prog.setAttribute('stroke-dashoffset', (1 - t / (v.duration || dur)).toFixed(4));
+    if (k !== lastK){ lastK = k; now.querySelector('b').textContent = M[k][1]; now.querySelector('span').textContent = M[k][2]; vents.forEach(function(b, i){ b.setAttribute('aria-current', i === k); }); } }
+  v.addEventListener('timeupdate', sync); sync();
+  var pauseI = pp.innerHTML, playI = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+  function setPP(){ pp.innerHTML = v.paused ? playI : pauseI; pp.setAttribute('aria-label', v.paused ? 'Play the film' : 'Pause the film'); }
+  v.addEventListener('play', setPP); v.addEventListener('pause', setPP); pp.addEventListener('click', function(){ v.paused ? OWL.play(v) : v.pause(); });
+  /* the light spill: the film drawn into a 32×18 canvas, blurred by CSS; 15 fps is plenty for light ⟦S0385⟧ */
+  function spill(){ try { g.drawImage(v.readyState >= 2 ? v : root.querySelector('video'), 0, 0, 32, 18); } catch (e) {} }
+  if (OWL.reduce){ v.removeAttribute('autoplay'); v.pause(); setPP(); var po = new Image(); po.onload = function(){ g.drawImage(po, 0, 0, 32, 18); }; po.src = v.poster; return; }
+  var tx = 0, ty = 0, sx = 0, sy = 0, visible = true, last = performance.now(), tick = 0;
+  if (OWL.fine) { th.addEventListener('pointermove', function(e){ var r = th.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - .5; ty = (e.clientY - r.top) / r.height - .5; scr.style.setProperty('--sx', ((tx + .5) * 100).toFixed(1) + '%'); scr.style.setProperty('--sy', ((ty + .5) * 100).toFixed(1) + '%'); }); th.addEventListener('pointerleave', function(){ tx = ty = 0; }); }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ visible = e[0].isIntersecting; if (visible) OWL.play(v); else v.pause(); }).observe(th);
+  (function loop(n){ requestAnimationFrame(loop); if (!visible || document.hidden){ last = n; return; } var dt = Math.min(1/30, (n - last) / 1000); last = n; var al = 1 - Math.pow(1 - .06, dt * 60); sx += (tx - sx) * al; sy += (ty - sy) * al;
+    th.style.setProperty('--ry', (sx * 5).toFixed(2) + 'deg'); th.style.setProperty('--rx', (-sy * 3.5).toFixed(2) + 'deg'); if ((tick++ & 3) === 0) spill(); })(last);
+});
+</script>
+</section>

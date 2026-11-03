@@ -1,64 +1,152 @@
-<section class="sec explore2" id="explore-2" aria-labelledby="ex2-h">
+<section class="sec explore2" aria-labelledby="ex2-h">
 <style>
-.explore2 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:clamp(24px,5vw,72px)}
-.explore2 .lede{margin:18px 0 30px;max-width:30ch}
-.explore2 .depth{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px}
-.explore2 .depth button{min-height:46px;padding:0 16px;border-radius:999px;background:var(--paper);font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(23,17,29,.08),0 10px 20px -14px rgba(23,17,29,.4);transition:transform .2s,background .2s}
-.explore2 .depth button:hover{transform:translateY(-2px)}
-.explore2 .depth button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
-.explore2 .desc{min-height:56px;margin-bottom:26px;font-size:17px;color:var(--ink-70);max-width:36ch}
-.explore2 .field{position:relative;aspect-ratio:640/420;border-radius:26px;overflow:hidden;background:#2a2e2c url({{A:roof-surface.webp}}) center/cover;box-shadow:0 0 0 10px var(--paper),0 40px 70px -30px rgba(23,17,29,.55);touch-action:none;cursor:none}
-.explore2 .lens{position:absolute;left:0;top:0;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;pointer-events:none;will-change:transform}
-.explore2 .glass{position:absolute;inset:14px;border-radius:50%;overflow:hidden;background-repeat:repeat;box-shadow:inset 0 0 0 2px rgba(23,17,29,.6),inset 0 10px 30px rgba(0,0,0,.45)}
-.explore2 .glass::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35),rgba(255,255,255,0) 42%)}
-.explore2 .rim{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 200deg,#F7CD78,#EAA221 20%,#C7871A 38%,#F3BE5A 55%,#D9951D 75%,#F7CD78);-webkit-mask:radial-gradient(circle,transparent 95px,#000 96px);mask:radial-gradient(circle,transparent 95px,#000 96px);box-shadow:0 18px 30px -8px rgba(23,17,29,.6)}
-.explore2 .handle{position:absolute;left:186px;top:186px;width:26px;height:110px;border-radius:13px;background:linear-gradient(90deg,#2a2030,#17111D 50%,#3a2e40);transform:rotate(-45deg);transform-origin:13px 0;box-shadow:0 10px 18px -6px rgba(23,17,29,.6)}
-.explore2 .handle::before{content:"";position:absolute;left:-3px;right:-3px;top:-4px;height:22px;border-radius:6px;background:linear-gradient(90deg,#C7871A,#F3BE5A,#C7871A)}
-.explore2 .tag{position:absolute;left:50%;top:-14px;transform:translateX(-50%);background:var(--amber);color:var(--ink);font-weight:700;font-size:14px;padding:6px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 3px 0 var(--amber-edge)}
-.explore2 .hint{position:absolute;right:16px;bottom:14px;background:rgba(248,246,240,.92);font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px}
-@media (max-width:900px){.explore2 .g{grid-template-columns:1fr}.explore2 .lens{width:170px;height:170px;margin:-85px 0 0 -85px}.explore2 .rim{-webkit-mask:radial-gradient(circle,transparent 72px,#000 73px);mask:radial-gradient(circle,transparent 72px,#000 73px)}.explore2 .handle{left:144px;top:144px;height:80px}}
+/* Explore V2 · Build It — a section from the eave to the ridge, drawn the way a roofer would; a slider puts the roof
+   on step by step in the real order. Each step draws its outline first, then fills (pen before paint).
+   ⟦S0414⟧ truthful construction · ⟦S0361⟧⟦S0362⟧ drawing language + draw-on · ⟦S1326⟧ input is the only clock
+   ⟦S1107⟧ native range + buttons · ⟦S0544⟧ one direction (eave → ridge) · ⟦S1341⟧ rain runs to the gutter */
+.explore2 .hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px 40px}
+.explore2 .lede{max-width:44ch;margin-top:12px}
+.explore2 .sheet{position:relative;margin-top:clamp(20px,3vw,34px);border-radius:24px;background:#FBF9F3;box-shadow:0 1px 0 #fff inset,0 0 0 1px rgba(23,17,29,.06),0 30px 60px -40px rgba(23,17,29,.45);padding:clamp(10px,2vw,24px);overflow:hidden}
+.explore2 .sheet::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(23,17,29,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(23,17,29,.045) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.explore2 svg.sec{position:relative;width:100%;height:auto;display:block;overflow:visible}
+.explore2 .st path,.explore2 .st polygon,.explore2 .st polyline,.explore2 .st line,.explore2 .st rect{vector-effect:non-scaling-stroke}
+.explore2 .st .ln{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s cubic-bezier(.77,0,.175,1)}
+.explore2 .st .fl{fill-opacity:0;transition:fill-opacity .5s ease-out .45s}
+.explore2 .st{opacity:0;transition:opacity .3s}
+.explore2 .st.in{opacity:1}
+.explore2 .st.in .ln{stroke-dashoffset:0}
+.explore2 .st.in .fl{fill-opacity:1}
+.explore2 .st.now .tag rect{fill:#17111D}.explore2 .st.now .tag text{fill:#FBF9F3}
+.explore2 .tag rect{fill:#FBF9F3;stroke:#17111D;stroke-width:1.2}
+.explore2 .tag text{font:700 15px Inter,sans-serif;fill:#17111D}
+.explore2 .tag line{stroke:#17111D;stroke-width:1}
+.explore2 .air{fill:none;stroke:#C7871A;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 10;animation:ex2air 1.1s linear infinite}
+@keyframes ex2air{to{stroke-dashoffset:-17}}
+.explore2 .drop{stroke:rgba(60,90,130,.55);stroke-width:2;stroke-linecap:round}
+.explore2 .ctrl{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;margin-top:20px}
+.explore2 .ctrl input{width:100%;appearance:none;-webkit-appearance:none;height:44px;background:transparent;cursor:pointer}
+.explore2 .ctrl input::-webkit-slider-runnable-track{height:10px;border-radius:10px;background:linear-gradient(90deg,var(--amber) var(--f,0%),rgba(23,17,29,.14) var(--f,0%));box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
+.explore2 .ctrl input::-moz-range-track{height:10px;border-radius:10px;background:rgba(23,17,29,.14)}
+.explore2 .ctrl input::-moz-range-progress{height:10px;border-radius:10px;background:var(--amber)}
+.explore2 .ctrl input::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;margin-top:-12px;border-radius:10px;background:linear-gradient(180deg,#FFFEFA,#EDE6D5);box-shadow:0 4px 0 #CFC3A6,0 8px 14px -6px rgba(23,17,29,.5),inset 0 1px 0 #fff;border:0}
+.explore2 .ctrl input::-moz-range-thumb{width:34px;height:34px;border-radius:10px;background:#F4EFE3;box-shadow:0 4px 0 #CFC3A6;border:0}
+.explore2 .ctrl input:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:12px}
+.explore2 .step{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:baseline;margin-top:14px;min-height:76px}
+.explore2 .step .n{font:800 34px Inter,sans-serif;color:var(--amber-edge);font-variant-numeric:tabular-nums}
+.explore2 .step b{font-size:20px}
+.explore2 .step p{grid-column:2;color:var(--ink-70);max-width:70ch}
+.explore2 .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:18px}
+.explore2 .note{font-size:14px;color:var(--ink-70)}
+@media (max-width:640px){.explore2 .ctrl{grid-template-columns:1fr 1fr}.explore2 .ctrl input{grid-column:1/-1;order:-1}.explore2 .tag text{font-size:22px}}
+@media (prefers-reduced-motion:reduce){.explore2 .st .ln,.explore2 .st .fl,.explore2 .st{transition:none}.explore2 .air{animation:none}}
 </style>
 <div class="wrap">
- <div class="g">
-  <div>
-   <h2 class="h2 rv" id="ex2-h">Look Closer</h2>
-   <p class="lede rv">Move the lens and see what the surface hides.</p>
-   <div class="depth" role="group" aria-label="How deep the lens looks">
-    <button type="button" aria-pressed="false" data-d="0">Shingles</button>
-    <button type="button" aria-pressed="true" data-d="1">Underlayment</button>
-    <button type="button" aria-pressed="false" data-d="2">Decking</button>
-    <button type="button" aria-pressed="false" data-d="3">Rafters</button>
-   </div>
-   <p class="desc" aria-live="polite"></p>
-   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
-  </div>
-  <div class="field" role="img" aria-label="A finished Owl roof with a magnifying lens that shows the layers underneath" data-owl="">
-   <div class="lens"><div class="glass"></div><div class="rim"></div><div class="handle"></div><span class="tag"></span></div>
-   <span class="hint" aria-hidden="true">Scroll inside to go deeper</span>
-  </div>
+ <div class="hd">
+  <div><span class="kick">Eave to ridge</span><h2 class="h2" id="ex2-h" style="margin-top:12px">Build a Roof, One Step at a Time</h2></div>
+  <p class="lede">A slice through one roof, from the gutter to the peak. Slide to put it on in the order we do it.</p>
+ </div>
+ <div class="sheet" data-owl="say:Slide to build">
+  <svg class="sec" viewBox="0 -60 1200 700" role="img" aria-labelledby="ex2-h ex2-desc"><desc id="ex2-desc">A cross-section of a roof from the eave to the ridge, built step by step: framing, roof deck, drip edge, ice and water shield, underlayment, starter strip and shingles, ridge vent and cap, and the attic air path with insulation on the attic floor.</desc></svg>
+ </div>
+ <div class="ctrl">
+  <button class="key" type="button" data-d="-1"><span class="led" aria-hidden="true"></span>Back</button>
+  <input type="range" min="1" max="8" step="1" value="8" aria-label="Build step" aria-valuetext="">
+  <button class="key" type="button" data-d="1"><span class="led" aria-hidden="true"></span>Next</button>
+ </div>
+ <div class="step" aria-live="polite"><span class="n"></span><b></b><p></p></div>
+ <div class="foot">
+  <p class="note">Drawing not to scale: the thin layers are thickened so you can see them.</p>
+  <a class="btn-tab" href="#book" data-owl="hoot"><span class="t-under" aria-hidden="true"></span><span class="t-face">Book a Wise Check<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></a>
  </div>
 </div>
 <script>
 OWL.reg('explore','2',function(root){
-  var L = [
-    {n:'Shingles', bg:'url({{A:shingle-close.webp}})', s:'520px', t:'The weather face of the roof. It sheds rain and snow and takes the sun.'},
-    {n:'Underlayment', bg:'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27240%27 height=%27240%27%3E%3Cfilter id=%27f%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.9%27 numOctaves=%272%27/%3E%3CfeColorMatrix values=%270 0 0 0 .16 0 0 0 0 .15 0 0 0 0 .17 0 0 0 .55 0%27/%3E%3C/filter%3E%3Crect width=%27240%27 height=%27240%27 fill=%27%232b2a2e%27/%3E%3Crect width=%27240%27 height=%27240%27 filter=%27url(%23f)%27/%3E%3Cpath d=%27M0 118h240%27 stroke=%27%23ffffff%27 stroke-opacity=%27.12%27 stroke-width=%272%27/%3E%3C/svg%3E")', s:'240px', t:'A water-resistant sheet under the shingles: a second line of defence.'},
-    {n:'Decking', bg:'url({{A:osb.webp}})', s:'420px', t:'The wood boards the whole roof is fastened to.'},
-    {n:'Rafters', bg:'url({{A:rafters.webp}})', s:'720px', t:'The frame that carries everything above it.'}
-  ];
-  var field = root.querySelector('.field'), lens = root.querySelector('.lens'), glass = root.querySelector('.glass'), tag = root.querySelector('.tag'), desc = root.querySelector('.desc'), btns = root.querySelectorAll('.depth button');
-  var d = 1, x = 0, y = 0, tx = 0, ty = 0;
-  function setDepth(n){ d = Math.max(0, Math.min(3, n)); var l = L[d]; glass.style.backgroundImage = l.bg; glass.style.backgroundSize = l.s; tag.textContent = l.n; desc.textContent = l.t;
-    btns.forEach(function(b){ b.setAttribute('aria-pressed', +b.dataset.d === d); }); field.dataset.owl = 'say:' + l.n; }
-  function place(){ var r = field.getBoundingClientRect(); lens.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-    var o = glass.offsetLeft + lens.offsetWidth/-2; glass.style.backgroundPosition = (-(x + o)) + 'px ' + (-(y + o)) + 'px'; }
-  function centre(){ var r = field.getBoundingClientRect(); tx = x = r.width*.56; ty = y = r.height*.48; place(); }
-  field.addEventListener('pointermove', function(e){ var r = field.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; });
-  field.addEventListener('pointerdown', function(e){ var r = field.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; field.setPointerCapture(e.pointerId); });
-  field.addEventListener('wheel', function(e){ var n = Math.max(0, Math.min(3, d + (e.deltaY > 0 ? 1 : -1))); if (n !== d){ e.preventDefault(); setDepth(n); } }, {passive:false});
-  btns.forEach(function(b){ b.addEventListener('click', function(){ setDepth(+b.dataset.d); }); });
-  (function loop(){ x += (tx - x)*(OWL.reduce ? 1 : .2); y += (ty - y)*(OWL.reduce ? 1 : .2); place(); requestAnimationFrame(loop); })();
-  setDepth(1); centre(); addEventListener('resize', centre);
+  var NS = 'http://www.w3.org/2000/svg', svg = root.querySelector('svg.sec'), range = root.querySelector('input'), stepN = root.querySelector('.step .n'), stepB = root.querySelector('.step b'), stepP = root.querySelector('.step p'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* geometry: a 6/12 slope from the rafter tail (eave, left) to the ridge board (right) */
+  var CS = .894, SN = .447, E0 = [120, 500], L = 1108, NX = -.447, NY = -.894;
+  function B(s, k){ return [E0[0] + CS*s + NX*(k || 0), E0[1] - SN*s + NY*(k || 0)]; }
+  function pts(a){ return a.map(function(p){ return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+  function band(s0, s1, k0, k1){ return [B(s0, k0), B(s1, k0), B(s1, k1), B(s0, k1)]; }
+  function el(t, a, p){ var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; }
+  function shape(g, t, a, fill, stroke, w){ a.pathLength = 1; a['class'] = 'ln'; a.fill = 'none'; a.stroke = stroke || '#17111D'; a['stroke-width'] = w || 1.6; a['stroke-linejoin'] = 'round';
+    if (fill){ var f = {}; for (var k in a) f[k] = a[k]; f['class'] = 'fl'; f.fill = fill; f.stroke = 'none'; el(t, f, g); } return el(t, a, g); }
+  function tag(g, at, txt, dx, dy){ var t = el('g', {'class':'tag'}, g), w = txt.length * 8.6 + 22, x = at[0] + dx, y = at[1] + dy; el('line', {x1:at[0], y1:at[1], x2:x + (dx < 0 ? w : 0), y2:y}, t); el('circle', {cx:at[0], cy:at[1], r:3.5, fill:'#17111D'}, t); el('rect', {x: dx < 0 ? x : x, y:y - 16, width:w, height:30, rx:15}, t); el('text', {x:x + 11, y:y + 5}, t).textContent = txt; }
+  var S = [];
+  function step(name, txt){ var g = el('g', {'class':'st'}); S.push({g:g, n:name, t:txt}); return g; }
+  /* 1 · framing: wall, top plate, ceiling joist, rafter with plumb-cut tail, ridge board, fascia, gutter, soffit */
+  var g1 = step('Framing, fascia and gutter', 'Rafters sit on the wall top plate and meet the ridge board at the peak. The ceiling joists carry the attic floor. Fascia and gutter hang on the rafter tails.');
+  shape(g1, 'polygon', {points: pts([[232, 470], [248, 470], [248, 640], [232, 640]])}, '#EDE6D5');
+  /* the rafter bears on the top plate with a birdsmouth; the ceiling joist sits on the same plate */
+  shape(g1, 'polygon', {points: pts([[226, 456], [252, 456], [252, 470], [226, 470]])}, '#C59A62');
+  shape(g1, 'polygon', {points: pts([[226, 456], [1200, 456], [1200, 440], [226, 440]])}, '#D9B57E');
+  var rt = [B(0), B(L - 4), [B(L - 4)[0], B(L - 4)[1] + 23], [E0[0], E0[1] + 23]];
+  shape(g1, 'polygon', {points: pts(rt)}, '#C59A62');
+  shape(g1, 'polygon', {points: pts([[1106, -10], [1118, -10], [1118, 50], [1106, 50]])}, '#B98A50');
+  shape(g1, 'polygon', {points: pts([[110, 496], [120, 496], [120, 540], [110, 540]])}, '#FBF9F3');
+  shape(g1, 'polyline', {points: pts([[110, 506], [64, 506], [60, 512], [64, 540], [104, 544], [110, 540]])}, '#E9E6DF');
+  shape(g1, 'polyline', {points: pts([[120, 540], [232, 540]])});
+  tag(g1, B(820, -14), 'Rafter', 30, 80); tag(g1, [80, 530], 'Gutter', -50, 70);
+  /* 2 · roof deck, stopped short of the ridge for the vent slot */
+  var g2 = step('Roof deck', 'Solid OSB nailed to the rafters. It stops short of the peak to leave the slot the ridge vent breathes through.');
+  shape(g2, 'polygon', {points: pts(band(0, L - 22, 0, 8))}, '#C69A5E');
+  tag(g2, B(600, 4), 'Roof deck (OSB)', 40, 110);
+  /* 3 · drip edge at the eave, its lip over the gutter */
+  var g3 = step('Drip edge', 'Metal edge at the eave, on the deck first, so water drips into the gutter instead of running behind the fascia.');
+  shape(g3, 'polyline', {points: pts([B(22, 9), B(0, 9), [B(0, 9)[0] - 2, B(0, 9)[1] + 6], [B(0, 9)[0] - 8, B(0, 9)[1] + 24]])}, null, '#8D9296', 3.4);
+  tag(g3, B(2, 9), 'Drip edge', -96, -150);
+  /* 4 · ice & water shield from the eave to past the wall line */
+  var sIce = (300 - E0[0]) / CS;
+  var g4 = step('Ice & water shield', 'Self-sealing membrane over the drip edge, from the eave to at least 24 in. inside the exterior wall line, where ice dams push water back up the roof.');
+  shape(g4, 'polygon', {points: pts(band(0, sIce, 9, 13))}, '#2E2C31');
+  shape(g4, 'line', {x1: 232, y1: 300, x2: 232, y2: 640, 'stroke-dasharray': '6 6'}, null, '#17111D', 1);
+  shape(g4, 'line', {x1: 285, y1: 300, x2: 285, y2: 400, 'stroke-dasharray': '6 6'}, null, '#17111D', 1);
+  shape(g4, 'line', {x1: 232, y1: 312, x2: 285, y2: 312}, null, '#17111D', 1);
+  el('text', {x: 258, y: 300, 'text-anchor':'middle', style:'font:600 13px Inter,sans-serif;fill:#17111D'}, g4).textContent = '24 in.';
+  tag(g4, B(60, 13), 'Ice & water shield', -40, -230);
+  /* 5 · underlayment, lapping over the membrane */
+  var g5 = step('Underlayment', 'Synthetic underlayment over the rest of the deck. Each course laps over the one below it, and the first one over the ice & water shield.');
+  shape(g5, 'polygon', {points: pts(band(sIce - 30, L - 22, 13, 16))}, '#D3CFC4');
+  [sIce + 160, sIce + 380, sIce + 600].forEach(function(s){ shape(g5, 'line', {x1: B(s, 13)[0], y1: B(s, 13)[1], x2: B(s, 18)[0], y2: B(s, 18)[1]}, null, '#17111D', 1.2); });
+  tag(g5, B(720, 16), 'Underlayment', -40, -80);
+  /* 6 · starter strip and shingle courses, eave up */
+  var g6 = step('Starter strip and shingles', 'Starter strip at the eave, then shingle courses from the eave up, each one lapping the one below with 5⅝ in. showing.');
+  shape(g6, 'polygon', {points: pts(band(-2, 22, 16, 19))}, '#45423F');
+  var EXP = 12.4, LEN = 29;
+  for (var s = -2; s < L - 46; s += EXP){ shape(g6, 'polygon', {points: pts([B(s, 19), B(Math.min(L - 30, s + LEN), 19), B(Math.min(L - 30, s + LEN), 21), B(s, 24)])}, '#3E3F44', '#17111D', 1); }
+  tag(g6, B(430, 24), 'Shingles, 5⅝ in. exposure', -80, -96);
+  /* 7 · ridge vent and cap over the slot */
+  var g7 = step('Ridge vent and cap', 'A ridge vent over the slot at the peak, covered by ridge cap shingles.');
+  var r0 = B(L - 48, 24), apex = [1112, -30], r1 = [1112 + (1112 - r0[0]), r0[1]];
+  shape(g7, 'polygon', {points: pts([r0, apex, r1, [r1[0], r1[1] + 8], [1112, -20], [r0[0], r0[1] + 8]])}, '#5E6064');
+  tag(g7, apex, 'Ridge vent + cap', -260, 4);
+  /* 8 · the air path and insulation on the attic floor */
+  var g8 = step('Ventilation and insulation', 'Air comes in at the soffit vents, passes the baffle that keeps insulation clear, rises under the deck and leaves through the ridge vent. Insulation stays on the attic floor.');
+  for (var x = 136; x < 228; x += 22) shape(g8, 'line', {x1: x, y1: 540, x2: x + 12, y2: 540}, null, '#17111D', 4);
+  shape(g8, 'polyline', {points: pts([B(140, -5), B(420, -5)])}, null, '#8B8579', 2.4);
+  /* insulation on top of the ceiling joists; near the eave its edge stays under the baffle, leaving the air channel open */
+  shape(g8, 'polygon', {points: pts([[262, 440], [1200, 440], [1200, 400], [380, 400], B(340, -24), B(170, -24)])}, '#EADBB0');
+  for (var i = 0; i < 44; i++){ var px = 400 + (i * 37) % 790, py = 406 + (i * 13) % 26; el('ellipse', {cx: px, cy: py, rx: 9, ry: 5, fill: i % 2 ? '#F3E6BE' : '#DCC88E', 'class':'fl'}, g8); }
+  el('path', {'class':'air', d:'M184 578 C184 556, 196 544, ' + B(150, -14).join(' ') + ' L ' + B(L - 70, -14).join(' ') + ' Q 1104 0 1112 -44'}, g8);
+  tag(g8, [180, 540], 'Soffit vent', 30, 70); tag(g8, [900, 420], 'Insulation on the attic floor', 20, 80);
+  /* rain that runs off into the gutter: falls to the roof surface only */
+  var rain = el('g', {'aria-hidden':'true'});
+  if (!OWL.reduce) for (i = 0; i < 18; i++){ var rx = 140 + ((i * 97) % 900), sAt = (rx - E0[0]) / CS, top = B(sAt, 26)[1], l = el('line', {'class':'drop', x1: rx, y1: -60, x2: rx - 3, y2: -46}, rain); l.animate([{transform:'translateY(0)', opacity:0}, {opacity:1, offset:.2}, {transform:'translateY(' + (top + 46) + 'px)', opacity:.9, offset:.97}, {transform:'translateY(' + (top + 46) + 'px)', opacity:0}], {duration: 900 + (i * 53) % 500, iterations: Infinity, delay: -(i * 137) % 1200}); }
+  /* build to a step */
+  var cur = 0;
+  function show(n, quiet){
+    n = Math.max(1, Math.min(S.length, n)); cur = n; range.value = n; range.style.setProperty('--f', ((n - 1) / (S.length - 1) * 100) + '%'); range.setAttribute('aria-valuetext', 'Step ' + n + ' of ' + S.length + ': ' + S[n - 1].n);
+    S.forEach(function(o, i){ o.g.classList.toggle('in', i < n); o.g.classList.toggle('now', i === n - 1); });
+    stepN.textContent = String(n).padStart(2, '0'); stepB.textContent = S[n - 1].n; stepP.textContent = S[n - 1].t;
+  }
+  range.addEventListener('input', function(){ stop(); show(+range.value); });
+  root.querySelectorAll('.ctrl .key').forEach(function(b){ b.addEventListener('click', function(){ stop(); show(cur + +b.dataset.d); }); });
+  /* when the section is first seen, the roof goes on by itself once (strokes first, then fill) */
+  var timer = 0; function stop(){ clearInterval(timer); timer = 0; }
+  if (OWL.reduce || !('IntersectionObserver' in window)){ show(S.length); OWL.reveal(h2); return; }
+  show(1);
+  var io = new IntersectionObserver(function(e){ if (!e[0].isIntersecting) return; io.disconnect(); OWL.reveal(h2); var n = 1; timer = setInterval(function(){ n++; show(n); if (n >= S.length) stop(); }, 1100); }, {threshold:.35});
+  io.observe(svg);
 });
 </script>
 </section>

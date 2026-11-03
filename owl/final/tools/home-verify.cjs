@@ -20,8 +20,8 @@ rec('video','crew film has a source and plays',await p.evaluate(()=>{const v=doc
 await p.click('.video1 .chips button:nth-child(4)'); await p.waitForTimeout(300);
 rec('video','chapter chip seeks (Finished roof ~9.2 s)',true,await p.evaluate(()=>document.querySelector('.video1 video').currentTime.toFixed(1)+' s, active: '+document.querySelector('.video1 .chips .on').textContent));
 await p.click('.video1 .play'); rec('video','play button loads YouTube ehKLv5DF2TQ (blocked offline in test, iframe checked)',await p.evaluate(()=>!!document.querySelector('.video1 iframe[src*="youtube-nocookie.com/embed/ehKLv5DF2TQ"]')));
-await p.click('.explore1 .opt[data-k="decking"]'); await p.waitForTimeout(500);
-rec('explore','choosing Decking lifts one slab and names it',await p.evaluate(()=>document.querySelectorAll('.explore1 .lay.on').length===1&&document.querySelector('.explore1 .info b').textContent==='Decking'));
+await p.click('.explore1 .opt[data-k="deck"]'); await p.waitForTimeout(500);
+rec('explore','choosing Roof deck lifts one layer and names it',await p.evaluate(()=>document.querySelectorAll('.explore1 .lay.on').length===1&&document.querySelector('.explore1 .info b').textContent==='Roof deck'));
 for(const k of ['shingles','flashing','ventilation','gutters']) await p.click('.wise1 .it[data-k="'+k+'"]');
 await p.waitForTimeout(1300);
 rec('wise','all four ticked: needle at PROTECTED and CTA glows',await p.evaluate(()=>/118/.test(document.querySelector('.wise1 .needle').style.transform)&&document.querySelector('.wise1 .btn').classList.contains('ready')));

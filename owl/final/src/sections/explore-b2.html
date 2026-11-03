@@ -1,0 +1,64 @@
+<section class="sec explore2" id="explore-2" aria-labelledby="ex2-h">
+<style>
+.explore2 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:clamp(24px,5vw,72px)}
+.explore2 .lede{margin:18px 0 30px;max-width:30ch}
+.explore2 .depth{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px}
+.explore2 .depth button{min-height:46px;padding:0 16px;border-radius:999px;background:var(--paper);font-weight:600;font-size:15px;box-shadow:0 3px 0 rgba(23,17,29,.08),0 10px 20px -14px rgba(23,17,29,.4);transition:transform .2s,background .2s}
+.explore2 .depth button:hover{transform:translateY(-2px)}
+.explore2 .depth button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.explore2 .desc{min-height:56px;margin-bottom:26px;font-size:17px;color:var(--ink-70);max-width:36ch}
+.explore2 .field{position:relative;aspect-ratio:640/420;border-radius:26px;overflow:hidden;background:#2a2e2c url({{A:roof-surface.webp}}) center/cover;box-shadow:0 0 0 10px var(--paper),0 40px 70px -30px rgba(23,17,29,.55);touch-action:none;cursor:none}
+.explore2 .lens{position:absolute;left:0;top:0;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;pointer-events:none;will-change:transform}
+.explore2 .glass{position:absolute;inset:14px;border-radius:50%;overflow:hidden;background-repeat:repeat;box-shadow:inset 0 0 0 2px rgba(23,17,29,.6),inset 0 10px 30px rgba(0,0,0,.45)}
+.explore2 .glass::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35),rgba(255,255,255,0) 42%)}
+.explore2 .rim{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 200deg,#F7CD78,#EAA221 20%,#C7871A 38%,#F3BE5A 55%,#D9951D 75%,#F7CD78);-webkit-mask:radial-gradient(circle,transparent 95px,#000 96px);mask:radial-gradient(circle,transparent 95px,#000 96px);box-shadow:0 18px 30px -8px rgba(23,17,29,.6)}
+.explore2 .handle{position:absolute;left:186px;top:186px;width:26px;height:110px;border-radius:13px;background:linear-gradient(90deg,#2a2030,#17111D 50%,#3a2e40);transform:rotate(-45deg);transform-origin:13px 0;box-shadow:0 10px 18px -6px rgba(23,17,29,.6)}
+.explore2 .handle::before{content:"";position:absolute;left:-3px;right:-3px;top:-4px;height:22px;border-radius:6px;background:linear-gradient(90deg,#C7871A,#F3BE5A,#C7871A)}
+.explore2 .tag{position:absolute;left:50%;top:-14px;transform:translateX(-50%);background:var(--amber);color:var(--ink);font-weight:700;font-size:14px;padding:6px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 3px 0 var(--amber-edge)}
+.explore2 .hint{position:absolute;right:16px;bottom:14px;background:rgba(248,246,240,.92);font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px}
+@media (max-width:900px){.explore2 .g{grid-template-columns:1fr}.explore2 .lens{width:170px;height:170px;margin:-85px 0 0 -85px}.explore2 .rim{-webkit-mask:radial-gradient(circle,transparent 72px,#000 73px);mask:radial-gradient(circle,transparent 72px,#000 73px)}.explore2 .handle{left:144px;top:144px;height:80px}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2 rv" id="ex2-h">Look Closer</h2>
+   <p class="lede rv">Move the lens and see what the surface hides.</p>
+   <div class="depth" role="group" aria-label="How deep the lens looks">
+    <button type="button" aria-pressed="false" data-d="0">Shingles</button>
+    <button type="button" aria-pressed="true" data-d="1">Underlayment</button>
+    <button type="button" aria-pressed="false" data-d="2">Decking</button>
+    <button type="button" aria-pressed="false" data-d="3">Rafters</button>
+   </div>
+   <p class="desc" aria-live="polite"></p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <div class="field" role="img" aria-label="A finished Owl roof with a magnifying lens that shows the layers underneath" data-owl="">
+   <div class="lens"><div class="glass"></div><div class="rim"></div><div class="handle"></div><span class="tag"></span></div>
+   <span class="hint" aria-hidden="true">Scroll inside to go deeper</span>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','2',function(root){
+  var L = [
+    {n:'Shingles', bg:'url({{A:shingle-close.webp}})', s:'520px', t:'The weather face of the roof. It sheds rain and snow and takes the sun.'},
+    {n:'Underlayment', bg:'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27240%27 height=%27240%27%3E%3Cfilter id=%27f%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.9%27 numOctaves=%272%27/%3E%3CfeColorMatrix values=%270 0 0 0 .16 0 0 0 0 .15 0 0 0 0 .17 0 0 0 .55 0%27/%3E%3C/filter%3E%3Crect width=%27240%27 height=%27240%27 fill=%27%232b2a2e%27/%3E%3Crect width=%27240%27 height=%27240%27 filter=%27url(%23f)%27/%3E%3Cpath d=%27M0 118h240%27 stroke=%27%23ffffff%27 stroke-opacity=%27.12%27 stroke-width=%272%27/%3E%3C/svg%3E")', s:'240px', t:'A water-resistant sheet under the shingles: a second line of defence.'},
+    {n:'Decking', bg:'url({{A:osb.webp}})', s:'420px', t:'The wood boards the whole roof is fastened to.'},
+    {n:'Rafters', bg:'url({{A:rafters.webp}})', s:'720px', t:'The frame that carries everything above it.'}
+  ];
+  var field = root.querySelector('.field'), lens = root.querySelector('.lens'), glass = root.querySelector('.glass'), tag = root.querySelector('.tag'), desc = root.querySelector('.desc'), btns = root.querySelectorAll('.depth button');
+  var d = 1, x = 0, y = 0, tx = 0, ty = 0;
+  function setDepth(n){ d = Math.max(0, Math.min(3, n)); var l = L[d]; glass.style.backgroundImage = l.bg; glass.style.backgroundSize = l.s; tag.textContent = l.n; desc.textContent = l.t;
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', +b.dataset.d === d); }); field.dataset.owl = 'say:' + l.n; }
+  function place(){ var r = field.getBoundingClientRect(); lens.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var o = glass.offsetLeft + lens.offsetWidth/-2; glass.style.backgroundPosition = (-(x + o)) + 'px ' + (-(y + o)) + 'px'; }
+  function centre(){ var r = field.getBoundingClientRect(); tx = x = r.width*.56; ty = y = r.height*.48; place(); }
+  field.addEventListener('pointermove', function(e){ var r = field.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; });
+  field.addEventListener('pointerdown', function(e){ var r = field.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; field.setPointerCapture(e.pointerId); });
+  field.addEventListener('wheel', function(e){ var n = Math.max(0, Math.min(3, d + (e.deltaY > 0 ? 1 : -1))); if (n !== d){ e.preventDefault(); setDepth(n); } }, {passive:false});
+  btns.forEach(function(b){ b.addEventListener('click', function(){ setDepth(+b.dataset.d); }); });
+  (function loop(){ x += (tx - x)*(OWL.reduce ? 1 : .2); y += (ty - y)*(OWL.reduce ? 1 : .2); place(); requestAnimationFrame(loop); })();
+  setDepth(1); centre(); addEventListener('resize', centre);
+});
+</script>
+</section>

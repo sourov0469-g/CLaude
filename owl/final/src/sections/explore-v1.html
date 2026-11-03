@@ -14,14 +14,13 @@
 .explore1 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:28px}
 .explore1 .tel{font-weight:700;font-size:18px;text-underline-offset:5px}
 .explore1 .stk{position:relative;width:min(100%,560px);aspect-ratio:740/1040;justify-self:center}
-.explore1 .stk img{position:absolute;inset:0;width:100%;height:100%}
-.explore1 .stk .base{transition:filter .5s,opacity .5s}
-.explore1 .stk.sel .base{filter:saturate(.35) brightness(1.08);opacity:.42}
-.explore1 .lay{opacity:0;transform:translateY(0);transition:opacity .45s var(--ease),transform .55s var(--ease),filter .45s;filter:drop-shadow(0 0 0 rgba(23,17,29,0))}
-.explore1 .lay.on{opacity:1;transform:translate(-10px,-14px);filter:drop-shadow(10px 18px 14px rgba(23,17,29,.35))}
-.explore1 svg.hit{position:absolute;inset:0;width:100%;height:100%}
-.explore1 svg.hit polygon{fill:transparent;cursor:pointer;outline:none}
-.explore1 svg.hit polygon:hover{fill:rgba(234,162,33,.14)}
+.explore1 .stk svg.draw{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.explore1 .stk .lay{transition:transform .55s var(--ease),opacity .45s,filter .45s;cursor:pointer}
+.explore1 .stk.sel .lay{opacity:.58}
+.explore1 .stk.sel .lay.on{opacity:1;transform:translate(-10px,-16px);filter:drop-shadow(10px 18px 12px rgba(23,17,29,.3))}
+.explore1 .stk .air{fill:none;stroke:#C7871A;stroke-width:3;stroke-linecap:round;stroke-dasharray:6 10;animation:ex1air 1.2s linear infinite}
+@keyframes ex1air{to{stroke-dashoffset:-16}}
+@media (prefers-reduced-motion:reduce){.explore1 .stk .air{animation:none}.explore1 .stk .lay{transition:none}}
 .explore1 .pin{position:absolute;display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;white-space:nowrap;padding:7px 12px;border-radius:999px;background:var(--ink);color:var(--cream);opacity:0;transform:translateY(6px);transition:.35s var(--ease);pointer-events:none}
 .explore1 .pin.on{opacity:1;transform:none}
 .explore1 .pin::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
@@ -32,55 +31,113 @@
   <div>
    <h2 class="h2 rv" id="ex1-h">Explore Your Roof, Layer by Layer</h2>
    <p class="lede rv">See exactly what sits between the weather and your home.</p>
-   <div class="list" role="radiogroup" aria-label="Roof layers">
-    <button class="opt" type="button" role="radio" aria-checked="true" data-k="shingles" data-owl="peek"><i></i>Shingles</button>
-    <button class="opt" type="button" role="radio" aria-checked="false" data-k="underlayment" data-owl="peek" tabindex="-1"><i></i>Underlayment</button>
-    <button class="opt" type="button" role="radio" aria-checked="false" data-k="decking" data-owl="peek" tabindex="-1"><i></i>Decking</button>
-    <button class="opt" type="button" role="radio" aria-checked="false" data-k="insulation" data-owl="peek" tabindex="-1"><i></i>Insulation</button>
-    <button class="opt" type="button" role="radio" aria-checked="false" data-k="ventilation" data-owl="peek" tabindex="-1"><i></i>Ventilation</button>
+   <div class="list" role="radiogroup" aria-label="Roof layers, top to bottom">
+    <button class="opt" type="button" role="radio" aria-checked="true" data-k="shingles" data-owl="peek"><i></i>Shingles and ridge cap</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="under" data-owl="peek" tabindex="-1"><i></i>Underlayment</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="ice" data-owl="peek" tabindex="-1"><i></i>Ice &amp; water shield</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="deck" data-owl="peek" tabindex="-1"><i></i>Roof deck</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="vent" data-owl="peek" tabindex="-1"><i></i>Rafters and ventilation</button>
+    <button class="opt" type="button" role="radio" aria-checked="false" data-k="insul" data-owl="peek" tabindex="-1"><i></i>Attic insulation</button>
    </div>
-   <p class="info" aria-live="polite"><b>Shingles</b><span>The weather face of the roof. It sheds rain and snow and takes the sun.</span></p>
+   <p class="info" aria-live="polite"><b>Shingles and ridge cap</b><span></span></p>
    <div class="ctas"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="tel" href="tel:+16519776027">(651) 977-6027</a></div>
   </div>
   <div class="stk" data-owl="say:Pick a layer">
-   <img class="base" src="{{A:explore-stack.webp}}" alt="An exploded roof: shingles, underlayment, decking, insulation and a ventilation layer above a house" width="740" height="1040">
-   <svg class="hit" viewBox="0 0 740 1040" aria-hidden="true"></svg>
+   <svg class="draw" viewBox="0 0 740 1040" role="img" aria-label="One roof slope taken apart, top to bottom: shingles and ridge cap, underlayment, ice and water shield at the eave, solid roof deck, rafters with air moving from the soffit to the ridge vent, and insulation on the attic floor above the house walls."></svg>
   </div>
+ </div>
  </div>
 </div>
 <script>
 OWL.reg('explore','1',function(root){
-  var P = {
-    shingles:{p:[[68,210],[238,24],[580,92],[692,196],[402,292]], at:[700,120], t:'The weather face of the roof. It sheds rain and snow and takes the sun.'},
-    underlayment:{p:[[82,305],[300,248],[668,293],[668,306],[388,390],[82,318]], at:[680,300], t:'A water-resistant sheet under the shingles: a second line of defence if water gets past them.'},
-    decking:{p:[[84,405],[305,352],[666,400],[666,416],[388,502],[84,422]], at:[680,405], t:'The wood boards the whole roof is fastened to. Soft or rotten spots need replacing first.'},
-    insulation:{p:[[84,548],[98,505],[330,462],[645,498],[660,548],[410,630],[84,556]], at:[672,520], t:'Keeps heat in the house and out of the attic, which helps stop ice dams in a Minnesota winter.'},
-    ventilation:{p:[[84,636],[140,606],[290,586],[520,598],[600,604],[660,626],[655,646],[350,722],[86,652]], at:[670,630], t:'Intake and exhaust vents move air through the attic so heat and moisture can escape.'}
-  };
-  var stk = root.querySelector('.stk'), svg = root.querySelector('svg.hit'), base = root.querySelector('.base'), opts = root.querySelectorAll('.opt'), info = root.querySelector('.info');
-  var layers = {}, pins = {};
-  Object.keys(P).forEach(function(k){
-    var pts = P[k].p.map(function(q){ return q.join(','); }).join(' ');
-    var poly = document.createElementNS('http://www.w3.org/2000/svg','polygon'); poly.setAttribute('points', pts); poly.dataset.k = k; svg.appendChild(poly);
-    var im = document.createElement('img'); im.className = 'lay'; im.src = base.src; im.alt = ''; im.setAttribute('aria-hidden','true');
-    im.style.clipPath = 'polygon(' + P[k].p.map(function(q){ return (q[0]/7.4).toFixed(2) + '% ' + (q[1]/10.4).toFixed(2) + '%'; }).join(',') + ')';
-    stk.insertBefore(im, svg); layers[k] = im;
-    var pin = document.createElement('span'); pin.className = 'pin'; pin.textContent = k.charAt(0).toUpperCase() + k.slice(1);
-    pin.style.left = (P[k].at[0]/7.4) + '%'; pin.style.top = (P[k].at[1]/10.4) + '%'; pin.style.translate = '-30% -50%'; stk.appendChild(pin); pins[k] = pin;
-  });
+  /* one roof slope taken apart in the order it is built, bottom to top ⟦S0414⟧⟦S0361⟧: house walls, attic floor with
+     insulation (on the floor, not under the deck), rafters with soffit-to-ridge airflow, solid OSB deck with the
+     ridge-vent slot, ice & water shield at the eave over the drip edge, underlayment, shingles with ridge cap. */
+  var NS = 'http://www.w3.org/2000/svg', svg = root.querySelector('svg.draw'), stk = root.querySelector('.stk'), opts = root.querySelectorAll('.opt'), info = root.querySelector('.info');
+  var T = {
+    shingles:['Shingles and ridge cap','Laid from the eave up with the joints offset row to row. Cap shingles cover the ridge vent at the peak.'],
+    under:['Underlayment','A water-shedding sheet over the whole deck. Each course laps over the one below it, so water runs off, not in.'],
+    ice:['Ice & water shield','A self-sealing membrane along the eaves, where ice dams push water back up the roof. The metal drip edge at the eave sits under it.'],
+    deck:['Roof deck','Solid OSB panels with staggered joints, nailed to the rafters. A slot is cut along the peak so the attic can breathe out through the ridge vent.'],
+    vent:['Rafters and ventilation','Air comes in through the soffit vents at the eaves, rises up each rafter bay under the deck and leaves through the ridge vent.'],
+    insul:['Attic insulation','It lies on the attic floor, between the ceiling joists, not under the roof deck. It keeps house heat out of the attic, which helps prevent ice dams.']};
+  function el(t, a, p){ var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; }
+  /* slope plane: u along the eave (0–360 in), v up the slope (0–168 in) */
+  /* 6/12 pitch: the slope vector is the horizontal run (H) plus the rise, so the gable end and the layers agree */
+  var A = 1.18, B = .3, HX = .62, HY = -.26, C = .55, D = -.72, X0 = 40;
+  function P(u, v, y0){ return [(X0 + A*u + C*v).toFixed(1), (y0 + B*u + D*v).toFixed(1)]; }
+  function poly(pts, a, p){ a.points = pts.map(function(q){ return q.join(','); }).join(' '); return el('polygon', a, p); }
+  function plane(u0, v0, u1, v1, y0){ return [P(u0, v0, y0), P(u1, v0, y0), P(u1, v1, y0), P(u0, v1, y0)]; }
+  function slab(g, u0, v0, u1, v1, y0, t, top, side){
+    poly([P(u0, v0, y0), P(u1, v0, y0), P(u1, v0, y0 + t), P(u0, v0, y0 + t)].map(function(q){ return q; }), {fill: side, stroke:'#17111D', 'stroke-width':1.2, 'stroke-linejoin':'round'}, g);
+    poly([P(u1, v0, y0), P(u1, v1, y0), P(u1, v1, y0 + t), P(u1, v0, y0 + t)], {fill: side, stroke:'#17111D', 'stroke-width':1.2, 'stroke-linejoin':'round', opacity:.85}, g);
+    return poly(plane(u0, v0, u1, v1, y0), {fill: top, stroke:'#17111D', 'stroke-width':1.4, 'stroke-linejoin':'round'}, g);
+  }
+  function line(g, a, b, st, w, dash){ var l = el('line', {x1:a[0], y1:a[1], x2:b[0], y2:b[1], stroke: st, 'stroke-width': w || 1}, g); if (dash) l.setAttribute('stroke-dasharray', dash); return l; }
+  function rnd(i){ var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+  var defs = el('defs', {}), G = {};
+  var osb = el('pattern', {id:'ex1osb', patternUnits:'userSpaceOnUse', width:60, height:46}, defs); el('image', {href:'{{A:osb.webp}}', width:60, height:46, preserveAspectRatio:'xMidYMid slice'}, osb);
+  function group(k){ var g = el('g', {'class':'lay', 'data-k':k}); G[k] = g; return g; }
+  /* house walls (not selectable) */
+  var hw = el('g', {}), yH = 905;
+  poly([P(0, 0, yH), P(360, 0, yH), P(360, 0, yH + 120), P(0, 0, yH + 120)], {fill:'#FBF9F3', stroke:'#17111D', 'stroke-width':1.4}, hw);
+  (function(){ var E = P(360, 0, yH).map(Number), back = [E[0] + HX*300, E[1] + HY*300], apex = P(360, 168, yH).map(Number);
+    poly([E, back, [back[0], back[1] + 120], [E[0], E[1] + 120]], {fill:'#EDE8DA', stroke:'#17111D', 'stroke-width':1.4}, hw);
+    poly([E, apex, back], {fill:'#F4F0E4', stroke:'#17111D', 'stroke-width':1.4, 'stroke-linejoin':'round'}, hw);
+    el('circle', {cx:(E[0] + apex[0] + back[0]) / 3, cy:(E[1] + apex[1] + back[1]) / 3 + 8, r:9, fill:'#DCE3E6', stroke:'#17111D', 'stroke-width':1.2}, hw);
+  })();
+  [[50, 30, 46, 52], [150, 30, 40, 90], [250, 30, 46, 52]].forEach(function(w){ var a = P(w[0], 0, yH + w[1]), b = P(w[0] + w[2], 0, yH + w[1]); poly([a, b, [b[0], (+b[1] + w[3]).toFixed(1)], [a[0], (+a[1] + w[3]).toFixed(1)]], {fill: w[3] > 60 ? '#C7871A' : '#DCE3E6', stroke:'#17111D', 'stroke-width':1.2}, hw); });
+  /* attic floor: a horizontal plane (ceiling joists + insulation between them) */
+  var gi = group('insul'), yF = 838, run = 300;
+  function F(u, w){ return [(X0 + A*u + w*HX).toFixed(1), (yF + B*u + w*HY).toFixed(1)]; }
+  poly([F(0, 0), F(360, 0), F(360, run), F(0, run)], {fill:'#EADBB0', stroke:'#17111D', 'stroke-width':1.4}, gi);
+  for (var j = 0; j <= 360; j += 24) line(gi, F(j, 0), F(j, run), 'rgba(110,80,30,.55)', 2);
+  for (var i = 0; i < 220; i++){ var q = F(rnd(i) * 360, rnd(i + 7) * run); el('ellipse', {cx:q[0], cy:q[1], rx:4 + rnd(i + 3) * 4, ry:2 + rnd(i + 4) * 2, fill: rnd(i + 9) > .5 ? '#F3E6BE' : '#DCC88E', opacity:.9}, gi); }
+  poly([F(0, 0), F(360, 0), [F(360, 0)[0], (+F(360, 0)[1] + 12).toFixed(1)], [F(0, 0)[0], (+F(0, 0)[1] + 12).toFixed(1)]], {fill:'#D8C690', stroke:'#17111D', 'stroke-width':1.2}, gi);
+  /* rafters at 24 in. on centre, with the airflow from soffit intake to ridge exhaust */
+  var gv = group('vent'), yR = 700;
+  for (var r = 0; r <= 360; r += 24){ poly([P(r, 0, yR), P(r + 1.5, 0, yR), P(r + 1.5, 168, yR), P(r, 168, yR)], {fill:'#C59A62', stroke:'#17111D', 'stroke-width':1}, gv); poly([P(r + 1.5, 0, yR), P(r + 1.5, 168, yR), P(r + 1.5, 168, yR + 16), P(r + 1.5, 0, yR + 16)], {fill:'#A97D47', stroke:'#17111D', 'stroke-width':.8}, gv); }
+  [60, 180, 300].forEach(function(u){ var a = P(u, -8, yR + 26), b = P(u, 84, yR - 6), c = P(u, 176, yR - 18); el('path', {'class':'air', d:'M' + a + ' Q' + b + ' ' + c}, gv); el('path', {d:'M' + c + ' l-9 4 m9 -4 l-2 -9', fill:'none', stroke:'#C7871A', 'stroke-width':3, 'stroke-linecap':'round'}, gv); });
+  var sfa = P(0, 0, yR + 30), sfb = P(360, 0, yR + 30); poly([sfa, sfb, [sfb[0], (+sfb[1] + 12).toFixed(1)], [sfa[0], (+sfa[1] + 12).toFixed(1)]], {fill:'#F4F1EA', stroke:'#17111D', 'stroke-width':1.2}, gv);
+  for (var s = 10; s < 360; s += 18){ var sv = P(s, 0, yR + 33); el('rect', {x: sv[0], y: sv[1], width: 9, height: 6, fill:'#17111D', opacity:.55}, gv); }
+  /* roof deck: solid OSB with staggered joints, nail lines over rafters, ridge-vent slot */
+  var gd = group('deck'), yD = 590;
+  slab(gd, 0, 0, 360, 168, yD, 9, 'url(#ex1osb)', '#B58A50');
+  for (var row = 0; row < 4; row++){ line(gd, P(0, row * 48, yD), P(360, row * 48, yD), 'rgba(70,45,15,.8)', 1); for (var x = row % 2 ? 48 : 0; x < 360; x += 96) if (x) line(gd, P(x, row * 48, yD), P(x, Math.min(168, row * 48 + 48), yD), 'rgba(70,45,15,.8)', 1); }
+  for (r = 0; r <= 360; r += 24) line(gd, P(r + .75, 3, yD), P(r + .75, 160, yD), 'rgba(40,25,10,.55)', 1.2, '1 7');
+  poly(plane(10, 164, 350, 168, yD), {fill:'#17111D'}, gd);
+  /* ice & water shield over the eave drip edge */
+  var gc = group('ice'), yI = 574;
+  slab(gc, 0, 0, 360, 36, yI, 4, '#2E2C31', '#1E1C21');
+  for (i = 0; i < 160; i++){ var gq = P(rnd(i) * 356 + 2, rnd(i + 5) * 34 + 1, yI); el('circle', {cx:gq[0], cy:gq[1], r:.8, fill:'rgba(255,255,255,.18)'}, gc); }
+  var de0 = P(-2, -1, yI + 4), de1 = P(362, -1, yI + 4); poly([de0, de1, [de1[0], (+de1[1] + 8).toFixed(1)], [de0[0], (+de0[1] + 8).toFixed(1)]], {fill:'#AEB3B8', stroke:'#17111D', 'stroke-width':1}, gc);
+  /* underlayment: courses lapped upslope over downslope, cap fasteners */
+  var gu = group('under'), yU = 420;
+  slab(gu, 0, 0, 360, 164, yU, 3, '#D9D5CB', '#BDB8AC');
+  [32, 76, 120].forEach(function(v){ line(gu, P(0, v, yU), P(360, v, yU), 'rgba(23,17,29,.45)', 1.2); line(gu, P(0, v + 4, yU), P(360, v + 4, yU), 'rgba(60,90,130,.5)', .8); for (var u = 12; u < 360; u += 24){ var f = P(u, v + 2, yU); el('circle', {cx:f[0], cy:f[1], r:1.6, fill:'rgba(23,17,29,.6)'}, gu); } });
+  /* shingles: courses from the eave up, joints offset, ridge vent with cap shingles */
+  var gs = group('shingles'), yS = 270, EXP = 5.625;
+  slab(gs, 0, 0, 360, 168, yS, 5, '#3C3D42', '#2A2B2F');
+  for (var c = 0; c * EXP < 160; c++){ var v0 = c * EXP, off = (c % 6) * 6.5; line(gs, P(0, v0, yS), P(360, v0, yS), 'rgba(0,0,0,.55)', 1);
+    for (x = -39.375 + off; x < 360; x += 39.375){ if (x > 0) line(gs, P(x, v0, yS), P(x, v0 + EXP, yS), 'rgba(0,0,0,.5)', .8); for (var t = 0; t < 4; t++){ var tx = x + 4 + t * 9.5 + rnd(c * 31 + t + x) * 3; if (tx > 0 && tx < 356 && rnd(c + t * 7 + x) > .5) poly(plane(tx, v0, Math.min(360, tx + 5 + rnd(t + c) * 3), v0 + EXP * .45, yS), {fill:'rgba(15,15,18,.45)'}, gs); } } }
+  poly(plane(0, 160, 360, 168, yS), {fill:'#55565B', stroke:'#17111D', 'stroke-width':1}, gs);
+  for (x = 0; x < 360; x += 12) line(gs, P(x, 160, yS), P(x, 168, yS), 'rgba(0,0,0,.6)', 1);
+  /* leader pins */
+  var AT = {shingles:[360, 120, yS], under:[360, 110, yU], ice:[360, 18, yI], deck:[360, 110, yD], vent:[360, 110, yR], insul:null}, pins = {};
+  Object.keys(T).forEach(function(k){ var at = AT[k] ? P(AT[k][0], AT[k][1], AT[k][2]) : F(360, 160), pin = document.createElement('span'); pin.className = 'pin'; pin.textContent = T[k][0]; pin.style.left = (at[0] / 7.4) + '%'; pin.style.top = (at[1] / 10.4) + '%'; pin.style.translate = '8px -50%'; stk.appendChild(pin); pins[k] = pin; });
   function pick(k, focus){
     stk.classList.add('sel');
-    Object.keys(P).forEach(function(n){ layers[n].classList.toggle('on', n === k); pins[n].classList.toggle('on', n === k); });
+    Object.keys(G).forEach(function(n){ G[n].classList.toggle('on', n === k); pins[n].classList.toggle('on', n === k); });
     opts.forEach(function(o){ var on = o.dataset.k === k; o.setAttribute('aria-checked', on); o.tabIndex = on ? 0 : -1; if (on && focus) o.focus(); });
-    info.querySelector('b').textContent = k.charAt(0).toUpperCase() + k.slice(1); info.querySelector('span').textContent = P[k].t;
+    info.querySelector('b').textContent = T[k][0]; info.querySelector('span').textContent = T[k][1];
   }
   opts.forEach(function(o, i){
     o.addEventListener('click', function(){ pick(o.dataset.k); });
     o.addEventListener('keydown', function(e){ var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0;
       if (d){ e.preventDefault(); pick(opts[(i + d + opts.length) % opts.length].dataset.k, true); } });
   });
-  svg.addEventListener('click', function(e){ var k = e.target.dataset && e.target.dataset.k; if (k) pick(k); });
-  svg.addEventListener('mouseover', function(e){ var k = e.target.dataset && e.target.dataset.k; if (k && OWL.fine) pick(k); });
+  svg.addEventListener('click', function(e){ var g = e.target.closest('.lay'); if (g) pick(g.dataset.k); });
+  svg.addEventListener('mouseover', function(e){ var g = e.target.closest('.lay'); if (g && OWL.fine) pick(g.dataset.k); });
   pick('shingles');
 });
 </script>
