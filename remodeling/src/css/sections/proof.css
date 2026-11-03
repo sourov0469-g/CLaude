@@ -6,7 +6,7 @@
 .pf__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); }
 
 /* the site: a stage the blocks live in; the deck is the floor; the stage height leaves room to stack */
-.pf__site { position: relative; margin-top: var(--s7); height: clamp(360px, 44vw, 460px); touch-action: pan-y; }
+.pf__site { position: relative; margin-top: var(--s7); height: clamp(440px, 42vw, 620px); touch-action: pan-y; }
 .pf__blocks { position: absolute; inset: 0 0 34px 0; margin: 0; padding: 0; list-style: none; }
 .pf__deck { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 44px; overflow: visible; }
 .pf__deck .d-ply { fill: var(--sand-100, #F7F1EA); }
@@ -21,10 +21,8 @@
   padding: var(--s3) var(--s4); box-sizing: border-box;
   cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
   transform-origin: 50% 100%; will-change: transform;
-  filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--color-shadow) 16%, transparent));
-  transition: filter 200ms var(--ez-out);
 }
-.pf__b.is-held { cursor: grabbing; z-index: 3; filter: drop-shadow(0 18px 22px color-mix(in srgb, var(--color-shadow) 26%, transparent)); }   /* lifted: the shadow grows [S0490] */
+.pf__b.is-held { cursor: grabbing; z-index: 3; }
 .pf__b:focus-visible { outline: 2px solid var(--color-accent-solid); outline-offset: 4px; }
 .pf__b.is-key { outline: 2px dashed var(--color-accent-solid); outline-offset: 6px; }
 .pf__mat { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; overflow: visible; }
@@ -70,3 +68,47 @@
 
 /* Phase 6: the arrival is clipped at the site's top edge (the blocks never cross the lead text while dropping in) */
 .pf__site.is-arriving { clip-path: inset(0 -100vw -200px -100vw); }
+
+/* OWNER (proof pass) · depth: every block has thickness (a side slab in its own darker material, offset down-right,
+   inked) and a contact shadow on the deck that shrinks and fades as the block lifts */
+.pf__b { --side: var(--sand-300, #D9CBBB); }
+.pf__b--wood { --side: var(--clay-300, #ECB3A4); }
+.pf__b--brick { --side: var(--clay-800, #5E2E22); }
+.pf__b--tile { --side: var(--sand-200, #EFE6DC); }
+.pf__b::before { content: ''; position: absolute; inset: 0; z-index: -2; transform: translate(8px, 8px); background: var(--side); border: 1.5px solid var(--color-text); border-radius: 4px; transition: transform 220ms var(--ez-out); }
+.pf__b:hover::before, .pf__b.is-held::before { transform: translate(11px, 11px); }
+.pf__sh { position: absolute; left: 0; top: 0; height: 12px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--color-shadow, #000) 55%, transparent), transparent); transform-origin: 50% 50%; pointer-events: none; opacity: 0; }
+.pf__b.is-open { outline: 3px solid var(--color-accent-solid); outline-offset: 6px; }
+
+/* the proof card lives in the empty sky above the deck */
+.pf__card { position: absolute; left: 0; top: 0; z-index: 6; width: min(380px, 36%); padding: var(--s5); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); box-shadow: 8px 8px 0 var(--clay-100, #F9E3DD); }
+.pf__ck { margin: 0 0 var(--s3); font: 600 .75rem/1.2 var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent-text, var(--clay-600, #A45540)); }
+.pf__how { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+.pf__how li { display: flex; align-items: center; gap: var(--s3); font: 400 .9375rem/1.35 var(--f-text); }
+.pf__how svg { flex: none; width: 36px; height: 36px; padding: 7px; border-radius: 50%; background: var(--clay-100, #F9E3DD); fill: none; stroke: var(--color-text); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pf__how b { font-weight: 600; }
+.pf__fact { position: relative; }
+.pf__x { position: absolute; top: -8px; right: -8px; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: none; color: var(--color-text); cursor: pointer; }
+.pf__x:hover { background: var(--color-bg-muted, #f1ece6); }
+.pf__x svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.pf__fv { margin: 0 0 var(--s2); font: 600 clamp(2rem, 1.4rem + 1.6vw, 2.75rem)/1 var(--f-display); letter-spacing: -.03em; }
+.pf__fb { margin: 0 0 var(--s4); color: var(--color-text-secondary); line-height: 1.5; }
+.pf__card.is-swap > :not([hidden]) { animation: pf-in 280ms var(--ez-out); }
+@keyframes pf-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* the reward: a stamp over the tower and a height mark beside it */
+.pf__win { position: absolute; z-index: 5; margin: 0; transform: translate(-100%, -50%) rotate(-6deg) scale(.4); opacity: 0; pointer-events: none; padding: 10px 18px; font: 700 1rem/1 var(--f-display); letter-spacing: .04em; text-transform: uppercase; color: var(--color-accent-solid); background: var(--color-bg, #fff); border: 3px double var(--color-accent-solid); border-radius: 6px; transition: transform 380ms cubic-bezier(.2, .9, .3, 1.4), opacity 200ms; }
+.pf__site.is-won .pf__win { opacity: 1; transform: translate(-100%, -50%) rotate(-6deg) scale(1); }
+.pf__dim { position: absolute; z-index: 5; width: 14px; border-top: 1.5px solid var(--color-text); border-bottom: 1.5px solid var(--color-text); opacity: 0; pointer-events: none; transition: opacity 300ms 200ms; }
+.pf__dim::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 1.5px dashed var(--color-text); }
+.pf__dimt { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); white-space: nowrap; font: 600 .8125rem/1 var(--f-text); color: var(--color-text-secondary); }
+.pf__site.is-won .pf__dim { opacity: 1; }
+.pf__restack { min-height: 44px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
+
+@media (max-width: 760px) {
+  .pf__card { position: relative; width: auto; margin-bottom: var(--s4); padding: var(--s4); }
+  .pf__site { height: auto; }
+  .pf__blocks { position: relative; inset: auto; height: 400px; }
+  .pf__deck { position: relative; display: block; margin-top: -10px; }
+}
+@media (prefers-reduced-motion: reduce) { .pf__card.is-swap > * { animation: none; } .pf__win { transition: none; } }

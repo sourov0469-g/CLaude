@@ -47,28 +47,8 @@
   function pop(k, els) { if (!k.motion || !els.length) return; gsap.fromTo(els, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: .45, ease: 'power3.out', stagger: .07, clearProps: 'transform,opacity' }); }
 
   EZ.section('financing', {
-    /* V1 · ask then answer */
-    1: { init: function (root, k) {
-      var opts = root.querySelector('.fa__opts'), list = root.querySelector('.fa__list'), why = root.querySelector('.fa__why');
-      opts.innerHTML = PROJ.map(function (x) { return '<button type="button" class="fa__o" data-k="' + x[0] + '" aria-pressed="false">' + ic(x[2], 'fz-ic fa__oi') + '<span>' + x[1] + '</span><svg class="fa__ar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>'; }).join('');
-      var bs = Array.prototype.slice.call(opts.querySelectorAll('.fa__o')), cur = '';
-      function pick(key, anim) {
-        if (key === cur) return; cur = key;
-        bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.k === key ? 'true' : 'false'); });
-        why.textContent = WHY[key];
-        list.innerHTML = ROUTES[key].map(function (id) { var p = P[id]; return '<li class="fa__p fa__p--' + p.k + '"><span class="fa__pk">' + p.kind + '</span><span class="fa__pn">' + p.name + '</span><span class="fa__pb nums">' + p.big + '</span><span class="fa__pu">' + p.unit + '</span><span class="fa__pr">' + p.what + ' &middot; ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '</span></li>'; }).join('');
-        list.dataset.n = ROUTES[key].length;
-        if (anim) pop(k, list.children);
-      }
-      bs.forEach(function (b) { k.on(b, 'click', function () { pick(b.dataset.k, true); }); });
-      pick('kitchen', false);
-      foot(root, k);
-      k.add(function () { opts.innerHTML = ''; list.innerHTML = ''; cur = ''; });
-      EZ.reveal(k, root.querySelectorAll('.fa__side > *, .fa__ans'));
-    } },
-
     /* V2 · two kinds of money */
-    2: { init: function (root, k) {
+    1: { init: function (root, k) {
       var split = root.querySelector('.fb__split');
       function half(kind, title, line, ids, note) {
         return '<article class="fb__h fb__h--' + kind + '" data-k="' + kind + '"><header class="fb__hh">' + ic(kind === 'cc' ? CHIP : HOUSE, 'fz-ic fb__hi') + '<div><h3 class="fb__ht">' + title + '</h3><p class="fb__hl">' + line + '</p></div></header>' +
@@ -92,34 +72,6 @@
       if (!k.motion) return;
       gsap.set(hs, { y: 40, opacity: 0 });
       var st = ScrollTrigger.create({ trigger: split, start: 'top 82%', once: true, onEnter: function () { gsap.to(hs, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .15, clearProps: 'transform,opacity' }); } });
-      k.add(function () { st.kill(); });
-    } },
-
-    /* V3 · the wallet */
-    3: { init: function (root, k) {
-      var wal = root.querySelector('.fw__wallet'), det = root.querySelector('.fw__detail');
-      wal.innerHTML = ORDER.map(function (id, i) { return '<button type="button" class="fw__c" data-p="' + id + '" style="--i:' + i + '" aria-pressed="false" aria-label="' + P[id].name + ', ' + P[id].kind.toLowerCase() + '">' + cardHTML(id) + '</button>'; }).join('');
-      var bs = Array.prototype.slice.call(wal.querySelectorAll('.fw__c')), cur = '';
-      function pick(id, anim) {
-        if (id === cur) return; cur = id; var p = P[id];
-        bs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.p === id ? 'true' : 'false'); });
-        det.innerHTML = '<p class="fw__k fz-kind">' + p.kind + '</p><h3 class="fw__n">' + p.name + '</h3><p class="fw__big"><span class="nums">' + p.big + '</span><span class="fw__u">' + p.unit + '</span></p>' + rows(p) +
-          '<p class="fw__fl">Usually fits</p><ul class="fw__fits">' + fits(id).map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>';
-        det.className = 'fw__detail fw__detail--' + p.k;
-        if (anim) pop(k, det.children);
-      }
-      bs.forEach(function (b, i) {
-        k.on(b, 'pointerenter', function (e) { if (e.pointerType === 'mouse') pick(b.dataset.p, true); });
-        k.on(b, 'click', function () { pick(b.dataset.p, true); }); k.on(b, 'focus', function () { pick(b.dataset.p, true); });
-        k.on(b, 'keydown', function (e) { var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (!d) return; e.preventDefault(); bs[(i + d + 4) % 4].focus(); });
-      });
-      pick('syn', false);
-      foot(root, k);
-      k.add(function () { wal.innerHTML = ''; det.innerHTML = ''; cur = ''; });
-      EZ.reveal(k, root.querySelectorAll('.fw__side > :not(.fw__wallet), .fw__detail'));
-      if (!k.motion) return;
-      gsap.set(bs, { y: 80, rotate: 0, opacity: 0 });
-      var st = ScrollTrigger.create({ trigger: wal, start: 'top 82%', once: true, onEnter: function () { gsap.to(bs, { y: 0, opacity: 1, duration: .6, ease: 'power3.out', stagger: .08, clearProps: 'transform,opacity' }); } });
       k.add(function () { st.kill(); });
     } }
   });

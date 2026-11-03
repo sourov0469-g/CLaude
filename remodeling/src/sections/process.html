@@ -1,30 +1,15 @@
 <section id="process" class="sec process g-surface" data-section="process" aria-labelledby="process-h">
-  <!-- OWNER (second pass): the calendar read flat. Three new layouts of the same eight stages, each about one screen,
+  <!-- OWNER (pick): the owner chose the second of three layouts; the other two are retired.
+       OWNER (second pass): the calendar read flat. Three new layouts of the same eight stages, each about one screen,
        each with its own drawn icon set and interaction. V1 the staircase (the job climbs; the open space above the low
        steps holds the stage card), V2 the dial (a ring of eight; the centre answers), V3 the card rail (drag or step
        through eight illustrated cards on a progress track). Week marks and lines are the firm's own (FACTS.md "The
        eight-stage process"). The stages render from one list in process.js. -->
   <div class="ver ps" data-v="1">
-    <div class="wrap ps__head">
-      <div>
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
-      </div>
-      <p class="t-lead ps__lead">We tell you which stage is likely to be the long one on your project before you sign anything.</p>
-    </div>
-    <div class="wrap">
-      <div class="st">
-        <div class="st__card pz-card" aria-live="polite"></div>
-        <ol class="st__steps" aria-label="The eight stages"></ol>
-      </div>
-      <p class="ps__note">Timelines vary by scope and jurisdiction.</p>
-    </div>
-  </div>
-  <div class="ver ps" data-v="2" hidden>
     <div class="wrap pd">
       <div class="pd__side">
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h-2">Eight stages. <span class="acc">You always know which.</span></h2>
+        <h2 class="t-head" id="process-h">Eight stages. <span class="acc">You always know which.</span></h2>
         <div class="pd__card pz-card" aria-live="polite"></div>
         <div class="pd__nav">
           <button type="button" class="pd__btn" data-d="-1" aria-label="Previous stage"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -39,25 +24,5 @@
         <div class="pd__mid" aria-hidden="true"><span class="pd__n nums">01</span><span class="pd__t">Consultation</span></div>
       </div>
     </div>
-  </div>
-  <div class="ver ps" data-v="3" hidden>
-    <div class="wrap ps__head">
-      <div>
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>How a job runs</p>
-        <h2 class="t-head" id="process-h-3">Eight stages. <span class="acc">You always know which.</span></h2>
-      </div>
-      <div class="pk__ctl">
-        <p class="t-lead ps__lead">Drag through the job, or step it.</p>
-        <div class="pk__btns">
-          <button type="button" class="pd__btn" data-d="-1" aria-label="Previous stages"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button type="button" class="pd__btn" data-d="1" aria-label="Next stages"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
-        </div>
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="pk__track" aria-hidden="true"><span class="pk__fill"></span></div>
-    </div>
-    <ol class="pk__rail" aria-label="The eight stages" tabindex="0"></ol>
-    <div class="wrap"><p class="ps__note">Timelines vary by scope and jurisdiction.</p></div>
   </div>
 </section>

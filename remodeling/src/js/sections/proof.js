@@ -1,4 +1,8 @@
-/* FINALIZE · Home 2 · Proof (V2 deepened): four fact blocks you can grab, throw and stack.
+/* OWNER (proof pass): depth (each block has thickness and a contact shadow that shrinks as it lifts), a purpose (a click
+   without a drag opens that fact's card with the way to check it: the state licence search, the Google listing, the
+   town finder, the projects), and a goal (four stacked in one tower earns the "Built properly." stamp and a height mark;
+   "Build the tower" stacks them for you). Enter checks a block from the keyboard; Space still picks it up.
+   FINALIZE · Home 2 · Proof (V2 deepened): four fact blocks you can grab, throw and stack.
    A small rigid-box solver (own code; the S0452 custom-renderer and teardown rules applied): gravity, floor, walls,
    box-on-box stacking resolved along the smaller overlap, fixed 1/120s sub-steps, sleeps when still [S1315].
    Feel [S0340]: a release keeps the hand's real velocity; tilt comes from horizontal speed (state, not time); the hover
@@ -9,11 +13,34 @@
   EZ.section('proof', { 1: { init: function (root, k) {
     var site = root.querySelector('.pf__site'), list = root.querySelector('.pf__blocks'), say = root.querySelector('.pf__say');
     var els = Array.prototype.slice.call(root.querySelectorAll('.pf__b'));
+    var FACTS = [
+      ['Licence', 'CBC1265280', 'Licensed, bonded &amp; insured. Elbaz Construction is a Florida Certified Building Contractor; look the licence up on the state\u2019s own search.', 'Verify the licence', 'https://www.myfloridalicense.com/', true],
+      ['Google reviews', '4.8 \u00b7 343', 'The average across every review on our Google listing. Read them there, not here.', 'Read the 343 reviews', 'https://www.google.com/maps?cid=17916885921843924422', true],
+      ['Where we build', '104', 'Municipalities across Miami\u2011Dade, Broward and Palm Beach: 34, 31 and 39. Type yours into the town finder.', 'Find your town', '#towns', false],
+      ['Our own work', '26 \u00b7 44', 'Projects and photographs on this site, every one an Elbaz job. No stock photos.', 'See the projects', '#work', false]
+    ];
+    var card = root.querySelector('.pf__card'), intro = card.querySelector('.pf__intro'), fact = card.querySelector('.pf__fact');
+    var win = root.querySelector('.pf__win'), dim = root.querySelector('.pf__dim'), dimt = root.querySelector('.pf__dimt');
+    var shadows = els.map(function () { var sh = document.createElement('span'); sh.className = 'pf__sh'; sh.setAttribute('aria-hidden', 'true'); list.insertBefore(sh, list.firstChild); return sh; });
+    k.add(function () { shadows.forEach(function (sh) { sh.remove(); }); });
+    var openI = -1;
+    function inspect(i) {
+      openI = i; var F = FACTS[i];
+      intro.hidden = true; fact.hidden = false;
+      fact.querySelector('.pf__fk').innerHTML = F[0]; fact.querySelector('.pf__fv').innerHTML = F[1]; fact.querySelector('.pf__fb').innerHTML = F[2];
+      var a = fact.querySelector('.pf__fa'); a.href = F[4]; a.querySelector('.btn__label').textContent = F[3];
+      if (F[5]) a.setAttribute('rel', 'noopener'); else a.removeAttribute('rel');
+      els.forEach(function (e, j) { e.classList.toggle('is-open', j === i); });
+      card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
+    }
+    function closeFact() { openI = -1; intro.hidden = false; fact.hidden = true; els.forEach(function (e) { e.classList.remove('is-open'); }); }
+    k.on(fact.querySelector('.pf__x'), 'click', closeFact);
+    k.add(function () { closeFact(); });
     var G = 2600, SUB = 1 / 120, B = [], W = 0, H = 0, S = 1, asleep = true, frames = 0, loop = null, started = false;
 
     function dims() {
       W = list.clientWidth; H = list.clientHeight;
-      S = Math.max(.56, Math.min(1, W / 1180));
+      S = Math.max(.6, Math.min(1.08, W / 1240));
       B.forEach(function (b) { b.w = b.bw * S; b.h = b.bh * S; b.el.style.width = b.w + 'px'; b.el.style.height = b.h + 'px'; });
     }
     els.forEach(function (el, i) {
@@ -49,7 +76,7 @@
       if (oy < ox) {            // vertical: the upper block rests on the lower
         var up = a.y < b.y ? a : b, lo = up === a ? b : a;
         if (up.held && !lo.held) { lo.y += oy; } else {
-          up.y -= oy; if (up.vy > 0) { up.vy = up.vy > 380 ? -up.vy * .18 : 0; up.sq = Math.min(1, up.sq + .5); } up.vx *= .9;
+          up.y -= oy; if (up.vy > 0) { if (up.vy > 380) { up.sq = Math.min(1, up.sq + up.vy / 3600); up.vy = -up.vy * .18; } else up.vy = 0; } up.vx *= .9;   // owner pass: squash only on a real impact (a resting block was re-squashed every step and never slept)
           // a block resting on less than 35% of its width slides off its edge and lands level ("they always land level")
           if (!up.held && ox / up.w < .35) up.vx += (up.x + up.w / 2 < lo.x + lo.w / 2 ? -1 : 1) * 90;
         }
@@ -86,15 +113,37 @@
       });
       render();
       frames = moving ? 0 : frames + 1;
-      if (frames > 20) { asleep = true; return false; }
+      if (frames > 20) { asleep = true; checkTower(); return false; }
     }
     function render() {
-      B.forEach(function (b) {
+      B.forEach(function (b, i) {
+        // the contact shadow sits on the deck under the block; it shrinks and fades as the block rises
+        var gap = Math.max(0, H - (b.y + b.h)), f = Math.min(1, gap / 420), sh = shadows[i];
+        if (sh) { sh.style.transform = 'translate3d(' + (b.x + b.w * .06 + gap * .04).toFixed(1) + 'px,' + (H - 6) + 'px,0) scaleX(' + (1 - f * .45).toFixed(3) + ')'; sh.style.width = (b.w * .9).toFixed(0) + 'px'; sh.style.opacity = (b.live ? .55 * (1 - f * .8) : 0).toFixed(2); }
         var sy = 1 - b.sq * .12, sx = 1 + b.sq * .08, r = b.tilt + b.bend * 1.6, sk = b.bend * -1.8;
         b.el.style.transform = 'translate3d(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px,0) rotate(' + r.toFixed(2) + 'deg) skewX(' + sk.toFixed(2) + 'deg) scale(' + sx.toFixed(3) + ',' + sy.toFixed(3) + ')';
       });
     }
+    // four in one tower: every block but the lowest rests on another, and they overlap in one column
+    var won = false;
+    function rests(b, o) { return Math.abs(b.y + b.h - o.y) < 4 && Math.min(b.x + b.w, o.x + o.w) - Math.max(b.x, o.x) > 8; }
+    function checkTower() {
+      var on = B.filter(function (b) { return B.some(function (o) { return o !== b && rests(b, o); }); });
+      var floor = B.filter(function (b) { return Math.abs(b.y + b.h - H) < 4; });
+      var tower = on.length === B.length - 1 && floor.length === 1;
+      if (tower && !won) {
+        won = true;
+        var top = B.reduce(function (a, b) { return b.y < a.y ? b : a; }), right = Math.max.apply(null, B.map(function (b) { return b.x + b.w; }));
+        var lr = list.getBoundingClientRect(), sr = site.getBoundingClientRect(), ox = lr.left - sr.left, oy = lr.top - sr.top;
+        var left = Math.min.apply(null, B.map(function (b) { return b.x; }));
+        win.style.left = (ox + left - 24) + 'px'; win.style.top = (oy + top.y + (H - top.y) * .3) + 'px';
+        dim.style.left = (ox + right + 18) + 'px'; dim.style.top = (oy + top.y) + 'px'; dim.style.height = (H - top.y) + 'px';
+        dimt.textContent = 'Four high';
+        site.classList.add('is-won'); announce('All four stacked in one tower. Built properly.');
+      }
+    }
     function wake() {
+      if (won) { won = false; site.classList.remove('is-won'); }
       if (!asleep) return;
       asleep = false; frames = 0;
       if (!k.motion) { for (var n = 0; n < 2400; n++) { if (frame(1 / 60) === false) break; } asleep = true; return; }   // resolve at once
@@ -107,7 +156,7 @@
       var b = B[i], ox = 0, oy = 0;
       // touch: a direction lock (Phase 6). The block takes the gesture only if it starts sideways; a vertical start is
       // left to the browser (touch-action: pan-y), so a thumb on a block still scrolls the page
-      var pend = null;
+      var pend = null, down = null;
       function grab(e, sx, sy) {
         try { el.setPointerCapture(e.pointerId); } catch (x) {}   // a capture that cannot be taken never aborts the grab
         var r = list.getBoundingClientRect();
@@ -118,6 +167,7 @@
       }
       k.on(el, 'pointerdown', function (e) {
         if (e.button > 0) return;
+        down = { x: e.clientX, y: e.clientY, t: performance.now() };
         if (e.pointerType === 'touch') { pend = { x: e.clientX, y: e.clientY }; return; }
         e.preventDefault(); grab(e, e.clientX, e.clientY);
       });
@@ -140,8 +190,11 @@
         }
       });
       k.on(el, 'pointerleave', function () { if (!b.held) { b.bendT = 0; wake(); } });
-      function release() {
-        pend = null;
+      function release(e) {
+        // a press that never travelled is a click: open this fact's card instead of throwing
+        var tap = down && e && e.type === 'pointerup' && Math.abs(e.clientX - down.x) < 6 && Math.abs(e.clientY - down.y) < 6 && performance.now() - down.t < 400;
+        down = null; pend = null;
+        if (tap) { inspect(i); if (b.held) { b.held = false; el.classList.remove('is-held'); b.vx = 0; b.vy = 0; wake(); } return; }
         if (!b.held) return;
         b.held = false; el.classList.remove('is-held');
         var a = hist[0], z = hist[hist.length - 1], dt = Math.max(16, z.t - a.t) / 1000;
@@ -159,6 +212,7 @@
       var home = null;
       k.on(el, 'keydown', function (e) {
         var name = el.getAttribute('aria-label');
+        if (e.key === 'Enter' && !b.key) { e.preventDefault(); inspect(i); return; }
         if (e.key === ' ' || e.key === 'Enter') {
           e.preventDefault();
           if (!b.key) { b.key = true; home = { x: b.x, y: b.y }; b.held = true; b.y = Math.max(-H * .3, b.y - 48 * S); el.classList.add('is-key'); el.style.zIndex = 4; announce(name + ' picked up. Left and right arrows carry it, Space sets it down, Escape puts it back.'); }
@@ -175,6 +229,14 @@
     });
     function announce(t) { say.textContent = ''; requestAnimationFrame(function () { say.textContent = t; }); }
 
+    /* ---------- build the tower: widest at the base, each dropped onto the one below in turn ---------- */
+    k.on(root.querySelector('.pf__tower'), 'click', function () {
+      var order = B.slice().sort(function (a, b) { return b.w - a.w; }), cx = W * (W > 760 ? .66 : .5);
+      clock = 0;
+      order.forEach(function (b, n) { b.x = Math.max(0, Math.min(W - b.w, cx - b.w / 2)); b.y = -b.h - 40; b.vx = 0; b.vy = 0; b.tilt = 0; b.live = false; b.t0 = n * .42; b.held = false; b.key = false; b.el.classList.remove('is-held', 'is-key'); });
+      if (won) { won = false; site.classList.remove('is-won'); }
+      render(); asleep = true; wake(); announce('Building the tower, widest block at the base.');
+    });
     /* ---------- restack: every block is lifted and dropped back level, in sequence ---------- */
     k.on(root.querySelector('.pf__restack'), 'click', function () { clock = 0; place(k.motion); announce('The blocks are back on the deck, level.'); });
 

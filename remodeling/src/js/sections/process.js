@@ -44,32 +44,8 @@
   }
 
   EZ.section('process', {
-    /* V1 · the staircase */
-    1: { init: function (root, k) {
-      var ol = root.querySelector('.st__steps'), cardEl = root.querySelector('.st__card');
-      ol.innerHTML = ST.map(function (s, i) {
-        return '<li class="st__li" style="--i:' + i + '"><button type="button" class="st__s" data-i="' + i + '" aria-pressed="false">' +
-          '<span class="st__flag" aria-hidden="true"></span>' + icon(i, 'pz-ic st__ic') + '<span class="st__n nums">' + nn(i) + '</span><span class="st__t">' + s[1] + '</span></button></li>';
-      }).join('');
-      var bs = Array.prototype.slice.call(ol.querySelectorAll('.st__s')), cur = -1;
-      function go(i, anim) { if (i === cur) return; cur = i; bs.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); b.classList.toggle('is-past', j < i); }); card(cardEl, i, anim); }
-      bs.forEach(function (b, i) {
-        k.on(b, 'pointerenter', function (e) { if (e.pointerType === 'mouse') go(i, true); });
-        k.on(b, 'click', function () { go(i, true); }); k.on(b, 'focus', function () { go(i, true); });
-      });
-      keys(k, bs, function (j) { go(j, true); });
-      go(0, false);
-      k.add(function () { ol.innerHTML = ''; cardEl.innerHTML = ''; cur = -1; });
-      EZ.reveal(k, root.querySelectorAll('.ps__head > *, .st__card'));
-      if (!k.motion) return;
-      var lis = ol.querySelectorAll('.st__li');
-      gsap.set(lis, { yPercent: 100, opacity: 0 });
-      var stt = ScrollTrigger.create({ trigger: ol, start: 'top 85%', once: true, onEnter: function () { gsap.to(lis, { yPercent: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .07, clearProps: 'transform,opacity' }); } });
-      k.add(function () { stt.kill(); });
-    } },
-
     /* V2 · the dial */
-    2: { init: function (root, k) {
+    1: { init: function (root, k) {
       var svg = root.querySelector('.pd__svg'), nodes = root.querySelector('.pd__nodes'), cardEl = root.querySelector('.pd__card');
       var midN = root.querySelector('.pd__n'), midT = root.querySelector('.pd__t'), pos = root.querySelector('.pd__pos');
       var C = 220, R = 168, GAP = 5, seg = 360 / 8;
@@ -105,32 +81,6 @@
         gsap.to(bs, { scale: 1, opacity: 1, duration: .45, ease: 'back.out(2)', stagger: .07, delay: .15, clearProps: 'transform,opacity' });
       } });
       k.add(function () { stt.kill(); gsap.set(segs, { clearProps: 'all' }); });
-    } },
-
-    /* V3 · the card rail */
-    3: { init: function (root, k) {
-      var rail = root.querySelector('.pk__rail'), fill = root.querySelector('.pk__fill');
-      rail.innerHTML = ST.map(function (s, i) {
-        return '<li class="pk__c" style="--i:' + i + '"><span class="pk__art">' + icon(i, 'pz-ic pk__ic') + '<span class="pk__big nums" aria-hidden="true">' + nn(i) + '</span></span>' +
-          '<span class="pk__wk">' + s[0] + '</span><h3 class="pk__t"><span class="sr-only">' + nn(i) + ' </span>' + s[1] + '</h3><p class="pk__p">' + s[2] + '</p></li>';
-      }).join('');
-      var cs = rail.querySelectorAll('.pk__c');
-      function upd() { var m = rail.scrollWidth - rail.clientWidth; fill.style.transform = 'scaleX(' + (m > 0 ? Math.max(.08, rail.scrollLeft / m) : 1).toFixed(3) + ')'; }
-      k.on(rail, 'scroll', upd); upd();
-      function step(d) { var w = cs[0].getBoundingClientRect().width + 24; rail.scrollBy({ left: d * w * 2, behavior: k.motion ? 'smooth' : 'auto' }); }
-      root.querySelectorAll('.pk__btns .pd__btn').forEach(function (b) { k.on(b, 'click', function () { step(+b.dataset.d); }); });
-      k.on(rail, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
-      // mouse drag (touch scrolls natively); a drag under 6px still lets a click through
-      var dn = null;
-      k.on(rail, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') return; dn = { x: e.clientX, l: rail.scrollLeft, moved: false }; rail.classList.add('is-grab'); });
-      k.on(window, 'pointermove', function (e) { if (!dn) return; var dx = e.clientX - dn.x; if (Math.abs(dx) > 6) dn.moved = true; rail.scrollLeft = dn.l - dx; });
-      k.on(window, 'pointerup', function () { if (!dn) return; dn = null; rail.classList.remove('is-grab'); });
-      k.add(function () { rail.innerHTML = ''; });
-      EZ.reveal(k, root.querySelectorAll('.ps__head > *'));
-      if (!k.motion) return;
-      gsap.set(cs, { x: 80, opacity: 0 });
-      var stt = ScrollTrigger.create({ trigger: rail, start: 'top 85%', once: true, onEnter: function () { gsap.to(cs, { x: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .06, clearProps: 'transform,opacity' }); } });
-      k.add(function () { stt.kill(); });
     } }
   });
 })();
