@@ -518,3 +518,26 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Protect 7's cover icons sat on the numerals at narrow widths; they moved to the bottom.
 
 **Evidence note:** the full-page capture replays Protect 7's width transition, so its evidence is viewport shots (`f25`). Protect 6 also has 2× shots mid-sweep, mid-walk and with the box set down.
+
+## L16 · Services 6 + 7 · checks 39/39 · evidence `gates/ladder/L16-services-6-7/` · Services now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Services 6 · What Do You See?** | Quiet Cubes (configurator first) | Five plain things a homeowner notices, as 3D keys with drawn icons: a leak or a stain · shingles down after a storm · an older roof · planning a new roof · tired siding. Choosing one re-deals Owl's five service cards with FLIP motion: the fit rises to the top as "Start here", opening its photo and what's included; the next sensible one is "Also worth a look"; the rest sit back with greyed photos. A live line names both. | 8.2 | 8.8 | 8.0 | 8.6 | **8.42** |
+| **Services 7 · A Roof's Life** | Scout Motors (heritage timeline spine) | One vertical spine through a roof's life with no years claimed: Day one (Roof Replacement) · After a storm (Storm Damage Help) · When something leaks (Roof Repair) · Every so often (Wise Check Inspections) · When the walls are next (Siding). The amber spine fills as you scroll; each stop lights, wipes Owl's photo open and settles its card; a round roof badge rides the spine and changes per stop (new, hail, drip, magnifier, new siding). | 8.4 | 8.2 | 8.2 | 8.6 | **8.34** |
+
+**Truth:**
+- Every card is `OWL.SVC`: Owl's names, lines, included items and photos (with the same truthful alts as Services 5).
+- Services 6 says "A guide, not a diagnosis. A Wise Check is how we confirm what your roof needs." The pairings are roofer-sensible: leak → repair, then a Wise Check (leak detection tools); storm → Storm Damage Help; older roof → Wise Check, then replacement; new roof → replacement, then siding; siding → siding, then replacement.
+- Services 7 names no ages or intervals (tested: no "N years").
+
+**Checks run:** the generic gate, plus:
+- Services 6: five cards from data; leak → repair then check, with the first card opened; storm → Storm Damage Help and the live line; arrow + Enter → older roof puts the Wise Check first; the guide note.
+- Services 7: five stops with no years; data words; nothing lit at the top; halfway the spine is at 0.5 with 2–3 stops lit; the badge rides the spine and matches the stop; at the end all five are lit and the badge shows siding; photos are Owl's.
+
+**Ledger:**
+- **Services 6:** keys ⟦S1388⟧; FLIP re-deal ⟦S0409⟧; arrow keys ⟦S1107⟧; title ⟦S0451⟧.
+- **Services 7:** progress spine ⟦S1325⟧; badge states ⟦S0407⟧; photo clip reveal ⟦S1324⟧-style; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Services 6's key group was a `ul` with `role="group"`, which orphaned its items (axe listitem); it is now a plain group of buttons.
+- Faded "rest" cards and unreached Services 7 cards first used opacity, which would drop the text contrast; now only the photos grey or stay closed, and the text stays at full contrast.

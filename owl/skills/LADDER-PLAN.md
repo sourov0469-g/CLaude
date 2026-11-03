@@ -216,3 +216,18 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   the chapter (a drawn plate and Owl's words), and the open chapter widens while the others narrow to their spines.
   One open at a time; keyboard buttons with aria-expanded. Skills: ⟦S0409⟧ transition, ⟦S0910⟧ accordion a11y,
   ⟦S0407⟧ plate draw-on, ⟦S0451⟧ title.
+
+## L16 · Services 6 + 7 (Services stands at 5: V1 boarding board, V2 five chapters, V3 one line, V4 point at your roof, V5 up close)
+- **Services 6 · "What Do You See?"** — reference **Quiet Cubes** (configurator first: the instrument is the page).
+  Five plain things a homeowner notices (a leak or a stain · shingles down after a storm · an older roof · planning a
+  new roof · tired siding) as 3D keys with drawn icons. Choosing one re-deals Owl's five service cards (FLIP motion):
+  the service that fits rises to the top marked "Start here", the next sensible one sits behind it marked "Also worth
+  a look", and the rest fan back. Every card is Owl's own (`OWL.SVC` name, line, photo). A note says a Wise Check
+  is how Owl confirms what a roof needs; nothing here diagnoses. Skills: ⟦S1388⟧ keys, ⟦S0409⟧ FLIP re-deal,
+  ⟦S1107⟧ keyboard, ⟦S0451⟧ title.
+- **Services 7 · "A Roof's Life"** — reference **Scout Motors** (heritage timeline spine). One vertical spine through
+  a roof's life with no years claimed: Day one (Roof Replacement) · After a storm (Storm Damage Help) · When
+  something leaks (Roof Repair) · Every so often (Wise Check Inspections) · When the walls are next (Siding). The
+  spine draws as you scroll; each stop brings in Owl's photo and words on alternating sides. A small roof badge
+  rides the spine and changes with the stop: new, hail-marked, dripping, under the magnifier, with new siding.
+  Skills: ⟦S1325⟧ progress spine, ⟦S0407⟧ badge draw, ⟦S0451⟧ title, ⟦S1324⟧-style photo reveal (clip).

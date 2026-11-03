@@ -1,0 +1,257 @@
+[
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "services"
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "What Do You See?"
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "five cards, each Owl's own name, line and photo",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "a leak or a stain: Roof Repair first, Wise Check second",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "the first card opens with what is included",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "shingles down after a storm: Storm Damage Help first",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "arrow and Enter: an older roof puts the Wise Check first",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "it says it is a guide, not a diagnosis",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "services"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "A Roof’s Life"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "five stops in a roof's life, no years claimed",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "each stop carries Owl's own service words",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "at the top nothing is lit and photos are closed",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "halfway: the spine is half drawn and the first stops are lit",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "the badge rides the spine and shows the current stop",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "the end: all five lit, the badge shows new siding",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "each photo is Owl's service photo with a truthful alt",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]
