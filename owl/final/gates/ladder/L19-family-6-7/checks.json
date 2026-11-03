@@ -1,0 +1,239 @@
+[
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 7
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "family"
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Porch Light"
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "founding facts as locked (family-owned, 2025, Shoreview, Tim Brown, Noah Bergland)",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "the two founding families are real photos with true alts",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "the porch light comes on when the porch is seen",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "the switch turns it off and says so",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "…and on again: the dusk lifts and the glow falls on the photos",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "6",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "family"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Pinboard"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "five real photos as prints, every one with a true description",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "the patch carries only locked facts",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "a print drags and settles where it is dropped",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "arrow keys move a focused print",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "Tidy Up eases every print home",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "7",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

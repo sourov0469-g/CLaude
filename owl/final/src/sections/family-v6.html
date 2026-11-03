@@ -1,0 +1,80 @@
+<section class="sec fam6" id="family-6" aria-labelledby="fm6-h">
+<style>
+.fam6{overflow:hidden}
+.fam6 .g{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.75fr);gap:clamp(20px,4vw,60px);align-items:center}
+.fam6 .scene{position:relative;aspect-ratio:1000/640;border-radius:26px;overflow:hidden;box-shadow:0 44px 70px -46px rgba(23,17,29,.6)}
+.fam6 .scene svg{position:absolute;inset:0;width:100%;height:100%}
+.fam6 .ph{position:absolute;overflow:hidden;background:#E9E3D5}
+.fam6 .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.fam6 .ph.a{left:10.4%;top:21.5%;width:21.2%;height:24.5%}
+.fam6 .ph.b{left:35.4%;top:24.6%;width:19.2%;height:21.4%}
+.fam6 .dusk{position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,48,72,.34),rgba(42,33,49,.22));transition:opacity 1.2s;pointer-events:none}
+.fam6 .glow{position:absolute;left:58.5%;top:41%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,140,.55),rgba(255,214,140,.18) 45%,transparent 70%);opacity:0;transition:opacity 1.2s;pointer-events:none;mix-blend-mode:screen}
+.fam6 .lit .dusk{opacity:0}
+.fam6 .lit .glow{opacity:1}
+.fam6 .bulb{transition:fill .6s}
+.fam6 .lit .bulb{fill:#FFE29A}
+.fam6 .fly{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFE29A;box-shadow:0 0 10px 3px rgba(255,214,140,.8);opacity:0;pointer-events:none}
+.fam6 .lit .fly{animation:fm6f 7s ease-in-out infinite}
+@keyframes fm6f{0%,100%{opacity:0;transform:translate(0,0)}20%{opacity:1}50%{opacity:.8;transform:translate(30px,-26px)}80%{opacity:1;transform:translate(-14px,-44px)}}
+.fam6 .tag{position:absolute;padding:4px 10px;border-radius:999px;background:rgba(251,250,246,.94);font-weight:800;font-size:13px;pointer-events:none}
+.fam6 .lede{margin:12px 0 18px;max-width:36ch}
+.fam6 .who{display:grid;gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.fam6 .who li{display:flex;gap:10px;align-items:baseline;font-size:16px}
+.fam6 .who b{min-width:8ch}
+.fam6 .act{display:flex;flex-wrap:wrap;gap:12px}
+.fam6 .sw{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 20px 0 12px;border-radius:999px;font-weight:800;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s}
+.fam6 .sw:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.fam6 .sw i{position:relative;width:46px;height:26px;border-radius:13px;background:#C9C0AC;transition:background .3s}
+.fam6 .sw i::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .3s cubic-bezier(.3,1.4,.5,1)}
+.fam6 .sw[aria-pressed="true"] i{background:#EAA221}
+.fam6 .sw[aria-pressed="true"] i::after{transform:translateX(20px)}
+.fam6 .sw:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (max-width:900px){.fam6 .g{grid-template-columns:minmax(0,1fr)}.fam6 .tag{font-size:11px;padding:3px 7px}}
+@media (prefers-reduced-motion:reduce){.fam6 .dusk,.fam6 .glow,.fam6 .bulb{transition:none}.fam6 .lit .fly{animation:none;opacity:.8}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <figure class="scene" data-owl="say:Lights on" style="margin:0">
+   <svg viewBox="0 0 1000 640" aria-hidden="true">
+    <rect width="1000" height="640" fill="#EDE4D2"/>
+    <g stroke="#D4C8B0" stroke-width="2"><path d="M0 40H1000M0 80H1000M0 120H1000M0 160H1000M0 200H1000M0 240H1000M0 280H1000M0 320H1000M0 360H1000M0 400H1000M0 440H1000M0 480H1000M0 520H1000"/></g>
+    <rect x="0" y="0" width="1000" height="26" fill="#55505D"/><rect x="0" y="26" width="1000" height="10" fill="#F1EFE6"/>
+    <rect x="94" y="128" width="228" height="173" fill="#9C7A52"/><rect x="100" y="134" width="216" height="161" fill="#F6F3EC"/>
+    <rect x="344" y="148" width="208" height="153" fill="#9C7A52"/><rect x="350" y="154" width="196" height="141" fill="#F6F3EC"/>
+    <path d="M208 128L208 100M448 148L448 116" stroke="#6B5A44" stroke-width="2"/><circle cx="208" cy="98" r="4" fill="#6B5A44"/><circle cx="448" cy="114" r="4" fill="#6B5A44"/>
+    <rect x="640" y="210" width="140" height="350" rx="4" fill="#17111D"/><rect x="654" y="226" width="112" height="140" rx="3" fill="#2A2131"/><rect x="662" y="234" width="96" height="124" rx="3" fill="#CFE1EA" opacity=".35"/><circle cx="760" cy="400" r="6" fill="#EAA221"/>
+    <rect x="626" y="196" width="168" height="16" fill="#F1EFE6"/><path d="M626 210V560M794 210V560" stroke="#F1EFE6" stroke-width="10"/>
+    <g><path d="M585 210h14v18h-14z" fill="#3A3540"/><path d="M574 228h36l-6 52h-24z" fill="#3A3540"/><path class="bulb" d="M581 236h22l-4 38h-14z" fill="#BFB6A4"/><path d="M570 280h44" stroke="#3A3540" stroke-width="5" stroke-linecap="round"/></g>
+    <rect x="830" y="230" width="130" height="170" fill="#F6F3EC"/><rect x="840" y="240" width="110" height="150" fill="#CFE1EA" opacity=".6"/><path d="M895 240V390M840 315H950" stroke="#F6F3EC" stroke-width="6"/>
+    <rect y="560" width="1000" height="80" fill="#B48A55"/><g stroke="#9C7448" stroke-width="2"><path d="M0 586H1000M0 612H1000"/></g>
+    <rect x="606" y="548" width="208" height="34" rx="6" fill="#6B4E2E"/><text x="710" y="571" text-anchor="middle" font-size="17" font-weight="900" letter-spacing="2" fill="#F1EFE6">WE GIVE A HOOT</text>
+    <path d="M60 560c0-40 20-62 44-62s44 22 44 62z" fill="#5E8C45"/><path d="M880 560c0-34 18-54 38-54s38 20 38 54z" fill="#5E8C45"/>
+   </svg>
+   <div class="ph a"><img alt="Tim Brown with his wife and their children" decoding="async"></div>
+   <div class="ph b"><img alt="Noah Bergland with his wife and their children" decoding="async"></div>
+   <span class="tag" style="left:12%;top:48.5%" aria-hidden="true">The Browns</span><span class="tag" style="left:37%;top:48.5%" aria-hidden="true">The Berglands</span>
+   <div class="dusk"></div><div class="glow"></div>
+   <i class="fly" style="left:20%;top:70%;animation-delay:-1s"></i><i class="fly" style="left:48%;top:62%;animation-delay:-3s"></i><i class="fly" style="left:83%;top:72%;animation-delay:-5s"></i><i class="fly" style="left:30%;top:16%;animation-delay:-2s"></i><i class="fly" style="left:92%;top:30%;animation-delay:-4s"></i>
+  </figure>
+  <div>
+   <span class="kick">Family-owned since 2025</span>
+   <h2 class="h2" id="fm6-h" style="margin-top:12px">Porch Light</h2>
+   <p class="lede rv">Owl Roofing is family-owned, founded in Shoreview in 2025 by two families. We leave the light on for the people we work for.</p>
+   <ul class="who"><li><b>Tim Brown</b><span>co-founder, with the Browns</span></li><li><b>Noah Bergland</b><span>co-founder, with the Berglands</span></li></ul>
+   <div class="act"><button class="sw" type="button" aria-pressed="false"><i aria-hidden="true"></i>Porch light</button><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('family','6',function(root){
+  var scene = root.querySelector('.scene'), sw = root.querySelector('.sw'), imgs = root.querySelectorAll('.ph img'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  imgs[0].src = '{{A:browns.webp}}'; imgs[1].src = '{{A:berglands.webp}}';
+  function set(on){ scene.classList.toggle('lit', on); sw.setAttribute('aria-pressed', on); }
+  sw.addEventListener('click', function(){ set(sw.getAttribute('aria-pressed') !== 'true'); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ set(true); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); setTimeout(function(){ set(true); }, 600); } }, {threshold:.4}); io.observe(scene);
+});
+</script>
+</section>

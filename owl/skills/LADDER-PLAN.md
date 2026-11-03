@@ -260,3 +260,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   keys; idle, it turns slowly through the list (off under reduced motion). An unknown town is told plainly it is
   not on the list and given the phone (651) 977-6027. Skills: ⟦S0409⟧ spin transition, ⟦S1107⟧ keyboard, ⟦S1388⟧
   keys, ⟦S1442⟧ search feedback.
+
+## L19 · We Give a Hoot 6 + 7 (Family stands at 5: V1 tagline, V2 album, V3 numbers, V4 say it big, V5 two families one owl)
+- **Family 6 · "Porch Light"** — reference **Cowboy** (people-fronted warmth, one named system). A drawn front porch
+  in the soft light of early evening (kept light): siding, a door, a doormat reading "We Give a Hoot", and the two
+  founding families' real photos framed on the wall (the Browns, the Berglands). The porch lamp is a switch: on
+  view, or on a press, it comes on, the scene warms, a glow falls on the photos, and a few fireflies drift (off
+  under reduced motion). Beside it: family-owned, founded in 2025 in Shoreview by Tim Brown and Noah Bergland.
+  Skills: ⟦S1363⟧ ambient particles, ⟦S0405⟧ switch micro-interaction, ⟦S1388⟧ key, ⟦S0451⟧ title.
+- **Family 7 · "The Pinboard"** — reference **Lando Norris** (bespoke craft, motion that comes to rest). A cork
+  board with Owl's five real photos pinned as prints with honest captions, around an embroidered patch ("Owl
+  Roofing · Family-owned · Est. 2025 · Shoreview, MN") whose stitches sew themselves on. Drag a print anywhere (it
+  lifts, tilts and settles with a damped spring); focus a print and move it with the arrow keys; "Tidy Up" eases
+  them all home. Skills: ⟦S1018⟧ draggable a11y, ⟦S0489⟧ settle, ⟦S0407⟧ stitch draw-on, ⟦S1388⟧ keys.

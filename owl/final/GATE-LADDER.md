@@ -591,3 +591,26 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Area 7's letter keys were 33 px wide on phones; they now use 7 columns at 44 px or more.
 - Area 7's counter overlapped the plate on phones; it moved to the top corner.
 - Area 7's idle turns announced every town to screen readers; they are now quiet.
+
+## L19 · We Give a Hoot 6 + 7 · checks 36/36 · evidence `gates/ladder/L19-family-6-7/` · Family now at 7
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Family 6 · Porch Light** | Cowboy (people-fronted warmth) | A drawn front porch in soft early-evening light (kept light): siding, door, lamp, a window, and a doormat reading "WE GIVE A HOOT". The two founding families' real photos hang framed on the wall, labelled "The Browns" and "The Berglands". The porch light comes on when the porch is seen; a switch (aria-pressed) turns it off and on: the dusk lifts, a warm glow falls on the photos, fireflies drift (still under reduced motion). | 8.4 | 8.0 | 8.6 | 8.8 | **8.42** |
+| **Family 7 · The Pinboard** | Lando Norris (bespoke, motion that comes to rest) | A cork board with Owl's five real photos as pinned prints (the Browns, the Berglands, Noah at the roof edge, the crew, the community) around an embroidered patch ("OWL ROOFING · FAMILY-OWNED · EST. 2025 · SHOREVIEW, MN · WE GIVE A HOOT") whose stitches sew on when seen. Prints drag, tilt and settle on damped springs; arrow keys move a focused print; Tidy Up eases them home. | 8.4 | 8.2 | 8.4 | 8.6 | **8.40** |
+
+**Truth:**
+- Only the locked facts appear: family-owned, founded 2025 in Shoreview by Tim Brown and Noah Bergland, "We Give a Hoot".
+- Only Owl's own photos are used, each described as in earlier versions (from the owner's material). Nothing new was generated or invented.
+- Family 7's short captions ("Tim Brown & family") keep the full description in each print's accessible name.
+
+**Checks run:** the generic gate, plus:
+- Family 6: founding facts and doormat; two real photos with true alts; the light comes on when seen; the switch turns it off and on with the dusk lifting and the glow on.
+- Family 7: five real prints with true descriptions; the patch facts; drag and settle where dropped; arrow keys move a focused print; Tidy Up returns every print home.
+
+**Ledger:**
+- **Family 6:** fireflies ⟦S1363⟧; switch ⟦S0405⟧; keys ⟦S1388⟧; title ⟦S0451⟧.
+- **Family 7:** draggable with a keyboard alternative ⟦S1018⟧; spring settle ⟦S0489⟧; stitch draw-on ⟦S0407⟧; Tidy key ⟦S1388⟧.
+
+**Defects found and fixed in the round:**
+- Family 7's long captions ran onto the photos; they were shortened, and the phone prints got room for two lines.
+- The community print covered the patch on phones; phones now get a taller board with the patch at the top.
