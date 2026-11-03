@@ -1133,7 +1133,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .kcta__proof { margin: 0; display: flex; flex-wrap: wrap; gap: 2px var(--s4); font: 600 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); }
 .kcta__proof .nums { color: var(--color-text); }
 .kcta__fin { display: grid; gap: var(--s2); padding-top: var(--s4); border-top: 1px dashed var(--color-border-strong); font: 400 .9375rem/1.5 var(--f-text); color: var(--color-text-secondary); }
-.kcta__fin p { margin: 0; }
+.kcta__fin p { margin: 0; max-width: 64ch; }   
 .kcta__fh { font: 600 1rem/1.3 var(--f-display) !important; color: var(--color-text); }
 .kcta__not { font-size: .8125rem; }
 
@@ -1145,7 +1145,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .kg__c { display: grid; grid-template-columns: 3rem 1fr; column-gap: var(--s4); padding: var(--s5); background: var(--color-bg); border: 1.5px solid var(--color-text); }
 .kg__n { grid-row: 1 / 3; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent-solid); color: #fff; font: 600 1rem/1 var(--f-text); }
 .kg__get { margin: 0; font: 600 1.375rem/1.25 var(--f-display); letter-spacing: -.01em; }
-.kg__q { margin: var(--s2) 0 0; font: italic 400 .9375rem/1.5 var(--f-text); color: var(--color-text-secondary); }
+.kg__q { margin: var(--s2) 0 0; max-width: 64ch; font: italic 400 .9375rem/1.5 var(--f-text); color: var(--color-text-secondary); }
 
 @media (max-width: 900px) {
   .kc__grid, .kg__grid { grid-template-columns: 1fr; gap: var(--s6); }
@@ -1317,7 +1317,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           </ol>
           <p class="sq__note">A kitchen often runs <span class="nums">6&ndash;12</span> weeks of construction.</p>
         </div>
-        <figure class="sq__fig" aria-hidden="true"><svg class="sq__svg" viewBox="0 0 640 460" focusable="false"></svg></figure>
+        <figure class="sq__fig" aria-hidden="true"><svg class="sq__svg" viewBox="0 0 640 466" focusable="false"></svg></figure>
       </div>
     </div>
   </div>
@@ -3703,9 +3703,10 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     s += g('l1', R(250, 300, 90, 120, 'app') + '<circle class="app" cx="275" cy="316" r="8"/><circle class="app" cx="315" cy="316" r="8"/>' + P('M262 340 H328 V408 H262 Z', 'app') +
       R(150, 300, 80, 120, 'app') + P('M158 314 H222', 'dim') + R(530, 130, 80, 290, 'app') + P('M530 250 H610 M598 180 V230 M598 270 V320', 'dim') +
       P('M262 180 H328 L340 230 H250 Z', 'app') + T(256, 290, 'Range') + T(154, 290, 'Dishwasher') + T(534, 120, 'Refrigerator') + T(266, 172, 'Hood'));
-    // 2 · cabinetry on order: dashed clay boxes (lead time)
+    // 2 · cabinetry on order: dashed clay boxes (lead time); the tag sits inside the upper on-order run (QA-2: on the wall
+    //     line it was crossed by the wiring and outlet boxes of stage 3)
     s += g('l2', R(40, 300, 100, 120, 'cab-o') + R(350, 300, 170, 120, 'cab-o') + R(40, 110, 200, 110, 'cab-o') + R(420, 110, 100, 110, 'cab-o') +
-      '<g class="tagg"><rect class="tagr" x="64" y="236" width="128" height="26" rx="3"/>' + T(78, 254, 'Cabinetry on order', 'tagt') + '</g>');
+      '<g class="tagg"><rect class="tagr" x="76" y="152" width="128" height="26" rx="3"/>' + T(90, 170, 'Cabinetry on order', 'tagt') + '</g>');
     // 3 · plumbing and electrical behind them
     s += g('l3', P('M435 420 V350 H455 V330 M470 420 V340', 'pipe') + P('M20 246 H520 M90 246 V252 M295 246 V252 M190 246 V252 M470 246 V252', 'wire') +
       R(84, 252, 12, 16, 'box') + R(289, 252, 12, 16, 'box') + R(184, 252, 12, 16, 'box') + R(464, 252, 12, 16, 'box') + T(330, 458, 'Water and drain', 'lab-s') + T(26, 238, 'Electrical', 'lab-s'));
@@ -3714,7 +3715,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     [[40, 100], [350, 85], [435, 85]].forEach(function (c) { doors += R(c[0], 304, c[1], 116, 'cab') + P('M' + (c[0] + c[1] / 2) + ' 312 V412', 'dim'); });
     [[40, 100], [140, 100], [420, 100]].forEach(function (c) { doors += R(c[0], 110, c[1], 110, 'cab') + P('M' + (c[0] + c[1] / 2) + ' 118 V212', 'dim'); });
     var tiles = ''; for (var y = 236; y < 292; y += 14) tiles += 'M40 ' + y + 'H520 '; for (var x = 40; x <= 520; x += 28) tiles += 'M' + x + ' 230 V292 ';
-    s += g('l4', P(tiles, 'tile') + doors + R(36, 292, 488, 9, 'top') + P('M380 296 Q410 310 440 296', 'ln') + T(150, 450, 'One kitchen, delivered as one scope', 'lab-s'));
+    s += g('l4', P(tiles, 'tile') + doors + R(36, 292, 488, 9, 'top') + P('M380 296 Q410 310 440 296', 'ln') + T(150, 458, 'One kitchen, delivered as one scope', 'lab-s'));
     return s;
   }
   // solid strokes draw; dashed and filled marks fade (DrawSVG would overwrite their dash pattern)
@@ -3731,7 +3732,9 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       k.add(function () { svg.innerHTML = ''; steps.forEach(function (s) { s.classList.remove('is-on'); }); });
       EZ.reveal(k, root.querySelectorAll('.sq__side > .eyebrow, .sq__side > .t-head'));
       var wide = k.motion && matchMedia('(min-width: 901px)').matches;
-      if (!wide) { steps.forEach(function (s) { s.classList.add('is-on'); }); return; }
+      // QA-2: the static drawing (≤ 900px, reduced motion) is the pinned story's last frame. It showed every layer's working
+      // notes at once, so captions, the lead-time tag and the wall labels stacked on one another; hide what the pin hands over.
+      if (!wide) { gsap.set(svg.querySelectorAll('.l2 .cab-o, .l2 .tagg, .l1 .lab, .l0 .ghost, .l0 .lab-s, .l1 .lab-s, .l2 .lab-s, .l3 .lab-s'), { opacity: 0 }); steps.forEach(function (s) { s.classList.add('is-on'); }); return; }
       // every layer starts undrawn; strokes draw, then fills and words come in
       layers.forEach(function (L) {
         gsap.set(L.querySelectorAll(DRAW), { drawSVG: '0%' });

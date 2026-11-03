@@ -62,7 +62,11 @@ function measure() {
     for (const id of ids) {
       if (v === 2 && !two.includes(id)) continue;
       const el = await p.$('#' + id); await el.scrollIntoViewIfNeeded(); await p.waitForTimeout(250);
+      // QA-2: hide the fixed chrome while a tall section is captured in strips (it repeated at every seam)
+      await p.addStyleTag({ content: '.qa-hide-chrome header, .qa-hide-chrome .skip, .qa-hide-chrome .mbar, .qa-hide-chrome .buddy, .qa-hide-chrome .ptip, .qa-hide-chrome .vsw { visibility: hidden !important; }' });
+      await p.evaluate(() => document.documentElement.classList.add('qa-hide-chrome'));
       await el.screenshot({ path: `${OUT}/${page}-${W}-${id}-v${v}.png`, animations: 'disabled' }).catch(() => {});
+      await p.evaluate(() => document.documentElement.classList.remove('qa-hide-chrome'));
     }
     await p.close();
   }

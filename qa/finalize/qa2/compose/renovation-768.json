@@ -1,0 +1,20 @@
+{
+ "page": "renovation",
+ "W": 768,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  }
+ }
+}

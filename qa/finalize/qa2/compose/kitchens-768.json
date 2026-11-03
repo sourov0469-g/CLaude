@@ -1,0 +1,26 @@
+{
+ "page": "kitchens",
+ "W": 768,
+ "runs": {
+  "v1": {
+   "edge": [],
+   "image": [
+    "kitchen-work img.kp__ib upscaled 1.35x (388px shown at 524px)",
+    "kitchen-work img.kp__ia upscaled 1.35x (388px shown at 524px)"
+   ],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  },
+  "v2": {
+   "edge": [],
+   "image": [
+    "kitchen-work img.kp__ib upscaled 1.35x (388px shown at 524px)",
+    "kitchen-work img.kp__ia upscaled 1.35x (388px shown at 524px)"
+   ],
+   "widow": [],
+   "measure": [],
+   "errors": []
+  }
+ }
+}

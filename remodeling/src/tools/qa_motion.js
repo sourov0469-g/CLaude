@@ -13,17 +13,48 @@ const [page, wArg, round] = process.argv.slice(2); const W = +wArg, VH = W > 500
 const OUT = `/home/user/CLaude/qa/finalize/qa${round}/motion`; fs.mkdirSync(OUT, { recursive: true });
 
 function overlaps() {
-  const vis = e => { const r = e.getBoundingClientRect(); if (r.width < 4 || r.height < 4 || r.bottom < 60 || r.top > innerHeight) return false; let op = 1; for (let a = e; a; a = a.parentElement) { const s = getComputedStyle(a); if (s.visibility === 'hidden' || s.display === 'none') return false; op *= +s.opacity; } return op > .25; };
+  // QA-2: clipping-aware. A block's rect is cut by every ancestor that clips (a closed answer at 0px has no visible area),
+  // and a pair counts only if, at the centre of their overlap, nothing opaque and unrelated sits above both of them.
+  const clipRect = e => { let r = e.getBoundingClientRect(); r = { l: r.left, t: r.top, r: r.right, b: r.bottom };
+    for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) { const s = getComputedStyle(a);
+      if (/(hidden|clip|auto|scroll)/.test(s.overflow + s.overflowX + s.overflowY)) { const q = a.getBoundingClientRect(); r = { l: Math.max(r.l, q.left), t: Math.max(r.t, q.top), r: Math.min(r.r, q.right), b: Math.min(r.b, q.bottom) }; } }
+    return r; };
+  const vis = e => { const r = clipRect(e); if (r.r - r.l < 4 || r.b - r.t < 4 || r.b < 60 || r.t > innerHeight) return false; let op = 1; for (let a = e; a; a = a.parentElement) { const s = getComputedStyle(a); if (s.visibility === 'hidden' || s.display === 'none') return false; op *= +s.opacity; } return op > .25; };
+  const opaque = e => { if (/^(IMG|CANVAS|VIDEO|svg)$/.test(e.tagName)) return true; const c = getComputedStyle(e).backgroundColor.match(/[\d.]+/g); return !!c && (c.length < 4 ? true : +c[3] > .9) && c.length >= 3 && !(c.length === 4 && +c[3] === 0); };
+  const skip = e => e.closest('.buddy, .ptip, .mbar, header, nav');
   const blocks = [...document.querySelectorAll('main h1, main h2, main h3, main p, main li, main figcaption, main .btn, main dt, main dd, main label')]
     .filter(e => vis(e) && [...e.childNodes].some(n => n.nodeType === 3 && n.nodeValue.trim()) && !e.closest('svg, .ca__rows, [aria-hidden="true"]'));
+  const rects = new Map(blocks.map(b => [b, clipRect(b)]));
   const out = [];
   for (let i = 0; i < blocks.length; i++) for (let j = i + 1; j < blocks.length; j++) {
     const a = blocks[i], b = blocks[j]; if (a.contains(b) || b.contains(a)) continue;
-    const p = a.getBoundingClientRect(), q = b.getBoundingClientRect();
-    const w = Math.min(p.right, q.right) - Math.max(p.left, q.left), h = Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top);
-    if (w <= 2 || h <= 2) continue; const ar = w * h, sm = Math.min(p.width * p.height, q.width * q.height);
-    if (ar / sm > .3) { const t = e => ((e.closest('section[id]') || { id: 'chrome' }).id) + ' ' + e.tagName.toLowerCase() + '.' + String(e.className).split(' ')[0] + ' "' + e.textContent.trim().replace(/\s+/g, ' ').slice(0, 26) + '"'; out.push(t(a) + ' x ' + t(b)); }
+    const p = rects.get(a), q = rects.get(b);
+    const w = Math.min(p.r, q.r) - Math.max(p.l, q.l), h = Math.min(p.b, q.b) - Math.max(p.t, q.t);
+    if (w <= 2 || h <= 2) continue; const ar = w * h, sm = Math.min((p.r - p.l) * (p.b - p.t), (q.r - q.l) * (q.b - q.t));
+    if (ar / sm <= .3) continue;
+    const cx = (Math.max(p.l, q.l) + Math.min(p.r, q.r)) / 2, cy = (Math.max(p.t, q.t) + Math.min(p.b, q.b)) / 2;
+    // walk the paint order from the top: the pair is a visible collision only if the second block is reached before
+    // anything opaque (an unrelated cover, or the first block's own opaque sheet) hides it
+    let found = null, real = false;
+    for (const e of document.elementsFromPoint(cx, cy)) { if (skip(e)) continue;
+      const inA = a === e || a.contains(e), inB = b === e || b.contains(e);
+      if (inA || inB) { const w = inA ? 'a' : 'b'; if (!found) found = w; else if (found !== w) { real = true; break; } continue; }
+      if (opaque(e)) break; }
+    if (!real) continue;
+    const t = e => ((e.closest('section[id]') || { id: 'chrome' }).id) + ' ' + e.tagName.toLowerCase() + '.' + String(e.className).split(' ')[0] + ' "' + e.textContent.trim().replace(/\s+/g, ' ').slice(0, 26) + '"'; out.push(t(a) + ' x ' + t(b));
   }
+  // QA-2: labels inside drawings (the detector above skips svg): text on text within the same drawing, as painted now
+  const op = e => { let o = 1; for (let x = e; x && x !== document.body; x = x.parentElement || x.parentNode) { if (!(x instanceof Element)) break; const s = getComputedStyle(x); if (s.visibility === 'hidden' || s.display === 'none') return 0; o *= +s.opacity * (x.tagName === 'text' || x.tagName === 'tspan' ? +(s.fillOpacity || 1) : 1); } return o; };
+  document.querySelectorAll('main svg').forEach(svg => {
+    const r0 = svg.getBoundingClientRect(); if (r0.bottom < 60 || r0.top > innerHeight || r0.width < 20) return;
+    const ts = [...svg.querySelectorAll('text')].filter(t => t.textContent.trim() && op(t) > .25).map(t => [t, t.getBoundingClientRect()]).filter(([, r]) => r.width > 2 && r.height > 2 && r.bottom > 60 && r.top < innerHeight);
+    for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++) {
+      const [a, p] = ts[i], [b, q] = ts[j]; if (a.contains(b) || b.contains(a)) continue;
+      const w = Math.min(p.right, q.right) - Math.max(p.left, q.left), h = Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top);
+      if (w > 2 && h > 2 && w * h / Math.min(p.width * p.height, q.width * q.height) > .15)
+        out.push(((svg.closest('section[id]') || { id: 'chrome' }).id) + ' svg "' + a.textContent.trim().slice(0, 24) + '" x "' + b.textContent.trim().slice(0, 24) + '"');
+    }
+  });
   return out;
 }
 
