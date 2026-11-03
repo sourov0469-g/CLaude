@@ -1234,3 +1234,15 @@ Every text element is paired with the nearest painted background behind it, as r
 | 85374e2 | Stage 1: steel ramps at hue 248; primitives renamed `--steel-N`; every role token repointed; logo files re-coloured; audits read the live accent tokens |
 | 7b355b3 | Stage 2: challenge fixes (selected tint was grey-equivalent; band read powder-blue); light-step chroma retuned; logo at steel-9 #396791; drift windows and photo masking in the pixel audit |
 | 0244d2f | Stage 3: repacked standalone files, this brand-sheet section, gate evidence |
+
+---
+
+# New versions — AUSTIN-NEW-VERSIONS-ADDENDUM-2026-11-04 (owner's order, binding)
+
+**Cycle:** one new version per section, in this order: Hero → Services → Visualiser → Windows → Reviews → Process → Try → Area → Booking. Each version is gated, then I stop for Muse's accept. Letters continue from J (the hero's 1–10 count as A–J). Subpages, defaults and existing versions stay untouched.
+
+| Pass | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 1 | Hero | **K, "Before \| After, on the seam"** (`?hero=k`) | MERSI (split-slider, opposing wipes, synced plate) on the firm's 6 documented before/after pairs | GATE-NEW-Hero-K.md | 8.46 PASS | Waiting for Muse's accept |
+
+**Next, after the accept:** Services K.
