@@ -86,7 +86,7 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 | 4 | Kitchens, then Bathrooms | **done**: `GATE-kitchens.md`, `GATE-bathrooms.md` |
 | 5 | Renovation, then Contact, then single-file assembly | **done**: `GATE-renovation.md`, `GATE-contact.md`, `GATE-assembly.md` |
 | 6 | Polish pass on the defects the gate reports name as remaining | PASS (Muse), after the scorecard correction: `GATE-phase6.md` |
-| 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | **done**: `GATE-phase7.md`; three questions for Muse (hero word count, section rhythm tokens, the remaining geometry offsets) |
+| 7 | Whole-site conformance to the brief's numbers: conversion floor, copy budgets, Carbon icons and spacing, AA contrast, pins | **corrected per Muse** (Creativity was under the 6.0 floor): `GATE-phase7.md` adds the seam level and re-rates; Muse's three rulings recorded; awaiting re-judgement |
 
 ## Phase 1 progress
 - [x] WEB-SKILLS index read through four nomination lists (397 nominations). These came from the early index-reader agents, finished before the order.
@@ -187,3 +187,12 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
 - **Dead code:** 17 `.vs1r__*` rules for a Contact card version that no longer exists, removed.
 - **For Muse (no ruling invented):** whether the 40-word hero budget counts locked content (authored copy passes on every page; strict counts do not); whether to move `--section-y` to the brief's three pair-tokens, which would change kept material's geometry (the spacing twin of ruling 7); whether the geometry offsets should be rewritten as `translate`.
 - Zero background tasks, zero sub-agents.
+- **Muse: GATE-phase7 FAIL on one point**, Creativity 5 under the 6.0 floor. Rulings received:
+  - (1) the hero budget counts authored copy, so every hero passes;
+  - (2) the bath hero's firm line stays verbatim;
+  - (3) keep the single `--section-y` token, an extension of ruling 7;
+  - the geometry offsets stay as they are.
+- **Correction: the seam handle is now a spirit level** (`EZ.level`, Home, Kitchens and Bathrooms before/after). It replaces the generic double-arrow grip the MERSI seam wording rules out.
+  - The bubble lags the seam's motion and settles level with one wobble.
+  - Measured: -2.4 while dragging right; back to exactly 0; arrow keys move it; static under reduced motion; 0 writes at rest (the loop sleeps); Carbon 24/1.5 at 1440 and 390.
+  - Creativity re-rated 6, with frames in `qa/finalize/phase7/level-*.png`.

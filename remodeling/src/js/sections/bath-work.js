@@ -28,6 +28,7 @@
     function setS(v) { st.s = Math.max(0, Math.min(1, v)); stage.style.setProperty('--s', st.s.toFixed(4)); var pc = Math.round(st.s * 100); range.value = pc; range.setAttribute('aria-valuetext', pc <= 2 ? 'All after' : pc >= 98 ? 'All before' : pc + ' percent before, ' + (100 - pc) + ' percent after'); }
     k.on(range, 'input', function () { gsap.killTweensOf(st); touched = true; setS(range.value / 100); });
     setS(.5);
+    EZ.level(stage, stage.querySelector('.kp__grip'), k);
     // the stack
     var host = root.querySelector('.bw__stack'), title = root.querySelector('.bw__t'), btns = Array.prototype.slice.call(root.querySelectorAll('.bw__fl'));
     var order = [], busy = false;

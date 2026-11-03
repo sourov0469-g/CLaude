@@ -53,6 +53,7 @@
     });
     k.on(range, 'input', function () { gsap.killTweensOf(st); touched = true; setS(range.value / 100); });
     load(0); setS(.5);
+    EZ.level(stage, stage.querySelector('.kp__grip'), k);
 
     // the chapters of pinned prints
     var all = [];

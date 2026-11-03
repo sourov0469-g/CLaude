@@ -231,3 +231,10 @@ html.has-buddy select { cursor: default !important; }
 .vouch > span { white-space: nowrap; }
 .vouch .nums { color: var(--color-text); }
 .go { display: grid; gap: var(--s2); justify-items: start; }
+
+/* Phase 7 · the seam handle as a spirit level (EZ.level): Carbon 24 grid, 1.5 stroke, round caps; the bubble is the one fill */
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }

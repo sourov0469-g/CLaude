@@ -917,6 +917,13 @@ html.has-buddy select { cursor: default !important; }
 .go { display: grid; gap: var(--s2); justify-items: start; }
 
 
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }
+
+
 .rintro { padding-top: calc(var(--nav-h) + clamp(32px, 4vw, 64px)); }   
 .rproof { display: flex; flex-wrap: wrap; column-gap: 16px; row-gap: 2px; font: 600 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); }
 .rproof p { margin: 0; }
@@ -2328,6 +2335,40 @@ html.has-buddy select { cursor: default !important; }
   // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
   // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  /* Phase 7 · the seam's handle is a spirit level clipped across the stud (MERSI: "the seam is the subject ... not a
+     generic slider bar"). Its bubble lags when the seam moves and settles back between the ticks when it stops: level.
+     One mechanism, as the owner asked the before/after seam to be shared (Home, Kitchens, Bathrooms). It reads the
+     stage's --s, so the first-view sweep, a drag and a key step all move it. Reduced motion: the bubble stays centred.
+     The loop sleeps once the bubble has settled and wakes on the next change of --s. */
+  EZ.LEVEL_SVG = '<svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/>' +
+    '<rect x="5" y="8.5" width="14" height="7" rx="3.5"/>' +
+    '<path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/>' +
+    '<circle class="lv__b" cx="12" cy="12" r="1.75"/></svg>';
+  EZ.level = function (stage, grip, kit) {
+    if (!grip) return;
+    grip.innerHTML = EZ.LEVEL_SVG;
+    var bub = grip.querySelector('.lv__b');
+    if (!kit.motion) return;
+    function read() { return parseFloat(stage.style.getPropertyValue('--s')) || 0; }
+    var prev = read(), x = 0, vx = 0, calm = 0, loop = null;
+    function step(dt) {
+      var s = read(), v = (s - prev) / dt; prev = s;
+      var target = Math.max(-1, Math.min(1, -v * 5));       // the bubble lags behind the way the seam travels
+      vx += (140 * (target - x) - 13 * vx) * dt;             // a little under-damped: one small wobble, then level
+      x += vx * dt;
+      bub.setAttribute('transform', 'translate(' + (x * 4.4).toFixed(2) + ' 0)');
+      grip.classList.toggle('is-level', Math.abs(x) < .04);
+      calm = Math.abs(x) < .002 && Math.abs(vx) < .01 && Math.abs(v) < .001 ? calm + 1 : 0;
+      if (calm > 20) { x = 0; vx = 0; bub.setAttribute('transform', 'translate(0 0)'); return false; }
+    }
+    loop = kit.raf(step);
+    // wake on any change of --s (sweep, drag, keys); a MutationObserver on the stage's style is cheap and catches all three
+    var mo = new MutationObserver(function () { if (read() !== prev) { calm = 0; loop.start(); } });
+    mo.observe(stage, { attributes: true, attributeFilter: ['style'] });
+    kit.add(function () { mo.disconnect(); });
+  };
+
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
     var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)

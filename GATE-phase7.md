@@ -1,5 +1,7 @@
 # GATE: Phase 7 · Whole-site conformance to the brief's numbers
 
+**Status:** corrected per Muse. The first version failed on one point only: Creativity was self-rated 5, below the scorecard's 6.0 floor. The correction adds one genuine creative change inside this pass's scope: **the seam handle becomes a spirit level** (see "Correction per Muse"). It then re-rates Creativity with evidence. Muse's rulings on the three flagged questions are recorded where each question was asked.
+
 **Why this phase exists:** after Phase 6 was accepted, the brief's own phases (0 to 5) were complete. What had never been measured site-wide was the brief's **AUDIT STANDARD** applied to its binding numbers:
 - the **CONVERSION FLOOR**: proof beside every call to action, the phone reachable at all times, the licence line where trust is asked, and counted copy budgets;
 - the **SYSTEM NUMBERS**: Carbon icons, the Carbon spacing ladder, and the Utopia type scale;
@@ -59,10 +61,10 @@ The brief says "counted, not vibes", so here are both counts. **Strict** counts 
 | Renovation | 63 | **10** | 53 | the firm's kicker and lead (27), two published project titles (11) |
 | Contact | 137 | **16** | 121 | the letter form's fields and consent (75), hours and address (14) |
 
-**For Muse to decide (no ruling invented):** which count the 40-word hero budget means. On the authored count, every hero passes. On the strict count, every hero fails, and it could only pass by removing fact-lock items, the firm's verbatim lines or the conversion floor's proof. The brief ranks all three above the budget ("THE LOCKS ... outrank everything above").
+**Muse's ruling (1):** the 40-word hero budget counts authored copy, because the brief's locks outrank the budget. **Every hero passes:** 36, 31, 23, 10 and 16 authored words.
 
 ### Bathrooms hero headline (9 words)
-"Down to the studs. Waterproofed properly. Closed up once." is the firm's published line (FACTS.md, "Bathroom"). The brief's locks forbid changing it ("nothing invented, nothing improved") and outrank the copy budget. So it stays verbatim, and it is listed here so it is not mistaken for an oversight.
+"Down to the studs. Waterproofed properly. Closed up once." is the firm's published line (FACTS.md, "Bathroom"). The brief's locks forbid changing it ("nothing invented, nothing improved") and outrank the copy budget. So it stays verbatim, and it is listed here so it is not mistaken for an oversight. **Muse's ruling (2):** it stays verbatim.
 
 ### What the 35 remaining "off-ladder" declarations are
 All geometry, none spacing rhythm:
@@ -71,15 +73,53 @@ All geometry, none spacing rhythm:
 - `calc()` offsets against the nav height;
 - 1px hairline nudges.
 
-Each is listed in `qa/finalize/phase7/ladder.json`. Converting them to `translate` would satisfy a literal reading of "every margin" without changing a single pixel. I left them, because their numbers are geometry derived from element sizes, not chosen spacing.
+Each is listed in `qa/finalize/phase7/ladder.json`. Converting them to `translate` would satisfy a literal reading of "every margin" without changing a single pixel. I left them, because their numbers are geometry derived from element sizes, not chosen spacing. **Muse's ruling:** they stay as geometry, with no `translate` rewrite.
 
-## Not changed, flagged for Muse (no ruling invented)
+## Section rhythm: Muse's ruling (3)
 - **Section rhythm tokens.** The brief's three fluid pair-tokens are minor 48→64, default 64→96 and hero/CTA 96→144. The site has one token, `--section-y`, `clamp(88px, 6vw + 60px, 208px)`: 88 at 360, 134 at 1240.
   - Top and bottom are already the same token, as the brief requires.
   - Moving to the pair tokens would tighten every section by 40 to 70px at desktop. That is a change of whole-page geometry across kept, shortlisted material, which "retains its proven geometry".
-  - It is the spacing twin of the type question Muse settled in ruling 7 (no blanket migration). I would rather take Muse's ruling than extend ruling 7 myself.
+  - It is the spacing twin of the type question Muse settled in ruling 7 (no blanket migration).
+  - **Muse's ruling (3), an extension of ruling 7:** keep the single `--section-y` token; do not migrate to the pair tokens. Kept, shortlisted geometry stands. Untouched.
 - **Type scale:** ruling 7 stands; untouched.
-- **The 40-word hero count** (above).
+
+## Correction per Muse: the creative change, the seam handle as a spirit level
+**What it was:** the handle on the before/after seam was a clay disc with two arrows. That is the generic slider-bar affordance the MERSI seam mechanism rules out ("The seam is the subject. The join between before and after is a designed construction seam ... not a generic slider bar"; REFERENCE-STUDY). The seam itself is already drawn as a wall stud.
+
+**What it is now:** the handle is a **spirit level clipped across the stud**:
+- a vial, with two ticks at its centre and a bubble;
+- small push chevrons at either end, so it still says "drag sideways".
+
+**How it moves:**
+- When the seam moves, the bubble **lags the other way**, as a real level's bubble does when you carry it.
+- When the seam stops, the bubble makes **one small wobble**, settles back between the ticks, and the ticks come up to full strength: **level**.
+- The small story: the room is set right, and the seam you just moved is true.
+
+**Scope-true:** it is the grip icon this pass had already put on the Carbon grid. The vial is drawn on that grid (24 grid, 1.5 stroke, round caps); the bubble is its one fill. No words and no numbers, so the numbers lock is untouched.
+
+**Why it is not reused decoration** (CUSTOM ANIMATION LAW):
+- It is made for this one mechanism, from the seam's own material: a stud is set with a level.
+- It runs on the three before/after seams (Home, Kitchens, Bathrooms) only because they are one mechanism. The owner's recipe asked for the bathroom seam to be "copied from the kitchen approach".
+- No other section uses it.
+
+**Built:**
+- `EZ.level` in `core.js`: it reads the stage's `--s`, so the first-view sweep, a drag and a key step all move the bubble;
+- the vial markup in `ba.html`, `kitchen-work.html` and `bath-work.html`;
+- its style in `systems.css`;
+- one call each in `ba.js`, `kitchen-work.js` and `bath-work.js`.
+
+**Measured on all three pages at 1440** (bubble offset in vial units):
+
+| check | result |
+|---|---|
+| Drag right | the bubble lags left, growing to -2.4 |
+| Release | -1.39, -0.28, +0.21, +0.23, +0.10, +0.01, -0.03, -0.02, -0.01, **0.00**; one wobble, then exactly centred, and `is-level` set |
+| Arrow-key steps left | the bubble lags right (0.3, 0.6, 0.9), then settles to 0 |
+| Reduced motion | the bubble never moves (no transform written) |
+| The loop sleeps at rest | **0** bubble writes in 1.5 s; it wakes on the next change of `--s` |
+| Carbon check (`conform.js`) | 24px at 1.5 stroke on all three pages, at 1440 and 390 |
+
+**Frames:** `qa/finalize/phase7/level-home-rest.png`, `level-home-moving.png` (bubble off-centre) and `level-home-level.png` (centred, ticks full), plus the same three for Kitchens. Before: `grip-before-home.png` and `grip-before-kitchen.png`.
 
 ## Mechanisms and their WEB-SKILLS tags
 | mechanism | tags | how it is met | files |
@@ -90,26 +130,28 @@ Each is listed in `qa/finalize/phase7/ladder.json`. Converting them to `translat
 | Icons | **S1463**, brief Carbon numbers | 24 grid / 1.5, 16 grid / 1, currentColor, round caps, `aria-hidden`. `vector-effect: non-scaling-stroke` where the viewBox is not the grid. | `chrome.css`, ba, kitchen-work, bath-work, reno-permits, bath-rooms, contact-form, work `.css` |
 | Spacing ladder | brief SYSTEM NUMBERS; **S0666** | Ladder values only; rounding up keeps air (S0666: rhythm comes from a few varied gaps, not from odd numbers). | `chrome.css`, `tokens.css`, 18 section CSS files |
 | Contrast and pins | **S0657** (WCAG 2.2 AA), **S0400** | Measured on every visible text run, composited through opacity; SVG grounds checked by hand. A wheel scroll from the top reaches the end at 390. | `conform.js` |
+| Seam level (the creative change) | **S1463** (icon numbers), **S0340** (motion from the input's real velocity, spring settle), **S1018** (keys move it like a drag), **S0400** (static under reduced motion), MERSI seam wording | Velocity of `--s` drives a slightly under-damped spring; the loop stops when settled and a MutationObserver on the stage wakes it. | `core.js`, `systems.css`, `ba`, `kitchen-work`, `bath-work` (`.html`, `.js`) |
 | Dead code | hygiene | 17 rules for `.vs1r__*` (a Contact card version that no longer exists) removed. | `contact-visit.css` |
 
 ## Self-rating (critical; Muse judges)
 | category | /10 | evidence | why not higher |
 |---|---|---|---|
-| **Design** | **7** | One proof component, one icon grid, one spacing ladder across five pages. The proof lines sit cleanly under or beside each CTA at both widths (screenshots). Fluid poles now land on the ladder. | Spacing snaps are small (2 to 8px) but were not reviewed frame by frame on every element; I checked the riskiest (flip cards, the Towns list against the map, the nav, the CTA rows). Section rhythm is still off the brief's tokens, pending Muse. |
+| **Design** | **7** | One proof component, one icon grid, one spacing ladder across five pages. The proof lines sit cleanly under or beside each CTA at both widths (screenshots). Fluid poles now land on the ladder. | Spacing snaps are small (2 to 8px) but were not reviewed frame by frame on every element; I checked the riskiest (flip cards, the Towns list against the map, the nav, the CTA rows). Section rhythm stays on the single token by Muse's ruling (3); that is not counted against the score. |
 | **Usability** | **8** | Every CTA now carries its proof. The phone is visible at all sampled scroll positions. No pin traps scrolling. 0 real AA failures. Icons on the grid. One consistent action name. | Contrast on SVG grounds is verified by hand, not by the tool; a future SVG ground could slip through. Touch is still tested with synthetic events. |
-| **Creativity** | **5** | None claimed. This is a conformance pass, and it adds no new moment by design. | It deliberately invents nothing. |
-| **Content** | **8** | Copy budgets measured, not guessed. Every primary CTA within 3 words. Three headlines brought within 8 words without new claims. Facts and firm lines untouched. Licence string character-exact in every new instance. 0 em dashes. | The hero budget is met only on the authored count; the strict count is Muse's question. "Book a consultation" everywhere is consistent but less warm than "Talk it through with us". I followed S1494 over tone, and Muse may prefer the other. |
+| **Creativity** | **6** | The seam handle is now the trade's own instrument. A spirit level whose bubble lags the seam and settles level replaces a generic double-arrow slider. It is made from the stud the seam is drawn as, gives a small story (the seam you moved is set true), and is measured (frames and numbers above). It is the one new moment of a pass otherwise about conformance. | It is one small moment on a 24px handle. The rest of the pass invents nothing by design. The vial reads clearly at 3× zoom; at 1× it is a small detail a visitor notices on the second drag rather than the first. |
+| **Content** | **8** | Copy budgets measured, not guessed. Every primary CTA within 3 words. Three headlines brought within 8 words without new claims. Facts and firm lines untouched. Licence string character-exact in every new instance. 0 em dashes. | The hero budget passes on the authored count, by Muse's ruling (1). "Book a consultation" everywhere is consistent but less warm than "Talk it through with us". I followed S1494 over tone, and Muse may prefer the other. |
 
 ## Evidence
 `qa/finalize/phase7/`:
 - `conform.json` and `ladder.json`: raw measurements;
 - `vouch-*-{1440,390}.png`: every CTA with its proof, both versions;
 - `contrast-*.png`: the two SVG-ground flags;
-- `ladder-*-{1440,390}.png`: nav, consult, contact visit and services after the snap.
+- `ladder-*-{1440,390}.png`: nav, consult, contact visit and services after the snap;
+- `level-*.png` and `grip-before-*.png`: the seam level at rest, moving and level, against the old grip.
 
 **Regression after the last change:**
 - all five pages: 0 console errors;
-- single file `elbaz-construction.html` (3.69 MB):
+- single file `elbaz-construction.html` (3.7 MB, rebuilt after the level):
   - navigation, back, the deep link `#/contact/contact-form`, the mail override and logo home all pass;
   - images: 0 broken;
   - console errors: 0;

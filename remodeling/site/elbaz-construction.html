@@ -978,6 +978,13 @@ html.has-buddy select { cursor: default !important; }
 .go { display: grid; gap: var(--s2); justify-items: start; }
 
 
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }
+
+
 
 
 .hero__acts { display: flex; align-items: center; flex-wrap: wrap; gap: var(--s4) var(--s6); }
@@ -2129,7 +2136,7 @@ html.has-buddy select { cursor: default !important; }
             <span class="bx__tag bx__tag--b">Before</span><span class="bx__tag bx__tag--a">After</span>
             <div class="bx__stud" aria-hidden="true">
               <span class="bx__wood"></span><span class="bx__nail" style="top:14%"></span><span class="bx__nail" style="top:50%"></span><span class="bx__nail" style="top:86%"></span>
-              <span class="bx__grip"><svg viewBox="0 0 40 40" focusable="false"><path d="M9 20 H31 M9 20 l5-5 M9 20 l5 5 M31 20 l-5-5 M31 20 l-5 5"/></svg></span>
+              <span class="bx__grip"><svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/><rect x="5" y="8.5" width="14" height="7" rx="3.5"/><path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/><circle class="lv__b" cx="12" cy="12" r="1.75"/></svg></span>
               <span class="bx__read nums">0 in</span>
             </div>
             <input class="bx__range" type="range" min="0" max="100" value="50" step="1" aria-label="Before and after: move the stud" aria-valuetext="Half before, half after">
@@ -3390,6 +3397,40 @@ html.has-buddy select { cursor: default !important; }
   // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
   // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  /* Phase 7 · the seam's handle is a spirit level clipped across the stud (MERSI: "the seam is the subject ... not a
+     generic slider bar"). Its bubble lags when the seam moves and settles back between the ticks when it stops: level.
+     One mechanism, as the owner asked the before/after seam to be shared (Home, Kitchens, Bathrooms). It reads the
+     stage's --s, so the first-view sweep, a drag and a key step all move it. Reduced motion: the bubble stays centred.
+     The loop sleeps once the bubble has settled and wakes on the next change of --s. */
+  EZ.LEVEL_SVG = '<svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/>' +
+    '<rect x="5" y="8.5" width="14" height="7" rx="3.5"/>' +
+    '<path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/>' +
+    '<circle class="lv__b" cx="12" cy="12" r="1.75"/></svg>';
+  EZ.level = function (stage, grip, kit) {
+    if (!grip) return;
+    grip.innerHTML = EZ.LEVEL_SVG;
+    var bub = grip.querySelector('.lv__b');
+    if (!kit.motion) return;
+    function read() { return parseFloat(stage.style.getPropertyValue('--s')) || 0; }
+    var prev = read(), x = 0, vx = 0, calm = 0, loop = null;
+    function step(dt) {
+      var s = read(), v = (s - prev) / dt; prev = s;
+      var target = Math.max(-1, Math.min(1, -v * 5));       // the bubble lags behind the way the seam travels
+      vx += (140 * (target - x) - 13 * vx) * dt;             // a little under-damped: one small wobble, then level
+      x += vx * dt;
+      bub.setAttribute('transform', 'translate(' + (x * 4.4).toFixed(2) + ' 0)');
+      grip.classList.toggle('is-level', Math.abs(x) < .04);
+      calm = Math.abs(x) < .002 && Math.abs(vx) < .01 && Math.abs(v) < .001 ? calm + 1 : 0;
+      if (calm > 20) { x = 0; vx = 0; bub.setAttribute('transform', 'translate(0 0)'); return false; }
+    }
+    loop = kit.raf(step);
+    // wake on any change of --s (sweep, drag, keys); a MutationObserver on the stage's style is cheap and catches all three
+    var mo = new MutationObserver(function () { if (read() !== prev) { calm = 0; loop.start(); } });
+    mo.observe(stage, { attributes: true, attributeFilter: ['style'] });
+    kit.add(function () { mo.disconnect(); });
+  };
+
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
     var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)
@@ -5086,6 +5127,7 @@ html.has-buddy select { cursor: default !important; }
     k.on(range, 'pointercancel', function () { stage.classList.remove('is-drag'); });
 
     load(0); setS(.5);
+    EZ.level(stage, stage.querySelector('.bx__grip'), k);
     if (k.motion) {
       // MERSI: on first view the seam travels with the scroll (mostly before, then half and half), then hands control over
       setS(.9);
@@ -7005,6 +7047,13 @@ html.has-buddy select { cursor: default !important; }
 .go { display: grid; gap: var(--s2); justify-items: start; }
 
 
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }
+
+
 .kintro { padding-top: calc(var(--nav-h) + clamp(32px, 4vw, 64px)); }   
 .kproof { margin: 0; display: flex; flex-wrap: wrap; column-gap: 16px; row-gap: 2px; font: 600 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); }
 .kproof p { margin: 0; }
@@ -7436,7 +7485,7 @@ html.has-buddy select { cursor: default !important; }
               <figure class="kp__img kp__img--b"><img class="kp__ib" alt=""></figure>
               <figure class="kp__img kp__img--a"><img class="kp__ia" alt=""></figure>
               <span class="kp__tag kp__tag--b" aria-hidden="true">Before</span><span class="kp__tag kp__tag--a" aria-hidden="true">After</span>
-              <span class="kp__stud" aria-hidden="true"><span class="kp__wood"></span><span class="kp__grip"><svg viewBox="0 0 26 26"><path d="M9 7 L4 13 L9 19 M17 7 L22 13 L17 19"/></svg></span></span>
+              <span class="kp__stud" aria-hidden="true"><span class="kp__wood"></span><span class="kp__grip"><svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/><rect x="5" y="8.5" width="14" height="7" rx="3.5"/><path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/><circle class="lv__b" cx="12" cy="12" r="1.75"/></svg></span></span>
               <input class="kp__range" type="range" min="0" max="100" value="50" aria-label="Move the seam between before and after">
             </div>
             <p class="kp__cap"></p>
@@ -8339,6 +8388,40 @@ html.has-buddy select { cursor: default !important; }
   // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
   // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  /* Phase 7 · the seam's handle is a spirit level clipped across the stud (MERSI: "the seam is the subject ... not a
+     generic slider bar"). Its bubble lags when the seam moves and settles back between the ticks when it stops: level.
+     One mechanism, as the owner asked the before/after seam to be shared (Home, Kitchens, Bathrooms). It reads the
+     stage's --s, so the first-view sweep, a drag and a key step all move it. Reduced motion: the bubble stays centred.
+     The loop sleeps once the bubble has settled and wakes on the next change of --s. */
+  EZ.LEVEL_SVG = '<svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/>' +
+    '<rect x="5" y="8.5" width="14" height="7" rx="3.5"/>' +
+    '<path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/>' +
+    '<circle class="lv__b" cx="12" cy="12" r="1.75"/></svg>';
+  EZ.level = function (stage, grip, kit) {
+    if (!grip) return;
+    grip.innerHTML = EZ.LEVEL_SVG;
+    var bub = grip.querySelector('.lv__b');
+    if (!kit.motion) return;
+    function read() { return parseFloat(stage.style.getPropertyValue('--s')) || 0; }
+    var prev = read(), x = 0, vx = 0, calm = 0, loop = null;
+    function step(dt) {
+      var s = read(), v = (s - prev) / dt; prev = s;
+      var target = Math.max(-1, Math.min(1, -v * 5));       // the bubble lags behind the way the seam travels
+      vx += (140 * (target - x) - 13 * vx) * dt;             // a little under-damped: one small wobble, then level
+      x += vx * dt;
+      bub.setAttribute('transform', 'translate(' + (x * 4.4).toFixed(2) + ' 0)');
+      grip.classList.toggle('is-level', Math.abs(x) < .04);
+      calm = Math.abs(x) < .002 && Math.abs(vx) < .01 && Math.abs(v) < .001 ? calm + 1 : 0;
+      if (calm > 20) { x = 0; vx = 0; bub.setAttribute('transform', 'translate(0 0)'); return false; }
+    }
+    loop = kit.raf(step);
+    // wake on any change of --s (sweep, drag, keys); a MutationObserver on the stage's style is cheap and catches all three
+    var mo = new MutationObserver(function () { if (read() !== prev) { calm = 0; loop.start(); } });
+    mo.observe(stage, { attributes: true, attributeFilter: ['style'] });
+    kit.add(function () { mo.disconnect(); });
+  };
+
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
     var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)
@@ -9812,6 +9895,7 @@ html.has-buddy select { cursor: default !important; }
     });
     k.on(range, 'input', function () { gsap.killTweensOf(st); touched = true; setS(range.value / 100); });
     load(0); setS(.5);
+    EZ.level(stage, stage.querySelector('.kp__grip'), k);
 
     // the chapters of pinned prints
     var all = [];
@@ -10782,6 +10866,13 @@ html.has-buddy select { cursor: default !important; }
 .go { display: grid; gap: var(--s2); justify-items: start; }
 
 
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }
+
+
 .bintro { padding-top: calc(var(--nav-h) + clamp(32px, 4vw, 64px)); }
 .bi__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 80px); align-items: center; }
 .bi__copy { display: grid; gap: var(--s5); justify-items: start; }
@@ -11180,7 +11271,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
               <figure class="kp__img kp__img--b"><img data-img="ba-bath2-before" width="428" height="404" alt="Dated bathroom with alcove tub and shower curtain, before renovation"></figure>
               <figure class="kp__img kp__img--a"><img data-img="ba-bath2-after" width="430" height="490" alt="Renovated bathroom with frameless glass shower and round backlit mirror"></figure>
               <span class="kp__tag kp__tag--b" aria-hidden="true">Before</span><span class="kp__tag kp__tag--a" aria-hidden="true">After</span>
-              <span class="kp__stud" aria-hidden="true"><span class="kp__wood"></span><span class="kp__grip"><svg viewBox="0 0 26 26"><path d="M9 7 L4 13 L9 19 M17 7 L22 13 L17 19"/></svg></span></span>
+              <span class="kp__stud" aria-hidden="true"><span class="kp__wood"></span><span class="kp__grip"><svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/><rect x="5" y="8.5" width="14" height="7" rx="3.5"/><path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/><circle class="lv__b" cx="12" cy="12" r="1.75"/></svg></span></span>
               <input class="kp__range" type="range" min="0" max="100" value="50" aria-label="Move the seam between before and after">
             </div>
             <p class="kp__cap">Before: a dated bathroom with an alcove tub and shower curtain. After: a frameless glass shower and a round backlit mirror. A single bathroom might run <span class="nums">4&ndash;8</span> weeks of construction.</p>
@@ -12088,6 +12179,40 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
   // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
   // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  /* Phase 7 · the seam's handle is a spirit level clipped across the stud (MERSI: "the seam is the subject ... not a
+     generic slider bar"). Its bubble lags when the seam moves and settles back between the ticks when it stops: level.
+     One mechanism, as the owner asked the before/after seam to be shared (Home, Kitchens, Bathrooms). It reads the
+     stage's --s, so the first-view sweep, a drag and a key step all move it. Reduced motion: the bubble stays centred.
+     The loop sleeps once the bubble has settled and wakes on the next change of --s. */
+  EZ.LEVEL_SVG = '<svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/>' +
+    '<rect x="5" y="8.5" width="14" height="7" rx="3.5"/>' +
+    '<path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/>' +
+    '<circle class="lv__b" cx="12" cy="12" r="1.75"/></svg>';
+  EZ.level = function (stage, grip, kit) {
+    if (!grip) return;
+    grip.innerHTML = EZ.LEVEL_SVG;
+    var bub = grip.querySelector('.lv__b');
+    if (!kit.motion) return;
+    function read() { return parseFloat(stage.style.getPropertyValue('--s')) || 0; }
+    var prev = read(), x = 0, vx = 0, calm = 0, loop = null;
+    function step(dt) {
+      var s = read(), v = (s - prev) / dt; prev = s;
+      var target = Math.max(-1, Math.min(1, -v * 5));       // the bubble lags behind the way the seam travels
+      vx += (140 * (target - x) - 13 * vx) * dt;             // a little under-damped: one small wobble, then level
+      x += vx * dt;
+      bub.setAttribute('transform', 'translate(' + (x * 4.4).toFixed(2) + ' 0)');
+      grip.classList.toggle('is-level', Math.abs(x) < .04);
+      calm = Math.abs(x) < .002 && Math.abs(vx) < .01 && Math.abs(v) < .001 ? calm + 1 : 0;
+      if (calm > 20) { x = 0; vx = 0; bub.setAttribute('transform', 'translate(0 0)'); return false; }
+    }
+    loop = kit.raf(step);
+    // wake on any change of --s (sweep, drag, keys); a MutationObserver on the stage's style is cheap and catches all three
+    var mo = new MutationObserver(function () { if (read() !== prev) { calm = 0; loop.start(); } });
+    mo.observe(stage, { attributes: true, attributeFilter: ['style'] });
+    kit.add(function () { mo.disconnect(); });
+  };
+
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
     var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)
@@ -13571,6 +13696,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
     function setS(v) { st.s = Math.max(0, Math.min(1, v)); stage.style.setProperty('--s', st.s.toFixed(4)); var pc = Math.round(st.s * 100); range.value = pc; range.setAttribute('aria-valuetext', pc <= 2 ? 'All after' : pc >= 98 ? 'All before' : pc + ' percent before, ' + (100 - pc) + ' percent after'); }
     k.on(range, 'input', function () { gsap.killTweensOf(st); touched = true; setS(range.value / 100); });
     setS(.5);
+    EZ.level(stage, stage.querySelector('.kp__grip'), k);
     // the stack
     var host = root.querySelector('.bw__stack'), title = root.querySelector('.bw__t'), btns = Array.prototype.slice.call(root.querySelectorAll('.bw__fl'));
     var order = [], busy = false;
@@ -14566,6 +14692,13 @@ html.has-buddy select { cursor: default !important; }
 .vouch > span { white-space: nowrap; }
 .vouch .nums { color: var(--color-text); }
 .go { display: grid; gap: var(--s2); justify-items: start; }
+
+
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }
 
 
 .rintro { padding-top: calc(var(--nav-h) + clamp(32px, 4vw, 64px)); }   
@@ -15918,6 +16051,40 @@ html.has-buddy select { cursor: default !important; }
   // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
   // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  /* Phase 7 · the seam's handle is a spirit level clipped across the stud (MERSI: "the seam is the subject ... not a
+     generic slider bar"). Its bubble lags when the seam moves and settles back between the ticks when it stops: level.
+     One mechanism, as the owner asked the before/after seam to be shared (Home, Kitchens, Bathrooms). It reads the
+     stage's --s, so the first-view sweep, a drag and a key step all move it. Reduced motion: the bubble stays centred.
+     The loop sleeps once the bubble has settled and wakes on the next change of --s. */
+  EZ.LEVEL_SVG = '<svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/>' +
+    '<rect x="5" y="8.5" width="14" height="7" rx="3.5"/>' +
+    '<path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/>' +
+    '<circle class="lv__b" cx="12" cy="12" r="1.75"/></svg>';
+  EZ.level = function (stage, grip, kit) {
+    if (!grip) return;
+    grip.innerHTML = EZ.LEVEL_SVG;
+    var bub = grip.querySelector('.lv__b');
+    if (!kit.motion) return;
+    function read() { return parseFloat(stage.style.getPropertyValue('--s')) || 0; }
+    var prev = read(), x = 0, vx = 0, calm = 0, loop = null;
+    function step(dt) {
+      var s = read(), v = (s - prev) / dt; prev = s;
+      var target = Math.max(-1, Math.min(1, -v * 5));       // the bubble lags behind the way the seam travels
+      vx += (140 * (target - x) - 13 * vx) * dt;             // a little under-damped: one small wobble, then level
+      x += vx * dt;
+      bub.setAttribute('transform', 'translate(' + (x * 4.4).toFixed(2) + ' 0)');
+      grip.classList.toggle('is-level', Math.abs(x) < .04);
+      calm = Math.abs(x) < .002 && Math.abs(vx) < .01 && Math.abs(v) < .001 ? calm + 1 : 0;
+      if (calm > 20) { x = 0; vx = 0; bub.setAttribute('transform', 'translate(0 0)'); return false; }
+    }
+    loop = kit.raf(step);
+    // wake on any change of --s (sweep, drag, keys); a MutationObserver on the stage's style is cheap and catches all three
+    var mo = new MutationObserver(function () { if (read() !== prev) { calm = 0; loop.start(); } });
+    mo.observe(stage, { attributes: true, attributeFilter: ['style'] });
+    kit.add(function () { mo.disconnect(); });
+  };
+
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
     var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)
@@ -18288,6 +18455,13 @@ html.has-buddy select { cursor: default !important; }
 .go { display: grid; gap: var(--s2); justify-items: start; }
 
 
+.lv { width: 24px; height: 24px; overflow: visible; }
+.lv path, .lv rect { fill: none; stroke: var(--white, #fff); stroke-width: 1.5px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.lv .lv__t { opacity: .55; transition: opacity 200ms var(--ez-out); }
+.lv .lv__b { fill: var(--white, #fff); stroke: none; }
+.is-level .lv .lv__t { opacity: 1; }
+
+
 .cform { padding-top: calc(var(--nav-h) + clamp(32px, 4vw, 64px)); }   
 .fm__h { font-size: clamp(2.25rem, 1.3rem + 3vw, 4.25rem); }
 .fm__lead { color: var(--color-text-secondary); }
@@ -19566,6 +19740,40 @@ html.has-buddy select { cursor: default !important; }
   // default section entrance, copied from the bank's Q40 pen (GreenSock pojzxwZ): content arrives from the direction
   // of travel, fromTo +-100px (50px on phones), autoAlpha 0->1, 1.25s "expo", overwrite "auto"; hidden again on leave.
   // data-reveal="left|right" enters sideways as in the pen's gs_reveal_fromLeft/Right.
+  /* Phase 7 · the seam's handle is a spirit level clipped across the stud (MERSI: "the seam is the subject ... not a
+     generic slider bar"). Its bubble lags when the seam moves and settles back between the ticks when it stops: level.
+     One mechanism, as the owner asked the before/after seam to be shared (Home, Kitchens, Bathrooms). It reads the
+     stage's --s, so the first-view sweep, a drag and a key step all move it. Reduced motion: the bubble stays centred.
+     The loop sleeps once the bubble has settled and wakes on the next change of --s. */
+  EZ.LEVEL_SVG = '<svg class="lv" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M3 9.5 L1.5 12 L3 14.5 M21 9.5 L22.5 12 L21 14.5"/>' +
+    '<rect x="5" y="8.5" width="14" height="7" rx="3.5"/>' +
+    '<path class="lv__t" d="M9.75 9.75 V14.25 M14.25 9.75 V14.25"/>' +
+    '<circle class="lv__b" cx="12" cy="12" r="1.75"/></svg>';
+  EZ.level = function (stage, grip, kit) {
+    if (!grip) return;
+    grip.innerHTML = EZ.LEVEL_SVG;
+    var bub = grip.querySelector('.lv__b');
+    if (!kit.motion) return;
+    function read() { return parseFloat(stage.style.getPropertyValue('--s')) || 0; }
+    var prev = read(), x = 0, vx = 0, calm = 0, loop = null;
+    function step(dt) {
+      var s = read(), v = (s - prev) / dt; prev = s;
+      var target = Math.max(-1, Math.min(1, -v * 5));       // the bubble lags behind the way the seam travels
+      vx += (140 * (target - x) - 13 * vx) * dt;             // a little under-damped: one small wobble, then level
+      x += vx * dt;
+      bub.setAttribute('transform', 'translate(' + (x * 4.4).toFixed(2) + ' 0)');
+      grip.classList.toggle('is-level', Math.abs(x) < .04);
+      calm = Math.abs(x) < .002 && Math.abs(vx) < .01 && Math.abs(v) < .001 ? calm + 1 : 0;
+      if (calm > 20) { x = 0; vx = 0; bub.setAttribute('transform', 'translate(0 0)'); return false; }
+    }
+    loop = kit.raf(step);
+    // wake on any change of --s (sweep, drag, keys); a MutationObserver on the stage's style is cheap and catches all three
+    var mo = new MutationObserver(function () { if (read() !== prev) { calm = 0; loop.start(); } });
+    mo.observe(stage, { attributes: true, attributeFilter: ['style'] });
+    kit.add(function () { mo.disconnect(); });
+  };
+
   EZ.reveal = function (kit, targets) {
     if (!kit.motion) return;
     var d = kit.mobile ? 16 : 24;   // §4 dosing: reveal-level travel, .3s ease-out (Q40 direction kept, its 1.25s/100px dropped)

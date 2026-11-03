@@ -217,7 +217,7 @@
    "wheelSteps": 85,
    "icons": [
     {
-     "host": "bx__grip",
+     "host": "lv",
      "size": 24,
      "stroke": 1.5,
      "want": 1.5,
@@ -456,7 +456,7 @@
      "ok": true
     },
     {
-     "host": "bx__grip",
+     "host": "lv",
      "size": 24,
      "stroke": 1.5,
      "want": 1.5,
@@ -590,10 +590,10 @@
     true
    ],
    "reached": true,
-   "wheelSteps": 56,
+   "wheelSteps": 60,
    "icons": [
     {
-     "host": "kp__grip",
+     "host": "lv",
      "size": 24,
      "stroke": 1.5,
      "want": 1.5,
@@ -734,7 +734,7 @@
      "ok": true
     },
     {
-     "host": "kp__grip",
+     "host": "lv",
      "size": 24,
      "stroke": 1.5,
      "want": 1.5,
@@ -897,7 +897,7 @@
      "ok": true
     },
     {
-     "host": "kp__grip",
+     "host": "lv",
      "size": 24,
      "stroke": 1.5,
      "want": 1.5,
@@ -1064,7 +1064,7 @@
      "ok": true
     },
     {
-     "host": "kp__grip",
+     "host": "lv",
      "size": 24,
      "stroke": 1.5,
      "want": 1.5,
@@ -1188,7 +1188,7 @@
     true
    ],
    "reached": true,
-   "wheelSteps": 54,
+   "wheelSteps": 58,
    "icons": [
     {
      "host": "rp__list",
@@ -1423,14 +1423,14 @@
      "id": "contact-form",
      "first": true,
      "authored": 16,
-     "locked": 121,
+     "locked": 123,
      "split": [
       "A 3 Book a consultation",
       "A 3 You will get",
       "A 3 a real answer.",
       "A 4 Not a callback form.",
       "L 3 (754) 236‑0675",
-      "L 6 Open now, until 7pm Miami time",
+      "L 8 Closed now. Open tomorrow from 7am Miami time",
       "L 6 Sun–Fri 7am–7pm · Saturday closed",
       "L 8 19 W Flagler St #310, Miami, FL 33130",
       "L 16 Send us a message to get a free consultation. Don't worry, w",
@@ -1454,7 +1454,7 @@
      "head": "You will get a real answer.",
      "headWords": 6,
      "supWords": 4,
-     "allWords": 137
+     "allWords": 139
     },
     {
      "id": "contact-visit",
@@ -1464,8 +1464,8 @@
      "split": [],
      "head": "Everything you need on one card.",
      "headWords": 6,
-     "supWords": 22,
-     "allWords": 41
+     "supWords": 24,
+     "allWords": 43
     },
     {
      "id": "contact-area",
@@ -1531,13 +1531,13 @@
     true
    ],
    "reached": true,
-   "wheelSteps": 49,
+   "wheelSteps": 50,
    "icons": [
     {
      "host": "fm5__lamp",
-     "size": 16,
+     "size": 15,
      "stroke": 1,
-     "want": 1,
+     "want": 0.92,
      "ok": true
     }
    ],
@@ -1549,14 +1549,14 @@
      "id": "contact-form",
      "first": true,
      "authored": 16,
-     "locked": 121,
+     "locked": 123,
      "split": [
       "A 3 Book a consultation",
       "A 3 You will get",
       "A 3 a real answer.",
       "A 4 Not a callback form.",
       "L 3 (754) 236‑0675",
-      "L 6 Open now, until 7pm Miami time",
+      "L 8 Closed now. Open tomorrow from 7am Miami time",
       "L 6 Sun–Fri 7am–7pm · Saturday closed",
       "L 8 19 W Flagler St #310, Miami, FL 33130",
       "L 16 Send us a message to get a free consultation. Don't worry, w",
@@ -1580,7 +1580,7 @@
      "head": "You will get a real answer.",
      "headWords": 6,
      "supWords": 4,
-     "allWords": 137
+     "allWords": 139
     },
     {
      "id": "contact-visit",
@@ -1590,8 +1590,8 @@
      "split": [],
      "head": "Everything you need on one card.",
      "headWords": 6,
-     "supWords": 22,
-     "allWords": 41
+     "supWords": 24,
+     "allWords": 43
     },
     {
      "id": "contact-area",

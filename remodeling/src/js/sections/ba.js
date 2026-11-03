@@ -69,6 +69,7 @@
     k.on(range, 'pointercancel', function () { stage.classList.remove('is-drag'); });
 
     load(0); setS(.5);
+    EZ.level(stage, stage.querySelector('.bx__grip'), k);
     if (k.motion) {
       // MERSI: on first view the seam travels with the scroll (mostly before, then half and half), then hands control over
       setS(.9);
