@@ -216,6 +216,20 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px);scroll-margin-
 .key[aria-pressed="true"] .led{background:#17111D;box-shadow:0 0 0 3px rgba(23,17,29,.15)}
 @media (prefers-reduced-motion:reduce){.btn-tab .t-face,.btn-ink .wash,.btn-film .disc,.btn-film .roll span,.btn-plate,.key{transition:none}}
 
+/* header treatment (upgrade R5): a ridge line that fills with scroll; nav underlines laid like a shingle course */
+.hdr-bar{position:relative}
+.hdr-ridge{position:absolute;left:22px;right:22px;bottom:-1px;height:3px;border-radius:3px;background:rgba(23,17,29,.06);overflow:hidden;pointer-events:none}
+.hdr-ridge i{position:absolute;inset:0;background:repeating-linear-gradient(90deg,var(--amber) 0 14px,#C7871A 14px 16px);transform-origin:left;transform:scaleX(var(--p,0))}
+.hdr-nav a{position:relative}
+.hdr-nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:4px;background:repeating-linear-gradient(90deg,var(--amber) 0 7px,transparent 7px 9px);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.hdr-nav a:hover::after,.hdr-nav a:focus-visible::after,.hdr-nav a[aria-current="page"]::after{transform:scaleX(1)}
+/* footer treatment: 29 roofs, one per town, lit by a slow wave */
+.ftr{position:relative}
+.ftr-roofs{position:absolute;left:0;right:0;top:-46px;width:100%;height:48px;pointer-events:none}
+.ftr-roofs path{fill:#E7E0CE;stroke:#C9C0AC;stroke-width:1.5;animation:ftrwave 6s ease-in-out infinite;animation-delay:calc(var(--i)*.12s)}
+@keyframes ftrwave{0%,70%,100%{fill:#E7E0CE}35%{fill:#F6C25F}}
+@media (prefers-reduced-motion:reduce){.ftr-roofs path{animation:none}.hdr-nav a::after{transition:none}}
+
 </style>
 <script>
 (function(){
@@ -269,6 +283,13 @@ function header(){
   var h = document.querySelector('.hdr'), m = h && h.querySelector('.hdr-menu'); if (!m) return;
   m.addEventListener('click', function(){ var o = h.classList.toggle('open'); m.setAttribute('aria-expanded', o); });
   h.querySelectorAll('.hdr-nav a').forEach(function(a){ a.addEventListener('click', function(){ h.classList.remove('open'); m.setAttribute('aria-expanded', false); }); });
+  /* ridge line: how far down the page you are */
+  var rg = h.querySelector('.hdr-ridge'), rq = 0;
+  if (rg){ var upd = function(){ rq = 0; var d = document.documentElement, mx = d.scrollHeight - innerHeight; rg.style.setProperty('--p', mx > 0 ? Math.min(1, scrollY/mx).toFixed(4) : 0); };
+    addEventListener('scroll', function(){ if (!rq) rq = requestAnimationFrame(upd); }, {passive: true}); upd(); }
+  /* footer roofline: 29 small roofs, one for each town */
+  var fr = document.querySelector('.ftr-roofs');
+  if (fr && !fr.childNodes.length){ var o = ''; for (var i = 0; i < 29; i++){ var x = 10 + i*40, hgt = 16 + (i*7 % 3)*6; o += '<path style="--i:' + i + '" d="M' + x + ' 60 V' + (60 - 12) + ' L' + (x + 16) + ' ' + (60 - 12 - hgt) + ' L' + (x + 32) + ' ' + (60 - 12) + ' V60 Z"/>'; } fr.innerHTML = o; }
 }
 
 /* magnetic 3D buttons: the pill leans toward the pointer, springs back on leave */
@@ -460,6 +481,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <a class="hdr-tel" href="tel:+16519776027"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span>(651) 977-6027</span></a>
   <a class="btn btn-amber btn-sm" href="#book" data-mag>Book a Wise Check</a>
   <button class="hdr-menu" aria-label="Open menu" aria-expanded="false"><span></span></button>
+  <span class="hdr-ridge" aria-hidden="true"><i></i></span>
  </div>
 </header>
 
@@ -4274,7 +4296,7 @@ OWL.reg('reviews','2',function(root){
 .area1 .road .tree circle{fill:#9DB27A}.area1 .road .tree rect{fill:#8a6a3e}
 .area1 .owlrider{transition:transform .1s linear}
 .area1 .towns{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.area1 .towns button{min-height:40px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:500;font-size:15px;box-shadow:0 2px 0 rgba(23,17,29,.07);transition:background .2s,transform .2s}
+.area1 .towns button{min-height:44px;padding:0 14px;border-radius:999px;background:var(--paper);font-weight:500;font-size:15px;box-shadow:0 2px 0 rgba(23,17,29,.07);transition:background .2s,transform .2s}
 .area1 .towns button:hover{transform:translateY(-2px)}
 .area1 .towns button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
 .area1 .towns button.home{font-weight:700;box-shadow:0 0 0 2px var(--amber)}
@@ -4904,6 +4926,202 @@ OWL.reg('booking','1',function(root){
   paths.forEach(function(p){ s += '<path d="M' + p[0] + ' ' + p[1] + ' Q' + ((p[0] + p[2])/2) + ' ' + (Math.min(p[1], p[3]) - 30) + ' ' + p[2] + ' ' + p[3] + '" fill="none" stroke="#EAA221" stroke-width="2" stroke-dasharray="4 5"/><circle cx="' + p[2] + '" cy="' + p[3] + '" r="5" fill="#EAA221"/>'; });
   s += '<g class="pin"><path d="M150 120 c-14 0 -22 -10 -22 -20 0 -12 10 -22 22 -22 s22 10 22 22 c0 10 -8 20 -22 20z" fill="#EAA221" transform="translate(0 -8)"/><circle cx="150" cy="92" r="7" fill="#FFFDF8"/></g>';
   root.querySelector('.dots').innerHTML = s;
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="booking" data-v="2">
+<section class="sec book2" id="book-2" aria-labelledby="bk2-h">
+<style>
+.book2 .panel{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);border-radius:30px;background:var(--paper);overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -46px rgba(23,17,29,.55)}
+.book2 .rail{position:relative;padding:clamp(22px,3vw,40px);background:linear-gradient(180deg,#EFE9DA,#E7E0CE)}
+.book2 .rail .sub{margin:10px 0 26px;font-size:16px;color:var(--ink-70)}
+.book2 .steps{position:relative}
+.book2 .rail ol{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.book2 .steps::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:4px;border-radius:4px;background:rgba(23,17,29,.1)}
+.book2 .rail .fill{position:absolute;left:21px;top:22px;width:4px;border-radius:4px;background:var(--amber);height:calc((100% - 44px)*var(--f,0));transition:height .6s cubic-bezier(.22,.61,.36,1)}
+.book2 .rail li{position:relative;display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:center;font-weight:700;color:#6B6570;transition:color .3s}
+.book2 .rail li i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;font-style:normal;font-weight:800;background:var(--paper);box-shadow:0 0 0 3px rgba(23,17,29,.1);transition:background .3s,box-shadow .3s,transform .4s cubic-bezier(.3,1.6,.5,1)}
+.book2 .rail li span small{display:block;font-weight:500;font-size:14px;color:var(--ink-70)}
+.book2 .rail li[aria-current="step"]{color:var(--ink)}
+.book2 .rail li[aria-current="step"] i{background:var(--amber);box-shadow:0 0 0 3px var(--amber-edge),0 0 0 10px rgba(234,162,33,.2);transform:scale(1.06)}
+.book2 .rail li.done{color:var(--ink)}
+.book2 .rail li.done i{background:#17111D;color:#F6C25F}
+.book2 .call{display:inline-block;margin-top:26px;font-weight:700;text-decoration:underline;text-underline-offset:4px;min-height:44px;line-height:44px}
+.book2 form{display:grid;grid-template-rows:1fr auto;padding:clamp(22px,3vw,40px);min-height:520px}
+.book2 fieldset{border:0;margin:0;padding:0;min-width:0}
+.book2 .st{display:none}
+.book2 .st.on{display:block;animation:bk2in .45s cubic-bezier(.22,.61,.36,1)}
+@keyframes bk2in{from{opacity:0;transform:translateX(16px)}}
+.book2 legend{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:18px;padding:0}
+.book2 .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.book2 [data-g="time"]{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.book2 .opt{position:relative}
+.book2 .opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.book2 .opt span{display:flex;align-items:center;gap:12px;min-height:60px;padding:12px 16px;border-radius:16px;background:#fff;font-weight:700;box-shadow:0 0 0 2px rgba(23,17,29,.1),0 4px 0 rgba(23,17,29,.08);transition:box-shadow .2s,transform .15s,background .2s}
+.book2 .opt span::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(23,17,29,.3);transition:box-shadow .2s}
+.book2 .opt:hover span{transform:translateY(-2px)}
+.book2 .opt input:checked + span{background:#FFF6E2;box-shadow:0 0 0 3px var(--amber),0 4px 0 var(--amber-edge)}
+.book2 .opt input:checked + span::before{box-shadow:inset 0 0 0 6px var(--amber)}
+.book2 .opt input:focus-visible + span{outline:3px solid var(--ink);outline-offset:3px}
+.book2 .grp + .grp{margin-top:20px}
+.book2 .grp > p{font-weight:700;margin-bottom:10px}
+.book2 .fld{display:grid;gap:6px;max-width:460px}
+.book2 .fld + .fld{margin-top:14px}
+.book2 .fld label{font-weight:700}
+.book2 .fld input{min-height:54px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:17px}
+.book2 .fld input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.book2 .fld input[aria-invalid="true"]{border-color:#b3261e}
+.book2 .fld .er{min-height:20px;font-size:14px;font-weight:600;color:#b3261e}
+.book2 .nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}
+.book2 .back{min-height:48px;padding:0 18px;border-radius:14px;font-weight:700;background:transparent;box-shadow:0 0 0 2px rgba(23,17,29,.14)}
+.book2 .back[hidden]{display:none}
+.book2 .pv{margin-top:18px;padding:14px 16px;border-radius:14px;background:#17111D;color:#E9E5DA;font:500 14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;box-shadow:inset 0 2px 10px rgba(0,0,0,.5)}
+.book2 .pv b{color:#F6C25F;font-weight:700}
+@media (max-width:900px){.book2 .panel{grid-template-columns:1fr}.book2 .rail ol{grid-template-columns:repeat(3,1fr);gap:8px}.book2 .steps::before,.book2 .rail .fill{display:none}.book2 .rail li{grid-template-columns:1fr;justify-items:start;font-size:14px}.book2 .rail li span small{display:none}.book2 form{min-height:0}}
+@media (prefers-reduced-motion:reduce){.book2 .st.on{animation:none}.book2 .rail .fill,.book2 .rail li i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="panel">
+  <div class="rail">
+   <span class="kick">Booking</span>
+   <h2 class="h2" id="bk2-h" style="margin-top:12px;font-size:clamp(30px,3.2vw,44px)">Build Your Visit</h2>
+   <p class="sub">Three short steps. Your email app opens with the details; nothing is sent until you send it.</p>
+   <div class="steps"><span class="fill" aria-hidden="true"></span><ol><li aria-current="step"><i>1</i><span>What<small>The job</small></span></li><li><i>2</i><span>When<small>Day and time</small></span></li><li><i>3</i><span>Who<small>Your details</small></span></li></ol></div>
+   <a class="call" href="tel:+16519776027" data-owl="peek">Or call (651) 977-6027</a>
+  </div>
+  <form novalidate aria-labelledby="bk2-h">
+   <div>
+    <fieldset class="st on" data-s="0"><legend>What do you need?</legend><div class="opts" role="radiogroup" aria-label="Service"></div></fieldset>
+    <fieldset class="st" data-s="1"><legend>When suits you?</legend>
+     <div class="grp"><p id="bk2-dl">Day</p><div class="opts" role="radiogroup" aria-labelledby="bk2-dl" data-g="day"></div></div>
+     <div class="grp"><p id="bk2-tl">Time</p><div class="opts" role="radiogroup" aria-labelledby="bk2-tl" data-g="time"></div></div></fieldset>
+    <fieldset class="st" data-s="2"><legend>Who and where?</legend>
+     <div class="fld"><label for="bk2-n">Name</label><input id="bk2-n" data-n="Name" autocomplete="name" required aria-describedby="bk2-ne"><span class="er" id="bk2-ne"></span></div>
+     <div class="fld"><label for="bk2-p">Phone</label><input id="bk2-p" type="tel" data-n="Phone" autocomplete="tel" inputmode="tel" required aria-describedby="bk2-pe"><span class="er" id="bk2-pe"></span></div>
+     <div class="fld"><label for="bk2-a">Address</label><input id="bk2-a" data-n="Address" autocomplete="street-address" required aria-describedby="bk2-ae"><span class="er" id="bk2-ae"></span></div></fieldset>
+    <div class="pv" aria-label="Preview of the email that will open"></div>
+   </div>
+   <div class="nav"><button class="back" type="button" hidden>Back</button><p class="form-msg" aria-live="polite"></p><button class="btn btn-amber go" type="submit" data-mag data-owl="hoot">Next: When</button></div>
+  </form>
+ </div>
+</div>
+<script>
+OWL.reg('booking','2',function(root){
+  var S = (OWL.SVC || []).map(function(s){ return s.n; }), DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat'], TIMES = ['Morning, 8–12','Afternoon, 12–6'];
+  var form = root.querySelector('form'), sts = [].slice.call(root.querySelectorAll('.st')), lis = [].slice.call(root.querySelectorAll('.rail li')), fill = root.querySelector('.steps'), back = root.querySelector('.back'), go = root.querySelector('.go'), msg = root.querySelector('.form-msg'), pv = root.querySelector('.pv'), h2 = root.querySelector('h2'), cur = 0;
+  OWL.split(h2);
+  function opts(box, name, list, def){ box.innerHTML = list.map(function(t, i){ return '<label class="opt"><input type="radio" name="' + name + '" value="' + t + '"' + (i === def ? ' checked' : '') + '><span>' + t + '</span></label>'; }).join(''); }
+  opts(root.querySelector('[data-s="0"] .opts'), 'bk2-svc', S, Math.max(0, S.indexOf('Wise Check Inspections')));
+  opts(root.querySelector('[data-g="day"]'), 'bk2-day', DAYS, 0); opts(root.querySelector('[data-g="time"]'), 'bk2-time', TIMES, 0);
+  var F = [].slice.call(root.querySelectorAll('.fld input'));
+  function val(n){ var c = form.querySelector('input[name="' + n + '"]:checked'); return c ? c.value : ''; }
+  function lines(){ return ['Service: ' + val('bk2-svc'), 'Day: ' + val('bk2-day'), 'Time: ' + val('bk2-time')].concat(F.map(function(i){ return i.dataset.n + ': ' + (i.value.trim() || '…'); })); }
+  function preview(){ pv.innerHTML = '<b>To:</b> info@owlroofing.com\n<b>Subject:</b> Wise Check request\n\n' + lines().join('\n').replace(/[<>&]/g, ''); }
+  form.addEventListener('input', preview); form.addEventListener('change', preview);
+  function check(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1), er = root.querySelector('#' + i.getAttribute('aria-describedby'));
+    i.setAttribute('aria-invalid', ok ? 'false' : 'true'); er.textContent = ok ? '' : (i.type === 'tel' ? 'Add a phone number we can call back.' : 'Add your ' + i.dataset.n.toLowerCase() + '.'); return ok; }
+  F.forEach(function(i){ i.addEventListener('blur', function(){ if (i.value) check(i); }); });
+  function show(n){ cur = n; sts.forEach(function(s, j){ s.classList.toggle('on', j === n); });
+    lis.forEach(function(l, j){ if (j === n) l.setAttribute('aria-current', 'step'); else l.removeAttribute('aria-current'); l.classList.toggle('done', j < n); });
+    fill.style.setProperty('--f', n/2); back.hidden = n === 0; go.textContent = n === 0 ? 'Next: When' : n === 1 ? 'Next: Your details' : 'Open my email'; msg.textContent = ''; msg.className = 'form-msg'; }
+  back.addEventListener('click', function(){ show(cur - 1); sts[cur].querySelector('input').focus(); });
+  form.addEventListener('submit', function(e){ e.preventDefault();
+    if (cur < 2){ show(cur + 1); var f = sts[cur].querySelector('input:checked') || sts[cur].querySelector('input'); f.focus(); return; }
+    var bad = F.filter(function(i){ return !check(i); })[0]; if (bad){ msg.className = 'form-msg err'; msg.textContent = 'Please check the highlighted field.'; bad.focus(); return; }
+    location.href = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(lines().join('\n'));
+    msg.className = 'form-msg'; msg.textContent = 'Your email app should open with these details. Send it from there, or call (651) 977-6027.'; });
+  show(0); preview();
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(form); }
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="booking" data-v="3">
+<section class="sec book3" id="book-3" aria-labelledby="bk3-h">
+<style>
+.book3{overflow:hidden}
+.book3 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:center}
+.book3 .lede{margin:14px 0 0;max-width:34ch}
+.book3 .scene{perspective:1600px;justify-self:center;width:100%;max-width:640px}
+.book3 .card{position:relative;display:grid;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1);transform:rotateX(var(--rx,0deg)) rotateY(calc(var(--ry,0deg) + var(--flip,0deg)))}
+.book3 .card.back{--flip:180deg}
+.book3 .face{grid-area:1/1;position:relative;border-radius:26px;padding:clamp(22px,3vw,36px);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -40px rgba(23,17,29,.6),0 0 0 1px rgba(23,17,29,.06);overflow:hidden}
+.book3 .front{background:linear-gradient(135deg,#FFFDF7,#F3EEE1 60%,#EBE3CF);min-height:380px;display:flex;flex-direction:column}
+.book3 .front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.7),rgba(255,255,255,0) 42%);pointer-events:none;mix-blend-mode:soft-light}
+.book3 .front .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.book3 .front .top img{height:44px;width:auto}
+.book3 .front .top span{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.book3 .tel{display:block;margin:auto 0 8px;padding-top:26px;font-size:clamp(38px,5vw,64px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+.book3 .tel:hover{color:#8E5A12}
+.book3 .tel:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:8px}
+.book3 .meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 22px;font-size:15px;color:var(--ink-70);margin-bottom:22px}
+.book3 .meta a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600}.book3 .meta b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.book3 .acts{display:flex;flex-wrap:wrap;gap:10px}
+.book3 .backf{transform:rotateY(180deg);background:linear-gradient(135deg,#FFFDF7,#F6F2E8)}
+.book3 .backf h3{font-size:24px;font-weight:800;margin-bottom:12px}
+.book3 .fld{display:grid;gap:4px;margin-bottom:10px}
+.book3 .fld label{font-weight:700;font-size:15px}
+.book3 .fld input{min-height:48px;padding:0 14px;border-radius:12px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:16px}
+.book3 .fld input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.book3 .fld input[aria-invalid="true"]{border-color:#b3261e}
+.book3 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.book3 .chips button{min-width:48px;min-height:44px;padding:0 10px;border-radius:12px;font-weight:700;background:#fff;box-shadow:0 0 0 2px rgba(23,17,29,.12),0 3px 0 rgba(23,17,29,.08)}
+.book3 .chips button[aria-pressed="true"]{background:var(--amber);box-shadow:0 0 0 2px var(--amber-edge),0 3px 0 var(--amber-edge)}
+.book3 .lb{font-weight:700;font-size:15px}
+.book3 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+.book3 .flipb{min-height:48px;padding:0 16px;border-radius:14px;font-weight:700;background:transparent;box-shadow:0 0 0 2px rgba(23,17,29,.16)}
+@media (max-width:900px){.book3 .g{grid-template-columns:1fr}.book3 .meta{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.book3 .card{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Booking</span>
+   <h2 class="h2" id="bk3-h" style="margin-top:12px">Take Our Card</h2>
+   <p class="lede rv">One number, one email, one office in Shoreview. Call us, or turn the card over to book a Wise Check.</p>
+  </div>
+  <div class="scene" data-owl="say:Turn it over">
+   <div class="card">
+    <div class="face front">
+     <div class="top"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-asrc="a0" alt="Owl Roofing" width="140" height="44"><span>We Give a Hoot</span></div>
+     <a class="tel" href="tel:+16519776027">(651) 977-6027</a>
+     <div class="meta"><div><b>Hours</b>Mon–Sat 8:00–18:00</div><div><b>Email</b><a href="mailto:info@owlroofing.com">info@owlroofing.com</a></div><div><b>Office</b>1000 County Rd E #230, Shoreview, MN 55126</div><div><b>Licence</b>Minnesota #BC809662</div></div>
+     <div class="acts"><a class="btn btn-amber btn-sm" href="tel:+16519776027" data-mag data-owl="hoot">Call Now</a><button class="btn btn-line btn-sm flip" type="button" aria-controls="bk3-form" data-mag>Book Online</button></div>
+    </div>
+    <div class="face backf" id="bk3-form" inert aria-hidden="true">
+     <h3>Book a Wise Check</h3>
+     <form novalidate>
+      <div class="fld"><label for="bk3-n">Name</label><input id="bk3-n" data-n="name" autocomplete="name" required></div>
+      <div class="fld"><label for="bk3-p">Phone</label><input id="bk3-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+      <div class="fld"><label for="bk3-a">Address</label><input id="bk3-a" data-n="address" autocomplete="street-address" required></div>
+      <span class="lb" id="bk3-d">Preferred day</span><div class="chips" role="group" aria-labelledby="bk3-d" data-n="Preferred day"><button type="button" aria-pressed="true">Mon</button><button type="button" aria-pressed="false">Tue</button><button type="button" aria-pressed="false">Wed</button><button type="button" aria-pressed="false">Thu</button><button type="button" aria-pressed="false">Fri</button><button type="button" aria-pressed="false">Sat</button></div>
+      <p class="form-msg" aria-live="polite"></p>
+      <div class="row"><button class="flipb unflip" type="button">Back to the card</button><button class="btn btn-amber btn-sm" type="submit" data-mag data-owl="hoot">Book My Wise Check</button></div>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('booking','3',function(root){
+  var card = root.querySelector('.card'), scene = root.querySelector('.scene'), front = root.querySelector('.front'), back = root.querySelector('.backf'), flip = root.querySelector('.flip'), unflip = root.querySelector('.unflip'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  OWL.bookForm(root.querySelector('form'), root.querySelector('.form-msg'));
+  function turn(toBack){ card.classList.toggle('back', toBack); back.inert = !toBack; back.setAttribute('aria-hidden', !toBack); front.inert = toBack; front.setAttribute('aria-hidden', toBack); flip.setAttribute('aria-expanded', toBack);
+    setTimeout(function(){ (toBack ? root.querySelector('#bk3-n') : flip).focus({preventScroll: true}); }, OWL.reduce ? 0 : 450); }
+  flip.addEventListener('click', function(){ turn(true); }); unflip.addEventListener('click', function(){ turn(false); });
+  flip.setAttribute('aria-expanded', 'false');
+  if (OWL.fine && !OWL.reduce){
+    scene.addEventListener('pointermove', function(e){ var b = scene.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+      card.style.setProperty('--ry', (x*10).toFixed(2) + 'deg'); card.style.setProperty('--rx', (-y*8).toFixed(2) + 'deg'); front.style.setProperty('--gx', ((x + .5)*100).toFixed(0) + '%'); front.style.setProperty('--gy', ((y + .5)*100).toFixed(0) + '%'); });
+    scene.addEventListener('pointerleave', function(){ card.style.setProperty('--ry', '0deg'); card.style.setProperty('--rx', '0deg'); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(card); }
 });
 </script>
 </section>
@@ -5957,6 +6175,7 @@ OWL.reg('wcparts','2',function(root){
 </div>
 </main>
 <footer class="ftr" id="contact">
+ <svg class="ftr-roofs" viewBox="0 0 1160 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true"></svg>
  <div class="wrap">
   <div class="ftr-g">
    <div class="ftr-brand"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-asrc="a0" alt="Owl Roofing" width="130" height="53"><p class="ftr-tag">We Give a Hoot.</p><p>Family-owned, founded 2025 by Tim Brown and Noah Bergland.</p></div>

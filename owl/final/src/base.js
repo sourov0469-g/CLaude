@@ -49,6 +49,13 @@ function header(){
   var h = document.querySelector('.hdr'), m = h && h.querySelector('.hdr-menu'); if (!m) return;
   m.addEventListener('click', function(){ var o = h.classList.toggle('open'); m.setAttribute('aria-expanded', o); });
   h.querySelectorAll('.hdr-nav a').forEach(function(a){ a.addEventListener('click', function(){ h.classList.remove('open'); m.setAttribute('aria-expanded', false); }); });
+  /* ridge line: how far down the page you are */
+  var rg = h.querySelector('.hdr-ridge'), rq = 0;
+  if (rg){ var upd = function(){ rq = 0; var d = document.documentElement, mx = d.scrollHeight - innerHeight; rg.style.setProperty('--p', mx > 0 ? Math.min(1, scrollY/mx).toFixed(4) : 0); };
+    addEventListener('scroll', function(){ if (!rq) rq = requestAnimationFrame(upd); }, {passive: true}); upd(); }
+  /* footer roofline: 29 small roofs, one for each town */
+  var fr = document.querySelector('.ftr-roofs');
+  if (fr && !fr.childNodes.length){ var o = ''; for (var i = 0; i < 29; i++){ var x = 10 + i*40, hgt = 16 + (i*7 % 3)*6; o += '<path style="--i:' + i + '" d="M' + x + ' 60 V' + (60 - 12) + ' L' + (x + 16) + ' ' + (60 - 12 - hgt) + ' L' + (x + 32) + ' ' + (60 - 12) + ' V60 Z"/>'; } fr.innerHTML = o; }
 }
 
 /* magnetic 3D buttons: the pill leans toward the pointer, springs back on leave */

@@ -1849,3 +1849,17 @@ No HIGH colour finding is open.
 - The old V2s are archived as `services-b1` and `reviews-b1`. Services V1's phone row height is fixed.
 - Checks: Round 4 94/94; homepage 50/50.
 - Next: Round 5 (Area, Family, Booking, header/footer), then the overnight ladder.
+
+## Owl Roofing · Upgrade Round 5 · Area + Family + Booking + header/footer (2026-11-04, overnight: no stop)
+- Gate: `owl/final/GATE-UP-R5.md`. Evidence: `owl/final/gates/up-r5/`. Plan lines: `owl/skills/UP-R5-PACK.md`.
+- New versions:
+  - Area V2 Press Your Town;
+  - Area V3 Twenty-Nine Towns;
+  - Family V2 Family Album;
+  - Family V3 In Numbers;
+  - Booking V2 Build Your Visit;
+  - Booking V3 Take Our Card.
+- Header: ridge-line scroll progress and shingle underlines. Footer: 29 roofs.
+- The build now stores repeated images once (7.18 → 6.06 MB).
+- Checks: Round 5 138/138; homepage 50/50; Rounds 1–4 re-run, all pass.
+- Next: the overnight ladder (hero 7+8 first).

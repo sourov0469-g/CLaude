@@ -204,3 +204,17 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px);scroll-margin-
 .key[aria-pressed="true"]{background:linear-gradient(180deg,#F7C760,#EAA221)}
 .key[aria-pressed="true"] .led{background:#17111D;box-shadow:0 0 0 3px rgba(23,17,29,.15)}
 @media (prefers-reduced-motion:reduce){.btn-tab .t-face,.btn-ink .wash,.btn-film .disc,.btn-film .roll span,.btn-plate,.key{transition:none}}
+
+/* header treatment (upgrade R5): a ridge line that fills with scroll; nav underlines laid like a shingle course */
+.hdr-bar{position:relative}
+.hdr-ridge{position:absolute;left:22px;right:22px;bottom:-1px;height:3px;border-radius:3px;background:rgba(23,17,29,.06);overflow:hidden;pointer-events:none}
+.hdr-ridge i{position:absolute;inset:0;background:repeating-linear-gradient(90deg,var(--amber) 0 14px,#C7871A 14px 16px);transform-origin:left;transform:scaleX(var(--p,0))}
+.hdr-nav a{position:relative}
+.hdr-nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:4px;background:repeating-linear-gradient(90deg,var(--amber) 0 7px,transparent 7px 9px);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+.hdr-nav a:hover::after,.hdr-nav a:focus-visible::after,.hdr-nav a[aria-current="page"]::after{transform:scaleX(1)}
+/* footer treatment: 29 roofs, one per town, lit by a slow wave */
+.ftr{position:relative}
+.ftr-roofs{position:absolute;left:0;right:0;top:-46px;width:100%;height:48px;pointer-events:none}
+.ftr-roofs path{fill:#E7E0CE;stroke:#C9C0AC;stroke-width:1.5;animation:ftrwave 6s ease-in-out infinite;animation-delay:calc(var(--i)*.12s)}
+@keyframes ftrwave{0%,70%,100%{fill:#E7E0CE}35%{fill:#F6C25F}}
+@media (prefers-reduced-motion:reduce){.ftr-roofs path{animation:none}.hdr-nav a::after{transition:none}}

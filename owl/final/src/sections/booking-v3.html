@@ -1,0 +1,85 @@
+<section class="sec book3" id="book-3" aria-labelledby="bk3-h">
+<style>
+.book3{overflow:hidden}
+.book3 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:center}
+.book3 .lede{margin:14px 0 0;max-width:34ch}
+.book3 .scene{perspective:1600px;justify-self:center;width:100%;max-width:640px}
+.book3 .card{position:relative;display:grid;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1);transform:rotateX(var(--rx,0deg)) rotateY(calc(var(--ry,0deg) + var(--flip,0deg)))}
+.book3 .card.back{--flip:180deg}
+.book3 .face{grid-area:1/1;position:relative;border-radius:26px;padding:clamp(22px,3vw,36px);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -40px rgba(23,17,29,.6),0 0 0 1px rgba(23,17,29,.06);overflow:hidden}
+.book3 .front{background:linear-gradient(135deg,#FFFDF7,#F3EEE1 60%,#EBE3CF);min-height:380px;display:flex;flex-direction:column}
+.book3 .front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.7),rgba(255,255,255,0) 42%);pointer-events:none;mix-blend-mode:soft-light}
+.book3 .front .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.book3 .front .top img{height:44px;width:auto}
+.book3 .front .top span{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.book3 .tel{display:block;margin:auto 0 8px;padding-top:26px;font-size:clamp(38px,5vw,64px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+.book3 .tel:hover{color:#8E5A12}
+.book3 .tel:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:8px}
+.book3 .meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 22px;font-size:15px;color:var(--ink-70);margin-bottom:22px}
+.book3 .meta a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600}.book3 .meta b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.book3 .acts{display:flex;flex-wrap:wrap;gap:10px}
+.book3 .backf{transform:rotateY(180deg);background:linear-gradient(135deg,#FFFDF7,#F6F2E8)}
+.book3 .backf h3{font-size:24px;font-weight:800;margin-bottom:12px}
+.book3 .fld{display:grid;gap:4px;margin-bottom:10px}
+.book3 .fld label{font-weight:700;font-size:15px}
+.book3 .fld input{min-height:48px;padding:0 14px;border-radius:12px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:16px}
+.book3 .fld input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.book3 .fld input[aria-invalid="true"]{border-color:#b3261e}
+.book3 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.book3 .chips button{min-width:48px;min-height:44px;padding:0 10px;border-radius:12px;font-weight:700;background:#fff;box-shadow:0 0 0 2px rgba(23,17,29,.12),0 3px 0 rgba(23,17,29,.08)}
+.book3 .chips button[aria-pressed="true"]{background:var(--amber);box-shadow:0 0 0 2px var(--amber-edge),0 3px 0 var(--amber-edge)}
+.book3 .lb{font-weight:700;font-size:15px}
+.book3 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+.book3 .flipb{min-height:48px;padding:0 16px;border-radius:14px;font-weight:700;background:transparent;box-shadow:0 0 0 2px rgba(23,17,29,.16)}
+@media (max-width:900px){.book3 .g{grid-template-columns:1fr}.book3 .meta{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.book3 .card{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Booking</span>
+   <h2 class="h2" id="bk3-h" style="margin-top:12px">Take Our Card</h2>
+   <p class="lede rv">One number, one email, one office in Shoreview. Call us, or turn the card over to book a Wise Check.</p>
+  </div>
+  <div class="scene" data-owl="say:Turn it over">
+   <div class="card">
+    <div class="face front">
+     <div class="top"><img src="{{A:logo.svg}}" alt="Owl Roofing" width="140" height="44"><span>We Give a Hoot</span></div>
+     <a class="tel" href="tel:+16519776027">(651) 977-6027</a>
+     <div class="meta"><div><b>Hours</b>Mon–Sat 8:00–18:00</div><div><b>Email</b><a href="mailto:info@owlroofing.com">info@owlroofing.com</a></div><div><b>Office</b>1000 County Rd E #230, Shoreview, MN 55126</div><div><b>Licence</b>Minnesota #BC809662</div></div>
+     <div class="acts"><a class="btn btn-amber btn-sm" href="tel:+16519776027" data-mag data-owl="hoot">Call Now</a><button class="btn btn-line btn-sm flip" type="button" aria-controls="bk3-form" data-mag>Book Online</button></div>
+    </div>
+    <div class="face backf" id="bk3-form" inert aria-hidden="true">
+     <h3>Book a Wise Check</h3>
+     <form novalidate>
+      <div class="fld"><label for="bk3-n">Name</label><input id="bk3-n" data-n="name" autocomplete="name" required></div>
+      <div class="fld"><label for="bk3-p">Phone</label><input id="bk3-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+      <div class="fld"><label for="bk3-a">Address</label><input id="bk3-a" data-n="address" autocomplete="street-address" required></div>
+      <span class="lb" id="bk3-d">Preferred day</span><div class="chips" role="group" aria-labelledby="bk3-d" data-n="Preferred day"><button type="button" aria-pressed="true">Mon</button><button type="button" aria-pressed="false">Tue</button><button type="button" aria-pressed="false">Wed</button><button type="button" aria-pressed="false">Thu</button><button type="button" aria-pressed="false">Fri</button><button type="button" aria-pressed="false">Sat</button></div>
+      <p class="form-msg" aria-live="polite"></p>
+      <div class="row"><button class="flipb unflip" type="button">Back to the card</button><button class="btn btn-amber btn-sm" type="submit" data-mag data-owl="hoot">Book My Wise Check</button></div>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('booking','3',function(root){
+  var card = root.querySelector('.card'), scene = root.querySelector('.scene'), front = root.querySelector('.front'), back = root.querySelector('.backf'), flip = root.querySelector('.flip'), unflip = root.querySelector('.unflip'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  OWL.bookForm(root.querySelector('form'), root.querySelector('.form-msg'));
+  function turn(toBack){ card.classList.toggle('back', toBack); back.inert = !toBack; back.setAttribute('aria-hidden', !toBack); front.inert = toBack; front.setAttribute('aria-hidden', toBack); flip.setAttribute('aria-expanded', toBack);
+    setTimeout(function(){ (toBack ? root.querySelector('#bk3-n') : flip).focus({preventScroll: true}); }, OWL.reduce ? 0 : 450); }
+  flip.addEventListener('click', function(){ turn(true); }); unflip.addEventListener('click', function(){ turn(false); });
+  flip.setAttribute('aria-expanded', 'false');
+  if (OWL.fine && !OWL.reduce){
+    scene.addEventListener('pointermove', function(e){ var b = scene.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+      card.style.setProperty('--ry', (x*10).toFixed(2) + 'deg'); card.style.setProperty('--rx', (-y*8).toFixed(2) + 'deg'); front.style.setProperty('--gx', ((x + .5)*100).toFixed(0) + '%'); front.style.setProperty('--gy', ((y + .5)*100).toFixed(0) + '%'); });
+    scene.addEventListener('pointerleave', function(){ card.style.setProperty('--ry', '0deg'); card.style.setProperty('--rx', '0deg'); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(card); }
+});
+</script>
+</section>

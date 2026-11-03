@@ -1,0 +1,912 @@
+[
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "default view shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "superseded versions kept as inert backups (area b1, family b1, booking b1)",
+  "ok": true
+ },
+ {
+  "sec": "page",
+  "v": "-",
+  "check": "every homepage section is inside the home page",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "From our nest to yours"
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Press Your Town"
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "29 town keys, Shoreview marked as home",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "typing filters the keys (ed → Edina, Eden Prairie)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "one match presses its key and confirms",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "an unknown town is told the truth and given the phone",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "arrow keys move around the key grid",
+  "ok": "Mounds View",
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "arrow-down moves a full row",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Twenty-Nine Towns"
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "all 29 towns are written inside the 29",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "search lights the town inside the numeral",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "marquee is a decorative duplicate (aria-hidden, 58 items)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "We Give a Hoot"
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Family Album"
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "five real photos, only the top print exposed",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "Next sends the top print to the back; caption and count follow",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "Previous brings it back",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "dragging the top print past 90 px flicks it to the back",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Our Family, in Numbers"
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "numbers settle on locked facts only (2 · 2025 · 29 · 3 · 10-yr · 5.0) and say 90+ reviews",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "rules drawn when seen",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Book Your Wise Check"
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Build Your Visit"
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "step 1 defaults to the most common job (Wise Check), radios visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "Next walks the steps; the rail marks the current one",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "Back keeps the answers (Thu still chosen)",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "empty details: error under the field, focus moves there",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "live preview shows the email that will open",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "submit hands off to email and never claims it was saved or sent",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "2",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "section keeps the page anchor id",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Take Our Card"
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "card front carries the locked phone, hours, address, email and licence",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "Book Online flips the card; back face live, front inert, focus in Name",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "empty submit asks for the name and marks it",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "Back to the card flips back and returns focus to Book Online",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "phone: controls stay at least 44 px tall",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "3",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

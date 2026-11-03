@@ -1,0 +1,105 @@
+<section class="sec book2" id="book-2" aria-labelledby="bk2-h">
+<style>
+.book2 .panel{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);border-radius:30px;background:var(--paper);overflow:hidden;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -46px rgba(23,17,29,.55)}
+.book2 .rail{position:relative;padding:clamp(22px,3vw,40px);background:linear-gradient(180deg,#EFE9DA,#E7E0CE)}
+.book2 .rail .sub{margin:10px 0 26px;font-size:16px;color:var(--ink-70)}
+.book2 .steps{position:relative}
+.book2 .rail ol{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.book2 .steps::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:4px;border-radius:4px;background:rgba(23,17,29,.1)}
+.book2 .rail .fill{position:absolute;left:21px;top:22px;width:4px;border-radius:4px;background:var(--amber);height:calc((100% - 44px)*var(--f,0));transition:height .6s cubic-bezier(.22,.61,.36,1)}
+.book2 .rail li{position:relative;display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:center;font-weight:700;color:#6B6570;transition:color .3s}
+.book2 .rail li i{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;font-style:normal;font-weight:800;background:var(--paper);box-shadow:0 0 0 3px rgba(23,17,29,.1);transition:background .3s,box-shadow .3s,transform .4s cubic-bezier(.3,1.6,.5,1)}
+.book2 .rail li span small{display:block;font-weight:500;font-size:14px;color:var(--ink-70)}
+.book2 .rail li[aria-current="step"]{color:var(--ink)}
+.book2 .rail li[aria-current="step"] i{background:var(--amber);box-shadow:0 0 0 3px var(--amber-edge),0 0 0 10px rgba(234,162,33,.2);transform:scale(1.06)}
+.book2 .rail li.done{color:var(--ink)}
+.book2 .rail li.done i{background:#17111D;color:#F6C25F}
+.book2 .call{display:inline-block;margin-top:26px;font-weight:700;text-decoration:underline;text-underline-offset:4px;min-height:44px;line-height:44px}
+.book2 form{display:grid;grid-template-rows:1fr auto;padding:clamp(22px,3vw,40px);min-height:520px}
+.book2 fieldset{border:0;margin:0;padding:0;min-width:0}
+.book2 .st{display:none}
+.book2 .st.on{display:block;animation:bk2in .45s cubic-bezier(.22,.61,.36,1)}
+@keyframes bk2in{from{opacity:0;transform:translateX(16px)}}
+.book2 legend{font-size:clamp(24px,2.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:18px;padding:0}
+.book2 .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.book2 [data-g="time"]{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.book2 .opt{position:relative}
+.book2 .opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.book2 .opt span{display:flex;align-items:center;gap:12px;min-height:60px;padding:12px 16px;border-radius:16px;background:#fff;font-weight:700;box-shadow:0 0 0 2px rgba(23,17,29,.1),0 4px 0 rgba(23,17,29,.08);transition:box-shadow .2s,transform .15s,background .2s}
+.book2 .opt span::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(23,17,29,.3);transition:box-shadow .2s}
+.book2 .opt:hover span{transform:translateY(-2px)}
+.book2 .opt input:checked + span{background:#FFF6E2;box-shadow:0 0 0 3px var(--amber),0 4px 0 var(--amber-edge)}
+.book2 .opt input:checked + span::before{box-shadow:inset 0 0 0 6px var(--amber)}
+.book2 .opt input:focus-visible + span{outline:3px solid var(--ink);outline-offset:3px}
+.book2 .grp + .grp{margin-top:20px}
+.book2 .grp > p{font-weight:700;margin-bottom:10px}
+.book2 .fld{display:grid;gap:6px;max-width:460px}
+.book2 .fld + .fld{margin-top:14px}
+.book2 .fld label{font-weight:700}
+.book2 .fld input{min-height:54px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:17px}
+.book2 .fld input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.book2 .fld input[aria-invalid="true"]{border-color:#b3261e}
+.book2 .fld .er{min-height:20px;font-size:14px;font-weight:600;color:#b3261e}
+.book2 .nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}
+.book2 .back{min-height:48px;padding:0 18px;border-radius:14px;font-weight:700;background:transparent;box-shadow:0 0 0 2px rgba(23,17,29,.14)}
+.book2 .back[hidden]{display:none}
+.book2 .pv{margin-top:18px;padding:14px 16px;border-radius:14px;background:#17111D;color:#E9E5DA;font:500 14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;box-shadow:inset 0 2px 10px rgba(0,0,0,.5)}
+.book2 .pv b{color:#F6C25F;font-weight:700}
+@media (max-width:900px){.book2 .panel{grid-template-columns:1fr}.book2 .rail ol{grid-template-columns:repeat(3,1fr);gap:8px}.book2 .steps::before,.book2 .rail .fill{display:none}.book2 .rail li{grid-template-columns:1fr;justify-items:start;font-size:14px}.book2 .rail li span small{display:none}.book2 form{min-height:0}}
+@media (prefers-reduced-motion:reduce){.book2 .st.on{animation:none}.book2 .rail .fill,.book2 .rail li i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="panel">
+  <div class="rail">
+   <span class="kick">Booking</span>
+   <h2 class="h2" id="bk2-h" style="margin-top:12px;font-size:clamp(30px,3.2vw,44px)">Build Your Visit</h2>
+   <p class="sub">Three short steps. Your email app opens with the details; nothing is sent until you send it.</p>
+   <div class="steps"><span class="fill" aria-hidden="true"></span><ol><li aria-current="step"><i>1</i><span>What<small>The job</small></span></li><li><i>2</i><span>When<small>Day and time</small></span></li><li><i>3</i><span>Who<small>Your details</small></span></li></ol></div>
+   <a class="call" href="tel:+16519776027" data-owl="peek">Or call (651) 977-6027</a>
+  </div>
+  <form novalidate aria-labelledby="bk2-h">
+   <div>
+    <fieldset class="st on" data-s="0"><legend>What do you need?</legend><div class="opts" role="radiogroup" aria-label="Service"></div></fieldset>
+    <fieldset class="st" data-s="1"><legend>When suits you?</legend>
+     <div class="grp"><p id="bk2-dl">Day</p><div class="opts" role="radiogroup" aria-labelledby="bk2-dl" data-g="day"></div></div>
+     <div class="grp"><p id="bk2-tl">Time</p><div class="opts" role="radiogroup" aria-labelledby="bk2-tl" data-g="time"></div></div></fieldset>
+    <fieldset class="st" data-s="2"><legend>Who and where?</legend>
+     <div class="fld"><label for="bk2-n">Name</label><input id="bk2-n" data-n="Name" autocomplete="name" required aria-describedby="bk2-ne"><span class="er" id="bk2-ne"></span></div>
+     <div class="fld"><label for="bk2-p">Phone</label><input id="bk2-p" type="tel" data-n="Phone" autocomplete="tel" inputmode="tel" required aria-describedby="bk2-pe"><span class="er" id="bk2-pe"></span></div>
+     <div class="fld"><label for="bk2-a">Address</label><input id="bk2-a" data-n="Address" autocomplete="street-address" required aria-describedby="bk2-ae"><span class="er" id="bk2-ae"></span></div></fieldset>
+    <div class="pv" aria-label="Preview of the email that will open"></div>
+   </div>
+   <div class="nav"><button class="back" type="button" hidden>Back</button><p class="form-msg" aria-live="polite"></p><button class="btn btn-amber go" type="submit" data-mag data-owl="hoot">Next: When</button></div>
+  </form>
+ </div>
+</div>
+<script>
+OWL.reg('booking','2',function(root){
+  var S = (OWL.SVC || []).map(function(s){ return s.n; }), DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat'], TIMES = ['Morning, 8–12','Afternoon, 12–6'];
+  var form = root.querySelector('form'), sts = [].slice.call(root.querySelectorAll('.st')), lis = [].slice.call(root.querySelectorAll('.rail li')), fill = root.querySelector('.steps'), back = root.querySelector('.back'), go = root.querySelector('.go'), msg = root.querySelector('.form-msg'), pv = root.querySelector('.pv'), h2 = root.querySelector('h2'), cur = 0;
+  OWL.split(h2);
+  function opts(box, name, list, def){ box.innerHTML = list.map(function(t, i){ return '<label class="opt"><input type="radio" name="' + name + '" value="' + t + '"' + (i === def ? ' checked' : '') + '><span>' + t + '</span></label>'; }).join(''); }
+  opts(root.querySelector('[data-s="0"] .opts'), 'bk2-svc', S, Math.max(0, S.indexOf('Wise Check Inspections')));
+  opts(root.querySelector('[data-g="day"]'), 'bk2-day', DAYS, 0); opts(root.querySelector('[data-g="time"]'), 'bk2-time', TIMES, 0);
+  var F = [].slice.call(root.querySelectorAll('.fld input'));
+  function val(n){ var c = form.querySelector('input[name="' + n + '"]:checked'); return c ? c.value : ''; }
+  function lines(){ return ['Service: ' + val('bk2-svc'), 'Day: ' + val('bk2-day'), 'Time: ' + val('bk2-time')].concat(F.map(function(i){ return i.dataset.n + ': ' + (i.value.trim() || '…'); })); }
+  function preview(){ pv.innerHTML = '<b>To:</b> info@owlroofing.com\n<b>Subject:</b> Wise Check request\n\n' + lines().join('\n').replace(/[<>&]/g, ''); }
+  form.addEventListener('input', preview); form.addEventListener('change', preview);
+  function check(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1), er = root.querySelector('#' + i.getAttribute('aria-describedby'));
+    i.setAttribute('aria-invalid', ok ? 'false' : 'true'); er.textContent = ok ? '' : (i.type === 'tel' ? 'Add a phone number we can call back.' : 'Add your ' + i.dataset.n.toLowerCase() + '.'); return ok; }
+  F.forEach(function(i){ i.addEventListener('blur', function(){ if (i.value) check(i); }); });
+  function show(n){ cur = n; sts.forEach(function(s, j){ s.classList.toggle('on', j === n); });
+    lis.forEach(function(l, j){ if (j === n) l.setAttribute('aria-current', 'step'); else l.removeAttribute('aria-current'); l.classList.toggle('done', j < n); });
+    fill.style.setProperty('--f', n/2); back.hidden = n === 0; go.textContent = n === 0 ? 'Next: When' : n === 1 ? 'Next: Your details' : 'Open my email'; msg.textContent = ''; msg.className = 'form-msg'; }
+  back.addEventListener('click', function(){ show(cur - 1); sts[cur].querySelector('input').focus(); });
+  form.addEventListener('submit', function(e){ e.preventDefault();
+    if (cur < 2){ show(cur + 1); var f = sts[cur].querySelector('input:checked') || sts[cur].querySelector('input'); f.focus(); return; }
+    var bad = F.filter(function(i){ return !check(i); })[0]; if (bad){ msg.className = 'form-msg err'; msg.textContent = 'Please check the highlighted field.'; bad.focus(); return; }
+    location.href = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(lines().join('\n'));
+    msg.className = 'form-msg'; msg.textContent = 'Your email app should open with these details. Send it from there, or call (651) 977-6027.'; });
+  show(0); preview();
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(form); }
+});
+</script>
+</section>
