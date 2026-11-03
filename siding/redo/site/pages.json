@@ -1,0 +1,87 @@
+{
+ "pages": [
+  [
+   "siding",
+   "Siding"
+  ],
+  [
+   "windows",
+   "Windows & Doors"
+  ],
+  [
+   "roofing",
+   "Roofing"
+  ],
+  [
+   "work",
+   "Our Work"
+  ],
+  [
+   "reviews",
+   "Reviews"
+  ],
+  [
+   "about",
+   "About"
+  ],
+  [
+   "area",
+   "Service Area"
+  ],
+  [
+   "contact",
+   "Contact"
+  ]
+ ],
+ "sections": {
+  "siding": [
+   {
+    "slot": "sd1",
+    "name": "Opener",
+    "mod": "p_sd1",
+    "obj": "PSd1",
+    "v": [
+     [
+      "a",
+      "Split cover"
+     ],
+     [
+      "b",
+      "Hung as courses"
+     ],
+     [
+      "c",
+      "The street view"
+     ]
+    ]
+   },
+   {
+    "slot": "sd2",
+    "name": "The board",
+    "mod": "p_sd2",
+    "obj": "PSd2",
+    "v": [
+     [
+      "a",
+      "The spec sheet"
+     ],
+     [
+      "b",
+      "Two faces"
+     ],
+     [
+      "c",
+      "415 squares"
+     ]
+    ]
+   }
+  ],
+  "windows": [],
+  "roofing": [],
+  "work": [],
+  "reviews": [],
+  "about": [],
+  "area": [],
+  "contact": []
+ }
+}

@@ -10,9 +10,13 @@ from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, 
 # the live winner of every slot; the rest become backups
 LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'windows', 'win2', 'win3', 'win4', 'win5', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'area', 'area2', 'area3', 'area4', 'area5', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'nav']
+MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'windows', 'win2', 'win3', 'win4', 'win5', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'area', 'area2', 'area3', 'area4', 'area5', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'p_base', 'nav']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
 WORK = os.path.join(HERE, '..', '..', 'work')
+# subpages: page views inside the same file (pages.json: page list + each section's module, object and versions)
+PG = json.load(open(os.path.join(HERE, 'pages.json')))
+PSECS = [(p, x) for p, _ in PG['pages'] for x in PG['sections'][p]]
+PMODS = [x['mod'] for _, x in PSECS]
 
 
 def area():
@@ -92,11 +96,12 @@ WCOL = json.load(open(os.path.join(WORK, 'data', 'window_colours.json')))
 
 
 def prerender():
-    js = '\n'.join(SEC(m + '.js') for m in MODS)
-    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';globalThis.__SVCP=' + json.dumps(SVCP) + ';globalThis.__SVCP640=' + json.dumps(SVCP640) + ';globalThis.__WINP=' + json.dumps(WINP) + ';globalThis.__NEAR=' + json.dumps(NEAR) + ';globalThis.__WCOL=' + json.dumps(WCOL) + ';' + js +
+    js = '\n'.join(SEC(m + '.js') for m in MODS + PMODS)
+    pgk = 'PG_:{' + ','.join(f'"{x["slot"]}{v[0]}":{x["obj"]}.{v[0].upper()}()' for _, x in PSECS for v in x['v']) + '},'
+    prog = ('const window=globalThis;globalThis.matchMedia=()=>({matches:false});globalThis.__REV=' + json.dumps(REV) + ';globalThis.__AREA=' + json.dumps(AREA) + ';globalThis.__SVCP=' + json.dumps(SVCP) + ';globalThis.__SVCP640=' + json.dumps(SVCP640) + ';globalThis.__WINP=' + json.dumps(WINP) + ';globalThis.__NEAR=' + json.dumps(NEAR) + ';globalThis.__WCOL=' + json.dumps(WCOL) + ';globalThis.__JOBS=' + json.dumps([{k: v for k, v in c.items() if k != 'src'} for c in AREA['cards']]) + ';' + js +
             # fact lock: every quote must be a verbatim excerpt of its review
             ';for(const p of [...Rev.PICK,...Proc.QUOTES,...Rev2.PICK,...Svc3.Q,...Win5.Q,...Rev4.LINES]){if(!__REV[p[0]].text.includes(p[1]))throw new Error("not verbatim: "+p[1]);}'
-            ';process.stdout.write(JSON.stringify({sa:Services.A(),sb:Services.B(),sc:Svc2.C(),sd:Svc2.D(),se:Svc3.E(),sf:Svc3.F(),sg:Svc4.G(),sh:Svc4.H(),si:Svc5.I(),sj:Svc5.J(),va:Vis.A(),vb:Vis.B(),vc:Vis2.C(),vd:Vis2.D(),ve:Vis3.E(),vf:Vis3.F(),vg:Vis4.G(),vh:Vis4.H(),vi:Vis5.I(),vj:Vis5.J(),wa:Win.A(),wb:Win.B(),wc:Win2.C(),wd:Win2.D(),we:Win3.E(),wf:Win3.F(),wg:Win4.G(),wh:Win4.H(),wi:Win5.I(),wj:Win5.J(),ra:Rev.A(),rb:Rev.B(),rc:Rev2.C(),rd:Rev2.D(),re:Rev3.E(),rf:Rev3.F(),rg:Rev4.G(),rh:Rev4.H(),pa:Proc.A(),pb:Proc.B(),pc:Proc2.C(),pd:Proc2.D(),aa:Area.A(),ab:Area.B(),ac:Area2.C(),ad:Area2.D(),qa:Seq.A(),qb:Seq.B(),qc:Seq2.C(),qd:Seq2.D(),ca:Cta.A(),cb:Cta.B(),cc:Cta2.C(),cd:Cta2.D(),ft:Cta.FOOT(),ri:Rev5.I(),rj:Rev5.J(),pe:Proc3.E(),pf:Proc3.F(),pg:Proc4.G(),ph:Proc4.H(),pi:Proc5.I(),pj:Proc5.J(),qe:Seq3.E(),qf:Seq3.F(),qg:Seq4.G(),qh:Seq4.H(),qi:Seq5.I(),qj:Seq5.J(),ae:Area3.E(),af:Area3.F(),ag:Area4.G(),ah:Area4.H(),ai:Area5.I(),aj:Area5.J(),ce:Cta3.E(),cf:Cta3.F(),cg:Cta4.G(),ch:Cta4.H(),ci:Cta5.I(),cj:Cta5.J()}))')
+            ';process.stdout.write(JSON.stringify({' + pgk + 'sa:Services.A(),sb:Services.B(),sc:Svc2.C(),sd:Svc2.D(),se:Svc3.E(),sf:Svc3.F(),sg:Svc4.G(),sh:Svc4.H(),si:Svc5.I(),sj:Svc5.J(),va:Vis.A(),vb:Vis.B(),vc:Vis2.C(),vd:Vis2.D(),ve:Vis3.E(),vf:Vis3.F(),vg:Vis4.G(),vh:Vis4.H(),vi:Vis5.I(),vj:Vis5.J(),wa:Win.A(),wb:Win.B(),wc:Win2.C(),wd:Win2.D(),we:Win3.E(),wf:Win3.F(),wg:Win4.G(),wh:Win4.H(),wi:Win5.I(),wj:Win5.J(),ra:Rev.A(),rb:Rev.B(),rc:Rev2.C(),rd:Rev2.D(),re:Rev3.E(),rf:Rev3.F(),rg:Rev4.G(),rh:Rev4.H(),pa:Proc.A(),pb:Proc.B(),pc:Proc2.C(),pd:Proc2.D(),aa:Area.A(),ab:Area.B(),ac:Area2.C(),ad:Area2.D(),qa:Seq.A(),qb:Seq.B(),qc:Seq2.C(),qd:Seq2.D(),ca:Cta.A(),cb:Cta.B(),cc:Cta2.C(),cd:Cta2.D(),ft:Cta.FOOT(),ri:Rev5.I(),rj:Rev5.J(),pe:Proc3.E(),pf:Proc3.F(),pg:Proc4.G(),ph:Proc4.H(),pi:Proc5.I(),pj:Proc5.J(),qe:Seq3.E(),qf:Seq3.F(),qg:Seq4.G(),qh:Seq4.H(),qi:Seq5.I(),qj:Seq5.J(),ae:Area3.E(),af:Area3.F(),ag:Area4.G(),ah:Area4.H(),ai:Area5.I(),aj:Area5.J(),ce:Cta3.E(),cf:Cta3.F(),cg:Cta4.G(),ch:Cta4.H(),ci:Cta5.I(),cj:Cta5.J()}))')
     return json.loads(subprocess.run(['node', '-'], input=prog, capture_output=True, text=True, check=True).stdout)
 
 
@@ -210,11 +215,16 @@ VERSIONS = {
     'area': [['a', 'Thread board'], ['b', 'Street finder'], ['c', 'Drive round our jobs'], ['d', 'Every town, ranked'], ['e', 'Is your street on our books?'], ['f', 'The job board'], ['g', 'The streets we know'], ['h', 'Town by trade'], ['i', 'Miles from our door'], ['j', 'Year by year']], 'book': [['a', 'Work order'], ['b', 'Press the board'], ['c', 'The record, then the call'], ['d', 'One number'], ['e', 'The week, at a glance'], ['f', 'Come by the office'], ['g', 'Three ways in'], ['h', 'Write us a postcard'], ['i', 'Day and night'], ['j', 'The receipt']]}
 SLOTNAMES = {'hero': 'Hero', 'services': 'Services', 'vis': 'Visualiser', 'windows': 'Windows', 'reviews': 'Reviews', 'process': 'Process', 'try': 'Try the job', 'area': 'On your street', 'book': 'Booking'}
 
+PAGENAMES = dict((k, n) for k, n in PG['pages'])
+for _p, _x in PSECS:
+    VERSIONS[_x['slot']] = _x['v']; SLOTNAMES[_x['slot']] = PAGENAMES[_p] + ' · ' + _x['name']
+SLOTPAGE = {_x['slot']: _p for _p, _x in PSECS}
+
 
 def slot(name, versions):
-    live = versions[LIVE[name]]
-    backs = ''.join(f'<template data-slot="{name}" data-v="{k}">{v}</template>' for k, v in versions.items() if k != LIVE[name])
-    return f'<div class="slot" data-slot="{name}" data-v="{LIVE[name]}">{live}</div>{backs}'
+    lv = LIVE.get(name, 'a'); live = versions[lv]
+    backs = ''.join(f'<template data-slot="{name}" data-v="{k}">{v}</template>' for k, v in versions.items() if k != lv)
+    return f'<div class="slot" data-slot="{name}" data-v="{lv}">{live}</div>{backs}'
 
 
 def photos():
@@ -226,6 +236,10 @@ def photos():
 
 BOOT = '''(function(){
 const q=new URLSearchParams(location.search);
+/* page views: ?page=<name> swaps the homepage for that page (the homepage stays the default) */
+{const pg=q.get('page'),m=document.querySelector('main'),t=pg&&document.querySelector('template[data-page="'+pg+'"]');
+ if(t&&m){const home=document.createElement('template');home.dataset.page='home';home.innerHTML=m.innerHTML;m.replaceChildren(t.content.cloneNode(true));m.dataset.page=pg;t.replaceWith(home);
+  const n=(window.__PAGES||[]).find(x=>x[0]===pg);if(n)document.title=n[1]+' | Austin Pro Siding, Windows & Roofing';}}
 /* audit only: put a backup version into its slot */
 document.querySelectorAll('.slot').forEach(s=>{const v=q.get(s.dataset.slot);if(!v||v===s.dataset.v)return;
   const t=document.querySelector('template[data-slot="'+s.dataset.slot+'"][data-v="'+v+'"]');if(!t)return;
@@ -251,7 +265,7 @@ Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(docu
 
 def build():
     pre = prerender()
-    css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS)
+    css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS + PMODS)
     css += src('hero2.css') + src('hero3.css') + src('fx.css') + src('hf.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
@@ -262,13 +276,15 @@ def build():
             slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd'], 'e': pre['pe'], 'f': pre['pf'], 'g': pre['pg'], 'h': pre['ph'], 'i': pre['pi'], 'j': pre['pj']}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd'], 'e': pre['qe'], 'f': pre['qf'], 'g': pre['qg'], 'h': pre['qh'], 'i': pre['qi'], 'j': pre['qj']}) +
             slot('area', {'a': pre['aa'], 'b': pre['ab'], 'c': pre['ac'], 'd': pre['ad'], 'e': pre['ae'], 'f': pre['af'], 'g': pre['ag'], 'h': pre['ah'], 'i': pre['ai'], 'j': pre['aj']}) + slot('book', {'a': pre['ca'], 'b': pre['cb'], 'c': pre['cc'], 'd': pre['cd'], 'e': pre['ce'], 'f': pre['cf'], 'g': pre['cg'], 'h': pre['ch'], 'i': pre['ci'], 'j': pre['cj']}))
     foot = pre['ft']
-    boot = BOOT.replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + ''.join(SEC(m + '.js') for m in MODS) + src('fx.js') + src('hf.js')
+    PP_ = pre['PG_']
+    pages = ''.join(f'<template data-page="{p}">' + ''.join(slot(x['slot'], {v[0]: PP_[x['slot'] + v[0]] for v in x['v']}) for x in PG['sections'][p]) + '</template>' for p, _ in PG['pages'] if PG['sections'][p])
+    boot = BOOT.replace('Nav.wire();', 'PB.wire(document);' + ''.join(x['obj'] + '.wire(document);' for _, x in PSECS) + 'Nav.wire();').replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
+    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
-<style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main>{main}</main>{foot}{MBAR}{film}
-<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+<style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main data-page="home">{main}</main>{pages}{foot}{MBAR}{film}
+<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':

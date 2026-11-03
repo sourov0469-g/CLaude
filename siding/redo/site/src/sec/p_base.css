@@ -1,0 +1,5 @@
+/* SUBPAGES — shared bits */
+.pcall{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 20px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 2px var(--green);font:800 16px/1 var(--text);color:var(--green);text-decoration:none;white-space:nowrap}
+.pcall svg{width:20px;height:20px}.pcall:hover{background:#EAF6D2}.pcall:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.pacts{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pkick{font:800 12px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--green)}

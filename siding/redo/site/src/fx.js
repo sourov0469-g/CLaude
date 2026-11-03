@@ -33,7 +33,10 @@
   const el = document.createElement('aside'); el.className = 'rv'; el.setAttribute('aria-label', 'Review switcher');
   const link = (slot, v) => { const p = new URLSearchParams(location.search); p.delete('review'); p.set(slot, v); return '?review&' + p.toString(); };
   const live = (slot) => (document.querySelector(`.slot[data-slot="${slot}"]`) || {}).dataset?.v;
-  el.innerHTML = `<header><div><b>Review</b> <span>every version, live in place</span></div><button type="button">Hide</button></header><div class="body">${Object.keys(V).map((slot) =>
+  const PG = window.__PAGES || [], cur = new URLSearchParams(location.search).get('page') || 'home';
+  const plink = (pg) => { const p = new URLSearchParams(); if (pg !== 'home') p.set('page', pg); return '?review' + (p.toString() ? '&' + p.toString() : ''); };
+  const pages = PG.length ? `<div class="row pgs"><b>Page</b><div class="vs">${[['home', 'Homepage'], ...PG].map(([k, n]) => `<a href="${plink(k)}" aria-current="${cur === k}">${n}</a>`).join('')}</div></div>` : '';
+  el.innerHTML = `<header><div><b>Review</b> <span>every version, live in place</span></div><button type="button">Hide</button></header><div class="body">${pages}${Object.keys(V).filter((slot) => document.querySelector(`.slot[data-slot="${slot}"]`)).map((slot) =>
     `<div class="row"><b>${NAMES[slot] || slot}</b><div class="vs">${V[slot].map(([v, label]) => `<a href="${link(slot, v)}" aria-current="${live(slot) === v}"><span class="n">${v.toUpperCase()}</span>${label}</a>`).join('')}</div></div>`).join('')}</div>`;
   document.body.append(el);
   el.querySelector('header button').addEventListener('click', (e) => { const m = el.classList.toggle('min'); e.target.textContent = m ? 'Show' : 'Hide'; });
