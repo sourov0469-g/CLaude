@@ -4613,6 +4613,173 @@ OWL.reg('wise','7',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="wise" data-v="8">
+<section class="sec wise8" id="wise-check-8" aria-labelledby="w8-h">
+<style>
+.wise8{overflow:hidden}
+.wise8 .g{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(20px,4vw,60px);align-items:center}
+.wise8 .lede{margin:12px 0 18px;max-width:34ch}
+.wise8 .folder{position:relative;padding-top:56px}
+.wise8 .back{position:absolute;left:0;right:0;top:40px;bottom:0;border-radius:6px 16px 16px 16px;background:linear-gradient(180deg,#E2C48D,#D4B077);box-shadow:0 40px 60px -40px rgba(23,17,29,.55)}
+.wise8 .tabs{position:absolute;left:14px;right:14px;top:0;display:flex;gap:6px;z-index:5}
+.wise8 .tab{flex:1;min-width:0;min-height:56px;padding:8px 10px 18px;border-radius:12px 12px 0 0;background:#E8CF9E;color:#5E3A08;font-weight:800;font-size:14px;line-height:1.15;text-align:left;box-shadow:inset 0 -6px 8px -6px rgba(0,0,0,.2);transition:transform .25s,background .25s}
+.wise8 .tab:hover{transform:translateY(-3px)}
+.wise8 .tab[aria-selected="true"]{background:#FBFAF6;color:#17111D;transform:translateY(-6px);box-shadow:0 -4px 10px -6px rgba(23,17,29,.3)}
+.wise8 .tab:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wise8 .stack{position:relative;min-height:400px;margin:0 14px}
+.wise8 .sheet{position:absolute;inset:0;padding:clamp(22px,3vw,34px);border-radius:4px;background:#FBFAF6;box-shadow:0 2px 0 #fff inset,0 10px 24px -14px rgba(23,17,29,.5);transform:translate(var(--sx,0),var(--sy,0)) rotate(var(--sr,0deg));transition:transform .55s cubic-bezier(.3,1.3,.5,1),opacity .4s;opacity:var(--so,1)}
+.wise8 .sheet.front{z-index:4}
+.wise8 .sheet .k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wise8 .sheet h3{margin:6px 0 12px;font-size:clamp(24px,2.6vw,34px);font-weight:900;letter-spacing:-.02em}
+.wise8 .sheet p{margin:0 0 10px;font-size:18px;color:var(--ink-70);max-width:52ch}
+.wise8 .sheet ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.wise8 .sheet li{position:relative;padding-left:30px;font-size:17px}
+.wise8 .sheet li b{display:block}
+.wise8 .sheet li span{color:var(--ink-70);font-size:15px}
+.wise8 .sheet li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:10px;border-left:3px solid var(--amber);border-bottom:3px solid var(--amber);transform:rotate(-45deg)}
+.wise8 .sheet a{color:var(--ink);font-weight:800}
+.wise8 .clip{position:absolute;right:-8px;top:110px;transform:rotate(90deg);width:28px;height:70px;border:5px solid #9AA3A8;border-radius:16px;border-bottom-color:transparent;z-index:6;pointer-events:none}
+.wise8 .ruled{position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 35px,rgba(91,163,217,.14) 35px 36px);pointer-events:none;border-radius:inherit}
+@media (max-width:900px){.wise8 .g{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.wise8 .tabs{left:6px;right:6px;gap:4px}.wise8 .tab{font-size:12px;padding:6px 6px 14px}.wise8 .stack{min-height:520px;margin:0 6px}.wise8 .folder{padding-top:72px}.wise8 .back{top:54px}}
+@media (prefers-reduced-motion:reduce){.wise8 .sheet,.wise8 .tab{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">The Wise Check</span>
+   <h2 class="h2" id="w8-h" style="margin-top:12px">The File</h2>
+   <p class="lede rv">The five things people ask us about a Wise Check, answered in our own words. Pull a tab.</p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <div class="folder" data-owl="say:Pull a tab">
+   <div class="back" aria-hidden="true"></div>
+   <div class="tabs" role="tablist" aria-label="Questions about the Wise Check"></div>
+   <div class="stack"></div>
+   <span class="clip" aria-hidden="true"></span>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','8',function(root){
+  var W = OWL.WISE, chk = OWL.SVC.filter(function(s){ return s.k === 'check'; })[0], tabsEl = root.querySelector('.tabs'), stack = root.querySelector('.stack'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function esc(t){ return String(t).replace(/[<>&]/g, ''); }
+  var Q = [
+    {q:'What is it?', h:'What is a Wise Check?', b:'<p>' + esc(chk.d) + '</p><p>' + esc(chk.inc[0]) + ', ' + esc(chk.inc[1]).charAt(0).toLowerCase() + esc(chk.inc[1]).slice(1) + ', and ' + esc(chk.inc[2]).charAt(0).toLowerCase() + esc(chk.inc[2]).slice(1) + '.</p>'},
+    {q:'What’s in it?', h:'What’s in it?', b:'<ul>' + W.parts.map(function(p){ return '<li><b>' + esc(p.n) + '</b><span>' + esc(p.t) + '</span></li>'; }).join('') + '</ul>'},
+    {q:'When to book?', h:'When should I book one?', b:'<ul>' + W.cases.map(function(c){ return '<li><b>' + esc(c.n) + '</b><span>' + esc(c.t) + '</span></li>'; }).join('') + '</ul>'},
+    {q:'Will I see it?', h:'Will I see what you saw?', b:'<p>Yes. ' + esc(W.parts[3].t) + '</p><p>The Wise Check includes ' + esc(chk.inc[1]).charAt(0).toLowerCase() + esc(chk.inc[1]).slice(1) + '.</p>'},
+    {q:'How to book?', h:'How do I book?', b:'<p>Call <a href="tel:+16519776027">(651) 977-6027</a>, Monday to Saturday, 08:00–18:00.</p><p>Or email <a href="mailto:info@owlroofing.com?subject=Wise%20Check%20request">info@owlroofing.com</a> any time.</p><p>Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126</p>'}];
+  var cur = -1, tabs = [], sheets = [];
+  Q.forEach(function(x, i){ var t = document.createElement('button'); t.type = 'button'; t.className = 'tab'; t.id = 'w8-t' + i; t.setAttribute('role', 'tab'); t.setAttribute('aria-controls', 'w8-p' + i); t.textContent = x.q; tabsEl.appendChild(t); tabs.push(t);
+    var s = document.createElement('div'); s.className = 'sheet'; s.id = 'w8-p' + i; s.setAttribute('role', 'tabpanel'); s.setAttribute('aria-labelledby', 'w8-t' + i);
+    s.innerHTML = '<span class="ruled" aria-hidden="true"></span><span class="k">Question ' + (i + 1) + ' of 5</span><h3>' + x.h + '</h3>' + x.b; stack.appendChild(s); sheets.push(s);
+    t.addEventListener('click', function(){ pick(i); });
+    t.addEventListener('keydown', function(e){ var m = e.key === 'ArrowRight' ? (i + 1) % 5 : e.key === 'ArrowLeft' ? (i + 4) % 5 : e.key === 'Home' ? 0 : e.key === 'End' ? 4 : null; if (m === null) return; e.preventDefault(); pick(m); tabs[m].focus(); }); });
+  function pick(i){ if (i === cur) return; cur = i;
+    tabs.forEach(function(t, j){ var on = j === i; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    /* the chosen sheet comes to the front; the rest shuffle back and peek out, each a little off square */
+    var order = sheets.map(function(s, j){ return j; }).filter(function(j){ return j !== i; });
+    sheets.forEach(function(s, j){ var on = j === i; s.classList.toggle('front', on); if (on){ s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); } else { s.setAttribute('inert', ''); s.setAttribute('aria-hidden', 'true'); } if (on){ s.style.setProperty('--sx', '0px'); s.style.setProperty('--sy', '0px'); s.style.setProperty('--sr', '0deg'); s.style.setProperty('--so', 1); s.style.zIndex = 4; }
+      else { var d = order.indexOf(j) + 1; s.style.setProperty('--sx', (d*5) + 'px'); s.style.setProperty('--sy', (d*7) + 'px'); s.style.setProperty('--sr', ((d % 2 ? 1 : -1)*d*.6) + 'deg'); s.style.setProperty('--so', 1); s.style.zIndex = 4 - d; } }); }
+  pick(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(stack);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="wise" data-v="9">
+<section class="sec wise9" id="wise-check-9" aria-labelledby="w9-h">
+<style>
+.wise9{overflow:hidden}
+.wise9 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.wise9 .lede{margin-top:12px;max-width:44ch}
+.wise9 .nav{display:flex;align-items:center;gap:10px}
+.wise9 .nav button{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s}
+.wise9 .nav button:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.wise9 .nav button:disabled{opacity:.45;cursor:default}
+.wise9 .nav button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wise9 .nav svg{width:22px;height:22px}
+.wise9 .pg{font-weight:800;font-variant-numeric:tabular-nums;min-width:5ch;text-align:center}
+.wise9 .desk{padding:clamp(16px,3vw,34px);border-radius:28px;background:linear-gradient(160deg,#C9A57A,#B48A55);box-shadow:0 44px 70px -46px rgba(23,17,29,.6)}
+.wise9 .nb{position:relative;display:grid;grid-template-columns:1fr 1fr;perspective:1800px;filter:drop-shadow(0 18px 18px rgba(23,17,29,.35))}
+.wise9 .npg{position:relative;min-height:380px;padding:clamp(20px,3vw,36px);background:repeating-linear-gradient(180deg,#FFFDF7 0 31px,#DCE6EC 31px 32px);background-position:0 54px}
+.wise9 .npg.l{border-radius:10px 0 0 10px;box-shadow:inset -18px 0 24px -18px rgba(23,17,29,.25)}
+.wise9 .npg.r{border-radius:0 10px 10px 0;box-shadow:inset 18px 0 24px -18px rgba(23,17,29,.25)}
+.wise9 .npg.r::before{content:"";position:absolute;left:44px;top:0;bottom:0;width:2px;background:rgba(214,98,98,.4)}
+.wise9 .rings{position:absolute;left:50%;top:22px;bottom:22px;width:26px;margin-left:-13px;background:repeating-linear-gradient(180deg,transparent 0 14px,#9AA3A8 14px 22px,transparent 22px 34px);border-radius:13px;z-index:6;pointer-events:none}
+.wise9 .sk{display:block;width:100%;max-width:360px;height:auto;margin:6px auto 0}
+.wise9 .sk .ink{fill:none;stroke:#3A3540;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.wise9 .sk.draw .ink{animation:w9d 1.6s cubic-bezier(.4,0,.2,1) both}
+@keyframes w9d{from{stroke-dashoffset:1}}
+.wise9 .cap{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:13px;font-weight:700;color:#6B6570}
+.wise9 .tx{padding-left:22px}
+.wise9 .tx .k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wise9 .tx h3{margin:8px 0 12px;font-size:clamp(24px,2.6vw,34px);font-weight:900;letter-spacing:-.02em;line-height:1.1}
+.wise9 .tx p{margin:0 0 10px;font-size:18px;color:#3A3540;line-height:32px}
+.wise9 .tx a{font-weight:800;color:var(--ink)}
+.wise9 .leaf{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.45,.05,.3,1);z-index:5;pointer-events:none}
+.wise9 .leaf.fwd{left:50%;transform-origin:left center}
+.wise9 .leaf.bwd{left:0;transform-origin:right center}
+.wise9 .leaf > div{position:absolute;inset:0;backface-visibility:hidden;overflow:hidden}
+.wise9 .leaf .bk{transform:rotateY(180deg)}
+@media (max-width:820px){.wise9 .nb{grid-template-columns:1fr}.wise9 .npg.l{border-radius:10px 10px 0 0;min-height:0;padding-bottom:44px}.wise9 .npg.r{border-radius:0 0 10px 10px}.wise9 .rings{display:none}.wise9 .tx{padding-left:22px}}
+@media (prefers-reduced-motion:reduce){.wise9 .sk.draw .ink{animation:none}.wise9 .leaf{display:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">The Wise Check</span><h2 class="h2" id="w9-h" style="margin-top:12px">Field Notebook</h2>
+  <p class="lede rv">Our notes on what a Wise Check looks at, page by page. Turn the page.</p></div>
+  <div class="nav"><button type="button" class="pv" aria-label="Previous page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="#17111D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="pg" aria-live="polite"></span><button type="button" class="nx" aria-label="Next page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="#17111D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+ <div class="desk" data-owl="say:Turn the page">
+  <div class="nb" tabindex="0" role="group" aria-roledescription="notebook" aria-label="Wise Check field notebook. Use the arrow keys to turn pages.">
+   <div class="npg l"><svg class="sk" viewBox="0 0 360 260" aria-hidden="true"></svg><span class="cap">Sketches, not photos.</span></div>
+   <div class="npg r"><div class="tx"></div></div>
+   <span class="rings" aria-hidden="true"></span>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','9',function(root){
+  var W = OWL.WISE, book = root.querySelector('.nb'), sk = root.querySelector('.sk'), tx = root.querySelector('.tx'), pl = root.querySelector('.npg.l'), pr = root.querySelector('.npg.r'), pg = root.querySelector('.pg'), pv = root.querySelector('.pv'), nx = root.querySelector('.nx'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function ink(d){ return '<path class="ink" pathLength="1" d="' + d + '"/>'; }
+  var SK = [
+    ink('M20 200L180 80 340 200') + ink('M50 178H310M80 156H280M110 134H250M140 112H220') + ink('M90 178v-22M150 178v-22M210 178v-22M270 178v-22M120 156v-22M180 156v-22M240 156v-22') + ink('M250 70a40 40 0 1 0 0.1 0') + ink('M278 98l40 40'),
+    ink('M20 220L180 40 340 220Z') + ink('M180 40V220M100 130V220M260 130V220') + ink('M30 220q20-14 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0') + ink('M300 190l-70-40M300 190l-90-10') + ink('M296 182h30v16h-30z'),
+    ink('M20 40H340M20 40V60M340 40V60') + ink('M140 70c30-14 80-14 110 4 20 14 0 30-40 30-40 0-90-10-70-34z') + ink('M150 160h70v50h-70zM220 172l26-12v40l-26-12') + ink('M185 160v-30') + ink('M185 128l-6 10h12z'),
+    ink('M120 20h120a12 12 0 0 1 12 12v196a12 12 0 0 1-12 12H120a12 12 0 0 1-12-12V32a12 12 0 0 1 12-12z') + ink('M126 46h108v70H126zM126 124h50v40h-50zM184 124h50v40h-50zM126 172h108v40H126z') + ink('M170 182l24 10-24 10z'),
+    ink('M60 80c20-30 60-30 70-10l-14 24c-8 14 4 34 18 44l20-18c14 4 30 22 18 46-24 20-80 0-108-46-14-22-14-36-4-40z') + ink('M200 90h130v90H200z') + ink('M200 90l65 50 65-50')];
+  var P = W.parts.map(function(p, i){ return {k:'Page ' + (i + 1) + ' · Part of every Wise Check', h:p.n, p:'<p>' + p.t + '</p>'}; });
+  P.push({k:'Last page', h:'Book one', p:'<p>Call <a href="tel:+16519776027">(651) 977-6027</a>, Monday to Saturday, 08:00–18:00, or email <a href="mailto:info@owlroofing.com?subject=Wise%20Check%20request">info@owlroofing.com</a>.</p>'});
+  var cur = 0, busy = false, N = P.length;
+  function textHTML(i){ var x = P[i]; return '<span class="k">' + x.k + '</span><h3>' + x.h + '</h3>' + x.p; }
+  function drawSketch(i){ sk.innerHTML = SK[i]; sk.classList.remove('draw'); void sk.getBoundingClientRect(); if (!OWL.reduce) sk.classList.add('draw'); }
+  function ui(){ pg.textContent = (cur + 1) + ' / ' + N; pv.disabled = cur === 0; nx.disabled = cur === N - 1; }
+  function set(i){ cur = i; drawSketch(i); tx.innerHTML = textHTML(i); ui(); }
+  function turn(d){ var n = cur + d; if (busy || n < 0 || n >= N) return;
+    if (OWL.reduce || matchMedia('(max-width:820px)').matches){ set(n); return; }
+    busy = true; var leaf = document.createElement('div'); leaf.className = 'leaf ' + (d > 0 ? 'fwd' : 'bwd'); leaf.setAttribute('aria-hidden', 'true');
+    /* the turning leaf carries the old page on its face and blank lined paper on its back */
+    var src = d > 0 ? pr : pl, face = document.createElement('div'), back = document.createElement('div'); face.className = 'fr'; back.className = 'bk';
+    face.innerHTML = src.outerHTML; back.innerHTML = '<div class="npg ' + (d > 0 ? 'l' : 'r') + '" style="height:100%"></div>'; face.firstChild.style.height = '100%';
+    leaf.appendChild(face); leaf.appendChild(back); book.appendChild(leaf);
+    if (d > 0) tx.innerHTML = textHTML(n); else drawSketch(n);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ leaf.style.transform = 'rotateY(' + (d > 0 ? -180 : 180) + 'deg)'; }); });
+    setTimeout(function(){ if (d > 0) drawSketch(n); else tx.innerHTML = textHTML(n); }, 400);
+    setTimeout(function(){ leaf.remove(); cur = n; ui(); busy = false; }, 820); }
+  pv.addEventListener('click', function(){ turn(-1); }); nx.addEventListener('click', function(){ turn(1); });
+  book.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); turn(1); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); turn(-1); } });
+  tx.innerHTML = textHTML(0); sk.innerHTML = SK[0]; ui();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); drawSketch(0); } }, {threshold:.3}); io.observe(book);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="wise" data-b="1">
 <section class="sec wise2" id="wise-check-2" aria-labelledby="w2-h">
 <style>

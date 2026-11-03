@@ -313,3 +313,17 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   out the ridge. Three keys: Balanced (baffles keep the soffit open) · Blocked soffits (insulation over the
   intake: the air stalls, warm damp air gathers under the deck, frost forms on the nails) · No ridge vent (air has
   nowhere to leave). Plain words for each. Skills: ⟦S1363⟧ particles, ⟦S0407⟧ flow paths, ⟦S1246⟧ keys, ⟦S0451⟧ title.
+
+## L23 · Wise Check 8 + 9 (Wise stands at 7: dial, lens modes, case panels, chat, kit, contact sheet, route)
+- **Wise 8 · "The File"** — reference **MERSI** (chapter system, here as folder tabs). A manila file folder with five
+  labelled tabs, the questions homeowners ask: What is a Wise Check? · What's in it? · When should I book one? ·
+  Will I see what you saw? · How do I book? Choosing a tab pulls its sheet to the front (the others shuffle back
+  and peek out behind); a paper clip holds the answer. Every answer is Owl's published words (`OWL.SVC`, `OWL.WISE`)
+  and the locked contacts; nothing new is claimed (no price, no duration). A real tablist with arrow keys. Skills:
+  ⟦S1246⟧ tabs a11y, ⟦S0409⟧ shuffle transition, ⟦S0451⟧ title, ⟦S1388⟧ keys.
+- **Wise 9 · "Field Notebook"** — reference **Graza** (the custom-animation bar). A spiral-bound field notebook
+  open on the page: each spread has a pencil-line sketch that draws itself on the left (shingles under a
+  magnifier, rafters and a flashlight, a heat camera on a damp patch, a phone of photos) and Owl's words on the
+  right. Next and Previous turn the page with a real page-turn (small 3D); arrow keys work. The last spread is how to
+  book. Labelled "Sketches, not photos." Skills: ⟦S0407⟧ sketch draw-on, ⟦S0409⟧ page turn, ⟦S1388⟧ keys, ⟦S1107⟧
+  keyboard.

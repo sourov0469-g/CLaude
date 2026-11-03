@@ -1,0 +1,245 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The File"
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "five tabs in a real tablist; the first sheet is in front",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "sheets behind are inert and hidden from readers",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "What’s in it: the four published parts, word for word",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "arrow keys move between tabs (When to book: the four published cases)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "How do I book: only the locked phone, email, hours and address",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "no price or duration is claimed anywhere in the file",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Field Notebook"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "page 1 of 5: the first part in Owl’s words, a sketch drawn, previous disabled",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "Next turns the page to the attic inspection, the turning leaf cleans itself up",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "arrow keys reach the last page: how to book with the locked phone",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "Previous turns back",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "labelled as sketches, not photos",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

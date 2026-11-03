@@ -684,3 +684,23 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Explore 8's first section was too small and its labels collided. It was redrawn thicker, with layer names drawn over the nail.
 - On phones Explore 8 was unreadable; the section now stacks under the front view.
 - Explore 9's columns were the wrong way round, and its damp tint spilled outside the attic; it is now clipped to the attic.
+
+## L23 · Wise Check 8 + 9 · checks 37/37 · evidence `gates/ladder/L23-wise-8-9/` · Wise Check now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Wise 8 · The File** | MERSI (chapter system, as folder tabs) | A manila file folder with five tabs, the questions people ask: What is it? · What's in it? · When to book? · Will I see it? · How to book? Choosing a tab pulls its ruled sheet to the front while the others shuffle back and peek out behind, each a little off square. Every answer is Owl's published words (`OWL.SVC`, `OWL.WISE`) or the locked contacts. A real tablist with arrow, Home and End keys; back sheets are inert. | 8.2 | 8.6 | 8.0 | 9.0 | **8.38** |
+| **Wise 9 · Field Notebook** | Graza (custom-animation bar) | A spiral-bound notebook on a desk. Each spread pairs a pencil-line sketch that draws itself (shingles under a magnifier, rafters and a flashlight, a heat camera on a damp patch, a phone of photos, a handset and envelope) with Owl's words on lined paper. Next and Previous (and the arrow keys) turn the page with a real 3D leaf; phones get a single page that swaps. Labelled "Sketches, not photos." | 8.6 | 8.0 | 8.6 | 8.6 | **8.42** |
+
+**Truth:** both use only `OWL.WISE` and `OWL.SVC` text and the locked contacts. Wise 8 claims no price or duration (tested). Wise 9's drawings are labelled as sketches.
+
+**Checks run:** the generic gate, plus:
+- Wise 8: five tabs with the first sheet in front; back sheets inert and aria-hidden; the four parts word for word; arrow keys reach the four published cases; End reaches the locked contacts and tel link; no price or duration.
+- Wise 9: page 1 of 5 with the first part and a sketch, Previous disabled; Next turns to the attic and the leaf cleans up; arrow keys reach the last page's tel link with Next disabled; Previous turns back; the sketches label.
+
+**Ledger:**
+- **Wise 8:** tabs a11y ⟦S1246⟧; sheet shuffle ⟦S0409⟧; title ⟦S0451⟧; CTA ⟦S1388⟧.
+- **Wise 9:** sketch draw-on ⟦S0407⟧; page turn ⟦S0409⟧; keys ⟦S1388⟧; keyboard ⟦S1107⟧.
+
+**Defects found and fixed in the round:**
+- Wise 8's shuffled sheets overflowed by 5 px on phones (now clipped), and the paper clip covered a tab (moved to the side).
+- Wise 9 rendered empty: its `.book` and `.page` classes collided with global classes (`.page` belongs to the page router). They are renamed `.nb` and `.npg`. Note for every later version: avoid the global class names `.page`, `.book`, `.in` and `.chips`.

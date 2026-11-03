@@ -48,5 +48,27 @@ module.exports = {
     rec('a card moves the route to its station (heat sensor)', await p.evaluate(S => document.querySelectorAll(S + ' .st.on').length === 3 && document.querySelector(S + ' .f2').classList.contains('on') && !document.querySelector(S + ' .f3').classList.contains('on'), S));
     rec('the route is masked, drawn only up to the marker', await p.evaluate(S => { const m = document.querySelector(S + ' .mp'); return parseFloat(m.style.strokeDashoffset) > 0; }, S));
     rec('no fixed order of work is claimed', await p.evaluate(S => /not as a fixed order of work/.test(document.querySelector(S).innerText), S));
+  },
+  '8': async (p, S, rec, txt) => {
+    rec('five tabs in a real tablist; the first sheet is in front', await p.evaluate(S => { const t = [...document.querySelectorAll(S + ' [role=tab]')]; return t.length === 5 && t[0].getAttribute('aria-selected') === 'true' && document.querySelector(S + ' #w8-p0').classList.contains('front'); }, S));
+    rec('sheets behind are inert and hidden from readers', await p.evaluate(S => [...document.querySelectorAll(S + ' .sheet:not(.front)')].every(x => x.hasAttribute('inert') && x.getAttribute('aria-hidden') === 'true'), S));
+    await p.click(S + ' #w8-t1'); await p.waitForTimeout(700);
+    rec('What’s in it: the four published parts, word for word', await p.evaluate(S => [...document.querySelectorAll(S + ' #w8-p1 li span')].map(x => x.textContent).join('|') === OWL.WISE.parts.map(x => x.t).join('|'), S));
+    await p.focus(S + ' #w8-t1'); await p.keyboard.press('ArrowRight'); await p.waitForTimeout(500);
+    rec('arrow keys move between tabs (When to book: the four published cases)', await p.evaluate(S => document.activeElement.id === 'w8-t2' && [...document.querySelectorAll(S + ' #w8-p2 li b')].map(x => x.textContent).join('|') === OWL.WISE.cases.map(x => x.n).join('|'), S));
+    await p.keyboard.press('End'); await p.waitForTimeout(500);
+    rec('How do I book: only the locked phone, email, hours and address', await p.evaluate(S => { const t = document.querySelector(S + ' #w8-p4').textContent; return /\(651\) 977-6027/.test(t) && /info@owlroofing\.com/.test(t) && /08:00–18:00/.test(t) && /1000 County Rd E #230, Shoreview, MN 55126/.test(t) && document.querySelector(S + ' #w8-p4 a').getAttribute('href') === 'tel:+16519776027'; }, S));
+    rec('no price or duration is claimed anywhere in the file', await p.evaluate(S => !/\$\d|free|minutes|hours? long|\d+\s*min/i.test(document.querySelector(S + ' .stack').textContent), S));
+  },
+  '9': async (p, S, rec, txt) => {
+    await p.waitForTimeout(1200);
+    rec('page 1 of 5: the first part in Owl’s words, a sketch drawn, previous disabled', await p.evaluate(S => document.querySelector(S + ' .pg').textContent === '1 / 5' && document.querySelector(S + ' .tx h3').textContent === OWL.WISE.parts[0].n && document.querySelector(S + ' .tx p').textContent === OWL.WISE.parts[0].t && document.querySelectorAll(S + ' .sk .ink').length > 3 && document.querySelector(S + ' .pv').disabled, S));
+    await p.click(S + ' .nx'); await p.waitForTimeout(1100);
+    rec('Next turns the page to the attic inspection, the turning leaf cleans itself up', await p.evaluate(S => document.querySelector(S + ' .pg').textContent === '2 / 5' && document.querySelector(S + ' .tx h3').textContent === OWL.WISE.parts[1].n && document.querySelectorAll(S + ' .leaf').length === 0, S));
+    await p.focus(S + ' .nb'); for (let i = 0; i < 3; i++){ await p.keyboard.press('ArrowRight'); await p.waitForTimeout(950); }
+    rec('arrow keys reach the last page: how to book with the locked phone', await p.evaluate(S => document.querySelector(S + ' .pg').textContent === '5 / 5' && document.querySelector(S + ' .tx a').getAttribute('href') === 'tel:+16519776027' && document.querySelector(S + ' .nx').disabled, S));
+    await p.click(S + ' .pv'); await p.waitForTimeout(1100);
+    rec('Previous turns back', await p.evaluate(S => document.querySelector(S + ' .pg').textContent === '4 / 5' && document.querySelector(S + ' .tx h3').textContent === OWL.WISE.parts[3].n, S));
+    rec('labelled as sketches, not photos', /Sketches, not photos/.test(txt));
   }
 };
