@@ -1,0 +1,42 @@
+/* SIDING · Jobs A — five on the wall */
+.sd5A,.sd5B,.sd5C{padding:96px var(--gut) 70px}
+.sd5A .hd .sec-p,.sd5B .hd .sec-p,.sd5C .hd .sec-p{margin-top:10px;font-size:17px;max-width:62ch}
+.sd5A .wall2{list-style:none;margin-top:30px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
+.sd5A .wall2 li{grid-column:span 2;transform:rotate(var(--r));transition:transform .4s cubic-bezier(.3,1.4,.5,1)}
+.sd5A .wall2 li:nth-child(4){grid-column:2/span 2}
+.sd5A .wall2 li:hover{transform:rotate(0) translateY(-6px)}
+.sd5A figure{margin:0;padding:10px 10px 14px;background:#fff;box-shadow:0 1px 0 #E6E0D2,0 24px 40px -28px rgba(14,59,44,.55)}
+.sd5A img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6EEE8}
+.sd5A figcaption{margin-top:10px;font:700 13px/1.4 var(--text);color:var(--ink-2)}
+@media (max-width:860px){.sd5A .wall2{grid-template-columns:1fr 1fr}.sd5A .wall2 li,.sd5A .wall2 li:nth-child(4){grid-column:auto}}
+@media (max-width:520px){.sd5A .wall2{grid-template-columns:1fr}}
+
+/* SIDING · Jobs B — the ledger */
+.sd5B .tw2{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px}
+.sd5B .tw2 button{all:unset;box-sizing:border-box;padding:9px 15px;border-radius:999px;background:#EEF3EF;cursor:pointer;font:700 14px/1 var(--text);color:var(--ink-2)}
+.sd5B .tw2 button[aria-checked="true"]{background:var(--green);color:#fff}.sd5B .tw2 button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.sd5B .ldg{margin-top:16px;padding:6px clamp(16px,2.4vw,30px) 16px;border-radius:10px;background:#FBF9F3 repeating-linear-gradient(180deg,transparent 0 55px,#E2DBCB 55px 56px);box-shadow:inset 3px 0 0 #D98F7A,0 30px 50px -40px rgba(14,59,44,.5)}
+.sd5B .lr{list-style:none}
+.sd5B .lr li{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1.4fr);gap:14px;align-items:center;min-height:56px;padding:4px 0}
+.sd5B .w3{font:800 14px/1 var(--display);color:var(--green);font-variant-numeric:tabular-nums}
+.sd5B .p3 b{display:block;font:700 16px/1.2 var(--text);color:var(--ink)}.sd5B .p3 small{font:500 12.5px/1.2 var(--text);color:var(--ink-3)}
+.sd5B .o3{font:500 14.5px/1.35 var(--text);color:var(--ink-2)}
+.sd5B .lf2{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.sd5B .lf2 button{all:unset;padding:8px 14px;border-radius:999px;background:var(--green);color:#fff;cursor:pointer;font:700 13.5px/1 var(--text)}
+.sd5B .lf2 button:disabled{opacity:.3;cursor:default}.sd5B .lf2 button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.sd5B .pg3{font:700 13px/1 var(--text);color:var(--ink-3)}
+.sd5B .lk2{margin-top:16px;font:500 14px/1.5 var(--text);color:var(--ink-3)}.sd5B .lk2 b{color:var(--green)}
+@media (max-width:620px){.sd5B .lr li{grid-template-columns:72px minmax(0,1fr);padding:8px 0}.sd5B .o3{grid-column:2}.sd5B .ldg{background-image:none}.sd5B .lr li{border-bottom:1px solid #E2DBCB}}
+
+/* SIDING · Jobs C — names on the list */
+.sd5C .az{margin-top:20px;display:flex;flex-wrap:wrap;gap:4px}
+.sd5C .az a{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;background:#EEF3EF;font:800 14px/1 var(--display);color:var(--green);text-decoration:none}
+.sd5C .az a:hover{background:#E1EADF}.sd5C .az a:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.sd5C .nw2{margin-top:22px;columns:3 260px;column-gap:clamp(20px,3vw,48px)}
+.sd5C .grp{break-inside:avoid;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;scroll-margin:120px}
+.sd5C .lt3{width:100%;font:800 34px/1 var(--display);color:#CFE5A8}
+.sd5C .nm2{all:unset;cursor:pointer;font:700 clamp(17px,1.5vw,21px)/1.35 var(--display);color:var(--ink);border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease}
+.sd5C .nm2:hover,.sd5C .nm2.on{color:var(--green);border-bottom-color:#B5DB6E}.sd5C .nm2:focus-visible{outline:3px solid var(--green);outline-offset:2px;border-radius:3px}
+.sd5C .rd7{position:sticky;bottom:86px;margin-top:10px;padding:14px 18px;border-radius:14px;background:#0E3B2C;color:rgba(255,255,255,.85);font:500 15.5px/1.4 var(--text);box-shadow:0 20px 40px -20px rgba(0,0,0,.4)}
+.sd5C .rd7 b{color:#B5DB6E}
+@media (min-width:861px){.sd5C .rd7{bottom:20px}}

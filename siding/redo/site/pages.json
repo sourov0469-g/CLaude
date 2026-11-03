@@ -114,6 +114,46 @@
       "On site, in order"
      ]
     ]
+   },
+   {
+    "slot": "sd5",
+    "name": "Siding jobs on record",
+    "mod": "p_sd5",
+    "obj": "PSd5",
+    "v": [
+     [
+      "a",
+      "Five on the wall"
+     ],
+     [
+      "b",
+      "The ledger"
+     ],
+     [
+      "c",
+      "Names on the list"
+     ]
+    ]
+   },
+   {
+    "slot": "sd6",
+    "name": "Book the siding inspection",
+    "mod": "p_sd6",
+    "obj": "PSd6",
+    "v": [
+     [
+      "a",
+      "Phone first"
+     ],
+     [
+      "b",
+      "What the inspection covers"
+     ],
+     [
+      "c",
+      "The status band"
+     ]
+    ]
    }
   ],
   "windows": [],
