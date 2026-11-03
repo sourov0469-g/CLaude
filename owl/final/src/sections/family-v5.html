@@ -1,0 +1,62 @@
+<section class="sec fam5" id="family-5" aria-labelledby="fm5-h">
+<style>
+.fam5{overflow:hidden}
+.fam5 .g{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,64px);align-items:center}
+.fam5 .face{position:relative}
+.fam5 svg{display:block;width:100%;height:auto;overflow:visible}
+.fam5 .eye{cursor:pointer}
+.fam5 .eye image{transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.fam5 .lid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:fm5blink 7s 2s infinite}
+@keyframes fm5blink{0%,93%,100%{transform:scaleY(0)}95.5%{transform:scaleY(1)}}
+.fam5 .ring{fill:none;stroke:#EAA221;stroke-width:14;transition:stroke-width .3s}
+.fam5 .eye.on .ring{stroke-width:20}
+.fam5 .draw{stroke-dasharray:1;stroke-dashoffset:1}
+.fam5 .go .draw{animation:fm5d 1.6s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes fm5d{to{stroke-dashoffset:0}}
+.fam5 .lede{margin:14px 0 18px;max-width:36ch}
+.fam5 .pick{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.fam5 .pick button{min-height:52px;padding:0 18px;border-radius:16px;font-weight:800;background:var(--paper);box-shadow:0 4px 0 rgba(23,17,29,.1)}
+.fam5 .pick button[aria-pressed="true"]{background:var(--amber);box-shadow:0 4px 0 var(--amber-edge)}
+.fam5 .say{min-height:52px;font-size:17px;margin-bottom:18px}
+.fam5 .say b{display:block;font-size:20px}
+@media (max-width:900px){.fam5 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.fam5 .lid{animation:none}.fam5 .draw{stroke-dashoffset:0;animation:none!important}.fam5 .eye image{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="face" data-owl="say:Two families">
+   <svg viewBox="0 0 640 470" role="img" aria-label="A drawn owl face whose two eyes are photos of the two founding families, the Browns and the Berglands">
+    <defs><clipPath id="fm5l"><circle cx="200" cy="250" r="118"/></clipPath><clipPath id="fm5r"><circle cx="440" cy="250" r="118"/></clipPath></defs>
+    <path class="draw" pathLength="1" d="M60 150 L110 30 L190 110 Q320 70 450 110 L530 30 L580 150 Q620 260 560 360 Q470 460 320 460 Q170 460 80 360 Q20 260 60 150Z" fill="#FBFAF6" stroke="#17111D" stroke-width="6" stroke-linejoin="round"/>
+    <path class="draw" pathLength="1" d="M90 150 Q200 100 300 160 M550 150 Q440 100 340 160" fill="none" stroke="#C9C0AC" stroke-width="5" stroke-linecap="round"/>
+    <g class="eye" data-k="0"><circle cx="200" cy="250" r="132" fill="#F3E3B8"/><g clip-path="url(#fm5l)"><image href="{{A:browns.webp}}" x="70" y="120" width="260" height="260" preserveAspectRatio="xMidYMid slice"/></g><circle class="ring" cx="200" cy="250" r="125"/><path class="lid" d="M68 250 A132 132 0 0 1 332 250 Z" fill="#E9E3D5" stroke="#17111D" stroke-width="4"/></g>
+    <g class="eye" data-k="1"><circle cx="440" cy="250" r="132" fill="#F3E3B8"/><g clip-path="url(#fm5r)"><image href="{{A:berglands.webp}}" x="310" y="120" width="260" height="260" preserveAspectRatio="xMidYMid slice"/></g><circle class="ring" cx="440" cy="250" r="125"/><path class="lid" d="M308 250 A132 132 0 0 1 572 250 Z" fill="#E9E3D5" stroke="#17111D" stroke-width="4"/></g>
+    <path d="M300 372 L320 420 L340 372 Q320 360 300 372Z" fill="#EAA221" stroke="#17111D" stroke-width="4" stroke-linejoin="round"/>
+   </svg>
+  </div>
+  <div>
+   <span class="kick">We Give a Hoot</span>
+   <h2 class="h2" id="fm5-h" style="margin-top:12px">Two Families, One Owl</h2>
+   <p class="lede rv">Owl Roofing is family-owned, founded in Shoreview in 2025 by Tim Brown and Noah Bergland. Look into its eyes.</p>
+   <div class="pick" role="group" aria-label="The founding families"><button type="button" aria-pressed="true" data-k="0">The Browns</button><button type="button" aria-pressed="false" data-k="1">The Berglands</button></div>
+   <p class="say" aria-live="polite"></p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('family','5',function(root){
+  var F = [['The Browns', 'Tim Brown, co-founder, with his wife and their children.'], ['The Berglands', 'Noah Bergland, co-founder, with his wife and their children.']];
+  var face = root.querySelector('.face'), eyes = [].slice.call(root.querySelectorAll('.eye')), btns = [].slice.call(root.querySelectorAll('.pick button')), say = root.querySelector('.say'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function pick(k){ eyes.forEach(function(e, j){ e.classList.toggle('on', j === k); }); btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === k); }); say.innerHTML = '<b>' + F[k][0] + '</b>' + F[k][1]; }
+  btns.forEach(function(b, k){ b.addEventListener('click', function(){ pick(k); }); }); eyes.forEach(function(e, k){ e.addEventListener('pointerenter', function(){ pick(k); }); e.addEventListener('click', function(){ pick(k); }); });
+  /* the portraits drift a little inside the eye rims, like pupils following the cursor */
+  if (OWL.fine && !OWL.reduce) face.addEventListener('pointermove', function(ev){ var b = face.getBoundingClientRect(), x = (ev.clientX - b.left)/b.width - .5, y = (ev.clientY - b.top)/b.height - .5;
+    eyes.forEach(function(e){ e.querySelector('image').style.transform = 'translate(' + (x*18).toFixed(1) + 'px,' + (y*14).toFixed(1) + 'px)'; }); });
+  pick(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ face.classList.add('go'); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); face.classList.add('go'); OWL.reveal(h2); } }, {threshold:.3}); io.observe(face);
+});
+</script>
+</section>

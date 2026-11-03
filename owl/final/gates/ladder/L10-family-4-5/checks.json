@@ -1,0 +1,221 @@
+[
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 5
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "family"
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "We Give a Hoot"
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "the tagline is the control: three word buttons spelling We Give a Hoot",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "hovering \"a Hoot\" reveals the crew photo with a truthful caption",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "\"We\" holds both founding families (a second press shows the Berglands)",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "names the founders as locked",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "4",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "family"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Two Families, One Owl"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "two eyes, two founding-family photos",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "choosing the Berglands lights that eye and says who they are",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "founding facts as locked (2025, Shoreview, Tim Brown and Noah Bergland)",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "5",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

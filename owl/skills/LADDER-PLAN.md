@@ -128,3 +128,15 @@ Both stay fully abstract (no geography, no positions that pretend to be a map), 
   vertical 3D drum you turn with the wheel, a drag, the arrow keys or the up and down keys; the town in the window is
   read out: "Yes, we roof in Eagan." A find box turns the drum to a typed town. It is a listbox underneath, so
   screen readers get the plain list. Skills: ⟦S0205⟧ 3D drum, ⟦S0340⟧ inertia and snap, ⟦S1107⟧, ⟦S1388⟧, ⟦S0451⟧.
+
+## L10 · We Give a Hoot 4 + 5 (Family stood at 3: V1 duo + hoot, V2 album stack, V3 in numbers)
+Skill added and read in full: ⟦S1324⟧ reveal-hover-effect (feathered radial mask, pointer easing .1, radius easing
+.14, collapse on exit, real images beneath).
+- **Family 4 · "Say It Big"** — reference **Cowboy** (people-fronted warmth, one named system). The tagline set very
+  large, "We Give a Hoot", where each word is a window onto Owl's own photos: hovering or focusing a word opens a
+  feathered radial reveal of its photo (We → the Browns and the Berglands; Give → community; a Hoot → the crew on a
+  roof), eased toward the cursor. The captions say only what is shown. Skills: ⟦S1324⟧, ⟦S1039⟧, ⟦S0451⟧, ⟦S1107⟧.
+- **Family 5 · "Two Families, One Owl"** — reference **Graza** (custom-animation bar). A large drawn owl face whose two
+  eyes are the two family portraits (the Browns in one, the Berglands in the other). The portraits drift a little
+  against the eye rims with the cursor, the lids blink now and then, and hovering an eye names that family. Skills:
+  ⟦S0407⟧ draw, ⟦S1330⟧ parallax, ⟦S1039⟧ captions, ⟦S0451⟧.

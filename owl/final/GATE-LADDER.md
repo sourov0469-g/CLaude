@@ -361,3 +361,35 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects fixed:**
 - Area 4's row was squeezed by a global `max-width:100%` on SVGs, and the row started on the wrong town.
 - Area 5's list sat between the listbox and its options (axe); the `ul` is now `role="none"`.
+
+---
+
+## L10 · We Give a Hoot 4 + 5 · checks 33/33 · evidence `gates/ladder/L10-family-4-5/` · Family now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Family 4 · Say It Big** | Cowboy (people-fronted warmth, one named system) | The tagline set very large, "We Give a Hoot", with each word a button. Hovering, focusing or pressing a word opens a feathered radial reveal of its photo, eased toward the cursor over a faded base (We → the Browns, press again for the Berglands; Give → community; a Hoot → the crew on a roof). The captions say only what is shown. | 8.4 | 8.0 | 8.4 | 8.6 | **8.32** |
+| **Family 5 · Two Families, One Owl** | Graza (custom-animation bar) | A large drawn owl face (draws on when first seen) whose two eyes are the two founding-family portraits inside amber rims. The portraits drift inside the rims with the cursor like pupils, the lids blink now and then, and choosing an eye or a family button lights it and says who they are. | 8.4 | 8.0 | 8.6 | 8.4 | **8.36** |
+
+**Truth:**
+- Owl's own photos only.
+- Alt text and captions say only what is shown ("Community involvement" kept as Owl's own caption).
+- The locked founding facts appear verbatim: 2025, Shoreview, Tim Brown and Noah Bergland.
+
+**Checks run:** the generic gate, plus:
+- Family 4: the word buttons spell the tagline; hovering "a Hoot" reveals the crew with a truthful caption; "We" also holds the Berglands; the founders are named.
+- Family 5: two eyes, two family photos; choosing the Berglands lights that eye; the founding facts are present.
+
+**Ledger:**
+- **Family 4:**
+  - spotlight reveal: ⟦S1324⟧ (CSS radial mask, pointer easing .1, radius easing .14, collapse to centre on exit);
+  - captions: ⟦S1039⟧;
+  - word buttons: ⟦S1107⟧ ⟦S0462⟧;
+  - visually hidden h2 kept for structure.
+- **Family 5:**
+  - owl draw-on: ⟦S0407⟧;
+  - portrait parallax: ⟦S1330⟧;
+  - blink: ⟦S0407⟧;
+  - family toggles: ⟦S1388⟧;
+  - title: ⟦S0451⟧.
+
+**Defect fixed:** Family 4's inactive words were too faint for 3:1 large-text contrast; they are now #8A8178.

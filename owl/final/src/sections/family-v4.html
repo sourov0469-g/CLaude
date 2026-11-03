@@ -1,0 +1,59 @@
+<section class="sec fam4" id="family-4" aria-labelledby="fm4-h">
+<style>
+.fam4{overflow:hidden}
+.fam4 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:center}
+.fam4 .h2{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.fam4 .words{display:grid;gap:0}
+.fam4 .w{display:block;width:max-content;max-width:100%;padding:0 6px;border-radius:14px;font-size:clamp(64px,9vw,148px);font-weight:900;letter-spacing:-.05em;line-height:.92;text-align:left;color:#8A8178;transition:color .35s,transform .45s cubic-bezier(.3,1.5,.5,1)}
+.fam4 .w[aria-pressed="true"]{color:var(--ink);transform:translateX(10px)}
+.fam4 .w[aria-pressed="true"]::after{content:"";display:block;height:6px;margin-top:4px;border-radius:3px;background:var(--amber)}
+.fam4 .w:hover{color:#6B6570}
+.fam4 .w:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.fam4 .lede{margin:18px 0 22px;max-width:40ch}
+.fam4 .frame{position:relative;aspect-ratio:4/3.4;border-radius:28px;overflow:hidden;background:#E7E1D3;box-shadow:0 50px 80px -46px rgba(23,17,29,.55)}
+.fam4 .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fam4 .frame .base{filter:grayscale(1) contrast(.9);opacity:.28}
+.fam4 .frame .over{-webkit-mask-image:radial-gradient(circle var(--r,0px) at var(--x,50%) var(--y,50%),#000 0,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%);mask-image:radial-gradient(circle var(--r,0px) at var(--x,50%) var(--y,50%),#000 0,#000 40%,rgba(0,0,0,.75) 60%,rgba(0,0,0,.4) 75%,rgba(0,0,0,.12) 88%,transparent 100%)}
+.fam4 figcaption{position:absolute;left:16px;bottom:16px;padding:8px 14px;border-radius:999px;background:rgba(251,250,246,.94);font-weight:700;font-size:15px}
+.fam4 .cta{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.fam4 .g{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Family-owned since 2025</span>
+   <h2 class="h2" id="fm4-h">We Give a Hoot</h2>
+   <div class="words" role="group" aria-label="We Give a Hoot. Choose a word to see a photo."></div>
+   <p class="lede rv">Tim Brown and Noah Bergland started Owl Roofing in Shoreview. Choose a word to see who stands behind it.</p>
+   <div class="cta"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="#crew-video" data-mag data-owl="peek">Watch the Crew</a></div>
+  </div>
+  <figure class="frame" data-owl="say:Look closer"><img class="base" alt="" aria-hidden="true"><img class="over" alt=""><figcaption aria-live="polite"></figcaption></figure>
+ </div>
+</div>
+<script>
+OWL.reg('family','4',function(root){
+  var P = [
+    {w:'We', src:'{{A:browns.webp}}', alt:'Tim Brown with his wife and their children', cap:'We: the Browns and the Berglands', src2:'{{A:berglands.webp}}', alt2:'Noah Bergland with his wife and their children'},
+    {w:'Give', src:'{{A:fam-community.webp}}', alt:'Community involvement', cap:'Give: in the community'},
+    {w:'a Hoot', src:'{{A:fam-crew.webp}}', alt:'Owl’s crew at work on a roof', cap:'a Hoot: the crew on a roof'}];
+  var words = root.querySelector('.words'), frame = root.querySelector('.frame'), base = frame.querySelector('.base'), over = frame.querySelector('.over'), cap = frame.querySelector('figcaption'), cur = -1, alt = 0;
+  var tx = .5, ty = .5, x = .5, y = .5, r = 0, tr = 0, raf = 0;
+  function tick(){ x += (tx - x)*.1; y += (ty - y)*.1; r += (tr - r)*.14; frame.style.setProperty('--x', (x*100).toFixed(2) + '%'); frame.style.setProperty('--y', (y*100).toFixed(2) + '%'); over.style.setProperty('--x', (x*100).toFixed(2) + '%'); over.style.setProperty('--y', (y*100).toFixed(2) + '%'); over.style.setProperty('--r', r.toFixed(1) + 'px');
+    if (Math.abs(tr - r) > .5 || Math.abs(tx - x) > .002 || Math.abs(ty - y) > .002) raf = requestAnimationFrame(tick); else raf = 0; }
+  function kick(){ if (!raf) raf = requestAnimationFrame(tick); }
+  var btns = P.map(function(p, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'w'; b.textContent = p.w; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function(){ pick(i, true); }); b.addEventListener('pointerenter', function(){ pick(i, false); }); b.addEventListener('focus', function(){ pick(i, false); });
+    words.appendChild(b); return b; });
+  function pick(i, toggle){ var p = P[i];
+    if (i === cur && toggle && p.src2){ alt = 1 - alt; } else if (i !== cur){ alt = 0; }
+    cur = i; var s = alt && p.src2 ? p.src2 : p.src, a = alt && p.src2 ? p.alt2 : p.alt;
+    base.src = s; over.src = s; over.alt = a; cap.textContent = p.cap;
+    btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    var fb = frame.getBoundingClientRect(); tr = Math.hypot(fb.width, fb.height)*.42;
+    if (OWL.reduce){ r = tr; tx = x = .5; ty = y = .5; tick(); } else { r = 0; tx = .5; ty = .5; kick(); } }
+  frame.addEventListener('pointermove', function(e){ var b = frame.getBoundingClientRect(); tx = (e.clientX - b.left)/b.width; ty = (e.clientY - b.top)/b.height; tr = Math.max(b.width, b.height)*.3; kick(); });
+  frame.addEventListener('pointerleave', function(){ var b = frame.getBoundingClientRect(); tx = .5; ty = .5; tr = Math.hypot(b.width, b.height)*.42; kick(); });
+  pick(0, false);
+});
+</script>
+</section>
