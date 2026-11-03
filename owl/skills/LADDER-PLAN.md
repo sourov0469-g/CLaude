@@ -116,3 +116,15 @@ Each round runs the generic gate (`tools/ladder-test.cjs`) plus its own interact
   object: a large "5.0" whose strokes are laid in shingle courses (staggered tabs, laminate band), with a
   small 3D tilt and light that follow the cursor. "90+ reviews" sits on the ridge line under it, beside the locked
   proof chips. Skills: ⟦S0205⟧ small 3D, ⟦S1330⟧ tilt, ⟦S0414⟧ courses, ⟦S1352⟧, ⟦S0451⟧.
+
+## L9 · Service Area 4 + 5 (Area stood at 3: V1 abstract road, V2 town keys, V3 Twenty-Nine numeral)
+Both stay fully abstract (no geography, no positions that pretend to be a map), using the real 29 towns.
+- **Area 4 · "Roof Row"** — reference **Lusion** (one continuous line carries the visitor). One long roofline of 29
+  houses, one per town, drawn as a single amber stroke with Shoreview as the home with the owl. You drag or scroll the
+  row sideways (keys too), windows light as houses pass the centre, and typing a town glides the row to it and lights
+  its windows. Skills: ⟦S0407⟧ line, ⟦S0450⟧-style continuous track (no fake loop; it ends at both towns),
+  ⟦S1107⟧ keyboard, ⟦S0462⟧, ⟦S0451⟧.
+- **Area 5 · "The Town Drum"** — reference **Quiet Cubes** (instrument-first) with small 3D. The 29 towns on a
+  vertical 3D drum you turn with the wheel, a drag, the arrow keys or the up and down keys; the town in the window is
+  read out: "Yes, we roof in Eagan." A find box turns the drum to a typed town. It is a listbox underneath, so
+  screen readers get the plain list. Skills: ⟦S0205⟧ 3D drum, ⟦S0340⟧ inertia and snap, ⟦S1107⟧, ⟦S1388⟧, ⟦S0451⟧.

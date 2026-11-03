@@ -1,0 +1,233 @@
+[
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 5
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "areas"
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Roof Row"
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "29 houses, one per real town, Shoreview first",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "starts at home: Shoreview centred and named",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "typing a town glides the row to it and lights its windows",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "arrow keys move along the row",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "an unlisted town is told the truth and given the phone",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "4",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "areas"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Turn to Your Town"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "the drum holds the 29 real towns as listbox options",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "arrow keys turn the drum (active descendant follows)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "typing turns the drum to the town",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "the 3D buttons turn it one town",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "5",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

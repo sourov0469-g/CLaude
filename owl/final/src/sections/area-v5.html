@@ -1,0 +1,76 @@
+<section class="sec area5" id="areas-5" aria-labelledby="ar5-h">
+<style>
+.area5 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.area5 .lede{margin:14px 0 20px;max-width:34ch}
+.area5 .find{display:grid;gap:8px;max-width:360px;margin-bottom:16px}
+.area5 .find label{font-weight:700}
+.area5 .find input{min-height:54px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.14);background:#fff;font:inherit;font-size:17px}
+.area5 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.area5 .read{min-height:56px;font-size:20px;font-weight:700;margin-bottom:18px}
+.area5 .read b{color:#8E5A12}
+.area5 .inst{position:relative;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:clamp(16px,2.4vw,26px);border-radius:30px;background:linear-gradient(180deg,#E9E3D3,#DCD4C0);box-shadow:inset 0 2px 0 rgba(255,255,255,.8),inset 0 -3px 0 rgba(23,17,29,.12),0 40px 70px -40px rgba(23,17,29,.6)}
+.area5 .win{position:relative;height:clamp(320px,34vw,400px);border-radius:20px;background:#17111D;overflow:hidden;perspective:900px;outline-offset:4px;cursor:grab;touch-action:none}
+.area5 .win:focus-visible{outline:3px solid var(--ink)}
+.area5 .win::before,.area5 .win::after{content:"";position:absolute;left:0;right:0;height:34%;z-index:2;pointer-events:none}
+.area5 .win::before{top:0;background:linear-gradient(#17111D,rgba(23,17,29,0))}
+.area5 .win::after{bottom:0;background:linear-gradient(rgba(23,17,29,0),#17111D)}
+.area5 .slot{position:absolute;left:12px;right:12px;top:50%;height:52px;margin-top:-26px;border-radius:12px;box-shadow:0 0 0 2px #EAA221,0 0 22px rgba(234,162,33,.35);z-index:3;pointer-events:none}
+.area5 .drum{position:absolute;left:0;right:0;top:50%;height:0;transform-style:preserve-3d;transform:rotateX(var(--a,0deg))}
+.area5 .drum li{position:absolute;left:0;right:0;top:-26px;height:52px;display:flex;align-items:center;justify-content:center;font-size:clamp(20px,2vw,26px);font-weight:800;color:#F1EFE6;backface-visibility:hidden;list-style:none}
+.area5 .drum li[aria-selected="true"]{color:#F6C25F}
+.area5 .drum li.home::after{content:"HOME";margin-left:10px;font-size:11px;letter-spacing:.14em;color:#EAA221}
+.area5 .btns{display:grid;gap:10px}
+.area5 .btns button{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:linear-gradient(180deg,#fff,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 10px 18px -8px rgba(23,17,29,.4);transition:transform .1s,box-shadow .1s}
+.area5 .btns button:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.area5 .btns svg{width:22px;height:22px}
+.area5 .cnt{font-size:13px;font-weight:800;letter-spacing:.12em;color:#6B6570;text-align:center;font-variant-numeric:tabular-nums}
+@media (max-width:900px){.area5 .g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.area5 .drum{transition:none!important}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Service area</span>
+   <h2 class="h2" id="ar5-h" style="margin-top:12px">Turn to Your Town</h2>
+   <p class="lede rv">29 towns on one drum, starting at home in Shoreview. Turn it with a drag, the arrow keys or the buttons.</p>
+   <div class="find"><label for="ar5-q">Or type your town</label><input id="ar5-q" autocomplete="off" placeholder="Start typing"></div>
+   <p class="read" aria-live="polite"></p>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <div class="inst" data-owl="say:Give it a spin">
+   <div class="win" tabindex="0" role="listbox" aria-label="The 29 towns Owl Roofing serves"><ul class="drum" role="none"></ul><span class="slot" aria-hidden="true"></span></div>
+   <div class="btns"><button class="up" type="button" aria-label="Previous town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg></button><span class="cnt" aria-hidden="true"></span><button class="dn" type="button" aria-label="Next town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('area','5',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var win = root.querySelector('.win'), drum = root.querySelector('.drum'), read = root.querySelector('.read'), cnt = root.querySelector('.cnt'), q = root.querySelector('#ar5-q'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var N = T.length, STEP = 360/N, R = 52/2/Math.tan(Math.PI/N), ang = 0, cur = 0;
+  var lis = T.map(function(t, i){ var li = document.createElement('li'); li.id = 'ar5-o' + i; li.setAttribute('role', 'option'); li.textContent = t; if (!i) li.className = 'home';
+    li.style.transform = 'rotateX(' + (-i*STEP) + 'deg) translateZ(' + R.toFixed(1) + 'px)'; drum.appendChild(li); return li; });
+  function set(i, smooth){ cur = ((i % N) + N) % N; var target = -cur*STEP, k = Math.round((ang - target)/360); ang = target + k*360;
+    drum.style.transition = smooth && !OWL.reduce ? 'transform .5s cubic-bezier(.3,1.3,.5,1)' : 'none'; drum.style.setProperty('--a', (-ang).toFixed(2) + 'deg');
+    drum.style.transform = 'rotateX(' + (-ang).toFixed(2) + 'deg)';
+    lis.forEach(function(li, j){ li.setAttribute('aria-selected', j === cur); }); win.setAttribute('aria-activedescendant', 'ar5-o' + cur);
+    cnt.textContent = ('0' + (cur + 1)).slice(-2) + ' / ' + N;
+    read.innerHTML = cur === 0 ? '<b>Shoreview</b> is home: 1000 County Rd E #230.' : 'Yes, we roof in <b>' + T[cur] + '</b>.'; }
+  root.querySelector('.up').addEventListener('click', function(){ set(cur - 1, true); }); root.querySelector('.dn').addEventListener('click', function(){ set(cur + 1, true); });
+  win.addEventListener('keydown', function(e){ var n = null; if (e.key === 'ArrowDown') n = cur + 1; else if (e.key === 'ArrowUp') n = cur - 1; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = N - 1; else if (e.key === 'PageDown') n = cur + 5; else if (e.key === 'PageUp') n = cur - 5; if (n !== null){ e.preventDefault(); set(n, true); } });
+  /* drag to turn, with a little inertia, then snap to the nearest town */
+  var drag = null;
+  win.addEventListener('pointerdown', function(e){ drag = {y: e.clientY, a: ang, t: performance.now(), v: 0, ly: e.clientY}; win.setPointerCapture(e.pointerId); drum.style.transition = 'none'; });
+  win.addEventListener('pointermove', function(e){ if (!drag) return; var now = performance.now(); drag.v = (e.clientY - drag.ly)/Math.max(1, now - drag.t); drag.t = now; drag.ly = e.clientY; ang = drag.a - (e.clientY - drag.y)*.55; drum.style.transform = 'rotateX(' + (-ang).toFixed(2) + 'deg)'; });
+  function end(){ if (!drag) return; var fling = -drag.v*160; drag = null; set(Math.round((ang + fling)/STEP), true); }
+  win.addEventListener('pointerup', end); win.addEventListener('pointercancel', end);
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  q.addEventListener('input', function(){ var v = norm(q.value); if (!v) return; var hit = T.map(norm).findIndex(function(t){ return t.indexOf(v) === 0 || t.indexOf(' ' + v) > -1; });
+    if (hit > -1) set(hit, true); else read.innerHTML = '<b>' + q.value.replace(/[<>&]/g, '') + '</b> is not on our list of 29 towns. Call (651) 977-6027 to ask.'; });
+  set(0, false);
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); set(3, true); setTimeout(function(){ set(0, true); }, 900); } }, {threshold:.4}); io.observe(win); }
+});
+</script>
+</section>

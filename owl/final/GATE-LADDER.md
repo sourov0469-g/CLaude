@@ -326,3 +326,38 @@ Each round adds two versions to one homepage slot, in the order the overnight br
   - shingle courses: ⟦S0414⟧;
   - chips: ⟦S1352⟧;
   - title: ⟦S0451⟧.
+
+---
+
+## L9 · Service Area 4 + 5 · checks 35/35 · evidence `gates/ladder/L09-area-4-5/` · Area now at 5
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Area 4 · Roof Row** | Lusion (one line) | One continuous amber roofline of 29 houses (gable and hip, one per real town), beginning at home in Shoreview, where the owl perches. A native horizontal scroll you can drag, arrow through or step with 3D keys. The house at the centre lights its windows and names its town; typing a town glides the row to it. | 8.2 | 8.2 | 8.2 | 8.6 | **8.26** |
+| **Area 5 · Turn to Your Town** | Quiet Cubes (instrument first), small 3D | The 29 towns on a 3D drum in a dark window with an amber slot. Turn it with a drag (with inertia and snap), arrow, Page and Home/End keys, or the 3D buttons. A readout says "Yes, we roof in Eagan."; typing turns the drum to a town. Underneath it is a real listbox with an active descendant. | 8.4 | 8.2 | 8.0 | 8.6 | **8.28** |
+
+**Truth:**
+- The real 29 towns, in the same order used across the site.
+- Both are abstract, with no geography and no positions pretending to be a map.
+- Unlisted towns are told so and given the phone (tested in Area 4).
+
+**Checks run:** the generic gate, plus:
+- Area 4: 29 houses in true order; it starts at Shoreview; "stillw" glides to Stillwater and lights it; arrow keys reach Woodbury; Duluth gets the honest answer.
+- Area 5: a listbox of the 29; arrow keys turn it (active descendant); "eagan" turns it to 27/29; the 3D button steps to Burnsville.
+
+**Ledger:**
+- **Area 4:**
+  - roofline: ⟦S0407⟧;
+  - track: ⟦S0450⟧ (continuous, ends at both towns);
+  - keyboard: ⟦S1107⟧;
+  - 3D keys: ⟦S1388⟧;
+  - title: ⟦S0451⟧.
+- **Area 5:**
+  - 3D drum: ⟦S0205⟧;
+  - inertia and snap: ⟦S0340⟧;
+  - listbox keyboard: ⟦S1107⟧;
+  - 3D buttons: ⟦S1388⟧;
+  - title: ⟦S0451⟧.
+
+**Defects fixed:**
+- Area 4's row was squeezed by a global `max-width:100%` on SVGs, and the row started on the wrong town.
+- Area 5's list sat between the listbox and its options (axe); the `ul` is now `role="none"`.
