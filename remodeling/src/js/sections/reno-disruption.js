@@ -10,10 +10,11 @@
     1: { init: function (root, k) {
       var chart = root.querySelector('.dc__chart'), host = root.querySelector('.dc__bars'), read = root.querySelector('.dc__read');
       host.innerHTML = ROOMS.map(function (r, i) {
-        return '<li class="dc__bar"><span class="dc__seg" style="--l:' + (i * .2 + .02) + ';--w:.16"><span>' + r + '</span><span class="dc__tag" aria-hidden="true">' + 'ABCDE'.charAt(i) + '</span></span></li>';
+        return '<li class="dc__bar"><span class="dc__seg" style="--l:' + (i * .2 + L0) + ';--w:' + W0 + '"><span>' + r + '</span><span class="dc__tag" aria-hidden="true">' + 'ABCDE'.charAt(i) + '</span></span></li>';
       }).join('');
       var segs = Array.prototype.slice.call(host.querySelectorAll('.dc__seg')), tags = host.querySelectorAll('.dc__tag');
       // the resolved plan: on phones the bars stay wide enough to name their rooms (Phase 6: they truncated at 390)
+      var PH = matchMedia('(max-width: 600px)').matches, W0 = PH ? .19 : .16, L0 = PH ? .005 : .02;   // MOBILE AUDIT r2: on a phone the five-year bars fill their year
       var END = matchMedia('(max-width: 900px)').matches ? { step: .1, w: .38, span: .82 } : { step: .052, w: .12, span: .36 };
       chart.style.setProperty('--one', END.span);
       var A = 'One room at a time, over five years, with a different contractor each time.', B = 'One plan, one contractor, one disruption: the rooms sequenced inside the same stretch.';
@@ -25,7 +26,7 @@
       var tl = gsap.timeline().to(o, { p: 1, duration: 1, ease: 'none', onUpdate: function () {
         var p = gsap.parseEase('power2.inOut')(o.p);
         segs.forEach(function (s, i) {
-          var l0 = i * .2 + .02, l1 = .02 + i * END.step, w0 = .16, w1 = END.w;   // sequenced, overlapping a little, inside one marked stretch
+          var l0 = i * .2 + L0, l1 = .02 + i * END.step, w0 = W0, w1 = END.w;   // sequenced, overlapping a little, inside one marked stretch
           s.style.setProperty('--l', (l0 + (l1 - l0) * p).toFixed(4)); s.style.setProperty('--w', (w0 + (w1 - w0) * p).toFixed(4));
         });
         var on = o.p > .9; if (on !== chart.classList.contains('is-one')) { chart.classList.toggle('is-one', on); read.textContent = on ? B : A; tags.forEach(function (t, i) { t.textContent = on ? '1' : 'ABCDE'.charAt(i); }); }

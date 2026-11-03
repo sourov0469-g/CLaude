@@ -31,7 +31,7 @@
       s += R(L + 40, 300, 150, 76, 'board') + P('M' + (L + 40) + ' 338 H' + (L + 190), 'ln') + R(L + 58, 312, 18, 26, 'tile') + R(L + 84, 318, 14, 20, 'tile');   // niche: shelf and two bottles
       s += P('M' + (L + 120) + ' 434 H' + (L + 300), 'ln') + P('M' + (L + 120) + ' 430 H' + (L + 300), 'lnt');   // linear drain at the floor
       s += P('M' + (L + 360) + ' 240 V300', 'ln') + '<circle class="blk" cx="' + (L + 360) + '" cy="236" r="4"/><circle class="blk" cx="' + (L + 360) + '" cy="304" r="4"/>';   // the handle on the glass
-      s += P('M' + (L + W + 12) + ' 200 H' + (L + W + 52), 'ln') + R(L + W + 18, 204, 28, 64, 'board');          // a towel on its bar, outside the glass
+      s += P('M' + (L + W + 4) + ' 200 H' + (L + W + 34), 'ln') + R(L + W + 8, 204, 22, 60, 'board');          // a towel on its bar, outside the glass
       s += T(L, 40, 'Closed up once');
       s = s0 + Lg(5, s);
     }

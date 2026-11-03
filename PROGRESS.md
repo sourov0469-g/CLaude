@@ -320,3 +320,21 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - touch 33/33;
   - phones at 360, 390 and 414: 0 small targets, 0 overflow;
   - pins 8/8; locks 0 fails; 0 outside links; 0 console errors.
+
+## Mobile visual audit: five rounds, every frame
+- Method: `remodeling/src/tools/qa_frames.js` walks each page as a phone visitor (touch, motion on), captures a frame every 0.77 screen and lays them out eight to a sheet.
+  - Rounds 1 to 4 at 390x844 (about 86 frames each); round 5 at 360x780 (91 frames). Every sheet was looked at; fixes went in between rounds.
+  - Sheets kept: `qa/mobile/r1` (before) and `qa/mobile/r5` (after).
+- Fixed across the rounds:
+  - phone rhythm: section padding down from about 290px to about 130px; all booking buttons full width, including the rows that held them;
+  - Proof: actions in a tidy grid (no duplicate reviews link, no repeated licence line);
+  - drawing sheets: the repeated title block is gone; reviews cards are as tall as their words; the town map is compact;
+  - footer: one full-width action, the email address on one line, pages in two columns, no second logo, about half the dead air;
+  - Bathrooms: the rooms preview sticks while the list scrolls; the build's towel no longer pokes out of its frame;
+  - Renovation hero: words and the button first, then one exterior photo (the open-plan photo opens the next sheet);
+  - Renovation "Not five": the five-year bars fill their year, names wrap, and the contractor letter is a corner badge (it was clipped);
+  - Renovation stories: each photo is fully revealed by mid-screen (it sat half-open);
+  - Financing: each figure reads before its unit ("6-132 months ...");
+  - Contact: the business card holds its lines; the town search is full width;
+  - every phone label is 13px or more.
+- Regression: touch 33/33; phones at 360, 390 and 414 with 0 small targets, 0 text under 13px and 0 overflow; pins 8/8 at 375, 390, 768 and 1440; locks 0 fails; 0 outside links; 0 console errors; 38 images, 0 broken.

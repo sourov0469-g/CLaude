@@ -38,3 +38,13 @@
 .dp__svg .one { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 3; stroke-dasharray: 10 6; }
 .dp__svg .stop { fill: var(--color-accent-solid); stroke: var(--color-surface); stroke-width: 3; }
 @media (max-width: 900px) { .dc__head, .dp__grid { grid-template-columns: 1fr; } .dc__seg { font-size: .75rem; padding: 0 8px; } .dc__tag { width: 20px; height: 20px; font-size: .625rem; } .dc__bar { height: 44px; } }
+/* MOBILE AUDIT r2: a fifth of a phone is narrow; the room name wraps and the contractor's letter becomes a corner badge
+   (it was clipped off the bar) */
+@media (max-width: 600px) {
+  .dc__chart { padding-inline: var(--s4); }
+  .dc__bands, .dc__one { left: var(--s4); right: var(--s4); }
+  .dc__one { width: calc((100% - 2 * var(--s4)) * var(--one, .36)); }
+  .dc__bars { gap: var(--s4); }
+  .dc__seg { white-space: normal; overflow: visible; padding: 0 5px; line-height: 1.05; font-size: .8125rem; letter-spacing: -.01em; }
+  .dc__tag { position: absolute; top: -10px; right: -8px; }
+}

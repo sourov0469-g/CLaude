@@ -22,11 +22,15 @@
       k.add(function () { list.innerHTML = ''; });
       EZ.reveal(k, root.querySelectorAll('.sc__head > *, .sc__cta'));
       if (!k.motion) return;
-      var sts = [];
+      var sts = [], stack = matchMedia('(max-width: 900px)').matches;   // stacked: the title sits above the photo, never hidden
       list.querySelectorAll('.sc__ch').forEach(function (ch) {
         var fig = ch.querySelector('.sc__fig'), txt = ch.querySelectorAll('.sc__txt > *');
-        var tl = gsap.timeline().fromTo(fig, { clipPath: 'inset(0 50% 0 50%)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 1, ease: 'power2.inOut' }).from(txt, { y: 20, autoAlpha: 0, duration: .4, stagger: .1 }, .2);
-        sts.push(ScrollTrigger.create({ trigger: ch, start: 'top 85%', end: 'top 35%', scrub: .5, animation: tl }));
+        var tl = gsap.timeline().fromTo(fig, { clipPath: 'inset(0 50% 0 50%)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 1, ease: 'power2.inOut' }).from(txt, stack ? { y: 14, duration: .4, stagger: .1 } : { y: 20, autoAlpha: 0, duration: .4, stagger: .1 }, stack ? 0 : .2);
+        // MOBILE AUDIT r2: on a phone the chapter stacks (title over photo), so the reveal follows the photo and is whole
+        // by the time it reaches the middle of the screen (it used to sit half-open there)
+        sts.push(stack
+          ? ScrollTrigger.create({ trigger: fig, start: 'top 98%', end: 'center 62%', scrub: .4, animation: tl })
+          : ScrollTrigger.create({ trigger: ch, start: 'top 85%', end: 'top 35%', scrub: .5, animation: tl }));
       });
       k.add(function () { sts.forEach(function (s) { s.kill(); }); });
     } },

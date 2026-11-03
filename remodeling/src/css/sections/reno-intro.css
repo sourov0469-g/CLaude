@@ -39,3 +39,11 @@
 .ri4__p.is-on .ri4__t { box-shadow: inset 4px 0 0 var(--color-accent-solid); }
 .ri4__p:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
 .ri3__kick { margin: 0; font: 600 1rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+/* MOBILE AUDIT r2: on a phone the words and the action come first, then one photograph (the exterior: the open-plan room
+   opens the next sheet); two tall photos used to push the button two screens down */
+@media (max-width: 600px) {
+  .ri3__foot { order: 3; margin-top: var(--s4); }
+  .ri3__b { order: 4; margin-top: var(--s6); }
+  .ri3__b img { aspect-ratio: 4 / 3; }
+  .ri3__a { display: none; }   /* r4: the open-plan photo opens the next sheet right below; the hero shows the whole house */
+}

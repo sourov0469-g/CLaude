@@ -67,7 +67,7 @@
    }
   },
   "bathrooms v1": {
-   "runs": 178,
+   "runs": 176,
    "tel": [
     "tel:+17542360675"
    ],
@@ -83,7 +83,7 @@
    }
   },
   "bathrooms v2": {
-   "runs": 178,
+   "runs": 176,
    "tel": [
     "tel:+17542360675"
    ],
@@ -183,7 +183,7 @@
   }
  ],
  "fonts": {
-  "Roboto": 1274,
+  "Roboto": 1270,
   "Elbaz Display": 672
  },
  "requests": [],

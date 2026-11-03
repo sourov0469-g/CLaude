@@ -121,5 +121,10 @@
   .fw__c .fz-card { padding: var(--s3); border-radius: 12px; } .fw__c .fz-big { font-size: 1.5rem; } .fw__c .fz-cic { display: none; }
   .fw__c .fz-unit { display: none; }
   .fz-rows div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  /* MOBILE AUDIT r4: the figure reads before its unit ("6-132 months, ...") instead of the unit first and the figure
+     parked at the far edge */
+  .fb__p { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'n n' 'b u' 'w w'; gap: 6px var(--s3); }
+  .fb__pb { font-size: 2rem; }
+  .fb__pu { align-self: center; }
 }
 @media (prefers-reduced-motion: reduce) { .fa__o, .fb__h, .fw__c, .fb__p { transition: none; } }

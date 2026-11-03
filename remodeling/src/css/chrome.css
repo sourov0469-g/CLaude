@@ -352,7 +352,65 @@
   html body .cl__copy { min-height: 44px; padding-inline: 18px; }
   html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
   html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
-  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
-  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .8125rem; }
+  /* r5 regression: every phone label at 13px or more */
+  html body .foot__brand p, html body .ca__cn span, html body .pf__ck, html body .pf__b--cmu .pf__k, html body .kp__chn, html body #bath-intro figcaption { font-size: .8125rem; }
+  html body .fq__btn { font-size: 1.125rem; line-height: 1.3; }
   html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* MOBILE AUDIT · round 1 (frame-by-frame review at 390): phones get phone layouts, not a smaller desktop.
+   ("html body" lifts these over the section sheets, which load later with equal weight) */
+@media (max-width: 600px) {
+  /* rhythm: ~290px of air between sections becomes ~130px */
+  :root { --section-y: 64px; }
+  /* the actions a thumb reaches for are full width */
+  html body main a.btn[href*="consult"], html body main a.btn[href*="contact-form"], html body main form button[type="submit"], html body .foot__acts .btn { width: 100%; justify-content: center; }
+  html body .go { width: 100%; }
+  html body main :is(div, p):has(> a.btn[href*="consult"], > a.btn[href*="contact-form"]) { justify-self: stretch; }   /* the row holding it spans too */
+  /* the hero: proof facts sit tight under the actions */
+  html body .hlic { margin-top: calc(var(--s2) * -1); }
+  /* Proof: no repeated licence line under the deck (the block shows it); the actions in a tidy grid */
+  html body .pf__cred { display: none; }
+  html body .pf__acts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s3); width: 100%; }
+  html body .pf__acts .btn { width: 100%; justify-content: center; padding-inline: 10px; }
+  html body .pf__acts .pf__verify { grid-column: 1 / -1; grid-row: 1; }
+  html body .pf__acts .pf__reviews { display: none; }
+  html body .pf__acts .pf__restack { justify-self: center; }
+  /* drawing sheets: the Project / Contractor title block repeats what is above it */
+  html body .sv__tb { display: none; }
+  /* reviews: each card as tall as its own words */
+  html body .vc__rail { align-items: start; }
+  /* the service-area map: compact */
+  html body .tw__map { height: 400px; }
+  /* footer: the wordmark already names the firm; the second logo goes */
+  html body .foot__logo { display: none; }
+  /* footer on a phone: one full-width action, the email on one line, pages in two columns, less dead air */
+  html body .foot__mark { margin-bottom: var(--s6); padding-top: var(--s6); }
+  html body .foot__cta { margin-bottom: var(--s6); padding-bottom: var(--s6); gap: var(--s4); }
+  html body .foot__acts { width: 100%; display: grid; justify-items: center; gap: var(--s2); }
+  html body .foot .grid12 { row-gap: var(--s5); }
+  html body .foot__brand p { margin: 0; }
+  html body .foot__col { grid-column: 1 / -1; }
+  html body .foot__col a[href^="mailto:"] { overflow-wrap: normal; word-break: normal; }
+  html body .foot__col:nth-child(4) { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s4); row-gap: 0; }
+  html body .foot__col:nth-child(4) h3 { grid-column: 1 / -1; }
+  html body .foot__legal { flex-direction: column; gap: var(--s2); padding-top: var(--s3); }
+}
+/* Bathrooms · rooms: the preview stays in view while the list scrolls under it (a tap below used to change a photo
+   that had scrolled off screen) */
+@media (max-width: 900px) {
+  html body .br__side { position: static; }
+  html body .br__prev { position: sticky; top: calc(var(--nav-h) + 8px); z-index: 3; margin: var(--s3) calc(var(--margin) * -1) 0; padding: 8px var(--margin); background: var(--color-bg); }
+  html body .br__ph { aspect-ratio: 16 / 10; max-height: 30svh; width: 100%; }
+}
+/* MOBILE AUDIT r2 · contact: the business card holds its lines (the 44px tap rows overflowed a card-shaped box); the town
+   search gets the full width, its pause control drops below */
+@media (max-width: 600px) {
+  html body .vs1__card { aspect-ratio: auto; height: 290px; }
+  html body .vs1__face { gap: 2px; padding: 22px 24px 30px; }
+  html body .vs1__logo { width: 140px; margin-bottom: 10px; }
+  html body .ca__box { flex-wrap: wrap; }
+  html body .ca__in { flex: 1 1 100%; }
+  html body .ca__hold { min-height: 44px; }
 }

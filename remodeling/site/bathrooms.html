@@ -698,9 +698,64 @@ input, textarea { caret-color: var(--color-accent-text); }
   html body .cl__copy { min-height: 44px; padding-inline: 18px; }
   html body .gs__b input, html body .fm3__blank input, html body .fm3__blank select { min-height: 44px; }
   html body input[type="checkbox"] { width: 24px; height: 24px; flex: none; accent-color: var(--color-accent-solid); }
-  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .75rem; }
-  html body .fq__btn { font-size: 1rem; line-height: 1.35; }
+  html body .sv__tb dt, html body .bx__tag, html body .rp__hz { font-size: .8125rem; }
+  
+  html body .foot__brand p, html body .ca__cn span, html body .pf__ck, html body .pf__b--cmu .pf__k, html body .kp__chn, html body #bath-intro figcaption { font-size: .8125rem; }
+  html body .fq__btn { font-size: 1.125rem; line-height: 1.3; }
   html body .foot .foot__legal a.link { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+
+@media (max-width: 600px) {
+  
+  :root { --section-y: 64px; }
+  
+  html body main a.btn[href*="consult"], html body main a.btn[href*="contact-form"], html body main form button[type="submit"], html body .foot__acts .btn { width: 100%; justify-content: center; }
+  html body .go { width: 100%; }
+  html body main :is(div, p):has(> a.btn[href*="consult"], > a.btn[href*="contact-form"]) { justify-self: stretch; }   
+  
+  html body .hlic { margin-top: calc(var(--s2) * -1); }
+  
+  html body .pf__cred { display: none; }
+  html body .pf__acts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s3); width: 100%; }
+  html body .pf__acts .btn { width: 100%; justify-content: center; padding-inline: 10px; }
+  html body .pf__acts .pf__verify { grid-column: 1 / -1; grid-row: 1; }
+  html body .pf__acts .pf__reviews { display: none; }
+  html body .pf__acts .pf__restack { justify-self: center; }
+  
+  html body .sv__tb { display: none; }
+  
+  html body .vc__rail { align-items: start; }
+  
+  html body .tw__map { height: 400px; }
+  
+  html body .foot__logo { display: none; }
+  
+  html body .foot__mark { margin-bottom: var(--s6); padding-top: var(--s6); }
+  html body .foot__cta { margin-bottom: var(--s6); padding-bottom: var(--s6); gap: var(--s4); }
+  html body .foot__acts { width: 100%; display: grid; justify-items: center; gap: var(--s2); }
+  html body .foot .grid12 { row-gap: var(--s5); }
+  html body .foot__brand p { margin: 0; }
+  html body .foot__col { grid-column: 1 / -1; }
+  html body .foot__col a[href^="mailto:"] { overflow-wrap: normal; word-break: normal; }
+  html body .foot__col:nth-child(4) { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s4); row-gap: 0; }
+  html body .foot__col:nth-child(4) h3 { grid-column: 1 / -1; }
+  html body .foot__legal { flex-direction: column; gap: var(--s2); padding-top: var(--s3); }
+}
+
+@media (max-width: 900px) {
+  html body .br__side { position: static; }
+  html body .br__prev { position: sticky; top: calc(var(--nav-h) + 8px); z-index: 3; margin: var(--s3) calc(var(--margin) * -1) 0; padding: 8px var(--margin); background: var(--color-bg); }
+  html body .br__ph { aspect-ratio: 16 / 10; max-height: 30svh; width: 100%; }
+}
+
+@media (max-width: 600px) {
+  html body .vs1__card { aspect-ratio: auto; height: 290px; }
+  html body .vs1__face { gap: 2px; padding: 22px 24px 30px; }
+  html body .vs1__logo { width: 140px; margin-bottom: 10px; }
+  html body .ca__box { flex-wrap: wrap; }
+  html body .ca__in { flex: 1 1 100%; }
+  html body .ca__hold { min-height: 44px; }
 }
 
 
@@ -1275,10 +1330,10 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       </div>
       <div class="wrap bb__stage">
         <ol class="bb__list">
-          <li class="bb__i" data-i="0"><p class="bb__n nums">01</p><h3 class="bb__t">Down to the studs</h3><p class="bb__p">Down to the studs.</p></li>
+          <li class="bb__i" data-i="0"><p class="bb__n nums">01</p><h3 class="bb__t">Down to the studs</h3></li>
           <li class="bb__i" data-i="1"><p class="bb__n nums">02</p><h3 class="bb__t">Backer board</h3><p class="bb__p">Backer board is water-resistant, not waterproof.</p></li>
           <li class="bb__i" data-i="2"><p class="bb__n nums">03</p><h3 class="bb__t">Waterproofing</h3><p class="bb__p">Waterproofed properly.</p></li>
-          <li class="bb__i" data-i="3"><p class="bb__n nums">04</p><h3 class="bb__t">Tile, set square</h3><p class="bb__p">Tile set square.</p></li>
+          <li class="bb__i" data-i="3"><p class="bb__n nums">04</p><h3 class="bb__t">Tile, set square</h3></li>
           <li class="bb__i" data-i="4"><p class="bb__n nums">05</p><h3 class="bb__t">Glass, templated after tiling</h3><p class="bb__p">Glass is templated after tiling, because it is cut to what was actually built rather than to the drawing.</p></li>
           <li class="bb__i" data-i="5"><p class="bb__n nums">06</p><h3 class="bb__t">Fixtures, then closed up once</h3><p class="bb__p">Glass and fixtures that still look right in year five.</p></li>
         </ol>
@@ -3653,7 +3708,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
       s += R(L + 40, 300, 150, 76, 'board') + P('M' + (L + 40) + ' 338 H' + (L + 190), 'ln') + R(L + 58, 312, 18, 26, 'tile') + R(L + 84, 318, 14, 20, 'tile');   // niche: shelf and two bottles
       s += P('M' + (L + 120) + ' 434 H' + (L + 300), 'ln') + P('M' + (L + 120) + ' 430 H' + (L + 300), 'lnt');   // linear drain at the floor
       s += P('M' + (L + 360) + ' 240 V300', 'ln') + '<circle class="blk" cx="' + (L + 360) + '" cy="236" r="4"/><circle class="blk" cx="' + (L + 360) + '" cy="304" r="4"/>';   // the handle on the glass
-      s += P('M' + (L + W + 12) + ' 200 H' + (L + W + 52), 'ln') + R(L + W + 18, 204, 28, 64, 'board');          // a towel on its bar, outside the glass
+      s += P('M' + (L + W + 4) + ' 200 H' + (L + W + 34), 'ln') + R(L + W + 8, 204, 22, 60, 'board');          // a towel on its bar, outside the glass
       s += T(L, 40, 'Closed up once');
       s = s0 + Lg(5, s);
     }
