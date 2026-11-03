@@ -1,0 +1,144 @@
+<section class="sec wrap3" id="protect-3" aria-labelledby="pn3-h">
+<style>
+.wrap3 .hd{max-width:760px;margin-bottom:clamp(24px,4vw,44px)}
+.wrap3 .lede{margin-top:14px;max-width:48ch}
+.wrap3 .g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,72px);align-items:start}
+.wrap3 .plan{position:sticky;top:clamp(76px,10vh,110px);border-radius:26px;background:#FBF8EF;padding:12px;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 40px 60px -34px rgba(23,17,29,.5),0 0 0 1px rgba(23,17,29,.06)}
+.wrap3 .plan svg{display:block;width:100%;height:auto;border-radius:16px}
+.wrap3 .rail{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.wrap3 .rail button{min-width:44px;height:44px;border-radius:12px;font-weight:800;font-size:15px;background:transparent;transition:background .3s,color .3s,transform .3s var(--ease)}
+.wrap3 .rail button[aria-current="step"]{background:var(--ink);color:var(--cream);transform:translateY(-2px)}
+.wrap3 .rail button:hover{background:rgba(234,162,33,.18)}
+.wrap3 .rail button[aria-current="step"]:hover{background:var(--ink)}
+.wrap3 .steps{list-style:none;margin:0;padding:0}
+.wrap3 .step{min-height:min(62vh,560px);display:flex;flex-direction:column;justify-content:center;padding:20px 0 20px 26px;border-left:3px solid rgba(23,17,29,.1);transition:border-color .4s}
+.wrap3 .step:first-child{min-height:min(40vh,380px);justify-content:start;padding-top:8px}
+.wrap3 .step .n{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wrap3 .step h3{font-size:clamp(24px,2.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:6px 0 10px;transition:opacity .4s,transform .5s var(--ease);opacity:.35;transform:translateX(-6px)}
+.wrap3 .step p{font-size:18px;max-width:34ch;color:var(--ink-70);transition:opacity .4s;opacity:.35}
+.wrap3 .step.on{border-color:var(--amber)}
+.wrap3 .step.on h3,.wrap3 .step.on p{opacity:1;transform:none}
+.wrap3 .cta{margin-top:10px}
+/* plan layers */
+.wrap3 .ink{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+.wrap3 .ink.on{stroke-dashoffset:0}
+.wrap3 .lay{opacity:0;transition:opacity .6s}
+.wrap3 .lay.on{opacity:1}
+.wrap3 .deb{transform-box:fill-box;transform-origin:50% 50%;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.wrap3 .deb.on{transform:none}
+.wrap3 .nail{transition:opacity .25s,transform .25s}
+.wrap3 .nail.got{opacity:0;transform:translateY(-8px)}
+.wrap3 .ring{transform-box:fill-box;transform-origin:50% 50%;animation:pn3ring 1.8s ease-out infinite}
+@keyframes pn3ring{from{transform:scale(.6);opacity:.9}to{transform:scale(1.8);opacity:0}}
+.wrap3 .grid{animation:pn3grid 30s linear infinite}
+@keyframes pn3grid{to{transform:translate(20px,20px)}}
+@media (max-width:900px){.wrap3 .g{grid-template-columns:1fr}.wrap3 .plan{top:60px;z-index:2;padding:6px;max-width:340px;width:100%;justify-self:center}.wrap3 .rail{margin-top:4px}.wrap3 .rail button{height:40px}.wrap3 .step{min-height:44vh;padding-left:18px;justify-content:end}.wrap3 .step:first-child{min-height:24vh;justify-content:end}.wrap3 .steps{padding-bottom:20vh}.wrap3 .step p{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.wrap3 .ink,.wrap3 .lay,.wrap3 .deb{transition:none}.wrap3 .ring,.wrap3 .grid{animation:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Protect Your Nest System</span>
+  <h2 class="h2" id="pn3-h" style="margin-top:12px">Every Step, Mapped on Your Yard</h2>
+  <p class="lede rv">A plan view of a re-roof day. Scroll, or pick a step, to see where the wrap goes and how the yard is cleared three times.</p></div>
+ <div class="g">
+  <div class="plan">
+   <svg viewBox="0 0 600 600" role="img" aria-label="Plan view of a house and yard. It changes with each step: the wrap around the house, debris on the wrap, the crew pass, the magnet sweep lanes, the project manager's walk and the aftercare box at the front door"></svg>
+   <div class="rail" role="group" aria-label="Steps"></div>
+  </div>
+  <ol class="steps">
+   <li class="step" data-s="1"><span class="n">Step 1</span><h3>The wrap goes on</h3><p>Mesh hangs from the eaves over the walls and beds, and a tarp covers the ground around the house.</p></li>
+   <li class="step" data-s="2"><span class="n">Step 2</span><h3>Tear-off lands on the wrap</h3><p>Old shingles and nails come down onto the wrap, not into your garden.</p></li>
+   <li class="step" data-s="3"><span class="n">Pass 1</span><h3>The crew</h3><p>The crew lifts the wrap and clears the yard as they go.</p></li>
+   <li class="step" data-s="4"><span class="n">Pass 2</span><h3>The magnet sweep</h3><p>A rolling magnet goes over the lawn and drive for nails, lane by lane.</p></li>
+   <li class="step" data-s="5"><span class="n">Pass 3</span><h3>The project manager</h3><p>A final walk-through before we call it done.</p></li>
+   <li class="step" data-s="6"><span class="n">Last</span><h3>The aftercare box</h3><p>Left with you at the door when the crew goes.</p><a class="btn btn-amber cta" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a></li>
+  </ol>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','3',function(root){
+  var svg = root.querySelector('.plan svg'), rail = root.querySelector('.rail'), steps = [].slice.call(root.querySelectorAll('.step')), cur = 0;
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed - 1)/2147483646; }; }
+  var R = rnd(29), h = '';
+  h += '<defs><pattern id="pn3g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#17111D" stroke-opacity=".06"/></pattern>'
+    + '<pattern id="pn3sh" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V8" stroke="#17111D" stroke-opacity=".22" stroke-width="1.4"/></pattern>'
+    + '<pattern id="pn3mesh" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 0L6 6M6 0L0 6" stroke="#F1EFE6" stroke-opacity=".18"/></pattern></defs>';
+  h += '<rect width="600" height="600" fill="#FBF8EF"/><rect x="-20" y="-20" width="640" height="640" fill="url(#pn3g)" class="grid"/>';
+  h += '<rect x="10" y="10" width="580" height="520" rx="6" fill="#E3ECD3"/>';
+  h += '<rect y="540" width="600" height="60" fill="#D9D6CC"/><path d="M0 540H600" stroke="#B5AE9E" stroke-width="3"/>';
+  h += '<rect x="440" y="290" width="80" height="250" fill="#E4E0D5" stroke="#B5AE9E"/><rect x="270" y="302" width="22" height="238" fill="#E9E5DA" stroke="#C9C3B4"/>';
+  h += '<circle cx="70" cy="74" r="50" fill="#9DBB7C"/><circle cx="58" cy="64" r="22" fill="#B2CC94"/><circle cx="556" cy="70" r="36" fill="#9DBB7C"/>';
+  h += '<path d="M130 296H264V322H130ZM298 296H430V322H298Z" fill="#B48C64"/>';
+  [150,180,210,240,320,350,380,410].forEach(function(x, i){ h += '<circle cx="' + x + '" cy="309" r="' + (i % 2 ? 10 : 12) + '" fill="#6C9A50"/>'; });
+  /* house: hip roofs, plan view */
+  h += '<path d="M130 110H430V290H130Z M430 150H530V290H430Z" fill="#C8C4C9"/><path d="M130 110H430V290H130Z M430 150H530V290H430Z" fill="url(#pn3sh)"/>';
+  h += '<path d="M130 110L220 200H340L430 110M130 290L220 200M340 200L430 290M430 150L480 190V250L430 290M530 150L480 190M530 290L480 250" fill="none" stroke="#17111D" stroke-opacity=".55" stroke-width="2"/>';
+  h += '<path d="M130 110H430V290H130Z M430 150H530V290H430Z" fill="none" stroke="#17111D" stroke-width="3"/>';
+  h += '<rect x="266" y="290" width="30" height="12" fill="#BEB8AA" stroke="#17111D" stroke-width="1.5"/>';
+  h += '<g font-size="12" font-weight="700" fill="#17111D" opacity=".6" letter-spacing=".08em"><text x="280" y="574" text-anchor="middle">STREET</text><text x="480" y="420" text-anchor="middle" transform="rotate(-90 480 420)">DRIVE</text></g>';
+  /* 1 the wrap: tarp zone + mesh line on the eaves */
+  h += '<g class="lay" data-l="wrap"><path d="M92 72H568V332H92Z M130 110V290H430V290H530V150H430V110Z" fill-rule="evenodd" fill="#2B2730" fill-opacity=".78"/><path d="M92 72H568V332H92Z M130 110V290H430V290H530V150H430V110Z" fill-rule="evenodd" fill="url(#pn3mesh)"/><g class="debs"></g></g>';
+  h += '<path class="ink" data-l="wrap" pathLength="1" d="M126 106H434V146H534V294H126Z" fill="none" stroke="#EAA221" stroke-width="5" stroke-linejoin="round"/>';
+  /* 3 crew trail */
+  h += '<path class="ink" data-l="crew" pathLength="1" d="M100 340 C160 330 220 352 270 338 S380 330 430 344 S520 330 560 340" fill="none" stroke="#8E5A12" stroke-width="3" stroke-dasharray="1" stroke-linecap="round"/>';
+  /* 4 magnet lanes + nails + magnet */
+  var lanes = 'M24 356H586V392H24V428H586V464H24V500H586V520H24';
+  h += '<path class="ink lanes" data-l="mag" pathLength="1" d="' + lanes + '" fill="none" stroke="#C9302C" stroke-opacity=".55" stroke-width="3" stroke-linejoin="round"/>';
+  var nails = '';
+  for (var n = 0; n < 8; n++){ var x = 30 + R()*540, y = 344 + R()*180; if (x > 262 && x < 300) x += 50; nails += '<path class="nail" data-x="' + x.toFixed(0) + '" data-y="' + y.toFixed(0) + '" d="M' + (x - 5).toFixed(1) + ' ' + y.toFixed(1) + 'h10" stroke="#5E646B" stroke-width="2.4" stroke-linecap="round"/>'; }
+  h += '<g class="nails">' + nails + '</g>';
+  h += '<g class="magnet" opacity="0"><rect x="-14" y="-7" width="28" height="14" rx="4" fill="#C9302C" stroke="#17111D" stroke-width="2"/></g>';
+  /* 5 PM walk + check */
+  h += '<path class="ink" data-l="pm" pathLength="1" d="M281 330 C200 336 74 330 70 250 C66 160 70 44 200 40 C330 36 520 30 566 110 C600 180 566 330 470 334 C400 338 330 334 290 332" fill="none" stroke="#17111D" stroke-width="3" stroke-dasharray="1" stroke-linecap="round"/>';
+  h += '<g class="lay" data-l="pm"><circle cx="330" cy="356" r="18" fill="#2E7D32"/><path d="M321 356l6 6 12-12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>';
+  /* 6 aftercare box at the door */
+  h += '<g class="lay" data-l="box"><circle class="ring" cx="281" cy="318" r="22" fill="none" stroke="#EAA221" stroke-width="3"/><rect x="262" y="308" width="38" height="16" rx="2" fill="#6F6D4A" stroke="#4D4B33" stroke-width="1.5"/><rect x="267" y="313" width="12" height="4" fill="#F1EFE6"/>'
+    + '<rect x="306" y="398" width="132" height="30" rx="15" fill="#17111D"/><text x="372" y="418" text-anchor="middle" font-size="14" font-weight="700" fill="#F1EFE6">Aftercare box</text><path d="M330 398 L300 326" stroke="#17111D" stroke-width="2"/></g>';
+  /* title block */
+  h += '<g><rect x="404" y="10" width="186" height="44" rx="6" fill="#FBF8EF" stroke="#17111D" stroke-opacity=".35"/><text x="416" y="29" font-size="11" font-weight="800" letter-spacing=".12em" fill="#17111D">YARD PLAN</text><text class="tb" x="416" y="45" font-size="12" font-weight="600" fill="#17111D" opacity=".75">Before the job</text></g>';
+  svg.innerHTML = h;
+  var debs = svg.querySelector('.debs'), dh = '';
+  for (var d = 0; d < 46; d++){ var x, y, side = d % 4;
+    if (side === 0){ x = 98 + R()*464; y = 76 + R()*30; } else if (side === 1){ x = 98 + R()*464; y = 296 + R()*32; } else if (side === 2){ x = 96 + R()*30; y = 110 + R()*180; } else { x = 534 + R()*30; y = 110 + R()*180; }
+    dh += '<rect class="deb" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + (5 + R()*5).toFixed(1) + '" height="3" fill="#CFCBD3" transform="rotate(' + Math.round(R()*180) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1) + ')" style="transition-delay:' + (d*22) + 'ms"/>'; }
+  debs.innerHTML = dh;
+  var TB = ['Before the job','The wrap','Tear-off','Pass 1 · Crew','Pass 2 · Magnet','Pass 3 · Walk-through','Done'];
+  var lanesP = svg.querySelector('.lanes'), magnet = svg.querySelector('.magnet'), nl = [].slice.call(svg.querySelectorAll('.nail')), raf = 0;
+  function sweep(to){
+    cancelAnimationFrame(raf);
+    var L = lanesP.getTotalLength(), t0 = 0;
+    function at(p){ var q = lanesP.getPointAtLength(p*L); magnet.setAttribute('transform', 'translate(' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + ')'); return q; }
+    if (to === 0){ magnet.setAttribute('opacity', 0); nl.forEach(function(e){ e.classList.remove('got'); }); return; }
+    if (to === 2){ magnet.setAttribute('opacity', 0); nl.forEach(function(e){ e.classList.add('got'); }); return; }
+    magnet.setAttribute('opacity', 1);
+    if (OWL.reduce){ at(1); nl.forEach(function(e){ e.classList.add('got'); }); return; }
+    nl.forEach(function(e){ e.classList.remove('got'); });
+    function tick(t){ if (!t0) t0 = t; var p = Math.min(1, (t - t0)/3200), q = at(p);
+      nl.forEach(function(e){ if (Math.abs(+e.dataset.y - q.y) < 22 && Math.abs(+e.dataset.x - q.x) < 20) e.classList.add('got'); });
+      if (p < 1) raf = requestAnimationFrame(tick); else nl.forEach(function(e){ e.classList.add('got'); }); }
+    raf = requestAnimationFrame(tick);
+  }
+  function set(s){
+    if (s === cur) return; cur = s;
+    svg.querySelectorAll('[data-l="wrap"]').forEach(function(e){ e.classList.toggle('on', s >= 1 && s < 3); });
+    svg.querySelectorAll('.deb').forEach(function(e){ e.classList.toggle('on', s >= 2); });
+    svg.querySelectorAll('[data-l="crew"]').forEach(function(e){ e.classList.toggle('on', s >= 3); });
+    svg.querySelector('.nails').style.opacity = s >= 2 ? 1 : 0;
+    svg.querySelectorAll('[data-l="mag"]').forEach(function(e){ e.classList.toggle('on', s >= 4); });
+    sweep(s < 4 ? 0 : s === 4 ? 1 : 2);
+    svg.querySelectorAll('[data-l="pm"]').forEach(function(e){ e.classList.toggle('on', s >= 5); });
+    svg.querySelectorAll('[data-l="box"]').forEach(function(e){ e.classList.toggle('on', s >= 6); });
+    svg.querySelector('.tb').textContent = TB[s];
+    steps.forEach(function(st){ st.classList.toggle('on', +st.dataset.s === s); });
+    rail.querySelectorAll('button').forEach(function(b, i){ if (i + 1 === s) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+  }
+  steps.forEach(function(st, i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = i + 1; b.setAttribute('aria-label', 'Step ' + (i + 1) + ': ' + st.querySelector('h3').textContent);
+    b.addEventListener('click', function(){ set(i + 1); st.scrollIntoView({block: 'center', behavior: OWL.reduce ? 'auto' : 'smooth'}); }); rail.appendChild(b); });
+  svg.querySelector('.nails').style.opacity = 0; svg.querySelector('.nails').style.transition = 'opacity .4s';
+  if (!('IntersectionObserver' in window)){ set(6); return; }
+  var vis = {};
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ vis[e.target.dataset.s] = e.isIntersecting ? e.intersectionRatio : 0; });
+    var best = 0, bv = 0; Object.keys(vis).forEach(function(k){ if (vis[k] > bv){ bv = vis[k]; best = +k; } }); if (best) set(best); }, {rootMargin: matchMedia('(max-width:900px)').matches ? '-58% 0px -8% 0px' : '-35% 0px -35% 0px', threshold: [0, .25, .5, .75, 1]});
+  steps.forEach(function(st){ io.observe(st); });
+});
+</script>
+</section>
