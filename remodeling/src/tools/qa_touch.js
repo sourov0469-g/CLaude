@@ -62,6 +62,17 @@ const txt = (p, s) => p.evaluate(s => { const e = document.querySelector(s); ret
   // reviews: tap the stars (no error)
   await to(p, '#reviews .rv__cv'); const cv = await (await p.$('#reviews .rv__cv')).boundingBox(); await p.touchscreen.tap(cv.x + cv.width / 2, cv.y + cv.height / 2); await p.waitForTimeout(500);
   out(p.errs.length === 0, 'reviews: tapping the stars runs clean');
+  // what homeowners wrote: filter, read all, step on
+  await center(p, '#voices .vc__chip[data-f="bath"]'); await p.tap('#voices .vc__chip[data-f="bath"]'); await p.waitForTimeout(600);
+  const vn = await p.evaluate(() => [...document.querySelectorAll('#voices .vc__c')].filter(c => !c.hidden).length);
+  out(vn === 7, 'voices: Bathrooms filter shows the bathroom reviews', vn + ' cards');
+  await p.tap('#voices .vc__chip[data-f="all"]'); await p.waitForTimeout(500);
+  const more = await p.evaluate(() => { const b = [...document.querySelectorAll('#voices .vc__more')].find(x => !x.hidden); if (!b) return null; b.scrollIntoView({ block: 'center', inline: 'nearest' }); b.closest('.vc__c').scrollIntoView({ inline: 'start', block: 'nearest' }); return b.id || b.getAttribute('aria-controls'); });
+  if (more) { await p.waitForTimeout(700); await p.tap(`#voices .vc__more[aria-controls="${more}"]`); await p.waitForTimeout(400); }
+  out(!!more && await p.evaluate(m => document.querySelector(`#voices .vc__more[aria-controls="${m}"]`).getAttribute('aria-expanded') === 'true', more), 'voices: Read all opens a long review');
+  await center(p, '#voices .vc__btn[data-d="1"]'); const vc0 = await txt(p, '#voices .vc__count');
+  await p.tap('#voices .vc__btn[data-d="1"]'); await p.waitForTimeout(900);
+  out((await txt(p, '#voices .vc__count')) !== vc0, 'voices: next moves the row on', vc0 + ' -> ' + await txt(p, '#voices .vc__count'));
   // towns: type, pick, answer
   await to(p, '#towns');
   await p.tap('#tw-q'); await p.keyboard.type('Dora'); await p.waitForTimeout(500);

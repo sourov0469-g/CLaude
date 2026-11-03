@@ -34,8 +34,9 @@
   position: absolute; inset: -12px;          /* room for the pointer parallax */
   background: var(--color-bg-muted) center / cover no-repeat;
   clip-path: inset(var(--ct, 50%) var(--cr, 50%) var(--cb, 50%) var(--cl, 50%));
-  opacity: calc(min(1, var(--p) * 12));
-  will-change: transform;
+  opacity: var(--fo, calc(min(1, var(--p) * 12)));
+  scale: var(--fs, 1); transform-origin: 50% 45%;   /* the room settles from a slight zoom as it opens */
+  will-change: transform, clip-path, opacity;
 }
 .hm__word {
   position: absolute; left: -.03em; bottom: -.27em; margin: 0;
@@ -51,12 +52,12 @@
 .hm__copy {
   display: grid; gap: var(--s5); justify-items: start; align-content: center;
   padding: var(--s6); margin: calc(var(--s6) * -1);
-  background: color-mix(in srgb, var(--color-bg) calc(min(1, var(--p) * 12) * 100%), transparent);   /* see-through at rest so the letters show; solid paper once the room opens [S1425] */
-  box-shadow: 0 22px 48px -18px color-mix(in srgb, var(--color-shadow) calc(var(--p) * 34%), transparent);
+  background: color-mix(in srgb, var(--color-bg) calc(var(--bk, min(1, var(--p) * 12)) * 100%), transparent);   /* see-through at rest so the letters show; solid paper once the room opens [S1425] */
+  box-shadow: 0 22px 48px -18px color-mix(in srgb, var(--color-shadow) calc(var(--bk, var(--p)) * 34%), transparent);
 }
 .hm__copy .eyebrow { margin: 0; }
-.hm__art { position: relative; display: grid; gap: var(--s3); justify-self: end; width: min(100%, calc(min(50svh, 440px) * 600 / 470)); opacity: calc(1 - var(--p) * 4); }
-.hm__win { opacity: calc(1 - var(--p) * 12); }   /* the window hands its picture to the room at once: never two crops at the same time [S0063] */
+.hm__art { position: relative; display: grid; gap: var(--s3); justify-self: end; width: min(100%, calc(min(50svh, 440px) * 600 / 470)); opacity: var(--ao, calc(1 - var(--p) * 4)); }
+.hm__win { opacity: var(--wo, calc(1 - var(--p) * 12)); }   /* the window hands its picture to the room at once: never two crops at the same time [S0063] */
 .hm__house { display: block; width: 100%; height: auto; overflow: visible; }
 .hm__ph { fill: var(--color-bg-muted); }
 .hm__img { will-change: transform; }

@@ -75,20 +75,38 @@
       var top = hr.top + hr.height * (6 / 470);
       geo.t = top - fr.top; geo.l = hr.left - fr.left; geo.r = fr.right - hr.right; geo.b = fr.bottom - hr.bottom;
       geo.mob = matchMedia('(max-width: 900px)').matches;
+      // OWNER (smooth reveal) · stacked layouts: the room opens into a full-width band under the copy, shaped close to the
+      // photo, instead of the whole tall frame (which cropped a wide kitchen down to one corner of the island)
+      if (geo.mob) {
+        geo.wh = hr.bottom - top;
+        geo.band = Math.max(geo.wh, Math.min(fr.bottom - top - 90, fr.width * 1.08));
+        full.style.top = geo.t + 'px'; full.style.bottom = 'auto'; full.style.height = geo.band + 'px';
+      } else { full.style.top = full.style.bottom = full.style.height = ''; }
       frame.style.setProperty('--tw', track.getBoundingClientRect().width + 'px');
       apply();
     }
+    // OWNER (smooth reveal): every layer gets its own eased curve over a real stretch of the scroll. Before, the room
+    // photo, the window's picture and the copy panel all switched within the first 8% of the reveal, and the room is
+    // framed differently from the window, so the picture jumped. Now the window opens out with a soft start and finish,
+    // the two pictures crossfade slowly, and the room settles from a slight zoom (a camera pull, not a cut).
+    function sm(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
     function apply() {
-      var q = st.p, e = 1 - q, o = 12;   // .hm__full is inset -12px (parallax room)
+      var q = st.p, ce = sm(q), e = 1 - ce, o = 12;   // .hm__full is inset -12px (parallax room)
       frame.style.setProperty('--p', q.toFixed(4));
-      frame.style.setProperty('--ct', (o + (geo.mob ? geo.t : geo.t * e)).toFixed(1) + 'px');
+      frame.style.setProperty('--fo', sm(q / .38).toFixed(4));            // the room fades in
+      frame.style.setProperty('--wo', (1 - sm((q - .04) / .34)).toFixed(4));   // the window's picture fades out across it
+      frame.style.setProperty('--ao', (1 - sm((q - .06) / .42)).toFixed(4));   // the house drawing steps back
+      frame.style.setProperty('--bk', sm(q / .45).toFixed(4));            // the copy panel firms up
+      frame.style.setProperty('--fs', (1.14 - .14 * ce).toFixed(4));      // the room settles from a slight zoom
+      frame.style.setProperty('--ct', (geo.mob ? 0 : o + geo.t * e).toFixed(1) + 'px');
       frame.style.setProperty('--cr', (o + geo.r * e).toFixed(1) + 'px');
-      frame.style.setProperty('--cb', (o + geo.b * e).toFixed(1) + 'px');
+      frame.style.setProperty('--cb', (geo.mob ? (geo.band - geo.wh) * e : o + geo.b * e).toFixed(1) + 'px');
       frame.style.setProperty('--cl', (o + geo.l * e).toFixed(1) + 'px');
       var v = Math.round(q * 100);
       rail.setAttribute('aria-valuenow', v);
       rail.setAttribute('aria-valuetext', v === 0 ? 'Closed: the house' : v === 100 ? 'Open: the whole room' : 'Opening, ' + v + ' percent');
     }
+    k.add(function () { full.style.top = full.style.bottom = full.style.height = ''; });
     k.ro(frame, measure);
     measure();
     function setP(v, animate) {
@@ -119,14 +137,14 @@
       // below the headline; before, the scroll reveal finished first and the finish picker was never seen on a phone or tablet
       var stacked = k.mobile || matchMedia('(max-width: 900px)').matches;
       if (!stacked) {
-        var tl = gsap.timeline({ scrollTrigger: { trigger: root, start: function () { return 'top ' + parseFloat(getComputedStyle(sec).paddingTop) + 'px'; }, end: '+=70%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });   // pin the version where it already sits under the nav (start = scroll 0)
+        var tl = gsap.timeline({ scrollTrigger: { trigger: root, start: function () { return 'top ' + parseFloat(getComputedStyle(sec).paddingTop) + 'px'; }, end: '+=115%', pin: root, pinSpacing: true, scrub: 1.1, invalidateOnRefresh: true } });   // pin the version where it already sits under the nav (start = scroll 0)
         tl.to(st, { p: 1, ease: 'none', duration: .78, onUpdate: apply })
           .to(frame, { scale: .965, ease: 'none', duration: .22 });
       } else {
         // stacked (QA-1, per the QA completion: a pin is never removed as a fix): the hero pins once the art and its finish
         // picker are centred on screen, the reveal plays while pinned, and the pin releases [S1209 finite pin, S0186 scrub].
         // Before, the reveal ran from the first pixel of scroll and finished before the picker ever arrived.
-        var stl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector('.hm__art'), start: 'center center', end: '+=60%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });
+        var stl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector('.hm__art'), start: 'center center', end: '+=95%', pin: root, pinSpacing: true, scrub: 1.1, invalidateOnRefresh: true } });
         stl.to(st, { p: 1, ease: 'none', duration: 1, onUpdate: apply });
         // a keyboard user who Tabs into the house art (the finish picker) lands at the pin's start, where the house is whole and
         // the picker readable; without this, the focus scroll could land inside the reveal and the picker would be faded

@@ -582,7 +582,7 @@
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['voices', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],

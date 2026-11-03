@@ -284,7 +284,7 @@
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', voices: 'What homeowners wrote', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',

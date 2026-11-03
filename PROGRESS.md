@@ -306,3 +306,17 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - the contact field hints read naturally.
 - Fixed on tablet: Proof tower size and placement; the dial first; Bathrooms close in two columns.
 - Final: phones at 360, 390 and 414, 0 small targets, 0 overflow; touch 30/30; pins 6/6; locks 0 fails; 0 console errors.
+
+## Owner pass: the reviews themselves, a smooth hero
+- New section "What homeowners wrote" (#voices) after the 4.8 average:
+  - the twenty published Google reviews, checked character for character against FACTS.md (0 mismatches), names and dates as shown;
+  - phones: a swipeable row with filters (All, Kitchens, Bathrooms, Other projects), long reviews folded with "Read all";
+  - desktop: arrows, drag and a position count.
+- Hero reveal:
+  - each layer has its own eased curve; the room crossfades and settles from a slight zoom;
+  - the pins are longer (desktop 115%, stacked 95%);
+  - on phones the room opens into a full-width band shaped near the photo, not the whole tall frame.
+- QA:
+  - touch 33/33;
+  - phones at 360, 390 and 414: 0 small targets, 0 overflow;
+  - pins 8/8; locks 0 fails; 0 outside links; 0 console errors.

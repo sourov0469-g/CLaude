@@ -18,7 +18,7 @@ ROOT = os.path.dirname(HERE)
 IMG = os.path.join(ROOT, "assets", "img")
 OUT = os.path.join(ROOT, "site", "elbaz-homepage.html")
 
-SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "towns", "consult"]
+SECTIONS = ["hero", "proof", "services", "ba", "process", "financing", "work", "reviews", "voices", "towns", "consult"]
 
 # OWNER ORDER (full site): five pages; every inner page is a set of sections, each section with its own five versions
 PAGES = {

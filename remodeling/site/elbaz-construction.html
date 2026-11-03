@@ -1044,8 +1044,9 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   position: absolute; inset: -12px;          
   background: var(--color-bg-muted) center / cover no-repeat;
   clip-path: inset(var(--ct, 50%) var(--cr, 50%) var(--cb, 50%) var(--cl, 50%));
-  opacity: calc(min(1, var(--p) * 12));
-  will-change: transform;
+  opacity: var(--fo, calc(min(1, var(--p) * 12)));
+  scale: var(--fs, 1); transform-origin: 50% 45%;   
+  will-change: transform, clip-path, opacity;
 }
 .hm__word {
   position: absolute; left: -.03em; bottom: -.27em; margin: 0;
@@ -1061,12 +1062,12 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 .hm__copy {
   display: grid; gap: var(--s5); justify-items: start; align-content: center;
   padding: var(--s6); margin: calc(var(--s6) * -1);
-  background: color-mix(in srgb, var(--color-bg) calc(min(1, var(--p) * 12) * 100%), transparent);   
-  box-shadow: 0 22px 48px -18px color-mix(in srgb, var(--color-shadow) calc(var(--p) * 34%), transparent);
+  background: color-mix(in srgb, var(--color-bg) calc(var(--bk, min(1, var(--p) * 12)) * 100%), transparent);   
+  box-shadow: 0 22px 48px -18px color-mix(in srgb, var(--color-shadow) calc(var(--bk, var(--p)) * 34%), transparent);
 }
 .hm__copy .eyebrow { margin: 0; }
-.hm__art { position: relative; display: grid; gap: var(--s3); justify-self: end; width: min(100%, calc(min(50svh, 440px) * 600 / 470)); opacity: calc(1 - var(--p) * 4); }
-.hm__win { opacity: calc(1 - var(--p) * 12); }   
+.hm__art { position: relative; display: grid; gap: var(--s3); justify-self: end; width: min(100%, calc(min(50svh, 440px) * 600 / 470)); opacity: var(--ao, calc(1 - var(--p) * 4)); }
+.hm__win { opacity: var(--wo, calc(1 - var(--p) * 12)); }   
 .hm__house { display: block; width: 100%; height: auto; overflow: visible; }
 .hm__ph { fill: var(--color-bg-muted); }
 .hm__img { will-change: transform; }
@@ -1778,6 +1779,63 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .rv__hint, .rv__again { display: none; } }
 
 
+.vc__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s4) var(--s8); }
+.vc__head .eyebrow { margin: 0 0 var(--s3); }
+.vc__head .t-head, .vc__lead { margin: 0; }
+.vc__lead { max-width: 44ch; color: var(--color-text-secondary); }
+
+.vc__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3) var(--s5); margin-top: var(--s6); }
+.vc__chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.vc__chip { min-height: 44px; padding: 8px 18px; font: 600 .9375rem/1.2 var(--f-text); color: var(--color-text); background: var(--color-bg, #fff); border: 1.5px solid var(--color-text); border-radius: 999px; cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out); }
+.vc__chip[aria-pressed="true"] { background: var(--color-text); color: var(--color-bg, #fff); }
+.vc__chip:focus-visible, .vc__btn:focus-visible, .vc__more:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.vc__nav { display: flex; align-items: center; gap: var(--s3); }
+.vc__count { min-width: 5.5em; text-align: right; font: 600 .875rem/1 var(--f-text); color: var(--color-text-secondary); }
+.vc__btn { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-bg, #fff); border: 1.5px solid var(--color-text); color: var(--color-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out); }
+.vc__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.vc__btn:hover { background: var(--color-text); color: var(--color-bg, #fff); }
+
+.vc__rail { list-style: none; margin: var(--s5) 0 0; padding: var(--s2) var(--margin) var(--s4); display: grid; grid-auto-flow: column; grid-auto-columns: clamp(280px, 30vw, 380px); gap: 16px; align-items: stretch;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--margin); overscroll-behavior-x: contain; scrollbar-width: none; cursor: grab; }
+.vc__rail::-webkit-scrollbar { display: none; }
+.vc__rail.is-grab { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.vc__rail:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.vc__c { scroll-snap-align: start; display: flex; }
+.vc__c[hidden] { display: none; }
+.vc__fig { margin: 0; flex: 1; display: flex; flex-direction: column; gap: var(--s3); padding: var(--s5); background: var(--color-surface, #fff); border: 1.5px solid var(--color-text); border-radius: 14px; position: relative;
+  transition: transform 240ms var(--ez-out), box-shadow 240ms var(--ez-out); }
+.vc__fig::before { content: '\201C'; position: absolute; top: -6px; right: 18px; font: 600 5rem/1 var(--f-display); color: var(--clay-100, #F9E3DD); pointer-events: none; }
+@media (hover: hover) and (pointer: fine) { .vc__fig:hover { transform: translateY(-6px); box-shadow: 8px 8px 0 var(--clay-100, #F9E3DD); } }
+.vc__st { margin: 0; font-size: 1.125rem; letter-spacing: 2px; color: var(--color-accent-solid); position: relative; }
+.vc__q { margin: 0; position: relative; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; overflow: hidden; }
+.vc__q p { margin: 0; font: 400 1.0625rem/1.55 var(--f-text); color: var(--color-text); }
+.vc__c.is-open .vc__q { -webkit-line-clamp: unset; display: block; }
+.vc__more { align-self: flex-start; min-height: 44px; padding: 0; background: none; border: 0; font: 600 .9375rem/1 var(--f-text); color: var(--color-accent-text, var(--clay-700, #884432)); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.vc__by { margin-top: auto; display: flex; align-items: center; gap: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--color-border); }
+.vc__av { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent-solid); color: #fff; font: 600 1rem/1 var(--f-display); }
+.vc__who { display: grid; gap: 2px; }
+.vc__n { font: 600 1rem/1.2 var(--f-display); }
+.vc__d { font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+
+.vc__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); margin-top: var(--s5); }
+.vc__avg { margin: 0; display: flex; align-items: center; gap: var(--s3); font: 600 .9375rem/1.3 var(--f-text); }
+.vc__stars { color: var(--color-accent-solid); letter-spacing: 2px; }
+
+@media (max-width: 900px) { .vc__head { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 600px) {
+  .vc__bar { margin-top: var(--s4); }
+  .vc__chips { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--margin) * -1); padding-inline: var(--margin); scrollbar-width: none; width: calc(100% + var(--margin) * 2); }
+  .vc__chips::-webkit-scrollbar { display: none; }
+  .vc__chip { flex: none; }
+  .vc__nav { width: 100%; justify-content: space-between; }
+  .vc__count { text-align: left; order: -1; flex: 1; }
+  .vc__rail { grid-auto-columns: 84vw; gap: 12px; }
+  .vc__fig { padding: var(--s4); }
+  .vc__foot .btn { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .vc__fig, .vc__chip { transition: none; } }
+
+
 .tw__grid { display: grid; grid-template-columns: minmax(0, 5fr) auto minmax(0, 4fr); gap: var(--s7); align-items: start; }
 .tw__side { display: grid; gap: var(--s4); align-content: start; }
 .tw__side .eyebrow, .tw__side .t-head, .tw__lead { margin: 0; }
@@ -2400,6 +2458,37 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   </div>
 </section>
 
+<section id="voices" class="sec voices g-base" data-section="voices" aria-labelledby="voices-h">
+  
+  <div class="ver vc" data-v="1">
+    <div class="wrap vc__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>In their words</p>
+        <h2 class="t-head" id="voices-h">What homeowners <span class="acc">wrote.</span></h2>
+      </div>
+      <p class="t-lead vc__lead">Twenty of the <span class="nums">343</span> reviews on our Google listing, quoted exactly as they were written.</p>
+    </div>
+    <div class="wrap vc__bar">
+      <div class="vc__chips" role="group" aria-label="Show reviews about">
+        <button type="button" class="vc__chip" data-f="all" aria-pressed="true">All</button>
+        <button type="button" class="vc__chip" data-f="kitchen" aria-pressed="false">Kitchens</button>
+        <button type="button" class="vc__chip" data-f="bath" aria-pressed="false">Bathrooms</button>
+        <button type="button" class="vc__chip" data-f="other" aria-pressed="false">Other projects</button>
+      </div>
+      <div class="vc__nav">
+        <span class="vc__count nums" aria-live="polite"></span>
+        <button type="button" class="vc__btn" data-d="-1" aria-label="Previous reviews"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="vc__btn" data-d="1" aria-label="Next reviews"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <ul class="vc__rail" aria-label="Google reviews" tabindex="0"></ul>
+    <div class="wrap vc__foot">
+      <p class="vc__avg"><span class="vc__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span><span class="nums">4.8</span> average across <span class="nums">343</span> Google reviews</span></p>
+      <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
+    </div>
+  </div>
+</section>
+
 <section id="towns" class="sec towns g-base" data-section="towns" aria-labelledby="towns-h">
   
   <div class="ver tw" data-v="1">
@@ -2846,7 +2935,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', voices: 'What homeowners wrote', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
@@ -4559,7 +4648,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['voices', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -4684,20 +4773,38 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       var top = hr.top + hr.height * (6 / 470);
       geo.t = top - fr.top; geo.l = hr.left - fr.left; geo.r = fr.right - hr.right; geo.b = fr.bottom - hr.bottom;
       geo.mob = matchMedia('(max-width: 900px)').matches;
+      // OWNER (smooth reveal) · stacked layouts: the room opens into a full-width band under the copy, shaped close to the
+      // photo, instead of the whole tall frame (which cropped a wide kitchen down to one corner of the island)
+      if (geo.mob) {
+        geo.wh = hr.bottom - top;
+        geo.band = Math.max(geo.wh, Math.min(fr.bottom - top - 90, fr.width * 1.08));
+        full.style.top = geo.t + 'px'; full.style.bottom = 'auto'; full.style.height = geo.band + 'px';
+      } else { full.style.top = full.style.bottom = full.style.height = ''; }
       frame.style.setProperty('--tw', track.getBoundingClientRect().width + 'px');
       apply();
     }
+    // OWNER (smooth reveal): every layer gets its own eased curve over a real stretch of the scroll. Before, the room
+    // photo, the window's picture and the copy panel all switched within the first 8% of the reveal, and the room is
+    // framed differently from the window, so the picture jumped. Now the window opens out with a soft start and finish,
+    // the two pictures crossfade slowly, and the room settles from a slight zoom (a camera pull, not a cut).
+    function sm(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
     function apply() {
-      var q = st.p, e = 1 - q, o = 12;   // .hm__full is inset -12px (parallax room)
+      var q = st.p, ce = sm(q), e = 1 - ce, o = 12;   // .hm__full is inset -12px (parallax room)
       frame.style.setProperty('--p', q.toFixed(4));
-      frame.style.setProperty('--ct', (o + (geo.mob ? geo.t : geo.t * e)).toFixed(1) + 'px');
+      frame.style.setProperty('--fo', sm(q / .38).toFixed(4));            // the room fades in
+      frame.style.setProperty('--wo', (1 - sm((q - .04) / .34)).toFixed(4));   // the window's picture fades out across it
+      frame.style.setProperty('--ao', (1 - sm((q - .06) / .42)).toFixed(4));   // the house drawing steps back
+      frame.style.setProperty('--bk', sm(q / .45).toFixed(4));            // the copy panel firms up
+      frame.style.setProperty('--fs', (1.14 - .14 * ce).toFixed(4));      // the room settles from a slight zoom
+      frame.style.setProperty('--ct', (geo.mob ? 0 : o + geo.t * e).toFixed(1) + 'px');
       frame.style.setProperty('--cr', (o + geo.r * e).toFixed(1) + 'px');
-      frame.style.setProperty('--cb', (o + geo.b * e).toFixed(1) + 'px');
+      frame.style.setProperty('--cb', (geo.mob ? (geo.band - geo.wh) * e : o + geo.b * e).toFixed(1) + 'px');
       frame.style.setProperty('--cl', (o + geo.l * e).toFixed(1) + 'px');
       var v = Math.round(q * 100);
       rail.setAttribute('aria-valuenow', v);
       rail.setAttribute('aria-valuetext', v === 0 ? 'Closed: the house' : v === 100 ? 'Open: the whole room' : 'Opening, ' + v + ' percent');
     }
+    k.add(function () { full.style.top = full.style.bottom = full.style.height = ''; });
     k.ro(frame, measure);
     measure();
     function setP(v, animate) {
@@ -4728,14 +4835,14 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       // below the headline; before, the scroll reveal finished first and the finish picker was never seen on a phone or tablet
       var stacked = k.mobile || matchMedia('(max-width: 900px)').matches;
       if (!stacked) {
-        var tl = gsap.timeline({ scrollTrigger: { trigger: root, start: function () { return 'top ' + parseFloat(getComputedStyle(sec).paddingTop) + 'px'; }, end: '+=70%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });   // pin the version where it already sits under the nav (start = scroll 0)
+        var tl = gsap.timeline({ scrollTrigger: { trigger: root, start: function () { return 'top ' + parseFloat(getComputedStyle(sec).paddingTop) + 'px'; }, end: '+=115%', pin: root, pinSpacing: true, scrub: 1.1, invalidateOnRefresh: true } });   // pin the version where it already sits under the nav (start = scroll 0)
         tl.to(st, { p: 1, ease: 'none', duration: .78, onUpdate: apply })
           .to(frame, { scale: .965, ease: 'none', duration: .22 });
       } else {
         // stacked (QA-1, per the QA completion: a pin is never removed as a fix): the hero pins once the art and its finish
         // picker are centred on screen, the reveal plays while pinned, and the pin releases [S1209 finite pin, S0186 scrub].
         // Before, the reveal ran from the first pixel of scroll and finished before the picker ever arrived.
-        var stl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector('.hm__art'), start: 'center center', end: '+=60%', pin: root, pinSpacing: true, scrub: .8, invalidateOnRefresh: true } });
+        var stl = gsap.timeline({ scrollTrigger: { trigger: root.querySelector('.hm__art'), start: 'center center', end: '+=95%', pin: root, pinSpacing: true, scrub: 1.1, invalidateOnRefresh: true } });
         stl.to(st, { p: 1, ease: 'none', duration: 1, onUpdate: apply });
         // a keyboard user who Tabs into the house art (the finish picker) lands at the pin's start, where the house is whole and
         // the picker readable; without this, the focus scroll could land inside the reveal and the picker would be faded
@@ -5690,6 +5797,97 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       // they fly in together when the figure comes into view (once the canvas is half on screen)
       k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
       EZ.reveal(k, root.querySelectorAll('.rv__head > *, .rv__avg, .rv__acts'));
+    } }
+  });
+})();
+
+/* OWNER · Home 8b · What homeowners wrote: the twenty published Google reviews, verbatim (FACTS.md). A swipeable row of
+   cards (native scroll with snap on touch, drag with a mouse, arrows and keys); filters by room from the review's own
+   words; long reviews fold to six lines with "Read all". Cards rise in as the row arrives. Reduced motion: no rise
+   [S1443 gestures, S1018 keyboard, S0400]. */
+(function () {
+  // [text, name as shown, date as shown, tags] (tags only from the review's own words: kitchen, bathroom, or another job)
+  var R = [
+    ['Excellent beautiful work on our kitchen project. Asher passion and professionalism were outstanding! Very happy with the outcome', 'Alan Schroeder', 'a year ago', 'kitchen'],
+    ['I am very grateful that Ashley took on my project . Now every morning I run to my beautiful kitchen because it is more than I expected. Thank you Ashley for your efforts, understanding and patience', 'RIo Norman', 'a year ago', 'kitchen'],
+    ['Sean has experience and he gave me the best ideas for my kitchen and bathroom project. He did high quality Job . We are very satisfied', 'J C', 'a year ago', 'kitchen bath'],
+    ['Highly recommended for any bathroom or kitchen projects! Raz is very knowledgeable at this field and gave us wonderful ideas for the design. It was done in a timely manner. Thank you !!', 'Valerie Cisneros', 'a year ago', 'kitchen bath'],
+    ['If you are planning to remodel your kitchen or bathroom or do any other construction project, call Sean from Elbaz Construction . He has a lot of experience and will recommend the best options/ suggestions to your project. He did high quality job !', 'Kameron Allison', 'a year ago', 'kitchen bath'],
+    ['Thank you Ashley ! We love the new bathrooms. Good with communication and very clear with explanations . I will definitely use them again in the future', 'Andrew Tyupa', 'a year ago', 'bath'],
+    ['If I could refer anybody to getting their bathroom redone it\'s through this company very reliable honest and clean work', 'Jonathan Vargas', '11 months ago', 'bath'],
+    ['Outstanding service by Elbaz Construction. The team finished our bathroom in a timely fashion. Highly recommended for anyone who is looking for à reliable construction work', 'Paco Jazz', 'a year ago', 'bath'],
+    ['Very satisfied with my bathroom and the way it looks now they crew was very professional, The service was quick, and the staff was friendly , The customer service staff went above and beyond , The customer support was fantastic! They quickly resolved my bathroom issues and were very friendly , highly recommended!!', 'Leynol Carvajal', 'a year ago', 'bath'],
+    ['Dealing with Asher was a truly enjoyable experience. His team is experienced and swift. They did a splendid job!', 'Sandy Zurita', 'a year ago', ''],
+    ['Elbaz Construction provided excellent service and outstanding craftsmanship. The team was professional and attentive to our needs. We\'re extremely satisfied with the results!', 'Damian Nunez', 'a year ago', ''],
+    ['Asher was knowledgeable and gave us cool ideas that we didn\'t even know before. Nice beautiful color and design. We appreciate the price !', 'Sierra Bernabeo', 'a year ago', ''],
+    ['We had a good time dealing with Asher and the crew, he went over and above all our expectations and made every effort to ensure that the end result was up to their high standards. Thank you !!', 'Emmett Giffin', 'a year ago', ''],
+    ['Elbaz Construction provided excellent service and great customer service. also provide the right team to get the job done. Any project or style that\'s needed it. Elbaz Construction is the place to call. Thank you!', 'Jaee Rodriguez', 'a year ago', ''],
+    ['Great experience! The team was professional, efficient, and delivered high-quality work on time. They communicated clearly throughout the project and exceeded our expectations. Highly recommend for any construction needs!', 'Andrew', 'a year ago', ''],
+    ['Asher was the best choice I have made. We love the outcome of the ADU . They showed up on time and did a great job, were friendly. No issues at all during the whole process. Very organized team . I would recommend them to everyone I know !', 'Robert Bryan', 'a year ago', 'other'],
+    ['Really glad we went with Elbaz Construction for our ADU . They were in and out faster than we expected which I appreciated , and the price seemed reasonable. Overall great experience!!', 'Kirtsada Shearing', 'a year ago', 'other'],
+    ['Asher has a lot of experience . We replaced our windows to energy efficient windows. He got down to business right away and did high quality work. His team is very professional! Thanks again', 'jessica berliner', 'a year ago', 'other'],
+    ['I give them a five star rating not only for their excellent roofing skills and timelines, but also for their competitive pricing and the honesty and professionalism of the team !! We are very pleased with the outcome', 'Zachary Gugliotta', 'a year ago', 'other'],
+    ['The team was amazing. Did a fabulous job with the landscaping, roofing and backyard renovation. The best contractors I have worked with! Will definitely use this company in the future.', 'Derpy Day', 'a year ago', 'other']
+  ];
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  EZ.section('voices', {
+    1: { init: function (root, k) {
+      var rail = root.querySelector('.vc__rail'), count = root.querySelector('.vc__count');
+      var chips = Array.prototype.slice.call(root.querySelectorAll('.vc__chip'));
+      rail.innerHTML = R.map(function (r, i) {
+        return '<li class="vc__c" data-tags="' + r[3] + '" style="--i:' + i + '"><figure class="vc__fig">' +
+          '<p class="vc__st" role="img" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>' +
+          '<blockquote class="vc__q" id="vc-q' + i + '"><p>&ldquo;' + esc(r[0]) + '&rdquo;</p></blockquote>' +
+          '<button type="button" class="vc__more" aria-expanded="false" aria-controls="vc-q' + i + '" hidden>Read all</button>' +
+          '<figcaption class="vc__by"><span class="vc__av" aria-hidden="true">' + esc(r[1].trim().charAt(0).toUpperCase()) + '</span>' +
+          '<span class="vc__who"><span class="vc__n">' + esc(r[1]) + '</span><span class="vc__d">on Google &middot; ' + r[2] + '</span></span></figcaption>' +
+          '</figure></li>';
+      }).join('');
+      var cards = Array.prototype.slice.call(rail.children);
+      // long reviews fold to six lines; "Read all" opens the card in place
+      function folds() {
+        cards.forEach(function (c) {
+          var q = c.querySelector('.vc__q'), b = c.querySelector('.vc__more');
+          if (c.classList.contains('is-open')) return;
+          b.hidden = q.scrollHeight <= q.clientHeight + 2;
+        });
+      }
+      cards.forEach(function (c) {
+        var b = c.querySelector('.vc__more');
+        k.on(b, 'click', function () { var open = !c.classList.contains('is-open'); c.classList.toggle('is-open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); b.textContent = open ? 'Show less' : 'Read all'; });
+      });
+      function visible() { return cards.filter(function (c) { return !c.hidden; }); }
+      function upd() {
+        var v = visible(); if (!v.length) { count.textContent = ''; return; }
+        var r = rail.getBoundingClientRect(), first = -1, last = -1;
+        v.forEach(function (c, i) { var q = c.getBoundingClientRect(), seen = Math.min(q.right, r.right) - Math.max(q.left, r.left); if (seen > q.width * .6) { if (first < 0) first = i; last = i; } });   // a card counts once it is mostly on screen
+        if (first < 0) first = last = 0;
+        count.textContent = (first === last ? (first + 1) : (first + 1) + '–' + (last + 1)) + ' of ' + v.length;
+      }
+      function filter(f) {
+        chips.forEach(function (ch) { ch.setAttribute('aria-pressed', ch.dataset.f === f ? 'true' : 'false'); });
+        cards.forEach(function (c) { c.hidden = f !== 'all' && c.dataset.tags.split(' ').indexOf(f) < 0; });
+        rail.scrollLeft = 0; folds(); upd();
+        if (k.motion) gsap.fromTo(visible().slice(0, 4), { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: .4, ease: 'power3.out', stagger: .05, clearProps: 'transform,opacity' });
+      }
+      chips.forEach(function (ch) { k.on(ch, 'click', function () { filter(ch.dataset.f); }); });
+      function step(d) { var c = visible()[0]; if (!c) return; var w = c.getBoundingClientRect().width + 16; rail.scrollBy({ left: d * w * Math.max(1, Math.floor(rail.clientWidth / w)), behavior: k.motion ? 'smooth' : 'auto' }); }
+      root.querySelectorAll('.vc__btn').forEach(function (b) { k.on(b, 'click', function () { step(+b.dataset.d); }); });
+      k.on(rail, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
+      k.on(rail, 'scroll', upd);
+      // mouse drag (touch scrolls natively)
+      var dn = null;
+      k.on(rail, 'pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.target.closest('button')) return; dn = { x: e.clientX, l: rail.scrollLeft }; rail.classList.add('is-grab'); });
+      k.on(window, 'pointermove', function (e) { if (dn) rail.scrollLeft = dn.l - (e.clientX - dn.x); });
+      k.on(window, 'pointerup', function () { if (dn) { dn = null; rail.classList.remove('is-grab'); } });
+      k.ro(rail, function () { folds(); upd(); });
+      folds(); upd();
+      k.add(function () { rail.innerHTML = ''; count.textContent = ''; });
+      EZ.reveal(k, root.querySelectorAll('.vc__head > *, .vc__bar, .vc__foot'));
+      if (!k.motion) return;
+      gsap.set(cards.slice(0, 5), { y: 40, opacity: 0 });
+      var st = ScrollTrigger.create({ trigger: rail, start: 'top 85%', once: true, onEnter: function () { gsap.to(cards.slice(0, 5), { y: 0, opacity: 1, duration: .65, ease: 'power3.out', stagger: .08, clearProps: 'transform,opacity' }); } });
+      k.add(function () { st.kill(); });
     } }
   });
 })();
@@ -7754,7 +7952,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', voices: 'What homeowners wrote', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
@@ -9467,7 +9665,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['voices', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -11544,7 +11742,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', voices: 'What homeowners wrote', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
@@ -13257,7 +13455,7 @@ button.bs__tile::after { content: ""; position: absolute; inset: 0; background: 
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['voices', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -15426,7 +15624,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', voices: 'What homeowners wrote', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
@@ -17139,7 +17337,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['voices', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
@@ -19101,7 +19299,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   EZ.swap = swap;
 
   var NAMES = { hero: 'Opening', proof: 'Proof', services: 'Services', ba: 'Before and after', process: 'Process',
-    financing: 'Financing', work: 'Projects', reviews: 'Reviews', towns: 'Service area', consult: 'Consultation',
+    financing: 'Financing', work: 'Projects', reviews: 'Reviews', voices: 'What homeowners wrote', towns: 'Service area', consult: 'Consultation',
     // inner pages (OWNER ORDER: full site), each section with its own five versions
     'kitchen-intro': 'Kitchens', 'kitchen-scope': 'Kitchen scope', 'kitchen-sequence': 'Kitchen sequence', 'kitchen-work': 'Kitchen projects', 'kitchen-close': 'Kitchen close',
     'bath-intro': 'Bathrooms', 'bath-build': 'How a bath is built', 'bath-rooms': 'Rooms we build', 'bath-work': 'Bath projects', 'bath-close': 'Bath close',
@@ -20814,7 +21012,7 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 
   // OWNER MASTER DIRECTIVE: a different divider per section again, in the new palette. Hazard tape and brick stay retired
   // (AUDIT-01 C.9); rooftops and the spirit level take their places.
-  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['reviews', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
+  var ORDER = [['hero', 'dimension'], ['proof', 'beam'], ['services', 'roofs'], ['ba', 'conduit'], ['process', 'fork'], ['financing', 'rail'], ['work', 'spark'], ['voices', 'pins'], ['towns', 'coast'], ['consult', 'footing'],
     // inner pages (Phase 6): each boundary carries its hand-off; every page's last section hands to the footer on the footing
     ['kitchen-intro', 'dimension'], ['kitchen-scope', 'counter'], ['kitchen-sequence', 'rule'], ['kitchen-work', 'level'], ['kitchen-close', 'footing'],
     ['bath-intro', 'studs'], ['bath-build', 'tile'], ['bath-rooms', 'rule'], ['bath-work', 'weeks'], ['bath-close', 'footing'],
