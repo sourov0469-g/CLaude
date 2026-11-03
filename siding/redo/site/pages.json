@@ -318,6 +318,46 @@
       "The plain table"
      ]
     ]
+   },
+   {
+    "slot": "rf3",
+    "name": "Roofing jobs on record",
+    "mod": "p_rf3",
+    "obj": "PRf3",
+    "v": [
+     [
+      "a",
+      "The latest roofs"
+     ],
+     [
+      "b",
+      "Shingle or metal"
+     ],
+     [
+      "c",
+      "A street of roofs"
+     ]
+    ]
+   },
+   {
+    "slot": "rf4",
+    "name": "What homeowners said about roofs",
+    "mod": "p_rf4",
+    "obj": "PRf4",
+    "v": [
+     [
+      "a",
+      "The pinned wall"
+     ],
+     [
+      "b",
+      "One at a time"
+     ],
+     [
+      "c",
+      "Laid like shingles"
+     ]
+    ]
    }
   ],
   "work": [],

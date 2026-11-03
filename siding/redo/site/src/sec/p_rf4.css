@@ -1,0 +1,27 @@
+/* ROOFING · Words */
+.rf4A,.rf4B,.rf4C{padding:96px var(--gut) 72px}
+.rf4A .rt3,.rf4B .rt3,.rf4C .rt3{margin-top:10px;font:700 15px/1.3 var(--text);color:var(--green)}
+
+/* A — the pinned wall */
+.rf4A .wal{margin-top:26px;columns:3 300px;column-gap:18px}
+.rf4A .pin{break-inside:avoid;margin-bottom:18px;transform:rotate(var(--r))}
+.rf4A .pin figure.pq2{background:#fff;box-shadow:0 1px 0 #E6E0D2,0 24px 40px -30px rgba(14,59,44,.5);border-top:6px solid #B5DB6E;border-radius:6px}
+
+/* B — one at a time */
+.rf4B .one{margin-top:26px;padding:clamp(26px,4vw,60px);border-radius:28px;background:#0E3B2C}
+.rf4B .sl2[hidden]{display:none}
+.rf4B figure.pq2.big2{padding:0;background:none;box-shadow:none}
+.rf4B figure.pq2.big2 blockquote p{font:800 clamp(28px,3.6vw,52px)/1.15 var(--display);letter-spacing:-.025em;color:#fff;max-width:28ch}
+.rf4B figure.pq2.big2 figcaption,.rf4B figure.pq2.big2 figcaption b{color:#B5DB6E}
+.rf4B .ctr2{display:flex;align-items:center;gap:14px;margin-top:28px}
+.rf4B .ctr2 button{all:unset;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#B5DB6E;color:#0E3B2C;cursor:pointer;font:800 20px/1 var(--text)}
+.rf4B .ctr2 button:focus-visible{outline:3px solid #fff;outline-offset:3px}.rf4B .ct3{font:700 14px/1 var(--text);color:rgba(255,255,255,.75)}
+
+/* C — laid like shingles */
+.rf4C .lap3{margin-top:26px;display:grid}
+.rf4C .tile{position:relative;margin-top:-18px;z-index:calc(10 - var(--i));margin-left:calc(var(--i) * clamp(10px,3vw,48px));max-width:780px}
+.rf4C .tile:first-child{margin-top:0}
+.rf4C .tile figure.pq2{padding:22px 26px 34px;border-radius:4px 4px 0 0;background:#3C4642;box-shadow:0 10px 0 -4px rgba(0,0,0,.25);clip-path:polygon(0 0,100% 0,100% 100%,92% 86%,84% 100%,76% 86%,68% 100%,60% 86%,52% 100%,44% 86%,36% 100%,28% 86%,20% 100%,12% 86%,4% 100%,0 86%)}
+.rf4C .tile:nth-child(even) figure.pq2{background:#2F3532}
+.rf4C .tile figure.pq2 blockquote p{color:#fff;font-size:17px}.rf4C .tile figure.pq2 figcaption,.rf4C .tile figure.pq2 figcaption b{color:#B5DB6E}
+@media (max-width:620px){.rf4C .tile{margin-left:0}}
