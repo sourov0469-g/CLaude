@@ -400,6 +400,46 @@
       "One at a time"
      ]
     ]
+   },
+   {
+    "slot": "ow2",
+    "name": "The photographs",
+    "mod": "p_ow2",
+    "obj": "POw2",
+    "v": [
+     [
+      "a",
+      "The gallery"
+     ],
+     [
+      "b",
+      "By the work done"
+     ],
+     [
+      "c",
+      "Editorial rows"
+     ]
+    ]
+   },
+   {
+    "slot": "ow3",
+    "name": "By trade",
+    "mod": "p_ow3",
+    "obj": "POw3",
+    "v": [
+     [
+      "a",
+      "The ladder"
+     ],
+     [
+      "b",
+      "Blocks by size"
+     ],
+     [
+      "c",
+      "Nine lines"
+     ]
+    ]
    }
   ],
   "reviews": [],
