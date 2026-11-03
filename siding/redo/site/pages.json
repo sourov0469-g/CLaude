@@ -74,6 +74,46 @@
       "415 squares"
      ]
     ]
+   },
+   {
+    "slot": "sd3",
+    "name": "What siding costs here",
+    "mod": "p_sd3",
+    "obj": "PSd3",
+    "v": [
+     [
+      "a",
+      "The price tag"
+     ],
+     [
+      "b",
+      "The column"
+     ],
+     [
+      "c",
+      "One sentence"
+     ]
+    ]
+   },
+   {
+    "slot": "sd4",
+    "name": "Warranty and time on site",
+    "mod": "p_sd4",
+    "obj": "PSd4",
+    "v": [
+     [
+      "a",
+      "Two certificates"
+     ],
+     [
+      "b",
+      "Year by year"
+     ],
+     [
+      "c",
+      "On site, in order"
+     ]
+    ]
    }
   ],
   "windows": [],
