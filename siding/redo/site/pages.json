@@ -358,9 +358,50 @@
       "Laid like shingles"
      ]
     ]
+   },
+   {
+    "slot": "rf5",
+    "name": "Book the roof inspection",
+    "mod": "p_rf5",
+    "obj": "PRf5",
+    "v": [
+     [
+      "a",
+      "Shingle tabs"
+     ],
+     [
+      "b",
+      "The inspection card"
+     ],
+     [
+      "c",
+      "This week"
+     ]
+    ]
    }
   ],
-  "work": [],
+  "work": [
+   {
+    "slot": "ow1",
+    "name": "Opener",
+    "mod": "p_ow1",
+    "obj": "POw1",
+    "v": [
+     [
+      "a",
+      "The contact sheet"
+     ],
+     [
+      "b",
+      "886, plainly"
+     ],
+     [
+      "c",
+      "One at a time"
+     ]
+    ]
+   }
+  ],
   "reviews": [],
   "about": [],
   "area": [],
