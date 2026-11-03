@@ -1,0 +1,170 @@
+{
+ "url": "https://www.quietcubes.com",
+ "title": "QuietCubes | Luxury Office Pods & Booths for Modern Offices",
+ "tags": {
+  "DIV": 44,
+  "A": 11,
+  "IMG": 9,
+  "svg": 2,
+  "path": 20,
+  "NAV": 1,
+  "SECTION": 1,
+  "H1": 2
+ },
+ "canvases": 0,
+ "videos": 3,
+ "svgs": 108,
+ "gl": [],
+ "anims": [],
+ "globals": {
+  "gsap": "object",
+  "ScrollTrigger": "function",
+  "Lenis": "function",
+  "Swiper": "function",
+  "SplitText": "function",
+  "Webflow": "object"
+ },
+ "buttons": [
+  {
+   "text": "Office Pods",
+   "tag": "A",
+   "transition": "opacity 0.2s",
+   "radius": "48px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001b9de_menu-pod-2.webp\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04ca\" alt=\"\" class=\"pod-start-i"
+  },
+  {
+   "text": "Home Pods",
+   "tag": "A",
+   "transition": "opacity 0.2s",
+   "radius": "48px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bae7_navy.webp\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04ce\" alt=\"\" class=\"pod-start-image\">"
+  },
+  {
+   "text": "Outdoor Pods",
+   "tag": "A",
+   "transition": "opacity 0.2s",
+   "radius": "48px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bd80_2_2gr.avif\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04d2\" alt=\"\" class=\"pod-start-image\""
+  },
+  {
+   "text": "Nursing Pods",
+   "tag": "A",
+   "transition": "opacity 0.2s",
+   "radius": "48px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bd8a_Frame%202131330380.avif\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04d6\" alt=\"\" class=\"pod"
+  }
+ ],
+ "cursorFollowers": [
+  "DIV.switch-overlay",
+  "DIV.faq-transition-overlay"
+ ],
+ "transformed": [],
+ "heroOuter": "<section id=\"intro\" data-w-id=\"ecd2d44f-f1e7-4b28-35cb-3faccc896db5\" class=\"intro\"><div class=\"intro-sticky\"><div class=\"intro-gradients\"><div class=\"gradients width-180\"><div nursing-gradient=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001baaa_beige.jpg\" office-gradient=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bac8_orange.jpg\" home-gradient=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bace_blue.jpg\" outdoor-gradient=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bab6_green.jpg\" class=\"gradient\"></div><div class=\"gradient _78 no-bg\"><div class=\"gradient-line\"></div><div class=\"gradient-line\"></div></div><div class=\"gradient _52 no-bg\"><div class=\"gradient-line\"></div><div class=\"gradient-line\"></div></div><div class=\"gradient _26 no-bg\"><div class=\"gradient-line\"></div><div class=\"gradient-line\"></div><div class=\"gradient-line\"></div></div></div><div nursing-floor=\"linear-gradient(rgb(235, 232, 229), rgb(202, 195, 189))\" office-floor=\"linear-gradient(rgb(221, 165, 117), rgb(151, 93, 49))\" home-floor=\"linear-gradient(rgb(74, 113, 157), rgb(52, 75, 100))\" outdoor-floor=\"linear-gradient(rgb(142, 154, 119), rgb(79, 90, 57))\" class=\"floor\"></div></div><div class=\"intro-navbar\"></div><div class=\"intro-container\"><div class=\"intro-content\"><div class=\"intro-1\"><h1 data=\"h1\" pod=\"office\" class=\"heading\">Maximize Focus <br>&amp; Productivity <br>at Your Workplace</h1><h1 data=\"h1-blue\" pod=\"home\" class=\"heading\">Upgrade<span class=\"spacer_h1",
+ "htmlClass": "w-mod-js lenis",
+ "bodyClass": "",
+ "listeners": {
+  "window": [
+   "scrollend",
+   "load",
+   "hashchange",
+   "popstate",
+   "ORIBI_historyChanged",
+   "blur",
+   "focus",
+   "pagehide",
+   "pageshow",
+   "wheel",
+   "resize",
+   "scroll",
+   "pointerdown",
+   "touchstart",
+   "touchmove",
+   "touchend",
+   "message"
+  ],
+  "document": [
+   "mousedown",
+   "click",
+   "DOMContentLoaded",
+   "visibilitychange",
+   "scroll",
+   "touchcancel",
+   "pointerdown",
+   "touchstart",
+   "pointerup",
+   "touchend",
+   "mouseup",
+   "touchmove",
+   "pointermove",
+   "pointercancel",
+   "pointerout",
+   "pointerleave",
+   "contextmenu",
+   "auxclick",
+   "change",
+   "submit",
+   "keyup"
+  ],
+  "document.body": [
+   "touchstart"
+  ]
+ },
+ "hover": {
+  "text": "Office Pods",
+  "x": 430,
+  "y": 450,
+  "before": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(255, 255, 255)",
+   "transform": "none",
+   "shadow": "none"
+  },
+  "after": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(255, 255, 255)",
+   "transform": "none",
+   "shadow": "none",
+   "childTransforms": [
+    "none",
+    "none"
+   ]
+  }
+ },
+ "scripts": [
+  "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=689b2fcec1e26eb9a001b9d6",
+  "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.d7b02e2a07ee8318.js",
+  "https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js",
+  "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.f2efb3c5440a81cf.js",
+  "https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js",
+  "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+  "https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js",
+  "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.bdf58efcee47c042.js",
+  "https://unpkg.com/lenis@1.2.3/dist/lenis.min.js",
+  "https://cdn.jsdelivr.net/npm/@finsweet/attributes-modal@1/modal.js",
+  "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+  "https://connect.facebook.net/en_US/fbevents.js",
+  "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.ff87cad5.b1785465a08fc2b0.js",
+  "https://www.googletagmanager.com/gtm.js?id=GTM-WPP59TKS",
+  "https://cdn.jsdelivr.net/npm/@finsweet/attributes-animation@1/animation.esm.js",
+  "https://www.quietcubes.com/9i1h7htkfq16Njg5YjJmY2VjMWUyNmViOWEwMDFiOWQ2/5GqHF7iZiWP2WI36JJ0gXiCDpY8",
+  "https://connect.facebook.net/signals/config/1583222426621102?v=2.9.433&r=stable&domain=www.quietcubes.com&hme=4453c87d489b6902031c012cadd2731893cd69feb64fe8a61b",
+  "https://px.ads.linkedin.com/collect?v=2&fmt=js&pid=6179852%2C10020428&time=1793713033399&li_adsId=15a8f997-e88f-45a6-a6ff-b5351f56e20a&pageLoadId=8c9e5d3f-4ea8-",
+  "https://www.googletagmanager.com/gtag/js?id=G-B98LJLLG35&gtg_health=1",
+  "https://www.googletagmanager.com/gtag/destination?id=AW-16516005424&cx=c&gtm=4e6au1",
+  "https://www.googletagmanager.com/gtag/js?id=AW-16516005424&cx=c&gtm=4e6au1",
+  "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16516005424/?random=1793713035181&cv=11&fst=1793713035181&bg=ffffff&guid=ON&async=1&gtm=45be6au",
+  "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16516005424/?random=1793713035204&cv=11&fst=1793713035204&bg=ffffff&guid=ON&async=1&en=gtag.con"
+ ]
+}

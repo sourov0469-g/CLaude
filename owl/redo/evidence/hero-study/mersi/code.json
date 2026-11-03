@@ -1,0 +1,144 @@
+{
+ "url": "https://www.mersi-architecture.com",
+ "title": "Architecte d'intérieur à Paris | MERSI Architecture",
+ "tags": {
+  "DIV": 209,
+  "NAV": 1,
+  "A": 17,
+  "svg": 21,
+  "path": 67,
+  "SPAN": 232,
+  "MAIN": 1,
+  "IMG": 20,
+  "H2": 10,
+  "g": 10
+ },
+ "canvases": 0,
+ "videos": 0,
+ "svgs": 29,
+ "gl": [],
+ "anims": [],
+ "globals": {
+  "gsap": "object"
+ },
+ "buttons": [
+  {
+   "text": "PROJETS\nPROJETS",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 1,
+   "inner": "<div class=\"hover-link-wrap\" style=\"overflow: hidden; position: relative;\"><div class=\"hover-link-top\"><span style=\"display: inline-block; will-change: transform;\">p</span><span style=\"display: inline-block; will-change:"
+  },
+  {
+   "text": "AGENCE\nAGENCE",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 1,
+   "inner": "<div class=\"hover-link-wrap\" style=\"overflow: hidden; position: relative;\"><div class=\"hover-link-top\"><span style=\"display: inline-block; will-change: transform;\">a</span><span style=\"display: inline-block; will-change:"
+  },
+  {
+   "text": "PROCESS\nPROCESS",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 1,
+   "inner": "<div class=\"hover-link-wrap\" style=\"overflow: hidden; position: relative;\"><div class=\"hover-link-top\"><span style=\"display: inline-block; will-change: transform;\">p</span><span style=\"display: inline-block; will-change:"
+  },
+  {
+   "text": "SHOP\nSHOP",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 1,
+   "inner": "<div class=\"hover-link-wrap\" style=\"overflow: hidden; position: relative;\"><div class=\"hover-link-top\"><span style=\"display: inline-block; will-change: transform;\">s</span><span style=\"display: inline-block; will-change:"
+  }
+ ],
+ "cursorFollowers": [
+  "DIV.grain-bg",
+  "DIV.transition-curtains",
+  "NAV.navbar",
+  "DIV.voile",
+  "DIV.home-slider_list_w left w-dyn-list",
+  "DIV.home-slider_list_w right w-dyn-list"
+ ],
+ "transformed": [
+  "SPAN. none",
+  "SPAN. none",
+  "SPAN. none",
+  "SPAN. none",
+  "SPAN. none",
+  "SPAN. none",
+  "SPAN. none",
+  "SPAN. matrix(1, 0, 0, 1, 0, 9.35938)",
+  "SPAN. matrix(1, 0, 0, 1, 0, 9.35938)",
+  "SPAN. matrix(1, 0, 0, 1, 0, 9.35938)",
+  "SPAN. matrix(1, 0, 0, 1, 0, 9.35938)",
+  "SPAN. matrix(1, 0, 0, 1, 0, 9.35938)"
+ ],
+ "heroOuter": "<div data-taxi-view=\"\" class=\"page_view\"><div class=\"voile\"></div><div class=\"home-slider_w\" style=\"height: 900000px;\"><div class=\"home-slider_list_w left w-dyn-list\"><div role=\"list\" class=\"home-slider_list w-dyn-items\"><div slider-name=\"Hamelin\" role=\"listitem\" class=\"home-slider_item w-dyn-item\" style=\"z-index: 1; clip-path: inset(0%);\"><div class=\"slider-left\"><img src=\"https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/6a69f97eddbb087190635536_CC_MERSI_HAMELIN-21.webp\" loading=\"lazy\" fetchpriority=\"high\" alt=\"\" sizes=\"100vw\" srcset=\"https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/6a69f97eddbb087190635536_CC_MERSI_HAMELIN-21-p-500.webp 500w, https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/6a69f97eddbb087190635536_CC_MERSI_HAMELIN-21-p-800.webp 800w, https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/6a69f97eddbb087190635536_CC_MERSI_HAMELIN-21-p-1080.webp 1080w, https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/6a69f97eddbb087190635536_CC_MERSI_HAMELIN-21.webp 1333w\" class=\"image-2\"></div></div><div slider-name=\"Naya\" role=\"listitem\" class=\"home-slider_item w-dyn-item\" style=\"z-index: 2; clip-path: inset(100% 0% 0%);\"><div class=\"slider-left\"><img src=\"https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/69a858ffb31f5a2c4b0240d9_MERSI%20x%20LEVALLOIS-9.webp\" loading=\"lazy\" fetchpriority=\"high\" alt=\"\" sizes=\"100vw\" srcset=\"https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/69a858ffb31f5a2c4b0240d9_MERSI%20x%20LEVALLOIS-9-p-500.webp 500w, https://cdn.prod.website-files.com/697096b6dde8a7564252bfdd/69a858f",
+ "htmlClass": "w-mod-js lenis",
+ "bodyClass": "",
+ "listeners": {
+  "window": [
+   "scrollend",
+   "load",
+   "pagehide",
+   "wheel",
+   "resize",
+   "scroll",
+   "pointerdown",
+   "touchstart",
+   "touchmove",
+   "touchend",
+   "popstate",
+   "hashchange",
+   "pageshow",
+   "focus",
+   "blur",
+   "message"
+  ],
+  "document": [
+   "click",
+   "mouseenter",
+   "focus",
+   "DOMContentLoaded",
+   "visibilitychange",
+   "scroll",
+   "touchcancel",
+   "pointerdown",
+   "touchstart",
+   "mousedown",
+   "pointerup",
+   "touchend",
+   "mouseup",
+   "wheel",
+   "auxclick",
+   "change",
+   "submit"
+  ],
+  "document.body": [
+   "touchstart"
+  ]
+ },
+ "hover": null,
+ "scripts": [
+  "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=69689842a40a17ac45e5418a",
+  "https://mersi.netlify.app/main.js",
+  "https://cdn.prod.website-files.com/69689842a40a17ac45e5418a/js/webflow.schunk.ed9687e0656a5325.js",
+  "https://connect.facebook.net/en_US/fbevents.js",
+  "https://cdn.prod.website-files.com/69689842a40a17ac45e5418a/js/webflow.eaf8ceef.4516a5108c6c615f.js",
+  "https://www.mersi-architecture.com/haqt6iy0yx2eNjk2ODk4NDJhNDBhMTdhYzQ1ZTU0MThh/KOb4T9Uw3E6nfGm5tJ7BcGMw3jQ",
+  "https://connect.facebook.net/signals/config/998929851225802?v=2.9.433&r=stable&domain=www.mersi-architecture.com&hme=4453c87d489b6902031c012cadd2731893cd69feb64",
+  "https://www.googletagmanager.com/gtag/js?id=G-70EBMTBV70&gtg_health=1"
+ ]
+}

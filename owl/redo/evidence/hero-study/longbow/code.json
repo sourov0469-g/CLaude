@@ -1,0 +1,196 @@
+{
+ "url": "https://longbowmotors.com",
+ "title": "Longbow | British Hand-Built Featherweight Sports Cars",
+ "tags": {
+  "DIV": 9,
+  "IMG": 3,
+  "NAV": 2,
+  "A": 24,
+  "LI": 8,
+  "SPAN": 4,
+  "SECTION": 1,
+  "VIDEO": 1,
+  "H1": 1,
+  "EM": 1,
+  "SUP": 1,
+  "svg": 2,
+  "path": 2,
+  "ASIDE": 1,
+  "BUTTON": 4,
+  "P": 1,
+  "STRONG": 1
+ },
+ "canvases": 0,
+ "videos": 1,
+ "svgs": 2,
+ "gl": [],
+ "anims": [
+  {
+   "type": "CSSAnimation",
+   "name": "lbSplashOut",
+   "dur": 700,
+   "easing": "linear",
+   "iter": 1,
+   "target": "DIV.lb-splash"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "lbSplashBreath",
+   "dur": 2200,
+   "easing": "linear",
+   "iter": 1,
+   "target": "IMG.lb-splash__mark"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "lbNavRise",
+   "dur": 950,
+   "easing": "linear",
+   "iter": 1,
+   "target": "NAV.nav"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "lbHeroWake",
+   "dur": 2800,
+   "easing": "linear",
+   "iter": 1,
+   "target": "VIDEO.hero__bg"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "lineRise",
+   "dur": 1100,
+   "easing": "linear",
+   "iter": 1,
+   "target": "SPAN."
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "heroCue",
+   "dur": 3400,
+   "easing": "linear",
+   "iter": null,
+   "target": "A.hero__scroll"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "pressroll",
+   "dur": 92000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.pressband__track"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "cookiesIn",
+   "dur": 380,
+   "easing": "linear",
+   "iter": 1,
+   "target": "DIV.lb-cookies"
+  }
+ ],
+ "globals": {},
+ "buttons": [
+  {
+   "text": "SPEEDSTER",
+   "tag": "A",
+   "transition": "color 0.3s",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Speedster"
+  },
+  {
+   "text": "ROADSTER",
+   "tag": "A",
+   "transition": "color 0.3s",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Roadster"
+  },
+  {
+   "text": "TECH",
+   "tag": "A",
+   "transition": "color 0.3s",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Tech"
+  },
+  {
+   "text": "OWNERSHIP",
+   "tag": "A",
+   "transition": "color 0.3s",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Ownership"
+  }
+ ],
+ "cursorFollowers": [
+  "DIV.lb-scrim"
+ ],
+ "transformed": [
+  "A.hero__scroll matrix(1, 0, 0, 1, -22, 6.90712)"
+ ],
+ "heroOuter": "<section class=\"hero\" id=\"top\"> <div class=\"hero__media\"> <!-- The film, re-encoded for the web from the 20 MB master. HEVC first for the browsers that take it, H.264 for the rest, no audio track on either and the moov atom up front so both start on the first bytes. The poster is frame one of the same film, so nothing jumps when playback begins. Tracked in WORKLOG.md. --> <!-- preload=\"auto\", not \"metadata\": chrome.js holds this paused until the splash lifts at 2.16s, and the visitor then has a consent banner to answer, so there is a clear few seconds of otherwise idle time to buffer in. The poster carries the first paint and is preloaded above at high priority, so this competes with nothing that matters. --> <video class=\"hero__bg\" autoplay=\"\" muted=\"\" loop=\"\" playsinline=\"\" preload=\"auto\" poster=\"/assets/hero-poster.jpg\"> <source src=\"/assets/hero-video-hevc.mp4\" type=\"video/mp4; codecs=&quot;hvc1&quot;\"> <source src=\"/assets/hero-video.mp4\" type=\"video/mp4\"> </video> </div> <div class=\"hero__content\"> <h1 class=\"hero__title lb-fade is-lit\"> <span class=\"line\"><span>Speed<br class=\"hero__br\"> of<br class=\"hero__br\"> <em>Lightness</em><sup class=\"tm\">™</sup></span></span> </h1> </div> <a class=\"hero__scroll\" href=\"#top\" id=\"heroScroll\" aria-label=\"Scroll down\"> <svg viewBox=\"0 0 24 34\" width=\"22\" height=\"31\" fill=\"none\" aria-hidden=\"true\"><path d=\"M12 2v26\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linecap=\"round\"></path><path d=\"M4 20l8 9 8-9\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> </a> </section>",
+ "htmlClass": " lb-splash-on",
+ "bodyClass": "",
+ "listeners": {
+  "window": [
+   "scroll",
+   "pagehide",
+   "load",
+   "hashchange",
+   "popstate",
+   "pageshow",
+   "scrollend",
+   "resize"
+  ],
+  "document": [
+   "focusin",
+   "focusout",
+   "keydown",
+   "click",
+   "submit",
+   "lb:consent",
+   "copy",
+   "visibilitychange",
+   "lb:track",
+   "lb:identify",
+   "auxclick",
+   "change"
+  ],
+  "document.body": []
+ },
+ "hover": {
+  "text": "SPEEDSTER",
+  "x": 284.640625,
+  "y": 850.9921875,
+  "before": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(227, 222, 208)",
+   "transform": "none",
+   "shadow": "none"
+  },
+  "after": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(157, 137, 92)",
+   "transform": "none",
+   "shadow": "none",
+   "childTransforms": []
+  }
+ },
+ "scripts": [
+  "https://longbowmotors.com/tags.js?v=7265671a",
+  "https://longbowmotors.com/chrome.js?v=e638d667",
+  "https://longbowmotors.com/lb.js?v=6f4183da",
+  "https://www.googletagmanager.com/gtag/js?id=G-V223RX6PYX"
+ ]
+}

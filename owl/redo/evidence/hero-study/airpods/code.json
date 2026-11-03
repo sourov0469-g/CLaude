@@ -1,0 +1,251 @@
+{
+ "url": "https://www.apple.com/airpods-pro/",
+ "title": "AirPods Pro 3 - Apple",
+ "tags": {
+  "DIV": 97,
+  "NAV": 2,
+  "UL": 45,
+  "LI": 239,
+  "A": 242,
+  "SPAN": 58,
+  "svg": 32,
+  "path": 22,
+  "BUTTON": 14,
+  "H2": 34,
+  "FORM": 1,
+  "INPUT": 1,
+  "MAIN": 1,
+  "SECTION": 1,
+  "H1": 1,
+  "P": 2,
+  "SUP": 1,
+  "VIDEO": 1,
+  "PICTURE": 3,
+  "IMG": 3
+ },
+ "canvases": 0,
+ "videos": 16,
+ "svgs": 132,
+ "gl": [
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "webgl",
+  "webgl"
+ ],
+ "anims": [
+  {
+   "type": "CSSAnimation",
+   "name": "globalnav-search-fade-and-slide",
+   "dur": 320,
+   "easing": "linear",
+   "iter": 1,
+   "target": "H2.globalnav-searchresults-header"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "globalnav-search-fade-and-slide",
+   "dur": 320,
+   "easing": "linear",
+   "iter": 1,
+   "target": "LI.globalnav-searchresults-list-item"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "globalnav-search-fade-and-slide",
+   "dur": 320,
+   "easing": "linear",
+   "iter": 1,
+   "target": "LI.globalnav-searchresults-list-item"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "globalnav-search-fade-and-slide",
+   "dur": 320,
+   "easing": "linear",
+   "iter": 1,
+   "target": "LI.globalnav-searchresults-list-item"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "globalnav-search-fade-and-slide",
+   "dur": 320,
+   "easing": "linear",
+   "iter": 1,
+   "target": "LI.globalnav-searchresults-list-item"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "globalnav-search-fade-and-slide",
+   "dur": 320,
+   "easing": "linear",
+   "iter": 1,
+   "target": "LI.globalnav-searchresults-list-item"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "aap-animate-progress",
+   "dur": 6150,
+   "easing": "linear",
+   "iter": 1,
+   "target": "A.dotnav-link current"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "inline-media-spin",
+   "dur": 850,
+   "easing": "linear",
+   "iter": null,
+   "target": "BUTTON.play-pause-button"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "inline-media-spin",
+   "dur": 850,
+   "easing": "linear",
+   "iter": null,
+   "target": "BUTTON.play-pause-button"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "inline-media-spin",
+   "dur": 850,
+   "easing": "linear",
+   "iter": null,
+   "target": "BUTTON.play-pause-button"
+  }
+ ],
+ "globals": {},
+ "buttons": [
+  {
+   "text": "Apple",
+   "tag": "A",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 3,
+   "inner": "<span aria-hidden=\"true\" class=\"globalnav-image-regular globalnav-link-image\"><svg height=\"44\" viewBox=\"0 0 14 44\" width=\"14\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3."
+  },
+  {
+   "text": "Store",
+   "tag": "A",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<span class=\"globalnav-link-text-container\"><span aria-hidden=\"true\" class=\"globalnav-image-regular globalnav-link-image\"><svg height=\"44\" viewBox=\"0 0 30 44\" width=\"30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m26.56"
+  },
+  {
+   "text": "Mac",
+   "tag": "A",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<span class=\"globalnav-link-text-container\"><span aria-hidden=\"true\" class=\"globalnav-image-regular globalnav-link-image\"><svg height=\"44\" viewBox=\"0 0 23 44\" width=\"23\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m8.155"
+  },
+  {
+   "text": "iPad",
+   "tag": "A",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<span class=\"globalnav-link-text-container\"><span aria-hidden=\"true\" class=\"globalnav-image-regular globalnav-link-image\"><svg height=\"44\" viewBox=\"0 0 24 44\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"m14.95"
+  }
+ ],
+ "cursorFollowers": [],
+ "transformed": [],
+ "heroOuter": "<section class=\"section section-welcome no-pad section-welcome-localnav-overlap section-welcome-globalnav-overlap\" data-anim-scroll-group=\"Welcome\" data-theme-changer=\"dark\" data-aap-hide-kf=\"{&quot;start&quot;: &quot;a0t - 75vh&quot;, &quot;end&quot;: &quot;a1t - 100vh + 60a1h&quot;, &quot;anchors&quot;: [&quot;.section-welcome&quot;, &quot;.section-highlights&quot;]}\" data-theme-changer-kf=\"{&quot;start&quot;: &quot;a0t - 75vh&quot;, &quot;end&quot;: &quot;a1t - css(--r-localnav-height)&quot;, &quot;anchors&quot;: [&quot;.section-welcome&quot;, &quot;.section-highlights&quot;]}\" data-analytics-section-engagement=\"name:hero\" data-component-list=\" Welcome\"> <div class=\"marquee\"> <div class=\"marquee-scrim\"></div> <div class=\"viewport-content\"> <div class=\"marquee-header typography-marquee-detail-reduced\"> <h1 class=\"header-eyebrow typography-marquee-eyebrow-base\">AirPods Pro 3</h1> <h2 class=\"header-headline typography-marquee-headline-base\">The world’s best<br class=\"small\"> in‑ear <br class=\"large\"><br class=\"medium\">Active Noise Cancellation.</h2> <div class=\"marquee-milestone\"> <p class=\"milestone-primary\">Up to 2x more than AirPods&nbsp;Pro&nbsp;2.<sup class=\"footnote footnote-number\"><a href=\"#footnote-3\" aria-label=\"Footnote 1\" data-modal-close=\"\">1</a></sup></p> </div> </div> <div class=\"marquee-detail typography-marquee-detail\"> <div class=\"detail-inner-group\"> <div class=\"marquee-pricing\" data-pricing-hide-all=\"airpods-pro\"> <p data-pricing-hide=\"airpods-pro\" class=\"ric-dynamic-pricing pricing-product has-dynamic-content\"><span data-pricing-product=\"airpods-pro\" da",
+ "htmlClass": "js no-touch no-reduced-motion enhanced ipad inline-media inline-media-alpha desktop no-ar-quicklook no-small-breakpoint ",
+ "bodyClass": "page-overview ",
+ "listeners": {
+  "window": [
+   "keydown",
+   "mousedown",
+   "storage",
+   "pagehide",
+   "beforeunload",
+   "analyticsCustomEvent",
+   "blur",
+   "segmentExit",
+   "scroll",
+   "resize",
+   "load",
+   "resize:text-zoom",
+   "touchmove",
+   "popstate",
+   "DOMContentLoaded",
+   "hashchange",
+   "orientationchange"
+  ],
+  "document": [
+   "keydown",
+   "keyup",
+   "webkitbeginfullscreen",
+   "webkitendfullscreen",
+   "focusin",
+   "DOMContentLoaded",
+   "fullscreenchange",
+   "readystatechange",
+   "at-content-rendering-succeeded",
+   "mvt-body-attribute-set",
+   "click",
+   "touchstart",
+   "touchend",
+   "scroll",
+   "visibilitychange"
+  ],
+  "document.body": [
+   "click",
+   "keydown",
+   "mousedown",
+   "touchstart",
+   "focus",
+   "blur",
+   "mouseup",
+   "focusin",
+   "submit"
+  ]
+ },
+ "hover": {
+  "text": "Buy",
+  "x": 1309.3984375,
+  "y": 787.5,
+  "before": {
+   "bg": "rgb(0, 113, 227)",
+   "color": "rgb(255, 255, 255)",
+   "transform": "none",
+   "shadow": "none"
+  },
+  "after": {
+   "bg": "rgb(0, 118, 223)",
+   "color": "rgb(255, 255, 255)",
+   "transform": "none",
+   "shadow": "none",
+   "childTransforms": []
+  }
+ },
+ "scripts": [
+  "https://www.apple.com/v/airpods-pro/t/built/scripts/overview/head.built.js",
+  "https://www.apple.com/metrics/ac-analytics/2.30.0/scripts/auto-init.js",
+  "https://www.apple.com/ac/includes/acmi-handler/scripts/acmi-head.built.js",
+  "https://www.apple.com/ac/localnav/9/scripts/ac-localnav.built.js",
+  "https://www.apple.com/metrics/ac-analytics/2.30.0/scripts/ac-analytics.js",
+  "https://www.apple.com/api-www/global-elements/global-header/v1/assets/globalheader.umd.js",
+  "https://www.apple.com/ac/globalfooter/8/en_US/scripts/ac-globalfooter.built.js",
+  "https://www.apple.com/metrics/data-relay/1.2.0/scripts/auto-relay.js",
+  "https://www.apple.com/ac/localeswitcher/4/en_US/scripts/localeswitcher.built.js",
+  "https://www.apple.com/ac/includes/acmi-handler/scripts/autopricing-toggle.built.js",
+  "https://www.apple.com/metrics/data-relay/1.2.0/scripts/data-relay.js",
+  "https://www.apple.com/ac/pricing/latest-1/scripts/autopricing.built.js",
+  "https://www.apple.com/v/airpods-pro/t/built/scripts/overview/main.built.js",
+  "https://www.apple.com/ac/ac-films/7.5.1/scripts/autofilms.built.js",
+  "https://www.apple.com/ac/libs/hls.js/2.920.4/hls.js"
+ ]
+}

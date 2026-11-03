@@ -1,0 +1,140 @@
+{
+ "url": "https://immersive-g.com",
+ "title": "Immersive Garden",
+ "tags": {
+  "DIV": 64,
+  "CANVAS": 12,
+  "svg": 2,
+  "g": 2,
+  "path": 28,
+  "H1": 1,
+  "A": 2,
+  "NAV": 1
+ },
+ "canvases": 12,
+ "videos": 0,
+ "svgs": 2,
+ "gl": [
+  "2d",
+  "webgl",
+  "webgl2",
+  "webgl2",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d"
+ ],
+ "anims": [],
+ "globals": {
+  "__NUXT__": "object"
+ },
+ "buttons": [
+  {
+   "text": "See all projects",
+   "tag": "A",
+   "transition": "color 0.5s",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 1,
+   "inner": "<!--[--><div class=\"wrapper\" data-v-823fbba4=\"\"><div class=\"wrapper__hover\" data-v-823fbba4=\"\"><canvas class=\"icon__black\" data-v-823fbba4=\"\" width=\"360\" height=\"360\" style=\"width: 22.5px; height: 22.5px;\"></canvas><canv"
+  },
+  {
+   "text": "Menu",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<div data-v-8efc4e59=\"\" class=\"navButton__label\">Menu</div><div data-v-8efc4e59=\"\" class=\"logo\"><div data-v-8efc4e59=\"\" class=\"logo__wrapper logo__wrapper--black\"><div data-v-8efc4e59=\"\" class=\"lottie-animation-container"
+  }
+ ],
+ "cursorFollowers": [
+  "DIV.introLoader main",
+  "DIV.cursor__follow",
+  "DIV.cursor__ease"
+ ],
+ "transformed": [
+  "DIV.introLoader__bg none",
+  "DIV.introLoader__logo matrix(1, 0, 0, 1, 0, 0)",
+  "svg. none",
+  "DIV.introLoader__baseline matrix(1, 0, 0, 1, 0, 0)",
+  "DIV. none",
+  "DIV. none",
+  "DIV. none",
+  "DIV. none",
+  "DIV.introLoader__scrollDown none",
+  "DIV. matrix(1, 0, 0, 1, 0, 0)",
+  "DIV.navButton__label matrix(1, 0, 0, 1, 29.4, 0)",
+  "DIV.logo none"
+ ],
+ "heroOuter": "<div class=\"hero hasFitHeight left\" type=\"hero\" block-index=\"0\" data-v-2bb8aacb=\"\" data-v-42a3f0a4=\"\"><div class=\"gridWrapper padding wrapper\" data-v-42a3f0a4=\"\" data-v-ad74c4db=\"\"><!--[--><h1 class=\"hero__text1 left\" data-webgl-title=\"\" data-v-42a3f0a4=\"\">Transcend anything seen<br> or felt before by crafting<br> unparalleled experiences<br> for ambitious brands.</h1><!----><!----><!--]--></div></div>",
+ "htmlClass": "linux chrome chrome_124 no-touch",
+ "bodyClass": "bg--white",
+ "listeners": {
+  "window": [
+   "message",
+   "resize",
+   "click",
+   "mousemove",
+   "pointerdown",
+   "pointermove",
+   "touchmove",
+   "pointerup",
+   "orientationchange",
+   "nuxt.preloadError",
+   "popstate",
+   "beforeunload",
+   "pagehide",
+   "hashchange",
+   "pageshow",
+   "focus",
+   "blur",
+   "touchend",
+   "mousedown",
+   "mouseup"
+  ],
+  "document": [
+   "visibilitychange",
+   "click",
+   "mousemove",
+   "auxclick"
+  ],
+  "document.body": []
+ },
+ "hover": null,
+ "scripts": [
+  "https://immersive-g.com/assets/default.CxpTjDRZ.js",
+  "https://immersive-g.com/assets/useTimeRaf.CEtG5dZ4.js",
+  "https://immersive-g.com/assets/BasicButton.D91CLqAw.js",
+  "https://immersive-g.com/assets/index.D4TZz6rT.js",
+  "https://immersive-g.com/assets/entry.DyxL_KXi.js",
+  "https://immersive-g.com/assets/asyncData.B6IxwMmT.js",
+  "https://immersive-g.com/assets/HomePage.ClaPmn7U.js",
+  "https://immersive-g.com/assets/HeroBlock.DoznkBHg.js",
+  "https://immersive-g.com/assets/component-stub.FmFgRqLi.js",
+  "https://immersive-g.com/assets/AllProjectsButton.BJXpRcDM.js",
+  "https://immersive-g.com/assets/proto.DuMH9e-J.js",
+  "https://www.googletagmanager.com/gtm.js?id=GTM-P3CGMTCS&l=dataLayer",
+  "https://immersive-g.com/assets/vue3-lottie.es.B1QeRuZw.js",
+  "https://www.googletagmanager.com/gtag/js?id=G-C3MZ78DBY2&cx=c&gtm=4e6au1",
+  "https://immersive-g.com/webgl/libs/basis/basis_transcoder.js",
+  "https://immersive-g.com/webgl/libs/draco/draco_wasm_wrapper.js",
+  "https://immersive-g.com/assets/index.CeH_ahVV.js",
+  "https://immersive-g.com/assets/BlocksPage.Bs5C7G0C.js",
+  "https://immersive-g.com/assets/AboutPage.DgUWXiAT.js",
+  "https://immersive-g.com/assets/PrevNextButton.B66t4y4U.js",
+  "https://immersive-g.com/assets/sortGeometryVertices-CjfG_b7R.js",
+  "https://immersive-g.com/assets/vue3-lottie.es.B1QeRuZw.js"
+ ]
+}

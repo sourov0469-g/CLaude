@@ -1,0 +1,423 @@
+{
+ "url": "https://www.graza.co",
+ "title": "GRAZA | High Quality Olive Oil | Graza",
+ "tags": {
+  "DIV": 27,
+  "HEADER": 1,
+  "NAV": 1,
+  "A": 10,
+  "SPAN": 6,
+  "svg": 3,
+  "path": 4,
+  "UL": 1,
+  "LI": 4,
+  "BUTTON": 2,
+  "g": 1,
+  "rect": 1,
+  "circle": 1,
+  "H2": 1,
+  "IMG": 1,
+  "P": 2,
+  "MAIN": 1,
+  "VIDEO": 2,
+  "H1": 1
+ },
+ "canvases": 0,
+ "videos": 10,
+ "svgs": 36,
+ "gl": [
+  "2d",
+  "2d",
+  "2d"
+ ],
+ "anims": [
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "spin",
+   "dur": 3000,
+   "easing": "linear",
+   "iter": null,
+   "target": "svg.animate--spin"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "drip-1",
+   "dur": 2000,
+   "easing": "linear",
+   "iter": null,
+   "target": "P.absolute font-medium uppercase"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "drip-2",
+   "dur": 2000,
+   "easing": "linear",
+   "iter": null,
+   "target": "P.absolute font-medium uppercase"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "blink",
+   "dur": 2000,
+   "easing": "linear",
+   "iter": null,
+   "target": "SPAN.marker w-custom h-custom mr-8 bg-backgro"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  },
+  {
+   "type": "CSSAnimation",
+   "name": "marquee",
+   "dur": 20000,
+   "easing": "linear",
+   "iter": null,
+   "target": "DIV.marquee-inner"
+  }
+ ],
+ "globals": {
+  "Shopify": "object"
+ },
+ "buttons": [
+  {
+   "text": "Shop",
+   "tag": "BUTTON",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Shop"
+  },
+  {
+   "text": "Get Refills",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Get Refills"
+  },
+  {
+   "text": "About",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "About"
+  },
+  {
+   "text": "Glog",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 0,
+   "inner": "Glog"
+  }
+ ],
+ "cursorFollowers": [
+  "DIV.hidden lg:block fixed w-full h-full inse",
+  "DIV.fixed inset-0 z-menu invisible",
+  "DIV.fixed inset-0 transition--std z-cart opa",
+  "DIV.translate-x-full pointer-events-none w-f"
+ ],
+ "transformed": [],
+ "heroOuter": "<style> :root {--height-promo: 0px !important;} </style>",
+ "htmlClass": "csm-cookie-embed",
+ "bodyClass": "transition--opacity template-index page- bg-background text-text font-body text-15 md:text-16",
+ "listeners": {
+  "window": [
+   "click",
+   "auxclick",
+   "load",
+   "pagehide",
+   "pageshow",
+   "visibilitychange",
+   "prerenderingchange",
+   "keydown",
+   "submit",
+   "blur",
+   "change",
+   "focus",
+   "resize",
+   "DOMContentLoaded",
+   "consentmo-tcf-reprompt",
+   "message",
+   "unhandledrejection",
+   "error",
+   "wixEmbedsAPIReady",
+   "klaviyoForms",
+   "omnisendForms",
+   "elevar-dl-event",
+   "onsite-event-publish",
+   "update-event-listeners",
+   "scroll",
+   "form-triggered",
+   "form-closed",
+   "wheel",
+   "orientationchange",
+   "pre-triggering-state-update",
+   "triggering-state-update",
+   "hotjar-survey-event",
+   "hashchange",
+   "popstate",
+   "scrollend"
+  ],
+  "document": [
+   "focusin",
+   "mousedown",
+   "touchstart",
+   "touchend",
+   "keydown",
+   "click",
+   "mouseover",
+   "submit",
+   "change",
+   "DOMContentLoaded",
+   "visitorConsentCollected",
+   "targeting-changed",
+   "consentmoSignal",
+   "GIFTBOX_CART_UPDATED",
+   "mousemove",
+   "scroll",
+   "alia:signup",
+   "keyup",
+   "touchcancel",
+   "pointerdown",
+   "pointerup",
+   "mouseup",
+   "visibilitychange",
+   "graza:motion",
+   "pointermove",
+   "vue:appended",
+   "keypress",
+   "auxclick",
+   "AdvertiserConsentChanged"
+  ],
+  "document.body": [
+   "touchstart"
+  ]
+ },
+ "hover": {
+  "text": "Shop Olive Oil",
+  "x": 1632.5,
+  "y": 621.890625,
+  "before": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(60, 66, 46)",
+   "transform": "none",
+   "shadow": "none"
+  },
+  "after": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(60, 66, 46)",
+   "transform": "none",
+   "shadow": "none",
+   "childTransforms": []
+  }
+ },
+ "scripts": [
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.en.esm.js",
+  "https://cdn.shopify.com/storefront/standard-actions.js",
+  "https://cdn.shopify.com/extensions/01a1a117-2c0e-71c8-a893-00535f4f7aac/tek-labs-gifts-upsell-1011/assets/widget-styling-gate.script.js",
+  "https://shop.app/checkouts/internal/preloads.js?locale=en-US&default_configuration_id=13336790&shop_id=55000039638",
+  "https://www.graza.co/cdn/shop/t/38/assets/js-polyfill-smooth-scroll.static.js?v=148379743528603512151686646138",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/client.init-shop-cart-sync_ChnSjukC.en.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.document_DMcRsBXN.esm.js",
+  "https://cdn.shopify.com/extensions/01a1a117-2c0e-71c8-a893-00535f4f7aac/tek-labs-gifts-upsell-1011/assets/discount-code.script.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.window_CAbVMZox.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.networkErrorMessages_Du380vAr.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.register_oML0Hu4L.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.init_dY63_sS3.esm.js",
+  "https://static.klaviyo.com/onsite/js/Ra2S9r/klaviyo.js?company_id=Ra2S9r",
+  "https://cdn.shopify.com/extensions/01a18973-a927-79a3-9205-8515282cb07a/56071677a62720b5cde4241477474f626e61c35a-40569/assets/algolia_autocomplete.js",
+  "https://cdn-static.okendo.io/reviews-widget-plus/js/okendo-reviews.js",
+  "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/consentmo_cookie_consent.js",
+  "https://c.albss.com/p/l/loader.iife.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.defineInitFunction_CIjOjzsO.esm.js",
+  "https://unpkg.com/@lottiefiles/lottie-player@2.0.12/dist/lottie-player.js",
+  "https://www.graza.co/checkouts/internal/preloads.js?locale=en-US&default_configuration_id=13336790",
+  "https://www.graza.co/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/client.shop-cart-sync_ytHtkiPf.en.esm.js",
+  "https://www.graza.co/cdn/shopifycloud/storefront/assets/shopify_pay/storefront-f0e26bdf.js?v=20250812",
+  "https://giftbox.ds-cdn.com/static/main.js?shop=getgraza.myshopify.com",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.v4_C3N_0s0v.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.casing_U_9x-Om3.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.utils_K8y2k-BJ.esm.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.useUserRecognitionSignal_DOQPCqaU.esm.js",
+  "https://www.graza.co/cdn/shopifycloud/storefront/assets/storefront/remote_product_tracking-91d95044.js",
+  "https://static-tracking.klaviyo.com/onsite/js/fender_analytics.d96631e4c27e2.js?cb=2",
+  "https://static.klaviyo.com/onsite/js/runtime.df7bd7e65dad0.js?cb=2",
+  "https://cdn.shopify.com/extensions/01a1a117-2c0e-71c8-a893-00535f4f7aac/tek-labs-gifts-upsell-1011/assets/prevent-reload.script.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.storage_DQF5v-OM.esm.js",
+  "https://static.klaviyo.com/onsite/js/sharedUtils.cec92fd08e073.js?cb=2",
+  "https://offers.pearcommerce.com/js/sdk.js?config=%7B%22vendorId%22%3A%222688810510271902%22%2C%22widget%22%3A%22product-locator%22%7D",
+  "https://static-tracking.klaviyo.com/onsite/js/static.0d6d31623aba7.js?cb=2",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.validators_09U1U9sZ.esm.js",
+  "https://d2hrivdxn8ekm8.cloudfront.net/tag-manager/ec46d50b-5e97-444f-8b50-70ee64df5750-latest.js",
+  "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.hooks_C48kTNUX.esm.js",
+  "https://static.klaviyo.com/onsite/js/vendors~static~in_app_forms~signup_forms~fender_analytics~post_identification_sync~web_personalization~client_identity~serv"
+ ]
+}

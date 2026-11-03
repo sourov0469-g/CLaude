@@ -62,6 +62,7 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px);scroll-margin-
 .trust .stars{display:inline-flex;gap:3px;color:var(--amber)}
 .trust .stars svg{width:18px;height:18px}
 .trust .dot{width:5px;height:5px;border-radius:50%;background:var(--amber)}
+@media (max-width:1020px) and (min-width:641px){.trust{gap:8px 14px;padding:14px 18px;font-size:15px}.trust .stars svg{width:16px;height:16px}}
 @media (max-width:640px){.trust{flex-direction:column;gap:6px}.trust .dot{display:none}}
 
 /* version blocks: only the chosen version of each section is shown */
@@ -134,3 +135,72 @@ section.sec{position:relative;padding-block:clamp(56px,8vw,112px);scroll-margin-
 .pghero{padding-top:clamp(28px,4vw,56px)}
 .crumb{display:flex;gap:8px;font-size:15px;font-weight:600;color:var(--ink-70);margin-bottom:16px}
 .crumb a{color:var(--ink);text-underline-offset:4px}
+
+/* ===== Upgrade R1 shared systems ===== */
+/* masked word reveal ⟦S0451⟧⟦S1329⟧: words rise through an overflow mask; aria-label carries the sentence */
+.split .wm{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em;margin:0 -.02em -.1em}
+.split .w{display:inline-block;transform:translateY(112%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i) * 45ms + var(--d,0ms))}
+.split.in .w{transform:none}
+@media (prefers-reduced-motion:reduce){.split .w{transform:none;transition:none}}
+
+/* five button families, one per hero version; every one is 3D, has hover, press and focus, and a real effect */
+/* 1 · shingle tab ⟦S1388⟧⟦S0405⟧⟦S0340⟧: the face is a shingle tab hinged at the top; hover lifts it to show
+   the self-seal strip underneath, press seals it flat */
+.btn-tab{position:relative;display:inline-grid;min-height:62px;font-weight:700;font-size:18px;color:var(--ink);text-decoration:none;perspective:700px;border-radius:12px;-webkit-tap-highlight-color:transparent}
+.btn-tab>span{grid-area:1/1;border-radius:inherit}
+.btn-tab .t-under{background:linear-gradient(180deg,#6E4A12,#4A3110);transform:translateY(7px);box-shadow:0 14px 22px -10px rgba(23,17,29,.55)}
+.btn-tab .t-under::after{content:"";position:absolute;left:14%;right:14%;bottom:14px;height:5px;border-radius:3px;background:repeating-linear-gradient(90deg,#17111D 0 18px,transparent 18px 26px);opacity:.85}
+.btn-tab .t-face{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 30px;background:linear-gradient(180deg,#F6C155 0%,#EAA221 58%,#DD9418 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -3px 0 rgba(140,90,18,.35);transform-origin:50% 0;transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;background-clip:padding-box}
+.btn-tab .t-face::before{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(90deg,transparent 0 33.2%,rgba(140,90,18,.28) 33.2% calc(33.2% + 2px));-webkit-mask:linear-gradient(0deg,#000 0 26%,transparent 26%);mask:linear-gradient(0deg,#000 0 26%,transparent 26%);pointer-events:none}
+.btn-tab .t-face svg{width:20px;height:20px;transition:transform .35s var(--ease)}
+.btn-tab.alt .t-face{background:linear-gradient(180deg,#FFFDF8,#F1EBDD);box-shadow:inset 0 1px 0 #fff,inset 0 -3px 0 rgba(23,17,29,.1),inset 0 0 0 2px rgba(234,162,33,.9)}
+.btn-tab.alt .t-under{background:linear-gradient(180deg,#B9AC8C,#8E826A)}
+@media (hover:hover) and (pointer:fine){.btn-tab:hover .t-face{transform:rotateX(-16deg) translateY(-2px)}.btn-tab:hover .t-face svg{transform:translateX(4px)}}
+.btn-tab:active .t-face{transform:translateY(6px);transition-duration:.09s;box-shadow:inset 0 2px 6px rgba(23,17,29,.25)}
+.btn-tab:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+
+/* 2 · drawn plate ⟦S0407⟧⟦S1324⟧⟦S0362⟧: a technical-drawing button; hover traces its outline with the pen and an
+   amber wash floods out from the exact point the cursor entered; press closes the printed offset */
+.btn-ink{--x:50%;--y:50%;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 28px;border-radius:6px;background:var(--paper);color:var(--ink);font-weight:700;font-size:18px;text-decoration:none;box-shadow:5px 5px 0 var(--ink);border:2px solid var(--ink);transition:transform .14s,box-shadow .14s;isolation:isolate;overflow:hidden}
+.btn-ink .wash{position:absolute;inset:0;z-index:-1;background:var(--amber);clip-path:circle(0 at var(--x) var(--y));transition:clip-path .55s cubic-bezier(.16,1,.3,1)}
+.btn-ink.solid .wash{clip-path:circle(150% at var(--x) var(--y))}
+.btn-ink.solid:hover .wash{background:#F2B643}
+.btn-ink svg.pen{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);pointer-events:none;overflow:visible}
+.btn-ink svg.pen rect{fill:none;stroke:var(--amber-edge);stroke-width:3;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s cubic-bezier(.77,0,.175,1)}
+.btn-ink .ar{width:22px;height:22px;transition:transform .35s var(--ease)}
+@media (hover:hover) and (pointer:fine){.btn-ink:hover .wash{clip-path:circle(150% at var(--x) var(--y))}.btn-ink:hover svg.pen rect{stroke-dashoffset:0}.btn-ink:hover .ar{transform:translateX(4px)}}
+.btn-ink:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+
+/* 3 · film pill with button-in-button ⟦S0214⟧⟦S0442⟧: the icon lives in its own amber disc that travels on hover;
+   the label rolls to a second line; press = .97 */
+.btn-film{position:relative;display:inline-flex;align-items:center;gap:14px;min-height:62px;padding:7px 26px 7px 7px;border-radius:999px;background:var(--ink);color:var(--cream);font-weight:700;font-size:18px;text-decoration:none;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 2.8px 2.2px rgba(23,17,29,.05),0 6.7px 5.3px rgba(23,17,29,.07),0 12.5px 10px rgba(23,17,29,.09),0 22.3px 17.9px rgba(23,17,29,.11),0 41.8px 33.4px rgba(23,17,29,.13);transition:transform .2s cubic-bezier(.32,.72,0,1),box-shadow .3s}
+.btn-film .disc{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FAD07A,#EAA221 55%,#C7871A);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 4px 10px -3px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.btn-film .disc svg{width:20px;height:20px}
+.btn-film .roll{display:inline-grid;overflow:hidden;height:1.3em;line-height:1.3em}
+.btn-film .roll span{grid-area:1/1;transition:transform .45s cubic-bezier(.77,0,.175,1)}
+.btn-film .roll span+span{transform:translateY(105%);color:var(--amber)}
+.btn-film.light{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink),0 12px 24px -12px rgba(23,17,29,.4)}
+.btn-film.light .roll span+span{color:var(--amber-edge)}
+@media (hover:hover) and (pointer:fine){.btn-film:hover .disc{transform:translate(3px,-2px) rotate(-12deg) scale(1.06)}.btn-film:hover .roll span:first-child{transform:translateY(-105%)}.btn-film:hover .roll span+span{transform:none}}
+.btn-film:active{transform:scale(.97)}
+
+/* 4 · embossed plate ⟦S1388⟧⟦S1349⟧⟦S0442⟧: raised metal-and-enamel plate with a reflective 1px edge; hover sends one
+   sheen across, press reverses the depth */
+.btn-plate{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:60px;padding:0 30px;border-radius:16px;border:1px solid transparent;font-weight:800;font-size:18px;letter-spacing:-.005em;color:var(--ink);text-decoration:none;overflow:hidden;
+  background:linear-gradient(180deg,#F7C760,#EAA221 52%,#D38F17) padding-box,linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.2) 45%,rgba(120,76,10,.6)) border-box;
+  box-shadow:0 18px 30px -14px rgba(150,95,15,.7),0 4px 10px rgba(23,17,29,.14),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -2px 0 rgba(120,76,10,.35);text-shadow:0 1px 0 rgba(255,255,255,.45);transition:transform .2s cubic-bezier(.32,.72,0,1),box-shadow .2s}
+.btn-plate.alt{background:linear-gradient(180deg,#FFFFFF,#F4F0E6 52%,#E4DDCD) padding-box,linear-gradient(180deg,#fff,rgba(255,255,255,.3) 45%,rgba(23,17,29,.28)) border-box;box-shadow:0 18px 30px -16px rgba(23,17,29,.45),0 4px 10px rgba(23,17,29,.1),inset 0 1px 0 #fff,inset 0 -2px 0 rgba(23,17,29,.12)}
+.btn-plate::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-18deg);pointer-events:none}
+.btn-plate svg{width:20px;height:20px}
+@media (hover:hover) and (pointer:fine){.btn-plate:hover{transform:translateY(-2px)}.btn-plate:hover::after{left:130%;transition:left .8s cubic-bezier(.22,1,.36,1)}}
+.btn-plate:active{transform:translateY(2px);box-shadow:inset 0 4px 10px rgba(80,50,8,.35),inset 0 -1px 0 rgba(255,255,255,.6),0 3px 8px rgba(23,17,29,.1)}
+.btn-plate.alt:active{box-shadow:inset 0 4px 10px rgba(23,17,29,.18),inset 0 -1px 0 #fff,0 3px 8px rgba(23,17,29,.08)}
+
+/* 5 · keycap ⟦S1382⟧⟦S0340⟧: chunky physical keys; they travel down on press and stay down while selected */
+.key{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 4px;border-radius:14px;font-weight:700;font-size:17px;color:var(--ink);text-align:left;background:linear-gradient(180deg,#FFFEFA,#F0EADC);box-shadow:0 6px 0 #CFC3A6,0 7px 0 #B9AC8C,0 14px 18px -8px rgba(23,17,29,.4),inset 0 1px 0 #fff,inset 0 -2px 0 rgba(23,17,29,.05);transform:translateY(0);transition:transform .11s cubic-bezier(.2,0,0,1),box-shadow .11s,background .2s}
+.key .led{width:9px;height:9px;border-radius:50%;background:#CFC3A6;box-shadow:inset 0 1px 1px rgba(0,0,0,.2);transition:background .2s,box-shadow .2s;flex:none}
+@media (hover:hover) and (pointer:fine){.key:hover{transform:translateY(-1px);box-shadow:0 7px 0 #CFC3A6,0 8px 0 #B9AC8C,0 16px 20px -8px rgba(23,17,29,.42),inset 0 1px 0 #fff}}
+.key:active,.key[aria-pressed="true"]{transform:translateY(5px);box-shadow:0 1px 0 #CFC3A6,0 2px 0 #B9AC8C,0 4px 8px -4px rgba(23,17,29,.4),inset 0 2px 5px rgba(23,17,29,.12)}
+.key[aria-pressed="true"]{background:linear-gradient(180deg,#F7C760,#EAA221)}
+.key[aria-pressed="true"] .led{background:#17111D;box-shadow:0 0 0 3px rgba(23,17,29,.15)}
+@media (prefers-reduced-motion:reduce){.btn-tab .t-face,.btn-ink .wash,.btn-film .disc,.btn-film .roll span,.btn-plate,.key{transition:none}}

@@ -1,0 +1,165 @@
+{
+ "url": "https://landonorris.com",
+ "title": "McLaren Formula 1 Driver — Lando Norris",
+ "tags": {
+  "DIV": 54,
+  "A": 4,
+  "svg": 3,
+  "path": 4,
+  "SPAN": 26,
+  "BUTTON": 1,
+  "CANVAS": 7,
+  "MAIN": 1,
+  "SECTION": 2,
+  "IMG": 1
+ },
+ "canvases": 21,
+ "videos": 0,
+ "svgs": 85,
+ "gl": [
+  "webgl2",
+  "webgl2",
+  "webgl2",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d",
+  "2d"
+ ],
+ "anims": [],
+ "globals": {
+  "lenis": "object"
+ },
+ "buttons": [
+  {
+   "text": "Store\nSTORE",
+   "tag": "A",
+   "transition": "all",
+   "radius": "7.2px",
+   "bg": "rgb(210, 255, 0)",
+   "shadow": "none",
+   "children": 1,
+   "inner": "<div class=\"btn-inner\"><div class=\"btn-icon-w\"><div class=\"btn-icon-svg is-large w-embed\"><svg width=\"100%\" height=\"100%\" viewBox=\"0 0 17 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"m10.931 5.783-.759.81"
+  },
+  {
+   "text": "Go to home",
+   "tag": "A",
+   "transition": "color 0.75s cubic-bezier(0.65, 0.05, 0, 1)",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<div class=\"page-ln4-svg w-embed\"><canvas data-rive-ln4=\"\" width=\"36\" height=\"36\"></canvas></div><div screen-reader=\"\">Go to home</div>"
+  },
+  {
+   "text": "Sāo Paulo\nSĀO PAULO\ngp\nGP",
+   "tag": "A",
+   "transition": "all",
+   "radius": "0px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "shadow": "none",
+   "children": 2,
+   "inner": "<div class=\"home-hero-next-race-rive-w\"><div class=\"home-hero-next-race-rive w-embed\"><!-- data-rive-circuit-hover=\"true\" -- looks for all [data-rive-circuit-hover-target] elements on page -- changes the data-rive-input-"
+  }
+ ],
+ "cursorFollowers": [
+  "DIV.nav",
+  "DIV.transition-w"
+ ],
+ "transformed": [],
+ "heroOuter": "<div data-page=\"home\" data-taxi-view=\"\" class=\"taxi-w\"><div class=\"home-title-w\"><h1 class=\"screen-reader\">Lando Norris</h1><h2 class=\"screen-reader\">2025 Mclaren Formula 1 Driver</h2></div><div data-designmode-white=\"\" data-sticky-hero=\"track\" data-gl-track=\"head\" class=\"sticky-track home-hero\"><div class=\"sticky-item home-hero\"><section data-hero-animation-container=\"\" class=\"s home-hero\"><div class=\"c home-hero\"><div data-gl=\"head\" data-sticky-hero=\"canvas\" class=\"gl-canvas\"></div><div class=\"home-hero-next-race-w\"><div class=\"home-hero-next-race-outline w-embed\"><svg width=\"119\" height=\"244\" viewBox=\"0 0 119 244\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M118.5 6v232a5.5 5.5 0 0 1-5.5 5.5H6A5.5 5.5 0 0 1 .5 238V25A5.5 5.5 0 0 1 6 19.5h46.346c4.695 0 9.167-2 12.297-5.498l7.46-8.337A15.5 15.5 0 0 1 83.653.5H113a5.5 5.5 0 0 1 5.5 5.5Z\" stroke=\"currentColor\"></path> </svg></div><div class=\"home-hero-next-race-top\"><div screen-reader=\"\">Next Race</div><div data-anim-high=\"right, lime\" split-text=\"lines\" class=\"text-eyebrow\" aria-hidden=\"true\" aria-label=\"Next Race\"><span class=\"line\" aria-hidden=\"true\" style=\"text-align: start; position: relative; opacity: 1; visibility: inherit; clip-path: inset(0px 0% 0px 0px);\">Next Race<div class=\"high-line-reveal\" style=\"position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background-color: var(--color--lime, #d2ff00); transform-origin: right center; z-index: 5; translate: none; rotate: none; scale: none; transform: scale(0, 1);\"></div></span></div></div><div class=\"home-hero-next-race-row is-1 w-dyn-list\">",
+ "htmlClass": "w-mod-js lenis",
+ "bodyClass": "",
+ "listeners": {
+  "window": [
+   "scrollend",
+   "load",
+   "wheel",
+   "resize",
+   "keydown",
+   "pagehide",
+   "pageshow",
+   "focus",
+   "blur",
+   "allriveloaded",
+   "popstate",
+   "scroll",
+   "pointerdown",
+   "riveAllLoaded"
+  ],
+  "document": [
+   "mouseenter",
+   "focus",
+   "DOMContentLoaded",
+   "scroll",
+   "touchcancel",
+   "pointerdown",
+   "touchstart",
+   "mousedown",
+   "pointerup",
+   "touchend",
+   "mouseup",
+   "visibilitychange",
+   "mousemove",
+   "touchmove",
+   "click",
+   "keypress",
+   "disco"
+  ],
+  "document.body": [
+   "touchstart",
+   "mousemove",
+   "touchmove",
+   "wheel",
+   "resize"
+  ]
+ },
+ "hover": {
+  "text": "Sāo Paulo\nSĀO PAULO\ngp\nGP",
+  "x": 66.234375,
+  "y": 743.34375,
+  "before": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(83, 84, 80)",
+   "transform": "none",
+   "shadow": "none"
+  },
+  "after": {
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(83, 84, 80)",
+   "transform": "none",
+   "shadow": "none",
+   "childTransforms": [
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none"
+   ]
+  }
+ },
+ "scripts": [
+  "https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/js/lando-offbrand.schunk.7321a5097fb66f41.js",
+  "https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/js/lando-offbrand.751e0867.148dc658e77a3916.js",
+  "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67b5a02dc5d338960b17a7e9",
+  "https://lando.itsoffbrand.io/dev-js/lando-by-OFF+BRAND.05.js",
+  "https://landonorris.com/avljl2rk9q5pNjdiNWEwMmRjNWQzMzg5NjBiMTdhN2U5/7ZblqsTeeE5q7zjxhGjeEUmRx4o",
+  "https://www.googletagmanager.com/gtag/js?id=G-P8L2KTXDN0&gtg_health=1",
+  "https://lando.itsoffbrand.io/gl/draco/draco_wasm_wrapper.js"
+ ]
+}

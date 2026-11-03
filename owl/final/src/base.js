@@ -159,6 +159,65 @@ function router(){
   addEventListener('hashchange', go); go();
 }
 
+
+/* ===== Upgrade R1 shared systems ===== */
+/* masked word reveal ⟦S0451⟧⟦S1329⟧: split once, keep the sentence for screen readers, reveal on demand */
+OWL.split = function(el, delay){
+  if (!el || el.dataset.split) return el; el.dataset.split = 1;
+  var i = 0, label = el.textContent.replace(/\s+/g, ' ').trim();
+  (function walk(node){
+    [].slice.call(node.childNodes).forEach(function(n){
+      if (n.nodeType === 3){
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function(part){
+          if (!part) return; if (!part.trim()){ frag.appendChild(document.createTextNode(part)); return; }
+          var m = document.createElement('span'); m.className = 'wm'; m.setAttribute('aria-hidden', 'true');
+          var w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--i', i++); w.textContent = part; m.appendChild(w); frag.appendChild(m);
+        });
+        node.replaceChild(frag, n);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+    });
+  })(el);
+  el.setAttribute('aria-label', label); el.classList.add('split'); if (delay) el.style.setProperty('--d', delay + 'ms');
+  return el;
+};
+OWL.reveal = function(el){ if (!el) return; requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('in'); }); }); };
+
+/* drawn-plate buttons: the amber wash starts where the cursor came in ⟦S1324⟧ */
+document.addEventListener('pointerover', function(e){
+  var b = e.target.closest && e.target.closest('.btn-ink'); if (!b || b.contains(e.relatedTarget)) return;
+  var r = b.getBoundingClientRect(); b.style.setProperty('--x', (e.clientX - r.left) + 'px'); b.style.setProperty('--y', (e.clientY - r.top) + 'px');
+});
+
+/* the splash surface ⟦S1338⟧⟦S1323⟧, technique read from Immersive Garden's engine: a small flowmap the cursor
+   stamps into and that decays every frame (×0.953). Consumers read .canvas (alpha = wake) as a mask or a texture.
+   Stamps are laid by distance travelled, not by time, so a flick and a crawl leave the same wake. */
+OWL.flow = function(el, o){
+  o = o || {}; var W = o.w || 160, R = o.radius || .14, DEC = o.decay || .953, STEP = o.step || .012, A = o.alpha || .32, EASE = o.ease || .4;
+  var c = document.createElement('canvas'), g = c.getContext('2d'), deep = o.deep ? document.createElement('canvas') : null, gd = deep && deep.getContext('2d');
+  var rect = null, H = 100, tx = -1, ty = -1, ex = -1, ey = -1, inside = false, energy = 0;
+  function size(){ rect = el.getBoundingClientRect(); H = Math.max(8, Math.round(W * rect.height / Math.max(1, rect.width))); c.width = W; c.height = H; if (deep){ deep.width = W; deep.height = H; } }
+  size(); new ResizeObserver(size).observe(el);
+  function local(e){ return [(e.clientX - rect.left) / rect.width, (e.clientY - rect.top) / rect.height]; }
+  el.addEventListener('pointermove', function(e){ if (e.pointerType === 'touch' && !o.touch) return; rect = el.getBoundingClientRect(); var p = local(e); tx = p[0]; ty = p[1]; if (!inside){ inside = true; ex = tx; ey = ty; } }, {passive:true});
+  el.addEventListener('pointerleave', function(){ inside = false; });
+  function blob(ctx, x, y, a, r){ var gr = ctx.createRadialGradient(x*W, y*H, 0, x*W, y*H, r*W); gr.addColorStop(0, 'rgba(255,255,255,' + a + ')'); gr.addColorStop(.45, 'rgba(255,255,255,' + a*.6 + ')'); gr.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x*W, y*H, r*W, 0, 6.3); ctx.fill(); }
+  var api = {canvas: c, deep: deep, energy: 0,
+    stamp: function(x, y, a, r){ blob(g, x, y, a == null ? A : a, r || R); if (deep) blob(gd, x, y, (a == null ? A : a) * .5, (r || R) * .8); },
+    step: function(){
+      g.globalCompositeOperation = 'destination-out'; g.fillStyle = 'rgba(0,0,0,' + (1 - DEC) + ')'; g.fillRect(0, 0, W, H); g.globalCompositeOperation = 'source-over';
+      if (deep){ gd.globalCompositeOperation = 'destination-out'; gd.fillStyle = 'rgba(0,0,0,' + (1 - (o.deepDecay || .985)) + ')'; gd.fillRect(0, 0, W, H); gd.globalCompositeOperation = 'source-over'; }
+      if (!inside) { energy *= .9; api.energy = energy; return; }
+      var px = ex, py = ey; ex += (tx - ex) * EASE; ey += (ty - ey) * EASE;
+      var dx = ex - px, dy = ey - py, d = Math.sqrt(dx*dx + dy*dy), n = Math.min(14, Math.floor(d / STEP));
+      energy = Math.min(1, energy * .9 + d * 6); api.energy = energy;
+      for (var i = 1; i <= n; i++){ var t = i / n; blob(g, px + dx*t, py + dy*t, A, R); }
+      if (deep){ var slow = Math.max(0, 1 - d * 60); if (slow > .05) blob(gd, ex, ey, .06 * slow, R * .7); }
+      if (!n && Math.random() < .08) blob(g, ex, ey, A * .35, R * .8);
+    }};
+  return api;
+};
+
 document.addEventListener('DOMContentLoaded', function(){
   var secs = apply(); review(secs); header(); magnets(); companion(); reveals(); router();
 });

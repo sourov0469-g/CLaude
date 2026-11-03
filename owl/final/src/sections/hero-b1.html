@@ -1,0 +1,105 @@
+<section class="sec hero2" aria-labelledby="h1-b">
+<style>
+.hero2{padding-top:clamp(28px,4vw,56px);padding-bottom:clamp(32px,4vw,56px)}
+.hero2 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,72px)}
+.hero2 .lede{margin:22px 0 34px;max-width:32ch}
+.hero2 .ctas{display:flex;flex-wrap:wrap;gap:16px}
+.hero2 .card{position:relative;aspect-ratio:1/1;border-radius:26px;overflow:hidden;background:var(--ink);box-shadow:0 2px 0 rgba(255,255,255,.6) inset,0 40px 70px -30px rgba(23,17,29,.55),0 0 0 10px var(--paper);transform:perspective(1400px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .6s var(--ease);touch-action:none;cursor:grab}
+.hero2 .card.drag{cursor:grabbing;transition:none}
+.hero2 canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero2 .knob{position:absolute;left:0;top:0;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6C25F,var(--amber) 55%,#D48F17);box-shadow:0 6px 0 var(--amber-edge),0 16px 26px -8px rgba(23,17,29,.6),inset 0 2px 0 rgba(255,255,255,.5);display:grid;place-items:center;pointer-events:none;transition:transform .2s}
+.hero2 .knob svg{width:26px;height:26px;color:var(--ink)}
+.hero2 .card.drag .knob{transform:scale(.92)}
+.hero2 .range{position:absolute;inset:auto 0 0 0;opacity:0;height:1px}
+.hero2 .range:focus-visible + .ring{opacity:1}
+.hero2 .ring{position:absolute;inset:6px;border-radius:22px;outline:3px solid var(--amber);opacity:0;pointer-events:none}
+.hero2 .tl{list-style:none;display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:clamp(28px,4vw,48px);padding-top:26px;border-top:1px solid var(--line);font-weight:600;font-size:16px}
+.hero2 .tl li{display:flex;align-items:center;gap:10px}
+.hero2 .tl svg{width:26px;height:26px;flex:none}
+@media (max-width:900px){.hero2 .g{grid-template-columns:1fr}.hero2 .card{order:-1;max-width:560px;width:100%;justify-self:center}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h1 class="h1" id="h1-b">A Roof That Watches Over Your Home</h1>
+   <p class="lede">Family-owned roofers in Shoreview, serving 29 towns. We Give a Hoot.</p>
+   <div class="ctas">
+    <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+    <a class="btn btn-line" href="#crew-video" data-mag data-owl="say:Roll film">Watch the Crew</a>
+   </div>
+   <ul class="tl">
+    <li><svg viewBox="0 0 26 26"><path d="M13 2.5l3.2 6.6 7.3 1-5.3 5.1 1.3 7.2L13 19l-6.5 3.4 1.3-7.2-5.3-5.1 7.3-1z" fill="#EAA221"/></svg>5.0 · 90+ reviews</li>
+    <li><svg viewBox="0 0 26 26"><path d="M13 2l9 3.5v6.3c0 6-3.9 10.4-9 12.2C7.9 22.2 4 17.8 4 11.8V5.5z" fill="#EAA221"/><path d="M8.5 13l3 3 6-6.5" stroke="#17111D" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>GAF Systems Plus Certified</li>
+    <li><svg viewBox="0 0 26 26"><path d="M13 2l9 3.5v6.3c0 6-3.9 10.4-9 12.2C7.9 22.2 4 17.8 4 11.8V5.5z" fill="none" stroke="#EAA221" stroke-width="2.2"/><path d="M9 14.5l4-7 4 7M10.4 12h5.2" stroke="#17111D" stroke-width="1.9" fill="none" stroke-linecap="round"/></svg>BBB A− Accredited</li>
+    <li><svg viewBox="0 0 26 26"><path d="M13 2l9 3.5v6.3c0 6-3.9 10.4-9 12.2C7.9 22.2 4 17.8 4 11.8V5.5z" fill="none" stroke="#EAA221" stroke-width="2.2"/><path d="M8 17V9.5L13 6l5 3.5V17z" fill="#EAA221"/></svg>10-Year Workmanship Warranty</li>
+   </ul>
+  </div>
+  <div class="card" data-owl="say:Peel it back">
+   <canvas role="img" aria-label="An old, curling roof peels away to show Owl's new shingle roof underneath"></canvas>
+   <span class="knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 9l-6 6M9 9v6h6"/></svg></span>
+   <input class="range" type="range" min="0" max="100" value="50" aria-label="Peel the old roof back">
+   <span class="ring" aria-hidden="true"></span>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('hero','2',function(root){
+  var card = root.querySelector('.card'), cv = root.querySelector('canvas'), knob = root.querySelector('.knob'), range = root.querySelector('.range');
+  var ctx = cv.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0;
+  var oldI = new Image(), newI = new Image(), n = 0; oldI.src = '{{A:old-roof.webp}}'; newI.src = '{{A:new-roof.webp}}';
+  var t = OWL.reduce ? .5 : 0, target = .5;
+  function size(){ var r = cv.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W*dpr; cv.height = H*dpr; }
+  function cover(img){ var s = Math.max(W/img.width, H/img.height), w = img.width*s, h = img.height*s; ctx.drawImage(img, (W-w)/2, (H-h)/2, w, h); }
+  /* t in 0..1: the roll line travels from the bottom-right corner to the top-left */
+  function foldAt(t){ return {x: W*(1-t), y: H*(1-t)}; }
+  function band(M, nx, ny, from, to){
+    var L = 4000; ctx.beginPath();
+    var ax = -ny, ay = nx; /* along the fold */
+    ctx.moveTo(M.x + nx*from + ax*L, M.y + ny*from + ay*L); ctx.lineTo(M.x + nx*from - ax*L, M.y + ny*from - ay*L);
+    ctx.lineTo(M.x + nx*to - ax*L, M.y + ny*to - ay*L); ctx.lineTo(M.x + nx*to + ax*L, M.y + ny*to + ay*L); ctx.closePath(); ctx.clip();
+  }
+  function draw(){
+    if (!W) return; ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    ctx.filter = 'brightness(1.18) contrast(1.05)'; cover(newI); ctx.filter = 'none';
+    var d = Math.hypot(W, H), nx = W/d, ny = H/d, M = foldAt(t), w = Math.min(96, 30 + t*130);
+    if (t <= .001){ cover(oldI); knob.style.transform = 'translate(' + (W-36) + 'px,' + (H-36) + 'px)'; return; }
+    /* the old roof still in place */
+    ctx.save(); band(M, nx, ny, -4000, -w*.5); cover(oldI); ctx.restore();
+    /* shadow the roll casts on the new roof */
+    ctx.save(); band(M, nx, ny, 0, 90);
+    var g = ctx.createLinearGradient(M.x, M.y, M.x + nx*90, M.y + ny*90); g.addColorStop(0,'rgba(23,17,29,.55)'); g.addColorStop(1,'rgba(23,17,29,0)');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H); ctx.restore();
+    /* the roll: old shingles curled into a cylinder along the line */
+    ctx.save(); band(M, nx, ny, -w*.5, w*.5);
+    ctx.filter = 'brightness(.62) sepia(.25)'; cover(oldI); ctx.filter = 'none';
+    var g2 = ctx.createLinearGradient(M.x - nx*w*.5, M.y - ny*w*.5, M.x + nx*w*.5, M.y + ny*w*.5);
+    g2.addColorStop(0,'rgba(23,17,29,.78)'); g2.addColorStop(.28,'rgba(255,236,200,.5)'); g2.addColorStop(.48,'rgba(255,236,200,.16)'); g2.addColorStop(.8,'rgba(23,17,29,.55)'); g2.addColorStop(1,'rgba(23,17,29,.9)');
+    ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+    /* ragged roll edges */
+    ctx.strokeStyle = 'rgba(23,17,29,.5)'; ctx.lineWidth = 1;
+    for (var k = -2; k <= 2; k++){ ctx.beginPath(); ctx.moveTo(M.x + nx*k*w*.18 - ny*4000, M.y + ny*k*w*.18 + nx*4000); ctx.lineTo(M.x + nx*k*w*.18 + ny*4000, M.y + ny*k*w*.18 - nx*4000); ctx.globalAlpha = .25; ctx.stroke(); }
+    ctx.restore();
+    var kx = Math.max(32, Math.min(W-32, M.x)), ky = Math.max(32, Math.min(H-32, M.y));
+    knob.style.transform = 'translate(' + kx + 'px,' + ky + 'px)';
+  }
+  function loop(){ t += (target - t) * (OWL.reduce ? 1 : .12); draw(); if (Math.abs(target - t) > .0008) requestAnimationFrame(loop); else { t = target; draw(); } }
+  function go(v){ target = Math.max(0, Math.min(1, v)); range.value = Math.round(target*100); requestAnimationFrame(loop); }
+  function both(){ if (++n < 2) return; size(); if (OWL.reduce) { t = target; draw(); } else { t = 0; draw(); setTimeout(function(){ go(.5); }, 500); } }
+  oldI.onload = both; newI.onload = both;
+  addEventListener('resize', function(){ size(); draw(); });
+  var dragging = false;
+  function fromPointer(e){ var r = card.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+        return 1 - ((x/W) + (y/H))/2; }
+  card.addEventListener('pointerdown', function(e){ dragging = true; card.classList.add('drag'); card.setPointerCapture(e.pointerId); go(fromPointer(e)); });
+  card.addEventListener('pointermove', function(e){
+    if (dragging) { go(fromPointer(e)); return; }
+    if (!OWL.fine || OWL.reduce) return;
+    var r = card.getBoundingClientRect(); card.style.setProperty('--ry', (((e.clientX-r.left)/r.width - .5)*8).toFixed(2) + 'deg'); card.style.setProperty('--rx', (-((e.clientY-r.top)/r.height - .5)*6).toFixed(2) + 'deg');
+  });
+  function up(){ dragging = false; card.classList.remove('drag'); }
+  card.addEventListener('pointerup', up); card.addEventListener('pointercancel', up);
+  card.addEventListener('pointerleave', function(){ card.style.setProperty('--ry','0deg'); card.style.setProperty('--rx','0deg'); });
+  range.addEventListener('input', function(){ go(range.value/100); });
+});
+</script>
+</section>
