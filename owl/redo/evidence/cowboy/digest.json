@@ -1,0 +1,655 @@
+{
+ "url": "https://cowboy.com",
+ "title": "Cowboy - The Ultimate Connected E-Bikes",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 0,
+  "canvases": 0,
+  "videos": [
+   "6e16fb1725b643cca37124c99aa20af4.mp4",
+   "1894e5ff58514386861562b37df4c3b6.mp4",
+   "aa348909f456482582338a32fbccd11a.mp4",
+   "aa348909f456482582338a32fbccd11a.mp4",
+   "aa348909f456482582338a32fbccd11a.mp4",
+   "aa348909f456482582338a32fbccd11a.mp4",
+   "ccbed03a9b824dc492ece9700419f680.mp4",
+   "4ccf006fd9ec413ea2391ec279087639.mp4",
+   "464b1c281d53457699b7696d160d6640.mp4",
+   "235659777548420ca770e18119a8235f.mp4",
+   "057821e16a3547d6add0a3fc4294271d.mp4"
+  ],
+  "clipPathEls": 11,
+  "sticky": 3,
+  "fixed": 8,
+  "fonts": [
+   "SuisseIntl"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/entry.client-BRExdFtJ.js",
+   "kb": 8
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/index-BoC_9qS6.js",
+   "kb": 32
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/chunk-OB3PAWPO-DDC9CxyS.js",
+   "kb": 132
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/index-DkGkwad7.js",
+   "kb": 132
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/thirdPartyPatterns-SnpXe7Jd.js",
+   "kb": 41
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/messageStore-B7cckJ2S.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/preload-helper-DUWyIh69.js",
+   "kb": 2
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/root-CkXRg3kr.js",
+   "kb": 17
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/index-DWkFesC_.js",
+   "kb": 69
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/useLoaderData-DYHkQPwR.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/CookieConsent-BO3COvjQ.js",
+   "kb": 27
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/googleTagManagerReady-BJE7X79d.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/ErrorPage-DFgZVoNK.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/(_locale)-BFz5OooJ.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/AIAssistant-C8-oUc1P.js",
+   "kb": 72
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/PageLayout-D1OllZGj.js",
+   "kb": 264
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/useRafLoop-McX3GhYy.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/(_locale)._index-BBDZpylM.js",
+   "kb": 37
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/generateSeoMeta-CtUudH7U.js",
+   "kb": 19
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/SectionKeepExploring-B5dr_9uD.js",
+   "kb": 3
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/SectionHero-ByTV5Kcr.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/DialogSubsidies-DU52LVT_.js",
+   "kb": 3
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/SectionAsset-DZ3cac8g.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/BikeTestRideMap-TnUUhNgk.js",
+   "kb": 4
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/sentry.client-DL9XJPBU.js",
+   "kb": 168
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-562LX9P",
+   "kb": 593
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/consent-tracking-api/v0.2/consent-tracking-api.js",
+   "kb": 31
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/api.trustpilot.ratings-l0sNRNKZ.js",
+   "kb": 0
+  },
+  {
+   "url": "https://challenges.cloudflare.com/turnstile/v0/g/5c2e6b612edd/api.js",
+   "kb": 85
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=AW-757052941&cx=c&gtm=4e6au1",
+   "kb": 485
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=DC-9918692&cx=c&gtm=4e6au1",
+   "kb": 413
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-RSRZYEZY9L&cx=c&gtm=4e6au1",
+   "kb": 580
+  },
+  {
+   "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/757052941/?random=1793684408275&cv=11&fst=1793684408275&bg=ffffff&guid=ON&a",
+   "kb": 7
+  },
+  {
+   "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/757052941/?random=1793684408277&cv=11&fst=1793684408277&bg=ffffff&guid=ON&a",
+   "kb": 7
+  },
+  {
+   "url": "https://cdn.shopify.com/oxygen-v2/33924/23678/49114/4924538/assets/sentryReplay.client-BruKRk5A.js",
+   "kb": 157
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/perf-kit/shopify-perf-kit-spa.min.js",
+   "kb": 83
+  },
+  {
+   "url": "https://www.redditstatic.com/ads/pixel.js",
+   "kb": 86
+  },
+  {
+   "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+   "kb": 61
+  },
+  {
+   "url": "https://s.pinimg.com/ct/core.js",
+   "kb": 5
+  },
+  {
+   "url": "https://bat.bing.com/bat.js",
+   "kb": 57
+  }
+ ],
+ "totalScriptKB": 6064,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 13,
+   "examples": [
+    "duration:0",
+    "duration: 1",
+    "duration:75"
+   ]
+  },
+  "ease": {
+   "count": 0,
+   "examples": []
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 47,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 6,
+   "examples": [
+    "rApiEr",
+    "rapier"
+   ]
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 1,
+   "examples": [
+    "Barba"
+   ]
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 0,
+   "examples": []
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 0,
+   "examples": []
+  },
+  "react": {
+   "count": 6,
+   "examples": [
+    "createRoot",
+    "react-dom"
+   ]
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 99.3,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer",
+   "",
+   "default",
+   "text"
+  ]
+ },
+ "hover": [
+  {
+   "txt": "Continue on us.cowboy.com",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "No thanks",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "E-bikes",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "AdaptivePower",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "Connect",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "Leasing",
+   "transition": "all",
+   "changed": []
+  }
+ ],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    98,
+    300
+   ],
+   [
+    158,
+    300
+   ],
+   [
+    238,
+    300
+   ],
+   [
+    300,
+    300
+   ],
+   [
+    360,
+    300
+   ],
+   [
+    420,
+    300
+   ],
+   [
+    474,
+    300
+   ],
+   [
+    530,
+    300
+   ],
+   [
+    585,
+    300
+   ],
+   [
+    649,
+    300
+   ],
+   [
+    703,
+    300
+   ],
+   [
+    759,
+    300
+   ],
+   [
+    819,
+    300
+   ],
+   [
+    877,
+    300
+   ],
+   [
+    931,
+    300
+   ],
+   [
+    986,
+    300
+   ],
+   [
+    1039,
+    300
+   ],
+   [
+    1092,
+    300
+   ],
+   [
+    1154,
+    300
+   ],
+   [
+    1219,
+    300
+   ],
+   [
+    1279,
+    300
+   ],
+   [
+    1340,
+    300
+   ],
+   [
+    1405,
+    300
+   ]
+  ],
+  "finalY": 300,
+  "msTo50pct": 22,
+  "msTo95pct": 22
+ },
+ "scrollSteps": [
+  {
+   "y": 450,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 1
+  },
+  {
+   "y": 900,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 2
+  },
+  {
+   "y": 1350,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 3
+  },
+  {
+   "y": 1800,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 4
+  },
+  {
+   "y": 2250,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 5
+  },
+  {
+   "y": 2700,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 6
+  },
+  {
+   "y": 3150,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 7
+  },
+  {
+   "y": 3600,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 4,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 8
+  },
+  {
+   "y": 4050,
+   "H": 18783,
+   "bigFixedOrSticky": 4,
+   "videosInView": 4,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 9
+  },
+  {
+   "y": 4500,
+   "H": 18783,
+   "bigFixedOrSticky": 5,
+   "videosInView": 4,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 10
+  },
+  {
+   "y": 4500,
+   "H": 18783,
+   "bigFixedOrSticky": 5,
+   "videosInView": 4,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 11
+  },
+  {
+   "y": 4500,
+   "H": 18783,
+   "bigFixedOrSticky": 5,
+   "videosInView": 4,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 12
+  },
+  {
+   "y": 4500,
+   "H": 18783,
+   "bigFixedOrSticky": 5,
+   "videosInView": 4,
+   "bigCanvasInView": 0,
+   "text": [
+    "YOUR CART",
+    "There's nothing here, but a test ride is nearby."
+   ],
+   "i": 13
+  }
+ ]
+}

@@ -1,0 +1,381 @@
+{
+ "url": "https://lusion.co",
+ "title": "Lusion - Award Winning 3D and Interactive Web Studio",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": true,
+  "threeRev": "158",
+  "webglContexts": 1,
+  "canvases": 3,
+  "videos": [],
+  "clipPathEls": null,
+  "sticky": null,
+  "fixed": null,
+  "fonts": [
+   "Aeonik",
+   "IBMPlexMono",
+   "LusionMono"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-W2XC5XK9QJ",
+   "kb": 532
+  },
+  {
+   "url": "https://lusion.co/_astro/hoisted.CUO_IjfL.js",
+   "kb": 1222
+  },
+  {
+   "url": "https://challenges.cloudflare.com/turnstile/v0/g/5c2e6b612edd/api.js",
+   "kb": 85
+  },
+  {
+   "url": "https://player.vimeo.com/cdn-cgi/challenge-platform/h/g/scripts/precursor/5c2e6b612edd/main.js?ray=a548fe5ac96ce601",
+   "kb": 53
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/55031058-83b2-4d47-9aa3-cbb6375bc8b7",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/55031058-83b2-4d47-9aa3-cbb6375bc8b7",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/55031058-83b2-4d47-9aa3-cbb6375bc8b7",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/bcc30503-4d92-415b-8858-09d5a5f5343b",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/bcc30503-4d92-415b-8858-09d5a5f5343b",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/736b748f-845e-415b-b022-da9006753cd1",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/736b748f-845e-415b-b022-da9006753cd1",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/8c7cabd2-2b1d-459c-8fb2-6107248acacd",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/8c7cabd2-2b1d-459c-8fb2-6107248acacd",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/8c7cabd2-2b1d-459c-8fb2-6107248acacd",
+   "kb": 0
+  },
+  {
+   "url": "blob:https://challenges.cloudflare.com/b29625e1-87af-4437-9198-345da5a86ba0",
+   "kb": 0
+  }
+ ],
+ "totalScriptKB": 1895,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 0,
+   "examples": []
+  },
+  "ease": {
+   "count": 0,
+   "examples": []
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 9,
+   "examples": [
+    "PerspectiveCamera(fov,aspect,e,t)",
+    "PerspectiveCamera(90,1,t,r)",
+    "PerspectiveCamera(60,1)",
+    "PerspectiveCamera(45,1,.1,200)"
+   ]
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 6,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 2,
+   "examples": [
+    "MeshPhysicalMaterial"
+   ]
+  },
+  "ShaderMaterial": {
+   "count": 100,
+   "examples": [
+    "ShaderMaterial",
+    "RawShaderMaterial"
+   ]
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 23,
+   "examples": [
+    "postprocessing"
+   ]
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 5,
+   "examples": [
+    "AudioContext"
+   ]
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 0,
+   "examples": []
+  },
+  "splittext": {
+   "count": 26,
+   "examples": [
+    "SplitType"
+   ]
+  },
+  "scrollTrigger": {
+   "count": 0,
+   "examples": []
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 58,
+   "examples": [
+    "astro",
+    "Astro"
+   ]
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "light": true
+ },
+ "hover": [],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    66,
+    0
+   ],
+   [
+    119,
+    0
+   ],
+   [
+    174,
+    0
+   ],
+   [
+    231,
+    0
+   ],
+   [
+    289,
+    0
+   ],
+   [
+    344,
+    0
+   ],
+   [
+    404,
+    0
+   ],
+   [
+    462,
+    0
+   ],
+   [
+    515,
+    0
+   ],
+   [
+    569,
+    0
+   ],
+   [
+    623,
+    0
+   ],
+   [
+    677,
+    0
+   ],
+   [
+    735,
+    0
+   ],
+   [
+    790,
+    0
+   ],
+   [
+    847,
+    0
+   ],
+   [
+    905,
+    0
+   ],
+   [
+    965,
+    0
+   ],
+   [
+    1020,
+    0
+   ],
+   [
+    1074,
+    0
+   ],
+   [
+    1127,
+    0
+   ],
+   [
+    1184,
+    0
+   ],
+   [
+    1237,
+    0
+   ],
+   [
+    1297,
+    0
+   ]
+  ],
+  "finalY": 0,
+  "msTo50pct": 0,
+  "msTo95pct": 0
+ },
+ "scrollSteps": [
+  {
+   "y": 0,
+   "H": 900,
+   "text": [
+    "Subscribe to\nour newsletter"
+   ],
+   "i": 1
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "text": [
+    "Subscribe to\nour newsletter"
+   ],
+   "i": 2
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "text": [
+    "Subscribe to\nour newsletter",
+    "We combine design, motion, 3D, and development to create dig"
+   ],
+   "i": 3
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "text": [
+    "Subscribe to\nour newsletter",
+    "We combine design, motion, 3D, and development to create dig"
+   ],
+   "i": 4
+  }
+ ]
+}

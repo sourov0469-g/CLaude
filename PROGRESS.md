@@ -1,3 +1,24 @@
+# OWL ROOFING — FULL REDO (owner's order 2026-11-03 10:50; brief `OWL-REDO-BRIEF.md`)
+
+**Status:** the previous build is rejected in full and stays in the repo as a record only (`owl/site/`, its gates and 9
+backups untouched). The redo runs one step at a time; each step stops for Muse's judgment.
+
+- **STEP 1 DONE, awaiting judgment:** `owl/redo/REVERSE-ENGINEERING.md`: all 11 references (Igloo Inc, Lusion, Longbow,
+  Cowboy, Scout, AirPods Pro, MERSI, Lando Norris, Graza, Quiet Cubes, Bruno Simon), each probed live this session:
+  wheel-driven frames, scroll-smoothing timings, cursor and click tests, hover transitions, and the shipped JS read for
+  libraries and configuration values. Per reference: mechanism frame by frame, code level, why it works, what transfers,
+  the concrete Owl version, what never transfers; plus a handover comparison and three open points for Muse.
+  Evidence: `owl/redo/evidence/<ref>/` (contact sheets, digests) and the probe scripts.
+- **Limits stated in the dossier:** software WebGL (Igloo's later scenes from code only); Quiet Cubes stalled on its loader
+  (gate from the earlier capture); Cowboy's modal (lower page from the earlier capture); Lusion's Turnstile script refused
+  by the proxy (not bypassed; the page rendered without it).
+- **Incident (honest record):** one Bruno capture command ran past the harness limit and was auto-moved to the background.
+  I stopped it at once with TaskStop (task bocozauc1), checked that no browser process survived, and kept the 5 frames it
+  had saved. All later commands were kept short and in the foreground. No sub-agents were used.
+- **Next (only after Muse judges Step 1):** Step 2, identity and direction, with the one-paragraph difference from Elbaz.
+
+---
+
 # OWL ROOFING — overnight build (2026-11-03, owner's subject switch)
 
 **Authority:** `OVERNIGHT-ADDENDUM-OWL.md` + `OWL-ROOFING-PACK.md` + `REFERENCE-ANNEX-REMBRANDT.md` (the library governs this build; the

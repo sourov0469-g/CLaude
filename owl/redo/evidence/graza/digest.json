@@ -1,0 +1,786 @@
+{
+ "url": "https://www.graza.co",
+ "title": "GRAZA | High Quality Olive Oil | Graza",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 0,
+  "canvases": 0,
+  "videos": [
+   "8e1af1140368412d8993ec13e53f6427.HD-1080p-7.2Mbps-69849097.m",
+   "116856785e5445af817856ad82f1b058.HD-1080p-7.2Mbps-70155274.m",
+   "4edb9d83767d416ea7dc7bcda64f27d5.HD-1080p-7.2Mbps-70156276.m",
+   "52c70e4345eb4f2188d0736c4a2f9aa2.HD-1080p-7.2Mbps-42857536.m",
+   "fc2476196b094fd8aab93165efdde41d.HD-1080p-7.2Mbps-51304310.m",
+   "d0c3bf24aec84ce98f1086cd44df957e.HD-1080p-7.2Mbps-84024008.m",
+   "d0c3bf24aec84ce98f1086cd44df957e.HD-1080p-7.2Mbps-84024008.m",
+   "6126586360454b41adf5b26042f37946.HD-1080p-3.3Mbps.mp4?v=0",
+   "ebf43c40d08a47e3b5ae202375cd93b4.HD-1080p-7.2Mbps-42984690.m",
+   "32e37fbdb4e54c529624dda4fd0a8023.HD-1080p-7.2Mbps-42833260.m"
+  ],
+  "clipPathEls": 23,
+  "sticky": 3,
+  "fixed": 9,
+  "fonts": [
+   "swiper-icons",
+   "GT Alpina Typewriter",
+   "ITC Garamond Condensed",
+   "Apercu",
+   "oke-widget-icons",
+   "Montserrat",
+   "Nunito Sans",
+   "Playfair Display",
+   "GT-Alpina-Typewriter-Light",
+   "GT-Alpina-Typewriter-Medium"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/loader.init-shop-cart-sync.en.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/storefront/standard-actions.js",
+   "kb": 11
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/client.init-shop-cart-sync_ChnSjukC.en.esm.js",
+   "kb": 2
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.window_CAbVMZox.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.register_oML0Hu4L.esm.js",
+   "kb": 47
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.document_DMcRsBXN.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.init_dY63_sS3.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19a2c-f029-763f-bc7c-c80e0213e0be/tek-labs-gifts-upsell-1009/assets/widget-styling-gate.script.js",
+   "kb": 3
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.networkErrorMessages_Du380vAr.esm.js",
+   "kb": 0
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/client.shop-cart-sync_ytHtkiPf.en.esm.js",
+   "kb": 8
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.defineInitFunction_CIjOjzsO.esm.js",
+   "kb": 0
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.utils_K8y2k-BJ.esm.js",
+   "kb": 9
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.casing_U_9x-Om3.esm.js",
+   "kb": 11
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.v4_C3N_0s0v.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.useUserRecognitionSignal_DOQPCqaU.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.storage_DQF5v-OM.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.hooks_C48kTNUX.esm.js",
+   "kb": 0
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.authorize_DINGMyE5.esm.js",
+   "kb": 0
+  },
+  {
+   "url": "https://static.klaviyo.com/onsite/js/Ra2S9r/klaviyo.js?company_id=Ra2S9r",
+   "kb": 14
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.useEventListener_BeiI7eri.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/shop-js/modules/v2/chunk.validators_09U1U9sZ.esm.js",
+   "kb": 1
+  },
+  {
+   "url": "https://cdn.shopify.com/shopifycloud/storefront/assets/storefront/origin_trials-318ab40a.js",
+   "kb": 2
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/consentmo_cookie_consent.js",
+   "kb": 143
+  },
+  {
+   "url": "https://shop.app/checkouts/internal/preloads.js?locale=en-US&default_configuration_id=13336790&shop_id=55000039638",
+   "kb": 0
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19a2c-f029-763f-bc7c-c80e0213e0be/tek-labs-gifts-upsell-1009/assets/discount-code.script.js",
+   "kb": 96
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a18973-a927-79a3-9205-8515282cb07a/56071677a62720b5cde4241477474f626e61c35a-40569/assets/algolia_autoco",
+   "kb": 216
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/layout-cookie-bar.consentmo.js",
+   "kb": 12
+  },
+  {
+   "url": "https://www.graza.co/checkouts/internal/preloads.js?locale=en-US&default_configuration_id=13336790",
+   "kb": 13
+  },
+  {
+   "url": "https://c.albss.com/p/l/loader.iife.js",
+   "kb": 6
+  },
+  {
+   "url": "https://www.graza.co/cdn/shop/t/38/assets/js-polyfill-smooth-scroll.static.js?v=148379743528603512151686646138",
+   "kb": 8
+  },
+  {
+   "url": "https://cdn-static.okendo.io/reviews-widget-plus/js/okendo-reviews.js",
+   "kb": 39
+  },
+  {
+   "url": "https://www.graza.co/cdn/shopifycloud/storefront/assets/storefront/load_feature-ed94c51f.js",
+   "kb": 14
+  },
+  {
+   "url": "https://www.graza.co/cdn/shopifycloud/storefront/assets/shopify_pay/storefront-f0e26bdf.js?v=20250812",
+   "kb": 68
+  },
+  {
+   "url": "https://static.klaviyo.com/onsite/js/sharedUtils.cec92fd08e073.js?cb=2",
+   "kb": 62
+  },
+  {
+   "url": "https://static.klaviyo.com/onsite/js/runtime.df7bd7e65dad0.js?cb=2",
+   "kb": 20
+  },
+  {
+   "url": "https://static.klaviyo.com/onsite/js/vendors~static~in_app_forms~signup_forms~fender_analytics~post_identification_sync~web_personalization~",
+   "kb": 12
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/layout-cookie-dialog.consentmo.js",
+   "kb": 18
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/layout-cookie-box.consentmo.js",
+   "kb": 10
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/layout-cookie-smart-banner.consentmo.js",
+   "kb": 15
+  },
+  {
+   "url": "https://cdn.shopify.com/extensions/01a19e07-4eb4-7dab-99be-a8f83a6b526e/gdpr-backpack-952/assets/layout-mobile-cookie-bar.consentmo.js",
+   "kb": 31
+  }
+ ],
+ "totalScriptKB": 16515,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 59,
+   "examples": [
+    "duration:0",
+    "duration:.5",
+    "duration:1",
+    "duration:.2",
+    "duration:1.5",
+    "duration:.25",
+    "duration:.7",
+    "duration:3"
+   ]
+  },
+  "ease": {
+   "count": 3,
+   "examples": [
+    "ease:\"power3\"",
+    "ease:\"none\"",
+    "ease:\"power1.inOut\""
+   ]
+  },
+  "scrub": {
+   "count": 1,
+   "examples": [
+    "scrub:1"
+   ]
+  },
+  "pin": {
+   "count": 4,
+   "examples": [
+    "pin:\"#intro-drop\"",
+    "pin:a",
+    "pin:\"pin-Latn-PG\""
+   ]
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 16,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 2,
+   "examples": [
+    ".glb"
+   ]
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 188,
+   "examples": [
+    "lottie",
+    "Lottie"
+   ]
+  },
+  "swiper": {
+   "count": 233,
+   "examples": [
+    "Swiper",
+    "swiper"
+   ]
+  },
+  "barba": {
+   "count": 10,
+   "examples": [
+    "Barba",
+    "barba"
+   ]
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 6,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 2,
+   "examples": [
+    "webflow"
+   ]
+  },
+  "nuxt": {
+   "count": 2,
+   "examples": [
+    "__NUXT__"
+   ]
+  },
+  "astro": {
+   "count": 3,
+   "examples": [
+    "astro"
+   ]
+  },
+  "react": {
+   "count": 3,
+   "examples": [
+    "__NEXT_DATA__"
+   ]
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 7,
+   "examples": [
+    "createApp",
+    "Vue"
+   ]
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 98.8,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer",
+   "",
+   "default",
+   "text"
+  ]
+ },
+ "hover": [
+  {
+   "txt": "",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "Shop",
+   "transition": "all",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "Get Refills",
+   "transition": "all",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "About",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "Glog",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "",
+   "transition": "background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out, fill 0.25s ease-in-out, str",
+   "changed": [
+    "bg"
+   ]
+  }
+ ],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    71,
+    300
+   ],
+   [
+    127,
+    300
+   ],
+   [
+    186,
+    300
+   ],
+   [
+    250,
+    300
+   ],
+   [
+    311,
+    300
+   ],
+   [
+    370,
+    300
+   ],
+   [
+    437,
+    300
+   ],
+   [
+    502,
+    300
+   ],
+   [
+    561,
+    300
+   ],
+   [
+    622,
+    300
+   ],
+   [
+    680,
+    300
+   ],
+   [
+    742,
+    300
+   ],
+   [
+    807,
+    300
+   ],
+   [
+    862,
+    300
+   ],
+   [
+    926,
+    300
+   ],
+   [
+    983,
+    300
+   ],
+   [
+    1046,
+    300
+   ],
+   [
+    1105,
+    300
+   ],
+   [
+    1169,
+    300
+   ],
+   [
+    1230,
+    300
+   ],
+   [
+    1296,
+    300
+   ],
+   [
+    1353,
+    300
+   ],
+   [
+    1410,
+    300
+   ]
+  ],
+  "finalY": 300,
+  "msTo50pct": 19,
+  "msTo95pct": 19
+ },
+ "scrollSteps": [
+  {
+   "y": 450,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 1
+  },
+  {
+   "y": 900,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 2
+  },
+  {
+   "y": 1350,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 3
+  },
+  {
+   "y": 1800,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 4
+  },
+  {
+   "y": 2250,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 5
+  },
+  {
+   "y": 2700,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 6
+  },
+  {
+   "y": 3150,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 7
+  },
+  {
+   "y": 3600,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 8
+  },
+  {
+   "y": 4050,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 9
+  },
+  {
+   "y": 4500,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 10
+  },
+  {
+   "y": 4950,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 11
+  },
+  {
+   "y": 5400,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 12
+  },
+  {
+   "y": 5850,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 13
+  },
+  {
+   "y": 6300,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 14
+  },
+  {
+   "y": 6750,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 15
+  },
+  {
+   "y": 7200,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 16
+  },
+  {
+   "y": 7650,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 17
+  },
+  {
+   "y": 7764,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 18
+  },
+  {
+   "y": 7764,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 19
+  },
+  {
+   "y": 7764,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 20
+  },
+  {
+   "y": 7764,
+   "H": 8664,
+   "bigFixedOrSticky": 7,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Cart(0)\n0 items",
+    "Looks like your ca(r)t has some issues"
+   ],
+   "i": 21
+  }
+ ]
+}

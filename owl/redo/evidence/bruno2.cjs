@@ -1,0 +1,10 @@
+const { chromium } = require('playwright'); const fs = require('fs');
+(async () => { const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(90000); const c = await ctx.newCDPSession(p); fs.mkdirSync('bruno/k', { recursive: true });
+const shot = async (f) => { const { data } = await c.send('Page.captureScreenshot', { format: 'jpeg', quality: 50 }); fs.writeFileSync('bruno/k/' + f + '.jpg', Buffer.from(data, 'base64')); };
+await p.goto('https://bruno-simon.com', { waitUntil: 'domcontentloaded', timeout: 60000 }); await p.waitForTimeout(25000); await shot('0-ready');
+await p.mouse.click(720, 470); await p.waitForTimeout(6000); await shot('1-after-click');
+await p.keyboard.down('ArrowUp'); await p.waitForTimeout(2500); await shot('2-driving'); await p.keyboard.down('ArrowLeft'); await p.waitForTimeout(2000); await shot('3-turning'); await p.keyboard.up('ArrowLeft'); await p.waitForTimeout(2500); await shot('4-further'); await p.keyboard.up('ArrowUp');
+await p.mouse.move(720, 450); await p.mouse.down(); await p.mouse.move(1100, 450, { steps: 15 }); await p.mouse.up(); await p.waitForTimeout(2000); await shot('5-drag-camera');
+await p.mouse.wheel(0, 600); await p.waitForTimeout(2000); await shot('6-wheel');
+await b.close(); })().catch(e => console.log('ERR', e.message.slice(0, 150)));

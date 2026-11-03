@@ -1,0 +1,741 @@
+{
+ "url": "https://www.quietcubes.com",
+ "title": "QuietCubes | Luxury Office Pods & Booths for Modern Offices",
+ "challenge": false,
+ "globals": {
+  "gsap": "3.15.0",
+  "ScrollTrigger": true,
+  "lenis": true,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 0,
+  "canvases": 0,
+  "videos": [
+   "01%20Horizontal%204K%20Website.mp4",
+   "01%20Vertical%204K%20Website.mp4",
+   "play_1080p.mp4"
+  ],
+  "clipPathEls": 3,
+  "sticky": 27,
+  "fixed": 14,
+  "fonts": [
+   "webflow-icons",
+   "Inter Tight Variable",
+   "swiper-icons"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=689b2fcec1e26eb9a001b9d6",
+   "kb": 87
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js",
+   "kb": 71
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.f2efb3c5440a81cf.js",
+   "kb": 339
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js",
+   "kb": 8
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js",
+   "kb": 44
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.bdf58efcee47c042.js",
+   "kb": 9
+  },
+  {
+   "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes-modal@1/modal.js",
+   "kb": 7
+  },
+  {
+   "url": "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+   "kb": 151
+  },
+  {
+   "url": "https://unpkg.com/lenis@1.2.3/dist/lenis.min.js",
+   "kb": 14
+  },
+  {
+   "url": "https://connect.facebook.net/en_US/fbevents.js",
+   "kb": 427
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.schunk.d7b02e2a07ee8318.js",
+   "kb": 293
+  },
+  {
+   "url": "https://snap.licdn.com/li.lms-analytics/insight.min.js",
+   "kb": 61
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-WPP59TKS",
+   "kb": 448
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/js/webflow.ff87cad5.b1785465a08fc2b0.js",
+   "kb": 549
+  },
+  {
+   "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes-animation@1/animation.esm.js",
+   "kb": 11
+  },
+  {
+   "url": "https://www.quietcubes.com/9i1h7htkfq16Njg5YjJmY2VjMWUyNmViOWEwMDFiOWQ2/5GqHF7iZiWP2WI36JJ0gXiCDpY8",
+   "kb": 615
+  },
+  {
+   "url": "https://connect.facebook.net/signals/config/1583222426621102?v=2.9.433&r=stable&domain=www.quietcubes.com&hme=4453c87d489b6902031c012cadd273",
+   "kb": 370
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-B98LJLLG35&gtg_health=1",
+   "kb": 0
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/destination?id=AW-16516005424&cx=c&gtm=4e6au1",
+   "kb": 482
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=AW-16516005424&cx=c&gtm=4e6au1",
+   "kb": 482
+  },
+  {
+   "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16516005424/?random=1793685343291&cv=11&fst=1793685343291&bg=ffffff&guid=ON",
+   "kb": 7
+  },
+  {
+   "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/16516005424/?random=1793685343317&cv=11&fst=1793685343317&bg=ffffff&guid=ON",
+   "kb": 7
+  },
+  {
+   "url": "https://px.ads.linkedin.com/collect?v=2&fmt=js&pid=6179852%2C10020428&time=1793685341515&li_adsId=a7bc2825-75a3-40c3-a1d5-f2c232ed2566&pageL",
+   "kb": 0
+  }
+ ],
+ "totalScriptKB": 4482,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 1647,
+   "examples": [
+    "duration:.5",
+    "duration:0",
+    "duration:.001",
+    "duration:.1",
+    "duration:.3",
+    "duration:.25",
+    "duration:1",
+    "duration:.7"
+   ]
+  },
+  "ease": {
+   "count": 10,
+   "examples": [
+    "ease:\"none\"",
+    "ease:\"expo\"",
+    "ease:\"power4\"",
+    "ease:\"power2.out\""
+   ]
+  },
+  "scrub": {
+   "count": 11,
+   "examples": [
+    "scrub:e.scrub",
+    "scrub:null"
+   ]
+  },
+  "pin": {
+   "count": 1,
+   "examples": [
+    "pin:T"
+   ]
+  },
+  "wheelMultiplier": {
+   "count": 1,
+   "examples": [
+    "wheelMultiplier:1"
+   ]
+  },
+  "smoothWheel": {
+   "count": 2,
+   "examples": [
+    "smoothWheel:o"
+   ]
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 22,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 74,
+   "examples": [
+    "lottie",
+    "Lottie",
+    "LOTTIE"
+   ]
+  },
+  "swiper": {
+   "count": 284,
+   "examples": [
+    "Swiper",
+    "swiper",
+    "SWIPER"
+   ]
+  },
+  "barba": {
+   "count": 1,
+   "examples": [
+    "barba"
+   ]
+  },
+  "splittext": {
+   "count": 13,
+   "examples": [
+    "SplitText",
+    "SplitType"
+   ]
+  },
+  "scrollTrigger": {
+   "count": 48,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 20,
+   "examples": [
+    "Lenis",
+    "lenis"
+   ]
+  },
+  "webflow": {
+   "count": 47,
+   "examples": [
+    "webflow",
+    "Webflow",
+    "WEBFLOW"
+   ]
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 2,
+   "examples": [
+    "astro"
+   ]
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 0,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer",
+   "grab",
+   "none",
+   "",
+   "text",
+   "default"
+  ]
+ },
+ "hover": [],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    20
+   ],
+   [
+    57,
+    69
+   ],
+   [
+    114,
+    116
+   ],
+   [
+    169,
+    140
+   ],
+   [
+    224,
+    158
+   ],
+   [
+    282,
+    175
+   ],
+   [
+    337,
+    184
+   ],
+   [
+    393,
+    191
+   ],
+   [
+    450,
+    197
+   ],
+   [
+    507,
+    201
+   ],
+   [
+    565,
+    204
+   ],
+   [
+    622,
+    205
+   ],
+   [
+    677,
+    207
+   ],
+   [
+    731,
+    208
+   ],
+   [
+    788,
+    208
+   ],
+   [
+    843,
+    209
+   ],
+   [
+    904,
+    209
+   ],
+   [
+    960,
+    209
+   ],
+   [
+    1017,
+    210
+   ],
+   [
+    1072,
+    210
+   ],
+   [
+    1127,
+    210
+   ],
+   [
+    1183,
+    210
+   ],
+   [
+    1240,
+    210
+   ],
+   [
+    1298,
+    210
+   ]
+  ],
+  "finalY": 210,
+  "msTo50pct": 114,
+  "msTo95pct": 488
+ },
+ "scrollSteps": [
+  {
+   "y": 311,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 1
+  },
+  {
+   "y": 626,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 2
+  },
+  {
+   "y": 941,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 3
+  },
+  {
+   "y": 1256,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 4
+  },
+  {
+   "y": 1571,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 5
+  },
+  {
+   "y": 1886,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 6
+  },
+  {
+   "y": 2201,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 7
+  },
+  {
+   "y": 2516,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Quiet Spaces Built for 1 to 10 Minds"
+   ],
+   "i": 8
+  },
+  {
+   "y": 2831,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Quiet Spaces Built for 1 to 10 Minds"
+   ],
+   "i": 9
+  },
+  {
+   "y": 3146,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Quiet Spaces Built for 1 to 10 Minds"
+   ],
+   "i": 10
+  },
+  {
+   "y": 3461,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 11
+  },
+  {
+   "y": 3776,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 12
+  },
+  {
+   "y": 4091,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 13
+  },
+  {
+   "y": 4406,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 14
+  },
+  {
+   "y": 4721,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 15
+  },
+  {
+   "y": 5036,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting"
+   ],
+   "i": 16
+  },
+  {
+   "y": 5351,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 17
+  },
+  {
+   "y": 5666,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 18
+  },
+  {
+   "y": 5981,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 19
+  },
+  {
+   "y": 6296,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 20
+  },
+  {
+   "y": 6611,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 21
+  },
+  {
+   "y": 6926,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 22
+  },
+  {
+   "y": 7241,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 23
+  },
+  {
+   "y": 7556,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 24
+  },
+  {
+   "y": 7871,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 25
+  },
+  {
+   "y": 8186,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 26
+  },
+  {
+   "y": 8501,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 27
+  },
+  {
+   "y": 8816,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 28
+  },
+  {
+   "y": 9131,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 29
+  },
+  {
+   "y": 9446,
+   "H": 26029,
+   "bigFixedOrSticky": 16,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Smart LED Lighting",
+    "Anti-glare and flicker-free lighting with adjustable light, "
+   ],
+   "i": 30
+  }
+ ]
+}

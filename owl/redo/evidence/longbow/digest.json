@@ -1,0 +1,563 @@
+{
+ "url": "https://longbowmotors.com",
+ "title": "Longbow | British Hand-Built Featherweight Sports Cars",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 0,
+  "canvases": 0,
+  "videos": [
+   "hero-video.mp4"
+  ],
+  "clipPathEls": 2,
+  "sticky": 0,
+  "fixed": 6,
+  "fonts": [
+   "Cormorant Garamond",
+   "Montserrat"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://longbowmotors.com/tags.js?v=7265671a",
+   "kb": 8
+  },
+  {
+   "url": "https://longbowmotors.com/chrome.js?v=e638d667",
+   "kb": 31
+  },
+  {
+   "url": "https://longbowmotors.com/lb.js?v=6f4183da",
+   "kb": 15
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-V223RX6PYX",
+   "kb": 530
+  }
+ ],
+ "totalScriptKB": 583,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 0,
+   "examples": []
+  },
+  "ease": {
+   "count": 0,
+   "examples": []
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 0,
+   "examples": []
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 0,
+   "examples": []
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 0,
+   "examples": []
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 0,
+   "examples": []
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 99,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer",
+   "",
+   "text",
+   "default"
+  ]
+ },
+ "hover": [
+  {
+   "txt": "",
+   "transition": "border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1), color 0.24s cubic-bezier(0.16, 1, 0.3, 1)",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "SPEEDSTER",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "ROADSTER",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "TECH",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "OWNERSHIP",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "ABOUT",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "FORUM",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "FAQ",
+   "transition": "color 0.3s",
+   "changed": [
+    "c"
+   ]
+  }
+ ],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    71,
+    300
+   ],
+   [
+    128,
+    300
+   ],
+   [
+    190,
+    300
+   ],
+   [
+    253,
+    300
+   ],
+   [
+    308,
+    300
+   ],
+   [
+    375,
+    300
+   ],
+   [
+    431,
+    300
+   ],
+   [
+    486,
+    300
+   ],
+   [
+    543,
+    300
+   ],
+   [
+    609,
+    300
+   ],
+   [
+    665,
+    300
+   ],
+   [
+    726,
+    300
+   ],
+   [
+    786,
+    300
+   ],
+   [
+    851,
+    300
+   ],
+   [
+    914,
+    300
+   ],
+   [
+    972,
+    300
+   ],
+   [
+    1030,
+    300
+   ],
+   [
+    1087,
+    300
+   ],
+   [
+    1143,
+    300
+   ],
+   [
+    1199,
+    300
+   ],
+   [
+    1257,
+    300
+   ],
+   [
+    1313,
+    300
+   ],
+   [
+    1373,
+    300
+   ]
+  ],
+  "finalY": 300,
+  "msTo50pct": 40,
+  "msTo95pct": 40
+ },
+ "scrollSteps": [
+  {
+   "y": 450,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "The longest tradition in\u00a0motoring.",
+    "Longbow exists to continue the longest unbroken tradition in"
+   ],
+   "i": 1
+  },
+  {
+   "y": 900,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "The longest tradition in\u00a0motoring.",
+    "Longbow exists to continue the longest unbroken tradition in"
+   ],
+   "i": 2
+  },
+  {
+   "y": 1350,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Made where it was\u00a0perfected.",
+    "Because today, like 100 years ago, the best place on Earth t"
+   ],
+   "i": 3
+  },
+  {
+   "y": 1800,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Three things we simply won't compromise\u00a0on.",
+    "SIMPLICITY"
+   ],
+   "i": 4
+  },
+  {
+   "y": 2250,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "SIMPLICITY",
+    "Nothing that does not need to be there. Every part, every su"
+   ],
+   "i": 5
+  },
+  {
+   "y": 2700,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "The world has been watching.",
+    "Speedster"
+   ],
+   "i": 6
+  },
+  {
+   "y": 3150,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Speedster",
+    "Driving in its purest form. The spiritual successor to the g"
+   ],
+   "i": 7
+  },
+  {
+   "y": 3600,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Driving in its purest form. The spiritual successor to the g",
+    "Roadster"
+   ],
+   "i": 8
+  },
+  {
+   "y": 4050,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Roadster",
+    "A new breed. Built to be enjoyed at every opportunity."
+   ],
+   "i": 9
+  },
+  {
+   "y": 4500,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "A new breed. Built to be enjoyed at every opportunity.",
+    "Beauty and the\u00a0Beast."
+   ],
+   "i": 10
+  },
+  {
+   "y": 4950,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Beauty and the\u00a0Beast.",
+    "Beneath our timeless exterior beats the heart and soul of a "
+   ],
+   "i": 11
+  },
+  {
+   "y": 5400,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Be the first to know.",
+    "Long-form despatches from the workshop. Build progress, foun"
+   ],
+   "i": 12
+  },
+  {
+   "y": 5850,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Long-form despatches from the workshop. Build progress, foun",
+    "Choose your\u00a0Longbow."
+   ],
+   "i": 13
+  },
+  {
+   "y": 6300,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Longbow Motorcar Company Ltd. Hand-built in Britain. The Spe",
+    "Longbow Motorcar Company Ltd, registered in England and Wale"
+   ],
+   "i": 14
+  },
+  {
+   "y": 6370,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Longbow Motorcar Company Ltd. Hand-built in Britain. The Spe",
+    "Longbow Motorcar Company Ltd, registered in England and Wale"
+   ],
+   "i": 15
+  },
+  {
+   "y": 6370,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Longbow Motorcar Company Ltd. Hand-built in Britain. The Spe",
+    "Longbow Motorcar Company Ltd, registered in England and Wale"
+   ],
+   "i": 16
+  },
+  {
+   "y": 6370,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Longbow Motorcar Company Ltd. Hand-built in Britain. The Spe",
+    "Longbow Motorcar Company Ltd, registered in England and Wale"
+   ],
+   "i": 17
+  },
+  {
+   "y": 6370,
+   "H": 7270,
+   "bigFixedOrSticky": 3,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Longbow Motorcar Company Ltd. Hand-built in Britain. The Spe",
+    "Longbow Motorcar Company Ltd, registered in England and Wale"
+   ],
+   "i": 18
+  }
+ ]
+}

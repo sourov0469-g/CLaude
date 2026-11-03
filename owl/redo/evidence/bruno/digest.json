@@ -1,0 +1,370 @@
+{
+ "url": "https://bruno-simon.com",
+ "title": "Bruno's",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": true,
+  "threeRev": "183",
+  "webglContexts": 1,
+  "canvases": 1,
+  "videos": [],
+  "clipPathEls": null,
+  "sticky": null,
+  "fixed": null,
+  "fonts": [
+   "Amatic SC",
+   "Nunito",
+   "Pally-Regular",
+   "Pally-Medium",
+   "Pally-Bold"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-JMSN30BQ5J",
+   "kb": 468
+  },
+  {
+   "url": "https://bruno-simon.com/assets/index-ORr3L4no.js",
+   "kb": 4744
+  },
+  {
+   "url": "https://bruno-simon.com/draco/draco_wasm_wrapper.js",
+   "kb": 57
+  },
+  {
+   "url": "https://bruno-simon.com/basis/basis_transcoder.js",
+   "kb": 56
+  },
+  {
+   "url": "https://bruno-simon.com/assets/rapier-BmPn8Tpt.js",
+   "kb": 225
+  }
+ ],
+ "totalScriptKB": 5550,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 118,
+   "examples": [
+    "duration:0",
+    "duration: 0.5",
+    "duration: 0",
+    "duration: 0.1",
+    "duration: 0.6",
+    "duration: 0.25",
+    "duration: 0.02",
+    "duration: 1.5"
+   ]
+  },
+  "ease": {
+   "count": 79,
+   "examples": [
+    "ease: \"none\"",
+    "ease: \"power2.out\"",
+    "ease: \"power4.inOut\"",
+    "ease: \"power2.inOut\"",
+    "ease: \"power2.in\"",
+    "ease: \"linear\"",
+    "ease: \"back.in(4.5)\"",
+    "ease: \"power1.inOut\""
+   ]
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 14,
+   "examples": [
+    "PerspectiveCamera(l)",
+    "PerspectiveCamera(this._camera)",
+    "PerspectiveCamera(fov, aspect, e, r)"
+   ]
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 9,
+   "examples": [
+    "Raycaster"
+   ]
+  },
+  "mouse": {
+   "count": 26,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 17,
+   "examples": [
+    "MeshPhysicalMaterial"
+   ]
+  },
+  "ShaderMaterial": {
+   "count": 11,
+   "examples": [
+    "ShaderMaterial",
+    "RawShaderMaterial"
+   ]
+  },
+  "gltf": {
+   "count": 50,
+   "examples": [
+    "GLTFLoader",
+    ".glb"
+   ]
+  },
+  "draco": {
+   "count": 190,
+   "examples": [
+    "dracoLoader",
+    "DRACOLoader",
+    "DRACO",
+    "Draco",
+    "draco"
+   ]
+  },
+  "ktx2": {
+   "count": 94,
+   "examples": [
+    ".ktx2",
+    "KTX2Loader",
+    ".ktx"
+   ]
+  },
+  "postprocessing": {
+   "count": 3,
+   "examples": [
+    "UnrealBloomPass"
+   ]
+  },
+  "physics": {
+   "count": 16,
+   "examples": [
+    "RAPIER",
+    "rapier",
+    "Rapier"
+   ]
+  },
+  "audio": {
+   "count": 71,
+   "examples": [
+    "AudioContext",
+    "howler",
+    "Howler"
+   ]
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 2,
+   "examples": [
+    "Barba"
+   ]
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 2,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 0,
+   "examples": []
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "light": true
+ },
+ "hover": [],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    74,
+    0
+   ],
+   [
+    130,
+    0
+   ],
+   [
+    195,
+    0
+   ],
+   [
+    249,
+    0
+   ],
+   [
+    302,
+    0
+   ],
+   [
+    360,
+    0
+   ],
+   [
+    420,
+    0
+   ],
+   [
+    475,
+    0
+   ],
+   [
+    528,
+    0
+   ],
+   [
+    585,
+    0
+   ],
+   [
+    643,
+    0
+   ],
+   [
+    696,
+    0
+   ],
+   [
+    782,
+    0
+   ],
+   [
+    843,
+    0
+   ],
+   [
+    905,
+    0
+   ],
+   [
+    966,
+    0
+   ],
+   [
+    1021,
+    0
+   ],
+   [
+    1090,
+    0
+   ],
+   [
+    1145,
+    0
+   ],
+   [
+    1207,
+    0
+   ],
+   [
+    1262,
+    0
+   ],
+   [
+    1314,
+    0
+   ],
+   [
+    1371,
+    0
+   ]
+  ],
+  "finalY": 0,
+  "msTo50pct": 0,
+  "msTo95pct": 0
+ },
+ "scrollSteps": [
+  {
+   "y": 0,
+   "H": 900,
+   "text": [],
+   "i": 1
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "text": [],
+   "i": 2
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "text": [],
+   "i": 3
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "text": [],
+   "i": 4
+  }
+ ]
+}

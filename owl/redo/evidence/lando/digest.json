@@ -1,0 +1,615 @@
+{
+ "url": "https://landonorris.com",
+ "title": "McLaren Formula 1 Driver \u2014 Lando Norris",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": true,
+  "three": true,
+  "threeRev": "174",
+  "webglContexts": 3,
+  "canvases": 21,
+  "videos": [],
+  "clipPathEls": null,
+  "sticky": null,
+  "fixed": null,
+  "fonts": [
+   "webflow-icons",
+   "Brier",
+   "Mona Sans Variable"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67b5a02dc5d338960b17a7e9",
+   "kb": 87
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/js/lando-offbrand.schunk.7321a5097fb66f41.js",
+   "kb": 35
+  },
+  {
+   "url": "https://lando.itsoffbrand.io/dev-js/lando-by-OFF+BRAND.05.js",
+   "kb": 1291
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/js/lando-offbrand.751e0867.148dc658e77a3916.js",
+   "kb": 1
+  },
+  {
+   "url": "https://landonorris.com/avljl2rk9q5pNjdiNWEwMmRjNWQzMzg5NjBiMTdhN2U5/7ZblqsTeeE5q7zjxhGjeEUmRx4o",
+   "kb": 509
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-P8L2KTXDN0&gtg_health=1",
+   "kb": 0
+  },
+  {
+   "url": "https://lando.itsoffbrand.io/gl/draco/draco_wasm_wrapper.js",
+   "kb": 57
+  }
+ ],
+ "totalScriptKB": 1982,
+ "code": {
+  "lerp": {
+   "count": 1,
+   "examples": [
+    "lerp:0.1"
+   ]
+  },
+  "duration": {
+   "count": 105,
+   "examples": [
+    "duration:0.5",
+    "duration:0",
+    "duration:1",
+    "duration:2",
+    "duration:1.5",
+    "duration:0.25",
+    "duration:2.5",
+    "duration:0.6"
+   ]
+  },
+  "ease": {
+   "count": 130,
+   "examples": [
+    "ease:\"none\"",
+    "ease:\"power4\"",
+    "ease:\"expo\"",
+    "ease:\"expo.inOut\"",
+    "ease:\"power4.inOut\"",
+    "ease:\"power1.inOut\"",
+    "ease:\"expo.in\"",
+    "ease:\"expo.out\""
+   ]
+  },
+  "scrub": {
+   "count": 3,
+   "examples": [
+    "scrub:0.5",
+    "scrub:1",
+    "scrub:0"
+   ]
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 1,
+   "examples": [
+    "wheelMultiplier:1"
+   ]
+  },
+  "smoothWheel": {
+   "count": 2,
+   "examples": [
+    "smoothWheel:E"
+   ]
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 37,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 4,
+   "examples": [
+    "MeshPhysicalMaterial"
+   ]
+  },
+  "ShaderMaterial": {
+   "count": 18,
+   "examples": [
+    "ShaderMaterial",
+    "RawShaderMaterial"
+   ]
+  },
+  "gltf": {
+   "count": 30,
+   "examples": [
+    "GLTFLoader",
+    ".glb"
+   ]
+  },
+  "draco": {
+   "count": 187,
+   "examples": [
+    "draco",
+    "Draco",
+    "DRACOLoader",
+    "DRACO",
+    "dracoLoader"
+   ]
+  },
+  "ktx2": {
+   "count": 30,
+   "examples": [
+    ".ktx2",
+    "KTX2Loader"
+   ]
+  },
+  "postprocessing": {
+   "count": 5,
+   "examples": [
+    "EffectComposer",
+    "UnrealBloomPass"
+   ]
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 4,
+   "examples": [
+    "audioContext",
+    "AudioContext"
+   ]
+  },
+  "rive": {
+   "count": 3,
+   "examples": [
+    "@rive-app",
+    "rive.wasm"
+   ]
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 0,
+   "examples": []
+  },
+  "splittext": {
+   "count": 3,
+   "examples": [
+    "SplitText"
+   ]
+  },
+  "scrollTrigger": {
+   "count": 19,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 75,
+   "examples": [
+    "lenis",
+    "Lenis"
+   ]
+  },
+  "webflow": {
+   "count": 23,
+   "examples": [
+    "Webflow",
+    "webflow"
+   ]
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 0,
+   "examples": []
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "light": true
+ },
+ "hover": [],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    300
+   ],
+   [
+    4037,
+    300
+   ],
+   [
+    8602,
+    300
+   ],
+   [
+    12486,
+    300
+   ],
+   [
+    16382,
+    300
+   ],
+   [
+    20809,
+    300
+   ],
+   [
+    25413,
+    300
+   ],
+   [
+    29773,
+    300
+   ],
+   [
+    33706,
+    300
+   ],
+   [
+    37615,
+    300
+   ],
+   [
+    41313,
+    300
+   ],
+   [
+    45161,
+    300
+   ],
+   [
+    49009,
+    300
+   ],
+   [
+    53387,
+    300
+   ],
+   [
+    57766,
+    300
+   ],
+   [
+    61491,
+    300
+   ],
+   [
+    66025,
+    300
+   ],
+   [
+    70494,
+    300
+   ],
+   [
+    74308,
+    300
+   ],
+   [
+    78617,
+    300
+   ],
+   [
+    82913,
+    300
+   ],
+   [
+    87153,
+    300
+   ],
+   [
+    91524,
+    300
+   ],
+   [
+    95802,
+    300
+   ]
+  ],
+  "finalY": 300,
+  "msTo50pct": 0,
+  "msTo95pct": 0
+ },
+ "scrollSteps": [
+  {
+   "y": 450,
+   "H": 13577,
+   "text": [],
+   "i": 1
+  },
+  {
+   "y": 900,
+   "H": 13577,
+   "text": [],
+   "i": 2
+  },
+  {
+   "y": 1350,
+   "H": 13577,
+   "text": [],
+   "i": 3
+  },
+  {
+   "y": 1800,
+   "H": 13577,
+   "text": [],
+   "i": 4
+  },
+  {
+   "y": 2250,
+   "H": 13577,
+   "text": [],
+   "i": 5
+  },
+  {
+   "y": 2699,
+   "H": 13577,
+   "text": [],
+   "i": 6
+  },
+  {
+   "y": 3149,
+   "H": 13577,
+   "text": [],
+   "i": 7
+  },
+  {
+   "y": 3600,
+   "H": 13577,
+   "text": [],
+   "i": 8
+  },
+  {
+   "y": 4050,
+   "H": 13577,
+   "text": [],
+   "i": 9
+  },
+  {
+   "y": 4495,
+   "H": 13577,
+   "text": [],
+   "i": 10
+  },
+  {
+   "y": 4950,
+   "H": 13577,
+   "text": [],
+   "i": 11
+  },
+  {
+   "y": 5400,
+   "H": 13577,
+   "text": [
+    "ON",
+    "ON"
+   ],
+   "i": 12
+  },
+  {
+   "y": 5849,
+   "H": 13577,
+   "text": [
+    "ON",
+    "ON"
+   ],
+   "i": 13
+  },
+  {
+   "y": 6299,
+   "H": 13577,
+   "text": [
+    "ON",
+    "ON"
+   ],
+   "i": 14
+  },
+  {
+   "y": 6750,
+   "H": 13577,
+   "text": [
+    "ON",
+    "ON"
+   ],
+   "i": 15
+  },
+  {
+   "y": 7200,
+   "H": 13577,
+   "text": [
+    "TRACK",
+    "TRACK"
+   ],
+   "i": 16
+  },
+  {
+   "y": 7646,
+   "H": 13577,
+   "text": [
+    "HELMETS",
+    "HELMETS"
+   ],
+   "i": 17
+  },
+  {
+   "y": 8100,
+   "H": 13577,
+   "text": [
+    "Season",
+    "Discoball"
+   ],
+   "i": 18
+  },
+  {
+   "y": 8550,
+   "H": 13577,
+   "text": [
+    "Porcelain",
+    "Japan"
+   ],
+   "i": 19
+  },
+  {
+   "y": 9000,
+   "H": 13577,
+   "text": [
+    "Race",
+    "Las Vegas"
+   ],
+   "i": 20
+  },
+  {
+   "y": 9448,
+   "H": 13577,
+   "text": [
+    "WORLD DRIVERS' CHAMPION",
+    "WORLD\nDRIVERS'\nCHAMPION"
+   ],
+   "i": 21
+  },
+  {
+   "y": 9900,
+   "H": 13577,
+   "text": [
+    "WORLD DRIVERS' CHAMPION",
+    "WORLD\nDRIVERS'\nCHAMPION"
+   ],
+   "i": 22
+  },
+  {
+   "y": 10349,
+   "H": 13577,
+   "text": [
+    "PARTNERS",
+    "PARTNERS"
+   ],
+   "i": 23
+  },
+  {
+   "y": 10800,
+   "H": 13577,
+   "text": [
+    "PARTNERS",
+    "PARTNERS"
+   ],
+   "i": 24
+  },
+  {
+   "y": 11249,
+   "H": 13577,
+   "text": [
+    "WHAT\u2019S UPON SOCIALS",
+    "WHAT\u2019S UP\nON SOCIALS"
+   ],
+   "i": 25
+  },
+  {
+   "y": 11698,
+   "H": 13577,
+   "text": [
+    "WHAT\u2019S UPON SOCIALS",
+    "WHAT\u2019S UP\nON SOCIALS"
+   ],
+   "i": 26
+  },
+  {
+   "y": 12150,
+   "H": 13577,
+   "text": [
+    "ALWAYS BRINGING THE FIGHT.",
+    "ALWAYS BRINGING\nTHE FIGHT."
+   ],
+   "i": 27
+  },
+  {
+   "y": 12600,
+   "H": 13577,
+   "text": [
+    "ALWAYS BRINGING THE FIGHT.",
+    "ALWAYS BRINGING\nTHE FIGHT."
+   ],
+   "i": 28
+  },
+  {
+   "y": 12677,
+   "H": 13577,
+   "text": [
+    "ALWAYS BRINGING THE FIGHT.",
+    "ALWAYS BRINGING\nTHE FIGHT."
+   ],
+   "i": 29
+  },
+  {
+   "y": 12677,
+   "H": 13577,
+   "text": [
+    "ALWAYS BRINGING THE FIGHT.",
+    "ALWAYS BRINGING\nTHE FIGHT."
+   ],
+   "i": 30
+  },
+  {
+   "y": 12677,
+   "H": 13577,
+   "text": [
+    "ALWAYS BRINGING THE FIGHT.",
+    "ALWAYS BRINGING\nTHE FIGHT."
+   ],
+   "i": 31
+  },
+  {
+   "y": 12677,
+   "H": 13577,
+   "text": [
+    "ALWAYS BRINGING THE FIGHT.",
+    "ALWAYS BRINGING\nTHE FIGHT."
+   ],
+   "i": 32
+  }
+ ]
+}

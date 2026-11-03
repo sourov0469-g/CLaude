@@ -1,0 +1,387 @@
+{
+ "url": "https://www.igloo.inc",
+ "title": "Igloo Inc.",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": true,
+  "threeRev": "165",
+  "webglContexts": 2,
+  "canvases": 0,
+  "videos": [],
+  "clipPathEls": 0,
+  "sticky": 0,
+  "fixed": 0,
+  "fonts": [
+   "IBMPlexMono-Medium",
+   "IBMPlexMono-Regular"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://www.igloo.inc/assets/index-2e130bc1.js",
+   "kb": 16
+  },
+  {
+   "url": "https://www.igloo.inc/assets/App3D-d68cb154.js",
+   "kb": 1451
+  },
+  {
+   "url": "https://www.igloo.inc/assets/libs/draco/draco_wasm_wrapper.js",
+   "kb": 57
+  },
+  {
+   "url": "https://www.igloo.inc/assets/libs/basis/basis_transcoder.js",
+   "kb": 65
+  },
+  {
+   "url": "https://www.igloo.inc/assets/exrworker-41cbee65.js",
+   "kb": 82
+  },
+  {
+   "url": "https://www.igloo.inc/assets/msdfworker-ac346fa7.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.igloo.inc/assets/bitmapworker-046527f8.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.igloo.inc/assets/audioworker-036a09db.js",
+   "kb": 89
+  }
+ ],
+ "totalScriptKB": 1767,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 137,
+   "examples": [
+    "duration:0",
+    "duration:5",
+    "duration:250",
+    "duration:750",
+    "duration:.5",
+    "duration:.6",
+    "duration:.4",
+    "duration:.75"
+   ]
+  },
+  "ease": {
+   "count": 136,
+   "examples": [
+    "ease:\"none\"",
+    "ease:\"power2.inOut\"",
+    "ease:\"sine.out\"",
+    "ease:\"power3.inOut\"",
+    "ease:\"inOut4\"",
+    "ease:\"sine.inOut\"",
+    "ease:\"igloo_ease_1\"",
+    "ease:\"linear\""
+   ]
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 2,
+   "examples": [
+    "fov:22",
+    "fov:30"
+   ]
+  },
+  "raycaster": {
+   "count": 1,
+   "examples": [
+    "Raycaster"
+   ]
+  },
+  "mouse": {
+   "count": 2,
+   "examples": [
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 4,
+   "examples": [
+    "MeshPhysicalMaterial"
+   ]
+  },
+  "ShaderMaterial": {
+   "count": 18,
+   "examples": [
+    "ShaderMaterial",
+    "RawShaderMaterial"
+   ]
+  },
+  "gltf": {
+   "count": 27,
+   "examples": [
+    "GLTFLoader"
+   ]
+  },
+  "draco": {
+   "count": 193,
+   "examples": [
+    "Draco",
+    "draco",
+    "DRACO",
+    "DRACOLoader",
+    "dracoLoader"
+   ]
+  },
+  "ktx2": {
+   "count": 114,
+   "examples": [
+    "KTX2Loader",
+    ".ktx2"
+   ]
+  },
+  "postprocessing": {
+   "count": 5,
+   "examples": [
+    "postprocessing",
+    "EffectComposer"
+   ]
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 5,
+   "examples": [
+    "AudioContext",
+    "audioContext"
+   ]
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 0,
+   "examples": []
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 2,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 0,
+   "examples": []
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 2,
+   "examples": [
+    "svelte"
+   ]
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 99.2,
+  "cursorValuesSeen": [
+   "auto"
+  ]
+ },
+ "hover": [],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    65,
+    0
+   ],
+   [
+    118,
+    0
+   ],
+   [
+    170,
+    0
+   ],
+   [
+    225,
+    0
+   ],
+   [
+    278,
+    0
+   ],
+   [
+    336,
+    0
+   ],
+   [
+    405,
+    0
+   ],
+   [
+    459,
+    0
+   ],
+   [
+    517,
+    0
+   ],
+   [
+    571,
+    0
+   ],
+   [
+    626,
+    0
+   ],
+   [
+    680,
+    0
+   ],
+   [
+    740,
+    0
+   ],
+   [
+    803,
+    0
+   ],
+   [
+    857,
+    0
+   ],
+   [
+    921,
+    0
+   ],
+   [
+    976,
+    0
+   ],
+   [
+    1033,
+    0
+   ],
+   [
+    1090,
+    0
+   ],
+   [
+    1142,
+    0
+   ],
+   [
+    1201,
+    0
+   ],
+   [
+    1256,
+    0
+   ],
+   [
+    1310,
+    0
+   ]
+  ],
+  "finalY": 0,
+  "msTo50pct": 0,
+  "msTo95pct": 0
+ },
+ "scrollSteps": [
+  {
+   "y": 0,
+   "H": 900,
+   "bigFixedOrSticky": 0,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 1
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "bigFixedOrSticky": 0,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 2
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "bigFixedOrSticky": 0,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 3
+  },
+  {
+   "y": 0,
+   "H": 900,
+   "bigFixedOrSticky": 0,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 4
+  }
+ ]
+}

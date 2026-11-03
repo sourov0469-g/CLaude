@@ -1,0 +1,953 @@
+{
+ "url": "https://www.apple.com/airpods-pro/",
+ "title": "AirPods Pro 3 - Apple",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": false,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 2,
+  "canvases": 0,
+  "videos": [
+   "large.mp4",
+   "",
+   "",
+   "large.mp4",
+   "large.mp4",
+   "large.mp4",
+   "large.mp4",
+   "large.mp4",
+   "large.webm",
+   "47e84016-424e-473d-b93a-ff33b97c907c",
+   "large.webm",
+   "large.webm",
+   "large.mp4",
+   "large.mp4",
+   "large.mp4",
+   ""
+  ],
+  "clipPathEls": 77,
+  "sticky": 12,
+  "fixed": 12,
+  "fonts": [
+   "Apple Legacy Chevron",
+   "Apple Icons 100",
+   "Apple Icons 200",
+   "Apple Icons 300",
+   "Apple Icons 400",
+   "Apple Icons 500",
+   "Apple Icons 600",
+   "Apple Icons 700",
+   "Apple Icons 800",
+   "Apple Icons 900"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://www.apple.com/api-www/global-elements/global-header/v1/assets/globalheader.umd.js",
+   "kb": 162
+  },
+  {
+   "url": "https://www.apple.com/v/airpods-pro/t/built/scripts/overview/head.built.js",
+   "kb": 71
+  },
+  {
+   "url": "https://www.apple.com/metrics/ac-analytics/2.30.0/scripts/auto-init.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.apple.com/ac/includes/acmi-handler/scripts/acmi-head.built.js",
+   "kb": 2
+  },
+  {
+   "url": "https://www.apple.com/ac/localnav/9/scripts/ac-localnav.built.js",
+   "kb": 45
+  },
+  {
+   "url": "https://www.apple.com/metrics/ac-analytics/2.30.0/scripts/ac-analytics.js",
+   "kb": 455
+  },
+  {
+   "url": "https://www.apple.com/ac/globalfooter/8/en_US/scripts/ac-globalfooter.built.js",
+   "kb": 9
+  },
+  {
+   "url": "https://www.apple.com/ac/localeswitcher/4/en_US/scripts/localeswitcher.built.js",
+   "kb": 187
+  },
+  {
+   "url": "https://www.apple.com/metrics/data-relay/1.2.0/scripts/data-relay.js",
+   "kb": 17
+  },
+  {
+   "url": "https://www.apple.com/v/airpods-pro/t/built/scripts/overview/main.built.js",
+   "kb": 861
+  },
+  {
+   "url": "https://www.apple.com/metrics/data-relay/1.2.0/scripts/auto-relay.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.apple.com/ac/includes/acmi-handler/scripts/autopricing-toggle.built.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.apple.com/ac/pricing/latest-1/scripts/autopricing.built.js",
+   "kb": 40
+  },
+  {
+   "url": "https://www.apple.com/ac/ac-films/7.5.1/scripts/autofilms.built.js",
+   "kb": 519
+  },
+  {
+   "url": "https://www.apple.com/ac/libs/hls.js/2.920.4/hls.js",
+   "kb": 861
+  }
+ ],
+ "totalScriptKB": 3233,
+ "code": {
+  "lerp": {
+   "count": 1,
+   "examples": [
+    "lerp:3"
+   ]
+  },
+  "duration": {
+   "count": 72,
+   "examples": [
+    "duration:1",
+    "duration:.5",
+    "duration:.2",
+    "duration:.6",
+    "duration:.02",
+    "duration:.03",
+    "duration:.05",
+    "duration:.15"
+   ]
+  },
+  "ease": {
+   "count": 0,
+   "examples": []
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 0,
+   "examples": []
+  },
+  "wheelMultiplier": {
+   "count": 0,
+   "examples": []
+  },
+  "smoothWheel": {
+   "count": 0,
+   "examples": []
+  },
+  "PerspectiveCamera": {
+   "count": 2,
+   "examples": [
+    "PerspectiveCamera(75,i,1,1100)"
+   ]
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 65,
+   "examples": [
+    "mousemove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 0,
+   "examples": []
+  },
+  "barba": {
+   "count": 0,
+   "examples": []
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 0,
+   "examples": []
+  },
+  "lenisLib": {
+   "count": 0,
+   "examples": []
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 0,
+   "examples": []
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 97.7,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer",
+   "default",
+   "text",
+   "none"
+  ]
+ },
+ "hover": [
+  {
+   "txt": "Apple",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "Store",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "Mac",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "iPad",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "changed": [
+    "c"
+   ]
+  },
+  {
+   "txt": "iPhone",
+   "transition": "color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+   "changed": [
+    "c"
+   ]
+  }
+ ],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    0
+   ],
+   [
+    93,
+    300
+   ],
+   [
+    149,
+    300
+   ],
+   [
+    208,
+    300
+   ],
+   [
+    284,
+    300
+   ],
+   [
+    349,
+    300
+   ],
+   [
+    417,
+    300
+   ],
+   [
+    478,
+    300
+   ],
+   [
+    548,
+    300
+   ],
+   [
+    616,
+    300
+   ],
+   [
+    680,
+    300
+   ],
+   [
+    749,
+    300
+   ],
+   [
+    806,
+    300
+   ],
+   [
+    862,
+    300
+   ],
+   [
+    917,
+    300
+   ],
+   [
+    977,
+    300
+   ],
+   [
+    1039,
+    300
+   ],
+   [
+    1103,
+    300
+   ],
+   [
+    1181,
+    300
+   ],
+   [
+    1236,
+    300
+   ],
+   [
+    1296,
+    300
+   ],
+   [
+    1356,
+    300
+   ],
+   [
+    1425,
+    300
+   ],
+   [
+    1485,
+    300
+   ]
+  ],
+  "finalY": 300,
+  "msTo50pct": 22,
+  "msTo95pct": 22
+ },
+ "scrollSteps": [
+  {
+   "y": 450,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [
+    "AirPods Pro 3",
+    "The world\u2019s best in\u2011ear\nActive Noise Cancellation."
+   ],
+   "i": 1
+  },
+  {
+   "y": 900,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [
+    "Get the highlights.",
+    "An exceptional spatial listening experience, with high-defin"
+   ],
+   "i": 2
+  },
+  {
+   "y": 1350,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [
+    "All-new heart rate sensing. Now\u00a0you can track your\u00a0heart rat",
+    "Hearing Aid capability7 now\u00a0features automatic Conversation "
+   ],
+   "i": 3
+  },
+  {
+   "y": 1800,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [
+    "Take a closer look."
+   ],
+   "i": 4
+  },
+  {
+   "y": 2250,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 5
+  },
+  {
+   "y": 2700,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 6
+  },
+  {
+   "y": 3150,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Intelligent noise control",
+    "The best thing\nyou\u2019ve never\nheard."
+   ],
+   "i": 7
+  },
+  {
+   "y": 3600,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Intelligent noise control",
+    "The best thing\nyou\u2019ve never\nheard."
+   ],
+   "i": 8
+  },
+  {
+   "y": 4050,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 9
+  },
+  {
+   "y": 4500,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 10
+  },
+  {
+   "y": 4950,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 11
+  },
+  {
+   "y": 5400,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "New ultra-low-noise microphones.",
+    "Using advanced computational audio to remove more noise arou"
+   ],
+   "i": 12
+  },
+  {
+   "y": 5850,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "New ultra-low-noise microphones.",
+    "Using advanced computational audio to remove more noise arou"
+   ],
+   "i": 13
+  },
+  {
+   "y": 6300,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Audio performance",
+    "The sound of science."
+   ],
+   "i": 14
+  },
+  {
+   "y": 6750,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "A new multiport acoustic architecture with more precise airf",
+    "A custom-built driver and amplifier work with the H2 chip to"
+   ],
+   "i": 15
+  },
+  {
+   "y": 7200,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "A new multiport acoustic architecture with more precise airf",
+    "A custom-built driver and amplifier work with the H2 chip to"
+   ],
+   "i": 16
+  },
+  {
+   "y": 7650,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "A new multiport acoustic architecture with more precise airf",
+    "A custom-built driver and amplifier work with the H2 chip to"
+   ],
+   "i": 17
+  },
+  {
+   "y": 8100,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "A new multiport acoustic architecture with more precise airf",
+    "A custom-built driver and amplifier work with the H2 chip to"
+   ],
+   "i": 18
+  },
+  {
+   "y": 8550,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "A custom-built driver and amplifier work with the H2 chip to",
+    "Personalized listening"
+   ],
+   "i": 19
+  },
+  {
+   "y": 9000,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Personalized listening",
+    "For your ears only."
+   ],
+   "i": 20
+  },
+  {
+   "y": 9450,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 21
+  },
+  {
+   "y": 9900,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 22
+  },
+  {
+   "y": 10350,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Adaptive EQ uses inward-facing microphones to tune music to ",
+    "Personalized Spatial\u00a0Audio uses the TrueDepth\u00a0camera on your"
+   ],
+   "i": 23
+  },
+  {
+   "y": 10800,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Adaptive EQ uses inward-facing microphones to tune music to ",
+    "Personalized Spatial\u00a0Audio uses the TrueDepth\u00a0camera on your"
+   ],
+   "i": 24
+  },
+  {
+   "y": 11250,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Fitness",
+    "Introducing heart rate sensing."
+   ],
+   "i": 25
+  },
+  {
+   "y": 11700,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Fitness",
+    "Introducing heart rate sensing."
+   ],
+   "i": 26
+  },
+  {
+   "y": 12150,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "All-new heart rate sensing helps you track your heart rate a"
+   ],
+   "i": 27
+  },
+  {
+   "y": 12600,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "All-new heart rate sensing helps you track your heart rate a",
+    "Fitness app. With just AirPods\u00a0Pro\u00a03 and iPhone, you can div"
+   ],
+   "i": 28
+  },
+  {
+   "y": 13050,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Fitness app. With just AirPods\u00a0Pro\u00a03 and iPhone, you can div",
+    "IP57 dust, sweat, and water resistance."
+   ],
+   "i": 29
+  },
+  {
+   "y": 13500,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "IP57 dust, sweat, and water resistance.",
+    "A first for AirPods, an IP57 rating means AirPods\u00a0Pro\u00a03 are "
+   ],
+   "i": 30
+  },
+  {
+   "y": 13950,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Hearing Health",
+    "Check, aid, and help\u00a0protect your\u00a0hearing."
+   ],
+   "i": 31
+  },
+  {
+   "y": 14400,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Hearing Health",
+    "Check, aid, and help\u00a0protect your\u00a0hearing."
+   ],
+   "i": 32
+  },
+  {
+   "y": 14850,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Learn more\n, hearing health"
+   ],
+   "i": 33
+  },
+  {
+   "y": 15300,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 3,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 34
+  },
+  {
+   "y": 15750,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [
+    "4 more hours\nfor the Hearing\u00a0Aid feature9"
+   ],
+   "i": 35
+  },
+  {
+   "y": 16200,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [
+    "Battery life.",
+    "Hearing Aid users now get 67 percent more battery life in Tr"
+   ],
+   "i": 36
+  },
+  {
+   "y": 16650,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [
+    "Battery life.",
+    "Hearing Aid users now get 67 percent more battery life in Tr"
+   ],
+   "i": 37
+  },
+  {
+   "y": 17100,
+   "H": 28918,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Experience",
+    "Magic to your ears."
+   ],
+   "i": 38
+  },
+  {
+   "y": 17550,
+   "H": 28956,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Siri, play the song Diana texted me yesterday",
+    "Siri\u00a0AI is rolling out in\u00a0English. Usage limits may\u00a0apply."
+   ],
+   "i": 39
+  },
+  {
+   "y": 18000,
+   "H": 28956,
+   "bigFixedOrSticky": 2,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "Siri\u00a0AI is rolling out in\u00a0English. Usage limits may\u00a0apply.",
+    "Get more done every day with hands-free access to an even mo"
+   ],
+   "i": 40
+  },
+  {
+   "y": 18450,
+   "H": 28956,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Siri can read out messages and alerts as they arrive, and yo",
+    "Easily share what you\u2019re watching or listening to with a fri"
+   ],
+   "i": 41
+  },
+  {
+   "y": 18900,
+   "H": 29048,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "All-day battery life",
+    "They\u2019re workin\u2019\n9 to 5."
+   ],
+   "i": 42
+  },
+  {
+   "y": 19350,
+   "H": 29048,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 43
+  },
+  {
+   "y": 19800,
+   "H": 29048,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "2 hours more than AirPods\u00a0Pro\u00a02",
+    "4 hours more than AirPods\u00a0Pro\u00a02"
+   ],
+   "i": 44
+  },
+  {
+   "y": 20250,
+   "H": 29163,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "2 hours more than AirPods\u00a0Pro\u00a02",
+    "4 hours more than AirPods\u00a0Pro\u00a02"
+   ],
+   "i": 45
+  },
+  {
+   "y": 20700,
+   "H": 29163,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Easily locate the exact place you left your AirPods\u00a0Pro. A n",
+    "1.5x increase with AirPods\u00a0Pro\u00a0312"
+   ],
+   "i": 46
+  },
+  {
+   "y": 21150,
+   "H": 29163,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Why Apple is the best\nplace to buy AirPods.",
+    "Free Engraving"
+   ],
+   "i": 47
+  },
+  {
+   "y": 21600,
+   "H": 29163,
+   "bigFixedOrSticky": 2,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Make them yours with a mix of emoji, names, initials, and nu",
+    "Choose two-hour delivery from an Apple\u00a0Store, free delivery,"
+   ],
+   "i": 48
+  }
+ ]
+}

@@ -1,0 +1,439 @@
+{
+ "url": "https://www.mersi-architecture.com",
+ "title": "Architecte d'int\u00e9rieur \u00e0 Paris | MERSI Architecture",
+ "challenge": false,
+ "globals": {
+  "gsap": "3.13.0",
+  "ScrollTrigger": false,
+  "lenis": true,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 0,
+  "canvases": 0,
+  "videos": [],
+  "clipPathEls": 41,
+  "sticky": 0,
+  "fixed": 8,
+  "fonts": [
+   "webflow-icons",
+   "Doner",
+   "Switzer Variable"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=69689842a40a17ac45e5418a",
+   "kb": 87
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/69689842a40a17ac45e5418a/js/webflow.eaf8ceef.4516a5108c6c615f.js",
+   "kb": 1
+  },
+  {
+   "url": "https://mersi.netlify.app/main.js",
+   "kb": 285
+  },
+  {
+   "url": "https://cdn.prod.website-files.com/69689842a40a17ac45e5418a/js/webflow.schunk.ed9687e0656a5325.js",
+   "kb": 45
+  },
+  {
+   "url": "https://connect.facebook.net/en_US/fbevents.js",
+   "kb": 427
+  },
+  {
+   "url": "https://www.mersi-architecture.com/haqt6iy0yx2eNjk2ODk4NDJhNDBhMTdhYzQ1ZTU0MThh/KOb4T9Uw3E6nfGm5tJ7BcGMw3jQ",
+   "kb": 559
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-70EBMTBV70&gtg_health=1",
+   "kb": 0
+  },
+  {
+   "url": "https://connect.facebook.net/signals/config/998929851225802?v=2.9.433&r=stable&domain=www.mersi-architecture.com&hme=4453c87d489b6902031c012",
+   "kb": 370
+  }
+ ],
+ "totalScriptKB": 1775,
+ "code": {
+  "lerp": {
+   "count": 1,
+   "examples": [
+    "lerp:.06"
+   ]
+  },
+  "duration": {
+   "count": 87,
+   "examples": [
+    "duration:.5",
+    "duration:0",
+    "duration:.4",
+    "duration:1",
+    "duration:1.2",
+    "duration:1.4",
+    "duration:.8",
+    "duration:1.35"
+   ]
+  },
+  "ease": {
+   "count": 111,
+   "examples": [
+    "ease:\"none\"",
+    "ease:\"expo\"",
+    "ease:\"power4\"",
+    "ease:\"power2.out\"",
+    "ease:\"power3.inOut\"",
+    "ease:\"power2.in\"",
+    "ease:\"expo.inOut\"",
+    "ease:\"power4.inOut\""
+   ]
+  },
+  "scrub": {
+   "count": 3,
+   "examples": [
+    "scrub:1"
+   ]
+  },
+  "pin": {
+   "count": 5,
+   "examples": [
+    "pin:1",
+    "pin:!0"
+   ]
+  },
+  "wheelMultiplier": {
+   "count": 2,
+   "examples": [
+    "wheelMultiplier:1",
+    "wheelMultiplier:.8"
+   ]
+  },
+  "smoothWheel": {
+   "count": 2,
+   "examples": [
+    "smoothWheel:i"
+   ]
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 13,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 1,
+   "examples": [
+    "swiper"
+   ]
+  },
+  "barba": {
+   "count": 1,
+   "examples": [
+    "barba"
+   ]
+  },
+  "splittext": {
+   "count": 2,
+   "examples": [
+    "SplitText"
+   ]
+  },
+  "scrollTrigger": {
+   "count": 7,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 14,
+   "examples": [
+    "lenis"
+   ]
+  },
+  "webflow": {
+   "count": 29,
+   "examples": [
+    "Webflow",
+    "webflow"
+   ]
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 2,
+   "examples": [
+    "astro"
+   ]
+  },
+  "react": {
+   "count": 0,
+   "examples": []
+  },
+  "svelte": {
+   "count": 0,
+   "examples": []
+  },
+  "vue": {
+   "count": 0,
+   "examples": []
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 0,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer"
+  ]
+ },
+ "hover": [
+  {
+   "txt": "",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "PROJETS\nPROJETS",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "AGENCE\nAGENCE",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "PROCESS\nPROCESS",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "SHOP\nSHOP",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "CONTACT\nCONTACT",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "INSTAGRAM\nINSTAGRAM",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "Hamelin\nHamelin\nParis 16\nR\u00e9sid",
+   "transition": "all",
+   "changed": []
+  }
+ ],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    450011
+   ],
+   [
+    63,
+    450050
+   ],
+   [
+    124,
+    450074
+   ],
+   [
+    180,
+    450096
+   ],
+   [
+    237,
+    450120
+   ],
+   [
+    294,
+    450136
+   ],
+   [
+    354,
+    450153
+   ],
+   [
+    413,
+    450161
+   ],
+   [
+    484,
+    450180
+   ],
+   [
+    541,
+    450183
+   ],
+   [
+    603,
+    450183
+   ],
+   [
+    664,
+    450183
+   ],
+   [
+    725,
+    450183
+   ],
+   [
+    783,
+    450183
+   ],
+   [
+    839,
+    450183
+   ],
+   [
+    895,
+    450183
+   ],
+   [
+    953,
+    450183
+   ],
+   [
+    1010,
+    450183
+   ],
+   [
+    1073,
+    450183
+   ],
+   [
+    1127,
+    450183
+   ],
+   [
+    1183,
+    450183
+   ],
+   [
+    1240,
+    450183
+   ],
+   [
+    1294,
+    450183
+   ],
+   [
+    1356,
+    450000
+   ]
+  ],
+  "finalY": 450000,
+  "msTo50pct": 0,
+  "msTo95pct": 0
+ },
+ "scrollSteps": [
+  {
+   "y": 450274,
+   "H": 900425,
+   "bigFixedOrSticky": 6,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Hamelin\nHamelin",
+    "Naya\nNaya"
+   ],
+   "i": 1
+  },
+  {
+   "y": 450274,
+   "H": 900425,
+   "bigFixedOrSticky": 6,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Hamelin\nHamelin",
+    "Naya\nNaya"
+   ],
+   "i": 2
+  },
+  {
+   "y": 450274,
+   "H": 900425,
+   "bigFixedOrSticky": 6,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Hamelin\nHamelin",
+    "Naya\nNaya"
+   ],
+   "i": 3
+  },
+  {
+   "y": 450274,
+   "H": 900425,
+   "bigFixedOrSticky": 6,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Hamelin\nHamelin",
+    "Naya\nNaya"
+   ],
+   "i": 4
+  }
+ ]
+}

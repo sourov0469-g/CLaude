@@ -1,0 +1,956 @@
+{
+ "url": "https://www.scoutmotors.com",
+ "title": "Scout Motors",
+ "challenge": false,
+ "globals": {
+  "gsap": false,
+  "ScrollTrigger": false,
+  "lenis": true,
+  "three": false,
+  "threeRev": null,
+  "webglContexts": 0,
+  "canvases": 2,
+  "videos": [
+   "hp1017.DDkwSAOz.webm",
+   "camp1015-vp9-chrome.DtpEpoM-.webm",
+   "Scout_Reveal_Sizzle_Final_Deliverable.mp4"
+  ],
+  "clipPathEls": 25,
+  "sticky": 4,
+  "fixed": 14,
+  "fonts": [
+   "scout-sans-regular",
+   "scout-sans-medium",
+   "scout-sans-semicond-bold",
+   "scout-sans-wide-medium",
+   "scout-ibm-plex-mono",
+   "Source Sans Pro"
+  ]
+ },
+ "scripts": [
+  {
+   "url": "https://consent.trustarc.com/v2/notice/zzhplz",
+   "kb": 179
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Layout.astro_astro_type_script_index_0_lang.wQy50sQh.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.google.com/recaptcha/api.js?render=6Lf9eJ8pAAAAAAwwAfa2OiJKohJfrL9OgAaG5DqT",
+   "kb": 2
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtm.js?id=GTM-MXZLWJSB",
+   "kb": 400
+  },
+  {
+   "url": "https://www.googletagmanager.com/gtag/js?id=G-EWMT52PYQP",
+   "kb": 543
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/SequenceKey.astro_astro_type_script_index_0_lang.ycaJijVa.js",
+   "kb": 1
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/SplitLines.astro_astro_type_script_index_0_lang.BbrFY4mw.js",
+   "kb": 6
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Menu.astro_astro_type_script_index_0_lang.C04toRNB.js",
+   "kb": 27
+  },
+  {
+   "url": "https://bat.bing.com/bat.js",
+   "kb": 57
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/HomeTreadmill.astro_astro_type_script_index_0_lang.Cm_jnYRz.js",
+   "kb": 1
+  },
+  {
+   "url": "https://www.redditstatic.com/ads/pixel.js",
+   "kb": 86
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Sequence.astro_astro_type_script_index_0_lang.C5MDVVB8.js",
+   "kb": 12
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/HomeCamp.astro_astro_type_script_index_0_lang.Cz6SWvi8.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/ProductTile.astro_astro_type_script_index_0_lang.Bar_4CXK.js",
+   "kb": 1
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Layout.astro_astro_type_script_index_1_lang.DhikvYOg.js",
+   "kb": 104
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Viewfinder.astro_astro_type_script_index_0_lang.DS_5CLFQ.js",
+   "kb": 1
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Layout.astro_astro_type_script_index_2_lang.uk0rlPgg.js",
+   "kb": 1
+  },
+  {
+   "url": "https://bat.bing.com/p/action/211065069.js",
+   "kb": 0
+  },
+  {
+   "url": "https://collector-53273.us.tvsquared.com/tv2track.js",
+   "kb": 20
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Layout.astro_astro_type_script_index_3_lang.DI-Hu7A3.js",
+   "kb": 1
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/HandleAuth.BkMC75Vz.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/HeaderSecondaryNav.DBwVYN7r.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/client.BXan3ubb.js",
+   "kb": 2
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/MenuAccount.CzNcgh7L.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/SideDrawer.av2uRE50.js",
+   "kb": 5
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/ErrorModal.CfTs68Li.js",
+   "kb": 2
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/reveal-event-slider.DuVuMFqn.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/SubscriptionModal.GU7NBLjC.js",
+   "kb": 7
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/Disclaimer.BXfRnXQ7.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/DisclaimerPrice.DMV_W64U.js",
+   "kb": 2
+  },
+  {
+   "url": "https://collector-48509.us.tvsquared.com/tv2track.js",
+   "kb": 20
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/imageService.Cky46zhN.js",
+   "kb": 3
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/maths.DLf3n1j8.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/screen.C7FgSqdh.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/gsap.CvDoa17S.js",
+   "kb": 68
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/focus-trap.esm.B1WdRdrv.js",
+   "kb": 19
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/rolldown-runtime.hePW80VL.js",
+   "kb": 1
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/deviceStatus.DQ4yLzYU.js",
+   "kb": 59
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/events.BP0LW-1h.js",
+   "kb": 0
+  },
+  {
+   "url": "https://www.scoutmotors.com/_astro/HomeCampContent.BanBxlGu.js",
+   "kb": 1
+  }
+ ],
+ "totalScriptKB": 7570,
+ "code": {
+  "lerp": {
+   "count": 0,
+   "examples": []
+  },
+  "duration": {
+   "count": 13,
+   "examples": [
+    "duration:1",
+    "duration:.5",
+    "duration:0",
+    "duration:.33"
+   ]
+  },
+  "ease": {
+   "count": 0,
+   "examples": []
+  },
+  "scrub": {
+   "count": 0,
+   "examples": []
+  },
+  "pin": {
+   "count": 4,
+   "examples": [
+    "pin:1",
+    "pin:h"
+   ]
+  },
+  "wheelMultiplier": {
+   "count": 1,
+   "examples": [
+    "wheelMultiplier:1"
+   ]
+  },
+  "smoothWheel": {
+   "count": 2,
+   "examples": [
+    "smoothWheel:i"
+   ]
+  },
+  "PerspectiveCamera": {
+   "count": 0,
+   "examples": []
+  },
+  "fov": {
+   "count": 0,
+   "examples": []
+  },
+  "raycaster": {
+   "count": 0,
+   "examples": []
+  },
+  "mouse": {
+   "count": 17,
+   "examples": [
+    "mousemove",
+    "pointermove"
+   ]
+  },
+  "MeshPhysicalMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "ShaderMaterial": {
+   "count": 0,
+   "examples": []
+  },
+  "gltf": {
+   "count": 0,
+   "examples": []
+  },
+  "draco": {
+   "count": 0,
+   "examples": []
+  },
+  "ktx2": {
+   "count": 0,
+   "examples": []
+  },
+  "postprocessing": {
+   "count": 0,
+   "examples": []
+  },
+  "physics": {
+   "count": 0,
+   "examples": []
+  },
+  "audio": {
+   "count": 0,
+   "examples": []
+  },
+  "rive": {
+   "count": 0,
+   "examples": []
+  },
+  "lottie": {
+   "count": 0,
+   "examples": []
+  },
+  "swiper": {
+   "count": 164,
+   "examples": [
+    "swiper",
+    "Swiper",
+    "SWIPER"
+   ]
+  },
+  "barba": {
+   "count": 1,
+   "examples": [
+    "Barba"
+   ]
+  },
+  "splittext": {
+   "count": 0,
+   "examples": []
+  },
+  "scrollTrigger": {
+   "count": 2,
+   "examples": [
+    "ScrollTrigger"
+   ]
+  },
+  "lenisLib": {
+   "count": 71,
+   "examples": [
+    "lenis",
+    "Lenis"
+   ]
+  },
+  "webflow": {
+   "count": 0,
+   "examples": []
+  },
+  "nuxt": {
+   "count": 0,
+   "examples": []
+  },
+  "astro": {
+   "count": 4757,
+   "examples": [
+    "astro"
+   ]
+  },
+  "react": {
+   "count": 7,
+   "examples": [
+    "react-dom",
+    "createRoot"
+   ]
+  },
+  "svelte": {
+   "count": 1,
+   "examples": [
+    "svelte"
+   ]
+  },
+  "vue": {
+   "count": 13,
+   "examples": [
+    "Vue",
+    "createApp"
+   ]
+  }
+ },
+ "cursor": {
+  "followers": [],
+  "pixelChangePctAfterMouseMove": 98.5,
+  "cursorValuesSeen": [
+   "auto",
+   "pointer",
+   "default",
+   "",
+   "grab",
+   "not-allowed",
+   "text"
+  ]
+ },
+ "hover": [
+  {
+   "txt": "",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "TRAVELER SUV",
+   "transition": "color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color ",
+   "changed": [
+    "bg"
+   ]
+  },
+  {
+   "txt": "TERRA TRUCK",
+   "transition": "color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color ",
+   "changed": [
+    "bg"
+   ]
+  },
+  {
+   "txt": "RESERVE",
+   "transition": "color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color ",
+   "changed": [
+    "bg"
+   ]
+  },
+  {
+   "txt": "",
+   "transition": "color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color ",
+   "changed": [
+    "bg"
+   ]
+  },
+  {
+   "txt": "Cookies",
+   "transition": "all",
+   "changed": []
+  },
+  {
+   "txt": "Privacy Policy",
+   "transition": "all",
+   "changed": []
+  }
+ ],
+ "smoothing": {
+  "samples": [
+   [
+    0,
+    31
+   ],
+   [
+    97,
+    155
+   ],
+   [
+    175,
+    201
+   ],
+   [
+    233,
+    233
+   ],
+   [
+    293,
+    253
+   ],
+   [
+    375,
+    270
+   ],
+   [
+    432,
+    280
+   ],
+   [
+    492,
+    286
+   ],
+   [
+    557,
+    290
+   ],
+   [
+    612,
+    293
+   ],
+   [
+    670,
+    295
+   ],
+   [
+    732,
+    297
+   ],
+   [
+    805,
+    298
+   ],
+   [
+    859,
+    298
+   ],
+   [
+    932,
+    299
+   ],
+   [
+    990,
+    299
+   ],
+   [
+    1044,
+    299
+   ],
+   [
+    1104,
+    300
+   ],
+   [
+    1157,
+    300
+   ],
+   [
+    1215,
+    300
+   ],
+   [
+    1269,
+    300
+   ],
+   [
+    1361,
+    300
+   ],
+   [
+    1425,
+    300
+   ],
+   [
+    1489,
+    300
+   ]
+  ],
+  "finalY": 300,
+  "msTo50pct": 97,
+  "msTo95pct": 492
+ },
+ "scrollSteps": [
+  {
+   "y": 444,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 1,
+   "bigCanvasInView": 1,
+   "text": [
+    "Scouts always come back.",
+    "An\u00a0off-road\nicon\u00a0reborn."
+   ],
+   "i": 1
+  },
+  {
+   "y": 894,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 1,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 2
+  },
+  {
+   "y": 1344,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 3
+  },
+  {
+   "y": 1794,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 4
+  },
+  {
+   "y": 2244,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 5
+  },
+  {
+   "y": 2694,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 6
+  },
+  {
+   "y": 3144,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 7
+  },
+  {
+   "y": 3594,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 8
+  },
+  {
+   "y": 4044,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 9
+  },
+  {
+   "y": 4494,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 10
+  },
+  {
+   "y": 4944,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "An\u00a0off-road\nicon\u00a0reborn.",
+    "The new Scout\u00ae Traveler\u2122 and Terra\u2122 models are here. Born fr"
+   ],
+   "i": 11
+  },
+  {
+   "y": 5394,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 2,
+   "text": [],
+   "i": 12
+  },
+  {
+   "y": 5844,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 13
+  },
+  {
+   "y": 6294,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 14
+  },
+  {
+   "y": 6744,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 15
+  },
+  {
+   "y": 7194,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 16
+  },
+  {
+   "y": 7644,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 17
+  },
+  {
+   "y": 8094,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 18
+  },
+  {
+   "y": 8544,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 19
+  },
+  {
+   "y": 8994,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 20
+  },
+  {
+   "y": 9444,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 21
+  },
+  {
+   "y": 9894,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 22
+  },
+  {
+   "y": 10344,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [],
+   "i": 23
+  },
+  {
+   "y": 10794,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 1,
+   "text": [
+    "For\nThe Scout\nIn All\nOf Us."
+   ],
+   "i": 24
+  },
+  {
+   "y": 11244,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 1,
+   "bigCanvasInView": 1,
+   "text": [
+    "For\nThe Scout\nIn All\nOf Us.",
+    "Our roots run deep, but they don\u2019t define us. We\u2019re blending"
+   ],
+   "i": 25
+  },
+  {
+   "y": 11371,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 1,
+   "bigCanvasInView": 1,
+   "text": [
+    "Our roots run deep, but they don\u2019t define us. We\u2019re blending"
+   ],
+   "i": 26
+  },
+  {
+   "y": 12144,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [
+    "Experience the\nreveal event.",
+    "On October 24, 2024, Scout Motors introduced the next era of"
+   ],
+   "i": 27
+  },
+  {
+   "y": 12594,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 2,
+   "bigCanvasInView": 0,
+   "text": [
+    "Experience the\nreveal event.",
+    "On October 24, 2024, Scout Motors introduced the next era of"
+   ],
+   "i": 28
+  },
+  {
+   "y": 13044,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [],
+   "i": 29
+  },
+  {
+   "y": 13494,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 1,
+   "bigCanvasInView": 0,
+   "text": [
+    "The duo\nthat does it all.",
+    "Traveler"
+   ],
+   "i": 30
+  },
+  {
+   "y": 13944,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "The duo\nthat does it all.",
+    "Traveler"
+   ],
+   "i": 31
+  },
+  {
+   "y": 14394,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Terra",
+    "In it for the long haul."
+   ],
+   "i": 32
+  },
+  {
+   "y": 14844,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "In it for the long haul.",
+    "This is a company as rugged as our vehicles. One that\u2019s buil"
+   ],
+   "i": 33
+  },
+  {
+   "y": 15294,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Legal notes",
+    "Individual performance and off-road capability varies based "
+   ],
+   "i": 34
+  },
+  {
+   "y": 15744,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "\"Refuel anywhere\" refers to the intended ability for vehicle",
+    "Customization options such as materials, colors, and wheels "
+   ],
+   "i": 35
+  },
+  {
+   "y": 16194,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "Be one of the pioneers.\nStay Connected."
+   ],
+   "i": 36
+  },
+  {
+   "y": 16644,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "\u00a9 2026 SCOUT MOTORS INC. OR ITS AFFILIATES. ALL RIGHTS RESER"
+   ],
+   "i": 37
+  },
+  {
+   "y": 16985,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "\u00a9 2026 SCOUT MOTORS INC. OR ITS AFFILIATES. ALL RIGHTS RESER"
+   ],
+   "i": 38
+  },
+  {
+   "y": 16990,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "\u00a9 2026 SCOUT MOTORS INC. OR ITS AFFILIATES. ALL RIGHTS RESER"
+   ],
+   "i": 39
+  },
+  {
+   "y": 16990,
+   "H": 17890,
+   "bigFixedOrSticky": 10,
+   "videosInView": 0,
+   "bigCanvasInView": 0,
+   "text": [
+    "\u00a9 2026 SCOUT MOTORS INC. OR ITS AFFILIATES. ALL RIGHTS RESER"
+   ],
+   "i": 40
+  }
+ ]
+}
