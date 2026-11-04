@@ -113,5 +113,22 @@ module.exports = {
     rec('the Owl flies to each chosen spot', owlMoved);
     rec('no answer teaches construction (no layers, underlayment, decking, nails, ventilation words)', await p.evaluate(S => !/underlayment|ice & water|decking|drip edge|nail|ventilation|rafter/i.test(document.querySelector(S).innerText), S));
     rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '12': async (p, S, rec) => {
+    await p.waitForTimeout(500);
+    const set = (v) => p.evaluate(([S, v]) => { const r = document.querySelector(S + ' input[type=range]'); r.value = v; r.dispatchEvent(new Event('input')); }, [S, v]);
+    const st = () => p.evaluate(S => { const g = document.querySelector(S + ' .sh'); const t = [...g.querySelectorAll('.tab')]; const fill = t[5].getAttribute('fill'); return { fill, curled: t.filter(x => x.style.transform && x.style.transform !== 'none').length, gone: t.filter(x => x.style.opacity === '0').length, moss: Math.max(...[...g.querySelectorAll('.moss')].map(m => +m.style.opacity || 0)), yr: document.querySelector(S + ' .yr').textContent, vt: document.querySelector(S + ' input').getAttribute('aria-valuetext'), h: document.querySelector(S + ' .ans h3').textContent, tag: document.querySelector(S + ' .ans small').textContent }; }, S);
+    await set(2); await p.waitForTimeout(250); const a = await st();
+    rec('a young roof: crisp shingles, nothing curled, no moss; Owl says it will fix anything fast (Roof repair)', a.curled === 0 && a.gone === 0 && a.moss === 0 && a.yr === '2' && a.h === 'Still young.' && a.tag === 'Roof repair', JSON.stringify(a));
+    await set(10); await p.waitForTimeout(250); const b = await st();
+    rec('middle years: a Wise Check', b.tag === 'Wise Check' && b.h === 'In its middle years.' && b.fill !== a.fill);
+    await set(30); await p.waitForTimeout(250); const c = await st();
+    rec('30+: faded, some tabs curled and a few missing, moss; "It’s had a good run" with the replacement and the 10-year workmanship warranty', c.curled > 0 && c.gone > 0 && c.moss > .5 && c.yr === '30+' && c.vt === '30 or more years' && c.tag === 'Roof replacement' && /10-year workmanship warranty/.test(await p.evaluate(S => document.querySelector(S + ' .ans p').textContent, S)), JSON.stringify(c));
+    await p.focus(S + ' input[type=range]'); await p.keyboard.press('Home'); await p.waitForTimeout(250);
+    rec('keyboard: Home goes to a new roof (native range)', (await st()).yr === '0');
+    await p.click(S + ' .unsure'); await p.waitForTimeout(200);
+    rec('"Not sure how old it is?" answers with a Wise Check', await p.evaluate(S => /Not sure\? Most people aren’t\./.test(document.querySelector(S + ' .ans h3').textContent) && document.querySelector(S + ' .ans small').textContent === 'Wise Check', S));
+    rec('no lifespan claims and no construction words', await p.evaluate(S => !/last(s)? (about|up to)?\s*\d|lifespan|years? to|underlayment|decking|nail|ventilation|rafter|granule/i.test(document.querySelector(S).innerText), S));
+    rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };

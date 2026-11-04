@@ -1,0 +1,101 @@
+<section class="sec explore12" id="explore-12" aria-labelledby="ex12-h">
+<style>
+.explore12{overflow:hidden}
+.explore12 .g{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(22px,4vw,60px);align-items:center}
+.explore12 .lede{margin:12px 0 20px;max-width:36ch}
+.explore12 .pic{position:relative;border-radius:30px;padding:clamp(14px,2vw,24px) clamp(14px,2vw,24px) clamp(18px,2.4vw,28px);background:radial-gradient(ellipse at 50% 20%,#FFFDF7,#EFE9DC 75%);box-shadow:0 2px 0 #fff inset,0 40px 60px -44px rgba(23,17,29,.5)}
+.explore12 .pic svg{display:block;width:100%;height:auto}
+.explore12 .age{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:10px 4px 6px}
+.explore12 .age b{font-size:clamp(34px,4vw,52px);font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#17111D}
+.explore12 .age b small{font-size:.42em;font-weight:800;letter-spacing:0;color:var(--ink-70);margin-left:6px}
+.explore12 .age label{font-weight:800;font-size:15px;color:var(--ink-70)}
+.explore12 input[type=range]{--p:40%;-webkit-appearance:none;appearance:none;display:block;width:100%;height:56px;margin:0;background:transparent;cursor:pointer}
+.explore12 input[type=range]::-webkit-slider-runnable-track{height:14px;border-radius:7px;background:linear-gradient(90deg,#EAA221 0 var(--p),#E4DCCB var(--p) 100%);box-shadow:inset 0 1px 2px rgba(23,17,29,.18)}
+.explore12 input[type=range]::-moz-range-track{height:14px;border-radius:7px;background:linear-gradient(90deg,#EAA221 0 var(--p),#E4DCCB var(--p) 100%)}
+.explore12 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:52px;height:52px;margin-top:-19px;border-radius:50%;border:0;background:#17111D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Ccircle cx='18' cy='22' r='9' fill='%23F1EFE6'/%3E%3Ccircle cx='34' cy='22' r='9' fill='%23F1EFE6'/%3E%3Ccircle cx='18' cy='22' r='5' fill='%23EAA221'/%3E%3Ccircle cx='34' cy='22' r='5' fill='%23EAA221'/%3E%3Ccircle cx='18' cy='22' r='2.4' fill='%2317111D'/%3E%3Ccircle cx='34' cy='22' r='2.4' fill='%2317111D'/%3E%3Cpath d='M23 30l3 5 3-5z' fill='%23EAA221'/%3E%3Cpath d='M9 12l3-8 6 6M43 12l-3-8-6 6' fill='%2317111D'/%3E%3C/svg%3E") center/100% no-repeat;box-shadow:0 0 0 4px #FFFDF7,0 10px 16px -8px rgba(23,17,29,.6);transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.explore12 input[type=range]::-moz-range-thumb{width:52px;height:52px;border-radius:50%;border:0;background:#17111D;box-shadow:0 0 0 4px #FFFDF7}
+.explore12 input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.07)}
+.explore12 input[type=range]:active::-webkit-slider-thumb{transform:scale(.94)}
+.explore12 input[type=range]:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:14px}
+.explore12 .ticks{display:flex;justify-content:space-between;margin:0 4px;font-size:13px;font-weight:700;color:var(--ink-70)}
+.explore12 .ans{padding:22px 22px 24px;border-radius:22px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 26px 40px -30px rgba(23,17,29,.5);min-height:200px}
+.explore12 .ans small{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(234,162,33,.2);color:#8E5A12;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.explore12 .ans h3{margin:12px 0 6px;font-size:clamp(22px,2.2vw,28px);font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.explore12 .ans p{margin:0;font-size:17px;color:var(--ink-70)}
+.explore12 .ans.swap{animation:ex12s .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes ex12s{0%{opacity:.25;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.explore12 .unsure{margin-top:12px;min-height:46px;padding:0 6px;border:0;background:none;font-weight:800;font-size:16px;color:#17111D;text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:3px;text-underline-offset:5px;cursor:pointer}
+.explore12 .acts{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.explore12 .acts .btn{width:100%;min-height:56px;font-size:17px}
+.explore12 .tab{transition:fill .35s,transform .35s cubic-bezier(.16,1,.3,1),opacity .3s}
+.explore12 .moss,.explore12 .streak{transition:opacity .35s}
+@media (max-width:900px){.explore12 .g{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.explore12 .tab,.explore12 .moss,.explore12 .streak{transition:none}.explore12 .ans.swap{animation:none}.explore12 input[type=range]::-webkit-slider-thumb{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="pic" data-owl="say:How old?">
+   <svg viewBox="0 0 640 400" aria-hidden="true"></svg>
+   <div class="age"><label for="ex12-r">Your roof’s age</label><b aria-hidden="true"><span class="yr">12</span><small>years</small></b></div>
+   <input id="ex12-r" type="range" min="0" max="30" step="1" value="12" aria-valuetext="12 years">
+   <div class="ticks" aria-hidden="true"><span>New</span><span>10</span><span>20</span><span>30+</span></div>
+  </div>
+  <div>
+   <span class="kick">Explore your roof</span>
+   <h2 class="h2" id="ex12-h" style="margin-top:12px">How Old Is Your Roof?</h2>
+   <p class="lede rv">Slide the Owl to your roof’s age. We’ll tell you straight what it needs.</p>
+   <div class="ans" aria-live="polite"><small></small><h3></h3><p></p></div>
+   <button class="unsure" type="button">Not sure how old it is?</button>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','12',function(root){
+  /* one idea: slide to your roof's age; the drawing ages with it and Owl says what it would do. No lifespan figures, no lesson. */
+  var svg = root.querySelector('svg'), r = root.querySelector('input'), yr = root.querySelector('.yr'), ans = root.querySelector('.ans'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var A = [
+    {to:5, tag:'Roof repair', q:'Still young.', a:'If something’s off, a lifted shingle or a leak after a storm, we’ll fix it fast.'},
+    {to:14, tag:'Wise Check', q:'In its middle years.', a:'A Wise Check catches the small things before they turn into big ones.'},
+    {to:24, tag:'Wise Check', q:'Getting on.', a:'Let’s look at it together. We’ll tell you straight: a repair, or time for a new roof.'},
+    {to:30, tag:'Roof replacement', q:'It’s had a good run.', a:'When you’re ready, we’ll replace it, backed by our 10-year workmanship warranty.'}];
+  var U = {tag:'Wise Check', q:'Not sure? Most people aren’t.', a:'We’ll look at it for you and tell you how it’s doing, in plain words.'};
+  /* the drawing: a side-gable house front; the roof is rows of shingle tabs that age with the slider */
+  var NS = 'http://www.w3.org/2000/svg', seed = 11; function rnd(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }
+  var h = '<rect x="0" y="372" width="640" height="28" rx="14" fill="#B9D38C"/><rect x="92" y="236" width="456" height="140" fill="#EDE3CF" stroke="#17111D" stroke-width="3"/>';
+  for (var y = 252; y < 376; y += 16) h += '<path d="M94 ' + y + 'H546" stroke="#D6C8AC" stroke-width="2"/>';
+  h += '<rect x="130" y="262" width="92" height="70" rx="4" fill="#D7E6EE" stroke="#FFFDF7" stroke-width="6"/><rect x="418" y="262" width="92" height="70" rx="4" fill="#D7E6EE" stroke="#FFFDF7" stroke-width="6"/><rect x="290" y="282" width="60" height="94" rx="3" fill="#8C6A3A" stroke="#17111D" stroke-width="3"/>';
+  h += '<defs><clipPath id="ex12c"><path d="M150 70H490L582 238H58z"/></clipPath></defs><path d="M150 70H490L582 238H58z" fill="#2A2731"/><g clip-path="url(#ex12c)" class="sh"></g><path d="M150 70H490L582 238H58z" fill="none" stroke="#17111D" stroke-width="4" stroke-linejoin="round"/><rect x="146" y="62" width="348" height="12" rx="4" fill="#3A3640"/><path d="M52 240H588" stroke="#FFFDF7" stroke-width="6"/>';
+  svg.innerHTML = h;
+  var g = svg.querySelector('.sh'), tabs = [];
+  for (var row = 0, ty = 76; ty < 240; ty += 18, row++){
+    for (var tx = 40 + (row % 2)*18; tx < 600; tx += 36){
+      var t = document.createElementNS(NS, 'rect'); t.setAttribute('x', tx + 1); t.setAttribute('y', ty); t.setAttribute('width', 34); t.setAttribute('height', 18); t.setAttribute('rx', 1.5); t.setAttribute('class', 'tab');
+      t.style.transformBox = 'fill-box'; t.style.transformOrigin = '50% 0%'; var o = {el:t, r:rnd(), j:rnd()}; tabs.push(o); g.appendChild(t);
+      if (o.r < .16){ var m = document.createElementNS(NS, 'ellipse'); m.setAttribute('cx', tx + 10 + o.j*14); m.setAttribute('cy', ty + 15); m.setAttribute('rx', 9 + o.j*6); m.setAttribute('ry', 4); m.setAttribute('class', 'moss'); m.setAttribute('fill', '#7C9A52'); o.moss = m; }
+    }
+    var line = document.createElementNS(NS, 'path'); line.setAttribute('d', 'M20 ' + (ty + 18) + 'H620'); line.setAttribute('stroke', '#211E27'); line.setAttribute('stroke-width', '1.6'); g.appendChild(line);
+  }
+  tabs.forEach(function(o){ if (o.moss) g.appendChild(o.moss); });
+  for (var s = 0; s < 7; s++){ var st = document.createElementNS(NS, 'path'), sx = 120 + s*64 + rnd()*20; st.setAttribute('d', 'M' + sx + ' 80 q6 70 -2 150'); st.setAttribute('stroke', '#1D1A22'); st.setAttribute('stroke-width', 10 + rnd()*8); st.setAttribute('fill', 'none'); st.setAttribute('class', 'streak'); st.setAttribute('opacity', '0'); g.appendChild(st); }
+  var streaks = [].slice.call(g.querySelectorAll('.streak'));
+  function mix(c1, c2, k){ var a = parseInt(c1.slice(1), 16), b = parseInt(c2.slice(1), 16); var rr = (a >> 16) + (((b >> 16) - (a >> 16))*k), gg = ((a >> 8) & 255) + ((((b >> 8) & 255) - ((a >> 8) & 255))*k), bb = (a & 255) + (((b & 255) - (a & 255))*k); return 'rgb(' + Math.round(rr) + ',' + Math.round(gg) + ',' + Math.round(bb) + ')'; }
+  function age(v){ var a = Math.min(1, v/30);
+    tabs.forEach(function(o){ var k = Math.max(0, Math.min(1, a*1.1 - o.j*.15)); o.el.setAttribute('fill', mix('#3E3A45', '#8C857A', k*.9));
+      var curl = (o.r < .15 && a > .45) ? -(a - .45)*20*(1 - o.r*2) : 0; o.el.style.transform = curl ? 'rotate(' + (o.j > .5 ? curl : -curl).toFixed(1) + 'deg) scaleY(' + (1 + curl/80).toFixed(3) + ')' : 'none';
+      o.el.style.opacity = (o.r < .045 && a > .86) ? 0 : 1;
+      if (o.moss) o.moss.style.opacity = Math.max(0, Math.min(1, (a - .55)*2.6)).toFixed(2); });
+    streaks.forEach(function(st){ st.setAttribute('opacity', Math.max(0, Math.min(.26, (a - .38)*.55)).toFixed(2)); });
+    yr.textContent = v >= 30 ? '30+' : v; r.setAttribute('aria-valuetext', (v >= 30 ? '30 or more' : v) + ' years'); r.style.setProperty('--p', (v/30*100).toFixed(1) + '%'); }
+  var cur = null;
+  function show(o){ if (cur === o) return; cur = o; ans.querySelector('small').textContent = o.tag; ans.querySelector('h3').textContent = o.q; ans.querySelector('p').textContent = o.a; ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap'); }
+  function band(v){ for (var i = 0; i < A.length; i++) if (v <= A[i].to) return A[i]; return A[A.length - 1]; }
+  var raf = 0; r.addEventListener('input', function(){ if (raf) return; raf = requestAnimationFrame(function(){ raf = 0; var v = +r.value; age(v); show(band(v)); }); });
+  root.querySelector('.unsure').addEventListener('click', function(){ show(U); });
+  age(+r.value); show(band(+r.value));
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg);
+});
+</script>
+</section>

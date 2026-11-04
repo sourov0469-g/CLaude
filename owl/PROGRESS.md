@@ -32,3 +32,4 @@
   - Controls with no hover motion went from 291/554 to 5/554 (all 5 explained), and controls with no press response from 258 to 5.
   - Touch and reduced motion were verified. home-verify 50/50, and the regressions pass.
   - Self-rating 8.92. Next, once accepted: Explore 12.
+- **Explore 12 · "How Old Is Your Roof?"** (slide the Owl to your roof's age: a drawn roof ages with it, and Owl says what it would do: repair, Wise Check or replace; no lifespan claims): gated, 8.70, checks 21/21. Explore now has 12; next is Explore 13.

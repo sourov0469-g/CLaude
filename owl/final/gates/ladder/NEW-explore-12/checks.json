@@ -1,0 +1,141 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 12
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "How Old Is Your Roof?"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "a young roof: crisp shingles, nothing curled, no moss; Owl says it will fix anything fast (Roof repair)",
+  "ok": true,
+  "detail": "{\"fill\":\"rgb(62,58,69)\",\"curled\":0,\"gone\":0,\"moss\":0,\"yr\":\"2\",\"vt\":\"2 years\",\"h\":\"Still young.\",\"tag\":\"Roof repair\"}"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "middle years: a Wise Check",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "30+: faded, some tabs curled and a few missing, moss; \"It’s had a good run\" with the replacement and the 10-year workmanship warranty",
+  "ok": true,
+  "detail": "{\"fill\":\"rgb(130,124,115)\",\"curled\":25,\"gone\":10,\"moss\":1,\"yr\":\"30+\",\"vt\":\"30 or more years\",\"h\":\"It’s had a good run.\",\"tag\":\"Roof replacement\"}"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "keyboard: Home goes to a new roof (native range)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "\"Not sure how old it is?\" answers with a Wise Check",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "no lifespan claims and no construction words",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "next steps: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "12",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]
