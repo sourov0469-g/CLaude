@@ -1,0 +1,175 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 15
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Show Us From the Ground"
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "three frames on the line, each a named button: \"Photo 1, the whole roof: not added yet. Press to add.\"",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "empty start: \"One is enough to start\", Send is marked unavailable, safety and privacy lines shown",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "Send with no photo explains instead of failing",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "a photo develops in its frame and the frame swings (mid-develop)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "photo 1 shows, stays local (blob:), frame says \"added. Press to retake.\", count \"1 of 3\", Send ready",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "retake replaces the photo in the same frame (still 1 of 3)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "no share screen: opens the visitor’s own email to info@owlroofing.com, subject \"Roof photos\", body with Name / Address / Best phone number",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "…and says to attach the photos there, never that anything was sent",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "share screen path: the photo goes to the device’s own share screen with our address in the text",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "cancelling the share keeps the photos and says nothing was sent",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "all three frames filled: \"All 3 photos ready.\"",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "the call button is the real phone",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "15",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

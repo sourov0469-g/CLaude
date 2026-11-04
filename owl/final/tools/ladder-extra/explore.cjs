@@ -173,5 +173,37 @@ module.exports = {
     rec('Email This to Owl hands the sentence to the visitor’s own email app and never claims it was sent', await p.evaluate(S => /Your email app should open with your words filled in\. Send it from there, or call \(651\) 977-6027\./.test(document.querySelector(S + ' .note').textContent) && !/\b(sent|received|we got)\b/i.test(document.querySelector(S + ' .note').textContent), S));
     rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
     rec('the call button is the real phone', await p.evaluate(S => document.querySelector(S + ' .acts a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '15': async (p, S, rec) => {
+    const A = f => require('path').resolve(__dirname, '../../src/assets', f), pick = n => p.locator(S + ' .pick').nth(n);
+    const st = () => p.evaluate(S => ({ count: document.querySelector(S + ' .count span').textContent, note: document.querySelector(S + ' .note').textContent, dis: document.querySelector(S + ' .send').getAttribute('aria-disabled'), srcs: [...document.querySelectorAll(S + ' .pic img')].map(i => i.getAttribute('src') || ''), labels: [...document.querySelectorAll(S + ' .pf')].map(b => b.getAttribute('aria-label')) }), S);
+    let s = await st();
+    rec('three frames on the line, each a named button: "Photo 1, the whole roof: not added yet. Press to add."', s.labels.length === 3 && s.labels[0] === 'Photo 1, the whole roof: not added yet. Press to add.' && s.labels[2] === 'Photo 3, any stain inside: not added yet. Press to add.' && await p.evaluate(S => [...document.querySelectorAll(S + ' .pick')].every(i => i.accept === 'image/*' && i.getAttribute('capture') === 'environment'), S));
+    rec('empty start: "One is enough to start", Send is marked unavailable, safety and privacy lines shown', s.count === 'No photos yet. One is enough to start.' && s.dis === 'true' && await p.evaluate(S => /Stay on the ground\. Ladders are our job\./.test(document.querySelector(S + ' .safe').textContent) && /stay on this device until you choose to send them/.test(document.querySelector(S + ' .count small').textContent), S));
+    await p.click(S + ' .send', { force: true }); s = await st();
+    rec('Send with no photo explains instead of failing', s.note === 'Add a photo first: tap a frame on the line.');
+    await pick(0).setInputFiles(A('hero-nest-home.webp')); await p.waitForTimeout(250);
+    const dev = await p.evaluate(S => { const i = document.querySelector(S + ' .pic img'); return i.classList.contains('dev') && parseFloat(getComputedStyle(i).opacity) < 1 && document.querySelector(S + ' .pf').classList.contains('swing'); }, S);
+    rec('a photo develops in its frame and the frame swings (mid-develop)', dev);
+    await p.waitForTimeout(1700); s = await st();
+    rec('photo 1 shows, stays local (blob:), frame says "added. Press to retake.", count "1 of 3", Send ready', /^blob:/.test(s.srcs[0]) && s.labels[0].endsWith('added. Press to retake.') && s.count === '1 of 3 photos ready. Send now, or add more.' && s.dis === null && await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .pic img')).opacity === '1', S));
+    const first = s.srcs[0]; await pick(0).setInputFiles(A('hero-pines.webp')); await p.waitForTimeout(300); s = await st();
+    rec('retake replaces the photo in the same frame (still 1 of 3)', s.srcs[0] !== first && /^blob:/.test(s.srcs[0]) && s.count.startsWith('1 of 3'));
+    await p.evaluate(() => { window.__mail = ''; HTMLAnchorElement.prototype.click = function(){ if (/^mailto:/.test(this.href)) window.__mail = this.href; }; Object.defineProperty(navigator, 'canShare', { value: undefined, configurable: true }); Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }); });
+    await p.click(S + ' .send'); s = await st();
+    const mail = await p.evaluate(() => window.__mail), u = mail ? new URL(mail) : null;
+    rec('no share screen: opens the visitor’s own email to info@owlroofing.com, subject "Roof photos", body with Name / Address / Best phone number', !!u && u.pathname === 'info@owlroofing.com' && u.searchParams.get('subject') === 'Roof photos' && /Name:\nAddress:\nBest phone number:/.test(u.searchParams.get('body')));
+    rec('…and says to attach the photos there, never that anything was sent', /Attach the photos you just took, then send it from there\. Nothing reaches us until you do\./.test(s.note) && !/\b(we got|received|has been sent|were sent|sent!)\b/i.test(s.note));
+    await p.evaluate(() => { Object.defineProperty(navigator, 'canShare', { value: () => true, configurable: true }); Object.defineProperty(navigator, 'share', { value: d => { window.__sh = { n: d.files.length, text: d.text }; return Promise.resolve(); }, configurable: true }); });
+    await p.click(S + ' .send'); await p.waitForTimeout(200); s = await st();
+    const sh = await p.evaluate(() => window.__sh);
+    rec('share screen path: the photo goes to the device’s own share screen with our address in the text', sh && sh.n === 1 && /info@owlroofing\.com/.test(sh.text) && /^Done on your side\. If you emailed them to info@owlroofing\.com/.test(s.note));
+    await p.evaluate(() => Object.defineProperty(navigator, 'share', { value: () => Promise.reject(new DOMException('cancelled', 'AbortError')), configurable: true }));
+    await p.click(S + ' .send'); await p.waitForTimeout(200); s = await st();
+    rec('cancelling the share keeps the photos and says nothing was sent', s.note === 'No problem. Nothing was sent, and your photos are still here.' && /^blob:/.test(s.srcs[0]));
+    await pick(1).setInputFiles(A('shingle-close.webp')); await pick(2).setInputFiles(A('roof-surface.webp')); await p.waitForTimeout(300); s = await st();
+    rec('all three frames filled: "All 3 photos ready."', s.count === 'All 3 photos ready.' && s.srcs.every(x => /^blob:/.test(x)));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
+    rec('the call button is the real phone', await p.evaluate(S => document.querySelector(S + ' .acts a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };
