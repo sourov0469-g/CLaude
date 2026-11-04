@@ -1,0 +1,109 @@
+{
+ "name": "scout",
+ "url": "https://www.scoutmotors.com",
+ "buttons": [
+  {
+   "text": "Menu",
+   "html": "<button type=\"button\" data-menu-toggler=\"true\" id=\"headerMenuToggler\" aria-label=\"Menu\" class=\"c-button c-header_menu-toggler -light -menu\" aria-controls=\"menu\" data-bp=\"0\"><span class=\"c-button_inner\"><span class=\"c-button_label\"><span class=\"c-icon\"><svg id=\"Layer_1\" width=\"25.5\" height=\"8.5\" viewBox=\"0 0 25.5 8.5\" class=\"svg-burger\" aria-hidden=\"true\" focusable=\"false\"> <path d=\"M.75,0c-.41421,0-.75.33579-.75.75s.",
+   "transitions": [
+    "0 BUTTON color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1)"
+   ],
+   "hover120": [
+    "0 BUTTON bg: rgb(237, 233, 232) → rgb(216, 213, 212)"
+   ],
+   "hover700": [
+    "0 BUTTON bg: rgb(237, 233, 232) → rgb(213, 210, 209)"
+   ],
+   "press": [],
+   "focus": [
+    "0 BUTTON outline: none 3px → auto 10px"
+   ]
+  },
+  {
+   "text": "Close",
+   "html": "<button type=\"button\" id=\"menuClose\" data-menu-toggler=\"true\" aria-label=\"Close\" class=\"c-button -menu -light\" aria-controls=\"menu\" data-bp=\"1\"><span class=\"c-button_inner\"><span class=\"c-button_label\"><span class=\"c-icon\"><svg id=\"Layer_1\" width=\"15.64211\" height=\"15.78426\" viewBox=\"0 0 15.64211 15.78426\" class=\"svg-burger-close\" aria-hidden=\"true\" focusable=\"false\"> <path d=\"M.21967,14.36179c-.29289.2929-.29289.767",
+   "transitions": [
+    "0 BUTTON color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1)"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": []
+  },
+  {
+   "text": "Accept All",
+   "html": "<button class=\"trustarc-primary-btn trustarc-acceptall-btn trustarc-agree-btn tc-button-icon trustarc-banner-agree-btn trustarc-banner-btn\" id=\"truste-consent-button\" type=\"button\" data-bp=\"2\"> <i aria-hidden=\"true\" class=\"tc-icon tc-icon-accept\"></i> <span>Accept All</span> </button>",
+   "transitions": [],
+   "hover120": [
+    "0 BUTTON bg: rgb(27, 24, 23) → color(srgb 0.284706 0.275294 0.272157)"
+   ],
+   "hover700": [
+    "0 BUTTON bg: rgb(27, 24, 23) → color(srgb 0.284706 0.275294 0.272157)"
+   ],
+   "press": [],
+   "focus": [
+    "0 BUTTON shadow: none → rgb(255, 255, 255) 0px 0px 0px 2px, rgb(54, 153, 241) 0px 0px 0px 4px"
+   ]
+  },
+  {
+   "text": "Reject All",
+   "html": "<button class=\"trustarc-declineall-btn trustarc-reject-btn tc-button-icon trustarc-banner-reject-btn trustarc-banner-btn trustarc-primary-btn ta-show ta-display-flex\" id=\"truste-consent-required\" style=\"opacity: 0;\" type=\"button\" data-bp=\"3\"> <i aria-hidden=\"true\" class=\"tc-icon tc-icon-decline\"></i> <span>Reject All</span> </button>",
+   "transitions": [],
+   "hover120": [
+    "0 BUTTON bg: rgb(27, 24, 23) → color(srgb 0.284706 0.275294 0.272157)"
+   ],
+   "hover700": [
+    "0 BUTTON bg: rgb(27, 24, 23) → color(srgb 0.284706 0.275294 0.272157)"
+   ],
+   "press": [],
+   "focus": [
+    "0 BUTTON shadow: none → rgb(255, 255, 255) 0px 0px 0px 2px, rgb(54, 153, 241) 0px 0px 0px 4px"
+   ]
+  },
+  {
+   "text": "Cookies Settings",
+   "html": "<button class=\"tc-button-icon trustarc-banner-secondary-btn trustarc-banner-btn trustarc-secondary-btn\" id=\"truste-show-consent\" type=\"button\" data-bp=\"4\"> <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.2089 20.5762C11.4784 20.6896 11.7676 20.7487 12.06 20.75C12.6447 20.732 13.1998 20.489 13.6097 2",
+   "transitions": [],
+   "hover120": [
+    "0 BUTTON bg: rgba(0, 0, 0, 0) → rgb(199, 199, 197)"
+   ],
+   "hover700": [
+    "0 BUTTON bg: rgba(0, 0, 0, 0) → rgb(199, 199, 197)"
+   ],
+   "press": [
+    "0 BUTTON bg: rgb(199, 199, 197) → rgb(255, 255, 255)"
+   ],
+   "focus": [
+    "0 BUTTON shadow: none → rgb(255, 255, 255) 0px 0px 0px 2px, rgb(54, 153, 241) 0px 0px 0px 4px"
+   ]
+  },
+  {
+   "text": "TRAVELER SUV",
+   "html": "<a href=\"/traveler\" target=\"_self\" data-track-event=\"Button Clicked\" data-track-name=\"Offroad Icon - Traveler\" class=\"c-button -transparent\" data-bp=\"5\"><span class=\"c-button_inner\"><span class=\"c-button_label\">Traveler SUV</span></span></a>",
+   "transitions": [
+    "0 A color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1)"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A bg: color(srgb 1 1 1 / 0.1) → oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+    "0 A outline: none 3px → auto 10px"
+   ]
+  },
+  {
+   "text": "TERRA TRUCK",
+   "html": "<a href=\"/terra\" target=\"_self\" data-track-event=\"Button Clicked\" data-track-name=\"Offroad Icon - Terra\" class=\"c-button -transparent\" data-bp=\"6\"><span class=\"c-button_inner\"><span class=\"c-button_label\">Terra Truck</span></span></a>",
+   "transitions": [
+    "0 A color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), background-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1), border-color 0.2s cubic-bezier(0.38, 0.005, 0.215, 1)"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A bg: color(srgb 1 1 1 / 0.1) → oklab(0.999994 0.0000455678 0.0000200868 / 0.1)",
+    "0 A outline: none 3px → auto 10px"
+   ]
+  }
+ ]
+}

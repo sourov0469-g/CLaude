@@ -1,0 +1,97 @@
+{
+ "name": "quietcubes",
+ "url": "https://www.quietcubes.com",
+ "buttons": [
+  {
+   "text": "Office Pods",
+   "html": "<a data=\"office\" pod-name=\"office\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04c9\" style=\"opacity:0\" href=\"#\" class=\"pod-menu-button w-inline-block\" data-bp=\"0\"><img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001b9de_menu-pod-2.webp\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04ca\" alt=\"\" class=\"pod-start-image\"><div data-w-id=\"a5991727-9c78-4c",
+   "transitions": [
+    "0 A opacity 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Home Pods",
+   "html": "<a data=\"home\" pod-name=\"home\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04cd\" style=\"opacity:0\" href=\"#\" class=\"pod-menu-button psi-home w-inline-block\" data-bp=\"1\"><img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bae7_navy.webp\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04ce\" alt=\"\" class=\"pod-start-image\"><div data-w-id=\"a5991727-9c78-4c3",
+   "transitions": [
+    "0 A opacity 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Outdoor Pods",
+   "html": "<a data=\"outdoor\" pod-name=\"outdoor\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04d1\" style=\"opacity:0\" href=\"#\" class=\"pod-menu-button psi-outdoor w-inline-block\" data-bp=\"2\"><img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bd80_2_2gr.avif\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04d2\" alt=\"\" class=\"pod-start-image\"><div data-w-id=\"a599172",
+   "transitions": [
+    "0 A opacity 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Nursing Pods",
+   "html": "<a data=\"nursing\" pod-name=\"nursing\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04d5\" style=\"opacity:0\" href=\"#\" class=\"pod-menu-button psi-nursing w-inline-block\" data-bp=\"3\"><img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bd8a_Frame%202131330380.avif\" loading=\"eager\" style=\"opacity:0\" data-w-id=\"a5991727-9c78-4c30-fa4e-50e16b3d04d6\" alt=\"\" class=\"pod-start-image\"><div data-",
+   "transitions": [
+    "0 A opacity 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "ORDER NOW",
+   "html": "<a href=\"https://configurator.quietcubes.com\" target=\"_blank\" class=\"nav-button order-now w-button\" data-bp=\"4\">Order Now</a>",
+   "transitions": [
+    "0 A background-color 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Office Pods",
+   "html": "<a anim=\"office\" pod-name=\"office\" href=\"#\" class=\"pod-menu-button psi-office w-inline-block\" data-bp=\"5\"><img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001b9de_menu-pod-2.webp\" alt=\"\" class=\"pod-start-image mob\"><div class=\"pod-start-label hide-mobile\">Office Pods</div></a>",
+   "transitions": [
+    "0 A opacity 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Home Pods",
+   "html": "<a anim=\"home\" pod-name=\"home\" href=\"#\" class=\"pod-menu-button psi-home w-inline-block\" data-bp=\"6\"><img src=\"https://cdn.prod.website-files.com/689b2fcec1e26eb9a001b9d6/689b2fcec1e26eb9a001bae7_navy.webp\" alt=\"\" class=\"pod-start-image mob\"><div class=\"pod-start-label hide-mobile\">Home Pods</div></a>",
+   "transitions": [
+    "0 A opacity 0.2s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  }
+ ]
+}

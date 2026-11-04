@@ -1,0 +1,8 @@
+{
+ "touchSplash": true,
+ "touchRipple": true,
+ "touchRings": true,
+ "hoverNotNeeded": true,
+ "reducedNoRoll": true,
+ "reducedNoArrowTravel": true
+}

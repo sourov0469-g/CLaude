@@ -1,0 +1,106 @@
+{
+ "name": "longbow",
+ "url": "https://longbowmotors.com",
+ "buttons": [
+  {
+   "text": "RESERVE\nYOURS\n→",
+   "html": "<a href=\"#reserve\" class=\"nav__reserve\" id=\"openReserve\" data-bp=\"0\">Reserve <span class=\"nav__reserve-word\">yours</span> <span aria-hidden=\"true\">→</span></a>",
+   "transitions": [
+    "0 A background-position 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
+   ],
+   "hover120": [
+    "0 A color: rgb(157, 137, 92) → rgb(23, 22, 19)",
+    "1 SPAN color: rgb(157, 137, 92) → rgb(23, 22, 19)",
+    "2 SPAN color: rgb(157, 137, 92) → rgb(23, 22, 19)"
+   ],
+   "hover700": [
+    "0 A color: rgb(157, 137, 92) → rgb(14, 14, 14)",
+    "1 SPAN color: rgb(157, 137, 92) → rgb(14, 14, 14)",
+    "2 SPAN color: rgb(157, 137, 92) → rgb(14, 14, 14)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → solid 2px"
+   ]
+  },
+  {
+   "text": "RESERVE SPEEDSTER",
+   "html": "<a class=\"btn btn-primary\" href=\"/reserve-speedster\" data-bp=\"1\">Reserve Speedster <span class=\"arrow\"></span></a>",
+   "transitions": [
+    "0 A background-position 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+    "1 SPAN transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → solid 2px"
+   ]
+  },
+  {
+   "text": "RESERVE ROADSTER",
+   "html": "<a class=\"btn btn-ghost\" href=\"/reserve-roadster\" data-bp=\"2\">Reserve Roadster <span class=\"arrow\"></span></a>",
+   "transitions": [
+    "0 A background 0.24s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1), color 0.24s cubic-bezier(0.16, 1, 0.3, 1)",
+    "1 SPAN width 0.35s"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → solid 2px"
+   ]
+  },
+  {
+   "text": "REJECT ALL",
+   "html": "<button type=\"button\" data-consent-act=\"reject\" data-bp=\"3\">Reject all</button>",
+   "transitions": [
+    "0 BUTTON border-color 0.25s, background 0.25s, color 0.25s"
+   ],
+   "hover120": [
+    "0 BUTTON color: rgb(227, 222, 208) → rgb(173, 157, 119)"
+   ],
+   "hover700": [
+    "0 BUTTON color: rgb(227, 222, 208) → rgb(157, 137, 92)"
+   ],
+   "press": [],
+   "focus": [
+    "0 BUTTON outline: none 3px → solid 2px"
+   ]
+  },
+  {
+   "text": "MANAGE",
+   "html": "<button type=\"button\" data-consent-act=\"manage\" data-bp=\"4\">Manage</button>",
+   "transitions": [
+    "0 BUTTON border-color 0.25s, background 0.25s, color 0.25s"
+   ],
+   "hover120": [
+    "0 BUTTON color: rgb(227, 222, 208) → rgb(169, 151, 111)"
+   ],
+   "hover700": [
+    "0 BUTTON color: rgb(227, 222, 208) → rgb(157, 137, 92)"
+   ],
+   "press": [],
+   "focus": [
+    "0 BUTTON outline: none 3px → solid 2px"
+   ]
+  },
+  {
+   "text": "ACCEPT ALL",
+   "html": "<button type=\"button\" data-consent-act=\"accept\" data-bp=\"5\">Accept all</button>",
+   "transitions": [
+    "0 BUTTON border-color 0.25s, background 0.25s, color 0.25s"
+   ],
+   "hover120": [
+    "0 BUTTON color: rgb(227, 222, 208) → rgb(173, 157, 119)"
+   ],
+   "hover700": [
+    "0 BUTTON color: rgb(227, 222, 208) → rgb(157, 137, 92)"
+   ],
+   "press": [],
+   "focus": [
+    "0 BUTTON outline: none 3px → solid 2px"
+   ]
+  }
+ ]
+}

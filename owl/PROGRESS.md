@@ -26,3 +26,9 @@
 - **Video 15 · "Keep Us on the Fridge"** (the crew film is a print pinned by an Owl magnet; letter magnets spell the real number as a call link; Save Our Number downloads a contact card with only the locked facts): gated, 8.88, checks 21/21. **Video +5 complete (11–15).** home-verify 50/50. Next is Explore 11 (for Explore the owner's rule means no roof-anatomy lessons: it must reassure, not teach).
 - **Explore 11 · "Where's the Trouble?"** (tap a trouble spot on a friendly house drawing: shingles, storm, chimney, ceiling stain, siding; the Owl hops there and says Owl fixes it, each answer mapped to a real service; no construction words): gated, 8.70, checks 21/21. Explore now has 11; next is Explore 12.
 - Hero pack batch 2 (5 images) stored in `owl/assets/source/hero-pack/`, with arrival notes. Two images (crew-install-wide-1, storm-damage-roof-2) are flagged as possibly AI-looking and held back from hero use until checked. The aerial arrived at 2000×1500, not 3000×2250. Waiting on Muse's accept of Hero 11 before Hero 12.
+- **Owner order: BUTTONS.** Explore 11 had already been gated. Then the homepage-wide **GATE-BUTTONS** pass:
+  - Reference buttons were studied at code level (Lando's letter roll, Longbow's fill sweep and arrow, Apple's pressed state, Cowboy's hover-only rule, Scout's focus).
+  - The shared system is rebuilt in base.css and base.js, and every future version inherits it.
+  - Controls with no hover motion went from 291/554 to 5/554 (all 5 explained), and controls with no press response from 258 to 5.
+  - Touch and reduced motion were verified. home-verify 50/50, and the regressions pass.
+  - Self-rating 8.92. Next, once accepted: Explore 12.

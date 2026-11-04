@@ -1,0 +1,57 @@
+{
+ "name": "graza",
+ "url": "https://www.graza.co",
+ "buttons": [
+  {
+   "text": "Search",
+   "html": "<a id=\"header-search-button\" href=\"/search\" aria-label=\"Search\" class=\"flex items-center justify-center p-[10px] lg:p-0 lg:w-[36px] lg:h-[36px] lg:rounded-full lg:border lg:text-text lg:bg-highlight lg:hover:bg-brand lg:transition--colors\" data-bp=\"0\"><svg class=\"hidden lg:block\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.39797 10.9086C6.74111 13.2517 10.5401",
+   "transitions": [
+    "0 A background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out, fill 0.25s ease-in-out, stroke 0.25s ease-in-out"
+   ],
+   "hover120": [
+    "0 A bg: rgb(255, 244, 236) → rgb(235, 235, 153)"
+   ],
+   "hover700": [
+    "0 A bg: rgb(255, 244, 236) → rgb(209, 224, 48)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → dotted 2px"
+   ]
+  },
+  {
+   "text": "Account",
+   "html": "<a href=\"/account\" aria-label=\"Account\" class=\"hidden lg:flex rounded-full border border-text bg-highlight hover:bg-brand transition--colors\" style=\"opacity: var(--header-link-opacity); pointer-events: var(--header-link-pointer);\" data-bp=\"1\"><span aria-hidden=\"true\"><!----><!----><!----><!----><!----><!----><!----><!----><svg width=\"36\" height=\"36\" viewBox=\"0 0 36 36\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><",
+   "transitions": [
+    "0 A background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out, fill 0.25s ease-in-out, stroke 0.25s ease-in-out"
+   ],
+   "hover120": [
+    "0 A bg: rgb(255, 244, 236) → rgb(235, 235, 153)"
+   ],
+   "hover700": [
+    "0 A bg: rgb(255, 244, 236) → rgb(209, 224, 48)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → dotted 2px"
+   ]
+  },
+  {
+   "text": "Cart\n[0]",
+   "html": "<a href=\"/cart\" class=\"font-medium text-14 lg:text-16 lg:text-text p-[10px] lg:p-0 lg:cart-toggle lg:hover:bg-brand lg:transition--colors\" aria-label=\"Cart, 0 items\" data-bp=\"2\"><span class=\"hidden lg:inline-block lg:mr-4\">Cart</span><span>[0]</span></a>",
+   "transitions": [
+    "0 A background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, color 0.25s ease-in-out, fill 0.25s ease-in-out, stroke 0.25s ease-in-out"
+   ],
+   "hover120": [
+    "0 A bg: rgb(255, 244, 236) → rgb(235, 235, 153)"
+   ],
+   "hover700": [
+    "0 A bg: rgb(255, 244, 236) → rgb(209, 224, 48)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → dotted 2px"
+   ]
+  }
+ ]
+}

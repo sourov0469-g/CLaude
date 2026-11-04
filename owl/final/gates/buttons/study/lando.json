@@ -1,0 +1,55 @@
+{
+ "name": "lando",
+ "url": "https://landonorris.com",
+ "buttons": [
+  {
+   "text": "Store\nSTORE",
+   "html": "<a data-theme=\"lime\" data-anim=\"text-hover\" href=\"https://store.landonorris.com/\" target=\"_blank\" class=\"btn-w is-nav w-inline-block\" data-bp=\"0\"><div class=\"btn-inner\"><div class=\"btn-icon-w\"><div class=\"btn-icon-svg is-large w-embed\"><svg width=\"100%\" height=\"100%\" viewBox=\"0 0 17 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"m10.931 5.783-.759.812c-1.132 1.212-2.89 1.212-4.022 0l-.76-.812C4.313 4.63",
+   "transitions": [],
+   "hover120": [
+    "0 A outline: none 3px → none 0px",
+    "9 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6697)",
+    "10 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6655)",
+    "11 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6568)",
+    "12 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6415)",
+    "13 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6166)"
+   ],
+   "hover700": [
+    "0 A outline: none 3px → none 0px",
+    "9 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6719)",
+    "10 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6719)",
+    "11 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6719)",
+    "12 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6719)",
+    "13 SPAN transform: none → matrix(1, 0, 0, 1, 0, -16.6719)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → solid 2px",
+    "9 SPAN transform: none → matrix(1, 0, 0, 1, 0, 0)",
+    "10 SPAN transform: none → matrix(1, 0, 0, 1, 0, 0)",
+    "11 SPAN transform: none → matrix(1, 0, 0, 1, 0, 0)",
+    "12 SPAN transform: none → matrix(1, 0, 0, 1, 0, 0)",
+    "13 SPAN transform: none → matrix(1, 0, 0, 1, 0, 0)"
+   ]
+  },
+  {
+   "id": 1,
+   "error": "elementHandle.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - attempting scroll into view action\u001b[22"
+  },
+  {
+   "text": "Sāo Paulo\nSĀO PAULO\ngp\nGP",
+   "html": "<a href=\"/calendar\" class=\"home-hero-next-race-row w-inline-block\" data-bp=\"2\"><div class=\"home-hero-next-race-rive-w\"><div class=\"home-hero-next-race-rive w-embed\"><!-- data-rive-circuit-hover=\"true\" -- looks for all [data-rive-circuit-hover-target] elements on page -- changes the data-rive-input-track to the value of that hovered attribute --> <canvas data-rive-object=\"\" data-rive-file=\"circuits\" data-rive-artboard",
+   "transitions": [],
+   "hover120": [
+    "0 A outline: none 3px → none 0px"
+   ],
+   "hover700": [
+    "0 A outline: none 3px → none 0px"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → solid 2px"
+   ]
+  }
+ ]
+}

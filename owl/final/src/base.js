@@ -18,7 +18,7 @@ function apply(){
     el.hidden = !on;
     if (on) el.querySelectorAll('video[data-media]').forEach(function(m){ if (!m.src && OWL.media) { m.src = OWL.media[m.dataset.media]; if (m.autoplay && !reduce) m.play().catch(function(){}); } });
     if (!on) el.querySelectorAll('video').forEach(function(m){ m.pause(); });
-    if (on && !OWL.started[s+':'+v] && OWL.inits[s+':'+v]) { OWL.started[s+':'+v] = 1; try { OWL.inits[s+':'+v](el); } catch(e){ console.error(e); } }
+    if (on && !OWL.started[s+':'+v] && OWL.inits[s+':'+v]) { OWL.started[s+':'+v] = 1; try { OWL.inits[s+':'+v](el); } catch(e){ console.error(e); } if (OWL.buttons) OWL.buttons(el); }
   });
   /* anchors: whichever version is shown carries the section's main id (the V1 id), so links like #book always land */
   Object.keys(secs).forEach(function(s){
@@ -71,6 +71,42 @@ function magnets(root){
   });
 }
 OWL.magnets = magnets;
+
+/* Owl button system v2 (GATE-BUTTONS): label roll, icon slot, in-button ripple, tap splash, lift and press for every control */
+var ARW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+var PHN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>';
+function rollLabel(b){
+  [].slice.call(b.childNodes).forEach(function(n){ if (n.nodeType !== 3 || !n.textContent.trim()) return;
+    var txt = n.textContent.replace(/\s+/g, ' '), w = document.createElement('span'); w.className = 'bl'; var k = 0;
+    txt.trim().split('').forEach(function(ch){ var i = document.createElement('i'); i.textContent = ch; i.dataset.c = ch; i.style.setProperty('--i', k++); w.appendChild(i); });
+    if (/^\s/.test(txt)) b.insertBefore(document.createTextNode(' '), n); b.replaceChild(w, n); });
+}
+function buttons(root){
+  (root || document).querySelectorAll('.btn').forEach(function(b){ if (b._bv) return; b._bv = 1;
+    if (!b.getAttribute('aria-label') && !b.getAttribute('aria-labelledby')) { var lab = b.textContent.replace(/\s+/g, ' ').trim(); if (lab) b.setAttribute('aria-label', lab); }
+    rollLabel(b);
+    var href = b.getAttribute('href') || '', has = b.querySelector('svg, .arr');
+    if (!has && /^tel:/.test(href)){ var s = document.createElement('span'); s.className = 'bi ph'; s.setAttribute('aria-hidden', 'true'); s.innerHTML = PHN; b.insertBefore(s, b.firstChild); }
+    else if (!has && /^#book/.test(href)){ var s2 = document.createElement('span'); s2.className = 'bi'; s2.setAttribute('aria-hidden', 'true'); s2.innerHTML = ARW.replace('<svg', '<svg class="a1"') + ARW.replace('<svg', '<svg class="a2"'); b.appendChild(s2); }
+    b.addEventListener('pointerdown', function(e){ var r = b.getBoundingClientRect(), d = document.createElement('span'); d.className = 'rp';
+      d.style.left = (e.clientX - r.left) + 'px'; d.style.top = (e.clientY - r.top) + 'px'; d.style.setProperty('--rs', (Math.max(r.width, r.height)*2.4/16).toFixed(1));
+      b.appendChild(d); setTimeout(function(){ d.remove(); }, 700);
+      if (b.querySelector('.bi.ph')){ b.classList.remove('rung'); void b.offsetWidth; b.classList.add('rung'); } });
+  });
+  /* every other control gets the shared lift and press (transform-safe: uses the individual translate and scale properties) */
+  (root || document).querySelectorAll('.ver [role="slider"]').forEach(function(k){ if (k._ck) return; k._ck = 1; if (k.getBoundingClientRect().width > 300 || k.offsetWidth > 300) return; k.classList.add('ctl-knob'); });
+  (root || document).querySelectorAll('.ver button, .ver [role="button"], .ver [role="tab"], .ver a[href].key, .ver a[href^="tel:"], .ver a[href^="mailto:"], .hdr a, .hdr button').forEach(function(c){
+    if (c._cl || c.classList.contains('btn') || c.closest('.btn')) return; c._cl = 1;
+    var cs = getComputedStyle(c); if (cs.display === 'inline') c.style.display = 'inline-block'; if (/translate|scale|all/.test(cs.transitionProperty) && cs.transitionDuration !== '0s') { c.classList.add('ctl-lift'); return; }
+    var t = cs.transition && cs.transition !== 'all 0s ease 0s' && cs.transitionDuration !== '0s' ? cs.transition + ', ' : '';
+    c.style.transition = t + 'translate .28s cubic-bezier(.16,1,.3,1), scale .14s cubic-bezier(.2,0,0,1), outline-offset .22s cubic-bezier(.16,1,.3,1)';
+    c.classList.add('ctl-lift'); });
+}
+OWL.buttons = buttons;
+/* the tap splash: wherever a finger or pointer presses a control, an amber ring opens (also for Enter and Space) */
+function splash(x, y){ var t = document.createElement('span'); t.className = 'tap'; t.style.left = x + 'px'; t.style.top = y + 'px'; document.body.appendChild(t); setTimeout(function(){ t.remove(); }, 560); }
+document.addEventListener('pointerdown', function(e){ var c = e.target.closest && e.target.closest('a[href], button, [role="button"], [role="tab"], label, summary'); if (c && !c.closest('.rev')) splash(e.clientX, e.clientY); }, true);
+document.addEventListener('keydown', function(e){ if (e.key !== 'Enter' && e.key !== ' ') return; var c = document.activeElement; if (!c || !c.matches || !c.matches('a[href], button, [role="button"], [role="tab"]')) return; var r = c.getBoundingClientRect(); splash(r.left + r.width/2, r.top + r.height/2); });
 
 /* owl cursor companion: follows with a soft lag, looks where you look, reacts per element (data-owl) */
 function companion(){
@@ -230,6 +266,6 @@ OWL.hydrate = function(scope){ if (!window.OWLA) return; (scope || document).que
 OWL.hydrate();
 document.addEventListener('DOMContentLoaded', function(){
   OWL.hydrate();
-  var secs = apply(); review(secs); header(); magnets(); companion(); reveals(); router();
+  var secs = apply(); review(secs); header(); magnets(); buttons(); companion(); reveals(); router();
 });
 })();

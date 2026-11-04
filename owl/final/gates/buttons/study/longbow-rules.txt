@@ -1,0 +1,35 @@
+.page-card .arrow-cta { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); }
+.btn { font-family: var(--font-sans); font-weight: 600; font-size: 11px; letter-spacing: var(--tr-eyebrow); text-transform: uppercase; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px; border: 1px solid; border-radius: var(--r-sm); transition: background .24s var(--ease-brand), border-color .24s var(--ease-brand), color .24s var(--ease-brand); position: relative; overflow: 
+.btn .arrow { width: 18px; height: 1px; background: currentcolor; position: relative; transition: width 0.35s; }
+.btn .arrow::after { content: ""; position: absolute; right: -1px; top: -3px; width: 7px; height: 7px; border-top: 1px solid; border-right: 1px solid; transform: rotate(45deg); }
+.btn:hover .arrow { width: 26px; }
+.btn-primary { background: var(--brass); border-color: var(--brass); color: var(--black); }
+.btn-ghost { color: var(--bone); border-color: rgba(248, 246, 241, 0.35); }
+.btn-ghost:hover { border-color: var(--brass); color: var(--brass); }
+.btn-dark { color: var(--black); border-color: var(--black); }
+.btn-dark:hover { background: var(--black); color: var(--sand); }
+.mp-card__cta .arrow { display: inline-block; width: 28px; height: 1px; background: currentcolor; position: relative; transition: width 0.3s; }
+.mp-card__cta .arrow::after { content: ""; position: absolute; right: 0px; top: -3px; width: 7px; height: 7px; border-top: 1px solid; border-right: 1px solid; transform: rotate(45deg); }
+.mp-card:hover .mp-card__cta .arrow { width: 40px; }
+.lb-drawer__foot .btn { width: 100%; justify-content: space-between; padding: 14px 22px; }
+.beast__inner .btn { margin-top: 22px; }
+.reserve__pickCta .arrow { display: inline-block; width: 24px; height: 1px; background: currentcolor; position: relative; transition: width 0.3s; }
+.reserve__pickCta .arrow::after { content: ""; position: absolute; right: 0px; top: -3px; width: 7px; height: 7px; border-right: 1px solid; border-top: 1px solid; transform: rotate(45deg); }
+.reserve__pickCard:hover .reserve__pickCta .arrow { width: 36px; }
+.showcase__cta .btn { width: auto; justify-content: space-between; }
+.hero__cta .btn { width: 100%; justify-content: space-between; }
+.cta-block .btn { width: 100%; justify-content: space-between; }
+.nav__reserve { display: inline-flex; align-items: center; line-height: 1; gap: 9px; height: auto; align-self: stretch; margin: 0px; padding: 0px clamp(20px, 1.8vw, 30px); border-radius: 999px; background: var(--brass); color: rgb(14, 14, 14); font-family: var(--sans); font-size: clamp(10.5px, 0.78vw, 12px); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; 
+.nav__reserve { justify-content: center; text-align: center; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-image: linear-gradient(to right,var(--brass) 0 50%,transparent 50% 100%); background-size: 200.5% 100%; background-position: 100% 0px; background-repeat: no-repeat; border: 1px solid var(--brass); color: var(--brass
+.nav__reserve:hover { color: rgb(14, 14, 14); background-position: 0px 0px; border-color: var(--brass); }
+.nav__reserve { padding: 0px 18px; white-space: nowrap; font-size: 10.5px; letter-spacing: 0.14em; }
+.nav__reserve-word, .nav__reserve span[aria-hidden] { display: none; }
+.page-hero__ctas .btn { width: 100%; justify-content: space-between; }
+.nav__reserve { font-size: clamp(10.5px, 0.78vw, 12px); }
+.arrow-cta { display: inline-flex; align-items: center; min-height: 44px; }
+.btn, .btn-primary, .btn-ghost { min-height: 48px; }
+.btn-primary, .rsv__btn, .rsv-band__btn { background-color: var(--brass); background-image: linear-gradient(to right,var(--bone) 0 50%,var(--brass) 50% 100%); background-size: 200.5% 100%; background-position: 100% 0px; background-repeat: no-repeat; border-color: var(--brass); color: rgb(14, 14, 14); transition: background-position .5s var(--ease-brand),border-color .35s var(--ease-brand),color .3
+.btn-primary:hover, .rsv__btn:hover, .rsv-band__btn:hover, .rsv__opt:hover .rsv__btn, .rsv-band__opt:hover .rsv-band__btn { background-position: 0px 0px; background-color: var(--bone); background-image: linear-gradient(to right,var(--bone) 0 50%,var(--brass) 50% 100%); border-color: var(--bone); color: rgb(14, 14, 14); }
+.btn-primary, .nav__reserve, .rsv__btn, .rsv-band__btn { transition-duration: 0.01ms; }
+.btn-primary .arrow { transition: transform .35s var(--ease-brand); }
+.btn-primary:hover .arrow { width: 18px; transform: translateX(5px); }

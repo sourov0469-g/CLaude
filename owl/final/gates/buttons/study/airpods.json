@@ -1,0 +1,56 @@
+{
+ "name": "airpods",
+ "url": "https://www.apple.com/airpods-pro/",
+ "buttons": [
+  {
+   "text": "0\n+",
+   "html": "<a id=\"globalnav-menubutton-link-bag\" href=\"/us/shop/goto/bag\" aria-label=\"Shopping Bag\" aria-expanded=\"false\" aria-controls=\"globalnav-submenu-bag\" data-globalnav-item-name=\"bag\" role=\"button\" data-topnav-flyout-trigger-regular=\"true\" data-topnav-flyout-trigger-compact=\"true\" data-analytics-title=\"open - bag\" class=\"globalnav-link globalnav-link-bag\" data-bp=\"0\"><span aria-hidden=\"true\" class=\"globalnav-image-regula",
+   "transitions": [
+    "0 A color 0.32s cubic-bezier(0.4, 0, 0.6, 1)",
+    "7::before SPAN transform 0.3s cubic-bezier(0.25, 0.1, 0.3, 1)",
+    "8 SPAN transform 0.3s cubic-bezier(0.25, 0.1, 0.3, 1)",
+    "9 SPAN transform 0.3s cubic-bezier(0.25, 0.1, 0.3, 1)",
+    "10 SPAN opacity 0.1s cubic-bezier(0.25, 0.1, 0.3, 1)"
+   ],
+   "hover120": [
+    "0 A color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)",
+    "1 SPAN color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)",
+    "2 svg color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)",
+    "3 path color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)",
+    "4 SPAN color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)",
+    "5 svg color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)",
+    "6 path color: rgba(0, 0, 0, 0.8) → rgba(0, 0, 0, 0.855)"
+   ],
+   "hover700": [
+    "0 A color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)",
+    "1 SPAN color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)",
+    "2 svg color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)",
+    "3 path color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)",
+    "4 SPAN color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)",
+    "5 svg color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)",
+    "6 path color: rgba(0, 0, 0, 0.8) → rgb(0, 0, 0)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → solid 2px"
+   ]
+  },
+  {
+   "text": "Buy",
+   "html": "<a class=\"marquee-ctas-link button\" aria-label=\"Buy, AirPods Pro 3\" href=\"/us/shop/goto/buy_airpods/airpods_pro_3\" data-analytics-title=\"buy - airpods pro 3\" data-bp=\"1\">Buy</a>",
+   "transitions": [],
+   "hover120": [
+    "0 A bg: rgb(0, 113, 227) → rgb(0, 118, 223)"
+   ],
+   "hover700": [
+    "0 A bg: rgb(0, 113, 227) → rgb(0, 118, 223)"
+   ],
+   "press": [
+    "0 A bg: rgb(0, 118, 223) → rgb(0, 110, 219)"
+   ],
+   "focus": [
+    "0 A outline: none 3px → solid 2px"
+   ]
+  }
+ ]
+}

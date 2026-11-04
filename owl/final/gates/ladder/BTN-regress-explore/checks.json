@@ -1,0 +1,139 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 11
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Where’s the Trouble?"
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "it opens on the homeowner’s question, not a lesson: “Not sure what’s wrong?” with Wise Check",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "five trouble spots, each a named 44 px+ button",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "no two spots overlap, at this width",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "each spot answers that Owl fixes it, with a real Owl service, one at a time",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "the Owl flies to each chosen spot",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "no answer teaches construction (no layers, underlayment, decking, nails, ventilation words)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "next steps: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "11",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

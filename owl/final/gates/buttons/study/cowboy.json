@@ -1,0 +1,101 @@
+{
+ "name": "cowboy",
+ "url": "https://cowboy.com",
+ "buttons": [
+  {
+   "text": "Book a test ride",
+   "html": "<a class=\"inline-block leading-none font-medium transition-colors text-nowrap duration-300 text-center py-3 px-5 rounded-full bg-white text-dark supportshover:hover:bg-dark supportshover:hover:text-white font-medium leading-none text-nowrap tracking-tight ml-2 text-[14px]\" href=\"/pages/test-ride\" data-discover=\"true\" data-bp=\"0\">Book a test ride</a>",
+   "transitions": [
+    "0 A color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s cubic-bezier"
+   ],
+   "hover120": [
+    "0 A bg: rgb(255, 255, 255) → rgb(122, 122, 122)",
+    "0 A color: rgb(29, 29, 29) → rgb(162, 162, 162)"
+   ],
+   "hover700": [
+    "0 A bg: rgb(255, 255, 255) → rgb(29, 29, 29)",
+    "0 A color: rgb(29, 29, 29) → rgb(255, 255, 255)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Add a bike",
+   "html": "<a class=\"flex-1 py-3 bg-dark text-white hover:bg-neutral-700\" href=\"/collections/bikes\" data-bp=\"1\">Add a bike</a>",
+   "transitions": [],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Shop accessories",
+   "html": "<a class=\"flex-1 py-3 bg-dark/10 text-dark hover:bg-neutral-700 hover:text-white\" href=\"/collections/accessories\" data-bp=\"2\">Shop accessories</a>",
+   "transitions": [],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Discover Cruiser",
+   "html": "<a class=\"inline-block leading-none font-medium transition-colors text-nowrap duration-300 text-center py-4 px-5 lg:py-5 lg:px-6 rounded-full bg-white text-dark supportshover:hover:bg-dark supportshover:hover:text-white\" href=\"/products/e-bike-cowboy-cruiser\" data-discover=\"true\" data-bp=\"3\">Discover <!-- -->Cruiser</a>",
+   "transitions": [
+    "0 A color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s cubic-bezier"
+   ],
+   "hover120": [
+    "0 A bg: rgb(255, 255, 255) → rgb(122, 122, 122)",
+    "0 A color: rgb(29, 29, 29) → rgb(162, 162, 162)"
+   ],
+   "hover700": [
+    "0 A bg: rgb(255, 255, 255) → rgb(29, 29, 29)",
+    "0 A color: rgb(29, 29, 29) → rgb(255, 255, 255)"
+   ],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Explore",
+   "html": "<a class=\"inline-block leading-none font-medium transition-colors text-nowrap duration-300 text-center py-4 px-5 lg:py-5 lg:px-6 rounded-full bg-dark text-white supportshover:hover:bg-white supportshover:hover:text-dark !bg-dark !text-white max-lg:rounded-lg\" href=\"/products/e-bike-cowboy-cruiser\" data-discover=\"true\" data-bp=\"4\">Explore</a>",
+   "transitions": [
+    "0 A color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), fill 0.3s cubic-bezier"
+   ],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 A outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Previous slide",
+   "html": "<button class=\"w-12 h-12 lg:w-10 lg:h-10 rounded-lg appearance-none touch-manipulation inline-flex no-underline cursor-pointer border-0 m-0 px-[calc(var(--slide-spacing)/4)] py-[calc(var(--slide-spacing)/2)] z-10 items-center justify-center disabled:opacity-50 bg-white \" aria-label=\"Previous slide\" data-bp=\"5\"><svg style=\"width:1rem;height:1rem\" width=\"16\" height=\"16\" class=\"inline-block\"><use href=\"/sprite.svg?v=524",
+   "transitions": [],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 BUTTON outline: none 3px → auto 1px"
+   ]
+  },
+  {
+   "text": "Next slide",
+   "html": "<button class=\"w-12 h-12 lg:w-10 lg:h-10 rounded-lg appearance-none touch-manipulation inline-flex no-underline cursor-pointer border-0 m-0 px-[calc(var(--slide-spacing)/4)] py-[calc(var(--slide-spacing)/2)] z-10 items-center justify-center disabled:opacity-50 bg-white \" aria-label=\"Next slide\" data-bp=\"6\"><svg style=\"width:1rem;height:1rem\" width=\"16\" height=\"16\" class=\"inline-block rotate-180\"><use href=\"/sprite.sv",
+   "transitions": [],
+   "hover120": [],
+   "hover700": [],
+   "press": [],
+   "focus": [
+    "0 BUTTON outline: none 3px → auto 1px"
+   ]
+  }
+ ]
+}
