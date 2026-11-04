@@ -1,0 +1,157 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 14
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Knock Knock"
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "starts shut: one big door button \"Knock on the door\", the photo behind it hidden from screen readers",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "knocking: the door shakes twice, \"Knock\" marks pop, the porch light comes on (the door is still shut)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "then the door swings open on its hinge (3D rotation under way)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "behind it: Noah Bergland, co-founder, in a real photo; \"Hoo’s there? It’s Owl.\" with the family and Wise Check line",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "the door button now says \"Close the door\"",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "pressing again closes the door and the light goes off",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "keyboard: Enter knocks and opens",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "facts only from the lock: family-owned, founders Tim Brown and Noah Bergland; Wise Check wording from wise-data; no price or timing",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "next steps: Book a Wise Check (#book) and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "14",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

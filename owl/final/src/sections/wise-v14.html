@@ -1,0 +1,95 @@
+<section class="sec wise14" id="wise-14" aria-labelledby="wc14-h">
+<style>
+.wise14{overflow:hidden}
+.wise14 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,88px);align-items:center;max-width:1080px;margin:0 auto}
+.wise14 .h2{text-wrap:balance}
+.wise14 .lede{margin:12px 0 0;max-width:34ch}
+.wise14 .msg{position:relative;margin-top:clamp(20px,3vw,30px);min-height:150px}
+.wise14 .msg .a,.wise14 .msg .b{transition:opacity .4s,translate .5s cubic-bezier(.16,1,.3,1)}
+.wise14 .msg .a p{margin:0;font-size:22px;font-weight:800;color:#17111D}
+.wise14 .msg .a p span{display:inline-block;margin-left:6px;color:#8E5A12}
+.wise14 .msg .b{position:absolute;inset:0 0 auto 0;opacity:0;translate:0 10px;pointer-events:none}
+.wise14 .open .msg .a{position:absolute;inset:0 0 auto 0;opacity:0;pointer-events:none}
+.wise14 .open .msg .b{position:relative;opacity:1;translate:none;pointer-events:auto}
+.wise14 .msg b{display:block;font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.025em;line-height:1.1;color:#17111D}
+.wise14 .msg .b p{margin:10px 0 0;font-size:18px;line-height:1.5;color:var(--ink-70);max-width:40ch}
+.wise14 .acts{display:flex;flex-direction:column;gap:14px;max-width:380px;margin-top:22px}
+.wise14 .acts .btn{width:100%;min-height:58px;font-size:18px}
+.wise14 .wall{position:relative;aspect-ratio:4/4.7;border-radius:30px;overflow:hidden;background:repeating-linear-gradient(180deg,#EEE9DF 0 34px,#E4DED2 34px 36px);box-shadow:inset 0 0 0 1px rgba(23,17,29,.06),0 36px 52px -40px rgba(23,17,29,.6)}
+.wise14 .step{position:absolute;left:18%;right:18%;bottom:0;height:7%;border-radius:8px 8px 0 0;background:linear-gradient(#CFC8BB,#BDB5A6);box-shadow:0 -2px 0 rgba(255,255,255,.6) inset}
+.wise14 .way{position:absolute;left:50%;bottom:7%;width:46%;aspect-ratio:300/520;translate:-50% 0;background:#3A2E28;box-shadow:0 0 0 12px #FFFDF7,0 0 0 13px rgba(23,17,29,.1),0 18px 30px -10px rgba(23,17,29,.35);perspective:1100px}
+.wise14 .inside{position:absolute;inset:0;overflow:hidden}
+.wise14 .inside img{width:100%;height:100%;object-fit:cover;object-position:60% 50%;display:block}
+.wise14 .inside .who{position:absolute;left:8px;right:8px;bottom:8px;padding:6px 8px;border-radius:10px;background:rgba(255,253,247,.94);font-size:13px;font-weight:800;line-height:1.25;color:#17111D;text-align:center;opacity:0;translate:0 8px;transition:opacity .4s .55s,translate .5s cubic-bezier(.3,1.4,.5,1) .55s}
+.wise14 .open .inside .who{opacity:1;translate:none}
+.wise14 .inside .who small{display:block;font-size:12px;font-weight:700;color:#5C3A08}
+.wise14 .door{position:absolute;inset:0;padding:0;border:0;background:none;cursor:pointer;transform-origin:0 50%;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,.9,.3,1),filter .9s;filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+.wise14 .door svg{width:100%;height:100%;display:block}
+.wise14 .open .door{transform:rotateY(-104deg);filter:drop-shadow(-14px 0 18px rgba(23,17,29,.35))}
+.wise14 .door:focus-visible{outline:3px solid var(--ink);outline-offset:16px}
+.wise14 .door .hint{position:absolute;left:50%;top:58%;translate:-50% 0;padding:7px 14px;border-radius:999px;background:#FFFDF7;color:#17111D;font-size:15px;font-weight:800;white-space:nowrap;box-shadow:0 8px 14px -8px rgba(23,17,29,.6);transition:opacity .25s}
+.wise14 .open .door .hint,.wise14 .knocking .door .hint{opacity:0}
+@media (hover:hover) and (pointer:fine){.wise14 .wall:not(.open) .door:hover{transform:rotateY(-7deg)}}
+.wise14 .knocking .door{animation:wc14k .62s ease-in-out}
+@keyframes wc14k{0%,100%{translate:0 0}12%{translate:3px 0}24%{translate:-2px 0}36%{translate:0 0}58%{translate:3px 0}70%{translate:-2px 0}82%{translate:0 0}}
+.wise14 .kn{position:absolute;z-index:4;padding:5px 11px;border-radius:999px;background:#17111D;color:#F1EFE6;font-size:14px;font-weight:900;letter-spacing:.02em;opacity:0;scale:.6;pointer-events:none}
+.wise14 .kn.k1{right:7%;top:30%}.wise14 .kn.k2{right:4%;top:40%}
+.wise14 .knocking .kn{animation:wc14p .9s cubic-bezier(.3,1.5,.5,1) forwards}
+.wise14 .knocking .kn.k2{animation-delay:.28s}
+@keyframes wc14p{0%{opacity:0;scale:.6}25%{opacity:1;scale:1.08}70%{opacity:1;scale:1}100%{opacity:0;scale:1;translate:0 -8px}}
+.wise14 .lamp{position:absolute;left:calc(50% + 23% + 26px);top:22%;width:26px;height:40px;border-radius:8px 8px 12px 12px;background:#17111D}
+.wise14 .lamp::before{content:"";position:absolute;left:5px;right:5px;top:8px;bottom:6px;border-radius:5px;background:#D9D2C4;transition:background .4s}
+.wise14 .glow{position:absolute;left:calc(50% + 23% + 39px);top:calc(22% + 20px);width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:radial-gradient(circle,rgba(234,162,33,.45),rgba(234,162,33,0) 65%);opacity:0;transition:opacity .5s;pointer-events:none}
+.wise14 .lit .lamp::before{background:#F6C35B}
+.wise14 .lit .glow{opacity:1}
+.wise14 .num{position:absolute;left:50%;translate:-50% 0;top:7%;padding:6px 10px;border-radius:8px;background:#FFFDF7;font-size:14px;font-weight:900;color:#17111D;box-shadow:0 0 0 1px rgba(23,17,29,.08)}
+@media (max-width:860px){.wise14 .msg .a p span{rotate:90deg}.wise14 .g{grid-template-columns:minmax(0,1fr);gap:0}.wise14 .txt{display:contents}.wise14 .hdw{order:1}.wise14 .wall{order:2;margin-top:22px}.wise14 .msg{order:3;min-height:0}.wise14 .acts{order:4;max-width:none}}
+@media (max-width:640px){.wise14 .wall{aspect-ratio:4/4.4;border-radius:22px}.wise14 .way{width:48%}.wise14 .lamp{left:calc(50% + 24% + 22px);width:20px;height:32px}.wise14 .glow{left:calc(50% + 24% + 32px);width:160px;height:160px;margin:-80px 0 0 -80px}.wise14 .num{font-size:12px;top:5%}.wise14 .door .hint{font-size:14px;padding:6px 11px}.wise14 .msg .a p{font-size:20px}}
+@media (prefers-reduced-motion:reduce){.wise14 .door{transition:opacity .3s}.wise14 .open .door{transform:none;opacity:0;pointer-events:none}.wise14 .knocking .door,.wise14 .knocking .kn{animation:none}.wise14 .inside .who,.wise14 .msg .a,.wise14 .msg .b,.wise14 .lamp::before,.wise14 .glow{transition:none}.wise14 .wall:not(.open) .door:hover{transform:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="wall" data-owl="say:Knock knock">
+   <span class="glow" aria-hidden="true"></span><span class="lamp" aria-hidden="true"></span><span class="num" aria-hidden="true">Your door</span>
+   <div class="way">
+    <div class="inside" aria-hidden="true"><img src="{{A:fam-noah.webp}}" alt="Noah Bergland on a ladder at a roof edge" width="700" height="543"><span class="who">Noah Bergland<small>Co-founder</small></span></div>
+    <button class="door" type="button" aria-expanded="false" aria-label="Knock on the door">
+     <svg viewBox="0 0 300 520" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width="300" height="520" rx="4" fill="#A9743C"/><rect x="0" y="0" width="300" height="520" rx="4" fill="url(#wc14w)" opacity=".35"/><defs><linearGradient id="wc14w" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".2"/></linearGradient></defs><rect x="34" y="34" width="232" height="150" rx="8" fill="#93612D"/><rect x="44" y="44" width="212" height="130" rx="6" fill="#A9743C"/><rect x="34" y="300" width="100" height="186" rx="8" fill="#93612D"/><rect x="44" y="310" width="80" height="166" rx="6" fill="#A9743C"/><rect x="166" y="300" width="100" height="186" rx="8" fill="#93612D"/><rect x="176" y="310" width="80" height="166" rx="6" fill="#A9743C"/><circle cx="150" cy="112" r="9" fill="#2A2131"/><circle cx="150" cy="112" r="5" fill="#5B4A3E"/><g transform="translate(150 236)"><path d="M-22 -14L-15 -30-6 -18M22 -14L15 -30 6 -18" fill="#E2A33A"/><ellipse cx="0" cy="0" rx="22" ry="20" fill="#E2A33A"/><circle cx="-8" cy="-4" r="6" fill="#6B4413"/><circle cx="8" cy="-4" r="6" fill="#6B4413"/><path d="M-4 6l4 6 4-6z" fill="#6B4413"/><path d="M-14 16a16 16 0 0 0 28 0" fill="none" stroke="#E2A33A" stroke-width="5" stroke-linecap="round"/></g><circle cx="262" cy="300" r="11" fill="#E2A33A"/><circle cx="262" cy="300" r="5" fill="#B57F22"/></svg>
+     <span class="hint" aria-hidden="true">Knock</span>
+    </button>
+   </div>
+   <span class="kn k1" aria-hidden="true">Knock</span><span class="kn k2" aria-hidden="true">knock!</span>
+   <span class="step" aria-hidden="true"></span>
+  </div>
+  <div class="txt">
+   <div class="hdw"><span class="kick">The Wise Check</span>
+    <h2 class="h2" id="wc14-h" style="margin-top:12px">Knock Knock</h2>
+    <p class="lede rv">Wondering who’ll turn up for your Wise Check? Knock on the door.</p></div>
+   <div class="msg" aria-live="polite">
+    <div class="a"><p>Knock on the door.<span aria-hidden="true">←</span></p></div>
+    <div class="b"><b>Hoo’s there? It’s Owl.</b><p>Family-owned, founded by Tim Brown and Noah Bergland. For a Wise Check we take a careful look at your roof and attic, and show you photos and video of what we saw.</p></div>
+   </div>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','14',function(root){
+  /* one idea: it's us who knock on your door for a Wise Check: family-owned, and careful */
+  var wall = root.querySelector('.wall'), door = root.querySelector('.door'), inside = root.querySelector('.inside'), g = root.querySelector('.g'), h2 = root.querySelector('h2'), busy = false, open = false, tm = null;
+  OWL.split(h2);
+  function set(o){ open = o; wall.classList.toggle('open', o); g.classList.toggle('open', o); wall.classList.toggle('lit', o);
+    door.setAttribute('aria-expanded', o ? 'true' : 'false'); door.setAttribute('aria-label', o ? 'Close the door' : 'Knock on the door');
+    inside.setAttribute('aria-hidden', o ? 'false' : 'true'); root.dataset.door = o ? 'open' : 'shut'; }
+  door.addEventListener('click', function(){
+    if (busy) return;
+    if (open){ set(false); return; }
+    if (OWL.reduce){ set(true); return; }
+    busy = true; wall.classList.add('knocking'); wall.classList.add('lit');
+    tm = setTimeout(function(){ wall.classList.remove('knocking'); set(true); busy = false; }, 760); });
+  set(false);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, { threshold: .3 }); io.observe(wall);
+});
+</script>
+</section>

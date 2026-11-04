@@ -158,5 +158,25 @@ module.exports = {
     rec('hours only as locked: Monday to Saturday, 8 to 6; no price, timing or arrival promise', await p.evaluate(S => { const t = document.querySelector(S).textContent; return /8 to 6/.test(t) && !/\bfree\b|\$\s?\d|no cost|\bminutes?\b|\bhours?\b|same.day|within|guarantee/i.test(t); }, S));
     rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
     rec('the call button is the real phone', await p.evaluate(S => document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '14': async (p, S, rec, txt) => {
+    await p.evaluate(S => document.querySelector(S).scrollIntoView({ block: 'start', behavior: 'instant' }), S); await p.waitForTimeout(1200);
+    const st = () => p.evaluate(S => { const r = document.querySelector(S), d = r.querySelector('.door'); return { door: r.dataset.door, exp: d.getAttribute('aria-expanded'), label: d.getAttribute('aria-label'), ins: r.querySelector('.inside').getAttribute('aria-hidden'), lit: r.querySelector('.wall').classList.contains('lit'), knock: r.querySelector('.wall').classList.contains('knocking'), tf: getComputedStyle(d).transform, msg: r.querySelector(r.querySelector('.g').classList.contains('open') ? '.msg .b' : '.msg .a').textContent.trim() }; }, S);
+    let s = await st();
+    rec('starts shut: one big door button "Knock on the door", the photo behind it hidden from screen readers', s.door === 'shut' && s.exp === 'false' && s.label === 'Knock on the door' && s.ins === 'true' && !s.lit && /^Knock on the door\./.test(s.msg) && await p.evaluate(S => document.querySelector(S + ' .door').tagName === 'BUTTON', S));
+    await p.click(S + ' .door'); await p.waitForTimeout(250); s = await st();
+    rec('knocking: the door shakes twice, "Knock" marks pop, the porch light comes on (the door is still shut)', s.knock && s.lit && s.door === 'shut' && await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .kn.k1')).animationName === 'wc14p', S));
+    await p.waitForTimeout(500); await p.waitForTimeout(150); s = await st();
+    rec('then the door swings open on its hinge (3D rotation under way)', s.door === 'open' && s.exp === 'true' && !s.knock && s.tf !== 'none');
+    await p.waitForTimeout(1300); s = await st();
+    rec('behind it: Noah Bergland, co-founder, in a real photo; "Hoo’s there? It’s Owl." with the family and Wise Check line', s.ins === 'false' && /^Hoo’s there\? It’s Owl\./.test(s.msg) && /Family-owned, founded by Tim Brown and Noah Bergland\./.test(s.msg) && /roof and attic, and show you photos and video of what we saw/.test(s.msg) && await p.evaluate(S => { const w = document.querySelector(S + ' .who'); return /Noah Bergland/.test(w.textContent) && /Co-founder/.test(w.textContent) && getComputedStyle(w).opacity === '1' && document.querySelector(S + ' .inside img').naturalWidth > 0; }, S));
+    rec('the door button now says "Close the door"', s.label === 'Close the door');
+    await p.click(S + ' .door'); await p.waitForTimeout(1000); s = await st();
+    rec('pressing again closes the door and the light goes off', s.door === 'shut' && s.exp === 'false' && !s.lit && s.ins === 'true' && /^Knock on the door\./.test(s.msg));
+    await p.focus(S + ' .door'); await p.keyboard.press('Enter'); await p.waitForTimeout(1100); s = await st();
+    rec('keyboard: Enter knocks and opens', s.door === 'open' && s.exp === 'true');
+    rec('facts only from the lock: family-owned, founders Tim Brown and Noah Bergland; Wise Check wording from wise-data; no price or timing', await p.evaluate(S => { const t = document.querySelector(S).textContent; return /Tim Brown and Noah Bergland/.test(t) && !/\bfree\b|\$\s?\d|no cost|\bminutes?\b|\bhours?\b|same.day|Master Elite|A\+/i.test(t); }, S));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
+    rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
   }
 };
