@@ -1331,6 +1331,8 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | # | Section | Version | Reference | Gate | Score | Status |
 |---|---|---|---|---|---|---|
-| 1 | Hero | **M, "A house built from our jobs"** (`?hero=m`) | Quiet Cubes (modular, calm: the 43 published project photos as blocks of a house: roofing jobs the roof, siding and window jobs the walls, doors, garage doors and patios at ground level; built from the ground up) | GATE-NEW-Hero-M.md | 8.60 PASS | Built and gated; waiting for Muse's accept |
+| 1 | Hero | **M, "A house built from our jobs"** (`?hero=m`) | Quiet Cubes (modular, calm: the 43 published project photos as blocks of a house: roofing jobs the roof, siding and window jobs the walls, doors, garage doors and patios at ground level; built from the ground up) | GATE-NEW-Hero-M.md | 8.60 PASS | Accepted by Muse |
 
-**Next, after the accept:** Services M.
+| 2 | Services | **M, "One frame, every trade"** (`?services=m`) | Lusion (flow as continuity: one photo frame whose outline flows into the shape of each trade's work, a published job photo inside) | GATE-NEW-Services-M.md | 8.63 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Visualiser M.

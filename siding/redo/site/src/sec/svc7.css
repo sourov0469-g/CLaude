@@ -1,0 +1,49 @@
+/* SERVICES M — one frame, every trade (Lusion: flow; the frame's outline flows into the shape of each trade's work). */
+.svM{padding:110px var(--gut) 100px}
+.svM .smh{max-width:760px}
+.svM .smg{margin-top:40px;display:grid;grid-template-columns:minmax(200px,.62fr) minmax(0,1.5fr) minmax(240px,.8fr);gap:clamp(20px,3vw,48px);align-items:center}
+/* the trade list */
+.svM .smlist{display:flex;flex-direction:column;gap:4px}
+.svM .smr{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:11px 14px;border-radius:12px;
+  font:700 16px/1.2 var(--text);color:var(--ink-2);transition:background-color .2s cubic-bezier(.38,.005,.215,1),color .2s ease,box-shadow .2s ease}
+.svM .smr small{font:600 13px/1 var(--text);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.svM .smr:hover{background:#F4F7F5;color:var(--ink)}
+.svM .smr[aria-checked="true"]{background:var(--green);color:#FFFFFF}
+.svM .smr[aria-checked="true"] small{color:#B5DB6E}
+.svM .smr:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px}
+/* the frame: one element, its outline flows between shapes */
+.svM .smf{margin:0;position:relative;aspect-ratio:4/3;min-width:0}
+.svM .smclip{position:absolute;inset:0;background:#DDE3DF;transition:clip-path .9s cubic-bezier(.65,0,.35,1);will-change:clip-path}
+.svM .smi{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;transform:scale(1.06) translateX(2%);
+  transition:opacity .7s cubic-bezier(.65,0,.35,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+.svM .smi.on{opacity:1;transform:none}
+/* the fact panel */
+.svM .smp{min-width:0}
+.svM .smpan.smin{animation:smIn .55s cubic-bezier(.16,1,.3,1) .15s both}
+@keyframes smIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.svM .smk{margin:0;font:800 12.5px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.svM .smn{margin:8px 0 0;font:600 17px/1.35 var(--text);color:var(--ink-2)}
+.svM .smn b{display:block;font:800 clamp(56px,5.4vw,84px)/1 var(--display);letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+.svM .smb{margin:16px 0 0;padding-top:14px;border-top:1px solid #DCE4DF;font:700 16px/1.45 var(--text);color:var(--ink)}
+.svM .smx{margin:8px 0 0;font:500 15px/1.5 var(--text);color:var(--ink-2)}
+.svM .smph{margin:16px 0 0;font:500 13.5px/1.55 var(--text);color:var(--ink-2)}
+.svM .smph a{color:var(--green);font-weight:800}
+.svM .smft{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:36px}
+.svM .smft p{margin:0;max-width:72ch;font:500 13.5px/1.55 var(--text);color:var(--ink-2)}
+/* the shared CTA block, sized as in the hero */
+.svM .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.svM .callx{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--text);color:var(--ink);padding:10px 2px;text-decoration:none}
+.svM .callx svg{width:18px;height:18px;flex:none;color:var(--green)}
+@media (max-width:1100px){
+  .svM .smg{grid-template-columns:minmax(190px,.7fr) minmax(0,1.4fr)}
+  .svM .smp{grid-column:1 / -1}
+}
+@media (max-width:760px){
+  .svM{padding:84px var(--gut) 80px}
+  .svM .smg{grid-template-columns:1fr;gap:18px}
+  .svM .smlist{flex-direction:row;overflow-x:auto;gap:6px;margin:0 calc(var(--gut) * -1);padding:2px var(--gut) 8px;scrollbar-width:none}
+  .svM .smlist::-webkit-scrollbar{display:none}
+  .svM .smr{flex:none;padding:10px 13px;border-radius:999px;box-shadow:inset 0 0 0 1.5px #D3DDD6;font-size:14.5px}
+  .svM .smr[aria-checked="true"]{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){.svM .smclip,.svM .smi{transition:none}.svM .smpan.smin{animation:none}}
