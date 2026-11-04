@@ -1272,4 +1272,14 @@ Every text element is paired with the nearest painted background behind it, as r
   - Every check re-measured and the screenshots re-shot. Spec rows A7, A11 and A16 amended.
 - **Status:** the corrected gate is waiting for Muse's judgment.
 
-**Next, after the accept:** Booking K (the last of pass 1).
+**Gate accepted by Muse (2026-11-04):** GATE-BACKGROUND-FIX (corrected). New-version work resumed.
+
+## New versions, pass 1, section 9: Booking K
+
+| # | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 9 | Booking | **K, "Next stop: your house"** (`?book=k`) | Lusion (the carrying thread: one route line enters from above and runs through today → at your house → after the visit → your stop; a lime bead rides it with scroll) | GATE-NEW-Booking-K.md | 8.48 PASS | Built and gated; waiting for Muse's accept |
+
+**Pass 1 is complete:** every homepage section now has its K version.
+
+**Next, after the accept:** pass 2 begins with Hero L. It follows the same cycle: one version, then gate, then stop.
