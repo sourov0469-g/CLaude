@@ -5,6 +5,18 @@ const F = 'file://' + path.resolve(__dirname, '../owl-reset.html');
 const [SEC, OUTD] = process.argv.slice(2); const OUT = path.resolve(__dirname, '..', OUTD || 'gates/reset/tmp'); fs.mkdirSync(OUT, { recursive: true });
 const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, info: info || '' }); console.log((ok ? 'PASS' : 'FAIL') + ' | ' + name + (info ? ' | ' + info : '')); };
 const EXTRA = {
+  numbers: async (p) => {
+    const vals = () => p.evaluate(() => [...document.querySelectorAll('#numbers .v, #numbers .n b')].map(e => e.textContent.replace(/\s+/g, ' ').trim()));
+    const final = await vals();
+    rec('not a pinned scene (a different kind from section 3): no sticky stage, the numbers arrive in normal flow', await p.evaluate(() => ![...document.querySelectorAll('#numbers *')].some(e => getComputedStyle(e).position === 'sticky')));
+    await p.evaluate(() => { const s = document.getElementById('numbers'); scrollTo(0, s.offsetTop); }); await p.waitForTimeout(250);
+    const mid = await vals();
+    rec('honest arrival: mid-reveal every number already shows its true value (no count-up through wrong values)', JSON.stringify(mid) === JSON.stringify(final), mid.join(' | '));
+    rec('the numerals arrive as events: a masked rise (clip-path) and a hairline drawn above each', await p.evaluate(() => { const b = document.querySelector('#numbers .n b'); return /inset/.test(getComputedStyle(b).clipPath) && getComputedStyle(document.querySelector('#numbers .n'), '::before').transformOrigin.startsWith('0'); }));
+    await p.evaluate(() => { const s = document.getElementById('numbers'); scrollTo(0, s.offsetTop + s.offsetHeight - innerHeight); }); await p.waitForTimeout(2200);
+    rec('every number has arrived by the end of the section', await p.evaluate(() => document.querySelectorAll('#numbers .n.on').length === 6 && document.querySelector('#numbers .big').classList.contains('on')));
+    rec('locked facts, exact: 5.0 · 90+ reviews, 10-year workmanship, up to 50-year manufacturer, 29 towns, GAF Systems Plus, BBB A−, founded 2025 by Tim Brown and Noah Bergland, licence #BC809662, Mon–Sat 08:00–18:00, Shoreview address, We Give a Hoot', await p.evaluate(() => { const t = document.getElementById('numbers').innerText.replace(/\s+/g, ' '); return ['5.0', 'from 90+ reviews', 'Workmanship warranty', '10-year', 'Manufacturer warranties', 'up to 50-year', '29', 'Certified by GAF', 'Systems Plus', 'A−', 'Better Business Bureau', '2025', 'Tim Brown and Noah Bergland', '#BC809662', 'Mon–Sat', '08:00–18:00', '1000 County Rd E #230', 'Shoreview, MN 55126', 'We Give a Hoot'].every(x => t.includes(x)) && !/A\+|Master Elite|Accredited|lifetime/i.test(t); }));
+  },
   nothing: async (p) => {
     const at = async f => { await p.evaluate(f => { const s = document.getElementById('nothing'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * f); }, f); await p.waitForTimeout(1000); return p.evaluate(() => { const s = document.getElementById('nothing'), v = s.querySelector('video'); return { beat: +s.dataset.beat, t: v.currentTime, first: s.querySelector('.bt b').textContent, on: s.querySelector('.bt.on b').textContent, you: s.querySelector('.you .w').textContent, cur: [...s.querySelectorAll('.rail button')].findIndex(b => b.getAttribute('aria-current') === 'step') }; }); };
     rec('a pinned stage: the section is at least 4 screens tall and its stage is position: sticky', await p.evaluate(() => { const s = document.getElementById('nothing'); return s.offsetHeight >= innerHeight * 4 && getComputedStyle(s.querySelector('.stage')).position === 'sticky'; }));
@@ -46,7 +58,7 @@ const EXTRA = {
   let p = await open();
   for (const pal of ['night', 'control', 'safety', 'slate']) {
     await p.evaluate(pal => document.documentElement.dataset.pal = pal, pal); await p.addScriptTag({ content: AXE });
-    if (SEC) await p.evaluate(s => document.getElementById(s).scrollIntoView({ block: 'start', behavior: 'instant' }), SEC);
+    if (SEC) { await p.evaluate(s => document.getElementById(s).scrollIntoView({ block: 'start', behavior: 'instant' }), SEC); await p.evaluate(s => { const e = document.getElementById(s); scrollTo(0, e.offsetTop + Math.max(0, e.offsetHeight - innerHeight)); }, SEC); await p.waitForTimeout(2000); await p.evaluate(s => document.getElementById(s).scrollIntoView({ block: 'start', behavior: 'instant' }), SEC); await p.waitForTimeout(1200); }
     const ax = await p.evaluate(async s => { const r = await axe.run(s ? document.getElementById(s) : document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } }); return r.violations.map(x => x.id + '(' + x.nodes.length + ':' + x.nodes[0].target.join(' ') + ')'); }, SEC);
     rec('axe WCAG 2.1 A/AA, palette ' + pal + ': 0 violations', ax.length === 0, ax.join(' '));
   }
@@ -64,6 +76,8 @@ const EXTRA = {
     rec('reduced motion: the choice swaps at once (no curtain animation), scene ready', await rm.evaluate(() => document.querySelector('#finder .gate').classList.contains('gone') && parseFloat(getComputedStyle(document.querySelector('#finder .gate')).transitionDuration) < .01 && document.getElementById('finder').dataset.case === 'shingles')); }
   if (SEC === 'nothing') { await rm.evaluate(() => { const s = document.getElementById('nothing'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * .7); }); await rm.waitForTimeout(500);
     rec('reduced motion: no film is loaded or scrubbed (the still poster stays), the beats still follow scroll', await rm.evaluate(() => { const s = document.getElementById('nothing'); return !s.querySelector('video').getAttribute('src') && +s.dataset.beat === 4; })); }
+  if (SEC === 'numbers') { await rm.evaluate(() => document.getElementById('numbers').scrollIntoView()); await rm.waitForTimeout(300);
+    rec('reduced motion: every number is visible at once, no mask or rise', await rm.evaluate(() => [...document.querySelectorAll('#numbers .n b')].every(b => getComputedStyle(b).clipPath === 'none' && getComputedStyle(b.closest('.n')).opacity === '1'))); }
   const loops = await rm.evaluate(() => document.getAnimations().filter(a => a.effect && a.effect.getTiming().iterations === Infinity).length);
   rec('reduced motion: no looping animation', loops === 0, loops + ' looping'); await rm.close();
   rec('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' | '));

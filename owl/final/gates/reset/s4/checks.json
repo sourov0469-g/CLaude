@@ -1,0 +1,107 @@
+{
+ "section": "numbers",
+ "total": 20,
+ "passed": 20,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "not a pinned scene (a different kind from section 3): no sticky stage, the numbers arrive in normal flow",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "honest arrival: mid-reveal every number already shows its true value (no count-up through wrong values)",
+   "ok": true,
+   "info": "5.0 | 10-year | 10 | up to 50-year | 50 | 29 | 29 | Systems Plus | A− | 2025 | 2025"
+  },
+  {
+   "name": "the numerals arrive as events: a masked rise (clip-path) and a hairline drawn above each",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "every number has arrived by the end of the section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "locked facts, exact: 5.0 · 90+ reviews, 10-year workmanship, up to 50-year manufacturer, 29 towns, GAF Systems Plus, BBB A−, founded 2025 by Tim Brown and Noah Bergland, licence #BC809662, Mon–Sat 08:00–18:00, Shoreview address, We Give a Hoot",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: every number is visible at once, no mask or rise",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
