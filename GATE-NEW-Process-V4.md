@@ -119,7 +119,7 @@ Weighted = 0.4 D + 0.3 U + 0.2 C + 0.1 Ct = 3.2 + 2.7 + 1.6 + 1.0 = 8.5.
 | **Composition** | A card left, a dial right | A full-width house drawing | Eight spines, one open, a weeks rule | A deck and its pile, centred, with stops beneath |
 | **What you do** | Pick a node | Drag the ground line, play | Open a spine, drag the weeks | Throw cards, use the stops |
 | **Progress** | The dial's arc | Marks on the house | Done spines, the rule | The pile grows, the deck thins |
-| **Height at 1440** | | 1037px | 923px | 882px |
+| **Height at 1440** | 853px | 1037px | 923px | 882px |
 | **Where it is weaker** | Less visual | Long | Taller on phones | One stage readable at a time |
 
 **My call:** V4 is a genuine challenger. It is the most tactile and the most compact version, and it reads at full size on a phone. V1 stays the owner's pick until the owner says otherwise. The defaults are not changed.
