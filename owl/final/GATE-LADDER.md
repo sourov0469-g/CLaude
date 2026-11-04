@@ -831,3 +831,59 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Known limit:** on phones the mailbox sits below the card, so the posting slide goes to the side rather than into the box; the outcome and wording are the same.
 
 **Third pass of the ladder complete:** every non-hero slot now stands at 9, and the hero at 10. The homepage regression (`home-verify`) passes 50/50 after the pass. Next, the fourth pass: V10 for Video → Booking.
+
+## L30 · Video 10 + Explore 10 (fourth pass begins)
+Evidence: `gates/ladder/L30-video-explore-10/` (checks-video.json 23/23, checks-explore.json 23/23, 2× shots at 1440 / 768 / 390).
+
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Video 10 · Tap Through the Job** | Apple AirPods Pro (one event at a time) | The crew film as a tall story card. Five segmented bars fill in time with the film's five real chapters (rafters and new decking · GAF shingles carried up · one of the crew, shingle in hand · walking a finished roof · OSB carried in for the next roof), each with a large caption and a slow framing of the wide film inside the tall card. Tap the right of the card for the next chapter and the left for the last; press and hold to pause. A numbered chapter list, Back · Pause · Next buttons and arrow keys do the same. The full film opens on YouTube. | 8.4 | 8.6 | 8.2 | 8.6 | **8.44** |
+| **Explore 10 · The Sample Block** | Quiet Cubes (an instrument you turn in your hand) | A cut sample of the roof at the eave as a small 3D block, with the rafter beneath it. The cut faces show every layer: shingle courses, the underlayment lapping over the top edge of the ice & water shield, the ice & water draped over the drip edge, the drip edge's lip past the deck, and the OSB deck with its panel joint landing on the rafter. Drag it, or use the arrow keys (role=slider) or the turn buttons, to turn it; it sways gently until touched and coasts to a stop after a flick. Picking a layer lights it on every face, dims the rest and turns the block to the best view (the rafter flips it to the underside), alongside the same verified fact used in Explore 5. | 8.6 | 8.2 | 8.6 | 8.6 | **8.48** |
+
+**Truth / roofer audit:**
+- Video 10: the chapter captions are the same frame-checked moments as Video 9, with no claims added.
+- Explore 10: the layer order is roofer-correct:
+  - the drip edge sits under the ice & water at the eave;
+  - the underlayment laps over the top of the ice & water, upslope over downslope;
+  - the deck panel joint falls over the rafter.
+- The facts are Explore 5's verified text, word for word: 5⅝ in exposure, IRC R905.1.2's 24 in, the ⅛ in gap, and 16 or 24 in on centre.
+- The block says plainly "Thicknesses drawn larger so you can see them." It is not a game.
+
+**Checks run:** the generic gate, plus:
+- **Video 10:**
+  - the story plays when it comes into view;
+  - at 9.6 s the caption, list and bars all agree on chapter 4;
+  - tapping right goes forward and tapping left goes back;
+  - pressing and holding pauses, and letting go resumes on the same chapter;
+  - arrow keys change chapter;
+  - Pause becomes Play;
+  - a chapter in the list jumps to 3.1 s;
+  - YouTube ehKLv5DF2TQ opens.
+- **Explore 10:**
+  - 11 faces, with all six layers drawn;
+  - the idle sway;
+  - dragging turns the block and the slider value follows;
+  - arrow keys turn it by 30°;
+  - ice & water lights up and the rest dims, with the 24 in IRC fact;
+  - the rafter pick turns the block to the underside;
+  - See the Underside toggles back;
+  - the drip edge is drawn under the ice & water, with its lip;
+  - the scale note is shown.
+
+**Ledger:**
+- **Video 10:** segmented progress ⟦S1325⟧; chapter transition ⟦S0409⟧; keys ⟦S1107⟧; film modal ⟦S1046⟧.
+- **Explore 10:** 3D ⟦S1388⟧; draggable with keyboard ⟦S1018⟧; rest motion and settle ⟦S0489⟧; anatomy callout ⟦S0526⟧.
+
+**Defects found and fixed in the round:**
+- **Video 10:**
+  - The bars froze whenever `requestAnimationFrame` was throttled. The state now also updates on every `timeupdate`, and rAF only smooths the bars.
+  - On phones the card came before the heading. The heading now comes first.
+  - The chapter list stretched across the whole column. It is capped at 440 px.
+- **Explore 10:**
+  - A course-loop variable shadowed the scale function and caused a page error. The function is renamed.
+  - Laminate tabs and course lines spilled past the block's edges. The top face is clipped and the lines are shortened.
+  - Dimmed layers went see-through, so the inside of the block showed. Each face now has a solid backing, and only the picked layer is outlined.
+  - The membranes were too thin to read when picked. The membranes in the drawn profile are thickened.
+  - The rafter's grain ran across the board. It now runs along it.
+
+**Known limit:** Video 10 is muted, like the other versions, and its framing of the wide film is a fixed pan per chapter rather than subject tracking.

@@ -1,0 +1,152 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 10
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Tap Through the Job"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "the story plays when seen: crew film, five bars, chapter 1 caption",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "at 9.6 s the caption, list and bars agree on chapter 4 (finished roof)",
+  "ok": true,
+  "detail": "Walking a finished roof 1,1,1,0.269,0 t=10.23"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "a tap on the right skips to chapter 5",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "a tap on the left goes back to chapter 4",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "press and hold pauses, letting go plays on without changing chapter",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "arrow keys on the card change chapter",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "the Pause button pauses and becomes Play",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "a chapter in the list jumps there (GAF shingles at 3.1 s)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "the full film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "10",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

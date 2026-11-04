@@ -403,3 +403,23 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   the slot, raises the flag and opens the visitor's email app with the details; the wording says the email is ready
   to send from their app, never that it was sent. An incomplete card shakes and says what is missing. Skills:
   ⟦S1442⟧ form rules, ⟦S0489⟧ slide and settle, ⟦S0405⟧ flag, ⟦S1388⟧ keys.
+
+## L30 · Video 10 + Explore 10 (fourth pass; both stand at 9)
+- **Video 10 · "Tap Through the Job"** — reference **Apple AirPods Pro** (one event at a time, full focus). The crew
+  film as a tall story card: five segmented bars across the top fill in time with the film's five real chapters
+  (rafters and new decking · GAF shingles carried up · one of the crew, shingle in hand · walking a finished roof ·
+  OSB carried in for the next roof). Tap the right of the card for the next chapter, the left for the last; press
+  and hold to pause. Each chapter gets a large caption and its own slow framing of the landscape film. Visible
+  Back · Pause · Next buttons and arrow keys do the same; the full film opens on YouTube (ehKLv5DF2TQ). Differs
+  from V1–V9: no player chrome, lens, mask, window, projector or scrub — the story-card pattern with tap zones
+  and hold-to-pause. Skills: ⟦S1325⟧ segmented progress, ⟦S0409⟧ chapter transition, ⟦S1107⟧ keys, ⟦S1046⟧ film
+  modal.
+- **Explore 10 · "The Sample Block"** — reference **Quiet Cubes** (an instrument you turn in your hand). A cut sample
+  of the roof at the eave as a small 3D block: shingles on top, then underlayment, ice & water shield, the drip
+  edge with its lip at the eave, the OSB deck and a rafter beneath, every layer visible on the cut faces
+  (thicknesses drawn larger, and said so). Drag it, or use the arrow keys, to turn it; it rests with a slow sway
+  until touched. Pick a layer and it lights on every face while the rest dim, with the same verified fact as the
+  other versions (5⅝ in exposure, upslope over downslope, 24 in inside the wall line per IRC R905.1.2, drip edge
+  under the ice & water at the eave, ⅛ in deck gap, 16 or 24 in on centre). Not a game. Differs from V1–V9: no
+  stack, slider, peel, deck of cards, drop, lens, nail or airflow — one solid object, turned. Skills: ⟦S1388⟧ 3D,
+  ⟦S1018⟧ draggable with keyboard (role=slider), ⟦S0489⟧ rest motion and settle, ⟦S0526⟧ anatomy callout.

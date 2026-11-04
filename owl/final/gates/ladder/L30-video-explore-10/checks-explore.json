@@ -1,0 +1,151 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 10
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Sample Block"
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "a 3D block: six faces plus the rafter, all six layers drawn",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "it rests with a slow sway until touched",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "dragging turns it and the slider value follows",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "arrow keys turn it by 30°",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "picking ice & water lights it, dims the rest, and gives the 24 in IRC fact",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "picking the rafter turns the block to show its underside",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "See the Underside toggles back to the top view",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "drip edge is drawn under the ice & water, with its lip past the deck",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "the honest scale note is shown",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "10",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

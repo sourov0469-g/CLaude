@@ -73,5 +73,28 @@ module.exports = {
     await p.click(S + ' .keys button >> nth=2'); await p.waitForTimeout(500);
     rec('no ridge vent: the exhaust is shut and air has no way out', await p.evaluate(S => document.querySelector(S + ' .shut').classList.contains('on') && document.querySelector(S + ' .read h3').textContent === 'No way out' && document.querySelectorAll(S + ' .keys [aria-pressed="true"]').length === 1, S));
     rec('the figure describes the current state', await p.evaluate(S => /no exhaust at the ridge/.test(document.querySelector(S + ' svg title').textContent), S));
+  },
+  '10': async (p, S, rec) => {
+    await p.waitForTimeout(1200);
+    rec('a 3D block: six faces plus the rafter, all six layers drawn', await p.evaluate(S => document.querySelectorAll(S + ' .blk > .face').length === 11 && [0, 1, 2, 3, 4, 5].every(i => document.querySelector(S + ' .blk [data-l="' + i + '"]')), S));
+    const a1 = await p.evaluate(S => document.querySelector(S + ' .blk').style.transform, S); await p.waitForTimeout(700);
+    const a2 = await p.evaluate(S => document.querySelector(S + ' .blk').style.transform, S);
+    rec('it rests with a slow sway until touched', a1 !== a2);
+    const box = await p.evaluate(S => { const r = document.querySelector(S + ' .stg').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, S);
+    const v0 = await p.evaluate(S => +document.querySelector(S + ' .stg').getAttribute('aria-valuenow'), S);
+    await p.mouse.move(box[0], box[1]); await p.mouse.down(); await p.mouse.move(box[0] - 160, box[1], { steps: 8 }); await p.mouse.up(); await p.waitForTimeout(1200);
+    const v1 = await p.evaluate(S => +document.querySelector(S + ' .stg').getAttribute('aria-valuenow'), S);
+    rec('dragging turns it and the slider value follows', Math.abs(v1 - v0) > 40);
+    await p.focus(S + ' .stg'); await p.keyboard.press('ArrowLeft'); await p.waitForTimeout(1200);
+    const v2 = await p.evaluate(S => +document.querySelector(S + ' .stg').getAttribute('aria-valuenow'), S);
+    rec('arrow keys turn it by 30°', Math.abs(((v2 - v1 + 540) % 360) - 180) > 20);
+    await p.click(S + ' .lay button >> nth=2'); await p.waitForTimeout(1600);
+    rec('picking ice & water lights it, dims the rest, and gives the 24 in IRC fact', await p.evaluate(S => { const b = document.querySelector(S + ' .blk'); const on = getComputedStyle(b.querySelector('[data-l="2"]')).opacity, off = getComputedStyle(b.querySelector('[data-l="0"]')).opacity; return b.dataset.on === '2' && +on === 1 && +off < .5 && document.querySelector(S + ' .inf strong').textContent === '24 in' && /IRC R905\.1\.2/.test(document.querySelector(S + ' .inf .num span').textContent); }, S));
+    await p.click(S + ' .lay button >> nth=5'); await p.waitForTimeout(1800);
+    rec('picking the rafter turns the block to show its underside', await p.evaluate(S => /rotateX\(30/.test(document.querySelector(S + ' .blk').style.transform) && document.querySelector(S + ' .ud').getAttribute('aria-pressed') === 'true' && document.querySelector(S + ' .inf b').textContent === 'Rafters', S));
+    await p.click(S + ' .ud'); await p.waitForTimeout(1600);
+    rec('See the Underside toggles back to the top view', await p.evaluate(S => /rotateX\(-26/.test(document.querySelector(S + ' .blk').style.transform) && document.querySelector(S + ' .ud').getAttribute('aria-pressed') === 'false', S));
+    rec('drip edge is drawn under the ice & water, with its lip past the deck', await p.evaluate(S => { const s = document.querySelector(S + ' .blk .face:nth-child(3) svg').innerHTML; return s.indexOf('data-l="3"') > s.indexOf('data-l="2"') && /M34 51H-4V88/.test(s); }, S));
+    rec('the honest scale note is shown', await p.evaluate(S => /Thicknesses drawn larger/.test(document.querySelector(S + ' .ctl small').textContent), S));
   }
 };

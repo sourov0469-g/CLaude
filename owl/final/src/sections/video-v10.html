@@ -1,0 +1,121 @@
+<section class="sec video10" id="crew-video-10" aria-labelledby="vd10-h">
+<style>
+.video10{overflow:hidden}
+.video10 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(24px,5vw,72px);align-items:center}
+.video10 .lede{margin:12px 0 20px;max-width:40ch}
+.video10 .chap{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:4px;max-width:440px}
+.video10 .chap button{position:relative;display:flex;align-items:center;gap:14px;width:100%;min-height:48px;padding:6px 12px 6px 6px;border-radius:14px;text-align:left;font-weight:700;font-size:17px;color:var(--ink-70);transition:background .25s,color .25s}
+.video10 .chap button b{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:14px;font-weight:900;background:rgba(23,17,29,.06);color:#17111D;transition:background .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.video10 .chap button:hover{background:rgba(23,17,29,.04);color:#17111D}
+.video10 .chap button[aria-current="true"]{background:var(--paper);color:#17111D;box-shadow:0 3px 0 rgba(23,17,29,.08)}
+.video10 .chap button[aria-current="true"] b{background:#EAA221;transform:scale(1.08)}
+.video10 .chap button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.video10 .act{display:flex;flex-wrap:wrap;gap:12px}
+.video10 .col{display:grid;justify-items:center;gap:14px}
+.video10 .story{position:relative;width:min(380px,82vw);aspect-ratio:9/14;border-radius:28px;overflow:hidden;background:#2A2131;box-shadow:0 0 0 6px #FFFDF7,0 0 0 7px rgba(23,17,29,.12),0 50px 70px -40px rgba(23,17,29,.65);touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer;transform:rotate(1.2deg);transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.video10 .story:hover{transform:rotate(0)}
+.video10 .story:focus-visible{outline:3px solid var(--ink);outline-offset:10px}
+.video10 .story video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 50%;transform:scale(1.04)}
+.video10 .bars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:5px;z-index:2}
+.video10 .bars span{flex:1;height:4px;border-radius:2px;background:rgba(255,253,247,.45);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.video10 .bars i{display:block;height:100%;background:#FFFDF7;transform-origin:left;transform:scaleX(0)}
+.video10 .who{position:absolute;left:14px;top:28px;z-index:2;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;background:rgba(255,253,247,.92);font-size:13px;font-weight:800;color:#17111D}
+.video10 .who img{width:24px;height:24px}
+.video10 .who em{font-style:normal;color:#6B6570;font-weight:700}
+.video10 .cap{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;padding:14px 16px 16px;border-radius:18px;background:rgba(255,253,247,.95);box-shadow:0 16px 26px -16px rgba(0,0,0,.6)}
+.video10 .cap small{display:block;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8E5A12}
+.video10 .cap p{margin:4px 0 0;font-size:clamp(19px,2vw,23px);font-weight:900;letter-spacing:-.02em;line-height:1.15;color:#17111D}
+.video10 .cap.swap{animation:vd10c .5s cubic-bezier(.22,.61,.36,1)}
+@keyframes vd10c{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:none}}
+.video10 .zone{position:absolute;top:0;bottom:0;z-index:1;display:grid;place-items:center;opacity:0;transition:opacity .25s;pointer-events:none}
+.video10 .zone.l{left:0;width:30%;background:linear-gradient(90deg,rgba(255,253,247,.28),transparent)}
+.video10 .zone.r{right:0;width:30%;background:linear-gradient(270deg,rgba(255,253,247,.28),transparent)}
+.video10 .zone.flash{opacity:1}
+.video10 .held{position:absolute;left:50%;top:44%;z-index:2;transform:translate(-50%,-50%) scale(.8);padding:8px 16px;border-radius:999px;background:rgba(23,17,29,.82);color:#FFFDF7;font-weight:800;font-size:14px;opacity:0;transition:opacity .2s,transform .25s}
+.video10 .paused .held{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.video10 .ctl{display:flex;gap:10px}
+.video10 .ctl button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:52px;min-height:52px;padding:0 16px;border-radius:999px;font-weight:800;font-size:15px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 4px 0 #C9C0AC,0 10px 16px -10px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s}
+.video10 .ctl button:active{transform:translateY(3px);box-shadow:0 1px 0 #C9C0AC}
+.video10 .ctl button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.video10 .ctl svg{width:18px;height:18px}
+.video10 .tip{margin:0;font-size:14px;color:var(--ink-70);text-align:center}
+@media (max-width:860px){.video10 .g{grid-template-columns:minmax(0,1fr)}.video10 .story{transform:none}}
+@media (prefers-reduced-motion:reduce){.video10 .story,.video10 .zone,.video10 .held{transition:none}.video10 .cap.swap{animation:none}.video10 .story video{transition:none!important}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Owl's crew on film</span>
+   <h2 class="h2" id="vd10-h" style="margin-top:12px">Tap Through the Job</h2>
+   <p class="lede rv">Fifteen seconds of Owl’s own crew, told like a story. Tap the right of the card to skip ahead, the left to go back, and hold to pause.</p>
+   <ol class="chap" aria-label="Chapters"></ol>
+   <div class="act"><button class="btn btn-line full" type="button" data-mag data-owl="peek">Watch the Full Film</button></div>
+  </div>
+  <div class="col">
+   <div class="story" tabindex="0" role="group" aria-label="Crew film as a story. Left and right arrow keys change chapter; space pauses." data-owl="say:Tap ahead">
+    <video data-media="crew" poster="{{A:crew-poster.webp}}" muted loop playsinline preload="auto" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+    <span class="zone l" aria-hidden="true"></span><span class="zone r" aria-hidden="true"></span>
+    <div class="bars" aria-hidden="true"></div>
+    <span class="who" aria-hidden="true"><img src="{{A:logo.svg}}" alt="">Owl Roofing <em>· Shoreview</em></span>
+    <span class="held" aria-hidden="true">Paused</span>
+    <div class="cap" aria-live="polite"><small></small><p></p></div>
+   </div>
+   <div class="ctl"><button class="prev" type="button" aria-label="Previous chapter"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 4L7 10l6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="pp" type="button" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="ic" d="M6 4h3v12H6zM11 4h3v12h-3z" fill="currentColor"/></svg><span>Pause</span></button><button class="next" type="button" aria-label="Next chapter"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+   <p class="tip">Tap · hold · or use the buttons</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('video','10',function(root){
+  /* the film's five real chapters (seconds), with a slow framing of the wide film inside the tall card */
+  var C = [[0, 'Rafters and new decking', 30, 55], [3.1, 'GAF shingles carried up', 44, 56], [6.4, 'One of the crew, shingle in hand', 46, 34], [9.2, 'Walking a finished roof', 62, 50], [13, 'OSB carried in for the next roof', 48, 58]];
+  var END = 15.55, story = root.querySelector('.story'), vid = root.querySelector('video'), bars = root.querySelector('.bars'), cap = root.querySelector('.cap'), list = root.querySelector('.chap'), pp = root.querySelector('.pp'), h2 = root.querySelector('h2'), zl = root.querySelector('.zone.l'), zr = root.querySelector('.zone.r');
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  var fills = C.map(function(){ var s = document.createElement('span'), i = document.createElement('i'); s.appendChild(i); bars.appendChild(s); return i; });
+  var items = C.map(function(c, k){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b>' + (k + 1) + '</b>' + c[1]; b.addEventListener('click', function(){ go(k, true); }); li.appendChild(b); list.appendChild(li); return b; });
+  var cur = -1, paused = false, started = false;
+  function len(k){ return (k < C.length - 1 ? C[k + 1][0] : END) - C[k][0]; }
+  function frame(k){ var c = C[k]; vid.style.transition = 'none'; vid.style.objectPosition = c[2] + '% 50%'; void vid.offsetWidth;
+    if (!OWL.reduce){ vid.style.transition = 'object-position ' + len(k).toFixed(2) + 's linear'; vid.style.objectPosition = c[3] + '% 50%'; } }
+  function mark(k){ if (k === cur) return; cur = k; frame(k);
+    items.forEach(function(b, j){ b.setAttribute('aria-current', j === k ? 'true' : 'false'); });
+    cap.querySelector('small').textContent = 'Chapter ' + (k + 1) + ' of 5'; cap.querySelector('p').textContent = C[k][1];
+    cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap'); }
+  function load(){ if (!vid.src && OWL.media) vid.src = OWL.media.crew; }
+  function go(k, user){ k = (k + C.length) % C.length; load(); mark(k);
+    try { vid.currentTime = C[k][0] + (OWL.reduce && vid.paused ? .4 : 0); } catch (e){}
+    paint(); if (user && !paused && !OWL.reduce) OWL.play(vid); }
+  function chapterAt(t){ var k = 0; C.forEach(function(c, j){ if (t >= c[0]) k = j; }); return k; }
+  function paint(){ var t = vid.currentTime || 0, k = chapterAt(t); fills.forEach(function(f, j){ var p = j < k ? 1 : j > k ? 0 : Math.min(1, (t - C[j][0])/len(j)); f.style.transform = 'scaleX(' + p.toFixed(3) + ')'; }); return k; }
+  var raf = 0;
+  function tick(){ raf = 0; var k = paint(); mark(k); if (!vid.paused) raf = requestAnimationFrame(tick); }
+  vid.addEventListener('play', function(){ if (!raf) raf = requestAnimationFrame(tick); });
+  vid.addEventListener('timeupdate', function(){ mark(paint()); });
+  function setPause(on){ paused = on; story.classList.toggle('paused', on); pp.setAttribute('aria-pressed', on); pp.querySelector('span').textContent = on ? 'Play' : 'Pause';
+    pp.querySelector('.ic').setAttribute('d', on ? 'M6 4l10 6-10 6z' : 'M6 4h3v12H6zM11 4h3v12h-3z');
+    if (on) vid.pause(); else { load(); OWL.play(vid); } }
+  pp.addEventListener('click', function(){ setPause(!paused); });
+  root.querySelector('.prev').addEventListener('click', function(){ go(cur - 1, true); });
+  root.querySelector('.next').addEventListener('click', function(){ go(cur + 1, true); });
+  function flash(z){ z.classList.add('flash'); setTimeout(function(){ z.classList.remove('flash'); }, 260); }
+  /* tap the right for next, the left for back; press and hold to pause until let go */
+  var down = 0, holdT = 0, held = false, wasPaused = false;
+  story.addEventListener('pointerdown', function(e){ if (e.button) return; down = e.clientX; held = false; wasPaused = paused;
+    holdT = setTimeout(function(){ held = true; if (!paused){ vid.pause(); story.classList.add('paused'); } }, 220); });
+  function release(e, cancel){ if (!holdT) return; clearTimeout(holdT); holdT = 0;
+    if (held){ if (!wasPaused){ story.classList.remove('paused'); load(); OWL.play(vid); } return; }
+    if (cancel) return; var r = story.getBoundingClientRect(), x = (e.clientX - r.left)/r.width;
+    if (x < .3){ flash(zl); go(cur - 1, true); } else { flash(zr); go(cur + 1, true); } }
+  story.addEventListener('pointerup', function(e){ release(e, false); });
+  story.addEventListener('pointercancel', function(e){ release(e, true); });
+  story.addEventListener('pointerleave', function(e){ if (held) release(e, true); });
+  story.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  story.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); flash(zr); go(cur + 1, true); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); flash(zl); go(cur - 1, true); } else if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); setPause(!paused); } });
+  mark(0); paint();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); setPause(true); load(); return; }
+  var io = new IntersectionObserver(function(e){ var on = e[0].isIntersecting; if (on && !started){ started = true; OWL.reveal(h2); load(); }
+    if (on && started && !paused) OWL.play(vid); else if (!on) vid.pause(); }, {threshold:.35}); io.observe(story);
+});
+</script>
+</section>

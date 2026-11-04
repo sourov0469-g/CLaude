@@ -2480,6 +2480,130 @@ OWL.reg('video','9',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="video" data-v="10">
+<section class="sec video10" id="crew-video-10" aria-labelledby="vd10-h">
+<style>
+.video10{overflow:hidden}
+.video10 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(24px,5vw,72px);align-items:center}
+.video10 .lede{margin:12px 0 20px;max-width:40ch}
+.video10 .chap{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:4px;max-width:440px}
+.video10 .chap button{position:relative;display:flex;align-items:center;gap:14px;width:100%;min-height:48px;padding:6px 12px 6px 6px;border-radius:14px;text-align:left;font-weight:700;font-size:17px;color:var(--ink-70);transition:background .25s,color .25s}
+.video10 .chap button b{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:14px;font-weight:900;background:rgba(23,17,29,.06);color:#17111D;transition:background .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.video10 .chap button:hover{background:rgba(23,17,29,.04);color:#17111D}
+.video10 .chap button[aria-current="true"]{background:var(--paper);color:#17111D;box-shadow:0 3px 0 rgba(23,17,29,.08)}
+.video10 .chap button[aria-current="true"] b{background:#EAA221;transform:scale(1.08)}
+.video10 .chap button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.video10 .act{display:flex;flex-wrap:wrap;gap:12px}
+.video10 .col{display:grid;justify-items:center;gap:14px}
+.video10 .story{position:relative;width:min(380px,82vw);aspect-ratio:9/14;border-radius:28px;overflow:hidden;background:#2A2131;box-shadow:0 0 0 6px #FFFDF7,0 0 0 7px rgba(23,17,29,.12),0 50px 70px -40px rgba(23,17,29,.65);touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer;transform:rotate(1.2deg);transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.video10 .story:hover{transform:rotate(0)}
+.video10 .story:focus-visible{outline:3px solid var(--ink);outline-offset:10px}
+.video10 .story video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 50%;transform:scale(1.04)}
+.video10 .bars{position:absolute;left:14px;right:14px;top:14px;display:flex;gap:5px;z-index:2}
+.video10 .bars span{flex:1;height:4px;border-radius:2px;background:rgba(255,253,247,.45);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.video10 .bars i{display:block;height:100%;background:#FFFDF7;transform-origin:left;transform:scaleX(0)}
+.video10 .who{position:absolute;left:14px;top:28px;z-index:2;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;background:rgba(255,253,247,.92);font-size:13px;font-weight:800;color:#17111D}
+.video10 .who img{width:24px;height:24px}
+.video10 .who em{font-style:normal;color:#6B6570;font-weight:700}
+.video10 .cap{position:absolute;left:14px;right:14px;bottom:14px;z-index:2;padding:14px 16px 16px;border-radius:18px;background:rgba(255,253,247,.95);box-shadow:0 16px 26px -16px rgba(0,0,0,.6)}
+.video10 .cap small{display:block;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8E5A12}
+.video10 .cap p{margin:4px 0 0;font-size:clamp(19px,2vw,23px);font-weight:900;letter-spacing:-.02em;line-height:1.15;color:#17111D}
+.video10 .cap.swap{animation:vd10c .5s cubic-bezier(.22,.61,.36,1)}
+@keyframes vd10c{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:none}}
+.video10 .zone{position:absolute;top:0;bottom:0;z-index:1;display:grid;place-items:center;opacity:0;transition:opacity .25s;pointer-events:none}
+.video10 .zone.l{left:0;width:30%;background:linear-gradient(90deg,rgba(255,253,247,.28),transparent)}
+.video10 .zone.r{right:0;width:30%;background:linear-gradient(270deg,rgba(255,253,247,.28),transparent)}
+.video10 .zone.flash{opacity:1}
+.video10 .held{position:absolute;left:50%;top:44%;z-index:2;transform:translate(-50%,-50%) scale(.8);padding:8px 16px;border-radius:999px;background:rgba(23,17,29,.82);color:#FFFDF7;font-weight:800;font-size:14px;opacity:0;transition:opacity .2s,transform .25s}
+.video10 .paused .held{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.video10 .ctl{display:flex;gap:10px}
+.video10 .ctl button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:52px;min-height:52px;padding:0 16px;border-radius:999px;font-weight:800;font-size:15px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 4px 0 #C9C0AC,0 10px 16px -10px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s}
+.video10 .ctl button:active{transform:translateY(3px);box-shadow:0 1px 0 #C9C0AC}
+.video10 .ctl button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.video10 .ctl svg{width:18px;height:18px}
+.video10 .tip{margin:0;font-size:14px;color:var(--ink-70);text-align:center}
+@media (max-width:860px){.video10 .g{grid-template-columns:minmax(0,1fr)}.video10 .story{transform:none}}
+@media (prefers-reduced-motion:reduce){.video10 .story,.video10 .zone,.video10 .held{transition:none}.video10 .cap.swap{animation:none}.video10 .story video{transition:none!important}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Owl's crew on film</span>
+   <h2 class="h2" id="vd10-h" style="margin-top:12px">Tap Through the Job</h2>
+   <p class="lede rv">Fifteen seconds of Owl’s own crew, told like a story. Tap the right of the card to skip ahead, the left to go back, and hold to pause.</p>
+   <ol class="chap" aria-label="Chapters"></ol>
+   <div class="act"><button class="btn btn-line full" type="button" data-mag data-owl="peek">Watch the Full Film</button></div>
+  </div>
+  <div class="col">
+   <div class="story" tabindex="0" role="group" aria-label="Crew film as a story. Left and right arrow keys change chapter; space pauses." data-owl="say:Tap ahead">
+    <video data-media="crew" data-aposter="a1" muted loop playsinline preload="auto" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+    <span class="zone l" aria-hidden="true"></span><span class="zone r" aria-hidden="true"></span>
+    <div class="bars" aria-hidden="true"></div>
+    <span class="who" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-asrc="a0" alt="">Owl Roofing <em>· Shoreview</em></span>
+    <span class="held" aria-hidden="true">Paused</span>
+    <div class="cap" aria-live="polite"><small></small><p></p></div>
+   </div>
+   <div class="ctl"><button class="prev" type="button" aria-label="Previous chapter"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 4L7 10l6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="pp" type="button" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="ic" d="M6 4h3v12H6zM11 4h3v12h-3z" fill="currentColor"/></svg><span>Pause</span></button><button class="next" type="button" aria-label="Next chapter"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+   <p class="tip">Tap · hold · or use the buttons</p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('video','10',function(root){
+  /* the film's five real chapters (seconds), with a slow framing of the wide film inside the tall card */
+  var C = [[0, 'Rafters and new decking', 30, 55], [3.1, 'GAF shingles carried up', 44, 56], [6.4, 'One of the crew, shingle in hand', 46, 34], [9.2, 'Walking a finished roof', 62, 50], [13, 'OSB carried in for the next roof', 48, 58]];
+  var END = 15.55, story = root.querySelector('.story'), vid = root.querySelector('video'), bars = root.querySelector('.bars'), cap = root.querySelector('.cap'), list = root.querySelector('.chap'), pp = root.querySelector('.pp'), h2 = root.querySelector('h2'), zl = root.querySelector('.zone.l'), zr = root.querySelector('.zone.r');
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  var fills = C.map(function(){ var s = document.createElement('span'), i = document.createElement('i'); s.appendChild(i); bars.appendChild(s); return i; });
+  var items = C.map(function(c, k){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b>' + (k + 1) + '</b>' + c[1]; b.addEventListener('click', function(){ go(k, true); }); li.appendChild(b); list.appendChild(li); return b; });
+  var cur = -1, paused = false, started = false;
+  function len(k){ return (k < C.length - 1 ? C[k + 1][0] : END) - C[k][0]; }
+  function frame(k){ var c = C[k]; vid.style.transition = 'none'; vid.style.objectPosition = c[2] + '% 50%'; void vid.offsetWidth;
+    if (!OWL.reduce){ vid.style.transition = 'object-position ' + len(k).toFixed(2) + 's linear'; vid.style.objectPosition = c[3] + '% 50%'; } }
+  function mark(k){ if (k === cur) return; cur = k; frame(k);
+    items.forEach(function(b, j){ b.setAttribute('aria-current', j === k ? 'true' : 'false'); });
+    cap.querySelector('small').textContent = 'Chapter ' + (k + 1) + ' of 5'; cap.querySelector('p').textContent = C[k][1];
+    cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap'); }
+  function load(){ if (!vid.src && OWL.media) vid.src = OWL.media.crew; }
+  function go(k, user){ k = (k + C.length) % C.length; load(); mark(k);
+    try { vid.currentTime = C[k][0] + (OWL.reduce && vid.paused ? .4 : 0); } catch (e){}
+    paint(); if (user && !paused && !OWL.reduce) OWL.play(vid); }
+  function chapterAt(t){ var k = 0; C.forEach(function(c, j){ if (t >= c[0]) k = j; }); return k; }
+  function paint(){ var t = vid.currentTime || 0, k = chapterAt(t); fills.forEach(function(f, j){ var p = j < k ? 1 : j > k ? 0 : Math.min(1, (t - C[j][0])/len(j)); f.style.transform = 'scaleX(' + p.toFixed(3) + ')'; }); return k; }
+  var raf = 0;
+  function tick(){ raf = 0; var k = paint(); mark(k); if (!vid.paused) raf = requestAnimationFrame(tick); }
+  vid.addEventListener('play', function(){ if (!raf) raf = requestAnimationFrame(tick); });
+  vid.addEventListener('timeupdate', function(){ mark(paint()); });
+  function setPause(on){ paused = on; story.classList.toggle('paused', on); pp.setAttribute('aria-pressed', on); pp.querySelector('span').textContent = on ? 'Play' : 'Pause';
+    pp.querySelector('.ic').setAttribute('d', on ? 'M6 4l10 6-10 6z' : 'M6 4h3v12H6zM11 4h3v12h-3z');
+    if (on) vid.pause(); else { load(); OWL.play(vid); } }
+  pp.addEventListener('click', function(){ setPause(!paused); });
+  root.querySelector('.prev').addEventListener('click', function(){ go(cur - 1, true); });
+  root.querySelector('.next').addEventListener('click', function(){ go(cur + 1, true); });
+  function flash(z){ z.classList.add('flash'); setTimeout(function(){ z.classList.remove('flash'); }, 260); }
+  /* tap the right for next, the left for back; press and hold to pause until let go */
+  var down = 0, holdT = 0, held = false, wasPaused = false;
+  story.addEventListener('pointerdown', function(e){ if (e.button) return; down = e.clientX; held = false; wasPaused = paused;
+    holdT = setTimeout(function(){ held = true; if (!paused){ vid.pause(); story.classList.add('paused'); } }, 220); });
+  function release(e, cancel){ if (!holdT) return; clearTimeout(holdT); holdT = 0;
+    if (held){ if (!wasPaused){ story.classList.remove('paused'); load(); OWL.play(vid); } return; }
+    if (cancel) return; var r = story.getBoundingClientRect(), x = (e.clientX - r.left)/r.width;
+    if (x < .3){ flash(zl); go(cur - 1, true); } else { flash(zr); go(cur + 1, true); } }
+  story.addEventListener('pointerup', function(e){ release(e, false); });
+  story.addEventListener('pointercancel', function(e){ release(e, true); });
+  story.addEventListener('pointerleave', function(e){ if (held) release(e, true); });
+  story.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  story.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); flash(zr); go(cur + 1, true); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); flash(zl); go(cur - 1, true); } else if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); setPause(!paused); } });
+  mark(0); paint();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); setPause(true); load(); return; }
+  var io = new IntersectionObserver(function(e){ var on = e[0].isIntersecting; if (on && !started){ started = true; OWL.reveal(h2); load(); }
+    if (on && started && !paused) OWL.play(vid); else if (!on) vid.pause(); }, {threshold:.35}); io.observe(story);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="video" data-b="1">
 <section class="sec video2" id="crew-video-2" aria-labelledby="v2-h">
 <style>
@@ -3662,6 +3786,159 @@ OWL.reg('explore','9',function(root){
   set(0); size(); addEventListener('resize', function(){ size(); if (OWL.reduce) still(); });
   if (OWL.reduce || !('IntersectionObserver' in window)){ still(); OWL.reveal(h2); return; }
   var io = new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis){ OWL.reveal(h2); if (!raf) raf = requestAnimationFrame(step); } }, {threshold:.1}); io.observe(cv);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="explore" data-v="10">
+<section class="sec explore10" id="explore-10" aria-labelledby="ex10-h">
+<style>
+.explore10{overflow:hidden}
+.explore10 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,60px);align-items:center}
+.explore10 .lede{margin:12px 0 18px;max-width:40ch}
+.explore10 .lay{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;padding:0;list-style:none}
+.explore10 .lay button{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 14px 0 10px;border-radius:999px;font-weight:800;font-size:15px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.1);transition:transform .15s,box-shadow .15s,background .2s}
+.explore10 .lay button i{width:14px;height:14px;border-radius:4px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(23,17,29,.25)}
+.explore10 .lay button:hover{transform:translateY(-2px)}
+.explore10 .lay button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge);transform:translateY(2px)}
+.explore10 .lay button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore10 .inf{padding:18px 20px 20px;border-radius:20px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 24px 40px -30px rgba(23,17,29,.5);min-height:190px}
+.explore10 .inf b{display:block;font-size:20px;font-weight:900}
+.explore10 .inf p{margin:6px 0 0;font-size:16px;color:var(--ink-70)}
+.explore10 .inf .num{display:flex;align-items:baseline;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(23,17,29,.1)}
+.explore10 .inf .num strong{flex:none;font-size:clamp(28px,3vw,38px);font-weight:900;letter-spacing:-.03em;color:#8E5A12;font-variant-numeric:tabular-nums}
+.explore10 .inf .num span{font-size:14px;font-weight:600;color:var(--ink-70)}
+.explore10 .inf.swap{animation:ex10s .45s cubic-bezier(.22,.61,.36,1)}
+@keyframes ex10s{0%{opacity:.2;transform:translateY(10px)}100%{opacity:1;transform:none}}
+.explore10 .stg{position:relative;height:clamp(380px,40vw,520px);border-radius:28px;background:radial-gradient(ellipse at 50% 40%,#FFFDF7 0,#F1EFE6 72%);box-shadow:0 2px 0 #fff inset;perspective:1300px;perspective-origin:50% 38%;cursor:grab;touch-action:pan-y;overflow:hidden}
+.explore10 .stg:active{cursor:grabbing}
+.explore10 .stg:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.explore10 .flr{position:absolute;left:50%;top:76%;width:62%;height:12%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(23,17,29,.28),rgba(23,17,29,0));pointer-events:none}
+.explore10 .blk{position:absolute;left:50%;top:44%;width:0;height:0;transform-style:preserve-3d}
+.explore10 .face{position:absolute;backface-visibility:hidden;overflow:visible}
+.explore10 .face svg{display:block;width:100%;height:100%;overflow:visible}
+.explore10 .face::after{content:"";position:absolute;inset:0;background:rgba(23,17,29,var(--sh,0));pointer-events:none}
+.explore10 .rf{background:#7A5A2A;transition:background .35s}
+.explore10 .rf::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(var(--gr,0deg),transparent 0 22px,rgba(255,255,255,.07) 22px 24px)}
+.explore10 [data-l]{transition:opacity .35s}
+.explore10 .blk[data-on] [data-l]{opacity:.22}
+.explore10 .blk[data-on="0"] [data-l="0"],.explore10 .blk[data-on="1"] [data-l="1"],.explore10 .blk[data-on="2"] [data-l="2"],.explore10 .blk[data-on="3"] [data-l="3"],.explore10 .blk[data-on="4"] [data-l="4"],.explore10 .blk[data-on="5"] [data-l="5"]{opacity:1}
+.explore10 .blk[data-on] .rf{background:#E4DACA}
+.explore10 .blk[data-on="5"] .rf{background:#7A5A2A}
+.explore10 .blk[data-on="0"] .hl[data-l="0"],.explore10 .blk[data-on="1"] .hl[data-l="1"],.explore10 .blk[data-on="2"] .hl[data-l="2"],.explore10 .blk[data-on="3"] .hl[data-l="3"],.explore10 .blk[data-on="4"] .hl[data-l="4"]{stroke:#EAA221;stroke-width:3}
+.explore10 .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.explore10 .ctl button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:52px;min-height:50px;padding:0 16px;border-radius:999px;font-weight:800;font-size:15px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 4px 0 #C9C0AC,0 10px 16px -10px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,background .2s}
+.explore10 .ctl button:active{transform:translateY(3px);box-shadow:0 1px 0 #C9C0AC}
+.explore10 .ctl button[aria-pressed="true"]{background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 2px 0 var(--amber-edge)}
+.explore10 .ctl button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.explore10 .ctl svg{width:18px;height:18px}
+.explore10 .ctl small{margin-left:auto;font-size:13px;font-weight:600;color:var(--ink-70)}
+.explore10 .hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);padding:6px 14px;border-radius:999px;background:rgba(255,253,247,.92);font-size:13px;font-weight:800;color:#17111D;box-shadow:0 3px 0 rgba(23,17,29,.08);transition:opacity .4s;pointer-events:none;white-space:nowrap}
+.explore10 .moved .hint{opacity:0}
+@media (max-width:900px){.explore10 .g{grid-template-columns:minmax(0,1fr)}.explore10 .ctl small{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){.explore10 .inf.swap{animation:none}.explore10 [data-l],.explore10 .rf{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Explore your roof</span>
+   <h2 class="h2" id="ex10-h" style="margin-top:12px">The Sample Block</h2>
+   <p class="lede rv">A piece of roof cut out at the eave, so you can turn it in your hand. Pick a layer and the block turns to show it.</p>
+   <ul class="lay" aria-label="Layers"></ul>
+   <div class="inf" aria-live="polite"><b></b><p></p><div class="num"><strong></strong><span></span></div></div>
+  </div>
+  <div>
+   <div class="stg" tabindex="0" role="slider" aria-label="Turn the roof sample" aria-valuemin="0" aria-valuemax="359" aria-valuenow="0" data-owl="say:Turn it">
+    <span class="flr" aria-hidden="true"></span>
+    <div class="blk" aria-hidden="true"></div>
+    <span class="hint" aria-hidden="true">Drag to turn it</span>
+   </div>
+   <div class="ctl"><button class="tl" type="button" aria-label="Turn left"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M13 4L7 10l6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="tr" type="button" aria-label="Turn right"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="ud" type="button" aria-pressed="false">See the Underside</button><small>Thicknesses drawn larger so you can see them.</small></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','10',function(root){
+  var L = [
+    ['Shingles', 'Laminated shingles over a starter course at the eave, laid from the eave up, each course lapping the one below with joints staggered.', '5⅝ in', 'exposure on a laminated shingle such as GAF Timberline HDZ', '#3F3B46', -28, -40],
+    ['Underlayment', 'Synthetic underlayment over the deck, lapped upslope over downslope and fastened with cap nails. It laps over the ice & water shield.', 'Upslope', 'over downslope, every lap, so water always runs over a seam', '#AEB4BC', -66, -16],
+    ['Ice & water shield', 'A self-sealing membrane at the eave, where ice dams push water back up under the shingles.', '24 in', 'inside the exterior wall line, at least, from the eave edge (IRC R905.1.2, adopted in Minnesota)', '#17111D', -58, -14],
+    ['Drip edge', 'Metal edge at the eave, under the ice & water shield, so water drips clear of the fascia and into the gutter.', 'Eave', 'under the ice & water; at the rakes it goes over the underlayment', '#8E949B', -36, -8],
+    ['Roof deck', 'OSB panels laid across the rafters with joints staggered row to row, nailed to the framing.', '⅛ in', 'gap between panels, so the deck can move with the seasons', '#9C7A48', -146, -18],
+    ['Rafters', 'The sloped framing everything is fastened to, with air moving up the rafter bays from the soffit to the ridge.', '16 or 24 in', 'on centre is common for rafter spacing', '#7A5A2A', -34, 30]];
+  var stg = root.querySelector('.stg'), blk = root.querySelector('.blk'), inf = root.querySelector('.inf'), ud = root.querySelector('.ud'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* the sample: W across the rafter, D up the slope from the eave, H through the layers */
+  var W = 320, D = 300, H = 80, RW = 36, RH = 92;
+  var c = function(i){ return L[i][4]; };
+  /* profile of a cut side, eave at x=0: deck, drip edge with its lip, ice & water over it, underlayment lapping over the ice & water, shingles on top */
+  var courses = ''; for (var k = 0; k < 5; k++){ var x = 6 + k*54; courses += '<path d="M' + x + ' 2V13L' + (x + 78) + ' 34" fill="none" stroke="#5E5967" stroke-width="1.6"/>'; }
+  function BK(w, h){ return '<rect width="' + w + '" height="' + h + '" fill="#EFE8DA"/>'; }
+  var prof = BK(300, 80) + '<path data-l="4" class="hl" d="M0 54H300V80H0z" fill="' + c(4) + '"/>' +
+    '<path data-l="2" class="hl" d="M0 42H182V54H34V51H0z" fill="' + c(2) + '"/>' +
+    '<path data-l="1" class="hl" d="M150 35H186L192 46H300V54H182V42H150z" fill="' + c(1) + '"/>' +
+    '<path data-l="0" class="hl" d="M0 0H300V46H192L186 35H150V42H0z" fill="' + c(0) + '"/><g data-l="0">' + courses + '<path d="M0 33H34V42H0z" fill="#4C4754"/></g>' +
+    '<path data-l="3" class="hl" d="M34 51H-4V88L-9 93L-7 95L-1 89V54H34z" fill="' + c(3) + '"/>';
+  var side = '<svg viewBox="0 0 300 80" preserveAspectRatio="none">' + prof + '</svg>';
+  var sideL = '<svg viewBox="0 0 300 80" preserveAspectRatio="none"><g transform="translate(300 0) scale(-1 1)">' + prof + '</g></svg>';
+  var front = '<svg viewBox="0 0 320 80" preserveAspectRatio="none">' + BK(320, 80) + '<path data-l="0" class="hl" d="M0 0H320V42H0z" fill="' + c(0) + '"/><path data-l="0" d="M0 33H320" stroke="#5E5967" stroke-width="1.6"/>' +
+    '<path data-l="2" class="hl" d="M0 42H320V51H0z" fill="' + c(2) + '"/><path data-l="3" class="hl" d="M0 51H320V89H0z" fill="' + c(3) + '"/><path data-l="3" d="M0 88H320" stroke="#6E747B" stroke-width="2"/></svg>';
+  var back = '<svg viewBox="0 0 320 80" preserveAspectRatio="none">' + BK(320, 80) + '<path data-l="0" class="hl" d="M0 0H320V46H0z" fill="' + c(0) + '"/><path data-l="1" class="hl" d="M0 46H320V54H0z" fill="' + c(1) + '"/>' +
+    '<path data-l="4" class="hl" d="M0 54H159V80H0zM161 54H320V80H161z" fill="' + c(4) + '"/><path data-l="4" d="M160 54V80" stroke="#2A2131" stroke-width="2"/></svg>';
+  /* the top: courses of laminated shingles from the eave (bottom edge) up, with darker laminate tabs */
+  var top = '<svg viewBox="0 0 320 300" preserveAspectRatio="none" style="overflow:hidden">' + BK(320, 300) + '<g data-l="0"><rect width="320" height="300" fill="#4A4552"/>', seed = 7;
+  function rnd(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }
+  for (var r = 0; r < 6; r++){ var y = 300 - (r + 1)*54, x0 = -rnd()*40; top += '<rect x="0" y="' + y + '" width="320" height="54" fill="' + (r % 2 ? '#47424F' : '#4D4856') + '"/>';
+    for (var xx = x0; xx < 320; xx += 26 + rnd()*30){ var w = 12 + rnd()*20; top += '<rect x="' + xx.toFixed(1) + '" y="' + (y + 24) + '" width="' + w.toFixed(1) + '" height="30" fill="#34303B"/>'; }
+    top += '<path d="M0 ' + (y + 54) + 'H320" stroke="#2A2731" stroke-width="2"/>'; }
+  top += '</g></svg>';
+  var bottom = '<svg viewBox="0 0 320 300" preserveAspectRatio="none" style="overflow:hidden">' + BK(320, 300) + '<g data-l="4"><rect width="320" height="300" fill="' + c(4) + '"/>';
+  for (var q = 0; q < 70; q++){ bottom += '<rect x="' + (rnd()*310).toFixed(0) + '" y="' + (rnd()*292).toFixed(0) + '" width="' + (4 + rnd()*10).toFixed(0) + '" height="' + (2 + rnd()*4).toFixed(0) + '" fill="' + (q % 2 ? '#B08C58' : '#86683C') + '" opacity=".7"/>'; }
+  bottom += '</g></svg>';
+  function face(w, h, tf, html, sh, cls, l){ var f = document.createElement('div'); f.className = 'face' + (cls ? ' ' + cls : ''); f.style.width = w + 'px'; f.style.height = h + 'px'; f.style.left = (-w/2) + 'px'; f.style.top = (-h/2) + 'px';
+    f.style.transform = tf; f.style.setProperty('--sh', sh); if (l != null) f.setAttribute('data-l', l); f.innerHTML = html || ''; blk.appendChild(f); return f; }
+  face(W, H, 'translateZ(' + D/2 + 'px)', front, .04);
+  face(W, H, 'rotateY(180deg) translateZ(' + D/2 + 'px)', back, .2);
+  face(D, H, 'rotateY(90deg) translateZ(' + W/2 + 'px)', side, .12);
+  face(D, H, 'rotateY(-90deg) translateZ(' + W/2 + 'px)', sideL, .16);
+  face(W, D, 'rotateX(90deg) translateZ(' + H/2 + 'px)', top, 0);
+  face(W, D, 'rotateX(-90deg) translateZ(' + H/2 + 'px)', bottom, .26);
+  /* the rafter under the deck, running up the slope; the deck's panel joint lands on it */
+  var ry0 = H/2 + RH/2;
+  [['translateY(' + ry0 + 'px) translateZ(' + D/2 + 'px)', RW, RH, .06], ['translateY(' + ry0 + 'px) rotateY(180deg) translateZ(' + D/2 + 'px)', RW, RH, .22], ['translateY(' + ry0 + 'px) rotateY(90deg) translateZ(' + RW/2 + 'px)', D, RH, .14], ['translateY(' + ry0 + 'px) rotateY(-90deg) translateZ(' + RW/2 + 'px)', D, RH, .18], ['translateY(' + ry0 + 'px) rotateX(-90deg) translateZ(' + RH/2 + 'px)', RW, D, .3]].forEach(function(f, j){ var e = face(f[1], f[2], f[0], '', f[3], 'rf', 5); e.style.setProperty('--gr', j === 4 ? '90deg' : j < 2 ? '45deg' : '0deg'); });
+  /* turning: drag, arrow keys, buttons; an idle sway until touched; picking a layer turns the block to show it */
+  var rot = {x:-26, y:-34}, goal = null, vel = 0, touched = false, raf = 0, last = 0, t0 = performance.now(), seen = false;
+  function scl(){ return Math.min(1, Math.max(.62, stg.clientWidth/600)); }
+  function apply(){ blk.style.transform = 'scale(' + scl().toFixed(3) + ') rotateX(' + rot.x.toFixed(2) + 'deg) rotateY(' + rot.y.toFixed(2) + 'deg)'; stg.setAttribute('aria-valuenow', Math.round(((-rot.y % 360) + 360) % 360)); }
+  function loop(now){ raf = 0; var dt = Math.min(64, now - (last || now)); last = now;
+    if (goal){ var e = 1 - Math.pow(.86, dt/16.7); rot.x += (goal.x - rot.x)*e; rot.y += (goal.y - rot.y)*e; if (Math.abs(goal.x - rot.x) < .05 && Math.abs(goal.y - rot.y) < .05){ rot.x = goal.x; rot.y = goal.y; goal = null; } }
+    else if (vel && !drag){ rot.y += vel*dt/16.7; vel *= Math.pow(.92, dt/16.7); if (Math.abs(vel) < .02) vel = 0; }
+    else if (!touched && !OWL.reduce){ rot.y = -34 + Math.sin((now - t0)/1400)*14; }
+    apply(); if (seen && (goal || vel || !touched)) raf = requestAnimationFrame(loop); }
+  function kick(){ if (!raf){ last = 0; raf = requestAnimationFrame(loop); } }
+  function to(x, y){ touched = true; stg.classList.add('moved'); if (OWL.reduce){ rot.x = x; rot.y = y; apply(); return; } var d = ((y - rot.y) % 360 + 540) % 360 - 180; goal = {x:x, y:rot.y + d}; vel = 0; kick(); }
+  var drag = false, px = 0, py = 0, lt = 0;
+  stg.addEventListener('pointerdown', function(e){ if (e.button) return; drag = true; touched = true; goal = null; vel = 0; px = e.clientX; py = e.clientY; lt = performance.now(); stg.classList.add('moved'); try { stg.setPointerCapture(e.pointerId); } catch (er){} });
+  stg.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - px, dy = e.clientY - py, n = performance.now(); px = e.clientX; py = e.clientY;
+    rot.y += dx*.45; rot.x = Math.max(-72, Math.min(34, rot.x - dy*.3)); vel = dx*.45*16.7/Math.max(8, n - lt); lt = n; apply(); });
+  function up(){ if (!drag) return; drag = false; if (OWL.reduce) vel = 0; kick(); }
+  stg.addEventListener('pointerup', up); stg.addEventListener('pointercancel', up);
+  stg.addEventListener('keydown', function(e){ var m = {ArrowLeft:30, ArrowDown:30, ArrowRight:-30, ArrowUp:-30}[e.key]; if (m){ e.preventDefault(); to(rot.x, rot.y + m); } else if (e.key === 'Home'){ e.preventDefault(); to(-26, 0); } });
+  root.querySelector('.tl').addEventListener('click', function(){ to(rot.x, rot.y + 45); });
+  root.querySelector('.tr').addEventListener('click', function(){ to(rot.x, rot.y - 45); });
+  ud.addEventListener('click', function(){ var on = ud.getAttribute('aria-pressed') !== 'true'; ud.setAttribute('aria-pressed', on); to(on ? 30 : -26, rot.y); });
+  var btns = L.map(function(l, i){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.style.setProperty('--c', l[4]); b.innerHTML = '<i aria-hidden="true"></i>' + l[0];
+    b.addEventListener('click', function(){ pick(i, true); }); li.appendChild(b); root.querySelector('.lay').appendChild(li); return b; });
+  function pick(i, turn){ btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); }); blk.setAttribute('data-on', i); var l = L[i];
+    inf.querySelector('b').textContent = l[0]; inf.querySelector('p').textContent = l[1]; inf.querySelector('strong').textContent = l[2]; inf.querySelector('.num span').textContent = l[3];
+    inf.classList.remove('swap'); void inf.offsetWidth; inf.classList.add('swap');
+    if (turn){ ud.setAttribute('aria-pressed', l[6] > 0); to(l[6], l[5]); } }
+  inf.querySelector('b').textContent = 'Six layers, one block'; inf.querySelector('p').textContent = 'Shingles on top, the rafter underneath. Pick a layer to light it on every face.'; inf.querySelector('strong').textContent = '6'; inf.querySelector('.num span').textContent = 'layers, from the shingles down to the rafter';
+  apply();
+  window.addEventListener('resize', apply);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ seen = true; touched = true; OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ seen = e[0].isIntersecting; if (seen){ OWL.reveal(h2); kick(); } }, {threshold:.2}); io.observe(stg);
 });
 </script>
 </section>

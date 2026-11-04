@@ -76,5 +76,30 @@ module.exports = {
     rec('the switch stops the movie: beam off, film paused, label changes', await p.evaluate(S => !document.querySelector(S + ' .scene').classList.contains('on') && document.querySelector(S + ' video').paused && document.querySelector(S + ' .sw .lb').textContent === 'Start the Movie', S));
     await p.click(S + ' .full'); await p.waitForTimeout(400);
     rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '10': async (p, S, rec) => {
+    await p.waitForTimeout(1800);
+    rec('the story plays when seen: crew film, five bars, chapter 1 caption', await p.evaluate(S => { const v = document.querySelector(S + ' video'); return v.dataset.media === 'crew' && !v.paused && document.querySelectorAll(S + ' .bars i').length === 5 && document.querySelector(S + ' .cap p').textContent.length > 5; }, S));
+    await p.evaluate(S => { document.querySelector(S + ' video').currentTime = 9.6; }, S); await p.waitForTimeout(700);
+    const q4 = await p.evaluate(S => { const f = [...document.querySelectorAll(S + ' .bars i')].map(i => +(i.style.transform.match(/[\d.]+/) || [0])[0]); return [document.querySelector(S + ' .cap p').textContent === 'Walking a finished roof' && document.querySelector(S + ' .chap [aria-current="true"]').textContent.includes('Walking a finished roof') && f[0] === 1 && f[2] === 1 && f[3] > 0 && f[3] < 1 && f[4] === 0, document.querySelector(S + ' .cap p').textContent + ' ' + f.join(',') + ' t=' + document.querySelector(S + ' video').currentTime.toFixed(2)]; }, S);
+    rec('at 9.6 s the caption, list and bars agree on chapter 4 (finished roof)', q4[0], q4[1]);
+    const box = await p.evaluate(S => { const r = document.querySelector(S + ' .story').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, S);
+    await p.mouse.click(box[0] + box[2] * .8, box[1] + box[3] * .5); await p.waitForTimeout(500);
+    rec('a tap on the right skips to chapter 5', await p.evaluate(S => document.querySelector(S + ' .cap small').textContent === 'Chapter 5 of 5' && document.querySelector(S + ' video').currentTime >= 13, S));
+    await p.mouse.click(box[0] + box[2] * .1, box[1] + box[3] * .5); await p.waitForTimeout(500);
+    rec('a tap on the left goes back to chapter 4', await p.evaluate(S => document.querySelector(S + ' .cap small').textContent === 'Chapter 4 of 5', S));
+    await p.mouse.move(box[0] + box[2] * .6, box[1] + box[3] * .5); await p.mouse.down(); await p.waitForTimeout(600);
+    const held = await p.evaluate(S => document.querySelector(S + ' video').paused && document.querySelector(S + ' .story').classList.contains('paused'), S);
+    const ch = await p.evaluate(S => document.querySelector(S + ' .cap small').textContent, S);
+    await p.mouse.up(); await p.waitForTimeout(400);
+    rec('press and hold pauses, letting go plays on without changing chapter', held && ch === 'Chapter 4 of 5' && await p.evaluate(S => !document.querySelector(S + ' video').paused && document.querySelector(S + ' .cap small').textContent === 'Chapter 4 of 5', S));
+    await p.focus(S + ' .story'); await p.keyboard.press('ArrowRight'); await p.waitForTimeout(300);
+    rec('arrow keys on the card change chapter', await p.evaluate(S => document.querySelector(S + ' .cap small').textContent === 'Chapter 5 of 5', S));
+    await p.click(S + ' .pp'); await p.waitForTimeout(300);
+    rec('the Pause button pauses and becomes Play', await p.evaluate(S => document.querySelector(S + ' video').paused && document.querySelector(S + ' .pp').getAttribute('aria-pressed') === 'true' && document.querySelector(S + ' .pp span').textContent === 'Play', S));
+    await p.click(S + ' .chap button >> nth=1'); await p.waitForTimeout(400);
+    rec('a chapter in the list jumps there (GAF shingles at 3.1 s)', await p.evaluate(S => Math.abs(document.querySelector(S + ' video').currentTime - 3.1) < .3 && document.querySelector(S + ' .cap p').textContent === 'GAF shingles carried up', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };
