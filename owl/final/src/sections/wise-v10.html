@@ -1,0 +1,128 @@
+<section class="sec wise10" id="wise-10" aria-labelledby="wc10-h">
+<style>
+.wise10{overflow:hidden}
+.wise10 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:center}
+.wise10 .h2{text-wrap:balance}
+.wise10 .lede{margin:12px 0 0;max-width:34ch}
+.wise10 .say{position:relative;margin:clamp(22px,3vw,34px) 0 0;min-height:132px}
+.wise10 .say .st{position:absolute;inset:0 0 auto 0;opacity:0;translate:0 10px;transition:opacity .35s,translate .45s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.wise10 .say .st.on{position:relative;opacity:1;translate:none;pointer-events:auto}
+.wise10 .say .n{display:inline-block;margin-bottom:8px;padding:4px 10px;border-radius:999px;background:rgba(234,162,33,.2);color:#7A4A0C;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.wise10 .say b{display:block;font-size:clamp(26px,2.6vw,36px);font-weight:900;letter-spacing:-.025em;line-height:1.1;color:#17111D}
+.wise10 .say span.t{display:block;margin-top:8px;font-size:18px;line-height:1.45;color:var(--ink-70);max-width:32ch}
+.wise10 .acts{display:flex;flex-direction:column;gap:14px;max-width:380px;margin-top:22px}
+.wise10 .acts .btn{width:100%;min-height:58px;font-size:18px}
+.wise10 .fine{margin:12px 0 0;font-size:13px;font-weight:600;color:var(--ink-70)}
+.wise10 .stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:14px;align-items:stretch}
+.wise10 .win{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:26px;background:#DCD6CB;box-shadow:0 34px 50px -36px rgba(23,17,29,.6),inset 0 0 0 1px rgba(23,17,29,.06)}
+.wise10 .sh{position:absolute;inset:0;opacity:0;translate:0 14%;scale:1.06;transition:opacity .55s ease,translate .7s cubic-bezier(.16,1,.3,1),scale .9s cubic-bezier(.16,1,.3,1)}
+.wise10 .sh img{width:100%;height:100%;object-fit:cover;display:block}
+.wise10 .sh.on{opacity:1;translate:none;scale:1}
+.wise10 .sh.past{opacity:0;translate:0 -10%;scale:1.02}
+.wise10 .win[data-dir="down"] .sh:not(.on):not(.past){translate:0 -14%}
+.wise10 .win[data-dir="down"] .sh.past{translate:0 10%}
+.wise10 .sh:nth-child(2) img{object-position:40% 50%}
+.wise10 .tag{position:absolute;left:14px;top:14px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(255,253,247,.92);font-size:13px;font-weight:800;color:#17111D;box-shadow:0 6px 12px -8px rgba(23,17,29,.5)}
+.wise10 .phone{position:absolute;z-index:4;right:7%;bottom:-8%;width:30%;aspect-ratio:9/17;padding:7px;border-radius:22px;background:#17111D;box-shadow:0 26px 34px -20px rgba(23,17,29,.75);opacity:0;translate:0 40px;rotate:6deg;transition:opacity .4s,translate .6s cubic-bezier(.3,1.4,.5,1),rotate .6s cubic-bezier(.3,1.4,.5,1)}
+.wise10 .phone.on{opacity:1;translate:0 -14%;rotate:-4deg}
+.wise10 .phone .scr{position:relative;height:100%;overflow:hidden;border-radius:16px;background:#2A2131}
+.wise10 .phone .scr>img{width:100%;height:52%;object-fit:cover;display:block}
+.wise10 .phone .th{position:absolute;left:8px;right:8px;bottom:9px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.wise10 .phone .th img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block}
+.wise10 .sh.back img{filter:blur(5px) brightness(.82) saturate(.85);scale:1.06}
+.wise10 .phone .play{position:absolute;left:50%;top:26%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:rgba(255,253,247,.9);display:grid;place-items:center}
+.wise10 .phone .play svg{width:14px;height:14px;margin-left:2px}
+.wise10 .phone .cap{padding:8px 8px 0;color:#F1EFE6;font-size:12px;font-weight:800;line-height:1.3}
+.wise10 .phone .cap small{display:block;margin-top:4px;font-weight:600;color:rgba(241,239,230,.7)}
+.wise10 .lad{position:relative;touch-action:none;cursor:grab;outline:none;border-radius:14px}
+.wise10 .lad:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.wise10 .lad svg.rails{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.wise10 .rung{position:absolute;left:0;right:0;height:52px;margin-top:-26px}
+.wise10 .rung::after{content:"";position:absolute;left:16%;right:16%;top:50%;height:7px;margin-top:-3.5px;border-radius:4px;background:#B98A4E;box-shadow:inset 0 -2px 0 rgba(23,17,29,.18)}
+.wise10 .rung.lit::after{background:#EAA221}
+.wise10 .owl{position:absolute;z-index:2;left:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:#FFFDF7;display:grid;place-items:center;box-shadow:0 10px 16px -8px rgba(23,17,29,.6),inset 0 -3px 0 rgba(23,17,29,.08);transition:top .55s cubic-bezier(.3,1.35,.5,1);pointer-events:none}
+.wise10 .lad.drag .owl{transition:none}
+.wise10 .owl svg{width:78%;height:auto}
+.wise10 .hint{position:absolute;z-index:3;right:calc(100% + 10px);white-space:nowrap;padding:7px 12px;border-radius:999px;background:#17111D;color:#F1EFE6;font-size:14px;font-weight:800;pointer-events:none;translate:0 -50%;transition:opacity .3s}
+.wise10 .hint::after{content:"";position:absolute;left:100%;top:50%;margin-top:-6px;border:6px solid transparent;border-left-color:#17111D}
+.wise10 .hint.gone{opacity:0}
+.wise10 .hint i{display:inline-block;font-style:normal;animation:wc10u 1.4s ease-in-out infinite}
+@keyframes wc10u{0%,100%{translate:0 2px}50%{translate:0 -3px}}
+@media (max-width:860px){.wise10 .g{grid-template-columns:minmax(0,1fr);gap:0}.wise10 .txt{display:contents}.wise10 .hdw{order:1}.wise10 .stage{order:2;margin-top:24px}.wise10 .say{order:3}.wise10 .acts{order:4}.wise10 .fine{order:5}.wise10 .acts{max-width:none}.wise10 .say{min-height:118px}}
+@media (max-width:640px){
+ .wise10 .stage{grid-template-columns:minmax(0,1fr) 70px;gap:8px}
+ .wise10 .win{border-radius:20px;aspect-ratio:4/4.4}
+ .wise10 .owl{width:50px;height:50px;margin:-25px 0 0 -25px}
+ .wise10 .phone{width:40%;right:5%}
+ .wise10 .phone .cap small{display:none}
+ .wise10 .hint{font-size:13px;padding:6px 10px}
+ .wise10 .say b{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){.wise10 .sh,.wise10 .sh.past,.wise10 .win[data-dir] .sh{translate:none!important;scale:none!important;transition:opacity .2s}.wise10 .phone{transition:opacity .2s;translate:0 -14%;rotate:-4deg}.wise10 .owl{transition:none}.wise10 .say .st{transition:none;translate:none}.wise10 .hint i{animation:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="txt">
+   <div class="hdw"><span class="kick">The Wise Check</span>
+   <h2 class="h2" id="wc10-h" style="margin-top:12px">We Climb, You See</h2>
+   <p class="lede rv">Move Owl up the ladder. You stay on the ground; we do the climbing and show you what we saw.</p></div>
+   <div class="say" aria-live="polite"></div>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+   <p class="fine">Photos are illustrative, except our crew.</p>
+  </div>
+  <div class="stage" data-owl="say:Up we go">
+   <div class="win" data-dir="up">
+    <div class="sh"><img src="{{A:hero-nest-home.webp}}" alt="A house seen from its front yard" width="720" height="720"></div>
+    <div class="sh"><img src="{{A:svc-check.webp}}" alt="One of Owl's crew walking on a roof" width="560" height="373"></div>
+    <div class="sh"><img src="{{A:old-roof.webp}}" alt="A close-up of a roof with missing shingles" width="600" height="480"></div>
+    <div class="sh back"><img src="{{A:hero-nest-home.webp}}" alt="" width="720" height="720"></div>
+    <span class="tag" aria-hidden="true"></span>
+    <div class="phone" aria-hidden="true"><div class="scr"><img src="{{A:old-roof.webp}}" alt=""><span class="play"><svg viewBox="0 0 12 14"><path d="M0 0l12 7-12 7z" fill="#17111D"/></svg></span><p class="cap">Your Wise Check<small>Photos and video</small></p><span class="th"><img src="{{A:svc-check.webp}}" alt=""><img src="{{A:old-roof.webp}}" alt=""><img src="{{A:hero-nest-home.webp}}" alt=""></span></div></div>
+   </div>
+   <div class="lad" role="slider" tabindex="0" aria-orientation="vertical" aria-label="Owl on the ladder" aria-valuemin="1" aria-valuemax="4">
+    <svg class="rails" viewBox="0 0 92 400" preserveAspectRatio="none" aria-hidden="true"><path d="M20 -6 L14 406 M72 -6 L78 406" stroke="#8C6A3A" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" fill="none"/></svg>
+    <span class="owl" aria-hidden="true"><svg viewBox="0 0 200 180"><path d="M38 52L52 8 82 40M162 52L148 8 118 40" fill="#17111D"/><ellipse cx="100" cy="98" rx="84" ry="78" fill="#17111D"/><circle cx="66" cy="84" r="34" fill="#F1EFE6"/><circle cx="134" cy="84" r="34" fill="#F1EFE6"/><circle cx="66" cy="84" r="20" fill="#EAA221"/><circle cx="134" cy="84" r="20" fill="#EAA221"/><circle cx="66" cy="84" r="9" fill="#17111D"/><circle cx="134" cy="84" r="9" fill="#17111D"/><path d="M88 120l12 18 12-18z" fill="#EAA221"/></svg></span>
+    <span class="hint" aria-hidden="true">Drag me up <i>↑</i></span>
+   </div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','10',function(root){
+  /* one idea: you stay on the ground; we climb, look closely and show you what we saw */
+  var win = root.querySelector('.win'), shs = [].slice.call(root.querySelectorAll('.sh')), lad = root.querySelector('.lad'), owl = root.querySelector('.owl'), hint = root.querySelector('.hint'), say = root.querySelector('.say'), tag = root.querySelector('.tag'), phone = root.querySelector('.phone'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var S = [
+    ['From your yard', 'It’s hard to tell what’s going on up there.', 'From the yard'],
+    ['We go up', 'Our crew does the climbing. You stay on the ground.', 'Owl’s crew'],
+    ['Up close', 'We look over the whole roof, and the attic too.', 'Up close'],
+    ['You see it too', 'Photos and video of what we found, so you see what we saw.', 'Back in your yard']];
+  var POS = [88, 63, 38, 13], cur = -1, moved = false;
+  S.forEach(function(s, k){ var d = document.createElement('div'); d.className = 'st'; d.innerHTML = '<span class="n">Rung ' + (k + 1) + ' of 4</span><b>' + s[0] + '</b><span class="t">' + s[1] + '</span>'; say.appendChild(d);
+    var r = document.createElement('span'); r.className = 'rung'; r.setAttribute('aria-hidden', 'true'); r.style.top = POS[k] + '%'; lad.insertBefore(r, owl); });
+  var sts = [].slice.call(say.children), rungs = [].slice.call(lad.querySelectorAll('.rung'));
+  hint.style.top = POS[0] + '%';
+  function go(k){ k = Math.max(0, Math.min(3, k)); if (k === cur) return;
+    win.dataset.dir = k > cur ? 'up' : 'down';
+    shs.forEach(function(sh, i){ sh.classList.toggle('on', i === k); sh.classList.toggle('past', cur > -1 && i === cur); });
+    sts.forEach(function(st, i){ st.classList.toggle('on', i === k); });
+    rungs.forEach(function(r, i){ r.classList.toggle('lit', i <= k); });
+    owl.style.top = POS[k] + '%'; tag.textContent = S[k][2]; phone.classList.toggle('on', k === 3);
+    lad.setAttribute('aria-valuenow', k + 1); lad.setAttribute('aria-valuetext', 'Rung ' + (k + 1) + ' of 4. ' + S[k][0] + '. ' + S[k][1]);
+    if (cur > -1 && !moved){ moved = true; hint.classList.add('gone'); }
+    cur = k; }
+  go(0);
+  lad.addEventListener('keydown', function(e){ var m = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }[e.key];
+    if (m){ e.preventDefault(); go(cur + m); } else if (e.key === 'Home'){ e.preventDefault(); go(0); } else if (e.key === 'End'){ e.preventDefault(); go(3); } });
+  /* drag: follow the pointer, settle on the nearest rung */
+  var drag = false;
+  function at(y){ var r = lad.getBoundingClientRect(), p = (y - r.top) / r.height * 100, best = 0; POS.forEach(function(v, i){ if (Math.abs(v - p) < Math.abs(POS[best] - p)) best = i; }); return { k: best, p: Math.max(POS[3], Math.min(POS[0], p)) }; }
+  lad.addEventListener('pointerdown', function(e){ drag = true; lad.classList.add('drag'); lad.setPointerCapture(e.pointerId); owl.style.top = at(e.clientY).p + '%'; });
+  lad.addEventListener('pointermove', function(e){ if (!drag) return; var a = at(e.clientY); owl.style.top = a.p + '%'; if (a.k !== cur){ var keep = a.p; go(a.k); owl.style.top = keep + '%'; } });
+  function end(e){ if (!drag) return; drag = false; lad.classList.remove('drag'); var a = at(e.clientY); cur = -2; go(a.k); }
+  lad.addEventListener('pointerup', end); lad.addEventListener('pointercancel', end);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, { threshold: .3 }); io.observe(root.querySelector('.stage'));
+});
+</script>
+</section>

@@ -1,0 +1,163 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 10
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "We Climb, You See"
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "starts on the ground: rung 1 of 4, the yard photo, \"From your yard\", the drag hint shown, no phone yet",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "ArrowUp climbs to rung 2 and the view rises (old photo leaving while the new one arrives)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "rung 2: Owl’s crew on the roof, \"Our crew does the climbing. You stay on the ground.\", the hint goes",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "End: rung 4, back in your yard with the photos and video on a phone",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "Home returns to the ground; ArrowDown at the bottom stays put",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "drag the owl up the ladder: settles on rung 4",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "tap a rung: jumps straight to it (rung 2)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "Wise Check facts only: attic and photos-and-video from lib/wise-data.js; no price, no \"free\", no timing",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "labelled: \"Photos are illustrative, except our crew.\"",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "next steps: Book a Wise Check (#book) and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "10",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

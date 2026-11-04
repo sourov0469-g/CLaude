@@ -70,5 +70,27 @@ module.exports = {
     await p.click(S + ' .pv'); await p.waitForTimeout(1100);
     rec('Previous turns back', await p.evaluate(S => document.querySelector(S + ' .pg').textContent === '4 / 5' && document.querySelector(S + ' .tx h3').textContent === OWL.WISE.parts[3].n, S));
     rec('labelled as sketches, not photos', /Sketches, not photos/.test(txt));
+  },
+  '10': async (p, S, rec, txt) => {
+    const st = () => p.evaluate(S => { const r = document.querySelector(S); const l = r.querySelector('.lad'); return { now: l.getAttribute('aria-valuenow'), text: l.getAttribute('aria-valuetext'), on: [...r.querySelectorAll('.sh')].findIndex(x => x.classList.contains('on')), past: [...r.querySelectorAll('.sh')].findIndex(x => x.classList.contains('past')), tag: r.querySelector('.tag').textContent, say: r.querySelector('.say .st.on b').textContent, phone: r.querySelector('.phone').classList.contains('on'), hint: !r.querySelector('.hint').classList.contains('gone') }; }, S);
+    let s = await st();
+    rec('starts on the ground: rung 1 of 4, the yard photo, "From your yard", the drag hint shown, no phone yet', s.now === '1' && s.on === 0 && s.tag === 'From the yard' && s.say === 'From your yard' && s.hint && !s.phone && s.text === 'Rung 1 of 4. From your yard. It’s hard to tell what’s going on up there.' && await p.evaluate(S => { const l = document.querySelector(S + ' .lad'); return l.getAttribute('role') === 'slider' && l.getAttribute('aria-orientation') === 'vertical' && l.tabIndex === 0; }, S));
+    await p.focus(S + ' .lad'); await p.keyboard.press('ArrowUp'); await p.waitForTimeout(150); s = await st();
+    rec('ArrowUp climbs to rung 2 and the view rises (old photo leaving while the new one arrives)', s.now === '2' && s.on === 1 && s.past === 0 && await p.evaluate(S => { const o = parseFloat(getComputedStyle(document.querySelectorAll(S + ' .sh')[1]).opacity); return o > 0 && o < 1; }, S));
+    await p.waitForTimeout(700); s = await st();
+    rec('rung 2: Owl’s crew on the roof, "Our crew does the climbing. You stay on the ground.", the hint goes', s.tag === 'Owl’s crew' && s.say === 'We go up' && /Our crew does the climbing\. You stay on the ground\./.test(s.text) && !s.hint && await p.evaluate(S => /Owl's crew/.test(document.querySelectorAll(S + ' .sh img')[1].alt), S));
+    await p.keyboard.press('End'); await p.waitForTimeout(800); s = await st();
+    rec('End: rung 4, back in your yard with the photos and video on a phone', s.now === '4' && s.on === 3 && s.phone && s.tag === 'Back in your yard' && /Photos and video of what we found, so you see what we saw\./.test(s.text));
+    await p.keyboard.press('Home'); await p.waitForTimeout(300); await p.keyboard.press('ArrowDown'); await p.waitForTimeout(300); s = await st();
+    rec('Home returns to the ground; ArrowDown at the bottom stays put', s.now === '1' && s.on === 0 && !s.phone);
+    const bb = await p.locator(S + ' .lad').boundingBox();
+    await p.mouse.move(bb.x + bb.width / 2, bb.y + bb.height * .88); await p.mouse.down(); await p.mouse.move(bb.x + bb.width / 2, bb.y + bb.height * .5, { steps: 6 }); await p.mouse.move(bb.x + bb.width / 2, bb.y + bb.height * .1, { steps: 6 }); await p.mouse.up(); await p.waitForTimeout(700); s = await st();
+    rec('drag the owl up the ladder: settles on rung 4', s.now === '4' && s.phone);
+    await p.mouse.click(bb.x + bb.width / 2, bb.y + bb.height * .63); await p.waitForTimeout(700); s = await st();
+    rec('tap a rung: jumps straight to it (rung 2)', s.now === '2' && s.on === 1);
+    rec('Wise Check facts only: attic and photos-and-video from lib/wise-data.js; no price, no "free", no timing', await p.evaluate(S => { const t = document.querySelector(S).innerText + [...document.querySelectorAll(S + ' .st')].map(x => x.textContent).join(' '); return /the attic too/.test(t) && !/\bfree\b|\$\s?\d|no cost|no charge|\bminutes?\b|\bhours?\b|same.day/i.test(t); }, S));
+    rec('labelled: "Photos are illustrative, except our crew."', /Photos are illustrative, except our crew\./.test(txt));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
+    rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
   }
 };
