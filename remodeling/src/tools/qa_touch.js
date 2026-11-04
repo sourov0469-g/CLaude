@@ -52,11 +52,11 @@ const txt = (p, s) => p.evaluate(s => { const e = document.querySelector(s); ret
   out((await txt(p, '#process .pz-t')) === 'Construction', 'process: next button steps on', await txt(p, '#process .pz-t'));
   // financing switch
   await to(p, '#financing');
-  await p.tap('#financing .fb__sb[data-w="in"]'); await p.waitForTimeout(500);
-  out(await p.evaluate(() => document.querySelector('#financing .fb__h--pa').classList.contains('is-dim')), 'financing: Inside the home lights consumer credit');
+  await center(p, '#financing .mm__a[data-id="bath"]'); await p.tap('#financing .mm__a[data-id="bath"]'); await p.waitForTimeout(600);
+  out(await p.evaluate(() => document.querySelector('#financing .mm__a[data-id="bath"]').getAttribute('aria-pressed') === 'true' && document.querySelectorAll('#financing .mm__p.is-dim').length > 0), 'financing: tap a project lights the partners that fit');
   // work: tap a frame opens the viewer
   await to(p, '#work');
-  const fr = await p.$('#work .pj__f'); if (fr) { await fr.tap({ force: true }); await p.waitForTimeout(800); }
+  const fr = await p.$('#work .pw__t'); if (fr) { await fr.tap({ force: true }); await p.waitForTimeout(800); }
   out(!!fr && await p.evaluate(() => { const v = document.querySelector('.viewer, .vw, [class*="viewer"]'); return !!v && !v.hidden; }), 'projects: tap a frame opens it large');
   await p.keyboard.press('Escape'); await p.waitForTimeout(500);
   // reviews: tap the stars (no error)
@@ -75,20 +75,20 @@ const txt = (p, s) => p.evaluate(s => { const e = document.querySelector(s); ret
   out((await txt(p, '#voices .vc__count')) !== vc0, 'voices: next moves the row on', vc0 + ' -> ' + await txt(p, '#voices .vc__count'));
   // towns: type, pick, answer
   await to(p, '#towns');
-  await p.tap('#tw-q'); await p.keyboard.type('Dora'); await p.waitForTimeout(500);
-  const opt = await p.$('#tw-opts [role="option"]'); if (opt) { await opt.tap(); await p.waitForTimeout(1500); }
-  out(!!opt && /Doral/.test(await txt(p, '#towns .tw__ans') || ''), 'towns: type and tap a town answers', (await txt(p, '#towns .tw__ans') || '').slice(0, 60));
-  const tile = await p.$('#towns .tw__cb'); await tile.tap(); await p.waitForTimeout(400);
-  out(await p.evaluate(() => !document.querySelector('#towns .tw__ul').hidden), 'towns: county tile opens its list');
+  await p.tap('#tb-q'); await p.keyboard.type('Dora'); await p.waitForTimeout(500);
+  const opt = await p.$('#tb-opts [role="option"]'); if (opt) { await opt.tap(); await p.waitForTimeout(1500); }
+  out(!!opt && /Doral/.test(await txt(p, '#towns .tb__ans') || ''), 'towns: type and tap a town answers', (await txt(p, '#towns .tb__ans') || '').slice(0, 60));
+  await p.fill('#tb-q', 'Tampa'); await p.keyboard.press('Enter'); await p.waitForTimeout(600);
+  out(/754/.test(await txt(p, '#towns .tb__ans') || ''), 'towns: a town we do not list gets the phone', (await txt(p, '#towns .tb__ans') || '').slice(0, 60));
   // consult: empty submit shows errors, never mails
-  await to(p, '#consult form');
-  await p.evaluate(() => { window.__mailed = 0; if (window.EZ) { const o = EZ.consultMail; EZ.consultMail = function () { window.__mailed++; }; } });
-  const sub = await p.$('#consult form [type="submit"], #consult form button.btn'); await sub.tap(); await p.waitForTimeout(600);
-  const errsShown = await p.evaluate(() => [...document.querySelectorAll('#consult .c-err')].filter(e => !e.hidden && e.textContent.trim()).length);
-  out(errsShown > 0 && (await p.evaluate(() => window.__mailed)) === 0, 'consult: empty send shows errors, sends nothing', errsShown + ' errors');
-  // call card copy
-  const cp = await p.$('#consult .cl__copy'); await cp.tap(); await p.waitForTimeout(300);
-  out(/Copied|\(754\)/.test(await txt(p, '#consult .cl__copy')), 'consult: copy number confirms', await txt(p, '#consult .cl__copy'));
+  await to(p, '#consult .ct__comp'); await p.waitForTimeout(1200);
+  await p.evaluate(() => { window.__mailed = 0; if (window.EZ) { EZ.consultMail = function () { window.__mailed++; }; } });
+  await p.tap('#consult .ct__send'); await p.waitForTimeout(600);
+  const errsShown = await p.evaluate(() => { const e = document.getElementById('ct-in-err'); return !e.hidden && e.textContent.trim(); });
+  out(!!errsShown && (await p.evaluate(() => window.__mailed)) === 0, 'consult: an empty answer shows its error, sends nothing', errsShown);
+  await p.tap('#consult .ct__in'); await p.keyboard.type('Ana Ruiz'); await p.tap('#consult .ct__send'); await p.waitForTimeout(1400);
+  const rep = await p.$('#consult .ct__replies button'); if (rep) { await rep.tap(); await p.waitForTimeout(1400); }
+  out(!!rep && await p.evaluate(() => document.querySelectorAll('#consult .ct__m--me').length >= 2), 'consult: a name and a tapped reply move the conversation on');
   out(p.errs.length === 0, 'home: no page errors', p.errs.join(' | '));
   await p.context().close();
 

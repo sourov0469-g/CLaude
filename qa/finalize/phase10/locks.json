@@ -1,7 +1,7 @@
 {
  "pages": {
   "home v1": {
-   "runs": 1015,
+   "runs": 528,
    "tel": [
     "tel:+17542360675"
    ],
@@ -20,7 +20,7 @@
    }
   },
   "home v2": {
-   "runs": 873,
+   "runs": 528,
    "tel": [
     "tel:+17542360675"
    ],
@@ -156,40 +156,10 @@
   }
  },
  "fails": [],
- "numbers": [
-  {
-   "page": "home v1",
-   "n": "1.0",
-   "ctx": "decimal (rating?)"
-  },
-  {
-   "page": "home v1",
-   "sec": "work",
-   "n": "21",
-   "ctx": "P-21 · BATHROOM Floating Vanity Primary Bath with Soaking Tub & Walk-In Shower"
-  },
-  {
-   "page": "home v1",
-   "sec": "work",
-   "n": "22",
-   "ctx": "P-22 · BATHROOM Sea-Glass Glazed Tile Bathroom Remodel with Double Vanity"
-  },
-  {
-   "page": "home v1",
-   "sec": "work",
-   "n": "23",
-   "ctx": "P-23 · BATHROOM Navy Vanity Bathroom Remodel with Backlit Tile Niche"
-  },
-  {
-   "page": "home v1",
-   "sec": "work",
-   "n": "25",
-   "ctx": "P-25 · BATHROOM Multi-Bathroom Renovation with Freestanding Tub & Brass-Accented Showers"
-  }
- ],
+ "numbers": [],
  "fonts": {
-  "Roboto": 1291,
-  "Elbaz Display": 658
+  "Roboto": 1258,
+  "Elbaz Display": 638
  },
  "requests": [],
  "baPairs": [

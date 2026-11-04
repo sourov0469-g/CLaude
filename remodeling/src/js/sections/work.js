@@ -1,524 +1,286 @@
-/* FINALIZE · Home 7 · Projects. Titles are the firm's own (data/projects.json from FACTS.md); photos are the firm's own.
-   V1 · two rows of hung frames, opposite directions (GSAP seamless loop). Each row's speed is ONE smoothed value: the
-        pointer on a row slows it to a crawl and sets the frame under it level; scroll quickens both a little; as the
-        section leaves, the rows decelerate to rest [PHASE1-PLAN row 7 OUT]. A pause control holds them (WCAG 2.2.2).
-        A focused frame stops its row and glides into view (focus not obscured). Reduced motion: two still strips.
-   V2 · the job binder: a two-faced leaf turns at the spine (front: this photograph; back: the next job sheet), driven by
-        the buttons, the arrow keys, or a drag on the page corner (release past a third completes, before it the leaf
-        settles back). On first view the cover opens. Phones and reduced motion: the pages swap without the leaf. */
+/* FINAL · Our Work · the portfolio wall (the owner's pick: Hero V2's gallery wall, made into the portfolio).
+   The firm's own photographs (data/projects.json) hang on one wall in three bays, Kitchens, Bathrooms and Whole homes,
+   each under its plaque, each photograph at its own proportions (justified rows). Titles and plan-room codes are the
+   section's own; the two photos whose subject does not match their title stay out (owner item); no counts printed.
+   Wide screens (the camera): one layer moves (translate + scale) [S0062]. As the section rises the camera stands back
+   from a close look to the whole wall, scrubbed by the scroll with no pin [S1326, S1209]. The bay buttons step up to a
+   bay; a photograph is flown to, named (code, room, title) and opened large; arrows walk the wall, Escape steps back
+   [S1018, S0083]. The pointer leans the camera a little and names the photograph under it.
+   Phones and narrow screens (the hang): the wall at full width in the page, a tap opens the photograph large, the bay
+   buttons bring a bay into view. Reduced motion: no scrub, no flight, no lean; the same wall, every action [S0400]. */
 (function () {
   var CAT = { k: 'Kitchen', b: 'Bathroom', w: 'Whole home and outdoor' };
+  var BAYS = [{ c: 'k', n: 'Kitchens' }, { c: 'b', n: 'Bathrooms' }, { c: 'w', n: 'Whole homes' }];
   function data() { return (window.__DATA || {}).projects || []; }
-  // plan-room numbering (P-01 is the same room in both versions); two photos whose subject does not match their title
+  // plan-room numbering (P-01 is the same room everywhere); two photos whose subject does not match their title
   // (k-walnut-marble shows a hallway, k-emerald-shaker a laundry run; owner item) stay out
   var ORDER = ['k-navy-shaker', 'b-black-marble', 'w-farmhouse', 'k-walnut-marble', 'b-polished-concrete', 'o-waterfront', 'k-emerald-shaker', 'b-spa-guest', 'k-chef', 'b-fluted-vanity', 'r-openplan', 'k-white-shaker', 'k-turquoise', 'k-gray-shaker', 'k-navy-white', 'k-brass-hood', 'k-stone-island', 'b-emerald', 'b-champagne', 'b-copper', 'b-floating-soak', 'b-sea-glass', 'b-navy-niche', 'b-white-marble', 'b-multi-brass', 'w-bath-whole'];
   var HOLD = ['k-walnut-marble', 'k-emerald-shaker'];
   function listed() {
     var by = {};
-    data().forEach(function (p) { by[p.k] = { key: p.k, title: p.t, c: p.c, w: p.w, h: p.h }; });
+    data().forEach(function (p) { by[p.k] = { key: p.k, title: p.t, c: p.c, a: (p.w || 4) / (p.h || 3) }; });
     return ORDER.map(function (key, n) { var p = by[key]; if (p) p.code = 'P-' + (n < 9 ? '0' : '') + (n + 1); return p; })
       .filter(function (p) { return p && HOLD.indexOf(p.key) < 0; });
   }
-  function viewerList(L) { return L.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; }); }
   function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
-  var TILT = [-1.6, 1.1, -.7, 1.4, -1.2, .8, -.4, 1.7, -1, .6, 1.3, -1.5];
+  // justified rows: split a bay's photographs (in order) into R rows whose aspect sums are as even as possible
+  function split(a, R) {
+    var n = a.length, S = a.reduce(function (s, x) { return s + x; }, 0), t = S / R, pre = [0];
+    a.forEach(function (x, i) { pre[i + 1] = pre[i] + x; });
+    R = Math.max(1, Math.min(R, n));
+    var best = [], cut = [];
+    for (var r = 0; r <= R; r++) { best[r] = []; cut[r] = []; for (var i = 0; i <= n; i++) best[r][i] = Infinity; }
+    best[0][0] = 0;
+    for (r = 1; r <= R; r++) for (i = 1; i <= n; i++) for (var j = r - 1; j < i; j++) {
+      var d = pre[i] - pre[j] - t, v = best[r - 1][j] + d * d;
+      if (v < best[r][i]) { best[r][i] = v; cut[r][i] = j; }
+    }
+    var rows = [], e = n;
+    for (r = R; r >= 1; r--) { var s0 = cut[r][e]; rows.unshift([s0, e]); e = s0; }
+    return rows;
+  }
 
   EZ.section('work', {
     1: { init: function (root, k) {
-      var L = listed(), all = viewerList(L), hold = root.querySelector('.pj__hold'), label = hold.querySelector('.btn__label');
-      var rows = Array.prototype.slice.call(root.querySelectorAll('.pj__row'));
-      rows.forEach(function (row) {
-        var tr = row.querySelector('.pj__track'), n = 0;
-        tr.innerHTML = L.map(function (p, i) {
-          if (row.dataset.c.indexOf(p.c) < 0) return '';
-          var t = TILT[(n++) % TILT.length];
-          return '<button type="button" class="pj__f" data-i="' + i + '" style="--tilt:' + t + 'deg;--tiltn:' + (t / 1.7).toFixed(2) + '" aria-label="' + esc(p.title) + ', ' + CAT[p.c] + ', open large">' +
-            '<span class="pj__hang"><span class="pj__wire" aria-hidden="true"><svg viewBox="0 0 100 26" preserveAspectRatio="none"><path vector-effect="non-scaling-stroke" d="M10 26 L50 1 L90 26"/></svg></span>' +
-            '<span class="pj__fr"><span class="pj__lvl" aria-hidden="true"><span class="pj__bub"></span></span><img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"></span></span>' +
-            '<span class="pj__cap" aria-hidden="true"><span class="pj__code">' + p.code + ' &middot; ' + CAT[p.c] + '</span><span class="pj__t">' + esc(p.title) + '</span></span></button>';
-        }).join('');
-        k.on(tr, 'click', function (e) { var f = e.target.closest('.pj__f'); if (f) EZ.viewer.open(all, +f.dataset.i, f.querySelector('img')); });
-      });
-      k.add(function () { rows.forEach(function (r) { r.querySelector('.pj__track').innerHTML = ''; }); root.classList.remove('is-static'); hold.hidden = false; });
-      EZ.reveal(k, root.querySelectorAll('.pj__head > *, .pj__foot'));
-      if (!k.motion) { root.classList.add('is-static'); hold.hidden = true; return; }
+      var stage = root.querySelector('.pw__stage'), cam = root.querySelector('.pw__cam'), wall = root.querySelector('.pw__wall'),
+        plq = root.querySelector('.pw__plaques'), tip = root.querySelector('.pw__tip'), hint = root.querySelector('.pw__hint'),
+        card = root.querySelector('.pw__card'), capT = root.querySelector('.pw__name'), capN = root.querySelector('.pw__no'),
+        bayBtns = Array.prototype.slice.call(root.querySelectorAll('.pw__bay'));
+      var L = listed(), G = [];   // G: the photographs bay by bay, in hanging order
+      BAYS.forEach(function (b) { L.forEach(function (p) { if (p.c === b.c) G.push(p); }); });
+      var N = G.length;
+      var ALL = G.map(function (p) { return { key: p.key, title: p.title, alt: p.title + ', an Elbaz project' }; });
 
-      // the frames are hung as the rows arrive: each drops onto the rail and its swing settles once (no idle motion)
-      var frames = root.querySelectorAll('.pj__f');
-      gsap.set(frames, { y: -22, autoAlpha: 0 });
-      var hang = ScrollTrigger.create({ trigger: root.querySelector('.pj__rows'), start: 'top 82%', once: true, onEnter: function () {
-        gsap.to(frames, { y: 0, autoAlpha: 1, duration: .5, ease: 'power4.out', stagger: { each: .04, from: 'start' } });
-      } });
-      k.add(function () { hang.kill(); gsap.set(frames, { clearProps: 'all' }); });
-
-      var loops = [], held = false, vel = 0, builtW = 0;
-      function build() {
-        var prev = loops.map(function (l) { return l.tl.progress(); });
-        loops.forEach(function (l) { l.tl.kill(); });
-        builtW = root.clientWidth;
-        loops = rows.map(function (row, bi) {
-          var items = row.querySelectorAll('.pj__f'), gap = parseFloat(getComputedStyle(row.querySelector('.pj__track')).columnGap) || 32;
-          gsap.set(items, { clearProps: 'transform,x,xPercent' });
-          var tl = EZ.horizontalLoop(items, { repeat: -1, paused: true, speed: .45, paddingRight: gap });
-          if (prev[bi] != null) tl.progress(prev[bi]); else tl.time(tl.duration() * (bi ? .41 : .07));
-          // GSAP keeps 'reversed' as the SIGN of timeScale: the second row runs with a negative scale, never reversed(true)
-          return { tl: tl, row: row, s: 1, dir: bi ? -1 : 1, over: false, focus: false };
-        });
-      }
-      var imgs = root.querySelectorAll('.pj__f img'), left = imgs.length;
-      imgs.forEach(function (im) { if (im.complete) left--; else k.on(im, 'load', function () { if (--left === 0) build(); }); });
-      build();
-      k.ro(root, function () { if (Math.abs(root.clientWidth - builtW) > 2) build(); });
-      k.add(function () { loops.forEach(function (l) { l.tl.kill(); }); loops = []; });
-
-      var vt = ScrollTrigger.create({ trigger: root, start: 'top bottom', end: 'bottom top', onUpdate: function (self) { vel = self.getVelocity(); } });
-      k.add(function () { vt.kill(); });
-      // one speed per row, smoothed: held 0, pointer or focus on the row .1, scroll adds up to +1.2; leaving brings it to rest
-      k.raf(function (dt) {
-        var r = root.getBoundingClientRect(), vh = innerHeight;
-        var vis = r.bottom < 0 || r.top > vh ? 0 : EZ.clamp((r.bottom - vh * .12) / (vh * .4), 0, 1);
-        vel *= .9;
-        loops.forEach(function (l) {
-          var target = held ? 0 : (l.over || l.focus) ? .1 : 1 + Math.min(Math.abs(vel) / 2400, 1.2);
-          target *= vis;
-          l.s += (target - l.s) * Math.min(1, dt * (target < l.s ? 5 : 2.5));
-          if (l.s < .004) { if (!l.tl.paused()) l.tl.paused(true); }
-          else { l.tl.timeScale(l.dir * l.s); if (l.tl.paused()) l.tl.paused(false); }
-        });
-      });
-      loops.forEach(function (l, i) {
-        k.on(l.row, 'pointerenter', function (e) { if (e.pointerType === 'mouse') loops[i].over = true; });
-        k.on(l.row, 'pointerleave', function () { loops[i].over = false; });
-        // a focused frame must be in view: the row stops and glides that frame towards the middle
-        k.on(l.row, 'focusin', function (e) {
-          loops[i].focus = true; loops[i].s = 0; loops[i].tl.paused(true);
-          var f = e.target.closest('.pj__f'); if (!f) return;
-          var rr = l.row.getBoundingClientRect(), fr = f.getBoundingClientRect(), dx = (fr.left + fr.width / 2) - (rr.left + rr.width / 2), tl = loops[i].tl;
-          if (Math.abs(dx) < 8) return;
-          if (tl.totalTime() < tl.duration() * 2) tl.totalTime(tl.totalTime() + tl.duration() * 10);
-          gsap.to(tl, { totalTime: tl.totalTime() + dx / (100 * .45), duration: .45, ease: 'power3.inOut', overwrite: true });
-        });
-        k.on(l.row, 'focusout', function (e) { if (!l.row.contains(e.relatedTarget)) loops[i].focus = false; });
-      });
-      k.on(hold, 'click', function () {
-        held = !held;
-        hold.setAttribute('aria-pressed', held ? 'true' : 'false');
-        label.textContent = held ? 'Run the rows' : 'Pause the rows';
-      });
-      k.add(function () { hold.setAttribute('aria-pressed', 'false'); label.textContent = 'Pause the rows'; });
-    } },
-
-    // RETIRED (Final: one version per section): the job binder's markup left the file; its definition is kept for the
-    // record under a key no version uses. NEW VERSIONS: slot 2 is "Room chapters" (below).
-    binder: { init: function (root, k) {
-      var L = listed(), all = viewerList(L), n = L.length, cur = 0, busy = false;
-      var book = root.querySelector('.jb__book'), spread = root.querySelector('.jb__spread');
-      var lSheet = root.querySelector('.jb__page--l .jb__sheet'), rPhoto = root.querySelector('.jb__page--r .jb__photo');
-      var leaf = root.querySelector('.jb__leaf'), fPhoto = leaf.querySelector('.jb__face--f .jb__photo'), bSheet = leaf.querySelector('.jb__face--b .jb__sheet');
-      var faces = leaf.querySelectorAll('.jb__face'), pg = root.querySelector('.jb__pg'), tabs = Array.prototype.slice.call(root.querySelectorAll('.jb__tab'));
-      var rings = root.querySelector('.jb__rings'), corner = root.querySelector('.jb__corner');
-
-      function sheet(p, live) {
-        return '<p class="jb__code"><b>' + p.code + '</b><span>' + CAT[p.c] + '</span></p><h3 class="jb__title">' + esc(p.title) + '</h3>' +
-          '<p class="jb__line">Our own photograph of the finished room.</p>' +
-          (live ? '<button type="button" class="btn btn--ghost jb__open"><span class="btn__label">See it large</span></button>' : '<span class="btn btn--ghost jb__open"><span class="btn__label">See it large</span></span>');
-      }
-      function photo(p, live) {
-        return '<div class="jb__mount"><img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="' + (live ? esc(p.title) + ', an Elbaz project' : '') + '" decoding="async"><i></i><i></i><i></i><i></i></div>';
-      }
-      function say() {
-        var p = L[cur];
-        pg.textContent = p.code + ' · ' + CAT[p.c];
-        tabs.forEach(function (t) { t.setAttribute('aria-current', t.dataset.c === p.c ? 'true' : 'false'); });
-      }
-      function setL(i) { lSheet.innerHTML = sheet(L[i], true); }
-      function setR(i) { rPhoto.innerHTML = photo(L[i], true); }
-      setL(0); setR(0); say();
-      k.on(root, 'click', function (e) { if (e.target.closest('.jb__page--l .jb__open')) EZ.viewer.open(all, cur, rPhoto.querySelector('img')); });
-
-      // the rings: drawn to the spread's real height, one every 72px
-      function drawRings() {
-        var h = spread.clientHeight, c = Math.max(4, Math.floor(h / 72)), s = '';
-        rings.setAttribute('viewBox', '0 0 40 ' + h);
-        for (var i = 0; i < c; i++) {
-          var y = (h / c) * (i + .5);
-          s += '<circle class="hole" cx="7" cy="' + y.toFixed(1) + '" r="3"/><circle class="hole" cx="33" cy="' + y.toFixed(1) + '" r="3"/>' +
-            '<path class="ring" d="M7 ' + y.toFixed(1) + ' C7 ' + (y - 16).toFixed(1) + ' 33 ' + (y - 16).toFixed(1) + ' 33 ' + y.toFixed(1) + '"/>' +
-            '<path class="ring-h" d="M11 ' + (y - 6).toFixed(1) + ' C15 ' + (y - 11).toFixed(1) + ' 25 ' + (y - 11).toFixed(1) + ' 29 ' + (y - 6).toFixed(1) + '"/>';
-        }
-        rings.innerHTML = s;
-      }
-      var wide = function () { return matchMedia('(min-width: 901px)').matches; };
-      drawRings(); k.ro(spread, drawRings);
-      k.add(function () { rings.innerHTML = ''; lSheet.innerHTML = rPhoto.innerHTML = fPhoto.innerHTML = bSheet.innerHTML = ''; gsap.set(leaf, { clearProps: 'all' }); });
-
-      function shade() { var p = this.progress(), v = (Math.sin(p * Math.PI) * .55).toFixed(3); faces.forEach(function (f) { f.style.setProperty('--sh', v); }); }
-      // a turn is a paused timeline plus what to do if it completes or is let go early
-      function turn(dir) {
-        var j = (cur + dir + n) % n, from = cur;
-        if (dir > 0) {
-          fPhoto.innerHTML = photo(L[from]); bSheet.innerHTML = sheet(L[j]); setR(j);
-          gsap.set(leaf, { rotationY: 0, visibility: 'visible' });
-          var tl = gsap.timeline({ paused: true, onUpdate: shade }).to(leaf, { rotationY: -180, duration: .8, ease: 'power2.inOut' });
-          return { tl: tl, done: function () { cur = j; setL(j); gsap.set(leaf, { visibility: 'hidden' }); say(); }, undo: function () { setR(from); gsap.set(leaf, { visibility: 'hidden' }); } };
-        }
-        fPhoto.innerHTML = photo(L[j]); bSheet.innerHTML = sheet(L[from]); setL(j);
-        gsap.set(leaf, { rotationY: -180, visibility: 'visible' });
-        var tb = gsap.timeline({ paused: true, onUpdate: shade }).to(leaf, { rotationY: 0, duration: .8, ease: 'power2.inOut' });
-        return { tl: tb, done: function () { cur = j; setR(j); gsap.set(leaf, { visibility: 'hidden' }); say(); }, undo: function () { setL(from); gsap.set(leaf, { visibility: 'hidden' }); } };
-      }
-      function swap(j) {   // phones and reduced motion: the pages change without the leaf
-        cur = j; setL(j); setR(j); say();
-        if (k.motion) gsap.fromTo(spread.querySelectorAll('.jb__page > *'), { autoAlpha: 0 }, { autoAlpha: 1, duration: .25, ease: 'power2.out' });
-      }
-      function go(dir) {
-        if (busy) return;
-        if (!k.motion || !wide()) { swap((cur + dir + n) % n); return; }
-        busy = true;
-        var t = turn(dir);
-        t.tl.eventCallback('onComplete', function () { t.done(); busy = false; });
-        t.tl.play();
-      }
-      function jump(j) {
-        if (busy || j === cur) return;
-        if (!k.motion || !wide()) { swap(j); return; }
-        // one leaf turn carries you there: the leaf's far side already shows the destination
-        busy = true;
-        var dir = j > cur ? 1 : -1, keep = cur;
-        cur = (j - dir + n) % n;           // turn() reads cur as the page the leaf leaves from
-        var t = turn(dir);
-        if (dir > 0) { fPhoto.innerHTML = photo(L[keep]); } else { bSheet.innerHTML = sheet(L[keep]); }
-        t.tl.eventCallback('onComplete', function () { t.done(); busy = false; });
-        t.tl.play();
-      }
-      k.on(root.querySelector('.jb__next'), 'click', function () { go(1); });
-      k.on(root.querySelector('.jb__prev'), 'click', function () { go(-1); });
-      k.on(book, 'keydown', function (e) {
-        if (e.target.closest('.jb__tab')) return;
-        if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
-      });
-      tabs.forEach(function (t) {
-        k.on(t, 'click', function () { for (var i = 0; i < n; i++) if (L[i].c === t.dataset.c) { jump(i); return; } });
-      });
-
-      // the dog-ear: drag it towards the spine; past a third the page turns, before that it settles back
-      var drag = null;
-      k.on(corner, 'pointerdown', function (e) {
-        if (busy || !k.motion || !wide()) return;
-        busy = true; corner.setPointerCapture(e.pointerId);
-        drag = { x: e.clientX, w: spread.clientWidth / 2, t: turn(1) };
-      });
-      k.on(corner, 'pointermove', function (e) { if (drag) drag.t.tl.progress(EZ.clamp((drag.x - e.clientX) / (drag.w * 1.6), 0, 1)); });
-      function release() {
-        if (!drag) return;
-        var d = drag; drag = null;
-        var fwd = d.t.tl.progress() > .33;
-        gsap.to(d.t.tl, { progress: fwd ? 1 : 0, duration: .35, ease: 'power2.out', onComplete: function () { if (fwd) d.t.done(); else d.t.undo(); busy = false; } });
-      }
-      k.on(corner, 'pointerup', release); k.on(corner, 'pointercancel', release);
-
-      // first view: the cover opens onto page one
-      if (k.motion && wide()) {
-        fPhoto.innerHTML = '<div class="jb__cover"><span class="jb__cvt">Job binder</span><span class="jb__cvn">Elbaz Construction</span><span class="jb__cvl">Licensed, bonded &amp; insured &middot; CBC1265280</span></div>';
-        bSheet.innerHTML = sheet(L[0]);
-        gsap.set(leaf, { rotationY: 0, visibility: 'visible' });
-        gsap.set(spread.querySelector('.jb__page--l'), { autoAlpha: 0 });
-        busy = true;
-        var open = ScrollTrigger.create({ trigger: book, start: 'top 70%', once: true, onEnter: function () {
-          gsap.timeline({ onComplete: function () { gsap.set(leaf, { visibility: 'hidden' }); busy = false; } })
-            .set(spread.querySelector('.jb__page--l'), { autoAlpha: 1 }, .5)
-            .to(leaf, { rotationY: -180, duration: 1, ease: 'power2.inOut', onUpdate: shade }, 0);
-        } });
-        k.add(function () { open.kill(); busy = false; gsap.set(spread.querySelector('.jb__page--l'), { clearProps: 'all' }); });
-      }
-    } },
-
-    /* NEW VERSIONS · V2 "Room chapters" (governing reference: Boffi, rooms as chapters under one narrative). One room at
-       full size; three chapters (Kitchens, Bathrooms, Whole home and outdoor) as a real tablist; a filmstrip of the chapter;
-       previous / next walk through every room, chapter to chapter. Signature: the shutter. The room on show splits into
-       vertical slats that turn edge-on one after another, in the direction you travelled, uncovering the next room behind
-       them [S0063 never two crossfaded states, S0062]. First view: the shutters open on the first kitchen. Swipe on the
-       stage (touch), tap or click it to see the room large. Reduced motion: rooms switch at once [S0400]. */
-    2: { init: function (root, k) {
-      var L = listed(), all = viewerList(L);
-      var CH = [['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole home and outdoor']];
-      var stage = root.querySelector('.rc__stage'), img = root.querySelector('.rc__img'), slatBox = root.querySelector('.rc__slats'), hit = root.querySelector('.rc__hit');
-      var tabsEl = root.querySelector('.rc__tabs'), strip = root.querySelector('.rc__strip'), code = root.querySelector('.rc__code'), title = root.querySelector('.rc__t');
-      var prev = root.querySelector('.rc__prev'), next = root.querySelector('.rc__next'), openB = root.querySelector('.rc__open');
-      var idxOf = {}; L.forEach(function (p, i) { idxOf[p.key] = i; });
-      var byC = {}; CH.forEach(function (c) { byC[c[0]] = L.filter(function (p) { return p.c === c[0] || (c[0] === 'w' && p.c === 'o'); }); });
-      var flat = []; CH.forEach(function (c) { byC[c[0]].forEach(function (p) { flat.push(p); }); });   // the walk: chapter by chapter
-      tabsEl.innerHTML = CH.map(function (c, i) { return '<button type="button" role="tab" class="rc__tab" id="rc-tab-' + c[0] + '" data-c="' + c[0] + '" aria-selected="' + (i ? 'false' : 'true') + '" aria-controls="rc-panel" tabindex="' + (i ? -1 : 0) + '"><span class="nums">0' + (i + 1) + '</span><span class="rc__tn">' + c[1] + '</span></button>'; }).join('');
-      var tabs = Array.prototype.slice.call(tabsEl.children), cur = null, busy = null;
-      k.add(function () { tabsEl.innerHTML = ''; strip.innerHTML = ''; slatBox.innerHTML = ''; img.removeAttribute('src'); });
-
-      function fillStrip(c) {
-        strip.innerHTML = byC[c].map(function (p) { return '<button type="button" class="rc__th" data-k="' + p.key + '" aria-label="' + esc(p.title) + '" aria-pressed="false" tabindex="-1"><img src="' + EZ.img(p.key) + '" alt="" decoding="async" draggable="false"></button>'; }).join('');
-      }
-      function cover(W, H, p) {   // the photograph's cover crop at the stage's size (centre), so slats line up with it
-        var a = p.w / p.h, bw, bh; if (a > W / H) { bh = H; bw = H * a; } else { bw = W; bh = W / a; }
-        return { w: bw, h: bh, x: (W - bw) / 2, y: (H - bh) / 2 };
-      }
-      function shutter(from, dir) {   // the room on show becomes slats that turn edge-on, uncovering the room behind
-        var W = stage.clientWidth, H = stage.clientHeight, n = W < 600 ? 6 : 9, sw = W / n, cv = from ? cover(W, H, from) : null, html = '';
-        for (var j = 0; j < n; j++) {
-          var st = 'left:' + (j * sw).toFixed(2) + 'px;width:' + (sw + .6).toFixed(2) + 'px;';
-          if (cv) st += 'background-image:url(' + EZ.img(from.key) + ');background-size:' + cv.w.toFixed(1) + 'px ' + cv.h.toFixed(1) + 'px;background-position:' + (cv.x - j * sw).toFixed(1) + 'px ' + cv.y.toFixed(1) + 'px';
-          html += '<i class="rc__sl' + (cv ? '' : ' rc__sl--blank') + '" style="' + st + '"><b></b></i>';
-        }
-        slatBox.innerHTML = html;
-        var sl = Array.prototype.slice.call(slatBox.children); if (dir < 0) sl.reverse();
-        if (busy) busy.kill();
-        busy = gsap.timeline({ onComplete: function () { slatBox.innerHTML = ''; busy = null; } });
-        busy.to(sl, { rotationY: dir < 0 ? -88 : 88, duration: .62, ease: 'power2.inOut', stagger: .045 }, 0)
-            .to(sl.map(function (e) { return e.firstChild; }), { opacity: .55, duration: .62, ease: 'power1.in', stagger: .045 }, 0);
-      }
-      function show(p, dir, first) {
-        if (cur && p.key === cur.key) return;
-        var from = cur; cur = p;
-        var c = (p.c === 'o') ? 'w' : p.c;
-        tabs.forEach(function (t) { var on = t.dataset.c === c; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
-        if (strip.dataset.c !== c) { strip.dataset.c = c; fillStrip(c); }
-        Array.prototype.forEach.call(strip.children, function (b) { var on = b.dataset.k === p.key; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if (on && !first) b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); });
-        code.textContent = p.code + ' · ' + CAT[p.c];
-        title.textContent = p.title;
-        hit.setAttribute('aria-label', p.title + ', open large');
-        img.alt = p.title + ', an Elbaz project';
-        if (k.motion && (from || first)) shutter(from, dir || 1);
-        img.src = EZ.img(p.key);
-      }
-      function step(d) { var i = flat.indexOf(cur); show(flat[(i + d + flat.length) % flat.length], d); }
-      // the chapters: a real tablist [S1018]
-      tabs.forEach(function (t, i) {
-        k.on(t, 'click', function () { if (t.dataset.c !== strip.dataset.c) show(byC[t.dataset.c][0], i >= tabs.indexOf(tabsEl.querySelector('[aria-selected="true"]')) ? 1 : -1); });
-        k.on(t, 'keydown', function (e) {
-          var d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0, j = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : d ? (i + d + tabs.length) % tabs.length : -1;
-          if (j < 0) return; e.preventDefault(); tabs[j].focus(); show(byC[tabs[j].dataset.c][0], j > i ? 1 : -1);
-        });
-      });
-      // the filmstrip: one Tab stop, arrows walk it
-      k.on(strip, 'click', function (e) { var b = e.target.closest('.rc__th'); if (!b) return; var p = L[idxOf[b.dataset.k]]; show(p, flat.indexOf(p) > flat.indexOf(cur) ? 1 : -1); });
-      k.on(strip, 'keydown', function (e) {
-        var b = e.target.closest('.rc__th'); if (!b) return;
-        var bs = Array.prototype.slice.call(strip.children), i = bs.indexOf(b), d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0;
-        if (!d) return; e.preventDefault(); var j = Math.max(0, Math.min(bs.length - 1, i + d)); if (j === i) return;
-        show(L[idxOf[bs[j].dataset.k]], d); bs[j].focus();
-      });
-      k.on(prev, 'click', function () { step(-1); });
-      k.on(next, 'click', function () { step(1); });
-      function openLarge() { EZ.viewer.open(all, idxOf[cur.key], img); }
-      k.on(openB, 'click', openLarge);
-      // the stage: tap or click to see it large; a sideways swipe walks the rooms (touch) [S1443]
-      var sw = null;
-      k.on(hit, 'pointerdown', function (e) { sw = { x: e.clientX, y: e.clientY, t: e.pointerType }; });
-      k.on(hit, 'pointerup', function (e) {
-        if (!sw) return; var dx = e.clientX - sw.x, dy = e.clientY - sw.y, t = sw.t; sw = null;
-        if (t !== 'mouse' && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) { hit.dataset.swiped = '1'; step(dx < 0 ? 1 : -1); }
-      });
-      k.on(hit, 'click', function () { if (hit.dataset.swiped) { delete hit.dataset.swiped; return; } openLarge(); });
-      k.on(stage, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
-
-      show(flat[0], 1, false);
-      EZ.reveal(k, root.querySelectorAll('.rc__side > *'));
-      if (!k.motion) return;
-      // first view: the shutters, still closed, open on the first kitchen
-      shutter(null, 1); busy.pause(0);
-      var st = ScrollTrigger.create({ trigger: stage, start: 'top 72%', once: true, onEnter: function () { if (busy) busy.play(); } });
-      k.add(function () { st.kill(); if (busy) busy.kill(); busy = null; slatBox.innerHTML = ''; });
-    } },
-    /* NEW VERSIONS · V3 "Find a room like yours" (governing reference: Igloo Inc, continuity). Every listed photograph
-       on one index; a room and a word from the firm's own titles bring the matches forward. Nothing cuts: each tile
-       slides from where it was (FLIP, transform only) [S0062, S0083, S1018]. */
-    3: { init: function (root, k) {
-      var L = listed(), grid = root.querySelector('.fi__grid'), roomsEl = root.querySelector('.fi__rooms'), wordsEl = root.querySelector('.fi__words'),
-        rc = root.querySelector('.fi__code'), rt = root.querySelector('.fi__t');
-      var ROOMS = [['all', 'All rooms'], ['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole home and outdoor']];
-      // every word is a phrase the firm's own titles use
-      var WORDS = [['any', 'Any detail', null], ['shaker', 'Shaker', /shaker/i], ['twotone', 'Two-tone', /two-tone/i], ['waterfall', 'Waterfall island', /waterfall[^,&]*island/i],
-        ['navy', 'Navy', /navy/i], ['white', 'White', /white/i], ['brass', 'Brass', /brass/i], ['marble', 'Marble', /marble/i], ['hood', 'Range hood', /range hood/i],
-        ['tile', 'Tile', /\btile\b/i], ['vanity', 'Vanity', /vanity/i], ['walkin', 'Walk-in shower', /walk-in shower/i], ['curbless', 'Curbless', /curbless/i], ['tub', 'Freestanding tub', /freestanding (soaking )?tub/i]];
-      function chips(list) { return list.map(function (x, i) { return '<button type="button" class="fi__o" role="radio" data-v="' + x[0] + '" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '">' + x[1] + '</button>'; }).join(''); }
-      roomsEl.innerHTML = chips(ROOMS); wordsEl.innerHTML = chips(WORDS);
-      grid.innerHTML = L.map(function (p, i) {
-        return '<li class="fi__c" data-i="' + i + '"><button type="button" class="fi__tile" aria-label="' + esc(p.title) + ', ' + CAT[p.c] + ', open large">' +
-          '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"></button></li>';
+      wall.innerHTML = G.map(function (p, i) {
+        return '<li class="pw__c" data-c="' + p.c + '"><button type="button" class="pw__t" data-i="' + i + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + esc(p.title) + '"><span class="pw__fr"><img src="' + EZ.img(p.key) + '" alt="" loading="lazy" decoding="async" draggable="false"></span></button></li>';
       }).join('');
-      var rBs = Array.prototype.slice.call(roomsEl.children), wBs = Array.prototype.slice.call(wordsEl.children), cs = Array.prototype.slice.call(grid.children);
-      k.add(function () { roomsEl.innerHTML = ''; wordsEl.innerHTML = ''; grid.innerHTML = ''; rc.textContent = ''; rt.textContent = ''; });
+      plq.innerHTML = BAYS.map(function (b, i) { return '<div class="pw__pl" data-c="' + b.c + '"><span class="pw__pl-no nums">Bay 0' + (i + 1) + '</span><b>' + b.n + '</b></div>'; }).join('');
+      var cells = Array.prototype.slice.call(wall.querySelectorAll('.pw__c')), tiles = cells.map(function (c) { return c.firstChild; });
+      var pls = Array.prototype.slice.call(plq.querySelectorAll('.pw__pl'));
+      k.add(function () { wall.innerHTML = ''; plq.innerHTML = ''; cam.style.transform = ''; stage.style.height = ''; card.hidden = true; root.classList.remove('is-flown', 'is-hang'); });
 
-      var room = 'all', word = 'any', order = cs.slice();
-      function W(v) { return WORDS.filter(function (x) { return x[0] === v; })[0]; }
-      function hit(p) { var w = W(word); return (room === 'all' || p.c === room) && (!w[2] || w[2].test(p.title)); }
-      function active() { return room !== 'all' || word !== 'any'; }
-      function mark(t) { var w = W(word); return w[2] ? esc(t).replace(w[2], function (m) { return '<mark>' + m + '</mark>'; }) : esc(t); }
-      function read(i) { var p = L[i]; rc.textContent = p.code + ' · ' + CAT[p.c]; rt.innerHTML = mark(p.title); }
-      function hint() { rc.textContent = ''; rt.textContent = 'Point at a photograph to read its title, or tap it to see it large.'; }
-
-      function apply(anim) {
-        // words no title in this room carries are switched off: the index never promises what it cannot show [S1442]
-        wBs.forEach(function (b) { var w = W(b.dataset.v), any = !w[2] || L.some(function (p) { return (room === 'all' || p.c === room) && w[2].test(p.title); });
-          b.setAttribute('aria-disabled', any ? 'false' : 'true'); });
-        if (wordsEl.querySelector('[aria-disabled="true"][aria-checked="true"]')) { word = 'any'; }
-        [[rBs, room], [wBs, word]].forEach(function (g) { g[0].forEach(function (b) { var on = b.dataset.v === g[1]; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; }); });
-        var hits = cs.filter(function (c) { return hit(L[+c.dataset.i]); }), rest = cs.filter(function (c) { return hits.indexOf(c) < 0; });
-        var next = hits.concat(rest), first = anim && k.motion ? cs.map(function (c) { return c.getBoundingClientRect(); }) : null;
-        next.forEach(function (c) { grid.appendChild(c); });   // the visual order is the reading and tab order
-        cs.forEach(function (c) { var on = hits.indexOf(c) > -1; c.classList.toggle('is-hit', active() && on); c.classList.toggle('is-quiet', active() && !on); });
-        order = next;
-        if (first) cs.forEach(function (c, j) {   // FLIP: each tile slides from where it was; nothing fades out or cuts
-          var a = first[j], b = c.getBoundingClientRect(), dx = a.left - b.left, dy = a.top - b.top;
-          if (Math.abs(dx) < .5 && Math.abs(dy) < .5) return;
-          gsap.fromTo(c, { x: dx, y: dy }, { x: 0, y: 0, duration: .75, ease: 'power3.inOut', delay: Math.min(next.indexOf(c), 23) * .012, overwrite: 'auto', clearProps: 'transform' });
+      /* ---------- layout: the bays in wall pixels; the camera on wide screens, the hang at full width otherwise ---------- */
+      var M = {}, rect = [], bayR = {}, cam0 = {}, cam1 = {};
+      function hangBay(items, x0, y0, BW, R, g) {   // justified rows inside one bay; returns its height
+        var a = items.map(function (p) { return G[p].a; }), rows = split(a, R), y = y0;
+        rows.forEach(function (rw) {
+          var ids = items.slice(rw[0], rw[1]), sa = 0;
+          ids.forEach(function (p) { sa += G[p].a; });
+          var h = (BW - (ids.length - 1) * g) / sa, x = x0;
+          ids.forEach(function (p) { var w = G[p].a * h; rect[p] = { x: x, y: y, w: w, h: h }; x += w + g; });
+          y += h + g;
         });
-        if (!active()) hint(); else if (hits.length) read(+hits[0].dataset.i);
-        else { rc.textContent = ''; rt.textContent = 'None of our titles says that yet. Try another detail.'; }
+        return y - g - y0;
       }
-      function group(list, set) {
-        list.forEach(function (b, i) {
-          k.on(b, 'click', function () { if (b.getAttribute('aria-disabled') === 'true') return; set(b.dataset.v); apply(true); });
-          k.on(b, 'keydown', function (e) {
-            var n = list.length, d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0, j = null;
-            if (d) { j = i; for (var t = 0; t < n; t++) { j = (j + d + n) % n; if (list[j].getAttribute('aria-disabled') !== 'true') break; } }
-            else if (e.key === 'Home') j = 0; else if (e.key === 'End') { j = n - 1; while (j > 0 && list[j].getAttribute('aria-disabled') === 'true') j--; }
-            if (j === null) return; e.preventDefault(); list[j].focus(); set(list[j].dataset.v); apply(true);
+      function layout() {
+        var W = stage.clientWidth; if (!W) return;
+        var VH = window.innerHeight, wide = W >= 900 && W / VH > 1.15;
+        root.classList.toggle('is-hang', !wide);
+        var idx = { k: [], b: [], w: [] };
+        G.forEach(function (p, i) { (idx[p.c] || idx.w).push(i); });
+        var g, PH, BG, WW, WH = 0;
+        rect = []; bayR = {};
+        if (wide) {
+          // three bays side by side, four rows each at one row height for the whole wall, sized to the stage
+          g = 14; PH = 92; BG = 72;
+          var RB = { k: 4, b: 4, w: 4 }, al = {}, tot = 0;
+          BAYS.forEach(function (b) { var s = 0; idx[b.c].forEach(function (i) { s += G[i].a; }); al[b.c] = s / RB[b.c]; tot += al[b.c]; });
+          var gapsW = BAYS.reduce(function (s, b) { return s + (Math.ceil(idx[b.c].length / RB[b.c]) - 1) * g; }, 0);
+          var H0 = (W * .94 - 2 * BG - gapsW) / tot, x = 0;
+          BAYS.forEach(function (b) {
+            var BW = al[b.c] * H0 + (Math.ceil(idx[b.c].length / RB[b.c]) - 1) * g;
+            var h = hangBay(idx[b.c], x, PH, BW, RB[b.c], g);
+            bayR[b.c] = { x: x, y: 0, w: BW, h: PH + h };
+            WH = Math.max(WH, PH + h); x += BW + BG;
           });
-        });
-      }
-      group(rBs, function (v) { room = v; }); group(wBs, function (v) { word = v; });
-
-      k.on(grid, 'click', function (e) {
-        var t = e.target.closest('.fi__tile'); if (!t) return;
-        var list = order.map(function (c) { return L[+c.dataset.i]; }), at = order.indexOf(t.parentNode);
-        EZ.viewer.open(viewerList(list), at, t.querySelector('img'));
-      });
-      function readFrom(e) { var t = e.target.closest('.fi__tile'); if (t) read(+t.parentNode.dataset.i); }
-      k.on(grid, 'pointerover', function (e) { if (e.pointerType === 'mouse') readFrom(e); });
-      k.on(grid, 'focusin', readFrom);
-      k.on(grid, 'pointerleave', function (e) { if (e.pointerType !== 'mouse') return; var h = cs.filter(function (c) { return c.classList.contains('is-hit'); }); if (h.length) read(+order[0].dataset.i); else if (!active()) hint(); });
-
-      apply(false);
-      if (!k.motion) return;
-      // the first view: the photographs are laid down on the table, front to back
-      var once = false;
-      k.io(grid, function (en) {
-        if (!en.isIntersecting || once) return; once = true;
-        gsap.fromTo(cs, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .6, ease: 'expo.out', stagger: .025, clearProps: 'transform,opacity' });
-      }, { threshold: .15 });
-    } },
-    /* NEW VERSIONS · V4 "The round room" (governing reference: Immersive Garden, camera scrub). The visitor stands at the
-       centre of a round gallery; drag, keys, wall chips or the scroll turn it. CSS 3D: one transform on the ring, and
-       only the photographs facing you are drawn [S0062, S0083, S1018, S1209, S1443]. */
-    4: { init: function (root, k) {
-      var stage = root.querySelector('.rr__stage'), ring = root.querySelector('.rr__ring'), wallsEl = root.querySelector('.rr__walls'),
-        code = root.querySelector('.rr__code'), tt = root.querySelector('.rr__t'), openB = root.querySelector('.rr__open');
-      var ORDERC = { k: 0, b: 1, w: 2 }, L = listed().map(function (p, n) { p.n = n; return p; }).sort(function (a, b) { return ORDERC[a.c] - ORDERC[b.c] || a.n - b.n; });
-      var N = L.length, STEP = 360 / N, WALL = [['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole homes']];
-      ring.innerHTML = L.map(function (p, i) {
-        var first = i === 0 || L[i - 1].c !== p.c;
-        return '<figure class="rr__p" data-i="' + i + '">' + (first ? '<span class="rr__wl">' + WALL[ORDERC[p.c]][1] + '</span>' : '') +
-          '<img src="' + EZ.img(p.key) + '" alt="" loading="lazy" decoding="async" draggable="false"></figure>';
-      }).join('');
-      wallsEl.innerHTML = WALL.map(function (w, j) { return '<button type="button" class="rr__w" role="radio" aria-checked="' + (j ? 'false' : 'true') + '" tabindex="' + (j ? -1 : 0) + '" data-c="' + w[0] + '">' + w[1] + '</button>'; }).join('');
-      var ps = Array.prototype.slice.call(ring.children), ws = Array.prototype.slice.call(wallsEl.children), all = viewerList(L);
-      k.add(function () { ring.innerHTML = ''; wallsEl.innerHTML = ''; stage.style.cssText = ''; ring.style.transform = ''; });
-
-      /* ---------- geometry: the camera at the centre of a ring of radius R; perspective a little shorter than R ---------- */
-      var G = { W: 0, PW: 0, PH: 0, R: 0, P: 0, fov: 40, cull: 40 }, st = { u: 0, sc: 0 }, front = -1;
-      function fit() {
-        G.W = stage.clientWidth; if (!G.W) return;
-        G.PW = G.W < 600 ? Math.min(300, G.W * .76) : Math.min(520, G.W * .4); G.PH = G.PW * .72;
-        G.R = N * G.PW * 1.08 / (2 * Math.PI); G.P = G.R * .92;
-        G.fov = 2 * Math.atan(G.W / 2 / G.P) * 180 / Math.PI; G.cull = G.fov / 2 + STEP * 1.2;
-        stage.style.perspective = G.P.toFixed(0) + 'px'; stage.style.height = Math.round(G.PH * G.P / G.R + (G.W < 600 ? 70 : 110)) + 'px';
-        ps.forEach(function (p, i) { p.style.width = G.PW.toFixed(1) + 'px'; p.style.height = G.PH.toFixed(1) + 'px'; p.style.margin = (-G.PH / 2).toFixed(1) + 'px 0 0 ' + (-G.PW / 2).toFixed(1) + 'px'; p.style.transform = 'rotateY(' + (i * STEP).toFixed(3) + 'deg) translateZ(' + (-G.R).toFixed(1) + 'px)'; });
+          WW = x - BG;
+          var SH = Math.round(Math.min(Math.max(560, VH - 150), 880));
+          stage.style.height = SH + 'px';
+          M = { wide: true, W: W, H: SH, WW: WW, WH: WH };
+          var hud = 76, s1 = Math.min(W * .94 / WW, (SH - hud - 24) / WH);
+          cam1 = { s: s1, cx: WW / 2, cy: WH / 2 + (hud - 24) / 2 / s1 };
+          var bb = bayR.b;   // the close look: the middle bay, a step nearer
+          cam0 = { s: s1 * 1.65, cx: bb.x + bb.w / 2, cy: bb.y + bb.h * .42 };
+        } else {
+          // the hang: bays one under another at the stage's width, rows of about one comfortable height
+          var pad = W < 600 ? 16 : 24, RH = W < 600 ? 118 : 168;
+          g = W < 600 ? 8 : 12; PH = 58; BG = 36; WW = W - 2 * pad;
+          var y = 0;
+          BAYS.forEach(function (b) {
+            var s = 0; idx[b.c].forEach(function (i) { s += G[i].a; });
+            var R = Math.max(1, Math.round(s * RH / WW));
+            var h = hangBay(idx[b.c], pad, y + PH, WW, R, g);
+            bayR[b.c] = { x: pad, y: y, w: WW, h: PH + h };
+            y += PH + h + BG;
+          });
+          WH = y - BG;
+          stage.style.height = (WH + 24) + 'px';
+          M = { wide: false, W: W, H: WH + 24, WW: W, WH: WH };
+        }
+        cells.forEach(function (el, i) { var r = rect[i]; el.style.cssText = 'left:' + r.x + 'px;top:' + r.y + 'px;width:' + r.w + 'px;height:' + r.h + 'px'; });
+        pls.forEach(function (el) { var r = bayR[el.dataset.c]; el.style.cssText = 'left:' + r.x + 'px;top:' + r.y + 'px;width:' + r.w + 'px;height:' + (PH - 12) + 'px'; });
+        wall.style.width = cam.style.width = (M.wide ? WW : W) + 'px'; wall.style.height = WH + 'px';
+        if (!M.wide) { land(true); fl.f = 0; }
         render();
       }
-      function angle() { return st.u + st.sc; }
+
+      /* ---------- the camera: base (scroll) + lean (pointer) + flight (a bay or a photograph), one transform ---------- */
+      var st = { p: k.motion ? 0 : 1 }, lean = { x: 0, y: 0 }, fl = { f: 0, s: 1, cx: 0, cy: 0 }, on = -1, bay = 'all';
+      function sm(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
       function render() {
-        var a = angle();
-        ring.style.transform = 'translateZ(' + G.P.toFixed(1) + 'px) rotateY(' + (-a).toFixed(3) + 'deg)';
-        ps.forEach(function (p, i) {
-          var rel = ((i * STEP - a) % 360 + 540) % 360 - 180, off = Math.abs(rel) > G.cull;
-          p.style.visibility = off ? 'hidden' : '';
-          if (!off) p.style.opacity = (1 - Math.min(1, Math.abs(rel) / G.cull) * .55).toFixed(3);
-        });
-        var f = ((Math.round(a / STEP) % N) + N) % N;
-        if (f !== front) { front = f; caption(); }
-      }
-      function caption() {
-        var p = L[front]; code.textContent = p.code + ' · ' + CAT[p.c]; tt.textContent = p.title;
-        ps.forEach(function (q, i) { q.classList.toggle('is-front', i === front); });
-        ws.forEach(function (b) { var on = b.dataset.c === p.c; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
-      }
-      var fly = null;
-      function turnTo(u, dur) {
-        if (fly) fly.kill();
-        if (!k.motion) { st.u = u; render(); return; }
-        fly = gsap.to(st, { u: u, duration: dur == null ? .7 : dur, ease: 'power3.inOut', onUpdate: render, onComplete: function () {
-          // the page may have moved during the turn: if the room is left between two photographs, it settles onto the nearer
-          var q = angle() / STEP; if (Math.abs(q - Math.round(q)) > .02 && !drag) turnTo(nearestU(front), .4);
-        } });
-      }
-      function nearestU(i) {   // the shortest way round to photograph i, given where the scroll has turned the room
-        var target = i * STEP - st.sc, d = ((target - st.u) % 360 + 540) % 360 - 180; return st.u + d;
-      }
-      function step(d) { turnTo(nearestU((front + d + N) % N)); }
-
-      /* ---------- the scroll turns the room a little as the section passes (one reversible value) [S1209] ---------- */
-      var raf = 0;
-      // while the page moves the room turns with it; when the page rests, the room settles facing a photograph
-      var settle = null;
-      function onScroll() {
-        if (raf) return;
-        raf = requestAnimationFrame(function () {
-          raf = 0; var r = stage.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
-          var t = Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight + r.height))); st.sc = (t - .5) * STEP * 1.6; render();
-          clearTimeout(settle); settle = setTimeout(function () { if (!drag && !(fly && fly.isActive())) turnTo(nearestU(front), .5); }, 180);   // never cuts short a turn already under way
+        if (!M.W) return;
+        if (!M.wide) { cam.style.transform = ''; cells.forEach(function (el) { el.style.transform = ''; }); return; }
+        var e = sm(st.p), bs = Math.exp(Math.log(cam0.s) * (1 - e) + Math.log(cam1.s) * e),
+          bx = cam0.cx + (cam1.cx - cam0.cx) * e, by = cam0.cy + (cam1.cy - cam0.cy) * e, f = fl.f;
+        var s = bs + (fl.s - bs) * f, cx = bx + (fl.cx - bx) * f, cy = by + (fl.cy - by) * f;
+        var tx = M.W / 2 - cx * s + lean.x * (1 - f), ty = M.H / 2 - cy * s + lean.y * (1 - f);
+        cam.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0) scale(' + s.toFixed(5) + ')';
+        // depth: close to the wall the frames stand a little apart; standing back closes them into the flat hang
+        var d = (1 - e) * (1 - f) * (k.motion ? .05 : 0);
+        if (d > .0005 || cells[0].style.transform) cells.forEach(function (el, i) {
+          var r = rect[i]; el.style.transform = d > .0005 ? 'translate3d(' + ((r.x + r.w / 2 - cam0.cx) * d).toFixed(1) + 'px,' + ((r.y + r.h / 2 - cam0.cy) * d).toFixed(1) + 'px,0)' : '';
         });
       }
-      if (k.motion) { k.on(window, 'scroll', onScroll, { passive: true }); k.add(function () { cancelAnimationFrame(raf); clearTimeout(settle); }); }
+      function go(t) {   // fly the camera to a target {s, cx, cy}, or back to the wall (null)
+        if (t) { fl.s = t.s; fl.cx = t.cx; fl.cy = t.cy; }
+        if (k.motion) gsap.to(fl, { f: t ? 1 : 0, duration: .75, ease: 'power3.inOut', overwrite: true, onUpdate: render });
+        else { fl.f = t ? 1 : 0; render(); }
+      }
+      function frameBay(c) { var r = bayR[c], hud = 76; var s = Math.min(M.W * .9 / r.w, (M.H - hud - 30) / r.h); return { s: s, cx: r.x + r.w / 2, cy: r.y + r.h / 2 + (hud - 30) / 2 / s }; }
+      function dim(fn) { cells.forEach(function (el, j) { var d = fn(j); el.classList.toggle('is-dim', d === 1); el.classList.toggle('is-on', d === 2); }); pls.forEach(function (el) { el.classList.toggle('is-dim', bay !== 'all' && el.dataset.c !== bay || on > -1); }); }
+      function press(b) { bay = b; bayBtns.forEach(function (x) { var y = x.dataset.b === b; x.classList.toggle('is-on', y); x.setAttribute('aria-pressed', y ? 'true' : 'false'); }); }
+      function rove(i) { tiles.forEach(function (t, j) { t.tabIndex = j === i ? 0 : -1; }); }
 
-      /* ---------- by hand: drag turns on the spot and settles on a photograph; a tap opens the one you face ---------- */
-      var drag = null;
-      k.on(stage, 'pointerdown', function (e) {
-        if (e.button > 0) return;
-        drag = { id: e.pointerId, x: e.clientX, y: e.clientY, u: st.u, live: e.pointerType === 'mouse', moved: false, t: performance.now(), lx: e.clientX, v: 0, tgt: e.target.closest('.rr__p') };
-      });
-      k.on(stage, 'pointermove', function (e) {
-        if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-        if (!drag.live) { if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { drag = null; return; } if (Math.abs(dx) > 8) drag.live = true; else return; }
-        if (!drag.moved && Math.abs(dx) > 4) { drag.moved = true; stage.classList.add('is-drag'); if (fly) fly.kill(); try { stage.setPointerCapture(drag.id); } catch (x) {} }
-        if (!drag.moved) return;
-        var now = performance.now(); drag.v = (e.clientX - drag.lx) / Math.max(1, now - drag.t); drag.t = now; drag.lx = e.clientX;
-        st.u = drag.u - dx * (G.fov / G.W); render();
-      });
-      k.on(stage, 'pointerup', function () {
-        if (!drag) return; var d = drag; drag = null; stage.classList.remove('is-drag');
-        if (!d.moved) { var i = d.tgt ? +d.tgt.dataset.i : -1; if (i < 0) return; if (i === front) EZ.viewer.open(all, i, ps[i].querySelector('img')); else turnTo(nearestU(i)); return; }
-        var fling = -d.v * 160 * (G.fov / G.W), a = st.u + fling + st.sc, i2 = ((Math.round(a / STEP) % N) + N) % N;   // a little momentum, then it settles facing a photograph
-        turnTo(nearestU(i2), .6);
-      });
-      k.on(stage, 'pointercancel', function () { drag = null; stage.classList.remove('is-drag'); });
-      k.on(stage, 'keydown', function (e) {
-        if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
-        else if (e.key === 'Home') { e.preventDefault(); turnTo(nearestU(0)); } else if (e.key === 'End') { e.preventDefault(); turnTo(nearestU(N - 1)); }
-        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); EZ.viewer.open(all, front, ps[front].querySelector('img')); }
-      });
-      k.on(root.querySelector('.rr__prev'), 'click', function () { step(-1); });
-      k.on(root.querySelector('.rr__next'), 'click', function () { step(1); });
-      k.on(openB, 'click', function () { EZ.viewer.open(all, front, ps[front].querySelector('img')); });
-      function toWall(c) { var i = L.findIndex(function (p) { return p.c === c; }); turnTo(nearestU(i), .9); }
-      ws.forEach(function (b, j) {
-        k.on(b, 'click', function () { toWall(b.dataset.c); });
-        k.on(b, 'keydown', function (e) { var d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0; if (!d) return; e.preventDefault(); var n = (j + d + 3) % 3; ws[n].focus(); toWall(ws[n].dataset.c); });
-      });
+      function inView() {   // a choice made from the buttons above brings the whole wall into view first
+        var r = stage.getBoundingClientRect(), nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+        if (r.top < nav - 2 || r.bottom > window.innerHeight + 2) window.scrollTo({ top: window.scrollY + r.top - nav - Math.max(0, (window.innerHeight - nav - r.height) / 2), behavior: k.motion ? 'smooth' : 'auto' });
+      }
+      function chooseBay(b) {
+        press(b); on = -1; card.hidden = true; root.classList.remove('is-flown');
+        if (!M.wide) {   // the hang: bring the bay into view
+          dim(function () { return 0; });
+          var r = b === 'all' ? stage.getBoundingClientRect() : null, top;
+          if (r) top = r.top; else { var sr = stage.getBoundingClientRect(); top = sr.top + bayR[b].y; }
+          var nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+          window.scrollTo({ top: window.scrollY + top - nav - 12, behavior: k.motion ? 'smooth' : 'auto' });
+          return;
+        }
+        dim(function (j) { return b !== 'all' && G[j].c !== b ? 1 : 0; });
+        inView();
+        go(b === 'all' ? null : frameBay(b));
+      }
+      bayBtns.forEach(function (x) { k.on(x, 'click', function () { chooseBay(x.dataset.b); }); });
 
-      k.ro(stage, fit); fit();
-      EZ.reveal(k, root.querySelectorAll('.rr__head > *, .rr__bar, .rr__foot'));
+      function fly(i, focus) {
+        var r = rect[i]; if (!r) return;
+        rove(i); on = i;
+        if (!M.wide) { openLarge(i); return; }
+        var cardH = 96, room = M.H - cardH - 40, s = Math.min(M.W * .6 / r.w, room * .9 / r.h);
+        dim(function (j) { return j === i ? 2 : 1; });
+        root.classList.add('is-flown');
+        capN.textContent = G[i].code + ' · ' + CAT[G[i].c];
+        capT.textContent = G[i].title;
+        card.hidden = false; tip.classList.remove('is-on');
+        if (focus) tiles[i].focus({ preventScroll: true });
+        inView();
+        go({ s: s, cx: r.x + r.w / 2, cy: r.y + r.h / 2 + cardH / 2 / s });
+      }
+      function land(quiet) {   // step back: to the bay you were looking at, or to the wall
+        if (on < 0 && quiet) return;
+        var i = on; on = -1; card.hidden = true; root.classList.remove('is-flown');
+        if (quiet) { press('all'); dim(function () { return 0; }); fl.f = 0; render(); return; }
+        if (bay !== 'all' && M.wide) { dim(function (j) { return G[j].c !== bay ? 1 : 0; }); go(frameBay(bay)); }
+        else { dim(function () { return 0; }); go(null); }
+        if (i > -1) tiles[i].focus({ preventScroll: true });
+      }
+      function openLarge(i) { EZ.viewer.open(ALL, i, tiles[i].querySelector('img')); }
+
+      k.on(wall, 'click', function (e) {
+        var t = e.target.closest('.pw__t'); if (!t) return;
+        var i = +t.dataset.i;
+        if (!M.wide || (on === i && fl.f > .6)) openLarge(i); else fly(i);
+      });
+      k.on(wall, 'focusin', function (e) {   // keyboard focus steps up to the photograph (never a mouse press)
+        var t = e.target.closest('.pw__t'); if (!t || !t.matches(':focus-visible') || !M.wide) return;
+        if (on !== +t.dataset.i) fly(+t.dataset.i);
+      });
+      // arrow keys walk the wall as it hangs, Home / End to the ends, Escape steps back [S1018]
+      k.on(wall, 'keydown', function (e) {
+        var t = e.target.closest('.pw__t'); if (!t) return;
+        var i = +t.dataset.i, r = rect[i], to = -1;
+        if (e.key === 'Escape') { if (on > -1 || fl.f > 0) { e.preventDefault(); land(false); } return; }
+        if (e.key === 'Home') to = 0; else if (e.key === 'End') to = N - 1;
+        else {
+          var dx = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0, dy = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
+          if (!dx && !dy) return;
+          var cx = r.x + r.w / 2, cy = r.y + r.h / 2, bd = 1e12;
+          rect.forEach(function (q, j) {
+            if (j === i) return;
+            var qx = q.x + q.w / 2, qy = q.y + q.h / 2, dist;
+            if (dx) { if (Math.abs(qy - cy) > Math.min(q.h, r.h) * .6 || Math.sign(qx - cx) !== dx) return; dist = Math.abs(qx - cx); }
+            else { if (Math.sign(qy - cy) !== dy || Math.abs(qy - cy) < Math.min(q.h, r.h) * .5) return; dist = Math.abs(qy - cy) * 4 + Math.abs(qx - cx); }
+            if (dist < bd) { bd = dist; to = j; }
+          });
+          if (to < 0 && dx) to = (i + dx + N) % N;   // a row's end runs on in hanging order
+        }
+        if (to < 0) return;
+        e.preventDefault();
+        if (M.wide) fly(to, true); else { rove(to); tiles[to].focus(); }
+      });
+      k.on(root.querySelector('.pw__prev'), 'click', function () { fly((Math.max(on, 0) - 1 + N) % N); });
+      k.on(root.querySelector('.pw__next'), 'click', function () { fly((Math.max(on, 0) + 1) % N); });
+      k.on(root.querySelector('.pw__open'), 'click', function () { if (on > -1) openLarge(on); });
+      k.on(root.querySelector('.pw__back'), 'click', function () { land(false); });
+      k.on(card, 'keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); land(false); } });
+      // leaving the wall behind resets it quietly
+      k.io(stage, function (en) { if (!en.isIntersecting && (on > -1 || bay !== 'all')) { on = -1; card.hidden = true; root.classList.remove('is-flown'); press('all'); dim(function () { return 0; }); fl.f = 0; render(); } }, { threshold: 0 });
+
+      /* ---------- the pointer: a name under the photograph it rests on, and a small lean of the camera ---------- */
+      if (k.fine) {
+        k.on(wall, 'pointerover', function (e) {
+          var t = e.target.closest('.pw__t'); if (!t || e.pointerType === 'touch' || fl.f > .02 || !M.wide) return;
+          var q = t.getBoundingClientRect(), sr = stage.getBoundingClientRect(), p = G[+t.dataset.i];
+          tip.textContent = p.title;
+          tip.style.left = Math.max(12, Math.min(sr.width - 12, q.left - sr.left + q.width / 2)) + 'px';
+          var up = q.bottom - sr.top > sr.height - 90;
+          tip.classList.toggle('is-up', up);
+          tip.style.top = (up ? q.top - sr.top - 8 : q.bottom - sr.top + 8) + 'px';
+          tip.classList.add('is-on');
+        });
+        k.on(wall, 'pointerout', function (e) { if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('.pw__t')) tip.classList.remove('is-on'); });
+      }
+      if (k.motion && k.fine) {
+        var qx = gsap.quickTo(lean, 'x', { duration: 1, ease: 'power3.out', onUpdate: render });
+        var qy = gsap.quickTo(lean, 'y', { duration: 1, ease: 'power3.out', onUpdate: render });
+        k.on(stage, 'pointermove', function (e) {
+          if (e.pointerType === 'touch' || !M.wide) return;
+          var r = stage.getBoundingClientRect();
+          qx(-((e.clientX - r.left) / r.width * 2 - 1) * 22); qy(-((e.clientY - r.top) / r.height * 2 - 1) * 14);
+        });
+        k.on(stage, 'pointerleave', function () { qx(0); qy(0); });
+      }
+
+      k.ro(stage, layout);
+      layout();
+      EZ.reveal(k, root.querySelectorAll('.pw__head > div > *, .pw__lead'));
       if (!k.motion) return;
-      // arriving: the room turns a quarter of a wall into place
+
+      /* ---------- the scroll: the camera stands back from the middle bay to the whole wall, no pin [S1326, S1209] ---------- */
+      var tw = gsap.to(st, { p: 1, ease: 'none', onUpdate: render,
+        scrollTrigger: { trigger: stage, start: 'top 95%', end: 'center 55%', scrub: .8, invalidateOnRefresh: true } });
+      k.add(function () { tw.scrollTrigger && tw.scrollTrigger.kill(); tw.kill(); });
+
+      /* ---------- the hang: the plaques go up, then the photographs are hung bay by bay ---------- */
       var once = false;
-      k.io(stage, function (en) { if (!en.isIntersecting || once) return; once = true; var to = nearestU(0); st.u = to - STEP * 4; render(); turnTo(to, 1.4); }, { threshold: .3 });
+      k.io(stage, function (en) {
+        if (!en.isIntersecting || once) return; once = true;
+        var frs = cells.map(function (c) { return c.querySelector('.pw__fr'); });
+        gsap.timeline({ defaults: { ease: 'expo.out' } })
+          .fromTo(pls, { autoAlpha: 0, y: -10 }, { autoAlpha: 1, y: 0, duration: .5, stagger: .12, clearProps: 'transform,opacity,visibility' }, 0)
+          .fromTo(frs, { autoAlpha: 0, y: -16, rotation: function (i) { return i % 2 ? 1.4 : -1.4; } },
+            { autoAlpha: 1, y: 0, rotation: 0, duration: .8, stagger: .035, clearProps: 'transform,opacity,visibility' }, .1)
+          .fromTo(hint, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4, clearProps: 'opacity,visibility' }, .9);
+      }, { threshold: .15 });
     } }
   });
 })();

@@ -1,118 +1,47 @@
 <section id="work" class="sec work g-base" data-section="work" aria-labelledby="work-h">
-  <!-- FINALIZE · Home 7 · Projects: TWO versions (Muse ruling 1; PHASE1-PLAN.md row 7). Earlier slots and backups are in
-       git history (ce59679). Photos are the firm's own project photographs; titles are the firm's own (data/projects.json).
-       Two photos whose subject does not match their title stay out (owner item). No count is printed beyond the fact lock. -->
-
-  <!-- V1 · Two rows, opposite directions (the owner's V1) carrying the V5 frame: each photo is a framed print hung on a
-       picture rail, a little crooked; point at one and the row slows while the frame sets level (the small spirit level
-       on its top edge centres its bubble). The chevron treads between the rows are gone. A pause control (WCAG 2.2.2). -->
-  <div class="ver pj" data-v="1">
-    <div class="wrap pj__head">
+  <!-- FINAL · Our Work: the portfolio wall (the owner's pick: Hero V2's gallery wall, made into the portfolio).
+       The firm's own photographs hang on one wall in three bays (Kitchens, Bathrooms, Whole homes), each photograph at
+       its own proportions under a plaque. Wide screens: a camera stands back from the wall as the section rises; step up
+       to a bay or to any photograph, named with its plan-room code, and open it large. Phones: the wall hangs at full
+       width and a tap opens the photograph large. The two photos whose subject does not match their title stay out
+       (owner item); no counts are printed. -->
+  <div class="ver pw" data-v="1">
+    <div class="wrap pw__head">
       <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Our work</p>
         <h2 class="t-head" id="work-h">Our own photographs. <span class="acc">Every room, finished.</span></h2>
       </div>
-      <p class="t-lead pj__lead">Kitchens run one way, bathrooms and whole homes the other. Pick any frame to see it large.</p>
-    </div>
-    <div class="pj__rows">
-      <div class="pj__row" data-c="k" role="group" aria-label="Kitchen projects"><span class="pj__rail" aria-hidden="true"></span><div class="pj__track"></div></div>
-      <div class="pj__row" data-c="bw" role="group" aria-label="Bathroom and whole-home projects"><span class="pj__rail" aria-hidden="true"></span><div class="pj__track"></div></div>
-    </div>
-    <div class="wrap pj__foot">
-      <button type="button" class="btn btn--ghost pj__hold" aria-pressed="false"><svg class="pj__hi" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="pj__hi-p" d="M6 4 V16 M14 4 V16"/><path class="pj__hi-r" d="M6 4 L16 10 L6 16 Z"/></svg><span class="btn__label">Pause the rows</span></button>
-      <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
-      <p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p>
-    </div>
-  </div>
-
-  <!-- (Retired in Final: the job binder. Its markup left the file; the record is in git history.) -->
-
-  <!-- NEW VERSIONS · Our Work V2 "Room chapters" (2026-11-04, pass 1). Governing reference: Boffi (rooms as chapters under
-       one narrative). One room at full size; three chapters as tabs; a filmstrip; previous / next walk every room. The
-       shutter: the room on show splits into louvred slats that turn edge-on to uncover the next room. Same photographs
-       and titles as V1 (data/projects.json), the same two held out; no counts printed. -->
-  <div class="ver rc" data-v="2">
-    <div class="wrap rc__grid">
-      <div class="rc__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Our work</p>
-        <h2 class="t-head" id="work-h-2">Room by room. <span class="acc">Our own photographs.</span></h2>
-        <p class="rc__lead">Three chapters of finished rooms. Open the shutters on any of them.</p>
-        <div class="rc__tabs" role="tablist" aria-label="Chapters"></div>
-        <div class="rc__cap" aria-live="polite"><p class="rc__code"></p><h3 class="rc__t"></h3></div>
-        <div class="rc__ctl">
-          <button type="button" class="rc__b rc__prev" aria-label="Previous room"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button type="button" class="rc__b rc__next" aria-label="Next room"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
-          <button type="button" class="btn btn--ghost rc__open"><span class="btn__label">See it large</span></button>
-        </div>
-        <div class="rc__foot">
-          <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
-          <p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p>
+      <div class="pw__side">
+        <p class="t-lead pw__lead">One wall, three bays. Step up to a bay, or pick any photograph to see it large.</p>
+        <div class="pw__bays" role="group" aria-label="Look at the wall">
+          <button type="button" class="pw__bay is-on" data-b="all" aria-pressed="true">The whole wall</button>
+          <button type="button" class="pw__bay" data-b="k" aria-pressed="false">Kitchens</button>
+          <button type="button" class="pw__bay" data-b="b" aria-pressed="false">Bathrooms</button>
+          <button type="button" class="pw__bay" data-b="w" aria-pressed="false">Whole homes</button>
         </div>
       </div>
-      <div class="rc__main">
-        <div class="rc__stage" id="rc-panel" role="tabpanel" aria-label="The room on show">
-          <img class="rc__img" alt="" decoding="async" draggable="false">
-          <div class="rc__slats" aria-hidden="true"></div>
-          <button type="button" class="rc__hit" aria-label="Open large"></button>
+    </div>
+    <div class="pw__stage">
+      <div class="pw__cam">
+        <div class="pw__plaques" aria-hidden="true"></div>
+        <ul class="pw__wall" aria-label="Our work, one photograph per project"></ul>
+      </div>
+      <div class="pw__tip" aria-hidden="true"></div>
+      <div class="pw__hud">
+        <p class="pw__hint" aria-hidden="true">Pick any photograph to step up to it.</p>
+        <div class="pw__card" role="group" aria-label="The photograph in view" hidden>
+          <p class="pw__cap" aria-live="polite"><span class="pw__no nums"></span><span class="pw__name"></span></p>
+          <div class="pw__acts">
+            <button type="button" class="pw__b pw__prev" aria-label="Previous photograph"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+            <button type="button" class="pw__b pw__next" aria-label="Next photograph"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+            <button type="button" class="pw__b pw__open">Open large</button>
+            <button type="button" class="pw__b pw__back">Step back</button>
+          </div>
         </div>
-        <div class="rc__strip" role="group" aria-label="Rooms in this chapter"></div>
       </div>
     </div>
-  </div>
-
-  <!-- NEW VERSIONS · Our Work V3 "Find a room like yours" (2026-11-04, pass 2). Governing reference: Igloo Inc (continuity:
-       nothing cuts). Every listed photograph on one index at once; choose a room and a word from the firm's own titles,
-       and the photographs whose titles say it glide to the front in colour while the rest slide back, quiet (FLIP,
-       transform only). The same listed photographs, titles and plan-room codes as V1 and V2. No counts printed. -->
-  <div class="ver fi" data-v="3">
-    <div class="wrap">
-      <div class="fi__head">
-        <div>
-          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Our work</p>
-          <h2 class="t-head" id="work-h-3">Find a room like yours. <span class="acc">In our own words.</span></h2>
-        </div>
-        <p class="fi__lead">Choose a room and a detail from our project titles. The photographs that say it come forward.</p>
-      </div>
-      <div class="fi__ask">
-        <div class="fi__grp"><p class="fi__gl" id="fi-gl-r">Room</p><div class="fi__opts fi__rooms" role="radiogroup" aria-labelledby="fi-gl-r"></div></div>
-        <div class="fi__grp"><p class="fi__gl" id="fi-gl-w">Detail</p><div class="fi__opts fi__words" role="radiogroup" aria-labelledby="fi-gl-w"></div></div>
-      </div>
-      <ul class="fi__grid" aria-label="Our photographs"></ul>
-      <div class="fi__read" aria-live="polite"><p class="fi__code"></p><p class="fi__t"></p></div>
-      <div class="fi__foot">
-        <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
-        <p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- NEW VERSIONS · Our Work V4 "The round room" (2026-11-04, pass 3). Governing reference: Immersive Garden (camera
-       scrub, inside the budget). The visitor stands at the centre of a round gallery of the listed photographs, three
-       walls (Kitchens, Bathrooms, Whole homes); drag, keys, buttons or the scroll turn the room. CSS 3D, one transform,
-       only the photographs facing you drawn. The same listed photographs, titles and plan-room codes. No counts. -->
-  <div class="ver rr" data-v="4">
-    <div class="wrap rr__head">
-      <div>
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Our work</p>
-        <h2 class="t-head" id="work-h-4">Stand in the room. <span class="acc">Our work, all around you.</span></h2>
-      </div>
-      <div class="rr__side">
-        <p class="rr__lead">Drag to turn, or turn to a wall. Every photograph is one of our own finished rooms.</p>
-        <div class="rr__walls" role="radiogroup" aria-label="Turn to a wall"></div>
-      </div>
-    </div>
-    <div class="rr__stage" tabindex="0" role="group" aria-roledescription="gallery" aria-label="Our work, a round room of photographs. The arrow keys turn it; Enter opens the photograph you face." data-buddy="drag"><div class="rr__ring"></div></div>
-    <div class="wrap">
-      <div class="rr__bar">
-        <button type="button" class="rr__b rr__prev" aria-label="Turn to the previous photograph"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <div class="rr__cap" aria-live="polite"><p class="rr__code"></p><p class="rr__t"></p></div>
-        <button type="button" class="rr__b rr__next" aria-label="Turn to the next photograph"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
-        <button type="button" class="btn btn--ghost rr__open"><span class="btn__label">See it large</span></button>
-      </div>
-      <div class="rr__foot">
-        <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
-        <p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p>
-      </div>
+    <div class="wrap pw__foot">
+      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
     </div>
   </div>
 </section>
