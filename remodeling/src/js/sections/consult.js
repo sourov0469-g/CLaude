@@ -320,7 +320,7 @@
           other.hidden = p !== 'other'; if (!other.hidden) otherIn.focus();
           form.querySelector('#pc-project-err').hidden = true;
           setFront(p, r.dataset.k || '');
-          if (k.motion && isBack) flip(false);
+          if (isBack) flip(false);   // show the room you just chose
           turn.classList.add('is-ready');
         });
       });
