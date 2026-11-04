@@ -47,33 +47,6 @@
   function pop(k, els) { if (!k.motion || !els.length) return; gsap.fromTo(els, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: .45, ease: 'power3.out', stagger: .07, clearProps: 'transform,opacity' }); }
 
   EZ.section('financing', {
-    /* V2 · two kinds of money */
-    1: { init: function (root, k) {
-      var split = root.querySelector('.fb__split');
-      function half(kind, title, line, ids, note) {
-        return '<article class="fb__h fb__h--' + kind + '" data-k="' + kind + '"><header class="fb__hh">' + ic(kind === 'cc' ? CHIP : HOUSE, 'fz-ic fb__hi') + '<div><h3 class="fb__ht">' + title + '</h3><p class="fb__hl">' + line + '</p></div></header>' +
-          '<ul class="fb__ps">' + ids.map(function (id) { var p = P[id]; return '<li class="fb__p"><span class="fb__pn">' + p.name + '</span><span class="fb__pb nums">' + p.big + '</span><span class="fb__pu">' + p.unit + '</span><span class="fb__pw">' + p.what + ' &middot; ' + p.also + '</span></li>'; }).join('') + '</ul>' +
-          (note ? '<p class="fb__note">' + note + '</p>' : '') + '</article>';
-      }
-      split.innerHTML = half('cc', 'Consumer credit', 'Repaid on a card or in fixed installments.', ['syn', 'sfc'], 'Usually fits interior finish work: kitchens, bathrooms, flooring.') +
-        '<div class="fb__or" aria-hidden="true"><span>or</span></div>' +
-        half('pa', 'Property-assessed', 'Repaid through your property tax bill.', ['ygr', 'rnw'], 'PACE covers specific improvements. A kitchen remodel is generally not one of them.');
-      var hs = split.querySelectorAll('.fb__h'), sbs = Array.prototype.slice.call(root.querySelectorAll('.fb__sb'));
-      var MAP = { in: ['cc'], out: ['cc', 'pa'], all: ['cc', 'pa'] }, HOT = { in: 'cc', out: 'pa', all: '' };
-      function pick(w) {
-        sbs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === w ? 'true' : 'false'); });
-        hs.forEach(function (h) { var on = MAP[w].indexOf(h.dataset.k) > -1; h.classList.toggle('is-dim', !on); h.classList.toggle('is-hot', HOT[w] === h.dataset.k); });
-      }
-      sbs.forEach(function (b) { k.on(b, 'click', function () { pick(b.dataset.w); }); });
-      pick('all');
-      foot(root, k);
-      k.add(function () { split.innerHTML = ''; });
-      EZ.reveal(k, root.querySelectorAll('.fb__head > *'));
-      if (!k.motion) return;
-      gsap.set(hs, { y: 40, opacity: 0 });
-      var st = ScrollTrigger.create({ trigger: split, start: 'top 82%', once: true, onEnter: function () { gsap.to(hs, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .15, clearProps: 'transform,opacity' }); } });
-      k.add(function () { st.kill(); });
-    } },
 
     /* NEW VERSIONS · V2 "The money map" (governing reference: Lusion, flow maps). Three columns joined by living ribbons:
        what you are building -> the partners that usually fit -> how each is repaid. Pick a project (or a partner) and its
@@ -81,7 +54,7 @@
        the nodes, so the same engine draws left-to-right on wide screens and top-to-bottom on phones. Routing is the
        firm's framing already used above (ROUTES, WHY); figures are the partners' own (P). Reduced motion: no flowing,
        no draw-in [S0400]. */
-    2: { init: function (root, k) {
+    1: { init: function (root, k) {
       var map = root.querySelector('.mm__map'), svg = root.querySelector('.mm__wires'), say = root.querySelector('.mm__say');
       var colA = root.querySelector('.mm__col--a .mm__nodes'), colB = root.querySelector('.mm__col--b .mm__nodes'), colC = root.querySelector('.mm__col--c .mm__nodes');
       var CAL = 'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4M8 13h2M12 13h2M16 13h2M8 16h2M12 16h2';
@@ -163,167 +136,6 @@
         gsap.fromTo(svg, { opacity: 1, clipPath: vert ? 'inset(0 0 100% 0)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0% 0)', duration: 1.1, delay: .25, ease: 'power2.inOut', clearProps: 'clipPath' });
       } });
       k.add(function () { st.kill(); gsap.set(A.concat(B, C, [svg]), { clearProps: 'all' }); });
-    } },
-    /* NEW VERSIONS · V3 "The board" (governing reference: Apple AirPods Pro, numerals as events). A split-flap board of
-       the four partners: choose a project and the rows that usually fit flip to their figures; the rest turn blank. */
-    3: { init: function (root, k) {
-      var pick = root.querySelector('.bd__pick'), rowsEl = root.querySelector('.bd__rows'), cap = root.querySelector('.bd__cap'), say = root.querySelector('.bd__say');
-      // the repayment tiles: short forms of the firm's own lines (P.repay)
-      var REP = { syn: 'ON THE CARD', sfc: 'INSTALLMENTS', ygr: 'TAX BILL', rnw: 'TAX BILL' };
-      var W = { name: 15, big: 5, rep: 12 };
-      function pad(t, n, right) { t = String(t).toUpperCase(); while (t.length < n) t = right ? ' ' + t : t + ' '; return t; }
-      function cells(n, cls) { var s = ''; for (var i = 0; i < n; i++) s += '<span class="bd__c"><b></b><i></i></span>'; return '<span class="bd__f bd__f--' + cls + '" aria-hidden="true">' + s + '</span>'; }
-      pick.innerHTML = PROJ.map(function (x) { return '<button type="button" class="bd__pk" role="radio" aria-checked="false" tabindex="-1" data-p="' + x[0] + '">' + ic(x[2], 'fz-ic bd__pi') + '<span>' + x[1] + '</span></button>'; }).join('');
-      rowsEl.innerHTML = ORDER.map(function (id) {
-        var p = P[id];
-        return '<button type="button" class="bd__row bd__row--' + p.k + '" data-id="' + id + '" aria-pressed="false">' + cells(W.name, 'name') +
-          '<span class="bd__fig">' + cells(W.big, 'big') + '<span class="bd__unit" aria-hidden="true">' + p.unit + '</span></span>' + cells(W.rep, 'rep') + '<span class="sr-only bd__sr"></span></button>';
-      }).join('');
-      var pks = Array.prototype.slice.call(pick.children), rws = Array.prototype.slice.call(rowsEl.children);
-      var F = rws.map(function (r) { return { name: r.querySelectorAll('.bd__f--name .bd__c'), big: r.querySelectorAll('.bd__f--big .bd__c'), rep: r.querySelectorAll('.bd__f--rep .bd__c') }; });
-      k.add(function () { pick.innerHTML = ''; rowsEl.innerHTML = ''; cap.textContent = ''; say.textContent = ''; gsap.ticker.remove(tick); });
-
-      /* ---------- the flap engine: one driver loop, each tile folds its top flap [S0062] ---------- */
-      var CH = 'ABCDEFGHIJKLMNOPRSTUVWY0123456789$', Q = [], STEP = 62;
-      function show(c, ch) {
-        var b = c.firstChild; if (b.textContent === ch) return; b.textContent = ch === ' ' ? '' : ch;
-        if (k.motion && c.lastChild.animate) c.lastChild.animate([{ transform: 'rotateX(0deg)', opacity: 1 }, { transform: 'rotateX(-90deg)', opacity: 1 }], { duration: 70, easing: 'ease-in' });
-      }
-      function queue(c, ch, delay, steps) {
-        for (var i = Q.length - 1; i >= 0; i--) if (Q[i].c === c) Q.splice(i, 1);
-        if (!k.motion) { c.firstChild.textContent = ch === ' ' ? '' : ch; return; }
-        if ((c.firstChild.textContent || ' ') === ch && !steps) return;
-        Q.push({ c: c, ch: ch, t: performance.now() + delay, n: steps });
-      }
-      function tick() {
-        if (!Q.length) return; var now = performance.now();
-        for (var i = Q.length - 1; i >= 0; i--) {
-          var j = Q[i]; if (j.t > now) continue;
-          if (j.n > 0) { show(j.c, CH.charAt(Math.random() * CH.length | 0)); j.n--; j.t = now + STEP; }
-          else { show(j.c, j.ch); Q.splice(i, 1); }
-        }
-      }
-      gsap.ticker.add(tick);
-      function setField(list, text, row, col0) {
-        for (var i = 0; i < list.length; i++) {
-          var ch = text.charAt(i) || ' ', cur = list[i].firstChild.textContent || ' ';
-          // a tile that changes runs a few random faces first, later columns and rows a little longer: a cascade
-          var steps = ch === cur ? 0 : (ch === ' ' ? 1 : 2 + ((i + row) % 3));
-          queue(list[i], ch, row * 90 + (col0 + i) * 16, steps);
-        }
-      }
-
-      /* ---------- state ---------- */
-      var proj = 'unsure', sel = -1;
-      function render() {
-        var fit = ROUTES[proj];
-        ORDER.forEach(function (id, r) {
-          var p = P[id], on = fit.indexOf(id) > -1;
-          setField(F[r].name, pad(p.name, W.name), r, 0);
-          setField(F[r].big, on ? pad(p.big, W.big, true) : pad('', W.big), r, W.name);
-          setField(F[r].rep, on ? pad(REP[id], W.rep) : pad('', W.rep), r, W.name + W.big);
-          rws[r].classList.toggle('is-off', !on);
-          rws[r].querySelector('.bd__sr').textContent = p.name + ', ' + p.kind.toLowerCase() + ': ' + (on ? 'usually fits. ' + p.big + ' ' + p.unit + '. Repaid ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '.' : 'not usually a fit for this project.');
-        });
-        pks.forEach(function (b) { var on = b.dataset.p === proj; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
-        say.textContent = WHY[proj];
-      }
-      function choose(p) { if (p === proj) return; proj = p; render(); }
-      function read(r) {
-        sel = r; rws.forEach(function (b, j) { b.setAttribute('aria-pressed', j === r ? 'true' : 'false'); });
-        var p = P[ORDER[r]];
-        cap.innerHTML = '<b>' + p.name + '</b><span>' + p.kind + '</span><span>' + p.what + '</span><span>' + p.also + '</span><span class="bd__src">' + p.src + '</span>';
-      }
-      pks.forEach(function (b, i) {
-        k.on(b, 'click', function () { choose(b.dataset.p); });
-        k.on(b, 'keydown', function (e) {
-          var n = pks.length, j = /Right|Down/.test(e.key) ? (i + 1) % n : /Left|Up/.test(e.key) ? (i + n - 1) % n : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : null;
-          if (j === null) return; e.preventDefault(); pks[j].focus(); choose(pks[j].dataset.p);
-        });
-      });
-      rws.forEach(function (b, r) { k.on(b, 'click', function () { read(r); }); });
-
-      // the board starts blank and turns on when it comes into view: the figures arrive as events
-      var started = false;
-      function start() { if (started) return; started = true; render(); read(0); }
-      pks.forEach(function (b) { b.setAttribute('aria-checked', b.dataset.p === proj ? 'true' : 'false'); b.tabIndex = b.dataset.p === proj ? 0 : -1; });
-      say.textContent = WHY[proj];
-      if (!k.motion) start(); else k.io(rowsEl, function (en) { if (en.isIntersecting) start(); }, { threshold: .3 });
-      foot(root, k);
-    } },
-    /* NEW VERSIONS · V4 "The house, annotated" (governing reference: Makhno Studio, the home as an explorable instrument).
-       Tap a part of a section drawing; the partners that usually fit are pinned to it by callout leaders [S0062, S1018]. */
-    4: { init: function (root, k) {
-      var fig = root.querySelector('.hs__fig'), draw = root.querySelector('.hs__draw'), marksEl = root.querySelector('.hs__marks'), tagsEl = root.querySelector('.hs__tags'),
-        lines = root.querySelector('.hs__lead-lines'), pick = root.querySelector('.hs__pick'), say = root.querySelector('.hs__say');
-      // the marks: each drawn part answers to one of the section's own project choices
-      var MK = [['kitchen', 'kitchen', 306, 452, 'The kitchen'], ['bath', 'bath', 572, 470, 'The bathroom'], ['floor', 'floor', 705, 550, 'The floors'],
-        ['roof', 'roof', 450, 228, 'The roof'], ['roofw', 'roof', 373, 378, 'A window or door'], ['shutter', 'hvac', 601, 364, 'Storm shutters'], ['hvac', 'hvac', 860, 519, 'The air conditioning']];
-      marksEl.innerHTML = MK.map(function (m, i) { return '<button type="button" class="hs__mk" data-i="' + i + '" data-p="' + m[1] + '" style="left:' + (m[2] / 10) + '%;top:' + ((m[3] - 120) / 4.7).toFixed(2) + '%" aria-label="' + m[4] + '"><i></i><span>' + m[4] + '</span></button>'; }).join('');
-      tagsEl.innerHTML = ORDER.map(function (id) {
-        var p = P[id];
-        return '<div class="hs__tag hs__tag--' + p.k + '" data-id="' + id + '"><p class="hs__tk">' + p.kind + '</p><p class="hs__tn">' + p.name + '</p>' +
-          '<p class="hs__tf"><span class="hs__tb nums">' + p.big + '</span><span class="hs__tu">' + p.unit + '</span></p><p class="hs__tr">Repaid: ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '</p><p class="hs__ts">' + p.src + '</p></div>';
-      }).join('');
-      pick.innerHTML = PROJ.map(function (x) { return '<button type="button" class="hs__pk" role="radio" aria-checked="false" tabindex="-1" data-p="' + x[0] + '">' + ic(x[2], 'fz-ic hs__pi') + '<span>' + x[1] + '</span></button>'; }).join('');
-      var mks = Array.prototype.slice.call(marksEl.children), tags = Array.prototype.slice.call(tagsEl.children), pks = Array.prototype.slice.call(pick.children), pts = root.querySelectorAll('.hs__pt');
-      k.add(function () { marksEl.innerHTML = ''; tagsEl.innerHTML = ''; pick.innerHTML = ''; lines.innerHTML = ''; say.textContent = ''; });
-
-      var proj = null, from = -1;
-      // which drawn parts light for each project, and where its leaders start
-      var PARTS = { kitchen: ['kitchen'], bath: ['bath'], floor: ['floor'], roof: ['roof', 'roofw'], hvac: ['hvac', 'shutter'], unsure: ['kitchen', 'bath', 'floor', 'roof', 'roofw', 'hvac', 'shutter'] };
-      function origin() {   // the mark the visitor touched, or the project's first mark; "not sure" starts from the middle of the house
-        var r = fig.getBoundingClientRect(), d = draw.getBoundingClientRect();
-        if (proj === 'unsure' || from < 0) { return [d.left - r.left + d.width * .45, d.top - r.top + d.height * .62]; }
-        var m = mks[from].getBoundingClientRect(); return [m.left - r.left + m.width / 2, m.top - r.top + m.height / 2];
-      }
-      function leaders(anim) {
-        var r = fig.getBoundingClientRect(); lines.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); lines.setAttribute('width', r.width); lines.setAttribute('height', r.height);
-        if (!proj) { lines.innerHTML = ''; return; }
-        var o = origin(), fit = ROUTES[proj], d = draw.getBoundingClientRect(), s = '';
-        tags.forEach(function (t) {
-          if (fit.indexOf(t.dataset.id) < 0) return;
-          var q = t.getBoundingClientRect(), side = q.left >= d.right - 4, tx = side ? q.left - r.left : q.left - r.left + q.width / 2, ty = side ? q.top - r.top + q.height / 2 : q.top - r.top;
-          var c = side ? [o[0] + (tx - o[0]) * .55, o[1], tx - (tx - o[0]) * .3, ty] : [o[0], o[1] + (ty - o[1]) * .55, tx, ty - (ty - o[1]) * .35];
-          s += '<path class="hs__ld hs__ld--' + P[t.dataset.id].k + '" d="M' + o[0].toFixed(1) + ' ' + o[1].toFixed(1) + ' C' + c.map(function (v) { return v.toFixed(1); }).join(' ') + ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + '"/><circle class="hs__dot" cx="' + tx.toFixed(1) + '" cy="' + ty.toFixed(1) + '" r="4.5"/>';
-        });
-        s += '<circle class="hs__src" cx="' + o[0].toFixed(1) + '" cy="' + o[1].toFixed(1) + '" r="6"/>';
-        lines.innerHTML = s;
-        if (anim && k.motion) gsap.fromTo(lines.querySelectorAll('.hs__ld'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .7, ease: 'power2.out', stagger: .08, clearProps: 'strokeDasharray,strokeDashoffset' });
-      }
-      function choose(p, mi, anim) {
-        proj = p; from = mi == null ? MK.findIndex(function (m) { return m[1] === p; }) : mi;
-        var fit = ROUTES[p], lit = PARTS[p];
-        pts.forEach(function (g) { g.classList.toggle('is-on', lit.indexOf(g.dataset.p) > -1); });
-        mks.forEach(function (m, i) { m.classList.toggle('is-on', m.dataset.p === p); m.setAttribute('aria-pressed', m.dataset.p === p ? 'true' : 'false'); });
-        tags.forEach(function (t) { var on = fit.indexOf(t.dataset.id) > -1; t.classList.toggle('is-on', on); t.classList.toggle('is-off', !on); });
-        pks.forEach(function (b) { var on = b.dataset.p === p; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
-        say.textContent = WHY[p];
-        leaders(anim);
-        if (anim && k.motion) gsap.fromTo(tags.filter(function (t) { return t.classList.contains('is-on'); }), { x: 10 }, { x: 0, duration: .45, ease: 'power3.out', stagger: .06, clearProps: 'transform' });
-      }
-      mks.forEach(function (m, i) { k.on(m, 'click', function () { choose(m.dataset.p, i, true); }); });
-      pks.forEach(function (b, i) {
-        k.on(b, 'click', function () { choose(b.dataset.p, null, true); });
-        k.on(b, 'keydown', function (e) {
-          var n = pks.length, j = /Right|Down/.test(e.key) ? (i + 1) % n : /Left|Up/.test(e.key) ? (i + n - 1) % n : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : null;
-          if (j === null) return; e.preventDefault(); pks[j].focus(); choose(pks[j].dataset.p, null, true);
-        });
-      });
-      pks[0].tabIndex = 0;
-      say.textContent = 'Tap a part of the house, or choose below.';
-      k.ro(fig, function () { leaders(false); });
-      foot(root, k);
-      EZ.reveal(k, root.querySelectorAll('.hs__head > *, .hs__pick'));
-      if (!k.motion) return;
-      // arriving: the drawing is drawn in, line by line, then the marks appear [S0362]
-      var once = false;
-      k.io(draw, function (en) {
-        if (!en.isIntersecting || once) return; once = true;
-        var ps = draw.querySelectorAll('.hs__svg path:not(.hs__fill), .hs__svg circle, .hs__svg rect');
-        gsap.fromTo(ps, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.1, ease: 'power2.inOut', stagger: .015, clearProps: 'strokeDasharray,strokeDashoffset' });
-        gsap.fromTo(mks, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .45, ease: 'back.out(2)', stagger: .06, delay: .9, clearProps: 'transform,opacity' });
-      }, { threshold: .25 });
     } }
   });
 })();

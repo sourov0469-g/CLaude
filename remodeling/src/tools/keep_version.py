@@ -190,6 +190,7 @@ def main():
     cp = os.path.join(HERE, 'css', 'sections', sid + '.css')
     jp = os.path.join(HERE, 'js', 'sections', sid + '.js')
     html, prefixes = strip_html(open(hp).read(), keep)
+    html = html.replace('id="%s-h-%s"' % (sid, keep), 'id="%s-h"' % sid)   # the kept heading takes the section's own id
     css = css_strip(open(cp).read(), prefixes)
     js = strip_js(open(jp).read(), keep)
     open(hp, 'w').write(html)
