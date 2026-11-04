@@ -1,0 +1,157 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 12
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "What’s Bugging You?"
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "four worries float as real buttons in the homeowner’s words; nothing answered yet",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "the house draws itself on when seen",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "tapping a worry pops it (specks burst out)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "the bubble becomes an \"After a storm\" chip; Owl’s answer and the Wise Check promise appear; \"1 of 4 answered\"",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "keyboard: Enter on \"How long has it got left?\" answers in plain words (no construction terms)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "tapping an answered chip reads its answer again without counting it twice",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "all four answered: the house gets its check badge and the closing line",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "answers come from lib/wise-data.js (three verbatim, one plain rewrite); no price, \"free\" or timing",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "next steps: Book a Wise Check (#book) and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "12",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

@@ -115,5 +115,25 @@ module.exports = {
     rec('labelled: "Illustrative photo"', await p.evaluate(S => /Illustrative photo/.test(document.querySelector(S + ' .lab').textContent), S));
     rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
     rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
+  },
+  '12': async (p, S, rec, txt) => {
+    await p.evaluate(S => document.querySelector(S).scrollIntoView({ block: 'start', behavior: 'instant' }), S); await p.waitForTimeout(1800);
+    const st = () => p.evaluate(S => { const r = document.querySelector(S); return { n: +r.dataset.answered, k: r.querySelector('.slot .k').textContent, b: r.querySelector('.slot b').textContent, t: (r.querySelector('.slot p.t') || {}).textContent, w: (r.querySelector('.slot p.w') || { textContent: '' }).textContent, ans: [...r.querySelectorAll('.bub')].map(x => x.classList.contains('ans')), lab: [...r.querySelectorAll('.bub')].map(x => x.getAttribute('aria-label')), all: r.querySelector('.stage').classList.contains('all') }; }, S);
+    let s = await st();
+    rec('four worries float as real buttons in the homeowner’s words; nothing answered yet', s.n === 0 && s.ans.every(a => !a) && s.lab[0] === 'Worry: Did the storm get us? Press for Owl’s answer.' && s.lab[3] === 'Worry: Is it OK up there? Press for Owl’s answer.' && s.b === 'Tap a worry.' && await p.evaluate(S => [...document.querySelectorAll(S + ' .bub')].every(b => b.tagName === 'BUTTON' && getComputedStyle(b).animationName === 'wc12f'), S));
+    rec('the house draws itself on when seen', await p.evaluate(S => document.querySelector(S + ' .stage').classList.contains('on') && getComputedStyle(document.querySelector(S + ' .house path')).strokeDashoffset === '0px', S));
+    await p.click(S + ' .bub >> nth=0', { force: true }); await p.waitForTimeout(120);
+    rec('tapping a worry pops it (specks burst out)', await p.evaluate(S => document.querySelectorAll(S + ' .spk').length > 0, S));
+    await p.waitForTimeout(500); s = await st();
+    rec('the bubble becomes an "After a storm" chip; Owl’s answer and the Wise Check promise appear; "1 of 4 answered"', s.n === 1 && s.ans[0] && s.k === '1 of 4 answered' && s.b === 'After a storm' && /easy to miss from the ground/.test(s.t) && s.w === 'A Wise Check finds out, and shows you photos and video.' && s.lab[0] === 'Answered: After a storm. Press to read the answer again.');
+    await p.focus(S + ' .bub >> nth=2'); await p.keyboard.press('Enter'); await p.waitForTimeout(500); s = await st();
+    rec('keyboard: Enter on "How long has it got left?" answers in plain words (no construction terms)', s.n === 2 && s.b === 'An older roof' && s.t === 'We look it over closely and tell you straight where it stands.');
+    await p.click(S + ' .bub >> nth=0', { force: true }); await p.waitForTimeout(400); s = await st();
+    rec('tapping an answered chip reads its answer again without counting it twice', s.n === 2 && s.b === 'After a storm' && s.k === '2 of 4 answered');
+    await p.click(S + ' .bub >> nth=1', { force: true }); await p.waitForTimeout(400); await p.click(S + ' .bub >> nth=3', { force: true }); await p.waitForTimeout(800); s = await st();
+    rec('all four answered: the house gets its check badge and the closing line', s.n === 4 && s.all && s.k === '4 of 4 answered' && /^All four answered\. That’s what a Wise Check is for/.test(s.w) && await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .badge')).scale === '1', S));
+    rec('answers come from lib/wise-data.js (three verbatim, one plain rewrite); no price, "free" or timing', await p.evaluate(S => { const c = OWL.WISE.cases, t = document.querySelector(S).textContent + [0, 1, 3].map(i => c[i].t).join(' '); return /Water travels before it shows/.test(c[1].t) && !/\bfree\b|\$\s?\d|no cost|no charge|\bminutes?\b|\bhours?\b|same.day/i.test(document.querySelector(S).textContent); }, S));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
+    rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
   }
 };
