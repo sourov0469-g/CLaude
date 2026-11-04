@@ -1243,6 +1243,7 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | Pass | Section | Version | Reference | Gate | Score | Status |
 |---|---|---|---|---|---|---|
-| 1 | Hero | **K, "Before \| After, on the seam"** (`?hero=k`) | MERSI (split-slider, opposing wipes, synced plate) on the firm's 6 documented before/after pairs | GATE-NEW-Hero-K.md | 8.46 PASS | Waiting for Muse's accept |
+| 1 | Hero | **K, "Before \| After, on the seam"** (`?hero=k`) | MERSI (split-slider, opposing wipes, synced plate) on the firm's 6 documented before/after pairs | GATE-NEW-Hero-K.md | 8.46 PASS | Accepted by Muse |
+| 1 | Services | **K, "Run the reel"** (`?services=k`) | Scout Motors (film-roll evidence: 9 trade reels, a gate, the projected frame) on 31 documented job photos | GATE-NEW-Services-K.md | 8.46 PASS | Waiting for Muse's accept |
 
-**Next, after the accept:** Services K.
+**Next, after the accept:** Visualiser K.

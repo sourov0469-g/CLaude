@@ -233,10 +233,48 @@ def heroK():
 <div class="kft"><p class="sub">{SUB}</p>{ct2}<p class="ksrc">{N} of our 177 before-and-after pairs · <a class="kjob" href="{json.loads(data)[0]['h']}" target="_blank" rel="noopener">See this job on our site</a></p></div></section>'''
 
 
+def svcK():
+    """Services K (new-versions addendum), Scout Motors' film-roll evidence. Each trade is a reel of the firm's own published
+    job photos (photos.json), each on the reel of a trade its record lists. The eight job photos already present at runtime
+    (window.__JOBS, 640 px) are reused by reference; the rest are embedded here once at 680 px."""
+    from PIL import Image
+    import base64 as _b, io
+    P = json.load(open(os.path.join(WORK, 'data', 'photos.json')))
+    REELS = [('Siding', 431, [0, 36, 28, 2]), ('Windows', 388, [42, 7, 6, 4]), ('Exterior painting', 320, [33, 38, 3, 30]),
+             ('Shingle roofing', 210, [10, 8, 9, 11]), ('Gutters', 121, [1, 3, 30]), ('Exterior doors', 109, [22, 20, 39, 40]),
+             ('Patio covers', 34, [16, 18, 19, 41]), ('Metal roofing', 31, [12, 14, 15]), ('Garage doors', 9, [26, 25, 24])]
+    J = [0, 10, 2, 7, 28, 33, 36, 42]   # window.__JOBS order (the only job photos present at runtime)
+    ref = lambda i: f'J:{J.index(i)}' if i in J else None
+    emb = {}
+    for _, _, fr in REELS:
+        for i in fr:
+            if ref(i) is None and i not in emb:
+                im = Image.open(os.path.join(WORK, 'dl', f'photo{i}-1400.webp')).convert('RGB'); im.thumbnail((680, 680)); b = io.BytesIO(); im.save(b, 'WEBP', quality=58, method=6)
+                emb[i] = 'data:image/webp;base64,' + _b.b64encode(b.getvalue()).decode()
+    rec = lambda i: {'r': ref(i) or f'E:{i}', 'alt': P[i]['alt'] or f"{P[i]['trades']} at a home in {P[i]['place']}, TX, by Austin Pro", 'p': P[i]['place'], 'w': P[i]['when'], 't': P[i]['trades'], 'h': 'https://www.austinprosiding.com' + P[i]['href']}
+    data = {'reels': [{'t': t, 'n': n, 'f': fr} for t, n, fr in REELS], 'ph': {i: rec(i) for _, _, fr in REELS for i in fr}, 'emb': emb}
+    t0, n0, f0 = REELS[0]
+    frames = ''.join(f'<li><button type="button" class="fr" data-i="{i}" aria-pressed="{str(not k).lower()}" tabindex="{-1 if k else 0}" aria-label="Frame {k + 1}: {html.escape(P[i]["place"])}, {P[i]["when"]}"><img alt="" decoding="async"><span class="ec" aria-hidden="true"><b>{k + 1:02d}A</b> {html.escape(P[i]["when"].upper())} · {html.escape(P[i]["place"].split(",")[0].upper())}</span></button></li>' for k, i in enumerate(f0))
+    reels = ''.join(f'<button type="button" class="rb" data-r="{k}" aria-pressed="{str(not k).lower()}"><span>{t}</span><b>{n}</b></button>' for k, (t, n, _) in enumerate(REELS))
+    p0 = P[f0[0]]
+    markup = f'''<section class="sec svk" id="services" aria-labelledby="svk-h">
+<div class="hd"><p class="kk">Services · on film</p><h2 class="sec-h" id="svk-h" data-split>Every trade, shown on real jobs.</h2><p class="sec-p">Pick a trade and run its reel. Every frame is a documented Austin Pro job, with its place and month.</p></div>
+<div class="reels" role="group" aria-label="Choose a trade (documented jobs)">{reels}</div>
+<figure class="scr" data-solid><div class="scw"><img class="pj" alt="{html.escape(rec(f0[0])['alt'])}" decoding="async"><i class="flk" aria-hidden="true"></i><span class="tc" aria-hidden="true">REEL <b>01</b> · FRAME <b>01</b></span></div>
+<figcaption aria-live="polite"><b class="cp">{html.escape(p0['place'])}</b><span class="cw">{p0['when']} · {html.escape(p0['trades'])}</span><a class="jl" href="https://www.austinprosiding.com{p0['href']}" target="_blank" rel="noopener">See this job on our site</a><div class="nv"><button type="button" class="go" data-go="-1" aria-label="Previous frame">{ARROW(-1)}</button><button type="button" class="go" data-go="1" aria-label="Next frame">{ARROW(1)}</button></div></figcaption></figure>
+<div class="film" data-solid><p class="rl" aria-hidden="true">REEL <b>01</b> · <span class="rt">{t0.upper()}</span> · <span class="rn">{n0}</span> DOCUMENTED JOBS · <span class="rfc">{len(f0)}</span> FRAMES</p>
+<ol class="strip" aria-label="Film strip: {t0}, {len(f0)} frames. Arrow keys move through the frames.">{frames}</ol><i class="gate" aria-hidden="true"></i></div>
+<div class="svft"><p class="ct" aria-live="polite"><b class="cn">{n0}</b> documented <span class="ctt">{t0.lower()}</span> jobs · <span class="cf">{len(f0)}</span> on this reel</p><div class="acts"><a class="btn key" href="{BOOK}">Book a free inspection<span class="tab">{I['cal']}</span></a><a class="callx" href="tel:+15125500000">{I['phone']}(512) 550-0000</a></div></div></section>'''
+    return markup, data
+
+
+SVK = svcK()
+
+
 VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
              ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
-    'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs'], ['e', 'Pick a part of the house'], ['f', 'The magazine spread'], ['g', 'Side by side'], ['h', 'Pull a board'], ['i', 'Three rings, one visit'], ['j', 'The index']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument'], ['e', 'Pairings to start from'], ['f', 'The colour map'], ['g', 'Four questions'], ['h', 'Colour in Austin light'], ['i', 'Look closer'], ['j', 'Your house, on the street']],
+    'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs'], ['e', 'Pick a part of the house'], ['f', 'The magazine spread'], ['g', 'Side by side'], ['h', 'Pull a board'], ['i', 'Three rings, one visit'], ['j', 'The index'], ['k', 'Run the reel']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument'], ['e', 'Pairings to start from'], ['f', 'The colour map'], ['g', 'Four questions'], ['h', 'Colour in Austin light'], ['i', 'Look closer'], ['j', 'Your house, on the street']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record'], ['e', '376 jobs, by maker'], ['f', 'How each window opens'], ['g', 'Frame colours, by maker'], ['h', 'Count your windows'], ['i', 'A window of words'], ['j', 'From opening to trim']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours'], ['e', 'The names they mention'], ['f', 'All 30, searchable'], ['g', 'A steady stream'], ['h', 'Letters from homeowners'], ['i', 'One line, poster size'], ['j', '474, and the 30 we show']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns'], ['e', 'Turn the dial'], ['f', 'Questions at each step'], ['g', 'Stamp the card'], ['h', 'One paragraph'], ['i', 'Your part, and ours'], ['j', 'Four numbers']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)'], ['e', 'Inspect at dusk'], ['f', 'Measure the opening'], ['g', 'Shingle from the eave up'], ['h', 'Level the window'], ['i', 'Nail it on the studs'], ['j', 'Name the parts']],
     'area': [['a', 'Thread board'], ['b', 'Street finder'], ['c', 'Drive round our jobs'], ['d', 'Every town, ranked'], ['e', 'Is your street on our books?'], ['f', 'The job board'], ['g', 'The streets we know'], ['h', 'Town by trade'], ['i', 'Miles from our door'], ['j', 'Year by year']], 'book': [['a', 'Work order'], ['b', 'Press the board'], ['c', 'The record, then the call'], ['d', 'One number'], ['e', 'The week, at a glance'], ['f', 'Come by the office'], ['g', 'Three ways in'], ['h', 'Write us a postcard'], ['i', 'Day and night'], ['j', 'The receipt']]}
@@ -279,7 +317,7 @@ if(h&&h.matches('.v1,.v2')){const k=h.matches('.v1')?'v1':'v2';window.__photo=ph
 const H2=window.__HERO2;if(h&&h.matches('.h4v')){h.querySelector('.back').src=H2.c3;h.querySelector('.front').src=H2.c3;}
 if(h&&h.matches('.h5v'))h.querySelectorAll('.c img').forEach(i=>i.src=H2.c2);
 if(h&&h.matches('.h6v'))h.querySelectorAll('.card').forEach(c=>c.querySelector('img').src=H2[c.dataset.img]);
-Hero2.wire();Hero3.wire();Hero4.wire();
+Hero2.wire();Hero3.wire();Hero4.wire();SvcK.wire();
 document.querySelectorAll('.slot video[data-film]').forEach(v=>{v.append(document.getElementById('film').content.cloneNode(true));
   v.poster=document.getElementById('film').dataset.poster;v.preload='auto';if(!RM){v.autoplay=true;v.load();v.play().catch(()=>{});}else v.load();});
 const PLAY=%PLAY%,PAUSE=%PAUSE%;
@@ -293,12 +331,12 @@ Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(docu
 def build():
     pre = prerender()
     css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS + PMODS)
-    css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('fx.css') + src('hf.css') + '.slot{display:contents}'
+    css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('svck.css') + src('fx.css') + src('hf.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
-    main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd'], 'e': pre['se'], 'f': pre['sf'], 'g': pre['sg'], 'h': pre['sh'], 'i': pre['si'], 'j': pre['sj']}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd'], 'e': pre['ve'], 'f': pre['vf'], 'g': pre['vg'], 'h': pre['vh'], 'i': pre['vi'], 'j': pre['vj']}) +
+    main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd'], 'e': pre['se'], 'f': pre['sf'], 'g': pre['sg'], 'h': pre['sh'], 'i': pre['si'], 'j': pre['sj'], 'k': SVK[0]}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd'], 'e': pre['ve'], 'f': pre['vf'], 'g': pre['vg'], 'h': pre['vh'], 'i': pre['vi'], 'j': pre['vj']}) +
             slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd'], 'e': pre['we'], 'f': pre['wf'], 'g': pre['wg'], 'h': pre['wh'], 'i': pre['wi'], 'j': pre['wj']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd'], 'e': pre['re'], 'f': pre['rf'], 'g': pre['rg'], 'h': pre['rh'], 'i': pre['ri'], 'j': pre['rj']}) +
             slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd'], 'e': pre['pe'], 'f': pre['pf'], 'g': pre['pg'], 'h': pre['ph'], 'i': pre['pi'], 'j': pre['pj']}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd'], 'e': pre['qe'], 'f': pre['qf'], 'g': pre['qg'], 'h': pre['qh'], 'i': pre['qi'], 'j': pre['qj']}) +
             slot('area', {'a': pre['aa'], 'b': pre['ab'], 'c': pre['ac'], 'd': pre['ad'], 'e': pre['ae'], 'f': pre['af'], 'g': pre['ag'], 'h': pre['ah'], 'i': pre['ai'], 'j': pre['aj']}) + slot('book', {'a': pre['ca'], 'b': pre['cb'], 'c': pre['cc'], 'd': pre['cd'], 'e': pre['ce'], 'f': pre['cf'], 'g': pre['cg'], 'h': pre['ch'], 'i': pre['ci'], 'j': pre['cj']}))
@@ -306,12 +344,12 @@ def build():
     PP_ = pre['PG_']
     pages = ''.join(f'<template data-page="{p}">' + ''.join(slot(x['slot'], {v[0]: PP_[x['slot'] + v[0]] for v in x['v']}) for x in PG['sections'][p]) + '</template>' for p, _ in PG['pages'] if PG['sections'][p])
     boot = BOOT.replace('Nav.wire();', 'PB.wire(document);' + ''.join(x['obj'] + '.wire(document);' for _, x in PSECS) + 'Nav.wire();').replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + src('hero4.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js')
+    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + src('hero4.js') + src('svck.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main data-page="home">{main}</main>{pages}{foot}{MBAR}{film}
-<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':
