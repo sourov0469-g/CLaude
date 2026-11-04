@@ -5,6 +5,20 @@ const F = 'file://' + path.resolve(__dirname, '../owl-reset.html');
 const [SEC, OUTD] = process.argv.slice(2); const OUT = path.resolve(__dirname, '..', OUTD || 'gates/reset/tmp'); fs.mkdirSync(OUT, { recursive: true });
 const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, info: info || '' }); console.log((ok ? 'PASS' : 'FAIL') + ' | ' + name + (info ? ' | ' + info : '')); };
 const EXTRA = {
+  nothing: async (p) => {
+    const at = async f => { await p.evaluate(f => { const s = document.getElementById('nothing'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * f); }, f); await p.waitForTimeout(1000); return p.evaluate(() => { const s = document.getElementById('nothing'), v = s.querySelector('video'); return { beat: +s.dataset.beat, t: v.currentTime, first: s.querySelector('.bt b').textContent, on: s.querySelector('.bt.on b').textContent, you: s.querySelector('.you .w').textContent, cur: [...s.querySelectorAll('.rail button')].findIndex(b => b.getAttribute('aria-current') === 'step') }; }); };
+    rec('a pinned stage: the section is at least 4 screens tall and its stage is position: sticky', await p.evaluate(() => { const s = document.getElementById('nothing'); return s.offsetHeight >= innerHeight * 4 && getComputedStyle(s.querySelector('.stage')).position === 'sticky'; }));
+    const a = await at(.1), b = await at(.5), c = await at(.9), d = await at(.5);
+    rec('scroll moves through five beats (1 at 10 %, 3 at 50 %, 5 at 90 %), the rail and the "meanwhile, you" line follow', a.beat === 1 && b.beat === 3 && c.beat === 5 && a.cur === 0 && c.cur === 4 && a.you === 'make coffee.' && c.you === 'open the front door.');
+    rec('the AirPods mechanism: scroll scrubs the film (currentTime rises with scroll and falls back when you scroll up)', b.t > a.t + 3 && c.t > b.t + 3 && Math.abs(d.t - b.t) < .6 && d.t < c.t, [a.t, b.t, c.t, d.t].map(x => x.toFixed(2)).join(' → '));
+    rec('the beats are Owl facts: Wise Check, Protect Your Nest wrap, GAF Systems Plus crew, three cleanup passes, the aftercare box with the 10-year workmanship warranty', await p.evaluate(() => { const t = [...document.querySelectorAll('#nothing .bt')].map(e => e.textContent).join(' '); return /Wise Check/.test(t) && /Protect Your Nest/.test(t) && /GAF Systems Plus/.test(t) && /magnet sweep/.test(t) && /project manager/.test(t) && /aftercare box/.test(t) && /10-year workmanship warranty/.test(t) && !/\bfree\b|\$|same.day|one day|hours?\b/i.test(t); }));
+    rec('with no case chosen, beat 1 reads "We look closely first."', a.first === 'We look closely first.');
+    await p.evaluate(() => document.getElementById('finder').scrollIntoView({ block: 'start', behavior: 'instant' })); await p.waitForTimeout(400); await p.click('#finder .pill >> nth=3'); await p.waitForTimeout(1400);
+    const e = await at(.05);
+    rec('tailored by section 2: choosing "After a storm" makes beat 1 "We check the storm damage first."', e.first === 'We check the storm damage first.');
+    await p.click('#nothing .rail button >> nth=3'); await p.waitForTimeout(1600);
+    rec('the rail jumps straight to a step (Clean)', await p.evaluate(() => +document.getElementById('nothing').dataset.beat) === 4);
+  },
   finder: async (p) => {
     const S = '#finder';
     await p.evaluate(() => document.getElementById('finder').scrollIntoView({ block: 'start', behavior: 'instant' })); await p.waitForTimeout(800);
@@ -48,6 +62,8 @@ const EXTRA = {
   const rm = await open('', { reducedMotion: 'reduce' });
   if (SEC === 'finder') { await rm.evaluate(() => document.getElementById('finder').scrollIntoView({ block: 'start', behavior: 'instant' })); await rm.click('#finder .pill >> nth=2'); await rm.waitForTimeout(150);
     rec('reduced motion: the choice swaps at once (no curtain animation), scene ready', await rm.evaluate(() => document.querySelector('#finder .gate').classList.contains('gone') && parseFloat(getComputedStyle(document.querySelector('#finder .gate')).transitionDuration) < .01 && document.getElementById('finder').dataset.case === 'shingles')); }
+  if (SEC === 'nothing') { await rm.evaluate(() => { const s = document.getElementById('nothing'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * .7); }); await rm.waitForTimeout(500);
+    rec('reduced motion: no film is loaded or scrubbed (the still poster stays), the beats still follow scroll', await rm.evaluate(() => { const s = document.getElementById('nothing'); return !s.querySelector('video').getAttribute('src') && +s.dataset.beat === 4; })); }
   const loops = await rm.evaluate(() => document.getAnimations().filter(a => a.effect && a.effect.getTiming().iterations === Infinity).length);
   rec('reduced motion: no looping animation', loops === 0, loops + ' looping'); await rm.close();
   rec('no page or console errors', errs.length === 0, errs.slice(0, 3).join(' | '));

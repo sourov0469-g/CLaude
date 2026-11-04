@@ -1,0 +1,117 @@
+{
+ "section": "nothing",
+ "total": 22,
+ "passed": 22,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "a pinned stage: the section is at least 4 screens tall and its stage is position: sticky",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "scroll moves through five beats (1 at 10 %, 3 at 50 %, 5 at 90 %), the rail and the \"meanwhile, you\" line follow",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the AirPods mechanism: scroll scrubs the film (currentTime rises with scroll and falls back when you scroll up)",
+   "ok": true,
+   "info": "1.52 → 7.75 → 13.99 → 7.79"
+  },
+  {
+   "name": "the beats are Owl facts: Wise Check, Protect Your Nest wrap, GAF Systems Plus crew, three cleanup passes, the aftercare box with the 10-year workmanship warranty",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "with no case chosen, beat 1 reads \"We look closely first.\"",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "tailored by section 2: choosing \"After a storm\" makes beat 1 \"We check the storm damage first.\"",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the rail jumps straight to a step (Clean)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no film is loaded or scrubbed (the still poster stays), the beats still follow scroll",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

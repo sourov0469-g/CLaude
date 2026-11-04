@@ -1,0 +1,178 @@
+{
+ "night1440": [
+  {
+   "f": 0.1,
+   "beat": "1",
+   "t": 1.54,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.3,
+   "beat": "2",
+   "t": 4.64,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.78,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.7,
+   "beat": "4",
+   "t": 10.87,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.9,
+   "beat": "5",
+   "t": 14,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.81,
+   "d": 15.56,
+   "first": "We find your leak first."
+  }
+ ],
+ "night390": [
+  {
+   "f": 0.1,
+   "beat": "1",
+   "t": 1.53,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.3,
+   "beat": "2",
+   "t": 4.64,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.77,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.7,
+   "beat": "4",
+   "t": 10.86,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.9,
+   "beat": "5",
+   "t": 14,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.78,
+   "d": 15.56,
+   "first": "We find your leak first."
+  }
+ ],
+ "safety1440": [
+  {
+   "f": 0.1,
+   "beat": "1",
+   "t": 1.56,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.3,
+   "beat": "2",
+   "t": 4.67,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.76,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.7,
+   "beat": "4",
+   "t": 10.87,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.9,
+   "beat": "5",
+   "t": 13.98,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.81,
+   "d": 15.56,
+   "first": "We find your leak first."
+  }
+ ],
+ "safety390": [
+  {
+   "f": 0.1,
+   "beat": "1",
+   "t": 1.53,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.3,
+   "beat": "2",
+   "t": 4.66,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.77,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.7,
+   "beat": "4",
+   "t": 10.86,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.9,
+   "beat": "5",
+   "t": 13.98,
+   "d": 15.56,
+   "first": "We find your leak first."
+  },
+  {
+   "f": 0.5,
+   "beat": "3",
+   "t": 7.78,
+   "d": 15.56,
+   "first": "We find your leak first."
+  }
+ ]
+}

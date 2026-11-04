@@ -1,0 +1,78 @@
+{
+ "stages": [
+  {
+   "top": 0,
+   "h": 28918,
+   "vids": 0,
+   "cls": "js no-touch css-sticky ac-ln-allow-transitions"
+  },
+  {
+   "top": 6796,
+   "h": 2250,
+   "vids": 1,
+   "cls": "sticky-element"
+  },
+  {
+   "top": 21851,
+   "h": 2584,
+   "vids": 0,
+   "cls": "all-access-pass inactive  "
+  }
+ ],
+ "chosen": {
+  "top": 6796,
+  "h": 2250,
+  "vids": 1,
+  "cls": "sticky-element"
+ },
+ "steps": [
+  {
+   "f": 0,
+   "times": [
+    2.69
+   ]
+  },
+  {
+   "f": 0.2,
+   "times": [
+    3.5
+   ]
+  },
+  {
+   "f": 0.4,
+   "times": [
+    4.3
+   ]
+  },
+  {
+   "f": 0.6,
+   "times": [
+    4.9
+   ]
+  },
+  {
+   "f": 0.8,
+   "times": [
+    4.9
+   ]
+  },
+  {
+   "f": 0.6,
+   "times": [
+    4.9
+   ]
+  },
+  {
+   "f": 0.4,
+   "times": [
+    4.3
+   ]
+  },
+  {
+   "f": 0.2,
+   "times": [
+    3.5
+   ]
+  }
+ ]
+}

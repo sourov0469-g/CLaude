@@ -1,0 +1,67 @@
+<section class="rs nothing" id="nothing" data-sky="dusk" aria-labelledby="nt-h">
+<style>
+.nothing{height:540vh}
+.nothing .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep);color:#fff}
+.nothing video,.nothing .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nothing .tint{position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--deep) 88%,transparent) 0%,color-mix(in srgb,var(--deep) 55%,transparent) 42%,color-mix(in srgb,var(--deep) 10%,transparent) 75%),linear-gradient(0deg,color-mix(in srgb,var(--deep) 70%,transparent),transparent 40%)}
+.nothing .say{position:absolute;left:clamp(18px,4.5vw,72px);top:clamp(96px,15vh,150px);margin:0;font-size:clamp(40px,6.4vw,104px);font-weight:900;line-height:.95;letter-spacing:-.045em;max-width:9ch}
+.nothing .say em{font-style:normal;color:var(--acc)}
+.nothing .beats{position:absolute;left:clamp(18px,4.5vw,72px);bottom:clamp(110px,16vh,170px);width:min(560px,calc(100% - 36px));min-height:150px}
+.nothing .bt{position:absolute;left:0;right:0;bottom:0;opacity:0;translate:0 30px;transition:opacity .45s,translate .6s cubic-bezier(.16,1,.3,1)}
+.nothing .bt.on{opacity:1;translate:none}
+.nothing .bt.past{opacity:0;translate:0 -30px}
+.nothing .bt .n{display:inline-block;margin-bottom:12px;padding:5px 11px;border-radius:999px;background:var(--acc);color:var(--ink);font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.nothing .bt b{display:block;font-size:clamp(28px,3vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.025em}
+.nothing .bt p{margin:10px 0 0;font-size:clamp(16px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.84);max-width:44ch}
+.nothing .rail{position:absolute;right:clamp(14px,3vw,48px);top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:6px}
+.nothing .rail button{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:44px;padding:0 4px 0 12px;border:0;background:none;color:rgba(255,255,255,.6);font:inherit;font-size:15px;font-weight:800;cursor:pointer}
+.nothing .rail button i{width:12px;height:12px;border-radius:50%;border:2px solid currentColor;transition:background .3s,scale .3s}
+.nothing .rail button.on{color:#fff}.nothing .rail button.on i{background:var(--acc);border-color:var(--acc);scale:1.3}
+.nothing .rail button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.nothing .you{position:absolute;right:clamp(14px,3vw,48px);bottom:clamp(96px,13vh,120px);display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:15px;font-weight:700}
+.nothing .you span.k{padding:4px 9px;border-radius:999px;background:#fff;color:var(--ink);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+.nothing .you .w{display:inline-block;min-width:11ch;transition:opacity .3s}
+.nothing .tag{position:absolute;right:clamp(14px,3vw,48px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.35);font-size:12px;font-weight:700}
+.nothing .bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.14)}
+.nothing .bar i{display:block;height:100%;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(var(--p,0))}
+@media (max-width:860px){.nothing .rail{top:auto;bottom:clamp(96px,13vh,120px);right:auto;left:18px;translate:none;flex-direction:row;gap:0}.nothing .rail button span{display:none}.nothing .rail button{padding:0 8px;min-width:44px;justify-content:center}.nothing .beats{bottom:calc(clamp(96px,13vh,120px) + 56px)}.nothing .you{top:252px;bottom:auto;left:18px;right:auto;font-size:13px}.nothing .tag{display:none}.nothing .say{top:150px}}
+@media (prefers-reduced-motion:reduce){.nothing .bt{transition:none}}
+</style>
+<div class="stage">
+ <img class="poster" src="{{A:crew-poster.webp}}" alt="">
+ <video muted playsinline preload="auto" aria-hidden="true"></video>
+ <div class="tint"></div>
+ <span class="tag">Owl’s crew film</span>
+ <h2 class="say" id="nt-h">Here’s your part: <em>nothing.</em></h2>
+ <div class="beats" aria-live="polite"></div>
+ <nav class="rail" aria-label="What we do"></nav>
+ <p class="you" aria-live="off"><span class="k">Meanwhile, you</span><span class="w"></span></p>
+ <span class="bar" aria-hidden="true"><i></i></span>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), v = sec.querySelector('video'), beats = sec.querySelector('.beats'), rail = sec.querySelector('.rail'), you = sec.querySelector('.you .w'), bar = sec.querySelector('.bar');
+  var FIRST = { leak: 'We find your leak first.', stain: 'We look above your stain first.', shingles: 'We check where the shingles went.', storm: 'We check the storm damage first.', old: 'We tell you where it stands.', unsure: 'We look closely first.' };
+  var B = [
+    { n: 'Look', b: 'We look closely first.', p: 'A Wise Check: the roof and the attic, with photos and video for you.', y: 'make coffee.' },
+    { n: 'Wrap', b: 'We wrap your home and lawn.', p: 'Protect Your Nest: mesh from the eaves down and a tarp over the lawn.', y: 'go to work.' },
+    { n: 'Roof', b: 'We fix it, or put on your new roof.', p: 'For a new roof: GAF materials, installed by our GAF Systems Plus certified crew.', y: 'pick up the kids.' },
+    { n: 'Clean', b: 'We clean up, three times.', p: 'The crew, a magnet sweep for nails, then the project manager’s walk.', y: 'make dinner.' },
+    { n: 'Box', b: 'We leave you a box.', p: 'The aftercare box, left with you when we go. Backed by our 10-year workmanship warranty.', y: 'open the front door.' }];
+  var els = B.map(function(x, i){ var d = document.createElement('div'); d.className = 'bt'; d.innerHTML = '<span class="n">' + (i + 1) + ' · ' + x.n + '</span><b></b><p></p>'; d.querySelector('b').textContent = x.b; d.querySelector('p').textContent = x.p; beats.appendChild(d); return d; });
+  var rb = B.map(function(x, i){ var b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<span>' + x.n + '</span><i aria-hidden="true"></i>'; b.setAttribute('aria-label', 'Step ' + (i + 1) + ': ' + x.b);
+    b.addEventListener('click', function(){ var top = sec.getBoundingClientRect().top + scrollY, span = sec.offsetHeight - innerHeight; scrollTo({ top: top + span * ((i + .5) / B.length), behavior: OWL.reduce ? 'instant' : 'smooth' }); }); rail.appendChild(b); return b; });
+  function tailor(k){ var t = FIRST[k] || B[0].b; els[0].querySelector('b').textContent = t; rb[0].setAttribute('aria-label', 'Step 1: ' + t); sec.dataset.case = k || ''; }
+  tailor(RESET.case && RESET.case()); document.addEventListener('owl:case', function(e){ tailor(e.detail); });
+  var cur = -1, want = 0, dur = 0, ready = false;
+  function show(i){ if (i === cur) return; els.forEach(function(e, j){ e.classList.toggle('on', j === i); e.classList.toggle('past', j < i); }); rb.forEach(function(b, j){ b.classList.toggle('on', j === i); if (j === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    you.textContent = B[i].y; cur = i; sec.dataset.beat = i + 1; }
+  function read(){ var r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight, p = Math.max(0, Math.min(1, -r.top / span)); sec.dataset.p = p.toFixed(3);
+    bar.style.setProperty('--p', p.toFixed(4)); show(Math.min(B.length - 1, Math.floor(p * B.length))); want = p; }
+  /* the AirPods mechanism: scroll progress drives the film's currentTime (scrubbed, reversible) */
+  function scrub(){ if (ready && dur){ var t = Math.min(dur - .05, want * dur); if (Math.abs(v.currentTime - t) > 1 / 30 && !v.seeking) v.currentTime = t; } requestAnimationFrame(scrub); }
+  if (!OWL.reduce){ v.src = window.RESET_MEDIA.crew; v.addEventListener('loadedmetadata', function(){ dur = v.duration; ready = true; sec.querySelector('.poster').style.opacity = 0; v.pause(); }); requestAnimationFrame(scrub); }
+  addEventListener('scroll', read, { passive: true }); addEventListener('resize', read); read();
+})();
+</script>
+</section>
