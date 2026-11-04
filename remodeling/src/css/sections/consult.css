@@ -230,3 +230,106 @@
   html body main .ct__end .go { width: 100%; }
   html body main .ct__end .ct__go { width: 100%; justify-content: center; }
 }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Tell Us V3 "The postcard" — stationery: the enquiry as a two-sided card (Boffi: rooms as chapters).
+   Front: the room you choose (the firm's own photograph, captioned). Back: your message and the firm's own fields,
+   addressed to Sales@elbazconstruction.com. One rotateY turns it [S0062]; the side you cannot see is inert.
+   ====================================================================================================================== */
+.pc__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--s6) var(--s8, 64px); align-items: start; }
+.pc__side { display: grid; gap: var(--s4); align-content: start; position: sticky; top: calc(var(--nav-h, 72px) + var(--s4)); }
+.pc__side .t-head { margin: 0; }
+.pc__lead { margin: 0; max-width: 40ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+.pc__call { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4); }
+.pc__st { margin: 0; display: inline-flex; align-items: center; gap: 8px; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.pc__lamp { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border-strong, #8a8580); }
+.pc__st.is-open .pc__lamp { background: #3f9a5a; box-shadow: 0 0 0 4px color-mix(in srgb, #3f9a5a 18%, transparent); }
+.pc__facts { margin: 0; font: 400 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); }
+
+/* the room choice [S1018, S1441] */
+.pc__rooms { margin: 0 0 var(--s4); padding: 0; border: 0; min-width: 0; }
+.pc__lg { padding: 0; margin-bottom: var(--s2); font: 600 1rem/1.3 var(--f-display); }
+.pc__chs { display: flex; flex-wrap: wrap; gap: 6px; }
+.pc__ch { position: relative; cursor: pointer; }
+.pc__ch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pc__ch span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--color-border-strong, var(--color-text)); background: var(--color-surface); font: 600 .9375rem/1.1 var(--f-text); transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out); }
+.pc__ch input:checked + span { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.pc__ch input:focus-visible + span { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .pc__ch:hover input:not(:checked) + span { border-color: var(--color-text); background: var(--color-bg-subtle); } }
+.pc__other { display: block; margin-top: var(--s2); }
+.pc__other input { width: min(100%, 360px); min-height: 46px; padding: 0 var(--s3); font: 500 1rem/1 var(--f-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: var(--radius); }
+.pc__other[hidden] { display: none; }
+
+/* the card: two faces in one grid cell, so it is as tall as its taller side */
+.pc__stage { perspective: 1600px; }
+.pc__card { position: relative; display: grid; transform-style: preserve-3d; transition: transform 760ms cubic-bezier(.65, 0, .35, 1); }
+.pc__card.is-back { transform: rotateY(180deg); }
+.pc__face {
+  grid-area: 1 / 1; position: relative; min-height: 0; border-radius: 6px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 26px 44px -26px rgba(0,0,0,.45), 0 0 0 1px color-mix(in srgb, var(--color-text) 12%, transparent);
+}
+.pc__front { background: var(--color-bg-muted); }
+.pc__front::before { content: ""; display: block; padding-top: 66.667%; }   /* at least 3:2, and as tall as the back when the back is taller */
+.pc__pics, .pc__pics img, .pc__four { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pc__pics img { object-fit: cover; display: block; }
+.pc__four { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--color-surface); }
+.pc__four img { position: static; }
+.pc__note { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--s6); background: var(--color-surface); text-align: center; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1.15 var(--f-display); color: var(--color-text); }
+.pc__lbl { position: absolute; left: var(--s4); bottom: var(--s4); margin: 0; padding: 8px 14px; border-radius: 4px; background: var(--color-surface); font: 600 1.0625rem/1.2 var(--f-display); box-shadow: 0 8px 18px -10px rgba(0,0,0,.5); }
+.pc__front.is-set .pc__lbl { background: var(--color-text); color: var(--color-bg); }
+.pc__cap { position: absolute; right: var(--s4); bottom: var(--s4); max-width: 46%; margin: 0; padding: 5px 9px; border-radius: 4px; background: color-mix(in srgb, var(--color-surface) 92%, transparent); font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); text-align: right; }
+.pc__cap:empty { display: none; }
+.pc__stamp { position: absolute; right: var(--s4); top: var(--s4); width: 54px; height: 64px; display: grid; place-items: center; background: var(--color-surface); outline: 2px dashed color-mix(in srgb, var(--color-text) 30%, transparent); outline-offset: -5px; }
+.pc__stamp svg, .pc__pst svg { width: 26px; height: 26px; fill: none; stroke: var(--color-accent-solid); stroke-width: 5; }
+
+/* the back: message left, address right, a dividing rule; paper [S1425] */
+.pc__back { transform: rotateY(180deg); display: grid; grid-template-columns: 1fr 1fr; background: var(--color-surface); padding: var(--s5); gap: 0 var(--s5); }
+.pc__msg { display: grid; align-content: start; gap: var(--s2); padding-right: var(--s5); border-right: 1.5px solid color-mix(in srgb, var(--color-text) 20%, transparent); }
+.pc__fl { display: block; font: 600 .875rem/1.3 var(--f-text); }
+.pc__fl span { font-weight: 400; color: var(--color-text-secondary); }
+.pc__ta { width: 100%; resize: vertical; min-height: 128px; padding: 6px 2px; border: 0; background: repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--color-text) 22%, transparent) 31px 32px); font: 400 1rem/32px var(--f-text); color: var(--color-text); }
+.pc__ta:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pc__how { margin: var(--s2) 0 0; padding: 0; border: 0; min-width: 0; }
+.pc__hows { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pc__hw { position: relative; cursor: pointer; }
+.pc__hw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pc__hw span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--color-border-strong, var(--color-text)); font: 600 .875rem/1.1 var(--f-text); }
+.pc__hw input:checked + span { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.pc__hw input:focus-visible + span { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pc__addr { display: grid; align-content: start; gap: var(--s2); }
+.pc__post { display: flex; justify-content: flex-end; align-items: center; gap: var(--s3); }
+.pc__pm { display: grid; place-items: center; width: 92px; height: 54px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--color-text) 35%, transparent); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); transform: rotate(-8deg); }
+.pc__pst { width: 54px; height: 64px; display: grid; place-items: center; outline: 2px dashed color-mix(in srgb, var(--color-text) 30%, transparent); outline-offset: -5px; }
+.pc__to { margin: var(--s2) 0 0; font: 600 1rem/1.3 var(--f-text); }
+.pc__to span, .pc__from { font: 600 .8125rem/1.2 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); margin-right: 6px; }
+.pc__from { margin: var(--s2) 0 0; }
+.pc__f input { width: 100%; min-height: 44px; padding: 0 2px; border: 0; border-bottom: 1.5px solid color-mix(in srgb, var(--color-text) 45%, transparent); background: transparent; font: 500 1rem/1 var(--f-text); color: var(--color-text); border-radius: 0; }
+.pc__f input:focus-visible { outline: none; border-bottom-color: var(--color-accent-solid); box-shadow: 0 2px 0 var(--color-accent-solid); }
+.pc__f input[aria-invalid="true"] { border-bottom-color: var(--color-danger-text); }
+.pc__f .c-err { margin-top: 4px; }
+
+.pc__turn {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: var(--s4); padding: 0 18px;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius); font: 600 .9375rem/1 var(--f-text); cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.pc__turn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pc__turn.is-ready:not([aria-pressed="true"]) { background: var(--color-text); color: var(--color-bg); }
+.pc__turn:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .pc__turn:hover { background: var(--color-text); color: var(--color-bg); } }
+.pc__send { display: grid; gap: var(--s3); margin-top: var(--s5); padding-top: var(--s4); border-top: 1px solid var(--color-border); }
+
+@media (max-width: 999px) {
+  .pc__grid { grid-template-columns: 1fr; }
+  .pc__side { position: static; }
+}
+@media (max-width: 599px) {
+  .pc__back { grid-template-columns: 1fr; padding: var(--s4); gap: var(--s4); }
+  .pc__msg { order: 2; padding-right: 0; border-right: 0; padding-top: var(--s4); border-top: 1.5px solid color-mix(in srgb, var(--color-text) 20%, transparent); }
+  .pc__addr { order: 1; }
+  .pc__lbl { left: var(--s3); bottom: var(--s3); }
+  .pc__cap { display: none; }
+  .pc__stamp { right: var(--s3); top: var(--s3); width: 44px; height: 52px; }
+  .pc__turn { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .pc__card { transition: none; } .pc__ch span, .pc__turn { transition: none; } }

@@ -611,3 +611,25 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Tell Us V3, the last section of pass 2.
+
+## New versions, pass 2 · Tell Us V3 "The postcard" (2026-11-04). Pass 2 complete.
+- **Muse accepted** Where We Build V3.
+- **One new version:** `consult` V3.
+  - V1 (the guided sentence) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?consult=3`.
+- **Governing reference:** Boffi (rooms as chapters).
+- **Style family:** stationery, a postcard.
+- **Signature move:** the postcard.
+  - Choose the room and the front becomes one of the firm's own captioned photographs.
+  - Turn the card over (one rotateY; the hidden side inert) and the back carries the firm's own fields, addressed to Sales@elbazconstruction.com.
+  - The same mailto as V1, with consent, never "sent". The call and the live open line sit beside the card.
+- **Lock fix during the build:** a postmark carrying the licence number alone was replaced with "Miami, FL".
+- **Gate:** `GATE-NEW-Consult-V3.md`, self-scored 8.2 (D8 U8 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/consult-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- **Pass 2 is complete:** all seven homepage sections carry a third version, and the defaults are unchanged.
+- Stopped for Muse's accept.

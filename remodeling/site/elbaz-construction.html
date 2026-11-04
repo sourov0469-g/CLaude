@@ -3228,6 +3228,105 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   html body main .ct__end .ct__go { width: 100%; justify-content: center; }
 }
 
+
+.pc__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--s6) var(--s8, 64px); align-items: start; }
+.pc__side { display: grid; gap: var(--s4); align-content: start; position: sticky; top: calc(var(--nav-h, 72px) + var(--s4)); }
+.pc__side .t-head { margin: 0; }
+.pc__lead { margin: 0; max-width: 40ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+.pc__call { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4); }
+.pc__st { margin: 0; display: inline-flex; align-items: center; gap: 8px; font: 600 .875rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.pc__lamp { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border-strong, #8a8580); }
+.pc__st.is-open .pc__lamp { background: #3f9a5a; box-shadow: 0 0 0 4px color-mix(in srgb, #3f9a5a 18%, transparent); }
+.pc__facts { margin: 0; font: 400 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); }
+
+
+.pc__rooms { margin: 0 0 var(--s4); padding: 0; border: 0; min-width: 0; }
+.pc__lg { padding: 0; margin-bottom: var(--s2); font: 600 1rem/1.3 var(--f-display); }
+.pc__chs { display: flex; flex-wrap: wrap; gap: 6px; }
+.pc__ch { position: relative; cursor: pointer; }
+.pc__ch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pc__ch span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--color-border-strong, var(--color-text)); background: var(--color-surface); font: 600 .9375rem/1.1 var(--f-text); transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out); }
+.pc__ch input:checked + span { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.pc__ch input:focus-visible + span { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .pc__ch:hover input:not(:checked) + span { border-color: var(--color-text); background: var(--color-bg-subtle); } }
+.pc__other { display: block; margin-top: var(--s2); }
+.pc__other input { width: min(100%, 360px); min-height: 46px; padding: 0 var(--s3); font: 500 1rem/1 var(--f-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: var(--radius); }
+.pc__other[hidden] { display: none; }
+
+
+.pc__stage { perspective: 1600px; }
+.pc__card { position: relative; display: grid; transform-style: preserve-3d; transition: transform 760ms cubic-bezier(.65, 0, .35, 1); }
+.pc__card.is-back { transform: rotateY(180deg); }
+.pc__face {
+  grid-area: 1 / 1; position: relative; min-height: 0; border-radius: 6px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 26px 44px -26px rgba(0,0,0,.45), 0 0 0 1px color-mix(in srgb, var(--color-text) 12%, transparent);
+}
+.pc__front { background: var(--color-bg-muted); }
+.pc__front::before { content: ""; display: block; padding-top: 66.667%; }   
+.pc__pics, .pc__pics img, .pc__four { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pc__pics img { object-fit: cover; display: block; }
+.pc__four { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--color-surface); }
+.pc__four img { position: static; }
+.pc__note { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--s6); background: var(--color-surface); text-align: center; font: 400 clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem)/1.15 var(--f-display); color: var(--color-text); }
+.pc__lbl { position: absolute; left: var(--s4); bottom: var(--s4); margin: 0; padding: 8px 14px; border-radius: 4px; background: var(--color-surface); font: 600 1.0625rem/1.2 var(--f-display); box-shadow: 0 8px 18px -10px rgba(0,0,0,.5); }
+.pc__front.is-set .pc__lbl { background: var(--color-text); color: var(--color-bg); }
+.pc__cap { position: absolute; right: var(--s4); bottom: var(--s4); max-width: 46%; margin: 0; padding: 5px 9px; border-radius: 4px; background: color-mix(in srgb, var(--color-surface) 92%, transparent); font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); text-align: right; }
+.pc__cap:empty { display: none; }
+.pc__stamp { position: absolute; right: var(--s4); top: var(--s4); width: 54px; height: 64px; display: grid; place-items: center; background: var(--color-surface); outline: 2px dashed color-mix(in srgb, var(--color-text) 30%, transparent); outline-offset: -5px; }
+.pc__stamp svg, .pc__pst svg { width: 26px; height: 26px; fill: none; stroke: var(--color-accent-solid); stroke-width: 5; }
+
+
+.pc__back { transform: rotateY(180deg); display: grid; grid-template-columns: 1fr 1fr; background: var(--color-surface); padding: var(--s5); gap: 0 var(--s5); }
+.pc__msg { display: grid; align-content: start; gap: var(--s2); padding-right: var(--s5); border-right: 1.5px solid color-mix(in srgb, var(--color-text) 20%, transparent); }
+.pc__fl { display: block; font: 600 .875rem/1.3 var(--f-text); }
+.pc__fl span { font-weight: 400; color: var(--color-text-secondary); }
+.pc__ta { width: 100%; resize: vertical; min-height: 128px; padding: 6px 2px; border: 0; background: repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--color-text) 22%, transparent) 31px 32px); font: 400 1rem/32px var(--f-text); color: var(--color-text); }
+.pc__ta:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pc__how { margin: var(--s2) 0 0; padding: 0; border: 0; min-width: 0; }
+.pc__hows { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pc__hw { position: relative; cursor: pointer; }
+.pc__hw input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pc__hw span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--color-border-strong, var(--color-text)); font: 600 .875rem/1.1 var(--f-text); }
+.pc__hw input:checked + span { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.pc__hw input:focus-visible + span { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pc__addr { display: grid; align-content: start; gap: var(--s2); }
+.pc__post { display: flex; justify-content: flex-end; align-items: center; gap: var(--s3); }
+.pc__pm { display: grid; place-items: center; width: 92px; height: 54px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--color-text) 35%, transparent); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); transform: rotate(-8deg); }
+.pc__pst { width: 54px; height: 64px; display: grid; place-items: center; outline: 2px dashed color-mix(in srgb, var(--color-text) 30%, transparent); outline-offset: -5px; }
+.pc__to { margin: var(--s2) 0 0; font: 600 1rem/1.3 var(--f-text); }
+.pc__to span, .pc__from { font: 600 .8125rem/1.2 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); margin-right: 6px; }
+.pc__from { margin: var(--s2) 0 0; }
+.pc__f input { width: 100%; min-height: 44px; padding: 0 2px; border: 0; border-bottom: 1.5px solid color-mix(in srgb, var(--color-text) 45%, transparent); background: transparent; font: 500 1rem/1 var(--f-text); color: var(--color-text); border-radius: 0; }
+.pc__f input:focus-visible { outline: none; border-bottom-color: var(--color-accent-solid); box-shadow: 0 2px 0 var(--color-accent-solid); }
+.pc__f input[aria-invalid="true"] { border-bottom-color: var(--color-danger-text); }
+.pc__f .c-err { margin-top: 4px; }
+
+.pc__turn {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: var(--s4); padding: 0 18px;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius); font: 600 .9375rem/1 var(--f-text); cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.pc__turn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pc__turn.is-ready:not([aria-pressed="true"]) { background: var(--color-text); color: var(--color-bg); }
+.pc__turn:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .pc__turn:hover { background: var(--color-text); color: var(--color-bg); } }
+.pc__send { display: grid; gap: var(--s3); margin-top: var(--s5); padding-top: var(--s4); border-top: 1px solid var(--color-border); }
+
+@media (max-width: 999px) {
+  .pc__grid { grid-template-columns: 1fr; }
+  .pc__side { position: static; }
+}
+@media (max-width: 599px) {
+  .pc__back { grid-template-columns: 1fr; padding: var(--s4); gap: var(--s4); }
+  .pc__msg { order: 2; padding-right: 0; border-right: 0; padding-top: var(--s4); border-top: 1.5px solid color-mix(in srgb, var(--color-text) 20%, transparent); }
+  .pc__addr { order: 1; }
+  .pc__lbl { left: var(--s3); bottom: var(--s3); }
+  .pc__cap { display: none; }
+  .pc__stamp { right: var(--s3); top: var(--s3); width: 44px; height: 52px; }
+  .pc__turn { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .pc__card { transition: none; } .pc__ch span, .pc__turn { transition: none; } }
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["HomeAndConstructionBusiness","GeneralContractor"],"name":"Elbaz Construction and Remodeling","url":"https://elbazconstructioncorp.com/","telephone":"+1-754-236-0675","email":"Sales@elbazconstruction.com","address":{"@type":"PostalAddress","streetAddress":"19 W Flagler St, Suite 310","addressLocality":"Miami","addressRegion":"FL","postalCode":"33130","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"19:00"}],"areaServed":[{"@type":"AdministrativeArea","name":"Miami-Dade County"},{"@type":"AdministrativeArea","name":"Broward County"},{"@type":"AdministrativeArea","name":"Palm Beach County"}],"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"license","name":"Florida Certified Building Contractor","identifier":"CBC1265280"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"343"},"sameAs":["https://www.instagram.com/elbazconstruction/","https://www.facebook.com/elbazconstruction/"]}
@@ -4131,6 +4230,79 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         </div>
       </div>
       <p class="ct__facts">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed &middot; 19 W Flagler St #310, Miami, FL 33130</p>
+    </div>
+  </div>
+
+  
+  <div class="ver pc" data-v="3">
+    <div class="wrap pc__grid">
+      <div class="pc__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Consultation</p>
+        <h2 class="t-head" id="consult-h-3">Send us a card. <span class="acc">Your room on the front.</span></h2>
+        <p class="pc__lead">Choose the room you want to change, turn the card over and write on the back. It opens in your own email app.</p>
+        <div class="pc__call">
+          <a class="btn pc__tel" href="tel:+17542360675"><span class="btn__label">Call <span class="nums">(754)&nbsp;236&#8209;0675</span></span></a>
+          <p class="pc__st" aria-live="polite"><span class="pc__lamp" aria-hidden="true"></span><span class="pc__stt">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+        </div>
+        <p class="pc__facts">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed &middot; 19 W Flagler St #310, Miami, FL 33130</p>
+      </div>
+      <form class="pc__form c-form" novalidate aria-labelledby="consult-h-3">
+        <fieldset class="pc__rooms">
+          <legend class="pc__lg">I would like to talk about</legend>
+          <div class="pc__chs">
+            <label class="pc__ch"><input type="radio" name="project" value="the kitchen" data-k="k-navy-shaker"><span>the kitchen</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="a bathroom" data-k="b-polished-concrete"><span>a bathroom</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="the whole home" data-k="w-farmhouse"><span>the whole home</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="outdoor living" data-k="o-waterfront"><span>outdoor living</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="other"><span>something else</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="not sure yet"><span>not sure yet</span></label>
+          </div>
+          <span class="pc__other" hidden><label class="sr-only" for="pc-other">What you would like to talk about</label><input id="pc-other" name="other" type="text" placeholder="in a few words"></span>
+          <span class="c-err" id="pc-project-err" hidden></span>
+        </fieldset>
+        <div class="pc__stage">
+          <div class="pc__card">
+            <div class="pc__face pc__front">
+              <div class="pc__pics"></div>
+              <p class="pc__lbl"><span class="pc__lt">Choose a room above</span></p>
+              <p class="pc__cap"></p>
+              <span class="pc__stamp" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg></span>
+            </div>
+            <div class="pc__face pc__back">
+              <div class="pc__msg">
+                <label class="pc__fl" for="pc-notes">Anything else you want us to know <span>(optional)</span></label>
+                <textarea id="pc-notes" name="notes" rows="4" class="pc__ta"></textarea>
+                <fieldset class="pc__how">
+                  <legend class="pc__fl">The easiest way to reach me is</legend>
+                  <div class="pc__hows">
+                    <label class="pc__hw"><input type="radio" name="contact" value="Phone"><span>a call</span></label>
+                    <label class="pc__hw"><input type="radio" name="contact" value="Text"><span>a text</span></label>
+                    <label class="pc__hw"><input type="radio" name="contact" value="Email"><span>an email</span></label>
+                    <label class="pc__hw"><input type="radio" name="contact" value="Whichever is easiest" checked><span>whichever is easiest</span></label>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="pc__addr">
+                <div class="pc__post" aria-hidden="true"><span class="pc__pm"><b>Miami, FL</b></span><span class="pc__pst"><svg viewBox="0 0 48 48" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg></span></div>
+                <p class="pc__to"><span>To</span> Sales@elbazconstruction.com</p>
+                <p class="pc__from">From</p>
+                <div class="pc__f"><label class="pc__fl" for="pc-name">Full name</label><input id="pc-name" name="name" type="text" autocomplete="name" required><span class="c-err" id="pc-name-err" hidden></span></div>
+                <div class="pc__f"><label class="pc__fl" for="pc-address">Property address</label><input id="pc-address" name="address" type="text" autocomplete="street-address" required><span class="c-err" id="pc-address-err" hidden></span></div>
+                <div class="pc__f"><label class="pc__fl" for="pc-phone">Phone</label><input id="pc-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required><span class="c-err" id="pc-phone-err" hidden></span></div>
+                <div class="pc__f"><label class="pc__fl" for="pc-email">Email</label><input id="pc-email" name="email" type="email" autocomplete="email" required><span class="c-err" id="pc-email-err" hidden></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="pc__turn" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg><span class="pc__tl">Turn the card over</span></button>
+        <div class="pc__send">
+          <label class="c-consent"><input type="checkbox" name="consent" id="pc-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="pc-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this note addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <div class="go"><button type="submit" class="btn pc__go"><span class="btn__label">Open in email</span></button><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -9517,6 +9689,93 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       function start() { if (started) return; started = true; ask(0); }
       if (!k.motion) start();
       else { var sti = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: start }); k.add(function () { sti.kill(); }); k.on(win, 'focusin', start); }
+    } },
+
+    /* NEW VERSIONS · V3 "The postcard" (governing reference: Boffi, rooms as chapters). The room you choose is the front of
+       the card; turn it over and the back carries the firm's own fields, addressed to Sales@elbazconstruction.com. The
+       same note as V1, composed in the visitor's mail app with consent, never claimed as sent [S0062, S1018, S1442]. */
+    3: { init: function (root, k) {
+      var form = root.querySelector('.pc__form'), card = root.querySelector('.pc__card'), front = root.querySelector('.pc__front'), back = root.querySelector('.pc__back'),
+        pics = root.querySelector('.pc__pics'), lt = root.querySelector('.pc__lt'), cap = root.querySelector('.pc__cap'), turn = root.querySelector('.pc__turn'), tl = root.querySelector('.pc__tl'),
+        other = root.querySelector('.pc__other'), otherIn = other.querySelector('input'), st = root.querySelector('.pc__st'), stt = root.querySelector('.pc__stt');
+      var P = (window.__DATA || {}).projects || [];
+      function title(key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; }
+      var ROOMS = ['k-navy-shaker', 'b-polished-concrete', 'w-farmhouse', 'o-waterfront'];
+      var firstP = form.querySelector('input[name="project"]'); firstP.id = 'pc-project';
+      liveClear(form, k);
+
+      // the phone, one tap away: open or closed now, from the published hours (Miami time)
+      function upd() { var o = EZ.openStatus(); st.classList.toggle('is-open', o.open); stt.textContent = o.text; }
+      upd(); var iv = setInterval(upd, 30000); k.add(function () { clearInterval(iv); });
+
+      /* ---------- the front: the room you choose [S0063: a short blur, never two photographs crossfaded] ---------- */
+      function img(key) { return '<img src="' + EZ.img(key) + '" alt="" decoding="async" draggable="false">'; }
+      function setFront(p, key) {
+        var html, label, c = '';
+        if (key) { html = img(key); label = p; c = 'Our work: ' + title(key); }
+        else if (p === 'other') { html = '<span class="pc__note">' + esc(otherIn.value.trim() || 'Something else') + '</span>'; label = 'something else'; }
+        else if (p) { html = '<span class="pc__four">' + ROOMS.map(img).join('') + '</span>'; label = 'not sure yet'; c = 'Our work: four of our rooms'; }
+        else { html = '<span class="pc__four">' + ROOMS.map(img).join('') + '</span>'; label = 'Choose a room above'; c = 'Our work: four of our rooms'; }
+        var swap = function () { pics.innerHTML = html; lt.textContent = label; cap.textContent = c; front.classList.toggle('is-set', !!p); };
+        if (k.motion && pics.innerHTML) gsap.to(pics, { filter: 'blur(6px)', opacity: .3, duration: .14, ease: 'power2.in', onComplete: function () { swap(); gsap.to(pics, { filter: 'blur(0px)', opacity: 1, duration: .32, ease: 'power2.out', clearProps: 'filter,opacity' }); } });
+        else swap();
+      }
+      function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+      form.querySelectorAll('input[name="project"]').forEach(function (r) {
+        k.on(r, 'change', function () {
+          var p = radio(form, 'project');
+          other.hidden = p !== 'other'; if (!other.hidden) otherIn.focus();
+          form.querySelector('#pc-project-err').hidden = true;
+          setFront(p, r.dataset.k || '');
+          if (k.motion && isBack) flip(false);
+          turn.classList.add('is-ready');
+        });
+      });
+      k.on(otherIn, 'input', function () { var n = front.querySelector('.pc__note'); if (n) n.textContent = otherIn.value.trim() || 'Something else'; });
+
+      /* ---------- the turn: one rotateY on the card; the side you cannot see is inert [S0062] ---------- */
+      var isBack = false;
+      function flip(toBack, then) {
+        isBack = toBack; card.classList.toggle('is-back', toBack);
+        front.inert = toBack; back.inert = !toBack;
+        front.setAttribute('aria-hidden', toBack ? 'true' : 'false'); back.setAttribute('aria-hidden', toBack ? 'false' : 'true');
+        turn.setAttribute('aria-pressed', toBack ? 'true' : 'false'); tl.textContent = toBack ? 'See the front' : 'Turn the card over';
+        if (then) k.timeout(then, k.motion ? 760 : 0);
+      }
+      flip(false);
+      k.on(turn, 'click', function () { flip(!isBack, function () { if (isBack) { var f = back.querySelector('#pc-name'); if (f && !f.value) f.focus({ preventScroll: true }); } }); });
+      k.add(function () { card.classList.remove('is-back'); front.inert = false; back.inert = false; pics.innerHTML = ''; other.hidden = true; turn.classList.remove('is-ready'); });
+
+      /* ---------- open in email: the same lines as V1, with consent; never "sent" ---------- */
+      k.on(form, 'submit', function (e) {
+        e.preventDefault();
+        var p = radio(form, 'project');
+        var head = [{ el: firstP, msg: !p ? 'Please pick what you would like to talk about, or choose not sure yet.' : (p === 'other' && !otherIn.value.trim() ? 'Please add a few words about it, or choose not sure yet.' : '') }];
+        var backErrs = check(form, ['name', 'address', 'phone', 'email']), cons = check(form, ['consent']);
+        var all = head.concat(backErrs, cons), first = all.filter(function (x) { return x.msg; })[0];
+        if (first && backErrs.indexOf(first) > -1 && !isBack) {   // an error on the back turns the card to it first
+          flip(true, function () { show(all, form, k); });
+          return;
+        }
+        if (!show(all, form, k)) return;
+        var topic = p === 'other' ? otherIn.value.trim() : p, how = radio(form, 'contact');
+        var lines = [
+          'Hi, my name is ' + v(form, 'name') + '.',
+          'I would like to talk about ' + topic + '.',
+          'The property is at ' + v(form, 'address') + '.',
+          'The easiest way to reach me is ' + ({ Phone: 'a call', Text: 'a text', Email: 'an email' }[how] || 'whichever is easiest') + ', on ' + v(form, 'phone') + ' or at ' + v(form, 'email') + '.'
+        ];
+        if (v(form, 'notes')) lines.push('', 'Anything else: ' + v(form, 'notes'));
+        EZ.consultMail(compose(lines, v(form, 'name')));
+        done(form);
+      });
+
+      setFront('', '');
+      EZ.reveal(k, root.querySelectorAll('.pc__side > *'));
+      if (k.motion) {   // the card arrives the way a postcard is dealt: a small tilt, then flat
+        var once = false;
+        k.io(card, function (en) { if (!en.isIntersecting || once) return; once = true; gsap.fromTo(card, { rotation: -4, y: 24, opacity: 0 }, { rotation: 0, y: 0, opacity: 1, duration: .8, ease: 'expo.out', clearProps: 'rotation,y,opacity,transform' }); }, { threshold: .2 });
+      }
     } }
   });
 })();

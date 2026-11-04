@@ -113,4 +113,80 @@
       <p class="ct__facts">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed &middot; 19 W Flagler St #310, Miami, FL 33130</p>
     </div>
   </div>
+
+  <!-- NEW VERSIONS · Tell Us V3 "The postcard" (2026-11-04, pass 2). Governing reference: Boffi (rooms as chapters). The
+       enquiry is a postcard: the room you choose (one of the firm's own photographs, captioned) is the front; turn it
+       over and the back carries your message and the firm's own fields, addressed to Sales@elbazconstruction.com. Opens
+       in the visitor's own mail app with consent: never claimed as sent. Fields, consent and privacy: FACTS.md "Contact". -->
+  <div class="ver pc" data-v="3">
+    <div class="wrap pc__grid">
+      <div class="pc__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Consultation</p>
+        <h2 class="t-head" id="consult-h-3">Send us a card. <span class="acc">Your room on the front.</span></h2>
+        <p class="pc__lead">Choose the room you want to change, turn the card over and write on the back. It opens in your own email app.</p>
+        <div class="pc__call">
+          <a class="btn pc__tel" href="tel:+17542360675"><span class="btn__label">Call <span class="nums">(754)&nbsp;236&#8209;0675</span></span></a>
+          <p class="pc__st" aria-live="polite"><span class="pc__lamp" aria-hidden="true"></span><span class="pc__stt">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p>
+        </div>
+        <p class="pc__facts">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed &middot; 19 W Flagler St #310, Miami, FL 33130</p>
+      </div>
+      <form class="pc__form c-form" novalidate aria-labelledby="consult-h-3">
+        <fieldset class="pc__rooms">
+          <legend class="pc__lg">I would like to talk about</legend>
+          <div class="pc__chs">
+            <label class="pc__ch"><input type="radio" name="project" value="the kitchen" data-k="k-navy-shaker"><span>the kitchen</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="a bathroom" data-k="b-polished-concrete"><span>a bathroom</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="the whole home" data-k="w-farmhouse"><span>the whole home</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="outdoor living" data-k="o-waterfront"><span>outdoor living</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="other"><span>something else</span></label>
+            <label class="pc__ch"><input type="radio" name="project" value="not sure yet"><span>not sure yet</span></label>
+          </div>
+          <span class="pc__other" hidden><label class="sr-only" for="pc-other">What you would like to talk about</label><input id="pc-other" name="other" type="text" placeholder="in a few words"></span>
+          <span class="c-err" id="pc-project-err" hidden></span>
+        </fieldset>
+        <div class="pc__stage">
+          <div class="pc__card">
+            <div class="pc__face pc__front">
+              <div class="pc__pics"></div>
+              <p class="pc__lbl"><span class="pc__lt">Choose a room above</span></p>
+              <p class="pc__cap"></p>
+              <span class="pc__stamp" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg></span>
+            </div>
+            <div class="pc__face pc__back">
+              <div class="pc__msg">
+                <label class="pc__fl" for="pc-notes">Anything else you want us to know <span>(optional)</span></label>
+                <textarea id="pc-notes" name="notes" rows="4" class="pc__ta"></textarea>
+                <fieldset class="pc__how">
+                  <legend class="pc__fl">The easiest way to reach me is</legend>
+                  <div class="pc__hows">
+                    <label class="pc__hw"><input type="radio" name="contact" value="Phone"><span>a call</span></label>
+                    <label class="pc__hw"><input type="radio" name="contact" value="Text"><span>a text</span></label>
+                    <label class="pc__hw"><input type="radio" name="contact" value="Email"><span>an email</span></label>
+                    <label class="pc__hw"><input type="radio" name="contact" value="Whichever is easiest" checked><span>whichever is easiest</span></label>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="pc__addr">
+                <div class="pc__post" aria-hidden="true"><span class="pc__pm"><b>Miami, FL</b></span><span class="pc__pst"><svg viewBox="0 0 48 48" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg></span></div>
+                <p class="pc__to"><span>To</span> Sales@elbazconstruction.com</p>
+                <p class="pc__from">From</p>
+                <div class="pc__f"><label class="pc__fl" for="pc-name">Full name</label><input id="pc-name" name="name" type="text" autocomplete="name" required><span class="c-err" id="pc-name-err" hidden></span></div>
+                <div class="pc__f"><label class="pc__fl" for="pc-address">Property address</label><input id="pc-address" name="address" type="text" autocomplete="street-address" required><span class="c-err" id="pc-address-err" hidden></span></div>
+                <div class="pc__f"><label class="pc__fl" for="pc-phone">Phone</label><input id="pc-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required><span class="c-err" id="pc-phone-err" hidden></span></div>
+                <div class="pc__f"><label class="pc__fl" for="pc-email">Email</label><input id="pc-email" name="email" type="email" autocomplete="email" required><span class="c-err" id="pc-email-err" hidden></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="pc__turn" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg><span class="pc__tl">Turn the card over</span></button>
+        <div class="pc__send">
+          <label class="c-consent"><input type="checkbox" name="consent" id="pc-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="pc-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this note addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <div class="go"><button type="submit" class="btn pc__go"><span class="btn__label">Open in email</span></button><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>
