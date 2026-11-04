@@ -269,3 +269,85 @@
   .ft__map.is-v .ft__frame { height: min(520px, 64svh); }
 }
 @media (prefers-reduced-motion: reduce) { .ft__svg .th, .ft__svg .mk, .ft__flag, .ft__cb { transition: none; } .ft__flag--on.is-up { animation: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Where We Build V4 "Drop your pin" — a cork pinboard with the firm's map pinned to it (Bruno Simon,
+   scoped to this section: a physical object you place). The pin moves by transform only [S0062].
+   ====================================================================================================================== */
+.pb__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s6) var(--s7, 48px); align-items: start; }
+.pb__side { display: grid; gap: var(--s4); align-content: start; }
+.pb__side .t-head, .pb__side .eyebrow { margin: 0; }
+.pb__lead { margin: 0; max-width: 42ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+.pb__panel { display: grid; gap: var(--s2); padding: var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: 12px; position: relative; }
+.pb__lbl { font: 600 .875rem/1.2 var(--f-text); }
+.pb__box { position: relative; }
+.pb__in { width: 100%; min-height: 50px; padding: 0 44px 0 var(--s3); font: 500 1.0625rem/1 var(--f-text); color: var(--color-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: var(--radius); }
+.pb__in:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pb__clear { position: absolute; right: 3px; top: 3px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; color: var(--color-text); }
+.pb__clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.pb__opts { list-style: none; margin: 0; padding: 4px; border: 1.5px solid var(--color-text); border-radius: var(--radius); background: var(--color-surface); max-height: 280px; overflow: auto; }
+.pb__opt { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 44px; padding: 0 var(--s3); border-radius: 6px; font: 600 .9375rem/1.2 var(--f-text); cursor: pointer; }
+.pb__opt span { font: 400 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.pb__opt[aria-selected="true"], .pb__opt:hover { background: var(--clay-100, #F9E3DD); }
+.pb__ans { margin: 0; font: 400 .9375rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+.pb__ans:empty { display: none; }
+.pb__ans b { color: var(--color-text); margin-right: .25em; }
+.pb__out { justify-self: start; min-height: 44px; padding: 0 14px; background: none; border: 1.5px solid var(--color-text); border-radius: var(--radius); color: var(--color-text); font: 600 .875rem/1 var(--f-text); cursor: pointer; }
+.pb__out[hidden] { display: none; }
+.pb__out:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pb__foot { display: grid; gap: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--color-border); }
+.pb__call { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+/* the board: cork, a tray at its edge, the map pinned in the middle */
+.pb__board {
+  position: relative; display: grid; grid-template-columns: 120px auto; justify-content: center; align-items: start; gap: var(--s4);
+  padding: var(--s5) var(--s5) var(--s5) var(--s4); border-radius: 14px; overflow: hidden;
+  background-color: #c9a27a;
+  background-image: radial-gradient(rgba(90,58,30,.35) 1px, transparent 1.6px), radial-gradient(rgba(255,240,220,.28) 1px, transparent 1.6px);
+  background-size: 9px 9px, 13px 13px; background-position: 0 0, 4px 6px;
+  box-shadow: inset 0 0 0 10px #6e4f33, inset 0 0 0 12px rgba(0,0,0,.25), 0 24px 40px -28px rgba(0,0,0,.55);
+}
+.pb__tray { display: grid; gap: 4px; align-self: start; margin-top: var(--s2); padding: 64px 10px 10px; border-radius: 10px; background: rgba(255,250,242,.92); box-shadow: 0 6px 14px -8px rgba(0,0,0,.5); text-align: center; }
+.pb__tl { font: 600 .875rem/1.2 var(--f-display); color: var(--color-text); }
+.pb__th { font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.pb__paper {
+  position: relative; height: min(640px, 72svh); aspect-ratio: 1000 / 2378; background: #fbf7f0; transform: rotate(-1deg);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 18px 30px -18px rgba(0,0,0,.6);
+}
+.pb__svg { display: block; width: 100%; height: 100%; }
+.pb__svg .cty { fill: #f3ece0; stroke: var(--color-text); stroke-width: 6; stroke-linejoin: round; transition: fill 260ms var(--ez-out); }
+.pb__svg .cty.is-on { fill: var(--clay-100, #F9E3DD); }
+.pb__svg .mk { fill: color-mix(in srgb, var(--color-text) 55%, transparent); transition: fill 160ms var(--ez-out); }
+.pb__svg .mk.is-on { fill: var(--color-accent-solid); r: 22px; }
+.pb__labels { position: absolute; inset: 0; pointer-events: none; }
+.pb__cl.is-off { opacity: 0; }
+.pb { overflow-anchor: none; }   /* the drop holds the map still itself */
+.pb__cl, .pb__ol, .pb__flag { position: absolute; }
+.pb__cl { transform: translate(-50%, -50%); transition: opacity 160ms var(--ez-out); font: 600 .8125rem/1 var(--f-text); letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-secondary); white-space: nowrap; }
+.pb__ol { transform: translate(-100%, -50%) translateX(-14px); padding: 2px 6px; border-radius: 4px; background: rgba(251,247,240,.9); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text); white-space: nowrap; }
+.pb__flag { display: grid; gap: 1px; padding: 6px 10px; border-radius: 6px; background: var(--color-text); color: var(--color-bg); white-space: nowrap; transform: translate(-100%, -50%) translateX(-18px); opacity: 0; transition: opacity 160ms var(--ez-out); box-shadow: 0 8px 18px -10px rgba(0,0,0,.6); }
+.pb__flag.is-l { transform: translate(-100%, -50%) translateX(-18px); }
+.pb__flag b { font: 600 .9375rem/1.2 var(--f-display); }
+.pb__flag small { font: 400 .8125rem/1.2 var(--f-text); opacity: .85; }
+.pb__flag.is-up { opacity: 1; }
+.pb__flag.is-on { background: var(--color-accent-solid); color: #fff; }
+/* the pins: a head, a shine, a needle; the visitor's in ink, the office's in clay */
+.pb__pin, .pb__office { position: absolute; left: 0; top: 0; width: 44px; height: 44px; padding: 0; border: 0; background: none; z-index: 3; }
+.pb__pin { cursor: grab; touch-action: none; filter: drop-shadow(2px 6px 3px rgba(0,0,0,.35)); transition: filter 160ms var(--ez-out); }
+.pb__pin.is-held { cursor: grabbing; filter: drop-shadow(6px 16px 6px rgba(0,0,0,.3)); }
+.pb__pin:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 50%; }
+.pb__pin svg, .pb__office svg { width: 44px; height: 44px; overflow: visible; }
+.pb__needle { stroke: #6f6a64; stroke-width: 2.5; stroke-linecap: round; }
+.pb__pin .pb__head { fill: var(--color-text); }
+.pb__office .pb__head { fill: var(--color-accent-solid); }
+.pb__shine { fill: rgba(255,255,255,.55); }
+.pb__office { z-index: 2; pointer-events: none; filter: drop-shadow(2px 5px 3px rgba(0,0,0,.3)); }
+.pb__board.is-carrying .pb__svg .mk { fill: color-mix(in srgb, var(--color-text) 75%, transparent); }
+
+@media (max-width: 999px) { .pb__grid { grid-template-columns: 1fr; } }
+@media (max-width: 599px) {
+  .pb__board { grid-template-columns: 1fr; justify-items: center; padding: var(--s4) var(--s3); }
+  .pb__tray { grid-auto-flow: column; justify-self: stretch; align-items: center; min-height: 64px; padding: 10px 10px 10px 64px; text-align: left; }
+  .pb__paper { height: clamp(420px, calc(100svh - 280px), 713px); max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .pb__svg .cty, .pb__svg .mk, .pb__flag, .pb__pin { transition: none; } }

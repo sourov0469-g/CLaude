@@ -3291,6 +3291,85 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .ft__svg .th, .ft__svg .mk, .ft__flag, .ft__cb { transition: none; } .ft__flag--on.is-up { animation: none; } }
 
 
+.pb__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s6) var(--s7, 48px); align-items: start; }
+.pb__side { display: grid; gap: var(--s4); align-content: start; }
+.pb__side .t-head, .pb__side .eyebrow { margin: 0; }
+.pb__lead { margin: 0; max-width: 42ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+.pb__panel { display: grid; gap: var(--s2); padding: var(--s4); background: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: 12px; position: relative; }
+.pb__lbl { font: 600 .875rem/1.2 var(--f-text); }
+.pb__box { position: relative; }
+.pb__in { width: 100%; min-height: 50px; padding: 0 44px 0 var(--s3); font: 500 1.0625rem/1 var(--f-text); color: var(--color-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: var(--radius); }
+.pb__in:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pb__clear { position: absolute; right: 3px; top: 3px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; color: var(--color-text); }
+.pb__clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.pb__opts { list-style: none; margin: 0; padding: 4px; border: 1.5px solid var(--color-text); border-radius: var(--radius); background: var(--color-surface); max-height: 280px; overflow: auto; }
+.pb__opt { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 44px; padding: 0 var(--s3); border-radius: 6px; font: 600 .9375rem/1.2 var(--f-text); cursor: pointer; }
+.pb__opt span { font: 400 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.pb__opt[aria-selected="true"], .pb__opt:hover { background: var(--clay-100, #F9E3DD); }
+.pb__ans { margin: 0; font: 400 .9375rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+.pb__ans:empty { display: none; }
+.pb__ans b { color: var(--color-text); margin-right: .25em; }
+.pb__out { justify-self: start; min-height: 44px; padding: 0 14px; background: none; border: 1.5px solid var(--color-text); border-radius: var(--radius); color: var(--color-text); font: 600 .875rem/1 var(--f-text); cursor: pointer; }
+.pb__out[hidden] { display: none; }
+.pb__out:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.pb__foot { display: grid; gap: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--color-border); }
+.pb__call { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+
+.pb__board {
+  position: relative; display: grid; grid-template-columns: 120px auto; justify-content: center; align-items: start; gap: var(--s4);
+  padding: var(--s5) var(--s5) var(--s5) var(--s4); border-radius: 14px; overflow: hidden;
+  background-color: #c9a27a;
+  background-image: radial-gradient(rgba(90,58,30,.35) 1px, transparent 1.6px), radial-gradient(rgba(255,240,220,.28) 1px, transparent 1.6px);
+  background-size: 9px 9px, 13px 13px; background-position: 0 0, 4px 6px;
+  box-shadow: inset 0 0 0 10px #6e4f33, inset 0 0 0 12px rgba(0,0,0,.25), 0 24px 40px -28px rgba(0,0,0,.55);
+}
+.pb__tray { display: grid; gap: 4px; align-self: start; margin-top: var(--s2); padding: 64px 10px 10px; border-radius: 10px; background: rgba(255,250,242,.92); box-shadow: 0 6px 14px -8px rgba(0,0,0,.5); text-align: center; }
+.pb__tl { font: 600 .875rem/1.2 var(--f-display); color: var(--color-text); }
+.pb__th { font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.pb__paper {
+  position: relative; height: min(640px, 72svh); aspect-ratio: 1000 / 2378; background: #fbf7f0; transform: rotate(-1deg);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 18px 30px -18px rgba(0,0,0,.6);
+}
+.pb__svg { display: block; width: 100%; height: 100%; }
+.pb__svg .cty { fill: #f3ece0; stroke: var(--color-text); stroke-width: 6; stroke-linejoin: round; transition: fill 260ms var(--ez-out); }
+.pb__svg .cty.is-on { fill: var(--clay-100, #F9E3DD); }
+.pb__svg .mk { fill: color-mix(in srgb, var(--color-text) 55%, transparent); transition: fill 160ms var(--ez-out); }
+.pb__svg .mk.is-on { fill: var(--color-accent-solid); r: 22px; }
+.pb__labels { position: absolute; inset: 0; pointer-events: none; }
+.pb__cl.is-off { opacity: 0; }
+.pb { overflow-anchor: none; }   
+.pb__cl, .pb__ol, .pb__flag { position: absolute; }
+.pb__cl { transform: translate(-50%, -50%); transition: opacity 160ms var(--ez-out); font: 600 .8125rem/1 var(--f-text); letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-secondary); white-space: nowrap; }
+.pb__ol { transform: translate(-100%, -50%) translateX(-14px); padding: 2px 6px; border-radius: 4px; background: rgba(251,247,240,.9); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text); white-space: nowrap; }
+.pb__flag { display: grid; gap: 1px; padding: 6px 10px; border-radius: 6px; background: var(--color-text); color: var(--color-bg); white-space: nowrap; transform: translate(-100%, -50%) translateX(-18px); opacity: 0; transition: opacity 160ms var(--ez-out); box-shadow: 0 8px 18px -10px rgba(0,0,0,.6); }
+.pb__flag.is-l { transform: translate(-100%, -50%) translateX(-18px); }
+.pb__flag b { font: 600 .9375rem/1.2 var(--f-display); }
+.pb__flag small { font: 400 .8125rem/1.2 var(--f-text); opacity: .85; }
+.pb__flag.is-up { opacity: 1; }
+.pb__flag.is-on { background: var(--color-accent-solid); color: #fff; }
+
+.pb__pin, .pb__office { position: absolute; left: 0; top: 0; width: 44px; height: 44px; padding: 0; border: 0; background: none; z-index: 3; }
+.pb__pin { cursor: grab; touch-action: none; filter: drop-shadow(2px 6px 3px rgba(0,0,0,.35)); transition: filter 160ms var(--ez-out); }
+.pb__pin.is-held { cursor: grabbing; filter: drop-shadow(6px 16px 6px rgba(0,0,0,.3)); }
+.pb__pin:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; border-radius: 50%; }
+.pb__pin svg, .pb__office svg { width: 44px; height: 44px; overflow: visible; }
+.pb__needle { stroke: #6f6a64; stroke-width: 2.5; stroke-linecap: round; }
+.pb__pin .pb__head { fill: var(--color-text); }
+.pb__office .pb__head { fill: var(--color-accent-solid); }
+.pb__shine { fill: rgba(255,255,255,.55); }
+.pb__office { z-index: 2; pointer-events: none; filter: drop-shadow(2px 5px 3px rgba(0,0,0,.3)); }
+.pb__board.is-carrying .pb__svg .mk { fill: color-mix(in srgb, var(--color-text) 75%, transparent); }
+
+@media (max-width: 999px) { .pb__grid { grid-template-columns: 1fr; } }
+@media (max-width: 599px) {
+  .pb__board { grid-template-columns: 1fr; justify-items: center; padding: var(--s4) var(--s3); }
+  .pb__tray { grid-auto-flow: column; justify-self: stretch; align-items: center; min-height: 64px; padding: 10px 10px 10px 64px; text-align: left; }
+  .pb__paper { height: clamp(420px, calc(100svh - 280px), 713px); max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .pb__svg .cty, .pb__svg .mk, .pb__flag, .pb__pin { transition: none; } }
+
+
 #consult .t-head { color: var(--color-text); }
 .consult__lead { color: var(--color-text-secondary); max-width: 42ch; }
 .consult__facts { margin: 0; display: grid; gap: 16px; }
@@ -4531,6 +4610,37 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     <div class="wrap ft__foot">
       <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
       <p class="ft__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
+    </div>
+  </div>
+
+  
+  <div class="ver pb" data-v="4">
+    <div class="wrap pb__grid">
+      <div class="pb__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-4">Drop your pin. <span class="acc">We will tell you.</span></h2>
+        <p class="pb__lead">Pick up the pin and drop it where you live, or type your town. <span class="nums">104</span> towns across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="pb__panel">
+          <label class="pb__lbl" for="pb-q">Your town or city</label>
+          <div class="pb__box">
+            <input class="pb__in" id="pb-q" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pb-opts" spellcheck="false" placeholder="Start typing, for example Weston">
+            <button type="button" class="pb__clear" aria-label="Clear the town" hidden><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5 L15 15 M15 5 L5 15"/></svg></button>
+          </div>
+          <ul class="pb__opts" id="pb-opts" role="listbox" aria-label="Matching towns" hidden></ul>
+          <p class="pb__ans" aria-live="polite"></p>
+          <button type="button" class="pb__out" hidden>Take the pin out</button>
+        </div>
+        <div class="pb__foot">
+          <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+          <p class="pb__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
+        </div>
+      </div>
+      <div class="pb__board">
+        <div class="pb__tray"><span class="pb__tl">Your pin</span><span class="pb__th">Drag it to where you live</span></div>
+        <div class="pb__paper"><svg class="pb__svg" viewBox="0 0 1000 2378" aria-hidden="true" focusable="false"></svg><div class="pb__labels" aria-hidden="true"></div></div>
+        <span class="pb__office" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="pb__needle" d="M22 26 L22 43"/><circle class="pb__head" cx="22" cy="15" r="11"/><circle class="pb__shine" cx="18.5" cy="11.5" r="3"/></svg></span>
+        <button type="button" class="pb__pin" aria-label="Your pin. Drag it onto the map where you live, or type your town in the search."><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="pb__needle" d="M22 26 L22 43"/><circle class="pb__head" cx="22" cy="15" r="11"/><circle class="pb__shine" cx="18.5" cy="11.5" r="3"/></svg></button>
+      </div>
     </div>
   </div>
 </section>
@@ -10299,6 +10409,155 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       gsap.to(order, { drawSVG: '100%', duration: 1, ease: 'power2.out', stagger: .012, clearProps: 'strokeDasharray,strokeDashoffset' });
     }, { threshold: .2 });
     k.add(function () { if (fly) fly.kill(); gsap.killTweensOf(ths); });
+  } },
+  /* NEW VERSIONS · V4 "Drop your pin" (governing reference: Bruno Simon, scoped to this section). Pick up the pin and
+     drop it on the pinned map: it snaps to the nearest listed town and answers; the search drops it for you [S1443]. */
+  4: { init: function (root, k) {
+    var D = geo(), board = root.querySelector('.pb__board'), paper = root.querySelector('.pb__paper'), svg = root.querySelector('.pb__svg'), labels = root.querySelector('.pb__labels'),
+      pin = root.querySelector('.pb__pin'), office = root.querySelector('.pb__office'), tray = root.querySelector('.pb__tray');
+    var inp = root.querySelector('.pb__in'), opts = root.querySelector('.pb__opts'), ans = root.querySelector('.pb__ans'), clr = root.querySelector('.pb__clear'), outB = root.querySelector('.pb__out');
+    var T = [];
+    NS_ORDER.forEach(function (c) { D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }).forEach(function (t) { T.push({ n: t[0], c: c, x: t[1], y: t[2], k: norm(t[0]) }); }); });
+    var oT = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0];
+    var s = '';
+    NS_ORDER.forEach(function (c) { s += '<path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>'; });
+    T.forEach(function (t, i) { s += '<circle class="mk" data-i="' + i + '" data-c="' + t.c + '" data-n="' + esc(t.n) + '" cx="' + t.x + '" cy="' + t.y + '" r="10"/>'; });
+    svg.innerHTML = s;
+    labels.innerHTML = NS_ORDER.map(function (c) { var b = D.boxes[c]; return '<span class="pb__cl" data-c="' + c + '" style="left:' + ((b[0] + b[2]) / 2 / 10).toFixed(2) + '%;top:' + ((b[1] + b[3]) / 2 / D.h * 100).toFixed(2) + '%">' + c + '</span>'; }).join('') +
+      '<span class="pb__ol" style="left:' + (oT[1] / 10).toFixed(2) + '%;top:' + (oT[2] / D.h * 100).toFixed(2) + '%">Our office</span><span class="pb__flag"><b></b><small></small></span>';
+    var marks = Array.prototype.slice.call(svg.querySelectorAll('.mk')), ctys = svg.querySelectorAll('.cty'), flag = labels.querySelector('.pb__flag');
+    k.add(function () { svg.innerHTML = ''; labels.innerHTML = ''; ans.innerHTML = ''; inp.value = ''; opts.hidden = true; opts.innerHTML = ''; clr.hidden = true; outB.hidden = true; pin.style.transform = ''; });
+
+    /* ---------- positions on the board: a mark's centre, the tray, the office ---------- */
+    function rel(r) { var b = board.getBoundingClientRect(); return [r.left + r.width / 2 - b.left, r.top + r.height / 2 - b.top]; }
+    function markAt(i) { return rel(marks[i].getBoundingClientRect()); }
+    function trayAt() {   // the pin's resting place: the top of the tall tray, or the left of the flat one on phones
+      var t = tray.getBoundingClientRect(), b = board.getBoundingClientRect(), flat = t.width > t.height * 1.6;
+      return flat ? [t.left - b.left + 34, t.top - b.top + t.height / 2 + 21] : [t.left - b.left + t.width / 2, t.top - b.top + 52];
+    }
+    function setPin(x, y, lift) { pin.style.transform = 'translate(' + (x - 22).toFixed(1) + 'px,' + (y - 43 - (lift || 0)).toFixed(1) + 'px)'; pin.dataset.x = x; pin.dataset.y = y; }
+    function placeOffice() { var p = rel(svg.querySelector('.mk[data-n="Miami"]').getBoundingClientRect()); office.style.transform = 'translate(' + (p[0] - 22).toFixed(1) + 'px,' + (p[1] - 43).toFixed(1) + 'px)'; }
+    var onI = -1, inTray = true, fall = null;
+    function layout() { placeOffice(); if (inTray) { var t = trayAt(); setPin(t[0], t[1]); } else if (onI > -1) { var m = markAt(onI); setPin(m[0], m[1]); } }
+    k.ro(board, layout);
+
+    function showFlag(i, on) {
+      if (i < 0) { flag.classList.remove('is-up'); return; }
+      var t = T[i]; flag.style.left = (t.x / 10).toFixed(2) + '%'; flag.style.top = (t.y / D.h * 100).toFixed(2) + '%';
+      flag.classList.toggle('is-l', t.x > 600); flag.querySelector('b').textContent = t.n; flag.querySelector('small').textContent = t.c; flag.classList.add('is-up'); flag.classList.toggle('is-on', !!on);
+    }
+    function light(i) { marks.forEach(function (m, j) { m.classList.toggle('is-on', j === i); }); ctys.forEach(function (c) { c.classList.toggle('is-on', i > -1 && c.dataset.c === T[i].c); });
+      labels.querySelectorAll('.pb__cl').forEach(function (l) { l.classList.toggle('is-off', i > -1 && l.dataset.c === T[i].c); }); }   // the flag names the county, so its label steps aside
+    function answerYes(t) { ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b> ' + esc(t.n) + ' is one of the <span class="nums">' + D.towns[t.c].length + '</span> municipalities we build in across ' + esc(t.c) + ', one of our three counties.'; }
+    function select(i, from) {
+      onI = i; inTray = false; light(i); showFlag(i, true); answerYes(T[i]); outB.hidden = false;
+      if (from !== 'input' && from !== 'drop') inp.value = T[i].n; if (from === 'drop') inp.value = T[i].n;
+      clr.hidden = false; close();
+      var m = markAt(i);
+      if (from === 'drop') { setPin(m[0], m[1]); if (k.motion) gsap.fromTo(pin.firstElementChild, { scale: 1.14 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .5)', transformOrigin: '50% 100%', clearProps: 'transform' }); return; }
+      // the search drops the pin from above, with a small bounce [S0340]
+      if (fall) fall.kill();
+      if (!k.motion) { setPin(m[0], m[1]); return; }
+      var o = { lift: 140 }; setPin(m[0], m[1], 140);
+      fall = gsap.to(o, { lift: 0, duration: .7, ease: 'bounce.out', onUpdate: function () { setPin(m[0], m[1], o.lift); } });
+    }
+    function backToTray(msg) {
+      onI = -1; inTray = true; light(-1); showFlag(-1); outB.hidden = true;
+      var t = trayAt(); if (fall) fall.kill();
+      if (k.motion) { var a = { x: +pin.dataset.x || t[0], y: +pin.dataset.y || t[1] }; fall = gsap.to(a, { x: t[0], y: t[1], duration: .5, ease: 'power3.out', onUpdate: function () { setPin(a.x, a.y); } }); } else setPin(t[0], t[1]);
+      if (msg) ans.innerHTML = msg;
+    }
+    var NONE = '<b>No town we list right there.</b> Drop the pin closer to where you live, or type your town above. Not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.';
+    var UNLISTED = function (q) { return '<b>Not on our published list.</b> We do not see &ldquo;' + esc(q) + '&rdquo; among the <span class="nums">104</span> municipalities we list. Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>: you will get a real answer, not a callback form.'; };
+
+    /* ---------- the pin by hand: pick it up, carry it over the map (the town under it is named), drop it ---------- */
+    function nearest(x, y, reach) {   // in board coordinates
+      var best = -1, bd = reach * reach;
+      marks.forEach(function (m, i) { var p = markAt(i), q = (p[0] - x) * (p[0] - x) + (p[1] - y) * (p[1] - y); if (q < bd) { bd = q; best = i; } });
+      return best;
+    }
+    var drag = null;
+    k.on(pin, 'pointerdown', function (e) {
+      if (e.button > 0) return; e.preventDefault();
+      if (fall) fall.kill();
+      var b = board.getBoundingClientRect();
+      drag = { id: e.pointerId, dx: (+pin.dataset.x) - (e.clientX - b.left), dy: (+pin.dataset.y) - (e.clientY - b.top), hov: -1 };
+      try { pin.setPointerCapture(e.pointerId); } catch (x) {}
+      pin.classList.add('is-held'); board.classList.add('is-carrying'); light(-1); showFlag(-1);
+    });
+    k.on(pin, 'pointermove', function (e) {
+      if (!drag) return; var b = board.getBoundingClientRect(), x = e.clientX - b.left + drag.dx, y = e.clientY - b.top + drag.dy;
+      setPin(x, y, 10);
+      var i = nearest(x, y, 34); if (i !== drag.hov) { drag.hov = i; light(i); showFlag(i, false); }
+    });
+    function keep(fn) {   // on one column the answer sits above the map: hold the map still under the hand while the answer grows [S1443]
+      if (innerWidth > 999) { fn(); return; }
+      var y0 = board.getBoundingClientRect().top; fn(); var d = board.getBoundingClientRect().top - y0; if (Math.abs(d) > .5) window.scrollBy(0, d);
+    }
+    function drop(e) { keep(function () { dropAt(e); }); }
+    function dropAt(e) {
+      if (!drag) return; var d = drag; drag = null; pin.classList.remove('is-held'); board.classList.remove('is-carrying');
+      var b = board.getBoundingClientRect(), x = e.clientX - b.left + d.dx, y = e.clientY - b.top + d.dy, p = paper.getBoundingClientRect();
+      var onPaper = e.clientX >= p.left && e.clientX <= p.right && e.clientY >= p.top && e.clientY <= p.bottom;
+      var i = nearest(x, y, 34);
+      if (i > -1) { select(i, 'drop'); return; }
+      if (!onPaper) { backToTray(onI > -1 ? null : ''); if (!ans.innerHTML) ans.innerHTML = '<b>Drop it on the map.</b> Hold the pin over where you live and let go.'; return; }
+      setPin(x, y); onI = -1; inTray = false; light(-1); showFlag(-1); ans.innerHTML = NONE; outB.hidden = false; inp.value = ''; clr.hidden = true;
+    }
+    k.on(pin, 'pointerup', drop);
+    k.on(pin, 'pointercancel', function () { if (drag) { drag = null; pin.classList.remove('is-held'); board.classList.remove('is-carrying'); layout(); } });
+    k.on(pin, 'keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.focus(); } });
+    k.on(outB, 'click', function () { backToTray(''); ans.innerHTML = ''; inp.value = ''; clr.hidden = true; pin.focus({ preventScroll: true }); });
+
+    /* ---------- the combobox (as V1 to V3) ---------- */
+    var found = [], act = -1;
+    function close() { opts.hidden = true; inp.setAttribute('aria-expanded', 'false'); inp.removeAttribute('aria-activedescendant'); act = -1; }
+    function renderOpts() {
+      opts.innerHTML = found.map(function (i, j) { return '<li class="pb__opt" role="option" id="pb-o-' + j + '" data-i="' + i + '" aria-selected="' + (j === act ? 'true' : 'false') + '">' + esc(T[i].n) + '<span>' + esc(T[i].c) + '</span></li>'; }).join('');
+      opts.hidden = !found.length; inp.setAttribute('aria-expanded', found.length ? 'true' : 'false');
+      if (act > -1) inp.setAttribute('aria-activedescendant', 'pb-o-' + act); else inp.removeAttribute('aria-activedescendant');
+    }
+    function search() {
+      var q = norm(inp.value); act = -1; clr.hidden = !inp.value;
+      if (!q) { found = []; renderOpts(); return; }
+      var a = [], b = [];
+      T.forEach(function (t, i) { if (t.k.indexOf(q) === 0) a.push(i); else if (t.k.indexOf(' ' + q) > -1 || t.k.indexOf(q) > 0) b.push(i); });
+      found = a.concat(b).slice(0, 6); renderOpts();
+    }
+    function commit() {
+      if (act > -1) { select(found[act], 'list'); return; }
+      var q = norm(inp.value); if (!q) return;
+      var exact = T.findIndex(function (t) { return t.k === q; });
+      if (exact > -1) { select(exact, 'input'); return; }
+      if (found.length === 1) { select(found[0], 'list'); return; }
+      close(); backToTray(UNLISTED(inp.value.trim()));   // a town we do not list: the pin goes back to the tray, nothing stays lit
+    }
+    k.on(inp, 'input', search);
+    k.on(inp, 'keydown', function (e) {
+      if (e.key === 'ArrowDown' && found.length) { e.preventDefault(); act = (act + 1) % found.length; renderOpts(); }
+      else if (e.key === 'ArrowUp' && found.length) { e.preventDefault(); act = (act - 1 + found.length) % found.length; renderOpts(); }
+      else if (e.key === 'Enter') { e.preventDefault(); commit(); }
+      else if (e.key === 'Escape') { if (!opts.hidden) { e.preventDefault(); close(); } }
+    });
+    k.on(opts, 'pointerdown', function (e) { var li = e.target.closest('.pb__opt'); if (li) { e.preventDefault(); select(+li.dataset.i, 'list'); } });
+    k.on(inp, 'blur', function () { k.timeout(close, 120); });
+    k.on(clr, 'click', function () { backToTray(''); ans.innerHTML = ''; inp.value = ''; clr.hidden = true; close(); inp.focus(); });
+    k.on(inp, 'focus', function () {   // DEEP QA rule kept: on phones the field rises when tapped
+      if (innerWidth > 767) return;
+      k.timeout(function () { var r = inp.getBoundingClientRect(), nav = (document.querySelector('.nav') || { offsetHeight: 64 }).offsetHeight; if (r.top > nav + 120) window.scrollTo({ top: scrollY + r.top - nav - 16, behavior: 'auto' }); }, 250);
+    });
+
+    layout();
+    EZ.reveal(k, root.querySelectorAll('.pb__side > *'));
+    if (!k.motion) return;
+    // arriving: the map is pinned to the board, the office pin goes in, and the visitor's pin gives a little hop in its tray
+    var once = false;
+    k.io(board, function (en) {
+      if (!en.isIntersecting || once) return; once = true;
+      gsap.fromTo(paper, { rotation: -4, y: -18, opacity: 0 }, { rotation: -1, y: 0, opacity: 1, duration: .8, ease: 'expo.out', clearProps: 'opacity', onComplete: layout });   // the pins follow the map once it is pinned
+      gsap.fromTo(office, { opacity: 0 }, { opacity: 1, duration: .3, delay: .6, clearProps: 'opacity' });
+      var h = { y: 0 }; gsap.to(h, { y: 18, duration: .35, delay: 1.1, yoyo: true, repeat: 3, ease: 'power2.out', onUpdate: function () { if (inTray && !drag) { var t = trayAt(); setPin(t[0], t[1], h.y); } } });
+    }, { threshold: .3 });
   } }
   });
 })();

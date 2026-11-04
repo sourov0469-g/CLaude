@@ -502,6 +502,155 @@
       gsap.to(order, { drawSVG: '100%', duration: 1, ease: 'power2.out', stagger: .012, clearProps: 'strokeDasharray,strokeDashoffset' });
     }, { threshold: .2 });
     k.add(function () { if (fly) fly.kill(); gsap.killTweensOf(ths); });
+  } },
+  /* NEW VERSIONS · V4 "Drop your pin" (governing reference: Bruno Simon, scoped to this section). Pick up the pin and
+     drop it on the pinned map: it snaps to the nearest listed town and answers; the search drops it for you [S1443]. */
+  4: { init: function (root, k) {
+    var D = geo(), board = root.querySelector('.pb__board'), paper = root.querySelector('.pb__paper'), svg = root.querySelector('.pb__svg'), labels = root.querySelector('.pb__labels'),
+      pin = root.querySelector('.pb__pin'), office = root.querySelector('.pb__office'), tray = root.querySelector('.pb__tray');
+    var inp = root.querySelector('.pb__in'), opts = root.querySelector('.pb__opts'), ans = root.querySelector('.pb__ans'), clr = root.querySelector('.pb__clear'), outB = root.querySelector('.pb__out');
+    var T = [];
+    NS_ORDER.forEach(function (c) { D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }).forEach(function (t) { T.push({ n: t[0], c: c, x: t[1], y: t[2], k: norm(t[0]) }); }); });
+    var oT = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0];
+    var s = '';
+    NS_ORDER.forEach(function (c) { s += '<path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>'; });
+    T.forEach(function (t, i) { s += '<circle class="mk" data-i="' + i + '" data-c="' + t.c + '" data-n="' + esc(t.n) + '" cx="' + t.x + '" cy="' + t.y + '" r="10"/>'; });
+    svg.innerHTML = s;
+    labels.innerHTML = NS_ORDER.map(function (c) { var b = D.boxes[c]; return '<span class="pb__cl" data-c="' + c + '" style="left:' + ((b[0] + b[2]) / 2 / 10).toFixed(2) + '%;top:' + ((b[1] + b[3]) / 2 / D.h * 100).toFixed(2) + '%">' + c + '</span>'; }).join('') +
+      '<span class="pb__ol" style="left:' + (oT[1] / 10).toFixed(2) + '%;top:' + (oT[2] / D.h * 100).toFixed(2) + '%">Our office</span><span class="pb__flag"><b></b><small></small></span>';
+    var marks = Array.prototype.slice.call(svg.querySelectorAll('.mk')), ctys = svg.querySelectorAll('.cty'), flag = labels.querySelector('.pb__flag');
+    k.add(function () { svg.innerHTML = ''; labels.innerHTML = ''; ans.innerHTML = ''; inp.value = ''; opts.hidden = true; opts.innerHTML = ''; clr.hidden = true; outB.hidden = true; pin.style.transform = ''; });
+
+    /* ---------- positions on the board: a mark's centre, the tray, the office ---------- */
+    function rel(r) { var b = board.getBoundingClientRect(); return [r.left + r.width / 2 - b.left, r.top + r.height / 2 - b.top]; }
+    function markAt(i) { return rel(marks[i].getBoundingClientRect()); }
+    function trayAt() {   // the pin's resting place: the top of the tall tray, or the left of the flat one on phones
+      var t = tray.getBoundingClientRect(), b = board.getBoundingClientRect(), flat = t.width > t.height * 1.6;
+      return flat ? [t.left - b.left + 34, t.top - b.top + t.height / 2 + 21] : [t.left - b.left + t.width / 2, t.top - b.top + 52];
+    }
+    function setPin(x, y, lift) { pin.style.transform = 'translate(' + (x - 22).toFixed(1) + 'px,' + (y - 43 - (lift || 0)).toFixed(1) + 'px)'; pin.dataset.x = x; pin.dataset.y = y; }
+    function placeOffice() { var p = rel(svg.querySelector('.mk[data-n="Miami"]').getBoundingClientRect()); office.style.transform = 'translate(' + (p[0] - 22).toFixed(1) + 'px,' + (p[1] - 43).toFixed(1) + 'px)'; }
+    var onI = -1, inTray = true, fall = null;
+    function layout() { placeOffice(); if (inTray) { var t = trayAt(); setPin(t[0], t[1]); } else if (onI > -1) { var m = markAt(onI); setPin(m[0], m[1]); } }
+    k.ro(board, layout);
+
+    function showFlag(i, on) {
+      if (i < 0) { flag.classList.remove('is-up'); return; }
+      var t = T[i]; flag.style.left = (t.x / 10).toFixed(2) + '%'; flag.style.top = (t.y / D.h * 100).toFixed(2) + '%';
+      flag.classList.toggle('is-l', t.x > 600); flag.querySelector('b').textContent = t.n; flag.querySelector('small').textContent = t.c; flag.classList.add('is-up'); flag.classList.toggle('is-on', !!on);
+    }
+    function light(i) { marks.forEach(function (m, j) { m.classList.toggle('is-on', j === i); }); ctys.forEach(function (c) { c.classList.toggle('is-on', i > -1 && c.dataset.c === T[i].c); });
+      labels.querySelectorAll('.pb__cl').forEach(function (l) { l.classList.toggle('is-off', i > -1 && l.dataset.c === T[i].c); }); }   // the flag names the county, so its label steps aside
+    function answerYes(t) { ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b> ' + esc(t.n) + ' is one of the <span class="nums">' + D.towns[t.c].length + '</span> municipalities we build in across ' + esc(t.c) + ', one of our three counties.'; }
+    function select(i, from) {
+      onI = i; inTray = false; light(i); showFlag(i, true); answerYes(T[i]); outB.hidden = false;
+      if (from !== 'input' && from !== 'drop') inp.value = T[i].n; if (from === 'drop') inp.value = T[i].n;
+      clr.hidden = false; close();
+      var m = markAt(i);
+      if (from === 'drop') { setPin(m[0], m[1]); if (k.motion) gsap.fromTo(pin.firstElementChild, { scale: 1.14 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .5)', transformOrigin: '50% 100%', clearProps: 'transform' }); return; }
+      // the search drops the pin from above, with a small bounce [S0340]
+      if (fall) fall.kill();
+      if (!k.motion) { setPin(m[0], m[1]); return; }
+      var o = { lift: 140 }; setPin(m[0], m[1], 140);
+      fall = gsap.to(o, { lift: 0, duration: .7, ease: 'bounce.out', onUpdate: function () { setPin(m[0], m[1], o.lift); } });
+    }
+    function backToTray(msg) {
+      onI = -1; inTray = true; light(-1); showFlag(-1); outB.hidden = true;
+      var t = trayAt(); if (fall) fall.kill();
+      if (k.motion) { var a = { x: +pin.dataset.x || t[0], y: +pin.dataset.y || t[1] }; fall = gsap.to(a, { x: t[0], y: t[1], duration: .5, ease: 'power3.out', onUpdate: function () { setPin(a.x, a.y); } }); } else setPin(t[0], t[1]);
+      if (msg) ans.innerHTML = msg;
+    }
+    var NONE = '<b>No town we list right there.</b> Drop the pin closer to where you live, or type your town above. Not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.';
+    var UNLISTED = function (q) { return '<b>Not on our published list.</b> We do not see &ldquo;' + esc(q) + '&rdquo; among the <span class="nums">104</span> municipalities we list. Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>: you will get a real answer, not a callback form.'; };
+
+    /* ---------- the pin by hand: pick it up, carry it over the map (the town under it is named), drop it ---------- */
+    function nearest(x, y, reach) {   // in board coordinates
+      var best = -1, bd = reach * reach;
+      marks.forEach(function (m, i) { var p = markAt(i), q = (p[0] - x) * (p[0] - x) + (p[1] - y) * (p[1] - y); if (q < bd) { bd = q; best = i; } });
+      return best;
+    }
+    var drag = null;
+    k.on(pin, 'pointerdown', function (e) {
+      if (e.button > 0) return; e.preventDefault();
+      if (fall) fall.kill();
+      var b = board.getBoundingClientRect();
+      drag = { id: e.pointerId, dx: (+pin.dataset.x) - (e.clientX - b.left), dy: (+pin.dataset.y) - (e.clientY - b.top), hov: -1 };
+      try { pin.setPointerCapture(e.pointerId); } catch (x) {}
+      pin.classList.add('is-held'); board.classList.add('is-carrying'); light(-1); showFlag(-1);
+    });
+    k.on(pin, 'pointermove', function (e) {
+      if (!drag) return; var b = board.getBoundingClientRect(), x = e.clientX - b.left + drag.dx, y = e.clientY - b.top + drag.dy;
+      setPin(x, y, 10);
+      var i = nearest(x, y, 34); if (i !== drag.hov) { drag.hov = i; light(i); showFlag(i, false); }
+    });
+    function keep(fn) {   // on one column the answer sits above the map: hold the map still under the hand while the answer grows [S1443]
+      if (innerWidth > 999) { fn(); return; }
+      var y0 = board.getBoundingClientRect().top; fn(); var d = board.getBoundingClientRect().top - y0; if (Math.abs(d) > .5) window.scrollBy(0, d);
+    }
+    function drop(e) { keep(function () { dropAt(e); }); }
+    function dropAt(e) {
+      if (!drag) return; var d = drag; drag = null; pin.classList.remove('is-held'); board.classList.remove('is-carrying');
+      var b = board.getBoundingClientRect(), x = e.clientX - b.left + d.dx, y = e.clientY - b.top + d.dy, p = paper.getBoundingClientRect();
+      var onPaper = e.clientX >= p.left && e.clientX <= p.right && e.clientY >= p.top && e.clientY <= p.bottom;
+      var i = nearest(x, y, 34);
+      if (i > -1) { select(i, 'drop'); return; }
+      if (!onPaper) { backToTray(onI > -1 ? null : ''); if (!ans.innerHTML) ans.innerHTML = '<b>Drop it on the map.</b> Hold the pin over where you live and let go.'; return; }
+      setPin(x, y); onI = -1; inTray = false; light(-1); showFlag(-1); ans.innerHTML = NONE; outB.hidden = false; inp.value = ''; clr.hidden = true;
+    }
+    k.on(pin, 'pointerup', drop);
+    k.on(pin, 'pointercancel', function () { if (drag) { drag = null; pin.classList.remove('is-held'); board.classList.remove('is-carrying'); layout(); } });
+    k.on(pin, 'keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.focus(); } });
+    k.on(outB, 'click', function () { backToTray(''); ans.innerHTML = ''; inp.value = ''; clr.hidden = true; pin.focus({ preventScroll: true }); });
+
+    /* ---------- the combobox (as V1 to V3) ---------- */
+    var found = [], act = -1;
+    function close() { opts.hidden = true; inp.setAttribute('aria-expanded', 'false'); inp.removeAttribute('aria-activedescendant'); act = -1; }
+    function renderOpts() {
+      opts.innerHTML = found.map(function (i, j) { return '<li class="pb__opt" role="option" id="pb-o-' + j + '" data-i="' + i + '" aria-selected="' + (j === act ? 'true' : 'false') + '">' + esc(T[i].n) + '<span>' + esc(T[i].c) + '</span></li>'; }).join('');
+      opts.hidden = !found.length; inp.setAttribute('aria-expanded', found.length ? 'true' : 'false');
+      if (act > -1) inp.setAttribute('aria-activedescendant', 'pb-o-' + act); else inp.removeAttribute('aria-activedescendant');
+    }
+    function search() {
+      var q = norm(inp.value); act = -1; clr.hidden = !inp.value;
+      if (!q) { found = []; renderOpts(); return; }
+      var a = [], b = [];
+      T.forEach(function (t, i) { if (t.k.indexOf(q) === 0) a.push(i); else if (t.k.indexOf(' ' + q) > -1 || t.k.indexOf(q) > 0) b.push(i); });
+      found = a.concat(b).slice(0, 6); renderOpts();
+    }
+    function commit() {
+      if (act > -1) { select(found[act], 'list'); return; }
+      var q = norm(inp.value); if (!q) return;
+      var exact = T.findIndex(function (t) { return t.k === q; });
+      if (exact > -1) { select(exact, 'input'); return; }
+      if (found.length === 1) { select(found[0], 'list'); return; }
+      close(); backToTray(UNLISTED(inp.value.trim()));   // a town we do not list: the pin goes back to the tray, nothing stays lit
+    }
+    k.on(inp, 'input', search);
+    k.on(inp, 'keydown', function (e) {
+      if (e.key === 'ArrowDown' && found.length) { e.preventDefault(); act = (act + 1) % found.length; renderOpts(); }
+      else if (e.key === 'ArrowUp' && found.length) { e.preventDefault(); act = (act - 1 + found.length) % found.length; renderOpts(); }
+      else if (e.key === 'Enter') { e.preventDefault(); commit(); }
+      else if (e.key === 'Escape') { if (!opts.hidden) { e.preventDefault(); close(); } }
+    });
+    k.on(opts, 'pointerdown', function (e) { var li = e.target.closest('.pb__opt'); if (li) { e.preventDefault(); select(+li.dataset.i, 'list'); } });
+    k.on(inp, 'blur', function () { k.timeout(close, 120); });
+    k.on(clr, 'click', function () { backToTray(''); ans.innerHTML = ''; inp.value = ''; clr.hidden = true; close(); inp.focus(); });
+    k.on(inp, 'focus', function () {   // DEEP QA rule kept: on phones the field rises when tapped
+      if (innerWidth > 767) return;
+      k.timeout(function () { var r = inp.getBoundingClientRect(), nav = (document.querySelector('.nav') || { offsetHeight: 64 }).offsetHeight; if (r.top > nav + 120) window.scrollTo({ top: scrollY + r.top - nav - 16, behavior: 'auto' }); }, 250);
+    });
+
+    layout();
+    EZ.reveal(k, root.querySelectorAll('.pb__side > *'));
+    if (!k.motion) return;
+    // arriving: the map is pinned to the board, the office pin goes in, and the visitor's pin gives a little hop in its tray
+    var once = false;
+    k.io(board, function (en) {
+      if (!en.isIntersecting || once) return; once = true;
+      gsap.fromTo(paper, { rotation: -4, y: -18, opacity: 0 }, { rotation: -1, y: 0, opacity: 1, duration: .8, ease: 'expo.out', clearProps: 'opacity', onComplete: layout });   // the pins follow the map once it is pinned
+      gsap.fromTo(office, { opacity: 0 }, { opacity: 1, duration: .3, delay: .6, clearProps: 'opacity' });
+      var h = { y: 0 }; gsap.to(h, { y: 18, duration: .35, delay: 1.1, yoyo: true, repeat: 3, ease: 'power2.out', onUpdate: function () { if (inTray && !drag) { var t = trayAt(); setPin(t[0], t[1], h.y); } } });
+    }, { threshold: .3 });
   } }
   });
 })();

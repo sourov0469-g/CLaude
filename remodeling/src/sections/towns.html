@@ -109,4 +109,38 @@
       <p class="ft__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
     </div>
   </div>
+
+  <!-- NEW VERSIONS · Where We Build V4 "Drop your pin" (2026-11-04, pass 3). Governing reference: Bruno Simon (scoped to
+       this section: playful physical objects). The firm's map pinned to a cork board; pick up your pin and drop it where
+       you live: it snaps to the nearest of the 104 towns and answers in V1's words; dropped where no listed town is
+       near, it says so, with the phone. The search drops the pin for you. Towns: the firm's published lists. -->
+  <div class="ver pb" data-v="4">
+    <div class="wrap pb__grid">
+      <div class="pb__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
+        <h2 class="t-head" id="towns-h-4">Drop your pin. <span class="acc">We will tell you.</span></h2>
+        <p class="pb__lead">Pick up the pin and drop it where you live, or type your town. <span class="nums">104</span> towns across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="pb__panel">
+          <label class="pb__lbl" for="pb-q">Your town or city</label>
+          <div class="pb__box">
+            <input class="pb__in" id="pb-q" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pb-opts" spellcheck="false" placeholder="Start typing, for example Weston">
+            <button type="button" class="pb__clear" aria-label="Clear the town" hidden><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5 L15 15 M15 5 L5 15"/></svg></button>
+          </div>
+          <ul class="pb__opts" id="pb-opts" role="listbox" aria-label="Matching towns" hidden></ul>
+          <p class="pb__ans" aria-live="polite"></p>
+          <button type="button" class="pb__out" hidden>Take the pin out</button>
+        </div>
+        <div class="pb__foot">
+          <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+          <p class="pb__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
+        </div>
+      </div>
+      <div class="pb__board">
+        <div class="pb__tray"><span class="pb__tl">Your pin</span><span class="pb__th">Drag it to where you live</span></div>
+        <div class="pb__paper"><svg class="pb__svg" viewBox="0 0 1000 2378" aria-hidden="true" focusable="false"></svg><div class="pb__labels" aria-hidden="true"></div></div>
+        <span class="pb__office" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="pb__needle" d="M22 26 L22 43"/><circle class="pb__head" cx="22" cy="15" r="11"/><circle class="pb__shine" cx="18.5" cy="11.5" r="3"/></svg></span>
+        <button type="button" class="pb__pin" aria-label="Your pin. Drag it onto the map where you live, or type your town in the search."><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="pb__needle" d="M22 26 L22 43"/><circle class="pb__head" cx="22" cy="15" r="11"/><circle class="pb__shine" cx="18.5" cy="11.5" r="3"/></svg></button>
+      </div>
+    </div>
+  </div>
 </section>

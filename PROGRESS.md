@@ -731,3 +731,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Where We Build V4.
+
+## New versions, pass 3 · Where We Build V4 "Drop your pin" (2026-11-04)
+- **Muse accepted** Reviews V4.
+- **One new version:** `towns` V4.
+  - V1 (the drawn map) stays the default; V2 and V3 are untouched.
+  - It is reachable from the header switch or `?towns=4`.
+- **Governing reference:** Bruno Simon (playful physical objects; the annex's one interactive section).
+- **Style family:** a cork pinboard with a pinned paper map.
+- **Signature move:** drop your pin.
+  - Pick up your pin from the tray and drop it where you live: it snaps to the nearest of the 104 towns and answers in V1's words.
+  - No town near: it says so honestly, with the phone. The search drops the pin from above.
+  - Only the town under the pin is ever named.
+- **Gate:** `GATE-NEW-Towns-V4.md`, self-scored 8.4 (D8 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/towns-v4/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Tell Us V4.
