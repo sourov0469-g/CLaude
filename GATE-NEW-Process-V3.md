@@ -96,7 +96,7 @@ Weighted = 0.4 D + 0.3 U + 0.2 C + 0.1 Ct = 3.2 + 2.4 + 1.6 + 1.0 = 8.2.
 | **Design 8** | **Pure type and rule:** numerals, vertical spine titles, an outlined chapter number, and the weeks as a drawn schedule. No picture.<br>**One focal point (S0083):** one open chapter, in ink and clay.<br>**Heights:** 923px at 1440 × 900 and 861px at 1024 (the site's section padding is 293px and 243px of that), against 1037px for V2 on the same measure. Phones are 1118 to 1144px. | **Phones:** about 1.35 screens, because eight 48px rows plus the open page stand in a column.<br>**Desktop:** the H2 still breaks onto two lines (the site's heading measure). |
 | **Usability 8** | **Verified at 1440 mouse, 768 and 390 touch, and reduced motion:**<br>• tabs: arrows, Home, End, and wrapping from 8 to 1;<br>• the marker: two arrow presses reach Design, Home returns;<br>• "Next" works;<br>• a tap on the rule opens Permitting at weeks 6–12;<br>• a drag from 1 to the hatched span opens Construction ("06 Construction, Varies");<br>• a vertical swipe over the rule scrolls the page (276 to 317px) and leaves the stage alone.<br>**Measures:** 0 targets under 44px; 0 text under 13px; 0 overflow at 360, 390, 414, 768 and 1440; 0 errors. | On phones the chapter rows stack, so the rule sits below the fold until you scroll. The one-week stages are only about 18px wide on the rule at 390 (the marker drag and the tabs cover them). |
 | **Creativity 8** | A move the section did not have: the job as a bound book of chapters, opened by sliding its spines apart, with the weeks drawn to scale so permitting's six weeks visibly dominate and construction reads as "varies". | A chapter index is an editorial convention; the craft is the transform-only opening and the schedule drag. |
-| **Content 10** | **Stages:** all eight names, weeks and lines are the section's one list (`ST`), verbatim. The rule's widths are exactly the published week ranges; nothing is invented for construction ("varies", hatched).<br>**Copy:** the eyebrow, H2 and note are V1's.<br>Locks **0 fails**; outside links **0**. | |
+| **Content 10** | **Stages:** all eight names, weeks and lines are the section's one list (`ST`), verbatim. The dated stages are drawn to their published week ranges. Construction ("varies") and closeout have no published length, so they get a fixed width: construction hatched and labelled "varies", with no week number printed after week 12.<br>**Copy:** the eyebrow, H2 and note are V1's.<br>Locks **0 fails**; outside links **0**. | |
 
 **Vetoes checked, none tripped:**
 - no console errors or warnings (V3 at 1440, 1024, 768, 414, 390 and 360, reduced motion, the single file);
@@ -117,6 +117,7 @@ Weighted = 0.4 D + 0.3 U + 0.2 C + 0.1 Ct = 3.2 + 2.4 + 1.6 + 1.0 = 8.2.
 - **Phones:** about 1.35 screens tall.
 - **The page arrives a beat after the slide begins.** The old page clears first, so for about 0.15s the gap is blank paper; this is by design, never two chapters at once.
 - **The H2** sets on two lines at 1440.
+- **Construction and closeout widths:** these are a drawing choice (4 and 1 units), not published figures; Muse should confirm the hatched treatment is clear enough.
 - **No assets needed or requested.**
 
 ## Reference: transfers and non-transfers (OH Architecture, primary)
