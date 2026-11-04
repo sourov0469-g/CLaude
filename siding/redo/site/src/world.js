@@ -4,12 +4,13 @@
      fields and baked offline into six lighting levels of increasing relief depth (bg/relief.py); the flat wall is pure
      white in every level, so at rest the page is exactly white;
    - a 256² ping-pong flowmap holds the reveal: presence (a) and eased pointer speed (b), stamped with
-     smoothstep(0.19, 0, dist) in viewport-height units, broken by drifting cloud noise (0.15–1), decayed every frame by
+     smoothstep(0.20, 0, dist) in viewport-height units at presence strength 0.38 for a slow or still pointer, rising to IG's 1.0 with pointer speed (IG's uAlpha; its class
+     default is 0.3), so the held disc has a 30–45 px feather (GATE-BACKGROUND-FIX, Muse's correction), broken by drifting cloud noise (0.15–1), decayed every frame by
      1/(1 + dm·(1/0.953 − 1)), dm = min(dt, 32)/16;
    - extrude = b + a walks IG's six-step ladder from white up through levels 1–5;
    - the wall moves at 0.31× page scroll (eased, τ ≈ 340 ms); the mask is shifted with it so trails stay on the wall;
-   - owner's rules over IG: nothing at rest (no ghost cursor), the disc closes by itself once the pointer is still (250 ms hold, then a 0.93 release), no
-     colour at all (grey only, drawn as black with alpha over the white page), a 4 px pointer parallax on the highest relief.
+   - owner's rules over IG: nothing at rest (no ghost cursor), the disc closes by itself once the pointer is still (450 ms hold, then a 0.87 release), no
+     colour at all (grey only, drawn as black with alpha over the white page), a pointer parallax of up to 2 px on the highest relief.
    WebGL2 (WebGL1 fallback), no library. Reduced motion: nothing starts; the page stays white. */
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -39,11 +40,11 @@
     float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+1.),f.x),f.y);}
     float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<4;i++){s+=a*vn(p);p*=2.03;a*=.5;}return s;}`;
   // flowmap: decay, scroll shift, stamp (IG: smoothstep(falloff,0,dist), noise2 = .15 + .85*smoothstep(.4,1,n))
-  const FM = `precision highp float;varying vec2 v;uniform sampler2D prev;uniform vec2 mouse;uniform float aspect,falloff,dm,shift,time,pres,speed,floor8,keep;${NOISE}
+  const FM = `precision highp float;varying vec2 v;uniform sampler2D prev;uniform vec2 mouse;uniform float aspect,falloff,alpha,dm,shift,time,pres,speed,floor8,keep;${NOISE}
     void main(){vec4 d=texture2D(prev,v+vec2(0.,shift));float k=1./(1.+dm*(1./keep-1.));d*=k;d=max(d-floor8,0.);
       vec2 c=v-mouse;c.x*=aspect;float st=1.-smoothstep(0.,falloff,length(c));   /* = IG's smoothstep(falloff,0,d), written with ordered edges (reversed edges are undefined in GLSL) */
       float n2=.15+.85*smoothstep(.4,1.,fbm(v*vec2(aspect,1.)*3.2+vec2(.01)*time));
-      d.a=min(1.,d.a+st*n2*dm*pres);d.b=min(1.,max(d.b,st*speed*n2));gl_FragColor=d;}`;
+      d.a=min(1.,d.a+st*alpha*n2*dm*pres);d.b=min(1.,max(d.b,st*speed*n2));gl_FragColor=d;}`;
   // composite: IG's six-level ladder; out = black with alpha (1 - v) over the white page, so R = G = B and rest = transparent
   const CO = `precision highp float;varying vec2 v;uniform sampler2D flow,a0,b0,a1,b1,a2,b2;uniform vec2 res,par;uniform float wy,pw,ph,dbg;
     vec3 L(int i,vec2 q,int c){vec4 A,B;if(i==0){A=texture2D(a0,q);B=texture2D(b0,q);}else if(i==1){A=texture2D(a1,q);B=texture2D(b1,q);}else{A=texture2D(a2,q);B=texture2D(b2,q);}
@@ -96,7 +97,7 @@
     const vx = (P.x - P.px) * dm, vy = (P.y - P.py) * dm; P.px = P.x; P.py = P.y;
     const mv = Math.hypot(vx, vy); const target = 1 - Math.pow(1 - Math.min(1, 50 * mv), 2);
     P.sp += (target - P.sp) * (1 - Math.pow(1 - (mv > 1e-5 ? 0.1 : 0.04), dm));
-    const active = P.on && t - P.last < 250; P.act = active; P.age = t - P.last;   // owner: a still pointer lets the disc close by itself                         // owner: the disc closes by itself once the pointer is still (250 ms hold, then a 0.93 release)
+    const active = P.on && t - P.last < 450; P.act = active; P.age = t - P.last;   // owner: the disc closes by itself once the pointer is still (450 ms hold, so the lower stamp strength still forms the disc; then a 0.87 release)
     if (active || P.sp > 0.01) lastStamp = t;
     // wall: 0.31 x scroll, eased tau ~340 ms; the mask moves with it so trails stay on the wall
     const want = scrollY * 0.31, prevWy = wy; wy += (want - wy) * (1 - Math.pow(1 - 0.047, dm));
@@ -106,10 +107,10 @@
     const src = M[cur], dst = M[1 - cur]; cur = 1 - cur;
     gl.bindFramebuffer(gl.FRAMEBUFFER, dst.f); gl.viewport(0, 0, MS, MS); gl.useProgram(PF);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, src.t); gl.uniform1i(U(PF, 'prev'), 0);
-    gl.uniform2f(U(PF, 'mouse'), P.x, P.y); gl.uniform1f(U(PF, 'aspect'), W / H); gl.uniform1f(U(PF, 'falloff'), 0.19); gl.uniform1f(U(PF, 'dm'), dm);
+    gl.uniform2f(U(PF, 'mouse'), P.x, P.y); gl.uniform1f(U(PF, 'aspect'), W / H); gl.uniform1f(U(PF, 'falloff'), 0.20); gl.uniform1f(U(PF, 'alpha'), 0.38 + 0.62 * Math.min(1, P.sp)); gl.uniform1f(U(PF, 'dm'), dm);   // falloff 0.20; presence strength 0.38 for a slow or still pointer (feather 30–45 px), rising to IG's 1.0 with pointer speed so a sweep keeps its depth
     gl.uniform1f(U(PF, 'shift'), shift); gl.uniform1f(U(PF, 'time'), (t - t0) / 1000); gl.uniform1f(U(PF, 'pres'), active ? 1 : 0);
     gl.uniform1f(U(PF, 'speed'), active ? P.sp : 0); gl.uniform1f(U(PF, 'floor8'), BYTE ? 1.5 / 255 : 0.0004);
-    gl.uniform1f(U(PF, 'keep'), active ? 0.953 : 0.93);                 // IG's 0.953 while the pointer moves; a faster release once it is still
+    gl.uniform1f(U(PF, 'keep'), active ? 0.953 : 0.87);                 // IG's 0.953 while the pointer moves; a faster release once it is still
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     // composite pass
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, cv.width, cv.height); gl.useProgram(PC);
@@ -118,7 +119,7 @@
     ['a0', 'b0', 'a1', 'b1', 'a2', 'b2'].forEach((n, i) => { gl.activeTexture(gl.TEXTURE1 + i); gl.bindTexture(gl.TEXTURE_2D, T[i]); gl.uniform1i(U(PC, n), 1 + i); });
     const pw = Math.max(W, 900), ph = pw * PH / PW;
     gl.uniform2f(U(PC, 'res'), W, H); gl.uniform1f(U(PC, 'wy'), wy); gl.uniform1f(U(PC, 'pw'), pw); gl.uniform1f(U(PC, 'ph'), ph);
-    gl.uniform1f(U(PC, 'dbg'), DBG); gl.uniform2f(U(PC, 'par'), (P.x - 0.5) * -4, (0.5 - P.y) * -4);     // up to 4 px on the highest relief
+    gl.uniform1f(U(PC, 'dbg'), DBG); gl.uniform2f(U(PC, 'par'), (P.x - 0.5) * -4, (0.5 - P.y) * -4);     // up to 2 px at the screen edges, on the highest relief
     if (loaded === PANELS.length * 2) gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     // run while anything is still showing (the mask fades to nothing ~2.2 s after the last stamp) or the wall is still easing
     if (t - lastStamp < 2300 || Math.abs(want - wy) > 0.05) raf = requestAnimationFrame(frame);

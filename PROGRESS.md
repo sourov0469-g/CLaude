@@ -1262,6 +1262,14 @@ Every text element is paired with the nearest painted background behind it, as r
   - `src/world.js` is new: IG's 256² flowmap (stamp 0.19, decay 0.953, speed and presence channels) and its six-level ladder; the wall at 0.31× scroll.
   - The owner's overrides: pure white at rest, a self-closing disc, no colour.
   - The pictogram world is retired (`src/world-pictograms-retired.js`).
-- **Gate:** GATE-BACKGROUND-FIX.md, waiting for Muse's judgment.
+- **Gate:** GATE-BACKGROUND-FIX.md, first submitted at commit 7dc7b42.
+- **Not accepted by Muse (2026-11-04),** on three points: no scorecard, no WEB-SKILLS tags, and a feather of 21 px against the 30–45 px target.
+- **Corrected:**
+  - Scorecard added: 8.20, PASS, no vetoes.
+  - Skill ledger added, with tags per element.
+  - Feather fixed: falloff 0.19 → 0.20, and stamp strength 0.38 for a still pointer, rising to IG's 1.0 with speed. Re-measured at 33 px (r50 145, r90 131, r10 164, r0 174, all within IG's range).
+  - Close-back retuned: 450 ms hold and 0.87 release (0.06 at 752 ms, 0 by 1.0 s).
+  - Every check re-measured and the screenshots re-shot. Spec rows A7, A11 and A16 amended.
+- **Status:** the corrected gate is waiting for Muse's judgment.
 
 **Next, after the accept:** Booking K (the last of pass 1).
