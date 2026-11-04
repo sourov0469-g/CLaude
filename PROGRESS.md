@@ -569,3 +569,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Reviews V3.
+
+## New versions, pass 2 · Reviews V3 "The solid block" (2026-11-04)
+- **Muse accepted** Our Work V3.
+- **One new version:** `reviews` V3.
+  - V1 (the constellation) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?reviews=3`.
+- **Governing reference:** Immersive Garden (camera scrub, inside the budget).
+- **Style family:** an isometric object drawn in ink on paper.
+- **Signature move:** the solid block.
+  - 343 = 7 × 7 × 7: the 343 stars gather with the scroll into a cube between the figures 4.8 and 343.
+  - The scroll turns the camera; a drag or "Turn the block" turns it by hand.
+  - The pointer and a tap scatter the stars and they spring home (the owner's rules kept).
+- **Gate:** `GATE-NEW-Reviews-V3.md`, self-scored 8.4 (D8 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/reviews-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Where We Build V3.

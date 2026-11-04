@@ -2577,6 +2577,47 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .rs__again { transition: none; } }
 
 
+.sk__head { text-align: center; display: grid; justify-items: center; margin-bottom: var(--s4); }
+.sk__head .t-head { margin: 0; }
+.sk__head .eyebrow { justify-self: center; }
+.sk__tri { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr); align-items: center; gap: var(--s4); }
+.sk__fig { margin: 0; display: grid; gap: var(--s2); }
+.sk__fig--avg { justify-items: end; text-align: right; }
+.sk__fig--n { justify-items: start; text-align: left; }
+.sk__num { font: 400 clamp(4.5rem, 2.4rem + 6vw, 9.5rem)/.82 var(--f-display); letter-spacing: -.045em; color: var(--color-text); }
+.sk__fig--avg .sk__num { color: var(--color-accent-text, var(--color-accent-solid)); }
+.sk__lab { font: 600 .9375rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.sk__stage { margin: 0; position: relative; }
+.sk__cv { display: block; width: 100%; height: clamp(340px, 46vh, 500px); touch-action: pan-y; cursor: grab; }
+.sk__cv.is-drag { cursor: grabbing; }
+.sk__line { margin: var(--s3) auto 0; max-width: 62ch; text-align: center; font: 400 1rem/1.5 var(--f-text); color: var(--color-text-secondary); }
+.sk__acts { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s3); margin-top: var(--s4); }
+.sk__b {
+  min-height: 48px; padding: 0 var(--s5); background: transparent; color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius);
+  font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.sk__b:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .sk__b:hover { background: var(--color-text); color: var(--color-bg); } }
+
+@media (max-width: 899px) {
+  
+  .sk__tri { grid-template-columns: 1fr 1fr; grid-template-areas: "avg n" "stage stage"; row-gap: var(--s2); }
+  .sk__fig--avg { grid-area: avg; justify-items: center; text-align: center; }
+  .sk__fig--n { grid-area: n; justify-items: center; text-align: center; }
+  .sk__stage { grid-area: stage; }
+  .sk__num { font-size: clamp(3.5rem, 2rem + 6vw, 5.5rem); }
+  .sk__cv { height: clamp(300px, 44vh, 440px); }
+}
+@media (max-width: 599px) {
+  .sk__head { text-align: left; justify-items: start; }
+  .sk__head .eyebrow { justify-self: start; }
+  .sk__line { text-align: left; }
+  .sk__acts { justify-content: stretch; }
+  .sk__acts > * { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .sk__b { transition: none; } .sk__again { display: none; } }
+
+
 .vc__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s4) var(--s8); }
 .vc__head .eyebrow { margin: 0 0 var(--s3); }
 .vc__head .t-head, .vc__lead { margin: 0; }
@@ -3657,6 +3698,30 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           <canvas class="rs__cv" role="img" aria-label="343 small stars, one per Google review, filling five large stars to 4.8 out of 5."></canvas>
           <figcaption class="rs__hint" aria-hidden="true">Run a pointer through them, or touch them. They find their way back.</figcaption>
         </figure>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver sk" data-v="3">
+    <div class="wrap">
+      <div class="sk__head">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Google reviews</p>
+        <h2 class="t-head" id="reviews-h-3">343 reviews. <span class="acc">One solid block.</span></h2>
+      </div>
+      <div class="sk__tri">
+        <p class="sk__fig sk__fig--avg" aria-hidden="true"><span class="sk__num nums">4.8</span><span class="sk__lab">out of <span class="nums">5</span>, the average</span></p>
+        <figure class="sk__stage" data-buddy="drag">
+          <canvas class="sk__cv" role="img" aria-label="343 small stars, one per Google review, forming a solid block seven stars on every side."></canvas>
+        </figure>
+        <p class="sk__fig sk__fig--n" aria-hidden="true"><span class="sk__num nums">343</span><span class="sk__lab">Google reviews</span></p>
+      </div>
+      <p class="sr-only">4.8 out of 5, the average across 343 Google reviews.</p>
+      <p class="sk__line">Every star is one review: seven by seven by seven. Turn the block, or push the stars aside. They find their way back.</p>
+      <div class="sk__acts">
+        <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
+        <button type="button" class="sk__b sk__turn">Turn the block</button>
+        <button type="button" class="sk__b sk__again">Scatter them</button>
       </div>
     </div>
   </div>
@@ -8313,6 +8378,118 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       k.on(root.querySelector('.rs__again'), 'click', function () { scatter(); });
       k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
       EZ.reveal(k, root.querySelectorAll('.rs__eye, .rs__h, .rs__acts'));
+    } },
+    /* NEW VERSIONS · V3 "The solid block" (governing reference: Immersive Garden, camera scrub). 343 = 7 x 7 x 7: the
+       stars gather into a cube with the scroll; the scroll turns the camera, a drag turns it by hand; the pointer pushes
+       stars aside and they spring home [S0340, S0089, S1326, Q41 DPR cap + 40fps ceiling]. */
+    3: { init: function (root, k) {
+      var cv = root.querySelector('.sk__cv'), ctx = cv.getContext('2d');
+      var css = getComputedStyle(root), INK = css.getPropertyValue('--color-text').trim() || '#1c1a17', ACC = css.getPropertyValue('--color-accent-solid').trim() || '#A45540';
+      var N = 7, stars = [], W = 0, H = 0, dpr = 1, unit = 1, ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0, prog = 0;
+      var cam = { user: 0, pitch: -0.42 }, drag = null;
+      function starPath(c, x, y, R, ri) {
+        for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? R * ri : R; if (i) c.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r); else c.moveTo(x + Math.cos(a) * r, y + Math.sin(a) * r); }
+        c.closePath();
+      }
+      // the camera: the scroll turns it about a quarter of the way round as the section passes (one reversible value) [S1326]
+      function pass() { var r = cv.getBoundingClientRect(), cy = r.top + r.height / 2; return Math.max(0, Math.min(1, (innerHeight + r.height / 2 - cy) / (innerHeight + r.height))); }
+      function target() { var r = cv.getBoundingClientRect(), cy = r.top + r.height / 2, from = innerHeight + r.height / 2, to = innerHeight / 2; return k.motion ? Math.max(0, Math.min(1, (from - cy) / (from - to))) : 1; }
+      function yaw() { return (k.motion ? -1.15 + pass() * 1.35 : -0.62) + cam.user; }
+      function layout(fresh) {
+        var r = cv.getBoundingClientRect(); W = Math.round(r.width); H = Math.round(r.height); if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        unit = Math.min(W, H) / 13.5;    // the spacing between neighbouring stars
+        if (fresh || !stars.length) {
+          stars = [];
+          for (var a = 0; a < N; a++) for (var b = 0; b < N; b++) for (var c = 0; c < N; c++) {
+            stars.push({ hx: a - 3, hy: b - 3, hz: c - 3,   // home: the block, centred
+              fx: (Math.random() - .5) * 15, fy: (Math.random() - .5) * 7 + 2.5, fz: (Math.random() - .5) * 9,   // the loose field, a little below
+              d: Math.random() * .3, k: .8 + Math.random() * .4, ox: 0, oy: 0, vx: 0, vy: 0 });
+          }
+        }
+        prog = target(); frame();
+      }
+      function ease(t) { return 1 - Math.pow(1 - t, 3); }
+      var proj = [];
+      function frame() {
+        var ya = yaw(), cyw = Math.cos(ya), syw = Math.sin(ya), cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch), D = 22, cx = W / 2, cy = H / 2;
+        function P(x, y, z) { var x1 = x * cyw + z * syw, z1 = -x * syw + z * cyw, y1 = y * cp - z1 * sp, z2 = y * sp + z1 * cp, f = D / (D + z2); return [cx + x1 * f * unit, cy + y1 * f * unit, z2, f]; }
+        proj.length = 0;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i], t = Math.max(0, Math.min(1, (prog - s.d) / .7)), e = ease(t);
+          var q = P(s.fx + (s.hx - s.fx) * e, s.fy + (s.hy - s.fy) * e, s.fz + (s.hz - s.fz) * e);
+          s.e = e; s.x = q[0] + s.ox; s.y = q[1] + s.oy; s.z = q[2]; s.f = q[3]; proj.push(s);
+        }
+        proj.sort(function (a, b) { return b.z - a.z; });   // far to near
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+        // the block's edges, ruled in as it forms
+        var g = prog, V = [];
+        for (var v = 0; v < 8; v++) V.push(P(v & 1 ? 3.6 : -3.6, v & 2 ? 3.6 : -3.6, v & 4 ? 3.6 : -3.6));
+        ctx.globalAlpha = .55 * g * g; ctx.strokeStyle = ACC; ctx.lineWidth = 1.25; ctx.beginPath();
+        [[0, 1], [2, 3], [4, 5], [6, 7], [0, 2], [1, 3], [4, 6], [5, 7], [0, 4], [1, 5], [2, 6], [3, 7]].forEach(function (e) { ctx.moveTo(V[e[0]][0], V[e[0]][1]); ctx.lineTo(V[e[1]][0], V[e[1]][1]); });
+        ctx.stroke();
+        // the stars, shaded by depth: near ones darker and larger
+        ctx.fillStyle = INK;
+        for (var n = 0; n < proj.length; n++) {
+          var p = proj[n], depth = Math.max(0, Math.min(1, (p.z + 6) / 12));
+          ctx.globalAlpha = (.28 + .72 * (1 - depth)) * (.45 + .55 * p.e);
+          ctx.beginPath(); starPath(ctx, p.x, p.y, unit * .26 * p.k * p.f * (1.1 - .25 * depth), .45); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 25) return;   // a 40fps ceiling
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        prog += (target() - prog) * Math.min(1, .16 * dt);
+        var R = Math.max(60, Math.min(W, H) * .16), R2 = R * R;
+        for (var i = 0; i < stars.length; i++) {   // springs: pushed by the pointer, always pulled home [S0340]
+          var s = stars[i], ax = -s.ox * .06, ay = -s.oy * .06, dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (!drag && d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 2.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .84; s.vy = (s.vy + ay * dt) * .84; s.ox += s.vx * dt; s.oy += s.vy * dt;
+        }
+        frame();
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(px, py) {
+        stars.forEach(function (s) { var dx = s.x - (px == null ? W / 2 : px), dy = s.y - (py == null ? H / 2 : py), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 6 + Math.random() * 8; s.vx += dx / d * f; s.vy += dy / d * f; });
+        run();
+      }
+
+      /* ---------- by hand: drag turns the block (sideways only on touch); a tap scatters [S1443] ---------- */
+      function local(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+      k.on(cv, 'pointerdown', function (e) {
+        if (e.button > 0) return; var p = local(e);
+        drag = { id: e.pointerId, x: e.clientX, y: e.clientY, u: cam.user, live: e.pointerType === 'mouse', moved: false, px: p[0], py: p[1], touch: e.pointerType !== 'mouse' };
+        if (drag.live) { try { cv.setPointerCapture(e.pointerId); } catch (x) {} cv.classList.add('is-drag'); }
+      });
+      k.on(cv, 'pointermove', function (e) {
+        if (e.pointerType === 'mouse' && !drag) { var p = local(e); ptr.x = p[0]; ptr.y = p[1]; run(); return; }
+        if (!drag) return;
+        var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+        if (!drag.live) { if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { drag = null; return; } if (Math.abs(dx) > 8) { drag.live = true; cv.classList.add('is-drag'); try { cv.setPointerCapture(drag.id); } catch (x) {} } else return; }
+        if (Math.abs(dx) > 3) drag.moved = true;
+        cam.user = drag.u + dx * .009; if (k.motion) run(); else frame();
+      });
+      function end(e) {
+        if (!drag) return; var d = drag; drag = null; cv.classList.remove('is-drag');
+        if (d.touch && !d.moved && e && e.type === 'pointerup') scatter(d.px, d.py);   // a tap scatters on touch
+      }
+      k.on(cv, 'pointerup', end); k.on(cv, 'pointercancel', function () { drag = null; cv.classList.remove('is-drag'); });
+      k.on(cv, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(root.querySelector('.sk__again'), 'click', function () { scatter(); });
+      k.on(root.querySelector('.sk__turn'), 'click', function () {   // the keyboard path to turning it: a quarter turn
+        if (!k.motion) { cam.user += Math.PI / 2; frame(); return; }
+        gsap.to(cam, { user: cam.user + Math.PI / 2, duration: .9, ease: 'power3.inOut' }); run();
+      });
+
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(cv, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; gsap.killTweensOf(cam); ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
+      EZ.reveal(k, root.querySelectorAll('.sk__head, .sk__fig, .sk__line, .sk__acts'));
     } }
   });
 })();
