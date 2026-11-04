@@ -96,5 +96,22 @@ module.exports = {
     rec('See the Underside toggles back to the top view', await p.evaluate(S => /rotateX\(-26/.test(document.querySelector(S + ' .blk').style.transform) && document.querySelector(S + ' .ud').getAttribute('aria-pressed') === 'false', S));
     rec('drip edge is drawn under the ice & water, with its lip past the deck', await p.evaluate(S => { const s = document.querySelector(S + ' .blk .face:nth-child(3) svg').innerHTML; return s.indexOf('data-l="3"') > s.indexOf('data-l="2"') && /M34 51H-4V88/.test(s); }, S));
     rec('the honest scale note is shown', await p.evaluate(S => /Thicknesses drawn larger/.test(document.querySelector(S + ' .ctl small').textContent), S));
+  },
+  '11': async (p, S, rec) => {
+    await p.waitForTimeout(600);
+    rec('it opens on the homeowner’s question, not a lesson: “Not sure what’s wrong?” with Wise Check', await p.evaluate(S => document.querySelector(S + ' .ans h3').textContent === 'Not sure what’s wrong?' && /Wise Check/.test(document.querySelector(S + ' .ans').textContent), S));
+    rec('five trouble spots, each a named 44 px+ button', await p.evaluate(S => { const b = [...document.querySelectorAll(S + ' .spot')]; return b.length === 5 && b.every(x => x.getAttribute('aria-label') && x.getBoundingClientRect().width >= 44); }, S));
+    rec('no two spots overlap, at this width', await p.evaluate(S => { const r = [...document.querySelectorAll(S + ' .spot')].map(x => x.getBoundingClientRect()); for (let i = 0; i < r.length; i++) for (let j = i + 1; j < r.length; j++) { if (Math.hypot(r[i].x - r[j].x, r[i].y - r[j].y) < 46) return false; } return true; }, S));
+    const ownership = { 'Shingles': /repair|replace/, 'Storm damage': /hail and wind/, 'Chimney': /water gets in/, 'Stain on the ceiling': /leak/, 'Siding': /siding/ };
+    let all = true, owlMoved = true, last = '';
+    for (let i = 0; i < 5; i++) {
+      await p.click(S + ' .spot >> nth=' + i); await p.waitForTimeout(800);
+      const st = await p.evaluate(([S, i]) => { const b = document.querySelectorAll(S + ' .spot')[i]; const o = document.querySelector(S + ' .owl'); return { n: b.getAttribute('aria-label'), pressed: [...document.querySelectorAll(S + ' .spot')].filter(x => x.getAttribute('aria-pressed') === 'true').length, a: document.querySelector(S + ' .ans').textContent, pos: o.style.left + o.style.top }; }, [S, i]);
+      if (!(st.pressed === 1 && ownership[st.n].test(st.a))) all = false; if (st.pos === last) owlMoved = false; last = st.pos;
+    }
+    rec('each spot answers that Owl fixes it, with a real Owl service, one at a time', all);
+    rec('the Owl flies to each chosen spot', owlMoved);
+    rec('no answer teaches construction (no layers, underlayment, decking, nails, ventilation words)', await p.evaluate(S => !/underlayment|ice & water|decking|drip edge|nail|ventilation|rafter/i.test(document.querySelector(S).innerText), S));
+    rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };

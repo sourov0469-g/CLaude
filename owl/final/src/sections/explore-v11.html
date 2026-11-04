@@ -1,0 +1,86 @@
+<section class="sec explore11" id="explore-11" aria-labelledby="ex11-h">
+<style>
+.explore11{overflow:hidden}
+.explore11 .g{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(22px,4vw,60px);align-items:center}
+.explore11 .lede{margin:12px 0 20px;max-width:36ch}
+.explore11 .house{position:relative;aspect-ratio:600/460;border-radius:30px;background:radial-gradient(ellipse at 50% 30%,#FFFDF7,#EFE9DC 75%);box-shadow:0 2px 0 #fff inset,0 40px 60px -44px rgba(23,17,29,.5)}
+.explore11 .house>svg{position:absolute;inset:0;width:100%;height:100%}
+.explore11 .spot{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;padding:0;border:0;border-radius:50%;background:#EAA221;color:#17111D;box-shadow:0 0 0 4px #FFFDF7,0 10px 16px -8px rgba(23,17,29,.55);display:grid;place-items:center;cursor:pointer;z-index:2;transition:transform .2s cubic-bezier(.3,1.6,.5,1),background .2s}
+.explore11 .spot svg{width:22px;height:22px;transition:transform .25s}
+.explore11 .spot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid rgba(234,162,33,.7);animation:ex11p 2.2s ease-out infinite;animation-delay:var(--d,0s)}
+@keyframes ex11p{0%{opacity:.9;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.7)}}
+.explore11 .spot:hover{transform:scale(1.1)}
+.explore11 .spot[aria-pressed="true"]{background:#17111D;color:#FFFDF7}
+.explore11 .spot[aria-pressed="true"] svg{transform:rotate(45deg)}
+.explore11 .spot[aria-pressed="true"]::after{animation:none;opacity:0}
+.explore11 .spot:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.explore11 .owl{position:absolute;z-index:3;width:clamp(46px,6vw,64px);margin:0;pointer-events:none;left:66.7%;top:21%;transform:translate(-50%,-100%);transition:left .7s cubic-bezier(.45,0,.25,1),top .7s cubic-bezier(.45,0,.25,1)}
+.explore11 .owl svg{display:block;width:100%;height:auto;filter:drop-shadow(0 6px 6px rgba(23,17,29,.3))}
+.explore11 .owl.hop svg{animation:ex11h .7s cubic-bezier(.45,0,.25,1)}
+@keyframes ex11h{50%{transform:translateY(-38px) rotate(-6deg)}100%{transform:none}}
+.explore11 .ans{padding:22px 22px 24px;border-radius:22px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 26px 40px -30px rgba(23,17,29,.5);min-height:220px}
+.explore11 .ans small{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(234,162,33,.2);color:#8E5A12;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.explore11 .ans h3{margin:12px 0 6px;font-size:clamp(22px,2.2vw,28px);font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.explore11 .ans p{margin:0;font-size:17px;color:var(--ink-70)}
+.explore11 .ans.swap{animation:ex11s .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes ex11s{0%{opacity:.2;transform:translateY(10px)}100%{opacity:1;transform:none}}
+.explore11 .acts{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.explore11 .acts .btn{width:100%;min-height:56px;font-size:17px}
+@media (max-width:900px){.explore11 .g{grid-template-columns:minmax(0,1fr)}.explore11 .spot{width:44px;height:44px;margin:-22px 0 0 -22px}}
+@media (prefers-reduced-motion:reduce){.explore11 .spot::after{animation:none;opacity:0}.explore11 .owl{transition:none}.explore11 .owl.hop svg,.explore11 .ans.swap{animation:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="house" data-owl="say:Show me">
+   <svg viewBox="0 0 600 460" aria-hidden="true"></svg>
+   <div class="owl" aria-hidden="true"><svg viewBox="0 0 200 200"><path d="M38 60L52 16 82 48M162 60L148 16 118 48" fill="#17111D"/><ellipse cx="100" cy="112" rx="80" ry="84" fill="#17111D"/><ellipse cx="100" cy="146" rx="46" ry="44" fill="#3A3540"/><circle cx="68" cy="92" r="30" fill="#F1EFE6"/><circle cx="132" cy="92" r="30" fill="#F1EFE6"/><circle cx="68" cy="92" r="17" fill="#EAA221"/><circle cx="132" cy="92" r="17" fill="#EAA221"/><circle cx="70" cy="92" r="8" fill="#17111D"/><circle cx="134" cy="92" r="8" fill="#17111D"/><path d="M90 116l10 16 10-16z" fill="#EAA221"/><path d="M70 192l-8 8M84 194l0 8M116 194l0 8M130 192l8 8" stroke="#EAA221" stroke-width="6" stroke-linecap="round"/></svg></div>
+  </div>
+  <div>
+   <span class="kick">Explore your roof</span>
+   <h2 class="h2" id="ex11-h" style="margin-top:12px">Where’s the Trouble?</h2>
+   <p class="lede rv">Tap the spot that looks like your home. We’ll tell you straight: we fix that.</p>
+   <div class="ans" aria-live="polite"><small></small><h3></h3><p></p></div>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','11',function(root){
+  /* one idea: point at the trouble, and the Owl flies over to say we fix it. No roof lessons. */
+  var house = root.querySelector('.house'), svg = house.querySelector('svg'), owl = root.querySelector('.owl'), ans = root.querySelector('.ans'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var T = [
+    {x:150, y:184, n:'Shingles', tag:'Roof repair or replacement', q:'Missing, cracked or curling shingles?', a:'We’ll repair them, or replace the roof if it’s time, backed by our 10-year workmanship warranty.'},
+    {x:264, y:172, n:'Storm damage', tag:'Storm damage help', q:'Storm hit your roof?', a:'We’ll find the hail and wind damage and put it right.'},
+    {x:446, y:166, n:'Chimney', tag:'Roof repair', q:'Leaking around the chimney?', a:'We’ll find where the water gets in and fix it before it spreads.'},
+    {x:224, y:322, n:'Stain on the ceiling', tag:'Roof repair', q:'A stain on the ceiling?', a:'It’s often the roof. We’ll track the leak down and stop it.'},
+    {x:404, y:390, n:'Siding', tag:'Siding', q:'Siding cracked or loose?', a:'We do siding too, so the outside of your home is looked after.'}];
+  var D = {tag:'Wise Check', q:'Not sure what’s wrong?', a:'Tap a spot on the house, or book a Wise Check and we’ll look for you.'};
+  /* the house: a plain, friendly drawing, roofer-correct but nothing to learn */
+  var h = '<ellipse cx="300" cy="420" rx="250" ry="18" fill="#B9D38C"/><rect x="120" y="232" width="360" height="182" fill="#EDE3CF" stroke="#17111D" stroke-width="3"/>';
+  for (var y = 250; y < 412; y += 18) h += '<path d="M122 ' + y + 'H478" stroke="#D6C8AC" stroke-width="2"/>';
+  h += '<path d="M418 350H478M418 368H478" stroke="#C2B08C" stroke-width="3"/><path d="M432 352l12 10-6 8 14 8" stroke="#8E5A12" stroke-width="2.5" fill="none"/><rect x="452" y="358" width="26" height="10" fill="#E2D2B2" transform="rotate(-6 465 363)"/>';
+  h += '<rect x="148" y="268" width="94" height="74" rx="4" fill="#D7E6EE" stroke="#FFFDF7" stroke-width="6"/><path d="M195 271v68M151 305h88" stroke="#FFFDF7" stroke-width="4"/><ellipse cx="183" cy="276" rx="26" ry="9" fill="#B08C58" opacity=".55"/><ellipse cx="180" cy="277" rx="14" ry="5" fill="#8E6A3A" opacity=".5"/>';
+  h += '<rect x="358" y="268" width="94" height="74" rx="4" fill="#D7E6EE" stroke="#FFFDF7" stroke-width="6"/><path d="M405 271v68M361 305h88" stroke="#FFFDF7" stroke-width="4"/>';
+  h += '<rect x="270" y="318" width="60" height="96" rx="3" fill="#8C6A3A" stroke="#17111D" stroke-width="3"/><circle cx="318" cy="368" r="4" fill="#EAA221"/>';
+  h += '<defs><clipPath id="ex11r"><path d="M90 240L300 98 510 240z"/></clipPath></defs><path d="M90 240L300 98 510 240z" fill="#4A4552"/><g clip-path="url(#ex11r)">';
+  for (var r = 0, yy = 112; yy < 242; yy += 13, r++){ h += '<path d="M60 ' + yy + 'H540" stroke="#2E2A33" stroke-width="2"/>'; for (var xx = 60 + (r % 2)*14; xx < 540; xx += 28) h += '<path d="M' + xx + ' ' + (yy - 13) + 'v13" stroke="#3A3640" stroke-width="1.5"/>'; }
+  h += '<rect x="150" y="203" width="26" height="13" fill="#9C7A48"/><rect x="178" y="216" width="26" height="13" fill="#9C7A48"/><rect x="146" y="218" width="28" height="12" fill="#5C5766" transform="rotate(-14 160 224)"/>';
+  h += '<path d="M402 186c-6 20-4 40 2 56" stroke="#2A2731" stroke-width="10" opacity=".55" fill="none"/></g>';
+  h += '<path d="M90 240L300 98 510 240" fill="none" stroke="#17111D" stroke-width="4" stroke-linejoin="round"/><path d="M84 242H516" stroke="#FFFDF7" stroke-width="6"/>';
+  h += '<rect x="380" y="108" width="42" height="76" fill="#A86B4A" stroke="#17111D" stroke-width="3"/><path d="M380 128h42M380 148h42M380 168h42M401 108v20M391 128v20M411 148v20M401 168v16" stroke="#8A5236" stroke-width="2"/><rect x="374" y="102" width="54" height="10" fill="#7A4A30"/><path d="M376 182l-6 12h62l-6-12z" fill="#8E949B"/>';
+  h += '<g stroke="#6B4E2E" stroke-width="7" stroke-linecap="round" fill="none"><path d="M200 168L300 128"/><path d="M240 152l-10-22M262 144l14-20M222 160l-24-6"/></g><g fill="#6E9B4F"><ellipse cx="228" cy="128" rx="12" ry="7"/><ellipse cx="278" cy="122" rx="12" ry="7"/><ellipse cx="196" cy="152" rx="12" ry="7"/></g>';
+  svg.innerHTML = h;
+  var btns = T.map(function(t, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'spot'; b.style.left = (t.x/6) + '%'; b.style.top = (t.y/4.6) + '%'; b.style.setProperty('--d', (i*.35) + 's');
+    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', t.n); b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+    b.addEventListener('click', function(){ pick(i); }); house.appendChild(b); return b; });
+  function show(t){ ans.querySelector('small').textContent = t.tag; ans.querySelector('h3').textContent = t.q; ans.querySelector('p').textContent = t.a; ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap'); }
+  function pick(i){ var t = T[i]; btns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    owl.style.left = ((t.x + (t.x > 300 ? -46 : 46))/6) + '%'; owl.style.top = ((t.y - 18)/4.6) + '%';
+    owl.classList.remove('hop'); void owl.offsetWidth; if (!OWL.reduce) owl.classList.add('hop'); show(t); }
+  show(D);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(house);
+});
+</script>
+</section>
