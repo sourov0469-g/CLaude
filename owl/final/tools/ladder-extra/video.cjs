@@ -170,5 +170,18 @@ module.exports = {
     rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
     await p.click(S + ' .full'); await p.waitForTimeout(400);
     rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '15': async (p, S, rec) => {
+    await p.waitForTimeout(1600);
+    rec('the letter magnets have snapped on and spell the real number, as one call link', await p.evaluate(S => { const n = document.querySelector(S + ' .num'); const t = [...n.querySelectorAll('.mg')].map(m => m.textContent).join(''); return n.classList.contains('on') && t === '6519776027' && n.getAttribute('href') === 'tel:+16519776027' && n.getAttribute('aria-label') === 'Call (651) 977-6027' && getComputedStyle(n.querySelector('.mg')).opacity === '1'; }, S));
+    rec('the number never splits inside a group (3-3-4)', await p.evaluate(S => [...document.querySelectorAll(S + ' .grp')].every(g => { const t = [...g.children].map(c => Math.round(c.getBoundingClientRect().top)); return t.every(v => Math.abs(v - t[0]) < 8); }) && document.querySelectorAll(S + ' .grp').length === 3, S));
+    rec('the crew print plays Owl’s film under the Owl magnet', await p.evaluate(S => { const v = document.querySelector(S + ' video'), om = document.querySelector(S + ' .om'); return v.dataset.media === 'crew' && !v.paused && getComputedStyle(om).zIndex === '2'; }, S));
+    const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 8000 }), p.click(S + ' .save')]);
+    const fs = require('fs'); const vcf = fs.readFileSync(await dl.path(), 'utf8');
+    rec('Save Our Number downloads a contact card with only the locked facts', dl.suggestedFilename() === 'Owl-Roofing.vcf' && /FN:Owl Roofing LLC/.test(vcf) && /TEL;TYPE=WORK,VOICE:\+16519776027/.test(vcf) && /info@owlroofing\.com/.test(vcf) && /1000 County Rd E #230;Shoreview;MN;55126/.test(vcf) && /Mon–Sat 08:00–18:00/.test(vcf) && !/867-2961|URL:|http/.test(vcf), vcf.split('\r\n').length + ' lines');
+    rec('the page confirms the download in plain words', await p.evaluate(S => /Contact card downloaded: Owl Roofing, \(651\) 977-6027/.test(document.querySelector(S + ' .note').textContent), S));
+    rec('Get My Roof Checked goes to booking', await p.evaluate(S => document.querySelector(S + ' .btn-line').getAttribute('href') === '#book', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };
