@@ -1323,6 +1323,14 @@ Every text element is paired with the nearest painted background behind it, as r
 | 6 | Process | **L, "One job, on its calendar"** (`?process=l`) | Scout Motors (sequenced proof: job APS-4867's five published steps on a true-scale March–September calendar; 178 days, 4 on site) | GATE-NEW-Process-L.md | 8.62 PASS | Accepted by Muse. Also fixed Windows L's oversized CTA phone icon (CSS only) |
 | 7 | Try | **L, "Price the job"** (`?try=l`) | Apple AirPods Pro (numbers as events: six documented jobs; pick one of four bands, then the published band lands on the photo beside the trade's median band) | GATE-NEW-Try-L.md | 8.54 PASS | Accepted by Muse |
 | 8 | On your street | **L, "Which way from our door"** (`?area=l`) | Graza (crafted motion: the finder's records on a compass rose around the office, by direction and distance; a spring needle swings to your side of town) | GATE-NEW-Area-L.md | 8.59 PASS | Accepted by Muse |
-| 9 | Booking | **L, "Everything, then one step"** (`?book=l`) | Dropbox Brand (the annex's subtraction-discipline closing: a poster wall of the twelve locked facts folds, tile by tile on scroll, into one line; one visit left) | GATE-NEW-Booking-L.md | 8.63 PASS | Built and gated; waiting for Muse's accept |
+| 9 | Booking | **L, "Everything, then one step"** (`?book=l`) | Dropbox Brand (the annex's subtraction-discipline closing: a poster wall of the twelve locked facts folds, tile by tile on scroll, into one line; one visit left) | GATE-NEW-Booking-L.md | 8.63 PASS | Accepted by Muse |
 
-**Pass 2 complete once Booking L is accepted** (an L version in all nine sections). Nothing further is queued under the addendum; next steps wait for the owner or Muse.
+**Pass 2 complete** (an L version in all nine sections, all accepted). The addendum governs "until the owner stops it" and says to finish one full pass before the next, so pass 3 follows in the same order, letter M.
+
+## New versions, pass 3
+
+| # | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 1 | Hero | **M, "A house built from our jobs"** (`?hero=m`) | Quiet Cubes (modular, calm: the 43 published project photos as blocks of a house: roofing jobs the roof, siding and window jobs the walls, doors, garage doors and patios at ground level; built from the ground up) | GATE-NEW-Hero-M.md | 8.60 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Services M.

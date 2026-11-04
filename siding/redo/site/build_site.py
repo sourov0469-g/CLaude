@@ -122,7 +122,7 @@ def heroes():
 <div class="win" data-solid><div class="glass">{FILM}<div class="mull"></div>{PP}</div><div class="sill"></div></div></section>'''
     v5 = f'''<section class="hero v5" aria-labelledby="h1"><h1 class="lead" id="h1">{LEAD}</h1>
 <div class="strip" data-solid>{FILM}{PP}</div><div class="row"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
-    return {'1': v1, **new_heroes(), **heroes3(), 'k': heroK(), 'l': heroL(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
+    return {'1': v1, **new_heroes(), **heroes3(), 'k': heroK(), 'l': heroL(), 'm': heroM(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
 
 
 ALT = {'c2': 'A modern two-storey house with charcoal lap siding and warm wood soffits.',
@@ -209,6 +209,58 @@ def heroes3():
 # Hero L: the eight colours, sampled by tools/hl_sample.py (sunlit part of the work in each __JOBS photo), in __JOBS order
 HL_COLOURS = ['#80868F', '#9A9998', '#CEBDA4', '#A3AEAC', '#9D9484', '#C4CDCE', '#908971', '#DDD9DC']
 HL_WHAT = ['siding', 'shingles', 'siding', 'window frames', 'siding', 'painted walls', 'siding', 'window frames']
+
+
+def heroM():
+    """Hero M (new-versions addendum, pass 3): Quiet Cubes, modular and calm. The firm's 43 published project photos
+    (photos.json) as square-jointed blocks stacked into a house: a stepped gable of the roofing jobs with a chimney,
+    three wall courses of the siding and window jobs, and two ground courses of doors, garage doors and patio covers.
+    A photo's part of the house is the trade it is captioned for (the first trade listed). Each block links to its
+    published project page. Nothing can be chosen or changed: not a configurator."""
+    from PIL import Image, ImageOps
+    import base64 as _b, io
+    e = html.escape
+    P = json.load(open(os.path.join(WORK, 'data', 'photos.json')))
+    MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    key = lambda i: (int(P[i]['when'].split()[-1]), MON.index(P[i]['when'].split()[0]))
+    first = lambda i: P[i]['trades'].replace(' & ', ', ').split(', ')[0]
+    KIND = {'siding': 'sid', 'windows': 'win', 'shingle roofing': 'roof', 'metal roofing': 'roof', 'doors': 'door', 'garage doors': 'gar', 'patio covers': 'pat'}
+    def cat(i):   # the trade the photo is captioned for: its published alt ("Doors at a home in …"), else the first trade listed
+        a = (P[i]['alt'] or '').split(' at a home')[0].lower()
+        return KIND[a] if a in KIND else KIND[first(i).lower()]
+    G = {}
+    for i in range(len(P)): G.setdefault(cat(i), []).append(i)
+    for k in G: G[k].sort(key=key, reverse=True)
+    assert {k: len(v) for k, v in G.items()} == {'roof': 13, 'sid': 9, 'win': 8, 'door': 5, 'gar': 4, 'pat': 4}, {k: len(v) for k, v in G.items()}
+    take = {k: list(v) for k, v in G.items()}
+    nxt = lambda k: take[k].pop(0)
+    # the house, top to bottom on a 6-column grid: (row, col, kind)
+    cells = [(1, 3, 'roof'), (1, 4, 'roof'), (1, 5, 'roof')]                         # ridge, and the chimney beside it
+    cells += [(2, c, 'roof') for c in range(2, 6)] + [(3, c, 'roof') for c in range(1, 7)]
+    for r, pat in ((4, 'SWSSWS'), (5, 'WSWWSW'), (6, 'SWSWSD')):
+        cells += [(r, c + 1, {'S': 'sid', 'W': 'win', 'D': 'door'}[ch]) for c, ch in enumerate(pat)]
+    for r, pat in ((7, 'GGDDGG'), (8, 'PPDDPP')):
+        cells += [(r, c + 1, {'G': 'gar', 'P': 'pat', 'D': 'door'}[ch]) for c, ch in enumerate(pat)]
+    assert len(cells) == 43
+    PART = {'roof': 'roof', 'sid': 'wall', 'win': 'wall', 'door': 'ground', 'gar': 'ground', 'pat': 'ground'}
+    def enc(i):
+        im = ImageOps.fit(Image.open(os.path.join(WORK, 'dl', f'photo{i}-640.webp')).convert('RGB'), (200, 150), Image.LANCZOS)
+        b = io.BytesIO(); im.save(b, 'WEBP', quality=56, method=6); return 'data:image/webp;base64,' + _b.b64encode(b.getvalue()).decode()
+    blocks = []   # (the chimney, at row 1 col 5, takes the oldest roofing photo)
+    for n, (r, c, k) in enumerate(cells):
+        i = take[k].pop() if (r, c) == (1, 5) else nxt(k); q = P[i]; alt = q['alt'] or f"{q['trades']} at a home in {q['place']}, TX, by Austin Pro"
+        lab = f"{q['trades']}, {q['place']}, {q['when']}. Opens the project page."
+        chim = ' mch0' if (r, c) == (1, 5) else ''
+        blocks.append(f'<a class="mhb{chim}" href="https://www.austinprosiding.com{e(q["href"])}" target="_blank" rel="noopener" data-part="{PART[k]}" '
+                      f'data-pl="{e(q["place"])}" data-wh="{e(q["when"])}" data-tr="{e(q["trades"])}" aria-label="{e(lab)}" tabindex="{0 if not n else -1}" '
+                      f'style="grid-area:{r} / {c};--d:{(8 - r) * 6 + c}"><img src="{enc(i)}" alt="{e(alt)}" decoding="async"></a>')
+    ct2 = CTAS.split('<p class="proof"')[0]
+    chips = ''.join(f'<button type="button" class="mpc" data-part="{k}" aria-pressed="false">{l}</button>' for k, l in (('roof', 'Roof'), ('wall', 'Walls and windows'), ('ground', 'Doors, garage and patio')))
+    return f'''<section class="hero hmv" aria-labelledby="h1">
+<div class="mcp"><p class="eye">A house built from our own jobs</p><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{ct2}</div>
+<div class="mhs"><div class="mhouse" data-solid role="group" aria-label="43 photos from our published projects, set as a house: roofing jobs as the roof, siding and window jobs as the walls, doors, garage doors and patio covers at ground level. Arrow keys move between them; Enter opens a project.">{''.join(blocks)}<i class="mground" aria-hidden="true"></i></div>
+<div class="mpcs" role="group" aria-label="Light one part of the house">{chips}</div>
+<p class="mplate" aria-live="polite"><span class="mdef">43 photos from our published projects, each set where its work sits on a house. <span class="mdf">Point at one to read its record.</span><span class="mdt">Tap one to open its project.</span></span></p></div></section>'''
 
 
 def heroL():
@@ -448,7 +500,7 @@ def bg_panels():
 
 VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
-             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['l', 'In their own colours'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
+             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['l', 'In their own colours'], ['m', 'A house built from our jobs'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs'], ['e', 'Pick a part of the house'], ['f', 'The magazine spread'], ['g', 'Side by side'], ['h', 'Pull a board'], ['i', 'Three rings, one visit'], ['j', 'The index'], ['k', 'Run the reel'], ['l', 'Built from our records']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument'], ['e', 'Pairings to start from'], ['f', 'The colour map'], ['g', 'Four questions'], ['h', 'Colour in Austin light'], ['i', 'Look closer'], ['j', 'Your house, on the street'], ['k', 'Open a colour'], ['l', 'Roll it on']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record'], ['e', '376 jobs, by maker'], ['f', 'How each window opens'], ['g', 'Frame colours, by maker'], ['h', 'Count your windows'], ['i', 'A window of words'], ['j', 'From opening to trim'], ['k', '376 jobs, set in type'], ['l', 'Lift the sash']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours'], ['e', 'The names they mention'], ['f', 'All 30, searchable'], ['g', 'A steady stream'], ['h', 'Letters from homeowners'], ['i', 'One line, poster size'], ['j', '474, and the 30 we show'], ['k', 'Marked up by hand'], ['l', 'The whole job, in their words']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns'], ['e', 'Turn the dial'], ['f', 'Questions at each step'], ['g', 'Stamp the card'], ['h', 'One paragraph'], ['i', 'Your part, and ours'], ['j', 'Four numbers'], ['k', 'Handed along'], ['l', 'One job, on its calendar']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)'], ['e', 'Inspect at dusk'], ['f', 'Measure the opening'], ['g', 'Shingle from the eave up'], ['h', 'Level the window'], ['i', 'Nail it on the studs'], ['j', 'Name the parts'], ['k', 'Flash the window'], ['l', 'Price the job']],
@@ -492,7 +544,7 @@ if(h&&h.matches('.v1,.v2')){const k=h.matches('.v1')?'v1':'v2';window.__photo=ph
 const H2=window.__HERO2;if(h&&h.matches('.h4v')){h.querySelector('.back').src=H2.c3;h.querySelector('.front').src=H2.c3;}
 if(h&&h.matches('.h5v'))h.querySelectorAll('.c img').forEach(i=>i.src=H2.c2);
 if(h&&h.matches('.h6v'))h.querySelectorAll('.card').forEach(c=>c.querySelector('img').src=H2[c.dataset.img]);
-Hero2.wire();Hero3.wire();Hero4.wire();Hero5.wire();SvcK.wire();
+Hero2.wire();Hero3.wire();Hero4.wire();Hero5.wire();Hero6.wire();SvcK.wire();
 document.querySelectorAll('.slot video[data-film]').forEach(v=>{v.append(document.getElementById('film').content.cloneNode(true));
   v.poster=document.getElementById('film').dataset.poster;v.preload='auto';if(!RM){v.autoplay=true;v.load();v.play().catch(()=>{});}else v.load();});
 const PLAY=%PLAY%,PAUSE=%PAUSE%;
@@ -506,7 +558,7 @@ Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(docu
 def build():
     pre = prerender()
     css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS + PMODS)
-    css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('hero5.css') + src('svck.css') + src('fx.css') + src('hf.css') + src('bx.css') + '.slot{display:contents}'
+    css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('hero5.css') + src('hero6.css') + src('svck.css') + src('fx.css') + src('hf.css') + src('bx.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
@@ -519,7 +571,7 @@ def build():
     PP_ = pre['PG_']
     pages = ''.join(f'<template data-page="{p}">' + ''.join(slot(x['slot'], {v[0]: PP_[x['slot'] + v[0]] for v in x['v']}) for x in PG['sections'][p]) + '</template>' for p, _ in PG['pages'] if PG['sections'][p])
     boot = BOOT.replace('Nav.wire();', 'PB.wire(document);' + ''.join(x['obj'] + '.wire(document);' for _, x in PSECS) + 'Nav.wire();').replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + src('hero4.js') + src('hero5.js') + src('svck.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js') + src('bx.js')
+    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + src('hero4.js') + src('hero5.js') + src('hero6.js') + src('svck.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js') + src('bx.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
