@@ -65,99 +65,14 @@
   function radio(form, n) { var r = form.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ''; }
 
   EZ.section('consult', {
-    1: { init: function (root, k) {
-      // OWNER · the call card: digits dial in a wave, the live open/closed light, copy with a confirmation, a gentle lean
-      (function () {
-        var cl = root.querySelector('.cl'); if (!cl) return;
-        var num = cl.querySelector('.cl__num'), call = cl.querySelector('.cl__call'), st = cl.querySelector('.cl__stt'), cp = cl.querySelector('.cl__copy'), cpl = cp.querySelector('.cl__cl');
-        var raw = num.textContent; num.setAttribute('aria-label', raw.replace(/\u00a0/g, ' ').replace(/\u2011/g, '-'));
-        num.innerHTML = raw.split('').map(function (ch, i) { return '<span class="d" aria-hidden="true" style="--i:' + i + '">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>'; }).join('');
-        function upd() { var o = EZ.openStatus(); cl.classList.toggle('is-open', o.open); st.textContent = o.text; }
-        upd(); var iv = setInterval(upd, 30000); k.add(function () { clearInterval(iv); num.textContent = raw; cl.classList.remove('is-open'); });
-        var tm = 0;
-        k.on(cp, 'click', function () {
-          function done() { cp.classList.add('is-done'); cpl.textContent = 'Copied'; clearTimeout(tm); tm = setTimeout(function () { cp.classList.remove('is-done'); cpl.textContent = 'Copy number'; }, 1800); }
-          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(cp.dataset.n).then(done, function () { cpl.textContent = cp.dataset.n; });
-          else cpl.textContent = cp.dataset.n;
-        });
-        k.add(function () { clearTimeout(tm); });
-        if (!k.motion || !k.fine) return;
-        k.on(call, 'pointermove', function (e) { var r = call.getBoundingClientRect(); call.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5) * 8 + 'px'); call.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5) * 6 + 'px'); });
-        k.on(call, 'pointerleave', function () { call.style.removeProperty('--mx'); call.style.removeProperty('--my'); });
-      })();
-      var form = root.querySelector('.gs__note'), other = root.querySelector('.gs__other'), otherIn = other.querySelector('input');
-      var firstP = form.querySelector('input[name="project"]'); firstP.id = 'gs-project';
-      liveClear(form, k);
-      form.querySelectorAll('.gs__b input').forEach(function (inp) { grow(inp); k.on(inp, 'input', function () { grow(inp); }); });
-      form.querySelectorAll('input[name="project"]').forEach(function (r) {
-        k.on(r, 'change', function () {
-          other.hidden = radio(form, 'project') !== 'other';
-          if (!other.hidden) otherIn.focus();
-          var b = form.querySelector('#gs-project-err'); b.hidden = true;
-        });
-      });
-      k.add(function () { other.hidden = true; form.querySelectorAll('.gs__b input').forEach(grow); });
-      k.on(form, 'submit', function (e) {
-        e.preventDefault();
-        var errs = check(form, ['name', 'address', 'phone', 'email']);
-        var p = radio(form, 'project');
-        errs.unshift({ el: firstP, msg: !p ? 'Please pick what you would like to talk about, or choose not sure yet.' : (p === 'other' && !otherIn.value.trim() ? 'Please add a few words about it, or choose not sure yet.' : '') });
-        errs = errs.concat(check(form, ['consent']));
-        if (!show(errs, form, k)) return;
-        var topic = p === 'other' ? otherIn.value.trim() : p, how = radio(form, 'contact');
-        var lines = [
-          'Hi, my name is ' + v(form, 'name') + '.',
-          'I would like to talk about ' + topic + '.',
-          'The property is at ' + v(form, 'address') + '.',
-          'The easiest way to reach me is ' + ({ Phone: 'a call', Text: 'a text', Email: 'an email' }[how] || 'whichever is easiest') + ', on ' + v(form, 'phone') + ' or at ' + v(form, 'email') + '.'
-        ];
-        if (v(form, 'notes')) lines.push('', 'Anything else: ' + v(form, 'notes'));
-        EZ.consultMail(compose(lines, v(form, 'name')));
-        done(form);
-      });
-      EZ.reveal(k, root.querySelectorAll('.gs__side > *'));
-      if (k.motion) {   // the note is written in as it arrives: line by line, the clay underlines drawn left to right
-        var parts = form.querySelectorAll('.gs__s, .gs__chips, .gs__send');
-        gsap.set(parts, { autoAlpha: 0, y: 10 });
-        var st = ScrollTrigger.create({ trigger: form, start: 'top 78%', once: true, onEnter: function () {
-          gsap.to(parts, { autoAlpha: 1, y: 0, duration: .4, ease: 'power2.out', stagger: .07 });
-        } });
-        k.add(function () { st.kill(); gsap.set(parts, { clearProps: 'all' }); });
-      }
-    } },
-
-    // RETIRED (Final: one version per section): the calm form's markup left the file; its definition is kept for the record
-    // under a key no version uses. NEW VERSIONS: slot 2 is "The conversation" (below).
-    calm: { init: function (root, k) {
-      var form = root.querySelector('.cf__form'), st = root.querySelector('.cf__st'), stt = root.querySelector('.cf__stt');
-      var firstR = form.querySelector('input[name="rooms"]'); firstR.id = 'cf-rooms';
-      liveClear(form, k);
-      // the phone desk: open or closed now, from the published hours (Sun to Fri 7am to 7pm, Saturday closed), Miami time
-      function status() { var o = EZ.openStatus(); st.classList.toggle('is-open', o.open); stt.textContent = o.text; }
-      status();
-      (function tick() { k.timeout(function () { status(); tick(); }, 60000); })();
-      form.querySelectorAll('input[name="rooms"]').forEach(function (c) { k.on(c, 'change', function () { form.querySelector('#cf-rooms-err').hidden = true; }); });
-      k.on(form, 'submit', function (e) {
-        e.preventDefault();
-        var rooms = Array.prototype.map.call(form.querySelectorAll('input[name="rooms"]:checked'), function (c) { return c.value; });
-        var errs = [{ el: firstR, msg: rooms.length ? '' : 'Please pick at least one, or choose not sure yet.' }].concat(check(form, ['name', 'phone', 'email', 'address', 'consent']));
-        if (!show(errs, form, k)) return;
-        var lines = ['What I would like to change: ' + rooms.join(', '), '', 'Full name: ' + v(form, 'name'), 'Phone: ' + v(form, 'phone'), 'Email: ' + v(form, 'email'), 'Property address: ' + v(form, 'address')];
-        if (v(form, 'notes')) lines.push('Project description: ' + v(form, 'notes'));
-        lines.push('Preferred contact method: ' + radio(form, 'contact'));
-        EZ.consultMail(compose(lines, v(form, 'name')));
-        done(form);
-      });
-      EZ.reveal(k, root.querySelectorAll('.cf__desk > *, .cf__form'));
-    } },
-
+    
     /* NEW VERSIONS · V2 "The conversation" (governing reference: Igloo Inc, continuity). One thread that grows: the firm
        asks one question at a time (a short typing beat first), you answer with a quick reply or a short text; each answer
        stays in the thread as your bubble and can be changed with a tap. The thread ends as the email draft (the same lines
        as V1), and "Open in email" composes it to Sales@elbazconstruction.com once consent is ticked; it is never called
        sent [S1437, S1440, S1442, S1441, S1018]. The window's header keeps the call one tap away with the live open line.
        Reduced motion: no typing beat, no slides [S0400]. */
-    2: { init: function (root, k) {
+    1: { init: function (root, k) {
       var log = root.querySelector('.ct__log'), comp = root.querySelector('.ct__comp'), replies = root.querySelector('.ct__replies'), row = root.querySelector('.ct__row'),
         inp = root.querySelector('.ct__in'), inL = root.querySelector('#ct-in-l'), err = root.querySelector('#ct-in-err'), skip = root.querySelector('.ct__skip'),
         editL = root.querySelector('.ct__edit'), end = root.querySelector('.ct__end'), draft = root.querySelector('.ct__draft'), consent = root.querySelector('#ct-consent'),
@@ -282,93 +197,6 @@
       function start() { if (started) return; started = true; ask(0); }
       if (!k.motion) start();
       else { var sti = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: start }); k.add(function () { sti.kill(); }); k.on(win, 'focusin', start); }
-    } },
-
-    /* NEW VERSIONS · V3 "The postcard" (governing reference: Boffi, rooms as chapters). The room you choose is the front of
-       the card; turn it over and the back carries the firm's own fields, addressed to Sales@elbazconstruction.com. The
-       same note as V1, composed in the visitor's mail app with consent, never claimed as sent [S0062, S1018, S1442]. */
-    3: { init: function (root, k) {
-      var form = root.querySelector('.pc__form'), card = root.querySelector('.pc__card'), front = root.querySelector('.pc__front'), back = root.querySelector('.pc__back'),
-        pics = root.querySelector('.pc__pics'), lt = root.querySelector('.pc__lt'), cap = root.querySelector('.pc__cap'), turn = root.querySelector('.pc__turn'), tl = root.querySelector('.pc__tl'),
-        other = root.querySelector('.pc__other'), otherIn = other.querySelector('input'), st = root.querySelector('.pc__st'), stt = root.querySelector('.pc__stt');
-      var P = (window.__DATA || {}).projects || [];
-      function title(key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; }
-      var ROOMS = ['k-navy-shaker', 'b-polished-concrete', 'w-farmhouse', 'o-waterfront'];
-      var firstP = form.querySelector('input[name="project"]'); firstP.id = 'pc-project';
-      liveClear(form, k);
-
-      // the phone, one tap away: open or closed now, from the published hours (Miami time)
-      function upd() { var o = EZ.openStatus(); st.classList.toggle('is-open', o.open); stt.textContent = o.text; }
-      upd(); var iv = setInterval(upd, 30000); k.add(function () { clearInterval(iv); });
-
-      /* ---------- the front: the room you choose [S0063: a short blur, never two photographs crossfaded] ---------- */
-      function img(key) { return '<img src="' + EZ.img(key) + '" alt="" decoding="async" draggable="false">'; }
-      function setFront(p, key) {
-        var html, label, c = '';
-        if (key) { html = img(key); label = p; c = 'Our work: ' + title(key); }
-        else if (p === 'other') { html = '<span class="pc__note">' + esc(otherIn.value.trim() || 'Something else') + '</span>'; label = 'something else'; }
-        else if (p) { html = '<span class="pc__four">' + ROOMS.map(img).join('') + '</span>'; label = 'not sure yet'; c = 'Our work: four of our rooms'; }
-        else { html = '<span class="pc__four">' + ROOMS.map(img).join('') + '</span>'; label = 'Choose a room above'; c = 'Our work: four of our rooms'; }
-        var swap = function () { pics.innerHTML = html; lt.textContent = label; cap.textContent = c; front.classList.toggle('is-set', !!p); };
-        if (k.motion && pics.innerHTML) gsap.to(pics, { filter: 'blur(6px)', opacity: .3, duration: .14, ease: 'power2.in', onComplete: function () { swap(); gsap.to(pics, { filter: 'blur(0px)', opacity: 1, duration: .32, ease: 'power2.out', clearProps: 'filter,opacity' }); } });
-        else swap();
-      }
-      function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
-      form.querySelectorAll('input[name="project"]').forEach(function (r) {
-        k.on(r, 'change', function () {
-          var p = radio(form, 'project');
-          other.hidden = p !== 'other'; if (!other.hidden) otherIn.focus();
-          form.querySelector('#pc-project-err').hidden = true;
-          setFront(p, r.dataset.k || '');
-          if (isBack) flip(false);   // show the room you just chose
-          turn.classList.add('is-ready');
-        });
-      });
-      k.on(otherIn, 'input', function () { var n = front.querySelector('.pc__note'); if (n) n.textContent = otherIn.value.trim() || 'Something else'; });
-
-      /* ---------- the turn: one rotateY on the card; the side you cannot see is inert [S0062] ---------- */
-      var isBack = false;
-      function flip(toBack, then) {
-        isBack = toBack; card.classList.toggle('is-back', toBack);
-        front.inert = toBack; back.inert = !toBack;
-        front.setAttribute('aria-hidden', toBack ? 'true' : 'false'); back.setAttribute('aria-hidden', toBack ? 'false' : 'true');
-        turn.setAttribute('aria-pressed', toBack ? 'true' : 'false'); tl.textContent = toBack ? 'See the front' : 'Turn the card over';
-        if (then) k.timeout(then, k.motion ? 760 : 0);
-      }
-      flip(false);
-      k.on(turn, 'click', function () { flip(!isBack, function () { if (isBack) { var f = back.querySelector('#pc-name'); if (f && !f.value) f.focus({ preventScroll: true }); } }); });
-      k.add(function () { card.classList.remove('is-back'); front.inert = false; back.inert = false; pics.innerHTML = ''; other.hidden = true; turn.classList.remove('is-ready'); });
-
-      /* ---------- open in email: the same lines as V1, with consent; never "sent" ---------- */
-      k.on(form, 'submit', function (e) {
-        e.preventDefault();
-        var p = radio(form, 'project');
-        var head = [{ el: firstP, msg: !p ? 'Please pick what you would like to talk about, or choose not sure yet.' : (p === 'other' && !otherIn.value.trim() ? 'Please add a few words about it, or choose not sure yet.' : '') }];
-        var backErrs = check(form, ['name', 'address', 'phone', 'email']), cons = check(form, ['consent']);
-        var all = head.concat(backErrs, cons), first = all.filter(function (x) { return x.msg; })[0];
-        if (first && backErrs.indexOf(first) > -1 && !isBack) {   // an error on the back turns the card to it first
-          flip(true, function () { show(all, form, k); });
-          return;
-        }
-        if (!show(all, form, k)) return;
-        var topic = p === 'other' ? otherIn.value.trim() : p, how = radio(form, 'contact');
-        var lines = [
-          'Hi, my name is ' + v(form, 'name') + '.',
-          'I would like to talk about ' + topic + '.',
-          'The property is at ' + v(form, 'address') + '.',
-          'The easiest way to reach me is ' + ({ Phone: 'a call', Text: 'a text', Email: 'an email' }[how] || 'whichever is easiest') + ', on ' + v(form, 'phone') + ' or at ' + v(form, 'email') + '.'
-        ];
-        if (v(form, 'notes')) lines.push('', 'Anything else: ' + v(form, 'notes'));
-        EZ.consultMail(compose(lines, v(form, 'name')));
-        done(form);
-      });
-
-      setFront('', '');
-      EZ.reveal(k, root.querySelectorAll('.pc__side > *'));
-      if (k.motion) {   // the card arrives the way a postcard is dealt: a small tilt, then flat
-        var once = false;
-        k.io(card, function (en) { if (!en.isIntersecting || once) return; once = true; gsap.fromTo(card, { rotation: -4, y: 24, opacity: 0 }, { rotation: 0, y: 0, opacity: 1, duration: .8, ease: 'expo.out', clearProps: 'rotation,y,opacity,transform' }); }, { threshold: .2 });
-      }
     } }
   });
 })();
