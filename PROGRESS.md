@@ -381,3 +381,22 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Financing.
+
+## New versions, pass 1 · Financing V2 "The money map" (2026-11-04)
+- **Muse accepted** How a job runs V2.
+- **One new version:** `financing` V2.
+  - V1 ("two kinds of money") is untouched and stays the default.
+  - It is reachable from the header switch or `?financing=2`.
+- **Governing reference:** Lusion (flow maps).
+- **Style family:** an interactive flow map.
+- **Signature move:** the money map. Three columns (what you build → the partners that usually fit → how each is repaid) are joined by living ribbons; picking a project or a partner lights its path with money flowing along it.
+- **Data:** it reuses the file's own partner figures, routing and reasons.
+- **Phones:** the map turns to run top to bottom.
+- **Gate:** `GATE-NEW-Financing.md`, self-scored 8.1 (D8 U8 C8 Ct9), 0 vetoes. 8 build defects fixed.
+- **Evidence:** `qa/new/financing/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Our Work.

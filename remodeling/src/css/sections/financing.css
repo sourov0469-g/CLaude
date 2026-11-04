@@ -128,3 +128,89 @@
   .fb__pu { align-self: center; }
 }
 @media (prefers-reduced-motion: reduce) { .fa__o, .fb__h, .fw__c, .fb__p { transition: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Financing V2 "The money map" — an interactive flow map: three labelled columns joined by living
+   ribbons (clay for consumer credit, ink for property-assessed). Governing reference: Lusion (flow maps).
+   ====================================================================================================================== */
+.mm__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s4) var(--s8); }
+.mm__head .eyebrow { margin: 0 0 var(--s3); }
+.mm__head .t-head { margin: 0; }
+.mm__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+
+.mm__map { position: relative; margin-top: var(--s7); display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.2fr) minmax(0, .9fr); column-gap: clamp(64px, 9vw, 150px); align-items: stretch; }
+.mm__wires { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+.mm__col { position: relative; z-index: 1; display: grid; grid-template-rows: auto 1fr; gap: var(--s4); }   /* above the ribbons */
+.mm__ch { margin: 0; width: fit-content; padding: 2px 8px 2px 0; background: var(--color-surface); display: flex; align-items: center; gap: var(--s2); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.mm__ch .nums { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid currentColor; font-size: .8125rem; }
+.mm__nodes { display: grid; align-content: center; gap: 10px; }
+
+/* 1 · projects: pills */
+.mm__a {
+  display: flex; align-items: center; gap: var(--s3); min-height: 48px; padding: 0 var(--s4) 0 var(--s3); text-align: left;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-border-strong); border-radius: 999px;
+  font: 600 .9375rem/1.2 var(--f-text); cursor: pointer; transition: background-color 180ms var(--ez-out), border-color 180ms var(--ez-out), color 180ms var(--ez-out), transform 220ms var(--ez-out);
+}
+.mm__ai { width: 22px; height: 22px; flex: none; }
+.mm__a.is-lit { border-color: var(--color-text); }
+.mm__a[aria-pressed="true"] { background: var(--color-text); color: var(--color-surface); border-color: var(--color-text); transform: translateX(6px); }
+@media (hover: hover) and (pointer: fine) { .mm__a:hover { border-color: var(--color-text); } }
+
+/* 2 · partners: the figure is the headline */
+.mm__p {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'k n' 'b b' 'u u'; align-items: baseline; gap: 2px var(--s3);
+  padding: var(--s3) var(--s4) var(--s4); text-align: left; cursor: pointer; border-radius: 14px; border: 1.5px solid transparent;
+  transition: opacity 240ms var(--ez-out), transform 240ms var(--ez-out), box-shadow 240ms var(--ez-out);
+}
+.mm__p--cc { background: var(--color-accent-solid); color: #fff; }
+.mm__p--pa { background: var(--color-text); color: var(--color-surface); }
+.mm__k { grid-area: k; font: 600 .8125rem/1.2 var(--f-text); opacity: .85; }
+.mm__n { grid-area: n; font: 600 .9375rem/1.2 var(--f-display); }
+.mm__big { grid-area: b; font: 600 clamp(2rem, 1.4rem + 1.4vw, 2.75rem)/1 var(--f-display); letter-spacing: -.03em; }
+.mm__u { grid-area: u; font: 400 .8125rem/1.35 var(--f-text); opacity: .9; }
+.mm__p.is-dim { opacity: 1; color: var(--color-text-secondary); }   /* opaque when stepped back: a ribbon never shows through a card */
+.mm__p--cc.is-dim { background: color-mix(in srgb, var(--color-accent-solid) 16%, var(--color-surface)); }
+.mm__p--pa.is-dim { background: color-mix(in srgb, var(--color-text) 12%, var(--color-surface)); }
+.mm__p.is-lit { box-shadow: 0 18px 30px -20px color-mix(in srgb, var(--color-shadow, #000) 80%, transparent); }
+.mm__p[aria-pressed="true"] { outline: 3px solid var(--color-text); outline-offset: 3px; }
+.mm__p--pa[aria-pressed="true"] { outline-color: var(--color-accent-solid); }
+@media (hover: hover) and (pointer: fine) { .mm__p:hover { transform: translateY(-3px); } }
+
+/* 3 · how you repay */
+.mm__r { display: flex; align-items: center; gap: var(--s3); min-height: 56px; padding: var(--s2) var(--s4); background: var(--color-bg); border: 1.5px dashed var(--color-border-strong); border-radius: 12px; font: 600 .9375rem/1.25 var(--f-text); transition: opacity 240ms var(--ez-out), border-color 240ms var(--ez-out), background-color 240ms var(--ez-out); }
+.mm__ri { width: 24px; height: 24px; flex: none; }
+.mm__r.is-dim { color: var(--color-text-secondary); border-color: var(--color-border); }
+.mm__r.is-lit { border-style: solid; border-color: var(--color-text); background: var(--color-surface); }
+.mm__a:focus-visible, .mm__p:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
+
+/* the ribbons: a faint base; the chosen path solid, with money flowing along it */
+.mm__wb { fill: none; stroke-width: 6; stroke-linecap: round; opacity: .14; transition: opacity 260ms var(--ez-out), stroke-width 260ms var(--ez-out); }
+.mm__w--cc .mm__wb { stroke: var(--color-accent-solid); }
+.mm__w--pa .mm__wb { stroke: var(--color-text); }
+.mm__w.is-on .mm__wb { opacity: .9; stroke-width: 8; }
+.mm__w.is-off .mm__wb { opacity: .08; }
+.mm__wf { fill: none; stroke: var(--color-surface); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 16; opacity: 0; }
+.mm__w.is-on .mm__wf { opacity: .95; animation: mm-flow 900ms linear infinite; }
+@keyframes mm-flow { to { stroke-dashoffset: -17; } }
+
+/* the answer: one line under the map */
+.mm__say { margin: var(--s6) 0 0; padding: var(--s4) var(--s5); background: var(--color-surface); border-left: 4px solid var(--color-accent-solid); color: var(--color-text-secondary); line-height: 1.5; max-width: 90ch; min-height: 3.2em; }
+.mm__say b { color: var(--color-text); font: 600 1.25rem/1.2 var(--f-display); margin-right: .45em; }
+.mm__say span { color: var(--color-text); font-weight: 600; margin-right: .35em; }
+.mm__say.is-swap { animation: mm-in 260ms var(--ez-out) both; }
+@keyframes mm-in { from { opacity: 0; transform: translateY(6px); } }
+.mm .fz-foot { margin-top: var(--s6); }
+
+@media (max-width: 900px) { .mm__head { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 759px) {   /* the map turns to run top to bottom; the ribbons are re-measured from the nodes */
+  .mm__map { grid-template-columns: minmax(0, 1fr); row-gap: 52px; margin-top: var(--s6); }
+  .mm__col--a .mm__nodes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+  .mm__a { padding-inline: var(--s3); font-size: .875rem; }
+  .mm__a[aria-pressed="true"] { transform: none; }
+  .mm__col--b .mm__nodes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+  .mm__p { grid-template-areas: 'k k' 'b b' 'u u' 'n n'; padding: var(--s3); align-content: start; }
+  .mm__col--c .mm__nodes { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .mm__r { flex-direction: column; align-items: flex-start; gap: 6px; padding: var(--s2) var(--s3); font-size: .8125rem; min-height: 0; }
+  .mm__say { padding: var(--s4); }
+}
+@media (prefers-reduced-motion: reduce) { .mm__a, .mm__p, .mm__r, .mm__wb { transition: none; } .mm__w.is-on .mm__wf { animation: none; opacity: 0; } }

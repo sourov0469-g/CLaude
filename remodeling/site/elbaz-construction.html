@@ -1895,6 +1895,89 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .fa__o, .fb__h, .fw__c, .fb__p { transition: none; } }
 
 
+.mm__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s4) var(--s8); }
+.mm__head .eyebrow { margin: 0 0 var(--s3); }
+.mm__head .t-head { margin: 0; }
+.mm__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+
+.mm__map { position: relative; margin-top: var(--s7); display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.2fr) minmax(0, .9fr); column-gap: clamp(64px, 9vw, 150px); align-items: stretch; }
+.mm__wires { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+.mm__col { position: relative; z-index: 1; display: grid; grid-template-rows: auto 1fr; gap: var(--s4); }   
+.mm__ch { margin: 0; width: fit-content; padding: 2px 8px 2px 0; background: var(--color-surface); display: flex; align-items: center; gap: var(--s2); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.mm__ch .nums { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid currentColor; font-size: .8125rem; }
+.mm__nodes { display: grid; align-content: center; gap: 10px; }
+
+
+.mm__a {
+  display: flex; align-items: center; gap: var(--s3); min-height: 48px; padding: 0 var(--s4) 0 var(--s3); text-align: left;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-border-strong); border-radius: 999px;
+  font: 600 .9375rem/1.2 var(--f-text); cursor: pointer; transition: background-color 180ms var(--ez-out), border-color 180ms var(--ez-out), color 180ms var(--ez-out), transform 220ms var(--ez-out);
+}
+.mm__ai { width: 22px; height: 22px; flex: none; }
+.mm__a.is-lit { border-color: var(--color-text); }
+.mm__a[aria-pressed="true"] { background: var(--color-text); color: var(--color-surface); border-color: var(--color-text); transform: translateX(6px); }
+@media (hover: hover) and (pointer: fine) { .mm__a:hover { border-color: var(--color-text); } }
+
+
+.mm__p {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'k n' 'b b' 'u u'; align-items: baseline; gap: 2px var(--s3);
+  padding: var(--s3) var(--s4) var(--s4); text-align: left; cursor: pointer; border-radius: 14px; border: 1.5px solid transparent;
+  transition: opacity 240ms var(--ez-out), transform 240ms var(--ez-out), box-shadow 240ms var(--ez-out);
+}
+.mm__p--cc { background: var(--color-accent-solid); color: #fff; }
+.mm__p--pa { background: var(--color-text); color: var(--color-surface); }
+.mm__k { grid-area: k; font: 600 .8125rem/1.2 var(--f-text); opacity: .85; }
+.mm__n { grid-area: n; font: 600 .9375rem/1.2 var(--f-display); }
+.mm__big { grid-area: b; font: 600 clamp(2rem, 1.4rem + 1.4vw, 2.75rem)/1 var(--f-display); letter-spacing: -.03em; }
+.mm__u { grid-area: u; font: 400 .8125rem/1.35 var(--f-text); opacity: .9; }
+.mm__p.is-dim { opacity: 1; color: var(--color-text-secondary); }   
+.mm__p--cc.is-dim { background: color-mix(in srgb, var(--color-accent-solid) 16%, var(--color-surface)); }
+.mm__p--pa.is-dim { background: color-mix(in srgb, var(--color-text) 12%, var(--color-surface)); }
+.mm__p.is-lit { box-shadow: 0 18px 30px -20px color-mix(in srgb, var(--color-shadow, #000) 80%, transparent); }
+.mm__p[aria-pressed="true"] { outline: 3px solid var(--color-text); outline-offset: 3px; }
+.mm__p--pa[aria-pressed="true"] { outline-color: var(--color-accent-solid); }
+@media (hover: hover) and (pointer: fine) { .mm__p:hover { transform: translateY(-3px); } }
+
+
+.mm__r { display: flex; align-items: center; gap: var(--s3); min-height: 56px; padding: var(--s2) var(--s4); background: var(--color-bg); border: 1.5px dashed var(--color-border-strong); border-radius: 12px; font: 600 .9375rem/1.25 var(--f-text); transition: opacity 240ms var(--ez-out), border-color 240ms var(--ez-out), background-color 240ms var(--ez-out); }
+.mm__ri { width: 24px; height: 24px; flex: none; }
+.mm__r.is-dim { color: var(--color-text-secondary); border-color: var(--color-border); }
+.mm__r.is-lit { border-style: solid; border-color: var(--color-text); background: var(--color-surface); }
+.mm__a:focus-visible, .mm__p:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
+
+
+.mm__wb { fill: none; stroke-width: 6; stroke-linecap: round; opacity: .14; transition: opacity 260ms var(--ez-out), stroke-width 260ms var(--ez-out); }
+.mm__w--cc .mm__wb { stroke: var(--color-accent-solid); }
+.mm__w--pa .mm__wb { stroke: var(--color-text); }
+.mm__w.is-on .mm__wb { opacity: .9; stroke-width: 8; }
+.mm__w.is-off .mm__wb { opacity: .08; }
+.mm__wf { fill: none; stroke: var(--color-surface); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 16; opacity: 0; }
+.mm__w.is-on .mm__wf { opacity: .95; animation: mm-flow 900ms linear infinite; }
+@keyframes mm-flow { to { stroke-dashoffset: -17; } }
+
+
+.mm__say { margin: var(--s6) 0 0; padding: var(--s4) var(--s5); background: var(--color-surface); border-left: 4px solid var(--color-accent-solid); color: var(--color-text-secondary); line-height: 1.5; max-width: 90ch; min-height: 3.2em; }
+.mm__say b { color: var(--color-text); font: 600 1.25rem/1.2 var(--f-display); margin-right: .45em; }
+.mm__say span { color: var(--color-text); font-weight: 600; margin-right: .35em; }
+.mm__say.is-swap { animation: mm-in 260ms var(--ez-out) both; }
+@keyframes mm-in { from { opacity: 0; transform: translateY(6px); } }
+.mm .fz-foot { margin-top: var(--s6); }
+
+@media (max-width: 900px) { .mm__head { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 759px) {   
+  .mm__map { grid-template-columns: minmax(0, 1fr); row-gap: 52px; margin-top: var(--s6); }
+  .mm__col--a .mm__nodes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+  .mm__a { padding-inline: var(--s3); font-size: .875rem; }
+  .mm__a[aria-pressed="true"] { transform: none; }
+  .mm__col--b .mm__nodes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+  .mm__p { grid-template-areas: 'k k' 'b b' 'u u' 'n n'; padding: var(--s3); align-content: start; }
+  .mm__col--c .mm__nodes { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .mm__r { flex-direction: column; align-items: flex-start; gap: 6px; padding: var(--s2) var(--s3); font-size: .8125rem; min-height: 0; }
+  .mm__say { padding: var(--s4); }
+}
+@media (prefers-reduced-motion: reduce) { .mm__a, .mm__p, .mm__r, .mm__wb { transition: none; } .mm__w.is-on .mm__wf { animation: none; opacity: 0; } }
+
+
 
 
 .pj__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
@@ -2742,6 +2825,27 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       </div>
     </div>
     <div class="wrap fb__split"></div>
+    <div class="wrap fz-foot"></div>
+  </div>
+
+  
+  <div class="ver mm" data-v="2">
+    <div class="wrap mm__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h-2">Your project. <span class="acc">Its kind of money.</span></h2>
+      </div>
+      <p class="mm__lead">Pick what you are building. The map follows the money to the partners that usually fit, and on to how each is repaid.</p>
+    </div>
+    <div class="wrap">
+      <div class="mm__map">
+        <svg class="mm__wires" aria-hidden="true" focusable="false"></svg>
+        <div class="mm__col mm__col--a"><p class="mm__ch"><span class="nums">1</span>What you are building</p><div class="mm__nodes" role="group" aria-label="What you are building"></div></div>
+        <div class="mm__col mm__col--b"><p class="mm__ch"><span class="nums">2</span>Who usually fits</p><div class="mm__nodes" role="group" aria-label="Financing partners"></div></div>
+        <div class="mm__col mm__col--c"><p class="mm__ch"><span class="nums">3</span>How you repay</p><div class="mm__nodes"></div></div>
+      </div>
+      <p class="mm__say" aria-live="polite"></p>
+    </div>
     <div class="wrap fz-foot"></div>
   </div>
 </section>
@@ -6189,6 +6293,96 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       gsap.set(hs, { y: 40, opacity: 0 });
       var st = ScrollTrigger.create({ trigger: split, start: 'top 82%', once: true, onEnter: function () { gsap.to(hs, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .15, clearProps: 'transform,opacity' }); } });
       k.add(function () { st.kill(); });
+    } },
+
+    /* NEW VERSIONS · V2 "The money map" (governing reference: Lusion, flow maps). Three columns joined by living ribbons:
+       what you are building -> the partners that usually fit -> how each is repaid. Pick a project (or a partner) and its
+       path lights while the money flows along it; the rest of the map steps back [S0083]. The ribbons are measured from
+       the nodes, so the same engine draws left-to-right on wide screens and top-to-bottom on phones. Routing is the
+       firm's framing already used above (ROUTES, WHY); figures are the partners' own (P). Reduced motion: no flowing,
+       no draw-in [S0400]. */
+    2: { init: function (root, k) {
+      var map = root.querySelector('.mm__map'), svg = root.querySelector('.mm__wires'), say = root.querySelector('.mm__say');
+      var colA = root.querySelector('.mm__col--a .mm__nodes'), colB = root.querySelector('.mm__col--b .mm__nodes'), colC = root.querySelector('.mm__col--c .mm__nodes');
+      var CAL = 'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4M8 13h2M12 13h2M16 13h2M8 16h2M12 16h2';
+      var RT = [['card', 'On a card, as revolving credit', CHIP], ['inst', 'In fixed installments', CAL], ['tax', 'Through your property tax bill', HOUSE]];
+      var RTOF = { syn: 'card', sfc: 'inst', ygr: 'tax', rnw: 'tax' };
+      colA.innerHTML = PROJ.map(function (x, i) { return '<button type="button" class="mm__a" data-id="' + x[0] + '" tabindex="' + (i ? -1 : 0) + '" aria-pressed="false">' + ic(x[2], 'fz-ic mm__ai') + '<span>' + x[1] + '</span></button>'; }).join('');
+      colB.innerHTML = ORDER.map(function (id, i) { var q = P[id]; return '<button type="button" class="mm__p mm__p--' + q.k + '" data-id="' + id + '" tabindex="' + (i ? -1 : 0) + '" aria-pressed="false" aria-label="' + q.name + ', ' + q.kind + ': ' + q.big + ' ' + q.unit + '"><span class="mm__k">' + q.kind + '</span><span class="mm__big nums">' + q.big + '</span><span class="mm__u">' + q.unit + '</span><span class="mm__n">' + q.name + '</span></button>'; }).join('');
+      colC.innerHTML = RT.map(function (r) { return '<div class="mm__r" data-id="' + r[0] + '">' + ic(r[2], 'fz-ic mm__ri') + '<span>' + r[1] + '</span></div>'; }).join('');
+      var A = Array.prototype.slice.call(colA.children), B = Array.prototype.slice.call(colB.children), C = Array.prototype.slice.call(colC.children);
+      function byId(list, id) { return list.filter(function (n) { return n.dataset.id === id; })[0]; }
+      k.add(function () { colA.innerHTML = colB.innerHTML = colC.innerHTML = ''; svg.innerHTML = ''; say.textContent = ''; });
+
+      /* ---------- the ribbons: measured from the nodes; base + a flowing overlay ---------- */
+      var LINKS = [];
+      PROJ.forEach(function (x) { ROUTES[x[0]].forEach(function (id) { LINKS.push({ a: x[0], b: id, k: P[id].k, s: 1 }); }); });
+      ORDER.forEach(function (id) { LINKS.push({ b: id, c: RTOF[id], k: P[id].k, s: 2 }); });
+      function rel(el) { var x = 0, y = 0, n = el; while (n && n !== map) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; } return { x: x, y: y, w: el.offsetWidth, h: el.offsetHeight }; }
+      var vert = false;
+      function wires() {
+        vert = getComputedStyle(map).gridTemplateColumns.trim().split(/\s+/).length < 2;   // follow the CSS layout, never a guess
+        svg.setAttribute('viewBox', '0 0 ' + map.offsetWidth + ' ' + map.offsetHeight);
+        svg.innerHTML = LINKS.map(function (l, i) {
+          var f = rel(l.s === 1 ? byId(A, l.a) : byId(B, l.b)), t = rel(l.s === 1 ? byId(B, l.b) : byId(C, l.c)), d;
+          if (!vert) { var sx = f.x + f.w, sy = f.y + f.h / 2, ex = t.x, ey = t.y + t.h / 2, m = (ex - sx) * .5; d = 'M' + sx + ' ' + sy + 'C' + (sx + m) + ' ' + sy + ' ' + (ex - m) + ' ' + ey + ' ' + ex + ' ' + ey; }
+          else { var vx = f.x + f.w / 2, vy = f.y + f.h, wx = t.x + t.w / 2, wy = t.y, n = (wy - vy) * .5; d = 'M' + vx + ' ' + vy + 'C' + vx + ' ' + (vy + n) + ' ' + wx + ' ' + (wy - n) + ' ' + wx + ' ' + wy; }
+          return '<g class="mm__w mm__w--' + l.k + '" data-i="' + i + '"><path class="mm__wb" d="' + d + '"/><path class="mm__wf" d="' + d + '"/></g>';
+        }).join('');
+        LINKS.forEach(function (l, i) { l.g = svg.querySelector('.mm__w[data-i="' + i + '"]'); });
+        paint();
+      }
+
+      /* ---------- a choice lights its path ---------- */
+      var sel = { t: 'a', id: 'kitchen' };
+      function paint() {
+        var onA = {}, onB = {}, onC = {}, onL = [];
+        if (sel.t === 'a') { onA[sel.id] = 1; ROUTES[sel.id].forEach(function (id) { onB[id] = 1; onC[RTOF[id]] = 1; }); }
+        else { onB[sel.id] = 1; onC[RTOF[sel.id]] = 1; PROJ.forEach(function (x) { if (x[0] !== 'unsure' && ROUTES[x[0]].indexOf(sel.id) > -1) onA[x[0]] = 1; }); }
+        LINKS.forEach(function (l) {
+          var on = l.s === 1 ? (sel.t === 'a' ? l.a === sel.id : l.b === sel.id && l.a !== 'unsure') : !!onB[l.b];
+          if (l.g) { l.g.classList.toggle('is-on', on); l.g.classList.toggle('is-off', !on); }
+        });
+        A.forEach(function (n) { var on = !!onA[n.dataset.id]; n.classList.toggle('is-lit', on); n.setAttribute('aria-pressed', sel.t === 'a' && n.dataset.id === sel.id ? 'true' : 'false'); });
+        B.forEach(function (n) { var on = !!onB[n.dataset.id]; n.classList.toggle('is-lit', on); n.classList.toggle('is-dim', !on); n.setAttribute('aria-pressed', sel.t === 'b' && n.dataset.id === sel.id ? 'true' : 'false'); });
+        C.forEach(function (n) { var on = !!onC[n.dataset.id]; n.classList.toggle('is-lit', on); n.classList.toggle('is-dim', !on); });
+      }
+      function answer() {
+        if (sel.t === 'a') {
+          var x = PROJ.filter(function (q) { return q[0] === sel.id; })[0], names = ROUTES[sel.id].map(function (id) { return P[id].name; });
+          var list = names.length > 2 ? names.slice(0, -1).join(', ') + ' or ' + names[names.length - 1] : names.join(' or ');
+          say.innerHTML = '<b>' + x[1] + '</b><span>' + list + '.</span> ' + WHY[sel.id];
+        } else {
+          var q = P[sel.id];
+          say.innerHTML = '<b>' + q.name + '</b><span>' + q.what.replace(/\.$/, '') + '.</span> ' + q.repay + '; ' + q.also.charAt(0).toLowerCase() + q.also.slice(1) + '. ' + q.src + '.';
+        }
+      }
+      function choose(t, id) { if (sel.t === t && sel.id === id) return; sel = { t: t, id: id }; paint(); answer(); if (k.motion) { say.classList.remove('is-swap'); void say.offsetWidth; say.classList.add('is-swap'); } }
+      function rove(list, n) { list.forEach(function (m) { m.tabIndex = m === n ? 0 : -1; }); }
+      [[A, 'a'], [B, 'b']].forEach(function (pr) {
+        var list = pr[0], t = pr[1];
+        list.forEach(function (n, i) {
+          k.on(n, 'click', function () { rove(list, n); choose(t, n.dataset.id); });
+          k.on(n, 'pointerenter', function (e) { if (e.pointerType === 'mouse') choose(t, n.dataset.id); });
+          k.on(n, 'focus', function () { rove(list, n); choose(t, n.dataset.id); });
+          k.on(n, 'keydown', function (e) {
+            var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0, j = e.key === 'Home' ? 0 : e.key === 'End' ? list.length - 1 : d ? (i + d + list.length) % list.length : -1;
+            if (j < 0) return; e.preventDefault(); list[j].focus();
+          });
+        });
+      });
+      k.ro(map, wires);
+      wires(); answer();
+      foot(root, k);
+      EZ.reveal(k, root.querySelectorAll('.mm__head > *, .mm__ch'));
+      if (!k.motion) return;
+      /* ---------- arriving: the columns rise, then the ribbons draw from the first column on ---------- */
+      gsap.set(A.concat(B, C), { opacity: 0, y: 16 }); gsap.set(svg, { opacity: 0 });
+      var st = ScrollTrigger.create({ trigger: map, start: 'top 78%', once: true, onEnter: function () {
+        gsap.to(A.concat(B, C), { opacity: 1, y: 0, duration: .5, ease: 'power3.out', stagger: .04, clearProps: 'transform,opacity' });
+        gsap.fromTo(svg, { opacity: 1, clipPath: vert ? 'inset(0 0 100% 0)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0% 0)', duration: 1.1, delay: .25, ease: 'power2.inOut', clearProps: 'clipPath' });
+      } });
+      k.add(function () { st.kill(); gsap.set(A.concat(B, C, [svg]), { clearProps: 'all' }); });
     } }
   });
 })();

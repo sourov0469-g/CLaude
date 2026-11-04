@@ -73,6 +73,96 @@
       gsap.set(hs, { y: 40, opacity: 0 });
       var st = ScrollTrigger.create({ trigger: split, start: 'top 82%', once: true, onEnter: function () { gsap.to(hs, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', stagger: .15, clearProps: 'transform,opacity' }); } });
       k.add(function () { st.kill(); });
+    } },
+
+    /* NEW VERSIONS · V2 "The money map" (governing reference: Lusion, flow maps). Three columns joined by living ribbons:
+       what you are building -> the partners that usually fit -> how each is repaid. Pick a project (or a partner) and its
+       path lights while the money flows along it; the rest of the map steps back [S0083]. The ribbons are measured from
+       the nodes, so the same engine draws left-to-right on wide screens and top-to-bottom on phones. Routing is the
+       firm's framing already used above (ROUTES, WHY); figures are the partners' own (P). Reduced motion: no flowing,
+       no draw-in [S0400]. */
+    2: { init: function (root, k) {
+      var map = root.querySelector('.mm__map'), svg = root.querySelector('.mm__wires'), say = root.querySelector('.mm__say');
+      var colA = root.querySelector('.mm__col--a .mm__nodes'), colB = root.querySelector('.mm__col--b .mm__nodes'), colC = root.querySelector('.mm__col--c .mm__nodes');
+      var CAL = 'M4 5h16v15H4zM4 9h16M8 3v4M16 3v4M8 13h2M12 13h2M16 13h2M8 16h2M12 16h2';
+      var RT = [['card', 'On a card, as revolving credit', CHIP], ['inst', 'In fixed installments', CAL], ['tax', 'Through your property tax bill', HOUSE]];
+      var RTOF = { syn: 'card', sfc: 'inst', ygr: 'tax', rnw: 'tax' };
+      colA.innerHTML = PROJ.map(function (x, i) { return '<button type="button" class="mm__a" data-id="' + x[0] + '" tabindex="' + (i ? -1 : 0) + '" aria-pressed="false">' + ic(x[2], 'fz-ic mm__ai') + '<span>' + x[1] + '</span></button>'; }).join('');
+      colB.innerHTML = ORDER.map(function (id, i) { var q = P[id]; return '<button type="button" class="mm__p mm__p--' + q.k + '" data-id="' + id + '" tabindex="' + (i ? -1 : 0) + '" aria-pressed="false" aria-label="' + q.name + ', ' + q.kind + ': ' + q.big + ' ' + q.unit + '"><span class="mm__k">' + q.kind + '</span><span class="mm__big nums">' + q.big + '</span><span class="mm__u">' + q.unit + '</span><span class="mm__n">' + q.name + '</span></button>'; }).join('');
+      colC.innerHTML = RT.map(function (r) { return '<div class="mm__r" data-id="' + r[0] + '">' + ic(r[2], 'fz-ic mm__ri') + '<span>' + r[1] + '</span></div>'; }).join('');
+      var A = Array.prototype.slice.call(colA.children), B = Array.prototype.slice.call(colB.children), C = Array.prototype.slice.call(colC.children);
+      function byId(list, id) { return list.filter(function (n) { return n.dataset.id === id; })[0]; }
+      k.add(function () { colA.innerHTML = colB.innerHTML = colC.innerHTML = ''; svg.innerHTML = ''; say.textContent = ''; });
+
+      /* ---------- the ribbons: measured from the nodes; base + a flowing overlay ---------- */
+      var LINKS = [];
+      PROJ.forEach(function (x) { ROUTES[x[0]].forEach(function (id) { LINKS.push({ a: x[0], b: id, k: P[id].k, s: 1 }); }); });
+      ORDER.forEach(function (id) { LINKS.push({ b: id, c: RTOF[id], k: P[id].k, s: 2 }); });
+      function rel(el) { var x = 0, y = 0, n = el; while (n && n !== map) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; } return { x: x, y: y, w: el.offsetWidth, h: el.offsetHeight }; }
+      var vert = false;
+      function wires() {
+        vert = getComputedStyle(map).gridTemplateColumns.trim().split(/\s+/).length < 2;   // follow the CSS layout, never a guess
+        svg.setAttribute('viewBox', '0 0 ' + map.offsetWidth + ' ' + map.offsetHeight);
+        svg.innerHTML = LINKS.map(function (l, i) {
+          var f = rel(l.s === 1 ? byId(A, l.a) : byId(B, l.b)), t = rel(l.s === 1 ? byId(B, l.b) : byId(C, l.c)), d;
+          if (!vert) { var sx = f.x + f.w, sy = f.y + f.h / 2, ex = t.x, ey = t.y + t.h / 2, m = (ex - sx) * .5; d = 'M' + sx + ' ' + sy + 'C' + (sx + m) + ' ' + sy + ' ' + (ex - m) + ' ' + ey + ' ' + ex + ' ' + ey; }
+          else { var vx = f.x + f.w / 2, vy = f.y + f.h, wx = t.x + t.w / 2, wy = t.y, n = (wy - vy) * .5; d = 'M' + vx + ' ' + vy + 'C' + vx + ' ' + (vy + n) + ' ' + wx + ' ' + (wy - n) + ' ' + wx + ' ' + wy; }
+          return '<g class="mm__w mm__w--' + l.k + '" data-i="' + i + '"><path class="mm__wb" d="' + d + '"/><path class="mm__wf" d="' + d + '"/></g>';
+        }).join('');
+        LINKS.forEach(function (l, i) { l.g = svg.querySelector('.mm__w[data-i="' + i + '"]'); });
+        paint();
+      }
+
+      /* ---------- a choice lights its path ---------- */
+      var sel = { t: 'a', id: 'kitchen' };
+      function paint() {
+        var onA = {}, onB = {}, onC = {}, onL = [];
+        if (sel.t === 'a') { onA[sel.id] = 1; ROUTES[sel.id].forEach(function (id) { onB[id] = 1; onC[RTOF[id]] = 1; }); }
+        else { onB[sel.id] = 1; onC[RTOF[sel.id]] = 1; PROJ.forEach(function (x) { if (x[0] !== 'unsure' && ROUTES[x[0]].indexOf(sel.id) > -1) onA[x[0]] = 1; }); }
+        LINKS.forEach(function (l) {
+          var on = l.s === 1 ? (sel.t === 'a' ? l.a === sel.id : l.b === sel.id && l.a !== 'unsure') : !!onB[l.b];
+          if (l.g) { l.g.classList.toggle('is-on', on); l.g.classList.toggle('is-off', !on); }
+        });
+        A.forEach(function (n) { var on = !!onA[n.dataset.id]; n.classList.toggle('is-lit', on); n.setAttribute('aria-pressed', sel.t === 'a' && n.dataset.id === sel.id ? 'true' : 'false'); });
+        B.forEach(function (n) { var on = !!onB[n.dataset.id]; n.classList.toggle('is-lit', on); n.classList.toggle('is-dim', !on); n.setAttribute('aria-pressed', sel.t === 'b' && n.dataset.id === sel.id ? 'true' : 'false'); });
+        C.forEach(function (n) { var on = !!onC[n.dataset.id]; n.classList.toggle('is-lit', on); n.classList.toggle('is-dim', !on); });
+      }
+      function answer() {
+        if (sel.t === 'a') {
+          var x = PROJ.filter(function (q) { return q[0] === sel.id; })[0], names = ROUTES[sel.id].map(function (id) { return P[id].name; });
+          var list = names.length > 2 ? names.slice(0, -1).join(', ') + ' or ' + names[names.length - 1] : names.join(' or ');
+          say.innerHTML = '<b>' + x[1] + '</b><span>' + list + '.</span> ' + WHY[sel.id];
+        } else {
+          var q = P[sel.id];
+          say.innerHTML = '<b>' + q.name + '</b><span>' + q.what.replace(/\.$/, '') + '.</span> ' + q.repay + '; ' + q.also.charAt(0).toLowerCase() + q.also.slice(1) + '. ' + q.src + '.';
+        }
+      }
+      function choose(t, id) { if (sel.t === t && sel.id === id) return; sel = { t: t, id: id }; paint(); answer(); if (k.motion) { say.classList.remove('is-swap'); void say.offsetWidth; say.classList.add('is-swap'); } }
+      function rove(list, n) { list.forEach(function (m) { m.tabIndex = m === n ? 0 : -1; }); }
+      [[A, 'a'], [B, 'b']].forEach(function (pr) {
+        var list = pr[0], t = pr[1];
+        list.forEach(function (n, i) {
+          k.on(n, 'click', function () { rove(list, n); choose(t, n.dataset.id); });
+          k.on(n, 'pointerenter', function (e) { if (e.pointerType === 'mouse') choose(t, n.dataset.id); });
+          k.on(n, 'focus', function () { rove(list, n); choose(t, n.dataset.id); });
+          k.on(n, 'keydown', function (e) {
+            var d = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0, j = e.key === 'Home' ? 0 : e.key === 'End' ? list.length - 1 : d ? (i + d + list.length) % list.length : -1;
+            if (j < 0) return; e.preventDefault(); list[j].focus();
+          });
+        });
+      });
+      k.ro(map, wires);
+      wires(); answer();
+      foot(root, k);
+      EZ.reveal(k, root.querySelectorAll('.mm__head > *, .mm__ch'));
+      if (!k.motion) return;
+      /* ---------- arriving: the columns rise, then the ribbons draw from the first column on ---------- */
+      gsap.set(A.concat(B, C), { opacity: 0, y: 16 }); gsap.set(svg, { opacity: 0 });
+      var st = ScrollTrigger.create({ trigger: map, start: 'top 78%', once: true, onEnter: function () {
+        gsap.to(A.concat(B, C), { opacity: 1, y: 0, duration: .5, ease: 'power3.out', stagger: .04, clearProps: 'transform,opacity' });
+        gsap.fromTo(svg, { opacity: 1, clipPath: vert ? 'inset(0 0 100% 0)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0% 0)', duration: 1.1, delay: .25, ease: 'power2.inOut', clearProps: 'clipPath' });
+      } });
+      k.add(function () { st.kill(); gsap.set(A.concat(B, C, [svg]), { clearProps: 'all' }); });
     } }
   });
 })();
