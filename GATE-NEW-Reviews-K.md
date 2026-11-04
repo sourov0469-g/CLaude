@@ -22,7 +22,7 @@
 | Theme buttons (6) | ⟦S0054⟧ toggle buttons with `aria-pressed` in a labelled group, arrow keys and roving focus; ⟦S1427⟧ one treatment; each shows its count; ⟦S1440⟧ instant pressed state |
 | The page | ⟦S1500⟧ 13–15 px text in narrow columns (measure 50–60 characters), names in small caps; ⟦S1425⟧ reviews without the theme drop to 32 % so the marked ones are figure |
 | Highlighter strokes | Graza bar: a lime `background-size` sweep per line fragment (`box-decoration-break: clone`), with a slightly irregular edge and tilt; strokes drawn in reading order with a 45 ms stagger, 420 ms each; ⟦S0083⟧ one motion; ⟦S1315⟧ nothing at rest |
-| Live line | `aria-live="polite"`: "Kept clean: said in 11 of the 30 reviews shown." Marked phrases are `<mark>`, so screen readers can find them |
+| Live line | `aria-live="polite"`: "Kept clean: said in n of the 30 reviews shown." (example written before the build; the built count is 9.) Marked phrases are `<mark>`, so screen readers can find them |
 | Rating line | Locks verbatim: 4.9 from 474 Google reviews; "474 reviews. 30 of them here." |
 | Phone | One column; reviews without the theme collapse (with a "Show all 30" toggle), so the page stays short |
 | Reduced motion | Highlights appear at once, with no sweep |
@@ -117,7 +117,7 @@
 ## Comparison with the section's previous best (Reviews E, "The names they mention", 8.42)
 
 E proves the people: who the homeowners name, with counts and the sentences that name them. K proves the experience: pick a theme and see every place 30 homeowners said it, in context, in their own words.
-- **E is stronger on:** the team's faces.
+- **E is stronger on:** the team, by name.
 - **K is stronger on:** what a buyer worries about (mess, speed, price, pressure, being kept informed).
 
 ## Scorecard (D40 / U30 / C20 / Ct10)
