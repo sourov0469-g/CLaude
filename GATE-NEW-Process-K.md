@@ -62,7 +62,7 @@
 | Tracy | "…provided us with a great, no pressure estimate…" | David McPherson |
 | Taylor | "Special shout out to Taylor. This was a big project and he was so patient with sending over multiple quotes…" | Katie Littleton |
 | Kevin | "…made the scheduling side of things a breeze…" | Joe Liu |
-| Paul Schantz | "Paul Schantz's sent a crew…" | LOIS RICHWINE |
+| Paul Schantz | "Paul Schantz's sent a crew that was polite, timely, knowledgeable and respectful…" | LOIS RICHWINE |
 | Garret | "…did a good job on the punch out…" (spelled as the reviewer wrote it) | Lucas Wang |
 | Garrett | "…was extremely thorough with punch out…" | Lala Matthews |
 | Garrett | "…who finished up and also swept the pollen off my deck…" | Katie Littleton |
@@ -101,7 +101,7 @@
 ## Remaining defects, named honestly
 
 - **No photos of the people:** the names carry the design without faces. The skill pack wants real photographs for people, and no staff photographs are available. **Asset request:** a photograph of each of Paul Hale, Jake, Tracy, Taylor, Kevin, Paul Schantz and Garrett (released for web use), to sit at their stations.
-- **Placement, not roles:** a person's step is where a review mentions them, not a job title. Kevin appears in other reviews at other points, and Garrett also helped with decisions in one review. The page says "at the step where they met them" and claims no titles.
+- **Placement, not roles:** a person's step is where a review mentions them, not a job title. Kevin appears in other reviews at other points too (one review says he helped with decisions about the project). The page says "at the step where they met them" and claims no titles.
 - **Garret spelling:** shown as written, which may read as a typo.
 - **Testing:** done in Chromium only.
 
