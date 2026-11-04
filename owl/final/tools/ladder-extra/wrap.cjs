@@ -45,5 +45,26 @@ module.exports = {
     rec('chapter 02 lists the three passes in order', await p.evaluate(S => [...document.querySelectorAll(S + ' .ch:nth-child(2) li')].map(l => l.textContent.replace(/^\d/, '')).join('|') === 'The crew|A magnet sweep|The project manager’s walk-through', S));
     await p.focus(S + ' .ch:nth-child(2) .cover'); await p.keyboard.press('ArrowRight'); await p.keyboard.press('Enter'); await p.waitForTimeout(1400);
     rec('arrow then Enter opens chapter 03 (the box)', await p.evaluate(S => document.querySelector(S + ' .ch:nth-child(3)').classList.contains('open') && document.activeElement.id === 'pn7-b2', S));
+  },
+  '8': async (p, S, rec, txt) => {
+    rec('truth: the wrap, three passes and the box in Owl’s words; no storm, hail or shield', /Pass 1: the crew/.test(txt) && /Pass 2: a magnet sweep/.test(txt) && /Pass 3: the project manager/.test(txt) && /Aftercare box: left with you/.test(txt) && /Mesh from the eaves down, and a tarp over the lawn/.test(txt) && !/storm|hail|shield/i.test(txt));
+    await p.waitForTimeout(3600);
+    rec('seven lines in order, each ticked in marker when the board is seen', await p.evaluate(S => { const l = [...document.querySelectorAll(S + ' .ln')]; return l.length === 7 && l.every(b => b.classList.contains('done')) && l[0].querySelector('.t').textContent === 'Wrap goes up' && l[6].querySelector('.t').textContent === 'Aftercare box: left with you'; }, S));
+    await p.click(S + ' .ln >> nth=4'); await p.waitForTimeout(400);
+    rec('choosing a line underlines it and pins its note', await p.evaluate(S => document.querySelectorAll(S + ' .ln[aria-pressed="true"]').length === 1 && document.querySelector(S + ' .note h3').textContent === 'Pass 2: a magnet sweep' && /Step 5 of 7/.test(document.querySelector(S + ' .note .k').textContent), S));
+    await p.click(S + ' .wipe'); await p.waitForTimeout(700);
+    rec('Wipe and Run Again erases the ticks…', await p.evaluate(S => document.querySelectorAll(S + ' .ln.done').length < 7, S));
+    await p.waitForTimeout(3800);
+    rec('…and ticks them again in order', await p.evaluate(S => document.querySelectorAll(S + ' .ln.done').length === 7, S));
+  },
+  '9': async (p, S, rec, txt) => {
+    await p.waitForTimeout(3500);
+    rec('truth: the three inside panels in Owl’s words; no storm, hail or shield', await p.evaluate(S => { const t = document.querySelector(S).textContent; return /Mesh from the eaves down, and a tarp over the lawn/.test(t) && /The crew, a magnet sweep, then the project manager/.test(t) && /Left with you when the crew goes/.test(t) && !/storm|hail|shield/i.test(t); }, S));
+    rec('the leaflet unfolds when seen: both flaps flat, the key says Fold It', await p.evaluate(S => { const lf = document.querySelector(S + ' .lf'); return lf.classList.contains('open') && getComputedStyle(document.querySelector(S + ' .pn.r')).getPropertyValue('--r').trim() !== '-180deg' && document.querySelector(S + ' .tog').getAttribute('aria-expanded') === 'true' && document.querySelector(S + ' .tog').textContent === 'Fold It'; }, S));
+    rec('the cover carries only locked facts', await p.evaluate(S => /Protect Your Nest System/.test(document.querySelector(S + ' .cover').textContent) && /Shoreview, MN/.test(document.querySelector(S + ' .cover').textContent) && /\(651\) 977-6027/.test(document.querySelector(S + ' .backp').textContent), S));
+    await p.click(S + ' .tog'); await p.waitForTimeout(1900);
+    rec('Fold It folds it back to the cover and hides the inside from readers', await p.evaluate(S => document.querySelector(S + ' .lf').classList.contains('shut') && [...document.querySelectorAll(S + ' .face.in')].every(f => f.getAttribute('aria-hidden') === 'true') && document.querySelector(S + ' .tog').textContent === 'Open It', S));
+    await p.click(S + ' .tog'); await p.waitForTimeout(1900);
+    rec('Open It opens it again', await p.evaluate(S => document.querySelector(S + ' .lf').classList.contains('open'), S));
   }
 };

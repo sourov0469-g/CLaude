@@ -1,0 +1,68 @@
+<section class="sec wrap9" id="protect-9" aria-labelledby="pn9-h">
+<style>
+.wrap9{overflow:hidden}
+.wrap9 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,34px)}
+.wrap9 .lede{margin-top:12px;max-width:46ch}
+.wrap9 .table{padding:clamp(20px,4vw,50px) clamp(10px,3vw,40px);border-radius:28px;background:radial-gradient(120% 120% at 30% 10%,#EFE8DA,#E2D8C4);box-shadow:inset 0 2px 0 #fff}
+.wrap9 .lf{position:relative;max-width:960px;margin:0 auto;aspect-ratio:3/1.32;perspective:2200px}
+.wrap9 .pn{position:absolute;top:0;bottom:0;width:33.333%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.6,0,.2,1)}
+.wrap9 .pn.m{left:33.333%}
+.wrap9 .pn.l{left:0;transform-origin:right center;transform:translateZ(1px) rotateY(var(--l,0deg))}
+.wrap9 .pn.r{left:66.666%;transform-origin:left center;transform:translateZ(2px) rotateY(var(--r,0deg))}
+.wrap9 .face{position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;padding:clamp(14px,2vw,26px);background:#FBFAF6;backface-visibility:hidden;box-shadow:inset 0 0 0 1px rgba(23,17,29,.06);overflow:hidden}
+.wrap9 .pn.l .face.in{box-shadow:inset -14px 0 18px -16px rgba(23,17,29,.35)}
+.wrap9 .pn.r .face.in{box-shadow:inset 14px 0 18px -16px rgba(23,17,29,.35)}
+.wrap9 .face.out{transform:rotateY(180deg)}
+.wrap9 .face svg{width:100%;height:auto;max-height:46%}
+.wrap9 .face .k{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wrap9 .face h3{margin:0;font-size:clamp(18px,1.9vw,24px);font-weight:900;letter-spacing:-.02em}
+.wrap9 .face p{margin:0;font-size:clamp(14px,1.3vw,16px);color:var(--ink-70);line-height:1.45}
+.wrap9 .face ol{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-weight:700;font-size:clamp(14px,1.3vw,16px)}
+.wrap9 .face ol li{display:flex;gap:8px;align-items:center}
+.wrap9 .face ol i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--amber);font-style:normal;font-size:12px;font-weight:900;flex:none}
+.wrap9 .cover{background:#17111D;color:#F1EFE6;justify-content:space-between}
+.wrap9 .cover b{font-size:clamp(22px,2.6vw,34px);font-weight:900;line-height:1.05;color:#EAA221}
+.wrap9 .cover span{font-size:14px;font-weight:700}
+.wrap9 .backp{background:#F1EFE6;justify-content:center;text-align:center}
+.wrap9 .ink{stroke-dasharray:1;stroke-dashoffset:1}
+.wrap9 .lf.open .ink{animation:pn9d 1.4s .9s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes pn9d{to{stroke-dashoffset:0}}
+.wrap9 .lf.shut .pn.r{--r:-180deg}
+.wrap9 .lf.shut .pn.l{--l:180deg;transition-delay:.45s}
+.wrap9 .lf.open .pn.l{transition-delay:.5s}
+.wrap9 .lf{filter:drop-shadow(0 26px 22px rgba(23,17,29,.28))}
+@media (max-width:760px){.wrap9 .lf{aspect-ratio:auto;perspective:none;display:grid;gap:12px}.wrap9 .pn{position:relative;left:auto!important;width:auto;transform:none!important;min-height:340px}.wrap9 .face.out{display:none}.wrap9 .tog{display:none}.wrap9 .ink{stroke-dashoffset:0;animation:none!important}}
+@media (prefers-reduced-motion:reduce){.wrap9 .pn{transition:none}.wrap9 .ink{stroke-dashoffset:0;animation:none!important}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Protect Your Nest System</span><h2 class="h2" id="pn9-h" style="margin-top:12px">The Leaflet</h2>
+  <p class="lede rv">Everything we do for your home and yard during a re-roof, folded into one page. Open it up.</p></div>
+  <button class="btn btn-line tog" type="button" aria-expanded="false" aria-controls="pn9-in" data-mag data-owl="peek">Open It</button></div>
+ <div class="table" data-owl="say:Unfold it">
+  <div class="lf shut" id="pn9-in">
+   <div class="pn l"><div class="face in"></div><div class="face out backp" aria-hidden="true"><span class="k">Owl Roofing LLC</span><h3>We Give a Hoot</h3><p>(651) 977-6027<br>info@owlroofing.com</p></div></div>
+   <div class="pn m"><div class="face in"></div></div>
+   <div class="pn r"><div class="face in"></div><div class="face out cover" aria-hidden="true"><span>Owl Roofing</span><b>Protect Your Nest System</b><svg viewBox="0 0 200 120"><path d="M20 80q80 40 160 0" fill="none" stroke="#EAA221" stroke-width="6" stroke-linecap="round"/><path d="M28 74q72 30 144 0M40 66q60 22 120 0" fill="none" stroke="#C7871A" stroke-width="4" stroke-linecap="round"/><circle cx="100" cy="48" r="22" fill="#F1EFE6"/><circle cx="92" cy="45" r="5" fill="#17111D"/><circle cx="108" cy="45" r="5" fill="#17111D"/><path d="M97 54l3 5 3-5z" fill="#EAA221"/></svg><span>Family-owned · Shoreview, MN</span></div></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','9',function(root){
+  var lf = root.querySelector('.lf'), tog = root.querySelector('.tog'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var IN = [
+    {k:'Before the tear-off', h:'The wrap', p:'Mesh from the eaves down, and a tarp over the lawn.', art:'<rect y="96" width="200" height="24" fill="#8DB45F"/><rect x="40" y="52" width="120" height="44" fill="#E9E3D5"/><path class="ink" pathLength="1" d="M24 56L100 12 176 56" fill="none" stroke="#17111D" stroke-width="6" stroke-linejoin="round"/><path class="ink" pathLength="1" d="M34 56V96M54 56V96M74 56V96M94 56V96M114 56V96M134 56V96M154 56V96M30 70H170M30 84H170" fill="none" stroke="#17111D" stroke-width="2" opacity=".7"/><path d="M14 98H186L194 118H6z" fill="#3F6E8C"/>'},
+    {k:'After the new roof', h:'Three cleanup passes', p:'The crew, a magnet sweep, then the project manager.', list:['The crew', 'A magnet sweep', 'The project manager'], art:'<rect y="96" width="200" height="24" fill="#8DB45F"/><path class="ink" pathLength="1" d="M40 96V40M28 96h24" fill="none" stroke="#17111D" stroke-width="5" stroke-linecap="round"/><g transform="translate(100 96)"><path class="ink" pathLength="1" d="M0 -6L26 -64" fill="none" stroke="#3A3540" stroke-width="5" stroke-linecap="round"/><rect x="-30" y="-12" width="60" height="12" rx="4" fill="#B3261E"/></g><g transform="translate(160 60)"><rect x="-18" y="-24" width="36" height="48" rx="5" fill="#FBFAF6" stroke="#17111D" stroke-width="3"/><path class="ink" pathLength="1" d="M-9 0l6 6 12-13" fill="none" stroke="#2E7D32" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>'},
+    {k:'When the crew goes', h:'The aftercare box', p:'Left with you when the crew goes.', art:'<rect y="100" width="200" height="20" fill="#D9CFBA"/><g transform="translate(100 64)"><path d="M-56 0L0 -20 56 0 0 20z" fill="#E2C48D"/><path d="M-56 0V44L0 64V20z" fill="#C9A06A"/><path d="M56 0V44L0 64V20z" fill="#B48A55"/><path class="ink" pathLength="1" d="M-28 -10L28 10" fill="none" stroke="#EAA221" stroke-width="9"/><path class="ink" pathLength="1" d="M0 20V64" fill="none" stroke="#EAA221" stroke-width="7"/></g>'}];
+  ['l', 'm', 'r'].forEach(function(c, i){ var x = IN[i]; root.querySelector('.pn.' + c + ' .face.in').innerHTML = '<svg viewBox="0 0 200 120" aria-hidden="true">' + x.art + '</svg><span class="k">' + (i + 1) + ' · ' + x.k + '</span><h3>' + x.h + '</h3><p>' + x.p + '</p>' + (x.list ? '<ol>' + x.list.map(function(t, j){ return '<li><i>' + (j + 1) + '</i>' + t + '</li>'; }).join('') + '</ol>' : ''); });
+  var inside = [].slice.call(root.querySelectorAll('.face.in'));
+  function set(open){ lf.classList.toggle('open', open); lf.classList.toggle('shut', !open); tog.setAttribute('aria-expanded', open); tog.textContent = open ? 'Fold It' : 'Open It';
+    inside.forEach(function(f){ if (open) f.removeAttribute('aria-hidden'); else f.setAttribute('aria-hidden', 'true'); }); }
+  tog.addEventListener('click', function(){ set(tog.getAttribute('aria-expanded') !== 'true'); });
+  var flat = matchMedia('(max-width:760px)').matches;
+  if (flat || OWL.reduce || !('IntersectionObserver' in window)){ set(true); OWL.reveal(h2); return; }
+  set(false);
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); setTimeout(function(){ set(true); }, 700); } }, {threshold:.45}); io.observe(lf);
+});
+</script>
+</section>

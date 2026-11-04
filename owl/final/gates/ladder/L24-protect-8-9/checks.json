@@ -1,0 +1,239 @@
+[
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "protect"
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Job Board"
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "truth: the wrap, three passes and the box in Owl’s words; no storm, hail or shield",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "seven lines in order, each ticked in marker when the board is seen",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "choosing a line underlines it and pins its note",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "Wipe and Run Again erases the ticks…",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "…and ticks them again in order",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "protect"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Leaflet"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "truth: the three inside panels in Owl’s words; no storm, hail or shield",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "the leaflet unfolds when seen: both flaps flat, the key says Fold It",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "the cover carries only locked facts",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "Fold It folds it back to the cover and hides the inside from readers",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "Open It opens it again",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

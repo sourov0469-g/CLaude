@@ -1,0 +1,82 @@
+<section class="sec wrap8" id="protect-8" aria-labelledby="pn8-h">
+<style>
+.wrap8{overflow:hidden}
+.wrap8 .g{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(20px,4vw,56px);align-items:center}
+.wrap8 .lede{margin:12px 0 0;max-width:46ch}
+.wrap8 .board{position:relative;margin-top:clamp(18px,2.6vw,28px);padding:clamp(18px,2.6vw,30px) clamp(16px,2.6vw,30px) 54px;border-radius:12px;background:radial-gradient(60% 40% at 80% 20%,rgba(23,17,29,.04),transparent 70%),radial-gradient(40% 30% at 20% 80%,rgba(23,17,29,.035),transparent 70%),#FBFCFD;box-shadow:inset 0 0 0 10px #C9CDD2,inset 0 0 0 12px #9AA3A8,0 40px 60px -40px rgba(23,17,29,.55);overflow:hidden}
+.wrap8 .ttl{margin:4px 0 14px 8px;font-weight:900;font-size:clamp(18px,1.8vw,22px);color:#8E5A12;letter-spacing:.02em}
+.wrap8 ol{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.wrap8 .ln{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr) 54px;gap:12px;align-items:center;width:100%;min-height:48px;padding:4px 10px;border-radius:10px;text-align:left;font-weight:800;font-size:clamp(16px,1.6vw,19px);color:#17111D;background:transparent;transition:background .2s}
+.wrap8 .ln:hover{background:rgba(234,162,33,.08)}
+.wrap8 .ln:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wrap8 .ln .t{position:relative;justify-self:start;isolation:isolate}
+.wrap8 .ln .t::after{content:"";position:absolute;left:-4px;right:-6px;bottom:-4px;height:8px;border-radius:4px;background:#EAA221;opacity:.75;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.3,1,.4,1);z-index:-1}
+.wrap8 .ln[aria-pressed="true"] .t::after{transform:scaleX(1)}
+.wrap8 .ln svg{display:block;width:100%;height:auto;overflow:visible}
+.wrap8 .bx{fill:none;stroke:#17111D;stroke-width:2.5;stroke-linejoin:round}
+.wrap8 .ck{fill:none;stroke:#2E7D32;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .45s cubic-bezier(.5,0,.3,1)}
+.wrap8 .done .ck{stroke-dashoffset:0}
+.wrap8 .dd path,.wrap8 .dd rect,.wrap8 .dd circle{fill:none;stroke:#3A3540;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.wrap8 .dd{opacity:0;transform:translateY(4px);transition:opacity .4s .15s,transform .4s .15s}
+.wrap8 .done .dd{opacity:1;transform:none}
+.wrap8 .tray{position:absolute;left:12px;right:12px;bottom:12px;height:22px;border-radius:0 0 6px 6px;background:linear-gradient(180deg,#C9CDD2,#9AA3A8)}
+.wrap8 .tray i{position:absolute;bottom:8px;width:70px;height:12px;border-radius:6px}
+.wrap8 .eraser{position:absolute;top:0;bottom:0;left:-30%;width:26%;background:linear-gradient(90deg,transparent,rgba(251,252,253,.95) 30%,rgba(251,252,253,.95) 70%,transparent);pointer-events:none;opacity:0}
+.wrap8 .eraser.go{animation:pn8e .9s cubic-bezier(.5,0,.5,1)}
+@keyframes pn8e{0%{opacity:1;left:-30%}100%{opacity:1;left:110%}}
+.wrap8 .note{position:relative;padding:26px 24px 24px;background:#FFF1B8;box-shadow:0 18px 26px -16px rgba(23,17,29,.45);transform:rotate(-2deg);transition:transform .3s}
+.wrap8 .note::before{content:"";position:absolute;left:50%;top:-10px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F6C25F,#C7871A);box-shadow:0 3px 4px rgba(23,17,29,.35)}
+.wrap8 .note .k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.wrap8 .note h3{margin:6px 0 8px;font-size:clamp(22px,2.2vw,28px);font-weight:900;letter-spacing:-.02em}
+.wrap8 .note p{margin:0;font-size:17px;color:#3A3540}
+.wrap8 .act{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+@media (max-width:900px){.wrap8 .g{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.wrap8 .ln{grid-template-columns:28px minmax(0,1fr) 40px;gap:8px;padding:4px 6px}}
+@media (prefers-reduced-motion:reduce){.wrap8 .ck,.wrap8 .dd,.wrap8 .ln .t::after{transition:none}.wrap8 .eraser.go{animation:none}}
+</style>
+<div class="wrap">
+ <span class="kick">Protect Your Nest System</span>
+ <h2 class="h2" id="pn8-h" style="margin-top:12px">Job Board</h2>
+ <p class="lede rv">The board on our trailer, the way the crew runs a re-roof: the wrap, the job, three cleanup passes, and the box.</p>
+ <div class="g">
+  <div class="board" data-owl="say:Tick, tick, tick">
+   <p class="ttl">Your re-roof · Protect Your Nest System</p>
+   <ol class="lines" aria-label="The job, in order"></ol>
+   <span class="tray" aria-hidden="true"><i style="left:18%;background:#17111D"></i><i style="left:42%;background:#EAA221"></i><i style="left:66%;background:#2E7D32"></i></span>
+   <span class="eraser" aria-hidden="true"></span>
+  </div>
+  <div>
+   <div class="note" aria-live="polite"><span class="k"></span><h3></h3><p></p></div>
+   <div class="act"><button class="btn btn-line wipe" type="button" data-mag data-owl="peek">Wipe and Run Again</button><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','8',function(root){
+  var list = root.querySelector('.lines'), note = root.querySelector('.note'), eraser = root.querySelector('.eraser'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function d(s){ return '<svg viewBox="0 0 54 36" class="dd" aria-hidden="true">' + s + '</svg>'; }
+  var L = [
+    {t:'Wrap goes up', k:'The wrap', p:'Mesh from the eaves down, and a tarp over the lawn.', dd:d('<path d="M4 12L27 2l23 10"/><path d="M8 12v22M18 12v22M28 12v22M38 12v22M48 12v22M6 20h44M6 28h44"/>')},
+    {t:'Old roof off', k:'The job', p:'The tear-off comes down into the wrap, not onto your yard.', dd:d('<path d="M6 6l14 4-2 6-14-4zM26 14l12 3-2 6-12-3zM16 26l12 3-2 5-12-3z"/>')},
+    {t:'New roof on', k:'The job', p:'GAF materials, installed by a GAF Systems Plus Certified crew.', dd:d('<path d="M4 26L27 6l23 20"/><path d="M12 20h30M17 15h20"/>')},
+    {t:'Pass 1: the crew', k:'Three cleanup passes', p:'The crew’s cleanup comes first.', dd:d('<path d="M10 4v20M4 24h12l-2 10H6z"/><path d="M30 34l12-24M38 12l8 4"/>')},
+    {t:'Pass 2: a magnet sweep', k:'Three cleanup passes', p:'A rolling magnet goes over the lawn for the nails you can’t see.', dd:d('<path d="M36 4L24 26"/><rect x="6" y="24" width="40" height="8" rx="3"/><circle cx="10" cy="34" r="1"/>')},
+    {t:'Pass 3: the project manager', k:'Three cleanup passes', p:'The project manager walks the yard to check.', dd:d('<rect x="14" y="4" width="26" height="30" rx="3"/><path d="M20 20l5 5 9-10"/>')},
+    {t:'Aftercare box: left with you', k:'The aftercare box', p:'Left with you when the crew goes.', dd:d('<path d="M6 12L27 4l21 8-21 8z"/><path d="M6 12v16l21 8V20M48 12v16l-21 8"/>')}];
+  var cur = -1, timers = [], lines = L.map(function(x, i){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.className = 'ln'; b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<svg viewBox="0 0 34 34" aria-hidden="true"><rect class="bx" x="3" y="3" width="28" height="28" rx="5"/><path class="ck" pathLength="1" d="M8 18l7 7 14-17"/></svg><span class="t">' + x.t + '</span>' + x.dd;
+    b.addEventListener('click', function(){ pick(i); }); li.appendChild(b); list.appendChild(li); return b; });
+  function pick(i){ cur = i; var x = L[i]; lines.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    note.querySelector('.k').textContent = 'Step ' + (i + 1) + ' of 7 · ' + x.k; note.querySelector('h3').textContent = x.t; note.querySelector('p').textContent = x.p;
+    note.style.transform = 'rotate(' + (i % 2 ? 1.5 : -2) + 'deg)'; }
+  function run(){ timers.forEach(clearTimeout); timers = []; lines.forEach(function(b){ b.classList.remove('done'); });
+    if (OWL.reduce){ lines.forEach(function(b){ b.classList.add('done'); }); return; }
+    lines.forEach(function(b, i){ timers.push(setTimeout(function(){ b.classList.add('done'); }, 300 + i*420)); }); }
+  root.querySelector('.wipe').addEventListener('click', function(){ if (OWL.reduce){ run(); return; } eraser.classList.remove('go'); void eraser.offsetWidth; eraser.classList.add('go'); timers.forEach(clearTimeout); setTimeout(function(){ lines.forEach(function(b){ b.classList.remove('done'); }); }, 350); setTimeout(run, 950); });
+  pick(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ run(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); run(); } }, {threshold:.35}); io.observe(list);
+});
+</script>
+</section>

@@ -704,3 +704,23 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Wise 8's shuffled sheets overflowed by 5 px on phones (now clipped), and the paper clip covered a tab (moved to the side).
 - Wise 9 rendered empty: its `.book` and `.page` classes collided with global classes (`.page` belongs to the page router). They are renamed `.nb` and `.npg`. Note for every later version: avoid the global class names `.page`, `.book`, `.in` and `.chips`.
+
+## L24 · Protect Your Nest 8 + 9 · checks 36/36 · evidence `gates/ladder/L24-protect-8-9/` · Protect now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Protect 8 · Job Board** | Graza (custom-animation bar) | The crew's whiteboard in an aluminium frame with a marker tray, titled "Your re-roof · Protect Your Nest System". Seven lines in job order (wrap goes up · old roof off · new roof on · pass 1 the crew · pass 2 a magnet sweep · pass 3 the project manager · aftercare box), each ticked in green marker one after another with a marker doodle when the board is seen. Choosing a line underlines it in amber and pins a sticky note with Owl's words. "Wipe and Run Again" sweeps an eraser across and replays. | 8.2 | 8.6 | 8.2 | 8.8 | **8.40** |
+| **Protect 9 · The Leaflet** | Lando Norris (a bespoke made object) | A printed tri-fold leaflet on a table. It lies folded to its cover (ink, amber "Protect Your Nest System", a drawn nest and owl), then unfolds in small 3D, right flap then left, to three inside panels whose plates draw on: the wrap · three cleanup passes (listed 1–3) · the aftercare box. "Fold It" / "Open It" key; the folded inside is hidden from readers; phones show the three panels stacked. | 8.6 | 8.0 | 8.6 | 8.6 | **8.42** |
+
+**Truth:** both say only what the system is in Owl's words (the wrap, the three passes, the aftercare box) plus "GAF materials, installed by a GAF Systems Plus Certified crew" from `OWL.SVC`. There is no storm, hail or shield (the standing rule, tested). The leaflet's back panel carries only the locked phone and email.
+
+**Checks run:** the generic gate, plus:
+- Protect 8: truth wording; seven lines in order, all ticked; choosing a line underlines it and pins "Step 5 of 7"; wipe erases, then re-ticks all seven.
+- Protect 9: truth wording; unfolds when seen with the key reading "Fold It"; cover and back show only locked facts; Fold It returns to the cover with the inside aria-hidden; Open It reopens.
+
+**Ledger:**
+- **Protect 8:** marker doodles ⟦S0407⟧; ticks and underline ⟦S0405⟧; keys ⟦S1388⟧; title ⟦S0451⟧.
+- **Protect 9:** fold transition ⟦S0409⟧; plate draw-on ⟦S0407⟧; key ⟦S1388⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- Protect 8's amber underline sat behind the board and could not be seen; the label is now isolated so it shows.
+- Protect 9's early evidence caught the flaps mid-fold; the evidence is now taken after the unfold settles (viewport shots, because the full-page capture replays transitions).

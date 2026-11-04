@@ -327,3 +327,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   right. Next and Previous turn the page with a real page-turn (small 3D); arrow keys work. The last spread is how to
   book. Labelled "Sketches, not photos." Skills: ⟦S0407⟧ sketch draw-on, ⟦S0409⟧ page turn, ⟦S1388⟧ keys, ⟦S1107⟧
   keyboard.
+
+## L24 · Protect Your Nest 8 + 9 (Protect stands at 7: two yards, three cards, yard map, cloth, nest, sweep, chapters)
+- **Protect 8 · "Job Board"** — reference **Graza** (the custom-animation bar). The crew's whiteboard in an aluminium
+  frame with a marker tray. The job is written on it in order: wrap up (mesh from the eaves down, tarp over the
+  lawn) · old roof off · new roof on · pass 1, the crew · pass 2, a magnet sweep · pass 3, the project manager ·
+  the aftercare box, left with you. When the board is seen, each line gets a marker tick and a small marker doodle,
+  one after another. Choosing a line underlines it in amber and pins a note with Owl's words. "Wipe and Run Again"
+  erases and replays. Everyday font only. Skills: ⟦S0407⟧ marker draw-on, ⟦S0405⟧ ticks, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+- **Protect 9 · "The Leaflet"** — reference **Lando Norris** (a bespoke made object). A printed tri-fold leaflet that
+  lies folded on the cover ("Protect Your Nest System"), then unfolds in small 3D, right flap then left, to three
+  inside panels: the wrap · three cleanup passes · the aftercare box, each with a drawn plate and Owl's words.
+  "Fold It" / "Open It" keys; on phones the panels simply stack. Skills: ⟦S0409⟧ fold transition, ⟦S0407⟧ plate
+  draw, ⟦S1388⟧ keys, ⟦S0451⟧ title.
