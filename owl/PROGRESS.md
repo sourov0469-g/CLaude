@@ -17,4 +17,5 @@
 - **Hero 11 · "Under Our Wing"** (merges V1 and V2, with a real photo): gated, 8.74, checks 21/21. Hero now has 11; next is Hero 12.
 - **Hero 12 · "Wrapped in Wings"** (the second merge of V1 and V2: a centred medallion with the Owl hugging a real home): gated, 8.76, checks 21/21. Hero now has 12; next is Hero 13.
 - **Hero 13 · "Evening Watch"** (a V1 variant with a real golden-hour photo; the Owl perches on the text card, blinks and hops toward the buttons): gated, 8.66, checks 22/22. The daylight pack house was rejected for its wood-shake roof. Hero now has 13; next is Hero 14.
+- **Hero 14 · "Overhead"** (a V2 variant on a real drone aerial; the Owl appears only as its shadow, gliding over the roof and drifting to where you point): gated, 8.80, checks 21/21. Hero now has 14; next is Hero 15, the last of the five.
 - Hero pack batch 2 (5 images) stored in `owl/assets/source/hero-pack/`, with arrival notes. Two images (crew-install-wide-1, storm-damage-roof-2) are flagged as possibly AI-looking and held back from hero use until checked. The aerial arrived at 2000×1500, not 3000×2250. Waiting on Muse's accept of Hero 11 before Hero 12.

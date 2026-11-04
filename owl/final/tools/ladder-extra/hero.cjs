@@ -78,5 +78,20 @@ module.exports = {
     await p.keyboard.press('Tab'); 
     rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
     rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '14': async (p, S, rec) => {
+    await p.waitForTimeout(2400);
+    const T = () => p.evaluate(S => document.querySelector(S + ' .shd').style.transform, S);
+    const a1 = await T(); await p.waitForTimeout(600); const a2 = await T();
+    rec('the Owl shadow has swept in and keeps gliding over the roof', a1 !== a2 && await p.evaluate(S => { const b = document.querySelector(S + ' .band').getBoundingClientRect(), s = document.querySelector(S + ' .shd').getBoundingClientRect(); return s.left + s.width / 2 > b.left && s.left + s.width / 2 < b.right; }, S));
+    rec('the shadow is the Owl silhouette, darkened and soft, never the illustration itself', await p.evaluate(S => /brightness\(0\)/.test(getComputedStyle(document.querySelector(S + ' .shd img')).filter), S));
+    const b = await p.evaluate(S => { const r = document.querySelector(S + ' .band').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, S);
+    const tx = b[0] + b[2] * .18, ty = b[1] + b[3] * .3;
+    await p.mouse.move(tx, ty, { steps: 8 }); await p.waitForTimeout(2200);
+    rec('pointing at the roof brings the shadow there', await p.evaluate(([S, tx, ty]) => { const s = document.querySelector(S + ' .shd').getBoundingClientRect(); return Math.hypot(s.left + s.width * .55 - tx, s.top + s.height * .5 - ty) < 70; }, [S, tx, ty]));
+    rec('the photo is a real aerial with an honest alt and no caption', await p.evaluate(S => /shingle roof seen from straight above/.test(document.querySelector(S + ' .band > img').alt) && !document.querySelector(S + ' figcaption'), S));
+    rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
+    rec('the calls to action are not inside the photo (they stack under it on phones)', await p.evaluate(S => !document.querySelector(S + ' .band .ctas') && !!document.querySelector(S + ' .bandwrap > .ctas'), S));
+    rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-tab').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };
