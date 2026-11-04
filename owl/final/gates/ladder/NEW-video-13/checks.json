@@ -1,0 +1,141 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 13
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Shake It"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "the photo starts murky and develops on its own",
+  "ok": true,
+  "detail": "0.901 → 0.786"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "shaking it by drag develops it faster and swings the card",
+  "ok": true,
+  "detail": "0.786 → 0 · rotate(-13.8deg)"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "fully developed: Owl’s crew film comes alive in full colour, captioned",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "the Shake It button steps aside once developed, and it is announced",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "the card settles back to its resting tilt",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "next steps: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "the full film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "13",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

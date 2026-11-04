@@ -3181,6 +3181,83 @@ OWL.reg('video','12',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="video" data-v="13">
+<section class="sec video13" id="crew-video-13" aria-labelledby="vd13-h">
+<style>
+.video13{overflow:hidden}
+.video13 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.video13 .lede{margin:12px 0 24px;max-width:38ch}
+.video13 .acts{display:flex;flex-direction:column;gap:14px;max-width:380px}
+.video13 .acts .btn{width:100%;min-height:58px;font-size:18px}
+.video13 .full{align-self:flex-start;min-height:44px;padding:0 4px;border:0;background:none;font-weight:700;text-decoration:underline;text-underline-offset:4px;color:var(--ink);cursor:pointer}
+.video13 .stage{position:relative;display:grid;justify-items:center;gap:20px;touch-action:pan-y}
+.video13 .snap{position:relative;width:min(420px,84%);padding:16px 16px 0;background:#FFFDF7;border-radius:6px;box-shadow:0 2px 0 #fff inset,0 30px 50px -26px rgba(23,17,29,.55),0 4px 10px -4px rgba(23,17,29,.25);transform:rotate(-3deg);transform-origin:50% 12%;cursor:grab;user-select:none;-webkit-user-select:none}
+.video13 .snap:active{cursor:grabbing}
+.video13 .pic{position:relative;aspect-ratio:1;overflow:hidden;background:#2E2A28}
+.video13 .pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 50%}
+.video13 .murk{position:absolute;inset:0;background:radial-gradient(ellipse at 40% 35%,#4A433D,#2A2522 70%);pointer-events:none}
+.video13 .margin{height:clamp(70px,8vw,96px);display:grid;place-items:center}
+.video13 .cap{font-style:italic;font-weight:800;font-size:clamp(18px,1.8vw,22px);color:#17111D;opacity:0;transform:translateY(6px);transition:opacity .6s,transform .6s}
+.video13 .done .cap{opacity:1;transform:none}
+.video13 .shake{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 20px;border-radius:999px;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s,opacity .4s}
+.video13 .shake:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.video13 .shake:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.video13 .shake[hidden]{display:none}
+.video13 .meter{width:min(240px,60%);height:6px;border-radius:3px;background:rgba(23,17,29,.1);overflow:hidden}
+.video13 .meter i{display:block;height:100%;background:linear-gradient(90deg,#F6C25F,#EAA221);transform-origin:left;transform:scaleX(0)}
+.video13 .done .meter{opacity:0;transition:opacity .5s}
+@media (max-width:860px){.video13 .g{grid-template-columns:minmax(0,1fr)}.video13 .stage{order:-1}.video13 .acts{max-width:none}}
+@media (prefers-reduced-motion:reduce){.video13 .cap{transition:none}.video13 .shake,.video13 .meter{display:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Owl's crew on film</span>
+   <h2 class="h2" id="vd13-h" style="margin-top:12px">Shake It</h2>
+   <p class="lede rv">Get a good look at the people who’ll work on your home. Give the photo a shake.</p>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a><button class="full" type="button">Watch the full film</button></div>
+  </div>
+  <div class="stage">
+   <div class="snap" data-owl="say:Shake it!">
+    <div class="pic"><video data-media="crew" data-aposter="a1" muted loop playsinline preload="metadata" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video><span class="murk" aria-hidden="true"></span></div>
+    <div class="margin"><span class="cap">Owl’s crew, at work</span></div>
+   </div>
+   <span class="meter" aria-hidden="true"><i></i></span>
+   <button class="shake" type="button">Shake It</button>
+   <p class="sr" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('video','13',function(root){
+  /* one idea: shake the instant photo and it develops into Owl's crew, alive */
+  var stage = root.querySelector('.stage'), snap = root.querySelector('.snap'), vid = root.querySelector('video'), murk = root.querySelector('.murk'), meter = root.querySelector('.meter i'), shake = root.querySelector('.shake'), sr = root.querySelector('.sr'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  var p = 0, done = false, seen = false, ang = 0, vel = 0, raf = 0, last = 0, drag = false, lx = 0;
+  function paint(){ murk.style.opacity = (1 - p).toFixed(3); vid.style.filter = 'saturate(' + p.toFixed(2) + ') contrast(' + (.55 + .45*p).toFixed(2) + ') brightness(' + (.6 + .4*p).toFixed(2) + ')'; meter.style.transform = 'scaleX(' + p.toFixed(3) + ')'; }
+  function finish(){ if (done) return; done = true; p = 1; paint(); stage.classList.add('done'); shake.hidden = true; sr.textContent = 'The photo has developed: Owl’s crew, at work.'; if (!OWL.reduce) OWL.play(vid); }
+  function load(){ if (!vid.src && OWL.media) vid.src = OWL.media.crew; }
+  if (OWL.reduce){ load(); finish(); OWL.reveal(h2); vid.pause(); return; }
+  function add(d){ if (done) return; p = Math.min(1, p + d); if (p > .02){ load(); if (seen) OWL.play(vid); } paint(); if (p >= 1) finish(); }
+  function loop(now){ raf = 0; var dt = Math.min(64, now - (last || now)); last = now; var f = dt/16.7;
+    if (seen && !done) add(dt/7000);                      /* develops by itself in about seven seconds */
+    if (!drag){ vel += (-ang)*.12*f; vel *= Math.pow(.86, f); ang += vel*f; }  /* swing back and settle */
+    snap.style.transform = 'rotate(' + (-3 + ang).toFixed(2) + 'deg)';
+    if (seen && (!done || Math.abs(ang) > .05 || Math.abs(vel) > .05 || drag)) raf = requestAnimationFrame(loop); }
+  function kick(){ if (!raf){ last = 0; raf = requestAnimationFrame(loop); } }
+  snap.addEventListener('pointerdown', function(e){ drag = true; lx = e.clientX; try { snap.setPointerCapture(e.pointerId); } catch (er){} kick(); });
+  snap.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - lx; lx = e.clientX; ang = Math.max(-16, Math.min(16, ang + dx*.12)); add(Math.abs(dx)/1400); kick(); });
+  function up(){ drag = false; kick(); }
+  snap.addEventListener('pointerup', up); snap.addEventListener('pointercancel', up);
+  shake.addEventListener('click', function(){ vel += 4.2; add(.34); kick(); });
+  paint();
+  var io = new IntersectionObserver(function(e){ seen = e[0].isIntersecting; if (seen){ OWL.reveal(h2); kick(); if (p > .02 || done){ load(); OWL.play(vid); } } else vid.pause(); }, {threshold:.35}); io.observe(snap);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="video" data-b="1">
 <section class="sec video2" id="crew-video-2" aria-labelledby="v2-h">
 <style>

@@ -133,5 +133,27 @@ module.exports = {
     rec('the bell is a real named button (Enter rings it)', await p.evaluate(S => { const b = document.querySelector(S + ' .bell'); return b.tagName === 'BUTTON' && /Ring the doorbell/.test(b.getAttribute('aria-label')) && b.classList.contains('ringing'); }, S));
     await p.click(S + ' .full'); await p.waitForTimeout(400);
     rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '13': async (p, S, rec) => {
+    await p.waitForTimeout(300);
+    const op = () => p.evaluate(S => +document.querySelector(S + ' .murk').style.opacity, S);
+    const o1 = await op(); await p.waitForTimeout(1200); const o2 = await op();
+    rec('the photo starts murky and develops on its own', o1 > .6 && o2 < o1, o1 + ' → ' + o2);
+    const b = await p.evaluate(S => { const r = document.querySelector(S + ' .snap').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height * .4]; }, S);
+    const o3 = await op();
+    await p.mouse.move(b[0], b[1]); await p.mouse.down();
+    for (let i = 0; i < 6; i++) { await p.mouse.move(b[0] + 90, b[1], { steps: 3 }); await p.mouse.move(b[0] - 90, b[1], { steps: 3 }); }
+    const swung = await p.evaluate(S => document.querySelector(S + ' .snap').style.transform, S);
+    await p.mouse.up(); const o4 = await op();
+    rec('shaking it by drag develops it faster and swings the card', o3 - o4 > .2 && swung !== 'rotate(-3deg)', o3 + ' → ' + o4 + ' · ' + swung);
+    for (let i = 0; i < 3; i++) { if (await p.evaluate(S => !document.querySelector(S + ' .shake').hidden, S)) await p.click(S + ' .shake'); await p.waitForTimeout(200); }
+    await p.waitForTimeout(900);
+    rec('fully developed: Owl’s crew film comes alive in full colour, captioned', await p.evaluate(S => { const st = document.querySelector(S + ' .stage'), v = document.querySelector(S + ' video'); return st.classList.contains('done') && !v.paused && v.dataset.media === 'crew' && +document.querySelector(S + ' .murk').style.opacity === 0 && /saturate\(1/.test(v.style.filter) && getComputedStyle(document.querySelector(S + ' .cap')).opacity === '1' && document.querySelector(S + ' .cap').textContent === 'Owl’s crew, at work'; }, S));
+    rec('the Shake It button steps aside once developed, and it is announced', await p.evaluate(S => document.querySelector(S + ' .shake').hidden && /developed/.test(document.querySelector(S + ' .sr').textContent), S));
+    await p.waitForTimeout(1200);
+    rec('the card settles back to its resting tilt', await p.evaluate(S => { const m = document.querySelector(S + ' .snap').style.transform.match(/rotate\(([-\d.]+)deg\)/); return m && Math.abs(+m[1] + 3) < .6; }, S));
+    rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };
