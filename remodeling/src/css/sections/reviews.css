@@ -105,3 +105,30 @@
   .sk__acts > * { flex: 1 1 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .sk__b { transition: none; } .sk__again { display: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Reviews V4 "The tape" — a builder's tape measure, 0 to 5; the 343 stars flow along one stream into
+   its channel and fill it to 4.8 (Lusion: flow). Canvas, capped pixel ratio, 40fps ceiling, running only in view.
+   ====================================================================================================================== */
+.tm__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s3); }
+.tm__head .t-head { margin: 0; }
+.tm__fig { margin: 0; display: flex; align-items: flex-end; gap: var(--s3); }
+.tm__n { font: 400 clamp(4.5rem, 2.6rem + 5vw, 8rem)/.8 var(--f-display); letter-spacing: -.045em; color: var(--color-accent-text, var(--color-accent-solid)); }
+.tm__of { font: 600 .9375rem/1.35 var(--f-text); color: var(--color-text-secondary); padding-bottom: 6px; }
+.tm__fx { margin: 0; }
+.tm__cv { display: block; width: 100%; height: 340px; touch-action: pan-y; }
+.tm__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4); margin-top: var(--s3); }
+.tm__again {
+  min-height: 48px; padding: 0 var(--s5); background: transparent; color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius);
+  font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.tm__again:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .tm__again:hover { background: var(--color-text); color: var(--color-bg); } }
+.tm__hint { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 699px) {
+  .tm__head { grid-template-columns: 1fr; align-items: start; }
+  .tm__cv { height: 600px; }   /* upright: the tape fills from the bottom like a level */
+  .tm__acts > .btn, .tm__again { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .tm__again { transition: none; } .tm__again { display: none; } }

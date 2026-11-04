@@ -2884,6 +2884,30 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .sk__b { transition: none; } .sk__again { display: none; } }
 
 
+.tm__head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s3); }
+.tm__head .t-head { margin: 0; }
+.tm__fig { margin: 0; display: flex; align-items: flex-end; gap: var(--s3); }
+.tm__n { font: 400 clamp(4.5rem, 2.6rem + 5vw, 8rem)/.8 var(--f-display); letter-spacing: -.045em; color: var(--color-accent-text, var(--color-accent-solid)); }
+.tm__of { font: 600 .9375rem/1.35 var(--f-text); color: var(--color-text-secondary); padding-bottom: 6px; }
+.tm__fx { margin: 0; }
+.tm__cv { display: block; width: 100%; height: 340px; touch-action: pan-y; }
+.tm__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4); margin-top: var(--s3); }
+.tm__again {
+  min-height: 48px; padding: 0 var(--s5); background: transparent; color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius);
+  font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.tm__again:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .tm__again:hover { background: var(--color-text); color: var(--color-bg); } }
+.tm__hint { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 699px) {
+  .tm__head { grid-template-columns: 1fr; align-items: start; }
+  .tm__cv { height: 600px; }   
+  .tm__acts > .btn, .tm__again { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .tm__again { transition: none; } .tm__again { display: none; } }
+
+
 .vc__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s4) var(--s8); }
 .vc__head .eyebrow { margin: 0 0 var(--s3); }
 .vc__head .t-head, .vc__lead { margin: 0; }
@@ -4293,6 +4317,26 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
         <button type="button" class="sk__b sk__turn">Turn the block</button>
         <button type="button" class="sk__b sk__again">Scatter them</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="ver tm" data-v="4">
+    <div class="wrap">
+      <div class="tm__head">
+        <div>
+          <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Google reviews</p>
+          <h2 class="t-head" id="reviews-h-4"><span class="nums">343</span> reviews, <span class="acc">measured.</span></h2>
+        </div>
+        <p class="tm__fig" aria-hidden="true"><span class="tm__n nums">4.8</span><span class="tm__of">out of <span class="nums">5</span><br><span class="nums">343</span> Google reviews</span></p>
+      </div>
+      <figure class="tm__fx"><canvas class="tm__cv" role="img" aria-label="343 small stars, one per Google review, flowing into a tape measure and filling it to 4.8 of 5."></canvas></figure>
+      <p class="sr-only">4.8 out of 5, the average across 343 Google reviews.</p>
+      <div class="tm__acts">
+        <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
+        <button type="button" class="tm__again">Scatter them</button>
+        <p class="tm__hint">Every star is one review. Push them aside; they flow back.</p>
       </div>
     </div>
   </div>
@@ -9547,6 +9591,115 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       k.add(function () { stop(); stars = []; gsap.killTweensOf(cam); ctx.clearRect(0, 0, cv.width, cv.height); });
       k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
       EZ.reveal(k, root.querySelectorAll('.sk__head, .sk__fig, .sk__line, .sk__acts'));
+    } },
+    /* NEW VERSIONS · V4 "The tape" (governing reference: Lusion, flow). A tape measure 0 to 5; the 343 stars flow along one
+       stream into its channel, in order, to exactly 4.8 (7 rows of 49). Scroll-driven and reversible; the pointer pushes
+       them aside and they spring home [S0340, S0089, S1326, Q41 DPR cap + 40fps ceiling]. */
+    4: { init: function (root, k) {
+      var cv = root.querySelector('.tm__cv'), ctx = cv.getContext('2d');
+      var css = getComputedStyle(root), INK = css.getPropertyValue('--color-text').trim() || '#1c1a17', ACC = css.getPropertyValue('--color-accent-solid').trim() || '#A45540',
+        PAPER = css.getPropertyValue('--color-surface').trim() || '#fff', SAND = css.getPropertyValue('--sand-100').trim() || '#F7F1EA', MUTE = css.getPropertyValue('--color-text-secondary').trim() || '#6b645c';
+      var ROWS = 7, COLS = 49, READ = 4.8;   // 7 x 49 = 343 = COUNT
+      var stars = [], W = 0, H = 0, dpr = 1, G = {}, ptr = { x: -9999, y: -9999 }, running = false, inView = false, raf = 0, last = 0, prog = 0, clock = 0;
+      function starPath(c, x, y, R, ri) { for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? R * ri : R; if (i) c.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r); else c.moveTo(x + Math.cos(a) * r, y + Math.sin(a) * r); } c.closePath(); }
+      function target() { var r = cv.getBoundingClientRect(), cy = r.top + r.height / 2, from = innerHeight + r.height / 2, to = innerHeight / 2; return k.motion ? Math.max(0, Math.min(1, (from - cy) / (from - to))) : 1; }
+      // the tape in its own frame: u runs along the blade (0..5 on the scale), v across it; flat on wide screens, upright on phones
+      function geom() {
+        G.v = W < 700;
+        if (!G.v) { G.case = { x: 8, y: H / 2 - 62, w: 124, h: 124 }; G.u0 = 170; G.u5 = W - 56; G.bA = H / 2 - 60; G.bB = H / 2 + 60; }
+        else { G.case = { x: W / 2 - 46, y: H - 100, w: 92, h: 92 }; G.u0 = H - 132; G.u5 = 40; G.bA = W / 2 - 52; G.bB = W / 2 + 52; }
+        G.at = function (u, v) { return G.v ? [v, u] : [u, v]; };   // (along, across) to canvas x, y
+        G.val = function (s) { return G.u0 + (G.u5 - G.u0) * s / 5; };
+      }
+      function layout(fresh) {
+        var r = cv.getBoundingClientRect(); W = Math.round(r.width); H = Math.round(r.height); if (!W || !H) return;
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); geom();
+        var a0 = G.val(0), a1 = G.val(READ), cw = (a1 - a0) / COLS, rh = (G.bB - G.bA - 14) / ROWS;
+        G.unit = Math.min(Math.abs(cw), rh);
+        for (var c = 0, n = 0; c < COLS; c++) for (var rr = 0; rr < ROWS; rr++, n++) {
+          var s = stars[n];
+          if (!s || fresh) s = stars[n] = { ox: 0, oy: 0, vx: 0, vy: 0, j: (Math.random() - .5), ph: Math.random() * 6.28, sp: .6 + Math.random() * .8, k: .85 + Math.random() * .3 };
+          var p = G.at(a0 + (c + .5) * cw, G.bA + 7 + (rr + .5) * rh); s.tx = p[0]; s.ty = p[1];
+          s.d = n / COLS / ROWS * .55;   // the slots fill in order, from 0 up the scale: the stream flows in
+          s.s0 = (n / (COLS * ROWS) + s.j * .08 + 1) % 1;   // its place along the stream before it arrives
+        }
+        prog = target(); place(); draw();
+      }
+      function streamAt(sv, j) {   // a single curving stream above the tape (beside it, when upright)
+        if (!G.v) return [-W * .06 + sv * W * 1.12, H / 2 - 96 + Math.sin(sv * Math.PI * 3) * 26 + j * 30];
+        return [W / 2 + 92 + Math.sin(sv * Math.PI * 3) * 18 + j * 24, H * 1.04 - sv * H * 1.1];
+      }
+      function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+      function place() {
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i], t = Math.max(0, Math.min(1, (prog - s.d) / .45)), e = ease(t), sv = (s.s0 + clock * .02 * s.sp) % 1, q = streamAt(sv, s.j);
+          s.e = e; s.x = q[0] + (s.tx - q[0]) * e + s.ox; s.y = q[1] + (s.ty - q[1]) * e + s.oy;
+        }
+      }
+      function line(x1, y1, x2, y2) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+      function draw() {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+        var A = function (u, v) { return G.at(u, v); }, c = G.case;
+        // the blade: paper, ink edges, from the case to the hook
+        var p0 = A(G.u0 - 18, G.bA), p1 = A(G.u5 + 22, G.bB);
+        ctx.fillStyle = SAND; ctx.strokeStyle = INK; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.rect(Math.min(p0[0], p1[0]), Math.min(p0[1], p1[1]), Math.abs(p1[0] - p0[0]), Math.abs(p1[1] - p0[1])); ctx.fill(); ctx.stroke();
+        // the last tenths, 4.8 to 5: left empty, lightly hatched
+        var h0 = G.val(READ), h1 = G.val(5); ctx.save(); ctx.beginPath(); var q0 = A(h0, G.bA), q1 = A(h1, G.bB); ctx.rect(Math.min(q0[0], q1[0]), Math.min(q0[1], q1[1]), Math.abs(q1[0] - q0[0]), Math.abs(q1[1] - q0[1])); ctx.clip();
+        ctx.strokeStyle = 'rgba(0,0,0,.12)'; ctx.lineWidth = 1; for (var z = -200; z < 400; z += 8) line(Math.min(q0[0], q1[0]) + z, Math.min(q0[1], q1[1]), Math.min(q0[0], q1[0]) + z + 120, Math.max(q0[1], q1[1])); ctx.restore();
+        // the graduations: tenths, halves, whole numbers with their labels
+        ctx.strokeStyle = INK; ctx.fillStyle = INK; ctx.font = '600 14px ' + (css.getPropertyValue('--f-text').trim() || 'Roboto, Arial, sans-serif'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        for (var t = 0; t <= 50; t++) {
+          var u = G.val(t / 10), L = t % 10 === 0 ? 16 : t % 5 === 0 ? 11 : 6; ctx.lineWidth = t % 10 === 0 ? 2 : 1.25;
+          var a = A(u, G.bA), b = A(u, G.bA + L); line(a[0], a[1], b[0], b[1]);
+          if (t % 10 === 0) { var lp = G.v ? [G.bA - 16, u] : [u, G.bA - 16]; ctx.fillText(String(t / 10), lp[0], lp[1]); }
+        }
+        // the case and the hook
+        ctx.fillStyle = INK; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(c.x, c.y, c.w, c.h, 18); else ctx.rect(c.x, c.y, c.w, c.h); ctx.fill();
+        ctx.strokeStyle = PAPER; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(c.x + c.w / 2, c.y + c.h / 2, c.w * .3, 0, Math.PI * 2); ctx.stroke();
+        ctx.fillStyle = ACC; ctx.beginPath(); ctx.arc(c.x + c.w / 2, c.y + c.h / 2, c.w * .1, 0, Math.PI * 2); ctx.fill();
+        var hk = A(G.u5 + 22, G.bA - 6), hk2 = A(G.u5 + 22, G.bB + 6); ctx.strokeStyle = INK; ctx.lineWidth = 5; line(hk[0], hk[1], hk2[0], hk2[1]);
+        // the reading at 4.8: a clay hairline across the blade and its flag
+        var g = prog * prog, r0 = A(h0, G.bA - 30), r1 = A(h0, G.bB + 12);
+        ctx.globalAlpha = .25 + .75 * g; ctx.strokeStyle = ACC; ctx.lineWidth = 2.5; line(r0[0], r0[1], r1[0], r1[1]);
+        var fp = G.v ? [G.bB + 10, h0] : [h0, G.bB + 12]; ctx.fillStyle = ACC; ctx.font = '700 15px ' + (css.getPropertyValue('--f-text').trim() || 'Roboto, Arial, sans-serif');
+        ctx.textAlign = G.v ? 'left' : 'center'; ctx.textBaseline = G.v ? 'middle' : 'top'; ctx.fillText('4.8', fp[0] + (G.v ? 4 : 0), fp[1] + (G.v ? 0 : 6));
+        ctx.globalAlpha = 1;
+        // the stars: clay, one per review
+        ctx.fillStyle = ACC;
+        for (var n = 0; n < stars.length; n++) { var s = stars[n]; ctx.globalAlpha = .35 + .65 * s.e; ctx.beginPath(); starPath(ctx, s.x, s.y, G.unit * .5 * s.k, .45); ctx.fill(); }
+        ctx.globalAlpha = 1;
+      }
+      function step(t) {
+        raf = requestAnimationFrame(step);
+        if (document.hidden || t - last < 25) return;   // a 40fps ceiling
+        var dt = Math.min(2, (t - last) / 16.67); last = t;
+        prog += (target() - prog) * Math.min(1, .16 * dt);
+        if (prog < .999) clock += dt / 60;   // the stream flows only while there are stars still on it
+        var R = Math.max(60, Math.min(W, H) * .2), R2 = R * R;
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i], ax = -s.ox * .06, ay = -s.oy * .06, dx = s.x - ptr.x, dy = s.y - ptr.y, d2 = dx * dx + dy * dy;
+          if (d2 < R2) { var d = Math.sqrt(d2) || 1, f = (R - d) / R * 2.2; ax += dx / d * f; ay += dy / d * f; }
+          s.vx = (s.vx + ax * dt) * .84; s.vy = (s.vy + ay * dt) * .84; s.ox += s.vx * dt; s.oy += s.vy * dt;
+        }
+        place(); draw();
+      }
+      function run() { if (running || !k.motion) return; running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      function scatter(cx, cy) {
+        stars.forEach(function (s) { var dx = s.x - (cx == null ? W / 2 : cx), dy = s.y - (cy == null ? H / 2 : cy), d = Math.sqrt(dx * dx + dy * dy) || 1, f = 6 + Math.random() * 8; s.vx += dx / d * f; s.vy += dy / d * f; });
+        run();
+      }
+      var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      ready.then(function () { if (root.hidden) return; layout(true); if (k.motion && inView) run(); });
+      k.ro(cv, function () { if (W) layout(false); });
+      k.add(function () { stop(); stars = []; ctx.clearRect(0, 0, cv.width, cv.height); });
+      k.on(cv, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var r = cv.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; run(); });
+      k.on(cv, 'pointerleave', function () { ptr.x = ptr.y = -9999; });
+      k.on(cv, 'pointerdown', function (e) { if (e.pointerType !== 'mouse') { var r = cv.getBoundingClientRect(); scatter(e.clientX - r.left, e.clientY - r.top); } });
+      k.on(root.querySelector('.tm__again'), 'click', function () { scatter(); });
+      k.io(cv, function (en) { inView = en.isIntersecting; if (inView) run(); else stop(); }, { threshold: 0 });
+      EZ.reveal(k, root.querySelectorAll('.tm__head > *, .tm__acts'));
     } }
   });
 })();

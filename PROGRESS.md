@@ -711,3 +711,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Reviews V4.
+
+## New versions, pass 3 · Reviews V4 "The tape" (2026-11-04)
+- **Muse accepted** Our Work V4.
+- **One new version:** `reviews` V4.
+  - V1 (the constellation) stays the default; V2 and V3 are untouched.
+  - It is reachable from the header switch or `?reviews=4`.
+- **Governing reference:** Lusion (flow).
+- **Style family:** a construction instrument, a tape measure.
+- **Signature move:** the tape.
+  - The 343 stars flow along one stream into a tape measure graduated 0 to 5 and pack it to exactly 4.8 (7 × 49).
+  - They gather with the scroll, scatter under the pointer and flow back (the owner's rules kept).
+  - Upright on phones.
+- **Gate:** `GATE-NEW-Reviews-V4.md`, self-scored 8.4 (D8 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/reviews-v4/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Where We Build V4.
