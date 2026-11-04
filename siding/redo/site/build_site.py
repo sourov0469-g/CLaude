@@ -10,7 +10,7 @@ from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, 
 # the live winner of every slot; the rest become backups
 LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'svc6', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'vis6', 'vis7', 'windows', 'win2', 'win3', 'win4', 'win5', 'win6', 'win7', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'rev6', 'rev7', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'proc6', 'proc7', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'seq6', 'area', 'area2', 'area3', 'area4', 'area5', 'area6', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'cta6', 'p_base', 'nav']
+MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'svc6', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'vis6', 'vis7', 'windows', 'win2', 'win3', 'win4', 'win5', 'win6', 'win7', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'rev6', 'rev7', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'proc6', 'proc7', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'seq6', 'seq7', 'area', 'area2', 'area3', 'area4', 'area5', 'area6', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'cta6', 'p_base', 'nav']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
 WORK = os.path.join(HERE, '..', '..', 'work')
 # subpages: page views inside the same file (pages.json: page list + each section's module, object and versions)
@@ -312,6 +312,68 @@ def procL():
 <a href="https://www.austinprosiding.com/recent-projects/{PR['s']}" target="_blank" rel="noopener">See this project on our site</a></p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
 
 
+def tryL():
+    """Try L (new-versions addendum, pass 2): Apple AirPods Pro's numbers as events. "Price the job": six of the firm's
+    documented jobs, each with the trade band published on its project page (pairs.json; Rob Roy from svcpairs.json, the
+    siding page). The visitor picks one of four bands; the real band then lands as a numeral event beside the trade's
+    published median band. A quiz (game-like mechanics live in Try only), not a configurator: nothing about the
+    visitor's house is asked."""
+    from PIL import Image, ImageOps
+    import base64 as _b, io
+    e = html.escape
+    def enc(name):
+        im = ImageOps.fit(Image.open(os.path.join(WORK, 'dl', f'{name}-720.webp')).convert('RGB'), (640, 400), Image.LANCZOS)
+        b = io.BytesIO(); im.save(b, 'WEBP', quality=58, method=6); return 'data:image/webp;base64,' + _b.b64encode(b.getvalue()).decode()
+    HP = json.load(open(os.path.join(WORK, 'data', 'pairs.json')))
+    SV = json.load(open(os.path.join(WORK, 'data', 'svcpairs.json')))['siding']
+    LAD = ['$5k–$10k', '$10k–$15k', '$15k–$20k', '$20k–$25k', '$25k–$30k', '$30k–$40k', '$40k–$50k']
+    MED = {'Siding': ('siding', '$10k–$15k', 415), 'Windows': ('windows', '$10k–$15k', 376),     # homepage "Compare all 10 trades"
+           'Roofing': ('shingle roofing', '$10k–$15k', 204), 'Patio covers': ('patio covers', '$15k–$20k', 33)}
+    def hp(n, k):
+        r = HP[n]; return dict(place=r['p'].replace(' At ', ' at '), when=r['w'], trade=r['t'], inst=r['i'], band=r['b'], bl=r['bl'],
+                               alt=r['aa'].replace(' — ', ', ').replace(' At ', ' at '), href='/recent-projects/' + r['s'], img=f'home{n}a', k=k)
+    r = SV[1]
+    RB = dict(place=r['place'], when=r['when'], trade='Siding', inst=r['installed'], band=r['band'], bl=r['bl'], alt=r['after']['alt'], href=r['href'], img='siding1a', k=1)
+    # (round order; k = where the right band sits among the four offered, so it moves about)
+    R = [hp(5, 1), hp(0, 2), hp(2, 0), hp(4, 2), RB, hp(3, 3)]
+    for j in R:
+        assert j['band'] in LAD, j
+        c = LAD.index(j['band']); j['s'] = s = min(max(c - j['k'], 0), 3); j['c'] = c
+    say = lambda b: b.replace('–', ' to ')
+    def rnd(n, j):
+        med = MED[j['trade']]; opts = LAD[j['s']:j['s'] + 4]; part = j['bl'].lower()
+        tiles = ''.join(f'<button type="button" class="tqb" data-i="{LAD.index(o)}" aria-label="{e(say(o))}">{e(o)}</button>' for o in opts)
+        lad = ''.join(f'<i class="tql{" tqm" if o == med[1] else ""}{" tqj" if o == j["band"] else ""}" data-i="{i}"><span>{e(o.replace("$", "").replace("k", ""))}{"<em>median</em>" if o == med[1] else ""}</span></i>' for i, o in enumerate(LAD))
+        last = n == len(R) - 1
+        return (f'<article class="tqr" data-n="{n}" data-c="{j["c"]}"{"" if not n else " hidden"} aria-label="Job {n + 1} of {len(R)}">'
+                f'<figure class="tqph"><img src="{enc(j["img"])}" alt="{e(j["alt"])}" decoding="async"{"" if not n else " loading=\"lazy\""}>'
+                f'<figcaption class="tqbig" aria-hidden="true"><small>{e(j["bl"])}</small><b data-v="{e(j["band"])}">?</b></figcaption></figure>'
+                f'<div class="tqs"><p class="tqrec"><b>{e(j["place"])}</b><span>{e(j["when"])} · {e(j["trade"])} · {e(j["inst"])}</span></p>'
+                f'<h3 class="tqq">What did the {e(part)} cost?</h3>'
+                f'<div class="tqo" role="group" aria-label="Four price bands for the {e(part)}">{tiles}</div>'
+                f'<div class="tqres" hidden><p class="tqhit"></p>'
+                f'<p class="tqlh" aria-hidden="true">Price bands, in $ thousands</p><div class="tqlad" aria-hidden="true">{lad}</div>'
+                f'<p class="tqkey"><span><i class="tqkj"></i>This job</span><span><i class="tqkm"></i>{e(med[0].capitalize())}: {med[1]} median band ({med[2]} priced)</span></p>'
+                f'<div class="tqnx"><a class="tqpj" href="https://www.austinprosiding.com{e(j["href"])}" target="_blank" rel="noopener">See the project</a>'
+                f'<button type="button" class="btn light tqnext">{"See your score" if last else "Next job"}</button></div></div></div></article>')
+    LEV = ['Home size and number of stories — wall square footage drives material and labor',
+           'Finish and profile: James Hardie ColorPlus factory color vs field paint, and lap vs board and batten',
+           'How much rot, wood repair, or flashing correction hides under the old siding',
+           'Trim, soffit, and fascia scope — full wrap vs siding faces only',
+           'Whether exterior painting rides along in the same mobilization (usually cheaper together)',
+           'Access: second-story walls, steep grade, and tight lot lines all add labor']
+    end = (f'<article class="tqr tqend" data-n="{len(R)}" hidden aria-label="Your score"><div class="tqmos" aria-hidden="true"></div>'
+           f'<div class="tqs"><p class="tqk2">Your score</p><p class="tqsc" aria-hidden="true"><b>0</b> of {len(R)}</p><p class="tqsc2"></p>'
+           f'<p class="tqlv">What moves a siding price, as we publish it in our cost guide:</p><ol class="tqlvl">{"".join(f"<li>{e(t)}</li>" for t in LEV)}</ol>'
+           f'<div class="tqnx"><button type="button" class="btn light tqagain">Play again</button></div></div></article>')
+    pips = ''.join(f'<i data-n="{n}"></i>' for n in range(len(R)))
+    return f'''<section class="sec tqL" id="try" aria-labelledby="tqL-h">
+<div class="tqh"><h2 class="sec-h" id="tqL-h" data-split>Price the job.</h2><p class="sec-p">Six of our documented jobs, each with the price band we published for it. Pick a band for each, then see the real one.</p></div>
+<div class="tqcard" data-solid><div class="tqtop"><p class="tqct">Job <b class="tqcn">1</b> of {len(R)}</p><div class="tqpips" aria-hidden="true">{pips}</div><p class="tqct">Spot on: <b class="tqok">0</b></p></div>
+{''.join(rnd(n, j) for n, j in enumerate(R))}{end}<p class="vh tqlive" aria-live="polite"></p></div>
+<div class="tqft"><p>Each band is the published price of that trade on that job: materials and labor, before discounts, excluding tax. A documented sample of our work; your house will have its own number.</p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
+
+
 def heroK():
     """Hero K (new-versions addendum): MERSI's split-slider on the firm's own six documented before/after pairs
     (pairs.json, the published project pages). Before fills the left half, after the right; on each change the halves
@@ -389,7 +451,7 @@ VERSIONS = {
              ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['l', 'In their own colours'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs'], ['e', 'Pick a part of the house'], ['f', 'The magazine spread'], ['g', 'Side by side'], ['h', 'Pull a board'], ['i', 'Three rings, one visit'], ['j', 'The index'], ['k', 'Run the reel'], ['l', 'Built from our records']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument'], ['e', 'Pairings to start from'], ['f', 'The colour map'], ['g', 'Four questions'], ['h', 'Colour in Austin light'], ['i', 'Look closer'], ['j', 'Your house, on the street'], ['k', 'Open a colour'], ['l', 'Roll it on']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record'], ['e', '376 jobs, by maker'], ['f', 'How each window opens'], ['g', 'Frame colours, by maker'], ['h', 'Count your windows'], ['i', 'A window of words'], ['j', 'From opening to trim'], ['k', '376 jobs, set in type'], ['l', 'Lift the sash']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours'], ['e', 'The names they mention'], ['f', 'All 30, searchable'], ['g', 'A steady stream'], ['h', 'Letters from homeowners'], ['i', 'One line, poster size'], ['j', '474, and the 30 we show'], ['k', 'Marked up by hand'], ['l', 'The whole job, in their words']],
-    'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns'], ['e', 'Turn the dial'], ['f', 'Questions at each step'], ['g', 'Stamp the card'], ['h', 'One paragraph'], ['i', 'Your part, and ours'], ['j', 'Four numbers'], ['k', 'Handed along'], ['l', 'One job, on its calendar']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)'], ['e', 'Inspect at dusk'], ['f', 'Measure the opening'], ['g', 'Shingle from the eave up'], ['h', 'Level the window'], ['i', 'Nail it on the studs'], ['j', 'Name the parts'], ['k', 'Flash the window']],
+    'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns'], ['e', 'Turn the dial'], ['f', 'Questions at each step'], ['g', 'Stamp the card'], ['h', 'One paragraph'], ['i', 'Your part, and ours'], ['j', 'Four numbers'], ['k', 'Handed along'], ['l', 'One job, on its calendar']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)'], ['e', 'Inspect at dusk'], ['f', 'Measure the opening'], ['g', 'Shingle from the eave up'], ['h', 'Level the window'], ['i', 'Nail it on the studs'], ['j', 'Name the parts'], ['k', 'Flash the window'], ['l', 'Price the job']],
     'area': [['a', 'Thread board'], ['b', 'Street finder'], ['c', 'Drive round our jobs'], ['d', 'Every town, ranked'], ['e', 'Is your street on our books?'], ['f', 'The job board'], ['g', 'The streets we know'], ['h', 'Town by trade'], ['i', 'Miles from our door'], ['j', 'Year by year'], ['k', 'Month by month']], 'book': [['a', 'Work order'], ['b', 'Press the board'], ['c', 'The record, then the call'], ['d', 'One number'], ['e', 'The week, at a glance'], ['f', 'Come by the office'], ['g', 'Three ways in'], ['h', 'Write us a postcard'], ['i', 'Day and night'], ['j', 'The receipt'], ['k', 'Next stop: your house']]}
 SLOTNAMES = {'hero': 'Hero', 'services': 'Services', 'vis': 'Visualiser', 'windows': 'Windows', 'reviews': 'Reviews', 'process': 'Process', 'try': 'Try the job', 'area': 'On your street', 'book': 'Booking'}
 
@@ -437,7 +499,7 @@ const PLAY=%PLAY%,PAUSE=%PAUSE%;
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(document);Svc4.wire(document);Svc5.wire(document);Svc6.wire(document);Vis.wire(document);Vis2.wire(document);Vis3.wire(document);Vis4.wire(document);Vis5.wire(document);Vis6.wire(document);Vis7.wire(document);Win.wire(document);Win2.wire(document);Win3.wire(document);Win4.wire(document);Win5.wire(document);Win6.wire(document);Win7.wire(document);Rev.wire(document);Rev2.wire(document);Rev3.wire(document);Rev4.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Rev5.wire(document);Rev6.wire(document);Rev7.wire(document);Proc3.wire(document);Proc4.wire(document);Proc5.wire(document);Proc6.wire(document);Proc7.wire(document);Seq3.wire(document);Seq4.wire(document);Seq5.wire(document);Seq6.wire(document);Area3.wire(document);Area4.wire(document);Area5.wire(document);Area6.wire(document);Cta3.wire(document);Cta4.wire(document);Cta5.wire(document);Cta6.wire(document);Nav.wire();Bx.init();
+Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(document);Svc4.wire(document);Svc5.wire(document);Svc6.wire(document);Vis.wire(document);Vis2.wire(document);Vis3.wire(document);Vis4.wire(document);Vis5.wire(document);Vis6.wire(document);Vis7.wire(document);Win.wire(document);Win2.wire(document);Win3.wire(document);Win4.wire(document);Win5.wire(document);Win6.wire(document);Win7.wire(document);Rev.wire(document);Rev2.wire(document);Rev3.wire(document);Rev4.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Rev5.wire(document);Rev6.wire(document);Rev7.wire(document);Proc3.wire(document);Proc4.wire(document);Proc5.wire(document);Proc6.wire(document);Proc7.wire(document);Seq3.wire(document);Seq4.wire(document);Seq5.wire(document);Seq6.wire(document);Seq7.wire(document);Area3.wire(document);Area4.wire(document);Area5.wire(document);Area6.wire(document);Cta3.wire(document);Cta4.wire(document);Cta5.wire(document);Cta6.wire(document);Nav.wire();Bx.init();
 })();'''
 
 
@@ -451,7 +513,7 @@ def build():
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
     main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd'], 'e': pre['se'], 'f': pre['sf'], 'g': pre['sg'], 'h': pre['sh'], 'i': pre['si'], 'j': pre['sj'], 'k': SVK[0], 'l': pre['sl']}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd'], 'e': pre['ve'], 'f': pre['vf'], 'g': pre['vg'], 'h': pre['vh'], 'i': pre['vi'], 'j': pre['vj'], 'k': pre['vk'], 'l': pre['vl']}) +
             slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd'], 'e': pre['we'], 'f': pre['wf'], 'g': pre['wg'], 'h': pre['wh'], 'i': pre['wi'], 'j': pre['wj'], 'k': pre['wk'], 'l': winL()}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd'], 'e': pre['re'], 'f': pre['rf'], 'g': pre['rg'], 'h': pre['rh'], 'i': pre['ri'], 'j': pre['rj'], 'k': pre['rk'], 'l': pre['rl']}) +
-            slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd'], 'e': pre['pe'], 'f': pre['pf'], 'g': pre['pg'], 'h': pre['ph'], 'i': pre['pi'], 'j': pre['pj'], 'k': pre['pk'], 'l': procL()}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd'], 'e': pre['qe'], 'f': pre['qf'], 'g': pre['qg'], 'h': pre['qh'], 'i': pre['qi'], 'j': pre['qj'], 'k': pre['qk']}) +
+            slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd'], 'e': pre['pe'], 'f': pre['pf'], 'g': pre['pg'], 'h': pre['ph'], 'i': pre['pi'], 'j': pre['pj'], 'k': pre['pk'], 'l': procL()}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd'], 'e': pre['qe'], 'f': pre['qf'], 'g': pre['qg'], 'h': pre['qh'], 'i': pre['qi'], 'j': pre['qj'], 'k': pre['qk'], 'l': tryL()}) +
             slot('area', {'a': pre['aa'], 'b': pre['ab'], 'c': pre['ac'], 'd': pre['ad'], 'e': pre['ae'], 'f': pre['af'], 'g': pre['ag'], 'h': pre['ah'], 'i': pre['ai'], 'j': pre['aj'], 'k': pre['ak']}) + slot('book', {'a': pre['ca'], 'b': pre['cb'], 'c': pre['cc'], 'd': pre['cd'], 'e': pre['ce'], 'f': pre['cf'], 'g': pre['cg'], 'h': pre['ch'], 'i': pre['ci'], 'j': pre['cj'], 'k': pre['ck']}))
     foot = pre['ft']
     PP_ = pre['PG_']

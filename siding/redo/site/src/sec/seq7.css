@@ -1,0 +1,102 @@
+/* TRY THE JOB L — Price the job (Apple AirPods Pro: numbers as events). One job card, four bands, the real band lands. */
+.tqL{padding:110px var(--gut) 100px}
+.tqL .tqh{max-width:760px}
+.tqL .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tqL .tqcard{margin-top:40px;padding:clamp(18px,2.6vw,36px);border-radius:24px;background:#FFFFFF;box-shadow:0 0 0 1px #DCE4DF,0 30px 60px -44px rgba(10,22,17,.4)}
+.tqL .tqtop{display:flex;align-items:center;justify-content:space-between;gap:14px 22px;flex-wrap:wrap;margin-bottom:18px}
+.tqL .tqct{margin:0;font:800 12.5px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.tqL .tqct b{color:var(--ink);font-variant-numeric:tabular-nums}
+.tqL .tqpips{display:flex;gap:6px;flex:1;max-width:320px}
+.tqL .tqpips i{flex:1;height:6px;border-radius:3px;background:#E3E9E5;transition:background-color .3s ease}
+.tqL .tqpips i.on{background:#9FB0A7}.tqL .tqpips i.y{background:var(--green)}
+/* one job */
+.tqL .tqr{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:start}
+.tqL .tqr[hidden]{display:none}
+.tqL .tqr.tqin{animation:tqIn .45s cubic-bezier(.16,1,.3,1)}
+@keyframes tqIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tqL .tqph{position:relative;margin:0;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#DDE3DF}
+.tqL .tqph img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+/* the numeral event: the published band lands on the photo */
+.tqL .tqbig{position:absolute;left:0;right:0;bottom:0;padding:70px clamp(16px,2vw,26px) clamp(14px,1.8vw,22px);background:linear-gradient(180deg,rgba(6,22,16,0),rgba(6,22,16,.82));color:#FFFFFF;opacity:0;transition:opacity .35s ease}
+.tqL .tqgo .tqbig{opacity:1}
+.tqL .tqbig small{display:block;font:800 12px/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase;color:#B5DB6E}
+.tqL .tqbig b{display:block;margin-top:4px;font:800 clamp(40px,5.6vw,88px)/1.08 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tqL .tqch{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em}
+.tqL .tqch>span{display:inline-block;transform:translateY(110%);transition:transform .6s cubic-bezier(.16,1,.3,1) calc(var(--d) * 40ms)}
+.tqL .tqrl .tqch>span{transform:none}
+/* the record and the question */
+.tqL .tqrec{margin:0;display:flex;flex-direction:column;gap:4px}
+.tqL .tqrec b{font:700 20px/1.25 var(--display);color:var(--ink)}
+.tqL .tqrec span{font:500 14.5px/1.45 var(--text);color:var(--ink-2)}
+.tqL .tqq{margin:18px 0 12px;font:700 clamp(21px,1.9vw,27px)/1.2 var(--display);color:var(--ink)}
+.tqL .tqo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tqL .tqb{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:64px;padding:14px 12px;border-radius:14px;
+  background:#F4F7F5;box-shadow:inset 0 0 0 1.5px #D3DDD6;font:800 20px/1 var(--display);color:var(--ink);text-align:center;font-variant-numeric:tabular-nums;
+  transition:background-color .2s cubic-bezier(.38,.005,.215,1),box-shadow .2s cubic-bezier(.38,.005,.215,1),color .2s ease,opacity .3s ease}
+.tqL .tqb{white-space:nowrap}
+@media (max-width:1100px){.tqL .tqb{font-size:17px;padding:14px 8px}}
+.tqL .tqb small{font:800 10.5px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.tqL .tqb:not([aria-disabled="true"]):hover{background:#FFFFFF;box-shadow:inset 0 0 0 2px var(--green)}
+.tqL .tqb:focus-visible{outline:3px solid #B5DB6E;outline-offset:3px}
+.tqL .tqb[aria-disabled="true"]{cursor:default}
+.tqL .tqb.tqy{background:var(--green);color:#FFFFFF;box-shadow:none}.tqL .tqb.tqy small{color:#B5DB6E}
+.tqL .tqb.tqx{background:#FFFFFF;box-shadow:inset 0 0 0 2px #9FB0A7;color:var(--ink-2)}
+.tqL .tqb.tqd{opacity:.42}
+/* the result: how close, and the ladder */
+.tqL .tqres{margin-top:18px;padding-top:16px;border-top:1px solid #DCE4DF}
+.tqL .tqres.tqon{animation:tqIn .45s cubic-bezier(.16,1,.3,1) .25s both}
+.tqL .tqhit{margin:0;font:500 16px/1.5 var(--text);color:var(--ink-2)}.tqL .tqhit b{color:var(--ink);font-weight:800}
+.tqL .tqlh{margin:14px 0 6px;font:700 11.5px/1.2 var(--text);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.tqL .tqlad{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding-bottom:34px}
+.tqL .tql em{display:block;margin-top:3px;font:800 9.5px/1 var(--text);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.tqL .tql{position:relative;display:block;height:30px;border-radius:6px;background:#EEF2EF;font-style:normal}
+.tqL .tql span{position:absolute;left:0;right:0;top:100%;margin-top:5px;font:600 11px/1 var(--text);color:var(--ink-2);text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tqL .tql.tqm{background:repeating-linear-gradient(135deg,#EEF2EF 0 5px,#DFE8E2 5px 10px);box-shadow:inset 0 0 0 2px var(--green)}
+.tqL .tql.tqj{background:#B5DB6E;box-shadow:inset 0 0 0 2px var(--green);transform-origin:50% 100%}
+.tqL .tql.tqj span{color:var(--ink);font-weight:800}
+.tqL .tqon .tql.tqj{animation:tqUp .55s cubic-bezier(.16,1,.3,1) .55s both}
+@keyframes tqUp{from{transform:scaleY(.15);background:#EEF2EF}to{transform:none}}
+.tqL .tqkey{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px 18px;font:500 13px/1.4 var(--text);color:var(--ink-2)}
+.tqL .tqkey span{display:inline-flex;align-items:center;gap:7px}
+.tqL .tqkey i{flex:none;width:16px;height:11px;border-radius:3px;background:#B5DB6E;box-shadow:inset 0 0 0 2px var(--green)}
+.tqL .tqkey i.tqkm{background:repeating-linear-gradient(135deg,#EEF2EF 0 3px,#DFE8E2 3px 6px)}
+.tqL .tqnx{display:flex;align-items:center;justify-content:space-between;gap:12px 18px;flex-wrap:wrap;margin-top:18px}
+.tqL .tqpj{color:var(--green);font:800 15px/1.3 var(--text)}
+/* the end card */
+.tqL .tqend{align-items:center}
+.tqL .tqmos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tqL .tqmf{position:relative;margin:0;border-radius:12px;overflow:hidden;aspect-ratio:16/10;background:#DDE3DF}
+.tqL .tqmf img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.tqL .tqmf figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 9px 7px;background:linear-gradient(180deg,rgba(6,22,16,0),rgba(6,22,16,.8));color:#FFFFFF;display:flex;flex-direction:column;gap:2px}
+.tqL .tqmf b{font:800 15px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.tqL .tqmf span{font:700 10.5px/1.1 var(--text);letter-spacing:.08em;text-transform:uppercase;color:#D9E6DE}
+.tqL .tqmf.y span{color:#B5DB6E}
+.tqL .tqk2{margin:0;font:800 12.5px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.tqL .tqsc{margin:6px 0 0;font:700 clamp(26px,2.4vw,34px)/1 var(--display);color:var(--ink-2)}
+.tqL .tqsc b{display:inline-block;margin-right:.12em;font:800 clamp(72px,8vw,120px)/1 var(--display);color:var(--green);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tqL .tqsc2{margin:10px 0 0;font:600 16px/1.5 var(--text);color:var(--ink)}
+.tqL .tqlv{margin:18px 0 0;font:700 14px/1.4 var(--text);color:var(--ink)}
+.tqL .tqlvl{margin:8px 0 0;padding-left:22px;font:500 14px/1.5 var(--text);color:var(--ink-2)}
+.tqL .tqlvl li{margin-top:4px}.tqL .tqlvl li::marker{color:var(--green);font-weight:800}
+/* footer: the band definition and the one filled button */
+.tqL .tqft{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:30px}
+.tqL .tqft p{margin:0;max-width:66ch;font:500 14px/1.55 var(--text);color:var(--ink-2)}
+/* the shared CTA block (phone link beside the Book button), sized as in the hero; it is unstyled outside .hero */
+.tqL .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.tqL .callx{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--text);color:var(--ink);padding:10px 2px;text-decoration:none}
+.tqL .callx svg{width:18px;height:18px;flex:none;color:var(--green)}
+@media (max-width:760px){
+  .tqL{padding:84px var(--gut) 80px}
+  .tqL .tqcard{padding:14px;border-radius:18px}
+  .tqL .tqpips{order:3;flex:0 0 100%;max-width:none}
+  .tqL .tqr{grid-template-columns:1fr;gap:16px}
+  .tqL .tqph{border-radius:12px}
+  .tqL .tqbig{padding-top:48px}
+  .tqL .tqb{font-size:18px;min-height:58px}
+  .tqL .tql span{font-size:9.5px;letter-spacing:-.02em}
+  .tqL .tqmos{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){
+  .tqL .tqr.tqin,.tqL .tqres.tqon,.tqL .tqon .tql.tqj{animation:none}
+  .tqL .tqch>span{transition:none}.tqL .tqbig,.tqL .tqb,.tqL .tqpips i{transition:none}
+}
