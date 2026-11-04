@@ -303,3 +303,97 @@
   .bd__cap span + span::before { content: none; }
 }
 @media (prefers-reduced-motion: reduce) { .bd__pk, .bd__row, .bd__unit { transition: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Financing V4 "The house, annotated" — an architectural section drawing (Makhno: the home as an
+   explorable instrument, target-marked). Tap a part; the partners that usually fit are pinned to it by callout
+   leaders. Leaders draw by stroke offset; nothing else moves but opacity [S0062].
+   ====================================================================================================================== */
+.hs__head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s5); }
+.hs__head .t-head { margin: 0; }
+.hs__lead { margin: 0; max-width: 44ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+
+.hs__fig { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s5) var(--s6); align-items: center; }
+.hs__draw { position: relative; z-index: 1; }
+.hs__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hs__svg path, .hs__svg rect, .hs__svg circle { fill: none; stroke: var(--color-text); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hs__gr path { stroke-width: 2; }
+.hs__gr path + path { stroke: color-mix(in srgb, var(--color-text) 40%, transparent); stroke-width: 1.5; }
+.hs__st rect { fill: var(--color-text); }
+.hs__svg .hs__fill { fill: transparent; stroke: none; transition: fill 320ms var(--ez-out); }
+.hs__pt.is-on path:not(.hs__fill), .hs__pt.is-on circle { stroke: var(--color-accent-solid); }
+.hs__pt[data-p="kitchen"].is-on .hs__fill, .hs__pt[data-p="bath"].is-on .hs__fill, .hs__pt[data-p="floor"].is-on .hs__fill { fill: color-mix(in srgb, var(--color-accent-solid) 22%, transparent); }
+.hs__pt[data-p="roof"].is-on .hs__fill, .hs__pt[data-p="roofw"].is-on .hs__fill, .hs__pt[data-p="shutter"].is-on .hs__fill, .hs__pt[data-p="hvac"].is-on .hs__fill { fill: color-mix(in srgb, var(--color-text) 16%, transparent); }
+.hs__key { margin: var(--s3) 0 0; display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.hs__k { display: inline-flex; align-items: center; gap: 8px; }
+.hs__k::before { content: ""; width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--color-text); }
+.hs__k--in::before { background: color-mix(in srgb, var(--color-accent-solid) 30%, transparent); }
+.hs__k--out::before { background: color-mix(in srgb, var(--color-text) 18%, transparent); }
+
+/* the target marks [S1441] */
+.hs__marks { position: absolute; inset: 0; pointer-events: none; }
+.hs__mk { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; display: grid; place-items: center; border: 0; background: none; border-radius: 50%; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+.hs__mk i { position: relative; width: 26px; height: 26px; border-radius: 50%; background: var(--color-surface); border: 2px solid var(--color-text); box-shadow: 0 4px 10px -4px rgba(0,0,0,.4); transition: transform 200ms var(--ez-out), background-color 200ms var(--ez-out), border-color 200ms var(--ez-out); }
+.hs__mk i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--color-accent-solid); }
+.hs__mk i::before { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--color-accent-solid); opacity: 0; animation: hs-pulse 2.6s var(--ez-out) infinite; }
+@keyframes hs-pulse { 0% { transform: scale(.9); opacity: .7; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+.hs__mk.is-on i { background: var(--color-accent-solid); border-color: var(--color-accent-solid); transform: scale(1.12); }
+.hs__mk.is-on i::after { background: #fff; }
+.hs__mk.is-on i::before { animation: none; }
+.hs__mk span { position: absolute; top: calc(100% - 2px); left: 50%; transform: translateX(-50%); padding: 4px 8px; border-radius: 4px; background: var(--color-text); color: var(--color-bg); font: 600 .8125rem/1.2 var(--f-text); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 160ms var(--ez-out); }
+.hs__mk:hover span, .hs__mk:focus-visible span, .hs__mk.is-on span { opacity: 1; }
+.hs__mk:focus-visible { outline: none; }
+.hs__mk:focus-visible i { box-shadow: 0 0 0 3px var(--color-focus-ring); }
+
+/* the callouts: the figure leads each note [S0666]; the quiet ones step back */
+.hs__tags { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.hs__tag {
+  position: relative; display: grid; gap: 2px; padding: var(--s3) var(--s4) var(--s3) calc(var(--s4) + 6px); background: var(--color-surface); border-radius: 8px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-text) 14%, transparent); transition: opacity 300ms var(--ez-out), box-shadow 300ms var(--ez-out);
+}
+.hs__tag::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 2px; background: var(--color-accent-solid); }
+.hs__tag--pa::before { background: var(--color-text); }
+.hs__tag.is-off { opacity: .38; }
+.hs__tag.is-on { box-shadow: 0 0 0 1.5px var(--color-text), 0 16px 28px -20px rgba(0,0,0,.5); }
+.hs__tk { margin: 0; font: 600 .8125rem/1.2 var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-secondary); }
+.hs__tn { margin: 0; font: 600 1.0625rem/1.2 var(--f-display); }
+.hs__tf { margin: 4px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hs__tb { font: 400 2.25rem/1 var(--f-display); letter-spacing: -.02em; white-space: nowrap; color: var(--color-accent-text, var(--color-accent-solid)); }
+.hs__tag--pa .hs__tb { color: var(--color-text); }
+.hs__tu { font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.hs__tr { margin: 4px 0 0; font: 600 .875rem/1.35 var(--f-text); }
+.hs__ts { margin: 0; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+
+.hs__lead-lines { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; overflow: visible; }
+.hs__ld { fill: none; stroke: var(--color-accent-solid); stroke-width: 2; stroke-linecap: round; }
+.hs__ld--pa { stroke: var(--color-text); stroke-dasharray: none; }
+.hs__dot { fill: var(--color-accent-solid); } .hs__src { fill: var(--color-accent-solid); stroke: var(--color-surface); stroke-width: 2.5; }
+
+.hs__pick { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s5); }
+.hs__pk {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 12px; border-radius: 999px;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-border-strong, var(--color-text)); font: 600 .9375rem/1.1 var(--f-text); cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out);
+}
+.hs__pi { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.hs__pk[aria-checked="true"] { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.hs__pk:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .hs__pk:not([aria-checked="true"]):hover { border-color: var(--color-text); background: var(--color-bg-subtle); } }
+.hs__say { margin: var(--s3) 0 0; max-width: 72ch; font: 600 1.0625rem/1.5 var(--f-text); color: var(--color-text); }
+
+@media (max-width: 1099px) {
+  .hs__fig { grid-template-columns: 1fr; }
+  .hs__tags { grid-template-columns: repeat(4, minmax(0, 1fr)); }   /* the house takes the full width; the four callouts sit in a row beneath */
+}
+@media (max-width: 999px) { .hs__head { grid-template-columns: 1fr; align-items: start; } }
+@media (max-width: 759px) { .hs__tags { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 599px) {
+  .hs__mk[data-i="4"], .hs__mk[data-i="5"] { display: none; }   /* the window and the shutters crowd their neighbours on a phone; the roof and the AC marks carry those projects */
+  .hs__mk span { display: none; }
+  .hs__tags { gap: var(--s2); }
+  .hs__tag { padding: var(--s3) var(--s3) var(--s3) calc(var(--s3) + 6px); }
+  .hs__tb { font-size: 1.75rem; }
+  .hs__tf { flex-wrap: wrap; gap: 2px 8px; }
+  .hs__pk { padding: 0 12px 0 10px; font-size: .875rem; }
+}
+@media (prefers-reduced-motion: reduce) { .hs__mk i::before { animation: none; } .hs__mk i, .hs__tag, .hs__svg .hs__fill, .hs__pk { transition: none; } }

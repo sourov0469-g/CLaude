@@ -2446,6 +2446,96 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .bd__pk, .bd__row, .bd__unit { transition: none; } }
 
 
+.hs__head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s5); }
+.hs__head .t-head { margin: 0; }
+.hs__lead { margin: 0; max-width: 44ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+
+.hs__fig { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s5) var(--s6); align-items: center; }
+.hs__draw { position: relative; z-index: 1; }
+.hs__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hs__svg path, .hs__svg rect, .hs__svg circle { fill: none; stroke: var(--color-text); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hs__gr path { stroke-width: 2; }
+.hs__gr path + path { stroke: color-mix(in srgb, var(--color-text) 40%, transparent); stroke-width: 1.5; }
+.hs__st rect { fill: var(--color-text); }
+.hs__svg .hs__fill { fill: transparent; stroke: none; transition: fill 320ms var(--ez-out); }
+.hs__pt.is-on path:not(.hs__fill), .hs__pt.is-on circle { stroke: var(--color-accent-solid); }
+.hs__pt[data-p="kitchen"].is-on .hs__fill, .hs__pt[data-p="bath"].is-on .hs__fill, .hs__pt[data-p="floor"].is-on .hs__fill { fill: color-mix(in srgb, var(--color-accent-solid) 22%, transparent); }
+.hs__pt[data-p="roof"].is-on .hs__fill, .hs__pt[data-p="roofw"].is-on .hs__fill, .hs__pt[data-p="shutter"].is-on .hs__fill, .hs__pt[data-p="hvac"].is-on .hs__fill { fill: color-mix(in srgb, var(--color-text) 16%, transparent); }
+.hs__key { margin: var(--s3) 0 0; display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.hs__k { display: inline-flex; align-items: center; gap: 8px; }
+.hs__k::before { content: ""; width: 14px; height: 14px; border-radius: 3px; border: 1.5px solid var(--color-text); }
+.hs__k--in::before { background: color-mix(in srgb, var(--color-accent-solid) 30%, transparent); }
+.hs__k--out::before { background: color-mix(in srgb, var(--color-text) 18%, transparent); }
+
+
+.hs__marks { position: absolute; inset: 0; pointer-events: none; }
+.hs__mk { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; padding: 0; display: grid; place-items: center; border: 0; background: none; border-radius: 50%; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+.hs__mk i { position: relative; width: 26px; height: 26px; border-radius: 50%; background: var(--color-surface); border: 2px solid var(--color-text); box-shadow: 0 4px 10px -4px rgba(0,0,0,.4); transition: transform 200ms var(--ez-out), background-color 200ms var(--ez-out), border-color 200ms var(--ez-out); }
+.hs__mk i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--color-accent-solid); }
+.hs__mk i::before { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--color-accent-solid); opacity: 0; animation: hs-pulse 2.6s var(--ez-out) infinite; }
+@keyframes hs-pulse { 0% { transform: scale(.9); opacity: .7; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+.hs__mk.is-on i { background: var(--color-accent-solid); border-color: var(--color-accent-solid); transform: scale(1.12); }
+.hs__mk.is-on i::after { background: #fff; }
+.hs__mk.is-on i::before { animation: none; }
+.hs__mk span { position: absolute; top: calc(100% - 2px); left: 50%; transform: translateX(-50%); padding: 4px 8px; border-radius: 4px; background: var(--color-text); color: var(--color-bg); font: 600 .8125rem/1.2 var(--f-text); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 160ms var(--ez-out); }
+.hs__mk:hover span, .hs__mk:focus-visible span, .hs__mk.is-on span { opacity: 1; }
+.hs__mk:focus-visible { outline: none; }
+.hs__mk:focus-visible i { box-shadow: 0 0 0 3px var(--color-focus-ring); }
+
+
+.hs__tags { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.hs__tag {
+  position: relative; display: grid; gap: 2px; padding: var(--s3) var(--s4) var(--s3) calc(var(--s4) + 6px); background: var(--color-surface); border-radius: 8px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-text) 14%, transparent); transition: opacity 300ms var(--ez-out), box-shadow 300ms var(--ez-out);
+}
+.hs__tag::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 2px; background: var(--color-accent-solid); }
+.hs__tag--pa::before { background: var(--color-text); }
+.hs__tag.is-off { opacity: .38; }
+.hs__tag.is-on { box-shadow: 0 0 0 1.5px var(--color-text), 0 16px 28px -20px rgba(0,0,0,.5); }
+.hs__tk { margin: 0; font: 600 .8125rem/1.2 var(--f-text); letter-spacing: .06em; text-transform: uppercase; color: var(--color-text-secondary); }
+.hs__tn { margin: 0; font: 600 1.0625rem/1.2 var(--f-display); }
+.hs__tf { margin: 4px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.hs__tb { font: 400 2.25rem/1 var(--f-display); letter-spacing: -.02em; white-space: nowrap; color: var(--color-accent-text, var(--color-accent-solid)); }
+.hs__tag--pa .hs__tb { color: var(--color-text); }
+.hs__tu { font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.hs__tr { margin: 4px 0 0; font: 600 .875rem/1.35 var(--f-text); }
+.hs__ts { margin: 0; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+
+.hs__lead-lines { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; overflow: visible; }
+.hs__ld { fill: none; stroke: var(--color-accent-solid); stroke-width: 2; stroke-linecap: round; }
+.hs__ld--pa { stroke: var(--color-text); stroke-dasharray: none; }
+.hs__dot { fill: var(--color-accent-solid); } .hs__src { fill: var(--color-accent-solid); stroke: var(--color-surface); stroke-width: 2.5; }
+
+.hs__pick { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s5); }
+.hs__pk {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 12px; border-radius: 999px;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-border-strong, var(--color-text)); font: 600 .9375rem/1.1 var(--f-text); cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out);
+}
+.hs__pi { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.hs__pk[aria-checked="true"] { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.hs__pk:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .hs__pk:not([aria-checked="true"]):hover { border-color: var(--color-text); background: var(--color-bg-subtle); } }
+.hs__say { margin: var(--s3) 0 0; max-width: 72ch; font: 600 1.0625rem/1.5 var(--f-text); color: var(--color-text); }
+
+@media (max-width: 1099px) {
+  .hs__fig { grid-template-columns: 1fr; }
+  .hs__tags { grid-template-columns: repeat(4, minmax(0, 1fr)); }   
+}
+@media (max-width: 999px) { .hs__head { grid-template-columns: 1fr; align-items: start; } }
+@media (max-width: 759px) { .hs__tags { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 599px) {
+  .hs__mk[data-i="4"], .hs__mk[data-i="5"] { display: none; }   
+  .hs__mk span { display: none; }
+  .hs__tags { gap: var(--s2); }
+  .hs__tag { padding: var(--s3) var(--s3) var(--s3) calc(var(--s3) + 6px); }
+  .hs__tb { font-size: 1.75rem; }
+  .hs__tf { flex-wrap: wrap; gap: 2px 8px; }
+  .hs__pk { padding: 0 12px 0 10px; font-size: .875rem; }
+}
+@media (prefers-reduced-motion: reduce) { .hs__mk i::before { animation: none; } .hs__mk i, .hs__tag, .hs__svg .hs__fill, .hs__pk { transition: none; } }
+
+
 
 
 .pj__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
@@ -3997,6 +4087,41 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       </div>
       <p class="bd__cap" aria-live="polite"></p>
       <p class="bd__say" aria-live="polite"></p>
+    </div>
+    <div class="wrap fz-foot"></div>
+  </div>
+
+  
+  <div class="ver hs" data-v="4">
+    <div class="wrap hs__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Financing partners</p>
+        <h2 class="t-head" id="financing-h-4">Point at the work. <span class="acc">See who usually finances it.</span></h2>
+      </div>
+      <p class="hs__lead">Tap the part of the house you are changing. The partners that usually fit are pinned to it, with their published figures and how each is repaid.</p>
+    </div>
+    <div class="wrap">
+      <div class="hs__fig">
+        <div class="hs__draw">
+          <svg class="hs__svg" viewBox="0 120 1000 470" aria-hidden="true" focusable="false">
+            <g class="hs__gr"><path d="M40 560 H960"/><path d="M60 560 l-14 18 M110 560 l-14 18 M160 560 l-14 18 M210 560 l-14 18 M260 560 l-14 18 M310 560 l-14 18 M360 560 l-14 18 M410 560 l-14 18 M460 560 l-14 18 M510 560 l-14 18 M560 560 l-14 18 M610 560 l-14 18 M660 560 l-14 18 M710 560 l-14 18 M760 560 l-14 18 M810 560 l-14 18 M860 560 l-14 18 M910 560 l-14 18 M960 560 l-14 18"/></g>
+            <g class="hs__pt" data-p="roof"><path class="hs__fill" d="M100 304 L450 146 L800 304 L776 304 L450 168 L124 304 Z"/><path d="M100 304 L450 146 L800 304 M124 304 L450 168 L776 304 M180 278 L196 286 M250 246 L266 254 M320 214 L336 222 M580 214 L564 222 M650 246 L634 254 M720 278 L704 286"/></g>
+            <g class="hs__st"><path d="M140 304 H760"/><rect x="140" y="304" width="20" height="256"/><rect x="740" y="304" width="20" height="256"/><rect x="452" y="304" width="8" height="236"/></g>
+            <g class="hs__pt" data-p="floor"><path class="hs__fill" d="M160 540 H740 V560 H160 Z"/><path d="M160 540 H740 M200 540 V560 M250 540 V560 M300 540 V560 M350 540 V560 M400 540 V560 M450 540 V560 M500 540 V560 M550 540 V560 M600 540 V560 M650 540 V560 M700 540 V560"/></g>
+            <g class="hs__pt" data-p="kitchen"><path class="hs__fill" d="M188 468 H424 V540 H188 Z M200 330 H306 V392 H200 Z"/><path d="M184 468 H428 M188 474 V540 H424 V474 M246 478 V532 M304 478 V532 M362 478 V532 M200 330 H306 V392 H200 Z M253 330 V392 M226 356 V366 M280 356 V366 M336 468 V452 Q336 444 346 444 H352"/></g>
+            <g class="hs__pt" data-p="roofw"><path class="hs__fill" d="M326 336 H420 V420 H326 Z"/><path d="M326 336 H420 V420 H326 Z M373 336 V420 M326 378 H420"/></g>
+            <g class="hs__pt" data-p="bath"><path class="hs__fill" d="M496 494 H644 V540 H496 Z M658 482 H728 V540 H658 Z"/><path d="M496 494 H644 Q650 494 648 506 L640 540 H500 L492 506 Q490 494 496 494 Z M658 482 H728 V540 H658 Z M693 482 V540 M668 386 H718 V446 H668 Z M520 494 V440 Q520 424 536 424 H546 M546 424 V432"/></g>
+            <g class="hs__pt" data-p="shutter"><path class="hs__fill" d="M568 336 H634 V392 H568 Z"/><path d="M568 336 H634 V392 H568 Z M568 346 H634 M568 356 H634 M568 366 H634 M568 376 H634 M568 386 H634"/></g>
+            <g class="hs__pt" data-p="hvac"><path class="hs__fill" d="M806 478 H914 V560 H806 Z"/><path d="M806 478 H914 V560 H806 Z"/><circle cx="860" cy="519" r="27"/><path d="M860 492 V546 M833 519 H887 M760 500 H806"/></g>
+          </svg>
+          <div class="hs__marks"></div>
+          <p class="hs__key" aria-hidden="true"><span class="hs__k hs__k--in">Inside the home</span><span class="hs__k hs__k--out">The shell and its systems</span></p>
+        </div>
+        <div class="hs__tags"></div>
+        <svg class="hs__lead-lines" aria-hidden="true" focusable="false"></svg>
+      </div>
+      <div class="hs__pick" role="radiogroup" aria-label="What you are building"></div>
+      <p class="hs__say" aria-live="polite"></p>
     </div>
     <div class="wrap fz-foot"></div>
   </div>
@@ -8361,6 +8486,80 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       say.textContent = WHY[proj];
       if (!k.motion) start(); else k.io(rowsEl, function (en) { if (en.isIntersecting) start(); }, { threshold: .3 });
       foot(root, k);
+    } },
+    /* NEW VERSIONS · V4 "The house, annotated" (governing reference: Makhno Studio, the home as an explorable instrument).
+       Tap a part of a section drawing; the partners that usually fit are pinned to it by callout leaders [S0062, S1018]. */
+    4: { init: function (root, k) {
+      var fig = root.querySelector('.hs__fig'), draw = root.querySelector('.hs__draw'), marksEl = root.querySelector('.hs__marks'), tagsEl = root.querySelector('.hs__tags'),
+        lines = root.querySelector('.hs__lead-lines'), pick = root.querySelector('.hs__pick'), say = root.querySelector('.hs__say');
+      // the marks: each drawn part answers to one of the section's own project choices
+      var MK = [['kitchen', 'kitchen', 306, 452, 'The kitchen'], ['bath', 'bath', 572, 470, 'The bathroom'], ['floor', 'floor', 705, 550, 'The floors'],
+        ['roof', 'roof', 450, 228, 'The roof'], ['roofw', 'roof', 373, 378, 'A window or door'], ['shutter', 'hvac', 601, 364, 'Storm shutters'], ['hvac', 'hvac', 860, 519, 'The air conditioning']];
+      marksEl.innerHTML = MK.map(function (m, i) { return '<button type="button" class="hs__mk" data-i="' + i + '" data-p="' + m[1] + '" style="left:' + (m[2] / 10) + '%;top:' + ((m[3] - 120) / 4.7).toFixed(2) + '%" aria-label="' + m[4] + '"><i></i><span>' + m[4] + '</span></button>'; }).join('');
+      tagsEl.innerHTML = ORDER.map(function (id) {
+        var p = P[id];
+        return '<div class="hs__tag hs__tag--' + p.k + '" data-id="' + id + '"><p class="hs__tk">' + p.kind + '</p><p class="hs__tn">' + p.name + '</p>' +
+          '<p class="hs__tf"><span class="hs__tb nums">' + p.big + '</span><span class="hs__tu">' + p.unit + '</span></p><p class="hs__tr">Repaid: ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '</p><p class="hs__ts">' + p.src + '</p></div>';
+      }).join('');
+      pick.innerHTML = PROJ.map(function (x) { return '<button type="button" class="hs__pk" role="radio" aria-checked="false" tabindex="-1" data-p="' + x[0] + '">' + ic(x[2], 'fz-ic hs__pi') + '<span>' + x[1] + '</span></button>'; }).join('');
+      var mks = Array.prototype.slice.call(marksEl.children), tags = Array.prototype.slice.call(tagsEl.children), pks = Array.prototype.slice.call(pick.children), pts = root.querySelectorAll('.hs__pt');
+      k.add(function () { marksEl.innerHTML = ''; tagsEl.innerHTML = ''; pick.innerHTML = ''; lines.innerHTML = ''; say.textContent = ''; });
+
+      var proj = null, from = -1;
+      // which drawn parts light for each project, and where its leaders start
+      var PARTS = { kitchen: ['kitchen'], bath: ['bath'], floor: ['floor'], roof: ['roof', 'roofw'], hvac: ['hvac', 'shutter'], unsure: ['kitchen', 'bath', 'floor', 'roof', 'roofw', 'hvac', 'shutter'] };
+      function origin() {   // the mark the visitor touched, or the project's first mark; "not sure" starts from the middle of the house
+        var r = fig.getBoundingClientRect(), d = draw.getBoundingClientRect();
+        if (proj === 'unsure' || from < 0) { return [d.left - r.left + d.width * .45, d.top - r.top + d.height * .62]; }
+        var m = mks[from].getBoundingClientRect(); return [m.left - r.left + m.width / 2, m.top - r.top + m.height / 2];
+      }
+      function leaders(anim) {
+        var r = fig.getBoundingClientRect(); lines.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); lines.setAttribute('width', r.width); lines.setAttribute('height', r.height);
+        if (!proj) { lines.innerHTML = ''; return; }
+        var o = origin(), fit = ROUTES[proj], d = draw.getBoundingClientRect(), s = '';
+        tags.forEach(function (t) {
+          if (fit.indexOf(t.dataset.id) < 0) return;
+          var q = t.getBoundingClientRect(), side = q.left >= d.right - 4, tx = side ? q.left - r.left : q.left - r.left + q.width / 2, ty = side ? q.top - r.top + q.height / 2 : q.top - r.top;
+          var c = side ? [o[0] + (tx - o[0]) * .55, o[1], tx - (tx - o[0]) * .3, ty] : [o[0], o[1] + (ty - o[1]) * .55, tx, ty - (ty - o[1]) * .35];
+          s += '<path class="hs__ld hs__ld--' + P[t.dataset.id].k + '" d="M' + o[0].toFixed(1) + ' ' + o[1].toFixed(1) + ' C' + c.map(function (v) { return v.toFixed(1); }).join(' ') + ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + '"/><circle class="hs__dot" cx="' + tx.toFixed(1) + '" cy="' + ty.toFixed(1) + '" r="4.5"/>';
+        });
+        s += '<circle class="hs__src" cx="' + o[0].toFixed(1) + '" cy="' + o[1].toFixed(1) + '" r="6"/>';
+        lines.innerHTML = s;
+        if (anim && k.motion) gsap.fromTo(lines.querySelectorAll('.hs__ld'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .7, ease: 'power2.out', stagger: .08, clearProps: 'strokeDasharray,strokeDashoffset' });
+      }
+      function choose(p, mi, anim) {
+        proj = p; from = mi == null ? MK.findIndex(function (m) { return m[1] === p; }) : mi;
+        var fit = ROUTES[p], lit = PARTS[p];
+        pts.forEach(function (g) { g.classList.toggle('is-on', lit.indexOf(g.dataset.p) > -1); });
+        mks.forEach(function (m, i) { m.classList.toggle('is-on', m.dataset.p === p); m.setAttribute('aria-pressed', m.dataset.p === p ? 'true' : 'false'); });
+        tags.forEach(function (t) { var on = fit.indexOf(t.dataset.id) > -1; t.classList.toggle('is-on', on); t.classList.toggle('is-off', !on); });
+        pks.forEach(function (b) { var on = b.dataset.p === p; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
+        say.textContent = WHY[p];
+        leaders(anim);
+        if (anim && k.motion) gsap.fromTo(tags.filter(function (t) { return t.classList.contains('is-on'); }), { x: 10 }, { x: 0, duration: .45, ease: 'power3.out', stagger: .06, clearProps: 'transform' });
+      }
+      mks.forEach(function (m, i) { k.on(m, 'click', function () { choose(m.dataset.p, i, true); }); });
+      pks.forEach(function (b, i) {
+        k.on(b, 'click', function () { choose(b.dataset.p, null, true); });
+        k.on(b, 'keydown', function (e) {
+          var n = pks.length, j = /Right|Down/.test(e.key) ? (i + 1) % n : /Left|Up/.test(e.key) ? (i + n - 1) % n : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : null;
+          if (j === null) return; e.preventDefault(); pks[j].focus(); choose(pks[j].dataset.p, null, true);
+        });
+      });
+      pks[0].tabIndex = 0;
+      say.textContent = 'Tap a part of the house, or choose below.';
+      k.ro(fig, function () { leaders(false); });
+      foot(root, k);
+      EZ.reveal(k, root.querySelectorAll('.hs__head > *, .hs__pick'));
+      if (!k.motion) return;
+      // arriving: the drawing is drawn in, line by line, then the marks appear [S0362]
+      var once = false;
+      k.io(draw, function (en) {
+        if (!en.isIntersecting || once) return; once = true;
+        var ps = draw.querySelectorAll('.hs__svg path:not(.hs__fill), .hs__svg circle, .hs__svg rect');
+        gsap.fromTo(ps, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.1, ease: 'power2.inOut', stagger: .015, clearProps: 'strokeDasharray,strokeDashoffset' });
+        gsap.fromTo(mks, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .45, ease: 'back.out(2)', stagger: .06, delay: .9, clearProps: 'transform,opacity' });
+      }, { threshold: .25 });
     } }
   });
 })();

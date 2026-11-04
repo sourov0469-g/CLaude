@@ -250,6 +250,80 @@
       say.textContent = WHY[proj];
       if (!k.motion) start(); else k.io(rowsEl, function (en) { if (en.isIntersecting) start(); }, { threshold: .3 });
       foot(root, k);
+    } },
+    /* NEW VERSIONS · V4 "The house, annotated" (governing reference: Makhno Studio, the home as an explorable instrument).
+       Tap a part of a section drawing; the partners that usually fit are pinned to it by callout leaders [S0062, S1018]. */
+    4: { init: function (root, k) {
+      var fig = root.querySelector('.hs__fig'), draw = root.querySelector('.hs__draw'), marksEl = root.querySelector('.hs__marks'), tagsEl = root.querySelector('.hs__tags'),
+        lines = root.querySelector('.hs__lead-lines'), pick = root.querySelector('.hs__pick'), say = root.querySelector('.hs__say');
+      // the marks: each drawn part answers to one of the section's own project choices
+      var MK = [['kitchen', 'kitchen', 306, 452, 'The kitchen'], ['bath', 'bath', 572, 470, 'The bathroom'], ['floor', 'floor', 705, 550, 'The floors'],
+        ['roof', 'roof', 450, 228, 'The roof'], ['roofw', 'roof', 373, 378, 'A window or door'], ['shutter', 'hvac', 601, 364, 'Storm shutters'], ['hvac', 'hvac', 860, 519, 'The air conditioning']];
+      marksEl.innerHTML = MK.map(function (m, i) { return '<button type="button" class="hs__mk" data-i="' + i + '" data-p="' + m[1] + '" style="left:' + (m[2] / 10) + '%;top:' + ((m[3] - 120) / 4.7).toFixed(2) + '%" aria-label="' + m[4] + '"><i></i><span>' + m[4] + '</span></button>'; }).join('');
+      tagsEl.innerHTML = ORDER.map(function (id) {
+        var p = P[id];
+        return '<div class="hs__tag hs__tag--' + p.k + '" data-id="' + id + '"><p class="hs__tk">' + p.kind + '</p><p class="hs__tn">' + p.name + '</p>' +
+          '<p class="hs__tf"><span class="hs__tb nums">' + p.big + '</span><span class="hs__tu">' + p.unit + '</span></p><p class="hs__tr">Repaid: ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '</p><p class="hs__ts">' + p.src + '</p></div>';
+      }).join('');
+      pick.innerHTML = PROJ.map(function (x) { return '<button type="button" class="hs__pk" role="radio" aria-checked="false" tabindex="-1" data-p="' + x[0] + '">' + ic(x[2], 'fz-ic hs__pi') + '<span>' + x[1] + '</span></button>'; }).join('');
+      var mks = Array.prototype.slice.call(marksEl.children), tags = Array.prototype.slice.call(tagsEl.children), pks = Array.prototype.slice.call(pick.children), pts = root.querySelectorAll('.hs__pt');
+      k.add(function () { marksEl.innerHTML = ''; tagsEl.innerHTML = ''; pick.innerHTML = ''; lines.innerHTML = ''; say.textContent = ''; });
+
+      var proj = null, from = -1;
+      // which drawn parts light for each project, and where its leaders start
+      var PARTS = { kitchen: ['kitchen'], bath: ['bath'], floor: ['floor'], roof: ['roof', 'roofw'], hvac: ['hvac', 'shutter'], unsure: ['kitchen', 'bath', 'floor', 'roof', 'roofw', 'hvac', 'shutter'] };
+      function origin() {   // the mark the visitor touched, or the project's first mark; "not sure" starts from the middle of the house
+        var r = fig.getBoundingClientRect(), d = draw.getBoundingClientRect();
+        if (proj === 'unsure' || from < 0) { return [d.left - r.left + d.width * .45, d.top - r.top + d.height * .62]; }
+        var m = mks[from].getBoundingClientRect(); return [m.left - r.left + m.width / 2, m.top - r.top + m.height / 2];
+      }
+      function leaders(anim) {
+        var r = fig.getBoundingClientRect(); lines.setAttribute('viewBox', '0 0 ' + r.width + ' ' + r.height); lines.setAttribute('width', r.width); lines.setAttribute('height', r.height);
+        if (!proj) { lines.innerHTML = ''; return; }
+        var o = origin(), fit = ROUTES[proj], d = draw.getBoundingClientRect(), s = '';
+        tags.forEach(function (t) {
+          if (fit.indexOf(t.dataset.id) < 0) return;
+          var q = t.getBoundingClientRect(), side = q.left >= d.right - 4, tx = side ? q.left - r.left : q.left - r.left + q.width / 2, ty = side ? q.top - r.top + q.height / 2 : q.top - r.top;
+          var c = side ? [o[0] + (tx - o[0]) * .55, o[1], tx - (tx - o[0]) * .3, ty] : [o[0], o[1] + (ty - o[1]) * .55, tx, ty - (ty - o[1]) * .35];
+          s += '<path class="hs__ld hs__ld--' + P[t.dataset.id].k + '" d="M' + o[0].toFixed(1) + ' ' + o[1].toFixed(1) + ' C' + c.map(function (v) { return v.toFixed(1); }).join(' ') + ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + '"/><circle class="hs__dot" cx="' + tx.toFixed(1) + '" cy="' + ty.toFixed(1) + '" r="4.5"/>';
+        });
+        s += '<circle class="hs__src" cx="' + o[0].toFixed(1) + '" cy="' + o[1].toFixed(1) + '" r="6"/>';
+        lines.innerHTML = s;
+        if (anim && k.motion) gsap.fromTo(lines.querySelectorAll('.hs__ld'), { drawSVG: '0%' }, { drawSVG: '100%', duration: .7, ease: 'power2.out', stagger: .08, clearProps: 'strokeDasharray,strokeDashoffset' });
+      }
+      function choose(p, mi, anim) {
+        proj = p; from = mi == null ? MK.findIndex(function (m) { return m[1] === p; }) : mi;
+        var fit = ROUTES[p], lit = PARTS[p];
+        pts.forEach(function (g) { g.classList.toggle('is-on', lit.indexOf(g.dataset.p) > -1); });
+        mks.forEach(function (m, i) { m.classList.toggle('is-on', m.dataset.p === p); m.setAttribute('aria-pressed', m.dataset.p === p ? 'true' : 'false'); });
+        tags.forEach(function (t) { var on = fit.indexOf(t.dataset.id) > -1; t.classList.toggle('is-on', on); t.classList.toggle('is-off', !on); });
+        pks.forEach(function (b) { var on = b.dataset.p === p; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
+        say.textContent = WHY[p];
+        leaders(anim);
+        if (anim && k.motion) gsap.fromTo(tags.filter(function (t) { return t.classList.contains('is-on'); }), { x: 10 }, { x: 0, duration: .45, ease: 'power3.out', stagger: .06, clearProps: 'transform' });
+      }
+      mks.forEach(function (m, i) { k.on(m, 'click', function () { choose(m.dataset.p, i, true); }); });
+      pks.forEach(function (b, i) {
+        k.on(b, 'click', function () { choose(b.dataset.p, null, true); });
+        k.on(b, 'keydown', function (e) {
+          var n = pks.length, j = /Right|Down/.test(e.key) ? (i + 1) % n : /Left|Up/.test(e.key) ? (i + n - 1) % n : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : null;
+          if (j === null) return; e.preventDefault(); pks[j].focus(); choose(pks[j].dataset.p, null, true);
+        });
+      });
+      pks[0].tabIndex = 0;
+      say.textContent = 'Tap a part of the house, or choose below.';
+      k.ro(fig, function () { leaders(false); });
+      foot(root, k);
+      EZ.reveal(k, root.querySelectorAll('.hs__head > *, .hs__pick'));
+      if (!k.motion) return;
+      // arriving: the drawing is drawn in, line by line, then the marks appear [S0362]
+      var once = false;
+      k.io(draw, function (en) {
+        if (!en.isIntersecting || once) return; once = true;
+        var ps = draw.querySelectorAll('.hs__svg path:not(.hs__fill), .hs__svg circle, .hs__svg rect');
+        gsap.fromTo(ps, { drawSVG: '0%' }, { drawSVG: '100%', duration: 1.1, ease: 'power2.inOut', stagger: .015, clearProps: 'strokeDasharray,strokeDashoffset' });
+        gsap.fromTo(mks, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .45, ease: 'back.out(2)', stagger: .06, delay: .9, clearProps: 'transform,opacity' });
+      }, { threshold: .25 });
     } }
   });
 })();

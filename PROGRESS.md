@@ -672,3 +672,22 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Financing V4.
+
+## New versions, pass 3 · Financing V4 "The house, annotated" (2026-11-04)
+- **Muse accepted** How a job runs V4.
+- **One new version:** `financing` V4.
+  - V1 (two kinds of money) stays the default; V2 and V3 are untouched.
+  - It is reachable from the header switch or `?financing=4`.
+- **Governing reference:** Makhno Studio (the home as an explorable instrument).
+- **Style family:** an annotated architectural section drawing.
+- **Signature move:** the house, annotated.
+  - Point at the part of a drawn house (kitchen, bathroom, floors, roof or window, shutters or AC); it lights.
+  - The partners that usually fit are pinned to it by callout leaders, with their published figures and how each is repaid.
+- **Gate:** `GATE-NEW-Financing-V4.md`, self-scored 8.4 (D8 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/financing-v4/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Our Work V4.
