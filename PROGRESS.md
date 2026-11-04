@@ -633,3 +633,22 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - locks 0 fails; outside links 0; single file 0 errors.
 - **Pass 2 is complete:** all seven homepage sections carry a third version, and the defaults are unchanged.
 - Stopped for Muse's accept.
+
+## New versions, pass 3 · Hero V4 "The triptych" (2026-11-04)
+- **Muse accepted** pass 2 (Tell Us V3). The addendum governs until the owner stops it, so pass 3 begins in the same order.
+- **One new version:** `hero` V4.
+  - V1 (the opening) stays the default; V2 and V3 are untouched.
+  - It is reachable from the header switch or `?hero=4`.
+- **Governing reference:** Shed (interiors as chapters, parallax storytelling).
+- **Style family:** an interior triptych.
+- **Signature move:** the triptych.
+  - A paper slice with the headline, the call and the proof.
+  - Three of the firm's rooms as chapters (Kitchens, Bathrooms, Whole homes), one open at a time (transform only), each photograph at its own depth, each leading to its service page.
+- **Gate:** `GATE-NEW-Hero-V4.md`, self-scored 8.2 (D8 U8 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/hero-v4/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before How a job runs V4.

@@ -535,6 +535,90 @@
       .fromTo(root.querySelectorAll('.hv__br'), { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .7, stagger: .05, clearProps: 'transform,opacity' }, .15)
       .fromTo(root.querySelectorAll('.hv__h .rise'), { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .1)
       .fromTo(marksEl, { opacity: 0 }, { opacity: 1, duration: .4, clearProps: 'opacity' }, .8);
+  } },
+
+  /* NEW VERSIONS · Hero V4 "The triptych" (governing reference: Shed, interiors as chapters with parallax). A paper slice
+     with the headline and three room slices; one chapter open at a time. Slices are fixed in size and only slide
+     (transform), so opening never reflows; every photograph drifts at its own depth [S0062, S0083, S1018]. */
+  4: { init: function (root, k) {
+    var stage = root.querySelector('.ht__stage'), area = root.querySelector('.ht__rooms');
+    var P = (window.__DATA || {}).projects || [];
+    function title(key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; }
+    var C = [
+      { n: 'Kitchens', key: 'k-white-shaker', href: 'kitchens.html', go: 'See our kitchens' },
+      { n: 'Bathrooms', key: 'b-black-marble', href: 'bathrooms.html', go: 'See our bathrooms' },
+      { n: 'Whole homes', key: 'w-farmhouse', href: 'renovation.html', go: 'See whole-home renovation' }
+    ];
+    area.innerHTML = C.map(function (c, i) {
+      return '<div class="ht__s" data-i="' + i + '">' +
+        '<div class="ht__ph" aria-hidden="true"><img src="' + EZ.img(c.key) + '" alt="" decoding="async" draggable="false"></div>' +
+        '<button type="button" class="ht__tab" aria-pressed="false" aria-controls="ht-c' + i + '"><span class="ht__no nums">0' + (i + 1) + '</span><span class="ht__nm">' + c.n + '</span></button>' +
+        '<div class="ht__cap" id="ht-c' + i + '"><p class="ht__ct">' + c.n + '</p><p class="ht__cs">Our work: ' + title(c.key) + '</p>' +
+        '<a class="ht__go" href="' + c.href + '">' + c.go + '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>';
+    }).join('');
+    var ss = Array.prototype.slice.call(area.children), tabs = ss.map(function (s) { return s.querySelector('.ht__tab'); }), caps = ss.map(function (s) { return s.querySelector('.ht__cap'); }),
+      imgs = ss.map(function (s) { return s.querySelector('.ht__ph'); });
+    k.add(function () { area.innerHTML = ''; });
+
+    var G = { v: false, c: 96, O: 0, A: 0 }, cur = 0;
+    function fit() {
+      var r = area.getBoundingClientRect(); G.v = innerWidth < 900;
+      G.A = G.v ? r.height : r.width; G.c = G.v ? 64 : (r.width > 900 ? 128 : 100); G.O = G.A - 2 * G.c;
+      area.classList.toggle('is-v', G.v);
+      ss.forEach(function (s) { if (G.v) { s.style.width = '100%'; s.style.height = G.O + 'px'; } else { s.style.height = '100%'; s.style.width = G.O + 'px'; } });
+      place(false);
+    }
+    function pos(i) { return i * G.c + (i > cur ? G.O - G.c : 0); }
+    function place(anim) {
+      ss.forEach(function (s, i) {
+        var to = G.v ? { x: 0, y: pos(i) } : { x: pos(i), y: 0 };
+        if (anim && k.motion) gsap.to(s, { x: to.x, y: to.y, duration: .8, ease: 'power3.inOut', overwrite: 'auto' }); else gsap.set(s, to);
+      });
+    }
+    function open(i, anim) {
+      cur = i;
+      ss.forEach(function (s, j) { var on = j === i; s.classList.toggle('is-on', on); tabs[j].setAttribute('aria-pressed', on ? 'true' : 'false'); caps[j].inert = !on; });
+      place(anim);
+    }
+    k.ro(area, fit);
+
+    /* ---------- by hand: point (with a short intent delay), tap, focus, keys ---------- */
+    var intent = null, intentI = -1, lastP = { x: -1, y: -1 };
+    ss.forEach(function (s, i) {
+      // only a pointer that really moves opens a chapter: slices sliding under a resting pointer must not open themselves
+      k.on(s, 'pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var moved = Math.abs(e.clientX - lastP.x) + Math.abs(e.clientY - lastP.y) > 1; lastP.x = e.clientX; lastP.y = e.clientY;
+        if (!moved || i === cur || intentI === i) return; clearTimeout(intent); intentI = i; intent = setTimeout(function () { intentI = -1; open(i, true); }, 140);
+      });
+      k.on(s, 'pointerleave', function () { clearTimeout(intent); intentI = -1; });
+      k.on(tabs[i], 'click', function () { if (i !== cur) open(i, true); });
+      k.on(s, 'click', function (e) { if (e.target.closest('.ht__go, .ht__tab')) return; if (i !== cur) open(i, true); });
+      k.on(tabs[i], 'keydown', function (e) {
+        var j = /Right|Down/.test(e.key) ? (i + 1) % 3 : /Left|Up/.test(e.key) ? (i + 2) % 3 : e.key === 'Home' ? 0 : e.key === 'End' ? 2 : null;
+        if (j === null) return; e.preventDefault(); tabs[j].focus(); open(j, true);
+      });
+    });
+    k.add(function () { clearTimeout(intent); });
+
+    /* ---------- depth: each photograph drifts against the pointer and the scroll at its own rate [Shed: parallax] ---------- */
+    if (k.motion) {
+      var D = [1, .7, 1.25], px = 0, py = 0, sy = 0, raf = 0;
+      function drift() { raf = 0; imgs.forEach(function (im, i) { im.style.transform = 'translate3d(' + (px * D[i]).toFixed(1) + 'px,' + (py * D[i] + sy * D[i]).toFixed(1) + 'px,0)'; }); }
+      function req() { if (!raf) raf = requestAnimationFrame(drift); }
+      k.on(stage, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var r = stage.getBoundingClientRect(); px = -((e.clientX - r.left) / r.width - .5) * 22; py = -((e.clientY - r.top) / r.height - .5) * 14; req(); });
+      k.on(stage, 'pointerleave', function () { px = py = 0; req(); });
+      k.on(window, 'scroll', function () { var r = stage.getBoundingClientRect(); if (r.bottom < 0) return; sy = Math.max(-40, Math.min(40, -r.top * .08)); req(); });
+      k.add(function () { cancelAnimationFrame(raf); imgs.forEach(function (im) { im.style.transform = ''; }); });
+    }
+
+    fit(); open(0, false);
+    if (!k.motion) return;
+    /* ---------- the load beat: the headline rises, then the chapters are dealt in from the right ---------- */
+    var lt = gsap.timeline({ defaults: { ease: EZO } });
+    lt.fromTo(root.querySelectorAll('.ht__h .rise'), { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .05)
+      .fromTo(root.querySelectorAll('.ht__paper > :not(.ht__h)'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, stagger: .05, clearProps: 'opacity,transform' }, .3)
+      .fromTo(imgs.map(function (im) { return im.firstChild; }), { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 1.1, stagger: .12, clearProps: 'opacity,transform' }, .15);
   } }
   });
 })();

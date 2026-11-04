@@ -408,3 +408,66 @@
   .hv__tag { animation: none; }
   .hv__mk, .hv__mk i, .hv__x, .hv__room, .hv__b { transition: none; }
 }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Hero V4 "The triptych" — four tall slices: the paper slice with the headline, then three of the firm's
+   rooms as chapters (Shed: interiors as chapters, parallax). Slices are fixed in size and only slide [S0062]; the copy
+   stays on paper [S1425]. Phones: four horizontal bands.
+   ====================================================================================================================== */
+.ht { --ht-x: var(--s5); width: calc(100% + 2 * var(--ht-x)); max-width: none; margin: calc(var(--s4) * -1) calc(var(--ht-x) * -1) calc(var(--s5) * -1); }
+.ht__stage {
+  display: grid; grid-template-columns: clamp(380px, 34%, 520px) minmax(0, 1fr);
+  height: clamp(600px, calc(100svh - var(--nav-h, 68px)), 900px); background: var(--color-text);
+}
+.ht__paper {
+  position: relative; z-index: 2; display: grid; align-content: center; justify-items: start; gap: var(--s4);
+  padding: var(--s6) var(--s6) var(--s6) var(--s7, 48px); background: var(--color-bg);
+}
+.ht__paper .eyebrow { margin: 0; }
+.sec .ver.ht h1.ht__h { font-size: clamp(2.5rem, 1.4rem + 2.6vw, 4rem); }
+.ht__paper .hlead { max-width: 30ch; }
+
+.ht__rooms { position: relative; overflow: hidden; }
+.ht__s { position: absolute; left: 0; top: 0; overflow: hidden; background: var(--color-text); box-shadow: -18px 0 30px -18px rgba(0,0,0,.55); cursor: pointer; }
+.ht__s:nth-child(1) { z-index: 1; } .ht__s:nth-child(2) { z-index: 2; } .ht__s:nth-child(3) { z-index: 3; }
+.ht__ph { position: absolute; inset: -40px; will-change: transform; }
+.ht__ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 500ms var(--ez-out); }
+.ht__s:not(.is-on) .ht__ph img { filter: saturate(.55) brightness(.72); }
+/* the spine: an ink tab down the slice's leading edge, the chapter set upright */
+.ht__tab {
+  position: absolute; z-index: 2; left: 0; top: 0; bottom: 0; width: 48px; display: grid; grid-template-rows: auto 1fr; justify-items: center; gap: var(--s3);
+  padding: var(--s4) 0; border: 0; background: var(--color-text); color: var(--sand-50, #FCF8F5); cursor: pointer; font: inherit;
+}
+.ht__no { font: 600 .8125rem/1 var(--f-text); color: var(--clay-300, #ECB3A4); }
+.ht__nm { writing-mode: vertical-rl; transform: rotate(180deg); align-self: end; font: 600 1rem/1 var(--f-display); letter-spacing: .02em; white-space: nowrap; }
+.ht__s.is-on .ht__tab { background: var(--color-accent-solid); }
+.ht__s.is-on .ht__no { color: #fff; }
+.ht__tab:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: -3px; }
+/* the open chapter's caption: paper, never type on the photograph [S1425] */
+.ht__cap {
+  position: absolute; z-index: 2; left: calc(48px + var(--s5)); bottom: var(--s5); max-width: min(440px, calc(100% - 48px - 2 * var(--s5)));
+  display: grid; gap: 4px; padding: var(--s4) var(--s4) var(--s3); background: var(--color-bg); color: var(--color-text);
+  box-shadow: 0 20px 34px -20px rgba(0,0,0,.6); opacity: 0; transform: translateY(10px); transition: opacity 300ms var(--ez-out), transform 400ms var(--ez-out); pointer-events: none;
+}
+.ht__s.is-on .ht__cap { opacity: 1; transform: none; pointer-events: auto; transition-delay: 380ms; }
+.ht__ct { margin: 0; font: 600 1.375rem/1.15 var(--f-display); }
+.ht__cs { margin: 0; font: 400 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.ht__go { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 2px; font: 600 .9375rem/1 var(--f-text); color: var(--color-text); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.ht__go svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ez-out); }
+@media (hover: hover) and (pointer: fine) { .ht__go:hover svg { transform: translateX(4px); } .ht__s:not(.is-on):hover .ht__ph img { filter: saturate(.8) brightness(.85); } }
+.ht__go:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+
+@media (max-width: 1099px) { .ht__stage { grid-template-columns: clamp(340px, 40%, 420px) minmax(0, 1fr); } .ht__paper { padding: var(--s5); } }
+@media (max-width: 899px) {
+  .ht { --ht-x: var(--s4); }
+  .ht__stage { grid-template-columns: 1fr; grid-template-rows: auto clamp(420px, 62svh, 560px); height: auto; }
+  .ht__paper { padding: var(--s5) var(--s4) var(--s5); }
+  /* the slices become horizontal bands; the spine runs along the top edge */
+  .ht__rooms.is-v .ht__tab { right: 0; bottom: auto; width: auto; height: 48px; grid-template-rows: none; grid-template-columns: auto 1fr; align-items: center; justify-items: start; padding: 0 var(--s4); gap: var(--s3); }
+  .ht__rooms.is-v .ht__nm { writing-mode: horizontal-tb; transform: none; align-self: center; }
+  .ht__rooms.is-v .ht__s { box-shadow: 0 -14px 24px -16px rgba(0,0,0,.55); }
+  .ht__rooms.is-v .ht__cap { left: var(--s3); right: var(--s3); bottom: var(--s3); max-width: none; padding: var(--s3); }
+  .ht__ct { font-size: 1.125rem; }
+}
+@media (max-width: 599px) { .ht__paper .hero__acts { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .ht__cap, .ht__ph img, .ht__go svg { transition: none; } .ht__s.is-on .ht__cap { transition-delay: 0s; } }

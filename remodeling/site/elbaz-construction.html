@@ -1465,6 +1465,65 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
 
+.ht { --ht-x: var(--s5); width: calc(100% + 2 * var(--ht-x)); max-width: none; margin: calc(var(--s4) * -1) calc(var(--ht-x) * -1) calc(var(--s5) * -1); }
+.ht__stage {
+  display: grid; grid-template-columns: clamp(380px, 34%, 520px) minmax(0, 1fr);
+  height: clamp(600px, calc(100svh - var(--nav-h, 68px)), 900px); background: var(--color-text);
+}
+.ht__paper {
+  position: relative; z-index: 2; display: grid; align-content: center; justify-items: start; gap: var(--s4);
+  padding: var(--s6) var(--s6) var(--s6) var(--s7, 48px); background: var(--color-bg);
+}
+.ht__paper .eyebrow { margin: 0; }
+.sec .ver.ht h1.ht__h { font-size: clamp(2.5rem, 1.4rem + 2.6vw, 4rem); }
+.ht__paper .hlead { max-width: 30ch; }
+
+.ht__rooms { position: relative; overflow: hidden; }
+.ht__s { position: absolute; left: 0; top: 0; overflow: hidden; background: var(--color-text); box-shadow: -18px 0 30px -18px rgba(0,0,0,.55); cursor: pointer; }
+.ht__s:nth-child(1) { z-index: 1; } .ht__s:nth-child(2) { z-index: 2; } .ht__s:nth-child(3) { z-index: 3; }
+.ht__ph { position: absolute; inset: -40px; will-change: transform; }
+.ht__ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 500ms var(--ez-out); }
+.ht__s:not(.is-on) .ht__ph img { filter: saturate(.55) brightness(.72); }
+
+.ht__tab {
+  position: absolute; z-index: 2; left: 0; top: 0; bottom: 0; width: 48px; display: grid; grid-template-rows: auto 1fr; justify-items: center; gap: var(--s3);
+  padding: var(--s4) 0; border: 0; background: var(--color-text); color: var(--sand-50, #FCF8F5); cursor: pointer; font: inherit;
+}
+.ht__no { font: 600 .8125rem/1 var(--f-text); color: var(--clay-300, #ECB3A4); }
+.ht__nm { writing-mode: vertical-rl; transform: rotate(180deg); align-self: end; font: 600 1rem/1 var(--f-display); letter-spacing: .02em; white-space: nowrap; }
+.ht__s.is-on .ht__tab { background: var(--color-accent-solid); }
+.ht__s.is-on .ht__no { color: #fff; }
+.ht__tab:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: -3px; }
+
+.ht__cap {
+  position: absolute; z-index: 2; left: calc(48px + var(--s5)); bottom: var(--s5); max-width: min(440px, calc(100% - 48px - 2 * var(--s5)));
+  display: grid; gap: 4px; padding: var(--s4) var(--s4) var(--s3); background: var(--color-bg); color: var(--color-text);
+  box-shadow: 0 20px 34px -20px rgba(0,0,0,.6); opacity: 0; transform: translateY(10px); transition: opacity 300ms var(--ez-out), transform 400ms var(--ez-out); pointer-events: none;
+}
+.ht__s.is-on .ht__cap { opacity: 1; transform: none; pointer-events: auto; transition-delay: 380ms; }
+.ht__ct { margin: 0; font: 600 1.375rem/1.15 var(--f-display); }
+.ht__cs { margin: 0; font: 400 .875rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+.ht__go { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 2px; font: 600 .9375rem/1 var(--f-text); color: var(--color-text); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.ht__go svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ez-out); }
+@media (hover: hover) and (pointer: fine) { .ht__go:hover svg { transform: translateX(4px); } .ht__s:not(.is-on):hover .ht__ph img { filter: saturate(.8) brightness(.85); } }
+.ht__go:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+
+@media (max-width: 1099px) { .ht__stage { grid-template-columns: clamp(340px, 40%, 420px) minmax(0, 1fr); } .ht__paper { padding: var(--s5); } }
+@media (max-width: 899px) {
+  .ht { --ht-x: var(--s4); }
+  .ht__stage { grid-template-columns: 1fr; grid-template-rows: auto clamp(420px, 62svh, 560px); height: auto; }
+  .ht__paper { padding: var(--s5) var(--s4) var(--s5); }
+  
+  .ht__rooms.is-v .ht__tab { right: 0; bottom: auto; width: auto; height: 48px; grid-template-rows: none; grid-template-columns: auto 1fr; align-items: center; justify-items: start; padding: 0 var(--s4); gap: var(--s3); }
+  .ht__rooms.is-v .ht__nm { writing-mode: horizontal-tb; transform: none; align-self: center; }
+  .ht__rooms.is-v .ht__s { box-shadow: 0 -14px 24px -16px rgba(0,0,0,.55); }
+  .ht__rooms.is-v .ht__cap { left: var(--s3); right: var(--s3); bottom: var(--s3); max-width: none; padding: var(--s3); }
+  .ht__ct { font-size: 1.125rem; }
+}
+@media (max-width: 599px) { .ht__paper .hero__acts { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .ht__cap, .ht__ph img, .ht__go svg { transition: none; } .ht__s.is-on .ht__cap { transition-delay: 0s; } }
+
+
 .pf__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s5) var(--s8); }
 .pf__head .eyebrow { margin: 0 0 var(--s3); }
 .pf__head .t-head { margin: 0; }
@@ -3485,6 +3544,24 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
           <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
         </div>
       </div>
+    </div>
+  </div>
+
+  
+  <div class="ver ht" data-v="4">
+    <div class="ht__stage">
+      <div class="ht__paper">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Design, permits and construction under one contract</p>
+        <h1 class="hh ht__h" id="hero-h-4"><span class="ln"><span class="rise">Built properly.</span></span> <span class="ln hh__a"><span class="rise">Permitted correctly.</span></span></h1>
+        <p class="t-lead hlead">Kitchens, bathrooms and whole homes across Miami&#8209;Dade, Broward and Palm Beach.</p>
+        <div class="hero__acts">
+          <a class="btn hero__cta" href="#consult"><span class="btn__label">Book a consultation</span></a>
+          <a class="link hero__tel nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>
+        </div>
+        <p class="hproof"><a href="#reviews"><span class="hproof__star" aria-hidden="true">&#9733;</span><span class="nums">4.8</span>&thinsp;&middot; <span class="nums">343</span> Google reviews</a></p>
+        <p class="hlic">Licensed, bonded &amp; insured &middot; <span class="nums">CBC1265280</span></p>
+      </div>
+      <div class="ht__rooms" role="group" aria-label="Our work, three chapters"></div>
     </div>
   </div>
 </section>
@@ -6953,6 +7030,90 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       .fromTo(root.querySelectorAll('.hv__br'), { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .7, stagger: .05, clearProps: 'transform,opacity' }, .15)
       .fromTo(root.querySelectorAll('.hv__h .rise'), { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .1)
       .fromTo(marksEl, { opacity: 0 }, { opacity: 1, duration: .4, clearProps: 'opacity' }, .8);
+  } },
+
+  /* NEW VERSIONS · Hero V4 "The triptych" (governing reference: Shed, interiors as chapters with parallax). A paper slice
+     with the headline and three room slices; one chapter open at a time. Slices are fixed in size and only slide
+     (transform), so opening never reflows; every photograph drifts at its own depth [S0062, S0083, S1018]. */
+  4: { init: function (root, k) {
+    var stage = root.querySelector('.ht__stage'), area = root.querySelector('.ht__rooms');
+    var P = (window.__DATA || {}).projects || [];
+    function title(key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; }
+    var C = [
+      { n: 'Kitchens', key: 'k-white-shaker', href: 'kitchens.html', go: 'See our kitchens' },
+      { n: 'Bathrooms', key: 'b-black-marble', href: 'bathrooms.html', go: 'See our bathrooms' },
+      { n: 'Whole homes', key: 'w-farmhouse', href: 'renovation.html', go: 'See whole-home renovation' }
+    ];
+    area.innerHTML = C.map(function (c, i) {
+      return '<div class="ht__s" data-i="' + i + '">' +
+        '<div class="ht__ph" aria-hidden="true"><img src="' + EZ.img(c.key) + '" alt="" decoding="async" draggable="false"></div>' +
+        '<button type="button" class="ht__tab" aria-pressed="false" aria-controls="ht-c' + i + '"><span class="ht__no nums">0' + (i + 1) + '</span><span class="ht__nm">' + c.n + '</span></button>' +
+        '<div class="ht__cap" id="ht-c' + i + '"><p class="ht__ct">' + c.n + '</p><p class="ht__cs">Our work: ' + title(c.key) + '</p>' +
+        '<a class="ht__go" href="' + c.href + '">' + c.go + '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div>';
+    }).join('');
+    var ss = Array.prototype.slice.call(area.children), tabs = ss.map(function (s) { return s.querySelector('.ht__tab'); }), caps = ss.map(function (s) { return s.querySelector('.ht__cap'); }),
+      imgs = ss.map(function (s) { return s.querySelector('.ht__ph'); });
+    k.add(function () { area.innerHTML = ''; });
+
+    var G = { v: false, c: 96, O: 0, A: 0 }, cur = 0;
+    function fit() {
+      var r = area.getBoundingClientRect(); G.v = innerWidth < 900;
+      G.A = G.v ? r.height : r.width; G.c = G.v ? 64 : (r.width > 900 ? 128 : 100); G.O = G.A - 2 * G.c;
+      area.classList.toggle('is-v', G.v);
+      ss.forEach(function (s) { if (G.v) { s.style.width = '100%'; s.style.height = G.O + 'px'; } else { s.style.height = '100%'; s.style.width = G.O + 'px'; } });
+      place(false);
+    }
+    function pos(i) { return i * G.c + (i > cur ? G.O - G.c : 0); }
+    function place(anim) {
+      ss.forEach(function (s, i) {
+        var to = G.v ? { x: 0, y: pos(i) } : { x: pos(i), y: 0 };
+        if (anim && k.motion) gsap.to(s, { x: to.x, y: to.y, duration: .8, ease: 'power3.inOut', overwrite: 'auto' }); else gsap.set(s, to);
+      });
+    }
+    function open(i, anim) {
+      cur = i;
+      ss.forEach(function (s, j) { var on = j === i; s.classList.toggle('is-on', on); tabs[j].setAttribute('aria-pressed', on ? 'true' : 'false'); caps[j].inert = !on; });
+      place(anim);
+    }
+    k.ro(area, fit);
+
+    /* ---------- by hand: point (with a short intent delay), tap, focus, keys ---------- */
+    var intent = null, intentI = -1, lastP = { x: -1, y: -1 };
+    ss.forEach(function (s, i) {
+      // only a pointer that really moves opens a chapter: slices sliding under a resting pointer must not open themselves
+      k.on(s, 'pointermove', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        var moved = Math.abs(e.clientX - lastP.x) + Math.abs(e.clientY - lastP.y) > 1; lastP.x = e.clientX; lastP.y = e.clientY;
+        if (!moved || i === cur || intentI === i) return; clearTimeout(intent); intentI = i; intent = setTimeout(function () { intentI = -1; open(i, true); }, 140);
+      });
+      k.on(s, 'pointerleave', function () { clearTimeout(intent); intentI = -1; });
+      k.on(tabs[i], 'click', function () { if (i !== cur) open(i, true); });
+      k.on(s, 'click', function (e) { if (e.target.closest('.ht__go, .ht__tab')) return; if (i !== cur) open(i, true); });
+      k.on(tabs[i], 'keydown', function (e) {
+        var j = /Right|Down/.test(e.key) ? (i + 1) % 3 : /Left|Up/.test(e.key) ? (i + 2) % 3 : e.key === 'Home' ? 0 : e.key === 'End' ? 2 : null;
+        if (j === null) return; e.preventDefault(); tabs[j].focus(); open(j, true);
+      });
+    });
+    k.add(function () { clearTimeout(intent); });
+
+    /* ---------- depth: each photograph drifts against the pointer and the scroll at its own rate [Shed: parallax] ---------- */
+    if (k.motion) {
+      var D = [1, .7, 1.25], px = 0, py = 0, sy = 0, raf = 0;
+      function drift() { raf = 0; imgs.forEach(function (im, i) { im.style.transform = 'translate3d(' + (px * D[i]).toFixed(1) + 'px,' + (py * D[i] + sy * D[i]).toFixed(1) + 'px,0)'; }); }
+      function req() { if (!raf) raf = requestAnimationFrame(drift); }
+      k.on(stage, 'pointermove', function (e) { if (e.pointerType !== 'mouse') return; var r = stage.getBoundingClientRect(); px = -((e.clientX - r.left) / r.width - .5) * 22; py = -((e.clientY - r.top) / r.height - .5) * 14; req(); });
+      k.on(stage, 'pointerleave', function () { px = py = 0; req(); });
+      k.on(window, 'scroll', function () { var r = stage.getBoundingClientRect(); if (r.bottom < 0) return; sy = Math.max(-40, Math.min(40, -r.top * .08)); req(); });
+      k.add(function () { cancelAnimationFrame(raf); imgs.forEach(function (im) { im.style.transform = ''; }); });
+    }
+
+    fit(); open(0, false);
+    if (!k.motion) return;
+    /* ---------- the load beat: the headline rises, then the chapters are dealt in from the right ---------- */
+    var lt = gsap.timeline({ defaults: { ease: EZO } });
+    lt.fromTo(root.querySelectorAll('.ht__h .rise'), { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .05)
+      .fromTo(root.querySelectorAll('.ht__paper > :not(.ht__h)'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, stagger: .05, clearProps: 'opacity,transform' }, .3)
+      .fromTo(imgs.map(function (im) { return im.firstChild; }), { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 1.1, stagger: .12, clearProps: 'opacity,transform' }, .15);
   } }
   });
 })();
