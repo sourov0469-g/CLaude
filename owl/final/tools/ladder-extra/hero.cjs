@@ -49,5 +49,18 @@ module.exports = {
     rec('Make It Pour turns the storm on', await p.evaluate(S => document.querySelector(S + ' .pour').getAttribute('aria-pressed') === 'true', S));
     await p.waitForTimeout(6300);
     rec('the storm eases off by itself after six seconds', await p.evaluate(S => document.querySelector(S + ' .pour').getAttribute('aria-pressed') === 'false', S));
+  },
+  '12': async (p, S, rec) => {
+    await p.waitForTimeout(2600);
+    rec('the Owl has risen and opened its wings round the home; the ring is drawn', await p.evaluate(S => { const a = document.querySelector(S + ' .art'); return a.classList.contains('open') && +getComputedStyle(document.querySelector(S + ' .owl')).opacity === 1 && getComputedStyle(document.querySelector(S + ' .ring path')).strokeDashoffset.replace('px', '') * 1 === 0; }, S));
+    rec('the home is a real photo in a round frame, with an honest alt and no caption', await p.evaluate(S => { const ph = document.querySelector(S + ' .med .ph'); return getComputedStyle(ph).borderRadius === '50%' && /two-storey family home with a brown shingle roof/.test(ph.querySelector('img').alt) && !document.querySelector(S + ' figcaption'); }, S));
+    rec('the medallion sits in front of the Owl, centred under the title on desktop', await p.evaluate(S => { const m = document.querySelector(S + ' .med').getBoundingClientRect(), h = document.querySelector(S + ' .h1').getBoundingClientRect(); return Math.abs((m.left + m.width / 2) - (h.left + h.width / 2)) < 30; }, S));
+    const b = await p.evaluate(S => { const r = document.querySelector(S + ' .med').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, S);
+    await p.mouse.move(b[0], b[1], { steps: 6 }); await p.waitForTimeout(700);
+    rec('pointing at the home makes the Owl lean in', await p.evaluate(S => document.querySelector(S + ' .art').classList.contains('leaning') && getComputedStyle(document.querySelector(S + ' .lean')).transform !== 'none', S));
+    await p.mouse.move(b[0] + 300, b[1] - 200, { steps: 6 }); await p.waitForTimeout(500);
+    rec('the planes drift with the pointer (depth)', await p.evaluate(S => +document.querySelector(S + ' .stage').style.getPropertyValue('--px') !== 0, S));
+    rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
+    rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-tab').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };

@@ -1,0 +1,94 @@
+<section class="sec hero12" aria-labelledby="h12-a">
+<style>
+.hero12{overflow:hidden;padding-top:clamp(14px,2vw,28px);padding-bottom:clamp(30px,3.6vw,56px)}
+.hero12 .top{text-align:center;max-width:1000px;margin-inline:auto;position:relative;z-index:3}
+.hero12 .eyebrow{display:inline-flex;align-items:center;gap:12px;margin:0;font-weight:600;font-size:16px;color:var(--ink-70)}
+.hero12 .eyebrow svg{width:56px;height:10px;flex:none;overflow:visible}
+.hero12 .eyebrow path{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s cubic-bezier(.77,0,.175,1) .4s}
+.hero12.go .eyebrow path{stroke-dashoffset:0}
+.hero12 .h1{font-size:clamp(36px,4.4vw,64px);margin-top:6px;text-wrap:balance}
+.hero12 .lede{margin:8px auto 0;max-width:62ch;text-wrap:balance}
+.hero12 .stage{position:relative;width:min(100%,760px);margin:clamp(10px,1.4vw,22px) auto 0;--px:0;--py:0}
+.hero12 .art{position:relative;aspect-ratio:1180/810;transform:translateX(-9.3%)}
+.hero12 .plane{position:absolute;inset:0;transition:transform .9s cubic-bezier(.22,1,.36,1)}
+.hero12 .back{transform:translate3d(calc(var(--px) * -10px),calc(var(--py) * -6px),0)}
+.hero12 .mid{transform:translate3d(calc(var(--px) * 6px),calc(var(--py) * 4px),0)}
+.hero12 .front{transform:translate3d(calc(var(--px) * 16px),calc(var(--py) * 9px),0);pointer-events:none}
+.hero12 .glow{position:absolute;left:40%;width:40%;top:66%;height:36%;border-radius:50%;background:radial-gradient(closest-side,rgba(234,162,33,.34),rgba(234,162,33,0));filter:blur(4px)}
+.hero12 .lean{position:absolute;inset:0;transform-origin:59% 80%;transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+.hero12 .leaning .lean{transform:translateY(-1.6%) scale(1.025)}
+.hero12 .owl{position:absolute;left:0;top:0;width:100%;height:auto;transform-origin:59% 85%;transform:translateY(16%) scale(.84);opacity:0;transition:transform 1.15s cubic-bezier(.2,.9,.25,1.15) .25s,opacity .5s .25s;filter:drop-shadow(0 16px 14px rgba(23,17,29,.22))}
+.hero12 .open .owl{transform:none;opacity:1}
+.hero12 .owl.breathe{animation:h12b 6.5s ease-in-out infinite}
+@keyframes h12b{50%{translate:0 -3px;scale:1.006}}
+.hero12 .med{position:absolute;left:39.4%;top:40.1%;width:39.8%;aspect-ratio:1;pointer-events:auto}
+.hero12 .med .ph{position:absolute;inset:4.5%;border-radius:50%;overflow:hidden;background:#FFFDF7;box-shadow:0 0 0 9px #FFFDF7,0 30px 50px -26px rgba(23,17,29,.6)}
+.hero12 .med img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.14);transition:transform 1.8s cubic-bezier(.22,.61,.36,1),filter .5s}
+.hero12 .open .med img{transform:scale(1)}
+.hero12 .leaning .med img{filter:brightness(1.05) saturate(1.06)}
+.hero12 .ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hero12 .ring path{fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.65,0,.35,1)}
+.hero12 .open .ring path{stroke-dashoffset:0}
+.hero12 .ctas{position:absolute;inset:auto -14% 3% -14%;display:flex;justify-content:space-between;align-items:end;gap:16px;z-index:4;pointer-events:none}
+.hero12 .ctas a{pointer-events:auto;width:min(300px,33%)}
+.hero12 .ctas .t-face{white-space:nowrap;padding:0 22px}
+.hero12 .ctas .btn-tab svg{width:20px;height:20px}
+.hero12 .ctas .btn{min-height:60px;font-size:18px}
+.hero12 .trust{margin-top:clamp(18px,2.4vw,30px)}
+@media (max-width:1100px){.hero12 .ctas{position:static;flex-direction:column;align-items:stretch;gap:22px;margin-top:14px}.hero12 .ctas a{width:100%}}
+@media (max-width:600px){.hero12 .art{transform:none}.hero12 .eyebrow svg{display:none}}
+@media (prefers-reduced-motion:reduce){.hero12 .plane,.hero12 .lean,.hero12 .owl,.hero12 .med img{transition:none}.hero12 .owl.breathe{animation:none}.hero12 .ring path,.hero12 .eyebrow path{stroke-dashoffset:0;transition:none}}
+</style>
+<div class="wrap">
+ <div class="top">
+  <p class="eyebrow"><svg viewBox="0 0 56 10" aria-hidden="true"><path pathLength="1" d="M2 6 C14 1, 26 9, 38 4 S52 5, 54 4"/></svg>Family-owned roofers in Shoreview, Minnesota</p>
+  <h1 class="h1" id="h12-a">We Give a Hoot About Your Roof</h1>
+  <p class="lede">Under our wing, your nest is safe. Leaks, storm damage, new roofs: done properly.</p>
+ </div>
+ <div class="stage">
+  <div class="art">
+   <div class="plane back" aria-hidden="true"><div class="glow"></div></div>
+   <div class="plane mid"><div class="lean"><img class="owl" src="{{A:owl-perch.webp}}" alt="A great horned owl opens its wings around a picture of a family home" width="1180" height="703"></div></div>
+   <div class="plane front">
+    <div class="med" data-owl="say:Your home, held">
+     <div class="ph"><img src="{{A:hero-nest-home.webp}}" alt="A two-storey family home with a brown shingle roof" width="720" height="720"></div>
+     <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+      <path pathLength="1" d="M50 1.6A48.4 48.4 0 1 1 49.9 1.6" stroke="#EAA221" stroke-width="1.1"/>
+      <path pathLength="1" d="M50 .2C78 .4 99.6 22 99.5 50 99.3 78 77.6 99.6 50 99.6 22 99.6 .5 78 .4 50 .5 23 22 .4 47 .3" stroke="#8C6A3A" stroke-width=".7" opacity=".85" style="transition-delay:.15s"/>
+      <path pathLength="1" d="M51 99.1C24 99.4 1.4 78 1 50.5 .8 23 22.6.9 50.5.8 78 .7 99 23 99 49 98.9 76 78.5 98 55 99" stroke="#6B4E2E" stroke-width=".55" opacity=".7" style="transition-delay:.3s"/>
+     </svg>
+    </div>
+   </div>
+  </div>
+  <div class="ctas">
+   <a class="btn-tab" href="#book" data-owl="hoot"><span class="t-under" aria-hidden="true"></span><span class="t-face">Get My Roof Checked<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+   <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a>
+  </div>
+ </div>
+ <div class="trust" role="list">
+  <span class="stars" role="listitem" aria-label="Five stars"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span>
+  <span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">Founded 2025</span>
+ </div>
+</div>
+<script>
+OWL.reg('hero','12',function(root){
+  /* one idea: the Owl rises behind a real home and wraps its wings round it; the home is held */
+  var sec = root.querySelector('section'), stage = root.querySelector('.stage'), art = root.querySelector('.art'), owl = root.querySelector('.owl'), med = root.querySelector('.med'), h1 = root.querySelector('.h1');
+  OWL.split(h1, 110); OWL.reveal(h1); requestAnimationFrame(function(){ sec.classList.add('go'); });
+  function open(){ art.classList.add('open'); if (!OWL.reduce) setTimeout(function(){ owl.classList.add('breathe'); }, 1500); }
+  if (OWL.reduce) open(); else setTimeout(open, 450);
+  /* the Owl leans in when the home is pointed at or tapped */
+  function lean(on){ art.classList.toggle('leaning', on); }
+  med.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') lean(true); });
+  med.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse') lean(false); });
+  med.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse'){ lean(true); setTimeout(function(){ lean(false); }, 900); } });
+  /* depth: three planes drift with the pointer (V2) */
+  if (OWL.fine && !OWL.reduce){ var raf = 0, tx = 0, ty = 0;
+    stage.addEventListener('pointermove', function(e){ var r = stage.getBoundingClientRect(); tx = ((e.clientX - r.left)/r.width - .5)*2; ty = ((e.clientY - r.top)/r.height - .5)*2;
+      if (!raf) raf = requestAnimationFrame(function(){ raf = 0; stage.style.setProperty('--px', tx.toFixed(3)); stage.style.setProperty('--py', ty.toFixed(3)); }); });
+    stage.addEventListener('pointerleave', function(){ stage.style.setProperty('--px', 0); stage.style.setProperty('--py', 0); }); }
+});
+</script>
+</section>

@@ -1,0 +1,139 @@
+[
+ {
+  "sec": "hero",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 12
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "We Give a Hoot About Your Roof"
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "the Owl has risen and opened its wings round the home; the ring is drawn",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "the home is a real photo in a round frame, with an honest alt and no caption",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "the medallion sits in front of the Owl, centred under the title on desktop",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "pointing at the home makes the Owl lean in",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "the planes drift with the pointer (depth)",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "both calls to action sit in the first screen at 1440×900",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "the two calls to action: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "hero",
+  "v": "12",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

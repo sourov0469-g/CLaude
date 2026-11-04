@@ -15,4 +15,5 @@
 - The fourth ladder pass is **paused after L30**: Hero, Video and Explore at 10; Wise, Protect, Services, Reviews, Area, Family and Booking at 9. No ladder version was in flight. The subpages and the earlier new-versions cycle follow this pass.
 - Real-photo hero pack, batch 1 (5 images plus manifest), stored in `owl/assets/source/hero-pack/`. Batch 2 is pending.
 - **Hero 11 · "Under Our Wing"** (merges V1 and V2, with a real photo): gated, 8.74, checks 21/21. Hero now has 11; next is Hero 12.
+- **Hero 12 · "Wrapped in Wings"** (the second merge of V1 and V2: a centred medallion with the Owl hugging a real home): gated, 8.76, checks 21/21. Hero now has 12; next is Hero 13.
 - Hero pack batch 2 (5 images) stored in `owl/assets/source/hero-pack/`, with arrival notes. Two images (crew-install-wide-1, storm-damage-roof-2) are flagged as possibly AI-looking and held back from hero use until checked. The aerial arrived at 2000×1500, not 3000×2250. Waiting on Muse's accept of Hero 11 before Hero 12.
