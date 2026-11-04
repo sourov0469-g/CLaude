@@ -92,5 +92,28 @@ module.exports = {
     rec('labelled: "Photos are illustrative, except our crew."', /Photos are illustrative, except our crew\./.test(txt));
     rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
     rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
+  },
+  '11': async (p, S, rec, txt) => {
+    await p.evaluate(S => document.querySelector(S).scrollIntoView({ block: 'start', behavior: 'instant' }), S); await p.waitForTimeout(2400);
+    const st = () => p.evaluate(S => { const r = document.querySelector(S); return { clear: r.dataset.clear, wiped: +r.dataset.wiped, gone: r.querySelector('.fog').classList.contains('gone'), done: r.querySelector('.ctr').classList.contains('done'), hint: !r.querySelector('.hint').classList.contains('gone'), btn: r.querySelector('.aux button').textContent, msg: r.querySelector(r.querySelector('.ctr').classList.contains('done') ? '.msg .b' : '.msg .a').textContent.trim() }; }, S);
+    let s = await st();
+    rec('starts fogged: the window is covered, "Wipe the window with your finger or mouse.", "Wipe here" shown, "Clear it for me" offered', s.clear === 'no' && !s.gone && !s.done && s.hint && s.msg === 'Wipe the window with your finger or mouse.' && s.btn === 'Clear it for me' && await p.evaluate(S => { const c = document.querySelector(S + ' .fog'); return c.width > 300 && c.height > 100; }, S));
+    rec('the demo stroke wiped a little of the window by itself, without clearing it', s.wiped > 2 && s.wiped < 40);
+    const bb = await p.locator(S + ' .pane').boundingBox(), w0 = s.wiped;
+    await p.mouse.move(bb.x + bb.width * .1, bb.y + bb.height * .25); await p.mouse.move(bb.x + bb.width * .6, bb.y + bb.height * .25, { steps: 12 }); s = await st();
+    rec('moving the mouse over the window wipes it (no press needed); the hint goes', s.wiped > w0 && !s.hint && s.clear === 'no');
+    for (let row = 0; row < 7; row++) { const y = bb.y + bb.height * (.06 + row * .15); await p.mouse.move(bb.x + 4, y); await p.mouse.move(bb.x + bb.width - 4, y, { steps: 18 }); }
+    await p.mouse.move(2, 2); await p.waitForTimeout(1100); s = await st();
+    rec('past about 55 % the rest of the fog lifts: "Now you can see it." with the Wise Check line', s.clear === 'yes' && s.gone && s.done && /^Now you can see it\./.test(s.msg) && /we check the roof and the attic, and show you photos and video of what we saw/.test(s.msg) && await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .fog')).opacity === '0', S));
+    await p.click(S + ' .aux button'); await p.waitForTimeout(300); s = await st();
+    rec('"Fog it up again" puts the fog back', s.clear === 'no' && !s.gone && s.wiped === 0 && s.btn === 'Clear it for me');
+    await p.focus(S + ' .aux button'); await p.keyboard.press('Enter'); await p.waitForTimeout(300); s = await st();
+    rec('keyboard: "Clear it for me" clears it without wiping', s.clear === 'yes' && s.done && s.btn === 'Fog it up again');
+    rec('touch: sideways strokes wipe, up-and-down swipes still scroll the page (touch-action: pan-y)', await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .pane')).touchAction === 'pan-y', S));
+    rec('the window has a spoken description; the fog canvas is hidden from screen readers', await p.evaluate(S => { const pn = document.querySelector(S + ' .pane'); return pn.getAttribute('role') === 'img' && /fogged-up window/.test(pn.getAttribute('aria-label')) && document.querySelector(S + ' .fog').getAttribute('aria-hidden') === 'true'; }, S));
+    rec('Wise Check facts only: roof, attic, photos and video; no price, "free" or timing', await p.evaluate(S => { const t = document.querySelector(S).textContent; return /the attic/.test(t) && /photos and video/.test(t) && !/\bfree\b|\$\s?\d|no cost|no charge|\bminutes?\b|\bhours?\b|same.day/i.test(t); }, S));
+    rec('labelled: "Illustrative photo"', await p.evaluate(S => /Illustrative photo/.test(document.querySelector(S + ' .lab').textContent), S));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
+    rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
   }
 };

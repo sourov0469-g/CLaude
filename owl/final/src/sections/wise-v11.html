@@ -1,0 +1,107 @@
+<section class="sec wise11" id="wise-11" aria-labelledby="wc11-h">
+<style>
+.wise11{overflow:hidden}
+.wise11 .ctr{max-width:1120px;margin:0 auto}
+.wise11 .hd{text-align:center}
+.wise11 .lede{margin:10px auto 0;max-width:44ch;font-size:17px}
+.wise11 .pane{position:relative;margin-top:clamp(22px,3vw,36px);aspect-ratio:16/7;overflow:hidden;border-radius:28px;background:#DCD6CB;box-shadow:0 36px 56px -40px rgba(23,17,29,.6),inset 0 0 0 1px rgba(23,17,29,.06);touch-action:pan-y;cursor:crosshair;user-select:none;-webkit-user-select:none}
+.wise11 .pane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block;pointer-events:none}
+.wise11 .fog{position:absolute;inset:0;width:100%;height:100%;transition:opacity .9s ease}
+.wise11 .fog.gone{opacity:0}
+.wise11 .hint{position:absolute;left:50%;top:50%;translate:-50% -50%;display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;background:rgba(23,17,29,.86);color:#F1EFE6;font-size:16px;font-weight:800;pointer-events:none;transition:opacity .35s}
+.wise11 .hint svg{width:22px;height:22px;animation:wc11w 1.6s ease-in-out infinite}
+@keyframes wc11w{0%,100%{translate:-5px 0;rotate:-8deg}50%{translate:5px 0;rotate:8deg}}
+.wise11 .hint.gone{opacity:0}
+.wise11 .ok{position:absolute;left:18px;top:18px;padding:7px 14px;border-radius:999px;background:rgba(255,253,247,.94);color:#17111D;font-size:14px;font-weight:800;opacity:0;translate:0 -8px;transition:opacity .4s .5s,translate .5s cubic-bezier(.3,1.4,.5,1) .5s;box-shadow:0 6px 12px -8px rgba(23,17,29,.5)}
+.wise11 .done .ok{opacity:1;translate:none}
+.wise11 .lab{position:absolute;right:16px;bottom:12px;padding:3px 9px;border-radius:999px;background:rgba(255,253,247,.85);font-size:12px;font-weight:700;color:#17111D}
+.wise11 .row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,56px);align-items:center;margin-top:clamp(22px,3vw,32px)}
+.wise11 .msg{position:relative;min-height:64px}
+.wise11 .done .msg{min-height:112px}
+.wise11 .msg .a,.wise11 .msg .b{transition:opacity .4s,translate .5s cubic-bezier(.16,1,.3,1)}
+.wise11 .msg .b{position:absolute;inset:0 0 auto 0;opacity:0;translate:0 10px;pointer-events:none}
+.wise11 .done .msg .a{position:absolute;inset:0 0 auto 0;opacity:0;translate:0 -8px;pointer-events:none}
+.wise11 .done .msg .b{position:relative;opacity:1;translate:none;pointer-events:auto}
+.wise11 .msg .a p{margin:0;font-size:20px;font-weight:700;color:#17111D}
+.wise11 .msg b{display:block;font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.025em;line-height:1.1;color:#17111D}
+.wise11 .msg .b p{margin:10px 0 0;font-size:18px;line-height:1.5;color:var(--ink-70);max-width:44ch}
+.wise11 .acts{display:flex;flex-direction:column;gap:14px}
+.wise11 .acts .btn{width:100%;min-height:58px;font-size:18px}
+.wise11 .aux{display:flex;margin-top:6px}
+.wise11 .aux button{margin-left:-6px}
+.wise11 .aux button{min-height:44px;padding:0 6px;border:0;background:none;font:inherit;font-size:16px;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+@media (max-width:860px){.wise11 .row{grid-template-columns:minmax(0,1fr)}.wise11 .msg{min-height:0}}
+@media (max-width:640px){.wise11 .pane{aspect-ratio:4/4.6;border-radius:22px}.wise11 .pane img{object-position:42% 50%}.wise11 .msg .a p{font-size:18px}.wise11 .hint{font-size:15px;padding:10px 15px}}
+@media (prefers-reduced-motion:reduce){.wise11 .fog,.wise11 .ok,.wise11 .msg .a,.wise11 .msg .b{transition:none}.wise11 .hint svg{animation:none}}
+</style>
+<div class="wrap">
+ <div class="ctr">
+  <div class="hd"><span class="kick">The Wise Check</span><h2 class="h2" id="wc11-h" style="margin-top:12px">Clear It Up</h2>
+   <p class="lede rv">Most roofs look fine from the ground. Wipe the window and see what a Wise Check gives you.</p></div>
+  <div class="pane" role="img" aria-label="A house seen from the street, behind a fogged-up window you can wipe clear" data-owl="say:Wipe it clear">
+   <img src="{{A:hero-pines.webp}}" alt="" width="1200" height="750">
+   <canvas class="fog" aria-hidden="true"></canvas>
+   <span class="hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 013 0V10m0-1.5a1.5 1.5 0 013 0V11m0-1a1.5 1.5 0 013 0v4.5A6.5 6.5 0 0111.5 21h-.6a6 6 0 01-4.6-2.2L3.6 15.5a1.6 1.6 0 012.4-2.1L9 16V11"/></svg>Wipe here</span>
+   <span class="ok" aria-hidden="true">Clear view</span>
+   <span class="lab" aria-hidden="true">Illustrative photo</span>
+  </div>
+  <div class="row">
+   <div><div class="msg" aria-live="polite">
+    <div class="a"><p>Wipe the window with your finger or mouse.</p></div>
+    <div class="b"><b>Now you can see it.</b><p>A careful look gives you a clear picture of where your roof stands: we check the roof and the attic, and show you photos and video of what we saw.</p></div>
+   </div><div class="aux"><button class="full" type="button">Clear it for me</button></div></div>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise','11',function(root){
+  /* one idea: not sure how your roof is doing? wipe the fog; a Wise Check gives you a clear picture */
+  var pane = root.querySelector('.pane'), img = pane.querySelector('img'), cv = pane.querySelector('.fog'), ctx = cv.getContext('2d'), hint = pane.querySelector('.hint'), btn = root.querySelector('.aux button'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var GX = 40, GY = 20, grid, hits, W = 0, H = 0, dpr = 1, R = 40, cleared = false, touched = false, last = null, active = false, ready = false;
+  function size(){ var r = pane.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); R = Math.max(30, Math.min(60, W * .055)); }
+  function fog(){
+    size(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, W, H);
+    /* a soft copy of the same photo: drawn tiny, then scaled up (works where canvas filters don't) */
+    var sw = Math.max(16, Math.round(W / 22)), sh = Math.max(10, Math.round(H / 22)), sm = document.createElement('canvas'); sm.width = sw; sm.height = sh;
+    var sc = sm.getContext('2d'), iw = img.naturalWidth || 1200, ih = img.naturalHeight || 750, k = Math.max(sw / iw, sh / ih), dw = iw * k, dh = ih * k;
+    try { sc.drawImage(img, (sw - dw) / 2, (sh - dh) * .45, dw, dh); } catch (e){}
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high'; ctx.drawImage(sm, 0, 0, W, H);
+    var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(244,242,236,.74)'); g.addColorStop(1, 'rgba(236,232,224,.66)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* condensation: a scatter of small beads, the same pattern every time */
+    var sd = 7; function rnd(){ sd = (sd * 9301 + 49297) % 233280; return sd / 233280; }
+    for (var i = 0, n = Math.round(W * H / 2600); i < n; i++){ var bx = rnd() * W, by = rnd() * H, br = .8 + rnd() * rnd() * 3.2; ctx.beginPath(); ctx.arc(bx, by, br, 0, 6.283); ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.fill(); ctx.beginPath(); ctx.arc(bx, by + br * .45, br * .7, 0, 3.1416); ctx.fillStyle = 'rgba(120,110,95,.18)'; ctx.fill(); }
+    grid = new Uint8Array(GX * GY); hits = 0; root.dataset.wiped = 0; cv.classList.remove('gone'); }
+  function stamp(x, y){
+    ctx.globalCompositeOperation = 'destination-out';
+    var g = ctx.createRadialGradient(x, y, R * .35, x, y, R); g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - R, y - R, R * 2, R * 2);
+    var cw = W / GX, ch = H / GY, r2 = (R * .8) * (R * .8);
+    for (var gy = Math.max(0, Math.floor((y - R) / ch)); gy <= Math.min(GY - 1, Math.floor((y + R) / ch)); gy++)
+      for (var gx = Math.max(0, Math.floor((x - R) / cw)); gx <= Math.min(GX - 1, Math.floor((x + R) / cw)); gx++){
+        var cx = (gx + .5) * cw - x, cy = (gy + .5) * ch - y; if (cx * cx + cy * cy <= r2 && !grid[gy * GX + gx]){ grid[gy * GX + gx] = 1; hits++; } } }
+  function line(a, b){ var dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy), n = Math.max(1, Math.ceil(d / (R / 3))); for (var i = 1; i <= n; i++) stamp(a.x + dx * i / n, a.y + dy * i / n); }
+  function check(){ root.dataset.wiped = Math.round(hits / (GX * GY) * 100); if (!cleared && hits / (GX * GY) > .55) clear(); }
+  function clear(){ if (cleared) return; cleared = true; cv.classList.add('gone'); hint.classList.add('gone'); root.querySelector('.ctr').classList.add('done'); btn.textContent = 'Fog it up again'; root.dataset.clear = 'yes'; }
+  function reset(){ cleared = false; touched = false; root.querySelector('.ctr').classList.remove('done'); btn.textContent = 'Clear it for me'; hint.classList.remove('gone'); root.dataset.clear = 'no'; fog(); }
+  function pt(e){ var r = pane.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  function wipe(e){ if (!ready || cleared) return; var p = pt(e); if (!touched){ touched = true; hint.classList.add('gone'); } if (last) line(last, p); else stamp(p.x, p.y); last = p; check(); }
+  pane.addEventListener('pointerdown', function(e){ active = true; last = null; wipe(e); });
+  pane.addEventListener('pointermove', function(e){ if (e.pointerType === 'mouse' || active) wipe(e); else last = null; });
+  ['pointerup', 'pointercancel'].forEach(function(t){ pane.addEventListener(t, function(){ active = false; last = null; }); });
+  pane.addEventListener('pointerleave', function(){ last = null; if (active) active = false; });
+  btn.addEventListener('click', function(){ if (cleared) reset(); else clear(); });
+  function demo(){ if (OWL.reduce || cleared) return; var t0 = performance.now(), prev = null;
+    (function step(t){ var u = Math.min(1, (t - t0) / 1100), p = { x: W * (.3 + .4 * u), y: H * (.5 + .1 * Math.sin(u * Math.PI * 2)) };
+      if (prev) line(prev, p); else stamp(p.x, p.y); prev = p; root.dataset.wiped = Math.round(hits / (GX * GY) * 100); if (u < 1 && !cleared) requestAnimationFrame(step); })(t0); }
+  function init(){ if (ready) return; ready = true; fog(); }
+  (img.decode ? img.decode() : Promise.resolve()).catch(function(){}).then(init);
+  if (img.complete) init();
+  var ro = 'ResizeObserver' in window && new ResizeObserver(function(){ if (ready && !cleared && Math.abs(pane.getBoundingClientRect().width - W) > 2) fog(); }); if (ro) ro.observe(pane);
+  root.dataset.clear = 'no';
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); setTimeout(function(){ if (!touched) demo(); }, 500); } }, { threshold: .45 }); io.observe(pane);
+});
+</script>
+</section>
