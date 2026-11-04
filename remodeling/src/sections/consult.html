@@ -69,7 +69,48 @@
     </div>
   </div>
 
-  <!-- V2 · The calm form (V1-led) with V3's phone desk: on the left the number large, with a live open or closed line from
-       the published hours (Miami time); on the right one calm page: the rooms on a drawn plan (with "the whole home",
-       "something else" and "not sure yet"), then the firm's own fields. No steps. -->
+  <!-- (Retired in Final: the calm form. Its markup left the file; the record is in git history.) -->
+
+  <!-- NEW VERSIONS · Tell Us V2 "The conversation" (2026-11-04, pass 1). Governing reference: Igloo Inc (continuity: one
+       thread, no steps, no cuts). A messaging window: the firm asks one question at a time; you answer with a tap or a
+       short reply; every answer stays editable. It ends as the email draft (the same note), opened in your own mail app
+       with consent: never claimed as sent. Fields, consent and privacy lines: FACTS.md "Contact". -->
+  <div class="ver ct" data-v="2">
+    <div class="wrap ct__wrap">
+      <div class="ct__head">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-2">Tell us. <span class="acc">One question at a time.</span></h2>
+        <p class="ct__lead">A short conversation that becomes the email we receive. A real consultation, not a sales visit.</p>
+      </div>
+      <div class="ct__win">
+        <header class="ct__bar">
+          <span class="ct__av" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/><path class="r" d="M16 19 H30 V29 H16 Z"/></svg></span>
+          <div class="ct__id"><p class="ct__who">Elbaz Construction</p><p class="ct__st" aria-live="polite"><span class="ct__lamp" aria-hidden="true"></span><span class="ct__stt">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p></div>
+          <a class="ct__call" href="tel:+17542360675" aria-label="Call (754) 236-0675"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3.5 4 6c0 7.7 6.3 14 14 14l2.5-2.5-3.5-3-2.2 1.3a10 10 0 0 1-6.6-6.6L9.5 7z"/></svg><span>Call</span></a>
+        </header>
+        <ol class="ct__log" role="log" aria-label="The conversation"></ol>
+        <form class="ct__comp" novalidate>
+          <p class="ct__edit" hidden></p>
+          <div class="ct__replies" role="group"></div>
+          <div class="ct__row">
+            <label class="sr-only" for="ct-in" id="ct-in-l">Your answer</label>
+            <input class="ct__in" id="ct-in" type="text" aria-describedby="ct-in-err">
+            <button type="submit" class="ct__send" aria-label="Send the answer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12 20 4l-4 16-4-6z M12 14 20 4"/></svg></button>
+          </div>
+          <span class="c-err" id="ct-in-err" hidden></span>
+          <button type="button" class="ct__skip" hidden>Skip this one</button>
+        </form>
+        <div class="ct__end" hidden>
+          <p class="ct__dk">Your note to Sales@elbazconstruction.com</p>
+          <div class="ct__draft"></div>
+          <label class="c-consent"><input type="checkbox" name="consent" id="ct-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="ct-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this note addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <div class="go"><button type="button" class="btn ct__go"><span class="btn__label">Open in email</span></button><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </div>
+      <p class="ct__facts">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed &middot; 19 W Flagler St #310, Miami, FL 33130</p>
+    </div>
+  </div>
 </section>

@@ -466,3 +466,25 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Tell Us (the last section of pass 1).
+
+## New versions, pass 1 · Tell Us V2 "The conversation" (2026-11-04). Pass 1 complete.
+- **Muse accepted** Where We Build V2.
+- **One new version:** `consult` V2.
+  - V1 (the guided sentence) is untouched and stays the default.
+  - It is reachable from the header switch or `?consult=2`.
+- **Governing reference:** Igloo Inc (continuity).
+- **Style family:** a messaging thread.
+- **Signature move:** the conversation.
+  - The firm asks one question at a time; you answer with quick replies or a short field, and every answer is editable in place.
+  - The window's header keeps the call and the live open line.
+  - It ends as the same email draft as V1: mailto with consent, never "sent".
+- **Housekeeping:** the retired calm form's dead definition moved off key 2.
+- **Gate:** `GATE-NEW-Consult.md`, self-scored 8.5 (D8 U9 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/consult/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- **Pass 1 is complete:** all seven homepage sections carry one new version each, and the defaults are unchanged.
+- Stopped for Muse's accept before pass 2.

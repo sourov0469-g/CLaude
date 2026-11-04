@@ -2603,6 +2603,86 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .cl__call, .cl__call::before { transition: none; } .cl__num .d, .cl__hs svg, .cl__hs .w, .cl__lamp::after { animation: none !important; } }
 .cl__facts dd { font: 400 1rem/1.45 var(--f-text); }
 
+
+.ct__wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s6) var(--s8); align-items: start; }
+.ct__head { display: grid; gap: var(--s4); position: sticky; top: calc(var(--nav-h, 68px) + var(--s6)); }
+.ct__head .eyebrow, .ct__head .t-head { margin: 0; }
+.ct__lead { margin: 0; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); max-width: 40ch; }
+.ct__facts { grid-column: 2; margin: 0; font: 400 .875rem/1.5 var(--f-text); color: var(--color-text-secondary); text-align: center; }
+
+.ct__win { display: grid; background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: 22px; overflow: hidden; box-shadow: 0 30px 50px -36px rgba(0,0,0,.45); }
+.ct__bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.ct__av { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--color-text); }
+.ct__av svg { width: 26px; height: 26px; fill: none; stroke: var(--color-surface); stroke-width: 4.5; }
+.ct__av .r { fill: var(--color-accent-solid); stroke: none; }
+.ct__id { flex: 1; min-width: 0; }
+.ct__who { margin: 0; font: 600 1rem/1.2 var(--f-display); }
+.ct__st { margin: 2px 0 0; display: flex; align-items: center; gap: 6px; font: 400 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.ct__lamp { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--color-border-strong); }
+.ct__st.is-open .ct__lamp { background: var(--color-success, #2E7D4F); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success, #2E7D4F) 25%, transparent); }
+.ct__call { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 var(--s4); border-radius: 999px; background: var(--color-accent-solid); color: #fff; text-decoration: none; font: 600 .9375rem/1 var(--f-text); }
+.ct__call svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.ct__call:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+
+.ct__log { list-style: none; margin: 0; padding: var(--s5) var(--s4) var(--s3); display: grid; gap: 10px; min-height: 220px; align-content: end; }
+.ct__m { max-width: 82%; }
+.ct__m p { margin: 0; }
+.ct__m--them { justify-self: start; padding: 12px 16px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 18px 18px 18px 6px; font: 400 1rem/1.45 var(--f-text); }
+.ct__m--me { justify-self: end; }
+.ct__a { display: block; max-width: 100%; min-height: 44px; padding: 11px 16px; text-align: left; background: var(--color-text); color: var(--color-surface); border: 0; border-radius: 18px 18px 6px 18px; font: 500 1rem/1.4 var(--f-text); cursor: pointer; overflow-wrap: anywhere; transition: background-color 160ms var(--ez-out); }
+.ct__a::after { content: 'change'; margin-left: 10px; font: 600 .8125rem/1 var(--f-text); color: var(--clay-300, #ECB3A4); text-decoration: underline; text-underline-offset: 2px; }
+.ct__a:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .ct__a:hover { background: color-mix(in srgb, var(--color-text) 85%, var(--color-accent-solid)); } }
+.ct__typing { display: inline-flex; gap: 5px; padding: 14px 16px; }
+.ct__typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--color-text-secondary); animation: ct-dot 900ms ease-in-out infinite; }
+.ct__typing span:nth-child(2) { animation-delay: 150ms; } .ct__typing span:nth-child(3) { animation-delay: 300ms; }
+@keyframes ct-dot { 0%, 60%, 100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+
+.ct__comp { display: grid; gap: var(--s2); padding: var(--s3) var(--s4) var(--s4); border-top: 1px solid var(--color-border); background: var(--color-surface); }
+.ct__comp[hidden] { display: none; }
+.ct__edit { margin: 0; font: 600 .8125rem/1.2 var(--f-text); color: var(--color-accent-text, var(--clay-700, #884432)); }
+.ct__replies { display: flex; flex-wrap: wrap; gap: 8px; }
+.ct__replies[hidden], .ct__row[hidden] { display: none; }
+.ct__r { min-height: 44px; padding: 0 16px; background: var(--color-bg); color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: 999px; font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out); }
+.ct__r--open { border-style: dashed; }
+.ct__r:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .ct__r:hover { background: var(--color-text); color: var(--color-surface); } }
+.ct__row { display: flex; gap: 8px; }
+.ct__in { flex: 1; min-width: 0; min-height: 48px; padding: 0 16px; font: 400 1rem/1 var(--f-text); color: var(--color-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: 999px; }
+.ct__in:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.ct__in[aria-invalid="true"] { border-color: var(--color-error, #B3261E); }
+.ct__send { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent-solid); color: #fff; border: 0; cursor: pointer; }
+.ct__send svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.ct__send:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.ct__skip { justify-self: start; min-height: 44px; padding: 0; background: none; border: 0; color: var(--color-text-secondary); font: 600 .9375rem/1 var(--f-text); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.ct__skip[hidden] { display: none; }
+
+.ct__end { display: grid; gap: var(--s3); padding: var(--s4); border-top: 1px solid var(--color-border); background: var(--color-surface); }
+.ct__end[hidden] { display: none; }
+.ct__dk { margin: 0; font: 600 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.ct__draft { padding: var(--s3) var(--s4); background: var(--color-bg); border: 1px dashed var(--color-border-strong); border-radius: 12px; font: 400 .9375rem/1.55 var(--f-text); }
+.ct__draft p { margin: 0; }
+
+@media (max-width: 900px) {
+  .ct__wrap { grid-template-columns: minmax(0, 1fr); }
+  .ct__head { position: static; }
+  .ct__facts { grid-column: 1; }
+}
+@media (max-width: 600px) {
+  .ct__win { margin-inline: calc(var(--margin) * -1); border-radius: 0; border-inline: 0; }
+  .ct__log { padding-inline: var(--margin); }
+  .ct__comp, .ct__end, .ct__bar { padding-inline: var(--margin); }
+  .ct__m { max-width: 88%; }
+  .ct__call span { display: none; } .ct__call { width: 44px; padding: 0; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .ct__typing span { animation: none; } .ct__a, .ct__r { transition: none; } }
+
+@media (max-width: 600px) {
+  html body main .ct__comp .ct__send { width: 48px; flex: none; }
+  html body main .ct__end .go { width: 100%; }
+  html body main .ct__end .ct__go { width: 100%; justify-content: center; }
+}
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["HomeAndConstructionBusiness","GeneralContractor"],"name":"Elbaz Construction and Remodeling","url":"https://elbazconstructioncorp.com/","telephone":"+1-754-236-0675","email":"Sales@elbazconstruction.com","address":{"@type":"PostalAddress","streetAddress":"19 W Flagler St, Suite 310","addressLocality":"Miami","addressRegion":"FL","postalCode":"33130","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"19:00"}],"areaServed":[{"@type":"AdministrativeArea","name":"Miami-Dade County"},{"@type":"AdministrativeArea","name":"Broward County"},{"@type":"AdministrativeArea","name":"Palm Beach County"}],"hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"license","name":"Florida Certified Building Contractor","identifier":"CBC1265280"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"343"},"sameAs":["https://www.instagram.com/elbazconstruction/","https://www.facebook.com/elbazconstruction/"]}
@@ -3303,6 +3383,46 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
   </div>
 
   
+
+  
+  <div class="ver ct" data-v="2">
+    <div class="wrap ct__wrap">
+      <div class="ct__head">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Book a consultation</p>
+        <h2 class="t-head" id="consult-h-2">Tell us. <span class="acc">One question at a time.</span></h2>
+        <p class="ct__lead">A short conversation that becomes the email we receive. A real consultation, not a sales visit.</p>
+      </div>
+      <div class="ct__win">
+        <header class="ct__bar">
+          <span class="ct__av" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/><path class="r" d="M16 19 H30 V29 H16 Z"/></svg></span>
+          <div class="ct__id"><p class="ct__who">Elbaz Construction</p><p class="ct__st" aria-live="polite"><span class="ct__lamp" aria-hidden="true"></span><span class="ct__stt">Sun&ndash;Fri 7am&ndash;7pm, Miami time</span></p></div>
+          <a class="ct__call" href="tel:+17542360675" aria-label="Call (754) 236-0675"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 3.5 4 6c0 7.7 6.3 14 14 14l2.5-2.5-3.5-3-2.2 1.3a10 10 0 0 1-6.6-6.6L9.5 7z"/></svg><span>Call</span></a>
+        </header>
+        <ol class="ct__log" role="log" aria-label="The conversation"></ol>
+        <form class="ct__comp" novalidate>
+          <p class="ct__edit" hidden></p>
+          <div class="ct__replies" role="group"></div>
+          <div class="ct__row">
+            <label class="sr-only" for="ct-in" id="ct-in-l">Your answer</label>
+            <input class="ct__in" id="ct-in" type="text" aria-describedby="ct-in-err">
+            <button type="submit" class="ct__send" aria-label="Send the answer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12 20 4l-4 16-4-6z M12 14 20 4"/></svg></button>
+          </div>
+          <span class="c-err" id="ct-in-err" hidden></span>
+          <button type="button" class="ct__skip" hidden>Skip this one</button>
+        </form>
+        <div class="ct__end" hidden>
+          <p class="ct__dk">Your note to Sales@elbazconstruction.com</p>
+          <div class="ct__draft"></div>
+          <label class="c-consent"><input type="checkbox" name="consent" id="ct-consent"><span>I agree to be contacted by Elbaz Construction about this enquiry. Message and data rates may apply.</span></label>
+          <span class="c-err" id="ct-consent-err" hidden></span>
+          <p class="c-note">Sending opens your email app with this note addressed to Sales@elbazconstruction.com. We use your details only to respond to this enquiry. No lists, no resale.</p>
+          <div class="go"><button type="button" class="btn ct__go"><span class="btn__label">Open in email</span></button><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+          <p class="c-done" role="status" hidden></p>
+        </div>
+      </div>
+      <p class="ct__facts">Sun&ndash;Fri 7am&ndash;7pm &middot; Saturday closed &middot; 19 W Flagler St #310, Miami, FL 33130</p>
+    </div>
+  </div>
 </section>
 
 </main>
@@ -7828,7 +7948,9 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
       }
     } },
 
-    2: { init: function (root, k) {
+    // RETIRED (Final: one version per section): the calm form's markup left the file; its definition is kept for the record
+    // under a key no version uses. NEW VERSIONS: slot 2 is "The conversation" (below).
+    calm: { init: function (root, k) {
       var form = root.querySelector('.cf__form'), st = root.querySelector('.cf__st'), stt = root.querySelector('.cf__stt');
       var firstR = form.querySelector('input[name="rooms"]'); firstR.id = 'cf-rooms';
       liveClear(form, k);
@@ -7849,6 +7971,139 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         done(form);
       });
       EZ.reveal(k, root.querySelectorAll('.cf__desk > *, .cf__form'));
+    } },
+
+    /* NEW VERSIONS · V2 "The conversation" (governing reference: Igloo Inc, continuity). One thread that grows: the firm
+       asks one question at a time (a short typing beat first), you answer with a quick reply or a short text; each answer
+       stays in the thread as your bubble and can be changed with a tap. The thread ends as the email draft (the same lines
+       as V1), and "Open in email" composes it to Sales@elbazconstruction.com once consent is ticked; it is never called
+       sent [S1437, S1440, S1442, S1441, S1018]. The window's header keeps the call one tap away with the live open line.
+       Reduced motion: no typing beat, no slides [S0400]. */
+    2: { init: function (root, k) {
+      var log = root.querySelector('.ct__log'), comp = root.querySelector('.ct__comp'), replies = root.querySelector('.ct__replies'), row = root.querySelector('.ct__row'),
+        inp = root.querySelector('.ct__in'), inL = root.querySelector('#ct-in-l'), err = root.querySelector('#ct-in-err'), skip = root.querySelector('.ct__skip'),
+        editL = root.querySelector('.ct__edit'), end = root.querySelector('.ct__end'), draft = root.querySelector('.ct__draft'), consent = root.querySelector('#ct-consent'),
+        cErr = root.querySelector('#ct-consent-err'), go = root.querySelector('.ct__go'), win = root.querySelector('.ct__win'), st = root.querySelector('.ct__st'), stt = root.querySelector('.ct__stt');
+      function first(n) { return String(n || '').trim().split(/\s+/)[0]; }
+      var Q = [
+        { id: 'name', ask: function () { return 'Hi, this is Elbaz Construction. Who are we talking to?'; }, type: 'text', ac: 'name', ph: 'Your full name', check: function (v) { return v ? '' : 'Please add your full name.'; } },
+        { id: 'project', ask: function (a) { return 'Good to meet you, ' + first(a.name) + '. What would you like to talk about?'; }, type: 'choice', opts: ['the kitchen', 'a bathroom', 'the whole home', 'outdoor living', 'something else', 'not sure yet'], open: 'something else', oph: 'In a few words',
+          check: function (v) { return v ? '' : 'Please add a few words about it, or choose not sure yet.'; } },
+        { id: 'address', ask: function () { return 'Where is the property?'; }, type: 'text', ac: 'street-address', ph: 'The property address', check: function (v) { return v ? '' : 'Please add the property address.'; } },
+        { id: 'phone', ask: function () { return 'What number should we call or text?'; }, type: 'tel', ac: 'tel', ph: 'Phone number, with area code', check: function (v) { return !v ? 'Please add a phone number.' : v.replace(/\D/g, '').length < 10 ? 'Please include the area code.' : ''; } },
+        { id: 'email', ask: function () { return 'And your email address?'; }, type: 'email', ac: 'email', ph: 'Email address', check: function (v) { return !v ? 'Please add an email address.' : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'That email address does not look complete.'; } },
+        { id: 'contact', ask: function () { return 'What is the easiest way to reach you?'; }, type: 'choice', opts: ['a call', 'a text', 'an email', 'whichever is easiest'] },
+        { id: 'notes', ask: function () { return 'Anything else you want us to know? This one is optional.'; }, type: 'text', ph: 'Optional', optional: true }
+      ];
+      var A = {}, cur = -1, editing = -1, openMode = false, busy = false, touched = false;
+      k.add(function () { log.innerHTML = ''; replies.innerHTML = ''; draft.innerHTML = ''; end.hidden = true; comp.hidden = false; consent.checked = false; cErr.hidden = true; end.querySelector('.c-done').hidden = true; inp.value = ''; });
+      // the window's header: open or closed now, from the published hours (Sun to Fri 7am to 7pm, Saturday closed), Miami time
+      function status() { var o = EZ.openStatus(); st.classList.toggle('is-open', o.open); stt.textContent = o.text; }
+      status(); (function tick() { k.timeout(function () { status(); tick(); }, 60000); })();
+
+      function bubble(cls, html, extra) { var li = document.createElement('li'); li.className = 'ct__m ' + cls; li.innerHTML = html; if (extra) extra(li); log.appendChild(li); if (k.motion) gsap.fromTo(li, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .28, ease: 'power2.out', clearProps: 'transform,opacity' }); return li; }
+      function keep() { if (touched) comp.scrollIntoView({ block: 'nearest', behavior: k.motion ? 'smooth' : 'auto' }); }
+      function shown(i) { var q = Q[i]; if (q.id === 'project' && A.project === q.open) return A.projectText; return A[q.id]; }
+      function setComposer(i) {
+        var q = Q[i]; openMode = false; err.hidden = true; inp.removeAttribute('aria-invalid');
+        inL.textContent = q.ask(A);
+        editL.hidden = editing < 0; if (editing > -1) editL.textContent = 'Changing your answer';
+        skip.hidden = !q.optional;
+        if (q.type === 'choice') {
+          replies.innerHTML = q.opts.map(function (o, j) { return '<button type="button" class="ct__r' + (o === q.open || o.indexOf('not sure') === 0 || o.indexOf('whichever') === 0 ? ' ct__r--open' : '') + '" data-v="' + o + '" tabindex="' + (j ? -1 : 0) + '">' + o + '</button>'; }).join('');
+          replies.setAttribute('aria-label', q.ask(A)); replies.hidden = false; row.hidden = true;
+        } else {
+          replies.hidden = true; replies.innerHTML = ''; row.hidden = false;
+          inp.type = q.type === 'tel' ? 'tel' : q.type === 'email' ? 'email' : 'text';
+          inp.setAttribute('autocomplete', q.ac || 'off'); inp.placeholder = q.ph; inp.inputMode = q.type === 'tel' ? 'tel' : q.type === 'email' ? 'email' : 'text';
+          inp.value = editing > -1 ? (A[q.id] || '') : '';
+        }
+      }
+      function ask(i) {
+        cur = i; var q = Q[i];
+        function put() {
+          bubble('ct__m--them', '<p>' + q.ask(A) + '</p>');
+          setComposer(i); keep();
+          if (touched) { if (q.type === 'choice') replies.querySelector('.ct__r').focus({ preventScroll: true }); else inp.focus({ preventScroll: true }); }
+          busy = false;
+        }
+        busy = true;
+        if (!k.motion) { put(); return; }
+        var dots = bubble('ct__m--them ct__typing', '<span></span><span></span><span></span>');
+        dots.setAttribute('aria-hidden', 'true');
+        k.timeout(function () { dots.remove(); put(); }, 520);
+      }
+      function nextOpen() { for (var i = 0; i < Q.length; i++) if (!(Q[i].id in A)) return i; return -1; }
+      function answer(val, label) {
+        var q = Q[editing > -1 ? editing : cur], was = editing > -1;
+        if (editing > -1) {
+          A[q.id] = val; if (label != null) A[q.id + 'Text'] = label;
+          var b = log.querySelector('.ct__m--me[data-q="' + q.id + '"] .ct__a'); if (b) b.textContent = q.id === 'project' && A.project === q.open ? A.projectText : (val || 'No, that is all');
+          editing = -1;
+        } else {
+          A[q.id] = val; if (label != null) A[q.id + 'Text'] = label;
+          bubble('ct__m--me', '<button type="button" class="ct__a" data-q="' + q.id + '" aria-label="Your answer: ' + (shown(Q.indexOf(q)) || 'skipped').replace(/"/g, '&quot;') + '. Change it">' + '</button>', function (li) { li.dataset.q = q.id; li.firstChild.textContent = shown(Q.indexOf(q)) || 'No, that is all'; });
+        }
+        var n = nextOpen();
+        if (was && n === cur) { setComposer(cur); keep(); return; }   // a change made mid-way: back to the question still waiting
+        if (n > -1) ask(n); else finish();
+      }
+      function fail(msg) { err.textContent = msg; err.hidden = false; inp.setAttribute('aria-invalid', 'true'); inp.focus(); if (k.motion) gsap.fromTo(row, { x: 0 }, { keyframes: [{ x: 6, duration: .08 }, { x: -6, duration: .08 }, { x: 0, duration: .08 }] }); }
+      k.on(comp, 'submit', function (e) {
+        e.preventDefault(); if (busy) return; touched = true;
+        var q = Q[editing > -1 ? editing : cur], v = inp.value.trim();
+        if (openMode) { var m1 = q.check(v); if (m1) { fail(m1); return; } A.project = q.open; A.projectText = v; answer(q.open, v); return; }
+        if (q.type === 'choice') return;
+        var m = q.check ? q.check(v) : ''; if (m) { fail(m); return; }
+        answer(v);
+      });
+      k.on(skip, 'click', function () { touched = true; answer(''); });
+      k.on(replies, 'click', function (e) {
+        var b = e.target.closest('.ct__r'); if (!b || busy) return; touched = true;
+        var q = Q[editing > -1 ? editing : cur];
+        if (b.dataset.v === q.open) { openMode = true; replies.hidden = true; row.hidden = false; inp.type = 'text'; inp.placeholder = q.oph; inp.value = ''; inp.setAttribute('autocomplete', 'off'); inp.focus(); return; }
+        if (q.id === 'project') delete A.projectText;
+        answer(b.dataset.v);
+      });
+      k.on(replies, 'keydown', function (e) {
+        var bs = Array.prototype.slice.call(replies.children), i = bs.indexOf(document.activeElement), d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0;
+        if (!d || i < 0) return; e.preventDefault(); var j = (i + d + bs.length) % bs.length; bs.forEach(function (b, x) { b.tabIndex = x === j ? 0 : -1; }); bs[j].focus();
+      });
+      // tap any of your answers to change it
+      k.on(log, 'click', function (e) {
+        var b = e.target.closest('.ct__a'); if (!b || busy) return; touched = true;
+        editing = Q.findIndex(function (q) { return q.id === b.dataset.q; }); if (editing < 0) return;
+        end.hidden = true; comp.hidden = false; setComposer(editing);
+        if (Q[editing].type === 'choice') replies.querySelector('.ct__r').focus(); else inp.focus();
+        keep();
+      });
+      function lines() {
+        var how = { 'a call': 'a call', 'a text': 'a text', 'an email': 'an email' }[A.contact] || 'whichever is easiest';
+        var topic = A.project === Q[1].open ? A.projectText : A.project;
+        var L = ['Hi, my name is ' + A.name + '.', 'I would like to talk about ' + topic + '.', 'The property is at ' + A.address + '.', 'The easiest way to reach me is ' + how + ', on ' + A.phone + ' or at ' + A.email + '.'];
+        if (A.notes) L.push('', 'Anything else: ' + A.notes);
+        return L;
+      }
+      function finish() {
+        comp.hidden = true; end.hidden = false;
+        draft.innerHTML = lines().map(function (l) { return l ? '<p>' + l.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</p>' : ''; }).join('');
+        if (k.motion) gsap.fromTo(end, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: .35, ease: 'power2.out', clearProps: 'transform,opacity' });
+        if (touched) { end.scrollIntoView({ block: 'nearest', behavior: k.motion ? 'smooth' : 'auto' }); consent.focus({ preventScroll: true }); }
+      }
+      k.on(consent, 'change', function () { if (consent.checked) cErr.hidden = true; });
+      end._kit = k;
+      k.on(go, 'click', function () {
+        if (!consent.checked) { cErr.textContent = 'Please tick the box so we may contact you about this enquiry.'; cErr.hidden = false; consent.setAttribute('aria-invalid', 'true'); consent.focus(); return; }
+        consent.setAttribute('aria-invalid', 'false');
+        EZ.consultMail(compose(lines(), A.name));
+        done(end);
+      });
+      EZ.reveal(k, root.querySelectorAll('.ct__head > *, .ct__facts'));
+      // the conversation starts when the window arrives (never steals focus on its own)
+      var started = false;
+      function start() { if (started) return; started = true; ask(0); }
+      if (!k.motion) start();
+      else { var sti = ScrollTrigger.create({ trigger: win, start: 'top 85%', once: true, onEnter: start }); k.add(function () { sti.kill(); }); k.on(win, 'focusin', start); }
     } }
   });
 })();
