@@ -1282,4 +1282,12 @@ Every text element is paired with the nearest painted background behind it, as r
 
 **Pass 1 is complete:** every homepage section now has its K version.
 
-**Next, after the accept:** pass 2 begins with Hero L. It follows the same cycle: one version, then gate, then stop.
+**Booking K accepted by Muse (2026-11-04).** Pass 1 is complete. Area K's own accept was overtaken by the background correction and has not been confirmed separately.
+
+## New versions, pass 2
+
+| # | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 1 | Hero | **L, "In their own colours"** (`?hero=l`) | Cash App Brand Guidelines (colour as content: eight documented jobs as full-height fields of the colour of their work, sampled from each job's photo; open one to see the job) | GATE-NEW-Hero-L.md | 8.52 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Services L.

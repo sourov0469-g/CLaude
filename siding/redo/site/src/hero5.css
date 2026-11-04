@@ -1,0 +1,46 @@
+/* HERO L — "In their own colours" (Cash App Brand Guidelines: colour as content). Eight documented jobs as full-height
+   fields of the colour of the work, sampled from each job's photo. Ink on every field measured >= 4.5:1. */
+.hlv{display:flex;flex-direction:column;gap:clamp(22px,3vh,34px);padding:112px 0 22px}
+.hlv .lcp{padding:0 var(--gut);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:clamp(24px,4vw,72px);align-items:end}
+.hlv .eye{grid-column:1 / -1;margin:0 0 14px;font:800 12.5px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+.hlv .lead{margin:0;max-width:13ch}
+.hlv .lcp .sub{margin:0 0 6px;max-width:40ch}
+.hlv .lcp .ctas{grid-column:2;margin-top:20px}
+.hlv .lbd{position:relative;display:flex;height:clamp(300px,calc(100svh - 470px),520px);min-height:300px}
+.hlv .lf{position:relative;flex:1 1 0;min-width:0;background:var(--c);overflow:hidden;
+  transition:flex-grow .55s cubic-bezier(.2,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),opacity .7s cubic-bezier(.16,1,.3,1);transition-delay:0s,calc(var(--n) * 70ms),calc(var(--n) * 70ms)}
+.hlv:not(.lgo) .lf{transform:translateY(28px);opacity:0}
+.hlv .lbd:not(.lop) .lf:hover{flex-grow:1.4}
+.hlv .lf.lop{flex-grow:5}
+.hlv .lim{position:absolute;left:0;top:0;width:100%;height:calc(100% - 118px);max-width:none;object-fit:cover;opacity:0;transition:opacity .45s cubic-bezier(.16,1,.3,1)}
+.hlv .lf.lop .lim{opacity:1}
+.hlv .lbt{all:unset;box-sizing:border-box;position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;padding:18px clamp(12px,1.2vw,20px);cursor:pointer;color:#0A1611}
+.hlv .lbt:focus-visible{outline:3px solid #0A1611;outline-offset:-7px}
+.hlv .lcd{font:700 clamp(15px,1.15vw,19px)/1 var(--text);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.hlv .lpl{font:700 clamp(14px,1.05vw,17px)/1.2 var(--display);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.hlv .lmo{font:600 12.5px/1.3 var(--text)}
+.hlv .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hlv .lpn{position:absolute;right:14px;top:14px;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:4px;max-width:calc(100% - 28px);padding:10px 13px;border-radius:10px;background:#FFFFFF;box-shadow:0 10px 26px -14px rgba(10,22,17,.55)}
+.hlv .lpn[hidden]{display:none}
+.hlv .ltr{margin:0;font:600 12.5px/1.35 var(--text);color:#0A1611}
+.hlv .ljb{font:800 14px/1.2 var(--text);color:#0A1611;text-decoration:underline;text-underline-offset:3px}
+.hlv .ljb:focus-visible{outline:3px solid #0A1611;outline-offset:3px;border-radius:4px}
+.hlv .lnote{margin:0;padding:0 var(--gut);font:500 13px/1.5 var(--text);color:var(--ink-2);max-width:900px}
+/* tablet and phone: eight full-width rows; an opened row grows to show the photo */
+@media (max-width:1000px){
+  .hlv{padding-top:96px}
+  .hlv .lcp{grid-template-columns:1fr}
+  .hlv .lcp .ctas{grid-column:1}
+  .hlv .lcp .sub{margin-top:14px}
+  .hlv .lbd{flex-direction:column;height:auto}
+  .hlv .lf{flex:none;height:64px;transition:height .5s cubic-bezier(.2,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),opacity .7s cubic-bezier(.16,1,.3,1);transition-delay:0s,calc(var(--n) * 60ms),calc(var(--n) * 60ms)}
+  .hlv .lbd:not(.lop) .lf:hover{flex-grow:0}
+  .hlv .lf.lop{height:clamp(300px,52vw,420px)}
+  .hlv .lim{height:calc(100% - 64px)}
+  .hlv .lbt{flex-direction:row;flex-wrap:wrap;align-items:flex-end;align-content:flex-end;justify-content:flex-start;column-gap:12px;row-gap:2px;padding:12px var(--gut)}
+  .hlv .lcd{order:3;margin-left:auto;align-self:center}
+  .hlv .lpl{-webkit-line-clamp:1;flex:1 1 60%}
+  .hlv .lmo{flex:0 0 100%;order:4;margin-top:-2px}
+  .hlv .lpn{right:var(--gut);top:12px}
+}
+@media (prefers-reduced-motion:reduce){.hlv .lf,.hlv .lim{transition:none}.hlv:not(.lgo) .lf{transform:none;opacity:1}}
