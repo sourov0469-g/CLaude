@@ -1,7 +1,7 @@
 {
  "pages": {
   "home v1": {
-   "runs": 806,
+   "runs": 825,
    "tel": [
     "tel:+17542360675"
    ],
@@ -20,7 +20,7 @@
    }
   },
   "home v2": {
-   "runs": 664,
+   "runs": 683,
    "tel": [
     "tel:+17542360675"
    ],
@@ -159,6 +159,11 @@
  "numbers": [
   {
    "page": "home v1",
+   "n": "1.0",
+   "ctx": "decimal (rating?)"
+  },
+  {
+   "page": "home v1",
    "sec": "work",
    "n": "21",
    "ctx": "P-21 · BATHROOM Floating Vanity Primary Bath with Soaking Tub & Walk-In Shower"
@@ -183,7 +188,7 @@
   }
  ],
  "fonts": {
-  "Roboto": 1283,
+  "Roboto": 1289,
   "Elbaz Display": 658
  },
  "requests": [],

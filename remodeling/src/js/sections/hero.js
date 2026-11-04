@@ -392,6 +392,149 @@
       .fromTo(frs, { autoAlpha: 0, y: -18, rotation: function (i) { return i % 2 ? 1.6 : -1.6; } },
         { autoAlpha: 1, y: 0, rotation: 0, duration: .9, stagger: function (i) { return .15 + ds[i] / dm * .55; }, clearProps: 'transform,opacity,visibility' }, 0)
       .fromTo(hint, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4, clearProps: 'opacity,visibility' }, .9);
+  } },
+
+  /* NEW VERSIONS · Hero V3 "The viewfinder" (governing reference: Makhno Studio, the home as an explorable instrument).
+     A camera viewfinder on one of three finished rooms. Target marks sit on what each project's own title names. Tap a
+     target: the camera zooms in on it and names it; drag to look around while zoomed; the zoom-out control or Escape
+     returns. Three rooms to switch between, and a tour that visits every target by itself (pauses on any touch and off
+     screen). One camera layer moves (translate + scale), always clamped so the photograph fills the frame [S0062, S0089,
+     S0063, S0083, S1018, S1441]. No pin. Reduced motion: no travel, no focus pull [S0400]. */
+  3: { init: function (root, k) {
+    var vf = root.querySelector('.hv__vf'), cam = root.querySelector('.hv__cam'), img = root.querySelector('.hv__img'), marksEl = root.querySelector('.hv__marks'),
+      roomsEl = root.querySelector('.hv__rooms'), tag = root.querySelector('.hv__tag'), out = root.querySelector('.hv__out'), play = root.querySelector('.hv__play'),
+      playL = root.querySelector('.hv__pl'), ctlEl = root.querySelector('.hv__ctl'), rn = root.querySelector('.hv__rn'), rt = root.querySelector('.hv__rt'), zm = root.querySelector('.hv__zm');
+    var P = (window.__DATA || {}).projects || [];
+    function title(key) { var p = P.filter(function (x) { return x.k === key; })[0]; return p ? p.t : ''; }
+    // every label is a phrase from the project's own published title
+    var R = [
+      { k: 'k-navy-shaker-xl', d: 'k-navy-shaker', short: 'Navy Shaker', m: [['Custom range hood', .625, .33], ['Brass hardware', .16, .43], ['Navy blue Shaker cabinetry', .375, .71]] },
+      { k: 'k-gray-shaker', short: 'Gray Shaker', m: [['Wolf range', .82, .70], ['Farmhouse sink', .53, .62], ['Gray Shaker cabinetry', .33, .37]] },
+      { k: 'b-polished-concrete', short: 'Polished concrete', m: [['Polished concrete', .88, .32], ['Curbless walk-in shower', .07, .62]] }
+    ];
+    R.forEach(function (r) { r.t = title(r.d || r.k); });
+    roomsEl.innerHTML = R.map(function (r, i) { return '<button type="button" class="hv__room" data-i="' + i + '" aria-pressed="' + (i ? 'false' : 'true') + '" aria-label="' + r.t + '"><img src="' + EZ.img(r.d || r.k) + '" alt="" draggable="false"><span>' + r.short + '</span></button>'; }).join('');
+    var roomBs = Array.prototype.slice.call(roomsEl.children);
+    k.add(function () { roomsEl.innerHTML = ''; marksEl.innerHTML = ''; tag.hidden = true; cam.style.transform = ''; img.removeAttribute('src'); img.style.cssText = ''; });
+
+    /* ---------- the camera ---------- */
+    var G = { W: 0, H: 0, ctl: 64, iw: 1600, ih: 1067, c: 1, dw: 0, dh: 0, ox: 0, oy: 0 }, cv = { z: 1, cx: .5, cy: .5 }, room = 0, active = -1, marks = [], fly = null;
+    var ZOOM = function () { return 2; };   // the photographs ship at 1400 to 1920px wide; 2x keeps a desktop zoom near 1:1
+    function fit() {
+      G.W = vf.clientWidth; G.H = vf.clientHeight; G.ctl = ctlEl.offsetHeight; if (!G.W || !G.H) return;
+      G.c = Math.max(G.W / G.iw, G.H / G.ih); G.dw = G.iw * G.c; G.dh = G.ih * G.c; G.ox = (G.W - G.dw) / 2; G.oy = (G.H - G.dh) / 2;
+      img.style.cssText = 'width:' + G.dw.toFixed(1) + 'px;height:' + G.dh.toFixed(1) + 'px;left:' + G.ox.toFixed(1) + 'px;top:' + G.oy.toFixed(1) + 'px';
+      render();
+    }
+    function render() {
+      if (!G.W) return;
+      var z = cv.z, px = G.ox + cv.cx * G.dw, py = G.oy + cv.cy * G.dh, CY = (G.H - G.ctl) / 2;   // the centre of the visible frame, above the controls
+      var tx = G.W / 2 - px * z, ty = CY - py * z;
+      // the photograph always fills the frame
+      tx = Math.min(-G.ox * z, Math.max(G.W - (G.ox + G.dw) * z, tx)); ty = Math.min(-G.oy * z, Math.max(G.H - (G.oy + G.dh) * z, ty));
+      cv.cx = ((G.W / 2 - tx) / z - G.ox) / G.dw; cv.cy = ((CY - ty) / z - G.oy) / G.dh;
+      cam.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + z.toFixed(4) + ')';
+      zm.textContent = z.toFixed(1);
+      var zoomed = z > 1.04, bot = G.H - G.ctl - 22;
+      marks.forEach(function (b, i) {
+        var m = R[room].m[i], x = tx + (G.ox + m[1] * G.dw) * z, y = ty + (G.oy + m[2] * G.dh) * z;
+        b.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+        // a target outside the crop waits at the edge, pointing to where it is; a tap still takes you there
+        var ex = x < 26 ? 'l' : x > G.W - 26 ? 'r' : y < 40 ? 't' : y > bot ? 'b' : '';
+        if (ex) { x = Math.min(G.W - 26, Math.max(26, x)); y = Math.min(bot, Math.max(40, y)); b.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; }
+        if (ex) b.dataset.edge = ex; else delete b.dataset.edge;
+        b.classList.toggle('is-off', zoomed && active > -1 && i !== active);   // on the way back out every target returns, so focus is never stranded
+      });
+      out.hidden = !zoomed; vf.classList.toggle('is-zoomed', zoomed); vf.classList.toggle('can-pan', canPan());
+    }
+    function canPan() { return cv.z > 1.04 || G.dw > G.W + 8 || G.dh > G.H - G.ctl + 8; }   // zoomed, or the crop hides part of the room
+    function goTo(z, cx, cy, dur, done) {
+      if (fly) fly.kill();
+      if (!k.motion) { cv.z = z; cv.cx = cx; cv.cy = cy; render(); if (done) done(); return; }
+      fly = gsap.to(cv, { z: z, cx: cx, cy: cy, duration: dur == null ? .9 : dur, ease: 'power3.inOut', onUpdate: render, onComplete: done });
+    }
+    function setTag(i) {
+      if (i < 0) { tag.hidden = true; return; }
+      tag.querySelector('b').textContent = R[room].m[i][0]; tag.querySelector('span').textContent = R[room].t; tag.hidden = false;
+    }
+    function aim(i, dur, done) {   // zoom in on a target and name it
+      active = i; var m = R[room].m[i];
+      marks.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
+      setTag(-1);
+      goTo(ZOOM(), m[1], m[2], dur, function () { setTag(i); if (done) done(); });
+    }
+    function home() {   // the whole room, framed across its targets where the crop allows
+      var xs = R[room].m.map(function (a) { return a[1]; });
+      return [(Math.min.apply(0, xs) + Math.max.apply(0, xs)) / 2, .5];
+    }
+    function whole(dur, done) { active = -1; marks.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); }); setTag(-1); var h = home(); goTo(1, h[0], h[1], dur, done); }
+
+    /* ---------- rooms ---------- */
+    function buildMarks() {
+      marksEl.innerHTML = R[room].m.map(function (m, i) { return '<button type="button" class="hv__mk" data-i="' + i + '" aria-pressed="false" aria-label="' + m[0] + ': look closer"><i></i></button>'; }).join('');
+      marks = Array.prototype.slice.call(marksEl.children);
+    }
+    function setRoom(i, then) {
+      var go = function () {
+        room = i; active = -1; cv.z = 1; var h = home(); cv.cx = h[0]; cv.cy = h[1]; setTag(-1);
+        roomBs.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
+        rn.textContent = '0' + (i + 1) + ' / 0' + R.length; rt.textContent = R[i].t;
+        var r = R[i]; img.alt = r.t + ', an Elbaz project';
+        img.onload = function () { G.iw = img.naturalWidth || G.iw; G.ih = img.naturalHeight || G.ih; fit(); if (k.motion) gsap.fromTo(cam, { opacity: .2, filter: 'blur(6px)' }, { opacity: 1, filter: 'blur(0px)', duration: .45, ease: 'power2.out', clearProps: 'opacity,filter' }); if (then) then(); };
+        buildMarks(); img.src = EZ.img(r.k);
+        if (img.complete && img.naturalWidth) img.onload();
+      };
+      if (k.motion && room !== i && cam.style.transform) gsap.to(cam, { opacity: 0, filter: 'blur(4px)', duration: .16, ease: 'power2.in', onComplete: go }); else go();
+    }
+    k.ro(vf, fit);
+
+    /* ---------- the tour: every target in every room, by itself ---------- */
+    var touring = false, tq = null;
+    function stopTour() { touring = false; if (tq) { tq.kill(); tq = null; } play.setAttribute('aria-pressed', 'false'); playL.textContent = 'Tour the rooms'; }
+    function tour() {
+      touring = true; play.setAttribute('aria-pressed', 'true'); playL.textContent = 'Pause the tour';
+      var steps = []; for (var r = 0; r < R.length; r++) for (var m = 0; m < R[r].m.length; m++) steps.push([r, m]);
+      var n = 0, startAt = steps.findIndex(function (s) { return s[0] === room; });
+      function next() {
+        if (!touring) return;
+        if (n >= steps.length) { whole(.8); stopTour(); playL.textContent = 'Tour again'; return; }
+        var s2 = steps[(startAt + n) % steps.length]; n++;
+        var doAim = function () { if (!touring) return; aim(s2[1], 1, function () { tq = gsap.delayedCall(k.motion ? 1.8 : 2.4, function () { whole(.7, function () { tq = gsap.delayedCall(.25, next); }); }); }); };
+        if (s2[0] !== room) setRoom(s2[0], doAim); else doAim();
+      }
+      next();
+    }
+    k.on(play, 'click', function () { if (touring) stopTour(); else tour(); });
+    k.io(vf, function (en) { if (!en.isIntersecting && touring) stopTour(); }, { threshold: 0 });
+
+    /* ---------- by hand: targets, rooms, drag, keys ---------- */
+    k.on(marksEl, 'click', function (e) { var b = e.target.closest('.hv__mk'); if (!b) return; stopTour(); var i = +b.dataset.i; if (active === i && cv.z > 1.04) whole(); else aim(i); });
+    k.on(marksEl, 'keydown', function (e) {
+      var b = e.target.closest('.hv__mk'); if (!b) return; var i = +b.dataset.i, n = marks.length, d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0;
+      if (d) { e.preventDefault(); var j = i; for (var t = 0; t < n; t++) { j = (j + d + n) % n; if (!marks[j].hidden) break; } marks[j].focus(); }
+    });
+    k.on(roomsEl, 'click', function (e) { var b = e.target.closest('.hv__room'); if (!b) return; stopTour(); var i = +b.dataset.i; if (i !== room || cv.z > 1.04) setRoom(i); });
+    k.on(out, 'click', function () { stopTour(); whole(); });
+    k.on(vf, 'keydown', function (e) { if (e.key === 'Escape' && cv.z > 1.04) { e.preventDefault(); stopTour(); whole(); var a = marks[active > -1 ? active : 0]; if (a) a.focus(); } });
+    var drag = null;
+    k.on(vf, 'pointerdown', function (e) {
+      if (!canPan() || e.target.closest('.hv__ctl, .hv__mk, .hv__tag') || e.button > 0) return;
+      stopTour(); if (fly) fly.kill();
+      drag = { x: e.clientX, y: e.clientY, cx: cv.cx, cy: cv.cy }; vf.classList.add('is-drag');
+      try { vf.setPointerCapture(e.pointerId); } catch (x) {}
+    });
+    k.on(vf, 'pointermove', function (e) { if (!drag) return; cv.cx = drag.cx - (e.clientX - drag.x) / (G.dw * cv.z); cv.cy = drag.cy - (e.clientY - drag.y) / (G.dh * cv.z); render(); });
+    function endDrag() { if (drag) { drag = null; vf.classList.remove('is-drag'); } }
+    k.on(vf, 'pointerup', endDrag); k.on(vf, 'pointercancel', endDrag);
+
+    setRoom(0);
+    if (!k.motion) return;
+    /* ---------- the load beat: the viewfinder pulls focus, the brackets close in, the title lines rise ---------- */
+    var lt = gsap.timeline({ defaults: { ease: EZO } });
+    lt.fromTo(img, { filter: 'blur(10px)', scale: 1.04 }, { filter: 'blur(0px)', scale: 1, duration: 1.1, clearProps: 'filter,transform' }, 0)
+      .fromTo(root.querySelectorAll('.hv__br'), { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .7, stagger: .05, clearProps: 'transform,opacity' }, .15)
+      .fromTo(root.querySelectorAll('.hv__h .rise'), { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .1)
+      .fromTo(marksEl, { opacity: 0 }, { opacity: 1, duration: .4, clearProps: 'opacity' }, .8);
   } }
   });
 })();

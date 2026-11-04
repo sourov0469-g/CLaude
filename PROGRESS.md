@@ -488,3 +488,24 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - locks 0 fails; outside links 0; single file 0 errors.
 - **Pass 1 is complete:** all seven homepage sections carry one new version each, and the defaults are unchanged.
 - Stopped for Muse's accept before pass 2.
+
+## New versions, pass 2 · Hero V3 "The viewfinder" (2026-11-04)
+- **Muse accepted** pass 1 (Tell Us V2).
+- **One new version:** `hero` V3.
+  - V1 (the opening) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?hero=3`.
+- **Governing reference:** Makhno Studio (the home as an explorable instrument).
+- **Style family:** a camera viewfinder.
+- **Signature move:** the viewfinder.
+  - Target marks sit on the details each project's title names; a tap zooms in and names it.
+  - Drag looks around; there are three rooms; a tour plays every target and stops on touch or off screen.
+  - The copy is on a paper title band beneath.
+- **Gate:** `GATE-NEW-Hero-V3.md`, self-scored 8.3 (D8 U8 C9 Ct9), 0 vetoes.
+- **Asset ask:** full-resolution originals of three photographs, for a sharper zoom.
+- **Evidence:** `qa/new/hero-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before How a job runs V3.
