@@ -1,0 +1,139 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 14
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Flip It"
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "the card starts on the homeowner’s problem, film not playing",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "it turns over by itself once, showing Owl’s crew film playing: “Owl’s crew. On it.”",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "the button turns it back to the front and pauses the film; state is pressed=false and announced",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "it does not auto-turn again after the visitor has turned it",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "tapping the card itself turns it too",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "next steps: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "the full film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "14",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

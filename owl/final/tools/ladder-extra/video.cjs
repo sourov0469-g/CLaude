@@ -155,5 +155,20 @@ module.exports = {
     rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
     await p.click(S + ' .full'); await p.waitForTimeout(400);
     rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '14': async (p, S, rec) => {
+    await p.waitForTimeout(400);
+    rec('the card starts on the homeowner’s problem, film not playing', await p.evaluate(S => !document.querySelector(S + ' .scene').classList.contains('turned') && document.querySelector(S + ' .front b').textContent === 'Roof trouble?' && /A leak, a storm, a tired old roof/.test(document.querySelector(S + ' .front').textContent) && document.querySelector(S + ' video').paused, S));
+    await p.waitForTimeout(3400);
+    rec('it turns over by itself once, showing Owl’s crew film playing: “Owl’s crew. On it.”', await p.evaluate(S => { const sc = document.querySelector(S + ' .scene'), v = document.querySelector(S + ' video'); return sc.classList.contains('turned') && /rotateY|matrix3d/.test(getComputedStyle(document.querySelector(S + ' .card')).transform) && !v.paused && v.dataset.media === 'crew' && document.querySelector(S + ' .tag').textContent === 'Owl’s crew. On it.'; }, S));
+    await p.click(S + ' .flip'); await p.waitForTimeout(1200);
+    rec('the button turns it back to the front and pauses the film; state is pressed=false and announced', await p.evaluate(S => !document.querySelector(S + ' .scene').classList.contains('turned') && document.querySelector(S + ' video').paused && document.querySelector(S + ' .flip').getAttribute('aria-pressed') === 'false' && /front/.test(document.querySelector(S + ' .sr').textContent), S));
+    await p.waitForTimeout(3000);
+    rec('it does not auto-turn again after the visitor has turned it', await p.evaluate(S => !document.querySelector(S + ' .scene').classList.contains('turned'), S));
+    await p.click(S + ' .scene'); await p.waitForTimeout(1200);
+    rec('tapping the card itself turns it too', await p.evaluate(S => document.querySelector(S + ' .scene').classList.contains('turned') && document.querySelector(S + ' .flip').getAttribute('aria-pressed') === 'true', S));
+    rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };

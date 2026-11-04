@@ -3258,6 +3258,69 @@ OWL.reg('video','13',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="video" data-v="14">
+<section class="sec video14" id="crew-video-14" aria-labelledby="vd14-h">
+<style>
+.video14{overflow:hidden}
+.video14 .hd{text-align:center;max-width:760px;margin:0 auto clamp(18px,2.6vw,28px)}
+.video14 .lede{margin:10px auto 0;max-width:46ch}
+.video14 .scene{position:relative;width:min(100%,880px);margin:0 auto;aspect-ratio:16/9;perspective:1600px;cursor:pointer}
+.video14 .card{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.3,1.25,.4,1)}
+.video14 .turned .card{transform:rotateY(180deg)}
+.video14 .face{position:absolute;inset:0;border-radius:28px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 2px 0 #fff inset,0 50px 70px -46px rgba(23,17,29,.6)}
+.video14 .front{display:grid;place-items:center;align-content:center;gap:14px;padding:6%;text-align:center;background:linear-gradient(160deg,#FFFDF7,#F3EAD6)}
+.video14 .front b{display:block;font-size:clamp(40px,6.4vw,92px);font-weight:900;letter-spacing:-.04em;line-height:1;color:#17111D}
+.video14 .front span{font-size:clamp(18px,2vw,24px);font-weight:600;color:var(--ink-70)}
+.video14 .front em{margin-top:6px;display:inline-flex;align-items:center;gap:10px;font-style:normal;font-weight:800;font-size:16px;color:#8E5A12}
+.video14 .front em svg{width:30px;height:30px}
+.video14 .drip{position:absolute;left:68%;top:0;width:16px;height:100%;pointer-events:none}
+.video14 .drip i{position:absolute;left:0;top:-4%;width:16px;height:22px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(180deg,#9FC3E0,#5E8FBA);opacity:0;animation:vd14d 2.6s cubic-bezier(.55,0,.9,.4) infinite}
+@keyframes vd14d{0%{transform:translateY(0) scale(.4);opacity:0}15%{transform:translateY(0) scale(1);opacity:.95}85%{opacity:.95}100%{transform:translateY(460%) scale(1,1.15);opacity:0}}
+.video14 .stain{position:absolute;left:calc(68% - 40px);top:-30px;width:96px;height:60px;border-radius:50%;background:radial-gradient(closest-side,rgba(142,90,18,.22),rgba(142,90,18,0));pointer-events:none}
+.video14 .back{transform:rotateY(180deg);background:#2A2131}
+.video14 .back video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video14 .back .tag{position:absolute;left:20px;bottom:20px;padding:10px 18px;border-radius:999px;background:rgba(255,253,247,.95);font-weight:900;font-size:clamp(18px,2vw,24px);color:#17111D;box-shadow:0 10px 20px -10px rgba(23,17,29,.6)}
+.video14 .bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;margin-top:22px}
+.video14 .flip{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 20px;border-radius:999px;font-weight:800;font-size:16px;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45);transition:transform .12s,box-shadow .12s}
+.video14 .flip:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.video14 .flip:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.video14 .flip svg{width:20px;height:20px}
+.video14 .full{min-height:44px;padding:0 6px;border:0;background:none;font-weight:700;text-decoration:underline;text-underline-offset:4px;color:var(--ink);cursor:pointer}
+@media (max-width:640px){.video14 .scene{aspect-ratio:4/5}.video14 .bar .btn{flex:1 1 100%}}
+@media (prefers-reduced-motion:reduce){.video14 .card{transition:none}.video14 .drip{display:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Owl's crew on film</span><h2 class="h2" id="vd14-h" style="margin-top:12px">Flip It</h2>
+  <p class="lede rv">Whatever’s wrong with your roof, turn it over and meet the people who fix it.</p></div>
+ <div class="scene" data-owl="say:Flip it">
+  <div class="card">
+   <div class="face front"><span class="stain" aria-hidden="true"></span><span class="drip" aria-hidden="true"><i></i></span><b>Roof trouble?</b><span>A leak, a storm, a tired old roof.</span><em aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18a10 10 0 0 0 19 3M26 14A10 10 0 0 0 7 11"/><path d="M26 7v7h-7M6 25v-7h7"/></svg>Turn it over</em></div>
+   <div class="face back"><video data-media="crew" data-aposter="a1" muted loop playsinline preload="metadata" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video><span class="tag">Owl’s crew. On it.</span></div>
+  </div>
+ </div>
+ <div class="bar"><button class="flip" type="button" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18a10 10 0 0 0 19 3M26 14A10 10 0 0 0 7 11"/><path d="M26 7v7h-7M6 25v-7h7"/></svg><span>Flip the card</span></button><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a><button class="full" type="button">Watch the full film</button></div>
+ <p class="sr" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+</div>
+<script>
+OWL.reg('video','14',function(root){
+  /* one idea: the problem on the front, the people who fix it on the back; turn it over */
+  var scene = root.querySelector('.scene'), vid = root.querySelector('video'), flip = root.querySelector('.flip'), sr = root.querySelector('.sr'), h2 = root.querySelector('h2'), turned = false, seen = false, auto = 0;
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  function set(on){ turned = on; scene.classList.toggle('turned', on); flip.setAttribute('aria-pressed', on);
+    sr.textContent = on ? 'The back: Owl’s crew. On it.' : 'The front: Roof trouble? A leak, a storm, a tired old roof.';
+    if (on){ if (!vid.src && OWL.media) vid.src = OWL.media.crew; if (!OWL.reduce && seen) OWL.play(vid); } else vid.pause(); }
+  function toggle(){ clearTimeout(auto); set(!turned); }
+  scene.addEventListener('click', toggle); flip.addEventListener('click', toggle);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); seen = true; return; }
+  var once = false;
+  var io = new IntersectionObserver(function(e){ seen = e[0].isIntersecting;
+    if (seen){ OWL.reveal(h2); if (!once){ once = true; auto = setTimeout(function(){ if (!turned) set(true); }, 2600); } if (turned) OWL.play(vid); } else vid.pause(); }, {threshold:.4}); io.observe(scene);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="video" data-b="1">
 <section class="sec video2" id="crew-video-2" aria-labelledby="v2-h">
 <style>
