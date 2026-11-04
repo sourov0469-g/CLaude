@@ -744,3 +744,24 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Services 9 at first didn't stack: each card was sticky inside its own list item, so it had nowhere to stick. The items themselves are now the sticky cards in one container.
 - Services 8's floating photo could cover the open details; it now steps aside over them.
+
+## L26 · Reviews 8 + 9 · checks 37/37 · evidence `gates/ladder/L26-reviews-8-9/` · Reviews now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Reviews 8 · Marquee** | Graza (custom-animation bar) | A theatre marquee: "5.0" in big dot-matrix bulbs and "90+ REVIEWS" in a smaller row (a 5×7 dot font drawn in SVG), inside an amber frame of chasing border bulbs. The bulbs light in a left-to-right sweep when the sign is seen, glowing; bulbs near the pointer swell and burn brighter. Below it are the locked proofs as chips. Reduced motion: lit, still, no chase. | 8.6 | 7.8 | 8.6 | 8.6 | **8.38** |
+| **Reviews 9 · Stamped** | Lando Norris (a bespoke made object) | A sheet of paper on a desk and a rubber stamp that follows the pointer. A click presses it and leaves an inked seal, rotated a little, with a real ink texture (turbulence and displacement). Presses cycle only through Owl's locked proofs: 5.0 · 90+ reviews · BBB A− since Feb 25, 2026 · GAF Systems Plus (certified crew) · MN licence #BC809662 · 10-year workmanship. "Stamp It" for keyboard and touch; "Clear the Page"; a live line names each stamp. Not a game. | 8.6 | 8.2 | 8.6 | 8.6 | **8.50** |
+
+**Truth:** the only rating is "5.0 · 90+ reviews"; there are no quotes, names or other ratings. The stamps carry only the locked proofs. The GAF stamp's small line says "Certified crew", from Owl's own "GAF Systems Plus Certified crew"; "certified contractor" was changed to keep the locked wording. There is no A+, Accredited or Master Elite anywhere (tested on every stamp).
+
+**Checks run:** the generic gate, plus:
+- Reviews 8: rating and proofs; the sign's label; every lettering bulb lit with the chase on; the dot font spells 5.0 (40 bulbs) and 90+ REVIEWS; bulbs near the pointer swell.
+- Reviews 9: three opening stamps in order; a click stamps the licence next; Stamp It stamps the warranty next; every stamp is a locked proof; Clear wipes the page; no game wording.
+
+**Ledger:**
+- **Reviews 8:** bulbs as restrained particles ⟦S1363⟧; pointer glow ⟦S0405⟧; title ⟦S0451⟧; CTA ⟦S1388⟧.
+- **Reviews 9:** press and settle ⟦S0489⟧; stamp micro-interaction ⟦S0405⟧; keys ⟦S1388⟧; title ⟦S0451⟧.
+
+**Defects found and fixed in the round:**
+- The small bulb row was crowded; it is now tighter with dimmer unlit bulbs.
+- The stamp ink was too faint, "GAF SYSTEMS PLUS" overflowed its box, and the seal's ring text overlapped itself. The ink is now denser, the type is sized to fit, and the ring text uses a fixed length.
+- My expected bulb count in the check was wrong (47); the correct count for "5.0" in a 5×7 dot font is 40. The check was corrected, not the component.

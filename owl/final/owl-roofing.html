@@ -7391,6 +7391,142 @@ OWL.reg('reviews','7',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="reviews" data-v="8">
+<section class="sec rev8" id="reviews-8" aria-labelledby="rv8-h">
+<style>
+.rev8{overflow:hidden}
+.rev8 .hd{text-align:center;margin-bottom:clamp(18px,3vw,36px)}
+.rev8 .lede{margin:12px auto 0;max-width:44ch}
+.rev8 .sign{position:relative;max-width:1000px;margin:0 auto;filter:drop-shadow(0 40px 40px rgba(23,17,29,.35))}
+.rev8 svg{display:block;width:100%;height:auto;max-width:none}
+.rev8 .dot{fill:#3A3540;transition:fill .25s}
+.rev8 .dot.on{fill:#FFD27A}
+.rev8 .small .dot:not(.on){fill:#322A3A}
+.rev8 .glow .dot.on{filter:url(#rv8g)}
+.rev8 .ch{fill:#FFD27A}
+.rev8 .chase .ch{animation:rv8c 1.2s steps(1,end) infinite}
+@keyframes rv8c{0%{fill:#FFD27A}50%{fill:#7A5A2A}}
+.rev8 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:clamp(20px,3vw,34px) 0 0;padding:0;list-style:none}
+.rev8 .chips li{font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;background:var(--paper);box-shadow:0 0 0 1px rgba(23,17,29,.1),0 3px 0 rgba(23,17,29,.06)}
+.rev8 .chips li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+.rev8 .act{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+@media (prefers-reduced-motion:reduce){.rev8 .chase .ch{animation:none}.rev8 .dot{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Reviews</span><h2 class="h2" id="rv8-h" style="margin-top:12px">Marquee</h2>
+  <p class="lede rv">Our name in lights, and the only number we put up there: what our customers gave us.</p></div>
+ <div class="sign" data-owl="say:Lights up"><svg viewBox="0 0 1000 470" role="img" aria-label="A marquee sign in lights reading 5.0, 90+ reviews"><defs><filter id="rv8g" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="rv8f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C25F"/><stop offset="1" stop-color="#C7871A"/></linearGradient></defs></svg></div>
+ <ul class="chips" aria-label="What stands behind it"><li>5.0 · 90+ reviews</li><li>BBB A− since Feb 25, 2026</li><li>GAF Systems Plus</li><li>MN licence #BC809662</li><li>10-year workmanship warranty</li></ul>
+ <div class="act"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('reviews','8',function(root){
+  var svg = root.querySelector('svg'), sign = root.querySelector('.sign'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* a 5×7 dot font, just the glyphs the sign needs */
+  var F = {'5':['11111','10000','11110','00001','00001','10001','01110'], '0':['01110','10001','10011','10101','11001','10001','01110'], '.':['00','00','00','00','00','11','11'],
+    '9':['01110','10001','10001','01111','00001','00010','01100'], '+':['00000','00100','00100','11111','00100','00100','00000'], ' ':['00','00','00','00','00','00','00'],
+    'R':['11110','10001','10001','11110','10100','10010','10001'], 'E':['11111','10000','10000','11110','10000','10000','11111'], 'V':['10001','10001','10001','10001','10001','01010','00100'],
+    'I':['111','010','010','010','010','010','111'], 'W':['10001','10001','10001','10101','10101','10101','01010'], 'S':['01111','10000','10000','01110','00001','00001','11110']};
+  var h = '<rect x="10" y="10" width="980" height="450" rx="30" fill="url(#rv8f)"/><rect x="40" y="40" width="920" height="390" rx="16" fill="#2A2131"/>';
+  /* chasing border bulbs */
+  var B = []; for (var x = 30; x <= 970; x += 40){ B.push([x, 25]); B.push([x, 445]); } for (var y = 65; y <= 405; y += 40){ B.push([25, y]); B.push([975, y]); }
+  B.forEach(function(p, i){ h += '<circle class="ch" cx="' + p[0] + '" cy="' + p[1] + '" r="7" style="animation-delay:' + (-(i % 3)*.4).toFixed(1) + 's"/>'; });
+  function row(txt, pitch, r, cy){ var cols = 0; txt.split('').forEach(function(c){ cols += F[c][0].length + 1; }); cols -= 1; var x0 = 500 - (cols - 1)*pitch/2, cx = 0, s = '';
+    txt.split('').forEach(function(c){ var g = F[c], w = g[0].length; for (var j = 0; j < 7; j++) for (var i = 0; i < w; i++){ var on = g[j][i] === '1'; s += '<circle class="dot' + (on ? ' lit' : '') + '" cx="' + (x0 + (cx + i)*pitch).toFixed(1) + '" cy="' + (cy + (j - 3)*pitch).toFixed(1) + '" r="' + r + '"/>'; } cx += w + 1; }); return s; }
+  h += '<g class="big">' + row('5.0', 30, 11.5, 190) + '</g><g class="small">' + row('90+ REVIEWS', 11, 4.2, 362) + '</g>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var lit = [].slice.call(svg.querySelectorAll('.dot.lit'));
+  var P = lit.map(function(d){ return [+d.getAttribute('cx'), +d.getAttribute('cy'), +d.getAttribute('r')]; });
+  function lightUp(){ if (OWL.reduce){ lit.forEach(function(d){ d.classList.add('on'); }); sign.classList.add('glow'); return; }
+    lit.forEach(function(d, i){ setTimeout(function(){ d.classList.add('on'); }, 200 + P[i][0]*1.1 + (P[i][1] > 300 ? 500 : 0)); });
+    setTimeout(function(){ sign.classList.add('glow', 'chase'); }, 1900); }
+  /* bulbs near the pointer burn brighter */
+  var raf = 0, mx = -999, my = -999;
+  function burn(){ raf = 0; lit.forEach(function(d, i){ var dx = P[i][0] - mx, dy = P[i][1] - my, k = Math.max(0, 1 - Math.sqrt(dx*dx + dy*dy)/120); d.setAttribute('r', (P[i][2]*(1 + k*.45)).toFixed(2)); d.style.fill = k > .05 ? '#FFF1C9' : ''; }); }
+  sign.addEventListener('pointermove', function(e){ if (OWL.reduce) return; var r = svg.getBoundingClientRect(); mx = (e.clientX - r.left)/r.width*1000; my = (e.clientY - r.top)/r.height*470; if (!raf) raf = requestAnimationFrame(burn); });
+  sign.addEventListener('pointerleave', function(){ mx = my = -999; if (!raf) raf = requestAnimationFrame(burn); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ lightUp(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); lightUp(); } }, {threshold:.4}); io.observe(sign);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="reviews" data-v="9">
+<section class="sec rev9" id="reviews-9" aria-labelledby="rv9-h">
+<style>
+.rev9{overflow:hidden}
+.rev9 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.rev9 .lede{margin-top:12px;max-width:44ch}
+.rev9 .act{display:flex;flex-wrap:wrap;gap:12px}
+.rev9 .desk{padding:clamp(14px,3vw,34px);border-radius:28px;background:linear-gradient(160deg,#C9A57A,#B48A55)}
+.rev9 .paper{position:relative;aspect-ratio:16/8;border-radius:6px;background:radial-gradient(120% 90% at 30% 20%,#FFFEF9,#F6F1E4);box-shadow:0 30px 40px -26px rgba(23,17,29,.55);overflow:hidden;cursor:none;touch-action:manipulation}
+.rev9 .paper::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(23,17,29,.025) 0 1px,transparent 1px 3px);pointer-events:none}
+.rev9 .paper .hint{position:absolute;left:18px;bottom:14px;font-size:13px;font-weight:700;color:#6B6570;pointer-events:none}
+.rev9 .imp{position:absolute;width:clamp(150px,20vw,230px);height:auto;transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(var(--sc,1));pointer-events:none;opacity:.92;mix-blend-mode:multiply;transition:opacity .5s,transform .18s cubic-bezier(.3,1.6,.5,1)}
+.rev9 .imp.fresh{--sc:1.12;opacity:0}
+.rev9 .imp.gone{opacity:0}
+.rev9 .stamp{position:absolute;left:0;top:0;width:90px;pointer-events:none;transform:translate(var(--x,-200px),var(--y,-200px)) translate(-50%,-92%) scale(var(--p,1));transform-origin:50% 92%;transition:transform .12s cubic-bezier(.3,1.6,.5,1);filter:drop-shadow(0 16px 12px rgba(23,17,29,.35));z-index:3}
+.rev9 .stamp.away{opacity:0}
+.rev9 .log{margin:16px 0 0;font-size:15px;font-weight:700;min-height:24px}
+.rev9 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.rev9 .chips li{font-size:13px;font-weight:700;padding:6px 11px;border-radius:999px;background:var(--paper);box-shadow:0 0 0 1px rgba(23,17,29,.1)}
+@media (hover:none){.rev9 .paper{cursor:auto}.rev9 .stamp{display:none}}
+@media (max-width:640px){.rev9 .paper{aspect-ratio:4/5}.rev9 .imp{width:150px}}
+@media (prefers-reduced-motion:reduce){.rev9 .imp,.rev9 .stamp{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Reviews</span><h2 class="h2" id="rv9-h" style="margin-top:12px">Stamped</h2>
+  <p class="lede rv">Our proof, in ink. Press the stamp anywhere on the page; each press is something we can show you.</p></div>
+  <div class="act"><button class="btn btn-amber go" type="button" data-mag data-owl="hoot">Stamp It</button><button class="btn btn-line clr" type="button" data-mag data-owl="peek">Clear the Page</button></div></div>
+ <div class="desk" data-owl="say:Press it">
+  <div class="paper" aria-hidden="true"><span class="hint">Click to stamp</span>
+   <svg class="stamp" viewBox="0 0 90 120"><rect x="28" y="2" width="34" height="56" rx="16" fill="#9C6B3C"/><rect x="34" y="8" width="8" height="40" rx="4" fill="#B98C55"/><rect x="14" y="56" width="62" height="20" rx="5" fill="#6B4E2E"/><rect x="8" y="76" width="74" height="16" rx="3" fill="#2A2131"/><rect x="10" y="92" width="70" height="8" rx="2" fill="#17111D"/></svg>
+  </div>
+ </div>
+ <p class="log" aria-live="polite"></p>
+ <ul class="chips" aria-label="Every stamp on this page is one of these"><li>5.0 · 90+ reviews</li><li>BBB A− since Feb 25, 2026</li><li>GAF Systems Plus</li><li>MN licence #BC809662</li><li>10-year workmanship warranty</li></ul>
+ <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="rv9ink" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="d"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.1 1.45" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs></svg>
+</div>
+<script>
+OWL.reg('reviews','9',function(root){
+  var paper = root.querySelector('.paper'), stamp = root.querySelector('.stamp'), log = root.querySelector('.log'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var A = '#9A5A0C', K = '#17111D';
+  function seal(c, top, big, small){ return '<svg viewBox="0 0 240 240" class="imp" aria-hidden="true"><g filter="url(#rv9ink)" fill="none" stroke="' + c + '"><circle cx="120" cy="120" r="108" stroke-width="7"/><circle cx="120" cy="120" r="94" stroke-width="3"/>'
+    + '<path id="__ID__" d="M120 120m-80 0a80 80 0 1 1 160 0a80 80 0 1 1-160 0" stroke="none"/><text font-size="17" font-weight="900" letter-spacing="2" textLength="470" lengthAdjust="spacing" fill="' + c + '" stroke="none"><textPath href="#__ID__" startOffset="0">' + top + '</textPath></text>'
+    + '<text x="120" y="132" text-anchor="middle" font-size="' + (big.length > 4 ? 40 : 62) + '" font-weight="900" fill="' + c + '" stroke="none">' + big + '</text><text x="120" y="166" text-anchor="middle" font-size="17" font-weight="900" letter-spacing="2" fill="' + c + '" stroke="none">' + small + '</text></g></svg>'; }
+  function box(c, big, small){ return '<svg viewBox="0 0 260 150" class="imp" aria-hidden="true"><g filter="url(#rv9ink)"><rect x="8" y="8" width="244" height="134" rx="10" fill="none" stroke="' + c + '" stroke-width="7"/><rect x="20" y="20" width="220" height="110" rx="6" fill="none" stroke="' + c + '" stroke-width="2.5"/>'
+    + '<text x="130" y="80" text-anchor="middle" font-size="' + (big.length > 10 ? 21 : 40) + '" font-weight="900" fill="' + c + '">' + big + '</text><text x="130" y="112" text-anchor="middle" font-size="15" font-weight="900" letter-spacing="1.5" fill="' + c + '">' + small + '</text></g></svg>'; }
+  var ST = [
+    {say:'5.0 from 90+ reviews', svg:seal(A, 'OWL ROOFING · WE GIVE A HOOT ·', '5.0', '90+ REVIEWS')},
+    {say:'BBB A− since Feb 25, 2026', svg:box(K, 'BBB A−', 'SINCE FEB 25, 2026')},
+    {say:'GAF Systems Plus', svg:box(A, 'GAF SYSTEMS PLUS', 'CERTIFIED CREW')},
+    {say:'MN licence #BC809662', svg:box(K, '#BC809662', 'MINNESOTA LICENCE')},
+    {say:'10-year workmanship warranty', svg:seal(K, 'OWL ROOFING · WARRANTY ·', '10-YEAR', 'WORKMANSHIP')}];
+  var n = 0, uid = 0, imps = [];
+  function press(x, y){ var s = ST[n % ST.length], w = paper.clientWidth, h = paper.clientHeight; n++;
+    var holder = document.createElement('div'); holder.innerHTML = s.svg.replace(/__ID__/g, 'rv9p' + (++uid)); var el = holder.firstChild;
+    el.style.left = Math.max(60, Math.min(w - 60, x)) + 'px'; el.style.top = Math.max(60, Math.min(h - 60, y)) + 'px'; el.style.setProperty('--r', (Math.random()*16 - 8).toFixed(1) + 'deg');
+    paper.appendChild(el); imps.push(el); if (imps.length > 10){ var old = imps.shift(); old.classList.add('gone'); setTimeout(function(){ old.remove(); }, 500); }
+    if (!OWL.reduce){ el.classList.add('fresh'); requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.remove('fresh'); }); }); stamp.style.setProperty('--p', .86); setTimeout(function(){ stamp.style.setProperty('--p', 1); }, 140); }
+    log.textContent = 'Stamped: ' + s.say + '.'; }
+  function randomPress(){ var w = paper.clientWidth, h = paper.clientHeight; press(80 + Math.random()*(w - 160), 80 + Math.random()*(h - 160)); }
+  paper.addEventListener('pointermove', function(e){ var r = paper.getBoundingClientRect(); stamp.style.setProperty('--x', (e.clientX - r.left) + 'px'); stamp.style.setProperty('--y', (e.clientY - r.top) + 'px'); stamp.classList.remove('away'); });
+  paper.addEventListener('pointerleave', function(){ stamp.classList.add('away'); });
+  paper.addEventListener('click', function(e){ var r = paper.getBoundingClientRect(); press(e.clientX - r.left, e.clientY - r.top); });
+  root.querySelector('.go').addEventListener('click', randomPress);
+  root.querySelector('.clr').addEventListener('click', function(){ imps.forEach(function(el){ el.classList.add('gone'); setTimeout(function(){ el.remove(); }, 500); }); imps = []; n = 0; log.textContent = 'The page is clear.'; });
+  stamp.classList.add('away');
+  function opening(){ var w = paper.clientWidth, h = paper.clientHeight; press(w*.32, h*.48); if (OWL.reduce){ press(w*.62, h*.36); press(w*.7, h*.7); return; } setTimeout(function(){ press(w*.62, h*.36); }, 500); setTimeout(function(){ press(w*.72, h*.72); }, 1000); }
+  if (OWL.reduce || !('IntersectionObserver' in window)){ opening(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); opening(); } }, {threshold:.35}); io.observe(paper);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="reviews" data-b="1">
 <section class="sec rev2" id="reviews-2" aria-labelledby="rv2-h">
 <style>

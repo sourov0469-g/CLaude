@@ -1,0 +1,59 @@
+<section class="sec rev8" id="reviews-8" aria-labelledby="rv8-h">
+<style>
+.rev8{overflow:hidden}
+.rev8 .hd{text-align:center;margin-bottom:clamp(18px,3vw,36px)}
+.rev8 .lede{margin:12px auto 0;max-width:44ch}
+.rev8 .sign{position:relative;max-width:1000px;margin:0 auto;filter:drop-shadow(0 40px 40px rgba(23,17,29,.35))}
+.rev8 svg{display:block;width:100%;height:auto;max-width:none}
+.rev8 .dot{fill:#3A3540;transition:fill .25s}
+.rev8 .dot.on{fill:#FFD27A}
+.rev8 .small .dot:not(.on){fill:#322A3A}
+.rev8 .glow .dot.on{filter:url(#rv8g)}
+.rev8 .ch{fill:#FFD27A}
+.rev8 .chase .ch{animation:rv8c 1.2s steps(1,end) infinite}
+@keyframes rv8c{0%{fill:#FFD27A}50%{fill:#7A5A2A}}
+.rev8 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:clamp(20px,3vw,34px) 0 0;padding:0;list-style:none}
+.rev8 .chips li{font-size:14px;font-weight:700;padding:8px 13px;border-radius:999px;background:var(--paper);box-shadow:0 0 0 1px rgba(23,17,29,.1),0 3px 0 rgba(23,17,29,.06)}
+.rev8 .chips li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px;vertical-align:1px}
+.rev8 .act{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+@media (prefers-reduced-motion:reduce){.rev8 .chase .ch{animation:none}.rev8 .dot{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Reviews</span><h2 class="h2" id="rv8-h" style="margin-top:12px">Marquee</h2>
+  <p class="lede rv">Our name in lights, and the only number we put up there: what our customers gave us.</p></div>
+ <div class="sign" data-owl="say:Lights up"><svg viewBox="0 0 1000 470" role="img" aria-label="A marquee sign in lights reading 5.0, 90+ reviews"><defs><filter id="rv8g" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="rv8f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6C25F"/><stop offset="1" stop-color="#C7871A"/></linearGradient></defs></svg></div>
+ <ul class="chips" aria-label="What stands behind it"><li>5.0 · 90+ reviews</li><li>BBB A− since Feb 25, 2026</li><li>GAF Systems Plus</li><li>MN licence #BC809662</li><li>10-year workmanship warranty</li></ul>
+ <div class="act"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('reviews','8',function(root){
+  var svg = root.querySelector('svg'), sign = root.querySelector('.sign'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  /* a 5×7 dot font, just the glyphs the sign needs */
+  var F = {'5':['11111','10000','11110','00001','00001','10001','01110'], '0':['01110','10001','10011','10101','11001','10001','01110'], '.':['00','00','00','00','00','11','11'],
+    '9':['01110','10001','10001','01111','00001','00010','01100'], '+':['00000','00100','00100','11111','00100','00100','00000'], ' ':['00','00','00','00','00','00','00'],
+    'R':['11110','10001','10001','11110','10100','10010','10001'], 'E':['11111','10000','10000','11110','10000','10000','11111'], 'V':['10001','10001','10001','10001','10001','01010','00100'],
+    'I':['111','010','010','010','010','010','111'], 'W':['10001','10001','10001','10101','10101','10101','01010'], 'S':['01111','10000','10000','01110','00001','00001','11110']};
+  var h = '<rect x="10" y="10" width="980" height="450" rx="30" fill="url(#rv8f)"/><rect x="40" y="40" width="920" height="390" rx="16" fill="#2A2131"/>';
+  /* chasing border bulbs */
+  var B = []; for (var x = 30; x <= 970; x += 40){ B.push([x, 25]); B.push([x, 445]); } for (var y = 65; y <= 405; y += 40){ B.push([25, y]); B.push([975, y]); }
+  B.forEach(function(p, i){ h += '<circle class="ch" cx="' + p[0] + '" cy="' + p[1] + '" r="7" style="animation-delay:' + (-(i % 3)*.4).toFixed(1) + 's"/>'; });
+  function row(txt, pitch, r, cy){ var cols = 0; txt.split('').forEach(function(c){ cols += F[c][0].length + 1; }); cols -= 1; var x0 = 500 - (cols - 1)*pitch/2, cx = 0, s = '';
+    txt.split('').forEach(function(c){ var g = F[c], w = g[0].length; for (var j = 0; j < 7; j++) for (var i = 0; i < w; i++){ var on = g[j][i] === '1'; s += '<circle class="dot' + (on ? ' lit' : '') + '" cx="' + (x0 + (cx + i)*pitch).toFixed(1) + '" cy="' + (cy + (j - 3)*pitch).toFixed(1) + '" r="' + r + '"/>'; } cx += w + 1; }); return s; }
+  h += '<g class="big">' + row('5.0', 30, 11.5, 190) + '</g><g class="small">' + row('90+ REVIEWS', 11, 4.2, 362) + '</g>';
+  svg.insertAdjacentHTML('beforeend', h);
+  var lit = [].slice.call(svg.querySelectorAll('.dot.lit'));
+  var P = lit.map(function(d){ return [+d.getAttribute('cx'), +d.getAttribute('cy'), +d.getAttribute('r')]; });
+  function lightUp(){ if (OWL.reduce){ lit.forEach(function(d){ d.classList.add('on'); }); sign.classList.add('glow'); return; }
+    lit.forEach(function(d, i){ setTimeout(function(){ d.classList.add('on'); }, 200 + P[i][0]*1.1 + (P[i][1] > 300 ? 500 : 0)); });
+    setTimeout(function(){ sign.classList.add('glow', 'chase'); }, 1900); }
+  /* bulbs near the pointer burn brighter */
+  var raf = 0, mx = -999, my = -999;
+  function burn(){ raf = 0; lit.forEach(function(d, i){ var dx = P[i][0] - mx, dy = P[i][1] - my, k = Math.max(0, 1 - Math.sqrt(dx*dx + dy*dy)/120); d.setAttribute('r', (P[i][2]*(1 + k*.45)).toFixed(2)); d.style.fill = k > .05 ? '#FFF1C9' : ''; }); }
+  sign.addEventListener('pointermove', function(e){ if (OWL.reduce) return; var r = svg.getBoundingClientRect(); mx = (e.clientX - r.left)/r.width*1000; my = (e.clientY - r.top)/r.height*470; if (!raf) raf = requestAnimationFrame(burn); });
+  sign.addEventListener('pointerleave', function(){ mx = my = -999; if (!raf) raf = requestAnimationFrame(burn); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ lightUp(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); lightUp(); } }, {threshold:.4}); io.observe(sign);
+});
+</script>
+</section>

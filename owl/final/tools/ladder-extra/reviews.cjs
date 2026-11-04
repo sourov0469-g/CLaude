@@ -39,5 +39,28 @@ module.exports = {
     await p.click(S + ' .again'); await p.waitForTimeout(1600);
     rec('Lay It Again replays from the eave with the counter climbing', await p.evaluate(S => { const n = +document.querySelector(S + ' .count b').textContent; return n > 5 && n < 90 && +document.querySelector(S + ' .badge').getAttribute('opacity') === 0; }, S));
     rec('it says no shingle stands for a quote', /none stands for a quote/.test(txt));
+  },
+  '8': async (p, S, rec, txt) => {
+    rec('the only rating is 5.0 · 90+ reviews; the proofs are the locked set', /5\.0 · 90\+ reviews/.test(txt) && /BBB A− since Feb 25, 2026/.test(txt) && /GAF Systems Plus/.test(txt) && /#BC809662/.test(txt) && /10-year workmanship warranty/.test(txt) && !/[“"]/.test(txt));
+    rec('the sign’s label says exactly 5.0, 90+ reviews', await p.evaluate(S => document.querySelector(S + ' .sign svg').getAttribute('aria-label') === 'A marquee sign in lights reading 5.0, 90+ reviews', S));
+    await p.waitForTimeout(2600);
+    rec('the bulbs light in a sweep and the border chases', await p.evaluate(S => { const l = document.querySelectorAll(S + ' .dot.lit'); return l.length > 100 && [...l].every(d => d.classList.contains('on')) && document.querySelector(S + ' .sign').classList.contains('chase'); }, S));
+    rec('the lit dots spell 5.0 (big row) and 90+ REVIEWS (small row)', await p.evaluate(S => document.querySelectorAll(S + ' .big .dot.lit').length === 40 && document.querySelectorAll(S + ' .small .dot.lit').length > 120, S));
+    const r = await p.evaluate(S => { const b = document.querySelector(S + ' .big .dot.lit').getBoundingClientRect(); return [b.left + b.width / 2, b.top + b.height / 2]; }, S);
+    await p.mouse.move(r[0] - 60, r[1]); await p.mouse.move(r[0], r[1], { steps: 6 }); await p.waitForTimeout(300);
+    rec('bulbs near the pointer burn brighter', await p.evaluate(S => { const d = document.querySelector(S + ' .big .dot.lit'); return +d.getAttribute('r') > 12 && d.style.fill !== ''; }, S));
+  },
+  '9': async (p, S, rec, txt) => {
+    await p.waitForTimeout(1800);
+    rec('three stamps go down when the page is seen, in the locked order', await p.evaluate(S => document.querySelectorAll(S + ' .imp').length === 3 && /Stamped: GAF Systems Plus\./.test(document.querySelector(S + ' .log').textContent), S));
+    const b = await p.evaluate(S => { const r = document.querySelector(S + ' .paper').getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }, S);
+    await p.mouse.click(b[0] + b[2] * .2, b[1] + b[3] * .3); await p.waitForTimeout(400);
+    rec('a click stamps where it lands (licence next)', await p.evaluate(S => document.querySelectorAll(S + ' .imp').length === 4 && /#BC809662/.test(document.querySelector(S + ' .log').textContent), S));
+    await p.click(S + ' .go'); await p.waitForTimeout(300);
+    rec('Stamp It does the same for keyboard and touch (warranty next)', await p.evaluate(S => document.querySelectorAll(S + ' .imp').length === 5 && /10-year workmanship warranty/.test(document.querySelector(S + ' .log').textContent), S));
+    rec('every stamp is one of the locked proofs', await p.evaluate(S => [...document.querySelectorAll(S + ' .imp')].every(i => /5\.0|BBB A−|GAF SYSTEMS PLUS|#BC809662|10-YEAR/.test(i.textContent)) && ![...document.querySelectorAll(S + ' .imp')].some(i => /A\+|Accredited|Master/i.test(i.textContent)), S));
+    await p.click(S + ' .clr'); await p.waitForTimeout(700);
+    rec('Clear the Page wipes it', await p.evaluate(S => document.querySelectorAll(S + ' .imp').length === 0 && /clear/.test(document.querySelector(S + ' .log').textContent), S));
+    rec('no game: no score or goal', !/score|you win|points|level up/i.test(txt));
   }
 };

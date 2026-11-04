@@ -1,0 +1,245 @@
+[
+ {
+  "sec": "reviews",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "reviews"
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Marquee"
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "the only rating is 5.0 · 90+ reviews; the proofs are the locked set",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "the sign’s label says exactly 5.0, 90+ reviews",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "the bulbs light in a sweep and the border chases",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "the lit dots spell 5.0 (big row) and 90+ REVIEWS (small row)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "bulbs near the pointer burn brighter",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "reviews"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Stamped"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "three stamps go down when the page is seen, in the locked order",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "a click stamps where it lands (licence next)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "Stamp It does the same for keyboard and touch (warranty next)",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "every stamp is one of the locked proofs",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "Clear the Page wipes it",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "no game: no score or goal",
+  "ok": true
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "reviews",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

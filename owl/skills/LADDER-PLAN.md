@@ -352,3 +352,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   (scale and dim) into a neat stack; each card has Owl's photo, a big numeral, the name, the line and what's
   included. Reduced motion: a plain list of cards. Skills: ⟦S0448⟧ sticky stack, ⟦S1325⟧ scroll progress,
   ⟦S0451⟧ title, ⟦S1388⟧ keys.
+
+## L26 · Reviews 8 + 9 (Reviews stands at 7: proof row, dated spine, 91 marks, drawn stars, extruded 5.0, dead level, ninety shingles)
+- **Reviews 8 · "Marquee"** — reference **Graza** (the custom-animation bar). A theatre marquee sign: "5.0" in big
+  dot-matrix bulbs and "90+ REVIEWS" in a smaller row, inside a frame of chasing border bulbs. The letters light
+  in a sweep when the sign is seen; bulbs near the pointer burn brighter (a glow that follows the cursor); the
+  chase stops under reduced motion. Below it are the locked proofs as plain chips. Skills: ⟦S1363⟧ restrained
+  particles (bulbs), ⟦S0405⟧ pointer glow, ⟦S0451⟧ title, ⟦S1388⟧ key.
+- **Reviews 9 · "Stamped"** — reference **Lando Norris** (a bespoke made object). A sheet of paper and a rubber stamp.
+  The stamp follows the pointer over the sheet; a click presses it and leaves an inked seal (rough ink texture,
+  each a little rotated). Each press cycles through Owl's locked proofs only: 5.0 · 90+ reviews · BBB A− since Feb
+  25, 2026 · GAF Systems Plus · MN licence #BC809662 · 10-year workmanship warranty. "Stamp It" does the same for
+  keyboard and touch; "Clear the Page" wipes it. Not a game: no score or goal. Skills: ⟦S0489⟧ press and settle,
+  ⟦S0405⟧ micro-interaction, ⟦S1388⟧ keys, ⟦S0451⟧ title.
