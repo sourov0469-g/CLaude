@@ -785,3 +785,25 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Area 8's stamp text overran its frame; it is now fitted to length.
 - Area 9's knob first overlapped the dial window and was lowered; the needle hid the tuned town's letters and now sits behind haloed station names.
+
+## L28 · We Give a Hoot 8 + 9 · checks 34/34 · evidence `gates/ladder/L28-family-8-9/` · Family now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Family 8 · The Tree** | Lusion (lines carry the eye) | A family tree the other way up: a tapered trunk with the plaque "Owl Roofing · Est. 2025 · Shoreview, MN", whose five branches draw themselves on to round frames holding Owl's real photos (the Browns, the Berglands, the community, Noah on the job, the crew); leaves bud along them. Choosing a frame opens it larger in a card with its honest caption. Phones hide the frame labels (the card names the choice). | 8.4 | 8.4 | 8.4 | 8.8 | **8.46** |
+| **Family 9 · Give a Hoot** | Graza (custom-animation bar) | The tagline as a button: a drawn owl at the centre. Press "Give a Hoot" and it blinks, its beak opens twice, a soft synthesized two-note hoot plays (only on press; a Sound switch turns it off), a waveform draws the hoot, and three ripple rings go out. On first view it hoots silently and the rings bring four real photos into orbit with captions. Idle blinks only while in view. | 8.6 | 8.0 | 8.8 | 8.6 | **8.50** |
+
+**Truth:** both use only the locked facts (family-owned, founded 2025 in Shoreview by Tim Brown and Noah Bergland, "We Give a Hoot") and Owl's own photos with the same true descriptions as before. Family 9's sound is generated in the browser (no audio file) and plays only when the visitor presses the button.
+
+**Checks run:** the generic gate, plus:
+- Family 8: the plaque facts; the tree grows with five real photos; every frame has a true description; choosing the Berglands opens the card with its caption.
+- Family 9: founding facts; the silent first hoot brings four photos into orbit; pressing Give a Hoot creates exactly two tones and sends out ripples; with Sound off the hoot is silent.
+
+**Ledger:**
+- **Family 8:** branch draw-on ⟦S0407⟧; frame hover ⟦S0405⟧; frame keys ⟦S1388⟧; title ⟦S0451⟧.
+- **Family 9:** blink and rest motion ⟦S0489⟧; waveform ⟦S0407⟧; hoot key ⟦S1388⟧; sound switch ⟦S0405⟧.
+
+**Defects found and fixed in the round:**
+- Family 8's trunk looked spindly; it is now one tapered trunk.
+- Its frames started at 60% scale, which made them briefly under 44 px on phones; they now start at 85% with a 56 px minimum.
+- Phone labels collided with neighbouring frames; they are hidden there.
+- Family 9's resting waveform read as a stray line between the photos; it now appears only during the hoot.

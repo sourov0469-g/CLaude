@@ -378,3 +378,15 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   slides the dial band under the needle; between towns the signal meter drops and static shimmers, and on a town
   the meter fills and the readout says "Yes, we roof in Eagan." It settles onto the nearest town when you let go.
   Search tunes straight to a town. Skills: ⟦S1107⟧ slider keyboard, ⟦S0489⟧ settle, ⟦S1388⟧ keys, ⟦S1442⟧ search.
+
+## L28 · We Give a Hoot 8 + 9 (Family stands at 7: tagline, album, numbers, say it big, owl face, porch light, pinboard)
+- **Family 8 · "The Tree"** — reference **Lusion** (lines carry the eye). A family tree drawn the other way up: one
+  trunk, "Owl Roofing · Est. 2025 · Shoreview, MN", whose branches grow (drawn on as you arrive) out to round
+  frames holding Owl's five real photos: the Browns, the Berglands, Noah at the roof edge, the crew, the
+  community. Leaves bud along the branches. Choosing a frame opens it larger with its honest caption. Skills:
+  ⟦S0407⟧ branch draw-on, ⟦S0405⟧ frame hover, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+- **Family 9 · "Give a Hoot"** — reference **Graza** (the custom-animation bar). The tagline made literal: a drawn owl in
+  the middle; press "Give a Hoot" and it blinks, opens its beak and lets out a soft hoot (a synthesized two-note
+  tone, only when pressed, with a Sound on/off switch), while ripple rings spread out and, as they pass, bring the
+  families' photos into orbit with their captions. A waveform under the owl draws the hoot. Reduced motion: no
+  ripples, photos shown. Skills: ⟦S0489⟧ blink and rest motion, ⟦S0407⟧ waveform, ⟦S1388⟧ keys, ⟦S0405⟧ switch.

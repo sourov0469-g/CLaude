@@ -1,0 +1,71 @@
+<section class="sec fam8" id="family-8" aria-labelledby="fm8-h">
+<style>
+.fam8{overflow:hidden}
+.fam8 .g{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:clamp(20px,4vw,56px);align-items:center}
+.fam8 .lede{margin:12px 0 18px;max-width:36ch}
+.fam8 .tree{position:relative;aspect-ratio:1000/680}
+.fam8 .tree svg{position:absolute;inset:0;width:100%;height:100%}
+.fam8 .br{fill:none;stroke:#8C6A3A;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.fam8 .grow .br{animation:fm8g 1.6s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes fm8g{to{stroke-dashoffset:0}}
+.fam8 .lf{fill:#6E9B4F;opacity:0;transform:scale(.2);transform-box:fill-box;transform-origin:center;transition:opacity .4s,transform .5s cubic-bezier(.3,1.6,.5,1)}
+.fam8 .grow .lf{opacity:1;transform:scale(1)}
+.fam8 .fr{position:absolute;width:15%;aspect-ratio:1;padding:0;border-radius:50%;transform:translate(-50%,-50%) scale(.85);opacity:0;background:#FBFAF6;box-shadow:0 0 0 5px #FBFAF6,0 0 0 8px #8C6A3A,0 18px 26px -12px rgba(23,17,29,.5);transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .4s,box-shadow .2s}
+.fam8 .grow .fr{transform:translate(-50%,-50%) scale(1);opacity:1}
+.fam8 .fr img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.fam8 .fr span{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;padding:3px 10px;border-radius:999px;background:rgba(251,250,246,.95);font-size:13px;font-weight:800;color:#17111D}
+.fam8 .fr:hover{transform:translate(-50%,-50%) scale(1.07)}
+.fam8 .fr[aria-pressed="true"]{box-shadow:0 0 0 5px #FBFAF6,0 0 0 9px #EAA221,0 18px 26px -12px rgba(23,17,29,.5)}
+.fam8 .fr:focus-visible{outline:3px solid var(--ink);outline-offset:10px}
+.fam8 .card{border-radius:22px;overflow:hidden;background:var(--paper);box-shadow:0 30px 50px -34px rgba(23,17,29,.55)}
+.fam8 .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.fam8 .card div{padding:16px 18px 20px}
+.fam8 .card b{display:block;font-size:20px;font-weight:800}
+.fam8 .card p{margin:4px 0 0;font-size:16px;color:var(--ink-70)}
+@media (max-width:900px){.fam8 .g{grid-template-columns:minmax(0,1fr)}.fam8 .fr{width:17%;min-width:56px}.fam8 .fr span{display:none}}
+@media (prefers-reduced-motion:reduce){.fam8 .br{stroke-dashoffset:0;animation:none!important}.fam8 .lf,.fam8 .fr{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="tree" data-owl="say:Our family tree">
+   <svg viewBox="0 0 1000 680" aria-hidden="true"></svg>
+  </div>
+  <div>
+   <span class="kick">Family-owned since 2025</span>
+   <h2 class="h2" id="fm8-h" style="margin-top:12px">The Tree</h2>
+   <p class="lede rv">One company, two founding families, and the people around them. Pick a branch.</p>
+   <div class="card" aria-live="polite"><img alt=""><div><b></b><p></p></div></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('family','8',function(root){
+  var tree = root.querySelector('.tree'), svg = root.querySelector('svg'), card = root.querySelector('.card'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var P = [
+    {x:230, y:150, src:'{{A:browns.webp}}', alt:'Tim Brown with his wife and their children', t:'The Browns', p:'Tim Brown, co-founder, with his wife and their children.'},
+    {x:770, y:150, src:'{{A:berglands.webp}}', alt:'Noah Bergland with his wife and their children', t:'The Berglands', p:'Noah Bergland, co-founder, with his wife and their children.'},
+    {x:120, y:390, src:'{{A:fam-noah.webp}}', alt:'Noah Bergland on a ladder at a roof edge', t:'On the job', p:'Noah Bergland on a ladder at a roof edge.'},
+    {x:880, y:390, src:'{{A:fam-crew.webp}}', alt:'Owl’s crew at work on a roof', t:'The crew', p:'Owl’s crew at work on a roof.'},
+    {x:500, y:80, src:'{{A:fam-community.webp}}', alt:'Community involvement', t:'The community', p:'Out in the community.'}];
+  /* branches from the top of the trunk to each frame, thick to thin */
+  var h = '<path d="M430 680C468 640 478 560 482 470 484 440 490 425 500 418 510 425 516 440 518 470 522 560 532 640 570 680z" fill="#9C7448"/><path d="M492 676C496 600 494 520 498 450" stroke="#7E5A32" stroke-width="3" fill="none" opacity=".6"/><path d="M520 676C514 610 512 540 510 470" stroke="#7E5A32" stroke-width="2" fill="none" opacity=".5"/>';
+  var paths = ['M496 430C470 330 330 280 230 150', 'M504 430C530 330 670 280 770 150', 'M490 470C380 470 220 440 120 390', 'M510 470C620 470 780 440 880 390', 'M500 420C500 300 500 200 500 80'];
+  paths.forEach(function(d, i){ h += '<path class="br" pathLength="1" d="' + d + '" stroke-width="' + (i < 2 ? 18 : 14) + '" style="animation-delay:' + (i*.12) + 's"/>'; });
+  for (var k = 0; k < 26; k++){ var a = k/26*Math.PI*2, r = 60 + (k*37 % 50), cx = [300, 700, 210, 790, 500][k % 5] + Math.cos(a)*r*.7, cy = [250, 250, 420, 420, 210][k % 5] + Math.sin(a)*r*.5;
+    h += '<ellipse class="lf" cx="' + cx.toFixed(0) + '" cy="' + cy.toFixed(0) + '" rx="13" ry="7" transform="rotate(' + ((k*47) % 180) + ' ' + cx.toFixed(0) + ' ' + cy.toFixed(0) + ')" style="transition-delay:' + (1 + k*.04).toFixed(2) + 's"/>'; }
+  h += '<rect x="372" y="560" width="256" height="70" rx="12" fill="#FBFAF6" stroke="#8C6A3A" stroke-width="4"/><text x="500" y="590" text-anchor="middle" font-size="20" font-weight="900" fill="#17111D">Owl Roofing</text><text x="500" y="616" text-anchor="middle" font-size="15" font-weight="800" fill="#8E5A12">Est. 2025 · Shoreview, MN</text>';
+  svg.innerHTML = h;
+  var cur = -1, frames = P.map(function(x, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'fr'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', x.alt);
+    b.style.left = (x.x/10) + '%'; b.style.top = (x.y/6.8) + '%'; b.style.transitionDelay = (.8 + i*.1) + 's';
+    b.innerHTML = '<img alt="" src="' + x.src + '" decoding="async"><span aria-hidden="true">' + x.t + '</span>';
+    b.addEventListener('click', function(){ pick(i); }); tree.appendChild(b); return b; });
+  function pick(i){ cur = i; var x = P[i]; frames.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); });
+    var im = card.querySelector('img'); im.src = x.src; im.alt = x.alt; card.querySelector('b').textContent = x.t; card.querySelector('p').textContent = x.p; }
+  pick(0);
+  function grow(){ tree.classList.add('grow'); setTimeout(function(){ frames.forEach(function(b){ b.style.transitionDelay = '0s'; }); }, 1600); }
+  if (OWL.reduce || !('IntersectionObserver' in window)){ grow(); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); grow(); } }, {threshold:.3}); io.observe(tree);
+});
+</script>
+</section>

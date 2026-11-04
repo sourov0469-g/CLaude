@@ -1,0 +1,227 @@
+[
+ {
+  "sec": "family",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "family"
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Tree"
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "founding facts as locked (family-owned, 2025, Shoreview)",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "the branches grow and five frames hold Owl’s real photos",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "every frame has a true description",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "choosing a frame opens it larger with its caption (the Berglands)",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "family"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Give a Hoot"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "founding facts as locked",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "on first view the owl hoots silently and four photos come into orbit",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "pressing Give a Hoot plays the two-note hoot and ripples go out",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "with Sound off the hoot is silent",
+  "ok": true
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "family",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

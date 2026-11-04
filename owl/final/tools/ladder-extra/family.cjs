@@ -39,5 +39,23 @@ module.exports = {
     await p.click(S + ' .tidy'); await p.waitForTimeout(1600);
     const back = await pos(1);
     rec('Tidy Up eases every print home', Math.abs(back[0] - home[0]) < 3 && Math.abs(back[1] - home[1]) < 3);
+  },
+  '8': async (p, S, rec, txt) => {
+    rec('founding facts as locked (family-owned, 2025, Shoreview)', await p.evaluate(S => /Est\. 2025 · Shoreview, MN/.test(document.querySelector(S + ' svg').textContent), S) && /Family-owned since 2025/i.test(txt));
+    await p.waitForTimeout(2600);
+    rec('the branches grow and five frames hold Owl’s real photos', await p.evaluate(S => document.querySelector(S + ' .tree').classList.contains('grow') && [...document.querySelectorAll(S + ' .fr')].length === 5 && [...document.querySelectorAll(S + ' .fr img')].every(i => i.src.startsWith('data:image') && i.naturalWidth > 0), S));
+    rec('every frame has a true description', await p.evaluate(S => [...document.querySelectorAll(S + ' .fr')].every(b => b.getAttribute('aria-label').length > 12) && /Tim Brown/.test(document.querySelector(S + ' .fr').getAttribute('aria-label')), S));
+    await p.click(S + ' .fr >> nth=1'); await p.waitForTimeout(400);
+    rec('choosing a frame opens it larger with its caption (the Berglands)', await p.evaluate(S => document.querySelector(S + ' .card b').textContent === 'The Berglands' && /Noah Bergland, co-founder/.test(document.querySelector(S + ' .card p').textContent) && document.querySelector(S + ' .card img').alt.length > 10 && document.querySelectorAll(S + ' .fr[aria-pressed="true"]').length === 1, S));
+  },
+  '9': async (p, S, rec, txt) => {
+    rec('founding facts as locked', /Tim Brown/.test(txt) && /Noah Bergland/.test(txt) && /2025/.test(txt) && /Shoreview/.test(txt));
+    await p.waitForTimeout(2600);
+    rec('on first view the owl hoots silently and four photos come into orbit', await p.evaluate(S => [...document.querySelectorAll(S + ' .orb')].every(o => o.style.getPropertyValue('--s') === '1') && [...document.querySelectorAll(S + ' .orb img')].every(i => i.src.startsWith('data:image') && i.alt.length > 8), S));
+    await p.evaluate(S => { window.__tones = 0; const AC = window.AudioContext; window.AudioContext = function(){ const a = new AC(); const o = a.createOscillator.bind(a); a.createOscillator = function(){ window.__tones++; return o(); }; return a; }; }, S);
+    await p.click(S + ' .hoot'); await p.waitForTimeout(500);
+    rec('pressing Give a Hoot plays the two-note hoot and ripples go out', await p.evaluate(S => window.__tones === 2 && document.querySelectorAll(S + ' .ring.go').length >= 2 && /We give a hoot/.test(document.querySelector(S + ' .say').textContent), S));
+    await p.click(S + ' .snd'); await p.waitForTimeout(1200); await p.click(S + ' .hoot'); await p.waitForTimeout(300);
+    rec('with Sound off the hoot is silent', await p.evaluate(S => window.__tones === 2 && document.querySelector(S + ' .snd').getAttribute('aria-pressed') === 'false', S));
   }
 };
