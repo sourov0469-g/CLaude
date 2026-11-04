@@ -36,7 +36,7 @@ The default is unchanged: V1 (the dial, the owner's pick) stays version 1; V2 an
   - **Self-audit:** S1306, S0502, S1473.
 - **How it differs, and why it is better:**
   - **How it differs.** V1 picks a stage from a dial, V2 runs a scrubber along a drawing, and V3 opens a chapter among spines. V4 hands the visitor the job as a deck: one stage at a time, in your hand, with the done ones piling up.
-  - **Why it is better.** It is the most tactile and the most compact version: one card at a time, readable at full size on a phone. The growing pile and the thinning deck show progress without a single extra word.
+  - **Why it is better.** It is the most tactile version, and nearly as compact as V1: one card at a time, readable at full size on a phone. The growing pile and the thinning deck show progress without a single extra word.
   - **Facts.** The stage names, weeks and lines are the section's one list (`ST`) with V1's note.
 
 ## What was built
@@ -80,7 +80,7 @@ Weighted = 0.4 D + 0.3 U + 0.2 C + 0.1 Ct = 3.2 + 2.7 + 1.6 + 1.0 = 8.5.
 
 | category | evidence | why not higher |
 |---|---|---|
-| **Design 8** | **A physical object:** one paper card at full size, the thinning deck and the growing pile, centred under the heading.<br>**The tightest version of the section:** 882px at 1440, 780px at 768, 835 to 859px on phones, all including the site's section padding. | The cards are calm paper and type; the section's drama is the throw, not the artwork. |
+| **Design 8** | **A physical object:** one paper card at full size, the thinning deck and the growing pile, centred under the heading.<br>**Tight:** 882px at 1440 (tighter than V2's 1037 and V3's 923; V1, the dial, is 853), 780px at 768, 835 to 859px on phones, all including the site's section padding. | The cards are calm paper and type; the section's drama is the throw, not the artwork. |
 | **Usability 9** | **Verified at 1440 mouse, 768 and 390 touch, and reduced motion:**<br>• a drag throws Consultation onto the pile and shows Site evaluation;<br>• a short drag springs home with nothing changed;<br>• stop 06 deals five cards and lands on Construction;<br>• Back returns to Permitting;<br>• End reaches Completion and handover (Next disabled); Home returns to Consultation (Back disabled);<br>• the screen-reader line updates each time.<br>**Measures:** 0 targets under 44px (the phone stops sit in two rows of four so each stays 44px); 0 text under 13px; 0 overflow at 360 to 1440; 0 errors. | One stage at a time: a visitor who wants all eight in view gets them from the stops (titles on desktop only) rather than the cards. |
 | **Creativity 8** | A move the section did not have: the job handed over as a deck, with progress shown physically by the pile and the thinning deck. | Card stacks are a known pattern; the craft is the spring, the dealt jumps and the honest one-stage focus. |
 | **Content 10** | **Stages:** all eight names, weeks and lines are the section's `ST`, verbatim, with V1's note.<br>**Copy:** the eyebrow and H2 are V1's.<br>Locks **0 fails**; outside links **0**. | The lead line is my wording; Muse should confirm it. |
@@ -122,7 +122,7 @@ Weighted = 0.4 D + 0.3 U + 0.2 C + 0.1 Ct = 3.2 + 2.7 + 1.6 + 1.0 = 8.5.
 | **Height at 1440** | 853px | 1037px | 923px | 882px |
 | **Where it is weaker** | Less visual | Long | Taller on phones | One stage readable at a time |
 
-**My call:** V4 is a genuine challenger. It is the most tactile and the most compact version, and it reads at full size on a phone. V1 stays the owner's pick until the owner says otherwise. The defaults are not changed.
+**My call:** V4 is a genuine challenger. It is the most tactile version, within 30px of V1's height, and it reads at full size on a phone. V1 stays the owner's pick until the owner says otherwise. The defaults are not changed.
 
 ## Evidence (`qa/new/process-v4/`)
 - `v4-1440-rest-throw-stop06-end.jpg`: at rest with the empty pile slot; a card mid-throw; after stop 06; at the end.
