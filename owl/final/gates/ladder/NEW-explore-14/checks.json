@@ -1,0 +1,157 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 14
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Say It Your Way"
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "one centred sentence with three named blanks: \"My roof is leaking and it can’t wait. Please come and take a look.\"",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "Owl answers the leak with a real service",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "tapping a blank rolls its letters up to the next words (both layers moving mid-roll)",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "\"took a storm hit\" → Storm damage help",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "keyboard: ArrowDown rolls on to \"is getting old\" → Roof replacement with the 10-year workmanship warranty",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "ArrowUp rolls back",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "the screen-reader line reads the whole sentence",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "Email This to Owl hands the sentence to the visitor’s own email app and never claims it was sent",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "the call button is the real phone",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "14",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

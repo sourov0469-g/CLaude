@@ -150,5 +150,28 @@ module.exports = {
     rec('all "no": "Sounds healthy." with a Wise Check; no score anywhere', await p.evaluate(S => document.querySelector(S + ' .sum b').textContent === 'Sounds healthy.' && /Wise Check/.test(document.querySelector(S + ' .sum p').textContent) && !/\bscore|points?\b|\d+\s*\/\s*5|you (won|lost)/i.test(document.querySelector(S).innerText), S));
     rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
     rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .acts .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '14': async (p, S, rec) => {
+    await p.waitForTimeout(1200);
+    const words = () => p.evaluate(S => [...document.querySelectorAll(S + ' .bk')].map(b => [...b.querySelectorAll('.ln:not(.out)')].pop().textContent), S);
+    rec('one centred sentence with three named blanks: "My roof is leaking and it can’t wait. Please come and take a look."', JSON.stringify(await words()) === JSON.stringify(['is leaking', 'and it can’t wait.', 'come and take a look.']) && await p.evaluate(S => [...document.querySelectorAll(S + ' .bk')].every(b => /Press to change\./.test(b.getAttribute('aria-label'))) && getComputedStyle(document.querySelector(S + ' .say')).textAlign === 'center', S));
+    rec('Owl answers the leak with a real service', await p.evaluate(S => document.querySelector(S + ' .reply small').textContent === 'Roof repair' && document.querySelector(S + ' .reply span').textContent === 'We’ll find the leak and stop it.', S));
+    await p.click(S + ' .bk >> nth=0'); await p.waitForTimeout(120);
+    rec('tapping a blank rolls its letters up to the next words (both layers moving mid-roll)', await p.evaluate(S => document.querySelectorAll(S + ' .bk')[0].querySelectorAll('.ln').length === 2, S));
+    await p.waitForTimeout(800); await p.click(S + ' .bk >> nth=0'); await p.waitForTimeout(800);
+    rec('"took a storm hit" → Storm damage help', (await words())[0] === 'took a storm hit' && await p.evaluate(S => document.querySelector(S + ' .reply small').textContent === 'Storm damage help', S));
+    await p.focus(S + ' .bk >> nth=0'); await p.keyboard.press('ArrowDown'); await p.waitForTimeout(800);
+    rec('keyboard: ArrowDown rolls on to "is getting old" → Roof replacement with the 10-year workmanship warranty', (await words())[0] === 'is getting old' && await p.evaluate(S => document.querySelector(S + ' .reply small').textContent === 'Roof replacement' && /10-year workmanship warranty/.test(document.querySelector(S + ' .reply span').textContent), S));
+    await p.keyboard.press('ArrowUp'); await p.waitForTimeout(800);
+    rec('ArrowUp rolls back', (await words())[0] === 'took a storm hit');
+    await p.click(S + ' .bk >> nth=2'); await p.waitForTimeout(800);
+    rec('the screen-reader line reads the whole sentence', await p.evaluate(S => document.querySelector(S + ' .sr').textContent === 'My roof took a storm hit and it can’t wait. Please call me back.', S));
+    let mail = ''; p.on('request', r => { if (/^mailto:/.test(r.url())) mail = r.url(); });
+    const before = await p.evaluate(() => location.href);
+    await p.evaluate(S => { window.__mt = ''; const d = Object.getOwnPropertyDescriptor(window, 'location'); }, S);
+    await p.click(S + ' .mail').catch(() => {}); await p.waitForTimeout(500);
+    rec('Email This to Owl hands the sentence to the visitor’s own email app and never claims it was sent', await p.evaluate(S => /Your email app should open with your words filled in\. Send it from there, or call \(651\) 977-6027\./.test(document.querySelector(S + ' .note').textContent) && !/\b(sent|received|we got)\b/i.test(document.querySelector(S + ' .note').textContent), S));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
+    rec('the call button is the real phone', await p.evaluate(S => document.querySelector(S + ' .acts a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };

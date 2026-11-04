@@ -1,0 +1,84 @@
+<section class="sec explore14" id="explore-14" aria-labelledby="ex14-h">
+<style>
+.explore14{overflow:hidden}
+.explore14 .ctr{max-width:1120px;margin:0 auto;text-align:center}
+.explore14 .hd{margin-bottom:clamp(18px,3vw,36px)}
+.explore14 .hd .h2{font-size:clamp(24px,2.4vw,32px)}
+.explore14 .lede{margin:8px auto 0;max-width:46ch;font-size:17px}
+.explore14 .say{margin:0;font-size:clamp(34px,5.4vw,78px);font-weight:900;letter-spacing:-.035em;line-height:1.22;color:#17111D;text-wrap:balance}
+.explore14 .bk{position:relative;display:inline-flex;align-items:baseline;max-width:100%;text-align:center;gap:.12em;margin:0 .04em;padding:0 .08em .02em;border:0;background:none;font:inherit;letter-spacing:inherit;color:#8E5A12;cursor:pointer;border-radius:.18em;vertical-align:baseline;min-height:44px}
+.explore14 .bk .win{display:inline-grid;overflow:hidden;padding-bottom:.06em;max-width:100%}
+.explore14 .bk .ln{grid-area:1/1;white-space:normal}
+.explore14 .bk .wd{display:inline-block;white-space:nowrap}
+.explore14 .bk .ln i{display:inline-block;font-style:normal;transition:transform .5s cubic-bezier(.16,1,.3,1) calc(var(--i) * 12ms)}
+.explore14 .bk .ln.enter i{transform:translateY(105%)}
+.explore14 .bk .ln.out i{transform:translateY(-105%)}
+.explore14 .bk svg{width:.32em;height:.32em;flex:none;align-self:center;margin:0 -.04em 0 .02em;color:#EAA221;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.explore14 .bk::after{content:"";position:absolute;left:.08em;right:.08em;bottom:.02em;height:.09em;border-radius:.05em;background:#EAA221;transform-origin:left;transform:scaleX(0);transition:transform .8s cubic-bezier(.65,0,.35,1) var(--d,0s)}
+.explore14 .on .bk::after{transform:scaleX(1)}
+@media (hover:hover) and (pointer:fine){.explore14 .bk:hover{background:rgba(234,162,33,.12)}.explore14 .bk:hover svg{transform:rotate(180deg)}}
+.explore14 .bk:active{scale:.97}
+.explore14 .bk:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.explore14 .reply{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;margin:clamp(20px,3vw,34px) auto 0;padding:14px 22px;border-radius:999px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 18px 30px -24px rgba(23,17,29,.5);font-size:18px;font-weight:700;color:#17111D}
+.explore14 .reply small{padding:4px 10px;border-radius:999px;background:rgba(234,162,33,.2);color:#8E5A12;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.explore14 .reply.swap{animation:ex14r .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes ex14r{0%{opacity:.25;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.explore14 .acts{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:22px}
+.explore14 .acts .btn{min-width:260px;min-height:58px;font-size:18px}
+.explore14 .note{margin:12px auto 0;max-width:52ch;min-height:22px;font-size:15px;font-weight:600;color:var(--ink-70)}
+.explore14 .hint{margin:14px 0 0;font-size:14px;font-weight:700;color:var(--ink-70)}
+@media (max-width:640px){.explore14 .say{font-size:clamp(28px,8.4vw,40px)}.explore14 .acts .btn{min-width:0;width:100%}.explore14 .reply{border-radius:20px}}
+@media (prefers-reduced-motion:reduce){.explore14 .bk .ln i,.explore14 .bk .win,.explore14 .bk svg{transition:none}.explore14 .bk::after{transition:none;transform:scaleX(1)}.explore14 .reply.swap{animation:none}}
+</style>
+<div class="wrap">
+ <div class="ctr">
+  <div class="hd"><span class="kick">Explore your roof</span><h2 class="h2" id="ex14-h" style="margin-top:12px">Say It Your Way</h2>
+   <p class="lede rv">No roof words needed. Tap the underlined words until the sentence sounds like you.</p></div>
+  <p class="say" data-owl="say:Tap the words">My roof <button class="bk" type="button" data-k="0" style="--d:.2s"></button> <button class="bk" type="button" data-k="1" style="--d:.45s"></button> Please <button class="bk" type="button" data-k="2" style="--d:.7s"></button></p>
+  <div class="reply" aria-live="polite"><small></small><span></span></div>
+  <div class="acts"><a class="btn btn-amber" href="tel:+16519776027" data-mag data-owl="hoot">Call (651) 977-6027</a><button class="btn btn-line mail" type="button" data-mag data-owl="peek">Email This to Owl</button></div>
+  <p class="note" aria-live="polite"></p>
+  <p class="sr" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+ </div>
+</div>
+<script>
+OWL.reg('explore','14',function(root){
+  /* one idea: say what's wrong in your own words; Owl answers; call, or hand the sentence to your own email app */
+  var say = root.querySelector('.say'), bks = [].slice.call(root.querySelectorAll('.bk')), reply = root.querySelector('.reply'), note = root.querySelector('.note'), sr = root.querySelector('.sr'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var O = [
+    ['is leaking', 'lost some shingles', 'took a storm hit', 'is getting old', 'just needs a look'],
+    ['and it can’t wait', 'but it can wait a little', 'and I’m not sure how bad it is'],
+    ['come and take a look', 'call me back', 'tell me straight what it needs']];
+  var R = [
+    ['Roof repair', 'We’ll find the leak and stop it.'],
+    ['Roof repair', 'We’ll put back what’s missing, and check the rest while we’re up there.'],
+    ['Storm damage help', 'We’ll find the hail and wind damage and put it right.'],
+    ['Roof replacement', 'When it’s time, we’ll replace it, backed by our 10-year workmanship warranty.'],
+    ['Wise Check', 'A Wise Check: we’ll look it over and tell you how it’s doing.']];
+  var cur = [0, 0, 0], NAMES = ['What’s happening', 'How soon', 'What you’d like'];
+  var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9l5-5 5 5M7 15l5 5 5-5"/></svg>';
+  function letters(t){ var s = document.createElement('span'), n = 0; s.className = 'ln'; t.split(' ').forEach(function(w, wi){ if (wi) s.appendChild(document.createTextNode(' ')); var wd = document.createElement('span'); wd.className = 'wd'; w.split('').forEach(function(ch){ var e = document.createElement('i'); e.textContent = ch; e.style.setProperty('--i', n++); wd.appendChild(e); }); s.appendChild(wd); }); return s; }
+  function shown(k){ return O[k][cur[k]] + (k ? '.' : ''); }
+  function sentence(){ return 'My roof ' + O[0][cur[0]] + ' ' + O[1][cur[1]] + '. Please ' + O[2][cur[2]] + '.'; }
+  function label(b){ var k = +b.dataset.k; b.setAttribute('aria-label', NAMES[k] + ': ' + O[k][cur[k]] + '. Press to change.'); }
+  bks.forEach(function(b){ var k = +b.dataset.k; b.innerHTML = '<span class="win"></span>' + ICON; b.querySelector('.win').appendChild(letters(shown(k))); label(b); });
+  function answer(){ var r = R[cur[0]]; reply.querySelector('small').textContent = r[0]; reply.querySelector('span').textContent = r[1]; reply.classList.remove('swap'); void reply.offsetWidth; reply.classList.add('swap'); }
+  function roll(b, dir){ var k = +b.dataset.k, n = O[k].length; cur[k] = (cur[k] + dir + n) % n; var w = b.querySelector('.win'), old = w.querySelector('.ln:not(.out)'), nx = letters(shown(k));
+    label(b); sr.textContent = sentence(); note.textContent = ''; if (k === 0) answer();
+    if (OWL.reduce){ w.innerHTML = ''; w.appendChild(nx); return; }
+    nx.classList.add('enter'); w.appendChild(nx); void nx.offsetWidth;
+    old.classList.add('out'); nx.classList.remove('enter');
+    setTimeout(function(){ if (old.parentNode) old.remove(); }, 650 + O[k][cur[k]].length*12); }
+  bks.forEach(function(b){ b.addEventListener('click', function(){ roll(b, 1); });
+    b.addEventListener('keydown', function(e){ if (e.key === 'ArrowDown'){ e.preventDefault(); roll(b, 1); } else if (e.key === 'ArrowUp'){ e.preventDefault(); roll(b, -1); } }); });
+  root.querySelector('.mail').addEventListener('click', function(){
+    var body = sentence() + '\n\nName:\nAddress:\nBest phone number:\n';
+    location.href = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Roof help, please') + '&body=' + encodeURIComponent(body);
+    note.textContent = 'Your email app should open with your words filled in. Send it from there, or call (651) 977-6027.'; });
+  answer();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ say.classList.add('on'); OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); say.classList.add('on'); } }, {threshold:.4}); io.observe(say);
+});
+</script>
+</section>
