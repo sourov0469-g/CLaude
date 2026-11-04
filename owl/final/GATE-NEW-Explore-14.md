@@ -75,15 +75,62 @@ Screenshots: `gates/ladder/NEW-explore-14/explore-v14-1440.jpg`, `-768.jpg`, `-3
    - Every path ends at a call or a ready-written message, with nothing to type except their name.
    - The tone is a person talking ("tell me straight what it needs").
 
-## Scorecard (self-rating, out of 10)
-| Measure | Score | Why |
-|---|---|---|
-| Homeowner clarity | 9 | One sentence in everyday words. Nothing to learn. |
-| Distinct from V1–V13 | 9 | First version with no roof picture, no cards and no columns. The visitor writes. |
-| Playfulness | 8 | The letter roll and Owl's instant reply. Restrained, never a game (only V3 is a game). |
-| Path to action | 9 | Call is primary. Email carries their own words. |
-| Accessibility | 9 | Real buttons, arrow keys, live sentence, axe 0 violations, 44 px targets on phone. |
-| Honesty | 10 | The email is never claimed as sent. Facts lock held. |
+## Scorecard gate (restated after Muse's format correction)
+The earlier six-row self-rating (9.0) is **withdrawn**. It used my own categories, not the gate's. This is the standard scorecard used by every other gate: weights Design 40 · Usability 30 · Creativity 20 · Content 10. To pass, the weighted total must be at least 7.0, with no category under 6.0 and zero vetoes. Each score below cites the evidence it rests on and what it loses points for. The WEB-SKILLS tags cited in the plan line's per-element ledger (⟦S0451⟧, ⟦S0405⟧, ⟦S1107⟧, ⟦S0407⟧, ⟦S0409⟧, ⟦S1442⟧, ⟦S0400⟧) stand unchanged.
+
+| Category | Weight | Score | Weighted |
+|---|---|---|---|
+| Design | 40 | 8.4 | 3.36 |
+| Usability | 30 | 8.6 | 2.58 |
+| Creativity | 20 | 8.8 | 1.76 |
+| Content | 10 | 8.8 | 0.88 |
+| **Total** | **100** | | **8.58** |
+
+Recomputed: 8.4 × 0.40 + 8.6 × 0.30 + 8.8 × 0.20 + 8.8 × 0.10 = 3.36 + 2.58 + 1.76 + 0.88 = **8.58**. Pass: ≥ 7.0, lowest category 8.4 (≥ 6.0), zero vetoes (below).
+
+### Design: 8.4
+- **Evidence:**
+  - `explore-v14-1440.jpg`: one centred column, with the sentence at 78 px Inter 900 as the only large element. Three amber-brown blanks with drawn underlines, the reply pill, then the two buttons.
+  - `explore-v14-390.jpg`: the sentence wraps by whole words at 33 px, and the reply and the Call button sit above the fold line of a 844 px screen.
+  - `explore-v14-longest-390.jpg` and `-longest-1440.jpg`: the longest options wrap cleanly, with 0 px sideways scroll at 1440, 768 and 390 (checks).
+  - Light background only; palette and type from the locked identity; buttons from the GATE-BUTTONS system.
+- **Loses points for** two remaining defects, R1 and R2 below:
+  - the width snap at the end of a roll;
+  - on phone, the up/down mark of a two-line blank sits at the far right edge, away from the words (`explore-v14-longest-390.jpg`).
+  
+  The page is also very plain by design. That is a choice, not a defect, but it gives the eye nothing besides type.
+
+### Usability: 8.6
+- **Evidence (checks.json, 24/24):**
+  - every blank is a real `<button>` with a name that ends "Press to change.";
+  - Enter, Space, Arrow Down and Arrow Up all work (checks "keyboard: ArrowDown…" and "ArrowUp rolls back");
+  - a live line reads the whole sentence ("the screen-reader line reads the whole sentence");
+  - all controls are at least 44 px on desktop and on phone;
+  - axe WCAG 2.1 A/AA finds 0 violations;
+  - reduced motion is clean;
+  - Call is the real phone;
+  - the email hand-off never claims it was sent.
+- **Loses points for:**
+  - discoverability rests on the lede ("Tap the underlined words") and the small up/down mark, with no first-tap nudge (R4);
+  - Email This to Owl relies on a mail app being set up, and on a desktop without one nothing visible happens except the status line, which offers the phone number (R5);
+  - forward-only tapping means a visitor who passes their option must cycle round (arrows go back, taps do not).
+
+### Creativity: 8.8
+- **Evidence:**
+  - this is the only Explore version of 14 where the visitor writes something. V1 to V13 all show a roof, a house, pictures or cards (plan line, "How it differs");
+  - the letter roll turns choosing into a small pleasure (`explore-v14-mid-roll-1440.jpg`: old letters leaving upward, new letters rising, clipped at the blank);
+  - Owl answers straight away (`explore-v14-after-two-taps-1440.jpg`).
+- **Loses points for:**
+  - fill-in-the-blank sentences are a known pattern (mad-libs forms);
+  - the novelty here is the homeowner framing and the roll, not the format.
+
+### Content: 8.8
+- **Evidence:**
+  - every one of the 45 combinations (5 × 3 × 3) reads as correct English; the "since when" blank was removed for that reason (fixed defect 5);
+  - every problem maps to a real Owl service, and only facts from the lock are used ((651) 977-6027, info@owlroofing.com, the 10-year workmanship warranty);
+  - no construction words (check passes);
+  - the tone is a person talking.
+- **Loses points for** R3: Owl's reply follows only the problem blank. Choosing "and it can’t wait" does not change the reply, so the urgency the visitor states goes unacknowledged on the page (it does reach Owl in the email).
 
 ## Checks: `gates/ladder/NEW-explore-14/checks.json` · **24/24 PASS**
 - default view still V1 only; version count 14; only V14 visible; anchor id; one h2;
@@ -107,6 +154,46 @@ Regression: `home-verify.cjs` **50/50 PASS**.
 6. **Phone targets.** The blanks measured 43 px tall at 390, so a 44 px minimum height was added.
 7. **Evidence.** The cursor-companion owl drifted over "Please" in the shot. `sec-shots.cjs` now hides `.owlc` by default (`OWL=1` shows it), the same as the GATE-BUTTONS evidence. This is a tool change only; the site is unchanged.
 
-## Reference transfer
-- **Lando Norris, from the GATE-BUTTONS study:** the clipped, per-letter, staggered roll (`translateY(±105%)`, `cubic-bezier(.16,1,.3,1)`, 12 ms per letter). There it is a hover; here it is the whole interaction, and it is triggered by a tap, so touch gets it too.
-- **Button system v2:** used unchanged on Call and Email, and inherited by the blanks (press scale, splash, focus snap).
+## Remaining defects (honestly named, not fixed in this gate)
+- **R1 · width snap at the end of a roll (Design).**
+  - While a blank rolls, the old and new words share one grid cell, so the blank holds the wider width. When the old words are removed about 650 ms later, the blank snaps to the new width and the centred words around it shift sideways.
+  - Measured with `gates/ladder/NEW-explore-14/jump14.cjs` (output in `jump14.txt`), "lost some shingles" → "took a storm hit": 715 → 599 px at 1440 (116 px) and 301 → 252 px at 390 (49 px). The sentence height does not change.
+  - Proposed fix: animate the blank's width from old to new during the roll (measure both, then transition `width`), or remove the old line at the midpoint of the roll.
+- **R2 · up/down mark detached on two-line blanks (Design, phone).** When a blank wraps to two lines, the button stretches to full width and the mark sits at the right edge, away from the words. Proposed fix: place the mark inline after the last word.
+- **R3 · the reply ignores urgency (Content).** Proposed fix: when "and it can’t wait" is chosen, add one plain line to the reply ("Call us and we’ll come as soon as we can."). No promised times, because none are in the facts lock.
+- **R4 · no first-tap nudge (Usability).** Earlier I removed a duplicate hint line; nothing replaced it. Proposed fix: one gentle bounce of the first blank's mark the first time the sentence comes into view, skipped under reduced motion.
+- **R5 · email depends on a mail app (Usability).** This is how `mailto:` works and it is not fully fixable without a form. The status line already offers the phone number. A "copy my sentence" fallback would close the gap.
+- **R6 · test coverage gap.** The email check confirms only the honest status line. It does not read the generated `mailto:` address, subject or body. Proposed fix: intercept `location.href` in the test and assert all three.
+
+## Vetoes checked: **zero vetoes**
+- **Identity changed:** none. Locked palette, Inter, owl mark and button system.
+- **Invented facts, quotes, reviews or jobs:** none. Only (651) 977-6027, info@owlroofing.com, the 10-year workmanship warranty and the service names. The facts-lock check passes.
+- **Dark background:** none. Light background only.
+- **Roofer-incorrect claim:** none. No construction terms, and no promise of times or prices.
+- **Form claims saved or sent:** none. The status says the email app "should open", and the check passes.
+- **Defaults changed:** none. The default view still shows Explore V1 (check passes; home-verify 50/50).
+- **A second game:** none. This is a sentence, not a game; Explore V3 remains the only game.
+- **Bot wall bypassed:** none. Nothing was fetched for this version.
+- **Sub-agents or background tasks:** none (statement below).
+
+## Reference transfer: Lando Norris
+**What transfers**
+- **The clipped letter roll:** each letter is its own element inside an `overflow:hidden` window, translated by ±105 %, so the old word leaves upward as the new one rises in.
+- **Timing:** a per-letter stagger of 12 ms, and the curve `cubic-bezier(.16,1,.3,1)`, which is fast out and soft landing.
+- **The text itself is the moving thing,** with no extra shapes or effects.
+
+**What does not transfer, and why**
+- **Hover as the trigger.** On Lando's site the roll fires on hover and returns on leave. Here it fires on tap or key and stays, because a stressed homeowner on a phone has no hover, and the new words are the content, not decoration.
+- **The roll returning to the same word.** Lando's roll swaps a label for a copy of itself. Here each roll moves to a different option, so the roll means "changed", not "you are pointing here".
+- **Lando's scale, colour, dark backgrounds and motorsport energy.** The page stays on Owl's light cream with amber accents, and the motion stays restrained (one roll per tap, nothing looping).
+- **Cursor-led effects.** None are used. Touch and keyboard get the full interaction.
+
+The GATE-BUTTONS system v2 is used unchanged on Call (primary: phone ring, sheen, ripple) and Email (secondary: sweep). The blanks inherit its press scale, tap splash and focus snap.
+
+## Process statement
+- **No sub-agents and no background tasks were used** for Explore 14 or for this restatement.
+- All work ran in my main turn as short foreground commands, each with an explicit time limit (the longest was 235 s, for the ladder test).
+- No parallel sessions. Nothing was published; the work is in the repository only, on `claude/sweet-hypatia-it8evf`.
+
+## STOP
+Explore 14 stops here for Muse's judgment. Explore 15 does not start until Muse accepts this gate.
