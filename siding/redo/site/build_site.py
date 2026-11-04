@@ -534,6 +534,36 @@ def svcK():
 SVK = svcK()
 
 
+# ---------------------------------------------------------------- Background V2 (AUSTIN-BACKGROUND-V2-CODE-COPY-2026-11-05)
+BG2_DEFAULT = 'b2'
+BG2_LIST = [['b1', 'B1 Relief terrain'], ['b2', 'B2 Street of roofs'], ['b3', 'B3 Material field'], ['ig', 'IG exact (their code and art; comparison only)'], ['v1', 'V1 (previous background)']]
+
+
+def bg2_html():
+    """The copied Immersive Garden background engine (src/bg2/engine.bundle.js, Three.js r150) and one inert JSON block per
+    world; only the chosen world (?bg=, else BG2_DEFAULT) is decoded at run time."""
+    import base64
+    b = lambda p: base64.b64encode(open(p, 'rb').read()).decode()
+    M = os.path.join(HERE, 'media'); IGD = os.path.join(HERE, '..', '..', 'bgstudy-v2', 'background-code')
+    W = {}
+    td = os.path.join(M, 'igx', 'tex')
+    W['ig'] = {'kind': 'ig', 'plaster': [b(os.path.join(IGD, 'home', 'plaster.jpg')), 'image/jpeg'],
+               'maskNoise': [b(os.path.join(IGD, 'global', 'noises', 'mask-noise.png')), 'image/png'],
+               'att': [b(os.path.join(IGD, 'global', 'noises', 'rgb-attenuation-0_9.png')), 'image/png'],
+               'geo': b(os.path.join(M, 'igx', 'geo.bin.gz')), 'meta': json.load(open(os.path.join(M, 'igx', 'geo.json'))),
+               'tex': [b(os.path.join(td, f)) for f in sorted(os.listdir(td))]}
+    C = os.path.join(M, 'bg2', 'common')
+    common = {'plaster': [b(os.path.join(C, 'plaster.webp')), 'image/webp'], 'maskNoise': [b(os.path.join(C, 'mask.webp')), 'image/webp'], 'att': [b(os.path.join(C, 'att.webp')), 'image/webp']}
+    for w in ('b1', 'b2', 'b3'):
+        d = os.path.join(M, 'bg2', w); cfg = json.load(open(os.path.join(d, 'world.json')))
+        W[w] = {'kind': 'austin', 'depth': cfg['depth'], 'mx': cfg['mx'], 'my': cfg['my'], **common,
+                'panels': [{'h': b(os.path.join(d, f'p{k}_h.webp')), 'l': [b(os.path.join(d, f'p{k}_l{i}.webp')) for i in range(1, 6)]} for k in range(cfg['npan'])]}
+    blocks = ''.join(f'<script type="application/json" id="bgw-{k}">{json.dumps(v, separators=(",", ":"))}</script>' for k, v in W.items())
+    loader = "<script>(function(){var s=window.__BGSEL;if(s==='v1'||!window.BG2)return;var el=document.getElementById('bgw-'+s);if(!el)return;BG2.start(JSON.parse(el.textContent)).then(function(r){window.__BG2=r;},function(e){console.warn('bg2',e);});})();</script>"
+    return blocks + '<script>' + src('bg2/engine.bundle.js') + '</script>' + loader
+
+
+
 def bg_panels():
     # the hidden world: three baked relief panels (bg/relief.py), each as two WebPs (levels 1-3; levels 4-5 + plaster grain)
     import base64 as _b
@@ -619,7 +649,7 @@ def build():
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main data-page="home">{main}</main>{pages}{foot}{MBAR}{film}
-<script>window.__BG={json.dumps(bg_panels())};{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+<script>(function(){{var s=new URLSearchParams(location.search).get('bg')||'{BG2_DEFAULT}';window.__BGSEL=s;window.__BGLIST={json.dumps(BG2_LIST)};if(s!=='v1')return;window.__BG={json.dumps(bg_panels())};{src('world.js')}}})()</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script>{bg2_html()}</body></html>'''
 
 
 if __name__ == '__main__':
