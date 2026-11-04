@@ -10,7 +10,7 @@ from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, 
 # the live winner of every slot; the rest become backups
 LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
-MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'svc6', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'vis6', 'vis7', 'windows', 'win2', 'win3', 'win4', 'win5', 'win6', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'rev6', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'proc6', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'seq6', 'area', 'area2', 'area3', 'area4', 'area5', 'area6', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'cta6', 'p_base', 'nav']
+MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'svc6', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'vis6', 'vis7', 'windows', 'win2', 'win3', 'win4', 'win5', 'win6', 'win7', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'rev6', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'proc6', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'seq6', 'area', 'area2', 'area3', 'area4', 'area5', 'area6', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'cta6', 'p_base', 'nav']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
 WORK = os.path.join(HERE, '..', '..', 'work')
 # subpages: page views inside the same file (pages.json: page list + each section's module, object and versions)
@@ -238,6 +238,31 @@ def heroL():
 <p class="lnote">Each colour is sampled from the sunlit part of the work in that job’s photo: the siding, the shingles or the window frames. Photo colours, not paint or product names.</p></section>'''
 
 
+def winL():
+    """Windows L (new-versions addendum, pass 2): MERSI's seam turned into a window's meeting rail. The firm's four
+    published window before/after pairs (svcpairs.json, the windows page) hang as four windows on one lap wall; lifting a
+    sash raises the after photo from the sill with the rail riding the seam. Records exactly as published."""
+    from PIL import Image
+    import base64 as _b, io
+    P = json.load(open(os.path.join(WORK, 'data', 'svcpairs.json')))['windows']
+    def enc(i, c):
+        im = Image.open(os.path.join(WORK, 'dl', f'windows{i}{c}-720.webp')).convert('RGB').resize((640, 400), Image.LANCZOS)
+        b = io.BytesIO(); im.save(b, 'WEBP', quality=58, method=6); return 'data:image/webp;base64,' + _b.b64encode(b.getvalue()).decode()
+    e = html.escape
+    def win(i, r):
+        return (f'<figure class="wlw" style="--n:{i}"><button type="button" class="wlf" aria-pressed="false" aria-label="{e(r["place"])}: show the new windows">'
+                f'<img class="wlb" src="{enc(i, "b")}" alt="" decoding="async"><img class="wla" src="{enc(i, "a")}" alt="" decoding="async">'
+                f'<span class="wlrail" aria-hidden="true"><i></i></span><span class="wlchip" aria-hidden="true"><b>Before</b><b>After</b></span></button>'
+                f'<figcaption class="wlsill"><b>{e(r["place"])}</b><span>{e(r["when"])} · Installed: {e(r["installed"])}</span><span>Windows portion: {e(r["band"])}</span>'
+                f'<span class="vh">{e(r["before"]["alt"])}. {e(r["after"]["alt"])}.</span>'
+                f'<a href="https://www.austinprosiding.com{e(r["href"])}" target="_blank" rel="noopener">See the project</a></figcaption></figure>')
+    return f'''<section class="sec wnL" id="windows" aria-labelledby="wnL-h">
+<div class="wlh"><div><h2 class="sec-h" id="wnL-h" data-split>Lift the sash.</h2><p class="sec-p">Four of our window jobs, before and after. Lift each sash to see the new windows go in.</p></div>
+<button type="button" class="btn light wlall" aria-pressed="false">Lift every sash</button></div>
+<div class="wlwall" data-solid>{''.join(win(i, r) for i, r in enumerate(P))}</div>
+<div class="wlft"><p>Four of our <b>388 documented window jobs</b>, published with before-and-after photos.</p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
+
+
 def heroK():
     """Hero K (new-versions addendum): MERSI's split-slider on the firm's own six documented before/after pairs
     (pairs.json, the published project pages). Before fills the left half, after the right; on each change the halves
@@ -314,7 +339,7 @@ VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
              ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['l', 'In their own colours'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs'], ['e', 'Pick a part of the house'], ['f', 'The magazine spread'], ['g', 'Side by side'], ['h', 'Pull a board'], ['i', 'Three rings, one visit'], ['j', 'The index'], ['k', 'Run the reel'], ['l', 'Built from our records']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument'], ['e', 'Pairings to start from'], ['f', 'The colour map'], ['g', 'Four questions'], ['h', 'Colour in Austin light'], ['i', 'Look closer'], ['j', 'Your house, on the street'], ['k', 'Open a colour'], ['l', 'Roll it on']],
-    'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record'], ['e', '376 jobs, by maker'], ['f', 'How each window opens'], ['g', 'Frame colours, by maker'], ['h', 'Count your windows'], ['i', 'A window of words'], ['j', 'From opening to trim'], ['k', '376 jobs, set in type']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours'], ['e', 'The names they mention'], ['f', 'All 30, searchable'], ['g', 'A steady stream'], ['h', 'Letters from homeowners'], ['i', 'One line, poster size'], ['j', '474, and the 30 we show'], ['k', 'Marked up by hand']],
+    'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record'], ['e', '376 jobs, by maker'], ['f', 'How each window opens'], ['g', 'Frame colours, by maker'], ['h', 'Count your windows'], ['i', 'A window of words'], ['j', 'From opening to trim'], ['k', '376 jobs, set in type'], ['l', 'Lift the sash']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours'], ['e', 'The names they mention'], ['f', 'All 30, searchable'], ['g', 'A steady stream'], ['h', 'Letters from homeowners'], ['i', 'One line, poster size'], ['j', '474, and the 30 we show'], ['k', 'Marked up by hand']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns'], ['e', 'Turn the dial'], ['f', 'Questions at each step'], ['g', 'Stamp the card'], ['h', 'One paragraph'], ['i', 'Your part, and ours'], ['j', 'Four numbers'], ['k', 'Handed along']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)'], ['e', 'Inspect at dusk'], ['f', 'Measure the opening'], ['g', 'Shingle from the eave up'], ['h', 'Level the window'], ['i', 'Nail it on the studs'], ['j', 'Name the parts'], ['k', 'Flash the window']],
     'area': [['a', 'Thread board'], ['b', 'Street finder'], ['c', 'Drive round our jobs'], ['d', 'Every town, ranked'], ['e', 'Is your street on our books?'], ['f', 'The job board'], ['g', 'The streets we know'], ['h', 'Town by trade'], ['i', 'Miles from our door'], ['j', 'Year by year'], ['k', 'Month by month']], 'book': [['a', 'Work order'], ['b', 'Press the board'], ['c', 'The record, then the call'], ['d', 'One number'], ['e', 'The week, at a glance'], ['f', 'Come by the office'], ['g', 'Three ways in'], ['h', 'Write us a postcard'], ['i', 'Day and night'], ['j', 'The receipt'], ['k', 'Next stop: your house']]}
 SLOTNAMES = {'hero': 'Hero', 'services': 'Services', 'vis': 'Visualiser', 'windows': 'Windows', 'reviews': 'Reviews', 'process': 'Process', 'try': 'Try the job', 'area': 'On your street', 'book': 'Booking'}
@@ -363,7 +388,7 @@ const PLAY=%PLAY%,PAUSE=%PAUSE%;
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(document);Svc4.wire(document);Svc5.wire(document);Svc6.wire(document);Vis.wire(document);Vis2.wire(document);Vis3.wire(document);Vis4.wire(document);Vis5.wire(document);Vis6.wire(document);Vis7.wire(document);Win.wire(document);Win2.wire(document);Win3.wire(document);Win4.wire(document);Win5.wire(document);Win6.wire(document);Rev.wire(document);Rev2.wire(document);Rev3.wire(document);Rev4.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Rev5.wire(document);Rev6.wire(document);Proc3.wire(document);Proc4.wire(document);Proc5.wire(document);Proc6.wire(document);Seq3.wire(document);Seq4.wire(document);Seq5.wire(document);Seq6.wire(document);Area3.wire(document);Area4.wire(document);Area5.wire(document);Area6.wire(document);Cta3.wire(document);Cta4.wire(document);Cta5.wire(document);Cta6.wire(document);Nav.wire();Bx.init();
+Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(document);Svc4.wire(document);Svc5.wire(document);Svc6.wire(document);Vis.wire(document);Vis2.wire(document);Vis3.wire(document);Vis4.wire(document);Vis5.wire(document);Vis6.wire(document);Vis7.wire(document);Win.wire(document);Win2.wire(document);Win3.wire(document);Win4.wire(document);Win5.wire(document);Win6.wire(document);Win7.wire(document);Rev.wire(document);Rev2.wire(document);Rev3.wire(document);Rev4.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Rev5.wire(document);Rev6.wire(document);Proc3.wire(document);Proc4.wire(document);Proc5.wire(document);Proc6.wire(document);Seq3.wire(document);Seq4.wire(document);Seq5.wire(document);Seq6.wire(document);Area3.wire(document);Area4.wire(document);Area5.wire(document);Area6.wire(document);Cta3.wire(document);Cta4.wire(document);Cta5.wire(document);Cta6.wire(document);Nav.wire();Bx.init();
 })();'''
 
 
@@ -376,7 +401,7 @@ def build():
             f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
     main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd'], 'e': pre['se'], 'f': pre['sf'], 'g': pre['sg'], 'h': pre['sh'], 'i': pre['si'], 'j': pre['sj'], 'k': SVK[0], 'l': pre['sl']}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd'], 'e': pre['ve'], 'f': pre['vf'], 'g': pre['vg'], 'h': pre['vh'], 'i': pre['vi'], 'j': pre['vj'], 'k': pre['vk'], 'l': pre['vl']}) +
-            slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd'], 'e': pre['we'], 'f': pre['wf'], 'g': pre['wg'], 'h': pre['wh'], 'i': pre['wi'], 'j': pre['wj'], 'k': pre['wk']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd'], 'e': pre['re'], 'f': pre['rf'], 'g': pre['rg'], 'h': pre['rh'], 'i': pre['ri'], 'j': pre['rj'], 'k': pre['rk']}) +
+            slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd'], 'e': pre['we'], 'f': pre['wf'], 'g': pre['wg'], 'h': pre['wh'], 'i': pre['wi'], 'j': pre['wj'], 'k': pre['wk'], 'l': winL()}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd'], 'e': pre['re'], 'f': pre['rf'], 'g': pre['rg'], 'h': pre['rh'], 'i': pre['ri'], 'j': pre['rj'], 'k': pre['rk']}) +
             slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd'], 'e': pre['pe'], 'f': pre['pf'], 'g': pre['pg'], 'h': pre['ph'], 'i': pre['pi'], 'j': pre['pj'], 'k': pre['pk']}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd'], 'e': pre['qe'], 'f': pre['qf'], 'g': pre['qg'], 'h': pre['qh'], 'i': pre['qi'], 'j': pre['qj'], 'k': pre['qk']}) +
             slot('area', {'a': pre['aa'], 'b': pre['ab'], 'c': pre['ac'], 'd': pre['ad'], 'e': pre['ae'], 'f': pre['af'], 'g': pre['ag'], 'h': pre['ah'], 'i': pre['ai'], 'j': pre['aj'], 'k': pre['ak']}) + slot('book', {'a': pre['ca'], 'b': pre['cb'], 'c': pre['cc'], 'd': pre['cd'], 'e': pre['ce'], 'f': pre['cf'], 'g': pre['cg'], 'h': pre['ch'], 'i': pre['ci'], 'j': pre['cj'], 'k': pre['ck']}))
     foot = pre['ft']

@@ -1308,10 +1308,16 @@ Every text element is paired with the nearest painted background behind it, as r
   - press 114 → 258;
   - focus ring 267 → 272;
   - 0 errors across 226 views.
-- **Gate:** GATE-BUTTONS.md (with GATE-BUTTONS-LEDGER.md), 8.58 PASS, waiting for Muse's judgment.
+- **Gate:** GATE-BUTTONS.md (with GATE-BUTTONS-LEDGER.md), 8.58 PASS. **Accepted by Muse.**
 - **Standing rule from now on:** every new version inherits the button system.
   - Use `.btn` / `.btn.key` for board buttons.
   - Never set `scale` / `translate` on a control's own `:hover` / `:active` (the system owns those two properties).
   - Draggable pieces capture the pointer.
 
-**Next, after the accept:** Windows L.
+## New versions, pass 2 (continued)
+
+| # | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 4 | Windows | **L, "Lift the sash"** (`?windows=l`) | MERSI (its seam as a window's meeting rail: the four published window before/after pairs; lifting a sash raises the after photo from the sill) | GATE-NEW-Windows-L.md | 8.64 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Reviews L.
