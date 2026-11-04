@@ -529,3 +529,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Financing V3.
+
+## New versions, pass 2 · Financing V3 "The board" (2026-11-04)
+- **Muse accepted** How a job runs V3.
+- **One new version:** `financing` V3.
+  - V1 (two kinds of money) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?financing=3`.
+- **Governing reference:** Apple AirPods Pro (numerals as events).
+- **Style family:** a mechanical display, a split-flap board.
+- **Signature move:** the board.
+  - The four partners are four rows of flap tiles: partner, published figure, how it is repaid.
+  - Choose a project and the rows that usually fit flip to their figures; the rest turn blank.
+  - Tap a row to read its source line.
+- **Gate:** `GATE-NEW-Financing-V3.md`, self-scored 8.4 (D8 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/financing-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Our Work V3.

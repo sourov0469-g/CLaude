@@ -163,6 +163,93 @@
         gsap.fromTo(svg, { opacity: 1, clipPath: vert ? 'inset(0 0 100% 0)' : 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0% 0)', duration: 1.1, delay: .25, ease: 'power2.inOut', clearProps: 'clipPath' });
       } });
       k.add(function () { st.kill(); gsap.set(A.concat(B, C, [svg]), { clearProps: 'all' }); });
+    } },
+    /* NEW VERSIONS · V3 "The board" (governing reference: Apple AirPods Pro, numerals as events). A split-flap board of
+       the four partners: choose a project and the rows that usually fit flip to their figures; the rest turn blank. */
+    3: { init: function (root, k) {
+      var pick = root.querySelector('.bd__pick'), rowsEl = root.querySelector('.bd__rows'), cap = root.querySelector('.bd__cap'), say = root.querySelector('.bd__say');
+      // the repayment tiles: short forms of the firm's own lines (P.repay)
+      var REP = { syn: 'ON THE CARD', sfc: 'INSTALLMENTS', ygr: 'TAX BILL', rnw: 'TAX BILL' };
+      var W = { name: 15, big: 5, rep: 12 };
+      function pad(t, n, right) { t = String(t).toUpperCase(); while (t.length < n) t = right ? ' ' + t : t + ' '; return t; }
+      function cells(n, cls) { var s = ''; for (var i = 0; i < n; i++) s += '<span class="bd__c"><b></b><i></i></span>'; return '<span class="bd__f bd__f--' + cls + '" aria-hidden="true">' + s + '</span>'; }
+      pick.innerHTML = PROJ.map(function (x) { return '<button type="button" class="bd__pk" role="radio" aria-checked="false" tabindex="-1" data-p="' + x[0] + '">' + ic(x[2], 'fz-ic bd__pi') + '<span>' + x[1] + '</span></button>'; }).join('');
+      rowsEl.innerHTML = ORDER.map(function (id) {
+        var p = P[id];
+        return '<button type="button" class="bd__row bd__row--' + p.k + '" data-id="' + id + '" aria-pressed="false">' + cells(W.name, 'name') +
+          '<span class="bd__fig">' + cells(W.big, 'big') + '<span class="bd__unit" aria-hidden="true">' + p.unit + '</span></span>' + cells(W.rep, 'rep') + '<span class="sr-only bd__sr"></span></button>';
+      }).join('');
+      var pks = Array.prototype.slice.call(pick.children), rws = Array.prototype.slice.call(rowsEl.children);
+      var F = rws.map(function (r) { return { name: r.querySelectorAll('.bd__f--name .bd__c'), big: r.querySelectorAll('.bd__f--big .bd__c'), rep: r.querySelectorAll('.bd__f--rep .bd__c') }; });
+      k.add(function () { pick.innerHTML = ''; rowsEl.innerHTML = ''; cap.textContent = ''; say.textContent = ''; gsap.ticker.remove(tick); });
+
+      /* ---------- the flap engine: one driver loop, each tile folds its top flap [S0062] ---------- */
+      var CH = 'ABCDEFGHIJKLMNOPRSTUVWY0123456789$', Q = [], STEP = 62;
+      function show(c, ch) {
+        var b = c.firstChild; if (b.textContent === ch) return; b.textContent = ch === ' ' ? '' : ch;
+        if (k.motion && c.lastChild.animate) c.lastChild.animate([{ transform: 'rotateX(0deg)', opacity: 1 }, { transform: 'rotateX(-90deg)', opacity: 1 }], { duration: 70, easing: 'ease-in' });
+      }
+      function queue(c, ch, delay, steps) {
+        for (var i = Q.length - 1; i >= 0; i--) if (Q[i].c === c) Q.splice(i, 1);
+        if (!k.motion) { c.firstChild.textContent = ch === ' ' ? '' : ch; return; }
+        if ((c.firstChild.textContent || ' ') === ch && !steps) return;
+        Q.push({ c: c, ch: ch, t: performance.now() + delay, n: steps });
+      }
+      function tick() {
+        if (!Q.length) return; var now = performance.now();
+        for (var i = Q.length - 1; i >= 0; i--) {
+          var j = Q[i]; if (j.t > now) continue;
+          if (j.n > 0) { show(j.c, CH.charAt(Math.random() * CH.length | 0)); j.n--; j.t = now + STEP; }
+          else { show(j.c, j.ch); Q.splice(i, 1); }
+        }
+      }
+      gsap.ticker.add(tick);
+      function setField(list, text, row, col0) {
+        for (var i = 0; i < list.length; i++) {
+          var ch = text.charAt(i) || ' ', cur = list[i].firstChild.textContent || ' ';
+          // a tile that changes runs a few random faces first, later columns and rows a little longer: a cascade
+          var steps = ch === cur ? 0 : (ch === ' ' ? 1 : 2 + ((i + row) % 3));
+          queue(list[i], ch, row * 90 + (col0 + i) * 16, steps);
+        }
+      }
+
+      /* ---------- state ---------- */
+      var proj = 'unsure', sel = -1;
+      function render() {
+        var fit = ROUTES[proj];
+        ORDER.forEach(function (id, r) {
+          var p = P[id], on = fit.indexOf(id) > -1;
+          setField(F[r].name, pad(p.name, W.name), r, 0);
+          setField(F[r].big, on ? pad(p.big, W.big, true) : pad('', W.big), r, W.name);
+          setField(F[r].rep, on ? pad(REP[id], W.rep) : pad('', W.rep), r, W.name + W.big);
+          rws[r].classList.toggle('is-off', !on);
+          rws[r].querySelector('.bd__sr').textContent = p.name + ', ' + p.kind.toLowerCase() + ': ' + (on ? 'usually fits. ' + p.big + ' ' + p.unit + '. Repaid ' + p.repay.charAt(0).toLowerCase() + p.repay.slice(1) + '.' : 'not usually a fit for this project.');
+        });
+        pks.forEach(function (b) { var on = b.dataset.p === proj; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
+        say.textContent = WHY[proj];
+      }
+      function choose(p) { if (p === proj) return; proj = p; render(); }
+      function read(r) {
+        sel = r; rws.forEach(function (b, j) { b.setAttribute('aria-pressed', j === r ? 'true' : 'false'); });
+        var p = P[ORDER[r]];
+        cap.innerHTML = '<b>' + p.name + '</b><span>' + p.kind + '</span><span>' + p.what + '</span><span>' + p.also + '</span><span class="bd__src">' + p.src + '</span>';
+      }
+      pks.forEach(function (b, i) {
+        k.on(b, 'click', function () { choose(b.dataset.p); });
+        k.on(b, 'keydown', function (e) {
+          var n = pks.length, j = /Right|Down/.test(e.key) ? (i + 1) % n : /Left|Up/.test(e.key) ? (i + n - 1) % n : e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : null;
+          if (j === null) return; e.preventDefault(); pks[j].focus(); choose(pks[j].dataset.p);
+        });
+      });
+      rws.forEach(function (b, r) { k.on(b, 'click', function () { read(r); }); });
+
+      // the board starts blank and turns on when it comes into view: the figures arrive as events
+      var started = false;
+      function start() { if (started) return; started = true; render(); read(0); }
+      pks.forEach(function (b) { b.setAttribute('aria-checked', b.dataset.p === proj ? 'true' : 'false'); b.tabIndex = b.dataset.p === proj ? 0 : -1; });
+      say.textContent = WHY[proj];
+      if (!k.motion) start(); else k.io(rowsEl, function (en) { if (en.isIntersecting) start(); }, { threshold: .3 });
+      foot(root, k);
     } }
   });
 })();
