@@ -201,3 +201,61 @@
   .rc__open { margin-left: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .rc__tab, .rc__th, .rc__b { transition: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Our Work V3 "Find a room like yours" — a sortable photo index (Igloo Inc: continuity, nothing cuts).
+   Every listed photograph on one even grid; a room and a word from the firm's titles bring the matches forward in
+   colour while the rest slide back, quiet. Tiles move by transform; the quiet ones change opacity and filter [S0062].
+   ====================================================================================================================== */
+.fi__head { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s5); }
+.fi__head .t-head { margin: 0; }
+.fi__lead { margin: 0; max-width: 42ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+
+.fi__ask { display: grid; gap: var(--s2); margin-bottom: var(--s4); }
+.fi__grp { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: var(--s3); align-items: start; }
+.fi__gl { margin: 14px 0 0; font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-secondary); }
+.fi__opts { display: flex; flex-wrap: wrap; gap: 5px; }
+.fi__o {
+  min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--color-border-strong, var(--color-text));
+  background: var(--color-surface); color: var(--color-text); font: 600 .875rem/1.1 var(--f-text); cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out), opacity 160ms var(--ez-out);
+}
+.fi__o[aria-checked="true"] { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.fi__o[aria-disabled="true"] { opacity: .45; cursor: not-allowed; border-style: dashed; }
+.fi__o:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .fi__o:not([aria-checked="true"]):not([aria-disabled="true"]):hover { border-color: var(--color-text); background: var(--color-bg-subtle); } }
+
+/* the index: an even grid, so a tile never changes size, only place */
+.fi__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; }
+.fi__c { position: relative; z-index: 1; }
+.fi__c.is-hit { z-index: 2; }   /* the matches travel on top: they come forward, literally */
+.fi__tile { display: block; width: 100%; aspect-ratio: 4 / 3; margin: 0; padding: 0; border: 0; border-radius: 4px; overflow: hidden; background: var(--color-bg-muted); cursor: zoom-in; }
+.fi__tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 300ms var(--ez-out), opacity 420ms var(--ez-out), filter 420ms var(--ez-out); }
+.fi__c.is-quiet .fi__tile img { opacity: .4; filter: grayscale(1); }
+.fi__c.is-hit .fi__tile { box-shadow: 0 0 0 2px var(--color-accent-solid); }
+.fi__tile:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .fi__tile:hover img { transform: scale(1.06); }
+  .fi__c.is-quiet .fi__tile:hover img { opacity: .8; filter: grayscale(.3); }
+}
+
+/* the reading line: the title on paper beneath the index, the chosen word marked [S1425, S0666] */
+.fi__read { display: grid; gap: 2px; min-height: 3.6em; margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid var(--color-border); }
+.fi__code { margin: 0; min-height: 1.2em; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); letter-spacing: .02em; }
+.fi__t { margin: 0; font: 600 clamp(1.0625rem, .95rem + .4vw, 1.375rem)/1.3 var(--f-display); text-wrap: balance; }
+.fi__t mark { background: none; color: var(--color-accent-text, var(--color-accent-solid)); box-shadow: inset 0 -.18em 0 color-mix(in srgb, var(--color-accent-solid) 28%, transparent); }
+.fi__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s4); }
+
+@media (max-width: 1099px) { .fi__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 899px) { .fi__head { grid-template-columns: 1fr; align-items: start; } }
+@media (max-width: 599px) {
+  .fi__grp { grid-template-columns: 1fr; gap: 4px; }
+  .fi__gl { margin: 0; }
+  /* the details scroll sideways on a phone, so the index stays near the top */
+  .fi__words { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(var(--s4) * -1); padding: 2px var(--s4) 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .fi__words::-webkit-scrollbar { display: none; }
+  .fi__words .fi__o { flex: none; }
+  .fi__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+  .fi__foot .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .fi__o, .fi__tile img { transition: none; } }

@@ -325,6 +325,85 @@
       shutter(null, 1); busy.pause(0);
       var st = ScrollTrigger.create({ trigger: stage, start: 'top 72%', once: true, onEnter: function () { if (busy) busy.play(); } });
       k.add(function () { st.kill(); if (busy) busy.kill(); busy = null; slatBox.innerHTML = ''; });
+    } },
+    /* NEW VERSIONS · V3 "Find a room like yours" (governing reference: Igloo Inc, continuity). Every listed photograph
+       on one index; a room and a word from the firm's own titles bring the matches forward. Nothing cuts: each tile
+       slides from where it was (FLIP, transform only) [S0062, S0083, S1018]. */
+    3: { init: function (root, k) {
+      var L = listed(), grid = root.querySelector('.fi__grid'), roomsEl = root.querySelector('.fi__rooms'), wordsEl = root.querySelector('.fi__words'),
+        rc = root.querySelector('.fi__code'), rt = root.querySelector('.fi__t');
+      var ROOMS = [['all', 'All rooms'], ['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole home and outdoor']];
+      // every word is a phrase the firm's own titles use
+      var WORDS = [['any', 'Any detail', null], ['shaker', 'Shaker', /shaker/i], ['twotone', 'Two-tone', /two-tone/i], ['waterfall', 'Waterfall island', /waterfall[^,&]*island/i],
+        ['navy', 'Navy', /navy/i], ['white', 'White', /white/i], ['brass', 'Brass', /brass/i], ['marble', 'Marble', /marble/i], ['hood', 'Range hood', /range hood/i],
+        ['tile', 'Tile', /\btile\b/i], ['vanity', 'Vanity', /vanity/i], ['walkin', 'Walk-in shower', /walk-in shower/i], ['curbless', 'Curbless', /curbless/i], ['tub', 'Freestanding tub', /freestanding (soaking )?tub/i]];
+      function chips(list) { return list.map(function (x, i) { return '<button type="button" class="fi__o" role="radio" data-v="' + x[0] + '" aria-checked="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? -1 : 0) + '">' + x[1] + '</button>'; }).join(''); }
+      roomsEl.innerHTML = chips(ROOMS); wordsEl.innerHTML = chips(WORDS);
+      grid.innerHTML = L.map(function (p, i) {
+        return '<li class="fi__c" data-i="' + i + '"><button type="button" class="fi__tile" aria-label="' + esc(p.title) + ', ' + CAT[p.c] + ', open large">' +
+          '<img src="' + EZ.img(p.key) + '" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async"></button></li>';
+      }).join('');
+      var rBs = Array.prototype.slice.call(roomsEl.children), wBs = Array.prototype.slice.call(wordsEl.children), cs = Array.prototype.slice.call(grid.children);
+      k.add(function () { roomsEl.innerHTML = ''; wordsEl.innerHTML = ''; grid.innerHTML = ''; rc.textContent = ''; rt.textContent = ''; });
+
+      var room = 'all', word = 'any', order = cs.slice();
+      function W(v) { return WORDS.filter(function (x) { return x[0] === v; })[0]; }
+      function hit(p) { var w = W(word); return (room === 'all' || p.c === room) && (!w[2] || w[2].test(p.title)); }
+      function active() { return room !== 'all' || word !== 'any'; }
+      function mark(t) { var w = W(word); return w[2] ? esc(t).replace(w[2], function (m) { return '<mark>' + m + '</mark>'; }) : esc(t); }
+      function read(i) { var p = L[i]; rc.textContent = p.code + ' · ' + CAT[p.c]; rt.innerHTML = mark(p.title); }
+      function hint() { rc.textContent = ''; rt.textContent = 'Point at a photograph to read its title, or tap it to see it large.'; }
+
+      function apply(anim) {
+        // words no title in this room carries are switched off: the index never promises what it cannot show [S1442]
+        wBs.forEach(function (b) { var w = W(b.dataset.v), any = !w[2] || L.some(function (p) { return (room === 'all' || p.c === room) && w[2].test(p.title); });
+          b.setAttribute('aria-disabled', any ? 'false' : 'true'); });
+        if (wordsEl.querySelector('[aria-disabled="true"][aria-checked="true"]')) { word = 'any'; }
+        [[rBs, room], [wBs, word]].forEach(function (g) { g[0].forEach(function (b) { var on = b.dataset.v === g[1]; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; }); });
+        var hits = cs.filter(function (c) { return hit(L[+c.dataset.i]); }), rest = cs.filter(function (c) { return hits.indexOf(c) < 0; });
+        var next = hits.concat(rest), first = anim && k.motion ? cs.map(function (c) { return c.getBoundingClientRect(); }) : null;
+        next.forEach(function (c) { grid.appendChild(c); });   // the visual order is the reading and tab order
+        cs.forEach(function (c) { var on = hits.indexOf(c) > -1; c.classList.toggle('is-hit', active() && on); c.classList.toggle('is-quiet', active() && !on); });
+        order = next;
+        if (first) cs.forEach(function (c, j) {   // FLIP: each tile slides from where it was; nothing fades out or cuts
+          var a = first[j], b = c.getBoundingClientRect(), dx = a.left - b.left, dy = a.top - b.top;
+          if (Math.abs(dx) < .5 && Math.abs(dy) < .5) return;
+          gsap.fromTo(c, { x: dx, y: dy }, { x: 0, y: 0, duration: .75, ease: 'power3.inOut', delay: Math.min(next.indexOf(c), 23) * .012, overwrite: 'auto', clearProps: 'transform' });
+        });
+        if (!active()) hint(); else if (hits.length) read(+hits[0].dataset.i);
+        else { rc.textContent = ''; rt.textContent = 'None of our titles says that yet. Try another detail.'; }
+      }
+      function group(list, set) {
+        list.forEach(function (b, i) {
+          k.on(b, 'click', function () { if (b.getAttribute('aria-disabled') === 'true') return; set(b.dataset.v); apply(true); });
+          k.on(b, 'keydown', function (e) {
+            var n = list.length, d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0, j = null;
+            if (d) { j = i; for (var t = 0; t < n; t++) { j = (j + d + n) % n; if (list[j].getAttribute('aria-disabled') !== 'true') break; } }
+            else if (e.key === 'Home') j = 0; else if (e.key === 'End') { j = n - 1; while (j > 0 && list[j].getAttribute('aria-disabled') === 'true') j--; }
+            if (j === null) return; e.preventDefault(); list[j].focus(); set(list[j].dataset.v); apply(true);
+          });
+        });
+      }
+      group(rBs, function (v) { room = v; }); group(wBs, function (v) { word = v; });
+
+      k.on(grid, 'click', function (e) {
+        var t = e.target.closest('.fi__tile'); if (!t) return;
+        var list = order.map(function (c) { return L[+c.dataset.i]; }), at = order.indexOf(t.parentNode);
+        EZ.viewer.open(viewerList(list), at, t.querySelector('img'));
+      });
+      function readFrom(e) { var t = e.target.closest('.fi__tile'); if (t) read(+t.parentNode.dataset.i); }
+      k.on(grid, 'pointerover', function (e) { if (e.pointerType === 'mouse') readFrom(e); });
+      k.on(grid, 'focusin', readFrom);
+      k.on(grid, 'pointerleave', function (e) { if (e.pointerType !== 'mouse') return; var h = cs.filter(function (c) { return c.classList.contains('is-hit'); }); if (h.length) read(+order[0].dataset.i); else if (!active()) hint(); });
+
+      apply(false);
+      if (!k.motion) return;
+      // the first view: the photographs are laid down on the table, front to back
+      var once = false;
+      k.io(grid, function (en) {
+        if (!en.isIntersecting || once) return; once = true;
+        gsap.fromTo(cs, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .6, ease: 'expo.out', stagger: .025, clearProps: 'transform,opacity' });
+      }, { threshold: .15 });
     } }
   });
 })();

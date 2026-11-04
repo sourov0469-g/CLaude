@@ -549,3 +549,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Our Work V3.
+
+## New versions, pass 2 · Our Work V3 "Find a room like yours" (2026-11-04)
+- **Muse accepted** Financing V3.
+- **One new version:** `work` V3.
+  - V1 (hung frames) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?work=3`.
+- **Governing reference:** Igloo Inc (continuity: nothing cuts).
+- **Style family:** a sortable photo index.
+- **Signature move:** the photographs come forward.
+  - All listed photographs lie on one even grid.
+  - Choose a room and a word from the firm's own titles; the matches glide to the front in colour and the rest slide back, quiet (FLIP, transform only).
+  - Words no title carries are switched off.
+- **Gate:** `GATE-NEW-Work-V3.md`, self-scored 8.1 (D7 U9 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/work-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Reviews V3.
