@@ -509,3 +509,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before How a job runs V3.
+
+## New versions, pass 2 · How a job runs V3 "The chapters" (2026-11-04)
+- **Muse accepted** Hero V3.
+- **One new version:** `process` V3.
+  - V1 (the dial) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?process=3`.
+- **Governing reference:** OH Architecture (the process as numbered chapters).
+- **Style family:** an editorial typographic index.
+- **Signature move:** eight chapters, one open.
+  - Eight numbered spines; opening one slides the spines after it aside (transform only), and the chapter's page travels with its spine.
+  - Beneath, the published weeks are drawn to scale, with a draggable week marker that turns the chapters.
+  - On narrow screens the spines lie flat as rows.
+- **Gate:** `GATE-NEW-Process-V3.md`, self-scored 8.2 (D8 U8 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/process-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Financing V3.

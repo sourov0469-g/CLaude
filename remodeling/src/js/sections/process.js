@@ -294,6 +294,129 @@
       // the job pauses while it is off screen (WCAG 2.2.2: moving content can always be paused; here it also stops unseen)
       k.io(scene, function (en) { if (!en.isIntersecting && playing) stopPlay(); }, { threshold: 0 });
       k.add(function () { sti.kill(); stopPlay(); gsap.killTweensOf(st); });
+    } },
+    /* NEW VERSIONS · V3 "The chapters": eight numbered spines, one chapter open; a schedule rule of the published weeks */
+    3: { init: function (root, k) {
+      var book = root.querySelector('.jc__book'), spEl = root.querySelector('.jc__spines'), pgEl = root.querySelector('.jc__pages'),
+        segEl = root.querySelector('.jc__segs'), track = root.querySelector('.jc__track'), knob = root.querySelector('.jc__knob'), flag = root.querySelector('.jc__flag');
+      // the published weeks, drawn to scale: 1, 1, 3, 1, 6 weeks; construction "varies" (drawn broken); the final 1–2 weeks; closeout
+      var U = [1, 1, 3, 1, 6, 4, 2, 1], TK = ['1', '2', '5', '6', '12', '', '', ''], SUM = 19, A = [0];
+      U.forEach(function (u, i) { A.push(A[i] + u / SUM); });
+      spEl.innerHTML = ST.map(function (x, i) {
+        return '<button type="button" class="jc__sp" role="tab" id="jc-t' + i + '" aria-controls="jc-p' + i + '" aria-selected="false" tabindex="-1">' +
+          '<span class="jc__sn nums">' + nn(i) + '</span><span class="jc__st">' + x[1] + '</span>' + icon(i, 'jc__si') + '</button>';
+      }).join('');
+      pgEl.innerHTML = ST.map(function (x, i) {
+        return '<div class="jc__pg" role="tabpanel" id="jc-p' + i + '" aria-labelledby="jc-t' + i + '" tabindex="0" hidden>' +
+          '<p class="jc__big nums" aria-hidden="true">' + nn(i) + '</p>' +
+          '<div class="jc__tx"><p class="jc__wk">' + x[0] + '</p><h3 class="jc__t">' + x[1] + '</h3><p class="jc__p">' + x[2] + '</p>' +
+          '<button type="button" class="jc__nx">' + (i < 7 ? 'Next: ' + ST[i + 1][1] : 'Back to the start') + '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + (i < 7 ? 'M5 12h14M13 6l6 6-6 6' : 'M19 12H5M11 6l-6 6 6 6') + '"/></svg></button></div></div>';
+      }).join('');
+      segEl.innerHTML = U.map(function (u, i) { return '<span class="jc__sg' + (i === 5 ? ' is-var' : '') + '" style="flex:' + u + '"><i></i>' + (TK[i] ? '<b class="nums">' + TK[i] + '</b>' : '') + (i === 5 ? '<em>varies</em>' : '') + '</span>'; }).join('');
+      var sps = Array.prototype.slice.call(spEl.children), pgs = Array.prototype.slice.call(pgEl.children), sgs = Array.prototype.slice.call(segEl.children);
+      k.add(function () { spEl.innerHTML = ''; pgEl.innerHTML = ''; segEl.innerHTML = ''; book.style.height = ''; book.classList.remove('is-v'); });
+
+      /* ---------- geometry: spines are fixed-size; opening a chapter only moves them [S0062] ---------- */
+      var G = { v: false, c: 72, P: 0, H: 0 }, cur = 0, shown = false;
+      function fit() {
+        var BW = book.clientWidth; if (!BW) return;
+        G.v = BW < 820; book.classList.toggle('is-v', G.v);
+        if (!G.v) { G.c = BW >= 1100 ? 76 : 64; G.P = BW - 8 * G.c; pgEl.style.width = G.P + 'px'; }
+        else { G.c = BW < 600 ? 48 : 56; G.P = 0; pgEl.style.width = BW + 'px'; }
+        // the open page is as tall as the longest chapter, so the section never changes height
+        var mh = 0; pgs.forEach(function (p) { var h = p.hidden; p.hidden = false; mh = Math.max(mh, p.offsetHeight); p.hidden = h; });
+        if (!G.v) { G.H = Math.max(340, mh); sps.forEach(function (b) { b.style.width = G.c + 'px'; b.style.height = G.H + 'px'; }); book.style.height = G.H + 'px'; }
+        else { G.H = mh; sps.forEach(function (b) { b.style.width = BW + 'px'; b.style.height = G.c + 'px'; }); book.style.height = (8 * G.c + G.H) + 'px'; }
+        place(false);
+      }
+      function pos(i) { var o = shown && i > cur ? (G.v ? G.H : G.P) : 0; return i * G.c + o; }
+      function place(anim) {
+        sps.forEach(function (b, i) {
+          var to = G.v ? { x: 0, y: pos(i) } : { x: pos(i), y: 0 };
+          if (anim && k.motion) gsap.to(b, { x: to.x, y: to.y, duration: .7, ease: 'power3.inOut', overwrite: 'auto' }); else gsap.set(b, to);
+        });
+        // the open page travels with its spine and slides under the spines that follow it
+        sps.forEach(function (b, i) { b.style.zIndex = i > cur ? 2 : 0; });
+        var at = (cur + 1) * G.c, t = G.v ? { x: 0, y: at } : { x: at, y: 0 };
+        if (anim && k.motion) {   // it starts beside its spine, wherever that spine is now, so the two move as one
+          var ax = G.v ? 'y' : 'x', from = {}; from[ax] = gsap.getProperty(sps[cur], ax) + G.c;
+          gsap.fromTo(pgEl, from, { x: t.x, y: t.y, duration: .7, ease: 'power3.inOut', overwrite: 'auto' });
+        } else gsap.set(pgEl, t);
+      }
+      function go(i, anim, fromRule) {
+        var prev = cur; cur = i; shown = true;
+        sps.forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); b.tabIndex = j === i ? 0 : -1; b.classList.toggle('is-done', j < i); });
+        pgs.forEach(function (p, j) { p.hidden = j !== i; });
+        place(anim);
+        if (anim && k.motion && prev !== i) gsap.fromTo(pgs[i], { opacity: 0, x: G.v ? 0 : 24, y: G.v ? 12 : 0 }, { opacity: 1, x: 0, y: 0, duration: .5, delay: .18, ease: 'expo.out', clearProps: 'opacity,transform' });
+        sgs.forEach(function (s, j) { s.classList.toggle('is-done', j < i); s.classList.toggle('is-on', j === i); });
+        flag.textContent = ST[i][0];
+        knob.setAttribute('aria-valuenow', i + 1); knob.setAttribute('aria-valuetext', nn(i) + ' ' + ST[i][1] + ', ' + ST[i][0]);
+        if (!fromRule) setKnob((A[i] + A[i + 1]) / 2, anim);
+      }
+
+      /* ---------- the week marker: one continuous value along the rule [S1326] ---------- */
+      var kf = { f: (A[0] + A[1]) / 2 };
+      function drawKnob() { knob.style.transform = 'translateX(' + (kf.f * track.clientWidth).toFixed(1) + 'px)'; }
+      function setKnob(f, anim) {
+        gsap.killTweensOf(kf);
+        if (anim && k.motion) gsap.to(kf, { f: f, duration: .55, ease: 'power3.inOut', onUpdate: drawKnob }); else { kf.f = f; drawKnob(); }
+      }
+      function segAt(f) { for (var i = 0; i < 8; i++) if (f < A[i + 1]) return i; return 7; }
+      var drag = null;
+      function fAt(e) { var r = track.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); }
+      k.on(track, 'pointerdown', function (e) {
+        if (e.button > 0) return;
+        drag = { id: e.pointerId, x: e.clientX, y: e.clientY, live: e.pointerType === 'mouse' || e.target === knob || knob.contains(e.target) };
+        if (drag.live) start(e);
+      });
+      function start(e) {
+        drag.live = true; track.classList.add('is-drag'); gsap.killTweensOf(kf);
+        try { track.setPointerCapture(drag.id); } catch (x) {}
+        move(e);
+      }
+      function move(e) { kf.f = fAt(e); drawKnob(); var s = segAt(kf.f); if (s !== cur) go(s, true, true); }
+      k.on(track, 'pointermove', function (e) {
+        if (!drag) return;
+        if (!drag.live) { // on touch the page keeps its vertical scroll; a sideways move takes the marker [S1443]
+          var dx = Math.abs(e.clientX - drag.x), dy = Math.abs(e.clientY - drag.y);
+          if (dy > 10 && dy > dx) { drag = null; return; } if (dx > 6) start(e); return;
+        }
+        move(e);
+      });
+      function end(e) {
+        if (!drag) return; var wasLive = drag.live; drag = null; track.classList.remove('is-drag');
+        if (!wasLive && e && e.type === 'pointerup') { var s = segAt(fAt(e)); if (s !== cur) go(s, true); else setKnob((A[cur] + A[cur + 1]) / 2, true); return; }
+        setKnob((A[cur] + A[cur + 1]) / 2, true);
+      }
+      k.on(track, 'pointerup', end); k.on(track, 'pointercancel', function () { if (drag) { drag = null; track.classList.remove('is-drag'); setKnob((A[cur] + A[cur + 1]) / 2, true); } });
+      k.on(knob, 'keydown', function (e) {
+        var j = /Right|Up/.test(e.key) ? cur + 1 : /Left|Down/.test(e.key) ? cur - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? 7 : null;
+        if (j === null) return; e.preventDefault(); j = Math.max(0, Math.min(7, j)); if (j !== cur) go(j, true);
+      });
+
+      /* ---------- the spines: a real tablist [S1018] ---------- */
+      sps.forEach(function (b, i) {
+        k.on(b, 'click', function () { if (i !== cur) go(i, true); });
+        k.on(b, 'keydown', function (e) {
+          var j = /Right|Down/.test(e.key) ? (i + 1) % 8 : /Left|Up/.test(e.key) ? (i + 7) % 8 : e.key === 'Home' ? 0 : e.key === 'End' ? 7 : null;
+          if (j === null) return; e.preventDefault(); sps[j].focus(); go(j, true);
+        });
+      });
+      pgs.forEach(function (p, i) { k.on(p.querySelector('.jc__nx'), 'click', function () { var j = (i + 1) % 8; go(j, true); sps[j].focus({ preventScroll: true }); }); });
+
+      k.ro(book, fit); k.ro(track, drawKnob);
+      shown = !k.motion; fit(); go(0, false);
+      if (!k.motion) return;
+      /* ---------- the load beat: the spines stand up, then the first chapter opens ---------- */
+      shown = false; place(false); pgs[0].style.opacity = '0';
+      gsap.set(sps, { opacity: 0 });
+      var once = false;
+      k.io(book, function (en) {
+        if (!en.isIntersecting || once) return; once = true;
+        sps.forEach(function (b, i) { gsap.fromTo(b, { opacity: 0, y: (G.v ? i * G.c : 0) + 28 }, { opacity: 1, y: G.v ? i * G.c : 0, duration: .6, delay: i * .05, ease: 'expo.out' }); });
+        gsap.delayedCall(.55, function () { shown = true; pgs[cur].style.opacity = ''; place(true); gsap.fromTo(pgs[cur], { opacity: 0 }, { opacity: 1, duration: .5, delay: .25, ease: 'expo.out', clearProps: 'opacity' }); });
+      }, { threshold: .25 });
     } }
   });
 })();

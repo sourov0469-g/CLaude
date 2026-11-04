@@ -221,3 +221,107 @@
 }
 .jh__scene.is-follow .jh__q { font-size: 18px; }   /* the drawing is scaled down on a phone: its few glyphs stay at 13px or more */
 @media (prefers-reduced-motion: reduce) { .jh__s span, .jh__mk, .jh__mk circle, .jh__play { transition: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · How a job runs V3 "The chapters" — the job as eight numbered chapters, set as type (OH Architecture).
+   Style family: an editorial typographic index (numbered spines, vertical titles, a schedule rule). Spines are fixed
+   in size; opening a chapter only slides them [S0062]. The published weeks are drawn to scale beneath.
+   ====================================================================================================================== */
+.jc__head { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s6); }
+.jc__head .t-head { margin: 0; }
+.jc__lead { margin: 0; max-width: 42ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+
+.jc__book { position: relative; overflow: hidden; border-top: 1.5px solid var(--color-text); border-bottom: 1.5px solid var(--color-text); }
+.jc__spines { position: absolute; inset: 0; }
+.jc__sp {
+  position: absolute; left: 0; top: 0; box-sizing: border-box; margin: 0; padding: var(--s4) 0 var(--s4);
+  display: grid; grid-template-rows: auto 1fr auto; justify-items: center; align-items: start; gap: var(--s3);
+  background: var(--color-bg); color: var(--color-text); border: 0; border-left: 1px solid var(--color-border);
+  font: inherit; cursor: pointer; text-align: left; -webkit-tap-highlight-color: transparent;
+  transition: background-color 200ms var(--ez-out), color 200ms var(--ez-out);
+}
+.jc__sp:first-child { border-left: 0; }
+.jc__sn { font: 600 1.125rem/1 var(--f-display); letter-spacing: -.01em; }
+.jc__st { writing-mode: vertical-rl; transform: rotate(180deg); font: 600 .9375rem/1.2 var(--f-text); white-space: nowrap; color: var(--color-text-secondary); align-self: end; }
+.jc__si { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; color: var(--color-text-secondary); }
+.jc__sp.is-done .jc__sn { color: var(--color-text-secondary); }
+.jc__sp[aria-selected="true"] { background: var(--color-text); color: var(--color-bg); cursor: default; }
+.jc__sp[aria-selected="true"] .jc__st, .jc__sp[aria-selected="true"] .jc__si { color: inherit; }
+.jc__sp[aria-selected="true"] .jc__sn { color: var(--color-accent-solid); }
+.jc__sp:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: -3px; }
+@media (hover: hover) and (pointer: fine) {
+  .jc__sp:not([aria-selected="true"]):hover { background: var(--color-bg-subtle); }
+  .jc__sp:not([aria-selected="true"]):hover .jc__sn { color: var(--color-accent-text, var(--color-accent-solid)); }
+}
+
+/* the open chapter: a large numeral, then the weeks, the title and the firm's line, on paper [S1425] */
+.jc__pages { position: absolute; left: 0; top: 0; z-index: 1; }
+.jc__pg {
+  box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s6); align-items: start;
+  padding: var(--s6) var(--s6) var(--s6) var(--s6); background: var(--color-surface); outline: none;
+}
+.jc__pg[hidden] { display: none; }
+.jc__big { margin: -.06em 0 0; font: 400 clamp(5rem, 3rem + 5vw, 9rem)/.85 var(--f-display); letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.5px var(--color-text); }
+.jc__tx { display: grid; justify-items: start; gap: var(--s3); max-width: 46ch; }
+.jc__wk { margin: 0; display: inline-flex; padding: 4px 10px; border-radius: 999px; background: var(--color-accent-solid); color: #fff; font: 600 .8125rem/1.3 var(--f-text); font-variant-numeric: tabular-nums; }
+.jc__t { margin: 0; font: 600 clamp(1.5rem, 1.1rem + 1.2vw, 2.125rem)/1.1 var(--f-display); letter-spacing: -.01em; }
+.jc__p { margin: 0; font: 400 1.0625rem/1.55 var(--f-text); color: var(--color-text-secondary); }
+.jc__nx {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-top: var(--s2); padding: 0 16px;
+  background: transparent; color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius);
+  font: 600 .875rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.jc__nx svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.jc__nx:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .jc__nx:hover { background: var(--color-text); color: var(--color-bg); } }
+
+/* the schedule rule: the published weeks to scale, a week marker you can drag */
+.jc__rule { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s4); align-items: start; margin-top: var(--s5); }
+.jc__rk { margin: 13px 0 0; font: 600 .8125rem/1 var(--f-text); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .08em; }
+.jc__track { position: relative; height: 64px; touch-action: pan-y; cursor: pointer; user-select: none; -webkit-user-select: none; }
+.jc__track.is-drag { cursor: grabbing; }
+.jc__segs { position: absolute; left: 0; right: 0; top: 0; display: flex; gap: 3px; }
+.jc__sg { position: relative; min-width: 0; height: 40px; }
+.jc__sg i { position: absolute; left: 0; right: 0; top: 16px; height: 8px; background: var(--color-bg-muted); transition: background-color 260ms var(--ez-out); }
+.jc__sg.is-done i { background: var(--color-text); }
+.jc__sg.is-on i { background: var(--color-accent-solid); }
+.jc__sg.is-var i { background: repeating-linear-gradient(-45deg, var(--color-bg-muted) 0 5px, transparent 5px 9px); }
+.jc__sg.is-var.is-done i { background: repeating-linear-gradient(-45deg, var(--color-text) 0 5px, transparent 5px 9px); }
+.jc__sg.is-var.is-on i { background: repeating-linear-gradient(-45deg, var(--color-accent-solid) 0 5px, transparent 5px 9px); }
+.jc__sg b { position: absolute; right: -2px; top: 30px; transform: translateX(50%); font: 600 .8125rem/1 var(--f-text); color: var(--color-text-secondary); }
+.jc__sg em { position: absolute; left: 50%; top: 30px; transform: translateX(-50%); font: italic 400 .8125rem/1 var(--f-text); color: var(--color-text-secondary); white-space: nowrap; }
+.jc__knob {
+  position: absolute; left: 0; top: -2px; width: 44px; height: 44px; margin-left: -22px; display: grid; place-items: center;
+  cursor: grab; outline: none; touch-action: none;
+}
+.jc__knob::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--color-surface); border: 2.5px solid var(--color-text); box-shadow: 0 4px 10px -4px rgba(0,0,0,.4); transition: transform 160ms var(--ez-out); }
+.jc__track.is-drag .jc__knob::before { transform: scale(1.15); }
+.jc__knob:focus-visible::before { box-shadow: 0 0 0 3px var(--color-focus-ring); }
+.jc__flag {
+  position: absolute; bottom: calc(100% - 2px); left: 50%; transform: translateX(-50%); padding: 4px 9px; border-radius: 4px;
+  background: var(--color-text); color: var(--color-bg); font: 600 .8125rem/1.2 var(--f-text); white-space: nowrap; pointer-events: none;
+}
+.jc .ps__note { margin-top: var(--s2); }
+
+@media (max-width: 999px) {
+  .jc__head { grid-template-columns: 1fr; align-items: start; }
+  .jc__pg { grid-template-columns: 1fr; gap: var(--s3); padding: var(--s5); }
+  .jc__big { font-size: 4.5rem; }
+}
+/* narrow books: the spines lie flat as rows and the chapter opens downward (set in JS when the book is under 820px) */
+.jc__book.is-v .jc__sp { grid-template-rows: none; grid-template-columns: 2.25rem minmax(0, 1fr) auto; align-items: center; justify-items: start; padding: 0 var(--s4); border-left: 0; border-top: 1px solid var(--color-border); }
+.jc__book.is-v .jc__sp:first-child { border-top: 0; }
+.jc__book.is-v .jc__st { writing-mode: horizontal-tb; transform: none; align-self: center; font-size: 1rem; color: inherit; }
+.jc__book.is-v .jc__pg { grid-template-columns: auto minmax(0, 1fr); gap: var(--s4); padding: var(--s4) var(--s4) var(--s5); }
+.jc__book.is-v .jc__big { font-size: 3.5rem; }
+.jc__book.is-v .jc__t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }   /* the open row above already shows the title; screen readers keep the heading */
+@media (max-width: 599px) {
+  .jc__head { margin-bottom: var(--s5); }
+  .jc__lead { font-size: 1rem; }
+  .jc__rule { grid-template-columns: 1fr; gap: var(--s1); }
+  .jc__rk { margin: 0 0 22px; }
+  .jc__book.is-v .jc__pg { grid-template-columns: 1fr; gap: var(--s2); }
+  .jc__book.is-v .jc__big { display: none; }
+  .jc__nx { width: auto !important; }
+}
+@media (prefers-reduced-motion: reduce) { .jc__sp, .jc__sg i, .jc__nx, .jc__knob::before { transition: none; } }
