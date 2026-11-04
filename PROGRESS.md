@@ -1289,6 +1289,7 @@ Every text element is paired with the nearest painted background behind it, as r
 | # | Section | Version | Reference | Gate | Score | Status |
 |---|---|---|---|---|---|---|
 | 1 | Hero | **L, "In their own colours"** (`?hero=l`) | Cash App Brand Guidelines (colour as content: eight documented jobs as full-height fields of the colour of their work, sampled from each job's photo; open one to see the job) | GATE-NEW-Hero-L.md | 8.52 PASS | Accepted by Muse |
-| 2 | Services | **L, "Built from our records"** (`?services=l`) | Quiet Cubes (modular cubes: an isotype house, one cube per ~10 documented projects, each trade where it sits on a house; pick a trade for its record) | GATE-NEW-Services-L.md | 8.54 PASS | Built and gated; waiting for Muse's accept |
+| 2 | Services | **L, "Built from our records"** (`?services=l`) | Quiet Cubes (modular cubes: an isotype house, one cube per ~10 documented projects, each trade where it sits on a house; pick a trade for its record) | GATE-NEW-Services-L.md | 8.54 PASS | Accepted by Muse |
+| 3 | Visualiser | **L, "Roll it on"** (`?vis=l`) | Graza (crafted animation: the two published finish routes shown arriving: a roller paints Sherwin-Williams colours on course by course with a drying sheen; ColorPlus boards turn over bottom-up) | GATE-NEW-Visualiser-L.md | 8.50 PASS | Built and gated; waiting for Muse's accept |
 
-**Next, after the accept:** Visualiser L.
+**Next, after the accept:** Windows L.
