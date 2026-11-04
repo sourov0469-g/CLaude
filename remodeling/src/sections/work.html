@@ -25,8 +25,38 @@
     </div>
   </div>
 
-  <!-- V2 · The job binder (the owner's V8 idea, done better): a ring binder lying open. The left page is the job sheet (the
-       firm's title, the room, the plan-room number), the right page holds the photograph in photo corners. Turning the
-       page is a real leaf: it lifts at the spine and carries the next job sheet on its back (drag the corner, the arrow keys,
-       or the buttons). Index tabs on the fore-edge jump to Kitchens, Bathrooms or Whole home. -->
+  <!-- (Retired in Final: the job binder. Its markup left the file; the record is in git history.) -->
+
+  <!-- NEW VERSIONS · Our Work V2 "Room chapters" (2026-11-04, pass 1). Governing reference: Boffi (rooms as chapters under
+       one narrative). One room at full size; three chapters as tabs; a filmstrip; previous / next walk every room. The
+       shutter: the room on show splits into louvred slats that turn edge-on to uncover the next room. Same photographs
+       and titles as V1 (data/projects.json), the same two held out; no counts printed. -->
+  <div class="ver rc" data-v="2">
+    <div class="wrap rc__grid">
+      <div class="rc__side">
+        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Our work</p>
+        <h2 class="t-head" id="work-h-2">Room by room. <span class="acc">Our own photographs.</span></h2>
+        <p class="rc__lead">Three chapters of finished rooms. Open the shutters on any of them.</p>
+        <div class="rc__tabs" role="tablist" aria-label="Chapters"></div>
+        <div class="rc__cap" aria-live="polite"><p class="rc__code"></p><h3 class="rc__t"></h3></div>
+        <div class="rc__ctl">
+          <button type="button" class="rc__b rc__prev" aria-label="Previous room"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="rc__b rc__next" aria-label="Next room"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+          <button type="button" class="btn btn--ghost rc__open"><span class="btn__label">See it large</span></button>
+        </div>
+        <div class="rc__foot">
+          <a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a>
+          <p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p>
+        </div>
+      </div>
+      <div class="rc__main">
+        <div class="rc__stage" id="rc-panel" role="tabpanel" aria-label="The room on show">
+          <img class="rc__img" alt="" decoding="async" draggable="false">
+          <div class="rc__slats" aria-hidden="true"></div>
+          <button type="button" class="rc__hit" aria-label="Open large"></button>
+        </div>
+        <div class="rc__strip" role="group" aria-label="Rooms in this chapter"></div>
+      </div>
+    </div>
+  </div>
 </section>

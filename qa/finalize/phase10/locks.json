@@ -1,7 +1,7 @@
 {
  "pages": {
   "home v1": {
-   "runs": 740,
+   "runs": 753,
    "tel": [
     "tel:+17542360675"
    ],
@@ -20,7 +20,7 @@
    }
   },
   "home v2": {
-   "runs": 761,
+   "runs": 734,
    "tel": [
     "tel:+17542360675"
    ],
@@ -183,8 +183,8 @@
   }
  ],
  "fonts": {
-  "Roboto": 1297,
-  "Elbaz Display": 672
+  "Roboto": 1302,
+  "Elbaz Display": 676
  },
  "requests": [],
  "baPairs": [

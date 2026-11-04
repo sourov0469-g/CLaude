@@ -108,7 +108,9 @@
       k.add(function () { hold.setAttribute('aria-pressed', 'false'); label.textContent = 'Pause the rows'; });
     } },
 
-    2: { init: function (root, k) {
+    // RETIRED (Final: one version per section): the job binder's markup left the file; its definition is kept for the
+    // record under a key no version uses. NEW VERSIONS: slot 2 is "Room chapters" (below).
+    binder: { init: function (root, k) {
       var L = listed(), all = viewerList(L), n = L.length, cur = 0, busy = false;
       var book = root.querySelector('.jb__book'), spread = root.querySelector('.jb__spread');
       var lSheet = root.querySelector('.jb__page--l .jb__sheet'), rPhoto = root.querySelector('.jb__page--r .jb__photo');
@@ -229,6 +231,100 @@
         } });
         k.add(function () { open.kill(); busy = false; gsap.set(spread.querySelector('.jb__page--l'), { clearProps: 'all' }); });
       }
+    } },
+
+    /* NEW VERSIONS · V2 "Room chapters" (governing reference: Boffi, rooms as chapters under one narrative). One room at
+       full size; three chapters (Kitchens, Bathrooms, Whole home and outdoor) as a real tablist; a filmstrip of the chapter;
+       previous / next walk through every room, chapter to chapter. Signature: the shutter. The room on show splits into
+       vertical slats that turn edge-on one after another, in the direction you travelled, uncovering the next room behind
+       them [S0063 never two crossfaded states, S0062]. First view: the shutters open on the first kitchen. Swipe on the
+       stage (touch), tap or click it to see the room large. Reduced motion: rooms switch at once [S0400]. */
+    2: { init: function (root, k) {
+      var L = listed(), all = viewerList(L);
+      var CH = [['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole home and outdoor']];
+      var stage = root.querySelector('.rc__stage'), img = root.querySelector('.rc__img'), slatBox = root.querySelector('.rc__slats'), hit = root.querySelector('.rc__hit');
+      var tabsEl = root.querySelector('.rc__tabs'), strip = root.querySelector('.rc__strip'), code = root.querySelector('.rc__code'), title = root.querySelector('.rc__t');
+      var prev = root.querySelector('.rc__prev'), next = root.querySelector('.rc__next'), openB = root.querySelector('.rc__open');
+      var idxOf = {}; L.forEach(function (p, i) { idxOf[p.key] = i; });
+      var byC = {}; CH.forEach(function (c) { byC[c[0]] = L.filter(function (p) { return p.c === c[0] || (c[0] === 'w' && p.c === 'o'); }); });
+      var flat = []; CH.forEach(function (c) { byC[c[0]].forEach(function (p) { flat.push(p); }); });   // the walk: chapter by chapter
+      tabsEl.innerHTML = CH.map(function (c, i) { return '<button type="button" role="tab" class="rc__tab" id="rc-tab-' + c[0] + '" data-c="' + c[0] + '" aria-selected="' + (i ? 'false' : 'true') + '" aria-controls="rc-panel" tabindex="' + (i ? -1 : 0) + '"><span class="nums">0' + (i + 1) + '</span><span class="rc__tn">' + c[1] + '</span></button>'; }).join('');
+      var tabs = Array.prototype.slice.call(tabsEl.children), cur = null, busy = null;
+      k.add(function () { tabsEl.innerHTML = ''; strip.innerHTML = ''; slatBox.innerHTML = ''; img.removeAttribute('src'); });
+
+      function fillStrip(c) {
+        strip.innerHTML = byC[c].map(function (p) { return '<button type="button" class="rc__th" data-k="' + p.key + '" aria-label="' + esc(p.title) + '" aria-pressed="false" tabindex="-1"><img src="' + EZ.img(p.key) + '" alt="" decoding="async" draggable="false"></button>'; }).join('');
+      }
+      function cover(W, H, p) {   // the photograph's cover crop at the stage's size (centre), so slats line up with it
+        var a = p.w / p.h, bw, bh; if (a > W / H) { bh = H; bw = H * a; } else { bw = W; bh = W / a; }
+        return { w: bw, h: bh, x: (W - bw) / 2, y: (H - bh) / 2 };
+      }
+      function shutter(from, dir) {   // the room on show becomes slats that turn edge-on, uncovering the room behind
+        var W = stage.clientWidth, H = stage.clientHeight, n = W < 600 ? 6 : 9, sw = W / n, cv = from ? cover(W, H, from) : null, html = '';
+        for (var j = 0; j < n; j++) {
+          var st = 'left:' + (j * sw).toFixed(2) + 'px;width:' + (sw + .6).toFixed(2) + 'px;';
+          if (cv) st += 'background-image:url(' + EZ.img(from.key) + ');background-size:' + cv.w.toFixed(1) + 'px ' + cv.h.toFixed(1) + 'px;background-position:' + (cv.x - j * sw).toFixed(1) + 'px ' + cv.y.toFixed(1) + 'px';
+          html += '<i class="rc__sl' + (cv ? '' : ' rc__sl--blank') + '" style="' + st + '"><b></b></i>';
+        }
+        slatBox.innerHTML = html;
+        var sl = Array.prototype.slice.call(slatBox.children); if (dir < 0) sl.reverse();
+        if (busy) busy.kill();
+        busy = gsap.timeline({ onComplete: function () { slatBox.innerHTML = ''; busy = null; } });
+        busy.to(sl, { rotationY: dir < 0 ? -88 : 88, duration: .62, ease: 'power2.inOut', stagger: .045 }, 0)
+            .to(sl.map(function (e) { return e.firstChild; }), { opacity: .55, duration: .62, ease: 'power1.in', stagger: .045 }, 0);
+      }
+      function show(p, dir, first) {
+        if (cur && p.key === cur.key) return;
+        var from = cur; cur = p;
+        var c = (p.c === 'o') ? 'w' : p.c;
+        tabs.forEach(function (t) { var on = t.dataset.c === c; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+        if (strip.dataset.c !== c) { strip.dataset.c = c; fillStrip(c); }
+        Array.prototype.forEach.call(strip.children, function (b) { var on = b.dataset.k === p.key; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if (on && !first) b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); });
+        code.textContent = p.code + ' · ' + CAT[p.c];
+        title.textContent = p.title;
+        hit.setAttribute('aria-label', p.title + ', open large');
+        img.alt = p.title + ', an Elbaz project';
+        if (k.motion && (from || first)) shutter(from, dir || 1);
+        img.src = EZ.img(p.key);
+      }
+      function step(d) { var i = flat.indexOf(cur); show(flat[(i + d + flat.length) % flat.length], d); }
+      // the chapters: a real tablist [S1018]
+      tabs.forEach(function (t, i) {
+        k.on(t, 'click', function () { if (t.dataset.c !== strip.dataset.c) show(byC[t.dataset.c][0], i >= tabs.indexOf(tabsEl.querySelector('[aria-selected="true"]')) ? 1 : -1); });
+        k.on(t, 'keydown', function (e) {
+          var d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0, j = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : d ? (i + d + tabs.length) % tabs.length : -1;
+          if (j < 0) return; e.preventDefault(); tabs[j].focus(); show(byC[tabs[j].dataset.c][0], j > i ? 1 : -1);
+        });
+      });
+      // the filmstrip: one Tab stop, arrows walk it
+      k.on(strip, 'click', function (e) { var b = e.target.closest('.rc__th'); if (!b) return; var p = L[idxOf[b.dataset.k]]; show(p, flat.indexOf(p) > flat.indexOf(cur) ? 1 : -1); });
+      k.on(strip, 'keydown', function (e) {
+        var b = e.target.closest('.rc__th'); if (!b) return;
+        var bs = Array.prototype.slice.call(strip.children), i = bs.indexOf(b), d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0;
+        if (!d) return; e.preventDefault(); var j = Math.max(0, Math.min(bs.length - 1, i + d)); if (j === i) return;
+        show(L[idxOf[bs[j].dataset.k]], d); bs[j].focus();
+      });
+      k.on(prev, 'click', function () { step(-1); });
+      k.on(next, 'click', function () { step(1); });
+      function openLarge() { EZ.viewer.open(all, idxOf[cur.key], img); }
+      k.on(openB, 'click', openLarge);
+      // the stage: tap or click to see it large; a sideways swipe walks the rooms (touch) [S1443]
+      var sw = null;
+      k.on(hit, 'pointerdown', function (e) { sw = { x: e.clientX, y: e.clientY, t: e.pointerType }; });
+      k.on(hit, 'pointerup', function (e) {
+        if (!sw) return; var dx = e.clientX - sw.x, dy = e.clientY - sw.y, t = sw.t; sw = null;
+        if (t !== 'mouse' && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) { hit.dataset.swiped = '1'; step(dx < 0 ? 1 : -1); }
+      });
+      k.on(hit, 'click', function () { if (hit.dataset.swiped) { delete hit.dataset.swiped; return; } openLarge(); });
+      k.on(stage, 'keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } });
+
+      show(flat[0], 1, false);
+      EZ.reveal(k, root.querySelectorAll('.rc__side > *'));
+      if (!k.motion) return;
+      // first view: the shutters, still closed, open on the first kitchen
+      shutter(null, 1); busy.pause(0);
+      var st = ScrollTrigger.create({ trigger: stage, start: 'top 72%', once: true, onEnter: function () { if (busy) busy.play(); } });
+      k.add(function () { st.kill(); if (busy) busy.kill(); busy = null; slatBox.innerHTML = ''; });
     } }
   });
 })();

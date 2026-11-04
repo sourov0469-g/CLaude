@@ -400,3 +400,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Our Work.
+
+## New versions, pass 1 · Our Work V2 "Room chapters" (2026-11-04)
+- **Muse accepted** Financing V2.
+- **One new version:** `work` V2.
+  - V1 (two rows of hung frames) is untouched and stays the default.
+  - It is reachable from the header switch or `?work=2`.
+- **Governing reference:** Boffi (rooms as chapters).
+- **Style family:** an editorial showroom.
+- **Signature move:** the shutter. Louvred slats of the room on show turn edge-on, in the direction of travel, to uncover the next room.
+- **Layout and controls:** three chapter tabs, a filmstrip, previous and next across chapters, a swipe on touch, and tap for large.
+- **Content:** the same 24 photographs and titles as V1.
+- **Housekeeping:** the retired binder's dead definition moved off key 2.
+- **Gate:** `GATE-NEW-Work.md`, self-scored 8.1 (D8 U8 C8 Ct9), 0 vetoes.
+- **Evidence:** `qa/new/work/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Reviews.
