@@ -417,6 +417,111 @@
         sps.forEach(function (b, i) { gsap.fromTo(b, { opacity: 0, y: (G.v ? i * G.c : 0) + 28 }, { opacity: 1, y: G.v ? i * G.c : 0, duration: .6, delay: i * .05, ease: 'expo.out' }); });
         gsap.delayedCall(.55, function () { shown = true; pgs[cur].style.opacity = ''; place(true); gsap.fromTo(pgs[cur], { opacity: 0 }, { opacity: 1, duration: .5, delay: .25, ease: 'expo.out', clearProps: 'opacity' }); });
       }, { threshold: .25 });
+    } },
+    /* NEW VERSIONS · V4 "The deck" (governing reference: Scout Motors, sequenced evidence). Eight stage cards; throw the
+       top one onto the pile (drag, Next, a stop); Back brings it home. Cards only move and turn [S0062, S0340, S1443]. */
+    4: { init: function (root, k) {
+      var table = root.querySelector('.dk__table'), stopsEl = root.querySelector('.dk__stops'), live = root.querySelector('.dk__live'),
+        prevB = root.querySelector('.dk__prev'), nextB = root.querySelector('.dk__next');
+      table.insertAdjacentHTML('beforeend', ST.map(function (x, i) {
+        return '<article class="dk__card" data-i="' + i + '"><div class="dk__top"><span class="dk__n nums">' + nn(i) + '</span>' + icon(i, 'dk__ic') + '</div>' +
+          '<p class="dk__wk">' + x[0] + '</p><h3 class="dk__t">' + x[1] + '</h3><p class="dk__p">' + x[2] + '</p><span class="dk__of nums" aria-hidden="true">' + (i + 1) + ' of 8</span></article>';
+      }).join(''));
+      stopsEl.innerHTML = ST.map(function (x, i) { return '<button type="button" class="dk__s" aria-label="' + nn(i) + ' ' + x[1] + ', ' + x[0] + '" aria-pressed="false" tabindex="-1"><span class="nums">' + nn(i) + '</span><em>' + x[1] + '</em></button>'; }).join('');
+      var cards = Array.prototype.slice.call(table.querySelectorAll('.dk__card')), stops = Array.prototype.slice.call(stopsEl.children);
+      k.add(function () { cards.forEach(function (c) { c.remove(); }); stopsEl.innerHTML = ''; table.style.height = ''; live.textContent = ''; });
+
+      /* ---------- geometry: the deck right of centre, the pile left of centre; on phones the pile peeks at the edge ---------- */
+      var G = { W: 0, CW: 0, CH: 0, dx: 0, px: 0, narrow: false }, cur = 0;
+      var TILT = [-3.2, 2.1, -1.4, 2.8, -2.4, 1.2, -3, 2.5];
+      function fit() {
+        G.W = table.clientWidth; if (!G.W) return; G.narrow = G.W < 760;
+        G.CW = G.narrow ? G.W - 52 : Math.min(500, (G.W - 72) / 2);
+        cards.forEach(function (c) { c.style.width = G.CW + 'px'; c.style.height = ''; });
+        G.CH = Math.max.apply(null, cards.map(function (c) { return c.offsetHeight; }));
+        cards.forEach(function (c) { c.style.height = G.CH + 'px'; });
+        table.style.height = (G.CH + 44) + 'px';
+        if (G.narrow) { G.dx = 40; G.px = 40 - G.CW + 22; } else { G.dx = G.W / 2 + 18; G.px = G.W / 2 - 18 - G.CW; }
+        table.classList.toggle('is-narrow', G.narrow);
+        var slot = table.querySelector('.dk__slot'); slot.style.cssText = 'width:' + G.CW + 'px;height:' + G.CH + 'px;transform:translate(' + G.px + 'px,10px)';
+        place(false);
+      }
+      function spot(i) {
+        if (i < cur) return { x: G.px + (G.narrow ? 0 : (i % 3 - 1) * 6), y: 10 + (i % 2) * 6, r: G.narrow ? 0 : TILT[i], z: 10 + i };
+        var d = Math.min(i - cur, 4);
+        return { x: G.dx + d * 7, y: d * 7, r: 0, z: 100 - (i - cur) };
+      }
+      function place(anim, only) {
+        cards.forEach(function (c, i) {
+          if (only != null && i !== only) { var q = spot(i); c.style.zIndex = q.z; if (!anim || !k.motion) gsap.set(c, { x: q.x, y: q.y, rotation: q.r }); else gsap.to(c, { x: q.x, y: q.y, rotation: q.r, duration: .45, ease: 'power3.out', overwrite: 'auto' }); return; }
+          var s = spot(i); c.style.zIndex = s.z;
+          if (!anim || !k.motion) gsap.set(c, { x: s.x, y: s.y, rotation: s.r });
+          else gsap.to(c, { x: s.x, y: s.y, rotation: s.r, duration: .6, ease: i < cur ? 'power3.out' : 'power2.out', overwrite: 'auto' });
+          c.classList.toggle('is-top', i === cur); c.classList.toggle('is-done', i < cur);
+          c.setAttribute('aria-hidden', i === cur ? 'false' : 'true');
+        });
+      }
+      function sync() {
+        stops.forEach(function (b, j) { b.setAttribute('aria-pressed', j === cur ? 'true' : 'false'); b.tabIndex = j === cur ? 0 : -1; b.classList.toggle('is-done', j < cur); });
+        prevB.disabled = cur === 0; nextB.disabled = cur === 7;
+        live.textContent = 'Stage ' + (cur + 1) + ' of 8: ' + ST[cur][1] + ', ' + ST[cur][0] + '. ' + ST[cur][2];
+      }
+      // a jump deals (or gathers) the cards in between one after another
+      var dealing = null;
+      function go(j) {
+        j = Math.max(0, Math.min(7, j)); if (j === cur) return;
+        if (dealing) dealing.kill();
+        var step = j > cur ? 1 : -1;
+        if (!k.motion || Math.abs(j - cur) === 1) { cur = j; place(true); sync(); return; }
+        dealing = gsap.delayedCall(0, function tick() { cur += step; place(true); sync(); if (cur !== j) dealing = gsap.delayedCall(.11, tick); });
+      }
+      k.on(prevB, 'click', function () { go(cur - 1); });
+      k.on(nextB, 'click', function () { go(cur + 1); });
+      stops.forEach(function (b, i) {
+        k.on(b, 'click', function () { go(i); });
+        k.on(b, 'keydown', function (e) {
+          var j = /Right|Down/.test(e.key) ? i + 1 : /Left|Up/.test(e.key) ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? 7 : null;
+          if (j === null) return; e.preventDefault(); j = Math.max(0, Math.min(7, j)); stops[j].focus(); go(j);
+        });
+      });
+
+      /* ---------- the throw: drag the top card; past the line it lands on the pile, short of it it springs home ---------- */
+      var drag = null;
+      k.on(table, 'pointerdown', function (e) {
+        var c = e.target.closest('.dk__card'); if (!c || e.button > 0) return;
+        var i = +c.dataset.i; if (i !== cur && !(i === cur - 1 && c.classList.contains('is-done'))) return;
+        drag = { c: c, i: i, x: e.clientX, y: e.clientY, live: e.pointerType === 'mouse', sx: gsap.getProperty(c, 'x'), id: e.pointerId };
+        if (drag.live) start();
+      });
+      function start() { drag.live = true; table.classList.add('is-drag'); gsap.killTweensOf(drag.c); try { table.setPointerCapture(drag.id); } catch (x) {} drag.c.style.zIndex = 200; }
+      k.on(table, 'pointermove', function (e) {
+        if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+        if (!drag.live) { if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { drag = null; return; } if (Math.abs(dx) > 8) start(); else return; }
+        gsap.set(drag.c, { x: drag.sx + dx, y: Math.max(-20, Math.min(40, dy * .25)), rotation: dx * .035 });
+      });
+      function end(e) {
+        if (!drag) return; var d = drag; drag = null; table.classList.remove('is-drag');
+        if (!d.live) return;
+        var dx = (e && e.clientX != null ? e.clientX : d.x) - d.x, far = Math.min(140, G.CW * .3);
+        if (d.i === cur && dx < -far && cur < 7) { go(cur + 1); return; }   // thrown onto the pile
+        if (d.i === cur && dx > far && cur > 0) { go(cur - 1); return; }   // the last card comes back
+        if (d.i === cur - 1 && dx > far * .6) { go(cur - 1); return; }     // pulled back off the pile
+        var s = spot(d.i); d.c.style.zIndex = s.z;
+        if (k.motion) gsap.to(d.c, { x: s.x, y: s.y, rotation: s.r, duration: .7, ease: 'elastic.out(1, .6)' }); else gsap.set(d.c, { x: s.x, y: s.y, rotation: s.r });   // springs home [S0340]
+      }
+      k.on(table, 'pointerup', end); k.on(table, 'pointercancel', function () { if (drag) { var d = drag; drag = null; table.classList.remove('is-drag'); place(true); } });
+
+      k.ro(table, fit); fit(); sync();
+      k.add(function () { if (dealing) dealing.kill(); });
+      EZ.reveal(k, root.querySelectorAll('.dk__head > *, .dk__nav'));
+      if (!k.motion) return;
+      // the first view: the deck is dealt onto the table, bottom card first
+      var once = false;
+      gsap.set(cards, { opacity: 0 });
+      k.io(table, function (en) {
+        if (!en.isIntersecting || once) return; once = true;
+        cards.slice().reverse().forEach(function (c, n) { var s = spot(+c.dataset.i); gsap.fromTo(c, { opacity: 0, y: s.y - 60, rotation: (n % 2 ? 4 : -4) }, { opacity: 1, y: s.y, rotation: s.r, duration: .5, delay: n * .06, ease: 'power3.out', clearProps: 'opacity' }); });
+      }, { threshold: .2 });
     } }
   });
 })();

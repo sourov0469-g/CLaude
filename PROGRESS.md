@@ -652,3 +652,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before How a job runs V4.
+
+## New versions, pass 3 · How a job runs V4 "The deck" (2026-11-04)
+- **Muse accepted** Hero V4.
+- **One new version:** `process` V4.
+  - V1 (the dial) stays the default; V2 and V3 are untouched.
+  - It is reachable from the header switch or `?process=4`.
+- **Governing reference:** Scout Motors (sequenced evidence).
+- **Style family:** a physical card deck.
+- **Signature move:** the deck.
+  - Eight stage cards; throw the top one (drag or Next) onto the pile, or Back to bring it home.
+  - Numbered stops deal or gather the cards in between.
+  - Cards only move and turn.
+- **Gate:** `GATE-NEW-Process-V4.md`, self-scored 8.5 (D8 U9 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/process-v4/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Financing V4.
