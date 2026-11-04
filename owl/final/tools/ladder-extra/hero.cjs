@@ -62,5 +62,21 @@ module.exports = {
     rec('the planes drift with the pointer (depth)', await p.evaluate(S => +document.querySelector(S + ' .stage').style.getPropertyValue('--px') !== 0, S));
     rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
     rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-tab').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '13': async (p, S, rec) => {
+    await p.waitForTimeout(2900);
+    rec('the dusk photo has settled from its slow zoom', await p.evaluate(S => document.querySelector(S + ' .g').classList.contains('on') && getComputedStyle(document.querySelector(S + ' .pic img')).transform === 'none', S));
+    rec('the card overlaps the photo on desktop and the Owl perches on the card', await p.evaluate(S => { const c = document.querySelector(S + ' .card').getBoundingClientRect(), ph = document.querySelector(S + ' .pic').getBoundingClientRect(), o = document.querySelector(S + ' .perch').getBoundingClientRect(); return c.right > ph.left + 60 && Math.abs(o.bottom - c.top) < 16; }, S));
+    rec('the photo is real with an honest alt and no caption', await p.evaluate(S => /stone and brick family home with a dark shingle roof at sunset/.test(document.querySelector(S + ' .pic img').alt) && !document.querySelector(S + ' figcaption'), S));
+    let blinked = false; for (let i = 0; i < 28 && !blinked; i++) { blinked = await p.evaluate(S => document.querySelector(S + ' .perch > div').classList.contains('blink'), S); await p.waitForTimeout(200); }
+    rec('the Owl blinks now and then', blinked);
+    const b = await p.evaluate(S => { const r = document.querySelector(S + ' .ctas .btn-amber').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, S);
+    await p.mouse.move(b[0], b[1], { steps: 4 }); await p.waitForTimeout(150);
+    rec('going for a button makes the Owl hop', await p.evaluate(S => document.querySelector(S + ' .perch > div').classList.contains('hop'), S));
+    await p.waitForTimeout(900);
+    rec('after the hop it settles back to breathing', await p.evaluate(S => { const d = document.querySelector(S + ' .perch > div'); return !d.classList.contains('hop') && d.classList.contains('breathe'); }, S));
+    await p.keyboard.press('Tab'); 
+    rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
+    rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };

@@ -1,0 +1,64 @@
+<section class="sec hero13" aria-labelledby="h13-a">
+<style>
+.hero13{overflow:hidden;padding-top:clamp(20px,3vw,44px);padding-bottom:clamp(28px,3.4vw,52px)}
+.hero13 .g{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;margin-top:clamp(70px,7vw,96px)}
+.hero13 .pic{grid-column:5/13;grid-row:1;position:relative;aspect-ratio:1086/723;border-radius:30px;overflow:hidden;box-shadow:0 50px 70px -46px rgba(23,17,29,.6)}
+.hero13 .pic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.1);transition:transform 2.6s cubic-bezier(.22,.61,.36,1)}
+.hero13 .on .pic img{transform:none}
+.hero13 .card{grid-column:1/7;grid-row:1;position:relative;z-index:2;margin-bottom:5%;padding:clamp(24px,2.8vw,40px);border-radius:28px;background:#FFFDF7;box-shadow:0 2px 0 #fff inset,0 36px 60px -34px rgba(23,17,29,.55)}
+.hero13 .h1{font-size:clamp(36px,4vw,60px)}
+.hero13 .lede{margin:16px 0 26px;max-width:34ch}
+.hero13 .ctas{display:flex;flex-direction:column;gap:14px}
+.hero13 .ctas .btn{width:100%;min-height:62px;font-size:19px}
+.hero13 .perch{position:absolute;right:4%;bottom:calc(100% - 9px);width:min(330px,62%);pointer-events:none}
+.hero13 .perch>div{position:relative;transform-origin:67% 82%}
+.hero13 .owl{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 8px rgba(23,17,29,.22))}
+.hero13 .breathe{animation:h13b 6s ease-in-out infinite}
+@keyframes h13b{50%{translate:0 -3px;scale:1.006}}
+.hero13 .hop{animation:h13h .62s cubic-bezier(.3,0,.3,1)}
+@keyframes h13h{0%{transform:none}30%{transform:translateY(-11%) rotate(-2deg) scale(1.02)}55%{transform:translateY(0) scale(1.03,.97)}75%{transform:translateY(-3%)}100%{transform:none}}
+.hero13 .lid{position:absolute;left:52.1%;top:32.6%;width:4.1%;height:6.6%;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#C48A44,#8E5A26 70%);transform:rotate(-8deg) scaleY(0);transform-origin:50% 0;transition:transform .09s ease-in}
+.hero13 .blink .lid{transform:rotate(-8deg) scaleY(1)}
+.hero13 .trust{margin-top:clamp(18px,3vw,32px)}
+@media (max-width:900px){.hero13 .g{grid-template-columns:minmax(0,1fr);margin-top:0}.hero13 .pic{grid-column:1;grid-row:1;border-radius:24px}.hero13 .card{grid-column:1;grid-row:2;margin:-34px 10px 0}.hero13 .perch{width:min(180px,46%);right:3%}}
+@media (prefers-reduced-motion:reduce){.hero13 .pic img{transition:none;transform:none}.hero13 .breathe,.hero13 .hop{animation:none}.hero13 .lid{display:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div class="pic" data-owl="say:Home, safe and sound"><img src="{{A:hero-golden.webp}}" alt="A stone and brick family home with a dark shingle roof at sunset" width="1086" height="723"></div>
+  <div class="card">
+   <div class="perch" aria-hidden="true"><div><img class="owl" src="{{A:owl-perch.webp}}" alt="" width="1180" height="703"><i class="lid"></i></div></div>
+   <h1 class="h1" id="h13-a">Under Our Wing, Your Nest Is Safe</h1>
+   <p class="lede">Family roofers who fix it properly, so you can rest easy. We Give a Hoot.</p>
+   <div class="ctas">
+    <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+    <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a>
+   </div>
+  </div>
+ </div>
+ <div class="trust" role="list">
+  <span class="stars" role="listitem" aria-label="Five stars"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span>
+  <span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">Founded 2025</span>
+ </div>
+</div>
+<script>
+OWL.reg('hero','13',function(root){
+  /* one idea: a calm home at dusk, and the Owl keeping watch from the words; it hops when you go for a button */
+  var g = root.querySelector('.g'), perch = root.querySelector('.perch > div'), h1 = root.querySelector('.h1');
+  OWL.split(h1, 110); OWL.reveal(h1);
+  if (OWL.reduce) return;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.classList.add('on'); }); });
+  perch.classList.add('breathe');
+  function hop(){ if (perch.classList.contains('hop')) return; perch.classList.remove('breathe'); perch.classList.add('hop'); }
+  perch.addEventListener('animationend', function(e){ if (e.animationName === 'h13h'){ perch.classList.remove('hop'); perch.classList.add('breathe'); } });
+  root.querySelectorAll('.ctas a').forEach(function(a){ a.addEventListener('pointerenter', hop); a.addEventListener('focus', hop); });
+  /* a blink every few seconds, while on screen */
+  var t = 0, seen = true;
+  function blink(){ if (seen){ perch.classList.add('blink'); setTimeout(function(){ perch.classList.remove('blink'); }, 150); } t = setTimeout(blink, 2800 + Math.random()*2400); }
+  t = setTimeout(blink, 1600);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ seen = e[0].isIntersecting; }).observe(g);
+});
+</script>
+</section>
