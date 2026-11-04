@@ -115,3 +115,109 @@
   .pd__n { font-size: 2.75rem; }
   .pd__t { font-size: .9375rem; }
 }
+
+/* ======================================================================================================================
+   NEW VERSIONS · V2 "One house, eight marks" — an animated architectural elevation. One drawing, full width; the ground
+   line is the control; the caption reads below it. Style family: storybook line drawing on paper (ink, sand, one clay).
+   ====================================================================================================================== */
+.jh__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s4) var(--s8); }
+.jh__head .eyebrow { margin: 0 0 var(--s3); }
+.jh__head .t-head { margin: 0; }
+.jh__intro { display: grid; gap: var(--s4); justify-items: start; }
+.jh__lead { margin: 0; max-width: 46ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+.jh__play {
+  display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s4) 0 var(--s3);
+  background: var(--color-text); color: var(--color-surface); border: 1.5px solid var(--color-text); border-radius: 999px;
+  font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), border-color 160ms var(--ez-out);
+}
+.jh__play svg { width: 20px; height: 20px; fill: currentColor; }
+.jh__pa { display: none; }
+.jh__play[aria-pressed="true"] .jh__pa { display: inline; } .jh__play[aria-pressed="true"] .jh__pi { display: none; }
+.jh__play:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .jh__play:hover { background: var(--color-accent-solid); border-color: var(--color-accent-solid); } }
+
+.jh__fig { margin: var(--s5) 0 0; padding: 0; background: var(--color-bg); border: 1.5px solid var(--color-text); }
+.jh__scene { height: clamp(300px, 41svh, 460px); }   /* the drawing letterboxes on wide screens: the job stays one screen tall */
+.jh__scene.is-follow { height: auto; aspect-ratio: 460 / 310; }
+.jh__svg { display: block; width: 100%; height: 100%; overflow: hidden; }
+.jh__svg [class] { vector-effect: none; }
+.jh__svg .gd { fill: none; stroke: var(--color-text); stroke-width: 2.5; }
+.jh__svg .gh { fill: none; stroke: var(--color-border-strong); stroke-width: 1.2; }
+.jh__svg .lg { fill: none; stroke: color-mix(in srgb, var(--color-text) 34%, transparent); stroke-width: 2; stroke-linejoin: round; }
+.jh__svg .ln { fill: none; stroke: var(--color-text); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.jh__svg .lt { fill: none; stroke: var(--color-text); stroke-width: 1.5; stroke-linecap: round; opacity: .7; }
+.jh__svg .lx { fill: none; stroke: var(--color-text); stroke-width: 1; stroke-dasharray: 3 4; opacity: .5; }
+.jh__svg .thk { fill: none; stroke: var(--color-text); stroke-width: 4; stroke-linecap: round; }
+.jh__svg .plank { fill: none; stroke: var(--color-text); stroke-width: 6; stroke-linecap: butt; }
+.jh__svg .fg { fill: none; stroke: var(--color-text); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.jh__svg .acs { fill: none; stroke: var(--color-accent-solid); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.jh__svg .roof { fill: none; stroke: var(--color-accent-solid); stroke-width: 7; stroke-linecap: square; stroke-linejoin: miter; }
+.jh__svg .dsh { fill: none; stroke: var(--color-accent-solid); stroke-width: 2; stroke-dasharray: 7 6; }
+.jh__svg .dshg { fill: none; stroke: color-mix(in srgb, var(--color-text) 45%, transparent); stroke-width: 2.5; stroke-dasharray: 6 6; }
+.jh__svg .fld { fill: none; stroke: var(--clay-600, #A45540); stroke-width: 2; stroke-dasharray: 2 5; stroke-linecap: round; }
+.jh__svg .inc { fill: color-mix(in srgb, var(--color-accent-solid) 14%, transparent); stroke: none; }
+.jh__svg .f-paper { fill: var(--color-surface); }
+.jh__svg .f-us { fill: color-mix(in srgb, var(--color-accent-solid) 70%, var(--color-surface)); stroke: var(--color-text); stroke-width: 2; }
+.jh__svg .f-them { fill: var(--color-bg-muted); stroke: var(--color-text); stroke-width: 2; }
+.jh__svg .f-head { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 2.5; }
+.jh__svg .f-hat { fill: var(--color-accent-solid); stroke: var(--color-text); stroke-width: 1.5; }
+.jh__svg .f-ink { fill: var(--color-text); }
+.jh__svg .f-acc { fill: var(--color-accent-solid); }
+.jh__svg .f-chk { fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.jh__svg .f-glass { fill: color-mix(in srgb, var(--color-bg-muted) 70%, var(--color-surface)); }
+.jh__svg .f-lit { fill: var(--clay-100, #F9E3DD); }
+.jh__q { font: 700 15px/1 var(--f-display); fill: var(--color-accent-solid); text-anchor: middle; }
+.jh__mk { cursor: pointer; transition: opacity 200ms var(--ez-out); }
+.jh__mk circle { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 2; transition: fill 200ms var(--ez-out); }
+.jh__mk text { font: 700 13px/1 var(--f-text); fill: var(--color-text); text-anchor: middle; pointer-events: none; }
+.jh__mk.is-on circle { fill: var(--color-accent-solid); stroke: var(--color-accent-solid); }
+.jh__mk.is-on text { fill: #fff; }
+@media (hover: hover) and (pointer: fine) { .jh__mk:hover circle { fill: var(--color-text); } .jh__mk:hover text { fill: var(--color-surface); } }
+
+/* the ground line is the control: eight stops, a rail that fills to the stage you are on, a knob you can drag */
+.jh__track { position: relative; padding: var(--s3) var(--s4); border-top: 1.5px solid var(--color-text); background: var(--color-surface); cursor: grab; touch-action: pan-y; user-select: none; }
+.jh__track:active { cursor: grabbing; }
+.jh__rail { position: absolute; left: calc(var(--s4) + 22px); right: calc(var(--s4) + 22px); top: 50%; height: 4px; margin-top: -2px; background: var(--color-border); border-radius: 2px; pointer-events: none; }
+.jh__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--color-accent-solid); border-radius: 2px; }
+.jh__knob { position: absolute; top: 50%; left: 0; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: var(--color-accent-solid); box-shadow: 0 0 0 4px var(--color-surface), 0 0 0 5.5px var(--color-accent-solid); }
+.jh__stops { position: relative; display: flex; justify-content: space-between; }
+.jh__s {
+  position: relative; z-index: 1; width: 44px; height: 44px; padding: 0; display: grid; place-items: center; cursor: inherit;
+  background: none; border: 0; color: var(--color-text);
+}
+.jh__s span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--color-surface); border: 1.5px solid var(--color-text); font: 600 .875rem/1 var(--f-text); transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), transform 200ms var(--ez-out); }
+.jh__s.is-past span { background: color-mix(in srgb, var(--color-accent-solid) 16%, var(--color-surface)); }
+.jh__s[aria-pressed="true"] span { background: var(--color-text); color: var(--color-surface); transform: scale(1.15); }
+.jh__s:focus-visible { outline: none; }
+.jh__s:focus-visible span { outline: 2px solid var(--color-focus-ring); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .jh__s:hover span { transform: scale(1.12); } }
+
+/* the caption: number and weeks, the stage, the firm's line */
+.jh__cap { display: grid; grid-template-columns: auto minmax(0, 15rem) minmax(0, 1fr); align-items: center; gap: var(--s2) var(--s6); padding: var(--s4) var(--s5); border-top: 1px solid var(--color-border); background: var(--color-surface); min-height: 96px; }
+.jh__k { margin: 0; display: flex; align-items: center; gap: var(--s3); }
+.jh__no { font: 600 2.75rem/.85 var(--f-display); letter-spacing: -.04em; color: var(--color-accent-solid); }
+.jh__wk { font: 600 .8125rem/1.2 var(--f-text); padding: 4px 12px; border: 1.5px solid var(--color-text); border-radius: 999px; white-space: nowrap; }
+.jh__t { margin: 0; font: 600 1.375rem/1.15 var(--f-display); letter-spacing: -.015em; }
+.jh__p { margin: 0; color: var(--color-text-secondary); line-height: 1.5; max-width: 62ch; }
+
+@media (max-width: 900px) {
+  .jh__head { grid-template-columns: minmax(0, 1fr); }
+  .jh__cap { grid-template-columns: auto minmax(0, 1fr); }
+  .jh__p { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .jh__fig { margin-inline: calc(var(--margin) * -1); border-inline: 0; }
+  .jh__track { padding-inline: var(--s2); }
+  .jh__rail { left: calc(var(--s2) + 22px); right: calc(var(--s2) + 22px); }
+  .jh__s span { width: 28px; height: 28px; }
+  .jh__cap { padding: var(--s4) var(--margin); gap: var(--s2) var(--s4); }
+  .jh__no { font-size: 2.25rem; }
+  .jh__t { font-size: 1.25rem; }
+  .jh__play { justify-self: stretch; justify-content: center; }
+}
+@media (max-width: 380px) {   /* eight 44px stops need 352px: the track gives up its side padding on the narrowest phones */
+  .jh__track { padding-inline: 2px; }
+  .jh__rail { left: 24px; right: 24px; }
+}
+.jh__scene.is-follow .jh__q { font-size: 18px; }   /* the drawing is scaled down on a phone: its few glyphs stay at 13px or more */
+@media (prefers-reduced-motion: reduce) { .jh__s span, .jh__mk, .jh__mk circle, .jh__play { transition: none; } }

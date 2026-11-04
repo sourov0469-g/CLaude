@@ -359,3 +359,25 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12 (home, both versions, 6 widths);
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before the next section (How a job runs).
+
+## New versions, pass 1 · How a job runs V2 "One house, eight marks" (2026-11-04)
+- **Muse accepted** Hero V2.
+- **One new version:** `process` V2.
+  - V1 (the dial) is untouched and stays the default.
+  - It is reachable from the header switch or `?process=2`.
+- **Governing reference:** Scout Motors (the process as sequenced evidence).
+- **Style family:** an animated architectural elevation.
+- **Signature move:** evidence that stays. One house is drawn full width; dragging its ground line runs the eight stages, and each stage leaves a numbered mark.
+- **Controls:** drag, stops, arrow keys, play and pause, and the marks; it autoplays once on arrival.
+- **Length:** about one screen, with no pin.
+- **Phones:** the view follows the work.
+- **Gate:** `GATE-NEW-Process.md`, self-scored 7.7 (D7 U8 C8 Ct9), 0 vetoes. 7 build defects fixed, including:
+  - a class collision with Our Work;
+  - Chromium's wrong `getTotalLength()` for `<rect>`.
+- **Evidence:** `qa/new/process/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Financing.
