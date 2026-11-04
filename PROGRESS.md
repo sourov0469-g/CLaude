@@ -751,3 +751,13 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Tell Us V4.
+
+## Final · the owner's picks (2026-11-04)
+- **The owner ended the new-versions passes** and chose one version per section:
+  - Hero V1, How a job runs V1 (kept, not named), Financing V2, Reviews V1, Service area V2, Consultation V2.
+  - Our Work becomes the portfolio wall: Hero V2's gallery wall, reworked for the portfolio (three bays under plaques,
+    true proportions, scroll pull-back without a pin, bay buttons, flights with plan-room codes, a full-width hang on phones).
+- **Everything else removed** from the source (in git history); no version switch is shown. The gate
+  files stay as records.
+- **Record:** `FINAL.md`.
+- **Regression:** touch 33/33; phones 0 small targets, 0 small text; locks 0 fails; outside links 0; single file 0 errors.

@@ -1,10 +1,10 @@
 [
  {
   "page": "home",
-  "w": 375,
+  "w": 360,
   "v": 1,
   "sec": "hero",
-  "range": 633,
+  "range": 703,
   "engage": true,
   "drift": 0,
   "playEnd": 1,
@@ -13,11 +13,11 @@
   "ok": true
  },
  {
-  "page": "bathrooms",
+  "page": "home",
   "w": 375,
   "v": 1,
-  "sec": "bath-build",
-  "range": 1734,
+  "sec": "hero",
+  "range": 633,
   "engage": true,
   "drift": 0,
   "playEnd": 1,
@@ -39,11 +39,11 @@
   "ok": true
  },
  {
-  "page": "bathrooms",
-  "w": 390,
+  "page": "home",
+  "w": 414,
   "v": 1,
-  "sec": "bath-build",
-  "range": 2194,
+  "sec": "hero",
+  "range": 851,
   "engage": true,
   "drift": 0,
   "playEnd": 1,
@@ -65,37 +65,11 @@
   "ok": true
  },
  {
-  "page": "bathrooms",
-  "w": 768,
-  "v": 1,
-  "sec": "bath-build",
-  "range": 2662,
-  "engage": true,
-  "drift": 0,
-  "playEnd": 1,
-  "release": true,
-  "errors": 0,
-  "ok": true
- },
- {
   "page": "home",
   "w": 1440,
   "v": 1,
   "sec": "hero",
   "range": 1035,
-  "engage": true,
-  "drift": 0,
-  "playEnd": 1,
-  "release": true,
-  "errors": 0,
-  "ok": true
- },
- {
-  "page": "bathrooms",
-  "w": 1440,
-  "v": 1,
-  "sec": "bath-build",
-  "range": 2340,
   "engage": true,
   "drift": 0,
   "playEnd": 1,
