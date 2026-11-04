@@ -1,0 +1,107 @@
+{
+ "section": "people",
+ "total": 20,
+ "passed": 20,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "a split cover on a pinned stage: three covers of two halves each, a seam, and the name card sitting on the seam",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "scroll turns the chapters: The Browns → The Berglands → Owl’s crew; the dots follow",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "mid-turn: the two halves move in opposite directions across the seam (old out, new in)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "real people, captioned as the site already captions them; only locked facts (founded 2025, co-founders Tim Brown and Noah Bergland, GAF Systems Plus, We Give a Hoot); no invented details",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the dots jump to a chapter (The Berglands)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the chapter swaps at once (no slide)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
