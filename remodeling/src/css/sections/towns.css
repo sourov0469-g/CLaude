@@ -160,3 +160,112 @@
   .tb__ctl { right: var(--s3); bottom: var(--s3); }
 }
 @media (prefers-reduced-motion: reduce) { .tb__pin--town.is-up .tb__up > * { animation: none; } .tb__svg .cty, .tb__svg .mk, .tb__z, .tb__all { transition: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Where We Build V3 "104 threads" — a network flow map (Lusion): every municipality tied to our office by
+   a thread, on a night ground. Wide screens turn the map (north to the right) so the coast runs across the page.
+   Threads move by stroke offset and opacity only; the flow runs on an answer, never continuously [S0062].
+   ====================================================================================================================== */
+.ft { --ft-x: 0px; }
+.ft__band {
+  --ink: var(--color-text); --paper: var(--sand-50, #FCF8F5);
+  background: var(--ink); color: var(--paper); padding: var(--s6) 0 var(--s5); border-radius: 18px;
+}
+.ft__head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s5) var(--s7); align-items: start; margin-bottom: var(--s4); }
+.ft__eye { color: color-mix(in srgb, var(--paper) 72%, transparent); }
+.sec .ver.ft .ft__h { margin: 0; color: var(--paper); }
+.ft__h .acc { color: var(--clay-300, #ECB3A4); }
+.ft__lead { margin: var(--s3) 0 0; max-width: 44ch; font: 400 1.0625rem/1.5 var(--f-text); color: color-mix(in srgb, var(--paper) 78%, transparent); }
+
+/* the search: paper on the night ground [S1425, S1442] */
+.ft__panel { display: grid; gap: var(--s2); padding: var(--s4); background: var(--color-surface); color: var(--color-text); border-radius: 14px; position: relative; }
+.ft__lbl { font: 600 .875rem/1.2 var(--f-text); }
+.ft__box { position: relative; }
+.ft__in { width: 100%; min-height: 50px; padding: 0 44px 0 var(--s3); font: 500 1.0625rem/1 var(--f-text); color: var(--color-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: var(--radius); }
+.ft__in:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.ft__clear { position: absolute; right: 3px; top: 3px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; color: var(--color-text); }
+.ft__clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.ft__opts { list-style: none; margin: 0; padding: 4px; border: 1.5px solid var(--color-text); border-radius: var(--radius); background: var(--color-surface); max-height: 280px; overflow: auto; }
+.ft__opt { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 44px; padding: 0 var(--s3); border-radius: 6px; font: 600 .9375rem/1.2 var(--f-text); cursor: pointer; }
+.ft__opt span { font: 400 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.ft__opt[aria-selected="true"], .ft__opt:hover { background: var(--clay-100, #F9E3DD); }
+.ft__ans { margin: 0; font: 400 .9375rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+.ft__ans:empty { display: none; }
+.ft__ans b { color: var(--color-text); margin-right: .25em; }
+
+/* the map */
+.ft__map { position: relative; }
+.ft__frame { position: relative; width: 100%; cursor: crosshair; }
+.ft__map.is-v .ft__frame { width: auto; height: min(560px, 70svh); margin: 0 auto; }
+.ft__svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.ft__svg .cty { fill: rgba(255,255,255,.035); stroke: rgba(255,255,255,.26); stroke-width: 3; stroke-linejoin: round; transition: fill 300ms var(--ez-out); }
+.ft__svg .cty.is-on { fill: rgba(236,179,164,.10); }
+.ft__svg .th { fill: none; stroke: var(--clay-300, #ECB3A4); stroke-width: 2.6; stroke-linecap: round; opacity: .34; transition: opacity 320ms var(--ez-out), stroke-width 320ms var(--ez-out), stroke 320ms var(--ez-out); }
+.ft__svg .th.is-hot { opacity: .9; }
+.ft__svg .th.is-c { opacity: .85; }
+.ft__svg .th.is-dim { opacity: .07; }
+.ft__svg .th.is-on { opacity: 1; stroke: var(--clay-200, #F3CEC4); stroke-width: 6; }
+.ft__svg .mk { fill: var(--paper); opacity: .8; transition: fill 200ms var(--ez-out), opacity 200ms var(--ez-out); }
+.ft__svg .mk.is-on { fill: var(--color-accent-solid); opacity: 1; r: 16px; stroke: var(--paper); stroke-width: 4; }
+.ft__svg .ft__pulse { fill: var(--paper); filter: drop-shadow(0 0 10px rgba(236,179,164,.9)); }
+.ft__svg .office { fill: var(--color-accent-solid); stroke: var(--paper); stroke-width: 4; }
+/* the upright map on narrow screens is drawn smaller, so its lines are drawn thicker */
+.ft__map.is-v .ft__svg .th { stroke-width: 5.5; }
+.ft__map.is-v .ft__svg .th.is-on { stroke-width: 12; }
+.ft__map.is-v .ft__svg .cty { stroke-width: 6; }
+.ft__map.is-v .ft__svg .mk { r: 15px; }
+.ft__map.is-v .ft__svg .mk.is-on { r: 30px; stroke-width: 8; }
+.ft__map.is-v .ft__svg .ft__pulse { r: 30px; }
+.ft__map.is-v .ft__svg .office { stroke-width: 8; }
+
+/* labels over the map: counties, the office, the flags, north */
+.ft__labels { position: absolute; inset: 0; pointer-events: none; }
+.ft__labels > * { position: absolute; }
+.ft__cl { transform: translate(-50%, -50%); font: 600 .8125rem/1 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 55%, transparent); white-space: nowrap; }
+.ft__ol { transform: translate(-50%, 18px); display: grid; text-align: center; padding: 4px 9px; border-radius: 6px; background: color-mix(in srgb, var(--ink) 88%, transparent); font: 400 .8125rem/1.3 var(--f-text); color: color-mix(in srgb, var(--paper) 80%, transparent); white-space: nowrap; }
+.ft__ol b { font-weight: 600; color: var(--paper); }
+.ft__labels .ft__ol { transform: translate(calc(-100% - 16px), -50%); text-align: right; }   /* to the west of the office, clear of the fan of threads and the county names */
+.ft__flag {
+  display: grid; gap: 1px; padding: 7px 12px; border-radius: 8px; background: var(--paper); color: var(--color-text); white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 16px)); opacity: 0; transition: opacity 180ms var(--ez-out);
+  box-shadow: 0 10px 24px -12px rgba(0,0,0,.6);
+}
+.ft__flag.is-r { transform: translate(calc(-100% + 14px), calc(-100% - 16px)); }
+.ft__flag.is-l { transform: translate(-14px, calc(-100% - 16px)); }
+.ft__flag b { font: 600 .9375rem/1.2 var(--f-display); }
+.ft__flag small { font: 400 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.ft__flag.is-up { opacity: 1; }
+.ft__flag--on { background: var(--color-accent-solid); color: #fff; }
+.ft__flag--on small { color: rgba(255,255,255,.85); }
+.ft__flag--on.is-up { animation: ft-rise 380ms var(--ez-out); }
+@keyframes ft-rise { from { opacity: 0; margin-top: 8px; } to { opacity: 1; margin-top: 0; } }
+.ft__north { right: 0; top: 0; display: inline-flex; align-items: center; gap: 6px; font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 70%, transparent); }
+.ft__north svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ft__north.is-h svg { transform: rotate(90deg); }
+
+/* the counties: three chips, never a list of names */
+.ft__counties { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); margin-top: var(--s4); }
+.ft__cb {
+  display: inline-flex; align-items: baseline; gap: 10px; min-height: 44px; padding: 10px 18px; border-radius: 999px;
+  background: transparent; color: var(--paper); border: 1.5px solid color-mix(in srgb, var(--paper) 40%, transparent); cursor: pointer;
+  font: 600 .9375rem/1 var(--f-text); transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out);
+}
+.ft__cc { font: 400 1.25rem/1 var(--f-display); color: var(--clay-300, #ECB3A4); }
+.ft__cb[aria-pressed="true"] { background: var(--paper); color: var(--color-text); border-color: var(--paper); }
+.ft__cb[aria-pressed="true"] .ft__cc { color: var(--color-accent-solid); }
+.ft__cb:focus-visible { outline: 2px solid var(--clay-300, #ECB3A4); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .ft__cb:not([aria-pressed="true"]):hover { border-color: var(--paper); } }
+
+.ft__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3) var(--s5); margin-top: var(--s5); }
+.ft__call { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 899px) {
+  .ft__head { grid-template-columns: 1fr; }
+  .ft__band { border-radius: 14px; padding-top: var(--s5); }
+}
+@media (max-width: 599px) {
+  .ft__band { margin: 0 calc(var(--s4) * -1); border-radius: 0; }
+  .ft__panel { padding: var(--s3); }
+  .ft__map.is-v .ft__frame { height: min(520px, 64svh); }
+}
+@media (prefers-reduced-motion: reduce) { .ft__svg .th, .ft__svg .mk, .ft__flag, .ft__cb { transition: none; } .ft__flag--on.is-up { animation: none; } }

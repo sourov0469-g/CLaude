@@ -589,3 +589,25 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Where We Build V3.
+
+## New versions, pass 2 · Where We Build V3 "104 threads" (2026-11-04)
+- **Muse accepted** Reviews V3.
+- **One new version:** `towns` V3.
+  - V1 (the van route) stays the default; V2 is untouched.
+  - It is reachable from the header switch or `?towns=3`.
+- **Governing reference:** Lusion (flow maps).
+- **Style family:** a network flow map on a night ground.
+- **Signature move:** 104 threads.
+  - Every municipality is tied to the office by a thread.
+  - Search or tap a town: its thread pulls bright and a pulse runs out to it.
+  - County chips light 34 / 31 / 39 threads.
+  - An unlisted town gets the honest answer and the phone.
+  - The map turns on wide screens (north to the right).
+- **Gate:** `GATE-NEW-Towns-V3.md`, self-scored 8.4 (D8 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/towns-v3/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Tell Us V3, the last section of pass 2.

@@ -343,6 +343,165 @@
     // arriving: the table settles from flat to its tilt as the stage comes into view
     var st = ScrollTrigger.create({ trigger: stage, start: 'top 80%', once: true, onEnter: function () { gsap.fromTo(table, { rotationX: 0 }, { rotationX: TILT, duration: 1.2, ease: 'power3.inOut', clearProps: 'transform' }); } });
     k.add(function () { st.kill(); if (fly) fly.kill(); });
+  } },
+  /* NEW VERSIONS · V3 "104 threads" (governing reference: Lusion, flow maps). Each municipality is tied to our office by
+     a thread; a choice pulls its thread bright and sends a pulse out to it; a county lights its threads. The map turns
+     on wide screens (north to the right). Flow only on an answer, never continuous [S0062, S0083, S1018]. */
+  3: { init: function (root, k) {
+    var D = geo(), mapEl = root.querySelector('.ft__map'), frame = root.querySelector('.ft__frame'), svg = root.querySelector('.ft__svg'), geoG = root.querySelector('.ft__geo'),
+      labels = root.querySelector('.ft__labels'), ctyEl = root.querySelector('.ft__counties');
+    var inp = root.querySelector('.ft__in'), opts = root.querySelector('.ft__opts'), ans = root.querySelector('.ft__ans'), clr = root.querySelector('.ft__clear');
+    var T = [];
+    NS_ORDER.forEach(function (c) { D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }).forEach(function (t) { T.push({ n: t[0], c: c, x: t[1], y: t[2], k: norm(t[0]) }); }); });
+    var office = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0], ox = office[1], oy = office[2];
+
+    // ---- the threads: from the office, arcing out to sea (east) and back to each town ----
+    function thread(t) {
+      var dx = t.x - ox, dy = t.y - oy, L = Math.sqrt(dx * dx + dy * dy) || 1, px = -dy / L, py = dx / L;
+      if (px < 0) { px = -px; py = -py; }
+      var b = Math.min(260, L * .2), cx = (ox + t.x) / 2 + px * b, cy = (oy + t.y) / 2 + py * b;
+      return 'M' + f(ox) + ' ' + f(oy) + 'Q' + f(cx) + ' ' + f(cy) + ' ' + f(t.x) + ' ' + f(t.y);
+    }
+    var s = '';
+    NS_ORDER.forEach(function (c) { s += '<path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>'; });
+    T.forEach(function (t, i) { s += '<path class="th" data-i="' + i + '" data-c="' + t.c + '" d="' + thread(t) + '"/>'; });
+    T.forEach(function (t, i) { s += '<circle class="mk" data-i="' + i + '" data-c="' + t.c + '" data-n="' + esc(t.n) + '" cx="' + t.x + '" cy="' + t.y + '" r="9"/>'; });
+    s += '<circle class="ft__pulse" r="16" cx="' + ox + '" cy="' + oy + '" opacity="0"/>';
+    s += '<rect class="office" x="-20" y="-20" width="40" height="40" transform="translate(' + ox + ' ' + oy + ') rotate(45)"/>';
+    geoG.innerHTML = s;
+    var ths = Array.prototype.slice.call(geoG.querySelectorAll('.th')), marks = Array.prototype.slice.call(geoG.querySelectorAll('.mk')), ctys = geoG.querySelectorAll('.cty'), pulse = geoG.querySelector('.ft__pulse');
+    labels.innerHTML = NS_ORDER.map(function (c) { return '<span class="ft__cl" data-c="' + c + '">' + c + '</span>'; }).join('') +
+      '<span class="ft__ol"><b>Our office</b>19 W Flagler St</span><span class="ft__flag ft__flag--on"><b></b><small></small></span><span class="ft__flag ft__flag--hov"><b></b></span>' +
+      '<span class="ft__north"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 L12 21 M12 3 L7 9 M12 3 L17 9"/></svg>North</span>';
+    var cls = Array.prototype.slice.call(labels.querySelectorAll('.ft__cl')), ol = labels.querySelector('.ft__ol'), fOn = labels.querySelector('.ft__flag--on'), fHov = labels.querySelector('.ft__flag--hov'), north = labels.querySelector('.ft__north');
+    ctyEl.innerHTML = NS_ORDER.slice().reverse().map(function (c) { return '<button type="button" class="ft__cb" data-c="' + c + '" aria-pressed="false"><span class="ft__cn">' + c.replace('-', '&#8209;') + '</span><span class="ft__cc nums">' + D.towns[c].length + '</span></button>'; }).join('');
+    var cbs = Array.prototype.slice.call(ctyEl.children);
+    k.add(function () { geoG.innerHTML = ''; labels.innerHTML = ''; ctyEl.innerHTML = ''; ans.innerHTML = ''; inp.value = ''; opts.hidden = true; opts.innerHTML = ''; clr.hidden = true; });
+
+    /* ---------- orientation: the coast across the page on wide screens, upright on narrow ones ---------- */
+    var H = false, VW = 1000, VH = 2378;
+    function P(x, y) { return H ? [D.h - y, x] : [x, y]; }
+    function at(el, x, y) { var p = P(x, y); el.style.left = (p[0] / VW * 100).toFixed(3) + '%'; el.style.top = (p[1] / VH * 100).toFixed(3) + '%'; el.classList.toggle('is-r', p[0] / VW > .8); el.classList.toggle('is-l', p[0] / VW < .12); }
+    function orient() {
+      var h = mapEl.clientWidth >= 900;
+      if (h === H && svg.getAttribute('viewBox')) return;
+      H = h; VW = H ? D.h : D.w; VH = H ? D.w : D.h;
+      svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+      geoG.setAttribute('transform', H ? 'matrix(0 1 -1 0 ' + D.h + ' 0)' : '');
+      frame.style.aspectRatio = VW + ' / ' + VH; mapEl.classList.toggle('is-h', H); mapEl.classList.toggle('is-v', !H);
+      NS_ORDER.forEach(function (c, j) { var b = D.boxes[c]; at(cls[j], (b[0] + b[2]) / 2, (b[1] + b[3]) / 2); });
+      at(ol, ox, oy); north.classList.toggle('is-h', H);
+      if (onI > -1) at(fOn, T[onI].x, T[onI].y);
+    }
+
+    /* ---------- state ---------- */
+    var onI = -1, onC = null, fly = null;
+    function paint() {
+      ths.forEach(function (p, i) { var t = T[i]; p.classList.toggle('is-on', i === onI); p.classList.toggle('is-c', !!onC && t.c === onC); p.classList.toggle('is-dim', (onI > -1 && i !== onI) || (!!onC && t.c !== onC)); });
+      marks.forEach(function (m, i) { m.classList.toggle('is-on', i === onI); m.classList.toggle('is-c', !!onC && T[i].c === onC); });
+      ctys.forEach(function (c) { c.classList.toggle('is-on', (onI > -1 && T[onI].c === c.dataset.c) || onC === c.dataset.c); });
+      cbs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.c === onC ? 'true' : 'false'); });
+    }
+    function send(i) {   // the pulse runs from the office out along the town's thread
+      var p = ths[i], L = p.getTotalLength(); if (fly) fly.kill();
+      if (!k.motion) { var e = p.getPointAtLength(L); pulse.setAttribute('cx', e.x); pulse.setAttribute('cy', e.y); pulse.setAttribute('opacity', '1'); return; }
+      var o = { v: 0 };
+      fly = gsap.to(o, { v: 1, duration: Math.min(1.4, .55 + L / 2200), ease: 'power2.inOut', onStart: function () { pulse.setAttribute('opacity', '1'); },
+        onUpdate: function () { var q = p.getPointAtLength(o.v * L); pulse.setAttribute('cx', f(q.x)); pulse.setAttribute('cy', f(q.y)); },
+        onComplete: function () { fOn.classList.remove('is-up'); void fOn.offsetWidth; fOn.classList.add('is-up'); } });
+    }
+    function select(i, from) {
+      var t = T[i]; onI = i; onC = null; paint();
+      at(fOn, t.x, t.y); fOn.querySelector('b').textContent = t.n; fOn.querySelector('small').textContent = t.c;
+      fOn.classList.toggle('is-up', !k.motion); fHov.classList.remove('is-up');
+      if (from !== 'input') inp.value = t.n;
+      clr.hidden = false; close();
+      ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b> ' + esc(t.n) + ' is one of the <span class="nums">' + D.towns[t.c].length + '</span> municipalities we build in across ' + esc(t.c) + ', one of our three counties.';
+      send(i);
+    }
+    function county(c) {
+      onC = onC === c ? null : c; onI = -1; if (fly) fly.kill(); pulse.setAttribute('opacity', '0'); fOn.classList.remove('is-up'); paint();
+      if (onC) {
+        ans.innerHTML = '<b>' + esc(c) + '.</b> <span class="nums">' + D.towns[c].length + '</span> municipalities we build in, one of our three counties. Type a town to find yours.';
+        if (k.motion) gsap.fromTo(ths.filter(function (p) { return p.dataset.c === c; }), { drawSVG: '0%' }, { drawSVG: '100%', duration: .9, ease: 'power2.out', stagger: .008, clearProps: 'strokeDasharray,strokeDashoffset' });
+      } else ans.innerHTML = '';
+    }
+    function clear(focus) {
+      onI = -1; onC = null; if (fly) fly.kill(); pulse.setAttribute('opacity', '0'); fOn.classList.remove('is-up'); paint();
+      inp.value = ''; clr.hidden = true; ans.innerHTML = ''; close(); if (focus) inp.focus();
+    }
+    k.on(clr, 'click', function () { clear(true); });
+    cbs.forEach(function (b) { k.on(b, 'click', function () { county(b.dataset.c); }); });
+
+    /* ---------- the combobox (as V1 and V2: arrows, Enter, Escape; an honest answer when we do not list a town) ---------- */
+    var found = [], act = -1;
+    function close() { opts.hidden = true; inp.setAttribute('aria-expanded', 'false'); inp.removeAttribute('aria-activedescendant'); act = -1; }
+    function renderOpts() {
+      opts.innerHTML = found.map(function (i, j) { return '<li class="ft__opt" role="option" id="ft-o-' + j + '" data-i="' + i + '" aria-selected="' + (j === act ? 'true' : 'false') + '">' + esc(T[i].n) + '<span>' + esc(T[i].c) + '</span></li>'; }).join('');
+      opts.hidden = !found.length; inp.setAttribute('aria-expanded', found.length ? 'true' : 'false');
+      if (act > -1) inp.setAttribute('aria-activedescendant', 'ft-o-' + act); else inp.removeAttribute('aria-activedescendant');
+    }
+    function search() {
+      var q = norm(inp.value); act = -1; clr.hidden = !inp.value;
+      if (!q) { found = []; renderOpts(); return; }
+      var a = [], b = [];
+      T.forEach(function (t, i) { if (t.k.indexOf(q) === 0) a.push(i); else if (t.k.indexOf(' ' + q) > -1 || t.k.indexOf(q) > 0) b.push(i); });
+      found = a.concat(b).slice(0, 6); renderOpts();
+    }
+    function commit() {
+      if (act > -1) { select(found[act], 'list'); return; }
+      var q = norm(inp.value); if (!q) return;
+      var exact = T.findIndex(function (t) { return t.k === q; });
+      if (exact > -1) { select(exact, 'input'); return; }
+      if (found.length === 1) { select(found[0], 'list'); return; }
+      close();
+      // a town we do not list has no thread: nothing stays lit beside the honest answer
+      onI = -1; onC = null; if (fly) fly.kill(); pulse.setAttribute('opacity', '0'); fOn.classList.remove('is-up'); paint();
+      ans.innerHTML = '<b>Not on our published list.</b> We do not see &ldquo;' + esc(inp.value.trim()) + '&rdquo; among the <span class="nums">104</span> municipalities we list. Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>: you will get a real answer, not a callback form.';
+    }
+    k.on(inp, 'input', search);
+    k.on(inp, 'keydown', function (e) {
+      if (e.key === 'ArrowDown' && found.length) { e.preventDefault(); act = (act + 1) % found.length; renderOpts(); }
+      else if (e.key === 'ArrowUp' && found.length) { e.preventDefault(); act = (act - 1 + found.length) % found.length; renderOpts(); }
+      else if (e.key === 'Enter') { e.preventDefault(); commit(); }
+      else if (e.key === 'Escape') { if (!opts.hidden) { e.preventDefault(); close(); } }
+    });
+    k.on(opts, 'pointerdown', function (e) { var li = e.target.closest('.ft__opt'); if (li) { e.preventDefault(); select(+li.dataset.i, 'list'); } });
+    k.on(inp, 'blur', function () { k.timeout(close, 120); });
+    k.on(inp, 'focus', function () {   // DEEP QA rule kept: on phones the field rises when tapped
+      if (innerWidth > 767) return;
+      k.timeout(function () { var r = inp.getBoundingClientRect(), nav = (document.querySelector('.nav') || { offsetHeight: 64 }).offsetHeight; if (r.top > nav + 120) window.scrollTo({ top: scrollY + r.top - nav - 16, behavior: 'auto' }); }, 250);
+    });
+
+    /* ---------- the map by hand: the nearest mark under the pointer; a tap chooses it ---------- */
+    function nearest(x, y, reach) {
+      var best = -1, bd = reach * reach;
+      marks.forEach(function (m, i) { var r = m.getBoundingClientRect(), dx = r.left + r.width / 2 - x, dy = r.top + r.height / 2 - y, q = dx * dx + dy * dy; if (q < bd) { bd = q; best = i; } });
+      return best;
+    }
+    var hovI = -1;
+    function hover(i) {
+      if (i === hovI) return;
+      if (hovI > -1) ths[hovI].classList.remove('is-hot'); hovI = i;
+      if (i < 0 || i === onI) { fHov.classList.remove('is-up'); return; }
+      ths[i].classList.add('is-hot'); at(fHov, T[i].x, T[i].y); fHov.querySelector('b').textContent = T[i].n; fHov.classList.add('is-up');
+    }
+    k.on(frame, 'pointermove', function (e) { if (e.pointerType === 'mouse') hover(nearest(e.clientX, e.clientY, 26)); });
+    k.on(frame, 'pointerleave', function () { hover(-1); });
+    k.on(frame, 'click', function (e) { var i = nearest(e.clientX, e.clientY, 34); if (i > -1) { hover(-1); select(i, 'map'); } });
+
+    k.ro(mapEl, orient); orient(); paint();
+    EZ.reveal(k, root.querySelectorAll('.ft__head > *, .ft__counties, .ft__foot'));
+    if (!k.motion) return;
+    // arriving: the threads are spun out from the office, nearest towns first
+    var order = ths.map(function (p, i) { return [p, p.getTotalLength()]; }).sort(function (a, b) { return a[1] - b[1]; }).map(function (x) { return x[0]; });
+    gsap.set(order, { drawSVG: '0%' });
+    var once = false;
+    k.io(frame, function (en) {
+      if (!en.isIntersecting || once) return; once = true;
+      gsap.to(order, { drawSVG: '100%', duration: 1, ease: 'power2.out', stagger: .012, clearProps: 'strokeDasharray,strokeDashoffset' });
+    }, { threshold: .2 });
+    k.add(function () { if (fly) fly.kill(); gsap.killTweensOf(ths); });
   } }
   });
 })();

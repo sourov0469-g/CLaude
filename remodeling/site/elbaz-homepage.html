@@ -2835,6 +2835,111 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .tb__pin--town.is-up .tb__up > * { animation: none; } .tb__svg .cty, .tb__svg .mk, .tb__z, .tb__all { transition: none; } }
 
 
+.ft { --ft-x: 0px; }
+.ft__band {
+  --ink: var(--color-text); --paper: var(--sand-50, #FCF8F5);
+  background: var(--ink); color: var(--paper); padding: var(--s6) 0 var(--s5); border-radius: 18px;
+}
+.ft__head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s5) var(--s7); align-items: start; margin-bottom: var(--s4); }
+.ft__eye { color: color-mix(in srgb, var(--paper) 72%, transparent); }
+.sec .ver.ft .ft__h { margin: 0; color: var(--paper); }
+.ft__h .acc { color: var(--clay-300, #ECB3A4); }
+.ft__lead { margin: var(--s3) 0 0; max-width: 44ch; font: 400 1.0625rem/1.5 var(--f-text); color: color-mix(in srgb, var(--paper) 78%, transparent); }
+
+
+.ft__panel { display: grid; gap: var(--s2); padding: var(--s4); background: var(--color-surface); color: var(--color-text); border-radius: 14px; position: relative; }
+.ft__lbl { font: 600 .875rem/1.2 var(--f-text); }
+.ft__box { position: relative; }
+.ft__in { width: 100%; min-height: 50px; padding: 0 44px 0 var(--s3); font: 500 1.0625rem/1 var(--f-text); color: var(--color-text); background: var(--color-bg); border: 1.5px solid var(--color-text); border-radius: var(--radius); }
+.ft__in:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.ft__clear { position: absolute; right: 3px; top: 3px; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; color: var(--color-text); }
+.ft__clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.ft__opts { list-style: none; margin: 0; padding: 4px; border: 1.5px solid var(--color-text); border-radius: var(--radius); background: var(--color-surface); max-height: 280px; overflow: auto; }
+.ft__opt { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: 44px; padding: 0 var(--s3); border-radius: 6px; font: 600 .9375rem/1.2 var(--f-text); cursor: pointer; }
+.ft__opt span { font: 400 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.ft__opt[aria-selected="true"], .ft__opt:hover { background: var(--clay-100, #F9E3DD); }
+.ft__ans { margin: 0; font: 400 .9375rem/1.45 var(--f-text); color: var(--color-text-secondary); }
+.ft__ans:empty { display: none; }
+.ft__ans b { color: var(--color-text); margin-right: .25em; }
+
+
+.ft__map { position: relative; }
+.ft__frame { position: relative; width: 100%; cursor: crosshair; }
+.ft__map.is-v .ft__frame { width: auto; height: min(560px, 70svh); margin: 0 auto; }
+.ft__svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.ft__svg .cty { fill: rgba(255,255,255,.035); stroke: rgba(255,255,255,.26); stroke-width: 3; stroke-linejoin: round; transition: fill 300ms var(--ez-out); }
+.ft__svg .cty.is-on { fill: rgba(236,179,164,.10); }
+.ft__svg .th { fill: none; stroke: var(--clay-300, #ECB3A4); stroke-width: 2.6; stroke-linecap: round; opacity: .34; transition: opacity 320ms var(--ez-out), stroke-width 320ms var(--ez-out), stroke 320ms var(--ez-out); }
+.ft__svg .th.is-hot { opacity: .9; }
+.ft__svg .th.is-c { opacity: .85; }
+.ft__svg .th.is-dim { opacity: .07; }
+.ft__svg .th.is-on { opacity: 1; stroke: var(--clay-200, #F3CEC4); stroke-width: 6; }
+.ft__svg .mk { fill: var(--paper); opacity: .8; transition: fill 200ms var(--ez-out), opacity 200ms var(--ez-out); }
+.ft__svg .mk.is-on { fill: var(--color-accent-solid); opacity: 1; r: 16px; stroke: var(--paper); stroke-width: 4; }
+.ft__svg .ft__pulse { fill: var(--paper); filter: drop-shadow(0 0 10px rgba(236,179,164,.9)); }
+.ft__svg .office { fill: var(--color-accent-solid); stroke: var(--paper); stroke-width: 4; }
+
+.ft__map.is-v .ft__svg .th { stroke-width: 5.5; }
+.ft__map.is-v .ft__svg .th.is-on { stroke-width: 12; }
+.ft__map.is-v .ft__svg .cty { stroke-width: 6; }
+.ft__map.is-v .ft__svg .mk { r: 15px; }
+.ft__map.is-v .ft__svg .mk.is-on { r: 30px; stroke-width: 8; }
+.ft__map.is-v .ft__svg .ft__pulse { r: 30px; }
+.ft__map.is-v .ft__svg .office { stroke-width: 8; }
+
+
+.ft__labels { position: absolute; inset: 0; pointer-events: none; }
+.ft__labels > * { position: absolute; }
+.ft__cl { transform: translate(-50%, -50%); font: 600 .8125rem/1 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 55%, transparent); white-space: nowrap; }
+.ft__ol { transform: translate(-50%, 18px); display: grid; text-align: center; padding: 4px 9px; border-radius: 6px; background: color-mix(in srgb, var(--ink) 88%, transparent); font: 400 .8125rem/1.3 var(--f-text); color: color-mix(in srgb, var(--paper) 80%, transparent); white-space: nowrap; }
+.ft__ol b { font-weight: 600; color: var(--paper); }
+.ft__labels .ft__ol { transform: translate(calc(-100% - 16px), -50%); text-align: right; }   
+.ft__flag {
+  display: grid; gap: 1px; padding: 7px 12px; border-radius: 8px; background: var(--paper); color: var(--color-text); white-space: nowrap;
+  transform: translate(-50%, calc(-100% - 16px)); opacity: 0; transition: opacity 180ms var(--ez-out);
+  box-shadow: 0 10px 24px -12px rgba(0,0,0,.6);
+}
+.ft__flag.is-r { transform: translate(calc(-100% + 14px), calc(-100% - 16px)); }
+.ft__flag.is-l { transform: translate(-14px, calc(-100% - 16px)); }
+.ft__flag b { font: 600 .9375rem/1.2 var(--f-display); }
+.ft__flag small { font: 400 .8125rem/1.2 var(--f-text); color: var(--color-text-secondary); }
+.ft__flag.is-up { opacity: 1; }
+.ft__flag--on { background: var(--color-accent-solid); color: #fff; }
+.ft__flag--on small { color: rgba(255,255,255,.85); }
+.ft__flag--on.is-up { animation: ft-rise 380ms var(--ez-out); }
+@keyframes ft-rise { from { opacity: 0; margin-top: 8px; } to { opacity: 1; margin-top: 0; } }
+.ft__north { right: 0; top: 0; display: inline-flex; align-items: center; gap: 6px; font: 600 .8125rem/1 var(--f-text); letter-spacing: .08em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 70%, transparent); }
+.ft__north svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ft__north.is-h svg { transform: rotate(90deg); }
+
+
+.ft__counties { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s2); margin-top: var(--s4); }
+.ft__cb {
+  display: inline-flex; align-items: baseline; gap: 10px; min-height: 44px; padding: 10px 18px; border-radius: 999px;
+  background: transparent; color: var(--paper); border: 1.5px solid color-mix(in srgb, var(--paper) 40%, transparent); cursor: pointer;
+  font: 600 .9375rem/1 var(--f-text); transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out), border-color 160ms var(--ez-out);
+}
+.ft__cc { font: 400 1.25rem/1 var(--f-display); color: var(--clay-300, #ECB3A4); }
+.ft__cb[aria-pressed="true"] { background: var(--paper); color: var(--color-text); border-color: var(--paper); }
+.ft__cb[aria-pressed="true"] .ft__cc { color: var(--color-accent-solid); }
+.ft__cb:focus-visible { outline: 2px solid var(--clay-300, #ECB3A4); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .ft__cb:not([aria-pressed="true"]):hover { border-color: var(--paper); } }
+
+.ft__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s3) var(--s5); margin-top: var(--s5); }
+.ft__call { margin: 0; font: 400 .9375rem/1.4 var(--f-text); color: var(--color-text-secondary); }
+
+@media (max-width: 899px) {
+  .ft__head { grid-template-columns: 1fr; }
+  .ft__band { border-radius: 14px; padding-top: var(--s5); }
+}
+@media (max-width: 599px) {
+  .ft__band { margin: 0 calc(var(--s4) * -1); border-radius: 0; }
+  .ft__panel { padding: var(--s3); }
+  .ft__map.is-v .ft__frame { height: min(520px, 64svh); }
+}
+@media (prefers-reduced-motion: reduce) { .ft__svg .th, .ft__svg .mk, .ft__flag, .ft__cb { transition: none; } .ft__flag--on.is-up { animation: none; } }
+
+
 #consult .t-head { color: var(--color-text); }
 .consult__lead { color: var(--color-text-secondary); max-width: 42ch; }
 .consult__facts { margin: 0; display: grid; gap: 16px; }
@@ -3820,6 +3925,41 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
         <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
         <p class="tb__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
       </div>
+    </div>
+  </div>
+
+  
+  <div class="ver ft" data-v="3">
+    <div class="ft__band">
+      <div class="wrap ft__head">
+        <div>
+          <p class="eyebrow ft__eye"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
+          <h2 class="t-head ft__h" id="towns-h-3"><span class="nums">104</span> towns. <span class="acc">One office.</span></h2>
+          <p class="ft__lead">Every town we build in is tied to our office in Miami. Find yours and follow its thread.</p>
+        </div>
+        <div class="ft__panel">
+          <label class="ft__lbl" for="ft-q">Your town or city</label>
+          <div class="ft__box">
+            <input class="ft__in" id="ft-q" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ft-opts" spellcheck="false" placeholder="Start typing, for example Weston">
+            <button type="button" class="ft__clear" aria-label="Clear the town" hidden><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5 L15 15 M15 5 L5 15"/></svg></button>
+          </div>
+          <ul class="ft__opts" id="ft-opts" role="listbox" aria-label="Matching towns" hidden></ul>
+          <p class="ft__ans" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="wrap">
+        <div class="ft__map" data-buddy="map">
+          <div class="ft__frame">
+            <svg class="ft__svg" aria-hidden="true" focusable="false"><g class="ft__geo"></g></svg>
+            <div class="ft__labels" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="ft__counties" role="group" aria-label="Light a county"></div>
+      </div>
+    </div>
+    <div class="wrap ft__foot">
+      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
+      <p class="ft__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
     </div>
   </div>
 </section>
@@ -8930,6 +9070,165 @@ dd > a.link { display: inline-flex; align-items: center; min-height: 44px; }
     // arriving: the table settles from flat to its tilt as the stage comes into view
     var st = ScrollTrigger.create({ trigger: stage, start: 'top 80%', once: true, onEnter: function () { gsap.fromTo(table, { rotationX: 0 }, { rotationX: TILT, duration: 1.2, ease: 'power3.inOut', clearProps: 'transform' }); } });
     k.add(function () { st.kill(); if (fly) fly.kill(); });
+  } },
+  /* NEW VERSIONS · V3 "104 threads" (governing reference: Lusion, flow maps). Each municipality is tied to our office by
+     a thread; a choice pulls its thread bright and sends a pulse out to it; a county lights its threads. The map turns
+     on wide screens (north to the right). Flow only on an answer, never continuous [S0062, S0083, S1018]. */
+  3: { init: function (root, k) {
+    var D = geo(), mapEl = root.querySelector('.ft__map'), frame = root.querySelector('.ft__frame'), svg = root.querySelector('.ft__svg'), geoG = root.querySelector('.ft__geo'),
+      labels = root.querySelector('.ft__labels'), ctyEl = root.querySelector('.ft__counties');
+    var inp = root.querySelector('.ft__in'), opts = root.querySelector('.ft__opts'), ans = root.querySelector('.ft__ans'), clr = root.querySelector('.ft__clear');
+    var T = [];
+    NS_ORDER.forEach(function (c) { D.towns[c].slice().sort(function (a, b) { return a[2] - b[2]; }).forEach(function (t) { T.push({ n: t[0], c: c, x: t[1], y: t[2], k: norm(t[0]) }); }); });
+    var office = D.towns['Miami-Dade'].filter(function (t) { return t[0] === 'Miami'; })[0], ox = office[1], oy = office[2];
+
+    // ---- the threads: from the office, arcing out to sea (east) and back to each town ----
+    function thread(t) {
+      var dx = t.x - ox, dy = t.y - oy, L = Math.sqrt(dx * dx + dy * dy) || 1, px = -dy / L, py = dx / L;
+      if (px < 0) { px = -px; py = -py; }
+      var b = Math.min(260, L * .2), cx = (ox + t.x) / 2 + px * b, cy = (oy + t.y) / 2 + py * b;
+      return 'M' + f(ox) + ' ' + f(oy) + 'Q' + f(cx) + ' ' + f(cy) + ' ' + f(t.x) + ' ' + f(t.y);
+    }
+    var s = '';
+    NS_ORDER.forEach(function (c) { s += '<path class="cty" data-c="' + c + '" d="' + D.counties[c] + '"/>'; });
+    T.forEach(function (t, i) { s += '<path class="th" data-i="' + i + '" data-c="' + t.c + '" d="' + thread(t) + '"/>'; });
+    T.forEach(function (t, i) { s += '<circle class="mk" data-i="' + i + '" data-c="' + t.c + '" data-n="' + esc(t.n) + '" cx="' + t.x + '" cy="' + t.y + '" r="9"/>'; });
+    s += '<circle class="ft__pulse" r="16" cx="' + ox + '" cy="' + oy + '" opacity="0"/>';
+    s += '<rect class="office" x="-20" y="-20" width="40" height="40" transform="translate(' + ox + ' ' + oy + ') rotate(45)"/>';
+    geoG.innerHTML = s;
+    var ths = Array.prototype.slice.call(geoG.querySelectorAll('.th')), marks = Array.prototype.slice.call(geoG.querySelectorAll('.mk')), ctys = geoG.querySelectorAll('.cty'), pulse = geoG.querySelector('.ft__pulse');
+    labels.innerHTML = NS_ORDER.map(function (c) { return '<span class="ft__cl" data-c="' + c + '">' + c + '</span>'; }).join('') +
+      '<span class="ft__ol"><b>Our office</b>19 W Flagler St</span><span class="ft__flag ft__flag--on"><b></b><small></small></span><span class="ft__flag ft__flag--hov"><b></b></span>' +
+      '<span class="ft__north"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 L12 21 M12 3 L7 9 M12 3 L17 9"/></svg>North</span>';
+    var cls = Array.prototype.slice.call(labels.querySelectorAll('.ft__cl')), ol = labels.querySelector('.ft__ol'), fOn = labels.querySelector('.ft__flag--on'), fHov = labels.querySelector('.ft__flag--hov'), north = labels.querySelector('.ft__north');
+    ctyEl.innerHTML = NS_ORDER.slice().reverse().map(function (c) { return '<button type="button" class="ft__cb" data-c="' + c + '" aria-pressed="false"><span class="ft__cn">' + c.replace('-', '&#8209;') + '</span><span class="ft__cc nums">' + D.towns[c].length + '</span></button>'; }).join('');
+    var cbs = Array.prototype.slice.call(ctyEl.children);
+    k.add(function () { geoG.innerHTML = ''; labels.innerHTML = ''; ctyEl.innerHTML = ''; ans.innerHTML = ''; inp.value = ''; opts.hidden = true; opts.innerHTML = ''; clr.hidden = true; });
+
+    /* ---------- orientation: the coast across the page on wide screens, upright on narrow ones ---------- */
+    var H = false, VW = 1000, VH = 2378;
+    function P(x, y) { return H ? [D.h - y, x] : [x, y]; }
+    function at(el, x, y) { var p = P(x, y); el.style.left = (p[0] / VW * 100).toFixed(3) + '%'; el.style.top = (p[1] / VH * 100).toFixed(3) + '%'; el.classList.toggle('is-r', p[0] / VW > .8); el.classList.toggle('is-l', p[0] / VW < .12); }
+    function orient() {
+      var h = mapEl.clientWidth >= 900;
+      if (h === H && svg.getAttribute('viewBox')) return;
+      H = h; VW = H ? D.h : D.w; VH = H ? D.w : D.h;
+      svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+      geoG.setAttribute('transform', H ? 'matrix(0 1 -1 0 ' + D.h + ' 0)' : '');
+      frame.style.aspectRatio = VW + ' / ' + VH; mapEl.classList.toggle('is-h', H); mapEl.classList.toggle('is-v', !H);
+      NS_ORDER.forEach(function (c, j) { var b = D.boxes[c]; at(cls[j], (b[0] + b[2]) / 2, (b[1] + b[3]) / 2); });
+      at(ol, ox, oy); north.classList.toggle('is-h', H);
+      if (onI > -1) at(fOn, T[onI].x, T[onI].y);
+    }
+
+    /* ---------- state ---------- */
+    var onI = -1, onC = null, fly = null;
+    function paint() {
+      ths.forEach(function (p, i) { var t = T[i]; p.classList.toggle('is-on', i === onI); p.classList.toggle('is-c', !!onC && t.c === onC); p.classList.toggle('is-dim', (onI > -1 && i !== onI) || (!!onC && t.c !== onC)); });
+      marks.forEach(function (m, i) { m.classList.toggle('is-on', i === onI); m.classList.toggle('is-c', !!onC && T[i].c === onC); });
+      ctys.forEach(function (c) { c.classList.toggle('is-on', (onI > -1 && T[onI].c === c.dataset.c) || onC === c.dataset.c); });
+      cbs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.c === onC ? 'true' : 'false'); });
+    }
+    function send(i) {   // the pulse runs from the office out along the town's thread
+      var p = ths[i], L = p.getTotalLength(); if (fly) fly.kill();
+      if (!k.motion) { var e = p.getPointAtLength(L); pulse.setAttribute('cx', e.x); pulse.setAttribute('cy', e.y); pulse.setAttribute('opacity', '1'); return; }
+      var o = { v: 0 };
+      fly = gsap.to(o, { v: 1, duration: Math.min(1.4, .55 + L / 2200), ease: 'power2.inOut', onStart: function () { pulse.setAttribute('opacity', '1'); },
+        onUpdate: function () { var q = p.getPointAtLength(o.v * L); pulse.setAttribute('cx', f(q.x)); pulse.setAttribute('cy', f(q.y)); },
+        onComplete: function () { fOn.classList.remove('is-up'); void fOn.offsetWidth; fOn.classList.add('is-up'); } });
+    }
+    function select(i, from) {
+      var t = T[i]; onI = i; onC = null; paint();
+      at(fOn, t.x, t.y); fOn.querySelector('b').textContent = t.n; fOn.querySelector('small').textContent = t.c;
+      fOn.classList.toggle('is-up', !k.motion); fHov.classList.remove('is-up');
+      if (from !== 'input') inp.value = t.n;
+      clr.hidden = false; close();
+      ans.innerHTML = '<b>Yes, ' + esc(t.n) + '.</b> ' + esc(t.n) + ' is one of the <span class="nums">' + D.towns[t.c].length + '</span> municipalities we build in across ' + esc(t.c) + ', one of our three counties.';
+      send(i);
+    }
+    function county(c) {
+      onC = onC === c ? null : c; onI = -1; if (fly) fly.kill(); pulse.setAttribute('opacity', '0'); fOn.classList.remove('is-up'); paint();
+      if (onC) {
+        ans.innerHTML = '<b>' + esc(c) + '.</b> <span class="nums">' + D.towns[c].length + '</span> municipalities we build in, one of our three counties. Type a town to find yours.';
+        if (k.motion) gsap.fromTo(ths.filter(function (p) { return p.dataset.c === c; }), { drawSVG: '0%' }, { drawSVG: '100%', duration: .9, ease: 'power2.out', stagger: .008, clearProps: 'strokeDasharray,strokeDashoffset' });
+      } else ans.innerHTML = '';
+    }
+    function clear(focus) {
+      onI = -1; onC = null; if (fly) fly.kill(); pulse.setAttribute('opacity', '0'); fOn.classList.remove('is-up'); paint();
+      inp.value = ''; clr.hidden = true; ans.innerHTML = ''; close(); if (focus) inp.focus();
+    }
+    k.on(clr, 'click', function () { clear(true); });
+    cbs.forEach(function (b) { k.on(b, 'click', function () { county(b.dataset.c); }); });
+
+    /* ---------- the combobox (as V1 and V2: arrows, Enter, Escape; an honest answer when we do not list a town) ---------- */
+    var found = [], act = -1;
+    function close() { opts.hidden = true; inp.setAttribute('aria-expanded', 'false'); inp.removeAttribute('aria-activedescendant'); act = -1; }
+    function renderOpts() {
+      opts.innerHTML = found.map(function (i, j) { return '<li class="ft__opt" role="option" id="ft-o-' + j + '" data-i="' + i + '" aria-selected="' + (j === act ? 'true' : 'false') + '">' + esc(T[i].n) + '<span>' + esc(T[i].c) + '</span></li>'; }).join('');
+      opts.hidden = !found.length; inp.setAttribute('aria-expanded', found.length ? 'true' : 'false');
+      if (act > -1) inp.setAttribute('aria-activedescendant', 'ft-o-' + act); else inp.removeAttribute('aria-activedescendant');
+    }
+    function search() {
+      var q = norm(inp.value); act = -1; clr.hidden = !inp.value;
+      if (!q) { found = []; renderOpts(); return; }
+      var a = [], b = [];
+      T.forEach(function (t, i) { if (t.k.indexOf(q) === 0) a.push(i); else if (t.k.indexOf(' ' + q) > -1 || t.k.indexOf(q) > 0) b.push(i); });
+      found = a.concat(b).slice(0, 6); renderOpts();
+    }
+    function commit() {
+      if (act > -1) { select(found[act], 'list'); return; }
+      var q = norm(inp.value); if (!q) return;
+      var exact = T.findIndex(function (t) { return t.k === q; });
+      if (exact > -1) { select(exact, 'input'); return; }
+      if (found.length === 1) { select(found[0], 'list'); return; }
+      close();
+      // a town we do not list has no thread: nothing stays lit beside the honest answer
+      onI = -1; onC = null; if (fly) fly.kill(); pulse.setAttribute('opacity', '0'); fOn.classList.remove('is-up'); paint();
+      ans.innerHTML = '<b>Not on our published list.</b> We do not see &ldquo;' + esc(inp.value.trim()) + '&rdquo; among the <span class="nums">104</span> municipalities we list. Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>: you will get a real answer, not a callback form.';
+    }
+    k.on(inp, 'input', search);
+    k.on(inp, 'keydown', function (e) {
+      if (e.key === 'ArrowDown' && found.length) { e.preventDefault(); act = (act + 1) % found.length; renderOpts(); }
+      else if (e.key === 'ArrowUp' && found.length) { e.preventDefault(); act = (act - 1 + found.length) % found.length; renderOpts(); }
+      else if (e.key === 'Enter') { e.preventDefault(); commit(); }
+      else if (e.key === 'Escape') { if (!opts.hidden) { e.preventDefault(); close(); } }
+    });
+    k.on(opts, 'pointerdown', function (e) { var li = e.target.closest('.ft__opt'); if (li) { e.preventDefault(); select(+li.dataset.i, 'list'); } });
+    k.on(inp, 'blur', function () { k.timeout(close, 120); });
+    k.on(inp, 'focus', function () {   // DEEP QA rule kept: on phones the field rises when tapped
+      if (innerWidth > 767) return;
+      k.timeout(function () { var r = inp.getBoundingClientRect(), nav = (document.querySelector('.nav') || { offsetHeight: 64 }).offsetHeight; if (r.top > nav + 120) window.scrollTo({ top: scrollY + r.top - nav - 16, behavior: 'auto' }); }, 250);
+    });
+
+    /* ---------- the map by hand: the nearest mark under the pointer; a tap chooses it ---------- */
+    function nearest(x, y, reach) {
+      var best = -1, bd = reach * reach;
+      marks.forEach(function (m, i) { var r = m.getBoundingClientRect(), dx = r.left + r.width / 2 - x, dy = r.top + r.height / 2 - y, q = dx * dx + dy * dy; if (q < bd) { bd = q; best = i; } });
+      return best;
+    }
+    var hovI = -1;
+    function hover(i) {
+      if (i === hovI) return;
+      if (hovI > -1) ths[hovI].classList.remove('is-hot'); hovI = i;
+      if (i < 0 || i === onI) { fHov.classList.remove('is-up'); return; }
+      ths[i].classList.add('is-hot'); at(fHov, T[i].x, T[i].y); fHov.querySelector('b').textContent = T[i].n; fHov.classList.add('is-up');
+    }
+    k.on(frame, 'pointermove', function (e) { if (e.pointerType === 'mouse') hover(nearest(e.clientX, e.clientY, 26)); });
+    k.on(frame, 'pointerleave', function () { hover(-1); });
+    k.on(frame, 'click', function (e) { var i = nearest(e.clientX, e.clientY, 34); if (i > -1) { hover(-1); select(i, 'map'); } });
+
+    k.ro(mapEl, orient); orient(); paint();
+    EZ.reveal(k, root.querySelectorAll('.ft__head > *, .ft__counties, .ft__foot'));
+    if (!k.motion) return;
+    // arriving: the threads are spun out from the office, nearest towns first
+    var order = ths.map(function (p, i) { return [p, p.getTotalLength()]; }).sort(function (a, b) { return a[1] - b[1]; }).map(function (x) { return x[0]; });
+    gsap.set(order, { drawSVG: '0%' });
+    var once = false;
+    k.io(frame, function (en) {
+      if (!en.isIntersecting || once) return; once = true;
+      gsap.to(order, { drawSVG: '100%', duration: 1, ease: 'power2.out', stagger: .012, clearProps: 'strokeDasharray,strokeDashoffset' });
+    }, { threshold: .2 });
+    k.add(function () { if (fly) fly.kill(); gsap.killTweensOf(ths); });
   } }
   });
 })();
