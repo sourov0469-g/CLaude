@@ -1,0 +1,62 @@
+/* BOOKING L — everything, then one step (Dropbox Brand: subtraction as an act; type as the interface). */
+.bkL{padding:0 var(--gut)}
+.bkL .lstage{box-sizing:border-box;padding:110px 0 100px;display:flex;flex-direction:column;gap:18px;background:#FFFFFF}
+.bkL.lpin .ltrack{height:280vh;height:280svh}
+.bkL.lpin .lstage{position:sticky;top:0;min-height:100vh;min-height:100svh;padding:92px 0 26px;justify-content:center}
+.bkL .lhd{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 28px;flex-wrap:wrap}
+.bkL .lkk{margin:0 0 10px;font:800 12.5px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.bkL .lhd .sec-h{margin:0}
+.bkL .lcount{margin:0;display:flex;align-items:baseline;gap:10px;color:var(--ink-2);font:700 13px/1.2 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.bkL .lcount b{font:800 clamp(44px,5.4vw,80px)/.9 var(--display);letter-spacing:-.03em;color:var(--green);font-variant-numeric:tabular-nums;min-width:1.25ch;text-align:right}
+/* the wall: twelve facts as a flat poster grid */
+.bkL .lbody{position:relative}
+.bkL .lwall{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.bkL .ltile{box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:106px;padding:15px 18px;border-radius:16px;background:#F4F7F5;box-shadow:inset 0 0 0 1px #DCE4DF;transform-origin:50% 50%;will-change:transform,opacity}
+.bkL .ltile b{font:800 clamp(24px,2.5vw,38px)/1 var(--display);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.bkL .ltile span{font:500 13.5px/1.35 var(--text);color:var(--ink-2)}
+.bkL .ltile:is([data-i="0"],[data-i="7"]){background:var(--green);box-shadow:none}
+.bkL .ltile:is([data-i="0"],[data-i="7"]) b{color:#FFFFFF}.bkL .ltile:is([data-i="0"],[data-i="7"]) span{color:#CFE4BE}
+.bkL .ltile:is([data-i="2"],[data-i="9"]){background:#B5DB6E;box-shadow:none}
+.bkL .ltile:is([data-i="2"],[data-i="9"]) span{color:#1F3A2C}
+/* the end: one sentence where the wall was */
+.bkL .lend{padding:26px 0 0}
+.bkL.lpin .lend{position:absolute;inset:0;padding:0;display:flex;flex-direction:column;justify-content:center;opacity:0;pointer-events:none}
+.bkL .lsay{margin:0;font:800 clamp(34px,4.4vw,66px)/1.06 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.bkL .lsay em{font-style:normal;color:var(--green)}
+.bkL .lsay2{margin:14px 0 0;max-width:56ch;font:500 17px/1.55 var(--text);color:var(--ink-2)}
+/* the one line every fact folds into */
+.bkL .lline{margin:0;font:600 13px/1.7 var(--text);color:var(--ink-2)}
+.bkL .lline i{font-style:normal;color:#B9C3BF}
+.bkL.lpin .lsl{opacity:.16}
+.bkL.ldone .lline{color:var(--ink)}
+/* the call to action, there from the start */
+.bkL .lcta{display:flex;align-items:center;justify-content:space-between;gap:14px 28px;flex-wrap:wrap;padding-top:16px;border-top:1px solid #DCE4DF}
+.bkL .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.bkL .callx{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--text);color:var(--ink);padding:10px 2px;text-decoration:none}
+.bkL .callx svg{width:18px;height:18px;flex:none;color:var(--green)}
+.bkL .lmeta{max-width:62ch}
+.bkL .lmeta p{margin:0;font:500 13.5px/1.55 var(--text);color:var(--ink-2)}
+.bkL .lmeta a{color:var(--green);font-weight:700}
+.bkL .lnow{font-weight:700!important;color:var(--ink)!important}.bkL .lnow.open{color:var(--green)!important}
+.bkL .lno{font-size:12.5px!important}
+/* reduced motion: the end state at once; the wall stays in the page for screen readers */
+.bkL.lrm .lwall{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:1100px){.bkL .lwall{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+  .bkL .lstage{padding:84px 0 80px;gap:14px}
+  .bkL.lpin .lstage{padding:72px 0 92px;gap:10px}
+  .bkL.lpin > .lcta{margin:0 0 80px}
+  .bkL.lpin .lline{font-size:10.5px;line-height:1.45}
+  .bkL.lpin .ltile span{font-size:10px;line-height:1.25}
+  .bkL.lpin .ltile{padding:8px 8px 9px}
+  .bkL .lkk{margin-bottom:6px}
+  .bkL .lcount{gap:6px;font-size:11px}.bkL .lcount b{font-size:40px}
+  .bkL .lwall{gap:6px}
+  .bkL .ltile{min-height:0;padding:9px 9px 10px;border-radius:11px;gap:5px}
+  .bkL .ltile b{font-size:17px}
+  .bkL .ltile span{font-size:10.5px;line-height:1.28}
+  .bkL .lsay{font-size:30px}.bkL .lsay2{font-size:15px}
+  .bkL .lline{font-size:11px;line-height:1.55}
+  .bkL .lcta{padding-top:12px}.bkL .ctas{width:100%}.bkL .ctas .btn{flex:1 1 100%;justify-content:center}
+  .bkL .lmeta p{font-size:12px}
+}
