@@ -1319,6 +1319,7 @@ Every text element is paired with the nearest painted background behind it, as r
 | # | Section | Version | Reference | Gate | Score | Status |
 |---|---|---|---|---|---|---|
 | 4 | Windows | **L, "Lift the sash"** (`?windows=l`) | MERSI (its seam as a window's meeting rail: the four published window before/after pairs; lifting a sash raises the after photo from the sill) | GATE-NEW-Windows-L.md | 8.64 PASS | Accepted by Muse |
-| 5 | Reviews | **L, "The whole job, in their words"** (`?reviews=l`) | Scout Motors (sequenced proof as an honest spec sheet: the 30 published reviews, sentence by sentence, in the order a job happens, with a count per stage) | GATE-NEW-Reviews-L.md | 8.50 PASS | Built and gated; waiting for Muse's accept |
+| 5 | Reviews | **L, "The whole job, in their words"** (`?reviews=l`) | Scout Motors (sequenced proof as an honest spec sheet: the 30 published reviews, sentence by sentence, in the order a job happens, with a count per stage) | GATE-NEW-Reviews-L.md | 8.50 PASS | Accepted by Muse |
+| 6 | Process | **L, "One job, on its calendar"** (`?process=l`) | Scout Motors (sequenced proof: job APS-4867's five published steps on a true-scale March–September calendar; 178 days, 4 on site) | GATE-NEW-Process-L.md | 8.62 PASS | Built and gated; waiting for Muse's accept. Also fixed Windows L's oversized CTA phone icon (CSS only) |
 
-**Next, after the accept:** Process L.
+**Next, after the accept:** Try L.

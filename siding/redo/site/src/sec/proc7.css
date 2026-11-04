@@ -1,0 +1,68 @@
+/* PROCESS L — one job, on its calendar (Scout: sequenced proof on a true time scale). */
+.prL{padding:110px var(--gut) 100px}
+.prL .plh{max-width:980px}
+.prL .plk{margin:0;font:800 12.5px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.prL .plh .sec-h{margin-top:12px}
+.prL .plbig{margin:18px 0 0;font:600 clamp(20px,2vw,28px)/1.3 var(--display);color:var(--ink-2)}
+.prL .plbig b{color:var(--ink);font-weight:800}
+.prL .plbig em{font-style:normal;font-weight:800;color:var(--green);font-size:1.25em}
+.prL .plcal{margin-top:40px;padding:clamp(22px,3vw,40px);border-radius:22px;background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3}
+/* the axis: months to scale, the gaps in days, the on-site band */
+.prL .plax{position:relative;height:178px;margin:0 8px}
+.prL .plline{position:absolute;left:0;right:0;bottom:30px;height:2px;background:var(--ink);transform-origin:0 50%;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.prL[data-w]:not(.plgo) .plline{transform:scaleX(0)}
+.prL .plm{position:absolute;bottom:4px;transform:translateX(-1px);padding-left:6px;border-left:1px solid #B9C3BF;font:700 12px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);height:22px;display:flex;align-items:flex-end}
+.prL .plgap{position:absolute;bottom:40px;transform:translateX(-50%);font:600 12px/1 var(--text);color:var(--ink-2);white-space:nowrap;padding:3px 8px;border-radius:999px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #DCE4DF;
+  transition:opacity .5s ease .6s}
+.prL[data-w]:not(.plgo) .plgap{opacity:0}
+.prL .plband{position:absolute;bottom:26px;height:10px;min-width:8px;border-radius:5px;background:#B5DB6E;box-shadow:0 0 0 2px #0E3B2C}
+/* the step markers: placed at their dates; two rows so steps on the same date stack */
+.prL .pltabs{position:absolute;inset:0}
+.prL .plt{all:unset;box-sizing:border-box;position:absolute;bottom:calc(52px + var(--row) * 58px);transform:translateX(-14px);display:flex;align-items:center;gap:8px;
+  padding:6px 14px 6px 6px;border-radius:999px;background:#FFFFFF;box-shadow:inset 0 0 0 1.5px #D3DDD6;cursor:pointer;white-space:nowrap;
+  transition:background-color .2s cubic-bezier(.38,.005,.215,1),box-shadow .2s cubic-bezier(.38,.005,.215,1),opacity .5s ease;transition-delay:0s,0s,calc(var(--row) * 80ms + .2s)}
+.prL .plt.plr{transform:translateX(calc(-100% + 14px));flex-direction:row-reverse;padding:6px 6px 6px 14px;text-align:right}
+.prL[data-w]:not(.plgo) .plt{opacity:0}
+.prL .plt b{flex:none;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#E6ECE7;font:800 12px/1 var(--text);color:var(--ink)}
+.prL .plt2{display:flex;flex-direction:column;gap:2px}
+.prL .plt2 span{font:700 14px/1.15 var(--text);color:var(--ink)}
+.prL .plt2 small{font:600 11.5px/1.2 var(--text);color:var(--ink-2)}
+.prL .plt::after{content:"";position:absolute;left:14px;top:100%;width:1.5px;height:calc(22px + var(--row) * 58px);background:#B9C3BF}
+.prL .plt.plr::after{left:auto;right:14px}
+.prL .plt:hover{box-shadow:inset 0 0 0 1.5px var(--green)}
+.prL .plt[aria-selected="true"]{background:var(--green);box-shadow:none}
+.prL .plt[aria-selected="true"] b{background:#B5DB6E;color:var(--green)}
+.prL .plt[aria-selected="true"] .plt2 span{color:#FFFFFF}.prL .plt[aria-selected="true"] .plt2 small{color:#CFE4BE}
+.prL .plt[aria-selected="true"]::after{background:var(--green)}
+.prL .plt:focus-visible{outline:3px solid #B5DB6E;outline-offset:3px}
+/* the panel */
+.prL .plp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(20px,3vw,44px);align-items:start;margin-top:26px;padding-top:24px;border-top:1px solid #DCE4DF}
+.prL .plp[hidden]{display:none}
+.prL .plp.plin{animation:plIn .35s cubic-bezier(.16,1,.3,1)}
+@keyframes plIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.prL .plp h3{margin:8px 0 0;font:700 clamp(24px,2.2vw,32px)/1.15 var(--display);color:var(--ink)}
+.prL .plq{margin:12px 0 0;font:500 17px/1.6 var(--text);color:var(--ink-2);max-width:56ch}
+.prL .plx{margin:0;padding:16px 18px;border-radius:14px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #DCE4DF;font:600 15px/1.6 var(--text);color:var(--ink)}
+.prL .pli{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 14px 26px -18px rgba(10,22,17,.55)}
+.prL .plg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.prL .plg .pli{aspect-ratio:1;object-fit:cover}
+.prL .plft{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:30px}
+.prL .plft p{margin:0;max-width:62ch;font:500 14px/1.55 var(--text);color:var(--ink-2)}.prL .plft p a{color:var(--green);font-weight:800}
+/* phone: numbers only on the axis, names in the panel */
+/* the shared CTA block (phone link beside the Book button), sized as in the hero; it is unstyled outside .hero */
+.prL .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.prL .callx{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--text);color:var(--ink);padding:10px 2px;text-decoration:none}
+.prL .callx svg{width:18px;height:18px;flex:none;color:var(--green)}
+@media (max-width:760px){
+  .prL{padding:84px var(--gut) 80px}
+  .prL .plax{height:150px;margin:0 2px}
+  .prL .plt{padding:0;border-radius:50%;bottom:calc(48px + var(--row) * 44px);transform:translateX(-14px)}
+  .prL .plt.plr{transform:translateX(-14px);padding:0;flex-direction:row}
+  .prL .plt .plt2{display:none}
+  .prL .plt::after{height:calc(18px + var(--row) * 44px);left:13px}.prL .plt.plr::after{left:13px;right:auto}
+  .prL .plgap{font-size:10.5px;padding:2px 6px;bottom:36px}
+  .prL .plm{font-size:10.5px;padding-left:3px}
+  .prL .plp{grid-template-columns:1fr}
+  .prL .plg{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+}
+@media (prefers-reduced-motion:reduce){.prL .plline,.prL .plgap,.prL .plt{transition:none}.prL .plp.plin{animation:none}}

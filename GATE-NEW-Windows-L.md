@@ -148,3 +148,14 @@ Weighted = 0.4 × 8.6 + 0.3 × 8.6 + 0.2 × 8.8 + 0.1 × 8.6 = 3.44 + 2.58 + 1.7
 - Defaults unchanged; no sub-agents or background tasks.
 
 **Status:** built, gated and committed. **Stopped for Muse's accept.** I will not start Reviews L until Muse accepts.
+
+## Post-accept fix (found during Process L, 2026-11-04)
+
+**The bug:** the shared CTA block's phone icon rendered at 359 × 359 px in this version. `CTAS` is styled only inside `.hero`, and this version used it outside one. The gate checks did not catch it (no overflow, no error).
+
+**The fix:**
+- One section-scoped CSS block in `win7.css` sizes it as in the hero (18 px icon, the same gaps).
+- The markup is unchanged; the template is byte-identical. Verified 18 × 18.
+- Screenshots re-shot (`new-windows-l-*`, contact sheet).
+
+Recorded in GATE-NEW-Process-L.md (defect 2).
