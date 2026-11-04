@@ -807,3 +807,27 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - Its frames started at 60% scale, which made them briefly under 44 px on phones; they now start at 85% with a 56 px minimum.
 - Phone labels collided with neighbouring frames; they are hidden there.
 - Family 9's resting waveform read as a stray line between the photos; it now appears only during the hoot.
+
+## L29 · Booking 8 + 9 · checks 36/36 · evidence `gates/ladder/L29-booking-8-9/` · Booking now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Booking 8 · One at a Time** | Apple AirPods Pro (one full-screen event at a time) | A conversational stepper in very large type: What's your name? · Best number to reach you? · Where's the roof? · What's going on? (chips), each sliding up as the last is answered, with an amber progress line, Back and Next (Enter moves on; each step checks itself; inactive steps inert). The last screen reads the answers back and "Open My Email" hands them to the visitor's own email app. "Rather call? (651) 977-6027" stays in view. | 8.4 | 8.8 | 8.0 | 8.6 | **8.46** |
+| **Booking 9 · Mailbox** | Lando Norris (a bespoke made object) | A postcard to fill in ("Wise Check, please": a note on the left; name, phone and address on lines beside an Owl stamp) next to a drawn mailbox. "Pop It In" slides a complete card into the box and raises the red flag while the visitor's email app opens with the details; an incomplete card shakes and says what is missing. The card comes back still filled in. | 8.6 | 8.2 | 8.6 | 8.6 | **8.50** |
+
+**Truth:** only the locked phone; both say the email is "ready for you to send" from the visitor's own app, and neither claims a request or card was sent, received, saved, confirmed or delivered (tested).
+
+**Checks run:** the generic gate, plus:
+- Booking 8: honest wording; question 1 of 4 with only Next shown; an empty answer stays and asks; Enter moves on and grows the progress line; the read-back lists the answers; the honest hand-off message.
+- Booking 9: honest wording; an incomplete card shakes, says what's missing and keeps the flag down; a complete card posts with the flag up and the honest message; the card returns still filled.
+
+**Ledger:**
+- **Booking 8:** form rules ⟦S1442⟧; step transition ⟦S0409⟧; progress ⟦S1325⟧; keys ⟦S1388⟧.
+- **Booking 9:** form rules ⟦S1442⟧; slide and settle ⟦S0489⟧; flag ⟦S0405⟧; keys ⟦S1388⟧.
+
+**Defects found and fixed in the round:**
+- Booking 8's hidden buttons still showed, because the global `.btn` display rule beat the `hidden` attribute; they are now hidden explicitly.
+- Its review step first used the class `.rv`, which is the global reveal class; it is renamed `.rvw`.
+
+**Known limit:** on phones the mailbox sits below the card, so the posting slide goes to the side rather than into the box; the outcome and wording are the same.
+
+**Third pass of the ladder complete:** every non-hero slot now stands at 9, and the hero at 10. The homepage regression (`home-verify`) passes 50/50 after the pass. Next, the fourth pass: V10 for Video → Booking.

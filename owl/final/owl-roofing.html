@@ -9692,6 +9692,157 @@ OWL.reg('booking','7',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="booking" data-v="8">
+<section class="sec book8" id="book-8" aria-labelledby="bk8-h">
+<style>
+.book8{overflow:hidden}
+.book8 .top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.book8 .lede{margin-top:12px;max-width:44ch}
+.book8 .call{font-weight:800;color:var(--ink);display:inline-flex;align-items:center;min-height:44px}
+.book8 .card{position:relative;padding:clamp(22px,4vw,56px);border-radius:28px;background:linear-gradient(160deg,#FFFDF7,#F6EFDE);box-shadow:0 2px 0 #fff inset,0 40px 60px -42px rgba(23,17,29,.5)}
+.book8 .prog{position:absolute;left:0;right:0;top:0;height:6px;border-radius:28px 28px 0 0;overflow:hidden;background:rgba(23,17,29,.06)}
+.book8 .prog i{position:absolute;inset:0;background:linear-gradient(90deg,#F6C25F,#EAA221);transform-origin:left;transform:scaleX(var(--p,.2));transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.book8 .n{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.book8 .stage{position:relative;min-height:clamp(220px,26vw,280px)}
+.book8 .st{position:absolute;inset:0;border:0;margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;gap:16px;opacity:0;transform:translateY(40px);transition:opacity .45s,transform .55s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.book8 .st.on{opacity:1;transform:none;pointer-events:auto}
+.book8 .st.past{transform:translateY(-40px)}
+.book8 .st label,.book8 .st legend,.book8 .st .q{font-size:clamp(28px,4.2vw,56px);font-weight:900;letter-spacing:-.03em;line-height:1.05;padding:0}
+.book8 .st input{width:100%;max-width:640px;min-height:64px;padding:6px 2px;border:0;border-bottom:3px solid #17111D;background:transparent;font:inherit;font-size:clamp(22px,2.6vw,32px);font-weight:600;color:#17111D;border-radius:0}
+.book8 .st input:focus-visible{outline:none;border-bottom-color:#EAA221;box-shadow:0 4px 0 #EAA221}
+.book8 .st input[aria-invalid="true"]{border-bottom-color:#b3261e}
+.book8 .chips button{font-size:17px;min-height:52px}
+.book8 .rvw dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:18px}
+.book8 .rvw dt{font-weight:800;color:#8E5A12}
+.book8 .rvw dd{margin:0;font-weight:600}
+.book8 .bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px}
+.book8 .form-msg{margin-top:12px}
+.book8 .bar [hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.book8 .st,.book8 .prog i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="top"><div><span class="kick">Booking</span><h2 class="h2" id="bk8-h" style="margin-top:12px">One at a Time</h2>
+  <p class="lede rv">Four quick questions, one at a time. At the end your email app opens with the answers, ready for you to send.</p></div>
+  <a class="call" href="tel:+16519776027">Rather call? (651) 977-6027</a></div>
+ <form class="card" novalidate aria-labelledby="bk8-h" data-owl="say:One question">
+  <span class="prog" aria-hidden="true"><i></i></span>
+  <p class="n" aria-live="polite"></p>
+  <div class="stage">
+   <fieldset class="st"><label for="bk8-n">What’s your name?</label><input id="bk8-n" data-n="name" autocomplete="name" required></fieldset>
+   <fieldset class="st"><label for="bk8-p">Best number to reach you?</label><input id="bk8-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></fieldset>
+   <fieldset class="st"><label for="bk8-a">Where’s the roof?</label><input id="bk8-a" data-n="address" autocomplete="street-address" required></fieldset>
+   <fieldset class="st"><legend>What’s going on?</legend><div class="chips" data-n="What's going on" role="group" aria-label="What's going on"><button type="button" aria-pressed="false">A leak or a stain</button><button type="button" aria-pressed="false">Storm damage</button><button type="button" aria-pressed="false">An older roof</button><button type="button" aria-pressed="false">Planning a new roof</button><button type="button" aria-pressed="false">Just checking</button></div></fieldset>
+   <fieldset class="st rvw"><p class="q">All set?</p><dl></dl></fieldset>
+  </div>
+  <div class="bar"><button class="btn btn-line back" type="button" data-mag data-owl="peek">Back</button><button class="btn btn-amber next" type="button" data-mag data-owl="hoot">Next</button><button class="btn btn-amber send" type="submit" data-mag data-owl="hoot" hidden>Open My Email</button></div>
+  <p class="form-msg" aria-live="polite"></p>
+ </form>
+</div>
+<script>
+OWL.reg('booking','8',function(root){
+  var form = root.querySelector('form'), steps = [].slice.call(root.querySelectorAll('.st')), n = root.querySelector('.n'), prog = root.querySelector('.prog i'), back = root.querySelector('.back'), next = root.querySelector('.next'), send = root.querySelector('.send'), msg = root.querySelector('.form-msg'), chips = [].slice.call(root.querySelectorAll('.chips button')), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var cur = 0, L = ['Your name', 'Phone', 'Address', 'What’s going on'];
+  chips.forEach(function(c){ c.addEventListener('click', function(){ var on = c.getAttribute('aria-pressed') !== 'true'; chips.forEach(function(x){ x.setAttribute('aria-pressed', x === c && on); }); }); });
+  function ok(i){ var inp = steps[i].querySelector('input'); if (!inp) return true; var good = inp.value.trim().length > (inp.type === 'tel' ? 6 : 1); inp.setAttribute('aria-invalid', good ? 'false' : 'true');
+    if (!good){ msg.className = 'form-msg err'; msg.textContent = 'Please add your ' + inp.dataset.n + '.'; inp.focus(); } return good; }
+  function review(){ var vals = [form.querySelector('#bk8-n').value, form.querySelector('#bk8-p').value, form.querySelector('#bk8-a').value, (chips.filter(function(c){ return c.getAttribute('aria-pressed') === 'true'; })[0] || {}).textContent || 'Not said'];
+    steps[4].querySelector('dl').innerHTML = vals.map(function(v, i){ return '<dt>' + L[i] + '</dt><dd>' + String(v).replace(/[<>&]/g, '') + '</dd>'; }).join(''); }
+  function show(i, focus){ cur = i; steps.forEach(function(s, j){ s.classList.toggle('on', j === i); s.classList.toggle('past', j < i); if (j === i){ s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); } else { s.setAttribute('inert', ''); s.setAttribute('aria-hidden', 'true'); } });
+    prog.style.setProperty('--p', ((i + 1)/steps.length).toFixed(3)); n.textContent = i < 4 ? 'Question ' + (i + 1) + ' of 4' : 'Check and send';
+    back.hidden = i === 0; next.hidden = i === 4; send.hidden = i !== 4; if (i === 4) review();
+    if (focus){ var f = steps[i].querySelector('input, .chips button'); setTimeout(function(){ (f || (i === 4 ? send : next)).focus({preventScroll: true}); }, OWL.reduce ? 0 : 320); } }
+  next.addEventListener('click', function(){ if (!ok(cur)) return; msg.textContent = ''; msg.className = 'form-msg'; show(cur + 1, true); });
+  back.addEventListener('click', function(){ msg.textContent = ''; show(cur - 1, true); });
+  steps.forEach(function(s, i){ var inp = s.querySelector('input'); if (inp) inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); next.click(); } }); });
+  OWL.bookForm(form, msg);
+  show(0, false);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(form);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="booking" data-v="9">
+<section class="sec book9" id="book-9" aria-labelledby="bk9-h">
+<style>
+.book9{overflow:hidden}
+.book9 .hd{margin-bottom:clamp(18px,2.6vw,30px)}
+.book9 .lede{margin-top:12px;max-width:48ch}
+.book9 .g{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:clamp(20px,4vw,56px);align-items:end}
+.book9 .pc{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(14px,2.4vw,28px);padding:clamp(18px,2.6vw,30px);border-radius:10px;background:#FFFDF7;box-shadow:0 2px 0 #fff inset,0 30px 40px -24px rgba(23,17,29,.5);transform:rotate(-1.5deg);transition:transform .9s cubic-bezier(.6,-.2,.3,1),opacity .6s}
+.book9 .pc::before{content:"";position:absolute;left:50%;top:18px;bottom:18px;width:2px;background:rgba(23,17,29,.12)}
+.book9 .pc.posted{transform:translate(70%,8%) rotate(-8deg) scale(.25);opacity:0}
+.book9 .pc.shake{animation:bk9s .45s}
+@keyframes bk9s{20%,60%{transform:translateX(-8px) rotate(-1.5deg)}40%,80%{transform:translateX(8px) rotate(-1.5deg)}}
+.book9 .msgside{display:flex;flex-direction:column;gap:10px}
+.book9 .msgside b{font-size:clamp(20px,2vw,26px);font-weight:900;color:#8E5A12}
+.book9 .msgside label,.book9 .fld label{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6570}
+.book9 textarea{min-height:120px;padding:8px 2px;border:0;background:repeating-linear-gradient(180deg,transparent 0 31px,rgba(23,17,29,.18) 31px 32px);font:inherit;font-size:17px;line-height:32px;resize:vertical}
+.book9 textarea:focus-visible,.book9 .fld input:focus-visible{outline:none;box-shadow:0 3px 0 #EAA221}
+.book9 .addr{position:relative;display:flex;flex-direction:column;gap:12px;padding-top:70px}
+.book9 .stampbox{position:absolute;right:0;top:0;width:64px;height:76px;padding:5px;background:#EAA221;box-shadow:0 0 0 3px #FFFDF7,0 0 0 4px rgba(23,17,29,.2);display:grid;place-items:center}
+.book9 .stampbox svg{width:100%;height:100%}
+.book9 .fld{display:grid;gap:2px}
+.book9 .fld input{min-height:44px;padding:4px 2px;border:0;border-bottom:2px solid rgba(23,17,29,.35);background:transparent;font:inherit;font-size:17px;font-weight:600;border-radius:0}
+.book9 .fld input[aria-invalid="true"]{border-bottom-color:#b3261e}
+.book9 .box{position:relative;max-width:300px;width:100%;justify-self:center}
+.book9 .box svg{display:block;width:100%;height:auto;overflow:visible}
+.book9 .flag{transform-box:fill-box;transform-origin:0% 100%;transform:rotate(90deg);transition:transform .7s cubic-bezier(.3,1.6,.5,1) .5s}
+.book9 .up .flag{transform:rotate(0deg)}
+.book9 .bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+.book9 .form-msg{margin-top:12px}
+@media (max-width:900px){.book9 .g{grid-template-columns:minmax(0,1fr)}.book9 .box{max-width:200px}}
+@media (max-width:620px){.book9 .pc{grid-template-columns:minmax(0,1fr)}.book9 .pc::before{display:none}.book9 .addr{padding-top:84px}}
+@media (prefers-reduced-motion:reduce){.book9 .pc,.book9 .flag{transition:none}.book9 .pc.shake{animation:none}.book9 .pc.posted{transform:rotate(-1.5deg);opacity:1}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Booking</span><h2 class="h2" id="bk9-h" style="margin-top:12px">Mailbox</h2>
+  <p class="lede rv">Fill in the card and pop it in the box. Your email app opens with it, ready for you to send. Or call (651) 977-6027.</p></div>
+ <form class="g" novalidate aria-labelledby="bk9-h">
+  <div>
+   <div class="pc" data-owl="say:Write us a card">
+    <div class="msgside"><b>Wise Check, please</b><label for="bk9-x">Your note (optional)</label><textarea id="bk9-x" data-n="note" rows="3"></textarea></div>
+    <div class="addr">
+     <span class="stampbox" aria-hidden="true"><svg viewBox="0 0 60 70"><rect x="2" y="2" width="56" height="66" fill="none" stroke="#17111D" stroke-width="2" stroke-dasharray="3 3"/><circle cx="30" cy="30" r="14" fill="#17111D"/><circle cx="24" cy="28" r="4" fill="#FBFAF6"/><circle cx="36" cy="28" r="4" fill="#FBFAF6"/><path d="M28 36l2 3 2-3z" fill="#EAA221"/><text x="30" y="60" text-anchor="middle" font-size="9" font-weight="900" fill="#17111D">OWL</text></svg></span>
+     <div class="fld"><label for="bk9-n">Name</label><input id="bk9-n" data-n="name" autocomplete="name" required></div>
+     <div class="fld"><label for="bk9-p">Phone</label><input id="bk9-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></div>
+     <div class="fld"><label for="bk9-a">Address</label><input id="bk9-a" data-n="address" autocomplete="street-address" required></div>
+    </div>
+   </div>
+   <div class="bar"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Pop It In</button><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+   <p class="form-msg" aria-live="polite"></p>
+  </div>
+  <div class="box" aria-hidden="true"><svg viewBox="0 0 240 300">
+   <rect x="108" y="150" width="24" height="150" fill="#8C6A3A"/><rect x="80" y="286" width="80" height="14" rx="4" fill="#6B4E2E"/>
+   <path d="M30 150V90a60 60 0 0 1 120 0v60z" fill="#3A3540"/><path d="M150 90a60 60 0 0 0-120 0" fill="none" stroke="#55505D" stroke-width="6"/>
+   <rect x="30" y="140" width="120" height="14" fill="#2A2131"/>
+   <path d="M30 150V90a60 60 0 0 1 60-60" fill="none" stroke="#17111D" stroke-width="3" opacity=".4"/>
+   <rect x="54" y="96" width="72" height="10" rx="5" fill="#17111D"/>
+   <text x="90" y="130" text-anchor="middle" font-size="13" font-weight="900" letter-spacing="2" fill="#F1EFE6">OWL</text>
+   <g class="flag"><rect x="150" y="54" width="8" height="70" fill="#B3261E"/><rect x="158" y="54" width="34" height="22" fill="#B3261E"/></g>
+  </svg></div>
+ </form>
+</div>
+<script>
+OWL.reg('booking','9',function(root){
+  var form = root.querySelector('form'), pc = root.querySelector('.pc'), box = root.querySelector('.box'), msg = root.querySelector('.form-msg'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  OWL.bookForm(form, msg);
+  /* after the shared handler: a complete card slides into the box and the flag goes up; an incomplete one shakes */
+  form.addEventListener('submit', function(){ setTimeout(function(){
+    if (/err/.test(msg.className)){ pc.classList.remove('shake'); void pc.offsetWidth; pc.classList.add('shake'); box.classList.remove('up'); return; }
+    msg.textContent = 'Your email app should open with your card filled in. Send it from there, or call (651) 977-6027.';
+    pc.classList.add('posted'); box.classList.add('up');
+    setTimeout(function(){ pc.classList.remove('posted'); }, 2200); }, 0); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(form);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="booking" data-b="1">
 <section class="sec book2" id="book-2" aria-labelledby="bk2-h">
 <style>

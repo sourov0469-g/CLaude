@@ -390,3 +390,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   tone, only when pressed, with a Sound on/off switch), while ripple rings spread out and, as they pass, bring the
   families' photos into orbit with their captions. A waveform under the owl draws the hoot. Reduced motion: no
   ripples, photos shown. Skills: ⟦S0489⟧ blink and rest motion, ⟦S0407⟧ waveform, ⟦S1388⟧ keys, ⟦S0405⟧ switch.
+
+## L29 · Booking 8 + 9 (Booking stands at 7: form, build your visit, take our card, pick a day, open now, work order, knock knock)
+- **Booking 8 · "One at a Time"** — reference **Apple AirPods Pro** (one full-screen event at a time). A
+  conversational stepper in very large type: one question on screen (What's your name? · Best number to reach
+  you? · Where's the roof? · What's going on?), each sliding up as the last is answered, with a progress line and
+  Back. Enter moves on; each step checks itself. The last screen reads the answers back and hands them to the
+  visitor's own email app (`OWL.bookForm`); it never says sent. The phone is always one tap away. Skills: ⟦S1442⟧
+  form rules, ⟦S0409⟧ step transition, ⟦S1325⟧ progress, ⟦S1388⟧ keys.
+- **Booking 9 · "Mailbox"** — reference **Lando Norris** (a bespoke made object). A postcard to fill in (front: Owl
+  Roofing, Shoreview; back: name, phone, address, a note) beside a drawn mailbox. "Pop It In" slides the card into
+  the slot, raises the flag and opens the visitor's email app with the details; the wording says the email is ready
+  to send from their app, never that it was sent. An incomplete card shakes and says what is missing. Skills:
+  ⟦S1442⟧ form rules, ⟦S0489⟧ slide and settle, ⟦S0405⟧ flag, ⟦S1388⟧ keys.

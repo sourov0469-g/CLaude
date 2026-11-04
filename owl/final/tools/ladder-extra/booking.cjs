@@ -43,5 +43,30 @@ module.exports = {
     rec('keyboard opens door 3 on the locked address', await p.evaluate(S => /Owl Roofing LLC/.test(document.querySelector(S + ' #bk7-in2').textContent) && /1000 County Rd E #230/.test(document.querySelector(S + ' #bk7-in2').textContent) && /Shoreview, MN 55126/.test(document.querySelector(S + ' #bk7-in2').textContent) && document.querySelectorAll(S + ' .door[aria-expanded="true"]').length === 1, S));
     await p.focus(S + ' .door >> nth=0'); await p.keyboard.press('Enter'); await p.waitForTimeout(900); await p.keyboard.press('Tab');
     rec('Tab from an open door goes straight to its way in (the phone link)', await p.evaluate(S => document.activeElement.getAttribute('href') === 'tel:+16519776027', S));
+  },
+  '8': async (p, S, rec, txt) => {
+    rec('locked phone and honest wording', /\(651\) 977-6027/.test(txt) && /ready for you to send/.test(txt) && !/(request|booking) (has been |was )?(sent|received|saved|confirmed)/i.test(txt));
+    rec('one question at a time: question 1 of 4, only Next shown', await p.evaluate(S => document.querySelector(S + ' .n').textContent === 'Question 1 of 4' && document.querySelectorAll(S + ' .st.on').length === 1 && document.querySelector(S + ' .back').hidden && document.querySelector(S + ' .send').hidden && getComputedStyle(document.querySelector(S + ' .send')).display === 'none', S));
+    await p.click(S + ' .next'); await p.waitForTimeout(400);
+    rec('an empty answer stays put and asks for it', await p.evaluate(S => /Please add your name/.test(document.querySelector(S + ' .form-msg').textContent) && document.querySelector(S + ' .n').textContent === 'Question 1 of 4', S));
+    await p.fill(S + ' #bk8-n', 'Jo Smith'); await p.press(S + ' #bk8-n', 'Enter'); await p.waitForTimeout(500);
+    rec('Enter moves on; the progress line grows; Back appears', await p.evaluate(S => document.querySelector(S + ' .n').textContent === 'Question 2 of 4' && +document.querySelector(S + ' .prog i').style.getPropertyValue('--p') > .3 && !document.querySelector(S + ' .back').hidden, S));
+    await p.fill(S + ' #bk8-p', '651 555 0100'); await p.press(S + ' #bk8-p', 'Enter'); await p.waitForTimeout(400);
+    await p.fill(S + ' #bk8-a', '1 Main St, Shoreview'); await p.press(S + ' #bk8-a', 'Enter'); await p.waitForTimeout(400);
+    await p.click(S + ' .chips button >> nth=2'); await p.click(S + ' .next'); await p.waitForTimeout(500);
+    rec('the last screen reads the answers back', await p.evaluate(S => { const t = document.querySelector(S + ' .rvw dl').textContent; return /Jo Smith/.test(t) && /651 555 0100/.test(t) && /An older roof/.test(t) && !document.querySelector(S + ' .send').hidden; }, S));
+    await p.route('mailto:*', r => r.abort()).catch(() => {}); await p.click(S + ' .send').catch(() => {}); await p.waitForTimeout(400);
+    rec('it hands off to email honestly', await p.evaluate(S => /Your email app should open with these details\. Send it from there, or call \(651\) 977-6027\./.test(document.querySelector(S + ' .form-msg').textContent), S));
+  },
+  '9': async (p, S, rec, txt) => {
+    rec('locked phone and honest wording', /\(651\) 977-6027/.test(txt) && /ready for you to send/.test(txt) && !/(request|booking|card) (has been |was )?(sent|received|saved|confirmed|delivered)/i.test(txt));
+    await p.route('mailto:*', r => r.abort()).catch(() => {});
+    await p.click(S + ' button[type=submit]'); await p.waitForTimeout(300);
+    rec('an incomplete card shakes and says what is missing; the flag stays down', await p.evaluate(S => /Please add your name/.test(document.querySelector(S + ' .form-msg').textContent) && document.querySelector(S + ' .pc').classList.contains('shake') && !document.querySelector(S + ' .box').classList.contains('up'), S));
+    await p.fill(S + ' #bk9-n', 'Jo Smith'); await p.fill(S + ' #bk9-p', '651 555 0100'); await p.fill(S + ' #bk9-a', '1 Main St, Shoreview');
+    await p.click(S + ' button[type=submit]').catch(() => {}); await p.waitForTimeout(400);
+    rec('a complete card goes in the box, the flag goes up, and the wording stays honest', await p.evaluate(S => document.querySelector(S + ' .pc').classList.contains('posted') && document.querySelector(S + ' .box').classList.contains('up') && /Your email app should open with your card filled in\. Send it from there/.test(document.querySelector(S + ' .form-msg').textContent), S));
+    await p.waitForTimeout(2400);
+    rec('the card comes back, still filled in', await p.evaluate(S => !document.querySelector(S + ' .pc').classList.contains('posted') && document.querySelector(S + ' #bk9-n').value === 'Jo Smith', S));
   }
 };

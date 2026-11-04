@@ -1,0 +1,69 @@
+<section class="sec book8" id="book-8" aria-labelledby="bk8-h">
+<style>
+.book8{overflow:hidden}
+.book8 .top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.book8 .lede{margin-top:12px;max-width:44ch}
+.book8 .call{font-weight:800;color:var(--ink);display:inline-flex;align-items:center;min-height:44px}
+.book8 .card{position:relative;padding:clamp(22px,4vw,56px);border-radius:28px;background:linear-gradient(160deg,#FFFDF7,#F6EFDE);box-shadow:0 2px 0 #fff inset,0 40px 60px -42px rgba(23,17,29,.5)}
+.book8 .prog{position:absolute;left:0;right:0;top:0;height:6px;border-radius:28px 28px 0 0;overflow:hidden;background:rgba(23,17,29,.06)}
+.book8 .prog i{position:absolute;inset:0;background:linear-gradient(90deg,#F6C25F,#EAA221);transform-origin:left;transform:scaleX(var(--p,.2));transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.book8 .n{font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8E5A12}
+.book8 .stage{position:relative;min-height:clamp(220px,26vw,280px)}
+.book8 .st{position:absolute;inset:0;border:0;margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;gap:16px;opacity:0;transform:translateY(40px);transition:opacity .45s,transform .55s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.book8 .st.on{opacity:1;transform:none;pointer-events:auto}
+.book8 .st.past{transform:translateY(-40px)}
+.book8 .st label,.book8 .st legend,.book8 .st .q{font-size:clamp(28px,4.2vw,56px);font-weight:900;letter-spacing:-.03em;line-height:1.05;padding:0}
+.book8 .st input{width:100%;max-width:640px;min-height:64px;padding:6px 2px;border:0;border-bottom:3px solid #17111D;background:transparent;font:inherit;font-size:clamp(22px,2.6vw,32px);font-weight:600;color:#17111D;border-radius:0}
+.book8 .st input:focus-visible{outline:none;border-bottom-color:#EAA221;box-shadow:0 4px 0 #EAA221}
+.book8 .st input[aria-invalid="true"]{border-bottom-color:#b3261e}
+.book8 .chips button{font-size:17px;min-height:52px}
+.book8 .rvw dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:18px}
+.book8 .rvw dt{font-weight:800;color:#8E5A12}
+.book8 .rvw dd{margin:0;font-weight:600}
+.book8 .bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px}
+.book8 .form-msg{margin-top:12px}
+.book8 .bar [hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.book8 .st,.book8 .prog i{transition:none}}
+</style>
+<div class="wrap">
+ <div class="top"><div><span class="kick">Booking</span><h2 class="h2" id="bk8-h" style="margin-top:12px">One at a Time</h2>
+  <p class="lede rv">Four quick questions, one at a time. At the end your email app opens with the answers, ready for you to send.</p></div>
+  <a class="call" href="tel:+16519776027">Rather call? (651) 977-6027</a></div>
+ <form class="card" novalidate aria-labelledby="bk8-h" data-owl="say:One question">
+  <span class="prog" aria-hidden="true"><i></i></span>
+  <p class="n" aria-live="polite"></p>
+  <div class="stage">
+   <fieldset class="st"><label for="bk8-n">What’s your name?</label><input id="bk8-n" data-n="name" autocomplete="name" required></fieldset>
+   <fieldset class="st"><label for="bk8-p">Best number to reach you?</label><input id="bk8-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></fieldset>
+   <fieldset class="st"><label for="bk8-a">Where’s the roof?</label><input id="bk8-a" data-n="address" autocomplete="street-address" required></fieldset>
+   <fieldset class="st"><legend>What’s going on?</legend><div class="chips" data-n="What's going on" role="group" aria-label="What's going on"><button type="button" aria-pressed="false">A leak or a stain</button><button type="button" aria-pressed="false">Storm damage</button><button type="button" aria-pressed="false">An older roof</button><button type="button" aria-pressed="false">Planning a new roof</button><button type="button" aria-pressed="false">Just checking</button></div></fieldset>
+   <fieldset class="st rvw"><p class="q">All set?</p><dl></dl></fieldset>
+  </div>
+  <div class="bar"><button class="btn btn-line back" type="button" data-mag data-owl="peek">Back</button><button class="btn btn-amber next" type="button" data-mag data-owl="hoot">Next</button><button class="btn btn-amber send" type="submit" data-mag data-owl="hoot" hidden>Open My Email</button></div>
+  <p class="form-msg" aria-live="polite"></p>
+ </form>
+</div>
+<script>
+OWL.reg('booking','8',function(root){
+  var form = root.querySelector('form'), steps = [].slice.call(root.querySelectorAll('.st')), n = root.querySelector('.n'), prog = root.querySelector('.prog i'), back = root.querySelector('.back'), next = root.querySelector('.next'), send = root.querySelector('.send'), msg = root.querySelector('.form-msg'), chips = [].slice.call(root.querySelectorAll('.chips button')), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var cur = 0, L = ['Your name', 'Phone', 'Address', 'What’s going on'];
+  chips.forEach(function(c){ c.addEventListener('click', function(){ var on = c.getAttribute('aria-pressed') !== 'true'; chips.forEach(function(x){ x.setAttribute('aria-pressed', x === c && on); }); }); });
+  function ok(i){ var inp = steps[i].querySelector('input'); if (!inp) return true; var good = inp.value.trim().length > (inp.type === 'tel' ? 6 : 1); inp.setAttribute('aria-invalid', good ? 'false' : 'true');
+    if (!good){ msg.className = 'form-msg err'; msg.textContent = 'Please add your ' + inp.dataset.n + '.'; inp.focus(); } return good; }
+  function review(){ var vals = [form.querySelector('#bk8-n').value, form.querySelector('#bk8-p').value, form.querySelector('#bk8-a').value, (chips.filter(function(c){ return c.getAttribute('aria-pressed') === 'true'; })[0] || {}).textContent || 'Not said'];
+    steps[4].querySelector('dl').innerHTML = vals.map(function(v, i){ return '<dt>' + L[i] + '</dt><dd>' + String(v).replace(/[<>&]/g, '') + '</dd>'; }).join(''); }
+  function show(i, focus){ cur = i; steps.forEach(function(s, j){ s.classList.toggle('on', j === i); s.classList.toggle('past', j < i); if (j === i){ s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); } else { s.setAttribute('inert', ''); s.setAttribute('aria-hidden', 'true'); } });
+    prog.style.setProperty('--p', ((i + 1)/steps.length).toFixed(3)); n.textContent = i < 4 ? 'Question ' + (i + 1) + ' of 4' : 'Check and send';
+    back.hidden = i === 0; next.hidden = i === 4; send.hidden = i !== 4; if (i === 4) review();
+    if (focus){ var f = steps[i].querySelector('input, .chips button'); setTimeout(function(){ (f || (i === 4 ? send : next)).focus({preventScroll: true}); }, OWL.reduce ? 0 : 320); } }
+  next.addEventListener('click', function(){ if (!ok(cur)) return; msg.textContent = ''; msg.className = 'form-msg'; show(cur + 1, true); });
+  back.addEventListener('click', function(){ msg.textContent = ''; show(cur - 1, true); });
+  steps.forEach(function(s, i){ var inp = s.querySelector('input'); if (inp) inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); next.click(); } }); });
+  OWL.bookForm(form, msg);
+  show(0, false);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(form);
+});
+</script>
+</section>

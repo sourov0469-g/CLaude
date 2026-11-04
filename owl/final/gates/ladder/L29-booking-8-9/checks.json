@@ -1,0 +1,239 @@
+[
+ {
+  "sec": "booking",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "book"
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "One at a Time"
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "locked phone and honest wording",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "one question at a time: question 1 of 4, only Next shown",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "an empty answer stays put and asks for it",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "Enter moves on; the progress line grows; Back appears",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "the last screen reads the answers back",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "it hands off to email honestly",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "book"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Mailbox"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "locked phone and honest wording",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "an incomplete card shakes and says what is missing; the flag stays down",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "a complete card goes in the box, the flag goes up, and the wording stays honest",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "the card comes back, still filled in",
+  "ok": true
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "booking",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]
