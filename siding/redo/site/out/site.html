@@ -5203,6 +5203,90 @@ html{background:#FFFFFF}
 
 /* C3: the email never splits mid-word; it may only break after the @ */
 .ft .bd .em{overflow-wrap:normal;word-break:keep-all;hyphens:none}
+/* BX — the homepage button system (GATE-BUTTONS, owner order 2026-11-04). Techniques studied at code level on the
+   governing references and rebuilt here (see GATE-BUTTONS.md):
+   - Lando Norris: per-character label roll (each letter rides up to a duplicate, staggered); underline wipe; lime focus ring
+   - Lusion: dot-flood fill (a dot grows to fill the pill), arrow/icon slide-through, eases (.4,0,.1,1) and (.35,0,0,1)
+   - Graza: tactile depth (a face that presses into its plate); dotted/offset focus
+   - Scout / Apple / Cash App: quiet colour easing (.2–.32 s); a strong, offset focus ring
+   - Quiet Cubes: pressed state on every control
+   Everything is scoped under html.bx (set on the homepage view only; the subpages stay as delivered). The physics
+   (hover lift, press, spring release, keyboard pulse, tap pop, focus-ring snap) lives in bx.js on the individual
+   `scale` / `translate` properties, so it composes with every version's own `transform`. */
+:root{--bx-out:cubic-bezier(.4,0,.1,1);--bx-flood:cubic-bezier(.35,0,0,1);--bx-roll:cubic-bezier(.65,.05,0,1);--bx-col:cubic-bezier(.38,.005,.215,1);--bx-ring:#B5DB6E}
+
+/* ---------- 1. primary and board buttons (.btn, all variants): label roll + icon roll on the lifted board ---------- */
+.bx .btn .bx-t{position:relative;display:inline-block;overflow:hidden;height:1.18em;line-height:1.18;vertical-align:middle}
+.bx .btn .bx-w{display:block;white-space:pre}
+.bx .btn .bx-c{display:inline-block;transition:transform .55s var(--bx-roll);transition-delay:calc(var(--i) * 14ms)}
+.bx .btn .bx-w+.bx-w{position:absolute;left:0;top:100%}
+.bx .btn:is(:hover,:focus-visible) .bx-c{transform:translateY(-100%)}
+.bx .btn .tab{position:relative}
+.bx .btn .tab svg{transition:transform .42s var(--bx-out)}
+.bx .btn .tab .bx-i2{position:absolute;left:50%;top:50%;margin:-7px 0 0 -7px;transform:translate(-160%,160%)}
+.bx .btn:is(:hover,:focus-visible) .tab svg:first-child{transform:translate(160%,-160%)}
+.bx .btn:is(:hover,:focus-visible) .tab .bx-i2{transform:translate(0,0);transition-delay:.06s}
+.bx .btn:focus-visible .tab{width:30px;margin-left:0}
+.bx .btn:focus-visible{outline:3px solid var(--bx-ring);outline-offset:4px}
+.bx .btn.key:focus-visible{outline-color:var(--green)}
+.bx .btn:disabled .bx-c,.bx .btn[aria-disabled="true"] .bx-c{transform:none!important}
+
+/* ---------- 2. the header call button: Lusion dot-flood + a phone that rings ---------- */
+.bx .tel{position:relative;overflow:hidden;isolation:isolate;transition:background-color .2s var(--bx-col)}
+.bx .tel::before{content:"";position:absolute;left:24px;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#B5DB6E;z-index:-1;transform:scale(0);transition:transform .5s var(--bx-flood)}
+.bx .tel span{transition:transform .4s var(--bx-flood),color .3s var(--bx-col)}
+.bx .tel:is(:hover,:focus-visible){background:var(--green)}
+.bx .tel:is(:hover,:focus-visible)::before{transform:scale(26)}
+.bx .tel:is(:hover,:focus-visible) span{color:var(--ink);transform:translateX(3px)}
+.bx .tel:is(:hover,:focus-visible) svg{color:var(--green);animation:bxRing .7s var(--bx-out)}
+.bx .tel:focus-visible{outline:3px solid var(--bx-ring);outline-offset:3px}
+@keyframes bxRing{0%,100%{rotate:0deg}15%{rotate:-16deg}30%{rotate:13deg}45%{rotate:-10deg}60%{rotate:7deg}75%{rotate:-3deg}}
+
+/* ---------- 3. phone and email links in the sections: underline wipe (Lando) + the phone rings ---------- */
+.bx main .slot :where(a[href^="tel:"],a[href^="mailto:"]):not(.btn):not(.tel){background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:100% 100%;background-size:0% 2px;
+  transition:background-size .45s var(--bx-out),color .2s var(--bx-col)}
+.bx main .slot :where(a[href^="tel:"],a[href^="mailto:"]):not(.btn):not(.tel):is(:hover,:focus-visible){background-position:0 100%;background-size:100% 2px}
+.bx main .slot :where(a[href^="tel:"]):not(.btn):is(:hover,:focus-visible) svg{animation:bxRing .7s var(--bx-out)}
+/* plain text links in copy: the same wipe, thinner */
+.bx main .slot :where(p,li,small,dd,span) > a:not([class]):not([href^="tel:"]):not([href^="mailto:"]){text-decoration:none;background-image:linear-gradient(currentColor,currentColor),linear-gradient(rgba(14,59,44,.25),rgba(14,59,44,.25));
+  background-repeat:no-repeat;background-position:0 100%,0 100%;background-size:0% 1.5px,100% 1.5px;transition:background-size .45s var(--bx-out)}
+.bx main .slot :where(p,li,small,dd,span) > a:not([class]):not([href^="tel:"]):not([href^="mailto:"]):is(:hover,:focus-visible){background-size:100% 1.5px,100% 1.5px}
+
+/* ---------- 4. every other control: eased colour, a visible ring, a real disabled state ---------- */
+.bx :where(main .slot,header.hdr,.mbar) :where(button,a,[role="button"],[role="radio"],[role="tab"],summary):focus-visible{outline:3px solid var(--bx-ring);outline-offset:3px}
+.bx :where(main .slot) :where(button,[role="button"]):where(:disabled,[aria-disabled="true"]){opacity:.45;cursor:not-allowed;filter:saturate(.5)}
+.bx :where(main .slot) :where(button[aria-checked="true"],button[aria-pressed="true"],button[aria-selected="true"],button[aria-expanded="true"]){--bx-on:1}
+
+/* ---------- 4a. arrow and step buttons: the arrow travels the way it points (Lusion) ---------- */
+.bx main .slot :where(button,a):where([aria-label^="Next" i],[aria-label^="Previous" i],[aria-label^="Prev" i],[aria-label^="Forward" i],[aria-label^="Back" i]) svg{transition:translate .35s var(--bx-out)}
+.bx main .slot :where(button,a):where([aria-label^="Next" i],[aria-label^="Forward" i]):is(:hover,:focus-visible) svg{translate:3px 0}
+.bx main .slot :where(button,a):where([aria-label^="Previous" i],[aria-label^="Prev" i],[aria-label^="Back" i]):is(:hover,:focus-visible) svg{translate:-3px 0}
+
+/* ---------- 4b. form controls: fields that answer the pointer, range thumbs that press ---------- */
+.bx main .slot :where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),select,textarea){transition:border-color .2s var(--bx-col),box-shadow .25s var(--bx-out),background-color .2s var(--bx-col)}
+.bx main .slot :where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea):hover{border-color:var(--green)}
+.bx main .slot :where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea):focus-visible{outline:3px solid var(--bx-ring);outline-offset:2px;box-shadow:0 6px 18px -10px rgba(14,59,44,.45)}
+.bx main .slot input[type="range"]::-webkit-slider-thumb{transition:transform .25s var(--bx-out),box-shadow .25s var(--bx-out)}
+.bx main .slot input[type="range"]:hover::-webkit-slider-thumb{transform:scale(1.18)}
+.bx main .slot input[type="range"]:active::-webkit-slider-thumb{transform:scale(.92);box-shadow:0 0 0 8px rgba(181,219,110,.35)}
+.bx main .slot input[type="range"]::-moz-range-thumb{transition:transform .25s var(--bx-out)}
+.bx main .slot input[type="range"]:hover::-moz-range-thumb{transform:scale(1.18)}
+.bx main .slot input[type="range"]:active::-moz-range-thumb{transform:scale(.92)}
+.bx main .slot input[type="range"]:focus-visible{outline:3px solid var(--bx-ring);outline-offset:4px}
+
+/* ---------- 5. the phone quick bar: icons that answer the tap ---------- */
+.bx .mbar a svg{transition:transform .35s var(--bx-out)}
+.bx .mbar a:active svg{transform:translateY(-2px) scale(1.12)}
+
+/* ---------- reduced motion: states change, nothing travels ---------- */
+@media (prefers-reduced-motion:reduce){
+  .bx .btn .bx-c,.bx .btn .tab svg,.bx .tel::before,.bx .tel span,.bx .mbar a svg{transition:none!important}
+  .bx .btn:is(:hover,:focus-visible) .bx-c{transform:none}
+  .bx .btn:is(:hover,:focus-visible) .tab svg:first-child,.bx .btn .tab .bx-i2{transform:none}.bx .btn .tab .bx-i2{display:none}
+  .bx .tel:is(:hover,:focus-visible) svg,.bx main .slot a svg{animation:none!important}
+  .bx main .slot :where(button,a) svg{translate:none!important}
+  .bx .tel::before{display:none}.bx .tel:is(:hover,:focus-visible){background:#15493A}.bx .tel:is(:hover,:focus-visible) span{color:#fff;transform:none}
+}
 .slot{display:contents}</style></head><body id="top"><header class="hdr"><a class="brand" href="#top" aria-label="Austin Pro Siding, Windows &amp; Roofing, home"><svg class="" viewBox="0 0 100 100" width="38" height="38" role="img" aria-label="Austin Pro"><path d="M46.00 6.00 L54.00 6.00 L57.80 14.08 L42.20 14.08ZM41.25 15.78 L58.75 15.78 L62.54 23.86 L37.46 23.86ZM36.51 25.56 L63.49 25.56 L67.29 33.63 L32.71 33.63ZM31.76 35.33 L46.21 35.33 L42.42 43.41 L27.97 43.41ZM53.79 35.33 L68.24 35.33 L72.03 43.41 L57.58 43.41ZM27.02 45.11 L41.62 45.11 L37.82 53.19 L23.22 53.19ZM58.38 45.11 L72.98 45.11 L76.78 53.19 L62.18 53.19ZM22.27 54.89 L37.02 54.89 L33.23 62.97 L18.48 62.97ZM62.98 54.89 L77.73 54.89 L81.52 62.97 L66.77 62.97ZM17.53 64.67 L82.47 64.67 L86.27 72.74 L13.73 72.74ZM12.78 74.44 L27.83 74.44 L24.03 82.52 L8.98 82.52ZM72.17 74.44 L87.22 74.44 L91.02 82.52 L75.97 82.52ZM8.04 84.22 L23.24 84.22 L19.44 92.30 L4.24 92.30ZM76.76 84.22 L91.96 84.22 L95.76 92.30 L80.56 92.30Z" fill="#0E3B2C"/><path d="M43.34 11.65 L56.66 11.65 L57.80 14.08 L42.20 14.08ZM38.60 21.43 L61.40 21.43 L62.54 23.86 L37.46 23.86ZM33.85 31.21 L66.15 31.21 L67.29 33.63 L32.71 33.63ZM29.11 40.99 L43.56 40.99 L42.42 43.41 L27.97 43.41ZM56.44 40.99 L70.89 40.99 L72.03 43.41 L57.58 43.41ZM24.36 50.77 L38.96 50.77 L37.82 53.19 L23.22 53.19ZM61.04 50.77 L75.64 50.77 L76.78 53.19 L62.18 53.19ZM19.61 60.54 L34.36 60.54 L33.23 62.97 L18.48 62.97ZM65.64 60.54 L80.39 60.54 L81.52 62.97 L66.77 62.97ZM14.87 70.32 L85.13 70.32 L86.27 72.74 L13.73 72.74ZM10.12 80.10 L25.17 80.10 L24.03 82.52 L8.98 82.52ZM74.83 80.10 L89.88 80.10 L91.02 82.52 L75.97 82.52ZM5.38 89.88 L20.58 89.88 L19.44 92.30 L4.24 92.30ZM79.42 89.88 L94.62 89.88 L95.76 92.30 L80.56 92.30Z" fill="#7FA43E"/></svg><span><b>AUSTIN PRO</b><small>Siding, Windows &amp; Roofing</small></span></a>
 <nav aria-label="Main"><ul class="menu"><li><button type="button" aria-expanded="false" aria-controls="book">Siding <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 <div class="book" id="book"><div class="fan"><a href="#siding"><i style="background:#B9B4A8;--r:-3deg"></i><b>Lap siding</b><small>HardiePlank, 8.25" boards</small></a><a href="#siding"><i style="background:#2F4B3F;--r:2deg"></i><b>Board &amp; batten</b><small>Vertical panels and battens</small></a><a href="#siding"><i style="background:#B98D63;--r:-1deg"></i><b>Shingle &amp; shake</b><small>Gable accents</small></a><a href="#siding"><i style="background:#EDE7DA;--r:3deg"></i><b>Trim &amp; soffit</b><small>Corners, fascia, frieze</small></a></div></div></li>
@@ -13077,6 +13161,114 @@ window.PCt3 = (function () {
   const ft = document.querySelector('footer.ft');
   if (ft) { if (RM) ft.classList.add('up'); else new IntersectionObserver((es, io) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); ft.classList.add('up'); } }), { threshold: 0.15 }).observe(ft); }
 })();
+/* BX — the homepage button system (GATE-BUTTONS). Runs on the homepage view only (html.bx); subpages are untouched.
+   1. Label roll (Lando Norris): every .btn label is split into characters that ride up to a duplicate, 14 ms apart;
+      the original text stays readable to screen readers in a hidden span. The .tab icon gets a twin for Lusion's
+      slide-through.
+   2. Physics for every control (delegated; Web Animations on the individual `scale` / `translate` properties, so it
+      composes with each version's own `transform` and never replaces it):
+      - hover (fine pointer): small controls lift 2 px, wide rows 1 px, tiles zoom 1.2%; huge surfaces and draggable
+        pieces keep their own hover;
+      - press: down to .955 (small) / .985 (large) in 110 ms, held at least 90 ms so a quick tap still shows, then a
+        spring release with a small overshoot; the first icon inside pops;
+      - keyboard: Enter / Space give the same press-and-spring pulse;
+      - focus ring: snaps in from 9 px out when focus is keyboard-visible;
+      - draggable controls (touch-action:none) and reduced motion get a brightness press instead of any movement;
+      - disabled controls get nothing. */
+window.Bx = (function () {
+  const SEL = ':is(button,a[href],[role="button"],[role="radio"],[role="tab"],[role="switch"],[role="checkbox"],summary,label.tile)';
+  const OUT = 'cubic-bezier(.4,0,.1,1)';
+  const inScope = (el) => !!el.closest('main .slot, header.hdr, .mbar');
+  const off = (el) => el.disabled || el.getAttribute('aria-disabled') === 'true' || el.closest('[data-bx="off"]');
+  const small = (el) => { const r = el.getBoundingClientRect(); return r.height <= 80 && r.width <= 480; };
+  const pair = (v, d) => { if (!v || v === 'none') return [d, d]; const p = v.split(' ').map(parseFloat); return [p[0], p.length > 1 ? p[1] : (d === 1 ? p[0] : 0)]; };
+  const S = new WeakMap();   // el -> { base:[sx,sy], press, lift, t0 }
+  const state = (el) => { let s = S.get(el); if (!s) { s = {}; S.set(el, s); } return s; };
+
+  /* ---------- 1. label roll ---------- */
+  function roll(btn) {
+    if (btn.dataset.bxr || !inScope(btn)) return; btn.dataset.bxr = 1; let i = 0;
+    [...btn.childNodes].forEach((n) => {
+      if (n.nodeType !== 3 || !n.textContent.trim()) return;
+      const txt = n.textContent, t = document.createElement('span'); t.className = 'bx-t';
+      const row = () => { const w = document.createElement('span'); w.className = 'bx-w'; w.setAttribute('aria-hidden', 'true');
+        [...txt].forEach((ch, k) => { const c = document.createElement('span'); c.className = 'bx-c'; c.style.setProperty('--i', i + k); c.textContent = ch; w.appendChild(c); }); return w; };
+      const sr = document.createElement('span'); sr.className = 'bx-sr'; sr.textContent = txt;
+      sr.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap';
+      t.append(sr, row(), row()); i += txt.length; n.replaceWith(t);
+    });
+    const tab = btn.querySelector('.tab'), svg = tab && tab.querySelector('svg');
+    if (svg && !tab.querySelector('.bx-i2')) { const c = svg.cloneNode(true); c.classList.add('bx-i2'); c.setAttribute('aria-hidden', 'true'); tab.appendChild(c); }
+  }
+  const rollAll = (root) => { if (root.matches && root.matches('.btn')) roll(root); root.querySelectorAll && root.querySelectorAll('.btn').forEach(roll); };
+
+  /* ---------- 2. physics ---------- */
+  let RM = false;
+  const still = (el) => RM || getComputedStyle(el).touchAction === 'none';
+  // hover by size: small controls lift 2 px, wide rows lift 1 px, tiles zoom 1.2%; huge surfaces keep their own hover
+  const mode = (el) => { const r = el.getBoundingClientRect(); if (r.height <= 80 && r.width <= 480) return 2; if (r.height <= 90) return 1; if (r.width * r.height <= 420000) return 'z'; return 0; };
+  function lift(el, up) {
+    const s = state(el);
+    if (up) { if (s.lift) { s.lift.playbackRate = 1; s.lift.play(); return; }
+      const m = mode(el); if (!m) return;
+      if (m === 'z') { const [x, y] = pair(getComputedStyle(el).scale, 1);
+        s.lift = el.animate([{ scale: `${x} ${y}` }, { scale: `${x * 1.012} ${y * 1.012}` }], { duration: 320, easing: OUT, fill: 'forwards' }); }
+      else { const [tx, ty] = pair(getComputedStyle(el).translate, 0);
+        s.lift = el.animate([{ translate: `${tx}px ${ty}px` }, { translate: `${tx}px ${ty - m}px` }], { duration: 260, easing: OUT, fill: 'forwards' }); }
+    } else if (s.lift) { const a = s.lift; a.playbackRate = -1.15; a.play(); a.onfinish = () => { if (a.playbackRate < 0) { a.cancel(); if (s.lift === a) s.lift = null; } }; }
+  }
+  function press(el) {
+    const s = state(el); if (s.press) return;
+    s.t0 = performance.now(); s.small = small(el);
+    if (still(el)) { s.press = el.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(.9)' }], { duration: 90, fill: 'forwards' }); s.still = true; return; }
+    s.still = false; s.base = pair(getComputedStyle(el).scale, 1); const k = s.small ? 0.955 : 0.985, [x, y] = s.base;
+    s.press = el.animate([{ scale: `${x} ${y}` }, { scale: `${x * k} ${y * k}` }], { duration: 110, easing: 'cubic-bezier(.2,0,.2,1)', fill: 'forwards' }); s.k = k;
+  }
+  function release(el) {
+    const s = state(el); if (!s.press) return;
+    const wait = Math.max(0, 90 - (performance.now() - s.t0));
+    setTimeout(() => {
+      const p = s.press; s.press = null; if (!p) return;
+      if (s.still) { el.animate([{ filter: 'brightness(.9)' }, { filter: 'brightness(1)' }], { duration: 160 }); p.cancel(); return; }
+      const [x, y] = s.base, k = s.k, o = s.small ? 1.03 : 1.008;
+      el.animate([{ scale: `${x * k} ${y * k}` }, { scale: `${x * o} ${y * o}`, offset: 0.42 }, { scale: `${x} ${y}` }], { duration: s.small ? 420 : 360, easing: 'cubic-bezier(.3,0,.2,1)' });
+      p.cancel(); pop(el);
+    }, wait);
+  }
+  function pop(el) {
+    const i = el.querySelector(':scope > svg, :scope > .tab, :scope > i > svg, :scope > span > svg');
+    if (i && !RM) i.animate([{ scale: '1' }, { scale: '1.18', offset: 0.4 }, { scale: '1' }], { duration: 320, easing: OUT });
+  }
+  function pulse(el) { press(el); setTimeout(() => release(el), 90); }
+  function ring(el) {
+    if (RM || !el.matches(':focus-visible')) return; const c = getComputedStyle(el); if (c.outlineStyle === 'none') return;
+    el.animate([{ outlineOffset: `${parseFloat(c.outlineOffset) + 6}px`, outlineColor: 'transparent' }, { outlineOffset: c.outlineOffset, outlineColor: c.outlineColor }], { duration: 240, easing: OUT });
+  }
+
+  function init() {
+    if (document.querySelector('main[data-page]:not([data-page="home"])')) return;   // a subpage view: left exactly as delivered
+    document.documentElement.classList.add('bx');
+    RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    rollAll(document);
+    const m = document.querySelector('main'); if (m) new MutationObserver((ms) => ms.forEach((r) => r.addedNodes.forEach((n) => { if (n.nodeType === 1) rollAll(n); }))).observe(m, { childList: true, subtree: true });
+    const target = (e) => { const el = e.target.closest && e.target.closest(SEL); return el && inScope(el) && !off(el) ? el : null; };
+    // capture phase, so a version that stops propagation on its own controls still gets the physics
+    document.addEventListener('pointerover', (e) => { if (e.pointerType !== 'mouse' || RM) return; const el = target(e); if (!el || el.contains(e.relatedTarget)) return;
+      if (!el.matches('.btn,.tel') && getComputedStyle(el).touchAction !== 'none') lift(el, true); }, true);
+    document.addEventListener('pointerout', (e) => { const el = target(e); if (el && !el.contains(e.relatedTarget)) { lift(el, false); if (e.pointerType === 'mouse') release(el); } }, true);
+    document.addEventListener('pointerdown', (e) => { if (e.button !== 0) return; const el = target(e); if (!el) return; press(el);
+      // a control that captures the pointer is being dragged: no scale or lift under the drag, a brightness press instead
+      setTimeout(() => { if (el.hasPointerCapture && el.hasPointerCapture(e.pointerId)) { const s = state(el); if (s.press && !s.still) { s.press.cancel(); s.still = true;
+        s.press = el.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(.9)' }], { duration: 90, fill: 'forwards' }); } lift(el, false); } }, 0);
+      const up = () => { release(el); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); };
+      addEventListener('pointerup', up); addEventListener('pointercancel', up); }, true);
+    document.addEventListener('keydown', (e) => { if (e.repeat || (e.key !== 'Enter' && e.key !== ' ')) return; const el = target(e); if (!el || el !== document.activeElement) return;
+      if (e.key === ' ' && el.tagName === 'A') return; pulse(el); }, true);
+    document.addEventListener('focusin', (e) => { const el = target(e); if (el) ring(el); }, true);
+    document.addEventListener('touchstart', () => {}, { passive: true });   // lets :active show on iOS taps
+  }
+  return { init, roll };
+})();
 (function(){
 const q=new URLSearchParams(location.search);
 /* page views: ?page=<name> swaps the homepage for that page (the homepage stays the default) */
@@ -13102,5 +13294,5 @@ const PLAY="<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"current
 document.querySelectorAll('.slot .pp').forEach(b=>{const v=b.closest('.hero').querySelector('video');if(!v)return;
   const sync=()=>{const p=v.paused;b.innerHTML=p?PLAY:PAUSE;b.setAttribute('aria-label',p?'Play the film':'Pause the film');b.setAttribute('aria-pressed',p);};
   if(RM)sync();b.addEventListener('click',()=>{v.paused?v.play():v.pause();setTimeout(sync,0);});v.addEventListener('pause',sync);v.addEventListener('play',sync);});
-Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(document);Svc4.wire(document);Svc5.wire(document);Svc6.wire(document);Vis.wire(document);Vis2.wire(document);Vis3.wire(document);Vis4.wire(document);Vis5.wire(document);Vis6.wire(document);Vis7.wire(document);Win.wire(document);Win2.wire(document);Win3.wire(document);Win4.wire(document);Win5.wire(document);Win6.wire(document);Rev.wire(document);Rev2.wire(document);Rev3.wire(document);Rev4.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Rev5.wire(document);Rev6.wire(document);Proc3.wire(document);Proc4.wire(document);Proc5.wire(document);Proc6.wire(document);Seq3.wire(document);Seq4.wire(document);Seq5.wire(document);Seq6.wire(document);Area3.wire(document);Area4.wire(document);Area5.wire(document);Area6.wire(document);Cta3.wire(document);Cta4.wire(document);Cta5.wire(document);Cta6.wire(document);PB.wire(document);PSd1.wire(document);PSd2.wire(document);PSd3.wire(document);PSd4.wire(document);PSd5.wire(document);PSd6.wire(document);PWd1.wire(document);PWd2.wire(document);PWd3.wire(document);PWd4.wire(document);PWd5.wire(document);PWd6.wire(document);PRf1.wire(document);PRf2.wire(document);PRf3.wire(document);PRf4.wire(document);PRf5.wire(document);POw1.wire(document);POw2.wire(document);POw3.wire(document);POw4.wire(document);POw5.wire(document);PRv1.wire(document);PRv2.wire(document);PRv3.wire(document);PRv4.wire(document);PRv5.wire(document);PAb1.wire(document);PAb2.wire(document);PAb3.wire(document);PAb4.wire(document);PAb5.wire(document);PSa1.wire(document);PSa2.wire(document);PSa3.wire(document);PSa4.wire(document);PSa5.wire(document);PCt1.wire(document);PCt2.wire(document);PCt3.wire(document);Nav.wire();
+Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(document);Svc4.wire(document);Svc5.wire(document);Svc6.wire(document);Vis.wire(document);Vis2.wire(document);Vis3.wire(document);Vis4.wire(document);Vis5.wire(document);Vis6.wire(document);Vis7.wire(document);Win.wire(document);Win2.wire(document);Win3.wire(document);Win4.wire(document);Win5.wire(document);Win6.wire(document);Rev.wire(document);Rev2.wire(document);Rev3.wire(document);Rev4.wire(document);Proc.wire(document);Proc2.wire(document);Seq.wire(document);Seq2.wire(document);Area.wire(document);Area2.wire(document);Cta.wire(document);Cta2.wire(document);Rev5.wire(document);Rev6.wire(document);Proc3.wire(document);Proc4.wire(document);Proc5.wire(document);Proc6.wire(document);Seq3.wire(document);Seq4.wire(document);Seq5.wire(document);Seq6.wire(document);Area3.wire(document);Area4.wire(document);Area5.wire(document);Area6.wire(document);Cta3.wire(document);Cta4.wire(document);Cta5.wire(document);Cta6.wire(document);PB.wire(document);PSd1.wire(document);PSd2.wire(document);PSd3.wire(document);PSd4.wire(document);PSd5.wire(document);PSd6.wire(document);PWd1.wire(document);PWd2.wire(document);PWd3.wire(document);PWd4.wire(document);PWd5.wire(document);PWd6.wire(document);PRf1.wire(document);PRf2.wire(document);PRf3.wire(document);PRf4.wire(document);PRf5.wire(document);POw1.wire(document);POw2.wire(document);POw3.wire(document);POw4.wire(document);POw5.wire(document);PRv1.wire(document);PRv2.wire(document);PRv3.wire(document);PRv4.wire(document);PRv5.wire(document);PAb1.wire(document);PAb2.wire(document);PAb3.wire(document);PAb4.wire(document);PAb5.wire(document);PSa1.wire(document);PSa2.wire(document);PSa3.wire(document);PSa4.wire(document);PSa5.wire(document);PCt1.wire(document);PCt2.wire(document);PCt3.wire(document);Nav.wire();Bx.init();
 })();</script></body></html>

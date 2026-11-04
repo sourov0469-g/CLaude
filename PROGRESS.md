@@ -1290,6 +1290,28 @@ Every text element is paired with the nearest painted background behind it, as r
 |---|---|---|---|---|---|---|
 | 1 | Hero | **L, "In their own colours"** (`?hero=l`) | Cash App Brand Guidelines (colour as content: eight documented jobs as full-height fields of the colour of their work, sampled from each job's photo; open one to see the job) | GATE-NEW-Hero-L.md | 8.52 PASS | Accepted by Muse |
 | 2 | Services | **L, "Built from our records"** (`?services=l`) | Quiet Cubes (modular cubes: an isotype house, one cube per ~10 documented projects, each trade where it sits on a house; pick a trade for its record) | GATE-NEW-Services-L.md | 8.54 PASS | Accepted by Muse |
-| 3 | Visualiser | **L, "Roll it on"** (`?vis=l`) | Graza (crafted animation: the two published finish routes shown arriving: a roller paints Sherwin-Williams colours on course by course with a drying sheen; ColorPlus boards turn over bottom-up) | GATE-NEW-Visualiser-L.md | 8.50 PASS | Built and gated; waiting for Muse's accept |
+| 3 | Visualiser | **L, "Roll it on"** (`?vis=l`) | Graza (crafted animation: the two published finish routes shown arriving: a roller paints Sherwin-Williams colours on course by course with a drying sheen; ColorPlus boards turn over bottom-up) | GATE-NEW-Visualiser-L.md | 8.50 PASS | Gated; then the owner's buttons order |
+
+## Buttons pass (owner order, 2026-11-04): GATE-BUTTONS
+
+- **Reference study:** the governing references were studied at code level (live harness plus stylesheets): Lando Norris, Lusion, Graza, Scout, Apple, Cash App, Quiet Cubes. Cowboy, Dropbox and MERSI gave nothing to transfer.
+- **The system:**
+  - `src/bx.css` and `src/bx.js`, homepage view only; subpages untouched.
+  - Board buttons roll their label letter by letter and slide their icon through.
+  - The header call button floods with lime.
+  - Phone and email links wipe an underline, and the phone rings.
+  - Every control gets hover (lift or zoom by size), a press with a spring release, keyboard pulses, tap feedback, a snapping lime focus ring and a real disabled state.
+  - Reduced motion uses brightness, not movement.
+- **Measured** (276 control families, 105 version views):
+  - static controls 134 → 18, with 0 reachable;
+  - hover motion 128 → 253;
+  - press 114 → 258;
+  - focus ring 267 → 272;
+  - 0 errors across 226 views.
+- **Gate:** GATE-BUTTONS.md (with GATE-BUTTONS-LEDGER.md), 8.58 PASS, waiting for Muse's judgment.
+- **Standing rule from now on:** every new version inherits the button system.
+  - Use `.btn` / `.btn.key` for board buttons.
+  - Never set `scale` / `translate` on a control's own `:hover` / `:active` (the system owns those two properties).
+  - Draggable pieces capture the pointer.
 
 **Next, after the accept:** Windows L.

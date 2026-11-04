@@ -1,0 +1,84 @@
+/* BX — the homepage button system (GATE-BUTTONS, owner order 2026-11-04). Techniques studied at code level on the
+   governing references and rebuilt here (see GATE-BUTTONS.md):
+   - Lando Norris: per-character label roll (each letter rides up to a duplicate, staggered); underline wipe; lime focus ring
+   - Lusion: dot-flood fill (a dot grows to fill the pill), arrow/icon slide-through, eases (.4,0,.1,1) and (.35,0,0,1)
+   - Graza: tactile depth (a face that presses into its plate); dotted/offset focus
+   - Scout / Apple / Cash App: quiet colour easing (.2–.32 s); a strong, offset focus ring
+   - Quiet Cubes: pressed state on every control
+   Everything is scoped under html.bx (set on the homepage view only; the subpages stay as delivered). The physics
+   (hover lift, press, spring release, keyboard pulse, tap pop, focus-ring snap) lives in bx.js on the individual
+   `scale` / `translate` properties, so it composes with every version's own `transform`. */
+:root{--bx-out:cubic-bezier(.4,0,.1,1);--bx-flood:cubic-bezier(.35,0,0,1);--bx-roll:cubic-bezier(.65,.05,0,1);--bx-col:cubic-bezier(.38,.005,.215,1);--bx-ring:#B5DB6E}
+
+/* ---------- 1. primary and board buttons (.btn, all variants): label roll + icon roll on the lifted board ---------- */
+.bx .btn .bx-t{position:relative;display:inline-block;overflow:hidden;height:1.18em;line-height:1.18;vertical-align:middle}
+.bx .btn .bx-w{display:block;white-space:pre}
+.bx .btn .bx-c{display:inline-block;transition:transform .55s var(--bx-roll);transition-delay:calc(var(--i) * 14ms)}
+.bx .btn .bx-w+.bx-w{position:absolute;left:0;top:100%}
+.bx .btn:is(:hover,:focus-visible) .bx-c{transform:translateY(-100%)}
+.bx .btn .tab{position:relative}
+.bx .btn .tab svg{transition:transform .42s var(--bx-out)}
+.bx .btn .tab .bx-i2{position:absolute;left:50%;top:50%;margin:-7px 0 0 -7px;transform:translate(-160%,160%)}
+.bx .btn:is(:hover,:focus-visible) .tab svg:first-child{transform:translate(160%,-160%)}
+.bx .btn:is(:hover,:focus-visible) .tab .bx-i2{transform:translate(0,0);transition-delay:.06s}
+.bx .btn:focus-visible .tab{width:30px;margin-left:0}
+.bx .btn:focus-visible{outline:3px solid var(--bx-ring);outline-offset:4px}
+.bx .btn.key:focus-visible{outline-color:var(--green)}
+.bx .btn:disabled .bx-c,.bx .btn[aria-disabled="true"] .bx-c{transform:none!important}
+
+/* ---------- 2. the header call button: Lusion dot-flood + a phone that rings ---------- */
+.bx .tel{position:relative;overflow:hidden;isolation:isolate;transition:background-color .2s var(--bx-col)}
+.bx .tel::before{content:"";position:absolute;left:24px;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#B5DB6E;z-index:-1;transform:scale(0);transition:transform .5s var(--bx-flood)}
+.bx .tel span{transition:transform .4s var(--bx-flood),color .3s var(--bx-col)}
+.bx .tel:is(:hover,:focus-visible){background:var(--green)}
+.bx .tel:is(:hover,:focus-visible)::before{transform:scale(26)}
+.bx .tel:is(:hover,:focus-visible) span{color:var(--ink);transform:translateX(3px)}
+.bx .tel:is(:hover,:focus-visible) svg{color:var(--green);animation:bxRing .7s var(--bx-out)}
+.bx .tel:focus-visible{outline:3px solid var(--bx-ring);outline-offset:3px}
+@keyframes bxRing{0%,100%{rotate:0deg}15%{rotate:-16deg}30%{rotate:13deg}45%{rotate:-10deg}60%{rotate:7deg}75%{rotate:-3deg}}
+
+/* ---------- 3. phone and email links in the sections: underline wipe (Lando) + the phone rings ---------- */
+.bx main .slot :where(a[href^="tel:"],a[href^="mailto:"]):not(.btn):not(.tel){background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:100% 100%;background-size:0% 2px;
+  transition:background-size .45s var(--bx-out),color .2s var(--bx-col)}
+.bx main .slot :where(a[href^="tel:"],a[href^="mailto:"]):not(.btn):not(.tel):is(:hover,:focus-visible){background-position:0 100%;background-size:100% 2px}
+.bx main .slot :where(a[href^="tel:"]):not(.btn):is(:hover,:focus-visible) svg{animation:bxRing .7s var(--bx-out)}
+/* plain text links in copy: the same wipe, thinner */
+.bx main .slot :where(p,li,small,dd,span) > a:not([class]):not([href^="tel:"]):not([href^="mailto:"]){text-decoration:none;background-image:linear-gradient(currentColor,currentColor),linear-gradient(rgba(14,59,44,.25),rgba(14,59,44,.25));
+  background-repeat:no-repeat;background-position:0 100%,0 100%;background-size:0% 1.5px,100% 1.5px;transition:background-size .45s var(--bx-out)}
+.bx main .slot :where(p,li,small,dd,span) > a:not([class]):not([href^="tel:"]):not([href^="mailto:"]):is(:hover,:focus-visible){background-size:100% 1.5px,100% 1.5px}
+
+/* ---------- 4. every other control: eased colour, a visible ring, a real disabled state ---------- */
+.bx :where(main .slot,header.hdr,.mbar) :where(button,a,[role="button"],[role="radio"],[role="tab"],summary):focus-visible{outline:3px solid var(--bx-ring);outline-offset:3px}
+.bx :where(main .slot) :where(button,[role="button"]):where(:disabled,[aria-disabled="true"]){opacity:.45;cursor:not-allowed;filter:saturate(.5)}
+.bx :where(main .slot) :where(button[aria-checked="true"],button[aria-pressed="true"],button[aria-selected="true"],button[aria-expanded="true"]){--bx-on:1}
+
+/* ---------- 4a. arrow and step buttons: the arrow travels the way it points (Lusion) ---------- */
+.bx main .slot :where(button,a):where([aria-label^="Next" i],[aria-label^="Previous" i],[aria-label^="Prev" i],[aria-label^="Forward" i],[aria-label^="Back" i]) svg{transition:translate .35s var(--bx-out)}
+.bx main .slot :where(button,a):where([aria-label^="Next" i],[aria-label^="Forward" i]):is(:hover,:focus-visible) svg{translate:3px 0}
+.bx main .slot :where(button,a):where([aria-label^="Previous" i],[aria-label^="Prev" i],[aria-label^="Back" i]):is(:hover,:focus-visible) svg{translate:-3px 0}
+
+/* ---------- 4b. form controls: fields that answer the pointer, range thumbs that press ---------- */
+.bx main .slot :where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),select,textarea){transition:border-color .2s var(--bx-col),box-shadow .25s var(--bx-out),background-color .2s var(--bx-col)}
+.bx main .slot :where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea):hover{border-color:var(--green)}
+.bx main .slot :where(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),select,textarea):focus-visible{outline:3px solid var(--bx-ring);outline-offset:2px;box-shadow:0 6px 18px -10px rgba(14,59,44,.45)}
+.bx main .slot input[type="range"]::-webkit-slider-thumb{transition:transform .25s var(--bx-out),box-shadow .25s var(--bx-out)}
+.bx main .slot input[type="range"]:hover::-webkit-slider-thumb{transform:scale(1.18)}
+.bx main .slot input[type="range"]:active::-webkit-slider-thumb{transform:scale(.92);box-shadow:0 0 0 8px rgba(181,219,110,.35)}
+.bx main .slot input[type="range"]::-moz-range-thumb{transition:transform .25s var(--bx-out)}
+.bx main .slot input[type="range"]:hover::-moz-range-thumb{transform:scale(1.18)}
+.bx main .slot input[type="range"]:active::-moz-range-thumb{transform:scale(.92)}
+.bx main .slot input[type="range"]:focus-visible{outline:3px solid var(--bx-ring);outline-offset:4px}
+
+/* ---------- 5. the phone quick bar: icons that answer the tap ---------- */
+.bx .mbar a svg{transition:transform .35s var(--bx-out)}
+.bx .mbar a:active svg{transform:translateY(-2px) scale(1.12)}
+
+/* ---------- reduced motion: states change, nothing travels ---------- */
+@media (prefers-reduced-motion:reduce){
+  .bx .btn .bx-c,.bx .btn .tab svg,.bx .tel::before,.bx .tel span,.bx .mbar a svg{transition:none!important}
+  .bx .btn:is(:hover,:focus-visible) .bx-c{transform:none}
+  .bx .btn:is(:hover,:focus-visible) .tab svg:first-child,.bx .btn .tab .bx-i2{transform:none}.bx .btn .tab .bx-i2{display:none}
+  .bx .tel:is(:hover,:focus-visible) svg,.bx main .slot a svg{animation:none!important}
+  .bx main .slot :where(button,a) svg{translate:none!important}
+  .bx .tel::before{display:none}.bx .tel:is(:hover,:focus-visible){background:#15493A}.bx .tel:is(:hover,:focus-visible) span{color:#fff;transform:none}
+}
