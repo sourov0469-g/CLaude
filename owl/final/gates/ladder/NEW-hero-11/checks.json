@@ -1,0 +1,139 @@
+[
+ {
+  "sec": "hero",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 11
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "one h1 with a readable name",
+  "ok": true,
+  "detail": "Under Our Wing,Your Nest Is Safe"
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "the Owl lands on the photo and the house brightens",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "the Owl is the cut-out without the old house; the house is a real photo with an honest alt",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "rain is falling and the wings throw amber splashes (canvas has amber pixels)",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "the house photo stays dry: no rain drawn over the photo once landed",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "the two calls to action: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "Make It Pour turns the storm on",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "the storm eases off by itself after six seconds",
+  "ok": true
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "hero",
+  "v": "11",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

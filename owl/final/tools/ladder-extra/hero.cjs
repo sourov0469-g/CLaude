@@ -37,5 +37,17 @@ module.exports = {
     rec('focus pauses it (WCAG 2.2.2)', await p.evaluate(([S, a]) => document.querySelector(S + ' .track').style.transform === a, [S, a]));
     await p.keyboard.press('ArrowRight'); await p.waitForTimeout(100);
     rec('arrow keys step it a frame', await p.evaluate(([S, a]) => document.querySelector(S + ' .track').style.transform !== a, [S, a]));
+  },
+  '11': async (p, S, rec) => {
+    await p.waitForTimeout(2600);
+    rec('the Owl lands on the photo and the house brightens', await p.evaluate(S => { const st = document.querySelector(S + ' .stage'); return st.classList.contains('landed') && st.classList.contains('dry') && getComputedStyle(document.querySelector(S + ' .card img')).filter === 'none' && +getComputedStyle(document.querySelector(S + ' .owl')).opacity === 1; }, S));
+    rec('the Owl is the cut-out without the old house; the house is a real photo with an honest alt', await p.evaluate(S => /owl lands on the picture/.test(document.querySelector(S + ' .owl').alt) && /family home with a shingle roof among tall pines/.test(document.querySelector(S + ' .card img').alt), S));
+    rec('rain is falling and the wings throw amber splashes (canvas has amber pixels)', await p.evaluate(S => { const c = document.querySelector(S + ' canvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let a = 0, k = 0; for (let i = 0; i < d.length; i += 16) { if (d[i + 3] > 40) { k++; if (d[i] > 180 && d[i + 1] > 120 && d[i + 2] < 90) a++; } } return k > 50 && a > 3; }, S));
+    rec('the house photo stays dry: no rain drawn over the photo once landed', await p.evaluate(S => { const c = document.querySelector(S + ' canvas'), cr = c.getBoundingClientRect(), r = document.querySelector(S + ' .card').getBoundingClientRect(), k = c.width / cr.width; const x0 = Math.round((r.left - cr.left + r.width * .3) * k), y0 = Math.round((r.top - cr.top + r.height * .45) * k), w = Math.round(r.width * .4 * k), h = Math.round(r.height * .45 * k); const d = c.getContext('2d').getImageData(x0, y0, w, h).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 40) n++; return n < 40; }, S));
+    rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-tab').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+    await p.click(S + ' .pour'); await p.waitForTimeout(300);
+    rec('Make It Pour turns the storm on', await p.evaluate(S => document.querySelector(S + ' .pour').getAttribute('aria-pressed') === 'true', S));
+    await p.waitForTimeout(6300);
+    rec('the storm eases off by itself after six seconds', await p.evaluate(S => document.querySelector(S + ' .pour').getAttribute('aria-pressed') === 'false', S));
   }
 };

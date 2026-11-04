@@ -4,3 +4,14 @@
 - From then on: one new version per homepage section at a time (11, 12, …) in ladder order, each in a wholly different style family with one named signature move.
 - Each new version gets its own GATE-NEW-<Section>-<Number>.md with a scorecard, a full skill ledger and a comparison against the section's best, then a STOP for Muse's accept.
 - Until then the ladder continues unchanged. Ladder status at receipt: hero 10; Video 9; Explore 9; Wise Check, Protect, Services, Reviews, Area, Family and Booking 7.
+
+## 2026-11-04 · Owner addendum "homeowner-simple, +5" (binding) — supersedes the order of work
+- Owner verdict 09:52: Hero and Video work (Hero V1 and V2 are the liked pair). From section 3 on, the versions fell into document-type blocks that explain roofing.
+- The reader is a homeowner whose roof needs work. Each section has ONE job: we'll do the work for you, properly; here's why to trust us and how to start.
+- New pass, ahead of everything else:
+  - +5 new versions per homepage section, in order Hero → Booking;
+  - one at a time, each gated on its own (GATE-NEW-<Section>-<N>.md) with the five-question self-check;
+  - stop for Muse after each.
+- The fourth ladder pass is **paused after L30**: Hero, Video and Explore at 10; Wise, Protect, Services, Reviews, Area, Family and Booking at 9. No ladder version was in flight. The subpages and the earlier new-versions cycle follow this pass.
+- Real-photo hero pack, batch 1 (5 images plus manifest), stored in `owl/assets/source/hero-pack/`. Batch 2 is pending.
+- **Hero 11 · "Under Our Wing"** (merges V1 and V2, with a real photo): gated, 8.74, checks 21/21. Hero now has 11; next is Hero 12.
