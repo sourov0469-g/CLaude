@@ -1247,6 +1247,7 @@ Every text element is paired with the nearest painted background behind it, as r
 | 1 | Services | **K, "Run the reel"** (`?services=k`) | Scout Motors (film-roll evidence: 9 trade reels, a gate, the projected frame) on 31 documented job photos | GATE-NEW-Services-K.md | 8.46 PASS | Accepted by Muse |
 | 1 | Visualiser | **K, "Open a colour"** (`?vis=k`) | Dropbox Brand (subtraction; the tile becomes the page) on the 17 published ColorPlus values | GATE-NEW-Visualiser-K.md | 8.40 PASS | Accepted by Muse |
 | 1 | Windows | **K, "376 jobs, set in type"** (`?windows=k`) | Dropbox Brand (type as data: band type area ∝ job count) on the 376 priced window jobs | GATE-NEW-Windows-K.md | 8.58 PASS | Accepted by Muse |
-| 1 | Reviews | **K, "Marked up by hand"** (`?reviews=k`) | Graza (custom-animation bar: a highlighter sweeping homeowners' exact phrases by theme) on all 30 published reviews | GATE-NEW-Reviews-K.md | 8.58 PASS | Waiting for Muse's accept |
+| 1 | Reviews | **K, "Marked up by hand"** (`?reviews=k`) | Graza (custom-animation bar: a highlighter sweeping homeowners' exact phrases by theme) on all 30 published reviews | GATE-NEW-Reviews-K.md | 8.58 PASS | Accepted by Muse |
+| 1 | Process | **K, "Handed along"** (`?process=k`) | Quiet Cubes (a staffed service: the four steps as stations staffed by the people homeowners name, with a baton handed along) | GATE-NEW-Process-K.md | 8.42 PASS | Waiting for Muse's accept |
 
-**Next, after the accept:** Process K.
+**Next, after the accept:** Try K.

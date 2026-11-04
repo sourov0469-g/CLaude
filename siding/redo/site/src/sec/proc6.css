@@ -1,0 +1,44 @@
+/* PROCESS K — "Handed along" (Quiet Cubes: a staffed service; the relay of named people) */
+.prK{padding:104px var(--gut) 72px}
+.prK .hd{display:grid;gap:10px;max-width:980px}
+.prK .kk{font:800 12px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+.prK .sec-h{font-size:clamp(38px,5vw,76px);line-height:1}
+.prK .sec-p{font-size:17px;max-width:62ch}
+/* the rail */
+.prK .rl6{position:relative;margin-top:40px}
+.prK .tl6{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative;z-index:1}
+.prK .st6{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:0 18px 0 0;cursor:pointer;min-width:0}
+.prK .st6:focus-visible .nm6{outline:3px solid var(--green);outline-offset:6px;border-radius:6px}
+.prK .sn6{font:800 12.5px/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prK .nm6{display:flex;flex-direction:column;min-height:3.06em;justify-content:flex-end;font:800 clamp(26px,2.9vw,46px)/1.02 var(--display);letter-spacing:-.03em;color:#BFC8C2;transition:color .35s}
+.prK .nm6 b{font:inherit}
+.prK .st6:hover .nm6{color:var(--ink-3)}
+.prK .st6.past .nm6{color:#7F8C84}
+.prK .st6[aria-selected="true"] .nm6{color:var(--ink)}.prK .st6[aria-selected="true"] .sn6{color:var(--green)}
+.prK .dt6{display:block;flex:none;width:14px;height:14px;margin-top:auto;padding-top:0;transform:translateY(0);border-radius:50%;background:#fff;box-shadow:inset 0 0 0 3px #0E3B2C}
+.prK .tr6{position:absolute;left:0;right:0;bottom:5.5px;height:3px;background:#0E3B2C;border-radius:2px}
+.prK .bt6{position:absolute;left:0;top:0;z-index:2;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#B5DB6E;box-shadow:0 0 0 5px rgba(181,219,110,.35),0 8px 18px -6px rgba(14,59,44,.55)}
+/* the panel */
+.prK .pnl6{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr);gap:clamp(22px,4vw,56px);align-items:start;margin-top:34px;padding:clamp(24px,3vw,40px);border-radius:22px;background:#F1F5EF}
+.prK .pnl6:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.prK .pnl6.in6 .qs6 .pq6{animation:prKIn .5s cubic-bezier(.16,1,.3,1) both}.prK .pnl6.in6 .qs6 .pq6:nth-child(2){animation-delay:.07s}.prK .pnl6.in6 .qs6 .pq6:nth-child(3){animation-delay:.14s}
+@keyframes prKIn{from{opacity:0;transform:translateY(14px)}}
+.prK .pk6{font:800 12.5px/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.prK .pl6{margin-top:12px;font:600 clamp(18px,1.6vw,22px)/1.45 var(--text);color:var(--ink)}
+.prK .nx6{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:13px 18px;border:0;border-radius:999px;background:#0E3B2C;color:#fff;cursor:pointer;font:700 15px/1.2 var(--text);text-align:left;transition:transform .12s}
+.prK .nx6 svg{flex:none;width:18px;height:18px;color:#B5DB6E}.prK .nx6:active{transform:scale(.97)}.prK .nx6:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.prK .qs6{display:grid;gap:12px}
+.prK .pq6{margin:0;padding:18px 20px;border-radius:14px;background:#fff;box-shadow:0 1px 0 #E1E8E2}
+.prK .pq6 p{font:500 17px/1.5 var(--text);color:var(--ink)}
+.prK .pq6 mark{background:linear-gradient(transparent 14%,rgba(181,219,110,.9) 14% 86%,transparent 86%);color:inherit;font-weight:700;padding:0 .08em}
+.prK .pq6 figcaption{margin-top:8px;font:700 12px/1.3 var(--text);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.prK .ft6{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;margin-top:26px}
+.prK .ft6 p{font:600 16px/1.4 var(--text);color:var(--ink-2)}
+@media (max-width:860px){
+  .prK{padding-top:90px}
+  .prK .tl6{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:calc(var(--gut) * -1);padding-right:var(--gut)}.prK .tl6::-webkit-scrollbar{display:none}
+  .prK .st6{flex:none;width:62%;scroll-snap-align:start}
+  .prK .tr6{right:calc(var(--gut) * -1)}
+  .prK .pnl6{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.prK .nm6{transition:none}.prK .pnl6.in6 .qs6 .pq6{animation:none}}
