@@ -1,0 +1,59 @@
+{
+ "name": "quietcubes",
+ "url": "https://quietcubes.com/",
+ "facts": {
+  "title": "QuietCubes | Luxury Office Pods & Booths for Modern Offices",
+  "height": 26029,
+  "sticky": 27,
+  "fixed": 14,
+  "videos": 3,
+  "canvases": 0,
+  "clip": 15,
+  "libs": {
+   "gsap": true,
+   "ScrollTrigger": true,
+   "Lenis": true,
+   "three": false,
+   "swiper": true
+  },
+  "scripts": [
+   "insight.min.js",
+   "js?id=AW-16516005424&cx=c&gtm=4e6b31",
+   "destination?id=AW-16516005424&cx=c&gtm=4e6b31",
+   "js?id=G-B98LJLLG35&gtg_health=1",
+   "insight.min.js",
+   "1583222426621102?v=2.9.435&r=stable&domain=quietcubes.com&hme=4453c87d489b6902031c012cadd2731893cd69feb64fe8a61b339727247a7703&ex_m=118%2C242%2C171%2C27%2C82%2C83%2C162%2C78%2C77%2C11%2C181%2C102%2C20%2C153%2C141%2C46%2C85%2C90%2C149%2C176%2C183%2C8%2C4%2C5%2C7%2C6%2C3%2C103%2C115%2C32%2C17%2C31%2C18%2C33%2C34%2C35%2C37%2C55%2C163%2C87%2C126%2C22%2C24%2C51%2C47%2C49%2C48%2C95%2C104%2C108%2C124%2C160%2C164%2C53%2C125%2C29%2C26%2C133%2C79%2C43%2C166%2C165%2C167%2C157%2C155%2C30%2C42%2C66%2C123%2C178%2C80%2C21%2C128%2C93%2C76%2C23%2C97%2C98%2C130%2C96%2C151%2C150%2C154%2C109%2C177%2C180%2C41%2C56%2C127%2C54%2C161%2C72%2C185%2C110%2C184%2C211%2C263%2C84%2C283%2C282%2C281%2C14%2C25%2C28%2C40%2C62%2C117%2C68%2C10%2C73%2C111%2C112%2C113%2C119%2C144%2C38%2C36%2C146%2C147%2C148%2C143%2C142%2C172%2C86%2C175%2C173%2C174%2C57%2C69%2C67%2C137%2C19%2C179%2C52%2C333%2C334%2C335%2C332%2C349%2C371%2C256%2C238%2C70%2C239%2C237%2C374%2C365%2C59%2C257%2C121%2C145%2C92%2C135%2C61%2C134%2C140%2C139%2C65%2C74%2C168%2C88%2C89%2C129%2C44%2C39%2C60%2C63%2C114%2C182%2C1%2C138%2C16%2C136%2C12%2C2%2C64%2C105%2C15%2C75%2C71%2C132%2C101%2C100%2C187%2C188%2C106%2C107%2C9%2C116%2C186%2C58%2C158%2C99%2C91%2C81%2C131%2C120%2C169%2C50%2C159%2C0%2C94%2C152%2C156%2C170%2C45%2C122%2C13%2C189",
+   "fbevents.js",
+   "insight.min.js",
+   "gtm.js?id=GTM-WPP59TKS",
+   "5GqHF7iZiWP2WI36JJ0gXiCDpY8",
+   "modal.js",
+   "a11y.js",
+   "?random=1793834565009&cv=11&fst=1793834565009&bg=ffffff&guid=ON&async=1&gtm=45be6b31v9184684274z89184619644za20gzb9184619644zd9184619644xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616986~115938466~115938469~118897920~118897930~120213116~120385422~120412528~120420416~120469145~120469153~121191155~121246026~121246034~123814183~123814946&u_w=1440&u_h=900&url=https%3A%2F%2Fquietcubes.com%2F&rcb=12&frm=0&tiba=QuietCubes%20%7C%20Luxury%20Office%20Pods%20%26%20Booths%20for%20Modern%20Offices&did=dZGVlNj%2CdYWYxNW&gdid=dZGVlNj.dYWYxNW&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=702657934.1793834564&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uamb=0&uam=&uap=Linux&uapv=&uaw=0&_tu=CA&ept=9&rfmt=3&fmt=4",
+   "?random=1793834565030&cv=11&fst=1793834565030&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b31v9184684274za20ozb9184619644zd9184619644xecxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616986~115938466~115938469~118897920~118897930~120213116~120385422~120412528~120420416~120469145~120469153~121191155~121246026~121246034~123814183~123814946&u_w=1440&u_h=900&url=https%3A%2F%2Fquietcubes.com%2F&rcb=12&frm=0&tiba=QuietCubes%20%7C%20Luxury%20Office%20Pods%20%26%20Booths%20for%20Modern%20Offices&did=dZGVlNj%2CdYWYxNW&gdid=dZGVlNj.dYWYxNW&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=702657934.1793834564&uaa=x86&uab=64&uafvl=HeadlessChrome%3B153.0.8010.12%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.12&uamb=0&uam=&uap=Linux&uapv=&uaw=0&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=4",
+   "jquery-3.5.1.min.dc5e7f18c8.js?site=689b2fcec1e26eb9a001b9d6",
+   "webflow.schunk.f2efb3c5440a81cf.js",
+   "webflow.schunk.d7b02e2a07ee8318.js",
+   "webflow.schunk.bdf58efcee47c042.js",
+   "webflow.ff87cad5.b1785465a08fc2b0.js",
+   "gsap.min.js",
+   "SplitText.min.js",
+   "ScrollTrigger.min.js",
+   "swiper-bundle.min.js",
+   "lenis.min.js"
+  ]
+ },
+ "scrollLinkedChanges": 96,
+ "pinnedLikeHolds": 315,
+ "videoTimesByState": [
+  "0,0,0",
+  "0,0,0",
+  "0,0,0",
+  "1.22,0,0",
+  "2.67,0,0",
+  "4.13,0,0",
+  "5.59,0,0",
+  "7.03,0,0"
+ ],
+ "log": []
+}

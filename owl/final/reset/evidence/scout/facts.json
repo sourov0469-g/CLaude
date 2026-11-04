@@ -1,0 +1,60 @@
+{
+ "name": "scout",
+ "url": "https://www.scoutmotors.com/",
+ "facts": {
+  "title": "Scout Motors",
+  "height": 17890,
+  "sticky": 4,
+  "fixed": 14,
+  "videos": 3,
+  "canvases": 2,
+  "clip": 18,
+  "libs": {
+   "gsap": false,
+   "ScrollTrigger": false,
+   "Lenis": true,
+   "three": false,
+   "swiper": false
+  },
+  "scripts": [
+   "analytics-browser-2.11.4-min.js.gz",
+   "datadog-logs.js",
+   "datadog-rum.js",
+   "recaptcha__en.js",
+   "bat.js",
+   "tv2track.js",
+   "tv2track.js",
+   "pixel.js",
+   "gtm.js?id=GTM-MXZLWJSB",
+   "Layout.astro_astro_type_script_index_0_lang.wQy50sQh.js",
+   "zzhplz",
+   "js?id=G-EWMT52PYQP",
+   "211065069.js",
+   "v3",
+   "Menu.astro_astro_type_script_index_0_lang.C04toRNB.js",
+   "SequenceKey.astro_astro_type_script_index_0_lang.ycaJijVa.js",
+   "Sequence.astro_astro_type_script_index_0_lang.C5MDVVB8.js",
+   "SplitLines.astro_astro_type_script_index_0_lang.BbrFY4mw.js",
+   "Viewfinder.astro_astro_type_script_index_0_lang.DS_5CLFQ.js",
+   "HomeTreadmill.astro_astro_type_script_index_0_lang.Cm_jnYRz.js",
+   "HomeCamp.astro_astro_type_script_index_0_lang.Cz6SWvi8.js",
+   "ProductTile.astro_astro_type_script_index_0_lang.Bar_4CXK.js",
+   "up_loader.1.1.0.js",
+   "Layout.astro_astro_type_script_index_1_lang.DhikvYOg.js",
+   "Layout.astro_astro_type_script_index_2_lang.uk0rlPgg.js"
+  ]
+ },
+ "scrollLinkedChanges": 210,
+ "pinnedLikeHolds": 677,
+ "videoTimesByState": [
+  "8.09,0,0",
+  "9.48,0,0",
+  "9.6,0,0",
+  "9.6,0,0",
+  "9.6,0,0",
+  "9.6,0,0",
+  "9.6,0,0",
+  "9.6,0,0"
+ ],
+ "log": []
+}

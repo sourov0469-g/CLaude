@@ -45,3 +45,4 @@
 
 ## RESET (owner verdict 2026-11-05: all versions rejected; +5 cycle stopped; Protect 10 not accepted)
 - **Diagnosis** written: `final/OWL-DIAGNOSIS-2026-11-05.md`. It covers: one reused skeleton (kicker + h2 + widget + Book/Call; 0 of 21 new versions scroll-driven); references named but their mechanisms not taken; Explore, Wise Check and Protect as one story split into three explanations; a new 7-section map of different kinds; Night Owl (navy + owl-eye gold) as the working palette for the reset page, with the control and two trials switchable.
+- **Reset map** written: `final/OWL-RESET-MAP.md`. Keep/merge/kill for all 10 sections; the world shell (sky ground, travelling owl, call pill, palette switch); 7 sections of different kinds, each with a live-studied reference and mechanism. Evidence is in `final/reset/evidence/` (AirPods, Scout, Quiet Cubes including the first real capture of its choice gate, MERSI, Lando, Longbow). Four palettes on tokens.

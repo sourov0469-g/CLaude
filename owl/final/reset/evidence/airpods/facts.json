@@ -1,0 +1,53 @@
+{
+ "name": "airpods",
+ "url": "https://www.apple.com/airpods-pro/",
+ "facts": {
+  "title": "AirPods Pro 3 - Apple",
+  "height": 28918,
+  "sticky": 12,
+  "fixed": 12,
+  "videos": 16,
+  "canvases": 0,
+  "clip": 77,
+  "libs": {
+   "gsap": false,
+   "ScrollTrigger": false,
+   "Lenis": false,
+   "three": false,
+   "swiper": false
+  },
+  "scripts": [
+   "head.built.js",
+   "globalheader.umd.js",
+   "acmi-head.built.js",
+   "acmi-head.built.js",
+   "ac-analytics.js",
+   "auto-init.js",
+   "ac-localnav.built.js",
+   "ac-globalfooter.built.js",
+   "localeswitcher.built.js",
+   "main.built.js",
+   "data-relay.js",
+   "auto-relay.js",
+   "autopricing-toggle.built.js",
+   "autopricing.built.js",
+   "autofilms.built.js",
+   "hls.js"
+  ]
+ },
+ "scrollLinkedChanges": 564,
+ "pinnedLikeHolds": 65,
+ "videoTimesByState": [
+  "6.04,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+  "6.24,0,0,0.69,0,0,0,0,0,0,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,0.99,0,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,2.47,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,4.9,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,4.9,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,4.9,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,4.9,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,4.9,0,0,0,0,0,0",
+  "6.24,0,0,0.91,0,0,0,0,1.15,4.9,0,0,0,0,0,0"
+ ],
+ "log": []
+}

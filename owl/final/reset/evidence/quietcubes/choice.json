@@ -1,0 +1,65 @@
+{
+ "pills": [
+  {
+   "tag": "A",
+   "cls": "pod-menu-button w-inline-block",
+   "href": "#"
+  },
+  {
+   "tag": "DIV",
+   "cls": "pod-start-label",
+   "href": null
+  },
+  {
+   "tag": "A",
+   "cls": "pod-menu-button psi-home w-inline-block",
+   "href": "#"
+  },
+  {
+   "tag": "DIV",
+   "cls": "pod-start-label",
+   "href": null
+  },
+  {
+   "tag": "A",
+   "cls": "pod-menu-button psi-outdoor w-inline-block",
+   "href": "#"
+  },
+  {
+   "tag": "DIV",
+   "cls": "pod-start-label",
+   "href": null
+  },
+  {
+   "tag": "A",
+   "cls": "pod-menu-button psi-nursing w-inline-block",
+   "href": "#"
+  },
+  {
+   "tag": "DIV",
+   "cls": "pod-start-label",
+   "href": null
+  }
+ ],
+ "before": {
+  "url": "https://quietcubes.com/",
+  "h": 26029,
+  "overflow": "visible/hidden auto"
+ },
+ "clicked": "yes",
+ "after": {
+  "url": "https://quietcubes.com/",
+  "h": 25876,
+  "overflow": "visible/hidden auto",
+  "heads": [
+   "Maximize Focus & Productivity at Your Workplace",
+   "Upgrade YourRoutine & Work From Home",
+   "Elevate Comfort& ProductivityOutdoors",
+   "Comfort & Privacyfor Mothersand Babies",
+   "Innovative Soundproof Office Pods & Booths",
+   "Find Your PerfectWork-From-Home Pod",
+   "Protected From the Elements,Open to Possibilities",
+   "Comfort-First Podsfor Nursing Moms"
+  ]
+ }
+}

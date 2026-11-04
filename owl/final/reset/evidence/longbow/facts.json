@@ -1,0 +1,39 @@
+{
+ "name": "longbow",
+ "url": "https://longbowmotors.com/",
+ "facts": {
+  "title": "Longbow | British Hand-Built Featherweight Sports Cars",
+  "height": 7270,
+  "sticky": 0,
+  "fixed": 6,
+  "videos": 1,
+  "canvases": 0,
+  "clip": 0,
+  "libs": {
+   "gsap": false,
+   "ScrollTrigger": false,
+   "Lenis": false,
+   "three": false,
+   "swiper": false
+  },
+  "scripts": [
+   "chrome.js?v=e638d667",
+   "tags.js?v=7265671a",
+   "lb.js?v=6f4183da",
+   "js?id=G-V223RX6PYX"
+  ]
+ },
+ "scrollLinkedChanges": 64,
+ "pinnedLikeHolds": 168,
+ "videoTimesByState": [
+  "6.18",
+  "7.6",
+  "8.97",
+  "10.34",
+  "11.72",
+  "13.09",
+  "14.45",
+  "15.82"
+ ],
+ "log": []
+}
