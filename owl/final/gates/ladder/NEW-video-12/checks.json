@@ -1,0 +1,139 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 12
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Ring the Bell"
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "before ringing the screen dozes: a blurred still and \"Press the doorbell\", no film playing",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "the screen never claims a live feed (no \"Live\", no clock)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "pressing the bell rings: glow waves go out",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "then the doorbell screen wakes and Owl’s crew film plays, labelled Front door",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "the page names who it is and offers the real call",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "the bell is a real named button (Enter rings it)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "the full film opens YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "12",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

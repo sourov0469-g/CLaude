@@ -3104,6 +3104,83 @@ OWL.reg('video','11',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="video" data-v="12">
+<section class="sec video12" id="crew-video-12" aria-labelledby="vd12-h">
+<style>
+.video12{overflow:hidden}
+.video12 .hd{margin-bottom:clamp(18px,2.6vw,28px)}
+.video12 .lede{margin-top:10px;max-width:46ch}
+.video12 .g{display:grid;grid-template-columns:auto auto;justify-content:center;gap:clamp(20px,4vw,56px);align-items:center}
+.video12 .scr{position:relative;width:min(calc(100vw - 300px),980px,calc(52vh * 1.6));aspect-ratio:16/10;border-radius:30px;overflow:hidden;background:#17111D;box-shadow:0 0 0 10px #2A2131,0 0 0 11px rgba(23,17,29,.2),0 50px 70px -46px rgba(23,17,29,.7)}
+.video12 .scr video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(14px) brightness(.55) saturate(.6);transform:scale(1.14);transition:filter .8s,transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.video12 .awake video{filter:none;transform:scale(1.04)}
+.video12 .scr::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.video12 .standby{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:14px;color:#F1EFE6;text-align:center;transition:opacity .5s}
+.video12 .standby img{width:min(190px,36%);opacity:.9;filter:brightness(0) invert(1)}
+.video12 .standby span{font-weight:700;font-size:16px;opacity:.75}
+.video12 .awake .standby{opacity:0}
+.video12 .chip{position:absolute;left:16px;top:16px;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(23,17,29,.62);color:#F1EFE6;font-weight:700;font-size:14px;opacity:0;transition:opacity .5s .3s}
+.video12 .chip i{width:9px;height:9px;border-radius:50%;background:#EAA221}
+.video12 .awake .chip{opacity:1}
+.video12 .bell{position:relative;display:grid;justify-items:center;gap:12px;padding:0;border:0;background:none;cursor:pointer}
+.video12 .dev{position:relative;width:clamp(92px,9vw,124px);aspect-ratio:1/2.5;border-radius:999px;background:linear-gradient(180deg,#2A2131,#17111D);box-shadow:inset 0 2px 0 rgba(255,255,255,.12),0 26px 36px -18px rgba(23,17,29,.6);transition:transform .2s}
+.video12 .dev .lens{position:absolute;left:50%;top:15%;width:34%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 38% 35%,#5A6E8A,#0B0810 62%);box-shadow:0 0 0 4px #3A3540}
+.video12 .dev .led{position:absolute;left:50%;top:33%;width:6px;height:6px;transform:translateX(-50%);border-radius:50%;background:#3A3540;transition:background .3s,box-shadow .3s}
+.video12 .awake-dev .led{background:#7FBF7F;box-shadow:0 0 6px 2px rgba(127,191,127,.7)}
+.video12 .dev .btn-ring{position:absolute;left:50%;bottom:12%;width:58%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#3A3540 0 54%,#EAA221 56% 64%,#2A2131 66%);box-shadow:0 0 18px 2px rgba(234,162,33,.55);transition:box-shadow .3s,transform .12s}
+.video12 .bell:hover .btn-ring,.video12 .bell:focus-visible .btn-ring{box-shadow:0 0 26px 6px rgba(234,162,33,.85)}
+.video12 .bell:active .dev{transform:translateY(2px)}
+.video12 .bell:active .btn-ring{transform:translateX(-50%) scale(.94)}
+.video12 .bell:focus-visible{outline:none}
+.video12 .bell:focus-visible .dev{outline:3px solid var(--ink);outline-offset:6px}
+.video12 .wave{position:absolute;left:50%;bottom:calc(12% + 0px);width:58%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;border:3px solid rgba(234,162,33,.9);opacity:0;pointer-events:none}
+.video12 .ringing .wave{animation:vd12w 1s ease-out}
+.video12 .ringing .wave:nth-of-type(2){animation-delay:.2s}
+@keyframes vd12w{0%{opacity:.9;transform:translateX(-50%) scale(1)}100%{opacity:0;transform:translateX(-50%) scale(2.6)}}
+.video12 .bell .lb{font-weight:800;font-size:16px;color:var(--ink)}
+.video12 .bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin:24px auto 0;max-width:1180px}
+.video12 .bar p{margin:0 auto 0 0;font-weight:700;font-size:17px}
+.video12 .bar .call.nudge{animation:vd12n .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes vd12n{40%{transform:translateY(-6px) scale(1.04)}}
+.video12 .full{min-height:48px;font-weight:700;text-decoration:underline;text-underline-offset:4px;background:none;border:0;padding:0 6px;cursor:pointer;color:var(--ink)}
+@media (max-width:800px){.video12 .g{grid-template-columns:minmax(0,1fr)}.video12 .scr{width:100%}.video12 .bell{grid-auto-flow:column;align-items:center;justify-self:center;gap:16px}.video12 .dev{width:76px}.video12 .bar p{width:100%}.video12 .bar .btn{flex:1 1 100%}}
+@media (prefers-reduced-motion:reduce){.video12 .scr video,.video12 .standby,.video12 .chip,.video12 .dev,.video12 .btn-ring{transition:none}.video12 .ringing .wave,.video12 .bar .call.nudge{animation:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Owl's crew on film</span><h2 class="h2" id="vd12-h" style="margin-top:12px">Ring the Bell</h2>
+  <p class="lede rv">When you call Owl, these are the people who come to your door. Press the doorbell to see them.</p></div>
+ <div class="g">
+  <div class="scr" data-owl="say:Who's there?">
+   <video data-media="crew" data-aposter="a1" muted loop playsinline preload="metadata" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+   <div class="standby" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-asrc="a0" alt="" width="185" height="75"><span>Press the doorbell</span></div>
+   <span class="chip" aria-hidden="true"><i></i>Front door · Owl’s crew</span>
+  </div>
+  <button class="bell" type="button" aria-label="Ring the doorbell to see Owl's crew"><span class="dev"><span class="lens"></span><span class="led"></span><span class="btn-ring"></span><span class="wave"></span><span class="wave"></span></span><span class="lb" aria-hidden="true">Ring the bell</span></button>
+ </div>
+ <div class="bar" aria-live="polite"><p class="say">Ring us for real, and they’ll come to yours.</p><a class="btn btn-amber call" href="tel:+16519776027" data-mag data-owl="hoot">Call (651) 977-6027</a><a class="btn btn-line" href="#book" data-mag data-owl="peek">Get My Roof Checked</a><button class="full" type="button">Watch the full film</button></div>
+</div>
+<script>
+OWL.reg('video','12',function(root){
+  /* one idea: ring the bell and the doorbell camera shows who comes to your door: Owl's crew */
+  var scr = root.querySelector('.scr'), vid = root.querySelector('video'), bell = root.querySelector('.bell'), dev = root.querySelector('.dev'), call = root.querySelector('.call'), say = root.querySelector('.say'), h2 = root.querySelector('h2'), awake = false, seen = false;
+  OWL.split(h2);
+  root.querySelector('.full').addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  /* a soft two-note chime, synthesized, only when the bell is pressed */
+  var ac = null;
+  function note(t0, f, dur){ var o = ac.createOscillator(), g = ac.createGain(); o.type = 'sine'; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(.12, t0 + .02); g.gain.exponentialRampToValueAtTime(.001, t0 + dur); o.connect(g); g.connect(ac.destination); o.start(t0); o.stop(t0 + dur + .05); }
+  function chime(){ try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); var t = ac.currentTime + .02; note(t, 659.3, .9); note(t + .42, 523.3, 1.3); } catch (e){} }
+  function wake(){ awake = true; scr.classList.add('awake'); dev.classList.add('awake-dev'); if (!vid.src && OWL.media) vid.src = OWL.media.crew; if (!OWL.reduce && seen) OWL.play(vid);
+    say.textContent = 'That’s Owl’s crew. Ring us for real, and they’ll come to yours.';
+    call.classList.remove('nudge'); void call.offsetWidth; call.classList.add('nudge'); }
+  bell.addEventListener('click', function(){ chime(); bell.classList.remove('ringing'); void bell.offsetWidth; bell.classList.add('ringing'); setTimeout(wake, OWL.reduce ? 0 : 550); });
+  if (!('IntersectionObserver' in window)){ seen = true; OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ seen = e[0].isIntersecting; if (seen){ OWL.reveal(h2); if (awake && !OWL.reduce) OWL.play(vid); } else vid.pause(); }, {threshold:.3}); io.observe(scr);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="video" data-b="1">
 <section class="sec video2" id="crew-video-2" aria-labelledby="v2-h">
 <style>

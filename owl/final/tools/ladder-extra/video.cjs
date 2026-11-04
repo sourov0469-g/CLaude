@@ -119,5 +119,19 @@ module.exports = {
     await p.click(S + ' .owlbtn'); await p.waitForTimeout(400);
     rec('pressing the Owl opens the full film on YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
     rec('one next step: Get My Roof Checked goes to booking', await p.evaluate(S => document.querySelector(S + ' .bar a').getAttribute('href') === '#book', S));
+  },
+  '12': async (p, S, rec) => {
+    await p.waitForTimeout(1200);
+    rec('before ringing the screen dozes: a blurred still and "Press the doorbell", no film playing', await p.evaluate(S => { const sc = document.querySelector(S + ' .scr'), v = document.querySelector(S + ' video'); return !sc.classList.contains('awake') && v.paused && /blur/.test(getComputedStyle(v).filter) && /Press the doorbell/.test(sc.textContent); }, S));
+    rec('the screen never claims a live feed (no "Live", no clock)', await p.evaluate(S => !/\blive\b/i.test(document.querySelector(S + ' .scr').textContent) && !/\d{1,2}:\d{2}/.test(document.querySelector(S + ' .scr').textContent), S));
+    await p.click(S + ' .bell'); await p.waitForTimeout(250);
+    rec('pressing the bell rings: glow waves go out', await p.evaluate(S => document.querySelector(S + ' .bell').classList.contains('ringing'), S));
+    await p.waitForTimeout(1500);
+    rec('then the doorbell screen wakes and Owl’s crew film plays, labelled Front door', await p.evaluate(S => { const sc = document.querySelector(S + ' .scr'), v = document.querySelector(S + ' video'); return sc.classList.contains('awake') && v.dataset.media === 'crew' && !v.paused && getComputedStyle(v).filter === 'none' && /Front door/.test(document.querySelector(S + ' .chip').textContent); }, S));
+    rec('the page names who it is and offers the real call', await p.evaluate(S => /That’s Owl’s crew/.test(document.querySelector(S + ' .say').textContent) && document.querySelector(S + ' .call').getAttribute('href') === 'tel:+16519776027' && document.querySelector(S + ' .call').textContent.trim() === 'Call (651) 977-6027', S));
+    await p.focus(S + ' .bell'); await p.keyboard.press('Enter'); await p.waitForTimeout(120);
+    rec('the bell is a real named button (Enter rings it)', await p.evaluate(S => { const b = document.querySelector(S + ' .bell'); return b.tagName === 'BUTTON' && /Ring the doorbell/.test(b.getAttribute('aria-label')) && b.classList.contains('ringing'); }, S));
+    await p.click(S + ' .full'); await p.waitForTimeout(400);
+    rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
   }
 };
