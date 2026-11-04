@@ -5043,6 +5043,126 @@ OWL.reg('explore','12',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="explore" data-v="13">
+<section class="sec explore13" id="explore-13" aria-labelledby="ex13-h">
+<style>
+.explore13{overflow:hidden}
+.explore13 .g{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(22px,4vw,64px);align-items:center}
+.explore13 .lede{margin:12px 0 18px;max-width:36ch}
+.explore13 .said{min-height:84px;padding:16px 18px;border-radius:18px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 20px 34px -28px rgba(23,17,29,.5);font-size:17px;color:var(--ink-70)}
+.explore13 .said b{display:block;color:#17111D;font-size:18px;font-weight:900;margin-bottom:2px}
+.explore13 .said.swap{animation:ex13s .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes ex13s{0%{opacity:.2;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.explore13 .acts{display:flex;flex-direction:column;gap:12px;margin-top:16px;max-width:420px}
+.explore13 .acts .btn{width:100%;min-height:56px;font-size:17px}
+.explore13 .deckw{display:grid;justify-items:center;gap:18px}
+.explore13 .deck{position:relative;width:min(420px,88%);aspect-ratio:420/352;margin-bottom:18px;touch-action:pan-y}
+.explore13 .deck:focus-visible{outline:3px solid var(--ink);outline-offset:8px;border-radius:26px}
+.explore13 .cd{position:absolute;inset:0;border-radius:24px;background:#FFFDF7;box-shadow:0 2px 0 #fff inset,0 30px 46px -28px rgba(23,17,29,.55);overflow:hidden;transform-origin:50% 90%;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .35s;user-select:none;-webkit-user-select:none}
+.explore13 .cd svg{display:block;width:100%;height:auto}
+.explore13 .cd .t{padding:14px 18px 18px}
+.explore13 .cd .t b{display:block;font-size:clamp(20px,2.2vw,25px);font-weight:900;letter-spacing:-.02em;line-height:1.15;color:#17111D}
+.explore13 .cd .t span{font-size:15px;color:var(--ink-70)}
+.explore13 .cd[data-pos="0"]{z-index:3;cursor:grab}
+.explore13 .cd[data-pos="1"]{z-index:2;transform:translateY(14px) scale(.95) rotate(2deg)}
+.explore13 .cd[data-pos="2"]{z-index:1;transform:translateY(28px) scale(.9) rotate(-2deg)}
+.explore13 .cd[data-pos="x"]{opacity:0;pointer-events:none}
+.explore13 .cd.drag{transition:none;cursor:grabbing}
+.explore13 .stamp{position:absolute;top:18px;padding:6px 14px;border-radius:10px;border:3px solid;font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;opacity:0;pointer-events:none;background:rgba(255,253,247,.9)}
+.explore13 .stamp.y{left:18px;color:#8E5A12;border-color:#EAA221;transform:rotate(-12deg)}
+.explore13 .stamp.n{right:18px;color:#6B6570;border-color:#B9B2A6;transform:rotate(12deg)}
+.explore13 .dots{display:flex;gap:8px;margin-top:8px}
+.explore13 .dots i{width:10px;height:10px;border-radius:50%;background:#DCD3C1;transition:background .3s,transform .3s}
+.explore13 .dots i.on{background:#17111D;transform:scale(1.25)}
+.explore13 .dots i.yes{background:#EAA221}
+.explore13 .yn{display:flex;gap:12px;width:min(420px,88%);justify-content:center}
+.explore13 .yn .btn{flex:1 1 0;padding:0 14px}
+.explore13 .yn .yes{flex:1.7 1 0}
+.explore13 .cd:not([data-pos="0"]) .t{opacity:0}
+.explore13 .yn .btn{min-width:148px;min-height:58px;font-size:17px}
+.explore13 .sum{position:absolute;inset:0;display:none;align-content:center;justify-items:start;gap:10px;padding:26px;border-radius:24px;background:linear-gradient(160deg,#FFFDF7,#F3EAD6);box-shadow:0 30px 46px -28px rgba(23,17,29,.55)}
+.explore13 .done .sum{display:grid;animation:ex13s .45s cubic-bezier(.22,.61,.36,1)}
+.explore13 .sum b{font-size:clamp(24px,2.6vw,32px);font-weight:900;letter-spacing:-.02em;line-height:1.1}
+.explore13 .sum p{margin:0;font-size:17px;color:var(--ink-70)}
+.explore13 .again{min-height:46px;padding:0 6px;border:0;background:none;font-weight:800;font-size:16px;color:#17111D;text-decoration:underline;text-decoration-color:var(--amber);text-decoration-thickness:3px;text-underline-offset:5px;cursor:pointer}
+.explore13 .done .yn{display:none}
+@media (max-width:900px){.explore13 .g{grid-template-columns:minmax(0,1fr)}.explore13 .deckw{order:-1}.explore13 .acts{max-width:none}}
+@media (max-width:420px){.explore13 .yn .btn{min-width:0;font-size:16px}}
+@media (prefers-reduced-motion:reduce){.explore13 .cd,.explore13 .dots i{transition:none}.explore13 .said.swap,.explore13 .done .sum{animation:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Explore your roof</span>
+   <h2 class="h2" id="ex13-h" style="margin-top:12px">Does Your Roof Look Like This?</h2>
+   <p class="lede rv">Five pictures. Swipe right if it looks like yours, left if it doesn’t. We’ll take it from there.</p>
+   <div class="said" aria-live="polite"><b>No roof words needed.</b>Just tell us what you see.</div>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+  </div>
+  <div class="deckw">
+   <div class="deck" tabindex="0" role="group" aria-roledescription="card stack" aria-label="Roof pictures. Right arrow for yes, left arrow for no." data-owl="say:Swipe it">
+    <div class="sum" aria-live="polite"><b></b><p></p><button class="again" type="button">Start again</button></div>
+   </div>
+   <span class="dots" aria-hidden="true"></span>
+   <div class="yn"><button class="btn btn-line no" type="button">No</button><button class="btn btn-amber yes" type="button">Yes, that’s mine</button></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('explore','13',function(root){
+  /* one idea: recognise your roof in a picture; each yes gets "we fix that"; no score, no right answer */
+  var deck = root.querySelector('.deck'), deckw = root.querySelector('.deckw'), said = root.querySelector('.said'), sum = root.querySelector('.sum'), dots = root.querySelector('.dots'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var seed = 5; function rnd(){ seed = (seed*9301 + 49297) % 233280; return seed/233280; }
+  function shingles(extra, opts){ var o = opts || {}, s = '<rect width="420" height="260" fill="#2A2731"/>';
+    for (var row = 0, y = -6; y < 260; y += 26, row++){ for (var x = -20 + (row % 2)*26; x < 440; x += 52){ var k = rnd(); s += '<rect x="' + (x + 1) + '" y="' + y + '" width="50" height="26" rx="2" fill="' + (o.old ? (k > .5 ? '#7E776E' : '#86807A') : (k > .5 ? '#46414F' : '#4D4856')) + '"/>'; } s += '<path d="M0 ' + (y + 26) + 'H420" stroke="#1F1C24" stroke-width="2"/>'; }
+    return '<svg viewBox="0 0 420 260" aria-hidden="true">' + s + extra + '</svg>'; }
+  var C = [
+    {q:'Curling or cracked shingles?', s:'Edges lifting, corners turned up.', svc:'Roof repair or replacement', a:'We’ll repair them, or replace the roof if it’s time.', n:'curling shingles',
+     art: shingles('<g><path d="M58 128h52v4H58z" fill="#15121A" opacity=".6"/><path d="M58 128l52 0 2 -9 -48 -15z" fill="#B3ACA2" stroke="#5E5850" stroke-width="1.5"/><path d="M214 180h54v4h-54z" fill="#15121A" opacity=".6"/><path d="M214 180l54 0 2 -10 -50 -16z" fill="#B3ACA2" stroke="#5E5850" stroke-width="1.5"/><path d="M298 76h52v4h-52z" fill="#15121A" opacity=".6"/><path d="M298 76l52 0 2 -9 -48 -15z" fill="#B3ACA2" stroke="#5E5850" stroke-width="1.5"/></g><path d="M140 190l26 22 -6 14 20 10" stroke="#15121A" stroke-width="3" fill="none"/>', {old:1})},
+    {q:'Shingles gone after a windy night?', s:'Bare patches where they used to be.', svc:'Storm damage help', a:'We’ll put back what the wind took, and check the rest while we’re up there.', n:'missing shingles',
+     art: shingles('<rect x="126" y="98" width="104" height="26" fill="#1A171F"/><rect x="152" y="124" width="52" height="26" fill="#1A171F"/><rect x="290" y="176" width="52" height="26" fill="#1A171F"/><rect x="240" y="40" width="52" height="26" rx="2" fill="#4D4856" transform="rotate(-24 266 53)"/><path d="M330 30c30-10 60 0 80 14M318 54c30-8 56 0 76 12" stroke="#F1EFE6" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>')},
+    {q:'Dark streaks or moss?', s:'Stripes down the slope, green patches.', svc:'Wise Check', a:'Often it’s just looks. We’ll tell you honestly if it’s more than that.', n:'streaks or moss',
+     art: shingles('<g fill="#15121A" opacity=".5"><path d="M70 0h22l-6 260h-22z"/><path d="M190 0h30l-8 260h-28z"/><path d="M320 0h18l-4 260h-18z"/></g><g fill="#7C9A52"><ellipse cx="120" cy="140" rx="24" ry="9"/><ellipse cx="260" cy="88" rx="20" ry="8"/><ellipse cx="300" cy="200" rx="28" ry="10"/><ellipse cx="80" cy="220" rx="18" ry="7"/></g>', {old:1})},
+    {q:'A stain on the ceiling?', s:'A brown ring, maybe a drip.', svc:'Roof repair', a:'It’s often the roof. We’ll track the leak down and stop it.', n:'a ceiling stain',
+     art: '<svg viewBox="0 0 420 260" aria-hidden="true"><rect width="420" height="260" fill="#F4EEE2"/><path d="M0 186H420" stroke="#D9CFBC" stroke-width="3"/><rect y="186" width="420" height="74" fill="#E7DCC6"/><ellipse cx="210" cy="92" rx="96" ry="44" fill="#C9A473" opacity=".55"/><ellipse cx="204" cy="94" rx="64" ry="28" fill="#B08C58" opacity=".5"/><ellipse cx="198" cy="96" rx="34" ry="14" fill="#8E6A3A" opacity=".45"/><path d="M206 132c0 0-8 12-8 18a8 8 0 0 0 16 0c0-6-8-18-8-18z" fill="#6FA0C8"/><path d="M206 176c0 0-6 9-6 13a6 6 0 0 0 12 0c0-4-6-13-6-13z" fill="#6FA0C8" opacity=".7"/></svg>'},
+    {q:'Hail, or a branch came down?', s:'After a storm went through.', svc:'Storm damage help', a:'We’ll find the hail and wind damage and put it right.', n:'storm damage',
+     art: shingles('<g fill="#F1EFE6">' + (function(){ var d = ''; for (var i = 0; i < 26; i++) d += '<circle cx="' + (20 + rnd()*380).toFixed(0) + '" cy="' + (10 + rnd()*240).toFixed(0) + '" r="' + (3 + rnd()*3).toFixed(1) + '"/>'; return d; })() + '</g><g stroke="#6B4E2E" stroke-width="12" stroke-linecap="round" fill="none"><path d="M40 210L330 110"/><path d="M150 172l-20 -40M230 144l30 -36M280 128l-10 50"/></g><g fill="#6E9B4F"><ellipse cx="130" cy="126" rx="18" ry="10"/><ellipse cx="262" cy="104" rx="18" ry="10"/><ellipse cx="270" cy="182" rx="16" ry="9"/></g>')}];
+  var cards = C.map(function(c, i){ var d = document.createElement('div'); d.className = 'cd'; d.setAttribute('aria-hidden', i ? 'true' : 'false');
+    d.innerHTML = c.art + '<div class="t"><b>' + c.q + '</b><span>' + c.s + '</span></div><span class="stamp y" aria-hidden="true">Mine</span><span class="stamp n" aria-hidden="true">Nope</span>'; deck.insertBefore(d, sum); return d; });
+  var dd = C.map(function(){ var i = document.createElement('i'); dots.appendChild(i); return i; });
+  var idx = 0, yes = [];
+  function layout(){ cards.forEach(function(c, i){ var p = i - idx; c.dataset.pos = p < 0 ? 'x' : (p > 2 ? 2 : p); c.style.transform = ''; c.setAttribute('aria-hidden', p === 0 ? 'false' : 'true'); c.querySelectorAll('.stamp').forEach(function(s){ s.style.opacity = 0; }); });
+    dd.forEach(function(d, i){ d.classList.toggle('on', i === idx); }); }
+  function say(b, t){ said.innerHTML = '<b>' + b + '</b>' + t; said.classList.remove('swap'); void said.offsetWidth; said.classList.add('swap'); }
+  function finish(){ deckw.classList.add('done'); var sb = sum.querySelector('b'), sp = sum.querySelector('p');
+    if (yes.length){ sb.textContent = 'Let’s take a look.'; var ns = yes.map(function(i){ return C[i].n; }), list = ns.length > 1 ? ns.slice(0, -1).join(', ') + ' and ' + ns[ns.length - 1] : ns[0]; sp.textContent = 'You picked ' + list + '. We fix all of that. Book a check or call, and we’ll come and see.'; }
+    else { sb.textContent = 'Sounds healthy.'; sp.textContent = 'None of those look like yours. A Wise Check keeps it that way.'; }
+    say(yes.length ? 'We’ve got you.' : 'Good news.', yes.length ? ' The buttons below get us out to you.' : ' Book a Wise Check whenever you like.'); }
+  function decide(isYes){ if (idx >= C.length) return; var c = cards[idx], i = idx;
+    if (isYes){ yes.push(i); dd[i].classList.add('yes'); say(C[i].q.replace('?', '') + '?', ' ' + C[i].a + ' (' + C[i].svc + ')'); } else say('Not that one.', ' On to the next.');
+    if (!OWL.reduce){ c.classList.remove('drag'); c.style.transform = 'translateX(' + (isYes ? 140 : -140) + '%) rotate(' + (isYes ? 18 : -18) + 'deg)'; c.style.opacity = 0; }
+    idx++; setTimeout(function(){ c.style.opacity = ''; layout(); if (idx >= C.length) finish(); }, OWL.reduce ? 0 : 320); }
+  root.querySelector('.yes').addEventListener('click', function(){ decide(true); });
+  root.querySelector('.no').addEventListener('click', function(){ decide(false); });
+  deck.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); decide(true); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); decide(false); } });
+  root.querySelector('.again').addEventListener('click', function(){ idx = 0; yes = []; dd.forEach(function(d){ d.classList.remove('yes'); }); deckw.classList.remove('done'); layout(); say('No roof words needed.', 'Just tell us what you see.'); deck.focus(); });
+  /* swipe: drag the top card; past a third of its width it flies off */
+  var sx = 0, dx = 0, dragging = false;
+  deck.addEventListener('pointerdown', function(e){ var c = cards[idx]; if (!c || !c.contains(e.target)) return; dragging = true; sx = e.clientX; dx = 0; c.classList.add('drag'); try { deck.setPointerCapture(e.pointerId); } catch (er){} });
+  deck.addEventListener('pointermove', function(e){ if (!dragging) return; var c = cards[idx]; dx = e.clientX - sx; c.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx*.06).toFixed(2) + 'deg)';
+    c.querySelector('.stamp.y').style.opacity = Math.max(0, Math.min(1, dx/90)); c.querySelector('.stamp.n').style.opacity = Math.max(0, Math.min(1, -dx/90)); });
+  function up(){ if (!dragging) return; dragging = false; var c = cards[idx]; c.classList.remove('drag'); var w = deck.clientWidth;
+    if (Math.abs(dx) > w*.3) decide(dx > 0); else { c.style.transform = ''; c.querySelectorAll('.stamp').forEach(function(s){ s.style.opacity = 0; }); } }
+  deck.addEventListener('pointerup', up); deck.addEventListener('pointercancel', up);
+  layout();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(deck);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="explore" data-b="1">
 <section class="sec explore1" id="explore" aria-labelledby="ex1-h">
 <style>

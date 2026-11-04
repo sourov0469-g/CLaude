@@ -1,0 +1,145 @@
+[
+ {
+  "sec": "explore",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 13
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "explore"
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Does Your Roof Look Like This?"
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "five picture cards, the first on top: \"Curling or cracked shingles?\"",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "swiping right says \"that’s mine\": the card flies off, the answer names the fix and the real service",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "a short drag springs back without deciding",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "the No button moves on",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "arrow keys decide too; after the last card one honest summary lists what matched and says \"Let’s take a look.\"",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "all \"no\": \"Sounds healthy.\" with a Wise Check; no score anywhere",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "next steps: book and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "explore",
+  "v": "13",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

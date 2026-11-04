@@ -33,3 +33,4 @@
   - Touch and reduced motion were verified. home-verify 50/50, and the regressions pass.
   - Self-rating 8.92. Next, once accepted: Explore 12.
 - **Explore 12 · "How Old Is Your Roof?"** (slide the Owl to your roof's age: a drawn roof ages with it, and Owl says what it would do: repair, Wise Check or replace; no lifespan claims): gated, 8.70, checks 21/21. Explore now has 12; next is Explore 13.
+- **Explore 13 · "Does Your Roof Look Like This?"** (swipe five picture cards of everyday roof trouble: yes or no, each yes answered with the real service; an honest summary with no score): gated, 8.70, checks 22/22. Explore now has 13; next is Explore 14.

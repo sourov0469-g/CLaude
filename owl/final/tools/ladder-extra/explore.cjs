@@ -130,5 +130,25 @@ module.exports = {
     rec('"Not sure how old it is?" answers with a Wise Check', await p.evaluate(S => /Not sure\? Most people aren’t\./.test(document.querySelector(S + ' .ans h3').textContent) && document.querySelector(S + ' .ans small').textContent === 'Wise Check', S));
     rec('no lifespan claims and no construction words', await p.evaluate(S => !/last(s)? (about|up to)?\s*\d|lifespan|years? to|underlayment|decking|nail|ventilation|rafter|granule/i.test(document.querySelector(S).innerText), S));
     rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '13': async (p, S, rec) => {
+    await p.waitForTimeout(500);
+    const top = () => p.evaluate(S => { const c = document.querySelector(S + ' .cd[data-pos="0"]'); return c ? c.querySelector('.t b').textContent : ''; }, S);
+    rec('five picture cards, the first on top: "Curling or cracked shingles?"', await p.evaluate(S => document.querySelectorAll(S + ' .cd').length === 5, S) && await top() === 'Curling or cracked shingles?');
+    const box = await p.evaluate(S => { const r = document.querySelector(S + ' .cd[data-pos="0"]').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, S);
+    await p.mouse.move(box[0], box[1]); await p.mouse.down(); await p.mouse.move(box[0] + 220, box[1], { steps: 8 }); await p.mouse.up(); await p.waitForTimeout(600);
+    rec('swiping right says "that’s mine": the card flies off, the answer names the fix and the real service', await top() === 'Shingles gone after a windy night?' && await p.evaluate(S => /We’ll repair them, or replace the roof if it’s time\. \(Roof repair or replacement\)/.test(document.querySelector(S + ' .said').textContent) && document.querySelector(S + ' .dots i').classList.contains('yes'), S));
+    const b2 = await p.evaluate(S => { const r = document.querySelector(S + ' .cd[data-pos="0"]').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, S);
+    await p.mouse.move(b2[0], b2[1]); await p.mouse.down(); await p.mouse.move(b2[0] + 40, b2[1], { steps: 4 }); await p.mouse.up(); await p.waitForTimeout(600);
+    rec('a short drag springs back without deciding', await top() === 'Shingles gone after a windy night?');
+    await p.click(S + ' .no'); await p.waitForTimeout(450);
+    rec('the No button moves on', await top() === 'Dark streaks or moss?');
+    await p.focus(S + ' .deck'); await p.keyboard.press('ArrowLeft'); await p.waitForTimeout(450); await p.keyboard.press('ArrowRight'); await p.waitForTimeout(450); await p.click(S + ' .no'); await p.waitForTimeout(600);
+    rec('arrow keys decide too; after the last card one honest summary lists what matched and says "Let’s take a look."', await p.evaluate(S => { const w = document.querySelector(S + ' .deckw'); return w.classList.contains('done') && document.querySelector(S + ' .sum b').textContent === 'Let’s take a look.' && /curling shingles and a ceiling stain/.test(document.querySelector(S + ' .sum p').textContent); }, S));
+    await p.click(S + ' .again'); await p.waitForTimeout(400);
+    for (let i = 0; i < 5; i++) { await p.click(S + ' .no'); await p.waitForTimeout(380); }
+    rec('all "no": "Sounds healthy." with a Wise Check; no score anywhere', await p.evaluate(S => document.querySelector(S + ' .sum b').textContent === 'Sounds healthy.' && /Wise Check/.test(document.querySelector(S + ' .sum p').textContent) && !/\bscore|points?\b|\d+\s*\/\s*5|you (won|lost)/i.test(document.querySelector(S).innerText), S));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).innerText), S));
+    rec('next steps: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .acts .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };
