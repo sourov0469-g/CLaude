@@ -443,3 +443,26 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Where We Build.
+
+## New versions, pass 1 · Where We Build V2 "The map table" (2026-11-04)
+- **Muse accepted** Reviews V2.
+- **One new version:** `towns` V2.
+  - V1 (the van route) is untouched and stays the default.
+  - It is reachable from the header switch or `?towns=2`.
+- **Governing reference:** Bruno Simon (the annex scopes him to this one explorable-map section).
+- **Style family:** a tabletop diorama.
+- **Signature move:** the map table.
+  - The counties lie on a tilted table in perspective, with a receding survey grid and the 104 marks.
+  - Our office stands on it as a raised pin.
+  - A searched or tapped town gets a camera flight and a rising pin; its county lights.
+  - Controls: drag, zoom, "Whole map", and keys.
+- **The owner's law:** map and search kept; no name list; V1's honest answers word for word.
+- **QA tool:** `tools/locks.js` now also counts V2's marks by county (34/31/39); both versions pass at 104.
+- **Gate:** `GATE-NEW-Towns.md`, self-scored 8.3 (D8 U8 C9 Ct9), 0 vetoes.
+- **Evidence:** `qa/new/towns/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Tell Us (the last section of pass 1).

@@ -28,7 +28,9 @@ function grab() {
   const tel = [...document.querySelectorAll('a[href^="tel:"]')].map(a => a.getAttribute('href'));
   const mail = [...document.querySelectorAll('a[href^="mailto:"]')].map(a => a.getAttribute('href').split('?')[0]);
   const ba = [...new Set([...document.querySelectorAll('img[data-img^="ba-"]')].map(i => i.dataset.img.replace(/-(before|after)$/, '')))];
-  const towns = { tw: document.querySelectorAll('.tw__t').length, ca: document.querySelectorAll('.ca__set:first-child .ca__t').length };
+  // Towns V1 lists names; Towns V2 (the map table) places every municipality as a named survey mark with its county
+  const mk = [...document.querySelectorAll('.tb__svg .mk')], byC = {}; mk.forEach(m => { byC[m.dataset.c] = (byC[m.dataset.c] || 0) + 1; });
+  const towns = { tw: document.querySelectorAll('.tw__t').length || (byC['Miami-Dade'] === 34 && byC['Broward'] === 31 && byC['Palm Beach'] === 39 ? mk.length : -mk.length), ca: document.querySelectorAll('.ca__set:first-child .ca__t').length };
   return { runs, tel, mail, ba, towns };
 }
 
