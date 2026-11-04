@@ -1,0 +1,41 @@
+<section class="rs arrive" id="top" data-sky="dawn" data-over aria-label="Owl Roofing">
+<style>
+.arrive{height:190vh}
+.arrive .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep)}
+.arrive video,.arrive .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arrive .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 46%,rgba(0,0,0,.62) 100%)}
+.arrive .beat{position:absolute;left:clamp(18px,4vw,64px);right:clamp(18px,4vw,64px);bottom:clamp(96px,13vh,150px);color:#fff;transition:opacity .6s,translate .8s cubic-bezier(.16,1,.3,1)}
+.arrive .beat h1,.arrive .beat p.big{margin:0;font-size:clamp(46px,8.4vw,132px);font-weight:900;line-height:.94;letter-spacing:-.045em;text-wrap:balance;max-width:13ch}
+.arrive .beat .sub{margin:18px 0 0;font-size:clamp(16px,1.4vw,20px);font-weight:600;color:rgba(255,255,255,.86);max-width:44ch}
+.arrive .b2{opacity:0;translate:0 40px;pointer-events:none}
+.arrive.two .b1{opacity:0;translate:0 -40px;pointer-events:none}
+.arrive.two .b2{opacity:1;translate:none;pointer-events:auto}
+.arrive .b2 .facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.arrive .b2 .facts span{padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-size:15px;font-weight:700;color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.arrive .cue{position:absolute;left:50%;bottom:22px;translate:-50% 0;display:inline-flex;flex-direction:column;align-items:center;gap:6px;min-height:44px;color:#fff;font-size:14px;font-weight:800;text-decoration:none;letter-spacing:.02em}
+.arrive .cue i{width:2px;height:28px;background:linear-gradient(#fff,rgba(255,255,255,0));animation:ar1 1.8s ease-in-out infinite}
+@keyframes ar1{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
+.arrive .tag{position:absolute;right:clamp(18px,4vw,64px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.35);color:#fff;font-size:12px;font-weight:700}
+@media (max-width:640px){.arrive .beat{bottom:120px}.arrive .cue{display:none}.arrive .tag{top:76px}}
+@media (prefers-reduced-motion:reduce){.arrive .beat{transition:none}.arrive .cue i{animation:none}}
+</style>
+<div class="stage">
+ <img class="poster" src="{{A:crew-poster.webp}}" alt="">
+ <video muted loop playsinline preload="auto" aria-label="Owl's crew at work on a roof"></video>
+ <div class="shade"></div>
+ <span class="tag">Owl’s crew at work</span>
+ <div class="beat b1"><h1>Roof trouble? We’ll take it from here.</h1><p class="sub">Owl Roofing. Family-owned roofers in Shoreview, MN.</p></div>
+ <div class="beat b2" aria-hidden="true"><p class="big">You call. We climb. You relax.</p><div class="facts"><span>5.0 · 90+ reviews</span><span>GAF Systems Plus</span><span>10-year workmanship warranty</span></div></div>
+ <a class="cue" href="#finder">What’s going on up there?<i aria-hidden="true"></i></a>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), v = sec.querySelector('video'), b2 = sec.querySelector('.b2');
+  if (!OWL.reduce){ v.src = window.RESET_MEDIA.crew; v.addEventListener('playing', function(){ sec.querySelector('.poster').style.opacity = 0; }); OWL.play(v); }
+  var two = false;
+  function read(){ var r = sec.getBoundingClientRect(), p = -r.top / Math.max(1, r.height - innerHeight), t = p > .38;
+    if (t !== two){ two = t; sec.classList.toggle('two', t); b2.setAttribute('aria-hidden', t ? 'false' : 'true'); } }
+  addEventListener('scroll', read, { passive: true }); read();
+})();
+</script>
+</section>

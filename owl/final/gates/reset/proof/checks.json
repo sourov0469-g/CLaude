@@ -1,0 +1,122 @@
+{
+ "section": "finder",
+ "total": 23,
+ "passed": 23,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the first act is a choice: \"What’s going on up there?\" with six photo pills (a radiogroup); no scene, no dock yet",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "choosing pulls the gate up with a curved edge (curtain mid-reveal: an ellipse clip-path animating)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "behind it: the full scene for YOUR case (Roof Repair, \"A leak? We’ll find it and stop it.\", Owl’s crew photo) and a tailored call",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the choice docks into the top bar (page-wide chooser), with the same case checked",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the case is shared with the rest of the page (stored + owl:case event)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "keyboard: ArrowRight in the dock switches the case (A ceiling stain) and the scene follows",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "switching to \"After a storm\" names Storm Damage Help and labels the photo illustrative",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "every answer names a real Owl service from the site’s own list; no prices, timings or invented claims",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the choice swaps at once (no curtain animation), scene ready",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

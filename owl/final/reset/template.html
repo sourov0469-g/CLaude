@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-pal="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owl Roofing · Shoreview, MN · We Give a Hoot</title>
+<meta name="description" content="Family-owned roofers in Shoreview, MN, founded in 2025 by Tim Brown and Noah Bergland. GAF Systems Plus Certified. 5.0 · 90+ reviews. Call (651) 977-6027.">
+<link rel="icon" href="{{A:logo.svg}}">
+<script>(function(){var p=new URLSearchParams(location.search).get('palette');if(/^(night|control|safety|slate)$/.test(p||''))document.documentElement.dataset.pal=p;})();</script>
+<style>
+@font-face{font-family:Inter;font-weight:100 700;font-style:normal;font-display:swap;src:url({{A:inter-var.woff2}}) format('woff2')}
+@font-face{font-family:Inter;font-weight:800 900;font-style:normal;font-display:swap;src:url({{A:Inter-800.woff2}}) format('woff2')}
+{{CSS:src/base.css}}
+{{CSS:reset/reset.css}}
+</style>
+<script>
+{{JS:src/base.js}}
+window.RESET = window.RESET || {};
+window.RESET_MEDIA = { crew: '{{A:crew.mp4}}', poster: '{{A:crew-poster.webp}}' };
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sky" aria-hidden="true"></div>
+<header class="rbar"><a class="rlogo" href="#top" aria-label="Owl Roofing, back to the top">{{LOGO}}</a>
+ <button class="pal" type="button" aria-label="Trial colour palette: Night Owl. Press to try the next one."><span class="pal-sw" aria-hidden="true"><i></i><i></i><i></i></span><span class="pal-n">Night Owl</span><small>trial palette</small></button></header>
+<main id="main">
+{{SECTIONS}}
+</main>
+<a class="btn btn-amber callpill" href="tel:+16519776027" data-owl="hoot">Call (651) 977-6027</a>
+<img class="flyer" src="{{A:owl-wing.webp}}" alt="" aria-hidden="true" width="360" height="215">
+<script>
+{{JS:reset/reset.js}}
+</script>
+</body>
+</html>

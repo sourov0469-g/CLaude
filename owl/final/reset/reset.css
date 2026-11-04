@@ -1,0 +1,62 @@
+/* ===== Owl reset: the world (tokens, sky, bar, call pill, travelling owl). Every colour comes from a palette token. ===== */
+:root,[data-pal="night"]{
+ --ink:#0F1B2D;--ink-70:rgba(15,27,45,.74);--ink-50:rgba(15,27,45,.6);--line:rgba(15,27,45,.12);
+ --acc:#F5B83D;--acc-hi:#FFCB61;--acc-lo:#D99A1E;--acc-text:#855A0A;--acc-wash:#FCE8BC;
+ --ground:#F7F5F0;--surface:#FFFFFF;--deep:#0F1B2D;--deep-2:#1B2C47;--on-deep:#F7F5F0;--on-deep-70:rgba(247,245,240,.76);
+ --sky-a:#F6EEE1;--sky-b:#E3ECF5;--sky-c:#CFDDEC;--sky-d:#1B2C47;--sky-e:#F3DDBE;
+ --logo-ink:var(--ink);--logo-acc:var(--acc);--pal-name:"Night Owl";
+}
+[data-pal="control"]{
+ --ink:#17111D;--ink-70:rgba(23,17,29,.72);--ink-50:rgba(23,17,29,.62);--line:rgba(23,17,29,.12);
+ --acc:#EAA221;--acc-hi:#F1B23E;--acc-lo:#C7871A;--acc-text:#8E5A12;--acc-wash:#FBE3AE;
+ --ground:#F1EFE6;--surface:#F8F6F0;--deep:#17111D;--deep-2:#2A2131;--on-deep:#F1EFE6;--on-deep-70:rgba(241,239,230,.76);
+ --sky-a:#F3EEE2;--sky-b:#F1EFE6;--sky-c:#EAE4D6;--sky-d:#2A2131;--sky-e:#F4DFB8;
+}
+[data-pal="safety"]{
+ --ink:#1E2124;--ink-70:rgba(30,33,36,.74);--ink-50:rgba(30,33,36,.6);--line:rgba(30,33,36,.12);
+ --acc:#FF6A13;--acc-hi:#FF8640;--acc-lo:#D9530A;--acc-text:#B4440A;--acc-wash:#FFE1CF;
+ --ground:#FAFAF7;--surface:#FFFFFF;--deep:#1E2124;--deep-2:#30353A;--on-deep:#FAFAF7;--on-deep-70:rgba(250,250,247,.76);
+ --sky-a:#F7F4EF;--sky-b:#EEF0F2;--sky-c:#E2E5E8;--sky-d:#30353A;--sky-e:#FBE2D2;
+}
+[data-pal="slate"]{
+ --ink:#283440;--ink-70:rgba(40,52,64,.76);--ink-50:rgba(40,52,64,.62);--line:rgba(40,52,64,.13);
+ --acc:#C79A3B;--acc-hi:#D6AC52;--acc-lo:#A9802A;--acc-text:#7C5C1C;--acc-wash:#F0E2C2;
+ --ground:#EEEEEA;--surface:#F8F8F5;--deep:#283440;--deep-2:#384756;--on-deep:#F3F3EF;--on-deep-70:rgba(243,243,239,.76);
+ --sky-a:#F1EFEA;--sky-b:#E6EAEC;--sky-c:#D9DFE3;--sky-d:#384756;--sky-e:#EFE3CC;
+}
+/* the button system (GATE-BUTTONS) keeps its behaviour; only its colours follow the palette */
+:root{--amber:var(--acc);--amber-edge:var(--acc-lo);--cream:var(--ground);--paper:var(--surface)}
+html,body{background:var(--ground);color:var(--ink)}
+.btn-amber{background:linear-gradient(180deg,var(--acc-hi) 0%,var(--acc) 55%,var(--acc-lo) 100%);color:var(--ink);box-shadow:0 var(--lift) 0 var(--acc-lo),0 calc(var(--lift) + 12px) 24px -10px color-mix(in srgb,var(--acc-lo) 70%,transparent),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-line{background:linear-gradient(to right,var(--acc-wash) 0 50%,var(--surface) 50% 100%) 100% 0/200.5% 100% no-repeat;border-color:var(--acc)}
+.btn-deep{background:var(--deep);color:var(--on-deep);box-shadow:0 var(--lift) 0 #000,0 calc(var(--lift) + 12px) 24px -12px rgba(0,0,0,.5)}
+
+/* scroll sky: one fixed layer whose colour stops follow scroll progress (reset.js writes --p) */
+.sky{position:fixed;inset:0;z-index:-1;background:var(--sky-d);pointer-events:none}
+.sky::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-a),var(--sky-b));opacity:calc(1 - var(--dusk,0));transition:opacity .2s linear}
+.sky::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sky-c),var(--sky-e));opacity:var(--eve,0)}
+
+/* the bar: logo + the palette switch; light over film, ink on the page */
+.rbar{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px clamp(16px,3vw,36px);transition:background .35s,box-shadow .35s,color .35s;color:var(--ink)}
+.rbar.over{color:var(--on-deep)}
+.rbar.solid{background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.rlogo{display:inline-flex;min-height:44px;align-items:center}
+.rlogo .logo{width:118px;height:auto}
+.rbar.over .rlogo .logo{--logo-ink:var(--on-deep)}
+.pal{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px 6px 8px;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;font-size:14px;font-weight:800;cursor:pointer;opacity:.86}
+.pal small{font-size:11px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:.06em}
+.pal-sw{display:inline-flex}.pal-sw i{width:14px;height:14px;border-radius:50%;margin-right:-4px;box-shadow:0 0 0 2px var(--ground)}
+.pal-sw i:nth-child(1){background:var(--deep)}.pal-sw i:nth-child(2){background:var(--acc)}.pal-sw i:nth-child(3){background:var(--ground)}
+
+/* the one persistent call */
+.callpill{position:fixed;right:clamp(14px,2.4vw,32px);bottom:clamp(14px,2.4vw,28px);z-index:45;min-height:54px;padding:0 22px;font-size:17px;transition:transform .35s var(--ease),opacity .3s}
+.callpill.away{opacity:0;pointer-events:none;transform:translateY(16px)}
+
+/* the travelling owl (real photo cut-out): position follows scroll, a little lag */
+.flyer{position:fixed;left:0;top:0;z-index:30;width:clamp(84px,9vw,140px);height:auto;pointer-events:none;filter:drop-shadow(0 12px 14px rgba(0,0,0,.25));opacity:0;transition:opacity .5s;will-change:transform}
+.flyer.on{opacity:1}
+
+.rs{position:relative}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:99;padding:8px 12px;background:var(--surface)}
+@media (max-width:640px){.rlogo .logo{width:96px}.pal small{display:none}.callpill{left:14px;right:14px;justify-content:center}.flyer{display:none}}
+@media (prefers-reduced-motion:reduce){.sky::before,.callpill,.flyer{transition:none}}
