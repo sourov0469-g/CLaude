@@ -1,0 +1,48 @@
+<section class="sec services9" id="services-9" aria-labelledby="sv9-h">
+<style>
+.services9 .hd{margin-bottom:clamp(18px,2.6vw,30px)}
+.services9 .lede{margin-top:12px;max-width:46ch}
+.services9 .stk{margin:0;padding:0;list-style:none}
+.services9 .slot{position:sticky;top:calc(clamp(80px,11vh,110px) + var(--i)*18px);height:clamp(400px,58vh,540px);margin-bottom:38vh}
+.services9 .slot:last-child{margin-bottom:0}
+.services9 .crd{position:relative;height:100%;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);border-radius:28px;overflow:hidden;background:var(--bg);color:var(--fg);box-shadow:0 -2px 0 rgba(255,255,255,.4) inset,0 30px 60px -30px rgba(23,17,29,.55);transform-origin:center top;transform:scale(var(--s,1));filter:brightness(var(--b,1))}
+.services9 .ph{position:relative;overflow:hidden}
+.services9 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(var(--z,1.08));transition:transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.services9 .tx{display:flex;flex-direction:column;justify-content:center;gap:10px;padding:clamp(20px,3.4vw,48px)}
+.services9 .num{font-size:clamp(56px,7vw,110px);font-weight:900;letter-spacing:-.05em;line-height:.85;color:transparent;-webkit-text-stroke:2px var(--ac)}
+.services9 .tx h3{margin:0;font-size:clamp(28px,3.2vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1}
+.services9 .tx p{margin:0;font-size:18px;opacity:1;max-width:38ch;color:var(--mt)}
+.services9 .tx ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-weight:600;font-size:15px}
+.services9 .tx li{position:relative;padding-left:22px}
+.services9 .tx li::before{content:"";position:absolute;left:0;top:7px;width:11px;height:6px;border-left:3px solid var(--ac);border-bottom:3px solid var(--ac);transform:rotate(-45deg)}
+.services9 .end{display:flex;justify-content:center;margin-top:clamp(24px,4vw,48px)}
+@media (max-width:760px){.services9 .crd{grid-template-columns:minmax(0,1fr);grid-template-rows:38% 1fr}.services9 .slot{height:clamp(520px,78vh,640px);top:calc(70px + var(--i)*12px);margin-bottom:24vh}.services9 .tx{gap:6px;padding:18px}.services9 .tx p{font-size:16px}.services9 .tx ul{font-size:14px}}
+@media (prefers-reduced-motion:reduce){.services9 .slot{position:relative;top:0;height:auto;margin-bottom:24px}.services9 .crd{transform:none;filter:none}.services9 .ph img{transition:none;transform:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Services</span><h2 class="h2" id="sv9-h" style="margin-top:12px">The Stack</h2>
+  <p class="lede rv">Five services, one on top of the next. Keep scrolling and they stack up.</p></div>
+ <ol class="stk" aria-label="Owl Roofing services"></ol>
+ <div class="end"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+</div>
+<script>
+OWL.reg('services','9',function(root){
+  var S = OWL.SVC, list = root.querySelector('.stk'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var ALT = {replace:'An Owl crew member carrying a sheet of roof decking', repair:'An Owl crew member with a bundle of shingles', storm:'A tree fallen across a damaged roof', check:'An Owl crew member walking a shingle roof', siding:'A house with new lap siding and two garage doors'};
+  var TH = [['#FBFAF6', '#17111D', '#EAA221', '#5A5560'], ['#17111D', '#F1EFE6', '#EAA221', '#D8D2C6'], ['#EAA221', '#17111D', '#17111D', '#3A2A10'], ['#F1EFE6', '#17111D', '#C7871A', '#5A5560'], ['#2A2131', '#F1EFE6', '#F6C25F', '#D8D2C6']];
+  var cards = S.map(function(s, i){ var t = TH[i], li = document.createElement('li'); li.className = 'slot'; li.style.setProperty('--i', i);
+    li.innerHTML = '<article class="crd" style="--i:' + i + ';--bg:' + t[0] + ';--fg:' + t[1] + ';--ac:' + t[2] + ';--mt:' + t[3] + '"><div class="ph"><img alt="' + (ALT[s.k] || s.n) + '" loading="lazy" decoding="async"></div><div class="tx"><span class="num" aria-hidden="true">0' + (i + 1) + '</span><h3>' + s.n + '</h3><p>' + s.d + '</p><ul>' + s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul></div></article>';
+    li.querySelector('img').src = (OWL.media && OWL.media[s.img]) || ''; list.appendChild(li); return li.querySelector('.crd'); });
+  if (OWL.reduce){ OWL.reveal(h2); return; }
+  /* each card settles back (smaller, a touch darker) as the next one slides over it */
+  var rq = 0;
+  function paint(){ rq = 0; cards.forEach(function(c, i){ var nx = cards[i + 1], p = 0;
+      if (nx){ var a = c.getBoundingClientRect(), b = nx.getBoundingClientRect(); p = Math.max(0, Math.min(1, (a.bottom - b.top)/a.height)); }
+      c.style.setProperty('--s', (1 - p*.06).toFixed(4)); c.style.setProperty('--b', (1 - p*.18).toFixed(3));
+      var r = c.getBoundingClientRect(); c.style.setProperty('--z', r.top < innerHeight*.8 ? 1 : 1.08); }); }
+  addEventListener('scroll', function(){ if (!rq) rq = requestAnimationFrame(paint); }, {passive: true}); addEventListener('resize', paint); paint();
+  if ('IntersectionObserver' in window){ var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.1}); io.observe(list); } else OWL.reveal(h2);
+});
+</script>
+</section>

@@ -724,3 +724,23 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 **Defects found and fixed in the round:**
 - Protect 8's amber underline sat behind the board and could not be seen; the label is now isolated so it shows.
 - Protect 9's early evidence caught the flaps mid-fold; the evidence is now taken after the unfold settles (viewport shots, because the full-page capture replays transitions).
+
+## L25 · Services 8 + 9 · checks 35/35 · evidence `gates/ladder/L25-services-8-9/` · Services now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Services 8 · Name Your Job** | Immersive Garden (the surface reacts where the cursor moves) | An editorial list: the five service names set very large between ink rules, numbered 01–05. Pointing at a row floats that service's own photo beside the cursor, eased and leaning with its speed; the photo steps aside over open details. Each row is a disclosure (aria-expanded, inert when closed) that slides open Owl's line and what's included; the plus key turns to a close. On touch and phones the photo shows inside the open row instead. | 8.4 | 8.4 | 8.4 | 8.6 | **8.42** |
+| **Services 9 · The Stack** | Lando Norris (bespoke, rest-motion) | Five full-width cards that pin one after another as you scroll, each sliding up over the last while the ones beneath settle back (smaller, a touch dimmer) into a neat stack 18 px apart. Each card has Owl's photo (which settles in as it arrives), an outlined numeral, the name, the line and what's included, on five palettes drawn from ink, amber and cream. Reduced motion shows a plain list. | 8.6 | 8.2 | 8.2 | 8.6 | **8.42** |
+
+**Truth:** every name, line, included item and photo comes from `OWL.SVC`, with the same truthful alts as earlier versions.
+
+**Checks run:** the generic gate, plus:
+- Services 8: five rows in Owl's words with the first open; closed details inert; pointing floats the right photo; opening a row closes the others and lists what's included; it closes again.
+- Services 9: five cards with Owl's photos and words; at 70% scroll the cards are pinned and stacked 18 px apart; covered cards are smaller and dimmer; scrolling back restores the top card.
+
+**Ledger:**
+- **Services 8:** eased pointer photo reveal ⟦S1324⟧; disclosure a11y ⟦S0910⟧; type as the layout ⟦S0451⟧; keys ⟦S1388⟧.
+- **Services 9:** sticky stack ⟦S0448⟧; scroll progress ⟦S1325⟧; title ⟦S0451⟧; CTA ⟦S1388⟧.
+
+**Defects found and fixed in the round:**
+- Services 9 at first didn't stack: each card was sticky inside its own list item, so it had nowhere to stick. The items themselves are now the sticky cards in one container.
+- Services 8's floating photo could cover the open details; it now steps aside over them.

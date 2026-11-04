@@ -1,0 +1,71 @@
+<section class="sec services8" id="services-8" aria-labelledby="sv8-h">
+<style>
+.services8{overflow:hidden}
+.services8 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.services8 .lede{margin-top:12px;max-width:44ch}
+.services8 .rows{position:relative;margin:0;padding:0;list-style:none;border-top:2px solid #17111D}
+.services8 .rows > li{border-bottom:2px solid #17111D}
+.services8 .rw{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(12px,2vw,28px);align-items:center;width:100%;min-height:64px;padding:clamp(12px,1.6vw,20px) 4px;text-align:left;background:transparent;color:#17111D}
+.services8 .rw .n{font-size:14px;font-weight:800;letter-spacing:.12em;color:#8E5A12;font-variant-numeric:tabular-nums}
+.services8 .rw .nm{font-size:clamp(34px,6.4vw,92px);font-weight:900;letter-spacing:-.045em;line-height:.95;transition:transform .45s cubic-bezier(.22,.61,.36,1),color .3s}
+.services8 .rw .ar{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 4px 0 #C9C0AC;transition:transform .35s cubic-bezier(.3,1.4,.5,1),background .2s}
+.services8 .rw .ar svg{width:22px;height:22px}
+.services8 .rw:hover .nm{transform:translateX(14px)}
+.services8 .rw[aria-expanded="true"] .ar{transform:rotate(45deg);background:linear-gradient(180deg,#F6C25F,#EAA221);box-shadow:0 4px 0 var(--amber-edge)}
+.services8 .rw:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.services8 .det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.22,.61,.36,1)}
+.services8 .det > div{overflow:hidden}
+.services8 .open .det{grid-template-rows:1fr}
+.services8 .dg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(14px,3vw,40px);padding:0 4px 22px clamp(40px,5vw,72px)}
+.services8 .dg p{margin:0;font-size:18px;color:var(--ink-70);max-width:40ch}
+.services8 .dg ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-weight:600;font-size:16px}
+.services8 .dg li{position:relative;padding-left:24px}
+.services8 .dg li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:7px;border-left:3px solid var(--amber);border-bottom:3px solid var(--amber);transform:rotate(-45deg)}
+.services8 .dg .ph{display:none;grid-column:1/-1;border-radius:16px;overflow:hidden;aspect-ratio:16/9}
+.services8 .dg .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.services8 .flo{position:absolute;left:0;top:0;width:clamp(220px,24vw,340px);aspect-ratio:4/3;border-radius:18px;overflow:hidden;pointer-events:none;opacity:0;transform:translate(var(--fx,0),var(--fy,0)) rotate(var(--fr,0deg)) scale(var(--fs,.6));transition:opacity .3s;box-shadow:0 30px 50px -24px rgba(23,17,29,.6);z-index:4}
+.services8 .flo.on{opacity:1}
+.services8 .flo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
+.services8 .flo img.on{opacity:1}
+@media (hover:none),(max-width:760px){.services8 .flo{display:none}.services8 .dg .ph{display:block}}
+@media (max-width:760px){.services8 .dg{grid-template-columns:minmax(0,1fr);padding-left:4px}.services8 .rw .ar{width:46px;height:46px}}
+@media (prefers-reduced-motion:reduce){.services8 .det,.services8 .rw .nm,.services8 .rw .ar,.services8 .flo{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Services</span><h2 class="h2" id="sv8-h" style="margin-top:12px">Name Your Job</h2>
+  <p class="lede rv">Five things we do, named plainly. Point at one to see it; open it for what’s included.</p></div>
+  <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a></div>
+ <div style="position:relative" data-owl="say:Point at one">
+  <ol class="rows" aria-label="Owl Roofing services"></ol>
+  <div class="flo" aria-hidden="true"></div>
+ </div>
+</div>
+<script>
+OWL.reg('services','8',function(root){
+  var S = OWL.SVC, list = root.querySelector('.rows'), flo = root.querySelector('.flo'), box = list.parentNode, h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var ALT = {replace:'An Owl crew member carrying a sheet of roof decking', repair:'An Owl crew member with a bundle of shingles', storm:'A tree fallen across a damaged roof', check:'An Owl crew member walking a shingle roof', siding:'A house with new lap siding and two garage doors'};
+  var fimgs = [], rows = S.map(function(s, i){ var li = document.createElement('li'), src = (OWL.media && OWL.media[s.img]) || '';
+    li.innerHTML = '<button class="rw" type="button" aria-expanded="false" aria-controls="sv8-d' + i + '"><span class="n">0' + (i + 1) + '</span><span class="nm">' + s.n + '</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#17111D" stroke-width="3" stroke-linecap="round"/></svg></span></button>'
+      + '<div class="det" id="sv8-d' + i + '"><div><div class="dg"><p>' + s.d + '</p><ul>' + s.inc.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul><div class="ph"><img alt="' + (ALT[s.k] || s.n) + '" loading="lazy" src="' + src + '"></div></div></div></div>';
+    var fi = new Image(); fi.src = src; fi.alt = ''; flo.appendChild(fi); fimgs.push(fi);
+    var b = li.querySelector('.rw'); b.addEventListener('click', function(){ open(b.getAttribute('aria-expanded') === 'true' ? -1 : i); });
+    b.addEventListener('pointerenter', function(){ show(i); });
+    /* over the open details the photo steps aside, so it never covers the words */
+    li.querySelector('.det').addEventListener('pointerenter', function(){ hov = -1; flo.classList.remove('on'); }); list.appendChild(li); return li; });
+  function open(n){ rows.forEach(function(r, j){ var on = j === n; r.classList.toggle('open', on); r.querySelector('.rw').setAttribute('aria-expanded', on); var d = r.querySelector('.det'); if (on) d.removeAttribute('inert'); else d.setAttribute('inert', ''); }); }
+  /* the floating photo eases after the pointer and leans with its speed */
+  var tx = 0, ty = 0, x = 0, y = 0, vx = 0, raf = 0, last = 0, hov = -1;
+  function show(i){ if (i === hov) return; hov = i; fimgs.forEach(function(f, j){ f.classList.toggle('on', j === i); }); flo.classList.add('on'); }
+  function step(t){ var dt = last ? Math.min(50, t - last)/16.7 : 1; last = t; var k = 1 - Math.pow(.86, dt), nx = x + (tx - x)*k; vx = nx - x; x = nx; y += (ty - y)*k;
+    flo.style.setProperty('--fx', x.toFixed(1) + 'px'); flo.style.setProperty('--fy', y.toFixed(1) + 'px'); flo.style.setProperty('--fr', Math.max(-10, Math.min(10, vx*.8)).toFixed(2) + 'deg'); flo.style.setProperty('--fs', flo.classList.contains('on') ? 1 : .6);
+    if (Math.abs(tx - x) > .3 || Math.abs(ty - y) > .3) raf = requestAnimationFrame(step); else { raf = 0; last = 0; } }
+  box.addEventListener('pointermove', function(e){ if (e.pointerType !== 'mouse' || OWL.reduce) return; var r = box.getBoundingClientRect(); tx = e.clientX - r.left + 28; ty = e.clientY - r.top - flo.offsetHeight/2; if (!raf) raf = requestAnimationFrame(step); });
+  box.addEventListener('pointerleave', function(){ hov = -1; flo.classList.remove('on'); flo.style.setProperty('--fs', .6); });
+  rows.forEach(function(r){ r.querySelector('.det').setAttribute('inert', ''); });
+  open(0);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(list);
+});
+</script>
+</section>

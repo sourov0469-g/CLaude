@@ -1,0 +1,233 @@
+[
+ {
+  "sec": "services",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "services"
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Name Your Job"
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "five rows, Owl’s names and words; the first is open",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "closed rows keep their details out of reach (inert)",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "pointing at a row floats that service’s own photo beside the cursor",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "opening a row closes the others and shows what is included",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "the same row closes again",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "services"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "The Stack"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "five cards with Owl’s own photos and words",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "cards pin and stack: earlier cards sit stacked at the top",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "covered cards settle back (smaller, dimmer)",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "scrolling back restores the top card",
+  "ok": true
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "services",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

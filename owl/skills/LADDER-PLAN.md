@@ -340,3 +340,15 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   inside panels: the wrap · three cleanup passes · the aftercare box, each with a drawn plate and Owl's words.
   "Fold It" / "Open It" keys; on phones the panels simply stack. Skills: ⟦S0409⟧ fold transition, ⟦S0407⟧ plate
   draw, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+
+## L25 · Services 8 + 9 (Services stands at 7: board, chapters, one line, point at roof, up close, what do you see, a roof's life)
+- **Services 8 · "Name Your Job"** — reference **Immersive Garden** (the surface reacts where the cursor moves). An
+  editorial list: the five service names set very large, one per row, with a hairline between rows. Moving across a
+  row floats Owl's own photo for that service beside the cursor (eased, tilting with speed), and the row's line and
+  what's included slide open beneath it. Touch and keyboard: rows are disclosure buttons; one open at a time.
+  Skills: ⟦S1324⟧ eased pointer reveal, ⟦S0910⟧ disclosure a11y, ⟦S0451⟧ type, ⟦S1388⟧ keys.
+- **Services 9 · "The Stack"** — reference **Lando Norris** (bespoke, rest-motion). Five full-width service cards that
+  pin one after another as you scroll, each new card sliding up over the last while the ones beneath settle back
+  (scale and dim) into a neat stack; each card has Owl's photo, a big numeral, the name, the line and what's
+  included. Reduced motion: a plain list of cards. Skills: ⟦S0448⟧ sticky stack, ⟦S1325⟧ scroll progress,
+  ⟦S0451⟧ title, ⟦S1388⟧ keys.

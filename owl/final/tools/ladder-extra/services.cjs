@@ -38,5 +38,25 @@ module.exports = {
     await go(1); await p.waitForTimeout(1800);
     rec('the end: all five lit, the badge shows new siding', await p.evaluate(S => document.querySelectorAll(S + ' .stop.on').length === 5 && document.querySelector(S + ' .badge').dataset.s === '4', S));
     rec('each photo is Owl\'s service photo with a truthful alt', await p.evaluate(S => [...document.querySelectorAll(S + ' .ph img')].every(i => i.src.startsWith('data:image') && i.alt.length > 8), S));
+  },
+  '8': async (p, S, rec) => {
+    rec('five rows, Owl’s names and words; the first is open', await p.evaluate(S => { const r = [...document.querySelectorAll(S + ' .rw')]; return r.length === 5 && r.every((b, i) => b.querySelector('.nm').textContent === OWL.SVC[i].n) && r[0].getAttribute('aria-expanded') === 'true' && document.querySelector(S + ' #sv8-d0 p').textContent === OWL.SVC[0].d; }, S));
+    rec('closed rows keep their details out of reach (inert)', await p.evaluate(S => [1, 2, 3, 4].every(i => document.querySelector(S + ' #sv8-d' + i).hasAttribute('inert')), S));
+    const b = await p.evaluate(S => { const r = document.querySelectorAll(S + ' .rw')[2].getBoundingClientRect(); return [r.left + r.width * .4, r.top + r.height / 2]; }, S);
+    await p.mouse.move(b[0] - 100, b[1]); await p.mouse.move(b[0], b[1], { steps: 8 }); await p.waitForTimeout(900);
+    rec('pointing at a row floats that service’s own photo beside the cursor', await p.evaluate(S => { const f = document.querySelector(S + ' .flo'); return f.classList.contains('on') && f.querySelectorAll('img.on').length === 1 && f.querySelectorAll('img')[2].classList.contains('on') && f.querySelector('img.on').src.startsWith('data:image'); }, S));
+    await p.click(S + ' .rw >> nth=3'); await p.waitForTimeout(700);
+    rec('opening a row closes the others and shows what is included', await p.evaluate(S => { const r = [...document.querySelectorAll(S + ' .rw')]; return r[3].getAttribute('aria-expanded') === 'true' && r.filter(x => x.getAttribute('aria-expanded') === 'true').length === 1 && document.querySelectorAll(S + ' #sv8-d3 li').length === OWL.SVC[3].inc.length && !document.querySelector(S + ' #sv8-d3').hasAttribute('inert'); }, S));
+    await p.click(S + ' .rw >> nth=3'); await p.waitForTimeout(400);
+    rec('the same row closes again', await p.evaluate(S => document.querySelectorAll(S + ' .rw[aria-expanded="true"]').length === 0, S));
+  },
+  '9': async (p, S, rec) => {
+    rec('five cards with Owl’s own photos and words', await p.evaluate(S => { const c = [...document.querySelectorAll(S + ' .crd')]; return c.length === 5 && c.every((x, i) => x.querySelector('h3').textContent === OWL.SVC[i].n && x.querySelector('p').textContent === OWL.SVC[i].d && x.querySelector('img').src.startsWith('data:image') && x.querySelector('img').alt.length > 8); }, S));
+    const go = k => p.evaluate(([S, k]) => { const l = document.querySelector(S + ' .stk'), b = l.getBoundingClientRect(); scrollTo({ top: scrollY + b.top + (l.offsetHeight - innerHeight) * k, behavior: 'instant' }); }, [S, k]);
+    await go(0.7); await p.waitForTimeout(900);
+    rec('cards pin and stack: earlier cards sit stacked at the top', await p.evaluate(S => { const s = [...document.querySelectorAll(S + ' .slot')].map(x => x.getBoundingClientRect().top); return s[0] < 140 && s[1] < 160 && Math.abs(s[1] - s[0] - 18) < 6; }, S));
+    rec('covered cards settle back (smaller, dimmer)', await p.evaluate(S => { const c = document.querySelector(S + ' .crd'); return +c.style.getPropertyValue('--s') < .97 && +c.style.getPropertyValue('--b') < .95; }, S));
+    await go(0); await p.waitForTimeout(700);
+    rec('scrolling back restores the top card', await p.evaluate(S => +document.querySelector(S + ' .crd').style.getPropertyValue('--s') > .99, S));
   }
 };
