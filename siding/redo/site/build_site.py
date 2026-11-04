@@ -271,6 +271,13 @@ def svcK():
 SVK = svcK()
 
 
+def bg_panels():
+    # the hidden world: three baked relief panels (bg/relief.py), each as two WebPs (levels 1-3; levels 4-5 + plaster grain)
+    import base64 as _b
+    f = lambda n, ab: 'data:image/webp;base64,' + _b.b64encode(open(os.path.join(HERE, 'media', 'bg', f'p{n}{ab}.webp'), 'rb').read()).decode()
+    return [{'a': f(n, 'a'), 'b': f(n, 'b')} for n in (1, 2, 3)]
+
+
 VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
              ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
@@ -349,7 +356,7 @@ def build():
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main data-page="home">{main}</main>{pages}{foot}{MBAR}{film}
-<script>{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+<script>window.__BG={json.dumps(bg_panels())};{src('world.js')}</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':

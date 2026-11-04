@@ -1250,6 +1250,18 @@ Every text element is paired with the nearest painted background behind it, as r
 | 1 | Reviews | **K, "Marked up by hand"** (`?reviews=k`) | Graza (custom-animation bar: a highlighter sweeping homeowners' exact phrases by theme) on all 30 published reviews | GATE-NEW-Reviews-K.md | 8.58 PASS | Accepted by Muse |
 | 1 | Process | **K, "Handed along"** (`?process=k`) | Quiet Cubes (a staffed service: the four steps as stations staffed by the people homeowners name, with a baton handed along) | GATE-NEW-Process-K.md | 8.42 PASS | Accepted by Muse |
 | 1 | Try the job | **K, "Flash the window"** (`?try=k`) | Dropbox Brand (flat, one action at a time: put the four flashing pieces on in order, then a rain test traces the first bad lap) | GATE-NEW-Try-K.md | 8.36 PASS | Accepted by Muse |
-| 1 | On your street | **K, "Month by month"** (`?area=k`) | Cash App (colour as content: a calendar of the finder's dated records; pick a month to see the streets worked) | GATE-NEW-Area-K.md | 8.38 PASS | Waiting for Muse's accept |
+| 1 | On your street | **K, "Month by month"** (`?area=k`) | Cash App (colour as content: a calendar of the finder's dated records; pick a month to see the streets worked) | GATE-NEW-Area-K.md | 8.38 PASS | Built and gated; then paused by the owner's background correction |
+
+**Paused (owner's order, 2026-11-04):** AUSTIN-BACKGROUND-CORRECTION. New-version work stopped until the background gate passes.
+
+## Background correction (2026-11-04)
+
+- **Study:** exactly two one-off study agents (visual and technical) studied immersive-g.com's background. Their reports are merged with exact numbers into **IMMERSIVE-BACKGROUND-SPEC.md**.
+- **Rebuild:**
+  - `bg/relief.py` sculpts and bakes three Austin bas-relief panels (street, wall, roofscape) into IG's six lighting levels, with white as the flat ground.
+  - `src/world.js` is new: IG's 256² flowmap (stamp 0.19, decay 0.953, speed and presence channels) and its six-level ladder; the wall at 0.31× scroll.
+  - The owner's overrides: pure white at rest, a self-closing disc, no colour.
+  - The pictogram world is retired (`src/world-pictograms-retired.js`).
+- **Gate:** GATE-BACKGROUND-FIX.md, waiting for Muse's judgment.
 
 **Next, after the accept:** Booking K (the last of pass 1).
