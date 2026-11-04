@@ -1,0 +1,76 @@
+/* ON YOUR STREET L — which way from our door (Graza: crafted, characterful motion). A compass rose on the office. */
+.arL{padding:110px var(--gut) 100px}
+.arL .ahd{max-width:780px}
+.arL .akk0{margin:0 0 12px;font:800 12.5px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.arL .acard{margin-top:40px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start;padding:clamp(18px,3vw,44px);border-radius:24px;background:#FFFFFF;box-shadow:0 0 0 1px #DCE4DF,0 30px 60px -44px rgba(10,22,17,.4)}
+.arL .arose{min-width:0}
+.arL svg{display:block;width:100%;max-width:560px;height:auto;margin:0 auto;overflow:visible}
+.arL .aring{fill:#F7F9F7;stroke:#DCE4DF;stroke-width:1.5}
+.arL .atk path{stroke:#B9C3BF;stroke-width:1.2}
+/* the petals: four distance bands, deep green near the office to lime far out */
+.arL .ab0{fill:#0E3B2C}.arL .ab1{fill:#3F7A55}.arL .ab2{fill:#86B65F}.arL .ab3{fill:#C9E59A}
+.arL .apt{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center}
+.arL .ahit{fill:transparent}
+.arL .aol{fill:none;stroke:transparent;stroke-width:3;stroke-linejoin:round;transition:stroke .2s ease}
+.arL .abl{transform-box:view-box;transform-origin:260px 260px}
+.arL .ash{transform-box:view-box;transform-origin:260px 260px;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+.arL .apt[aria-checked="true"] .ash{transform:translate(var(--ox),var(--oy))}
+.arL .apt[aria-checked="true"] .aol{stroke:#FFFFFF}
+.arL .apt:not([aria-checked="true"]) .ash path:not(.aol){transition:opacity .25s ease}
+.arL .acard:has(.apt:hover) .apt:not(:hover):not([aria-checked="true"]) .ash path:not(.aol){opacity:.55}
+.arL .apt:hover .aol{stroke:#FFFFFF}
+/* the petal draws its own focus outline along its edge; the box-shaped ring would frame the wedge's bounding box */
+.arL .apt:focus-visible{outline:none}
+.arL .apt:focus-visible .aol{stroke:#B5DB6E;stroke-width:5}
+.arL .aol{transition:stroke .2s ease,stroke-width .24s cubic-bezier(.16,1,.3,1)}
+/* arrival: the petals bloom from the office, clockwise from north, with a small overshoot */
+.arL[data-w]:not(.ago) .abl{transform:scale(0)}
+.arL[data-w] .abl{transition:transform .7s cubic-bezier(.34,1.56,.64,1) calc(var(--i) * 60ms)}
+.arL .alb{font:800 15px/1 var(--text);fill:var(--ink-2);text-anchor:middle;letter-spacing:.04em;transition:fill .2s ease}
+.arL .alb.on{fill:var(--green)}
+.arL .andn{fill:#0E3B2C;stroke:#FFFFFF;stroke-width:2.5;stroke-linejoin:round}
+.arL .ands{fill:#B5DB6E;stroke:#FFFFFF;stroke-width:2.5;stroke-linejoin:round}
+.arL .ahub{fill:#FFFFFF;stroke:#0E3B2C;stroke-width:3}.arL .ahub2{fill:#0E3B2C}
+.arL .algd{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:14px;font:600 13px/1.3 var(--text);color:var(--ink-2)}
+.arL .algd span{display:inline-flex;align-items:center;gap:7px}
+.arL .algd i{width:14px;height:10px;border-radius:3px;display:block}
+.arL .algd i.ab0{background:#0E3B2C}.arL .algd i.ab1{background:#3F7A55}.arL .algd i.ab2{background:#86B65F}.arL .algd i.ab3{background:#C9E59A}
+.arL .acap{margin:10px auto 0;max-width:46ch;text-align:center;font:500 13px/1.5 var(--text);color:var(--ink-2)}
+/* the panel */
+.arL .asel{display:flex;flex-direction:column;gap:6px;font:700 13px/1.3 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.arL .asel select{appearance:none;-webkit-appearance:none;width:100%;box-sizing:border-box;padding:13px 44px 13px 16px;border:0;border-radius:12px;background:#F4F7F5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E3B2C' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/18px;
+  box-shadow:inset 0 0 0 1.5px #D3DDD6;font:600 16px/1.2 var(--text);letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer;transition:box-shadow .2s ease}
+.arL .asel select:hover{box-shadow:inset 0 0 0 2px var(--green)}
+.arL .asel select:focus-visible{outline:3px solid #B5DB6E;outline-offset:3px}
+.arL .abody{margin-top:22px}
+.arL .abody.ain{animation:aIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes aIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.arL .ayou{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:#EEF6E2;font:500 16px/1.5 var(--text);color:var(--ink)}.arL .ayou b{font-weight:800}
+.arL .akk{margin:0;font:700 clamp(26px,2.6vw,36px)/1.1 var(--display);color:var(--ink)}
+.arL .ark{margin:6px 0 0;font:600 14px/1.4 var(--text);color:var(--green)}
+.arL .adl{margin:18px 0 0;display:flex;flex-direction:column;gap:14px}
+.arL .adl div{padding-top:12px;border-top:1px solid #E3E9E5}
+.arL .adl dt{font:800 11.5px/1.3 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.arL .adl dd{margin:6px 0 0;font:500 15.5px/1.55 var(--text);color:var(--ink)}
+.arL .atn{display:inline-flex;align-items:baseline;gap:5px;margin:0 8px 6px 0;padding:5px 11px;border-radius:999px;background:#F4F7F5;box-shadow:inset 0 0 0 1px #DCE4DF;font-weight:700}
+.arL .atn small{font:600 12px/1 var(--text);color:var(--ink-2);font-variant-numeric:tabular-nums}
+/* footer: the lock, how it was measured, the one filled button */
+.arL .aft{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 32px;align-items:center;margin-top:30px}
+.arL .alk{margin:0;font:600 15px/1.5 var(--text);color:var(--ink)}
+.arL .acv{grid-column:1;margin:0;max-width:72ch;font:500 13.5px/1.55 var(--text);color:var(--ink-2)}
+.arL .aft .ctas{grid-column:2;grid-row:1 / span 2}
+.arL .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.arL .callx{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--text);color:var(--ink);padding:10px 2px;text-decoration:none}
+.arL .callx svg{width:18px;height:18px;flex:none;color:var(--green)}
+@media (max-width:900px){
+  .arL .acard{grid-template-columns:1fr}
+  .arL .aft{grid-template-columns:1fr}.arL .aft .ctas{grid-column:1;grid-row:auto}
+}
+@media (max-width:760px){
+  .arL{padding:84px var(--gut) 80px}
+  .arL .acard{padding:14px;border-radius:18px}
+  .arL .alb{font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){
+  .arL[data-w] .abl,.arL .ash,.arL .aol,.arL .alb{transition:none}.arL .abody.ain{animation:none}
+}
