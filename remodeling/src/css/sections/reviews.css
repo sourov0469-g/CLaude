@@ -19,3 +19,44 @@
   .rv__cv { aspect-ratio: 1.5 / 1; }
 }
 @media (prefers-reduced-motion: reduce) { .rv__hint, .rv__again { display: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · V2 "The rating, filled" — a night-sky band: five large star outlines that 343 pale stars fill to 4.8,
+   a large paper numeral beside them. Governing reference: Apple AirPods Pro (numerals as events).
+   ====================================================================================================================== */
+.rs__band { margin-block: calc(var(--section-y) * -1); padding-block: var(--section-y); background: var(--color-text); color: var(--sand-100, #F6F0EA); position: relative; overflow: hidden; }
+.rs__band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 80% at 70% 40%, color-mix(in srgb, var(--clay-600, #A45540) 22%, transparent), transparent 70%); pointer-events: none; }
+.rs__grid { position: relative; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--s6) var(--s8); align-items: center; }
+.rs__side { display: grid; gap: var(--s4); justify-items: start; }
+.rs__eye { margin: 0; color: var(--sand-300, #D9D0C7); }
+.rs__eye .eyebrow__mark path { stroke: currentColor; }
+.rs__h { margin: 0; color: var(--sand-50, #FCF8F5); }
+.rs__h .acc { color: var(--clay-300, #ECB3A4); }
+.rs__num { margin: var(--s3) 0 0; display: flex; align-items: baseline; gap: var(--s3); }
+.rs__avg { font: 600 clamp(5rem, 3rem + 6vw, 9.5rem)/.82 var(--f-display); letter-spacing: -.05em; color: var(--sand-50, #FCF8F5); min-width: 2.1ch; }
+.rs__of { font: 600 1.125rem/1.2 var(--f-text); color: var(--sand-300, #D9D0C7); }
+.rs__cnt { margin: 0; font: 400 1.0625rem/1.4 var(--f-text); color: var(--sand-200, #EBE3DB); }
+.rs__n { display: inline-block; min-width: 3ch; font: 600 1.375rem/1 var(--f-display); color: var(--clay-300, #ECB3A4); }
+.rs__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin-top: var(--s3); }
+.rs__again { min-height: 48px; padding: 0 var(--s5); background: transparent; color: var(--sand-50, #FCF8F5); border: 1.5px solid color-mix(in srgb, var(--sand-50, #FCF8F5) 55%, transparent); border-radius: var(--radius); font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out); }
+.rs__again:focus-visible { outline: 2px solid var(--clay-300, #ECB3A4); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .rs__again:hover { background: var(--sand-50, #FCF8F5); color: var(--color-text); } }
+.rs .btn:focus-visible { outline-color: var(--clay-300, #ECB3A4); }
+.rs__sky { margin: 0; display: grid; gap: var(--s3); }
+.rs__cv { display: block; width: 100%; aspect-ratio: 5 / 1.12; touch-action: pan-y; cursor: crosshair; }
+.rs__hint { font: 400 .875rem/1.4 var(--f-text); color: var(--sand-300, #D9D0C7); text-align: center; }
+
+@media (max-width: 900px) {
+  .rs__grid { grid-template-columns: minmax(0, 1fr); }
+  .rs__sky { order: 2; } .rs__side { display: contents; }
+  .rs__eye, .rs__h { order: 0; }
+  .rs__num, .rs__cnt { order: 3; } .rs__acts { order: 4; }
+  .rs__num { margin-top: 0; }
+}
+@media (max-width: 600px) {
+  .rs__band { padding-block: var(--s8); }
+  .rs__avg { font-size: 5.5rem; }
+  .rs__acts { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .rs__again { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .rs__again { transition: none; } }

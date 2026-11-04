@@ -420,3 +420,26 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Reviews.
+
+## New versions, pass 1 · Reviews V2 "The rating, filled" (2026-11-04)
+- **Muse accepted** Our Work V2.
+- **One new version:** `reviews` V2.
+  - V1 (the constellation spelling 4.8) is untouched and stays the default.
+  - It is reachable from the header switch or `?reviews=2`.
+- **Governing reference:** Apple AirPods Pro (numerals as events).
+- **Style family:** a night sky.
+- **Signature move:** the rating, filled. The 343 stars (one per review) gather with the scroll and fill five large stars to exactly 4.8 of 5, the fifth to 80%. The numerals 4.8 and 343 count with them, reversibly.
+- **The owner's star behaviour is kept exactly:**
+  - the scroll gather, formed at mid-screen;
+  - the pointer scatter with reassembly;
+  - the tap scatter;
+  - the "Scatter them" button.
+- **Content:** aggregate only.
+- **Gate:** `GATE-NEW-Reviews.md`, self-scored 8.2 (D8 U8 C8 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/reviews/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Where We Build.
