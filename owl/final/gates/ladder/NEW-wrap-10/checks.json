@@ -1,0 +1,157 @@
+[
+ {
+  "sec": "wrap",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 10
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "protect"
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Not a Nail Left"
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "starts with 24 drawn nails in the lawn, the magnet resting with \"Drag the magnet\", \"Move the magnet over the lawn.\"",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "mouse: the magnet follows the pointer and the nails near it jump up and hang from its tips; the hint goes",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "past 80 % the rest fly in by themselves: \"Not a nail left.\" with the three cleanup passes",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "\"Scatter them again\" puts all 24 back",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "keyboard: \"Sweep it for me\" sweeps the whole lawn on its own",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "touch: the lawn still scrolls the page (pan-y); only the magnet itself takes a drag (touch-action none)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "no count, timer or score anywhere (not a game)",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "labelled: \"Illustrative photo; drawn nails\"",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "Protect Your Nest facts only (three cleanup passes as the site states them); no construction words other than the homeowner’s \"nail\"",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "next steps: Get My Roof Checked (#book) and the real phone",
+  "ok": true
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wrap",
+  "v": "10",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

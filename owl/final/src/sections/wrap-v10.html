@@ -1,0 +1,114 @@
+<section class="sec wrap10" id="wrap-10" aria-labelledby="pn10-h">
+<style>
+.wrap10{overflow:hidden}
+.wrap10 .ctr{max-width:1120px;margin:0 auto}
+.wrap10 .hd{text-align:center}
+.wrap10 .lede{margin:10px auto 0;max-width:46ch;font-size:17px;text-wrap:balance}
+.wrap10 .lawn{position:relative;margin-top:clamp(20px,3vw,32px);aspect-ratio:16/7.6;overflow:hidden;border-radius:28px;background:#9DB46A;box-shadow:0 36px 56px -40px rgba(23,17,29,.6),inset 0 0 0 1px rgba(23,17,29,.06);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.wrap10 .lawn>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%;display:block;pointer-events:none}
+.wrap10 .nl{position:absolute;width:36px;height:36px;margin:-18px 0 0 -18px;pointer-events:none;transition:opacity .25s}
+.wrap10 .nl svg{width:100%;height:100%;rotate:var(--r);filter:drop-shadow(0 0 2px rgba(255,255,255,.85)) drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+.wrap10 .nl.gone{opacity:0}
+.wrap10 .mag{position:absolute;left:0;top:0;z-index:3;width:124px;height:124px;margin:-62px 0 0 -62px;touch-action:none;cursor:grab;will-change:transform}
+.wrap10 .mag.drag{cursor:grabbing}
+.wrap10 .mag>svg{position:absolute;inset:0;width:100%;height:100%;scale:1 -1;filter:drop-shadow(0 -10px 10px rgba(23,17,29,.4));rotate:var(--tilt,0deg);transition:rotate .2s}
+.wrap10 .stuck{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.wrap10 .stuck i{position:absolute;left:50%;top:100%;width:28px;height:28px;margin:-6px 0 0 -14px;transform-origin:50% 0;transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+.wrap10 .stuck i svg{width:100%;height:100%;rotate:var(--r)}
+.wrap10 .hint{position:absolute;z-index:4;right:calc(100% + 8px);top:30%;padding:7px 12px;border-radius:999px;background:#17111D;color:#F1EFE6;font-size:14px;font-weight:800;white-space:nowrap;pointer-events:none;transition:opacity .3s}
+.wrap10 .hint::after{content:"";position:absolute;left:100%;top:50%;margin-top:-6px;border:6px solid transparent;border-left-color:#17111D}
+.wrap10 .hint.gone{opacity:0}
+.wrap10 .ok{position:absolute;left:18px;top:18px;z-index:4;padding:7px 14px;border-radius:999px;background:rgba(255,253,247,.94);font-size:14px;font-weight:800;color:#17111D;opacity:0;translate:0 -8px;transition:opacity .4s .3s,translate .5s cubic-bezier(.3,1.4,.5,1) .3s}
+.wrap10 .done .ok{opacity:1;translate:none}
+.wrap10 .lab{position:absolute;right:14px;bottom:12px;z-index:2;padding:3px 9px;border-radius:999px;background:rgba(255,253,247,.86);font-size:12px;font-weight:700;color:#17111D}
+.wrap10 .row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,56px);align-items:center;margin-top:clamp(22px,3vw,32px)}
+.wrap10 .msg{position:relative;min-height:64px}
+.wrap10 .done .msg{min-height:112px}
+.wrap10 .msg .a,.wrap10 .msg .b{transition:opacity .4s,translate .5s cubic-bezier(.16,1,.3,1)}
+.wrap10 .msg .a p{margin:0;font-size:20px;font-weight:700;color:#17111D}
+.wrap10 .msg .b{position:absolute;inset:0 0 auto 0;opacity:0;translate:0 10px;pointer-events:none}
+.wrap10 .done .msg .a{position:absolute;inset:0 0 auto 0;opacity:0;pointer-events:none}
+.wrap10 .done .msg .b{position:relative;opacity:1;translate:none;pointer-events:auto}
+.wrap10 .msg b{display:block;font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.025em;line-height:1.1;color:#17111D}
+.wrap10 .msg .b p{margin:10px 0 0;font-size:18px;line-height:1.5;color:var(--ink-70);max-width:46ch}
+.wrap10 .aux{display:flex;margin-top:6px}
+.wrap10 .aux button{min-height:44px;margin-left:-6px;padding:0 6px;border:0;background:none;font:inherit;font-size:16px;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.wrap10 .acts{display:flex;flex-direction:column;gap:14px}
+.wrap10 .acts .btn{width:100%;min-height:58px;font-size:18px}
+@media (max-width:860px){.wrap10 .row{grid-template-columns:minmax(0,1fr)}.wrap10 .msg,.wrap10 .done .msg{min-height:0}}
+@media (max-width:640px){.wrap10 .lawn{aspect-ratio:4/4.4;border-radius:22px}.wrap10 .mag{width:96px;height:96px;margin:-48px 0 0 -48px}.wrap10 .nl{width:30px;height:30px;margin:-15px 0 0 -15px}.wrap10 .hint{font-size:13px}.wrap10 .msg .a p{font-size:18px}}
+@media (prefers-reduced-motion:reduce){.wrap10 .mag>svg,.wrap10 .stuck i,.wrap10 .ok,.wrap10 .msg .a,.wrap10 .msg .b,.wrap10 .nl{transition:none}}
+</style>
+<div class="wrap">
+ <div class="ctr">
+  <div class="hd"><span class="kick">Protect Your Nest System</span><h2 class="h2" id="pn10-h" style="margin-top:12px">Not a Nail Left</h2>
+   <p class="lede rv">Worried about nails in the lawn after a new roof? So are we. Move the magnet over the grass.</p></div>
+  <div class="lawn" role="img" aria-label="A lawn in front of a house, with drawn nails lying in the grass and a magnet you can move over it" data-owl="say:Sweep the lawn">
+   <img src="{{A:hero-pines.webp}}" alt="" width="1200" height="750">
+   <span class="ok" aria-hidden="true">Lawn swept</span>
+   <span class="lab" aria-hidden="true">Illustrative photo; drawn nails</span>
+   <div class="mag" aria-hidden="true"><span class="hint">Drag the magnet</span><svg viewBox="0 0 100 100"><path d="M22 14v38a28 28 0 0 0 56 0V14" fill="none" stroke="#EAA221" stroke-width="22"/><path d="M22 14v38a28 28 0 0 0 56 0V14" fill="none" stroke="#C98A15" stroke-width="22" stroke-dasharray="0 120 200" opacity=".35"/><rect x="11" y="4" width="22" height="16" rx="2" fill="#D7DBE0"/><rect x="67" y="4" width="22" height="16" rx="2" fill="#D7DBE0"/><path d="M11 12h22M67 12h22" stroke="#A9AFB7" stroke-width="2"/></svg><span class="stuck"></span></div>
+  </div>
+  <div class="row">
+   <div><div class="msg" aria-live="polite">
+     <div class="a"><p>Move the magnet over the lawn.</p></div>
+     <div class="b"><b>Not a nail left.</b><p>That’s pass two of our three cleanup passes: the crew clears up, a magnet sweeps the lawn, then the project manager walks it last.</p></div>
+    </div><div class="aux"><button class="full" type="button">Sweep it for me</button></div></div>
+   <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wrap','10',function(root){
+  /* one idea: when we leave, your lawn is safe for bare feet again: we sweep it with a magnet */
+  var lawn = root.querySelector('.lawn'), mag = root.querySelector('.mag'), stuck = root.querySelector('.stuck'), hint = root.querySelector('.hint'), ctr = root.querySelector('.ctr'), btn = root.querySelector('.aux button'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var NAIL = '<svg viewBox="0 0 26 26"><rect x="11.6" y="2" width="3" height="20" rx="1" fill="#5E6670"/><rect x="7.8" y="1" width="10.6" height="3.6" rx="1.6" fill="#8E969F"/><path d="M11.6 22l1.5 3 1.5-3z" fill="#5E6670"/></svg>';
+  var N = 24, nails = [], W = 0, H = 0, x = 0, y = 0, tx = 0, ty = 0, vx = 0, drag = false, done = false, auto = false, moved = false, raf = 0;
+  function rnd(seed){ return function(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  function size(){ var r = lawn.getBoundingClientRect(); W = r.width; H = r.height; }
+  function scatter(){
+    nails.forEach(function(n){ n.el.remove(); }); nails = []; stuck.innerHTML = ''; var R = rnd(11);
+    for (var i = 0; i < N; i++){ var e = document.createElement('span'), px = 6 + R() * 88, py = 60 + R() * 33, rot = Math.round(R() * 360);
+      e.className = 'nl'; e.style.left = px + '%'; e.style.top = py + '%'; e.style.setProperty('--r', rot + 'deg'); e.innerHTML = NAIL; lawn.insertBefore(e, mag); nails.push({ el: e, px: px, py: py, rot: rot, got: false }); }
+    root.dataset.left = N; }
+  function tip(){ return { x: x, y: y + (mag.offsetHeight * .42) }; }
+  function stick(n, instant){
+    n.got = true; n.el.classList.add('gone');
+    var t = tip(), i = document.createElement('i'), k = stuck.children.length, side = k % 2 ? -1 : 1, ang = ((k >> 1) % 5 - 2) * 9, off = side * mag.offsetWidth * .3 + (((k >> 1) % 3) - 1) * 5;
+    i.innerHTML = NAIL; i.style.setProperty('--r', '0deg');
+    i.style.transform = 'translate(' + (n.px / 100 * W - t.x) + 'px,' + (n.py / 100 * H - t.y) + 'px)';
+    stuck.appendChild(i); void i.offsetWidth;
+    i.style.transform = 'translate(' + off + 'px,' + (((k >> 1) % 4) * 4 - 2) + 'px) rotate(' + ang + 'deg)';
+    if (instant) i.style.transition = 'none';
+    root.dataset.left = nails.filter(function(m){ return !m.got; }).length; }
+  function grab(){ var t = tip(), r = Math.max(70, W * .075);
+    nails.forEach(function(n){ if (n.got) return; var dx = n.px / 100 * W - t.x, dy = n.py / 100 * H - t.y; if (dx * dx + dy * dy < r * r) stick(n, OWL.reduce); });
+    if (!done && nails.filter(function(n){ return n.got; }).length >= N * .8) finish(); }
+  function finish(){ if (done) return; done = true; var left = nails.filter(function(n){ return !n.got; });
+    left.forEach(function(n, i){ setTimeout(function(){ stick(n, OWL.reduce); }, OWL.reduce ? 0 : 60 * i); });
+    ctr.classList.add('done'); btn.textContent = 'Scatter them again'; hint.classList.add('gone'); root.dataset.done = 'yes';
+    if (auto || tx > W - 70 || tx < 70){ tx = W * .82; ty = H * .44; } }
+  function place(){ mag.style.transform = 'translate(' + x + 'px,' + y + 'px)'; mag.style.setProperty('--tilt', Math.max(-16, Math.min(16, vx * .6)) + 'deg'); }
+  function loop(){ var k = OWL.reduce ? 1 : .22, dx = tx - x; vx = dx; x += dx * k; y += (ty - y) * k; place(); if (moved && !auto) grab(); raf = requestAnimationFrame(loop); }
+  function rest(){ size(); tx = x = W * .86; ty = y = H * .3; place(); }
+  function pt(e){ var r = lawn.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top - mag.offsetHeight * .42 }; }
+  function aim(e){ var p = pt(e); tx = Math.max(30, Math.min(W - 30, p.x)); ty = Math.max(20, Math.min(H - 40, p.y)); if (!moved){ moved = true; hint.classList.add('gone'); } }
+  lawn.addEventListener('pointermove', function(e){ if (auto) return; if (e.pointerType === 'mouse' || drag) aim(e); });
+  mag.addEventListener('pointerdown', function(e){ if (auto) return; drag = true; mag.classList.add('drag'); mag.setPointerCapture(e.pointerId); aim(e); });
+  mag.addEventListener('pointermove', function(e){ if (drag) aim(e); });
+  ['pointerup', 'pointercancel'].forEach(function(t){ mag.addEventListener(t, function(){ drag = false; mag.classList.remove('drag'); }); });
+  function sweep(){ if (done || auto) return; auto = true; moved = true; hint.classList.add('gone'); size();
+    var pts = [[.08, .66], [.92, .66], [.92, .8], [.08, .8], [.08, .94], [.92, .94]], t0 = performance.now(), dur = OWL.reduce ? 0 : 2200;
+    (function step(t){ var u = dur ? Math.max(0, Math.min(1, (t - t0) / dur)) : 1, s = u * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(s)), f = s - i;
+      tx = (pts[i][0] + (pts[i + 1][0] - pts[i][0]) * f) * W; ty = (pts[i][1] + (pts[i + 1][1] - pts[i][1]) * f) * H - mag.offsetHeight * .42;
+      if (OWL.reduce){ x = tx; y = ty; } grab(); if (u < 1 && !done) requestAnimationFrame(step); else { auto = false; finish(); } })(t0); }
+  btn.addEventListener('click', function(){ if (done){ done = false; auto = false; ctr.classList.remove('done'); btn.textContent = 'Sweep it for me'; root.dataset.done = 'no'; scatter(); rest(); } else sweep(); });
+  scatter(); root.dataset.done = 'no';
+  requestAnimationFrame(function(){ rest(); raf = requestAnimationFrame(loop); });
+  if ('ResizeObserver' in window) new ResizeObserver(function(){ var ow = W; size(); if (Math.abs(ow - W) > 2 && !moved) rest(); }).observe(lawn);
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, { threshold: .3 }); io.observe(lawn);
+});
+</script>
+</section>

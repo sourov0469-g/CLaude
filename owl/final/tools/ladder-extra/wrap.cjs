@@ -66,5 +66,27 @@ module.exports = {
     rec('Fold It folds it back to the cover and hides the inside from readers', await p.evaluate(S => document.querySelector(S + ' .lf').classList.contains('shut') && [...document.querySelectorAll(S + ' .face.in')].every(f => f.getAttribute('aria-hidden') === 'true') && document.querySelector(S + ' .tog').textContent === 'Open It', S));
     await p.click(S + ' .tog'); await p.waitForTimeout(1900);
     rec('Open It opens it again', await p.evaluate(S => document.querySelector(S + ' .lf').classList.contains('open'), S));
+  },
+  '10': async (p, S, rec, txt) => {
+    await p.mouse.move(2, 2);
+    await p.evaluate(S => document.querySelector(S).scrollIntoView({ block: 'start', behavior: 'instant' }), S); await p.waitForTimeout(1500);
+    const st = () => p.evaluate(S => { const r = document.querySelector(S), c = r.querySelector('.ctr'); return { left: +r.dataset.left, done: r.dataset.done, stuck: r.querySelectorAll('.stuck i').length, loose: r.querySelectorAll('.nl:not(.gone)').length, hint: !r.querySelector('.hint').classList.contains('gone'), btn: r.querySelector('.aux button').textContent, msg: r.querySelector(c.classList.contains('done') ? '.msg .b' : '.msg .a').textContent.trim() }; }, S);
+    let s = await st();
+    rec('starts with 24 drawn nails in the lawn, the magnet resting with "Drag the magnet", "Move the magnet over the lawn."', s.left === 24 && s.loose === 24 && s.stuck === 0 && s.hint && s.done === 'no' && s.msg === 'Move the magnet over the lawn.' && s.btn === 'Sweep it for me');
+    const bb = await p.locator(S + ' .lawn').boundingBox();
+    await p.mouse.move(bb.x + bb.width * .08, bb.y + bb.height * .6); await p.mouse.move(bb.x + bb.width * .5, bb.y + bb.height * .65, { steps: 25 }); await p.waitForTimeout(500); s = await st();
+    rec('mouse: the magnet follows the pointer and the nails near it jump up and hang from its tips; the hint goes', s.stuck > 0 && s.left < 24 && s.left === s.loose && !s.hint && s.done === 'no');
+    for (let row = 0; row < 4; row++) { const y = bb.y + bb.height * (.58 + row * .12); await p.mouse.move(bb.x + 10, y); await p.mouse.move(bb.x + bb.width - 10, y, { steps: 26 }); }
+    await p.mouse.move(2, 2); await p.waitForTimeout(2200); s = await st();
+    rec('past 80 % the rest fly in by themselves: "Not a nail left." with the three cleanup passes', s.done === 'yes' && s.left === 0 && s.stuck === 24 && /^Not a nail left\./.test(s.msg) && /pass two of our three cleanup passes: the crew clears up, a magnet sweeps the lawn, then the project manager walks it last/.test(s.msg) && s.btn === 'Scatter them again');
+    await p.click(S + ' .aux button'); await p.waitForTimeout(300); s = await st();
+    rec('"Scatter them again" puts all 24 back', s.done === 'no' && s.left === 24 && s.stuck === 0 && s.btn === 'Sweep it for me');
+    await p.focus(S + ' .aux button'); await p.keyboard.press('Enter'); await p.waitForTimeout(3400); s = await st();
+    rec('keyboard: "Sweep it for me" sweeps the whole lawn on its own', s.done === 'yes' && s.left === 0 && s.stuck === 24);
+    rec('touch: the lawn still scrolls the page (pan-y); only the magnet itself takes a drag (touch-action none)', await p.evaluate(S => getComputedStyle(document.querySelector(S + ' .lawn')).touchAction === 'pan-y' && getComputedStyle(document.querySelector(S + ' .mag')).touchAction === 'none', S));
+    rec('no count, timer or score anywhere (not a game)', await p.evaluate(S => !/\b\d+\s*(of|\/)\s*\d+\b|score|points|seconds|timer/i.test(document.querySelector(S).innerText), S));
+    rec('labelled: "Illustrative photo; drawn nails"', /Illustrative photo; drawn nails/.test(txt) || await p.evaluate(S => /Illustrative photo; drawn nails/.test(document.querySelector(S + ' .lab').textContent), S));
+    rec('Protect Your Nest facts only (three cleanup passes as the site states them); no construction words other than the homeowner’s "nail"', await p.evaluate(S => { const t = document.querySelector(S).textContent; return /Protect Your Nest System/.test(t) && !/underlayment|decking|ventilation|rafter|granule|flashing|shingle/i.test(t) && !/\bfree\b|\$\s?\d|guarantee|every job/i.test(t); }, S));
+    rec('next steps: Get My Roof Checked (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Get My Roof Checked/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
   }
 };
