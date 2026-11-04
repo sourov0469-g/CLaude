@@ -1,0 +1,45 @@
+/* VISUALISER K — "Open a colour" (Dropbox Brand: the tile becomes the page) */
+.viK{padding:104px var(--gut) 64px}
+.viK .hd{display:grid;gap:10px;max-width:1000px}
+.viK .kk{font:800 12px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+.viK .sec-h{font-size:clamp(38px,5vw,76px);line-height:1}
+.viK .sec-p{font-size:17px;max-width:54ch}
+.viK .stg{position:relative;margin-top:30px;min-height:clamp(520px,64vh,640px);display:flex}
+.viK .tg{list-style:none;flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:1fr;gap:8px}
+.viK .ktile{all:unset;box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;width:100%;height:100%;min-height:96px;padding:14px 16px;border-radius:12px;background:var(--c);color:var(--t);cursor:pointer;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s}
+.viK .ktile:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px rgba(0,0,0,.06),0 18px 30px -20px rgba(22,25,29,.55)}
+.viK .ktile:active{transform:scale(.98)}
+.viK .ktile:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.viK .tn{font:800 clamp(14px,1.15vw,17px)/1.15 var(--display)}
+.viK .th{font:600 11.5px/1 var(--text);letter-spacing:.06em;opacity:.72;font-variant-numeric:tabular-nums}
+/* the open colour */
+.viK .vo{position:absolute;inset:0;z-index:3;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);align-items:center;gap:clamp(20px,3vw,48px);padding:clamp(26px,3.6vw,56px);
+  border-radius:22px;background:var(--c);color:var(--t);transition:background-color .45s ease,color .45s ease}
+.viK .vo[hidden]{display:none}
+.viK .vtx,.viK .vhs,.viK .vx{opacity:0;transition:opacity .3s ease}
+.viK .vo.on .vtx,.viK .vo.on .vhs,.viK .vo.on .vx{opacity:1}
+.viK .vk{font:700 12.5px/1.2 var(--text);letter-spacing:.12em;text-transform:uppercase;opacity:.8;font-variant-numeric:tabular-nums}
+.viK .vn{margin-top:12px;font:800 clamp(44px,6vw,96px)/.95 var(--display);letter-spacing:-.04em;outline:none}
+.viK .vn:focus-visible{outline:3px solid currentColor;outline-offset:6px;border-radius:6px}
+.viK .vt{margin-top:18px;max-width:40ch;font:500 15.5px/1.5 var(--text);opacity:.86}
+.viK .vnv{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:24px}
+.viK .vg{display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:50%;background:rgba(255,255,255,.88);color:#16191D;cursor:pointer;transition:transform .12s,background-color .15s}
+.viK .vg svg{width:20px;height:20px}.viK .vg:hover{background:#fff}.viK .vg:active{transform:scale(.92)}.viK .vg:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.viK .vnv .btn{margin-left:8px}
+.viK .vhs .khs{display:block;width:100%;height:auto;max-height:100%}
+.viK .khs .kbd{fill:color-mix(in srgb,var(--c) 84%,#000);transition:fill .45s ease}
+.viK .khs .ktr{fill:#E0E0D8}
+.viK .vx{position:absolute;top:18px;right:18px;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px;border:0;border-radius:999px;background:rgba(255,255,255,.9);font:700 14px/1 var(--text);color:#16191D;cursor:pointer}
+.viK .vx span{font-size:20px;line-height:0}.viK .vx:hover{background:#fff}.viK .vx:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.viK .vlive{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:1100px){.viK .tg{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:860px){
+  .viK{padding-top:90px}
+  .viK .stg{min-height:640px}
+  .viK .tg{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .viK .ktile{padding:10px 11px;min-height:0}.viK .th{display:none}
+  .viK .vo{grid-template-columns:1fr;align-content:start;padding:66px 20px 22px;gap:14px}
+  .viK .vhs{order:-1}.viK .vn{font-size:clamp(36px,11vw,56px);margin-top:6px}.viK .vt{font-size:14.5px;margin-top:10px}.viK .vnv{margin-top:14px}.viK .vnv .btn{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){.viK .ktile,.viK .vo,.viK .vtx,.viK .vhs,.viK .vx,.viK .khs .kbd{transition:none}}
