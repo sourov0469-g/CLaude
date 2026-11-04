@@ -1,0 +1,75 @@
+<section class="sec hero15" aria-labelledby="h15-a">
+<style>
+.hero15{overflow:hidden;padding-top:clamp(24px,3.4vw,52px);padding-bottom:clamp(28px,3.4vw,52px)}
+.hero15 .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(22px,4vw,64px)}
+.hero15 .pic{position:relative;display:block;width:100%;max-width:600px;justify-self:end;aspect-ratio:1;padding:0;border:0;border-radius:30px;overflow:visible;background:none;cursor:pointer}
+.hero15 .ph{position:absolute;inset:0;border-radius:30px;overflow:hidden;box-shadow:0 50px 70px -46px rgba(23,17,29,.6)}
+.hero15 .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.hero15 .pic.hit .ph{animation:h15j .34s cubic-bezier(.3,0,.3,1)}
+@keyframes h15j{0%{transform:none}22%{transform:translate(0,5px) scale(1.012)}48%{transform:translate(-2px,-2px)}72%{transform:translate(1px,1px)}100%{transform:none}}
+.hero15 .pic:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+.hero15 .fx{position:absolute;left:58.8%;top:72.1%;width:0;height:0;pointer-events:none}
+.hero15 .fx i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#FFF1C9;box-shadow:0 0 10px 4px rgba(246,194,95,.95),0 0 22px 6px rgba(234,162,33,.55);opacity:0}
+.hero15 .hit .fx i{animation:h15s .7s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes h15s{0%{opacity:1;transform:translate(0,0) scale(1.2)}55%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.35)}}
+.hero15 .fx b{position:absolute;left:-30px;top:-30px;width:60px;height:60px;border-radius:50%;border:3px solid rgba(246,194,95,.9);opacity:0}
+.hero15 .hit .fx b{animation:h15r .5s ease-out forwards}
+@keyframes h15r{0%{opacity:.9;transform:scale(.2)}100%{opacity:0;transform:scale(1.6)}}
+.hero15 .stamp{position:absolute;right:-4%;top:-5%;width:max(118px,30%);aspect-ratio:1;min-height:0;overflow:hidden;container-type:inline-size;border-radius:50%;padding:0;background:#FFFDF7;box-shadow:0 0 0 5px #FFFDF7,0 0 0 7px #EAA221,0 18px 26px -12px rgba(23,17,29,.5);text-align:center;transform:rotate(-9deg) scale(0);opacity:0}
+.hero15 .stamp .si{position:absolute;inset:12%;display:grid;place-items:center;align-content:center;gap:5cqw}
+.hero15 .stamp img{width:62cqw;height:auto}
+.hero15 .stamp .si span{font-size:8.6cqw;font-weight:900;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:#17111D}
+.hero15 .stamped .stamp{animation:h15t .5s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes h15t{0%{opacity:0;transform:rotate(-9deg) scale(1.6)}60%{opacity:1;transform:rotate(-9deg) scale(.92,.86)}100%{opacity:1;transform:rotate(-9deg) scale(1)}}
+.hero15 .eyebrow{margin:0 0 10px;font-weight:600;font-size:16px;color:var(--ink-70)}
+.hero15 .h1{font-size:clamp(44px,5.6vw,84px)}
+.hero15 .nl{position:relative;display:inline-block}
+.hero15 .nl svg{position:absolute;left:-2%;right:-2%;bottom:-.08em;width:104%;height:.22em;overflow:visible}
+.hero15 .nl path{fill:none;stroke:#EAA221;stroke-width:7;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s cubic-bezier(.65,0,.35,1)}
+.hero15 .struck .nl path{stroke-dashoffset:0}
+.hero15 .lede{margin:18px 0 30px;max-width:36ch}
+.hero15 .ctas{display:flex;flex-direction:column;gap:16px;max-width:400px}
+.hero15 .ctas .btn{width:100%;min-height:62px;font-size:19px}
+.hero15 .tip{margin:14px 0 0;font-size:14px;font-weight:600;color:var(--ink-70)}
+.hero15 .trust{margin-top:clamp(18px,3vw,34px)}
+@media (max-width:900px){.hero15 .g{grid-template-columns:minmax(0,1fr)}.hero15 .pic{justify-self:center;max-width:420px;width:74%}.hero15 .ctas{max-width:none}}
+@media (prefers-reduced-motion:reduce){.hero15 .pic.hit .ph,.hero15 .hit .fx i,.hero15 .hit .fx b{animation:none}.hero15 .stamp{transform:rotate(-9deg);opacity:1}.hero15 .stamped .stamp{animation:none}.hero15 .nl path{stroke-dashoffset:0;transition:none}.hero15 .tip{display:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <button class="pic" type="button" aria-label="Strike the nail again" data-owl="say:Nailed it">
+   <span class="ph"><img src="{{A:hero-nail.webp}}" alt="" width="1100" height="1100"></span>
+   <span class="fx" aria-hidden="true"><b></b><i style="--dx:-46px;--dy:-38px"></i><i style="--dx:-14px;--dy:-58px"></i><i style="--dx:22px;--dy:-52px"></i><i style="--dx:50px;--dy:-30px"></i><i style="--dx:-56px;--dy:-8px"></i><i style="--dx:58px;--dy:-4px"></i><i style="--dx:-30px;--dy:-64px"></i><i style="--dx:36px;--dy:-60px"></i><i style="--dx:-66px;--dy:-26px"></i><i style="--dx:68px;--dy:-22px"></i><i style="--dx:-4px;--dy:-72px"></i><i style="--dx:12px;--dy:-34px"></i></span>
+   <span class="stamp"><span class="si"><img src="{{A:logo.svg}}" alt="" width="185" height="75"><span>10-Year Workmanship Warranty</span></span></span>
+  </button>
+  <div class="txt">
+   <p class="eyebrow">Family-owned roofers in Shoreview, Minnesota</p>
+   <h1 class="h1" id="h15-a">We’ll <span class="nl">Nail<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 6C30 2 70 2 98 5"/></svg></span> It.</h1>
+   <p class="lede">Leaks, storm damage or a whole new roof: done properly, and backed by our 10-year workmanship warranty.</p>
+   <div class="ctas">
+    <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a>
+    <a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a>
+   </div>
+   <p class="tip" aria-hidden="true">Tap the photo to swing the hammer.</p>
+  </div>
+ </div>
+ <div class="trust" role="list">
+  <span class="stars" role="listitem" aria-label="Five stars"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg></span>
+  <span role="listitem">5.0 · 90+ reviews</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">GAF Systems Plus Certified</span><i class="dot" aria-hidden="true"></i>
+  <span role="listitem">Founded 2025</span>
+ </div>
+</div>
+<script>
+OWL.reg('hero','15',function(root){
+  /* one idea: the hammer lands, the nail sparks, the warranty stamp thumps down: we'll nail it */
+  var g = root.querySelector('.g'), pic = root.querySelector('.pic'), h1 = root.querySelector('.h1');
+  OWL.split(h1, 110); OWL.reveal(h1);
+  if (OWL.reduce){ pic.classList.add('stamped'); g.classList.add('struck'); pic.addEventListener('click', function(){}); return; }
+  function strike(){ pic.classList.remove('hit'); void pic.offsetWidth; pic.classList.add('hit'); g.classList.add('struck');
+    if (!pic.classList.contains('stamped')) setTimeout(function(){ pic.classList.add('stamped'); }, 260); }
+  setTimeout(strike, 1000);
+  pic.addEventListener('click', strike);
+});
+</script>
+</section>

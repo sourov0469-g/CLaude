@@ -93,5 +93,19 @@ module.exports = {
     rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
     rec('the calls to action are not inside the photo (they stack under it on phones)', await p.evaluate(S => !document.querySelector(S + ' .band .ctas') && !!document.querySelector(S + ' .bandwrap > .ctas'), S));
     rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-tab').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
+  },
+  '15': async (p, S, rec) => {
+    await p.waitForTimeout(2200);
+    rec('the hammer has struck once on load: jolt, sparks, "Nail" underlined, warranty stamp down', await p.evaluate(S => { const pic = document.querySelector(S + ' .pic'); return pic.classList.contains('hit') && pic.classList.contains('stamped') && document.querySelector(S + ' .g').classList.contains('struck') && +getComputedStyle(document.querySelector(S + ' .stamp')).opacity === 1; }, S));
+    rec('the stamp states the locked fact exactly: 10-Year Workmanship Warranty', await p.evaluate(S => document.querySelector(S + ' .stamp').textContent.trim() === '10-Year Workmanship Warranty' && /10-year workmanship warranty/.test(document.querySelector(S + ' .lede').textContent), S));
+    rec('the stamp is round (not squashed by its text)', await p.evaluate(S => { const r = document.querySelector(S + ' .stamp').getBoundingClientRect(); return Math.abs(r.width - r.height) < 3; }, S));
+    await p.evaluate(S => document.querySelector(S + ' .pic').classList.remove('hit'), S);
+    await p.click(S + ' .pic'); await p.waitForTimeout(80);
+    rec('tapping the photo strikes again', await p.evaluate(S => document.querySelector(S + ' .pic').classList.contains('hit'), S));
+    await p.evaluate(S => document.querySelector(S + ' .pic').classList.remove('hit'), S);
+    await p.focus(S + ' .pic'); await p.keyboard.press('Enter'); await p.waitForTimeout(80);
+    rec('Enter on the photo strikes too (it is a real button with a name)', await p.evaluate(S => { const b = document.querySelector(S + ' .pic'); return b.tagName === 'BUTTON' && b.getAttribute('aria-label') === 'Strike the nail again' && b.classList.contains('hit'); }, S));
+    rec('both calls to action sit in the first screen at 1440×900', await p.evaluate(S => { window.scrollTo(0, 0); return [...document.querySelectorAll(S + ' .ctas a')].every(a => a.getBoundingClientRect().bottom <= innerHeight); }, S));
+    rec('the two calls to action: book and the real phone', await p.evaluate(S => document.querySelector(S + ' .btn-amber').getAttribute('href') === '#book' && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };
