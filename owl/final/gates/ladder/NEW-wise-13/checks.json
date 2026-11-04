@@ -1,0 +1,163 @@
+[
+ {
+  "sec": "wise",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 13
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "wise-check"
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Pick Your Day"
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "a week of six working days (radio group) plus Sunday; nothing chosen; \"Any day suits me.\"; the main button works from the start",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "asking with no choice: email to info@owlroofing.com, \"Wise Check request\", any day Monday to Saturday, any time 8 to 6",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "the note matches the booking forms and never says booked or sent",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "tap Tuesday: it lifts with a check; \"Tuesday suits me.\"; the button reads \"Ask for Tuesday\"",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "keyboard: ArrowRight moves the choice and focus to Wednesday",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "Morning: the sentence and the button follow (\"Wednesday morning\")",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "Sunday: the sleeping owl wiggles and says it’s our day off; it is never chosen",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "asking now: the email carries Wednesday and Morning (8 to 12)",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "hours only as locked: Monday to Saturday, 8 to 6; no price, timing or arrival promise",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "no construction words",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "the call button is the real phone",
+  "ok": true
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "wise",
+  "v": "13",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

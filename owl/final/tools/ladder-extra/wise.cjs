@@ -135,5 +135,28 @@ module.exports = {
     rec('answers come from lib/wise-data.js (three verbatim, one plain rewrite); no price, "free" or timing', await p.evaluate(S => { const c = OWL.WISE.cases, t = document.querySelector(S).textContent + [0, 1, 3].map(i => c[i].t).join(' '); return /Water travels before it shows/.test(c[1].t) && !/\bfree\b|\$\s?\d|no cost|no charge|\bminutes?\b|\bhours?\b|same.day/i.test(document.querySelector(S).textContent); }, S));
     rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
     rec('next steps: Book a Wise Check (#book) and the real phone', await p.evaluate(S => { const b = document.querySelector(S + ' .acts .btn-amber'); return b.getAttribute('href') === '#book' && /Book a Wise Check/.test(b.textContent) && document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027'; }, S));
+  },
+  '13': async (p, S, rec, txt) => {
+    await p.evaluate(() => { window.__mail = ''; HTMLAnchorElement.prototype.click = function(){ if (/^mailto:/.test(this.href)) window.__mail = this.href; }; });
+    const st = () => p.evaluate(S => { const r = document.querySelector(S), a = r.querySelector('.ask'); return { days: [...r.querySelectorAll('.day:not(.sun)')].map(d => d.getAttribute('aria-checked')), times: [...r.querySelectorAll('.tm')].map(d => d.getAttribute('aria-checked')), say: r.querySelector('.say').textContent, label: a.getAttribute('aria-label'), shown: [...a.querySelectorAll('.bl i')].map(i => i.textContent).join(''), dis: a.getAttribute('aria-disabled'), note: r.querySelector('.note').textContent, focus: document.activeElement && document.activeElement.textContent }; }, S);
+    const mail = () => p.evaluate(() => { const u = new URL(window.__mail); return { to: u.pathname, subject: u.searchParams.get('subject'), body: u.searchParams.get('body') }; });
+    let s = await st();
+    rec('a week of six working days (radio group) plus Sunday; nothing chosen; "Any day suits me."; the main button works from the start', s.days.length === 6 && s.days.every(d => d === 'false') && s.say === 'Any day suits me.' && s.label === 'Ask for a Wise Check' && s.dis === null && await p.evaluate(S => { const r = document.querySelector(S); return r.querySelectorAll('[role="radiogroup"]').length === 2 && r.querySelectorAll('.day[role="radio"]').length === 6 && !r.querySelector('.sun').hasAttribute('role') && /^Monday, 8 to 6$/.test(r.querySelector('.day').getAttribute('aria-label')); }, S));
+    await p.click(S + ' .ask'); s = await st(); let m = await mail();
+    rec('asking with no choice: email to info@owlroofing.com, "Wise Check request", any day Monday to Saturday, any time 8 to 6', m.to === 'info@owlroofing.com' && m.subject === 'Wise Check request' && /Best day: Any day, Monday to Saturday/.test(m.body) && /Best time: Any time, 8 to 6/.test(m.body) && /Name:\nAddress:\nBest phone number:/.test(m.body));
+    rec('the note matches the booking forms and never says booked or sent', s.note === 'Your email app should open with these details. Send it from there, or call (651) 977-6027.' && !/\b(booked|confirmed|sent|scheduled)\b/i.test(s.note));
+    await p.click(S + ' .day >> nth=1'); await p.waitForTimeout(450); s = await st();
+    rec('tap Tuesday: it lifts with a check; "Tuesday suits me."; the button reads "Ask for Tuesday"', s.days[1] === 'true' && s.say === 'Tuesday suits me.' && s.label === 'Ask for Tuesday' && s.shown === 'Ask for Tuesday' && s.note === '' && await p.evaluate(S => getComputedStyle(document.querySelectorAll(S + ' .day')[1]).translate !== 'none', S));
+    await p.keyboard.press('ArrowRight'); await p.waitForTimeout(200); s = await st();
+    rec('keyboard: ArrowRight moves the choice and focus to Wednesday', s.days[2] === 'true' && s.days[1] === 'false' && /Wed/.test(s.focus) && s.say === 'Wednesday suits me.');
+    await p.click(S + ' .tm >> nth=0'); await p.waitForTimeout(200); s = await st();
+    rec('Morning: the sentence and the button follow ("Wednesday morning")', s.times[0] === 'true' && s.say === 'Wednesday morning suits me.' && s.label === 'Ask for Wednesday morning');
+    await p.click(S + ' .sun'); await p.waitForTimeout(200); s = await st();
+    rec('Sunday: the sleeping owl wiggles and says it’s our day off; it is never chosen', s.note === 'Sunday’s our day off. Any other day works.' && s.days[2] === 'true' && await p.evaluate(S => /Sunday: our day off/.test(document.querySelector(S + ' .sun').getAttribute('aria-label')), S));
+    await p.click(S + ' .ask'); m = await mail();
+    rec('asking now: the email carries Wednesday and Morning (8 to 12)', /Best day: Wednesday/.test(m.body) && /Best time: Morning \(8 to 12\)/.test(m.body));
+    rec('hours only as locked: Monday to Saturday, 8 to 6; no price, timing or arrival promise', await p.evaluate(S => { const t = document.querySelector(S).textContent; return /8 to 6/.test(t) && !/\bfree\b|\$\s?\d|no cost|\bminutes?\b|\bhours?\b|same.day|within|guarantee/i.test(t); }, S));
+    rec('no construction words', await p.evaluate(S => !/underlayment|decking|nail|ventilation|rafter|granule|flashing/i.test(document.querySelector(S).textContent), S));
+    rec('the call button is the real phone', await p.evaluate(S => document.querySelector(S + ' a[href="tel:+16519776027"]').textContent.trim() === 'Call (651) 977-6027', S));
   }
 };
