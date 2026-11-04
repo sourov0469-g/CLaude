@@ -365,3 +365,16 @@ Forms never claim a request was saved or sent; both hand off to the phone or the
   25, 2026 · GAF Systems Plus · MN licence #BC809662 · 10-year workmanship warranty. "Stamp It" does the same for
   keyboard and touch; "Clear the Page" wipes it. Not a game: no score or goal. Skills: ⟦S0489⟧ press and settle,
   ⟦S0405⟧ micro-interaction, ⟦S1388⟧ keys, ⟦S0451⟧ title.
+
+## L27 · Service Area 8 + 9 (Area stands at 7: road, keycaps, 29, roof row, drum, owl-flies map, welcome sign)
+- **Area 8 · "Postmarks"** — reference **Graza** (the custom-animation bar). Fully abstract: a wall of 29 postmarks,
+  one per real town, each a round cancellation mark with the town on the arc, "MN" below and wavy cancel lines,
+  in three inks. Typing filters the wall, so your town's mark stands out; choosing a mark presses a "We roof
+  here" stamp across it and confirms it in words. Shoreview's mark says Home. An unknown town gets the phone.
+  No ZIP codes are invented. Skills: ⟦S0405⟧ press micro-interaction, ⟦S1442⟧ search feedback, ⟦S1107⟧ keyboard
+  grid, ⟦S0451⟧ title.
+- **Area 9 · "Tune In"** — reference **Quiet Cubes** (instrument first). Fully abstract: a radio with a slide-rule dial
+  whose stations are the 29 towns. Turning the knob (drag, arrow keys on a real slider, or the station buttons)
+  slides the dial band under the needle; between towns the signal meter drops and static shimmers, and on a town
+  the meter fills and the readout says "Yes, we roof in Eagan." It settles onto the nearest town when you let go.
+  Search tunes straight to a town. Skills: ⟦S1107⟧ slider keyboard, ⟦S0489⟧ settle, ⟦S1388⟧ keys, ⟦S1442⟧ search.

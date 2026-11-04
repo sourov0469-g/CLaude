@@ -1,0 +1,251 @@
+[
+ {
+  "sec": "area",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 9
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "areas"
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Postmarks"
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "29 postmarks, the real towns, Shoreview marked home; no ZIP codes invented",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "typing filters the wall (ma: Maplewood, Maple Grove)",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "Find stamps Saint Paul and confirms it",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "clicking a postmark stamps it (Edina), one at a time",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "arrow keys move across the wall",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "an unknown town is told plainly and given the phone",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "8",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "areas"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Tune In"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "a real slider over 29 stations, starting home",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "arrow keys tune town by town (Arden Hills) and the signal fills",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "dragging the dial between stations drops the signal and brings static",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "letting go settles on the nearest town",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "search tunes straight to Eagan",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "an unknown town is told plainly and given the phone",
+  "ok": true
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "area",
+  "v": "9",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]

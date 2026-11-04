@@ -8177,6 +8177,151 @@ OWL.reg('area','7',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="area" data-v="8">
+<section class="sec area8" id="areas-8" aria-labelledby="ar8-h">
+<style>
+.area8 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,30px)}
+.area8 .lede{margin-top:12px;max-width:44ch}
+.area8 .find{display:flex;gap:10px;min-width:min(100%,380px)}
+.area8 .find input{flex:1;min-width:0;min-height:52px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:17px}
+.area8 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.area8 .say{min-height:28px;margin:0 0 14px;font-weight:800;font-size:18px}
+.area8 .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;padding:clamp(14px,2.4vw,26px);border-radius:24px;background:radial-gradient(120% 90% at 30% 10%,#FFFDF7,#F2ECDD);box-shadow:inset 0 0 0 1px rgba(23,17,29,.06),0 30px 50px -36px rgba(23,17,29,.5)}
+.area8 .pm{position:relative;display:block;width:100%;padding:0;aspect-ratio:1;border-radius:50%;background:transparent;transform:rotate(var(--r,0deg));transition:transform .3s cubic-bezier(.3,1.5,.5,1),opacity .3s}
+.area8 .pm svg{display:block;width:100%;height:100%;overflow:visible}
+.area8 .pm:hover{transform:rotate(0deg) scale(1.06)}
+.area8 .pm:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.area8 .wall.filtering .pm:not(.hit){opacity:.28}
+.area8 .pm .ok{opacity:0;transform:scale(1.5) rotate(-18deg);transform-origin:center;transform-box:fill-box;transition:opacity .2s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.area8 .pm[aria-pressed="true"] .ok{opacity:1;transform:scale(1) rotate(-18deg)}
+@media (max-width:520px){.area8 .wall{grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}}
+@media (prefers-reduced-motion:reduce){.area8 .pm,.area8 .pm .ok{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Service area</span><h2 class="h2" id="ar8-h" style="margin-top:12px">Postmarks</h2>
+  <p class="lede rv">Twenty-nine towns we roof in, one postmark each. Find yours and we’ll stamp it.</p></div>
+  <form class="find" role="search" novalidate><label for="ar8-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Find your town</label><input id="ar8-q" placeholder="Find your town" autocomplete="off"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Find</button></form></div>
+ <p class="say" aria-live="polite">Shoreview is home: 1000 County Rd E #230.</p>
+ <div class="wall" role="group" aria-label="The 29 towns Owl Roofing serves" data-owl="say:Find yours"></div>
+</div>
+<script>
+OWL.reg('area','8',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var wall = root.querySelector('.wall'), say = root.querySelector('.say'), form = root.querySelector('.find'), q = root.querySelector('#ar8-q'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var INK = ['#17111D', '#8E5A12', '#3F6E8C'];
+  var marks = T.map(function(t, i){ var b = document.createElement('button'), ink = INK[i % 3], id = 'ar8a' + i, up = t.toUpperCase(), fs = up.length > 12 ? 11 : 13;
+    b.type = 'button'; b.className = 'pm'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', t + (i ? '' : ', home'));
+    b.style.setProperty('--r', (((i*37) % 13) - 6) + 'deg');
+    b.innerHTML = '<svg viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="' + ink + '"><circle cx="60" cy="60" r="52" stroke-width="3.5"/><circle cx="60" cy="60" r="44" stroke-width="1.5"/>'
+      + '<path d="M104 46q8-5 16 0M104 56q8-5 16 0M104 66q8-5 16 0M104 76q8-5 16 0" stroke-width="2.5" opacity=".7"/></g>'
+      + '<path id="' + id + '" d="M60 60m-36 0a36 36 0 0 1 72 0" fill="none"/><text font-size="' + fs + '" font-weight="900" letter-spacing="1" fill="' + ink + '" text-anchor="middle"><textPath href="#' + id + '" startOffset="50%">' + up + '</textPath></text>'
+      + '<text x="60" y="68" text-anchor="middle" font-size="' + (i ? 15 : 13) + '" font-weight="900" fill="' + ink + '">' + (i ? '★' : 'HOME') + '</text><text x="60" y="92" text-anchor="middle" font-size="13" font-weight="900" letter-spacing="3" fill="' + ink + '">MN</text>'
+      + '<g class="ok"><rect x="10" y="48" width="100" height="26" rx="4" fill="#FBFAF6" stroke="#2E7D32" stroke-width="3"/><text x="60" y="65.5" text-anchor="middle" font-size="10.5" font-weight="900" fill="#2E7D32" textLength="86" lengthAdjust="spacingAndGlyphs">WE ROOF HERE</text></g></svg>';
+    b.addEventListener('click', function(){ pick(i); });
+    b.addEventListener('keydown', function(e){ var cols = Math.max(1, Math.round(wall.clientWidth/ (marks[0].offsetWidth + 10))), m = {ArrowRight:1, ArrowLeft:-1, ArrowDown:cols, ArrowUp:-cols}[e.key]; if (!m) return; var n = i + m; if (n < 0 || n >= T.length) return; e.preventDefault(); marks[n].focus(); });
+    wall.appendChild(b); return b; });
+  function pick(i){ marks.forEach(function(b, j){ b.setAttribute('aria-pressed', j === i); }); say.textContent = i ? 'Yes, we roof in ' + T[i] + '.' : 'Shoreview is home: 1000 County Rd E #230.'; }
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z]/g, ''); }
+  q.addEventListener('input', function(){ var v = norm(q.value); wall.classList.toggle('filtering', !!v); marks.forEach(function(b, j){ b.classList.toggle('hit', !!v && norm(T[j]).indexOf(v) === 0); }); });
+  form.addEventListener('submit', function(e){ e.preventDefault(); var v = norm(q.value); if (!v) return; var i = T.findIndex(function(t){ return norm(t) === v; }); if (i < 0) i = T.findIndex(function(t){ return norm(t).indexOf(v) === 0; });
+    if (i >= 0){ pick(i); marks[i].scrollIntoView({block: 'nearest', behavior: OWL.reduce ? 'auto' : 'smooth'}); return; }
+    marks.forEach(function(b){ b.setAttribute('aria-pressed', 'false'); }); say.textContent = q.value.replace(/[<>&]/g, '') + ' is not on our list of 29 towns. Call (651) 977-6027 to ask.'; });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); pick(0); } }, {threshold:.3}); io.observe(wall);
+});
+</script>
+</section>
+
+</div>
+<div class="ver" data-sec="area" data-v="9">
+<section class="sec area9" id="areas-9" aria-labelledby="ar9-h">
+<style>
+.area9{overflow:hidden}
+.area9 .hd{text-align:center;margin-bottom:clamp(18px,3vw,34px)}
+.area9 .lede{margin:12px auto 0;max-width:46ch}
+.area9 .radio{position:relative;max-width:980px;margin:0 auto;filter:drop-shadow(0 40px 40px rgba(23,17,29,.3))}
+.area9 svg{display:block;width:100%;height:auto;max-width:none;touch-action:pan-y}
+.area9 .knob{position:absolute;left:79.2%;top:70%;width:15.2%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,#4A4350,#17111D 70%);box-shadow:0 8px 0 #0B080E,0 18px 24px -10px rgba(0,0,0,.6);cursor:grab;touch-action:none}
+.area9 .knob::before{content:"";position:absolute;inset:8%;border-radius:50%;background:repeating-conic-gradient(from 0deg,#2A2131 0 6deg,#3A3540 6deg 12deg)}
+.area9 .knob i{position:absolute;left:50%;top:10%;width:8%;height:26%;margin-left:-4%;border-radius:4px;background:#EAA221;transform-origin:50% 154%;transform:rotate(var(--a,0deg))}
+.area9 .knob:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+.area9 .knob.drag{cursor:grabbing}
+.area9 .say{min-height:30px;margin:clamp(16px,2.6vw,26px) 0 0;text-align:center;font-weight:800;font-size:clamp(18px,2vw,22px)}
+.area9 .ctl{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;margin-top:14px}
+.area9 .ctl .nb{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,#FFFFFF,#F2EDE2);box-shadow:0 5px 0 #C9C0AC,0 12px 18px -12px rgba(23,17,29,.45)}
+.area9 .ctl .nb:active{transform:translateY(4px);box-shadow:0 1px 0 #C9C0AC}
+.area9 .ctl .nb:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.area9 .ctl svg{width:22px;height:22px}
+.area9 .find{display:flex;gap:10px}
+.area9 .find input{width:min(60vw,240px);min-height:52px;padding:0 16px;border-radius:14px;border:2px solid rgba(23,17,29,.16);background:#fff;font:inherit;font-size:17px}
+.area9 .find input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+</style>
+<div class="wrap">
+ <div class="hd"><span class="kick">Service area</span><h2 class="h2" id="ar9-h" style="margin-top:12px">Tune In</h2>
+  <p class="lede rv">Twenty-nine stations, one for every town we roof in. Turn the knob and find yours.</p></div>
+ <div class="radio" data-owl="say:Turn the knob">
+  <svg viewBox="0 0 1000 420" aria-hidden="true"></svg>
+  <div class="knob" tabindex="0" role="slider" aria-label="Tune to a town" aria-valuemin="0" aria-valuemax="28" aria-valuenow="0"><i></i></div>
+ </div>
+ <p class="say" aria-live="polite"></p>
+ <div class="ctl"><button type="button" class="nb pv" aria-label="Previous town"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="#17111D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="nb nx" aria-label="Next town"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="#17111D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <form class="find" role="search" novalidate><label for="ar9-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Find your town</label><input id="ar9-q" placeholder="Find your town" autocomplete="off"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Tune</button></form></div>
+</div>
+<script>
+OWL.reg('area','9',function(root){
+  var T = ['Shoreview','North Oaks','Arden Hills','Vadnais Heights','Little Canada','Roseville','Mounds View','New Brighton','Lino Lakes','Blaine','White Bear Lake','Maplewood','Fridley','Saint Paul','Minneapolis','Forest Lake','Coon Rapids','Oakdale','Stillwater','Woodbury','Maple Grove','Plymouth','Minnetonka','Edina','Eden Prairie','Bloomington','Eagan','Burnsville','Apple Valley'];
+  var svg = root.querySelector('svg'), knob = root.querySelector('.knob'), say = root.querySelector('.say'), form = root.querySelector('.find'), q = root.querySelector('#ar9-q'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var SP = 150, h = '<defs><clipPath id="ar9c"><rect x="110" y="64" width="780" height="120" rx="12"/></clipPath><linearGradient id="ar9g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6DD"/><stop offset="1" stop-color="#F3E3B8"/></linearGradient></defs>';
+  h += '<rect x="20" y="20" width="960" height="380" rx="40" fill="#C9A06A"/><rect x="36" y="36" width="928" height="348" rx="28" fill="#F1EFE6"/><path d="M36 210H964" stroke="#C9C0AC" stroke-width="2"/>';
+  h += '<rect x="100" y="54" width="800" height="140" rx="18" fill="#17111D"/><rect x="110" y="64" width="780" height="120" rx="12" fill="url(#ar9g)"/>';
+  h += '<path d="M500 64v120" stroke="#B3261E" stroke-width="4"/>';
+  h += '<g clip-path="url(#ar9c)"><g class="band">';
+  T.forEach(function(t, i){ var x = 500 + i*SP; h += '<path d="M' + x + ' 72v26" stroke="#17111D" stroke-width="3"/>'; for (var m = 1; m < 5; m++) h += '<path d="M' + (x + m*SP/5) + ' 72v12" stroke="#17111D" stroke-width="1.5" opacity=".5"/>';
+    h += '<text x="' + x + '" y="132" text-anchor="middle" font-size="' + (t.length > 12 ? 19 : 22) + '" font-weight="900" fill="#17111D" style="paint-order:stroke;stroke:#FFF6DD;stroke-width:6px">' + t + '</text><text x="' + x + '" y="162" text-anchor="middle" font-size="13" font-weight="800" fill="#8E5A12" letter-spacing="2" style="paint-order:stroke;stroke:#FFF6DD;stroke-width:5px">' + (i ? 'MN' : 'HOME') + '</text>'; });
+  h += '</g><g class="static" opacity="0"></g></g>';
+  h += '<circle cx="500" cy="60" r="6" fill="#B3261E"/><path d="M500 184v6" stroke="#B3261E" stroke-width="4"/>';
+  h += '<g>'; for (var r = 0; r < 6; r++) for (var c = 0; c < 10; c++) h += '<circle cx="' + (90 + c*28) + '" cy="' + (248 + r*24) + '" r="7" fill="#17111D" opacity=".85"/>'; h += '</g>';
+  h += '<g class="meter" transform="translate(440 262)"><text x="0" y="-12" font-size="13" font-weight="900" letter-spacing="2" fill="#5A5560">SIGNAL</text>'; for (var b = 0; b < 5; b++) h += '<rect class="bar" x="' + (b*22) + '" y="' + (80 - (b + 1)*14) + '" width="16" height="' + ((b + 1)*14) + '" rx="3" fill="#D8D2C6"/>'; h += '</g>';
+  h += '<text x="600" y="372" font-size="14" font-weight="900" letter-spacing="3" fill="#8E5A12">OWL ROOFING</text>';
+  svg.innerHTML = h;
+  var band = svg.querySelector('.band'), stat = svg.querySelector('.static'), bars = [].slice.call(svg.querySelectorAll('.bar'));
+  var t = 0, tgt = 0, raf = 0, last = 0, shown = -1, quiet = true;
+  function paint(){ band.setAttribute('transform', 'translate(' + (-t*SP).toFixed(1) + ' 0)'); knob.style.setProperty('--a', (t*28).toFixed(1) + 'deg');
+    knob.querySelector('i').style.transform = 'rotate(' + (t*28).toFixed(1) + 'deg)';
+    var n = Math.round(t), off = Math.abs(t - n), lvl = Math.max(0, 5 - Math.round(off*12));
+    bars.forEach(function(r, i){ r.setAttribute('fill', i < lvl ? (lvl === 5 ? '#2E7D32' : '#EAA221') : '#D8D2C6'); });
+    if (off > .06 && !OWL.reduce){ var s = ''; for (var k = 0; k < 40; k++){ var x = 110 + Math.random()*780, y = 64 + Math.random()*120; s += '<path d="M' + x.toFixed(0) + ' ' + y.toFixed(0) + 'h' + (4 + Math.random()*14).toFixed(0) + '" stroke="#17111D" stroke-width="2"/>'; } stat.innerHTML = s; stat.setAttribute('opacity', Math.min(.6, off*1.6).toFixed(2)); } else stat.setAttribute('opacity', 0);
+    knob.setAttribute('aria-valuenow', n); knob.setAttribute('aria-valuetext', T[n]);
+    if (off < .06 && n !== shown){ shown = n; if (!quiet) say.textContent = n ? 'Yes, we roof in ' + T[n] + '.' : 'Shoreview is home: 1000 County Rd E #230.'; } else if (off >= .06) shown = -1; }
+  function loop(ts){ var dt = last ? Math.min(50, ts - last)/16.7 : 1; last = ts; t += (tgt - t)*(1 - Math.pow(.84, dt)); if (Math.abs(tgt - t) < .002) t = tgt; paint(); if (t !== tgt) raf = requestAnimationFrame(loop); else { raf = 0; last = 0; } }
+  function go(n){ quiet = false; tgt = Math.max(0, Math.min(28, n)); if (OWL.reduce){ t = tgt; paint(); return; } if (!raf) raf = requestAnimationFrame(loop); }
+  /* drag the knob round, or drag the dial band sideways; let go and it settles on the nearest town */
+  var drag = null;
+  function center(){ var r = knob.getBoundingClientRect(); return [r.left + r.width/2, r.top + r.height/2]; }
+  knob.addEventListener('pointerdown', function(e){ knob.setPointerCapture(e.pointerId); var c = center(); drag = {a: Math.atan2(e.clientY - c[1], e.clientX - c[0]), t: tgt}; knob.classList.add('drag'); });
+  knob.addEventListener('pointermove', function(e){ if (!drag) return; var c = center(), a = Math.atan2(e.clientY - c[1], e.clientX - c[0]), d = a - drag.a; if (d > Math.PI) d -= 2*Math.PI; if (d < -Math.PI) d += 2*Math.PI; drag.a = a; drag.t = Math.max(0, Math.min(28, drag.t + d*180/Math.PI/28)); quiet = false; tgt = drag.t; t = drag.t; paint(); });
+  function up(){ if (!drag) return; drag = null; knob.classList.remove('drag'); go(Math.round(tgt)); }
+  knob.addEventListener('pointerup', up); knob.addEventListener('pointercancel', up);
+  var bd = null;
+  svg.addEventListener('pointerdown', function(e){ var r = svg.getBoundingClientRect(), y = (e.clientY - r.top)/r.height*420; if (y < 60 || y > 190) return; svg.setPointerCapture(e.pointerId); bd = {x: e.clientX, t: tgt, k: 1000/r.width}; });
+  svg.addEventListener('pointermove', function(e){ if (!bd) return; quiet = false; tgt = t = Math.max(0, Math.min(28, bd.t - (e.clientX - bd.x)*bd.k/SP)); paint(); });
+  svg.addEventListener('pointerup', function(){ if (!bd) return; bd = null; go(Math.round(tgt)); });
+  knob.addEventListener('keydown', function(e){ var m = {ArrowRight:1, ArrowUp:1, ArrowLeft:-1, ArrowDown:-1}[e.key]; if (e.key === 'Home'){ e.preventDefault(); go(0); return; } if (e.key === 'End'){ e.preventDefault(); go(28); return; } if (!m) return; e.preventDefault(); go(Math.round(tgt) + m); });
+  root.querySelector('.pv').addEventListener('click', function(){ go(Math.round(tgt) - 1); });
+  root.querySelector('.nx').addEventListener('click', function(){ go(Math.round(tgt) + 1); });
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z]/g, ''); }
+  form.addEventListener('submit', function(e){ e.preventDefault(); var v = norm(q.value); if (!v) return; var i = T.findIndex(function(x){ return norm(x) === v; }); if (i < 0) i = T.findIndex(function(x){ return norm(x).indexOf(v) === 0; });
+    if (i >= 0){ go(i); return; } say.textContent = q.value.replace(/[<>&]/g, '') + ' is not on our list of 29 towns. Call (651) 977-6027 to ask.'; });
+  paint(); quiet = false; say.textContent = 'Shoreview is home: 1000 County Rd E #230.'; shown = 0;
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io.observe(svg);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="area" data-b="1">
 <section class="sec area2" id="areas-2" aria-labelledby="ar2-h">
 <style>

@@ -765,3 +765,23 @@ Each round adds two versions to one homepage slot, in the order the overnight br
 - The small bulb row was crowded; it is now tighter with dimmer unlit bulbs.
 - The stamp ink was too faint, "GAF SYSTEMS PLUS" overflowed its box, and the seal's ring text overlapped itself. The ink is now denser, the type is sized to fit, and the ring text uses a fixed length.
 - My expected bulb count in the check was wrong (47); the correct count for "5.0" in a 5×7 dot font is 40. The check was corrected, not the component.
+
+## L27 · Service Area 8 + 9 · checks 38/38 · evidence `gates/ladder/L27-area-8-9/` · Area now at 9
+| Version | Reference | What it is | D | U | C | Ct | Weighted |
+|---|---|---|---|---|---|---|---|
+| **Area 8 · Postmarks** | Graza (custom-animation bar) | Fully abstract: a wall of 29 postmarks on cream, one per real town, each a round cancellation mark with the town on the arc, a star (HOME for Shoreview), "MN" and wavy cancel lines, in three inks, each a little off square. Typing filters the wall; Find, or a click, presses a green "WE ROOF HERE" stamp across the mark and confirms it; arrow keys move across the wall. No ZIP codes. | 8.4 | 8.4 | 8.4 | 8.6 | **8.44** |
+| **Area 9 · Tune In** | Quiet Cubes (instrument first) | Fully abstract: a cream radio with a slide-rule dial whose stations are the 29 towns, a speaker grille, a signal meter and a big knob. The knob is a real slider (drag it round, or use the arrow, Home and End keys); the dial band can be dragged sideways; Prev/Next keys and search tune straight to a town. Between stations the meter drops and static shimmers; on a station the meter fills green and the readout confirms the town; on release it settles to the nearest one. | 8.6 | 8.2 | 8.6 | 8.6 | **8.50** |
+
+**Truth:** both use the real 29 towns with Shoreview as home at the locked address. An unknown town is told it isn't on the list and given (651) 977-6027. Both are fully abstract, with no geography implied, and no ZIP codes are invented (tested).
+
+**Checks run:** the generic gate, plus:
+- Area 8: 29 marks with Shoreview home and no ZIPs; "ma" filters to Maple Grove and Maplewood; "st paul" stamps Saint Paul; a click stamps Edina, one at a time; arrow keys move across the wall; the unknown-town reply.
+- Area 9: slider semantics over 29 stations starting home; arrows tune to Arden Hills with a full signal; dragging between stations drops the signal and brings static; release settles on the nearest town; search tunes to Eagan; the unknown-town reply.
+
+**Ledger:**
+- **Area 8:** stamp press ⟦S0405⟧; search feedback ⟦S1442⟧; keyboard grid ⟦S1107⟧; title ⟦S0451⟧.
+- **Area 9:** slider keyboard ⟦S1107⟧; settle to station ⟦S0489⟧; keys ⟦S1388⟧; search ⟦S1442⟧.
+
+**Defects found and fixed in the round:**
+- Area 8's stamp text overran its frame; it is now fitted to length.
+- Area 9's knob first overlapped the dial window and was lowered; the needle hid the tuned town's letters and now sits behind haloed station names.

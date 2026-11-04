@@ -46,5 +46,32 @@ module.exports = {
     rec('Next moves alphabetically (Maplewood → Minneapolis)', await p.evaluate(S => document.querySelector(S + ' .nm').textContent === 'Minneapolis', S));
     await p.fill(S + ' #ar7-q', 'Rochester'); await p.press(S + ' #ar7-q', 'Enter'); await p.waitForTimeout(300);
     rec('an unknown town is told plainly and given the phone', await p.evaluate(S => /not on our list of 29 towns\. Call \(651\) 977-6027/.test(document.querySelector(S + ' .say').textContent), S));
+  },
+  '8': async (p, S, rec) => {
+    rec('29 postmarks, the real towns, Shoreview marked home; no ZIP codes invented', await p.evaluate(S => { const b = [...document.querySelectorAll(S + ' .pm')]; return b.length === 29 && b[0].getAttribute('aria-label') === 'Shoreview, home' && !/\b55\d{3}\b/.test(document.querySelector(S + ' .wall').textContent); }, S));
+    await p.fill(S + ' #ar8-q', 'ma'); await p.waitForTimeout(300);
+    rec('typing filters the wall (ma: Maplewood, Maple Grove)', await p.evaluate(S => [...document.querySelectorAll(S + ' .pm.hit')].map(b => b.getAttribute('aria-label')).sort().join('|') === 'Maple Grove|Maplewood' && document.querySelector(S + ' .wall').classList.contains('filtering'), S));
+    await p.fill(S + ' #ar8-q', 'st paul'); await p.press(S + ' #ar8-q', 'Enter'); await p.waitForTimeout(500);
+    rec('Find stamps Saint Paul and confirms it', await p.evaluate(S => document.querySelector(S + ' .pm[aria-label="Saint Paul"]').getAttribute('aria-pressed') === 'true' && document.querySelector(S + ' .say').textContent === 'Yes, we roof in Saint Paul.', S));
+    await p.fill(S + ' #ar8-q', ''); await p.dispatchEvent(S + ' #ar8-q', 'input'); await p.click(S + ' .pm >> nth=23'); await p.waitForTimeout(400);
+    rec('clicking a postmark stamps it (Edina), one at a time', await p.evaluate(S => document.querySelectorAll(S + ' .pm[aria-pressed="true"]').length === 1 && /Edina/.test(document.querySelector(S + ' .say').textContent), S));
+    await p.focus(S + ' .pm >> nth=23'); await p.keyboard.press('ArrowRight');
+    rec('arrow keys move across the wall', await p.evaluate(S => document.activeElement.getAttribute('aria-label') === 'Eden Prairie', S));
+    await p.fill(S + ' #ar8-q', 'Duluth'); await p.press(S + ' #ar8-q', 'Enter'); await p.waitForTimeout(300);
+    rec('an unknown town is told plainly and given the phone', await p.evaluate(S => /not on our list of 29 towns\. Call \(651\) 977-6027/.test(document.querySelector(S + ' .say').textContent), S));
+  },
+  '9': async (p, S, rec) => {
+    rec('a real slider over 29 stations, starting home', await p.evaluate(S => { const k = document.querySelector(S + ' .knob'); return k.getAttribute('role') === 'slider' && k.getAttribute('aria-valuemax') === '28' && k.getAttribute('aria-valuetext') === 'Shoreview' && document.querySelectorAll(S + ' .band text').length === 58; }, S));
+    await p.focus(S + ' .knob'); await p.keyboard.press('ArrowRight'); await p.keyboard.press('ArrowRight'); await p.waitForTimeout(1300);
+    rec('arrow keys tune town by town (Arden Hills) and the signal fills', await p.evaluate(S => document.querySelector(S + ' .knob').getAttribute('aria-valuetext') === 'Arden Hills' && document.querySelector(S + ' .say').textContent === 'Yes, we roof in Arden Hills.' && [...document.querySelectorAll(S + ' .bar')].every(b => b.getAttribute('fill') === '#2E7D32'), S));
+    const r = await p.evaluate(S => { const b = document.querySelector(S + ' svg').getBoundingClientRect(); return [b.left, b.top, b.width, b.height]; }, S);
+    await p.mouse.move(r[0] + r[2] * .5, r[1] + r[3] * .3); await p.mouse.down(); await p.mouse.move(r[0] + r[2] * .5 - 1.45 * 150 * r[2] / 1000, r[1] + r[3] * .3, { steps: 6 });
+    rec('dragging the dial between stations drops the signal and brings static', await p.evaluate(S => document.querySelector(S + ' .bar').getAttribute('fill') !== '#2E7D32' && +document.querySelector(S + ' .static').getAttribute('opacity') > 0, S));
+    await p.mouse.up(); await p.waitForTimeout(1400);
+    rec('letting go settles on the nearest town', await p.evaluate(S => { const k = document.querySelector(S + ' .knob'); return k.getAttribute('aria-valuetext') === 'Little Canada' || k.getAttribute('aria-valuetext') === 'Vadnais Heights'; }, S));
+    await p.fill(S + ' #ar9-q', 'eagan'); await p.press(S + ' #ar9-q', 'Enter'); await p.waitForTimeout(1800);
+    rec('search tunes straight to Eagan', await p.evaluate(S => document.querySelector(S + ' .knob').getAttribute('aria-valuetext') === 'Eagan' && document.querySelector(S + ' .say').textContent === 'Yes, we roof in Eagan.', S));
+    await p.fill(S + ' #ar9-q', 'Fargo'); await p.press(S + ' #ar9-q', 'Enter'); await p.waitForTimeout(300);
+    rec('an unknown town is told plainly and given the phone', await p.evaluate(S => /not on our list of 29 towns\. Call \(651\) 977-6027/.test(document.querySelector(S + ' .say').textContent), S));
   }
 };
