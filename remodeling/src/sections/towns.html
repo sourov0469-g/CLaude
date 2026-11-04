@@ -1,46 +1,16 @@
 <section id="towns" class="sec towns g-base" data-section="towns" aria-labelledby="towns-h">
-  <!-- FINALIZE · Home 9 · Towns: ONE version, the owner's merge: mostly V4 (the van route from our office) with a little V1
-       (type your town) and V2 (survey marks that raise a name on a flag). All 104 municipalities are shown at once, as
-       names, county by county from north to south, beside the map. Bruno's rule: explorable, with guards: one route at a
-       time, a clear control, every pointer action has a keyboard path, and a town we do not list gets an honest answer and
-       the phone number. Towns and counts are the firm's published lists (FACTS.md: 34 / 31 / 39 = 104). -->
-  <div class="ver tw" data-v="1">
-    <div class="wrap tw__grid">
-      <div class="tw__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
-        <h2 class="t-head" id="towns-h">From our office <span class="acc">to your street.</span></h2>
-        <p class="t-lead tw__lead"><span class="nums">104</span> municipalities across Miami&#8209;Dade, Broward and Palm Beach. Type your town, or pick it on the map.</p>
-        <div class="tw__field">
-          <label class="tw__lbl" for="tw-q">Your town or city</label>
-          <div class="tw__box">
-            <input class="tw__in" id="tw-q" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="tw-opts" spellcheck="false" placeholder="Start typing, for example Doral">
-            <button type="button" class="tw__clear" aria-label="Clear the town" hidden><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5 L15 15 M15 5 L5 15"/></svg></button>
-          </div>
-          <ul class="tw__opts" id="tw-opts" role="listbox" aria-label="Matching towns" hidden></ul>
-        </div>
-        <p class="tw__ans" aria-live="polite"></p>
-        <div class="tw__act">
-          <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-          <p class="tw__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
-        </div>
-      </div>
-      <div class="tw__map" aria-hidden="true">
-        <svg class="tw__svg" viewBox="0 0 1000 2378" focusable="false"></svg>
-      </div>
-      <div class="tw__all"></div>
-    </div>
-  </div>
+
 
   <!-- NEW VERSIONS · Where We Build V2 "The map table" (2026-11-04, pass 1). Governing reference: Bruno Simon (the annex
        scopes him to this one explorable-map section). The three counties on a tilted tabletop in perspective, the 104
        survey marks on it, our office standing on it. Type a town or tap its mark: the camera flies down the coast to it and
        its pin rises with its name. Drag to look around, zoom, back to the whole map. Map + search; no list of names.
        Towns and counts: FACTS.md (34 / 31 / 39 = 104), placed by data/southfl.json. -->
-  <div class="ver tb" data-v="2">
+  <div class="ver tb" data-v="1">
     <div class="wrap tb__head">
       <div>
         <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
-        <h2 class="t-head" id="towns-h-2"><span class="nums">104</span> towns on the table. <span class="acc">Find yours.</span></h2>
+        <h2 class="t-head" id="towns-h"><span class="nums">104</span> towns on the table. <span class="acc">Find yours.</span></h2>
       </div>
       <p class="tb__lead">Miami&#8209;Dade, Broward and Palm Beach. Type your town and we will take you there, or drag the table and tap a mark.</p>
     </div>
@@ -67,79 +37,6 @@
       <div class="tb__foot">
         <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
         <p class="tb__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- NEW VERSIONS · Where We Build V3 "104 threads" (2026-11-04, pass 2). Governing reference: Lusion (flow maps). Every
-       one of the 104 municipalities is tied to our office at 19 W Flagler St by a thread; search a town or tap its mark
-       and its thread pulls bright while a pulse runs out to it; tap a county and its threads light. A town we do not
-       list has no thread: the honest answer and the phone. On wide screens the map turns so the coast runs across the
-       page (north to the right). Towns and counts: the firm's published lists (34 / 31 / 39), gazetteer points. -->
-  <div class="ver ft" data-v="3">
-    <div class="ft__band">
-      <div class="wrap ft__head">
-        <div>
-          <p class="eyebrow ft__eye"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
-          <h2 class="t-head ft__h" id="towns-h-3"><span class="nums">104</span> towns. <span class="acc">One office.</span></h2>
-          <p class="ft__lead">Every town we build in is tied to our office in Miami. Find yours and follow its thread.</p>
-        </div>
-        <div class="ft__panel">
-          <label class="ft__lbl" for="ft-q">Your town or city</label>
-          <div class="ft__box">
-            <input class="ft__in" id="ft-q" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ft-opts" spellcheck="false" placeholder="Start typing, for example Weston">
-            <button type="button" class="ft__clear" aria-label="Clear the town" hidden><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5 L15 15 M15 5 L5 15"/></svg></button>
-          </div>
-          <ul class="ft__opts" id="ft-opts" role="listbox" aria-label="Matching towns" hidden></ul>
-          <p class="ft__ans" aria-live="polite"></p>
-        </div>
-      </div>
-      <div class="wrap">
-        <div class="ft__map" data-buddy="map">
-          <div class="ft__frame">
-            <svg class="ft__svg" aria-hidden="true" focusable="false"><g class="ft__geo"></g></svg>
-            <div class="ft__labels" aria-hidden="true"></div>
-          </div>
-        </div>
-        <div class="ft__counties" role="group" aria-label="Light a county"></div>
-      </div>
-    </div>
-    <div class="wrap ft__foot">
-      <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-      <p class="ft__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
-    </div>
-  </div>
-
-  <!-- NEW VERSIONS · Where We Build V4 "Drop your pin" (2026-11-04, pass 3). Governing reference: Bruno Simon (scoped to
-       this section: playful physical objects). The firm's map pinned to a cork board; pick up your pin and drop it where
-       you live: it snaps to the nearest of the 104 towns and answers in V1's words; dropped where no listed town is
-       near, it says so, with the phone. The search drops the pin for you. Towns: the firm's published lists. -->
-  <div class="ver pb" data-v="4">
-    <div class="wrap pb__grid">
-      <div class="pb__side">
-        <p class="eyebrow"><svg class="eyebrow__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M38 7.5 H10 V40.5 H38"/></svg>Where we build</p>
-        <h2 class="t-head" id="towns-h-4">Drop your pin. <span class="acc">We will tell you.</span></h2>
-        <p class="pb__lead">Pick up the pin and drop it where you live, or type your town. <span class="nums">104</span> towns across Miami&#8209;Dade, Broward and Palm Beach.</p>
-        <div class="pb__panel">
-          <label class="pb__lbl" for="pb-q">Your town or city</label>
-          <div class="pb__box">
-            <input class="pb__in" id="pb-q" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pb-opts" spellcheck="false" placeholder="Start typing, for example Weston">
-            <button type="button" class="pb__clear" aria-label="Clear the town" hidden><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 5 L15 15 M15 5 L5 15"/></svg></button>
-          </div>
-          <ul class="pb__opts" id="pb-opts" role="listbox" aria-label="Matching towns" hidden></ul>
-          <p class="pb__ans" aria-live="polite"></p>
-          <button type="button" class="pb__out" hidden>Take the pin out</button>
-        </div>
-        <div class="pb__foot">
-          <div class="go"><a class="btn" href="#consult"><span class="btn__label">Book a consultation</span></a><p class="vouch"><span><span class="nums">4.8</span> &middot; <span class="nums">343</span> Google reviews</span><span>Licensed, bonded &amp; insured &middot; CBC1265280</span></p></div>
-          <p class="pb__call">Not on the list, or not sure? Call <a class="link nums" href="tel:+17542360675">(754)&nbsp;236&#8209;0675</a>.</p>
-        </div>
-      </div>
-      <div class="pb__board">
-        <div class="pb__tray"><span class="pb__tl">Your pin</span><span class="pb__th">Drag it to where you live</span></div>
-        <div class="pb__paper"><svg class="pb__svg" viewBox="0 0 1000 2378" aria-hidden="true" focusable="false"></svg><div class="pb__labels" aria-hidden="true"></div></div>
-        <span class="pb__office" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="pb__needle" d="M22 26 L22 43"/><circle class="pb__head" cx="22" cy="15" r="11"/><circle class="pb__shine" cx="18.5" cy="11.5" r="3"/></svg></span>
-        <button type="button" class="pb__pin" aria-label="Your pin. Drag it onto the map where you live, or type your town in the search."><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="pb__needle" d="M22 26 L22 43"/><circle class="pb__head" cx="22" cy="15" r="11"/><circle class="pb__shine" cx="18.5" cy="11.5" r="3"/></svg></button>
       </div>
     </div>
   </div>
