@@ -3031,6 +3031,79 @@ OWL.reg('video','10',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="video" data-v="11">
+<section class="sec video11" id="crew-video-11" aria-labelledby="vd11-h">
+<style>
+.video11{overflow:hidden}
+.video11 .hd{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(18px,2.6vw,28px)}
+.video11 .lede{margin-top:10px;max-width:46ch}
+.video11 .band{position:relative;aspect-ratio:16/9;max-height:74vh;width:100%;border-radius:30px;overflow:hidden;background:#2A2131 center/cover no-repeat;box-shadow:0 50px 70px -46px rgba(23,17,29,.6)}
+.video11 .band video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video11 .band::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(23,17,29,.06),rgba(23,17,29,.38));pointer-events:none}
+.video11 .owlbtn{position:absolute;left:50%;top:50%;z-index:2;display:grid;justify-items:center;gap:12px;transform:translate(-50%,-50%);padding:0;border:0;background:none;cursor:pointer}
+.video11 .face{width:clamp(120px,15vw,190px);aspect-ratio:1;border-radius:50%;background:#FFFDF7;box-shadow:0 0 0 8px rgba(255,253,247,.35),0 24px 40px -16px rgba(23,17,29,.6);display:grid;place-items:center;transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
+.video11 .owlbtn:hover .face,.video11 .owlbtn:focus-visible .face{transform:translateY(-4px) scale(1.05);box-shadow:0 0 0 12px rgba(255,253,247,.45),0 30px 46px -16px rgba(23,17,29,.65)}
+.video11 .owlbtn:active .face{transform:scale(.96)}
+.video11 .owlbtn:focus-visible{outline:none}
+.video11 .owlbtn:focus-visible .face{outline:3px solid #FFFDF7;outline-offset:8px}
+.video11 .face svg{width:78%;height:auto;overflow:visible}
+.video11 .iris{transform-box:fill-box;transform-origin:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.video11 .owlbtn:hover .iris,.video11 .owlbtn:focus-visible .iris{transform:scale(1.12)}
+.video11 .lid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);transition:transform .08s ease-in}
+.video11 .blink .lid{transform:scaleY(1)}
+.video11 .beak{transform-box:fill-box;transform-origin:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.video11 .owlbtn:hover .beak{transform:scale(1.15)}
+.video11 .tag{padding:8px 16px;border-radius:999px;background:rgba(255,253,247,.94);font-weight:800;font-size:15px;color:#17111D;box-shadow:0 6px 14px -8px rgba(23,17,29,.5)}
+.video11 .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:20px}
+.video11 .bar p{margin:0;font-weight:700;font-size:17px}
+@media (max-width:640px){.video11 .band{aspect-ratio:4/5}.video11 .bar .btn{width:100%}}
+@media (prefers-reduced-motion:reduce){.video11 .face,.video11 .iris,.video11 .beak{transition:none}.video11 .lid{display:none}}
+</style>
+<div class="wrap">
+ <div class="hd"><div><span class="kick">Owl's crew on film</span><h2 class="h2" id="vd11-h" style="margin-top:12px">Meet the Crew Who’ll Be on Your Roof</h2>
+  <p class="lede rv">Real people, not stock footage. Press the Owl to watch them at work.</p></div></div>
+ <div class="band" data-owl="say:Press me">
+  <video data-media="crew" data-aposter="a1" muted loop playsinline preload="metadata" aria-label="Owl's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+  <button class="owlbtn" type="button" aria-label="Play the full crew film">
+   <span class="face"><svg viewBox="0 0 200 180" aria-hidden="true">
+    <path d="M38 52L52 8 82 40M162 52L148 8 118 40" fill="#17111D"/>
+    <ellipse cx="100" cy="98" rx="84" ry="78" fill="#17111D"/>
+    <circle cx="66" cy="84" r="34" fill="#F1EFE6"/><circle cx="134" cy="84" r="34" fill="#F1EFE6"/>
+    <g class="eye"><circle class="iris" cx="66" cy="84" r="20" fill="#EAA221"/><circle class="pupil" cx="66" cy="84" r="9" fill="#17111D"/><circle cx="62" cy="79" r="3" fill="#FFFDF7" class="glint"/></g>
+    <g class="eye"><circle class="iris" cx="134" cy="84" r="20" fill="#EAA221"/><circle class="pupil" cx="134" cy="84" r="9" fill="#17111D"/><circle cx="130" cy="79" r="3" fill="#FFFDF7" class="glint"/></g>
+    <rect class="lid" x="30" y="48" width="72" height="72" rx="36" fill="#17111D"/><rect class="lid" x="98" y="48" width="72" height="72" rx="36" fill="#17111D"/>
+    <path class="beak" d="M88 118L118 136 88 154z" fill="#EAA221" stroke="#EAA221" stroke-width="6" stroke-linejoin="round"/>
+   </svg></span>
+   <span class="tag" aria-hidden="true">Watch the crew</span>
+  </button>
+ </div>
+ <div class="bar"><p>Owl’s own crew, at work. Want them on your roof?</p><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Get My Roof Checked</a></div>
+</div>
+<script>
+OWL.reg('video','11',function(root){
+  /* one idea: the crew film runs quietly behind one big Owl button; the Owl watches you, press it to watch the crew */
+  var band = root.querySelector('.band'), vid = root.querySelector('video'), btn = root.querySelector('.owlbtn'), face = root.querySelector('.face'), pupils = [].slice.call(root.querySelectorAll('.pupil')), glints = [].slice.call(root.querySelectorAll('.glint')), svg = root.querySelector('.face svg'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  btn.addEventListener('click', function(){ OWL.ytModal('ehKLv5DF2TQ'); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  /* pupils glide toward the pointer (or the last tap), never past the iris */
+  var aim = {x: 0, y: 0}, cur = {x: 0, y: 0}, raf = 0, last = 0, seen = false;
+  function look(cx, cy){ var r = face.getBoundingClientRect(), dx = cx - (r.left + r.width/2), dy = cy - (r.top + r.height/2), d = Math.hypot(dx, dy) || 1, m = Math.min(1, d/260); aim = {x: dx/d*m*9, y: dy/d*m*8}; kick(); }
+  function loop(now){ raf = 0; var dt = Math.min(64, now - (last || now)); last = now; var k = 1 - Math.pow(.84, dt/16.7);
+    cur.x += (aim.x - cur.x)*k; cur.y += (aim.y - cur.y)*k;
+    pupils.forEach(function(p, i){ p.setAttribute('transform', 'translate(' + cur.x.toFixed(2) + ' ' + cur.y.toFixed(2) + ')'); glints[i].setAttribute('transform', 'translate(' + (cur.x*.7).toFixed(2) + ' ' + (cur.y*.7).toFixed(2) + ')'); });
+    if (Math.abs(aim.x - cur.x) > .02 || Math.abs(aim.y - cur.y) > .02) raf = requestAnimationFrame(loop); }
+  function kick(){ if (!raf){ last = 0; raf = requestAnimationFrame(loop); } }
+  root.addEventListener('pointermove', function(e){ if (e.pointerType === 'mouse') look(e.clientX, e.clientY); });
+  root.addEventListener('pointerdown', function(e){ look(e.clientX, e.clientY); });
+  /* a blink every few seconds while on screen */
+  (function blink(){ if (seen){ svg.classList.add('blink'); setTimeout(function(){ svg.classList.remove('blink'); }, 140); } setTimeout(blink, 2600 + Math.random()*2600); })();
+  var io = new IntersectionObserver(function(e){ seen = e[0].isIntersecting; if (seen){ OWL.reveal(h2); if (!vid.src && OWL.media) vid.src = OWL.media.crew; OWL.play(vid); } else vid.pause(); }, {threshold:.3}); io.observe(band);
+});
+</script>
+</section>
+
+</div>
 <template class="bak" data-sec="video" data-b="1">
 <section class="sec video2" id="crew-video-2" aria-labelledby="v2-h">
 <style>

@@ -101,5 +101,23 @@ module.exports = {
     rec('a chapter in the list jumps there (GAF shingles at 3.1 s)', await p.evaluate(S => Math.abs(document.querySelector(S + ' video').currentTime - 3.1) < .3 && document.querySelector(S + ' .cap p').textContent === 'GAF shingles carried up', S));
     await p.click(S + ' .full'); await p.waitForTimeout(400);
     rec('the full film opens YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+  },
+  '11': async (p, S, rec) => {
+    await p.waitForTimeout(1600);
+    rec('the crew film loops quietly behind the Owl when seen', await p.evaluate(S => { const v = document.querySelector(S + ' video'); return v.dataset.media === 'crew' && v.muted && v.loop && !v.paused; }, S));
+    const b = await p.evaluate(S => { const r = document.querySelector(S + ' .face').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }, S);
+    await p.mouse.move(b[0] + 400, b[1] - 10, { steps: 6 }); await p.waitForTimeout(700);
+    const right = await p.evaluate(S => document.querySelector(S + ' .pupil').getAttribute('transform') || '', S);
+    await p.mouse.move(b[0] - 400, b[1] + 10, { steps: 6 }); await p.waitForTimeout(700);
+    const left = await p.evaluate(S => document.querySelector(S + ' .pupil').getAttribute('transform') || '', S);
+    const num = t => +((t.match(/translate\(([-\d.]+)/) || [0, 0])[1]);
+    rec('the Owl looks where the pointer is (pupils right, then left)', num(right) > 4 && num(left) < -4, right + ' / ' + left);
+    rec('the pupils never leave the iris (max 9 units)', Math.abs(num(right)) <= 9.01 && Math.abs(num(left)) <= 9.01);
+    let blinked = false; for (let i = 0; i < 30 && !blinked; i++) { blinked = await p.evaluate(S => document.querySelector(S + ' .face svg').classList.contains('blink'), S); await p.waitForTimeout(180); }
+    rec('the Owl blinks now and then', blinked);
+    rec('the beak is the play triangle and the button has a clear name', await p.evaluate(S => /M88 118L118 136 88 154z/.test(document.querySelector(S + ' .beak').getAttribute('d')) && document.querySelector(S + ' .owlbtn').getAttribute('aria-label') === 'Play the full crew film', S));
+    await p.click(S + ' .owlbtn'); await p.waitForTimeout(400);
+    rec('pressing the Owl opens the full film on YouTube ehKLv5DF2TQ', await p.evaluate(() => !!document.querySelector('dialog.ytm iframe[src*="ehKLv5DF2TQ"]'))); await p.keyboard.press('Escape');
+    rec('one next step: Get My Roof Checked goes to booking', await p.evaluate(S => document.querySelector(S + ' .bar a').getAttribute('href') === '#book', S));
   }
 };

@@ -1,0 +1,140 @@
+[
+ {
+  "sec": "video",
+  "v": "1",
+  "check": "default view still shows V1 only",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "-",
+  "check": "live version count",
+  "ok": true,
+  "detail": 11
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "only this version visible",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "section takes the page anchor id",
+  "ok": true,
+  "detail": "crew-video"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "one h2 with a readable name",
+  "ok": true,
+  "detail": "Meet the Crew Who’ll Be on Your Roof"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "every control at least 44 px",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; ratings only as 5.0 · 90+",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "the crew film loops quietly behind the Owl when seen",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "the Owl looks where the pointer is (pupils right, then left)",
+  "ok": true,
+  "detail": "translate(8.98 -0.21) / translate(-8.98 0.20)"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "the pupils never leave the iris (max 9 units)",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "the Owl blinks now and then",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "the beak is the play triangle and the button has a clear name",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "pressing the Owl opens the full film on YouTube ehKLv5DF2TQ",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "one next step: Get My Roof Checked goes to booking",
+  "ok": true
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "axe WCAG 2.1 A/AA: 0 violations",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "no page or console errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "no sideways scroll at 1440",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "no sideways scroll at 768",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "no sideways scroll at 390",
+  "ok": true,
+  "detail": "0 px"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "phone: controls at least 44 px",
+  "ok": true,
+  "detail": "0 small"
+ },
+ {
+  "sec": "video",
+  "v": "11",
+  "check": "reduced motion: loads clean, no looping animation",
+  "ok": true,
+  "detail": "0 looping"
+ }
+]
