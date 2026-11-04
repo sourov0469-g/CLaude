@@ -404,6 +404,121 @@
         if (!en.isIntersecting || once) return; once = true;
         gsap.fromTo(cs, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .6, ease: 'expo.out', stagger: .025, clearProps: 'transform,opacity' });
       }, { threshold: .15 });
+    } },
+    /* NEW VERSIONS · V4 "The round room" (governing reference: Immersive Garden, camera scrub). The visitor stands at the
+       centre of a round gallery; drag, keys, wall chips or the scroll turn it. CSS 3D: one transform on the ring, and
+       only the photographs facing you are drawn [S0062, S0083, S1018, S1209, S1443]. */
+    4: { init: function (root, k) {
+      var stage = root.querySelector('.rr__stage'), ring = root.querySelector('.rr__ring'), wallsEl = root.querySelector('.rr__walls'),
+        code = root.querySelector('.rr__code'), tt = root.querySelector('.rr__t'), openB = root.querySelector('.rr__open');
+      var ORDERC = { k: 0, b: 1, w: 2 }, L = listed().map(function (p, n) { p.n = n; return p; }).sort(function (a, b) { return ORDERC[a.c] - ORDERC[b.c] || a.n - b.n; });
+      var N = L.length, STEP = 360 / N, WALL = [['k', 'Kitchens'], ['b', 'Bathrooms'], ['w', 'Whole homes']];
+      ring.innerHTML = L.map(function (p, i) {
+        var first = i === 0 || L[i - 1].c !== p.c;
+        return '<figure class="rr__p" data-i="' + i + '">' + (first ? '<span class="rr__wl">' + WALL[ORDERC[p.c]][1] + '</span>' : '') +
+          '<img src="' + EZ.img(p.key) + '" alt="" loading="lazy" decoding="async" draggable="false"></figure>';
+      }).join('');
+      wallsEl.innerHTML = WALL.map(function (w, j) { return '<button type="button" class="rr__w" role="radio" aria-checked="' + (j ? 'false' : 'true') + '" tabindex="' + (j ? -1 : 0) + '" data-c="' + w[0] + '">' + w[1] + '</button>'; }).join('');
+      var ps = Array.prototype.slice.call(ring.children), ws = Array.prototype.slice.call(wallsEl.children), all = viewerList(L);
+      k.add(function () { ring.innerHTML = ''; wallsEl.innerHTML = ''; stage.style.cssText = ''; ring.style.transform = ''; });
+
+      /* ---------- geometry: the camera at the centre of a ring of radius R; perspective a little shorter than R ---------- */
+      var G = { W: 0, PW: 0, PH: 0, R: 0, P: 0, fov: 40, cull: 40 }, st = { u: 0, sc: 0 }, front = -1;
+      function fit() {
+        G.W = stage.clientWidth; if (!G.W) return;
+        G.PW = G.W < 600 ? Math.min(300, G.W * .76) : Math.min(520, G.W * .4); G.PH = G.PW * .72;
+        G.R = N * G.PW * 1.08 / (2 * Math.PI); G.P = G.R * .92;
+        G.fov = 2 * Math.atan(G.W / 2 / G.P) * 180 / Math.PI; G.cull = G.fov / 2 + STEP * 1.2;
+        stage.style.perspective = G.P.toFixed(0) + 'px'; stage.style.height = Math.round(G.PH * G.P / G.R + (G.W < 600 ? 70 : 110)) + 'px';
+        ps.forEach(function (p, i) { p.style.width = G.PW.toFixed(1) + 'px'; p.style.height = G.PH.toFixed(1) + 'px'; p.style.margin = (-G.PH / 2).toFixed(1) + 'px 0 0 ' + (-G.PW / 2).toFixed(1) + 'px'; p.style.transform = 'rotateY(' + (i * STEP).toFixed(3) + 'deg) translateZ(' + (-G.R).toFixed(1) + 'px)'; });
+        render();
+      }
+      function angle() { return st.u + st.sc; }
+      function render() {
+        var a = angle();
+        ring.style.transform = 'translateZ(' + G.P.toFixed(1) + 'px) rotateY(' + (-a).toFixed(3) + 'deg)';
+        ps.forEach(function (p, i) {
+          var rel = ((i * STEP - a) % 360 + 540) % 360 - 180, off = Math.abs(rel) > G.cull;
+          p.style.visibility = off ? 'hidden' : '';
+          if (!off) p.style.opacity = (1 - Math.min(1, Math.abs(rel) / G.cull) * .55).toFixed(3);
+        });
+        var f = ((Math.round(a / STEP) % N) + N) % N;
+        if (f !== front) { front = f; caption(); }
+      }
+      function caption() {
+        var p = L[front]; code.textContent = p.code + ' · ' + CAT[p.c]; tt.textContent = p.title;
+        ps.forEach(function (q, i) { q.classList.toggle('is-front', i === front); });
+        ws.forEach(function (b) { var on = b.dataset.c === p.c; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
+      }
+      var fly = null;
+      function turnTo(u, dur) {
+        if (fly) fly.kill();
+        if (!k.motion) { st.u = u; render(); return; }
+        fly = gsap.to(st, { u: u, duration: dur == null ? .7 : dur, ease: 'power3.inOut', onUpdate: render, onComplete: function () {
+          // the page may have moved during the turn: if the room is left between two photographs, it settles onto the nearer
+          var q = angle() / STEP; if (Math.abs(q - Math.round(q)) > .02 && !drag) turnTo(nearestU(front), .4);
+        } });
+      }
+      function nearestU(i) {   // the shortest way round to photograph i, given where the scroll has turned the room
+        var target = i * STEP - st.sc, d = ((target - st.u) % 360 + 540) % 360 - 180; return st.u + d;
+      }
+      function step(d) { turnTo(nearestU((front + d + N) % N)); }
+
+      /* ---------- the scroll turns the room a little as the section passes (one reversible value) [S1209] ---------- */
+      var raf = 0;
+      // while the page moves the room turns with it; when the page rests, the room settles facing a photograph
+      var settle = null;
+      function onScroll() {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = 0; var r = stage.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+          var t = Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight + r.height))); st.sc = (t - .5) * STEP * 1.6; render();
+          clearTimeout(settle); settle = setTimeout(function () { if (!drag && !(fly && fly.isActive())) turnTo(nearestU(front), .5); }, 180);   // never cuts short a turn already under way
+        });
+      }
+      if (k.motion) { k.on(window, 'scroll', onScroll, { passive: true }); k.add(function () { cancelAnimationFrame(raf); clearTimeout(settle); }); }
+
+      /* ---------- by hand: drag turns on the spot and settles on a photograph; a tap opens the one you face ---------- */
+      var drag = null;
+      k.on(stage, 'pointerdown', function (e) {
+        if (e.button > 0) return;
+        drag = { id: e.pointerId, x: e.clientX, y: e.clientY, u: st.u, live: e.pointerType === 'mouse', moved: false, t: performance.now(), lx: e.clientX, v: 0, tgt: e.target.closest('.rr__p') };
+      });
+      k.on(stage, 'pointermove', function (e) {
+        if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+        if (!drag.live) { if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { drag = null; return; } if (Math.abs(dx) > 8) drag.live = true; else return; }
+        if (!drag.moved && Math.abs(dx) > 4) { drag.moved = true; stage.classList.add('is-drag'); if (fly) fly.kill(); try { stage.setPointerCapture(drag.id); } catch (x) {} }
+        if (!drag.moved) return;
+        var now = performance.now(); drag.v = (e.clientX - drag.lx) / Math.max(1, now - drag.t); drag.t = now; drag.lx = e.clientX;
+        st.u = drag.u - dx * (G.fov / G.W); render();
+      });
+      k.on(stage, 'pointerup', function () {
+        if (!drag) return; var d = drag; drag = null; stage.classList.remove('is-drag');
+        if (!d.moved) { var i = d.tgt ? +d.tgt.dataset.i : -1; if (i < 0) return; if (i === front) EZ.viewer.open(all, i, ps[i].querySelector('img')); else turnTo(nearestU(i)); return; }
+        var fling = -d.v * 160 * (G.fov / G.W), a = st.u + fling + st.sc, i2 = ((Math.round(a / STEP) % N) + N) % N;   // a little momentum, then it settles facing a photograph
+        turnTo(nearestU(i2), .6);
+      });
+      k.on(stage, 'pointercancel', function () { drag = null; stage.classList.remove('is-drag'); });
+      k.on(stage, 'keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); step(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+        else if (e.key === 'Home') { e.preventDefault(); turnTo(nearestU(0)); } else if (e.key === 'End') { e.preventDefault(); turnTo(nearestU(N - 1)); }
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); EZ.viewer.open(all, front, ps[front].querySelector('img')); }
+      });
+      k.on(root.querySelector('.rr__prev'), 'click', function () { step(-1); });
+      k.on(root.querySelector('.rr__next'), 'click', function () { step(1); });
+      k.on(openB, 'click', function () { EZ.viewer.open(all, front, ps[front].querySelector('img')); });
+      function toWall(c) { var i = L.findIndex(function (p) { return p.c === c; }); turnTo(nearestU(i), .9); }
+      ws.forEach(function (b, j) {
+        k.on(b, 'click', function () { toWall(b.dataset.c); });
+        k.on(b, 'keydown', function (e) { var d = /Right|Down/.test(e.key) ? 1 : /Left|Up/.test(e.key) ? -1 : 0; if (!d) return; e.preventDefault(); var n = (j + d + 3) % 3; ws[n].focus(); toWall(ws[n].dataset.c); });
+      });
+
+      k.ro(stage, fit); fit();
+      EZ.reveal(k, root.querySelectorAll('.rr__head > *, .rr__bar, .rr__foot'));
+      if (!k.motion) return;
+      // arriving: the room turns a quarter of a wall into place
+      var once = false;
+      k.io(stage, function (en) { if (!en.isIntersecting || once) return; once = true; var to = nearestU(0); st.u = to - STEP * 4; render(); turnTo(to, 1.4); }, { threshold: .3 });
     } }
   });
 })();

@@ -691,3 +691,23 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - pins 12/12;
   - locks 0 fails; outside links 0; single file 0 errors.
 - Stopped for Muse's accept before Our Work V4.
+
+## New versions, pass 3 · Our Work V4 "The round room" (2026-11-04)
+- **Muse accepted** Financing V4.
+- **One new version:** `work` V4.
+  - V1 (hung frames) stays the default; V2 and V3 are untouched.
+  - It is reachable from the header switch or `?work=4`.
+- **Governing reference:** Immersive Garden (camera scrub, inside the budget).
+- **Style family:** an immersive panorama.
+- **Signature move:** the round room.
+  - The visitor stands at the centre of a round gallery of the listed photographs, in three walls (Kitchens, Bathrooms, Whole homes).
+  - Drag, keys, wall chips or the scroll turn it; it settles facing a photograph, named beneath and opening large.
+  - CSS 3D, one transform, culled.
+- **Gate:** `GATE-NEW-Work-V4.md`, self-scored 8.8 (D9 U8 C9 Ct10), 0 vetoes.
+- **Evidence:** `qa/new/work-v4/`.
+- **Regression:**
+  - touch 33/33;
+  - phones 0 small targets, 0 small text;
+  - pins 12/12;
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before Reviews V4.

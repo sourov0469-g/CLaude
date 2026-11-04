@@ -259,3 +259,60 @@
   .fi__foot .btn { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .fi__o, .fi__tile img { transition: none; } }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Our Work V4 "The round room" — an immersive panorama: the visitor at the centre of a round gallery
+   (Immersive Garden: the camera turns, scrubbed by the scroll and the hand). One transform on the ring; the panels
+   not facing you are hidden [S0062]. The stage runs full width.
+   ====================================================================================================================== */
+.rr__head { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--s4) var(--s7); align-items: end; margin-bottom: var(--s4); }
+.rr__head .t-head { margin: 0; }
+.rr__side { display: grid; gap: var(--s3); justify-items: start; }
+.rr__lead { margin: 0; max-width: 42ch; color: var(--color-text-secondary); font: 400 1.0625rem/1.5 var(--f-text); }
+.rr__walls { display: flex; flex-wrap: wrap; gap: 6px; }
+.rr__w {
+  min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--color-border-strong, var(--color-text)); background: var(--color-surface);
+  color: var(--color-text); font: 600 .9375rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.rr__w[aria-checked="true"] { background: var(--color-text); color: var(--color-bg); border-color: var(--color-text); }
+.rr__w:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+
+/* the room: a soft floor and ceiling, so the ring reads as a space */
+.rr__stage {
+  position: relative; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; outline: none;
+  background: linear-gradient(to bottom, var(--color-bg-subtle) 0%, var(--color-bg) 30%, var(--color-bg) 62%, color-mix(in srgb, var(--color-text) 9%, var(--color-bg)) 100%);
+}
+.rr__stage::after { content: ""; position: absolute; left: 0; right: 0; top: 74%; height: 1px; background: color-mix(in srgb, var(--color-text) 14%, transparent); pointer-events: none; }
+.rr__stage.is-drag { cursor: grabbing; }
+.rr__stage:focus-visible { box-shadow: inset 0 0 0 3px var(--color-focus-ring); }
+.rr__ring { position: absolute; left: 50%; top: 46%; width: 0; height: 0; transform-style: preserve-3d; }
+.rr__p {
+  position: absolute; left: 0; top: 0; margin: 0; box-sizing: border-box; padding: 8px; background: var(--color-surface); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-text) 12%, transparent), 0 24px 36px -26px rgba(0,0,0,.55); cursor: pointer;
+}
+.rr__p img { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--color-bg-muted); pointer-events: none; }
+.rr__p.is-front { box-shadow: 0 0 0 1.5px var(--color-text), 0 30px 44px -26px rgba(0,0,0,.6); }
+.rr__wl { position: absolute; left: 0; bottom: calc(100% + 10px); font: 600 .8125rem/1 var(--f-text); letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-secondary); white-space: nowrap; }
+
+/* the caption: on paper beneath the room [S1425, S0666] */
+.rr__bar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: var(--s3) var(--s4); margin-top: var(--s4); }
+.rr__cap { min-height: 3.2em; display: grid; gap: 2px; text-align: center; }
+.rr__code { margin: 0; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); letter-spacing: .02em; }
+.rr__t { margin: 0; font: 600 clamp(1.0625rem, .95rem + .4vw, 1.375rem)/1.25 var(--f-display); text-wrap: balance; }
+.rr__b {
+  width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--color-text); background: var(--color-surface); color: var(--color-text); cursor: pointer;
+  transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.rr__b svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rr__b:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .rr__b:hover, .rr__w:not([aria-checked="true"]):hover { background: var(--color-text); color: var(--color-bg); } }
+.rr__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--color-border); }
+
+@media (max-width: 899px) { .rr__head { grid-template-columns: 1fr; align-items: start; } }
+@media (max-width: 599px) {
+  .rr__bar { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .rr__open { grid-column: 1 / -1; width: 100%; }
+  .rr__foot .btn { width: 100%; }
+  .rr__p { padding: 5px; }
+}
+@media (prefers-reduced-motion: reduce) { .rr__w, .rr__b { transition: none; } }
