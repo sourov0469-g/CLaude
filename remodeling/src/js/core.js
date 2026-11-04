@@ -868,7 +868,9 @@
     EZ.order.forEach(function (id) {
       var s = EZ.sections[id];
       buildSwitch(s);
-      activate(id, s.vis[0], { initial: true });   // FINAL: one version per section; no stored picks
+      // FINAL: the default is always version 1 and no stored pick changes it; NEW VERSIONS: an explicit link such as ?hero=2
+      // opens that version (for review), and the default stays
+      activate(id, valid(s, new URLSearchParams(location.search).get(id)) || s.vis[0], { initial: true });
     });
     setupPress();
     EZ.applyImages(doc.querySelector('.foot'));

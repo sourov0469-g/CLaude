@@ -338,3 +338,24 @@ The owner's order, given twice tonight, is that no sub-agents are used. **None a
   - Contact: the business card holds its lines; the town search is full width;
   - every phone label is 13px or more.
 - Regression: touch 33/33; phones at 360, 390 and 414 with 0 small targets, 0 text under 13px and 0 overflow; pins 8/8 at 375, 390, 768 and 1440; locks 0 fails; 0 outside links; 0 console errors; 38 images, 0 broken.
+
+## New versions, pass 1 · Hero V2 "The wall" (ELBAZ-NEW-VERSIONS-ADDENDUM, 2026-11-04)
+- **One new version** inside the existing version system: `hero` V2.
+  - V1 is untouched and stays the default.
+  - It is reachable from the header switch (restored on the home page only) or `?hero=2`.
+- **Governing reference:** Immersive Garden (the camera scrub, in 2D transforms).
+- **Style family:** a gallery salon wall.
+- **Signature move:** the pull-back. The 26 photographed projects are hung as a wall with the copy as its label, and the scroll pulls the camera back from the label to the whole wall.
+- **Interaction:**
+  - any photograph flies to the middle, named, with Previous, Next, Open large and Back;
+  - arrow keys walk the wall; Enter and Escape work;
+  - the camera leans with the pointer;
+  - reduced motion keeps every action.
+- **Gate:** `GATE-NEW-Hero.md`, self-scored 8.1 (D8 U8 C8 Ct9), 0 vetoes. 7 build defects found and fixed; remaining ones named.
+- **Evidence:** `qa/new/hero/`.
+- **Regression:**
+  - touch 33/33;
+  - phones at 360, 390 and 414: 0 small targets, 0 small text, 0 overflow;
+  - pins 12/12 (home, both versions, 6 widths);
+  - locks 0 fails; outside links 0; single file 0 errors.
+- Stopped for Muse's accept before the next section (How a job runs).

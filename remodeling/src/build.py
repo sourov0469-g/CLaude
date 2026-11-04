@@ -124,7 +124,10 @@ def build(page, only=None):
     html = (html.replace("{{TITLE}}", P["title"]).replace("{{DESC}}", P["desc"]).replace("{{URL}}", P["url"])
             .replace("{{HOME}}", "#top" if page == "home" else PAGES["home"]["out"])
             .replace("{{HOME_LABEL}}", "Elbaz Construction, back to top" if page == "home" else "Elbaz Construction, home page")
-            .replace("{{NAV}}", nav).replace("{{SHEET}}", sheet).replace("{{FOOTNAV}}", foot).replace("{{BOOK}}", P["book"]))
+            .replace("{{NAV}}", nav).replace("{{SHEET}}", sheet).replace("{{FOOTNAV}}", foot).replace("{{BOOK}}", P["book"])
+            # NEW VERSIONS (2026-11-04): the home page's sections gain new versions one at a time, so its header carries the
+            # version-switch dock again; inner pages stay exactly as delivered (no dock)
+            .replace("    {{VS}}\n", '    <div class="nav__vs"></div>\n' if page == "home" else ""))
     if only:
         sections = [only]
         out = os.path.join(ROOT, "site", "dev", only + ".html")

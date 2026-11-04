@@ -126,3 +126,120 @@
   .hero__acts { gap: var(--s2) var(--s5); }
   .hproof a { font-size: .875rem; }
 }
+
+/* ======================================================================================================================
+   NEW VERSIONS · Hero V2 "The wall" — a gallery salon hang of the 26 photographed projects; the copy is the wall label.
+   Style family: gallery wall (full bleed, sand wall, white mats, one paper label). One camera layer moves; nothing else
+   does except the hover lift and the flight dim. Governing reference: Immersive Garden (camera scrub).
+   ====================================================================================================================== */
+.hw { --hw-x: var(--s5); width: calc(100% + 2 * var(--hw-x)); max-width: none; margin: calc(var(--s4) * -1) calc(var(--hw-x) * -1) calc(var(--s5) * -1); }
+.hw__stage {
+  position: relative; overflow: hidden; isolation: isolate;
+  height: calc(100svh - var(--nav-h, 68px)); min-height: 560px; max-height: 1100px;
+  background: var(--color-bg-subtle);
+  touch-action: pan-y;
+}
+.hw__cam { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.hw__wall { position: relative; list-style: none; margin: 0; padding: 0; }
+.hw__c { position: absolute; transition: opacity 360ms var(--ez-out); }
+.hw__c.is-dim { opacity: .22; }
+.hw__t { display: block; width: 100%; height: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.hw__fr {
+  display: block; width: 100%; height: 100%; padding: 5px; background: var(--color-surface);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 10%, transparent), 0 16px 26px -18px color-mix(in srgb, var(--color-shadow) 55%, transparent);
+  transition: transform 260ms var(--ez-out), box-shadow 260ms var(--ez-out);
+}
+.hw__fr img { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--color-bg-muted); user-select: none; -webkit-user-drag: none; }
+@media (hover: hover) and (pointer: fine) {
+  .hw__t:hover .hw__fr { transform: translateY(-5px); box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 26px 34px -20px color-mix(in srgb, var(--color-shadow) 70%, transparent); }
+}
+.hw__t:focus-visible { outline: none; }
+.hw__t:focus-visible .hw__fr { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; }
+.hw__c.is-on .hw__fr { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 30px 50px -26px color-mix(in srgb, var(--color-shadow) 75%, transparent); }
+.hw__plate { transition: opacity 360ms var(--ez-out), visibility 0s; }
+.is-flown .hw__plate { opacity: 0; visibility: hidden; transition: opacity 360ms var(--ez-out), visibility 0s linear 360ms; }   /* one focal point [S0083] */
+.is-flown .hw__t { cursor: pointer; }
+.is-flown .hw__c.is-on .hw__t { cursor: zoom-in; }
+
+/* the wall label: the copy on paper, never on a photograph [S1425]; a museum label's rule above the facts */
+.hw__plate {
+  position: absolute; z-index: 2; box-sizing: border-box;
+  display: grid; align-content: center; justify-items: start; gap: var(--s4);
+  padding: var(--s6) var(--s6);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 12%, transparent), 0 24px 40px -24px color-mix(in srgb, var(--color-shadow) 60%, transparent);
+}
+.hw__plate .eyebrow { margin: 0; }
+.sec .ver.hw h1.hw__h { font-size: clamp(2.25rem, 1.4rem + 3vw, 3.25rem); }
+@media (min-width: 1000px) {   /* two lines on the label, sized to its width */
+  .sec .ver.hw h1.hw__h { font-size: min(clamp(2.375rem, 1.2rem + 2.2vw, 3.375rem), calc(var(--pw, 600px) * .085)); }
+  .hw__h .ln { white-space: nowrap; }
+}
+.hw__plate .hlead { max-width: 36ch; }
+.hw__facts { display: grid; gap: 2px; width: 100%; padding-top: var(--s3); border-top: 1px solid var(--color-border); }
+
+/* the wall's own label (spare cells at the end of the last row, phones and tablets) */
+.hw__lab { position: absolute; display: grid; align-items: center; margin: 0; padding: 0 6px; }
+.hw__lab p { margin: 0; font: 600 .8125rem/1.3 var(--f-text); color: var(--color-text-secondary); }
+.hw__lab b { display: block; font: 600 1.75rem/1 var(--f-display); color: var(--color-accent-text, var(--color-text)); }
+
+/* screen-space name card under the photograph the pointer rests on */
+.hw__tip {
+  position: absolute; z-index: 5; left: 0; top: 0; max-width: 300px; padding: 7px 11px;
+  background: var(--color-text); color: var(--color-bg); border-radius: 6px;
+  font: 600 .8125rem/1.3 var(--f-text); text-align: center;
+  transform: translate(-50%, 4px); opacity: 0; pointer-events: none;
+  transition: opacity 160ms var(--ez-out), transform 200ms var(--ez-out);
+}
+.hw__tip.is-on { opacity: 1; transform: translate(-50%, 0); }
+.hw__tip.is-up { transform: translate(-50%, calc(-100% - 4px)); }
+.hw__tip.is-up.is-on { transform: translate(-50%, -100%); }
+
+/* the hud: a hint while the wall is free, a card while a photograph is in view */
+.hw__hud { position: absolute; z-index: 6; left: var(--s4); right: var(--s4); bottom: var(--s4); display: grid; justify-items: center; pointer-events: none; }
+.hw__hint {
+  margin: 0; padding: 9px 16px; border-radius: 999px;
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent); color: var(--color-text);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-shadow) 12%, transparent);
+  font: 600 .875rem/1.3 var(--f-text); text-align: center;
+  transition: opacity 220ms var(--ez-out);
+}
+.hw__hint.is-back .hw__hint-s { display: none; }
+.hw__hint.is-off { opacity: 0; }
+.hw__card {
+  pointer-events: auto; display: flex; align-items: center; gap: var(--s4); width: min(100%, 820px);
+  padding: var(--s3) var(--s3) var(--s3) var(--s5); background: var(--color-surface);
+  border: 1.5px solid var(--color-text); box-shadow: 0 22px 40px -24px color-mix(in srgb, var(--color-shadow) 70%, transparent);
+}
+.hw__card[hidden] { display: none; }
+.hw__hud:has(.hw__card:not([hidden])) .hw__hint { display: none; }
+.hw__cap { flex: 1; margin: 0; font: 600 1rem/1.3 var(--f-display); text-wrap: balance; }
+.hw__acts { display: flex; gap: var(--s2); flex: none; }
+.hw__b {
+  display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0 14px;
+  background: var(--color-surface); color: var(--color-text); border: 1.5px solid var(--color-text); border-radius: var(--radius);
+  font: 600 .875rem/1 var(--f-text); cursor: pointer; transition: background-color 160ms var(--ez-out), color 160ms var(--ez-out);
+}
+.hw__b svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hw__prev, .hw__next { padding: 0; }
+.hw__open { background: var(--color-text); color: var(--color-surface); }
+.hw__b:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .hw__b:hover { background: var(--color-text); color: var(--color-surface); } .hw__open:hover { background: var(--color-accent-solid); border-color: var(--color-accent-solid); } }
+
+@media (max-width: 999px) {
+  .hw__plate { padding: var(--s5); gap: var(--s3); }
+}
+@media (max-width: 900px) { .hw { --hw-x: var(--s4); } }
+@media (max-width: 599px) {
+  .hw__stage { min-height: 520px; }
+  .hw__plate { padding: var(--s5) var(--s4); }
+  .hw__plate .hero__acts { width: 100%; }
+  .hw__hud { bottom: calc(var(--mbar-h, 64px) + var(--s3)); left: var(--s3); right: var(--s3); }
+  .hw__card { flex-wrap: wrap; padding: var(--s3); gap: var(--s3); }
+  .hw__cap { flex: 1 1 100%; font-size: .9375rem; }
+  .hw__acts { width: 100%; }
+  .hw__open, .hw__back { flex: 1; }
+  .hw__hint { font-size: .8125rem; }
+  .hw__hint:not(.is-back) .hw__hint-t { display: none; }   /* one line on a phone: the second half arrives with the whole wall */
+}
+@media (prefers-reduced-motion: reduce) { .hw__c, .hw__fr, .hw__tip, .hw__hint, .hw__b, .hw__plate, .is-flown .hw__plate { transition: none; } }

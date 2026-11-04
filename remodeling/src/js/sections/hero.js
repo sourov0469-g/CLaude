@@ -181,5 +181,217 @@
         .fromTo(root.querySelectorAll('.hm__rv'), { scale: 0 }, { scale: 1, duration: .3, stagger: .05, ease: 'back.out(1.6)', clearProps: 'transform' }, .5)
         .fromTo(rail, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: .4, clearProps: 'transform,opacity,visibility' }, .75);
     }
-  } } });
+  } },
+
+  /* NEW VERSIONS · Hero V2 "The wall" (governing reference: Immersive Garden, the camera scrub, rebuilt in 2D transforms).
+     A gallery wall hung with the 26 photographed projects, one photograph each, with the copy hung on it as its label.
+     One camera (translate + scale on one layer) is the only thing that moves: at rest it frames the label with the work
+     around it; the scroll pulls it back until the whole wall is in view [S1328 one connected world, S0186 pin + scrub,
+     S1326 one reversible value, S1209 native scroll, finite pin]. Any photograph can be flown to (click, tap, or keyboard
+     focus), named and opened; arrow keys walk the wall; Escape steps back [S1018, S0083 one focal point]. The pointer
+     leans the camera a little. Reduced motion: no pin, no travel, the same wall and every action, instantly [S0400]. */
+  2: { init: function (root, k) {
+    html.dataset.navOn = 'ground';
+    k.add(function () { delete html.dataset.navOn; });
+    var stage = root.querySelector('.hw__stage'), cam = root.querySelector('.hw__cam'), plate = root.querySelector('.hw__plate'),
+      wall = root.querySelector('.hw__wall'), tip = root.querySelector('.hw__tip'), hint = root.querySelector('.hw__hint'),
+      card = root.querySelector('.hw__card'), capT = root.querySelector('.hw__t');
+    var PR = ((window.__DATA || {}).projects || []).slice();
+    // hang order: kitchens, baths and whole homes mixed so no two neighbours repeat a room where it can be helped
+    var byC = { k: [], b: [], w: [] };
+    PR.forEach(function (p) { (byC[p.c] || byC.w).push(p); });
+    var PAT = 'kbkbwbkbkbwkbkbwbkbkbwbkbk', ORD = [];
+    PAT.split('').forEach(function (c) { var q = byC[c].length ? byC[c] : (byC.b.length ? byC.b : byC.k.length ? byC.k : byC.w); if (q.length) ORD.push(q.shift()); });
+    ['k', 'b', 'w'].forEach(function (c) { while (byC[c].length) ORD.push(byC[c].shift()); });
+    var N = ORD.length;
+    var ALL = ORD.map(function (p) { return { key: p.k, title: p.t, alt: p.t + ', an Elbaz project' }; });
+
+    wall.innerHTML = ORD.map(function (p, i) {
+      return '<li class="hw__c"><button type="button" class="hw__t" data-i="' + i + '" tabindex="' + (i ? -1 : 0) + '" aria-label="' + p.t.replace(/"/g, '&quot;') + '"><span class="hw__fr"><img src="' + EZ.img(p.k) + '" alt="" decoding="async" draggable="false"></span></button></li>';
+    }).join('') + '<li class="hw__lab" aria-hidden="true" hidden><p><b class="nums">' + N + '</b> projects. One photograph each, all our own work.</p></li>';
+    var cells = Array.prototype.slice.call(wall.querySelectorAll('.hw__c')), tiles = cells.map(function (c) { return c.firstChild; });
+    var lab = wall.querySelector('.hw__lab');
+    k.add(function () { wall.innerHTML = ''; cam.style.transform = ''; plate.style.cssText = ''; wall.style.cssText = ''; });
+
+    /* ---------- layout: the wall in its own pixels, the label at its natural size (camera scale 1 = crisp type) ---------- */
+    var G = {}, cam0 = {}, cam1 = {}, rect = [];
+    function layout() {
+      var W = stage.clientWidth, H = stage.clientHeight; if (!W || !H) return;
+      var phone = W < 600, tab = !phone && W < 1000;
+      var C = phone ? 4 : tab ? 4 : 6, pc = phone ? 4 : 2, g = phone ? 8 : tab ? 12 : 14;
+      var PW = phone ? W - 32 : tab ? Math.round(W * .62) : Math.round(Math.max(560, Math.min(680, W * .44)));
+      var cw = (PW - (pc - 1) * g) / pc;
+      plate.style.cssText = 'width:' + PW + 'px;height:auto;left:0;top:0;--pw:' + PW + 'px';
+      var ph = plate.offsetHeight, ch, pr;
+      if (!phone && !tab) { pr = 2; ch = Math.max(cw * .74, (ph - g) / 2); }
+      else { pr = Math.max(2, Math.round((ph + g) / ((phone ? cw * .92 : cw * .8) + g))); ch = (ph + g) / pr - g; }   // rows fit the label exactly
+      var inPlate = pr * (C - pc), rest = Math.max(0, N - inPlate), other = Math.ceil(rest / C), spare = other * C - rest;
+      var ra = phone ? Math.floor(other / 2) : Math.max(1, Math.floor(other / 2)), R = other + pr, c0 = (C - pc) / 2;
+      var sx = cw + g, sy = ch + g, n = 0, slots = [];
+      for (var r = 0; r < R; r++) for (var c = 0; c < C; c++) {
+        if (r >= ra && r < ra + pr && c >= c0 && c < c0 + pc) continue;
+        slots.push([c, r]);
+      }
+      rect = [];
+      cells.forEach(function (el, i) {
+        var sl = slots[i], x = sl[0] * sx, y = sl[1] * sy;
+        rect[i] = { x: x, y: y, w: cw, h: ch, c: sl[0], r: sl[1] };
+        el.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + cw + 'px;height:' + ch + 'px';
+      });
+      if (spare > 0) {   // the spare cells at the end of the last row carry the wall's own label
+        var ls = slots[N]; lab.hidden = false;
+        lab.style.cssText = 'left:' + ls[0] * sx + 'px;top:' + ls[1] * sy + 'px;width:' + (spare * cw + (spare - 1) * g) + 'px;height:' + ch + 'px';
+      } else lab.hidden = true;
+      var phH = pr * ch + (pr - 1) * g;
+      plate.style.cssText = 'width:' + PW + 'px;height:' + phH + 'px;left:' + c0 * sx + 'px;top:' + ra * sy + 'px;--pw:' + PW + 'px';
+      var WW = C * cw + (C - 1) * g, WH = R * ch + (R - 1) * g;
+      wall.style.width = WW + 'px'; wall.style.height = WH + 'px';
+      var bot = phone ? (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mbar-h')) || 64) : 0, hud = 64;
+      G = { W: W, H: H, WW: WW, WH: WH, phone: phone, C: C, bot: bot,
+        pcx: c0 * sx + PW / 2, pcy: ra * sy + phH / 2 };
+      // the first frame: the label centred, the work around it; the last: the whole wall, clear of the hint (and the call bar)
+      cam0 = { s: 1, cx: G.pcx, cy: G.pcy };
+      var s1 = Math.min(W * .92 / WW, (H - bot - hud) * .92 / WH, 1);
+      cam1 = { s: s1, cx: WW / 2, cy: WH / 2 + (bot + hud) / 2 / s1 - 8 / s1 };
+      render();
+    }
+
+    /* ---------- the camera: base (scroll) + lean (pointer) + flight (a chosen photograph), one transform ---------- */
+    var st = { p: 0 }, lean = { x: 0, y: 0 }, fl = { f: 0, i: -1, s: 1, cx: 0, cy: 0 }, flyY = 0;
+    function sm(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
+    function base() {
+      var e = sm(st.p), s = Math.exp(Math.log(cam0.s) * (1 - e) + Math.log(cam1.s) * e);
+      return { s: s, cx: cam0.cx + (cam1.cx - cam0.cx) * e, cy: cam0.cy + (cam1.cy - cam0.cy) * e, e: e };
+    }
+    function render() {
+      if (!G.W) return;
+      var b = base(), f = fl.f;
+      var s = b.s + (fl.s - b.s) * f, cx = b.cx + (fl.cx - b.cx) * f, cy = b.cy + (fl.cy - b.cy) * f;
+      var tx = G.W / 2 - cx * s + lean.x * (1 - f), ty = G.H / 2 - cy * s + lean.y * (1 - f);
+      cam.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0) scale(' + s.toFixed(5) + ')';
+      // depth: at the label the wall is close, so its tiles sit a little apart; stepping back closes them into the flat hang
+      var d = (1 - b.e) * (1 - f) * (k.motion ? .055 : 0);
+      if (d > .0005 || cells[0].style.transform) cells.forEach(function (el, i) {
+        var r = rect[i]; if (!r) return;
+        el.style.transform = d > .0005 ? 'translate3d(' + ((r.x + r.w / 2 - G.pcx) * d).toFixed(1) + 'px,' + ((r.y + r.h / 2 - G.pcy) * d).toFixed(1) + 'px,0)' : '';
+      });
+      hint.classList.toggle('is-back', b.e > .85);
+      hint.classList.toggle('is-off', f > .02);
+    }
+    k.ro(stage, layout);
+    layout();
+    k.add(function () { cells.forEach(function (el) { el.style.cssText = ''; }); });
+
+    /* ---------- flight: a photograph to the middle, named; the rest of the wall steps back ---------- */
+    var cur = 0;
+    function rove(i) { tiles.forEach(function (t, j) { t.tabIndex = j === i ? 0 : -1; }); cur = i; }
+    function fly(i, focus) {
+      var r = rect[i]; if (!r) return;
+      rove(i);
+      var cardH = G.phone ? 150 : 96, room = G.H - G.bot - cardH - 40;
+      fl.i = i; fl.s = Math.min(G.W * (G.phone ? .86 : .62) / r.w, room * .9 / r.h); fl.cx = r.x + r.w / 2; fl.cy = r.y + r.h / 2 + (G.bot + cardH) / 2 / fl.s;
+      flyY = window.scrollY;
+      cells.forEach(function (el, j) { el.classList.toggle('is-dim', j !== i); el.classList.toggle('is-on', j === i); });
+      root.classList.add('is-flown');
+      capT.textContent = ORD[i].t;
+      card.hidden = false;
+      tip.classList.remove('is-on');
+      if (focus) tiles[i].focus({ preventScroll: true });
+      if (k.motion) gsap.to(fl, { f: 1, duration: fl.f > .5 ? .55 : .8, ease: 'power3.inOut', overwrite: true, onUpdate: render });
+      else { fl.f = 1; render(); }
+    }
+    function land(refocus) {
+      if (fl.i < 0) return;
+      var i = fl.i; fl.i = -1;
+      cells.forEach(function (el) { el.classList.remove('is-dim', 'is-on'); });
+      root.classList.remove('is-flown');
+      card.hidden = true;
+      if (refocus) tiles[i].focus({ preventScroll: true });
+      if (k.motion) gsap.to(fl, { f: 0, duration: .7, ease: 'power3.inOut', overwrite: true, onUpdate: render });
+      else { fl.f = 0; render(); }
+    }
+    function openLarge(i) { EZ.viewer.open(ALL, i, tiles[i].querySelector('img')); }
+    k.on(wall, 'click', function (e) {
+      var t = e.target.closest('.hw__t'); if (!t) return;
+      var i = +t.dataset.i;
+      if (fl.i === i && fl.f > .6) openLarge(i); else fly(i);
+    });
+    // keyboard focus flies to the photograph it lands on (never a mouse press: that is a click)
+    k.on(wall, 'focusin', function (e) {
+      var t = e.target.closest('.hw__t'); if (!t || !t.matches(':focus-visible')) return;
+      if (fl.i !== +t.dataset.i) fly(+t.dataset.i);
+    });
+    // arrow keys walk the wall as it hangs (row and column), Home / End to the ends, Escape steps back [S1018]
+    k.on(wall, 'keydown', function (e) {
+      var t = e.target.closest('.hw__t'); if (!t) return;
+      var i = +t.dataset.i, r = rect[i], to = -1;
+      if (e.key === 'Escape') { e.preventDefault(); land(true); return; }
+      if (e.key === 'Home') to = 0; else if (e.key === 'End') to = N - 1;
+      else {
+        var dx = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0, dy = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0;
+        if (!dx && !dy) return;
+        var best = -1, bd = 1e9;
+        rect.forEach(function (q, j) {
+          var ddx = q.c - r.c, ddy = q.r - r.r, dist;
+          if (dx) { if (ddy !== 0 || Math.sign(ddx) !== dx) return; dist = Math.abs(ddx); }   // along the row
+          else { if (Math.sign(ddy) !== dy) return; dist = Math.abs(ddy) * 10 + Math.abs(ddx); }   // the nearest row, then column
+          if (dist < bd) { bd = dist; best = j; }
+        });
+        if (best < 0 && dx) best = (i + dx + N) % N;   // a row's end wraps to the next photograph in hanging order
+        to = best;
+      }
+      if (to < 0) return;
+      e.preventDefault();
+      fly(to, true);
+    });
+    k.on(root.querySelector('.hw__prev'), 'click', function () { fly((Math.max(fl.i, 0) - 1 + N) % N); });
+    k.on(root.querySelector('.hw__next'), 'click', function () { fly((Math.max(fl.i, 0) + 1) % N); });
+    k.on(root.querySelector('.hw__open'), 'click', function () { if (fl.i > -1) openLarge(fl.i); });
+    k.on(root.querySelector('.hw__back'), 'click', function () { land(true); });
+    k.on(card, 'keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); land(true); } });
+
+    /* ---------- the pointer: a name card under the photograph it rests on, and a small lean of the camera ---------- */
+    if (k.fine) {
+      k.on(wall, 'pointerover', function (e) {
+        var t = e.target.closest('.hw__t'); if (!t || e.pointerType === 'touch' || fl.f > .02) return;
+        var q = t.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+        tip.textContent = ORD[+t.dataset.i].t;
+        tip.style.left = Math.max(12, Math.min(sr.width - 12, q.left - sr.left + q.width / 2)) + 'px';
+        tip.style.top = (q.bottom - sr.top + 8) + 'px';
+        tip.classList.toggle('is-up', q.bottom - sr.top > sr.height - 70);
+        if (tip.classList.contains('is-up')) tip.style.top = (q.top - sr.top - 8) + 'px';
+        tip.classList.add('is-on');
+      });
+      k.on(wall, 'pointerout', function (e) { if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('.hw__t')) tip.classList.remove('is-on'); });
+    }
+    if (k.motion && k.fine) {
+      var qx = gsap.quickTo(lean, 'x', { duration: 1, ease: 'power3.out', onUpdate: render });
+      var qy = gsap.quickTo(lean, 'y', { duration: 1, ease: 'power3.out', onUpdate: render });
+      k.on(stage, 'pointermove', function (e) {
+        if (e.pointerType === 'touch') return;
+        var r = stage.getBoundingClientRect();
+        qx(-((e.clientX - r.left) / r.width * 2 - 1) * 26); qy(-((e.clientY - r.top) / r.height * 2 - 1) * 18);
+      });
+      k.on(stage, 'pointerleave', function () { qx(0); qy(0); });
+    }
+
+    if (!k.motion) return;
+    /* ---------- the scroll: a finite pin pulls the camera back from the label to the whole wall [S0186, S1209] ---------- */
+    var navH = function () { return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68; };
+    var tw = gsap.to(st, { p: 1, ease: 'none', onUpdate: function () {
+      render();
+      if (fl.i > -1 && Math.abs(window.scrollY - flyY) > 60) land(false);   // scrolling on is stepping back
+    }, scrollTrigger: { trigger: root, start: function () { return 'top ' + navH() + 'px'; }, end: G.phone ? '+=90%' : '+=110%', pin: root, pinSpacing: true, scrub: 1, invalidateOnRefresh: true } });
+    k.add(function () { tw.scrollTrigger && tw.scrollTrigger.kill(); tw.kill(); });
+
+    /* ---------- the hang: the label's lines rise, then the photographs are hung outward from it ---------- */
+    var frs = cells.map(function (c) { return c.querySelector('.hw__fr'); });
+    var ds = rect.map(function (r) { return Math.hypot(r.x + r.w / 2 - G.pcx, r.y + r.h / 2 - G.pcy); }), dm = Math.max.apply(null, ds) || 1;
+    var lt = gsap.timeline({ defaults: { ease: EZO } });
+    lt.fromTo(plate.querySelectorAll('.hh .rise'), { yPercent: 110 }, { yPercent: 0, duration: .8, stagger: .08, clearProps: 'transform' }, .05)
+      .fromTo(frs, { autoAlpha: 0, y: -18, rotation: function (i) { return i % 2 ? 1.6 : -1.6; } },
+        { autoAlpha: 1, y: 0, rotation: 0, duration: .9, stagger: function (i) { return .15 + ds[i] / dm * .55; }, clearProps: 'transform,opacity,visibility' }, 0)
+      .fromTo(hint, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4, clearProps: 'opacity,visibility' }, .9);
+  } }
+  });
 })();
