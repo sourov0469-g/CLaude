@@ -1,0 +1,45 @@
+/* ON YOUR STREET K — "Month by month" (Cash App: colour as content; a calendar of the finder's dated records) */
+.arK{padding:104px var(--gut) 72px}
+.arK .hd{display:grid;gap:10px;max-width:980px}
+.arK .kk{font:800 12px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+.arK .sec-h{font-size:clamp(38px,5vw,76px);line-height:1}
+.arK .sec-p{font-size:17px;max-width:64ch}
+.arK .flt{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.arK .tf{padding:12px 16px;border:0;border-radius:999px;background:#F1F5EF;cursor:pointer;font:700 15px/1 var(--text);color:var(--ink-2)}
+.arK .tf[aria-checked="true"]{background:#0E3B2C;color:#fff}.arK .tf:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.arK .cal{margin-top:22px}
+.arK .grd{display:grid;gap:6px}
+.arK .gr{display:grid;grid-template-columns:64px repeat(12,minmax(0,1fr));gap:6px;align-items:center}
+.arK .yl{font:800 15px/1 var(--display);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.arK .ml{font:700 12px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:center}.arK .ml .sh{display:none}
+.arK .vh9{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.arK .gr>span[role="gridcell"]{display:block}
+.arK .tile{all:unset;box-sizing:border-box;display:block;width:100%;aspect-ratio:1.5;border-radius:8px;cursor:pointer;background:var(--tc);transition:background-color .35s ease,transform .15s}
+.arK .tile:hover{transform:scale(1.06)}
+.arK .tile:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.arK .tile[aria-pressed="true"]{box-shadow:0 0 0 3px #fff,0 0 0 6px #B5DB6E}
+.arK [data-s="0"]{--tc:#F3F5F3;box-shadow:inset 0 0 0 1px #E1E6E2}
+.arK [data-s="1"]{--tc:#D7E7D9}.arK [data-s="2"]{--tc:#9FC5A8}.arK [data-s="3"]{--tc:#5E9B73}.arK [data-s="4"]{--tc:#2E6E4C}.arK [data-s="5"]{--tc:#0E3B2C}
+.arK [data-s="x"]{--tc:repeating-linear-gradient(135deg,#F3F5F3 0 5px,#E4E9E5 5px 7px);background:var(--tc)}
+.arK .tile[data-s="0"][aria-pressed="true"]{box-shadow:inset 0 0 0 1px #E1E6E2,0 0 0 3px #fff,0 0 0 6px #B5DB6E}
+.arK .lgd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:14px;font:600 12.5px/1 var(--text);color:var(--ink-3)}
+.arK .lgd i{display:inline-block;width:22px;height:14px;border-radius:4px;background:var(--tc)}
+.arK .lgd span:nth-of-type(2){margin-right:14px}
+.arK .mp{margin-top:20px;padding:20px 22px;border-radius:16px;background:#F1F5EF}
+.arK .mn{font:500 17px/1.55 var(--text);color:var(--ink-2)}.arK .mn b{color:var(--ink)}
+.arK .mn small{display:block;margin-top:6px;font:700 12.5px/1.4 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.arK .ft9{display:grid;gap:10px;margin-top:22px;max-width:820px}
+.arK .lk9{font:600 16px/1.45 var(--text);color:var(--ink)}.arK .lk9 b{font:800 22px/1 var(--display);color:var(--green)}
+.arK .cv{font:500 13px/1.5 var(--text);color:var(--ink-3)}
+.arK .ft9 .btn{justify-self:start}
+/* arrival: tiles fill in by month */
+.arK.pre .tile{opacity:0;transform:scale(.6)}
+.arK.pre.in9 .tile{opacity:1;transform:none;transition:opacity .4s ease calc(var(--i) * 8ms),transform .5s cubic-bezier(.3,1.4,.5,1) calc(var(--i) * 8ms),background-color .35s ease}
+@media (max-width:760px){
+  .arK{padding-top:90px}
+  .arK .gr{grid-template-columns:40px repeat(12,minmax(0,1fr));gap:3px}.arK .grd{gap:3px}
+  .arK .yl{font-size:12px}.arK .ml .lg{display:none}.arK .ml .sh{display:inline}
+  .arK .tile{aspect-ratio:.9;border-radius:4px}
+  .arK .flt{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:calc(var(--gut) * -1);padding-right:var(--gut)}.arK .flt::-webkit-scrollbar{display:none}.arK .tf{flex:none}
+}
+@media (prefers-reduced-motion:reduce){.arK .tile{transition:none!important;opacity:1!important;transform:none!important}}
