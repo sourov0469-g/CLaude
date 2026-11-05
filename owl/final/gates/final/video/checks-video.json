@@ -31,7 +31,7 @@
   {
    "name": "distinct media: nothing in this section is shown twice at once",
    "ok": true,
-   "info": "{\"9e8abc35c3\":1}"
+   "info": "{\"8dc0b3eec4\":1}"
   },
   {
    "name": "one film, played from a Blob URL; no progress strip, no full-film button",
@@ -51,12 +51,12 @@
   {
    "name": "the colour lens follows the pointer",
    "ok": true,
-   "info": "matrix(1, 0, 0, 1, 232.867, 273.86) -> matrix(1, 0, 0, 1, 590.006, 270.733)"
+   "info": "matrix(1, 0, 0, 1, 224.611, 281.513) -> matrix(1, 0, 0, 1, 570.543, 272.484)"
   },
   {
    "name": "inside the lens the film is painted (opaque pixel)",
    "ok": true,
-   "info": "82,82,64,255"
+   "info": "90,92,72,255"
   },
   {
    "name": "the screen leans toward the pointer",
@@ -66,12 +66,12 @@
   {
    "name": "the page behind takes the film's colour",
    "ok": true,
-   "info": "rgb(77, 79, 67)"
+   "info": "rgb(75, 71, 57)"
   },
   {
    "name": "a moment jumps the film there and is marked",
    "ok": true,
-   "info": "{\"t\":9.71274,\"cur\":1}"
+   "info": "{\"t\":9.668809,\"cur\":1}"
   },
   {
    "name": "the pause button pauses",
@@ -81,7 +81,7 @@
   {
    "name": "arrow keys move the lens",
    "ok": true,
-   "info": "573.2827693555932px -> 393.59972621838824px"
+   "info": "361.3520646878827px -> 167.8133756088891px"
   },
   {
    "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (1 media measured)",

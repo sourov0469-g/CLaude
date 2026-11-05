@@ -54,14 +54,14 @@
    "info": "{\"say\":\"Hoo-hoo. We give a hoot.\",\"snd\":\"false\",\"rings\":3}"
   },
   {
-   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (3 media measured)",
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (4 media measured)",
    "ok": true,
-   "info": "img 0.32x, img 0.29x, img 0.28x"
+   "info": "img 0.32x, img 0.28x, img 0.30x, img 0.14x"
   },
   {
    "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (3 media measured)",
    "ok": true,
-   "info": "img 0.40x, img 0.37x, img 0.33x"
+   "info": "img 0.40x, img 0.37x, img 0.31x"
   },
   {
    "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 844 px tall)",

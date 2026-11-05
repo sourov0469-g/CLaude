@@ -106,7 +106,7 @@
   {
    "name": "a Back to top button appears after the first screen, with a ring that shows how far down you are",
    "ok": true,
-   "info": "[false,{\"on\":true,\"p\":0.2885}]"
+   "info": "[false,{\"on\":true,\"p\":0.2869}]"
   },
   {
    "name": "it takes you back to the top",
@@ -129,17 +129,17 @@
    "info": ""
   },
   {
-   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 525 px tall)",
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 604 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },
   {
-   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 867 px tall)",
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 975 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },
   {
-   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1215 px tall)",
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1323 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },

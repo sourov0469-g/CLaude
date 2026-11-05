@@ -81,3 +81,4 @@
 - **9 Family** `final/GATE-FINAL-FAMILY.md`: OLD Family V9 Give a Hoot (four photos around the owl); phone sizes tuned. 18/18.
 - **10 Book** `final/GATE-FINAL-BOOK.md`: OLD Booking V3 3D card (thickness, lift, own lean layer; click-through bug fixed) + Work Order paper rebuilt as a handwritten ink letter (Caveat, this form only); the Areas town and the circled day go into the email. 27/27.
 - **11 Footer** `final/GATE-FINAL-FOOTER.md`: the 29 roofs are a touchable roofline (owl hops, arrows, choose a town into Areas), back-to-top with a progress ring, honest Shoreview hours, copy buttons, arrival animation. 31/31.
+- **Whole page** `final/GATE-FINAL-HOME.md`: all eleven re-run on the final build 258/258, whole-page checks 21/21 (anchors, axe on the whole page, scroll audit desktop and iPhone emulation, one pinned stage, ?past records, one phone number, no maps). Inner pages next, once this gate passes.

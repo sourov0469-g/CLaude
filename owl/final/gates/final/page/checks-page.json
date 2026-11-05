@@ -1,0 +1,111 @@
+{
+ "pass": 21,
+ "total": 21,
+ "results": [
+  {
+   "name": "eleven parts in the plan's order, one version each, no switcher",
+   "ok": true,
+   "info": "hero > video > wise-check > ask-owl > nothing > services > reviews > areas > family > book > footer"
+  },
+  {
+   "name": "every anchor the header, hero and footer use exists",
+   "ok": true,
+   "info": "hero:true crew-film:true wise-check:true ask-owl:true nothing:true services:true reviews:true areas:true family:true book:true contact:true top:true"
+  },
+  {
+   "name": "no link points at a missing section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the page has exactly one phone number",
+   "ok": true,
+   "info": "tel:+16519776027"
+  },
+  {
+   "name": "no Master Elite, no BBB A+/Accredited, no lifetime, reviews only as 5.0 · 90+, no invented numbers of reviews",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps anywhere on the page: no text, class, label or image is a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the title and the logo are the site's",
+   "ok": true,
+   "info": "Owl Roofing · Shoreview, MN · We Give a Hoot"
+  },
+  {
+   "name": "header \"Services\" lands on its section (#services)",
+   "ok": true,
+   "info": "84..1290"
+  },
+  {
+   "name": "header \"Wise Check\" lands on its section (#wise-check)",
+   "ok": true,
+   "info": "84..2106"
+  },
+  {
+   "name": "header \"About\" lands on its section (#family)",
+   "ok": true,
+   "info": "84..928"
+  },
+  {
+   "name": "header \"Reviews\" lands on its section (#reviews)",
+   "ok": true,
+   "info": "84..1068"
+  },
+  {
+   "name": "header \"Areas\" lands on its section (#areas)",
+   "ok": true,
+   "info": "0..828"
+  },
+  {
+   "name": "header \"Book a Wise Check\" lands on the card",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA on the whole page: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "only one pinned stage on the page (Your part: nothing)",
+   "ok": true,
+   "info": "stage"
+  },
+  {
+   "name": "desktop: scrolled the whole page (16 screens), no sideways scroll",
+   "ok": true,
+   "info": "overflow 0"
+  },
+  {
+   "name": "iPhone 13 emulation: scrolled the whole page (21 screens), no sideways scroll",
+   "ok": true,
+   "info": "overflow 0"
+  },
+  {
+   "name": "phone: controls at least 43 px (inline text links excepted)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "?past still opens the old homepage records (kept, never deleted)",
+   "ok": true,
+   "info": "{\"chip\":true,\"n\":130}"
+  },
+  {
+   "name": "reduced motion: the whole page scrolls without errors",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no console or page errors across every run",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

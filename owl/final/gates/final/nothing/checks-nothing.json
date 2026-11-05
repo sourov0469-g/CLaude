@@ -31,7 +31,7 @@
   {
    "name": "distinct media: nothing in this section is shown twice at once",
    "ok": true,
-   "info": "{\"8412361ee2\":1}"
+   "info": "{\"6c4b28c386\":1}"
   },
   {
    "name": "a pinned stage, 4.5 screens",
@@ -41,7 +41,7 @@
   {
    "name": "the scrub: film time rises with scroll and falls back when you scroll up (Blob URL)",
    "ok": true,
-   "info": "0.734092 → 5.020309 → 9.053642 → 5.042716"
+   "info": "0.772505 → 5.036314 → 9.053642 → 5.055521"
   },
   {
    "name": "five beats follow scroll, with the \"meanwhile, you\" line",
