@@ -119,7 +119,7 @@ Screenshots (`siding/redo/final/gate/`): `hero-1440x900.png`, `-1920x1080`, `-13
 | Usability (30) | **8.7** | 99% of the headline is readable; the action and the phone are in the first screen at every size tested; keyboard, touch, reduced motion and seven screen sizes verified. **Minus:** the Book link is an in-page anchor until the Contact page exists |
 | Creativity (20) | **8.6** | A full-resolution alpha cut-out with colour unmixing, an entrance in which the headline climbs out from behind the house, depth drift between photograph and headline. **Minus:** the idea is the owner's (V4), the craft is mine |
 | Content (10) | **9.0** | The firm's own line, its own subline and the job's own record; nothing invented. **Minus:** none found |
-| **Weighted** | **8.35** | **PASS** (≥ 7.0; no category below 6.0) |
+| **Weighted** | **8.39** | **PASS** (≥ 7.0; no category below 6.0) |
 
 Weighted = 0.4 × 7.9 + 0.3 × 8.7 + 0.2 × 8.6 + 0.1 × 9.0 = 3.16 + 2.61 + 1.72 + 0.90 = **8.39**.
 
