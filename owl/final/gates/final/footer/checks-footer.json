@@ -39,9 +39,9 @@
    "info": "Shoreview, our home base. Choose this town."
   },
   {
-   "name": "the links go to this page's sections (no Protect Your Nest section is linked)",
+   "name": "the links go to the Services, Wise Check and About pages and this page's sections (no Protect Your Nest link)",
    "ok": true,
-   "info": "#services,#wise-check,#ask-owl,#family,#reviews,#areas,#book"
+   "info": "#/services,#/wise-check,#ask-owl,#/about,#reviews,#areas,#book"
   },
   {
    "name": "the proofs and the address, hours and one phone number are exact",

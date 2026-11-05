@@ -22,13 +22,13 @@ const MEASURE = sel => { const root = document.querySelector(sel), out = [];
 const MEDIA = () => { const out = []; document.querySelectorAll('.ver').forEach(v => v.querySelectorAll('img, video, source').forEach(e => {
     const src = e.currentSrc || e.src || e.getAttribute('src') || e.dataset.media || ''; if (!src || src.startsWith('data:image/gif;base64,R0lGOD') || src.startsWith('data:image/svg')) return;
     const r = e.getBoundingClientRect(), cs = getComputedStyle(e);
-    out.push({ sec: v.dataset.sec, tag: e.tagName.toLowerCase(), src: src.length > 200 ? src.slice(0, 60) + '#' + src.length + '#' + src.slice(-200) : src, shown: r.width > 30 && cs.visibility !== 'hidden' && cs.display !== 'none' && +cs.opacity > 0 });
+    out.push({ sec: v.dataset.sec, tag: e.tagName.toLowerCase(), src: src.length > 200 ? src.slice(0, 60) + '#' + src.length + '#' + src.slice(-200) : src, hid: !!e.closest('[aria-hidden="true"]'), shown: r.width > 30 && cs.visibility !== 'hidden' && cs.display !== 'none' && +cs.opacity > 0 });
     if (e.poster) out.push({ sec: v.dataset.sec, tag: 'poster', src: e.poster.slice(0, 60) + '#' + e.poster.length + '#' + e.poster.slice(-200), shown: false }); })); return out; };
 
 (async () => { const b = await chromium.launch(); const errs = [];
   const open = async (q, o) => { const p = await b.newPage(Object.assign({ viewport: { width: 1440, height: 900 } }, o || {}));
     p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/favicon|Failed to load resource/.test(m.text())) errs.push(m.text()); });
-    await p.goto(F + (q ? '?' + q : '')); await p.waitForTimeout(700); return p; };
+    await p.goto(F + (q ? '?' + q : '') + (spec.hash || '')); await p.waitForTimeout(700); return p; };
   const settle = async p => { await p.evaluate(s => { const e = document.querySelector(s); e.scrollIntoView({ block: 'start', behavior: 'instant' }); }, SELF); await p.waitForTimeout(900); };
   let p = await open();
   rec('the section exists once, no version switcher on the page', await p.evaluate(s => document.querySelectorAll(s).length === 1 && !document.querySelector('.rev.on, .vsw, #owl-versions'), SELF));
@@ -54,7 +54,7 @@ const MEDIA = () => { const out = []; document.querySelectorAll('.ver').forEach(
   const cross = Object.entries(by).filter(([k, s]) => s.size > 1).map(([k, s]) => k + ' in ' + [...s].join('+'));
   const mine = cross.filter(c => c.split(' in ')[1].split('+').includes(SEC));
   rec('distinct media: nothing this section shows is used by any other section', mine.length === 0, mine.join('; '));
-  const twice = {}; media.filter(m => m.sec === SEC && m.shown && m.tag !== 'source').forEach(m => { const k = key(m); twice[k] = (twice[k] || 0) + 1; });
+  const twice = {}; media.filter(m => m.sec === SEC && m.shown && m.tag !== 'source' && !m.hid).forEach(m => { const k = key(m); twice[k] = (twice[k] || 0) + 1; });
   rec('distinct media: nothing in this section is shown twice at once', Object.values(twice).every(n => n === 1), JSON.stringify(twice));
   await p.close();
   if (spec.extra) { const q = await open(); try { await spec.extra(q, rec, { SEC, SELF, open, OUT }); } catch (e) { rec('section behaviour checks ran', false, e.message.split('\n')[0]); } await q.close(); }

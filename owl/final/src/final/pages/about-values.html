@@ -1,0 +1,42 @@
+<section class="sec av1" id="values" aria-labelledby="av1-h">
+<style>
+.av1 .k{margin-bottom:14px}
+.av1 .words{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:10px}
+.av1 .w{position:relative;min-height:44px;font-size:clamp(40px,7vw,104px);font-weight:800;letter-spacing:-.045em;line-height:1.02;color:rgba(23,17,29,.58);transition:color .35s}
+.av1 .w::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:clamp(6px,.8vw,12px);border-radius:8px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.av1 .w[aria-selected="true"]{color:var(--ink)}
+.av1 .w[aria-selected="true"]::after{transform:scaleX(1)}
+.av1 .proof{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:clamp(22px,3vw,34px);padding:clamp(20px,3vw,30px);border-radius:26px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 30px 60px -40px rgba(23,17,29,.5)}
+.av1 .proof svg{width:clamp(64px,7vw,92px);height:auto;color:var(--ink)}
+.av1 .proof .lab{font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-70)}
+.av1 .proof p{font-size:clamp(20px,2vw,28px);font-weight:700;letter-spacing:-.02em;line-height:1.25;margin-top:6px}
+.av1 .proof .in{animation:av1in .45s var(--ease)}
+@keyframes av1in{from{opacity:0;transform:translateY(10px)}}
+@media (max-width:760px){.av1 .proof{grid-template-columns:1fr}.av1 .proof .btn{justify-self:start}}
+</style>
+<div class="wrap">
+ <span class="kick k">What we stand for</span>
+ <h2 class="sr" id="av1-h">What we stand for</h2>
+ <div class="words" role="tablist" aria-label="Owl Roofing's values"></div>
+ <div class="proof" role="tabpanel" aria-live="polite"></div>
+</div>
+<script>
+OWL.reg('about-values','1',function(root){
+  var V = [
+    ['Friendly.','Family-owned since 2025. We Give a Hoot.','<circle cx="32" cy="30" r="18" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="25" cy="27" r="3" fill="currentColor"/><circle cx="39" cy="27" r="3" fill="currentColor"/><path d="M24 36 q8 7 16 0" stroke="#EAA221" stroke-width="4" fill="none" stroke-linecap="round"/>'],
+    ['Trustworthy.','BBB A−. Licensed in Minnesota, #BC809662.','<path d="M32 8l20 8v14c0 13-9 22-20 26-11-4-20-13-20-26V16z" fill="none" stroke="currentColor" stroke-width="4"/><path d="M23 32l7 7 12-14" stroke="#EAA221" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'],
+    ['Expert.','GAF Systems Plus Certified.','<circle cx="32" cy="34" r="20" fill="none" stroke="currentColor" stroke-width="4"/><path d="M32 34 L45 21" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="34" r="4" fill="currentColor"/>'],
+    ['Reassuring.','A 10-year workmanship warranty, plus up-to-50-year manufacturer warranties.','<path d="M8 32 L32 12 L56 32" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M32 22l14 6v8c0 8-6 13-14 16-8-3-14-8-14-16v-8z" fill="#EAA221"/>']
+  ];
+  var words = root.querySelector('.words'), proof = root.querySelector('.proof'), bs = [];
+  V.forEach(function(v, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'w'; b.setAttribute('role', 'tab'); b.textContent = v[0]; b.dataset.owl = 'peek';
+    b.addEventListener('click', function(){ pick(i); }); b.addEventListener('mouseenter', function(){ if (OWL.fine) pick(i); });
+    b.addEventListener('keydown', function(e){ var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0; if (d){ e.preventDefault(); pick((i + d + 4) % 4, true); } });
+    words.appendChild(b); bs.push(b); });
+  var cur = -1;
+  function pick(i, focus){ if (i === cur) return; cur = i; bs.forEach(function(b, j){ b.setAttribute('aria-selected', j === i); b.tabIndex = j === i ? 0 : -1; if (j === i && focus) b.focus(); });
+    proof.innerHTML = '<svg class="in" viewBox="0 0 64 64" aria-hidden="true">' + V[i][2] + '</svg><div class="in"><span class="lab">The proof</span><p>' + V[i][1] + '</p></div><a class="btn btn-amber btn-sm" href="#book" data-mag>Book a Wise Check</a>'; }
+  pick(0);
+});
+</script>
+</section>

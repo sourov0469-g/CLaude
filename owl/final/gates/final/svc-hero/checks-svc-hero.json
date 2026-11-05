@@ -1,0 +1,92 @@
+{
+ "section": "svc-hero",
+ "pass": 17,
+ "total": 17,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "the Services page shows, with five jobs and nothing else selected but one",
+   "ok": true,
+   "info": "{\"h1\":\"Pick Your Roof Job\",\"tabs\":[\"Roof Replacement\",\"Roof Repair\",\"Storm Damage Help\",\"Wise Check Inspections\",\"Siding\"],\"sel\":1,\"imgs\":0,\"page\":false}"
+  },
+  {
+   "name": "choosing Storm Damage Help shows its own details",
+   "ok": true,
+   "info": "{\"h2\":\"Storm Damage Help\",\"li\":3,\"sel\":2}"
+  },
+  {
+   "name": "arrow keys move between jobs",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "Book a Wise Check is there, and the crumb goes home",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 847 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1160 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1274 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

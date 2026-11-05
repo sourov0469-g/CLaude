@@ -1,6 +1,6 @@
 {
- "pass": 21,
- "total": 21,
+ "pass": 23,
+ "total": 23,
  "results": [
   {
    "name": "eleven parts in the plan's order, one version each, no switcher",
@@ -38,32 +38,42 @@
    "info": "Owl Roofing · Shoreview, MN · We Give a Hoot"
   },
   {
-   "name": "header \"Services\" lands on its section (#services)",
+   "name": "header \"Services\" opens the services page alone, marks it current, one h1",
    "ok": true,
-   "info": "84..1290"
+   "info": "{\"shown\":[\"services\"],\"cur\":\"Services\",\"h1\":1,\"title\":\"Roofing Services · Owl Roofing\"}"
   },
   {
-   "name": "header \"Wise Check\" lands on its section (#wise-check)",
+   "name": "header \"Wise Check\" opens the wise-check page alone, marks it current, one h1",
    "ok": true,
-   "info": "84..2106"
+   "info": "{\"shown\":[\"wise-check\"],\"cur\":\"Wise Check\",\"h1\":1,\"title\":\"The Wise Check · Owl Roofing\"}"
   },
   {
-   "name": "header \"About\" lands on its section (#family)",
+   "name": "header \"About\" opens the about page alone, marks it current, one h1",
    "ok": true,
-   "info": "84..928"
+   "info": "{\"shown\":[\"about\"],\"cur\":\"About\",\"h1\":1,\"title\":\"About Owl Roofing · Family-owned in Shoreview\"}"
   },
   {
-   "name": "header \"Reviews\" lands on its section (#reviews)",
+   "name": "header \"Reviews\" lands on its home section (#reviews)",
    "ok": true,
    "info": "84..1068"
   },
   {
-   "name": "header \"Areas\" lands on its section (#areas)",
+   "name": "header \"Areas\" lands on its home section (#areas)",
    "ok": true,
    "info": "0..828"
   },
   {
    "name": "header \"Book a Wise Check\" lands on the card",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "from the Services page, \"Book a Wise Check\" returns home to the card",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the logo goes home",
    "ok": true,
    "info": ""
   },
@@ -93,9 +103,9 @@
    "info": ""
   },
   {
-   "name": "?past still opens the old homepage records (kept, never deleted)",
+   "name": "the file holds one version per section only: no past homepage, no templates, no switcher",
    "ok": true,
-   "info": "{\"chip\":true,\"n\":130}"
+   "info": "17 parts"
   },
   {
    "name": "reduced motion: the whole page scrolls without errors",

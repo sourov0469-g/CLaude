@@ -1,0 +1,71 @@
+<section class="sec pghero ab1" id="about-top" aria-labelledby="ab1-h">
+<style>
+.ab1 .g{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,5vw,64px);align-items:center}
+.ab1 .lede{margin:20px 0 28px;max-width:40ch}
+.ab1 .facts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:560px;margin-bottom:28px}
+.ab1 .facts li{padding:14px 16px;border-radius:16px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.06)}
+.ab1 .facts b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-70);margin-bottom:4px}
+.ab1 .facts span{font-weight:700;font-size:17px}
+.ab1 .owl{position:relative;width:min(100%,520px);aspect-ratio:1;justify-self:center}
+.ab1 .owl svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 30px 40px rgba(23,17,29,.25))}
+.ab1 .lid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);transition:transform .13s}
+.ab1 .owl.blink .lid{transform:scaleY(1)}
+.ab1 .head{transition:transform .5s var(--ease)}
+.ab1 .owl .bubble{position:absolute;right:2%;top:6%;max-width:230px;padding:12px 16px;border-radius:18px 18px 18px 4px;background:var(--paper);font-weight:700;font-size:16px;box-shadow:0 14px 26px -14px rgba(23,17,29,.5);opacity:0;transform:translateY(8px) scale(.96);transition:.35s var(--ease)}
+.ab1 .owl.talk .bubble{opacity:1;transform:none}
+.ab1 .hoot{position:absolute;left:50%;bottom:2%;transform:translateX(-50%)}
+@media (max-width:900px){.ab1 .g{grid-template-columns:1fr}.ab1 .owl{width:min(100%,380px)}}
+</style>
+<div class="wrap">
+ <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>About</span></nav>
+ <div class="g">
+  <div>
+   <h1 class="h1" id="ab1-h" style="font-size:clamp(40px,5.4vw,78px)">Family-Owned. Shoreview-Built. We Give a Hoot.</h1>
+   <p class="lede">Owl Roofing is family-owned, founded in 2025 in Shoreview, Minnesota, by Tim Brown and Noah Bergland.</p>
+   <ul class="facts">
+    <li><b>Founded</b><span>2025, Shoreview, MN</span></li><li><b>Licence</b><span>MN #BC809662</span></li>
+    <li><b>Certified</b><span>GAF Systems Plus</span></li><li><b>BBB</b><span>A−</span></li>
+    <li><b>Reviews</b><span>5.0 · 90+ reviews</span></li><li><b>Warranty</b><span>10-year workmanship</span></li>
+   </ul>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <div class="owl" aria-hidden="true">
+   <svg viewBox="62 40 276 344">
+    <ellipse cx="200" cy="372" rx="120" ry="14" fill="#17111D" opacity=".12"/>
+    <path d="M70 330 Q200 300 330 330" stroke="#8E5A12" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <g class="body">
+     <path d="M110 330 C90 250 100 170 200 160 C300 170 310 250 290 330 Z" fill="#17111D"/>
+     <path d="M150 330 C140 270 150 220 200 214 C250 220 260 270 250 330 Z" fill="#EAA221"/>
+     <g fill="#C7871A" opacity=".8"><path d="M170 250 l8 10 8 -10M200 244 l8 10 8 -10M220 262 l8 10 8 -10M180 280 l8 10 8 -10M210 292 l8 10 8 -10"/></g>
+     <path d="M104 250 C70 270 80 320 120 330 C112 300 112 270 128 248Z" fill="#2a2131"/><path d="M296 250 C330 270 320 320 280 330 C288 300 288 270 272 248Z" fill="#2a2131"/>
+     <path d="M168 332 l-6 14 M180 332 l0 16 M192 332 l6 14 M208 332 l-6 14 M220 332 l0 16 M232 332 l6 14" stroke="#EAA221" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g class="head">
+     <path d="M110 120 L120 52 L160 92 Q200 82 240 92 L280 52 L290 120 Q300 190 200 200 Q100 190 110 120Z" fill="#17111D"/>
+     <circle cx="160" cy="132" r="38" fill="#F1EFE6"/><circle cx="240" cy="132" r="38" fill="#F1EFE6"/>
+     <circle cx="160" cy="132" r="30" fill="#EAA221"/><circle cx="240" cy="132" r="30" fill="#EAA221"/>
+     <circle class="pu" cx="160" cy="132" r="15" fill="#17111D"/><circle class="pu" cx="240" cy="132" r="15" fill="#17111D"/>
+     <circle cx="152" cy="124" r="5" fill="#fff" opacity=".8"/><circle cx="232" cy="124" r="5" fill="#fff" opacity=".8"/>
+     <rect class="lid" x="120" y="92" width="80" height="80" rx="40" fill="#17111D"/><rect class="lid" x="200" y="92" width="80" height="80" rx="40" fill="#17111D"/>
+     <path d="M190 160 L200 182 L210 160Z" fill="#EAA221"/>
+    </g>
+   </svg>
+   <span class="bubble"></span>
+   <button class="btn btn-line btn-sm hoot" type="button" data-owl="hoot" style="pointer-events:auto" aria-hidden="false">Say hello</button>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('about-hero','1',function(root){
+  var owl = root.querySelector('.owl'), head = owl.querySelector('.head'), pus = owl.querySelectorAll('.pu'), bub = owl.querySelector('.bubble'), btn = owl.querySelector('.hoot');
+  owl.removeAttribute('aria-hidden'); owl.querySelector('svg').setAttribute('aria-hidden', 'true'); bub.setAttribute('aria-live', 'polite');
+  var lines = ['We Give a Hoot.', 'Family-owned since 2025.', 'GAF Systems Plus Certified.', 'Rated 5.0 from 90+ reviews.', 'Hoo needs a Wise Check?'], k = 0, tm;
+  if (OWL.fine && !OWL.reduce) addEventListener('pointermove', function(e){ var r = owl.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+    var dx = e.clientX - (r.left + r.width/2), dy = e.clientY - (r.top + r.height*.33), d = Math.hypot(dx, dy) || 1, m = Math.min(1, d/400);
+    pus.forEach(function(p, i){ p.setAttribute('cx', (i ? 240 : 160) + dx/d*11*m); p.setAttribute('cy', 132 + dy/d*11*m); });
+    head.style.transform = 'rotate(' + Math.max(-10, Math.min(10, dx/40)) + 'deg)'; head.style.transformOrigin = '200px 190px'; }, {passive:true});
+  if (!OWL.reduce) setInterval(function(){ owl.classList.add('blink'); setTimeout(function(){ owl.classList.remove('blink'); }, 150); }, 3800);
+  btn.addEventListener('click', function(){ bub.textContent = lines[k++ % lines.length]; owl.classList.add('talk'); head.style.transform = 'rotate(-16deg)'; clearTimeout(tm); tm = setTimeout(function(){ owl.classList.remove('talk'); head.style.transform = ''; }, 2600); });
+});
+</script>
+</section>

@@ -7,11 +7,11 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   const open = async (o, q) => { const p = await b.newPage(o || { viewport: { width: 1440, height: 900 } }); p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/favicon|Failed to load resource/.test(m.text())) errs.push(m.text()); }); await p.goto(F + (q || '')); await p.waitForTimeout(900); return p; };
   let p = await open();
   // 1. structure: eleven sections in the plan's order, no switcher
-  const st = await p.evaluate(() => ({ order: [...document.querySelectorAll('.ver')].map(v => v.dataset.sec), sw: !!document.querySelector('.rev.on, .vsw, #owl-versions, [data-versions]'), ids: ['hero', 'crew-film', 'wise-check', 'ask-owl', 'nothing', 'services', 'reviews', 'areas', 'family', 'book', 'contact', 'top'].map(i => i + ':' + !!document.getElementById(i)).join(' '), qsBtn: [...document.querySelectorAll('.rev')].map(e => e.className).join('|'), title: document.title }));
+  const st = await p.evaluate(() => ({ order: [...document.querySelectorAll('.page[data-page="home"] .ver, footer.ftr')].map(v => v.dataset.sec || 'footer'), sw: !!document.querySelector('.rev.on, .vsw, #owl-versions, [data-versions]'), ids: ['hero', 'crew-film', 'wise-check', 'ask-owl', 'nothing', 'services', 'reviews', 'areas', 'family', 'book', 'contact', 'top'].map(i => i + ':' + !!document.getElementById(i)).join(' '), qsBtn: [...document.querySelectorAll('.rev')].map(e => e.className).join('|'), title: document.title }));
   rec('eleven parts in the plan\'s order, one version each, no switcher', JSON.stringify(st.order) === JSON.stringify(['hero', 'video', 'wise-check', 'ask-owl', 'nothing', 'services', 'reviews', 'areas', 'family', 'book', 'footer']) && !st.sw, st.order.join(' > '));
   rec('every anchor the header, hero and footer use exists', !/false/.test(st.ids), st.ids);
   // 2. every link on the page goes somewhere real
-  const links = await p.evaluate(() => { const bad = []; document.querySelectorAll('main a[href^="#"], header a[href^="#"], footer a[href^="#"]').forEach(a => { const h = a.getAttribute('href'); if (h === '#' || h === '#/') return; if (!document.getElementById(h.slice(1))) bad.push(h); }); return bad; });
+  const links = await p.evaluate(() => { const bad = []; document.querySelectorAll('main a[href^="#"], header a[href^="#"], footer a[href^="#"]').forEach(a => { const h = a.getAttribute('href'); if (h === '#' || h.startsWith('#/')) { if (h !== '#' && h !== '#/' && !document.querySelector('.page[data-page="' + h.slice(2) + '"]')) bad.push(h); return; } if (!document.getElementById(h.slice(1))) bad.push(h); }); return bad; });
   rec('no link points at a missing section', links.length === 0, links.join(','));
   const phones = await p.evaluate(() => [...document.querySelectorAll('a[href^="tel:"]')].map(a => a.getAttribute('href')).filter((v, i, a) => a.indexOf(v) === i));
   rec('the page has exactly one phone number', phones.length === 1 && phones[0] === 'tel:+16519776027', phones.join(','));
@@ -20,13 +20,23 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   const mp = await p.evaluate(() => { const bad = []; document.querySelectorAll('main *, header *, footer *').forEach(n => { const k = (n.getAttribute('class') || '') + ' ' + (n.id || '') + ' ' + (n.getAttribute('aria-label') || '') + ' ' + (n.getAttribute('alt') || ''); if (/\b(map|maps)\b|contour|cartograph/i.test(k)) bad.push(k.trim().slice(0, 40)); }); return bad; });
   rec('no maps anywhere on the page: no text, class, label or image is a map', !/\bmaps?\b/i.test(txt) && mp.length === 0, mp.join('; '));
   rec('the title and the logo are the site\'s', /Owl Roofing/.test(st.title) && await p.evaluate(() => !!document.querySelector('.hdr-logo img[alt="Owl Roofing"]') && !!document.querySelector('footer img[alt="Owl Roofing"]')), st.title);
-  // 3. anchors land (header links)
-  for (const [h, id] of [['Services', 'services'], ['Wise Check', 'wise-check'], ['About', 'family'], ['Reviews', 'reviews'], ['Areas', 'areas']]) {
+  // 3. header links: three pages, two home anchors, the book button
+  for (const [h, pg] of [['Services', 'services'], ['Wise Check', 'wise-check'], ['About', 'about']]) {
+    await p.evaluate(() => { location.hash = '#/'; scrollTo(0, 0); }); await p.waitForTimeout(500); await p.click('.hdr-nav a:has-text("' + h + '")'); await p.waitForTimeout(900);
+    const r = await p.evaluate(n => ({ shown: [...document.querySelectorAll('.page')].filter(x => !x.hidden).map(x => x.dataset.page), cur: document.querySelector('.hdr-nav a[aria-current="page"]') && document.querySelector('.hdr-nav a[aria-current="page"]').textContent, h1: document.querySelectorAll('.page:not([hidden]) h1').length, title: document.title }), pg);
+    rec('header "' + h + '" opens the ' + pg + ' page alone, marks it current, one h1', r.shown.join() === pg && r.cur === h && r.h1 === 1, JSON.stringify(r)); }
+  await p.evaluate(() => { location.hash = '#/'; }); await p.waitForTimeout(500);
+  for (const [h, id] of [['Reviews', 'reviews'], ['Areas', 'areas']]) {
     await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(300); await p.click('.hdr-nav a:has-text("' + h + '")'); await p.waitForTimeout(1600);
     const r = await p.evaluate(i => { const e = document.getElementById(i).getBoundingClientRect(); return [Math.round(e.top), Math.round(e.bottom)]; }, id);
-    rec('header "' + h + '" lands on its section (#' + id + ')', r[0] < 400 && r[1] > 100, r.join('..')); }
+    rec('header "' + h + '" lands on its home section (#' + id + ')', r[0] < 400 && r[1] > 100, r.join('..')); }
   await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(300); await p.click('.hdr .btn[href="#book"]'); await p.waitForTimeout(1600);
   rec('header "Book a Wise Check" lands on the card', await p.evaluate(() => { const e = document.getElementById('book').getBoundingClientRect(); return e.top < 500 && e.bottom > 100; }));
+  // from an inner page, Book goes home to the card, and the logo goes home
+  await p.evaluate(() => { location.hash = '#/services'; }); await p.waitForTimeout(700); await p.click('.page:not([hidden]) .ctaband a[href="#book"]'); await p.waitForTimeout(1600);
+  rec('from the Services page, "Book a Wise Check" returns home to the card', await p.evaluate(() => !document.querySelector('.page[data-page="home"]').hidden && document.getElementById('book').getBoundingClientRect().top < 600));
+  await p.evaluate(() => { location.hash = '#/about'; }); await p.waitForTimeout(600); await p.click('.hdr-logo'); await p.waitForTimeout(900);
+  rec('the logo goes home', await p.evaluate(() => !document.querySelector('.page[data-page="home"]').hidden));
   // 4. whole-page axe
   await p.evaluate(() => scrollTo(0, 0)); await p.addScriptTag({ content: AXE });
   const ax = await p.evaluate(async () => { const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } }); return r.violations.map(v => v.id + ':' + v.nodes.length + ' ' + (v.nodes[0] && v.nodes[0].target.join(' ')).slice(0, 80)); });
@@ -48,8 +58,8 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   const ptap = await p.evaluate(() => { const bad = []; document.querySelectorAll('main button, main a.btn, main input, footer button, footer a').forEach(c => { const r = c.getBoundingClientRect(), cs = getComputedStyle(c); if (r.width < 4 || cs.visibility === 'hidden' || cs.display === 'none' || c.closest('[inert],[hidden]')) return; if (c.closest('.rl')) return; if ((r.height < 43 || r.width < 43) && !(c.tagName === 'A' && getComputedStyle(c).display === 'inline')) bad.push((c.className || c.tagName).toString().slice(0, 20) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height)); }); return bad.slice(0, 6); });
   rec('phone: controls at least 43 px (inline text links excepted)', ptap.length === 0, ptap.join('; '));
   await p.close();
-  // 8. ?past still opens the records
-  p = await open(null, '?past'); const past = await p.evaluate(() => ({ chip: !!document.querySelector('.pastchip'), n: document.querySelectorAll('.ver').length })); rec('?past still opens the old homepage records (kept, never deleted)', past.chip && past.n > 20, JSON.stringify(past)); await p.close();
+  // 8. one version only: the old records are not in this file
+  { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8'); rec('the file holds one version per section only: no past homepage, no templates, no switcher', !/id="owl-past"|<template/.test(src) && (src.match(/class="ver"/g) || []).length === 17, (src.match(/class="ver"/g) || []).length + ' parts'); }
   // 9. reduced motion: whole page, no errors
   p = await open({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }); for (let y = 0; y < total; y += 1200) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(150); } rec('reduced motion: the whole page scrolls without errors', true); await p.close();
   rec('no console or page errors across every run', errs.length === 0, errs.slice(0, 3).join(' | '));
