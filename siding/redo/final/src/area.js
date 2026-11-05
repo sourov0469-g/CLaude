@@ -51,10 +51,10 @@ window.FArea = (function () {
     function readout() {
       const t = activeTown(), hasT = !!t, tr = S.trade; let h = '';
       const n = hasT ? (+signOf(t).dataset.n) : 0, pinned = lis.filter(match).length, all = lis.filter((l) => !hasT || l.dataset.town === t).length;
-      if (S.found) { const f = S.found; h = `<b>${esc(f.name)}</b><span class="rn">${f.n != null ? f.n : ''}<small>${f.n != null ? 'documented project' + (f.n === 1 ? '' : 's') : 'in our project records'}</small></span><span class="rh">${f.note}</span>`; }
+      if (S.found) { const f = S.found; h = `<b>${esc(f.name)}</b><span class="rn">${f.n != null ? f.n + ' <small>documented project' + (f.n === 1 ? '' : 's') + '</small>' : 'Yes <small>in our project records</small>'}</span><span class="rh">${f.note}</span>`; }
       else if (hasT) {
         let hoods = []; try { hoods = JSON.parse(signOf(t).dataset.hoods); } catch (e) {}
-        h = `<b>${esc(t)}</b><span class="rn">${n}<small>documented project${n === 1 ? '' : 's'}</small></span>`
+        h = `<b>${esc(t)}</b><span class="rn">${n} <small>documented project${n === 1 ? '' : 's'}</small></span>`
           + `<span class="rh">${tr === 'all' ? `${all} photo${all === 1 ? '' : 's'} pinned here.` : (pinned ? `${pinned} pinned photo${pinned === 1 ? '' : 's'} with ${esc(tr.toLowerCase())}.` : `No pinned photo of ${esc(tr.toLowerCase())} here yet.`)}</span>`
           + (hoods.length && tr === 'all' ? `<span class="rh">In our records: ${esc(hoods.slice(0, 5).join(', '))}${hoods.length > 5 ? ' and more' : ''}.</span>` : '');
       } else if (tr !== 'all') h = `<b>${esc(tr)}</b><span class="rh">${pinned} of the ${lis.length} pinned photos. Pick a town sign to narrow it.</span>`;
@@ -80,7 +80,7 @@ window.FArea = (function () {
     function setTrade(t) { S.trade = t; S.found = null; if (t !== 'all') revealAll(); apply(); }
     signs.forEach((b) => {
       b.addEventListener('click', () => setLock(b.dataset.town));
-      b.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse') return; S.hover = b.dataset.town; apply(); });
+      b.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse') return; S.hover = b.dataset.town; S.found = null; apply(); });
       b.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'mouse') return; if (S.hover === b.dataset.town) { S.hover = null; apply(); } });
       b.addEventListener('focus', () => { if (b.matches(':focus-visible')) { S.hover = b.dataset.town; apply(); } });
       b.addEventListener('blur', () => { if (S.hover === b.dataset.town) { S.hover = null; apply(); } });
@@ -91,7 +91,7 @@ window.FArea = (function () {
       c.addEventListener('keydown', (e) => { const k = e.key, i = chips.indexOf(c); let n = null; if (k === 'ArrowRight' || k === 'ArrowDown') n = chips[(i + 1) % chips.length]; else if (k === 'ArrowLeft' || k === 'ArrowUp') n = chips[(i - 1 + chips.length) % chips.length]; else if (k === 'Home') n = chips[0]; else if (k === 'End') n = chips[chips.length - 1];
         if (n) { e.preventDefault(); chips.forEach((x) => (x.tabIndex = x === n ? 0 : -1)); n.focus(); setTrade(n.dataset.t); } });
     });
-    s.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !dlg.open && (S.lock || S.trade !== 'all' || S.found)) { S.lock = null; S.trade = 'all'; S.found = null; q.value = ''; closeList(); chips.forEach((x) => (x.tabIndex = x.dataset.t === 'all' ? 0 : -1)); apply(); } });
+    s.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !dlg.open && (S.lock || S.trade !== 'all' || S.found)) { S.lock = null; S.hover = null; S.card = null; S.trade = 'all'; S.found = null; q.value = ''; closeList(); chips.forEach((x) => (x.tabIndex = x.dataset.t === 'all' ? 0 : -1)); apply(); } });
 
     /* ================= the thread: a damped string through every pin ================= */
     let pts = [], order = [], pinIdx = [], pinFrac = [], forced = RM(), maxP = RM() ? 1 : 0, cards = lis.map(() => ({ k: 0, v: 0 }));
@@ -101,7 +101,7 @@ window.FArea = (function () {
       const rows = []; [...A].sort((a, b) => a.y - b.y).forEach((a) => { const r = rows.find((r) => Math.abs(r.y - a.y) < 64); if (r) { r.a.push(a); r.y = (r.y * (r.a.length - 1) + a.y) / r.a.length; } else rows.push({ y: a.y, a: [a] }); });
       order = []; rows.sort((a, b) => a.y - b.y).forEach((r, ri) => { r.a.sort((p, q) => p.x - q.x); if (ri % 2) r.a.reverse(); r.a.forEach((a) => (a.row = ri)); order.push(...r.a); });
       pts = []; pinIdx = [];
-      const lr = lis.map((li) => li.getBoundingClientRect()), edgeL = Math.min(...lr.map((r) => r.left)) - o.left + 4, edgeR = Math.max(...lr.map((r) => r.right)) - o.left - 4;
+      const lr = btns.map((b) => b.getBoundingClientRect()), edgeL = Math.max(9, Math.min(...lr.map((r) => r.left)) - o.left - 11), edgeR = Math.min(W - 9, Math.max(...lr.map((r) => r.right)) - o.left + 11);
       const add = (x, y, fixed) => pts.push({ x, y, x0: x, y0: y, vx: 0, vy: 0, fixed });
       const seg = (a, b, n, mode) => { const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy), sag = mode === 'run' ? clamp(d * .07, 7, 17) : mode === 'tail' ? 5 : 0;
         for (let j = 1; j <= n; j++) { const f = j / n, bump = Math.pow(Math.sin(Math.PI * f), 2); add(a.x + dx * f, a.y + dy * f + sag * bump, mode === 'pin' || j === n && mode !== 'mid'); } };
@@ -125,23 +125,23 @@ window.FArea = (function () {
     function sim() {
       for (let i = 1; i < pts.length - 1; i++) { const p = pts[i]; if (p.fixed) continue; const l = pts[i - 1], r = pts[i + 1];
         let fx = (((l.x - l.x0) + (r.x - r.x0)) / 2 - (p.x - p.x0)) * .36 - (p.x - p.x0) * .03, fy = (((l.y - l.y0) + (r.y - r.y0)) / 2 - (p.y - p.y0)) * .36 - (p.y - p.y0) * .03;
-        if (ptr) { const dx = p.x - ptr.x, dy = p.y - ptr.y, d = Math.hypot(dx, dy); if (d < 76) { const k = (76 - d) * .05 / (d || 1); fx += dx * k; fy += dy * k; } }
+        if (ptr) { const dx = p.x - ptr.x, dy = p.y - ptr.y, d = Math.hypot(dx, dy); if (d < 84) { const k = (84 - d) * .085 / (d || 1); fx += dx * k; fy += dy * k; } }
         p.fx = fx; p.fy = fy; }
       let e = 0;
-      pts.forEach((p) => { if (p.fixed) return; p.vx = clamp((p.vx + p.fx) * .9, -30, 30); p.vy = clamp((p.vy + p.fy) * .9, -30, 30); p.x += p.vx; p.y += p.vy; e += Math.abs(p.vx) + Math.abs(p.vy) + Math.abs(p.x - p.x0) * .01 + Math.abs(p.y - p.y0) * .01; });
+      pts.forEach((p) => { if (p.fixed) return; p.vx = clamp((p.vx + p.fx) * .88, -30, 30); p.vy = clamp((p.vy + p.fy) * .88, -30, 30); p.x += p.vx; p.y += p.vy; e += Math.abs(p.vx) + Math.abs(p.vy); });
       cards.forEach((c) => { c.v += -c.k * .07 - c.v * .09; c.k = clamp(c.k + c.v, -14, 14); e += Math.abs(c.k) * .3 + Math.abs(c.v); });
       return e;
     }
     function step(now) {
       raf = 0; const n = clamp(Math.round(((now - last) || 16.7) / 16.7), 1, 3); last = now; let e = 0; for (let i = 0; i < n; i++) e = sim();
-      cards.forEach((c, i) => lis[i].style.setProperty('--k', Math.abs(c.k) < .004 ? '0' : c.k.toFixed(3)));
-      draw(); if (vis && (e > .08 || ptr)) raf = requestAnimationFrame(step); else cards.forEach((c, i) => { c.k = c.v = 0; lis[i].style.setProperty('--k', '0'); });
+      cards.forEach((c, i) => { const v = Math.abs(c.k) < .004 ? '0' : c.k.toFixed(3); if (v !== c.s) { c.s = v; lis[i].style.setProperty('--k', v); } });
+      draw(); if (vis && (e > .3 || (ptr && now - ptrT < 220))) raf = requestAnimationFrame(step); else cards.forEach((c, i) => { c.k = c.v = 0; c.s = '0'; lis[i].style.setProperty('--k', '0'); });
     }
     const kick = () => { if (!raf && !RM() && vis) { last = performance.now(); raf = requestAnimationFrame(step); } };
     function tugAt(li, v) { if (RM()) return; const i = order.findIndex((a) => a.li === li); if (i < 0) return; const pi = pinIdx[i], span = 9; pts.forEach((p, j) => { const d = Math.abs(j - pi); if (d < span && !p.fixed) p.vy += v * (1 - d / span); }); cards[lis.indexOf(li)].v += v * .18; kick(); }
     /* the pointer (mouse only): plucks the thread, swings the cards it moves past */
-    let pv = 0;
-    board.addEventListener('pointermove', (e) => { if (e.pointerType !== 'mouse' || RM()) return; const o = board.getBoundingClientRect(), x = e.clientX - o.left, y = e.clientY - o.top; pv = ptr ? x - ptr.x : 0; ptr = { x, y };
+    let pv = 0, ptrT = 0;
+    board.addEventListener('pointermove', (e) => { if (e.pointerType !== 'mouse' || RM()) return; const o = board.getBoundingClientRect(), x = e.clientX - o.left, y = e.clientY - o.top; pv = ptr ? x - ptr.x : 0; ptr = { x, y }; ptrT = performance.now();
       lis.forEach((li, i) => { const r = li.getBoundingClientRect(); if (e.clientX > r.left - 10 && e.clientX < r.right + 10 && e.clientY > r.top && e.clientY < r.bottom + 10) cards[i].v += clamp(pv * .045, -1.6, 1.6); }); kick(); });
     board.addEventListener('pointerleave', () => { ptr = null; kick(); });
     lis.forEach((li) => {
@@ -152,6 +152,17 @@ window.FArea = (function () {
       b.addEventListener('blur', () => { if (S.card === li) { S.card = null; fan(); } });
     });
 
+    /* a breeze now and then: a soft wave of swing runs across the cards in view (the loop sleeps in between; nothing runs while the page is idle) */
+    let gT = 0;
+    function gust() {
+      gT = setTimeout(gust, 5200 + Math.random() * 4200);
+      if (RM() || !vis || dlg.open || document.hidden || raf || !W) return;
+      const dir = Math.random() < .5 ? -1 : 1, amp = .3 + Math.random() * .16, o = board.getBoundingClientRect();
+      lis.forEach((li, i) => { const r = li.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight || li === S.card) return; const fx = clamp((r.left - o.left) / W);
+        setTimeout(() => { cards[i].v += dir * amp * (.8 + Math.random() * .4); kick(); }, (dir > 0 ? fx : 1 - fx) * 650); });
+      pts.forEach((p) => { if (!p.fixed) p.vy += Math.sin(p.x / 80) * .14; });
+    }
+    gT = setTimeout(gust, 2600);
     /* ================= drawn on scroll: the thread, then each card as it is reached ================= */
     function reveal() {
       if (!order.length) return; const o = board.getBoundingClientRect();
@@ -188,14 +199,15 @@ window.FArea = (function () {
     btns.forEach((b) => b.addEventListener('click', () => openDlg(lis[btns.indexOf(b)])));
 
     /* ================= the in-page viewer ================= */
-    const dlg = $('.ar-dlg'), wrap = $('.ar-dwrap', dlg), dimg = $('.ar-dfig img', dlg), dfig = $('.ar-dfig', dlg), dk = $('.ar-dk', dlg), dt = $('.ar-dt', dlg), dr = $('.ar-dr', dlg), dtn = $('.ar-dtn', dlg), dshow = $('.ar-dshow', dlg);
+    const dlg = $('.ar-dlg'), wrap = $('.ar-dwrap', dlg), dimg = $('.ar-dfig img', dlg), dfig = $('.ar-dfig', dlg), dk = $('.ar-dk', dlg), dt = $('.ar-dt', dlg), dr = $('.ar-dr', dlg), dtn = $('.ar-dtn', dlg), dshow = $('.ar-dshow', dlg), dd = $('.ar-dd', dlg);
     let navSet = [], cur = 0, closing = false, startPt = null;
     const dFocusables = () => $$('button:not([disabled]),a[href]', dlg).filter((x) => x.offsetParent !== null || x === dlg);
     function fill(li, dir) {
       const b = li.querySelector('.ar-card'), town = li.dataset.town, n = cityN.get(town.toLowerCase());
-      dimg.src = li.querySelector('img').src; dimg.alt = b.dataset.alt + ' (Austin Pro)'; dt.textContent = b.dataset.hood;
+      dimg.src = li.querySelector('img').src; dimg.alt = b.dataset.alt + '.'; dt.textContent = b.dataset.hood;
       dr.innerHTML = `${esc(b.dataset.place)} · ${esc(b.dataset.when)} · ${esc(b.dataset.trades)}`;
       dk.textContent = `Photo ${cur + 1} of ${navSet.length}`;
+      if (dd.children.length !== navSet.length) dd.innerHTML = navSet.map(() => '<i></i>').join(''); [...dd.children].forEach((d, i) => d.classList.toggle('on', i === cur));
       dtn.innerHTML = n != null ? `<b>${esc(town)}</b>: ${n} documented project${n === 1 ? '' : 's'} in our records.` : '';
       dshow.textContent = `Show ${town} on the board`; dshow.dataset.town = town;
       if (dir && !RM() && dfig.animate) { dfig.animate([{ opacity: 0, transform: `translateX(${dir * 36}px)` }, { opacity: 1, transform: 'none' }], { duration: 360, easing: 'cubic-bezier(.23,1,.32,1)' }); [dt, dr].forEach((x) => x.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: 40, easing: 'ease-out', fill: 'backwards' })); }
@@ -211,9 +223,9 @@ window.FArea = (function () {
     }
     function stepDlg(d) { if (navSet.length < 2) return; cur = (cur + d + navSet.length) % navSet.length; fill(navSet[cur], d); }
     function closeDlg() { if (!dlg.open || closing) return; closing = true;
-      const done = () => { dlg.close(); closing = false; };
-      if (!RM() && wrap.animate) { const a = wrap.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(14px) scale(.97)' }], { duration: 180, easing: 'ease-in', fill: 'forwards' }); a.onfinish = () => { done(); a.cancel(); }; } else done(); }
-    dlg.addEventListener('close', () => { if (lastLi) { const b = lastLi.querySelector('.ar-card'); b.tabIndex = 0; b.focus({ preventScroll: false }); } });
+      let fin = false; const done = () => { if (fin) return; fin = true; dlg.close(); closing = false; };
+      if (!RM() && wrap.animate) { const a = wrap.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(14px) scale(.97)' }], { duration: 180, easing: 'ease-in', fill: 'forwards' }); const to = setTimeout(() => { done(); a.cancel(); }, 300); a.onfinish = () => { clearTimeout(to); done(); a.cancel(); }; } else done(); }
+    dlg.addEventListener('close', () => { S.card = null; fan(); if (lastLi) { const b = lastLi.querySelector('.ar-card'); b.tabIndex = 0; b.focus({ preventScroll: false }); } });
     dlg.addEventListener('cancel', (e) => { e.preventDefault(); closeDlg(); });
     dlg.addEventListener('click', (e) => { if (e.target === dlg) closeDlg(); });
     $('.ar-dx', dlg).addEventListener('click', closeDlg); $('.ar-dp', dlg).addEventListener('click', () => stepDlg(-1)); $('.ar-dn', dlg).addEventListener('click', () => stepDlg(1));
@@ -239,10 +251,13 @@ window.FArea = (function () {
       items = [...starts, ...inc].slice(0, 7);
       lb.innerHTML = items.length ? items.map((a, i) => `<li role="option" id="ar-o${i}" aria-selected="false" data-i="${i}">${esc(a.label)}${a.n != null ? `<i>${a.n}</i>` : ''}</li>`).join('') : '<li class="none" role="presentation">Not in our records yet. Call (512) 550-0000 and ask.</li>';
       lb.hidden = false; q.setAttribute('aria-expanded', 'true'); }
-    function choose(a) { q.value = a.label; closeList(); const name = cityName.get(a.city.toLowerCase()) || a.city, n = cityN.get(a.city.toLowerCase()), sign = signOf(name);
-      S.card = null;
-      if (sign) { S.found = null; S.lock = null; setLock(name, 'quiet'); if (a.n == null) { read.innerHTML = `<b>${esc(a.label)}</b><span class="rn">${n}<small>documented projects in ${esc(name)}</small></span><span class="rh">${esc(a.label.split(',')[0])} is in our project records.</span>`; } }
-      else { S.lock = null; S.found = { name: a.label, n: a.n != null ? a.n : (n != null ? n : null), note: n != null && a.n == null ? `${esc(a.label.split(',')[0])} is in our project records (${esc(name)}: ${n}).` : 'No photo pinned for it on this board yet.' }; apply(); readout(); } }
+    function choose(a) {
+      q.value = a.label; closeList(); S.card = null; const key = a.city.toLowerCase(), name = cityName.get(key) || a.city, n = cityN.get(key), sign = signOf(name), place = a.n == null;
+      const cityLine = n != null ? `${esc(name)}: ${n} documented project${n === 1 ? '' : 's'}.` : '';
+      if (sign) { S.lock = null; S.found = null; setLock(name, 'quiet'); if (place) S.found = { name: a.label, n: null, note: cityLine }; }
+      else { S.lock = null; S.found = { name: a.label, n: place ? null : a.n, note: (place ? cityLine + ' ' : '') + 'No photo of it is pinned on this board.' }; apply(); }
+      clearTimeout(rdT); readout();
+    }
     q.addEventListener('input', listOpts);
     q.addEventListener('focus', () => { if (q.value.trim().length >= 2) listOpts(); });
     q.addEventListener('keydown', (e) => { const os = $$('[role=option]', lb);
@@ -255,7 +270,7 @@ window.FArea = (function () {
 
     $$('.ar-ph img').forEach((im) => { if (im.decode) im.decode().catch(() => {}); });
     layout(); apply(); readout(); onScroll();
-    s.__ar = { S, lis, signs, chips, fp, get pts() { return pts; }, get order() { return order; }, openDlg, closeDlg, layout, setLock, setTrade };
+    s.__ar = { S, lis, signs, chips, fp, get pts() { return pts; }, get order() { return order; }, running: () => !!raf, openDlg, closeDlg, layout, setLock, setTrade };
   }
   return { wire };
 })();

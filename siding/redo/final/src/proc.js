@@ -11,8 +11,8 @@ window.FProc = (function () {
   const ZN = ['siding', 'trim', 'windows', 'roof', 'gutters'];
   const zoneAt = (x, y) => {
     if ((x >= 88 && x <= 134 && y >= 122 && y <= 168) || (x >= 186 && x <= 234 && y >= 122 && y <= 168)) return 2;
-    if ((Math.abs(x - 72) <= 14 || Math.abs(x - 248) <= 14) && y >= 100 && y <= 212) return 1;
-    if ((y >= 106 && y <= 124 && x >= 44 && x <= 276) || (x >= 252 && x <= 274 && y >= 106 && y <= 208)) return 4;
+    if ((y >= 104 && y <= 122 && x >= 44 && x <= 276) || (x >= 254 && x <= 274 && y >= 106 && y <= 208)) return 4;
+    if ((Math.abs(x - 72) <= 14 || Math.abs(x - 248) <= 14) && y >= 122 && y <= 212) return 1;
     if (y < 106 && y > 34 && Math.abs(x - 160) <= (y - 40) / 72 * 104 + 14) return 3;
     if (x > 72 && x < 248 && y >= 124 && y <= 212) return 0;
     return -1;
@@ -50,7 +50,7 @@ window.FProc = (function () {
       if (i === 3) { a.walk = svg.querySelector('[data-walk]'); a.broom = svg.querySelector('[data-broom]'); }
       return a;
     });
-    let cur = 0, mode = 'manual', frozen = false, inView = false, finished = false, last = 0, raf = 0, started = false, hoverT = 0;
+    let lock = 0, cur = 0, mode = 'manual', frozen = false, inView = false, finished = false, last = 0, raf = 0, started = false, hoverT = 0;
 
     /* ---- one drawing, a pure function of t ---- */
     function lensScript(t) {
@@ -70,8 +70,8 @@ window.FProc = (function () {
         chips(a, z, t);
       } else {
         if (a.i === 1) { const kf = a.kf; let k = 0; while (k < kf.length - 2 && t > kf[k + 1][0]) k++; const A = kf[k], B = kf[k + 1], u = eio(seg(t, A[0], B[0])); a.pen.setAttribute('transform', `translate(${f2(lerp(A[1], B[1], u))} ${f2(lerp(A[2], B[2], u))})`); a.pen.style.opacity = f2(seg(t, .0, .03) * (1 - seg(t, .54, .6))); }
-        if (a.i === 2) { const p = seg(t, .62, .76), y = 124 + 46 * Math.sin(p * Math.PI * 6); a.roll.setAttribute('transform', `translate(${f2(73 + 174 * eo(p))} ${f2(y)})`); a.roll.style.opacity = f2(seg(t, .6, .62) * (1 - seg(t, .76, .79))); }
-        if (a.i === 3) { const w = seg(t, 0, .24), x = 34 + 138 * eio(w); a.walk.setAttribute('transform', `translate(${f2(x)} ${f2(222 - Math.abs(Math.sin(x / 5)) * 2.4)})`); const p = seg(t, .5, .72); a.broom.setAttribute('transform', `translate(${f2(20 + 176 * p)} 198) rotate(${f2(Math.sin(p * 50) * 4)})`); a.broom.style.opacity = f2(seg(t, .49, .5) * (1 - seg(t, .72, .75))); }
+        if (a.i === 2) { const p = seg(t, .62, .74), y = 124 + 46 * Math.sin(p * Math.PI * 6); a.roll.setAttribute('transform', `translate(${f2(73 + 174 * eo(p))} ${f2(y)})`); a.roll.style.opacity = f2(seg(t, .6, .62) * (1 - seg(t, .74, .76))); }
+        if (a.i === 3) { const w = seg(t, 0, .24), x = 34 + 138 * eio(w); a.walk.setAttribute('transform', `translate(${f2(x)} ${f2(222 - Math.abs(Math.sin(x / 5)) * 2.4)})`); const p = seg(t, .5, .7); a.broom.setAttribute('transform', `translate(${f2(20 + 176 * p)} 198) rotate(${f2(Math.sin(p * 50) * 4)})`); a.broom.style.opacity = f2(seg(t, .49, .5) * (1 - seg(t, .7, .73))); }
         chips(a, phase(a, t), t);
       }
     }
@@ -103,7 +103,7 @@ window.FProc = (function () {
     /* ---- the loop: only while something is changing and the section is on screen ---- */
     function start() { if (!raf && inView && !document.hidden && !RM) { last = performance.now(); raf = requestAnimationFrame(frame); } }
     function frame(now) {
-      raf = 0; const dt = Math.min(.05, (now - last) / 1000 || .016); last = now; const a = arts[cur]; let busy = false;
+      raf = 0; const dt = Math.min(.25, (now - last) / 1000 || .016); last = now; const a = arts[cur]; let busy = false;
       if (a.goal != null) {
         const d = a.goal - a.t;
         if (Math.abs(d) < .002) { a.t = a.goal; if (!a.over) a.goal = null; } else { a.t += d * (1 - Math.exp(-dt * (a.over ? 12 : 7))); busy = true; }
@@ -114,14 +114,14 @@ window.FProc = (function () {
       } else if (a.i === 0) render(a, a.t);
       if (a.i === 0 && lensMove(a, dt)) busy = true;
       railFill(); btnState();
-      if (busy) start();
+      if (busy && inView && !document.hidden) raf = requestAnimationFrame(frame);
     }
 
     /* ---- opening a column ---- */
     function setBW() { const W = colsEl.clientWidth, g = 10, gr = matchMedia('(max-width:1180px)').matches ? [4.4, 7.4] : [3.6, 6.6]; colsEl.style.setProperty('--bw', f2((W - 3 * g) * gr[0] / gr[1]) + 'px'); }
     function open(i, user) {
       if (i === cur) { if (user) stopAuto(); return; }
-      cur = i; finished = false;
+      cur = i; finished = false; lock = performance.now() + 900;
       items.forEach((it, k) => { const on = k === i; it.classList.toggle('on', on); btns[k].setAttribute('aria-expanded', on ? 'true' : 'false'); });
       const a = arts[i]; a.t = RM ? 1 : 0; a.goal = null; a.th = 0; a.hold = false; if (a.i === 0) a.seen.clear(); a.cs = []; render(a, a.t);
       if (user) { mode = 'manual'; frozen = false; live.textContent = `Step ${i + 1} of 4: ${TITLES[i]}`; }
@@ -138,8 +138,8 @@ window.FProc = (function () {
     s.addEventListener('focusin', () => stopAuto());
     items.forEach((it, i) => {
       const col = it.querySelector('.pr-col');
-      col.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse' || !fine) return; stopAuto(); if (i === cur) return; clearTimeout(hoverT); hoverT = setTimeout(() => open(i, true), 140); });
-      col.addEventListener('pointerleave', () => clearTimeout(hoverT));
+      col.addEventListener('pointermove', (e) => { if (e.pointerType !== 'mouse' || !fine) return; stopAuto(); if (i === cur || performance.now() < lock || hoverT) return; hoverT = setTimeout(() => { hoverT = 0; if (performance.now() >= lock) open(i, true); }, 140); });
+      col.addEventListener('pointerleave', () => { clearTimeout(hoverT); hoverT = 0; });
       const a = arts[i];
       a.panel.addEventListener('pointerenter', (e) => { if (e.pointerType === 'touch' || RM || i !== cur) return; stopAuto(); a.over = true; start(); });
       a.panel.addEventListener('pointermove', (e) => {
@@ -148,7 +148,7 @@ window.FProc = (function () {
       });
       a.panel.addEventListener('pointerleave', () => { if (!a.over) return; a.over = false; if (a.i !== 0) a.goal = null; start(); });
       a.chips.forEach((c, j) => c.addEventListener('click', () => {
-        stopAuto(); frozen = false; a.hold = true; const g = a.i === 0 ? a.ends[j] - .02 : a.ends[j];
+        stopAuto(); frozen = false; a.hold = true; const g = j === a.ends.length - 1 && a.i !== 0 ? 1 : a.ends[j] - .012;
         if (a.i === 0) a.seen.clear();
         if (RM) { a.t = g; render(a, g); btnState(); return; }
         a.goal = g; start();
@@ -178,7 +178,7 @@ window.FProc = (function () {
 
     arts.forEach((a, i) => { a.t = i === 0 && !RM ? 0 : 1; render(a, a.t); });
     railFill(); btnState();
-    window.__proc = { S: () => ({ cur, mode, frozen, finished, inView, t: arts[cur].t, goal: arts[cur].goal, hold: arts[cur].hold, over: arts[cur].over }), arts, open, go: (g) => { const a = arts[cur]; stopAuto(); a.hold = true; a.goal = g; start(); } };
+    window.__proc = { S: () => ({ loop: !!raf, nodes: nds.filter((n) => n.classList.contains('on')).length, cur, mode, frozen, finished, inView, t: arts[cur].t, goal: arts[cur].goal, hold: arts[cur].hold, over: arts[cur].over }), arts, open, set: (t) => { const a = arts[cur]; stopAuto(); a.hold = true; a.goal = null; a.t = t; render(a, t); btnState(); start(); }, go: (g) => { const a = arts[cur]; stopAuto(); a.hold = true; a.goal = g; start(); } };
   }
   return { wire };
 })();

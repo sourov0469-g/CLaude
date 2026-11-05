@@ -69,9 +69,9 @@ def markup(S, contact, cal):
         w, h = Image.open(io.BytesIO(raw)).size
         src = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
         trs = trades_of(trades); seen += trs
-        alt = f'{trades} job in {place}, Texas'
+        alt = f'Austin Pro project: {trades} in {place}, Texas'
         rec = f'{place} · {when} · {trades}'
-        cards.append(f'''<li class="ar-c" data-i="{i}" data-town="{e(town)}" data-tr="{e('|'.join(trs))}" style="--r:{ROT[k]}deg;--dy:{DY[k]}px;--d:{(k * 0.37) % 2.4:.2f};--a:{0.55 + (k % 4) * 0.17:.2f}deg;--ar:{AR[shape]};--w:{WD[shape]}"><i class="ar-pin{' g' if k % 4 == 1 else ''}" aria-hidden="true"></i>
+        cards.append(f'''<li class="ar-c" data-i="{i}" data-town="{e(town)}" data-tr="{e('|'.join(trs))}" style="--r:{ROT[k]}deg;--dy:{DY[k]}px;--ar:{AR[shape]};--w:{WD[shape]}"><i class="ar-pin{' g' if k % 4 == 1 else ''}" aria-hidden="true"></i>
 <button type="button" class="ar-card" tabindex="{0 if k == 0 else -1}" aria-haspopup="dialog" aria-label="{e(rec)}. Open photo" data-rec="{e(rec)}" data-place="{e(place)}" data-hood="{e(hood)}" data-when="{e(when)}" data-trades="{e(trades)}" data-alt="{e(alt)}"><span class="ar-lift"><span class="ar-sw"><span class="ar-ph"><img src="{src}" alt="" width="{w}" height="{h}" decoding="async"><span class="ar-zoom" aria-hidden="true">{PLUS}</span></span>
 <span class="ar-cap"><b>{e(hood)}</b><small>{e(sub)}</small><em>{e(trades)}</em></span></span></span></button></li>''')
     order = [t for t in TRADE_ORDER if t in seen]; assert set(seen) <= set(TRADE_ORDER), set(seen) - set(TRADE_ORDER)
@@ -94,11 +94,11 @@ def markup(S, contact, cal):
 <div class="ar-pole" role="group" aria-labelledby="ar-pn"><i class="ar-rod" aria-hidden="true"></i><i class="ar-finial" aria-hidden="true"></i>{signs}</div>
 <div class="ar-read" aria-live="polite" aria-atomic="true"></div>
 <form class="ar-find" role="search" autocomplete="off" novalidate><label class="ar-fl" for="ar-q">Find your town or neighbourhood</label><div class="ar-fw"><span class="ar-fi">{SEARCH}</span><input id="ar-q" type="search" role="combobox" aria-expanded="false" aria-controls="ar-lb" aria-autocomplete="list" placeholder="Try Round Rock or Maple Run" enterkeyhint="search" spellcheck="false"><ul id="ar-lb" role="listbox" aria-label="Matches in our records" hidden></ul></div></form></aside>
-<ol class="ar-cards" aria-label="Pinned project photos">{''.join(cards)}</ol></div>
+<ol class="ar-cards" role="list" aria-label="Pinned project photos">{''.join(cards)}</ol></div>
 <div class="ar-end"><p class="ar-endp">Your street not on a sign? Call and ask.</p><div class="ar-act"><a class="btn key" href="{contact}">Book a free inspection<span class="tab">{cal}</span></a><a class="callx" href="tel:+15125500000">{PH}(512) 550-0000</a></div></div></div>
 <dialog class="ar-dlg" aria-labelledby="ar-dt" aria-describedby="ar-dr"><div class="ar-dwrap"><i class="ar-dpin" aria-hidden="true"></i><button type="button" class="ar-dx" aria-label="Close photo">{CLOSE}</button>
 <figure class="ar-dfig"><img alt="" decoding="async"></figure>
 <div class="ar-dtxt"><p class="ar-dk" aria-live="polite"></p><h3 class="ar-dt" id="ar-dt"></h3><p class="ar-dr" id="ar-dr"></p><p class="ar-dtn"></p>
-<div class="ar-dact"><button type="button" class="ar-dshow"></button><a class="btn key ar-dbook" href="{contact}">Book a free inspection<span class="tab">{cal}</span></a></div></div>
+<div class="ar-dd" aria-hidden="true"></div><div class="ar-dact"><button type="button" class="ar-dshow"></button><a class="btn key ar-dbook" href="{contact}">Book a free inspection<span class="tab">{cal}</span></a></div><p class="ar-dh" aria-hidden="true"><span class="k">Arrow keys browse, Esc closes.</span><span class="t">Swipe to browse.</span></p></div>
 <div class="ar-dnav"><button type="button" class="ar-dp" aria-label="Previous photo">{PREV}</button><button type="button" class="ar-dn" aria-label="Next photo">{NEXT}</button></div></div></dialog>
 <script type="application/json" id="ar-data">{blob}</script></section>'''

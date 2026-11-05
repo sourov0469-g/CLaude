@@ -32,8 +32,8 @@ def js(mods=None):
 
 
 def globals_js():
-    return (f'window.__REV={json.dumps(BS.REV)};window.__NEAR={json.dumps(BS.NEAR, separators=(",", ":"))};window.__WCOL={json.dumps(BS.WCOL)};'
-            f'window.__JOBS={json.dumps(BS.AREA["cards"])};window.__AREA={{cities:{json.dumps(BS.AREA["cities"])},places:{json.dumps(BS.AREA["places"])}}};')
+    # only the reviews data is still needed by a ported module (Reviews B); the old job and area globals carried outside project addresses and are gone
+    return f'window.__REV={json.dumps(BS.REV)};'
 
 
 def wires(mods=None):

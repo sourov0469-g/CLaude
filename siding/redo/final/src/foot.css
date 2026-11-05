@@ -1,0 +1,139 @@
+/* SECTION 11 — Footer. The owner's design kept: board-and-batten columns of different heights standing on a concrete sill, a small house at the end.
+   Added: a name and promise with the two actions on top; a drawn street behind the boards that answers the pointer; Contact and Hours as the first two
+   (larger) boards; a live open/closed sign; copy buttons; a back-to-top control. A dim sage ground; nothing is pure white. */
+.fo{position:relative;overflow:clip;isolation:isolate;padding:70px var(--gut) 0;background:linear-gradient(180deg,#F1F5F1 0%,#EAF0EB 55%,#E2EAE4 100%);color:var(--ink)}
+.fo-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.fo-bg svg{display:block;width:100%;height:100%}
+.fo-in{position:relative;max-width:1400px;margin:0 auto}
+.fo-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;position:relative;z-index:2}
+.fo-brand{display:flex;align-items:center;gap:16px;min-width:0}
+.fo-logo{display:block;flex:none;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}.fo-logo svg{display:block}
+.fo-brand:hover .fo-logo{transform:rotate(-6deg) scale(1.06)}
+.fo-h{margin:0;font:800 clamp(22px,2.3vw,32px)/1.08 var(--display);letter-spacing:-.015em;color:var(--ink)}
+.fo-tag{margin:6px 0 0;font:500 16px/1.45 var(--text);color:var(--ink-2);max-width:44ch}
+.fo-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.fo-call{display:inline-flex;align-items:center;gap:9px;min-height:50px;padding:0 20px 0 16px;border-radius:99px;font:800 17px/1 var(--text);color:var(--green);background:rgba(245,249,245,.8);box-shadow:inset 0 0 0 2px rgba(14,59,44,.24);transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.fo-call svg{width:19px;height:19px;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.fo-call:hover{background:#F5F9F5;box-shadow:inset 0 0 0 2px var(--green);transform:translateY(-2px)}.fo-call:hover svg{transform:rotate(-14deg) scale(1.15)}
+.fo a:focus-visible,.fo button:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:10px}
+.fo-call:focus-visible{border-radius:99px}
+
+/* the street: a roofline behind the board tops */
+.fo-sky{position:relative;z-index:0;height:clamp(120px,15.4vw,222px);margin:0 calc(var(--gut) * -1) -34px;pointer-events:auto}
+.fo-svg{display:block;width:100%;height:100%;overflow:visible}
+.fo-svg .lawn{fill:url(#foLaw)}.fo-svg .gl{fill:none;stroke:#0E3B2C;stroke-opacity:.3;stroke-width:1.6}
+.fo-hs{transform:translate(var(--tx),calc(var(--l,0) * -11px));transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.fo-hs .fsb{fill:#E4ECE6;stroke:#0E3B2C;stroke-opacity:.38;stroke-width:1.6}
+.fo-hs .fsr{stroke:#0E3B2C;stroke-width:1.2;stroke-linejoin:round}.fsr1{fill:#0E3B2C}.fsr2{fill:#1B5240}.fsr3{fill:#2C6A52}
+.fo-hs .fsc{fill:#1B5240}.fo-hs .fsd{fill:#0E3B2C;fill-opacity:.55}
+.fo-hs .fsw{fill:#B9CABF;stroke:#0E3B2C;stroke-opacity:.35;stroke-width:1.2;transition:fill .35s ease}
+.fo-hs.near .fsw,.fo[data-phase="night"] .fo-hs .fsw{fill:#B5DB6E}
+.fo[data-phase="night"] .fo-hs .fsw{filter:drop-shadow(0 0 3px rgba(181,219,110,.9))}
+.fo-hs .fst{fill:#6C5B45;fill-opacity:.7}.fo-hs .fsn{fill:#7FA43E;fill-opacity:.34;stroke:#0E3B2C;stroke-opacity:.3;stroke-width:1.4;transition:fill-opacity .35s ease}
+.fo-hs.near .fsn{fill-opacity:.55}
+.fsk circle{fill:#0E3B2C;fill-opacity:0}
+.fo-hs.near .fsk circle{animation:foSmoke 2.6s ease-out infinite}.fo-hs.near .fsk circle:nth-child(2){animation-delay:.85s}.fo-hs.near .fsk circle:nth-child(3){animation-delay:1.7s}
+@keyframes foSmoke{0%{transform:translate(0,0) scale(.6);fill-opacity:.28}100%{transform:translate(9px,-34px) scale(2.2);fill-opacity:0}}
+.fo-hs.hop{animation:foHop .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes foHop{0%{transform:translate(var(--tx),0)}40%{transform:translate(var(--tx),-16px)}100%{transform:translate(var(--tx),0)}}
+.fo-cl path{fill:#F5F9F5;fill-opacity:.9;stroke:#0E3B2C;stroke-opacity:.16;stroke-width:1.2}
+.fo-cl .c1{animation:foCl 120s linear infinite;transform:translate(120px,26px)}.fo-cl .c2{animation:foCl2 160s linear infinite;transform:translate(760px,58px) scale(.8)}
+@keyframes foCl{from{transform:translate(-80px,26px)}to{transform:translate(1440px,26px)}}
+@keyframes foCl2{from{transform:translate(900px,58px) scale(.8)}to{transform:translate(2300px,58px) scale(.8)}}
+.fo-sun .disc{fill:#C9E58C;stroke:#7FA43E;stroke-width:2}.fo-sun .rays path{stroke:#7FA43E;stroke-width:2.4;stroke-linecap:round;fill:none}.fo-sun .rays{animation:foSpin 40s linear infinite}
+@keyframes foSpin{to{transform:rotate(360deg)}}
+.fo-moon{display:none}.fo-moon .disc{fill:#0E3B2C;fill-opacity:.82}.fo-moon .halo{fill:#B5DB6E;fill-opacity:.16}
+.fo-stars{display:none}.fo-stars path{stroke:#0E3B2C;stroke-opacity:.35;stroke-width:1.6;stroke-linecap:round;animation:foTw 3.4s ease-in-out infinite}.fo-stars path:nth-child(2n){animation-delay:1.2s}
+@keyframes foTw{50%{stroke-opacity:.1}}
+.fo[data-phase="night"] .fo-sun,.fo[data-phase="night"] .fo-cl{display:none}.fo[data-phase="night"] .fo-moon,.fo[data-phase="night"] .fo-stars{display:inline}
+.fo[data-phase="night"] .fo-svg .lawn{opacity:.6}
+.fo-sky::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(180deg,rgba(14,59,44,0),rgba(14,59,44,.13) 70%,rgba(14,59,44,.04));transition:opacity 1s ease}.fo[data-phase="night"] .fo-sky::before{opacity:1}
+
+/* the boards */
+.fo-boards{position:relative;z-index:1;display:grid;grid-template-columns:1.55fr 1.3fr 1.05fr 1.05fr 1.1fr 1.15fr 104px;align-items:end;max-width:1400px;margin:0 auto}
+.fo-b{position:relative;min-height:300px;padding:30px 20px 24px;background:#F3F7F1;border-left:10px solid #DFE8DD;box-shadow:inset -1px 0 0 rgba(14,59,44,.07);display:flex;flex-direction:column;gap:8px;min-width:0;transition:transform .4s cubic-bezier(.3,1.4,.5,1),box-shadow .3s ease}
+.fo-b:nth-child(even){background:#EEF4EA}
+.fo-b::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 9px,rgba(14,59,44,.045) 9px 10px);pointer-events:none}
+.fo-b::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--lime);transform:scaleX(0);transform-origin:0 50%;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.fo-b:hover{transform:translateY(-8px);box-shadow:inset -1px 0 0 rgba(14,59,44,.07),0 20px 26px -20px rgba(10,22,17,.45)}.fo-b:hover::after{transform:scaleX(1)}
+.fo-contact{min-height:352px}.fo-hours{min-height:372px}.fo-services{min-height:322px}.fo-area{min-height:344px}.fo-about{min-height:332px}.fo-creds{min-height:312px}
+.fo-b h3{display:flex;align-items:center;gap:9px;margin:0 0 8px;font:800 13px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+.fo-b h3 svg{width:19px;height:19px;flex:none;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.fo-b:hover h3 svg{transform:rotate(-8deg) scale(1.18)}
+.fo-b p,.fo-b a,.fo-b li{position:relative;font:500 14.5px/1.5 var(--text);color:var(--ink-2)}
+.fo-row{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-bottom:6px}.fo-row .fo-copy{margin-left:-8px;margin-top:-4px}
+.fo-b .fo-big{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;font:800 clamp(21px,1.75vw,25px)/1.1 var(--display);letter-spacing:-.02em;color:var(--ink);background:linear-gradient(var(--lime),var(--lime)) 0 calc(50% + 15px)/0 3px no-repeat;transition:background-size .3s ease;padding:0}
+.fo-b .fo-mail{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;font:700 14.5px/1.25 var(--text);color:var(--ink);overflow-wrap:normal;background:linear-gradient(var(--lime),var(--lime)) 0 calc(50% + 11px)/0 3px no-repeat;transition:background-size .3s ease;padding:0}
+.fo-b .fo-big:hover,.fo-b .fo-mail:hover{background-size:100% 3px}
+.fo-addr{margin-top:6px!important;font-weight:500;color:var(--ink-2)}
+.fo-copy{appearance:none;border:0;background:transparent;cursor:pointer;position:relative;flex:none;min-height:44px;padding:0 14px 0 8px;border-radius:99px;display:inline-flex;align-items:center;gap:6px;color:var(--green);font:700 13.5px/1 var(--text);transition:background-color .25s ease,color .25s ease,transform .2s ease}
+.fo-copy:hover{background:rgba(14,59,44,.1)}.fo-copy:active{transform:scale(.95)}
+.fo-copy .ico{position:relative;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;transition:background-color .25s ease}
+.fo-copy .ico>svg{width:18px;height:18px;grid-area:1/1;transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .2s ease}
+.fo-copy .fo-ck{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:transform .35s cubic-bezier(.3,1.8,.5,1),opacity .2s ease}.fo-copy .fo-ck svg{width:16px;height:16px;color:#fff}
+.fo-copy.ok{background:var(--green);color:#fff}.fo-copy.ok .ico{background:rgba(255,255,255,.18)}.fo-copy.ok .ico>svg{opacity:0;transform:scale(.4)}.fo-copy.ok .fo-ck{opacity:1;transform:none}
+.fo-link{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-weight:700!important;color:var(--ink)!important;background:linear-gradient(var(--lime),var(--lime)) 0 calc(50% + 12px)/0 3px no-repeat;transition:background-size .3s ease}
+.fo-link:hover{background-size:calc(100% - 25px) 3px}
+.fo-link svg{width:16px;height:16px;flex:none;color:var(--green);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}.fo-link:hover svg{transform:translateX(4px)}
+.fo-bk{margin-top:auto;color:var(--green)!important}
+.fo-ul{list-style:none;display:flex;flex-direction:column}.fo-ul a{white-space:nowrap;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:0 2px;font-weight:700;color:var(--ink);border-bottom:1px solid rgba(14,59,44,.1);transition:padding .25s ease,background-color .2s ease}
+.fo-ul li:last-child a{border-bottom:0}.fo-ul a svg{width:15px;height:15px;color:var(--green);opacity:0;transform:translateX(-6px);transition:opacity .2s ease,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.fo-ul a:hover{padding-left:8px;background:rgba(181,219,110,.22)}.fo-ul a:hover svg,.fo-ul a:focus-visible svg{opacity:1;transform:none}
+.fo-towns{margin-top:4px!important;padding-top:10px;border-top:1px dashed rgba(14,59,44,.25)}
+.fo-hr{display:flex;align-items:center;gap:6px;font:500 15px/1.3 var(--text)!important;color:var(--ink-2);padding:3px 0 3px 16px;position:relative}.fo-hr b{font-weight:700;min-width:5.2em;color:var(--ink)}
+.fo-hr::before{content:"";position:absolute;left:0;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:rgba(14,59,44,.18);transform:scale(.7);transition:background-color .3s ease,transform .4s cubic-bezier(.3,1.8,.5,1)}
+.fo-hr.today{color:var(--ink);font-weight:700}.fo-hr.today::before{background:var(--lime-d);transform:scale(1.2);box-shadow:0 0 0 3px rgba(181,219,110,.45)}
+.fo-state{display:flex;flex-direction:column;gap:2px;margin:8px 0 8px;min-height:46px}
+.fo-state b{font:800 clamp(19px,1.5vw,22px)/1.1 var(--display)!important;letter-spacing:-.02em;color:var(--green)}
+.fo-state span{font:600 13.5px/1.3 var(--text);color:var(--ink-3)}
+.fo-state.shut b{color:#3B4A41}
+.fo-sign{position:absolute;right:10px;top:0;width:74px;height:60px;pointer-events:none}
+.fo-sign svg{display:block;width:100%;height:100%;overflow:visible}.fo-sign .sw{transform-origin:48px 0;animation:foSway 5.5s ease-in-out infinite}
+@keyframes foSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.fo-sign .rope{stroke:#0E3B2C;stroke-opacity:.55;stroke-width:2;fill:none;stroke-linecap:round}.fo-sign .plate{fill:#0E3B2C}.fo-sign .plin{fill:none;stroke:#B5DB6E;stroke-width:1.6;stroke-opacity:.8}.fo-sign .ptx{font:800 17px var(--display);fill:#B5DB6E;letter-spacing:.02em}
+.fo-sign.shut .plate{fill:#5B6A60}.fo-sign.shut .ptx{fill:#E4ECE6;font-size:15px}.fo-sign.shut .plin{stroke:#E4ECE6;stroke-opacity:.5}
+.fo-about p{max-width:26ch}
+.fo-tl{display:block;width:100%;max-width:200px;height:auto;margin:6px 0 2px;overflow:visible}
+.fo-tl .tl{fill:none;stroke:#0E3B2C;stroke-opacity:.5;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.fo-tl .tn{fill:#B5DB6E;stroke:#0E3B2C;stroke-width:2.4}
+.fo-tl text{font:700 12.5px var(--text);fill:#434B54}
+.fo-stars{display:inline-grid;color:var(--lime-d)}.fo-stars svg{width:17px;height:17px}
+.fo-cl2{list-style:none;display:flex;flex-direction:column;gap:7px}
+.fo-cl2 li{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:12px;background:rgba(245,249,245,.75);box-shadow:inset 0 0 0 1px rgba(14,59,44,.1);font-weight:600;color:var(--ink);line-height:1.25;transition:transform .3s cubic-bezier(.3,1.5,.5,1),background-color .2s ease}
+.fo-cl2 li svg{width:20px;height:20px;flex:none;color:var(--green)}
+.fo-b:hover .fo-cl2 li{background:#F7FAF7}
+.fo-hs2{align-self:end;padding:0 0 0 10px;transition:transform .3s ease}.fo-hs2 svg{display:block;width:100%;height:auto;overflow:visible}
+.fo-hs2 .hh{transform-origin:50% 100%}
+.fo-hs2.hop .hh{animation:foHop2 .7s cubic-bezier(.3,1.5,.5,1)}
+@keyframes foHop2{0%{transform:none}35%{transform:translateY(-18px) scaleY(1.04)}65%{transform:translateY(0) scaleY(.94)}100%{transform:none}}
+.fo[data-phase="night"] .fo-hs2 .fw2{fill:#B5DB6E}
+.fo-sill{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:6px 8px 6px 22px;min-height:58px;background:linear-gradient(180deg,#CDD4CD,#B7C0B8);border-radius:0 0 8px 8px;font:600 13.5px/1.3 var(--text);color:#2A362F;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.fo-sill::before{content:"";position:absolute;inset:0;border-radius:inherit;background-image:radial-gradient(rgba(14,59,44,.12) 1px,transparent 1.2px);background-size:9px 9px;opacity:.5;pointer-events:none}
+.fo-top2{position:relative;display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 16px 0 18px;border-radius:99px;font:800 14px/1 var(--text);color:#fff;background:var(--green);box-shadow:inset 0 -3px 0 var(--green-dd);transition:transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .2s ease}
+.fo-top2 svg{width:17px;height:17px;color:var(--lime);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.fo-top2:hover{transform:translateY(-2px)}.fo-top2:hover svg{transform:translateY(-3px)}.fo-top2:active{transform:translateY(1px)}
+.fo-top2:focus-visible{outline-color:#B5DB6E;outline-offset:3px;box-shadow:0 0 0 3px var(--green)}
+/* arrival: the boards stand up one after another (only when the script is running) */
+.fo-arm:not(.up) .fo-b{opacity:0;transform:translateY(46px) rotate(-1.2deg)}
+.fo-arm.up .fo-b{transition:transform .9s cubic-bezier(.3,1.25,.5,1),opacity .5s ease,box-shadow .3s ease}
+.fo-arm.up .fo-b:nth-child(2){transition-delay:.07s}.fo-arm.up .fo-b:nth-child(3){transition-delay:.14s}.fo-arm.up .fo-b:nth-child(4){transition-delay:.21s}.fo-arm.up .fo-b:nth-child(5){transition-delay:.28s}.fo-arm.up .fo-b:nth-child(6){transition-delay:.35s}
+.fo-arm.up .fo-b:hover{transition-delay:0s}
+.fo-arm:not(.up) .fo-tl .tl{stroke-dashoffset:1}.fo-arm .fo-tl .tl{transition:stroke-dashoffset 1.1s cubic-bezier(.6,0,.2,1) .8s}
+.fo-arm:not(.up) .fo-tl .tn{transform:scale(0)}.fo-arm .fo-tl .tn{transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.3,1.8,.5,1) .9s}
+.fo-arm:not(.up) .fo-hs{--l:-1.6}.fo-arm .fo-hs{transition:transform .9s cubic-bezier(.3,1.4,.5,1)}
+
+@media (max-width:1180px){
+  .fo-boards{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.fo-hs2{display:none}.fo-b{min-height:0!important}
+  .fo-contact{grid-column:span 2}.fo-creds{grid-column:1/-1}.fo-cl2{flex-direction:row;flex-wrap:wrap}.fo-cl2 li{flex:1 1 220px}
+}
+@media (max-width:860px){
+  .fo{padding-top:56px;padding-bottom:96px}
+  .fo-boards{grid-template-columns:1fr 1fr}.fo-contact,.fo-hours,.fo-about,.fo-creds{grid-column:span 2}.fo-b{padding:24px 16px 20px}
+  .fo-sky{height:140px;margin-bottom:-24px}
+  .fo-sill{border-radius:0 0 8px 8px;flex-wrap:wrap;padding:10px 10px 10px 16px}
+}
+@media (max-width:520px){.fo-cta{width:100%}.fo-cl2 li{flex-basis:100%}}
+@media (prefers-reduced-motion:reduce){
+  .fo-hs,.fo-b,.fo-logo,.fo-copy,.fo-tip,.fo-link,.fo-ul a,.fo-top2,.fo-big,.fo-mail,.fo-hr::before,.fo-tl *{transition:none!important}
+  .fo-cl .c1,.fo-cl .c2,.fo-sun .rays,.fo-sign .sw,.fo-stars path,.fo-hs.near .fsk circle,.fo-hs.hop,.fo-hs2.hop .hh{animation:none!important}
+  .fo-cl .c1{transform:translate(220px,26px)}.fo-cl .c2{transform:translate(860px,58px) scale(.8)}
+}

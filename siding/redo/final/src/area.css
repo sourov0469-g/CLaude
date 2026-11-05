@@ -1,6 +1,6 @@
 /* SECTION 9 — Area, "On your street" (Thread board). A dim sage board, sixteen of the firm's own photos pinned on a sagging thread that sways, a street-sign post
    with the town tallies; pick a town and its threads are pulled from the sign, the rest dim. Never pure white: the ground, the board and the paper are green-tinted. */
-.ar{--spring:cubic-bezier(.34,1.56,.64,1);--paper:#FBFCF8;--board:#E7EEE8;--rule:#CBD9CE;--deep:#0E3B2C;position:relative;overflow:clip;padding:96px var(--gut) 84px;background:linear-gradient(180deg,#EEF3EE,#F1F5F1 38%,#ECF1EC);scroll-margin-top:0}
+.ar{--spring:cubic-bezier(.34,1.56,.64,1);--paper:#FBFCF8;--board:#E7EEE8;--rule:#CBD9CE;--deep:#0E3B2C;position:relative;overflow:clip;padding:112px var(--gut) 84px;background:linear-gradient(180deg,#EEF3EE,#F1F5F1 38%,#ECF1EC);scroll-margin-top:0}
 .ar *{box-sizing:border-box}
 .ar-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .ar-bg svg{position:absolute;left:0;width:100%;will-change:transform;transform:translate3d(0,var(--py,0px),0)}
@@ -44,7 +44,6 @@
 .ar-main{stroke:var(--deep);stroke-width:1.6;stroke-opacity:.62;transition:stroke-opacity .4s ease}
 .ar-ms{stroke:var(--deep);stroke-width:4;stroke-opacity:.07;transform:translate(0,5px)}
 .ar-filt .ar-main{stroke-opacity:.2}
-.ar-nojs-thread{display:none}
 .ar-fg path{fill:none;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;transition:stroke-dashoffset .28s ease,opacity .25s ease}
 .ar-fg .halo{stroke:#B5DB6E;stroke-width:8;stroke-opacity:.6;stroke-linecap:round}
 .ar-fg .line{stroke:var(--deep);stroke-width:2.2;stroke-linecap:butt}
@@ -58,10 +57,8 @@
 .ar-pin.g{background:radial-gradient(circle at 35% 30%,#7BA38A,#2C6249 48%,#0E3B2C)}
 .ar-card{display:block;width:min(var(--w,100%),236px);margin:0 auto;padding:0;border:0;background:none;cursor:pointer;text-align:left;color:var(--ink);transform-origin:50% 15px;transform:rotate(calc(var(--r) + var(--k,0) * 1deg))}
 .ar-lift{display:block;transition:transform .6s var(--spring),opacity .4s ease,filter .4s ease}
-.ar-sw{display:block;position:relative;padding:11px 11px 13px;border-radius:5px;background:var(--paper);transform-origin:50% 15px;animation:ar-sway 5.8s ease-in-out calc(var(--d) * -1s) infinite alternate;
+.ar-sw{display:block;position:relative;padding:11px 11px 13px;border-radius:5px;background:var(--paper);transform-origin:50% 15px;
   box-shadow:0 1px 0 rgba(14,59,44,.08),0 2px 5px rgba(14,59,44,.12),0 18px 24px -16px rgba(14,59,44,.5)}
-@keyframes ar-sway{from{transform:rotate(calc(var(--a) * -1))}to{transform:rotate(var(--a))}}
-.ar.ar-off .ar-sw{animation-play-state:paused}
 .ar-ph{position:relative;display:block;overflow:hidden;border-radius:2px;background:#DCE5DD;aspect-ratio:var(--ar)}
 .ar-ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)}
 .ar-zoom{position:absolute;right:8px;bottom:8px;width:32px;height:32px;border-radius:50%;background:#B5DB6E;color:var(--deep);display:grid;place-items:center;transform:scale(0);transition:transform .35s var(--spring);box-shadow:0 6px 10px -4px rgba(14,59,44,.55)}
@@ -74,13 +71,15 @@
 .ar-card:focus-visible .ar-sw{outline:3px solid var(--deep);outline-offset:4px}
 .ar-card:focus-visible .ar-zoom{transform:scale(1)}
 @media (hover:hover){
+  .ar-c:has(.ar-card:hover) .ar-pin,.ar-c:has(.ar-card:focus-visible) .ar-pin{transform:translateY(-3px) scale(1.18);box-shadow:0 9px 9px rgba(14,59,44,.28),inset 0 -2px 2px rgba(14,59,44,.22)}
   .ar-card:hover .ar-lift,.ar-card:focus-visible .ar-lift{transform:translateY(-9px) scale(1.035) rotate(calc(var(--r) * -1))}
-  .ar-card:hover .ar-sw,.ar-card:focus-visible .ar-sw{animation-play-state:paused;box-shadow:0 1px 0 rgba(14,59,44,.08),0 4px 8px rgba(14,59,44,.14),0 30px 34px -18px rgba(14,59,44,.55)}
+  .ar-card:hover .ar-sw,.ar-card:focus-visible .ar-sw{box-shadow:0 1px 0 rgba(14,59,44,.08),0 4px 8px rgba(14,59,44,.14),0 30px 34px -18px rgba(14,59,44,.55)}
   .ar-card:hover .ar-ph img{transform:scale(1.07)}.ar-card:hover .ar-zoom{transform:scale(1)}
 }
 .ar-card:active .ar-lift{transform:translateY(-3px) scale(.99);transition-duration:.12s}
 /* dimmed / lit by the sign or a chip */
-.ar-c.off .ar-lift{opacity:.3;filter:grayscale(.9);transform:scale(.965)}
+.ar-c.off .ar-lift{opacity:.3;transform:scale(.965)}
+.ar-c.off .ar-ph img{filter:grayscale(.9)}
 .ar-c.off .ar-pin{transform:scale(.8);opacity:.5}
 .ar-c.on .ar-sw{box-shadow:0 0 0 3px #B5DB6E,0 2px 6px rgba(14,59,44,.16),0 22px 26px -16px rgba(14,59,44,.55)}
 .ar-c.on .ar-lift{transform:translateY(-5px)}
@@ -114,7 +113,7 @@
 .ar-read{margin-top:12px;padding:14px 16px;border-radius:16px;background:rgba(251,252,248,.8);box-shadow:inset 0 0 0 1px var(--rule);font:500 14.5px/1.5 var(--text);color:var(--ink-2);min-height:100px}
 .ar-read b{font-weight:800;color:var(--ink)}
 .ar-read .rn{display:block;margin-top:4px;font:800 26px/1.1 var(--display);letter-spacing:-.02em;color:var(--deep)}
-.ar-read .rn small{font:600 13.5px/1.2 var(--text);letter-spacing:0;color:var(--ink-3);margin-left:6px}
+.ar-read .rn small{font:600 13.5px/1.2 var(--text);letter-spacing:0;color:var(--ink-3)}
 .ar-read .rh{display:block;margin-top:6px;font-size:13.5px;color:var(--ink-3)}
 .ar-read a{color:var(--deep);font-weight:700}
 .ar-find{margin-top:12px}
@@ -143,7 +142,7 @@
 /* the in-page viewer (a native modal dialog, focus-trapped in script) */
 .ar-dlg{width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:transparent;color:var(--ink);overflow:hidden;overscroll-behavior:contain}
 .ar-dlg:not([open]){display:none}
-.ar-dlg::backdrop{background:rgba(9,26,19,.62);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);animation:ar-fade .3s ease both}
+.ar-dlg::backdrop{background:rgba(9,26,19,.62);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);animation:ar-fade .3s ease both}
 @keyframes ar-fade{from{opacity:0}to{opacity:1}}
 .ar-dlg[open]{display:grid;place-items:center;padding:34px}
 .ar-dwrap{position:relative;display:grid;grid-template-columns:minmax(0,auto) 330px;gap:26px;align-items:center;max-width:min(1060px,100%);max-height:calc(100dvh - 40px);padding:26px 26px 26px 26px;border-radius:12px;background:var(--paper);box-shadow:0 2px 6px rgba(9,26,19,.25),0 50px 90px -30px rgba(9,26,19,.8);transform-origin:50% 0}
@@ -156,6 +155,11 @@
 .ar-dr{margin:0;font:600 17px/1.5 var(--text);color:var(--ink-2)}
 .ar-dtn{margin:0;padding:12px 14px;border-radius:12px;background:#EAF1EB;font:500 15px/1.45 var(--text);color:var(--ink-2)}
 .ar-dtn b{font-weight:800;color:var(--ink)}
+.ar-dd{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.ar-dd i{width:9px;height:9px;border-radius:50%;background:#C8D7CB;transition:background-color .25s ease,transform .35s var(--spring),width .3s var(--ease-out)}
+.ar-dd i.on{background:var(--deep);width:22px;border-radius:5px}
+.ar-dh{margin:4px 0 0;font:500 13px/1.4 var(--text);color:var(--ink-3)}.ar-dh .t{display:none}
+@media (hover:none){.ar-dh .k{display:none}.ar-dh .t{display:inline}}
 .ar-dact{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .ar-dshow{min-height:48px;padding:0 18px;border:0;border-radius:99px;background:transparent;box-shadow:inset 0 0 0 2px var(--deep);color:var(--deep);font:800 15px/1.1 var(--text);cursor:pointer;transition:background-color .2s ease,color .2s ease,transform .25s var(--spring)}
 .ar-dshow:hover{background:var(--deep);color:#F5F9F5}.ar-dshow:active{transform:scale(.97)}
@@ -179,7 +183,7 @@
   .ar{padding-top:84px;padding-bottom:64px}
   .ar-board{grid-template-columns:minmax(0,1fr);padding:16px 14px 18px;border-radius:24px}
   .ar-post{grid-column:1;grid-row:1;position:static;padding:0}
-  .ar-cards{grid-column:1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px;padding:12px 0 8px}
+  .ar-cards{grid-column:1;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 14px;padding:12px 0 8px}
   .ar-pole{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0}
   .ar-rod,.ar-finial{display:none}
   .ar-sign{width:100%;margin-left:0;min-height:50px;padding:0 8px 0 16px;font-size:15px;transform:none}
@@ -188,7 +192,6 @@
   .ar-nail{display:none}
   .ar-pn{text-align:left;margin-bottom:10px}
   .ar-read{min-height:0}
-  .ar-card{width:100%}
   .ar-sw{padding:8px 8px 10px}
   .ar-cap b{font-size:13.5px}.ar-cap small,.ar-cap em{font-size:12px}
   .ar-chips{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;padding:2px 2px 6px;-webkit-mask:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
@@ -203,6 +206,7 @@
   .ar-dact{flex-direction:column;align-items:stretch}
   .ar-dbook{justify-content:center}
 }
+@media (max-width:620px){.ar-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}.ar-card{width:var(--w,100%)}}
 @media (max-width:420px){.ar-cap b{font-size:13px}.ar-sign{font-size:14.5px;padding-left:14px}.ar-sc{min-width:38px;padding:7px 7px}}
 
 /* reduced motion: nothing sways, drops, draws or flips; everything is simply there */

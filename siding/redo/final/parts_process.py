@@ -77,15 +77,15 @@ def art1():
          gk('f', 0, .03, '<path class="fs" d="M88 14H206L228 36V226H88Z"/>') + dp('M88 14H206L228 36V226H88Z', 0, .05) + dp('M206 14V36H228', .03, .06, 'l th')]
     o.append(dp('M104 38H160', .02, .06, 'l tt') + gk('p', .02, .05, '<rect class="fa" x="196" y="30" width="16" height="12" rx="3"/>', c='204,36'))
     for k, (y, ln) in enumerate(rows):
-        s = .06 + k * .09; e = s + .075; cfg.append([126, 126 + ln, y, s, e])
-        o.append(f'<rect class="bx" x="104" y="{y - 9}" width="12" height="12" rx="2.5"/>' + dp(f'M126 {y}h{ln}', s, e) + dp(f'M126 {y + 9}h{ln // 2}', s + .02, e, 'l th')
+        s = .05 + k * .085; e = s + .075; cfg.append([126, 126 + ln, y, s, e])
+        o.append(gk('f', s - .02, s + .01, f'<rect class="bx" x="104" y="{y - 9}" width="12" height="12" rx="2.5"/>') + dp(f'M126 {y}h{ln}', s, e) + dp(f'M126 {y + 9}h{ln // 2}', s + .02, e, 'l th')
                  + dp(f'M200 {y}h12', s + .01, e, 'l pr') + dp(f'M106.5 {y - 3}l3.5 4 6-8', e - .005, e + .03, 'l ck'))
     o.append(dp('M104 178H212', .52, .56, 'l th'))
     o.append(gk('w', .54, .66, '<rect class="fa" x="104" y="186" width="108" height="14" rx="4"/>', c='104,193'))
     o.append(gk('p', .66, .74, '<g transform="rotate(-11 178 206)"><rect x="134" y="194" width="88" height="26" rx="6" class="l stp"/><text x="178" y="212" text-anchor="middle" class="stt">ITEMISED</text></g>', c='178,206'))
     o.append(gk('x', .66, .76, '<path class="l th" d="M142 190l-8-4M216 190l8-5M178 190v-8"/>', c='178,206'))
     o.append(dp('M100 214L216 224', .82, .97, 'l th') + dp('M216 214L100 224', .84, .98, 'l th'))
-    o.append('<g class="pen" data-pen><path d="M0 0L5 -3L27 -25L31 -21L9 1Z" class="pn"/><path d="M0 0L5 -3L3 1Z" class="pt"/></g>')
+    o.append('<g class="pen" data-pen><path class="pb" d="M7.2 -2.7L26.3 -21.8L21.8 -26.3L2.7 -7.2Z"/><path class="pt" d="M0 0L7.2 -2.7L2.7 -7.2Z"/><path class="pc" d="M26.3 -21.8L30.6 -26.1L26.1 -30.6L21.8 -26.3Z"/><path class="pl" d="M16 -11.5L19 -14.5"/></g>')
     return o, cfg
 
 
@@ -98,19 +98,19 @@ def art2():
     o.append(lad)
     o.append(gk('f', .2, .3, '<rect x="172" y="88" width="60" height="62" class="hole"/>'))
     for k in range(12):   # old boards, leaving from the top
-        y = 208 - 14 * (k + 1); s = .01 + (11 - k) * .017
+        y = 208 - 14 * (k + 1); s = .005 + (11 - k) * .0155
         crack = f'<path class="l th" d="M{98 + (k * 37) % 110} {y + 2}l5 5l-4 4"/>' if k % 2 else ''
-        o.append(gk('s', s, s + .08, f'<rect x="{X0}" y="{y + 1}" width="{X1 - X0}" height="12" class="old"/>{crack}', v='-96,0', out=True))
+        o.append(gk('s', s, s + .075, f'<rect x="{X0}" y="{y + 1}" width="{X1 - X0}" height="12" class="old"/>{crack}', v='-96,0', out=True))
     for k in range(12):   # new boards, going up from the bottom; the five courses beside the window opening are split
-        y = 208 - 14 * (k + 1); s = .27 + k * .02
+        y = 208 - 14 * (k + 1); s = .25 + k * .0185
         segs = [(X0, X1)] if not (82 <= y <= 138) else [(X0, 172), (232, X1)]
         inner = ''.join(f'<rect x="{a}" y="{y + .5}" width="{b - a}" height="13" class="nb"/><path d="M{a + 3} {y + 12.4}H{b - 3}" class="l th sd"/><circle cx="{a + 7}" cy="{y + 5}" r="1.1" class="nl"/><circle cx="{b - 7}" cy="{y + 5}" r="1.1" class="nl"/>' for a, b in segs)
         o.append(gk('s', s, s + .075, inner, v='84,0'))
     o.append(gk('s', .56, .64, '<rect x="64" y="36" width="9" height="174" class="nb"/>', v='0,-70'))
-    o.append(gk('s', .6, .68, '<rect x="247" y="36" width="9" height="174" class="nb"/>', v='0,-70'))
-    o.append(gk('w', .62, .76, '<rect x="73" y="40" width="174" height="168" class="paint"/>', c='73,0'))
+    o.append(gk('s', .58, .66, '<rect x="247" y="36" width="9" height="174" class="nb"/>', v='0,-70'))
+    o.append(gk('w', .62, .74, '<rect x="73" y="40" width="174" height="168" class="paint"/>', c='73,0'))
     o.append('<g class="roll" data-roll><rect x="-5" y="-26" width="10" height="52" rx="4" class="rl"/><path d="M0 -26v-8h-14" class="l"/><path d="M-14 -34v-12" class="l"/></g>')
-    dm = gk('f', .74, .79, gk('f', .86, .9, dp('M172 78H232', .74, .79, 'l th') + dp('M172 73v10M232 73v10', .75, .79, 'l th') + dp('M162 88V150', .76, .8, 'l th') + dp('M157 88h10M157 150h10', .77, .8, 'l th'), out=True))
+    dm = gk('f', .76, .8, gk('f', .86, .9, dp('M172 78H232', .76, .8, 'l th') + dp('M172 73v10M232 73v10', .77, .8, 'l th') + dp('M162 88V150', .77, .81, 'l th') + dp('M157 88h10M157 150h10', .78, .81, 'l th'), out=True))
     o.append(dm)
     win = ('<rect x="172" y="88" width="60" height="62" class="wf"/><rect x="177" y="93" width="50" height="52" class="gl"/><path d="M177 119h50M202 93v52" class="l th"/>'
            '<path d="M183 141L219 97" class="gs"/><rect x="172" y="88" width="60" height="62" class="l" fill="none"/>')
@@ -127,14 +127,14 @@ def art3():
     o.append(''.join(gk('p', .01 + i * .018, .03 + i * .018, f'<circle cx="{34 + i * 12.5}" cy="222" r="1.9" class="dt"/>', c=f'{34 + i * 12.5},222') for i in range(12)))
     o.append(gk('f', .24, .3, '<g class="walker" data-walk><circle cx="0" cy="-16" r="4.6" class="wk"/><path d="M0 -11V-1M0 -1L-4 8M0 -1L4 8M0 -8L-6 -3M0 -8L6 -4" class="l wl"/></g>', out=True))
     for i, (mx, my) in enumerate(((58, 180), (100, 138), (146, 184))):
-        s = .27 + i * .07
+        s = .26 + i * .065
         o.append(gk('f', 0, .04, gk('p', s, s + .05, f'<circle cx="{mx}" cy="{my}" r="8" class="mk"/><path d="M{mx} {my - 4}v4M{mx} {my + 3}v.1" class="l mkx"/>', c=f'{mx},{my}', out=True)))
         o.append(gk('p', s + .02, s + .09, f'<circle cx="{mx}" cy="{my}" r="8" class="ok"/><path d="M{mx - 4} {my}l3 3.5 5.5-7" class="l okc"/>', c=f'{mx},{my}'))
         o.append(gk('x', s + .02, s + .1, f'<circle cx="{mx}" cy="{my}" r="12" class="l bu"/>', c=f'{mx},{my}'))
     deb = [(40, 'M0 0l6 -1l1 4l-6 1z'), (66, 'M0 0l4 -3l3 3l-3 3z'), (104, 'M0 0l7 0l-1 3l-6 0z'), (132, 'M0 0l5 -2l2 4l-5 1z'), (156, 'M0 0l4 -3l4 1l-1 4z')]
     for x, d in deb:
-        s = .5 + (x - 20) / 176 * .2
-        o.append(gk('s', s, s + .06, f'<path d="{d}" transform="translate({x} 202)" class="db"/>', v='60,-4', out=True))
+        s = .5 + (x - 20) / 176 * .18
+        o.append(gk('s', s, s + .05, f'<path d="{d}" transform="translate({x} 202)" class="db"/>', v='60,-4', out=True))
     o.append('<g class="broom" data-broom><path d="M0 -34L-4 0" class="l"/><path d="M-9 0h10l3 10h-16z" class="bm"/></g>')
     o.append(gk('p', .76, .86, '<path d="M100 66L114 72V84C114 95 106 101 100 104C94 101 86 95 86 84V72Z" class="sd2"/>' + dp('M93 84l5 5 9-11', .8, .88, 'l sc'), c='100,84'))
     o.append(gk('x', .82, .96, '<circle cx="100" cy="84" r="22" class="l bu"/>', c='100,84'))
@@ -144,7 +144,7 @@ def art3():
              + '<rect class="fa" x="238" y="22" width="36" height="14" rx="5"/>')
     for k, y in enumerate((70, 106, 142, 178)):
         en = ENDS[3][k]
-        o.append(f'<rect class="bx" x="216" y="{y - 8}" width="16" height="16" rx="3.5"/>' + dp(f'M244 {y}h50', .02 + k * .01, .08, 'l th') + dp(f'M244 {y + 8}h30', .03 + k * .01, .08, 'l th')
+        o.append(gk('f', 0, .04, f'<rect class="bx" x="216" y="{y - 8}" width="16" height="16" rx="3.5"/>') + dp(f'M244 {y}h50', .02 + k * .01, .08, 'l th') + dp(f'M244 {y + 8}h30', .03 + k * .01, .08, 'l th')
                  + gk('w', en - .05, en, f'<rect class="fa" x="216" y="{y - 8}" width="16" height="16" rx="3.5"/>', c=f'216,{y}') + dp(f'M219.5 {y}l3.5 4 6-8', en - .05, en, 'l ck'))
     return o
 
