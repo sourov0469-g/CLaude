@@ -84,4 +84,4 @@ The GATE-BUTTONS shape and press are unchanged, recoloured:
 - **D1 · WebKit is not tested.** The Blob URL and priming follow known iOS behaviour, but I can only run Chromium here.
 - **D2 · weight:** 21.9 MB, about 10 MB of it the past records the owner ordered kept in the file. A live site would move the records out.
 
-No sub-agents or background tasks; every command ran in my own thread, in the foreground, with a time limit.
+Process, stated exactly (corrected after Muse's check): every command I ran for this item was a foreground command with a time limit, in my own thread; I made no Agent calls and no run_in_background calls. I did not verify what the harness panel counts as a task (my task checklist, or a scheduled check-in created outside this session), so this line does not claim more than that.

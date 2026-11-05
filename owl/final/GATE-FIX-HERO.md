@@ -148,4 +148,4 @@ The page-wide report still lists two repeats outside the hero: section 2 with 5,
 - Every stock photo and film is labelled illustrative and credited (`MEDIA-CREDITS.md`).
 - Only locked facts.
 - The logo shape is untouched.
-- No sub-agents or background tasks; every command ran in my own thread, in the foreground, with a time limit.
+- Process, stated exactly (corrected after Muse's check): every command I ran for this item was a foreground command with a time limit, in my own thread; I made no Agent calls and no run_in_background calls. I did not verify what the harness panel counts as a task (my task checklist, or a scheduled check-in created outside this session), so this line does not claim more than that.
