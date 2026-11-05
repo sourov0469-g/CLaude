@@ -8,7 +8,7 @@ sys.path.insert(0, HERE)
 from build import (fonts, jpeg, src, b64, I, BOOK, HEADER, MBAR, HEAD_JS, LEAD, SUB, CTAS, PP)
 
 # the live winner of every slot; the rest become backups
-LIVE = {'hero': '1', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
+LIVE = {'hero': 'o', 'services': 'a', 'vis': 'b', 'windows': 'a', 'reviews': 'b', 'process': 'a', 'try': 'a', 'area': 'a', 'book': 'a'}
 SEC = lambda f: open(os.path.join(HERE, 'src', 'sec', f)).read()
 MODS = ['scenes', 'services', 'svc2', 'svc3', 'svc4', 'svc5', 'svc6', 'svc7', 'svc8', 'vis', 'vis2', 'vis3', 'vis4', 'vis5', 'vis6', 'vis7', 'vis8', 'vis9', 'windows', 'win2', 'win3', 'win4', 'win5', 'win6', 'win7', 'win8', 'win9', 'reviews', 'rev2', 'rev3', 'rev4', 'rev5', 'rev6', 'rev7', 'rev8', 'rev9', 'process', 'proc2', 'proc3', 'proc4', 'proc5', 'proc6', 'proc7', 'proc8', 'proc9', 'seq', 'seq2', 'seq3', 'seq4', 'seq5', 'seq6', 'seq7', 'seq8', 'area', 'area2', 'area3', 'area4', 'area5', 'area6', 'area7', 'area8', 'cta', 'cta2', 'cta3', 'cta4', 'cta5', 'cta6', 'cta7', 'cta8', 'p_base', 'nav']
 REV = json.load(open(os.path.join(HERE, '..', '..', 'work', 'data', 'reviews.json')))
@@ -147,7 +147,7 @@ def heroes():
 <div class="win"><div class="glass">{FILM}<div class="mull"></div>{PP}</div><div class="sill"></div></div></section>'''
     v5 = f'''<section class="hero v5" aria-labelledby="h1"><h1 class="lead" id="h1">{LEAD}</h1>
 <div class="strip">{FILM}{PP}</div><div class="row"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
-    return {'1': v1, **new_heroes(), **heroes3(), 'k': heroK(), 'l': heroL(), 'm': heroM(), 'n': heroN(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
+    return {'1': v1, **new_heroes(), **heroes3(), 'k': heroK(), 'l': heroL(), 'm': heroM(), 'n': heroN(), 'o': heroO(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
 
 
 ALT = {'c2': 'A modern two-storey house with charcoal lap siding and warm wood soffits.',
@@ -359,6 +359,33 @@ def heroN():
   <div class="nhead"><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{ct2}</div>
   <p class="ncred">On the cover: <a href="https://www.austinprosiding.com{e(R['href'])}" target="_blank" rel="noopener">{e(R['place'])} · Siding · {e(R['when'])} · {e(R['installed'])}</a></p>
 </div></div></section>'''
+
+
+def heroO():
+    """Hero O, "The house, and the homeowner's word" (upgrade plan, H-A; reference Cowboy: one subject, warmth in a human voice, one
+    named system, restraint). One real Austin Pro job photo (photos.json #5, Anderson Mill West, Cedar Park, Aug 2026), embedded at
+    its own 1400 px width and shown at most that wide (never enlarged), captioned only with the job's own record; the page's
+    unchanged H1, subline, Book button and phone; the three credentials; and one homeowner's verbatim words, labelled as that
+    and never presented as the owner of the house in the photo. "4.9 from 474 Google reviews" is NOT here: it lives in Reviews
+    only (each number once). Nothing can be chosen or changed: not a configurator."""
+    from PIL import Image
+    import base64 as _b, io
+    e = html.escape
+    P = json.load(open(os.path.join(WORK, 'data', 'photos.json')))[5]
+    assert 'Windows' in P['trades'] and 'Anderson Mill West' in P['place']
+    im = Image.open(os.path.join(WORK, 'dl', 'photo5-1400.webp')).convert('RGB'); assert im.size == (1400, 1050)
+    b = io.BytesIO(); im.save(b, 'WEBP', quality=72, method=6); src_ = 'data:image/webp;base64,' + _b.b64encode(b.getvalue()).decode()
+    PHRASE = 'Wow what a difference our new windows have made, our home is so QUIET!'
+    R = REV[17]; assert PHRASE in R['text'] and R['name'].upper() == 'LOIS RICHWINE'
+    ct2 = CTAS.split('<p class="proof"')[0]   # the stars line (4.9 from 474) belongs to Reviews
+    creds = ''.join(f'<li>{c}</li>' for c in ('GAF Master Elite', 'James Hardie Elite Preferred', 'Andersen Certified Premier'))
+    return f'''<section class="hero hzv" aria-labelledby="h1">
+<div class="hzframe">
+  <div class="hzwrap"><img class="hzphoto" src="{src_}" width="1400" height="1050" alt="{e(P['alt'])}" decoding="async" fetchpriority="high" data-q="keep"><i class="hzglint" aria-hidden="true"></i></div>
+  <div class="hzcard"><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{ct2}<ul class="hzcreds" aria-label="Credentials">{creds}</ul></div>
+  <figure class="hzquote"><p class="hzlabel">A homeowner's words</p><blockquote><p>“{e(PHRASE)}”</p></blockquote><figcaption><b>{e(R['name'].title())}</b> · Google review, 2026</figcaption></figure>
+  <p class="hzcap">{e(P['place'])} · {e(P['when'])} · {e(P['trades'])} · <a href="https://www.austinprosiding.com{e(P['href'])}" target="_blank" rel="noopener">See the project</a></p>
+</div></section>'''
 
 
 def heroL():
@@ -630,7 +657,7 @@ SVK = svcK()
 
 VERSIONS = {
     'hero': [['1', 'Charcoal photo, boards lift (backup, rejected photo)'], ['2', 'Depth window'], ['3', 'Pinned dusk portrait'], ['4', 'Title between sky and house'],
-             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['l', 'In their own colours'], ['m', 'A house built from our jobs'], ['n', 'The cover story'], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
+             ['5', 'Photo hung as lap courses'], ['6', 'Three-house deck'], ['7', 'The record'], ['8', 'Last light'], ['9', 'Type as the house'], ['10', 'One visit'], ['k', 'Before | After, on the seam'], ['l', 'In their own colours'], ['m', 'A house built from our jobs'], ['n', 'The cover story'], ['o', "The house, and the homeowner's word"], ['a2', 'Archive: white-lap photo'], ['a3', 'Archive: film full bleed'], ['a4', 'Archive: film in a window'], ['a5', 'Archive: film strip']],
     'services': [['a', 'Sideways sequence'], ['b', 'Word switcher'], ['c', 'Counted chapters'], ['d', 'Split cover, real jobs'], ['e', 'Pick a part of the house'], ['f', 'The magazine spread'], ['g', 'Side by side'], ['h', 'Pull a board'], ['i', 'Three rings, one visit'], ['j', 'The index'], ['k', 'Run the reel'], ['l', 'Built from our records'], ['m', 'One frame, every trade'], ['n', 'Built trade by trade']], 'vis': [['a', 'Swatch fan'], ['b', 'Snap-together wall'], ['c', 'Colour fields, compare'], ['d', 'The instrument'], ['e', 'Pairings to start from'], ['f', 'The colour map'], ['g', 'Four questions'], ['h', 'Colour in Austin light'], ['i', 'Look closer'], ['j', 'Your house, on the street'], ['k', 'Open a colour'], ['l', 'Roll it on'], ['m', 'Pull a colour through'], ['n', 'Torn between two']],
     'windows': [['a', 'Morning to midnight'], ['b', 'Bay, built out'], ['c', 'Taken apart, pinned'], ['d', 'Window jobs on record'], ['e', '376 jobs, by maker'], ['f', 'How each window opens'], ['g', 'Frame colours, by maker'], ['h', 'Count your windows'], ['i', 'A window of words'], ['j', 'From opening to trim'], ['k', '376 jobs, set in type'], ['l', 'Lift the sash'], ['m', 'One window, four answers'], ['n', 'The window issue']], 'reviews': [['a', '4.9 in lap courses'], ['b', 'Hanging tags'], ['c', 'Read at reading pace'], ['d', 'Ask the neighbours'], ['e', 'The names they mention'], ['f', 'All 30, searchable'], ['g', 'A steady stream'], ['h', 'Letters from homeowners'], ['i', 'One line, poster size'], ['j', '474, and the 30 we show'], ['k', 'Marked up by hand'], ['l', 'The whole job, in their words'], ['m', 'Their before, their after'], ['n', 'Your worry, their words']],
     'process': [['a', 'Stacked chapters'], ['b', 'Pinned wall'], ['c', 'The plumb line'], ['d', 'Four columns'], ['e', 'Turn the dial'], ['f', 'Questions at each step'], ['g', 'Stamp the card'], ['h', 'One paragraph'], ['i', 'Your part, and ours'], ['j', 'Four numbers'], ['k', 'Handed along'], ['l', 'One job, on its calendar'], ['m', 'Your job, in order'], ['n', 'Watch it happen']], 'try': [['a', 'Pinned sideways'], ['b', 'Swipe rail'], ['c', 'The workbench'], ['d', 'The dive (Lusion idea)'], ['e', 'Inspect at dusk'], ['f', 'Measure the opening'], ['g', 'Shingle from the eave up'], ['h', 'Level the window'], ['i', 'Nail it on the studs'], ['j', 'Name the parts'], ['k', 'Flash the window'], ['l', 'Price the job'], ['m', 'Match the house']],
@@ -674,7 +701,7 @@ if(h&&h.matches('.v1,.v2')){const k=h.matches('.v1')?'v1':'v2';window.__photo=ph
 const H2=window.__HERO2;if(h&&h.matches('.h4v')){h.querySelector('.back').src=H2.c3;h.querySelector('.front').src=H2.c3;}
 if(h&&h.matches('.h5v'))h.querySelectorAll('.c img').forEach(i=>i.src=H2.c2);
 if(h&&h.matches('.h6v'))h.querySelectorAll('.card').forEach(c=>c.querySelector('img').src=H2[c.dataset.img]);
-Hero2.wire();Hero3.wire();Hero4.wire();Hero5.wire();Hero6.wire();Hero7.wire();SvcK.wire();
+Hero2.wire();Hero3.wire();Hero4.wire();Hero5.wire();Hero6.wire();Hero7.wire();Hero8.wire();SvcK.wire();
 document.querySelectorAll('.slot video[data-film]').forEach(v=>{v.append(document.getElementById('film').content.cloneNode(true));
   v.poster=document.getElementById('film').dataset.poster;v.preload='auto';if(!RM){v.autoplay=true;v.load();v.play().catch(()=>{});}else v.load();});
 const PLAY=%PLAY%,PAUSE=%PAUSE%;
@@ -688,7 +715,7 @@ Scenes.wire(document);Services.wire(document);Svc2.wire(document);Svc3.wire(docu
 def build():
     pre = prerender()
     css = fonts() + src('frame.css') + src('heroes.css') + ''.join(SEC(f + '.css') for f in MODS + PMODS)
-    css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('hero5.css') + src('hero6.css') + src('hero7.css') + src('svck.css') + src('fx.css') + src('hf.css') + src('bx.css') + '.slot{display:contents}'
+    css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('hero5.css') + src('hero6.css') + src('hero7.css') + src('hero8.css') + src('svck.css') + src('fx.css') + src('hf.css') + src('bx.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
             f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-960.mp4"))}"></template>')
@@ -700,7 +727,7 @@ def build():
     PP_ = pre['PG_']
     pages = ''.join(f'<template data-page="{p}">' + ''.join(slot(x['slot'], {v[0]: PP_[x['slot'] + v[0]] for v in x['v']}) for x in PG['sections'][p]) + '</template>' for p, _ in PG['pages'] if PG['sections'][p])
     boot = BOOT.replace('Nav.wire();', 'PB.wire(document);' + ''.join(x['obj'] + '.wire(document);' for _, x in PSECS) + 'Nav.wire();').replace('%PLAY%', json.dumps(I['play'])).replace('%PAUSE%', json.dumps(I['pause']))
-    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + src('hero4.js') + src('hero5.js') + src('hero6.js') + src('hero7.js') + src('svck.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js') + src('bx.js')
+    js = src('photo-hero.js') + src('hero2.js') + src('hero3.js') + src('hero4.js') + src('hero5.js') + src('hero6.js') + src('hero7.js') + src('hero8.js') + src('svck.js') + ''.join(SEC(m + '.js') for m in MODS + PMODS) + src('fx.js') + src('hf.js') + src('bx.js')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">

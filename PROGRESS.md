@@ -1419,7 +1419,15 @@ Every text element is paired with the nearest painted background behind it, as r
 - **Tools added:** `weight.py`, `measure_images.js`, `wcheck.js`, `media/img-need.json`. `python3 build_site.py --raw` writes the pre-pass file.
 - **Flag:** archived film heroes cannot play in headless Chromium (no H.264 decoder).
 
-**Next, after the accept:** Hero H-A, built to the NEXT PLAN in GATE-WEIGHT.md (photo choice, where 4.9 / 474 lives, and the H1 are Muse's decisions).
+**GATE-WEIGHT: accepted by Muse (8.26).** Consult reply on Hero H-A (binding): photo #5, 4.9 / 474 in Reviews only, H1 and subline unchanged.
+
+**Hero O "The house, and the homeowner's word" (GATE-NEW-Hero-O.md): built and gated; waiting for Muse.**
+- **Shown default:** `?hero=o`; Hero 1 is parked as a hidden backup. Score 8.51 (level with Hero N).
+- **Proof:** locks verbatim, no repeated numbers, 0.97 screen at 1440 (1.23 at 390), 256 views with 0 errors; 199 templates with only the old default added, 0 changed.
+- **File:** 13,071,331 bytes (+209,903).
+- **Sub-agents:** none used in this build.
+
+**Next, after the accept:** Booking B-A "The open door", built to the NEXT PLAN in GATE-NEW-Hero-O.md (four decisions for Muse: address/email, hours line, section headline, the scheduling-page line).
 
 **Owner order, 2026-11-05 (supersedes the no-sub-agents line for Austin only):** this Austin session may run **up to 2 sub-agents** to divide the upgrade work (prep, audit, asset work in parallel with the section being built). The plan, build order, gate standard (scorecard, skill ledger, screenshots, NEXT PLAN), weight ceiling and all fact locks stand. **Each gate states sub-agent use honestly.**
 

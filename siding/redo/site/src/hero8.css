@@ -1,0 +1,59 @@
+/* HERO O — The house, and the homeowner's word (upgrade plan H-A; Cowboy: one subject, a human voice, restraint). */
+.hero.hzv{min-height:0;padding:100px var(--gut) 0}   /* the floating header occupies the first 84 px */
+.hzv .hzframe{position:relative;max-width:1372px;margin:0 auto;height:clamp(540px,calc(100svh - 126px),780px);perspective:1400px}
+.hzv .hzwrap{position:absolute;inset:0;border-radius:26px;overflow:hidden;background:#E4EAE5;box-shadow:0 1px 0 rgba(10,22,17,.05),0 30px 60px -34px rgba(10,22,17,.45)}
+/* the photo is never wider than its own 1400 px: the frame is capped at 1372 and the photo overhangs it by 14 px a side for the drift */
+.hzv .hzphoto{position:absolute;left:-14px;top:-14px;width:calc(100% + 28px);max-width:1400px;height:calc(100% + 28px);object-fit:cover;object-position:50% 34%;
+  transform:translate3d(var(--hx,0px),var(--hy,0px),0);will-change:transform}
+.hzv .hzglint{position:absolute;top:-10%;bottom:-10%;left:0;width:46%;pointer-events:none;opacity:.0;
+  background:linear-gradient(100deg,rgba(255,255,255,0) 0,rgba(255,255,255,.30) 46%,rgba(255,255,255,.12) 54%,rgba(255,255,255,0) 100%);transform:translate3d(var(--gx,-70%),0,0) skewX(-14deg);will-change:transform,opacity}
+.hzv.hzsweep .hzglint{animation:hzSweep 1.9s .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes hzSweep{0%{opacity:0;transform:translate3d(-70%,0,0) skewX(-14deg)}12%{opacity:1}100%{opacity:0;transform:translate3d(260%,0,0) skewX(-14deg)}}
+/* the headline card (the page's own words) */
+.hzv .hzcard{position:absolute;left:28px;bottom:28px;width:min(476px,44%);padding:clamp(22px,2.2vw,32px);border-radius:22px;background:#FFFFFF;box-shadow:0 1px 0 rgba(10,22,17,.06),0 26px 50px -22px rgba(10,22,17,.55);
+  transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg)) translateZ(0);transform-origin:20% 80%;will-change:transform}
+.hzv .hzcard .lead{font:800 clamp(34px,3.5vw,52px)/1.02 var(--display);letter-spacing:-.026em;color:var(--ink);text-wrap:balance;margin:0}
+.hzv .hzcard .sub{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:34ch;margin:14px 0 20px}
+.hzv .hzcard .ctas{gap:12px 22px}
+/* a homeowner's words */
+.hzv .hzquote{position:absolute;top:28px;right:28px;width:min(344px,30%);margin:0;padding:20px 22px 18px;border-radius:20px;background:#FFFFFF;box-shadow:0 1px 0 rgba(10,22,17,.06),0 22px 44px -20px rgba(10,22,17,.5);
+  transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg)) translateZ(0);transform-origin:80% 20%;will-change:transform}
+.hzv .hzlabel{margin:0 0 10px;font:700 11.5px/1.3 var(--text);letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.hzv .hzquote blockquote{margin:0;padding:0 0 0 14px;border-left:4px solid #B5DB6E}
+.hzv .hzquote blockquote p{margin:0;font:700 clamp(17px,1.5vw,21px)/1.3 var(--display);letter-spacing:-.005em;color:var(--ink)}
+.hzv .hzquote figcaption{margin-top:12px;font:500 13px/1.4 var(--text);color:var(--ink-3)}
+.hzv .hzquote figcaption b{font-weight:700;color:var(--ink-2)}
+/* credentials (inside the headline card) and the job's own record */
+.hzv .hzcreds{margin:18px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.hzv .hzcreds li{padding:7px 11px;border-radius:999px;background:#F1F5F2;box-shadow:inset 0 0 0 1px #E1E9E3;font:700 12px/1 var(--text);color:var(--ink-2);white-space:nowrap}
+.hzv .hzcap{position:absolute;right:28px;bottom:26px;margin:0;max-width:min(640px,46%);padding:8px 14px;border-radius:12px;background:rgba(255,255,255,.94);font:500 12.5px/1.4 var(--text);color:var(--ink-2);text-align:right}
+@media (min-width:1240px){.hzv .hzcap{max-width:none;white-space:nowrap}}
+.hzv .hzcap a{font-weight:700;color:var(--green);text-underline-offset:3px}
+.hzv .hzcap a:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px;border-radius:4px}
+/* tablet: the headline card and the quote share the foot of the photo; the credentials move below */
+@media (max-width:1100px){
+  .hzv .hzframe{height:clamp(540px,calc(100svh - 110px),720px)}
+  .hzv .hzcard{width:min(470px,52%)}
+  .hzv .hzquote{width:min(300px,38%)}
+}
+/* phone and narrow tablet: the photo first, then the page's words, the voice, the credentials and the job's record */
+@media (max-width:900px){
+  .hero.hzv{padding-top:82px}
+  .hzv .hzframe{height:auto;perspective:none;display:flex;flex-direction:column;gap:14px}
+  .hzv .hzwrap{position:relative;inset:auto;aspect-ratio:5/4;max-height:56svh;border-radius:20px}
+  .hzv .hzphoto{object-position:50% 30%}
+  .hzv .hzcard,.hzv .hzquote{position:static;width:auto;transform:none!important}
+  .hzv .hzcard{padding:22px 20px;margin-top:-52px;margin-inline:10px;box-shadow:0 1px 0 rgba(10,22,17,.06),0 20px 40px -20px rgba(10,22,17,.5)}
+  .hzv .hzcard .lead{font-size:clamp(34px,10vw,46px)}
+  .hzv .hzcard .sub{font-size:16px;margin:12px 0 18px}
+  .hzv .hzquote{background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3;padding:18px 18px 16px}
+  .hzv .hzcap{position:static;max-width:none;text-align:left;background:none;padding:0 2px 6px;color:var(--ink-3)}
+}
+@media (min-width:600px) and (max-width:900px){
+  .hzv .hzwrap{aspect-ratio:4/3}
+  .hzv .hzcard .ctas .btn{flex:0 0 auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .hzv .hzglint{display:none}
+  .hzv .hzphoto,.hzv .hzcard,.hzv .hzquote{transform:none!important;will-change:auto}
+}

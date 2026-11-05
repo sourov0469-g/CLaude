@@ -19,6 +19,7 @@ from PIL import Image
 URI = re.compile(r'data:(image/(?:webp|jpeg|png));base64,([A-Za-z0-9+/=]+)')
 IMG_SRC = re.compile(r'src="(data:image/(?:webp|jpeg|png);base64,[A-Za-z0-9+/=]+)"')
 JS_STR = re.compile(r'"(data:image/(?:webp|jpeg|png);base64,[A-Za-z0-9+/=]+)"')
+KEEP_TAG = re.compile(r'<img[^>]*?\bsrc="(data:image/[a-z]+;base64,[A-Za-z0-9+/=]+)"[^>]*?data-q="keep"|<img[^>]*?data-q="keep"[^>]*?\bsrc="(data:image/[a-z]+;base64,[A-Za-z0-9+/=]+)"')
 TINY = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 OK_GLOBALS = ('__JOBS', '__SVCK', '__WINN')
 CANVAS_GLOBALS = ('__PHOTOS', '__HERO2')   # source pixels matter here (board polygons, depth maps): recompress, never resize
@@ -61,7 +62,7 @@ def _fingerprint(uri):
     return W, H, (d[:, :-1] > d[:, 1:]).flatten(), np.asarray(g.resize((48, 36), Image.LANCZOS), dtype=np.float32)
 
 
-def same_photo_map(uris):
+def same_photo_map(uris, keep=()):
     """{smaller copy: largest copy} for the same photograph embedded at several sizes. A pair counts as the same photo only if
     it has the same aspect ratio (within 2%), a near-identical difference hash AND a near-identical 48x36 pixel thumbnail
     (mean difference <= 2 of 255; measured: true copies <= 1.4; a repainted house or any other photo is far above)."""
@@ -84,7 +85,7 @@ def same_photo_map(uris):
     out = {}
     for g in groups.values():
         if len(g) > 1:
-            m = max(g, key=lambda i: (fp[i][0] * fp[i][1], -len(us[i])))
+            m = max(g, key=lambda i: (fp[i][0] * fp[i][1], us[i] in keep, -len(us[i])))
             for i in g:
                 if i != m:
                     out[us[i]] = us[m]
@@ -110,6 +111,7 @@ def weight_pass(h, need_path, log=print):
     for m in URI.finditer(h):
         k = _kind(h, m.start())
         kinds.setdefault(m.group(0), set()).add(k)
+    keep = {m.group(1) or m.group(2) for m in KEEP_TAG.finditer(h)}   # images marked data-q="keep" (the hero photo): never re-encoded
     elig = [u for u, ks in kinds.items() if ks <= {'img', 'js'} and None not in ks]
     canvas = [u for u, ks in kinds.items() if ks == {'canvas'} and len(u) >= CANVAS_MIN]
     keys = {}
@@ -120,6 +122,8 @@ def weight_pass(h, need_path, log=print):
     newmap, rows, upscaled = {}, [], []
     for u in elig:
         if not u.startswith('data:image/'):
+            continue
+        if u in keep:
             continue
         raw = base64.b64decode(u.split(',', 1)[1]); im = Image.open(io.BytesIO(raw)); im.load(); W, H = im.size
         n = need.get(key(u))
@@ -149,7 +153,7 @@ def weight_pass(h, need_path, log=print):
     after_resize = len(h.encode())
     # the same photograph embedded at several sizes: every use is pointed at the largest copy (never a smaller one)
     now = {newmap.get(u, u) for u in elig}
-    same = same_photo_map(now)
+    same = same_photo_map(now, keep)
     h = URI.sub(lambda m: same.get(m.group(0), m.group(0)), h)
     after_merge = len(h.encode())
     # ---- 2. one copy of each repeated image
