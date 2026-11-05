@@ -8,7 +8,7 @@ import build_site as BS
 
 BOOK = BS.BOOK
 SEC = lambda f: open(os.path.join(SITE, 'src', 'sec', f)).read()
-MODS = {'windows': 'Win', 'reviews': 'Rev', 'rev2': 'Rev2', 'proc2': 'Proc2', 'area': 'Area', 'cta': 'Cta', 'cta2': 'Cta2', 'cta5': 'Cta5'}
+MODS = {'reviews': 'Rev', 'rev2': 'Rev2', 'proc2': 'Proc2', 'area': 'Area', 'cta': 'Cta', 'cta2': 'Cta2', 'cta5': 'Cta5'}
 
 
 def sections():

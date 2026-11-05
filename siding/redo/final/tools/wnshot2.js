@@ -1,0 +1,10 @@
+const { chromium } = require('playwright'); const D = 'wn/';
+(async () => { const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+  await p.goto('file:///home/user/CLaude/siding/redo/final/out/final.html', { waitUntil: 'load' }); await p.waitForTimeout(600);
+  await p.evaluate(() => { const y = scrollY + document.querySelector('.wn').getBoundingClientRect().top; scrollTo({ top: y, behavior: 'instant' }); }); await p.waitForTimeout(1000);
+  const shot = async (n) => { await p.waitForTimeout(700); await (await p.$('.wn-stage')).screenshot({ path: D + n + '.png' }); };
+  await p.click('.wn-g[data-g="colonial"]'); await p.click('.wn-b[data-b="Simonton"]'); await p.click('.wn-c[data-i="7"]'); await shot('s1');
+  await p.click('.wn-g[data-g="prairie"]'); await p.click('.wn-scr'); await p.click('.wn-open'); await p.waitForTimeout(900); await shot('s2');
+  await p.evaluate(() => { const t = document.querySelector('.wn-time'); t.value = 21.5; t.dispatchEvent(new Event('input')); }); await shot('s3');
+  await p.evaluate(() => { const t = document.querySelector('.wn-time'); t.value = 7.5; t.dispatchEvent(new Event('input')); }); await p.click('.wn-open'); await p.waitForTimeout(900); await p.click('.wn-lock'); await p.waitForTimeout(400); await p.click('.wn-lock'); await p.click('.wn-g[data-g="none"]'); await p.click('.wn-lock'); await p.click('.wn-tilt'); await shot('s4');
+  console.log(JSON.stringify(errs)); await b.close(); })();

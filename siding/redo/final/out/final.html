@@ -339,142 +339,107 @@ html{scroll-behavior:smooth}
 }
 @media (max-width:420px){.vz-h{font-size:28px}.vz-hint{font-size:12.5px;padding:7px 12px}.vz-tag b{font-size:13px}}
 @media (prefers-reduced-motion:reduce){.vz-bg svg{transform:none}.vz-sw,.vz-lite,.vz-cv{transition:none}.vz-sw:hover{transform:none}}
-/* WINDOWS. A: one real single-hung, morning to midnight. B: a 400 Series bay built out from the wall, the wall peelable to its layers. */
-.wnA{min-height:100svh;padding-top:108px;padding-bottom:48px;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(20px,3.4vw,56px);align-items:center}
-.wnA .side{position:relative}
-.wnA .side::before,.wnB .side::before{content:"";position:absolute;inset:-40px -60px -40px -80px;z-index:-1;background:radial-gradient(closest-side,rgba(245,249,245,.92),rgba(245,249,245,.7) 60%,rgba(245,249,245,0));pointer-events:none}
-.wnA .parts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:20px;max-width:470px}
-.wnA .parts button{all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;padding:10px 12px;border-radius:10px;background:rgba(245,249,245,.86);box-shadow:inset 0 -2px 0 #E2DDD2;transition:transform .16s var(--ease-out),box-shadow .16s ease}
-.wnA .parts b{display:block;font:700 14px/1.2 var(--text);color:var(--ink)}
-.wnA .parts span{display:block;font:500 12.5px/1.35 var(--text);color:var(--ink-3);margin-top:3px}
-.wnA .parts button:hover,.wnA .parts button:focus-visible{transform:translateY(-2px);box-shadow:inset 0 -2px 0 var(--lime),0 8px 14px -10px rgba(0,0,0,.35)}
-.wnA .parts button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
-.wnA .brands{display:flex;gap:12px;align-items:baseline;margin-top:20px;max-width:470px}
-.wnA .brands b{font:800 30px/1 var(--display);color:var(--green)}
-.wnA .brands span{font:500 14px/1.45 var(--text);color:var(--ink-2)}
-.wnA .side .btn{margin-top:22px}
-.wnA .stage{position:relative;border-radius:22px;overflow:hidden;background:#F5F9F5;box-shadow:0 2px 0 #E9E5DB,0 40px 70px -46px rgba(22,25,29,.5)}
-.wnsvg{display:block;width:100%;height:calc(100svh - 250px);max-height:660px;min-height:420px;--night:0;--dusk:0;--sx:0px;--fc:#F3F0E9}
-.wnsvg .wall{fill:#B2AEA9}
-.wnsvg .trim{fill:#E0E0D8}.wnsvg .drip{fill:#D2D2C9}
-.wnsvg .frame,.wnsvg .sashframe{fill:var(--fc);transition:fill .35s ease}
-.wnsvg .shadow{transform:translate(var(--sx),9px);opacity:calc(1 - var(--night) * .8)}
-.wnsvg .glass-base{fill:#1C2329}
-.wnsvg .uppersash .glass-base{fill:rgba(28,35,41,.82)}
-.wnsvg .glow{opacity:calc(var(--night) * .95 + var(--dusk) * .25)}
-/* the room behind the opening: a quiet drawn interior (no photograph). By day it reads dimmer than outside, as rooms do;
-   from dusk a table lamp lights it warm. Seen fully only when the lower sash is lifted, through the insect screen. */
-.wnsvg .room .fl{stroke:rgba(0,0,0,.18);stroke-width:1.2}
-.wnsvg .room .rshade{opacity:calc(.34 - var(--night) * .26)}
-.wnsvg .room .rwarm{mix-blend-mode:soft-light;opacity:calc(var(--night) * .9 + var(--dusk) * .3)}
-.wnsvg .room .sun{opacity:calc(.32 * (1 - var(--night)) * (1 - var(--dusk)))}
-.wnsvg .room .lglow{mix-blend-mode:screen;opacity:calc(var(--night) * 1 + var(--dusk) * .35)}
-.wnsvg .room .lamp path:nth-child(2){filter:brightness(calc(1 + var(--night) * .25))}
-.wnsvg .refl{opacity:max(0,calc(.8 - var(--night) * 1.1 - var(--dusk) * .2))}
-.wnsvg .streak{opacity:calc(.16 - var(--night) * .14)}
-.wnsvg .grille{opacity:.78;transition:opacity .3s ease}
-.wnsvg.nogrille .grille{opacity:0}
-.wnsvg .spill{opacity:calc(var(--night) * 1)}
-.wnsvg .night{fill:#1B2538;opacity:calc(var(--night) * .5 + var(--dusk) * .12);mix-blend-mode:multiply;pointer-events:none}
-.wnsvg .sashframe{filter:brightness(calc(1 - var(--night) * .45))}
-.wnsvg .spill{mix-blend-mode:screen}
-.wnsvg .lower{transition:transform .9s cubic-bezier(.3,1.15,.45,1)}
-.wnsvg.lifted .lower{transform:translateY(-150px)}
-.wnsvg [data-part]{transition:opacity .2s ease,filter .2s ease}
-.wnsvg.hlon [data-part]:not(.hl):not(:has(.hl)){opacity:.3}
-.wnsvg.hlon [data-part]:has(.hl) > :not(.hl){opacity:.3}
-.wnsvg.hlon .hl{filter:drop-shadow(0 0 6px #B5DB6E) drop-shadow(0 0 2px #7FA43E)}
-.wnsvg.hlon .grille.hl{opacity:1;fill:#B5DB6E}
-.wnA .ctrl{display:grid;grid-template-columns:1fr auto;gap:12px 18px;align-items:center;padding:14px 18px 16px;border-top:1px solid #EFEBE2;background:#F5F9F5}
-.wnA .day{grid-column:1/-1;position:relative}
-.wnA .day input{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:none;cursor:pointer;margin:0}
-.wnA .day input::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#CFE3F1,#F8E6B0 30%,#F6C27A 64%,#7B6A8C 80%,#2C3554)}
-.wnA .day input::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#CFE3F1,#F8E6B0 30%,#F6C27A 64%,#7B6A8C 80%,#2C3554)}
-.wnA .day input::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:#F4C54F;border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.12),0 4px 10px rgba(0,0,0,.25)}
-.wnA .day input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#F4C54F;border:3px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.25)}
-.wnA .day input:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:8px}
-.wnA .ticks{display:flex;justify-content:space-between;font:600 12px/1 var(--text);color:var(--ink-3);margin-top:4px}
-.wnA .tg{display:flex;gap:8px}
-.chipb{border:0;cursor:pointer;height:38px;padding:0 14px;border-radius:9px;background:#F4F2EC;font:700 13.5px/1 var(--text);color:var(--ink-2);box-shadow:inset 0 -2px 0 #E2DDD2;transition:background-color .18s ease,color .18s ease,transform .16s var(--ease-out)}
-.chipb:hover{transform:translateY(-1px)}.chipb:active{transform:translateY(1px)}
-.chipb[aria-pressed="true"]{background:var(--green);color:#fff;box-shadow:inset 0 -2px 0 var(--green-dd)}
-.wnA .fc{display:flex;gap:7px;align-items:center;justify-self:end}
-.wnA .fc button{width:28px;height:28px;border-radius:7px;border:0;cursor:pointer;background:var(--c);box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.08);transition:transform .16s var(--ease-out)}
-.wnA .fc button:hover{transform:translateY(-2px)}
-.wnA .fc button[aria-checked="true"]{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--green)}
-.wnA .fcn{font:700 13px/1 var(--text);color:var(--ink-2);min-width:76px;margin-left:4px}
-
-/* ---- B: the built-out bay ---- */
-.wnB{min-height:100svh;padding-top:108px;padding-bottom:48px;display:grid;grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr);gap:clamp(20px,3.4vw,56px);align-items:center}
-.wnB .side{position:relative}
-.wnB .seg{display:inline-flex;margin-top:22px;padding:4px;border-radius:12px;background:#F5F9F5;box-shadow:inset 0 -2px 0 #E2DDD2}
-.wnB .seg button{border:0;background:none;height:40px;padding:0 14px;border-radius:9px;cursor:pointer;font:700 14px/1 var(--text);color:var(--ink-3);transition:background-color .18s ease,color .18s ease}
-.wnB .seg button[aria-pressed="true"]{background:var(--green);color:#fff;box-shadow:inset 0 -2px 0 var(--green-dd)}
-.wnB .layers{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:4px;max-width:420px;counter-reset:l}
-.wnB .layers li{display:flex;gap:12px;align-items:baseline;padding:8px 12px;border-radius:10px;transition:background-color .2s ease,opacity .2s ease}
-.wnB .layers li::before{counter-increment:l;content:counter(l);flex:none;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font:800 12px/1 var(--display);background:#F5F9F5;box-shadow:inset 0 -2px 0 #E2DDD2;color:var(--ink-2);align-self:center}
-.wnB .layers b{font:700 14.5px/1.2 var(--text);color:var(--ink);white-space:nowrap}
-.wnB .layers span{font:500 13px/1.35 var(--text);color:var(--ink-3)}
-.wnB .layers li.now{background:rgba(245,249,245,.9);box-shadow:0 2px 0 #E9E5DB}
-.wnB .layers li.now::before{background:var(--green);color:#fff;box-shadow:inset 0 -2px 0 var(--green-dd)}
-.wnB .layers li.off b{text-decoration:line-through;text-decoration-color:var(--lime-d);text-decoration-thickness:2px;color:var(--ink-3)}
-.wnB .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.wnB .note{margin-top:14px;font:500 13px/1.45 var(--text);color:var(--ink-3);max-width:44ch}
-.wnB .stage{position:relative;height:min(calc(100svh - 170px),640px);min-height:420px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#F7F5F0,#ECE8DF);box-shadow:0 2px 0 #E9E5DB,0 40px 70px -46px rgba(22,25,29,.5);touch-action:pan-y}
-.wnB .hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font:600 13px/1 var(--text);color:var(--ink-3);white-space:nowrap}
-.wnB .cam{position:absolute;left:50%;top:50%;width:760px;height:600px;margin:-300px 0 0 -380px;transform:scale(var(--s,1));perspective:1500px}
-.wnB .world{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry))}
-/* the wall: four pieces around the opening per layer, layers stacked behind each other */
-.wnB .wall{position:absolute;inset:0;transform-style:preserve-3d;--ow:var(--W);--oh:330px;--ox:calc(50% - var(--W) / 2);--oy:120px}
-.wnB .wp{position:absolute;display:block;transition:transform .8s cubic-bezier(.3,1.1,.45,1),opacity .5s ease}
-.wnB .wp.t{left:0;right:0;top:0;height:var(--oy)}.wnB .wp.b{left:0;right:0;top:calc(var(--oy) + var(--oh));bottom:0}
-.wnB .wp.l{left:0;width:var(--ox);top:var(--oy);height:var(--oh)}.wnB .wp.r{right:0;width:var(--ox);top:var(--oy);height:var(--oh)}
-.wnB .wp.siding{transform:translateZ(0);background:#C6BEB0 repeating-linear-gradient(180deg,rgba(255,255,255,.08) 0 24px,rgba(0,0,0,.22) 24px 26px,rgba(255,255,255,.18) 26px 27px);background-attachment:local}
-.wnB .wp.siding.t{background-position:0 0}.wnB .wp.siding.b{background-position:0 calc(-1 * (var(--oy) + var(--oh)))}
-.wnB .wp.siding.l,.wnB .wp.siding.r{background-position:0 calc(-1 * var(--oy))}
-.wnB .wp.wrap{transform:translateZ(-3px);background:repeating-linear-gradient(90deg,transparent 0 180px,rgba(60,90,130,.18) 180px 182px),repeating-linear-gradient(180deg,transparent 0 120px,rgba(60,90,130,.14) 120px 121px),#F1F3F4}
-.wnB .wp.sheath{transform:translateZ(-6px);background:#C9A877 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.09 .03' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .45 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  box-shadow:inset 0 0 0 1px rgba(90,60,20,.25)}
-.wnB .wp.studs{transform:translateZ(-12px);background:repeating-linear-gradient(90deg,#D9B988 0 14px,#E9D98F 14px 92px);background-color:#E9D98F}
-/* through the opening: the room behind */
-.wnB .inside{position:absolute;left:var(--ox);top:var(--oy);width:var(--ow);height:var(--oh);transform:translateZ(-40px);background:linear-gradient(180deg,#5A5047,#2F2A26)}
-/* peel: each layer lifts off the wall and falls away, in turn */
-.wnB .world[data-peel="1"] .wp.siding,.wnB .world[data-peel="2"] .wp.siding,.wnB .world[data-peel="3"] .wp.siding,
-.wnB .world[data-peel="2"] .wp.wrap,.wnB .world[data-peel="3"] .wp.wrap,.wnB .world[data-peel="3"] .wp.sheath{opacity:0;transform:translateZ(120px) translateY(60px) rotateX(-24deg)}
-.wnB .wp.siding.l,.wnB .wp.wrap.l,.wnB .wp.sheath.l{transition-delay:.05s}.wnB .wp.r{transition-delay:.1s}.wnB .wp.b{transition-delay:.15s}
-/* the bay */
-.wnB .bay{position:absolute;left:calc(50% - var(--W) / 2);top:120px;width:var(--W);height:330px;transform-style:preserve-3d}
-.wnB .u{position:absolute;top:0;height:330px;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,1.1,.45,1),width .5s ease}
-.wnB .u.ct{left:var(--inset);width:var(--C);transform:translateZ(var(--P))}
-.wnB .u.lf{left:0;width:var(--F);transform-origin:0 50%;transform:rotateY(calc(var(--a) * -1))}
-.wnB .u.rf{right:0;width:var(--F);transform-origin:100% 50%;transform:rotateY(var(--a))}
-.wnB .world:not(.in) .u.ct{transform:translateZ(0)}.wnB .world:not(.in) .u.lf,.wnB .world:not(.in) .u.rf{transform:rotateY(0)}
-.wnB .ufr{position:absolute;inset:0;background:#F3F0E9;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),inset 0 -6px 10px -6px rgba(0,0,0,.2);padding:12px}
-.wnB .usash{position:absolute;inset:12px;background:#ECE8E0;padding:12px 11px 14px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1),0 2px 3px rgba(0,0,0,.12)}
-.wnB .ug{position:absolute;inset:12px 11px 14px;display:block;background:linear-gradient(160deg,#D3E2EC 0%,#9CB3C4 42%,#6F8597 100%);box-shadow:inset 0 0 0 2px rgba(0,0,0,.3)}
-.wnB .ug::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.35) 38%,transparent 52%)}
-.wnB .u.lf .ug{filter:brightness(.88)}.wnB .u.rf .ug{filter:brightness(1.06)}
-.wnB .post{position:absolute;top:-2px;width:14px;height:334px;background:#E6E2D9;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);transition:transform .9s cubic-bezier(.3,1.1,.45,1)}
-.wnB .post.pl{left:calc(var(--inset) - 7px);transform:translateZ(var(--P))}.wnB .post.pr{left:calc(var(--inset) + var(--C) - 7px);transform:translateZ(var(--P))}
-.wnB .world:not(.in) .post{transform:translateZ(0)}
-/* head and seat: trapezoids from the wall to the front, the head a small standing-seam metal roof */
-.wnB .head,.wnB .seat{position:absolute;left:0;width:var(--W);height:var(--P);transform-origin:50% 0;
-  clip-path:polygon(0 0,100% 0,calc(100% - var(--inset)) 100%,var(--inset) 100%);transition:transform .9s cubic-bezier(.3,1.1,.45,1),height .9s ease}
-.wnB .head{top:calc((var(--P) + 18px) * -.4384 - 3px);height:calc(var(--P) + 18px);transform:rotateX(64deg);background:#3C4247 repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.14) 22px 24px)}
-.wnB .seat{top:330px;transform:rotateX(90deg);background:#D9D4C9;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
-.wnB .world:not(.in) .head,.wnB .world:not(.in) .seat{height:0}
-.wnB .brk{position:absolute;top:330px;width:10px;height:70px;background:#3C4247;transform-origin:50% 0;transition:transform .9s ease}
-.wnB .brk.bl{left:calc(var(--inset) + 20px);transform:translateZ(calc(var(--P) * .5)) rotateX(-40deg)}.wnB .brk.br{left:calc(var(--inset) + var(--C) - 30px);transform:translateZ(calc(var(--P) * .5)) rotateX(-40deg)}
-.wnB .world:not(.in) .brk{transform:scaleY(0)}
-@media (max-width:860px){
-  .wnA,.wnB{grid-template-columns:1fr;padding-top:90px}
-  .wnA .stage,.wnB .stage{order:-1}
-  .wnA .side::before,.wnB .side::before{inset:-24px calc(var(--gut) * -1)}
-  .wnA .ctrl{grid-template-columns:1fr}.wnA .fc{justify-self:start}
-  .wnsvg{height:auto;min-height:0;aspect-ratio:640/560}
-  .wnB .stage{height:380px;min-height:0}
-}
-@media (prefers-reduced-motion:reduce){.wnsvg .lower,.wnB .wp,.wnB .u,.wnB .post,.wnB .head,.wnB .seat,.wnB .brk{transition:none!important}}
+/* SECTION 5 — Windows. A dim sage ground with the kit's light rays and ghost sash grid; the drawn window is the stage. */
+.wn{position:relative;overflow:hidden;padding:84px var(--gut) 84px;background:linear-gradient(180deg,#E8EFE9,#EEF3EE 38%,#E4ECE6)}
+.wn-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.wn-bg svg{position:absolute;left:0;width:100%;will-change:transform;transform:translate3d(0,var(--py,0px),0)}
+.wn-far,.wn-near{top:-6%;height:112%}
+.wn-in{position:relative;z-index:1;max-width:1380px;margin:0 auto}
+.wn-hd{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin-bottom:22px}
+.wn-h{margin:0;font:800 clamp(30px,3.7vw,52px)/1.04 var(--display);letter-spacing:-.03em;color:var(--ink);text-wrap:balance;max-width:20ch}
+.wn-sub{margin:0;font:600 16px/1.4 var(--text);color:var(--ink-3)}
+.wn-main{display:grid;grid-template-columns:218px minmax(0,1fr) 352px;gap:20px;align-items:start}
+.wn-left{display:flex;flex-direction:column;gap:14px;min-width:0}
+.wn-kinds{display:flex;flex-direction:column;gap:8px}
+.wn-stat{padding:16px;border-radius:18px;background:rgba(245,249,245,.7);box-shadow:inset 0 0 0 1px #D5E1D7;display:flex;flex-direction:column;gap:9px}
+.wn-sq{margin:0;font:800 13px/1.2 var(--text);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.wn-sn{margin:0;font:600 14px/1.3 var(--text);color:var(--ink-2)}.wn-sn b{font:800 34px/1 var(--display);letter-spacing:-.03em;color:#0E3B2C;margin-right:4px}
+.wn-bar{display:grid;grid-template-columns:78px 1fr 30px;gap:8px;align-items:center;font:700 12.5px/1 var(--text);color:var(--ink-2)}
+.wn-bar u{display:block;height:9px;border-radius:99px;background:rgba(14,59,44,.1);overflow:hidden;text-decoration:none}
+.wn-bar i{display:block;height:100%;width:var(--w);border-radius:99px;background:#6FA05C;transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.7,.2,1),background-color .3s ease}
+.wn-seen .wn-bar i{transform:scaleX(1)}
+.wn-bar:nth-of-type(2) i{transition-delay:.08s}.wn-bar:nth-of-type(3) i{transition-delay:.16s}.wn-bar:nth-of-type(4) i{transition-delay:.24s}
+.wn-bar.on i{background:#0E3B2C}.wn-bar.on{color:var(--ink)}.wn-bar b{text-align:right;font-weight:800}
+.wn-sf{margin:0;font:500 12.5px/1.3 var(--text);color:var(--ink-3)}
+.wn-k{display:flex;align-items:center;gap:12px;text-align:left;padding:10px 12px;border-radius:16px;background:rgba(245,249,245,.7);border:0;box-shadow:inset 0 0 0 1px #D5E1D7;cursor:pointer;font-family:var(--text);color:var(--ink);transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease;min-height:68px}
+.wn-k:hover{background:#F7FAF7;transform:translateX(2px)}
+.wn-k[aria-checked="true"]{background:#0E3B2C;color:#fff;box-shadow:0 14px 24px -16px rgba(10,22,17,.7)}
+.wn-k:focus-visible,.wn-c:focus-visible,.wn-b:focus-visible,.wn-g:focus-visible,.wn-btn:focus-visible{outline:3px solid #0E3B2C;outline-offset:2px}
+.wn-k[aria-checked="true"]:focus-visible{outline-color:#B5DB6E}
+.wn-mini{flex:none;width:46px;height:46px;border-radius:10px;background:rgba(14,59,44,.06)}
+.wn-k[aria-checked="true"] .wn-mini{background:rgba(255,255,255,.16)}
+.wn-k b{display:block;font:800 16px/1.15 var(--display);letter-spacing:-.01em}
+.wn-k small{display:block;margin-top:3px;font:500 13.5px/1.3 var(--text);color:var(--ink-3)}
+.wn-k[aria-checked="true"] small{color:#CFE6D2}
+.wn-fig{margin:0;min-width:0}
+.wn-stage{position:relative;aspect-ratio:640/540;border-radius:24px;overflow:hidden;background:#9DAC9E;box-shadow:0 1px 0 rgba(10,22,17,.06),0 30px 56px -34px rgba(10,22,17,.55);transition:opacity .17s ease,transform .17s ease}
+.wn-stage.swap{opacity:.2;transform:scale(.99)}
+.wn-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.wn-hit{position:absolute;touch-action:none;cursor:grab;border-radius:6px}
+.wn-hit.grab{cursor:grabbing}
+.wn-tag{position:absolute;left:14px;top:14px;display:flex;flex-direction:column;gap:2px;padding:9px 14px;border-radius:14px;background:rgba(246,250,246,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 8px 18px -12px rgba(10,22,17,.6);pointer-events:none}
+.wn-tag b{font:800 15px/1.1 var(--display);color:var(--ink)}
+.wn-tag span{font:600 12.5px/1.2 var(--text);color:var(--ink-3)}
+.wn-hint{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(14,59,44,.92);color:#fff;font:700 13.5px/1 var(--text);pointer-events:none;transition:opacity .4s ease,transform .4s ease}
+.wn-hint svg{width:18px;height:18px;color:#B5DB6E}
+.wn-hint.off{opacity:0;transform:translateY(8px)}
+.wn-inset{position:absolute;right:14px;bottom:14px;width:min(34%,220px);border-radius:16px;overflow:hidden;background:#2A332D;box-shadow:0 14px 26px -14px rgba(0,0,0,.7),0 0 0 2px rgba(246,250,246,.9)}
+.wn-inset p{position:absolute;left:8px;top:6px;margin:0;padding:3px 9px;border-radius:999px;background:rgba(246,250,246,.92);font:800 11px/1 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);z-index:1}
+.wn-inset svg{display:block;width:100%;height:auto;font-family:var(--text)}
+.wn-inset.shake,.wn-lock.shake{animation:wnshake .4s cubic-bezier(.36,.07,.19,.97)}
+@keyframes wnshake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+.wn-cap{margin:12px 2px 0;display:flex;flex-direction:column;gap:6px}
+.wn-fact{font:600 14px/1.45 var(--text);color:var(--ink-2)}
+.wn-note{font:500 13px/1.45 var(--text);color:var(--ink-3)}
+.wn-panel{display:flex;flex-direction:column;gap:14px;padding:20px;border-radius:24px;background:rgba(245,249,245,.84);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px #D5E1D7,0 24px 44px -30px rgba(10,22,17,.5)}
+.wn-kn{margin:0;font:800 22px/1.1 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.wn-how{margin:6px 0 0;font:500 14.5px/1.5 var(--text);color:var(--ink-2)}
+.wn-sec{display:flex;flex-direction:column;gap:9px;padding-top:12px;border-top:1px solid #D5E1D7}
+.wn-q{margin:0;font:800 14.5px/1.2 var(--display);letter-spacing:-.005em;color:var(--ink);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.wn-q em{font:600 13px/1.2 var(--text);color:var(--ink-3);font-style:normal}
+.wn-row{display:flex;gap:8px;flex-wrap:wrap}
+.wn-btn{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 16px;border:0;border-radius:12px;background:#EAF1EB;box-shadow:inset 0 0 0 1px #C9D8CC;color:var(--ink);font:800 14.5px/1 var(--text);cursor:pointer;transition:background-color .18s ease,color .18s ease,transform .15s ease}
+.wn-btn:hover{background:#DDE9DF}.wn-btn:active{transform:scale(.97)}
+.wn-btn[aria-pressed="true"]{background:#0E3B2C;color:#fff;box-shadow:none}
+.wn-btn:disabled{opacity:.45;cursor:not-allowed}
+.wn-open{background:#B5DB6E;color:#0E3B2C;box-shadow:none;min-height:50px;font-size:15.5px}
+.wn-open:hover{background:#C4E584}
+.wn-open[aria-pressed="true"]{background:#0E3B2C;color:#B5DB6E}
+.wn-lock svg{width:18px;height:18px}.wn-lock.on svg .shk{transform:none}
+.wn-lock:not(.on) svg .shk{transform:translateY(-3px) rotate(-14deg);transform-origin:8px 11px}
+.wn-lock svg .shk{transition:transform .25s ease}
+.wn-sm{min-height:44px;font-size:14px;font-weight:700}
+.wn-rng{display:flex;flex-direction:column;gap:8px}
+.wn-r{display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center;font:700 13.5px/1.2 var(--text);color:var(--ink-2)}
+.wn-r[hidden]{display:none}
+.wn input,.wn button{font-family:inherit}
+.wn input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0;cursor:pointer}
+.wn input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,#B5DB6E,#6FA05C 55%,#0E3B2C)}
+.wn input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(90deg,#B5DB6E,#6FA05C 55%,#0E3B2C)}
+.wn input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:#fff;border:3px solid #0E3B2C;box-shadow:0 3px 8px rgba(10,22,17,.35)}
+.wn input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid #0E3B2C}
+.wn input[type=range]:focus-visible{outline:3px solid #0E3B2C;outline-offset:3px;border-radius:8px}
+.wn-fixed{margin:0;font:600 14px/1.45 var(--text);color:var(--ink-2)}
+.wn-fixed[hidden],.wn-open[hidden],.wn-lock[hidden],.wn-tilt[hidden],.wn-scr[hidden]{display:none}
+.wn-brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.wn-b{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:0 12px;border:0;border-radius:11px;background:#EAF1EB;box-shadow:inset 0 0 0 1px #C9D8CC;font:700 13.5px/1 var(--text);color:var(--ink);cursor:pointer}
+.wn-b i{font:800 12px/1 var(--text);font-style:normal;color:var(--ink-3)}
+.wn-b[aria-checked="true"]{background:#0E3B2C;color:#fff;box-shadow:none}.wn-b[aria-checked="true"] i{color:#B5DB6E}
+.wn-sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:7px}
+.wn-c{position:relative;height:44px;border:0;padding:0;background:transparent;cursor:pointer;border-radius:50%}
+.wn-c i{position:absolute;inset:3px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(10,22,17,.28),inset 0 -5px 8px rgba(0,0,0,.12),inset 0 3px 5px rgba(255,255,255,.3);transition:transform .2s ease}
+.wn-c:hover i{transform:scale(1.1)}
+.wn-c[aria-checked="true"]{box-shadow:0 0 0 3px #0E3B2C,0 0 0 5px #B5DB6E}
+.wn-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.wn-g{min-height:44px;border:0;border-radius:11px;background:#EAF1EB;box-shadow:inset 0 0 0 1px #C9D8CC;font:700 13.5px/1 var(--text);color:var(--ink);cursor:pointer}
+.wn-g[aria-checked="true"]{background:#0E3B2C;color:#fff;box-shadow:none}
+.wn-ticks{display:flex;justify-content:space-between;font:600 12px/1 var(--text);color:var(--ink-3)}
+.wn-last{flex-direction:row;flex-wrap:wrap;align-items:center}
+.wn-last .btn{flex:1 1 auto}
+.wn-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+@media (max-width:1180px){.wn-main{grid-template-columns:minmax(0,1fr) 340px}.wn-left{grid-column:1/-1}.wn-stat{display:none}.wn-kinds{flex-direction:row;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.wn-kinds::-webkit-scrollbar{display:none}.wn-k{flex:1 0 190px}}
+@media (max-width:860px){.wn-main{grid-template-columns:minmax(0,1fr)}.wn{padding-top:70px}.wn-k{flex-basis:172px;min-height:62px}.wn-inset{width:44%}.wn-panel{padding:16px}.wn-r{grid-template-columns:78px 1fr}}
+@media (prefers-reduced-motion:reduce){.wn-bar i{transform:none;transition:none}.wn-stage,.wn-k,.wn-c i,.wn-hint{transition:none}.wn-inset.shake,.wn-lock.shake{animation:none}}
 /* REVIEWS. A: the 4.9 laid course by course, a quote reader beside it. B: the rating as tags hung on a line. */
 .st5{position:relative;display:inline-block;height:22px;width:118px;color:#0E3B2C}
 .st5 .bg,.st5 .fg{position:absolute;left:0;top:0;display:flex;gap:2px;height:100%}
@@ -1001,67 +966,26 @@ html{scroll-behavior:smooth}
 <p class="vz-q">Light</p><div class="vz-lts" role="radiogroup" aria-label="Light"><button type="button" role="radio" class="vz-lt" data-l="midday" aria-checked="true" tabindex="0">Midday</button><button type="button" role="radio" class="vz-lt" data-l="morning" aria-checked="false" tabindex="-1">Morning</button><button type="button" role="radio" class="vz-lt" data-l="golden" aria-checked="false" tabindex="-1">Golden hour</button><button type="button" role="radio" class="vz-lt" data-l="dusk" aria-checked="false" tabindex="-1">Dusk</button></div>
 <div class="vz-acts"><button type="button" class="vz-cmp" aria-pressed="false">Hold to compare</button><button type="button" class="vz-sur">Surprise me</button><button type="button" class="vz-rst">Reset</button></div>
 <p class="vz-now" aria-live="polite"></p>
-<div class="vz-card"><p class="vz-k">Bring this to your inspection</p><p class="vz-pick"></p><a class="btn key vz-book" href="#booking">Book a free inspection<span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 15l2 2 4-4"/></svg></span></a></div></aside></div></div></section><section class="sec wnA" id="windows" aria-labelledby="wnA-h">
-    <div class="side"><h2 class="sec-h" id="wnA-h">One window, morning to midnight.</h2>
-      <p class="sec-p">An Andersen 100 Series single-hung, as we fit it: Fibrex frame, a fixed upper sash, a lower sash that lifts, Low-E glass. Drag the sun across the day.</p>
-      <ul class="parts" aria-label="Parts of the window"><li><button type="button" data-p="frame"><b>Fibrex frame</b><span>Andersen's wood-fibre and polymer composite</span></button></li><li><button type="button" data-p="uppersash"><b>Fixed upper sash</b><span>Sits to the outside</span></button></li><li><button type="button" data-p="lowersash"><b>Lower sash</b><span>Lifts up, behind the upper sash</span></button></li><li><button type="button" data-p="grille"><b>Finelight grilles</b><span>Between the two panes</span></button></li><li><button type="button" data-p="screen"><b>Insect screen</b><span>Outside, over the lower half</span></button></li><li><button type="button" data-p="trim"><b>Trim and sill</b><span>Our casing around the opening</span></button></li></ul>
-      <div class="brands"><b>388</b><span>documented window jobs. Of 376 priced: NT Windows 238, Simonton 54, Andersen 38, Pella 31.</span></div>
-      <a class="btn key" href="#booking">Book a free inspection<span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 15l2 2 4-4"/></svg></span></a></div>
-    <div class="stage"><svg class="wnsvg" viewBox="0 0 640 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An Andersen 100 Series single-hung window in a lap-sided wall, shown from outside.">
-      <defs>
-        <linearGradient id="wnLap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.10)"/><stop offset=".86" stop-color="rgba(0,0,0,0)"/><stop offset=".9" stop-color="rgba(0,0,0,.22)"/><stop offset="1" stop-color="rgba(0,0,0,.06)"/></linearGradient>
-        <linearGradient id="wnSky" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C9DAE6"/><stop offset=".55" stop-color="#8FA7BA"/><stop offset="1" stop-color="#5D7183"/></linearGradient>
-        <radialGradient id="wnGlow" cx=".45" cy=".35" r=".9"><stop offset="0" stop-color="#FFE7B5"/><stop offset=".45" stop-color="#F3B467"/><stop offset="1" stop-color="#9A5A26"/></radialGradient>
-        <radialGradient id="wnSpill"><stop offset="0" stop-color="rgba(255,196,120,.6)"/><stop offset="1" stop-color="rgba(255,196,120,0)"/></radialGradient>
-        <mask id="wnNightM"><rect x="-400" width="1440" height="700" fill="#fff"/><rect x="222" y="126" width="196" height="360" fill="#000"/></mask>
-        <pattern id="wnMesh" width="3" height="3" patternUnits="userSpaceOnUse"><path d="M0 0H3M0 0V3" stroke="rgba(20,24,28,.38)" stroke-width=".7"/></pattern>
-        <clipPath id="wnOpen"><rect x="220" y="124" width="200" height="364"/></clipPath>
-        <linearGradient id="wnBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A8176"/><stop offset=".55" stop-color="#A39A8D"/><stop offset="1" stop-color="#857B6F"/></linearGradient>
-        <linearGradient id="wnFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B5039"/><stop offset="1" stop-color="#8A6A4B"/></linearGradient>
-        <linearGradient id="wnDoor" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(0,0,0,.25)"/><stop offset="1" stop-color="rgba(255,255,255,.06)"/></linearGradient>
-        <radialGradient id="wnLamp"><stop offset="0" stop-color="rgba(255,214,150,.95)"/><stop offset=".5" stop-color="rgba(255,190,110,.35)"/><stop offset="1" stop-color="rgba(255,190,110,0)"/></radialGradient>
-        <filter id="wnSoft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
-      </defs>
-      <rect class="wall" x="-400" width="1440" height="700"/><rect x="-400" y="0" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="27" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="54" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="81" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="108" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="135" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="162" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="189" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="216" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="243" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="270" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="297" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="324" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="351" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="378" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="405" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="432" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="459" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="486" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="513" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="540" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="567" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="594" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="621" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="648" width="1440" height="27" fill="url(#wnLap)"/><rect x="-400" y="675" width="1440" height="27" fill="url(#wnLap)"/>
-      
-      <g class="shadow" filter="url(#wnSoft)"><rect x="188" y="92" width="264" height="440" rx="2" fill="rgba(0,0,0,.32)"/></g>
-      <g data-part="trim"><rect class="trim" x="188" y="92" width="264" height="430"/><rect x="188" y="84" width="264" height="10" class="trim drip"/>
-        <path class="trim" d="M174 520H466V532H174Z"/><path d="M174 532H466V536H174Z" fill="rgba(0,0,0,.25)"/></g>
-      <g data-part="frame"><rect class="frame" x="208" y="112" width="224" height="388"/><g class="room" clip-path="url(#wnOpen)" aria-hidden="true">
-          <rect x="220" y="124" width="200" height="364" fill="url(#wnBack)"/>
-          <path d="M232 420H408V476H232Z" fill="url(#wnFloor)"/><path class="fl" d="M262 420L238 476M292 420L280 476M322 420L320 476M352 420L360 476M382 420L402 476"/>
-          <path d="M232 416H408V421H232Z" fill="#E2DBCF"/>
-          <path d="M334 252h52v168h-52Z" fill="#E2DBCF"/><path d="M339 257h42v163h-42Z" fill="#4A433D"/><path d="M339 257h42v163h-42Z" fill="url(#wnDoor)"/>
-          <path d="M262 262h46v36h-46Z" fill="#EFEAE0"/><path d="M267 267h36v26h-36Z" fill="#9AA79A"/><path d="M267 285l11-9 9 7 6-4 10 9v5h-36Z" fill="#6F8070"/>
-          <g class="lamp"><path d="M294 386h8v30h-8Z" fill="#3D3833"/><path d="M286 386h24l-5-20h-14Z" fill="#E9DFC8"/><ellipse class="lglow" cx="298" cy="378" rx="70" ry="60" fill="url(#wnLamp)"/></g>
-          <path class="sun" d="M262 476L300 420H372L350 476Z" fill="#FFF3D6"/>
-          <path d="M220 124L234 138V474L220 488Z" fill="#D9D2C5"/><path d="M420 124L406 138V474L420 488Z" fill="#B4AC9F"/><path d="M220 124H420L406 138H234Z" fill="#9C9487"/><path d="M220 488L234 474H406L420 488Z" fill="#E8E2D6"/>
-          <g class="drape"><path d="M234 138h30v336h-30Z" fill="#EEE8DC" opacity=".9"/><path d="M241 138v336M249 138v336M257 138v336" stroke="#D3CABA" stroke-width="2.4"/></g>
-          <rect class="rshade" x="220" y="124" width="200" height="364" fill="#2A2622"/><rect class="rwarm" x="220" y="124" width="200" height="364" fill="url(#wnGlow)"/>
-        </g></g>
-      <g class="lowerwrap"><g class="lower"><g class="lowersash" data-part="lowersash">
-        <rect class="glass-base" x="235" y="318" width="170" height="146"/>
-        <rect class="glow" x="235" y="318" width="170" height="146" fill="url(#wnGlow)"/>
-        <g class="grille" data-part="grille" fill="var(--fc)"><rect x="289.7" y="318" width="4" height="146"/><rect x="346.3" y="318" width="4" height="146"/><rect x="235" y="389.0" width="170" height="4"/></g>
-        <rect class="refl" x="235" y="318" width="170" height="146" fill="url(#wnSky)"/>
-        <path class="streak" d="M252 464L328.5 318H357.4L280.9 464Z" fill="#fff"/>
-        <path class="sashframe" fill-rule="evenodd" d="M222 302h196v184h-196Z M235 318v146h170v-146Z"/>
-        <path d="M235 318h170v3h-170Z" fill="rgba(0,0,0,.25)"/></g></g></g>
-      <g class="uppersash" data-part="uppersash">
-        <rect class="glass-base" x="235" y="141" width="170" height="160"/>
-        <rect class="glow" x="235" y="141" width="170" height="160" fill="url(#wnGlow)"/>
-        <g class="grille" data-part="grille" fill="var(--fc)"><rect x="289.7" y="141" width="4" height="160"/><rect x="346.3" y="141" width="4" height="160"/><rect x="235" y="219.0" width="170" height="4"/></g>
-        <rect class="refl" x="235" y="141" width="170" height="160" fill="url(#wnSky)"/>
-        <path class="streak" d="M252 301L328.5 141H357.4L280.9 301Z" fill="#fff"/>
-        <path class="sashframe" fill-rule="evenodd" d="M222 126h196v192h-196Z M235 141v160h170v-160Z"/>
-        <path d="M235 141h170v3h-170Z" fill="rgba(0,0,0,.25)"/></g>
-      <g class="screen" data-part="screen"><rect x="222" y="318" width="196" height="168" fill="url(#wnMesh)"/><path fill-rule="evenodd" d="M222 318h196v168h-196Z M227 323v158h186v-158Z" fill="#2B2F33" opacity=".85"/></g>
-      <rect class="night" x="-400" width="1440" height="700" mask="url(#wnNightM)"/><ellipse class="spill" cx="320" cy="560" rx="230" ry="120" fill="url(#wnSpill)"/>
-    </svg>
-      <div class="ctrl"><div class="day"><label for="wnA-t" class="sr">Time of day</label><input id="wnA-t" type="range" min="0" max="100" value="22" aria-valuetext="9 am">
-        <div class="ticks" aria-hidden="true"><span>7 am</span><span>Noon</span><span>Dusk</span><span>11 pm</span></div></div>
-        <div class="tg"><button type="button" class="chipb" data-t="lift" aria-pressed="false">Lift the sash</button><button type="button" class="chipb" data-t="grille" aria-pressed="true">Grilles</button></div>
-        <div class="fc" role="radiogroup" aria-label="Frame colour"><button type="button" role="radio" aria-checked="true" aria-label="White" style="--c:#F3F0E9"></button><button type="button" role="radio" aria-checked="false" aria-label="Sandtone" style="--c:#B0A299"></button><button type="button" role="radio" aria-checked="false" aria-label="Terratone" style="--c:#786A61"></button><button type="button" role="radio" aria-checked="false" aria-label="Dark Bronze" style="--c:#493F3D"></button><button type="button" role="radio" aria-checked="false" aria-label="Black" style="--c:#323433"></button><span class="fcn">White</span></div></div></div></section><section class="sec rvB" id="reviews" aria-labelledby="rvB-h">
+<div class="vz-card"><p class="vz-k">Bring this to your inspection</p><p class="vz-pick"></p><a class="btn key vz-book" href="#booking">Book a free inspection<span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 15l2 2 4-4"/></svg></span></a></div></aside></div></div></section><section class="wn" id="windows" aria-labelledby="wn-h"><div class="wn-bg" aria-hidden="true"><svg class="wn-far" aria-hidden="true" focusable="false" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="wnfr" gradientUnits="userSpaceOnUse" x1="1300" y1="-80" x2="200" y2="760"><stop stop-color="#B5DB6E" stop-opacity=".12"/><stop offset="1" stop-color="#B5DB6E" stop-opacity="0"/></linearGradient><radialGradient id="wnfa" cx=".9" cy="0" r=".8"><stop stop-color="#fff" stop-opacity=".07"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="1440" height="900" fill="url(#wnfa)"/><g fill="url(#wnfr)"><polygon points="1300,-80 -80,380 -80,470"/><polygon points="1300,-80 80,780 -80,780"/><polygon points="1300,-80 560,900 380,900"/><polygon points="1300,-80 1000,900 880,900"/><polygon points="1300,-80 -80,150 -80,200"/></g><g fill="none" stroke="#E4EAE5" stroke-opacity="0.07" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M760 40H1400V860H760zM790 70H1370V830H790z"/><path d="M973 70V830M1187 70V830M790 275H1370M790 480H1370M790 685H1370" stroke-width="5"/></g><g fill="none" stroke="#0E3B2C" stroke-opacity="0.14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M740 872H1420" stroke-width="8" stroke-opacity="0.06"/></g></svg><svg class="wn-near" aria-hidden="true" focusable="false" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"><defs><path id="wnnk" d="M0-10Q0 0 10 0Q0 0 0 10Q0 0-10 0Q0 0 0-10Z"/></defs><g fill="#E4EAE5" fill-opacity=".05"><polygon points="680,0 760,0 380,900 300,900"/><polygon points="820,0 850,0 470,900 440,900"/><polygon points="1180,0 1260,0 1040,520 960,520"/></g><g fill="none" stroke="#E4EAE5" stroke-opacity="0.08" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M320 402v436M112 562h416M112 700h416"/></g><path d="M226 410h31l-83 122h-31z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M278 410h12l-83 122h-12z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M226 570h31l-83 122h-31z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M278 570h12l-83 122h-12z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M226 708h31l-83 122h-31z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M278 708h12l-83 122h-12z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M434 410h31l-83 122h-31z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M486 410h12l-83 122h-12z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M434 570h31l-83 122h-31z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M486 570h12l-83 122h-12z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M434 708h31l-83 122h-31z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><path d="M486 708h12l-83 122h-12z" fill="#E4EAE5" fill-opacity=".08" stroke="none"/><g fill="none" stroke="#E4EAE5" stroke-opacity="0.15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M90 380h460v480h-460z" stroke-width="3"/><path d="M90 380h460v480h-460zM112 402h416v436h-416z"/><path d="M320 402v436M112 562h416M112 700h416"/></g><g fill="none" stroke="#E4EAE5" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M110 396l24 0M110 420h8" stroke-opacity="0"/><path d="M572 560v60q0 10-6 10h-4" stroke-opacity="0.14" stroke-width="3"/></g><g fill="none" stroke="#B5DB6E" stroke-opacity="0.3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><use href="#wnnk" x="1250" y="150"/><use href="#wnnk" x="1330" y="250" transform="translate(1330 250) scale(.7) translate(-1330 -250)"/><use href="#wnnk" x="640" y="130" transform="translate(640 130) scale(.6) translate(-640 -130)"/><use href="#wnnk" x="320" y="300"/><use href="#wnnk" x="980" y="760" transform="translate(980 760) scale(.8) translate(-980 -760)"/></g><g fill="none" stroke="#E4EAE5" stroke-opacity="0.14" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1010 520a30 30 0 0 1 60 0M1010 520h60M1020 536h40M1030 552h20" stroke-opacity="0.14"/></g><g fill="none" stroke="#E4EAE5" stroke-opacity="0.14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M700 820h120M700 836h80M1300 500v90M1316 500v60" stroke-opacity="0.12"/></g></svg></div>
+<div class="wn-in" data-col='{&quot;NT Windows&quot;: [[&quot;Creme White&quot;, &quot;#FAF8F6&quot;], [&quot;Almond&quot;, &quot;#D4C899&quot;], [&quot;Sandstone&quot;, &quot;#B9AD97&quot;], [&quot;Bronze&quot;, &quot;#16140C&quot;], [&quot;Tan&quot;, &quot;#CFC9B5&quot;], [&quot;Desert Sand&quot;, &quot;#B9AEA1&quot;], [&quot;Cameo&quot;, &quot;#E4DFD3&quot;], [&quot;Earthtone&quot;, &quot;#837263&quot;], [&quot;English Saddle&quot;, &quot;#4B3D25&quot;], [&quot;Bordeaux&quot;, &quot;#511B09&quot;], [&quot;Brick Red&quot;, &quot;#914020&quot;], [&quot;Midnight&quot;, &quot;#231F20&quot;], [&quot;Hartford&quot;, &quot;#082318&quot;], [&quot;Sage Green&quot;, &quot;#8AAEA1&quot;], [&quot;Obsidian&quot;, &quot;#425A69&quot;], [&quot;Aegean&quot;, &quot;#80A0B5&quot;], [&quot;Chateau Stone&quot;, &quot;#A0A7AC&quot;], [&quot;Spanish Moss&quot;, &quot;#A7A69D&quot;], [&quot;Black&quot;, &quot;#0C0B0B&quot;]], &quot;Pella&quot;: [[&quot;White&quot;, &quot;#F2F2F0&quot;], [&quot;Tan&quot;, &quot;#BDAA8C&quot;], [&quot;Morning Sky Gray&quot;, &quot;#C0BDB8&quot;], [&quot;Brown&quot;, &quot;#423D35&quot;], [&quot;Black&quot;, &quot;#1F2021&quot;]], &quot;Simonton&quot;: [[&quot;White&quot;, &quot;#F1F1F1&quot;], [&quot;Tan&quot;, &quot;#D2C6AC&quot;], [&quot;Black&quot;, &quot;#120F10&quot;], [&quot;Bronze&quot;, &quot;#44413B&quot;], [&quot;Cream&quot;, &quot;#E8E1CE&quot;], [&quot;Silver&quot;, &quot;#BDBCBA&quot;], [&quot;Driftwood&quot;, &quot;#B09D7F&quot;], [&quot;Brick&quot;, &quot;#7F361F&quot;], [&quot;Pine&quot;, &quot;#1B4538&quot;], [&quot;Chocolate&quot;, &quot;#301F16&quot;]], &quot;Andersen&quot;: [[&quot;White&quot;, &quot;#F3F0E9&quot;], [&quot;Sandtone&quot;, &quot;#B0A299&quot;], [&quot;Terratone&quot;, &quot;#786A61&quot;], [&quot;Dark Bronze&quot;, &quot;#493F3D&quot;], [&quot;Black&quot;, &quot;#323433&quot;]]}'>
+<div class="wn-hd"><h2 class="wn-h" id="wn-h">One window, morning to midnight.</h2><p class="wn-sub">Pick a kind. Open it. Dress it. Move the sun.</p></div>
+<div class="wn-main">
+<div class="wn-left"><div class="wn-kinds" role="radiogroup" aria-label="Kind of window"><button type="button" role="radio" class="wn-k" data-k="single" aria-checked="true" tabindex="0"><svg class="wn-mini" viewBox="0 0 64 64" aria-hidden="true"></svg><span><b>Single hung</b><small>The lower sash lifts</small></span></button><button type="button" role="radio" class="wn-k" data-k="double" aria-checked="false" tabindex="-1"><svg class="wn-mini" viewBox="0 0 64 64" aria-hidden="true"></svg><span><b>Double hung</b><small>Both sashes slide</small></span></button><button type="button" role="radio" class="wn-k" data-k="casement" aria-checked="false" tabindex="-1"><svg class="wn-mini" viewBox="0 0 64 64" aria-hidden="true"></svg><span><b>Casement</b><small>Cranks open</small></span></button><button type="button" role="radio" class="wn-k" data-k="slider" aria-checked="false" tabindex="-1"><svg class="wn-mini" viewBox="0 0 64 64" aria-hidden="true"></svg><span><b>Slider</b><small>Slides sideways</small></span></button><button type="button" role="radio" class="wn-k" data-k="picture" aria-checked="false" tabindex="-1"><svg class="wn-mini" viewBox="0 0 64 64" aria-hidden="true"></svg><span><b>Picture</b><small>Fixed glass</small></span></button></div>
+<div class="wn-stat"><p class="wn-sq">Whose windows we fitted</p><p class="wn-sn"><b>376</b> priced window jobs</p><div class="wn-bar on" data-b="NT Windows"><span>NT Windows</span><u><i style="--w:100.0%"></i></u><b>238</b></div><div class="wn-bar" data-b="Simonton"><span>Simonton</span><u><i style="--w:22.7%"></i></u><b>54</b></div><div class="wn-bar" data-b="Andersen"><span>Andersen</span><u><i style="--w:16.0%"></i></u><b>38</b></div><div class="wn-bar" data-b="Pella"><span>Pella</span><u><i style="--w:13.0%"></i></u><b>31</b></div><p class="wn-sf">388 documented window jobs in all.</p></div></div>
+<figure class="wn-fig"><div class="wn-stage"><svg class="wn-svg" viewBox="0 0 640 540" role="img" aria-label="A window drawn in elevation on a lap-sided wall; it changes with the controls"><g class="wn-st"></g><g class="wn-dy"></g></svg><div class="wn-hit" aria-hidden="true"></div>
+<div class="wn-tag" aria-hidden="true"><b></b><span></span></div><div class="wn-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="2.2"/></svg><span>Drag the window</span></div>
+<div class="wn-inset" aria-hidden="true"><p>From inside</p><svg viewBox="0 0 220 150"></svg></div></div>
+<figcaption class="wn-cap"><span class="wn-fact">388 documented window jobs. Of 376 priced: NT Windows 238, Simonton 54, Andersen 38, Pella 31.</span><span class="wn-fact">Mostly vinyl. 214 of our 376 priced window jobs were vinyl, 64 were NT&#x27;s Twinsulator aluminum and 33 were Andersen&#x27;s Fibrex composite.</span><span class="wn-fact">Most of the window-only jobs in our files took two days on site.</span><span class="wn-note">How each kind opens is a general description, not a statement about any maker&#x27;s line. Frame colours are each maker&#x27;s published colours, shown approximately on screen. Which kinds and colours a line comes in, we&#x27;ll confirm at the free inspection.</span></figcaption></figure>
+<aside class="wn-panel" aria-label="Window controls"><div class="wn-now"><h3 class="wn-kn"></h3><p class="wn-how"></p></div>
+<div class="wn-sec wn-op"><p class="wn-q">Open it</p><div class="wn-row"><button type="button" class="wn-open wn-btn" aria-pressed="false"><span>Open</span></button><button type="button" class="wn-lock wn-btn" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path class="shk" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Locked</span></button></div>
+<div class="wn-rng"><label class="wn-r" data-r="lo"><span>Lower sash</span><input type="range" min="0" max="100" value="0"></label><label class="wn-r" data-r="up"><span>Upper sash</span><input type="range" min="0" max="100" value="0"></label><label class="wn-r" data-r="ang"><span>Crank</span><input type="range" min="0" max="100" value="0"></label><label class="wn-r" data-r="sl"><span>Sash</span><input type="range" min="0" max="100" value="0"></label></div>
+<button type="button" class="wn-tilt wn-btn wn-sm" aria-pressed="false">Tilt in, for cleaning</button><p class="wn-fixed">A picture window is fixed glass: it does not open.</p></div>
+<div class="wn-sec"><p class="wn-q">Frame colour <em class="wn-cn"></em></p><div class="wn-brands" role="radiogroup" aria-label="Window maker"><button type="button" role="radio" class="wn-b" data-b="NT Windows" aria-checked="true" tabindex="0">NT Windows<i>238</i></button><button type="button" role="radio" class="wn-b" data-b="Simonton" aria-checked="false" tabindex="-1">Simonton<i>54</i></button><button type="button" role="radio" class="wn-b" data-b="Andersen" aria-checked="false" tabindex="-1">Andersen<i>38</i></button><button type="button" role="radio" class="wn-b" data-b="Pella" aria-checked="false" tabindex="-1">Pella<i>31</i></button></div><div class="wn-sw" role="radiogroup" aria-label="Frame colour"></div></div>
+<div class="wn-sec"><p class="wn-q">Grilles, glass, screen</p><div class="wn-seg" role="radiogroup" aria-label="Grille pattern"><button type="button" role="radio" class="wn-g" data-g="none" aria-checked="true" tabindex="0">No grille</button><button type="button" role="radio" class="wn-g" data-g="colonial" aria-checked="false" tabindex="-1">Colonial</button><button type="button" role="radio" class="wn-g" data-g="prairie" aria-checked="false" tabindex="-1">Prairie</button></div>
+<div class="wn-row"><button type="button" class="wn-lowe wn-btn wn-sm" aria-pressed="true">Low-E glass</button><button type="button" class="wn-scr wn-btn wn-sm" aria-pressed="false">Insect screen</button></div></div>
+<div class="wn-sec"><label class="wn-q" for="wn-t">Time of day <em class="wn-tl"></em></label><input id="wn-t" class="wn-time" type="range" min="7" max="23" step="0.25" value="13" aria-valuetext="1 pm"><div class="wn-ticks" aria-hidden="true"><span>7 am</span><span>Noon</span><span>Dusk</span><span>11 pm</span></div></div>
+<div class="wn-sec wn-last"><button type="button" class="wn-reset wn-btn wn-sm">Reset window</button><a class="btn key wn-book" href="#booking">Book a free inspection<span class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 15l2 2 4-4"/></svg></span></a></div>
+<p class="wn-live" aria-live="polite"></p></aside></div></div></section><section class="sec rvB" id="reviews" aria-labelledby="rvB-h">
       <div class="hd"><h2 class="sec-h" id="rvB-h">4.9, hung out to read.</h2><p class="sec-p">474 Google reviews, rated 4.9. A few in their own words; tap a tag to read the whole review.</p></div>
       <div class="lineview"><div class="track"><i class="post l" aria-hidden="true"></i><i class="post r" aria-hidden="true"></i><svg class="rope" aria-hidden="true"><path/><path/></svg><button type="button" class="tag" data-i="0" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">Wow what a difference our new windows have made, our home is so QUIET!</span><span class="nm">LOIS RICHWINE</span><span class="tr">Windows</span></button><button type="button" class="tag" data-i="1" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">Fast, affordable &amp; beautiful work. 10/10 Would use again.</span><span class="nm">Kimmy Voigt</span><span class="tr">Roofing</span></button><div class="tag big" data-i="-1"><i class="peg" aria-hidden="true"></i><b>4.9</b><span class="st5" style="--f:98%" aria-hidden="true"><span class="bg"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span><span class="fg"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg></span></span><span>474 Google reviews</span></div><button type="button" class="tag" data-i="2" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">I hired Austin Pro to redo my house's 80s era masonite siding with…</span><span class="nm">Pat Mehaffy</span><span class="tr">Siding</span></button><button type="button" class="tag" data-i="3" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">They ripped off the old roof and put on a new one in one day.</span><span class="nm">Ken Weigand</span><span class="tr">Roofing</span></button><button type="button" class="tag" data-i="4" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">Also special shout out to Garrett who finished up and also swept the…</span><span class="nm">Katie Littleton</span><span class="tr">Door & siding</span></button><button type="button" class="tag" data-i="5" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">Replacing siding is a huge investment, but Austin Pro made it seamless.</span><span class="nm">Joe Liu</span><span class="tr">Siding</span></button><button type="button" class="tag" data-i="6" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">Austin pro just finished my windows in one day!</span><span class="nm">Charles Statler</span><span class="tr">Windows</span></button><button type="button" class="tag" data-i="7" aria-haspopup="dialog"><i class="peg" aria-hidden="true"></i><span class="tx">They only took 15 minutes to measure and understand the job rather…</span><span class="nm">Ray Cole</span><span class="tr">Estimate</span></button></div></div>
       <div class="dlg rvdlg" role="dialog" aria-modal="true" aria-labelledby="rvB-dn" hidden><div class="card"><button type="button" class="x" aria-label="Close">×</button>
@@ -1379,163 +1303,322 @@ window.FVis = (function () {
   }
   return { wire };
 })();
-/* WINDOWS (sheet: day/night same window; 3D built-out bay). Realness duty: only parts that exist and look like that.
-   Andersen 100 Series single-hung (the firm's Andersen jobs are mostly 100 Series Fibrex, FACTS.md): Fibrex composite frame,
-   fixed upper sash, operable lower sash that slides up BEHIND the upper sash, lock and lift on the interior (not seen from
-   outside), Finelight grilles sit between the two panes, an insect screen covers the lower half outside, Low-E (SmartSun) glass.
-   Andersen 400 Series bay: three units joined on 30° or 45° angled joining posts, head board and seat board, support hardware.
-   Wall build-out behind the siding: lap siding over house wrap over sheathing over studs with insulation. */
-window.Win = (function () {
-  const BOOK = 'https://www.austinprosiding.com/schedule-appointment';
-  const CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 15l2 2 4-4"/></svg>';
-  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const AC = [['White', '#F3F0E9'], ['Sandtone', '#B0A299'], ['Terratone', '#786A61'], ['Dark Bronze', '#493F3D'], ['Black', '#323433']];   // Andersen 100 Series exterior colours (firm's published swatches)
-
-  /* ---------- A: one single-hung window, morning to midnight ---------- */
-  function svgWindow() {
-    // geometry (viewBox 640 x 700): casing 188..452 x 92..520, frame 210..430 x 114..498, opening 222..418 x 126..486
-    let lap = ''; for (let y = 0; y < 700; y += 27) lap += `<rect x="-400" y="${y}" width="1440" height="27" fill="url(#wnLap)"/>`;
-    const sash = (x, y, w, h, top, bot, cls) => {
-      const gx = x + 13, gy = y + top, gw = w - 26, gh = h - top - bot;
-      let gr = ''; for (let i = 1; i < 3; i++) gr += `<rect x="${(gx + gw * i / 3 - 2).toFixed(1)}" y="${gy}" width="4" height="${gh}"/>`;
-      gr += `<rect x="${gx}" y="${(gy + gh / 2 - 2).toFixed(1)}" width="${gw}" height="4"/>`;
-      return `<g class="${cls}" data-part="${cls}">
-        <rect class="glass-base" x="${gx}" y="${gy}" width="${gw}" height="${gh}"/>
-        <rect class="glow" x="${gx}" y="${gy}" width="${gw}" height="${gh}" fill="url(#wnGlow)"/>
-        <g class="grille" data-part="grille" fill="var(--fc)">${gr}</g>
-        <rect class="refl" x="${gx}" y="${gy}" width="${gw}" height="${gh}" fill="url(#wnSky)"/>
-        <path class="streak" d="M${gx + gw * .1} ${gy + gh}L${gx + gw * .55} ${gy}H${gx + gw * .72}L${gx + gw * .27} ${gy + gh}Z" fill="#fff"/>
-        <path class="sashframe" fill-rule="evenodd" d="M${x} ${y}h${w}v${h}h${-w}Z M${gx} ${gy}v${gh}h${gw}v${-gh}Z"/>
-        <path d="M${gx} ${gy}h${gw}v3h${-gw}Z" fill="rgba(0,0,0,.25)"/></g>`;
-    };
-    return `<svg class="wnsvg" viewBox="0 0 640 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An Andersen 100 Series single-hung window in a lap-sided wall, shown from outside.">
-      <defs>
-        <linearGradient id="wnLap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.10)"/><stop offset=".86" stop-color="rgba(0,0,0,0)"/><stop offset=".9" stop-color="rgba(0,0,0,.22)"/><stop offset="1" stop-color="rgba(0,0,0,.06)"/></linearGradient>
-        <linearGradient id="wnSky" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#C9DAE6"/><stop offset=".55" stop-color="#8FA7BA"/><stop offset="1" stop-color="#5D7183"/></linearGradient>
-        <radialGradient id="wnGlow" cx=".45" cy=".35" r=".9"><stop offset="0" stop-color="#FFE7B5"/><stop offset=".45" stop-color="#F3B467"/><stop offset="1" stop-color="#9A5A26"/></radialGradient>
-        <radialGradient id="wnSpill"><stop offset="0" stop-color="rgba(255,196,120,.6)"/><stop offset="1" stop-color="rgba(255,196,120,0)"/></radialGradient>
-        <mask id="wnNightM"><rect x="-400" width="1440" height="700" fill="#fff"/><rect x="222" y="126" width="196" height="360" fill="#000"/></mask>
-        <pattern id="wnMesh" width="3" height="3" patternUnits="userSpaceOnUse"><path d="M0 0H3M0 0V3" stroke="rgba(20,24,28,.38)" stroke-width=".7"/></pattern>
-        <clipPath id="wnOpen"><rect x="220" y="124" width="200" height="364"/></clipPath>
-        <linearGradient id="wnBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A8176"/><stop offset=".55" stop-color="#A39A8D"/><stop offset="1" stop-color="#857B6F"/></linearGradient>
-        <linearGradient id="wnFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B5039"/><stop offset="1" stop-color="#8A6A4B"/></linearGradient>
-        <linearGradient id="wnDoor" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(0,0,0,.25)"/><stop offset="1" stop-color="rgba(255,255,255,.06)"/></linearGradient>
-        <radialGradient id="wnLamp"><stop offset="0" stop-color="rgba(255,214,150,.95)"/><stop offset=".5" stop-color="rgba(255,190,110,.35)"/><stop offset="1" stop-color="rgba(255,190,110,0)"/></radialGradient>
-        <filter id="wnSoft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
-      </defs>
-      <rect class="wall" x="-400" width="1440" height="700"/>${lap}
-      
-      <g class="shadow" filter="url(#wnSoft)"><rect x="188" y="92" width="264" height="440" rx="2" fill="rgba(0,0,0,.32)"/></g>
-      <g data-part="trim"><rect class="trim" x="188" y="92" width="264" height="430"/><rect x="188" y="84" width="264" height="10" class="trim drip"/>
-        <path class="trim" d="M174 520H466V532H174Z"/><path d="M174 532H466V536H174Z" fill="rgba(0,0,0,.25)"/></g>
-      <g data-part="frame"><rect class="frame" x="208" y="112" width="224" height="388"/><g class="room" clip-path="url(#wnOpen)" aria-hidden="true">
-          <rect x="220" y="124" width="200" height="364" fill="url(#wnBack)"/>
-          <path d="M232 420H408V476H232Z" fill="url(#wnFloor)"/><path class="fl" d="M262 420L238 476M292 420L280 476M322 420L320 476M352 420L360 476M382 420L402 476"/>
-          <path d="M232 416H408V421H232Z" fill="#E2DBCF"/>
-          <path d="M334 252h52v168h-52Z" fill="#E2DBCF"/><path d="M339 257h42v163h-42Z" fill="#4A433D"/><path d="M339 257h42v163h-42Z" fill="url(#wnDoor)"/>
-          <path d="M262 262h46v36h-46Z" fill="#EFEAE0"/><path d="M267 267h36v26h-36Z" fill="#9AA79A"/><path d="M267 285l11-9 9 7 6-4 10 9v5h-36Z" fill="#6F8070"/>
-          <g class="lamp"><path d="M294 386h8v30h-8Z" fill="#3D3833"/><path d="M286 386h24l-5-20h-14Z" fill="#E9DFC8"/><ellipse class="lglow" cx="298" cy="378" rx="70" ry="60" fill="url(#wnLamp)"/></g>
-          <path class="sun" d="M262 476L300 420H372L350 476Z" fill="#FFF3D6"/>
-          <path d="M220 124L234 138V474L220 488Z" fill="#D9D2C5"/><path d="M420 124L406 138V474L420 488Z" fill="#B4AC9F"/><path d="M220 124H420L406 138H234Z" fill="#9C9487"/><path d="M220 488L234 474H406L420 488Z" fill="#E8E2D6"/>
-          <g class="drape"><path d="M234 138h30v336h-30Z" fill="#EEE8DC" opacity=".9"/><path d="M241 138v336M249 138v336M257 138v336" stroke="#D3CABA" stroke-width="2.4"/></g>
-          <rect class="rshade" x="220" y="124" width="200" height="364" fill="#2A2622"/><rect class="rwarm" x="220" y="124" width="200" height="364" fill="url(#wnGlow)"/>
-        </g></g>
-      <g class="lowerwrap"><g class="lower">${sash(222, 302, 196, 184, 16, 22, 'lowersash')}</g></g>
-      ${sash(222, 126, 196, 192, 15, 17, 'uppersash')}
-      <g class="screen" data-part="screen"><rect x="222" y="318" width="196" height="168" fill="url(#wnMesh)"/><path fill-rule="evenodd" d="M222 318h196v168h-196Z M227 323v158h186v-158Z" fill="#2B2F33" opacity=".85"/></g>
-      <rect class="night" x="-400" width="1440" height="700" mask="url(#wnNightM)"/><ellipse class="spill" cx="320" cy="560" rx="230" ry="120" fill="url(#wnSpill)"/>
-    </svg>`;
+/* SECTION 5 — Windows. One window drawn in elevation from geometry (frame mitres, sash rails, glass reflection + Low-E, grilles, screen mesh, an interior with
+   curtains, a picture and a lamp), five kinds, springs on every moving part. The visitor can drag the sash, turn the lock, tilt, crank, slide; change the maker's
+   published frame colour, the grille, Low-E, the screen; and move the sun from 7 am to 11 pm (sky, tint, lamp glow). "From inside" shows the hardware.
+   Reduced motion: every value snaps; nothing runs on its own. Touch: a hit area over the window takes the drag; the rest of the stage still scrolls. */
+window.FWin = (function () {
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), lerp = (a, b, t) => a + (b - a) * t;
+  const H = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)), X = (r) => '#' + r.map((v) => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0')).join('');
+  const mix = (a, b, t) => { const A = H(a), B = H(b); return X(A.map((v, i) => v + (B[i] - v) * t)); }, lite = (c, t) => mix(c, '#ffffff', t), dark = (c, t) => mix(c, '#000000', t);
+  const f1 = (v) => (Math.round(v * 10) / 10);
+  const pts = (a) => a.map((p) => f1(p[0]) + ',' + f1(p[1])).join(' ');
+  const poly = (a, fill, ex = '') => `<polygon points="${pts(a)}" fill="${fill}" ${ex}/>`;
+  const KIND = {
+    single: { name: 'Single hung', how: 'The lower sash slides up inside the frame; the upper sash stays where it is.', box: [200, 40, 240, 400] },
+    double: { name: 'Double hung', how: 'Both sashes slide up and down in their own tracks, so you can open from the top, the bottom, or both.', box: [200, 40, 240, 400] },
+    casement: { name: 'Casement', how: 'Hinged at the side. A crank pushes the sash out, like a small door, and it opens all the way to the air.', box: [215, 40, 210, 400] },
+    slider: { name: 'Slider', how: 'One sash slides sideways along a track past the other. Wide, low openings.', box: [110, 110, 420, 280] },
+    picture: { name: 'Picture', how: 'Fixed glass in a frame. It does not open: all view, no moving parts.', box: [130, 70, 380, 340] },
+  };
+  const KF = [[7, '#B8D0EC', '#FCE2C6', '#FFC890', .10, 0], [10, '#8DBBEA', '#DCEBF8', '#FFFFFF', 0, 0], [13, '#74AAE6', '#D3E7F8', '#FFFFFF', 0, 0], [17, '#8FB0DC', '#FFD9A8', '#FFC27A', .12, 0],
+    [19.5, '#6B6FB0', '#F4A37C', '#FF9A60', .22, .3], [21, '#2A3262', '#5A5686', '#4560A8', .36, .8], [23, '#0A1028', '#1B2142', '#2A3A80', .46, 1]];
+  function sky(t) {
+    let i = 0; while (i < KF.length - 2 && t > KF[i + 1][0]) i++;
+    const a = KF[i], b = KF[i + 1], u = clamp((t - a[0]) / (b[0] - a[0])); return { top: mix(a[1], b[1], u), bot: mix(a[2], b[2], u), tint: mix(a[3], b[3], u), ta: lerp(a[4], b[4], u), glow: lerp(a[5], b[5], u) };
   }
-  const PARTS = [['frame', 'Fibrex frame', 'Andersen\'s wood-fibre and polymer composite'], ['uppersash', 'Fixed upper sash', 'Sits to the outside'],
-    ['lowersash', 'Lower sash', 'Lifts up, behind the upper sash'], ['grille', 'Finelight grilles', 'Between the two panes'], ['screen', 'Insect screen', 'Outside, over the lower half'],
-    ['trim', 'Trim and sill', 'Our casing around the opening']];
-  const A = () => `<section class="sec wnA" id="windows" aria-labelledby="wnA-h">
-    <div class="side"><h2 class="sec-h" id="wnA-h">One window, morning to midnight.</h2>
-      <p class="sec-p">An Andersen 100 Series single-hung, as we fit it: Fibrex frame, a fixed upper sash, a lower sash that lifts, Low-E glass. Drag the sun across the day.</p>
-      <ul class="parts" aria-label="Parts of the window">${PARTS.map(([k, n, d]) => `<li><button type="button" data-p="${k}"><b>${n}</b><span>${d}</span></button></li>`).join('')}</ul>
-      <div class="brands"><b>388</b><span>documented window jobs. Of 376 priced: NT Windows 238, Simonton 54, Andersen 38, Pella 31.</span></div>
-      <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>
-    <div class="stage">${svgWindow()}
-      <div class="ctrl"><div class="day"><label for="wnA-t" class="sr">Time of day</label><input id="wnA-t" type="range" min="0" max="100" value="22" aria-valuetext="9 am">
-        <div class="ticks" aria-hidden="true"><span>7 am</span><span>Noon</span><span>Dusk</span><span>11 pm</span></div></div>
-        <div class="tg"><button type="button" class="chipb" data-t="lift" aria-pressed="false">Lift the sash</button><button type="button" class="chipb" data-t="grille" aria-pressed="true">Grilles</button></div>
-        <div class="fc" role="radiogroup" aria-label="Frame colour">${AC.map(([n, h], i) => `<button type="button" role="radio" aria-checked="${i === 0}" aria-label="${n}" style="--c:${h}"></button>`).join('')}<span class="fcn">White</span></div></div></div></section>`;
+  const fmt = (t) => { let h = Math.floor(t), m = Math.round((t - h) * 60); if (m === 60) { h++; m = 0; } const ap = h >= 12 && h < 24 ? 'pm' : 'am', hh = h % 12 || 12; return hh + (m ? ':' + String(m).padStart(2, '0') : ':00') + ' ' + ap; };
 
-  function wireA(root) {
-    const s = root.querySelector('.wnA'); if (!s) return;
-    const svg = s.querySelector('.wnsvg'), rng = s.querySelector('#wnA-t');
-    const hour = (v) => 7 + v / 100 * 16;   // 7 am .. 11 pm
-    const fmt = (h) => { const H = Math.floor(h), m = Math.round((h - H) * 60 / 15) * 15 % 60, ap = H >= 12 ? 'pm' : 'am', h12 = ((H + 11) % 12) + 1; return `${h12}${m ? ':' + String(m).padStart(2, '0') : ''} ${ap}`; };
-    function set(v) {
-      const h = hour(v), night = Math.max(0, Math.min(1, (h - 18.2) / 2.3)), dusk = Math.max(0, 1 - Math.abs(h - 19) / 1.6), sun = Math.max(-1, Math.min(1, (h - 13) / 6));
-      svg.style.setProperty('--night', night.toFixed(3)); svg.style.setProperty('--dusk', dusk.toFixed(3));
-      svg.style.setProperty('--sx', (-sun * 10).toFixed(1) + 'px'); s.style.setProperty('--night', night.toFixed(3));
-      rng.setAttribute('aria-valuetext', fmt(h)); rng.style.setProperty('--v', v + '%');
+  /* ---- drawing parts */
+  function rim(q, tx, ty, c) {
+    const n = { tl: [q.tl[0] + tx, q.tl[1] + ty], tr: [q.tr[0] - tx, q.tr[1] + ty], br: [q.br[0] - tx, q.br[1] - ty], bl: [q.bl[0] + tx, q.bl[1] - ty] };
+    let s = poly([q.tl, q.tr, n.tr, n.tl], lite(c, .16)) + poly([q.tr, q.br, n.br, n.tr], dark(c, .12)) + poly([q.bl, n.bl, n.br, q.br], dark(c, .22)) + poly([q.tl, n.tl, n.bl, q.bl], lite(c, .03));
+    s += `<path d="M${q.tl}L${n.tl}M${q.tr}L${n.tr}M${q.br}L${n.br}M${q.bl}L${n.bl}" stroke="${dark(c, .4)}" stroke-opacity=".38" stroke-width=".9" fill="none"/>`;
+    s += poly([q.tl, q.tr, q.br, q.bl], 'none', `stroke="${dark(c, .45)}" stroke-opacity=".55" stroke-width=".9"`) + poly([n.tl, n.tr, n.br, n.bl], 'none', `stroke="${dark(c, .55)}" stroke-opacity=".5" stroke-width="1.3"`);
+    s += `<path d="M${q.tl[0] + 1.5},${q.tl[1] + 1.2}H${q.tr[0] - 1.5}" stroke="#fff" stroke-opacity=".5" stroke-width="1" fill="none"/>`;
+    return { s, n };
+  }
+  const bil = (n, u, v) => { const a = [lerp(n.tl[0], n.tr[0], u), lerp(n.tl[1], n.tr[1], u)], b = [lerp(n.bl[0], n.br[0], u), lerp(n.bl[1], n.br[1], u)]; return [lerp(a[0], b[0], v), lerp(a[1], b[1], v)]; };
+  function gridBars(n, kind, c) {
+    if (kind === 'none') return '';
+    const w = n.tr[0] - n.tl[0], h = n.bl[1] - n.tl[1], ls = [];
+    if (kind === 'colonial') { const cs = Math.max(2, Math.round(w / 92)), rs = Math.max(2, Math.round(h / 92)); for (let i = 1; i < cs; i++) ls.push([bil(n, i / cs, 0), bil(n, i / cs, 1)]); for (let j = 1; j < rs; j++) ls.push([bil(n, 0, j / rs), bil(n, 1, j / rs)]); }
+    else { const a = Math.min(.24, 36 / w), b = Math.min(.24, 36 / h); ls.push([bil(n, a, 0), bil(n, a, 1)], [bil(n, 1 - a, 0), bil(n, 1 - a, 1)], [bil(n, 0, b), bil(n, 1, b)], [bil(n, 0, 1 - b), bil(n, 1, 1 - b)]); }
+    const d = ls.map((l) => `M${f1(l[0][0])},${f1(l[0][1])}L${f1(l[1][0])},${f1(l[1][1])}`).join('');
+    return `<path d="${d}" stroke="${dark(c, .35)}" stroke-opacity=".45" stroke-width="6.4" fill="none" transform="translate(.7,1.2)"/><path d="${d}" stroke="${lite(c, .02)}" stroke-width="5" fill="none"/><path d="${d}" stroke="#fff" stroke-opacity=".45" stroke-width="1" fill="none" transform="translate(-1,-1.2)"/>`;
+  }
+
+  function wire(root) {
+    const s = root.querySelector('.wn'); if (!s || s.dataset.w) return; s.dataset.w = 1;
+    const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const COL = JSON.parse(s.querySelector('.wn-in').dataset.col), svg = s.querySelector('.wn-svg'), gSt = s.querySelector('.wn-st'), gDy = s.querySelector('.wn-dy'), hit = s.querySelector('.wn-hit');
+    const insetBox = s.querySelector('.wn-inset'), insetLab = insetBox.querySelector('p'), insetSvg = insetBox.querySelector('svg'), stage = s.querySelector('.wn-stage'), tag = s.querySelector('.wn-tag'), hint = s.querySelector('.wn-hint');
+    const kinds = [...s.querySelectorAll('.wn-k')], brands = [...s.querySelectorAll('.wn-b')], grids = [...s.querySelectorAll('.wn-g')], swBox = s.querySelector('.wn-sw');
+    const bOpen = s.querySelector('.wn-open'), bLock = s.querySelector('.wn-lock'), bTilt = s.querySelector('.wn-tilt'), bLow = s.querySelector('.wn-lowe'), bScr = s.querySelector('.wn-scr'), bReset = s.querySelector('.wn-reset');
+    const time = s.querySelector('.wn-time'), tl = s.querySelector('.wn-tl'), cn = s.querySelector('.wn-cn'), live = s.querySelector('.wn-live'), kn = s.querySelector('.wn-kn'), how = s.querySelector('.wn-how'), fixed = s.querySelector('.wn-fixed');
+    const rngs = {}; s.querySelectorAll('.wn-r').forEach((l) => { rngs[l.dataset.r] = { l, i: l.querySelector('input') }; });
+    const S = { kind: 'single', brand: 'NT Windows', ci: 0, grid: 'none', lowe: true, screen: false, time: 13, locked: true, tilt: false };
+    const sp = (x = 0) => ({ x, v: 0, t: x });
+    const P = { lo: sp(), up: sp(), tilt: sp(), ang: sp(), sl: sp(), lock: sp(1) };
+    let G = null, raf = 0, last = 0, sx = 320, sxT = 320, ptr = false, drag = null, sw = null, said = false, swapT = 0;
+    const colr = () => COL[S.brand][S.ci][1], cname = () => COL[S.brand][S.ci][0];
+    const say = (m) => { live.textContent = m; };
+    const SK = () => sky(S.time);
+    const pt = (e) => { const m = svg.getScreenCTM(); if (!m) return { x: 0, y: 0 }; const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse()); return { x: p.x, y: p.y }; };
+
+    /* ---- the static layer: wall, casing, interior, frame */
+    function geometry() {
+      const [fx, fy, fw, fh] = KIND[S.kind].box, FT = S.kind === 'picture' ? 18 : 15;
+      G = { fx, fy, fw, fh, FT, ix: fx + FT, iy: fy + FT, iw: fw - 2 * FT, ih: fh - 2 * FT, ST: 12.5 };
+      G.sw = G.iw / 2 + 8; G.sh = G.ih / 2 + 8; G.travel = G.ih / 2 - 12; G.stravel = G.iw / 2 - 10;
     }
-    rng.addEventListener('input', () => { stopIntro(); set(+rng.value); });
-    s.querySelectorAll('[data-t]').forEach((b) => b.addEventListener('click', () => { const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); svg.classList.toggle(b.dataset.t === 'lift' ? 'lifted' : 'nogrille', b.dataset.t === 'lift' ? on : !on); }));
-    const fcs = [...s.querySelectorAll('.fc [role=radio]')];
-    const pickC = (i, focus) => { fcs.forEach((b, k) => { b.setAttribute('aria-checked', k === i); b.tabIndex = k === i ? 0 : -1; }); svg.style.setProperty('--fc', AC[i][1]); s.querySelector('.fcn').textContent = AC[i][0]; if (focus) fcs[i].focus(); };
-    fcs.forEach((b, i) => { b.addEventListener('click', () => pickC(i)); b.addEventListener('keydown', (e) => { const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (d) { e.preventDefault(); pickC((i + d + fcs.length) % fcs.length, true); } }); });
-    pickC(0);
-    // part buttons highlight the real component in the drawing
-    s.querySelectorAll('.parts button').forEach((b) => { const on = (v) => { svg.querySelectorAll('[data-part]').forEach((p) => p.classList.toggle('hl', v && p.dataset.part === b.dataset.p)); svg.classList.toggle('hlon', v); };
-      b.addEventListener('pointerenter', () => on(true)); b.addEventListener('pointerleave', () => on(false)); b.addEventListener('focus', () => on(true)); b.addEventListener('blur', () => on(false));
-      b.addEventListener('click', () => { if (b.dataset.p === 'lowersash') s.querySelector('[data-t=lift]').click(); }); });
-    // intro: once in view, the day runs from morning to dusk; any touch of the slider stops it
-    let raf = 0, t0 = 0; const stopIntro = () => { cancelAnimationFrame(raf); raf = 0; };
-    set(+rng.value);
-    if (!RM) new IntersectionObserver((es, io) => es.forEach((e) => { if (!e.isIntersecting) return; io.disconnect(); const from = +rng.value, to = 80;
-      const step = (now) => { if (!t0) t0 = now; const k = Math.min(1, (now - t0) / 3200), ez = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; const v = from + (to - from) * ez; rng.value = v; set(v); if (k < 1) raf = requestAnimationFrame(step); };
-      raf = requestAnimationFrame(step); }), { threshold: 0.5 }).observe(s.querySelector('.stage'));
-  }
+    function drawStatic() {
+      geometry(); const g = G, k = SK(), c = colr(), glow = k.glow;
+      const wallC = '#9DAC9E'; let d = '<defs>';
+      d += `<linearGradient id="wnSky" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="540"><stop stop-color="${k.top}"/><stop offset="1" stop-color="${k.bot}"/></linearGradient>`;
+      d += '<linearGradient id="wnStk" x1="0" x2="1"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>';
+      d += '<pattern id="wnMesh" width="2.6" height="2.6" patternUnits="userSpaceOnUse"><path d="M0 0H2.6M0 0V2.6" stroke="#18201B" stroke-opacity=".34" stroke-width=".55"/></pattern>';
+      d += '<radialGradient id="wnGlow"><stop stop-color="#FFD58A" stop-opacity=".95"/><stop offset=".35" stop-color="#FFB45A" stop-opacity=".45"/><stop offset="1" stop-color="#FF9A3A" stop-opacity="0"/></radialGradient>';
+      d += '<radialGradient id="wnVig" cx=".5" cy=".5" r=".75"><stop offset=".6" stop-color="#0A1611" stop-opacity="0"/><stop offset="1" stop-color="#0A1611" stop-opacity=".34"/></radialGradient>';
+      d += `<clipPath id="wnClipI"><rect x="${g.ix}" y="${g.iy}" width="${g.iw}" height="${g.ih}"/></clipPath></defs>`;
+      let s = d + `<rect width="640" height="540" fill="${wallC}"/>`;
+      for (let y = 0, i = 0; y < 540; y += 27, i++) s += `<rect y="${y}" width="640" height="27" fill="${i % 2 ? '#98A89A' : '#A2B1A3'}"/><rect y="${y + 25.4}" width="640" height="1.6" fill="#243229" opacity=".22"/><rect y="${y}" width="640" height="1.2" fill="#fff" opacity=".18"/>`;
+      const cz = 21, casing = '#E8E6DD';
+      s += `<rect x="${g.fx - cz + 5}" y="${g.fy - cz + 7}" width="${g.fw + 2 * cz}" height="${g.fh + 2 * cz + 10}" rx="2" fill="#1C2A21" opacity=".2"/>`;
+      s += `<rect x="${g.fx - cz}" y="${g.fy - cz}" width="${g.fw + 2 * cz}" height="${g.fh + 2 * cz}" fill="${casing}"/><rect x="${g.fx - cz}" y="${g.fy - cz}" width="${g.fw + 2 * cz}" height="3" fill="#fff" opacity=".7"/><rect x="${g.fx - 4}" y="${g.fy - 4}" width="${g.fw + 8}" height="${g.fh + 8}" fill="#CFCCC0"/>`;
+      s += `<path d="M${g.fx - cz},${g.fy - cz}H${g.fx + g.fw + cz}V${g.fy + g.fh + cz}H${g.fx - cz}Z" fill="none" stroke="#7E8478" stroke-opacity=".55" stroke-width="1"/>`;
+      s += `<polygon points="${g.fx - cz - 10},${g.fy + g.fh + cz} ${g.fx + g.fw + cz + 10},${g.fy + g.fh + cz} ${g.fx + g.fw + cz + 10},${g.fy + g.fh + cz + 11} ${g.fx - cz - 10},${g.fy + g.fh + cz + 11}" fill="#DEDBD0" stroke="#7E8478" stroke-opacity=".5"/><rect x="${g.fx - cz - 10}" y="${g.fy + g.fh + cz + 11}" width="${g.fw + 2 * cz + 20}" height="7" fill="#1C2A21" opacity=".22"/>`;
+      // interior
+      const iw = g.iw, ih = g.ih, ix = g.ix, iy = g.iy, b0 = mix('#F1EADB', '#5A5064', glow), b1 = mix('#E1D6BF', '#3A3346', glow);
+      s += `<g clip-path="url(#wnClipI)"><defs><linearGradient id="wnBack" x1="0" y1="0" x2="0" y2="1"><stop stop-color="${b0}"/><stop offset="1" stop-color="${b1}"/></linearGradient></defs><rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" fill="url(#wnBack)"/>`;
+      const fy0 = iy + ih * .9; s += `<rect x="${ix}" y="${fy0}" width="${iw}" height="${ih * .16 + 2}" fill="${mix('#C7AD8C', '#5A4636', glow)}"/><rect x="${ix}" y="${fy0 - 6}" width="${iw}" height="6" fill="${mix('#F6F2E8', '#7C7088', glow)}"/>`;
+      s += `<rect x="${ix + iw * .4}" y="${iy + ih * .13}" width="${iw * .22}" height="${ih * .16}" fill="${mix('#7F6B4F', '#3A3042', glow)}"/><rect x="${ix + iw * .4 + 4}" y="${iy + ih * .13 + 4}" width="${iw * .22 - 8}" height="${ih * .16 - 8}" fill="${mix('#BCD2D8', '#506078', glow)}"/><path d="M${ix + iw * .4 + 4},${iy + ih * .29 - 4}l${iw * .06},-${ih * .06}l${iw * .04},${ih * .03}l${iw * .05},-${ih * .05}l${iw * .03},${ih * .08}Z" fill="${mix('#5F8B6E', '#2A3A4A', glow)}"/>`;
+      const cur = mix('#C2D3BC', '#3F4D4A', glow), cur2 = mix('#A9BEA3', '#2F3B39', glow);
+      for (const side of [0, 1]) { const w = iw * .2, x0 = side ? ix + iw - w : ix; for (let i = 0; i < 5; i++) s += `<rect x="${x0 + i * w / 5}" y="${iy}" width="${w / 5 + .5}" height="${ih * .9}" fill="${i % 2 ? cur : cur2}"/>`; s += `<path d="M${x0},${iy}H${x0 + w}" stroke="#fff" stroke-opacity=".3" stroke-width="3"/>`; }
+      const lx = ix + iw * .7, ly = fy0; G.lamp = [lx, ly - ih * .13];
+      s += `<rect x="${lx - 12}" y="${ly - 6}" width="24" height="6" rx="2" fill="${mix('#5B4A3A', '#2B2420', glow)}"/><rect x="${lx - 1.6}" y="${ly - ih * .11}" width="3.2" height="${ih * .11}" fill="${mix('#7B6A58', '#3A3028', glow)}"/><polygon points="${lx - 17},${ly - ih * .11} ${lx + 17},${ly - ih * .11} ${lx + 11},${ly - ih * .2} ${lx - 11},${ly - ih * .2}" fill="${mix('#F2E2BD', '#FFD58A', glow)}"/></g>`;
+      // fixed frame
+      const q = { tl: [g.fx, g.fy], tr: [g.fx + g.fw, g.fy], br: [g.fx + g.fw, g.fy + g.fh], bl: [g.fx, g.fy + g.fh] }, r = rim(q, g.FT, g.FT, c);
+      s += r.s + `<rect x="${g.fx + g.fw / 2 - 14}" y="${g.fy + g.fh - g.FT + 5}" width="28" height="3.4" rx="1.7" fill="${dark(c, .6)}" opacity=".7"/>`;
+      gSt.innerHTML = s;
+      // hit area (HTML, so touch-action works) over the operable opening
+      const L = (g.fx - 12) / 640 * 100, T = (g.fy - 12) / 540 * 100, W = (g.fw + 24) / 640 * 100, Hh = (g.fh + 24) / 540 * 100;
+      hit.style.cssText = `left:${L}%;top:${T}%;width:${W}%;height:${Hh}%;display:${S.kind === 'picture' ? 'none' : 'block'}`;
+    }
 
-  /* ---------- B: a 400 Series bay, built out from the wall; peel the wall to its build-up ---------- */
-  const LAYERS = [['siding', 'Lap siding', 'James Hardie, 7 in exposure'], ['wrap', 'House wrap', 'Sheds water that gets behind the boards'], ['sheath', 'Sheathing', 'Structural panels on the studs'], ['studs', 'Studs and insulation', 'The frame of the wall']];
-  const unit = (cls) => `<div class="u ${cls}"><div class="ufr"><div class="usash"><i class="ug"></i></div></div></div>`;
-  const wallPieces = (cls) => `<i class="wp ${cls} t"></i><i class="wp ${cls} b"></i><i class="wp ${cls} l"></i><i class="wp ${cls} r"></i>`;
-  const B = () => `<section class="sec wnB" id="windows" aria-labelledby="wnB-h">
-    <div class="side"><h2 class="sec-h" id="wnB-h">A bay, built out from the wall.</h2>
-      <p class="sec-p">Andersen 400 Series bays join three windows on angled posts, at 30° or 45°, with a head board above and a seat board below. Peel the wall to see what holds it.</p>
-      <div class="seg" role="group" aria-label="Bay angle"><button type="button" aria-pressed="false" data-a="30">30° bay</button><button type="button" aria-pressed="true" data-a="45">45° bay</button></div>
-      <ol class="layers" aria-label="Wall layers">${LAYERS.map(([k, n, d], i) => `<li data-l="${i}"><b>${n}</b><span>${d}</span></li>`).join('')}</ol>
-      <div class="acts"><button class="btn light" type="button" data-peel>Peel a layer</button><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>
-      <p class="note">Andersen Certified Contractor, Premier. 38 priced Andersen jobs; median band $20k–$25k.</p></div>
-    <div class="stage" role="img" aria-label="A three-window bay projecting from a lap-sided wall; the wall around it can be peeled back to house wrap, sheathing and studs.">
-      <div class="cam"><div class="world">
-        <div class="wall"><i class="inside"></i>${wallPieces('studs')}${wallPieces('sheath')}${wallPieces('wrap')}${wallPieces('siding')}</div>
-        <div class="bay">${unit('lf')}${unit('ct')}${unit('rf')}<i class="post pl"></i><i class="post pr"></i><i class="head"></i><i class="seat"></i><i class="brk bl"></i><i class="brk br"></i></div>
-      </div></div><span class="hint" aria-hidden="true">Move across the bay to turn it</span></div></section>`;
+    /* ---- the glass */
+    let gid = 0;
+    function glass(n, c) {
+      const k = SK(), ro = .66 - .48 * k.glow, id = 'wnG' + (gid++), p = pts([n.tl, n.tr, n.br, n.bl]);
+      let s = `<clipPath id="${id}"><polygon points="${p}"/></clipPath><g clip-path="url(#${id})"><rect width="640" height="540" fill="url(#wnSky)" opacity="${ro.toFixed(2)}"/>`;
+      s += `<path d="M0 392q40-26 80-8t80 2 80-16 90 8 90-10 80 12 70-6V540H0Z" fill="#2D4A38" opacity="${(ro * .42).toFixed(2)}"/><path d="M0 410q50-14 100 0t110-6 120 8 110-8 100 6V540H0Z" fill="#1F3528" opacity="${(ro * .3).toFixed(2)}"/>`;
+      if (S.lowe) s += `<rect width="640" height="540" fill="#78C3B1" opacity=".13"/>`;
+      const o = (.42 * (1 - k.glow) + .08).toFixed(2); s += `<polygon points="${sx - 20},0 ${sx + 28},0 ${sx - 56},540 ${sx - 118},540" fill="url(#wnStk)" opacity="${o}"/><polygon points="${sx + 40},0 ${sx + 52},0 ${sx - 34},540 ${sx - 46},540" fill="#fff" opacity="${(o * .55).toFixed(2)}"/></g>`;
+      const ins = { tl: [n.tl[0] + 3.2, n.tl[1] + 3.2], tr: [n.tr[0] - 3.2, n.tr[1] + 3.2], br: [n.br[0] - 3.2, n.br[1] - 3.2], bl: [n.bl[0] + 3.2, n.bl[1] - 3.2] };
+      s += poly([ins.tl, ins.tr, ins.br, ins.bl], 'none', `stroke="${S.lowe ? '#5FB4A0' : '#9AA7A0'}" stroke-opacity=".7" stroke-width="1"`);
+      s += poly([n.tl, n.tr, n.br, n.bl], 'none', 'stroke="#10201A" stroke-opacity=".35" stroke-width="1"') + gridBars(n, S.grid, c);
+      return s;
+    }
+    const quad = (x, y, w, h) => ({ tl: [x, y], tr: [x + w, y], br: [x + w, y + h], bl: [x, y + h] });
+    const mesh = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#wnMesh)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#fff" opacity=".07"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#18201B" stroke-opacity=".5" stroke-width="2"/>`;
 
-  function wireB(root) {
-    const s = root.querySelector('.wnB'); if (!s) return;
-    const stage = s.querySelector('.stage'), world = s.querySelector('.world'), cam = s.querySelector('.cam');
-    const F = 150, C = 210;   // flanker and centre unit widths (px in world units)
-    let ang = 45, peel = 0, ry = -22, rx = -6, try_ = -22, trx = -6, raf = 0;
-    function geo() { const a = ang * Math.PI / 180, W = C + 2 * F * Math.cos(a), P = F * Math.sin(a);
-      world.style.setProperty('--W', W.toFixed(1) + 'px'); world.style.setProperty('--P', P.toFixed(1) + 'px'); world.style.setProperty('--a', ang + 'deg');
-      world.style.setProperty('--F', F + 'px'); world.style.setProperty('--C', C + 'px'); world.style.setProperty('--inset', ((W - C) / 2).toFixed(1) + 'px'); }
-    function fit() { const r = stage.getBoundingClientRect(); cam.style.setProperty('--s', Math.min(r.width / 760, r.height / 600).toFixed(3)); }
-    function tick() { raf = 0; ry += (try_ - ry) * 0.12; rx += (trx - rx) * 0.12; world.style.setProperty('--ry', ry.toFixed(2) + 'deg'); world.style.setProperty('--rx', rx.toFixed(2) + 'deg');
-      if (Math.abs(try_ - ry) + Math.abs(trx - rx) > 0.05) raf = requestAnimationFrame(tick); }
-    const go = () => { if (RM) { ry = try_; rx = trx; world.style.setProperty('--ry', ry + 'deg'); world.style.setProperty('--rx', rx + 'deg'); } else if (!raf) raf = requestAnimationFrame(tick); };
-    stage.addEventListener('pointermove', (e) => { if (e.pointerType !== 'mouse') return; const r = stage.getBoundingClientRect(); try_ = -22 + ((e.clientX - r.left) / r.width - 0.5) * 50; trx = -6 - ((e.clientY - r.top) / r.height - 0.5) * 14; go(); });
-    stage.addEventListener('pointerleave', () => { try_ = -22; trx = -6; go(); });
-    // touch: drag sideways to turn
-    let sx = null; stage.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') sx = [e.clientX, try_]; });
-    stage.addEventListener('pointermove', (e) => { if (sx && e.pointerType !== 'mouse') { try_ = Math.max(-48, Math.min(8, sx[1] + (e.clientX - sx[0]) * 0.25)); go(); } });
-    addEventListener('pointerup', () => { sx = null; });
-    s.querySelectorAll('[data-a]').forEach((b) => b.addEventListener('click', () => { ang = +b.dataset.a; s.querySelectorAll('[data-a]').forEach((x) => x.setAttribute('aria-pressed', x === b)); geo(); }));
-    const pb = s.querySelector('[data-peel]'), lis = s.querySelectorAll('.layers li');
-    function showPeel() { world.dataset.peel = peel; lis.forEach((l, i) => { l.classList.toggle('off', i < peel); l.classList.toggle('now', i === peel); });
-      pb.textContent = peel >= 3 ? 'Build it back' : 'Peel a layer'; }
-    pb.addEventListener('click', () => { peel = peel >= 3 ? 0 : peel + 1; showPeel(); });
-    geo(); fit(); showPeel(); world.style.setProperty('--ry', ry + 'deg'); world.style.setProperty('--rx', rx + 'deg');
-    addEventListener('resize', fit); new ResizeObserver(fit).observe(stage);
-    // entrance: the bay slides out of the wall once in view
-    if (!RM) new IntersectionObserver((es, io) => es.forEach((e) => { if (e.isIntersecting) { io.disconnect(); world.classList.add('in'); } }), { threshold: 0.4 }).observe(stage); else world.classList.add('in');
+    function drawDyn() {
+      gid = 0; const g = G, c = colr(), k = SK(); let s = '';
+      if (S.kind === 'single' || S.kind === 'double') {
+        const dbl = S.kind === 'double', up = dbl ? P.up.x : 0, uy = g.iy + up * g.travel;
+        const qU = quad(g.ix, uy, g.iw, g.sh), rU = rim(qU, g.ST, g.ST, c);
+        const ly = g.iy + g.ih - g.sh - P.lo.x * g.travel, tt = P.tilt.x * (1 - P.lo.x), sI = 9 * tt, dy = 20 * tt;
+        const qL = { tl: [g.ix + sI, ly + dy], tr: [g.ix + g.iw - sI, ly + dy], br: [g.ix + g.iw, ly + g.sh], bl: [g.ix, ly + g.sh] };
+        const rL = rim(qL, g.ST, g.ST * (1 - .25 * tt), c);
+        s += glass(rU.n, c) + rU.s;
+        s += `<path d="M${g.ix},${ly + dy - 3}H${g.ix + g.iw}" stroke="#0A1611" stroke-opacity="${(.12 + .1 * P.lo.x).toFixed(2)}" stroke-width="5" fill="none"/>`;
+        s += glass(rL.n, c) + rL.s;
+        if (S.screen) s += mesh(g.ix, g.iy + g.ih / 2, g.iw, g.ih / 2);
+      } else if (S.kind === 'casement') {
+        const th = P.ang.x * 78 * Math.PI / 180, kk = Math.cos(th), d = Math.sin(th), sc = 1 + .1 * d, ex = g.ix + g.iw * kk, grow = g.ih * (sc - 1) / 2;
+        if (S.screen) s += mesh(g.ix, g.iy, g.iw, g.ih);
+        const q = { tl: [g.ix, g.iy], tr: [ex, g.iy - grow], br: [ex, g.iy + g.ih + grow], bl: [g.ix, g.iy + g.ih] }, r = rim(q, Math.max(3.2, g.ST * kk), g.ST * (1 + .2 * d * .5), c);
+        s += glass(r.n, c) + r.s;
+      } else if (S.kind === 'slider') {
+        const sl = P.sl.x, fxx = g.ix, mw = g.sw;
+        const qF = quad(fxx, g.iy, mw, g.ih), rF = rim(qF, g.ST, g.ST, c), mx = g.ix + g.iw - mw - sl * g.stravel, qM = quad(mx, g.iy, mw, g.ih), rM = rim(qM, g.ST, g.ST, c);
+        s += glass(rF.n, c) + rF.s;
+        s += `<path d="M${mx - 3},${g.iy}V${g.iy + g.ih}" stroke="#0A1611" stroke-opacity="${(.12 + .12 * sl).toFixed(2)}" stroke-width="5" fill="none"/>` + glass(rM.n, c) + rM.s;
+        if (S.screen) s += mesh(g.ix + g.iw / 2, g.iy, g.iw / 2, g.ih);
+        s += `<rect x="${g.ix}" y="${g.iy + g.ih - 3}" width="${g.iw}" height="3" fill="${dark(c, .45)}" opacity=".75"/>`;
+      } else {
+        const q = quad(g.ix, g.iy, g.iw, g.ih), r = rim(q, 9, 9, c); s += glass(r.n, c) + r.s;
+      }
+      // light: tint, lamp glow, vignette
+      s += `<rect width="640" height="540" fill="${k.tint}" opacity="${k.ta.toFixed(2)}" style="mix-blend-mode:multiply"/>`;
+      if (k.glow > .02) s += `<g clip-path="url(#wnClipI)" style="mix-blend-mode:screen"><circle cx="${G.lamp[0]}" cy="${G.lamp[1]}" r="${G.iw * .5}" fill="url(#wnGlow)" opacity="${(k.glow * .9).toFixed(2)}"/></g>`;
+      s += '<rect width="640" height="540" fill="url(#wnVig)"/>';
+      gDy.innerHTML = s;
+    }
+
+    /* ---- From inside: the hardware (rebuilt as the springs move) */
+    function drawInset() {
+      const c = colr(), kd = S.kind; let s = '<rect width="220" height="150" fill="#2A332D"/>';
+      const lk = P.lock.x, lab = S.locked ? 'Locked' : 'Unlocked';
+      if (kd === 'single' || kd === 'double') {
+        const tt = P.tilt.x, lo = P.lo.x;
+        s += `<rect x="0" y="52" width="220" height="40" fill="${c}"/><rect x="0" y="52" width="220" height="5" fill="${lite(c, .35)}" opacity=".7"/><rect x="0" y="86" width="220" height="6" fill="${dark(c, .3)}"/><rect x="0" y="0" width="220" height="52" fill="#9AB5C7" opacity=".5"/><rect x="0" y="92" width="220" height="58" fill="#B9CFDA" opacity=".5"/>`;
+        s += `<rect x="86" y="44" width="48" height="10" rx="2" fill="#C9CFCB" stroke="#586059" stroke-width=".8"/>`; // keeper on the upper rail
+        const a = lk * 0; s += `<g data-act="lock" style="cursor:pointer" transform="translate(110 68)"><circle r="14" fill="#E4E7E2" stroke="#4E5750" stroke-width="1"/><g transform="rotate(${(1 - lk) * 90})"><rect x="-26" y="-5" width="52" height="10" rx="5" fill="#F1F3F0" stroke="#4E5750" stroke-width="1"/><circle cx="20" cy="0" r="2.4" fill="#4E5750"/></g><circle r="3.4" fill="#4E5750"/></g>`;
+        for (const sd of [-1, 1]) s += `<rect x="${sd < 0 ? 12 + 10 * tt : 196 - 10 * tt - 12}" y="62" width="14" height="12" rx="3" fill="#DDE1DC" stroke="#586059" stroke-width=".8"/>`;
+        s += `<text x="110" y="124" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">${lab}${tt > .5 ? ', tilted in' : ''}</text><text x="110" y="140" text-anchor="middle" fill="#B5DB6E" font-size="9.5">Turn the lever · latches slide for tilt</text>`;
+      } else if (kd === 'casement') {
+        const th = P.ang.x * 78, rad = th * Math.PI / 180, hx = 36, hy = 46, L = 92;
+        s += `<rect x="${hx - 6}" y="${hy + 6}" width="${L + 28}" height="12" fill="#58635B"/><rect x="${hx - 6}" y="${hy + 6}" width="8" height="12" fill="#8C978F"/>`;
+        s += `<path d="M${hx},${hy}L${hx + L},${hy}" stroke="#fff" stroke-opacity=".28" stroke-dasharray="3 3"/><path d="M${hx + L},${hy}A${L},${L} 0 0 0 ${hx + L * Math.cos(rad)},${hy - L * Math.sin(rad) * .0}" fill="none"/>`;
+        s += `<g transform="translate(${hx} ${hy + 6})"><rect x="0" y="-5" width="${L}" height="6" fill="${c}" stroke="${dark(c, .5)}" stroke-width=".8" transform="rotate(${-th})"/></g><circle cx="${hx}" cy="${hy + 6}" r="3.4" fill="#fff"/>`;
+        s += `<g data-act="lock" style="cursor:pointer"><g transform="translate(166 100)"><circle r="21" fill="#E4E7E2" stroke="#4E5750"/><g transform="rotate(${P.ang.x * 540})"><rect x="-3" y="-17" width="6" height="19" rx="3" fill="#F1F3F0" stroke="#4E5750"/><circle cy="-17" r="5" fill="#C9CFCB" stroke="#4E5750"/></g><circle r="4" fill="#4E5750"/></g></g>`;
+        s += `<text x="12" y="116" fill="#fff" font-size="11" font-weight="700">${lab}</text><text x="12" y="132" fill="#B5DB6E" font-size="9.5">${Math.round(P.ang.x * 100)}% open · the crank turns</text>`;
+      } else if (kd === 'slider') {
+        const sl = P.sl.x, tr = 70;
+        s += `<rect x="14" y="44" width="192" height="3" fill="#58635B"/><rect x="14" y="62" width="192" height="3" fill="#58635B"/>`;
+        s += `<rect x="16" y="50" width="96" height="8" fill="${c}" stroke="${dark(c, .5)}" stroke-width=".8"/><rect x="${106 - sl * tr + 2}" y="66" width="96" height="8" fill="${lite(c, .06)}" stroke="${dark(c, .5)}" stroke-width=".8"/>`;
+        s += `<g data-act="lock" style="cursor:pointer" transform="translate(172 108)"><rect x="-26" y="-14" width="52" height="28" rx="6" fill="#E4E7E2" stroke="#4E5750"/><g transform="rotate(${S.locked ? 0 : -60})"><rect x="-4" y="-10" width="8" height="${S.locked ? 20 : 16}" rx="3" fill="#F1F3F0" stroke="#4E5750"/><path d="M0 -10 l10 -4" stroke="#4E5750" stroke-width="2.4" stroke-linecap="round"/></g></g>`;
+        s += `<text x="12" y="106" fill="#fff" font-size="11" font-weight="700">${lab}</text><text x="12" y="122" fill="#B5DB6E" font-size="9.5">${Math.round(sl * 100)}% open · hook latch</text>`;
+      } else {
+                const L = S.lowe; s += `<rect x="70" y="30" width="6" height="92" fill="#BFE0EC" opacity=".8"/><rect x="108" y="30" width="6" height="92" fill="#BFE0EC" opacity=".8"/><rect x="76" y="30" width="32" height="6" fill="#8D9992"/><rect x="76" y="116" width="32" height="6" fill="#8D9992"/><rect x="60" y="24" width="64" height="5" fill="${c}"/><rect x="60" y="123" width="64" height="5" fill="${c}"/>`;
+        if (L) s += `<rect x="107" y="30" width="1.6" height="92" fill="#5FD0B5"/>`;
+        s += `<text x="26" y="86" fill="#fff" font-size="8.5" text-anchor="middle">outside</text><text x="156" y="86" fill="#fff" font-size="8.5" text-anchor="middle">inside</text><path d="M30 60 h34M58 55l6 5-6 5" stroke="#FFD58A" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+        if (L) s += `<path d="M64 60 l-10 6" stroke="#5FD0B5" stroke-width="1.6" stroke-dasharray="3 2"/>`;
+        s += `<text x="110" y="144" text-anchor="middle" fill="#B5DB6E" font-size="9.5">${L ? 'Low-E coat on the inner pane' : 'Plain double pane'}</text>`;
+      }
+      insetSvg.innerHTML = s; insetLab.textContent = kd === 'single' || kd === 'double' ? 'From inside' : kd === 'picture' ? 'Through the glass' : 'From above';
+    }
+
+    /* ---- text, tag, ranges */
+    function sync() {
+      const k = KIND[S.kind]; kn.textContent = k.name; how.textContent = k.how; cn.textContent = S.brand + ' · ' + cname();
+      tag.firstElementChild.textContent = k.name; tag.lastElementChild.textContent = cname();
+      tl.textContent = fmt(S.time); time.setAttribute('aria-valuetext', fmt(S.time));
+      const hung = S.kind === 'single' || S.kind === 'double', op = S.kind !== 'picture';
+      for (const key of Object.keys(rngs)) { const on = (key === 'lo' && hung) || (key === 'up' && S.kind === 'double') || (key === 'ang' && S.kind === 'casement') || (key === 'sl' && S.kind === 'slider'); rngs[key].l.hidden = !on; }
+      rngs.lo.l.firstElementChild.textContent = S.kind === 'double' ? 'Lower sash' : 'Sash';
+      bOpen.hidden = bLock.hidden = !op; bTilt.hidden = !hung; fixed.hidden = op; bScr.hidden = !op; insetBox.hidden = false;
+      bLock.setAttribute('aria-pressed', String(S.locked)); bLock.lastElementChild.textContent = S.locked ? 'Locked' : 'Unlocked'; bLock.classList.toggle('on', S.locked);
+      bTilt.setAttribute('aria-pressed', String(S.tilt)); bLow.setAttribute('aria-pressed', String(S.lowe)); bScr.setAttribute('aria-pressed', String(S.screen));
+      const o = openness(); bOpen.setAttribute('aria-pressed', String(o > .005)); bOpen.lastElementChild.textContent = o > .005 ? 'Close' : 'Open';
+      for (const key of Object.keys(rngs)) rngs[key].i.value = Math.round(P[key].t * 100);
+      tilted();
+    }
+    const tilted = () => { bTilt.disabled = !hung() || P.lo.t > .005 || S.locked; };
+    const hung = () => S.kind === 'single' || S.kind === 'double';
+    function openness() { return S.kind === 'single' ? P.lo.t : S.kind === 'double' ? Math.max(P.lo.t, P.up.t) : S.kind === 'casement' ? P.ang.t : S.kind === 'slider' ? P.sl.t : 0; }
+
+    /* ---- springs */
+    function step(dt) {
+      let moving = false;
+      for (const p of Object.values(P)) {
+        if (RM) { p.x = p.t; p.v = 0; continue; }
+        const a = (p.t - p.x) * 170 - p.v * 21; p.v += a * dt; p.x += p.v * dt;
+        if (Math.abs(p.t - p.x) < .0007 && Math.abs(p.v) < .004) { p.x = p.t; p.v = 0; } else moving = true;
+      }
+      return moving;
+    }
+    function frame(ts) {
+      raf = 0; const dt = Math.min(.034, (ts - (last || ts)) / 1000 || .016); last = ts;
+      let moving = step(dt); const d = sxT - sx; if (Math.abs(d) > .4 && !RM) { sx += d * Math.min(1, dt * 7); moving = true; } else sx = sxT;
+      drawDyn(); drawInset(); if (moving) raf = requestAnimationFrame(frame); else last = 0;
+    }
+    const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+    const set = (k, v, snap) => { P[k].t = clamp(v); if (snap || RM) { P[k].x = P[k].t; P[k].v = 0; } kick(); };
+
+    /* ---- actions */
+    function lockTo(on, then) {
+      S.locked = on; P.lock.t = on ? 1 : 0; if (RM) P.lock.x = P.lock.t; kick(); sync();
+      if (then) setTimeout(then, RM ? 0 : 260);
+    }
+    function shake() { bLock.classList.remove('shake'); void bLock.offsetWidth; bLock.classList.add('shake'); insetBox.classList.remove('shake'); void insetBox.offsetWidth; insetBox.classList.add('shake'); }
+    function openAll() {
+      const go = () => { if (S.kind === 'single') set('lo', .55); else if (S.kind === 'double') { set('lo', .5); set('up', .32); } else if (S.kind === 'casement') set('ang', .86); else if (S.kind === 'slider') set('sl', .58); sync(); say(KIND[S.kind].name + ' opened.'); };
+      if (S.locked) lockTo(false, go); else go();
+    }
+    function closeAll() { set('lo', 0); set('up', 0); set('ang', 0); set('sl', 0); S.tilt = false; set('tilt', 0); setTimeout(() => lockTo(true), RM ? 0 : 520); sync(); say(KIND[S.kind].name + ' closed and locked.'); }
+    bOpen.addEventListener('click', () => { if (openness() > .005) closeAll(); else openAll(); hideHint(); });
+    bLock.addEventListener('click', () => { if (S.locked) { lockTo(false); say('Unlocked.'); } else if (openness() > .005) { shake(); say('Close it first, then lock it.'); } else { lockTo(true); say('Locked.'); } });
+    insetSvg.addEventListener('pointerdown', (e) => { if (e.target.closest('[data-act="lock"]')) { e.preventDefault(); bLock.click(); } });
+    bTilt.addEventListener('click', () => { S.tilt = !S.tilt; set('tilt', S.tilt ? 1 : 0); sync(); say(S.tilt ? 'Sash tilted in.' : 'Sash tilted back.'); });
+    bLow.addEventListener('click', () => { S.lowe = !S.lowe; drawDyn(); drawInset(); sync(); say(S.lowe ? 'Low-E glass on.' : 'Low-E glass off.'); });
+    bScr.addEventListener('click', () => { S.screen = !S.screen; drawDyn(); sync(); say(S.screen ? 'Insect screen on.' : 'Insect screen off.'); });
+    for (const [key, o] of Object.entries(rngs)) o.i.addEventListener('input', () => {
+      if (S.locked && +o.i.value > 0) { lockTo(false); }
+      if (key === 'lo' && +o.i.value > 2 && S.tilt) { S.tilt = false; set('tilt', 0); }
+      set(key, +o.i.value / 100, true); const op = openness(); bOpen.setAttribute('aria-pressed', String(op > .005)); bOpen.lastElementChild.textContent = op > .005 ? 'Close' : 'Open'; tilted(); hideHint();
+      if (key === 'lo' || key === 'up') say(Math.round(+o.i.value) + '% open.');
+    });
+    grids.forEach((b) => b.addEventListener('click', () => { S.grid = b.dataset.g; grids.forEach((x) => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; }); drawDyn(); say(b.textContent + '.'); }));
+    time.addEventListener('input', () => { S.time = +time.value; drawStatic(); drawDyn(); drawInset(); tl.textContent = fmt(S.time); time.setAttribute('aria-valuetext', fmt(S.time)); sxT = sx = 100 + (S.time - 7) / 16 * 440; hideHint(); });
+    function buildSwatches() {
+      swBox.innerHTML = COL[S.brand].map(([n, h], i) => `<button type="button" role="radio" class="wn-c" data-i="${i}" aria-checked="${i === S.ci}" aria-label="${n}" title="${n}" tabindex="${i === S.ci ? 0 : -1}" style="--c:${h}"><i></i></button>`).join('');
+    }
+    function pickColour(i) { S.ci = i; swBox.querySelectorAll('.wn-c').forEach((b, j) => { b.setAttribute('aria-checked', String(j === i)); b.tabIndex = j === i ? 0 : -1; }); drawStatic(); drawDyn(); drawInset(); minis(); sync(); say(S.brand + ' ' + cname() + '.'); }
+    swBox.addEventListener('click', (e) => { const b = e.target.closest('.wn-c'); if (b) pickColour(+b.dataset.i); });
+    function roving(box, sel, pick, cols) {
+      box.addEventListener('keydown', (e) => {
+        const items = [...box.querySelectorAll(sel)]; const i = items.indexOf(document.activeElement); if (i < 0) return;
+        const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0; if (!d) return; e.preventDefault();
+        const j = (i + d + items.length) % items.length; items[j].focus(); pick(items[j]);
+      });
+    }
+    roving(swBox, '.wn-c', (b) => pickColour(+b.dataset.i)); roving(s.querySelector('.wn-brands'), '.wn-b', (b) => b.click()); roving(s.querySelector('.wn-seg'), '.wn-g', (b) => b.click()); roving(s.querySelector('.wn-kinds'), '.wn-k', (b) => b.click());
+    brands.forEach((b) => b.addEventListener('click', () => { S.brand = b.dataset.b; s.querySelectorAll('.wn-bar').forEach((x) => x.classList.toggle('on', x.dataset.b === S.brand)); S.ci = 0; brands.forEach((x) => { x.setAttribute('aria-checked', String(x === b)); x.tabIndex = x === b ? 0 : -1; }); buildSwatches(); drawStatic(); drawDyn(); drawInset(); minis(); sync(); say(S.brand + ' colours, ' + COL[S.brand].length + ' published.'); }));
+    function chooseKind(k, quiet) {
+      if (k === S.kind) return; S.kind = k; kinds.forEach((x) => { const on = x.dataset.k === k; x.setAttribute('aria-checked', String(on)); x.tabIndex = on ? 0 : -1; });
+      for (const p of Object.values(P)) { p.t = 0; p.x = 0; p.v = 0; } P.lock.t = P.lock.x = 1; S.locked = true; S.tilt = false;
+      const go = () => { drawStatic(); drawDyn(); drawInset(); sync(); stage.classList.remove('swap'); };
+      if (RM) go(); else { stage.classList.add('swap'); clearTimeout(swapT); swapT = setTimeout(go, 170); }
+      if (!quiet) say(KIND[k].name + '. ' + KIND[k].how);
+    }
+    kinds.forEach((b) => b.addEventListener('click', () => chooseKind(b.dataset.k)));
+    bReset.addEventListener('click', () => { Object.assign(S, { brand: 'NT Windows', ci: 0, grid: 'none', lowe: true, screen: false, time: 13, locked: true, tilt: false }); for (const p of Object.values(P)) { p.t = 0; if (RM) p.x = 0; } P.lock.t = 1; if (RM) P.lock.x = 1;
+      s.querySelectorAll('.wn-bar').forEach((x, i) => x.classList.toggle('on', i === 0)); brands.forEach((x, i) => { x.setAttribute('aria-checked', String(i === 0)); x.tabIndex = i === 0 ? 0 : -1; }); grids.forEach((x, i) => { x.setAttribute('aria-checked', String(i === 0)); x.tabIndex = i === 0 ? 0 : -1; }); time.value = 13; buildSwatches(); sxT = sx = 320; drawStatic(); kick(); sync(); minis(); say('Reset.'); });
+
+    /* ---- direct manipulation */
+    function hideHint() { if (!said) { said = true; hint.classList.add('off'); } }
+    hit.addEventListener('pointerdown', (e) => {
+      if (S.kind === 'picture') return; const p = pt(e), g = G; hideHint();
+      if (S.locked) { shake(); say('Locked. Turn the lock first, or press Open.'); return; }
+      let w = null; if (hung()) w = p.y > g.iy + g.ih / 2 ? 'lo' : S.kind === 'double' ? 'up' : null; else if (S.kind === 'casement') w = 'ang'; else w = 'sl';
+      if (!w) { say('On a single hung the upper sash is fixed.'); return; }
+      drag = { w, y0: p.y, x0: p.x, v0: P[w].t, id: e.pointerId }; try { hit.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); hit.classList.add('grab');
+      if (w === 'lo' && S.tilt) { S.tilt = false; set('tilt', 0); sync(); }
+    });
+    hit.addEventListener('pointermove', (e) => { if (!drag) return; const p = pt(e), g = G; let v;
+      if (drag.w === 'lo') v = drag.v0 - (p.y - drag.y0) / g.travel; else if (drag.w === 'up') v = drag.v0 + (p.y - drag.y0) / g.travel;
+      else if (drag.w === 'ang') { const k = clamp((p.x - g.ix) / g.iw, Math.cos(78 * Math.PI / 180), 1); v = Math.acos(k) / (78 * Math.PI / 180); } else v = drag.v0 - (p.x - drag.x0) / g.stravel;
+      set(drag.w, v, true); sync(); });
+    const end = () => { if (drag) { drag = null; hit.classList.remove('grab'); } }; hit.addEventListener('pointerup', end); hit.addEventListener('pointercancel', end); hit.addEventListener('lostpointercapture', end);
+    stage.addEventListener('pointermove', (e) => { if (RM) return; const p = pt(e); if (p.x >= 0 && p.x <= 640) { sxT = p.x; ptr = true; kick(); } });
+    stage.addEventListener('pointerleave', () => { ptr = false; sxT = 100 + (S.time - 7) / 16 * 440; kick(); });
+
+    /* ---- thumbnails (the five kinds, in the chosen frame colour) */
+    function minis() {
+      const c = colr(), gl = '#CFE3F2', gl2 = '#9CC1DC';
+      const F = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${c}" stroke="${dark(c, .45)}" stroke-width="1"/><rect x="${x + 4}" y="${y + 4}" width="${w - 8}" height="${h - 8}" fill="${gl}"/>`;
+      const ar = (d) => `<path d="${d}" stroke="#0E3B2C" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+      const M = {
+        single: F(15, 6, 34, 52) + `<rect x="19" y="10" width="26" height="20" fill="${gl}"/><rect x="19" y="26" width="26" height="22" fill="${gl2}" opacity=".75"/><rect x="17" y="30" width="30" height="4" fill="${c}" stroke="${dark(c, .45)}" stroke-width=".8"/>` + ar('M32 52V42M28 46l4-4 4 4'),
+        double: F(15, 6, 34, 52) + `<rect x="17" y="30" width="30" height="4" fill="${c}" stroke="${dark(c, .45)}" stroke-width=".8"/>` + ar('M32 22v6M29 24l3-3 3 3M32 40v6M29 44l3 3 3-3'),
+        casement: F(15, 6, 34, 52).replace(`fill="${gl}"`, 'fill="#5B6F66" opacity=".5"') + `<polygon points="19,10 35,6 35,58 19,54" fill="${gl2}" stroke="${dark(c, .45)}" stroke-width="2.4"/>` + ar('M24 32h14M34 28l4 4-4 4'),
+        slider: F(6, 16, 52, 32) + `<rect x="10" y="20" width="24" height="24" fill="${gl2}" stroke="${c}" stroke-width="2"/><rect x="30" y="20" width="24" height="24" fill="${gl}" stroke="${c}" stroke-width="2"/>` + ar('M44 33H34M38 29l-4 4 4 4'),
+        picture: F(10, 10, 44, 44) + `<polygon points="16,40 30,16 38,16 22,40" fill="#fff" opacity=".5"/>`,
+      };
+      s.querySelectorAll('.wn-k').forEach((b) => { b.querySelector('svg').innerHTML = M[b.dataset.k]; });
+    }
+
+    /* ---- parallax for the background art, and the first draw */
+    const bg = s.querySelector('.wn-bg'); let tick = false;
+    const par = () => { tick = false; const r = s.getBoundingClientRect(), p = clamp((r.top + r.height / 2 - innerHeight / 2) / (innerHeight * .9), -1, 1); bg.firstElementChild.style.setProperty('--py', (p * -24).toFixed(1) + 'px'); bg.lastElementChild.style.setProperty('--py', (p * -60).toFixed(1) + 'px'); };
+    if (!RM) addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(par); } }, { passive: true }); par();
+    if ('IntersectionObserver' in window && !RM) { const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { s.classList.add('wn-seen'); io.disconnect(); } }, { threshold: .15 }); io.observe(s); } else s.classList.add('wn-seen');
+    sxT = sx = 100 + (S.time - 7) / 16 * 440; buildSwatches(); drawStatic(); drawDyn(); drawInset(); minis(); sync();
+    window.__win = { S, P, set, kick, chooseKind, get G() { return G; } };
   }
-  return { A, B, wire(root) { wireA(root); wireB(root); } };
+  return { wire };
 })();
 /* PROOF / REVIEWS (sheet: ONLY the big 4.9 arriving as a reveal, and the rating shown as hanging tags; no map, no video wall).
    Every quote is a verbatim excerpt of a Google review published on the firm's site (work/data/reviews.json, injected as
@@ -2100,4 +2183,4 @@ window.Cta5 = (function () {
   }
   return { I, J, wire(root) { wireI(root); wireJ(root); } };
 })();
-FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);Win.wire(document);Rev.wire(document);Rev2.wire(document);Proc2.wire(document);Area.wire(document);Cta2.wire(document);Cta5.wire(document);Cta.wire(document);</script></body></html>
+FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);Rev.wire(document);Rev2.wire(document);Proc2.wire(document);Area.wire(document);Cta2.wire(document);Cta5.wire(document);Cta.wire(document);</script></body></html>
