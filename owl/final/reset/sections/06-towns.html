@@ -1,0 +1,82 @@
+<section class="rs towns" id="towns" data-sky="day" aria-labelledby="tw-h">
+<style>
+.towns{padding:clamp(100px,13vh,150px) clamp(16px,4vw,64px) clamp(70px,9vh,110px)}
+.towns .map{position:relative;max-width:1320px;margin:0 auto;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 40px 60px -46px rgba(0,0,0,.5)}
+.towns svg.ground{position:absolute;inset:0;width:100%;height:100%}
+.towns svg.ground path{fill:none;stroke:var(--ink);stroke-opacity:.13;stroke-width:1.1;vector-effect:non-scaling-stroke}
+.towns svg.ground path.t{stroke-opacity:.22}
+.towns .dot{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border:0;border-radius:50%;background:none;cursor:pointer;display:grid;place-items:center}
+.towns .dot i{width:12px;height:12px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--surface);transition:scale .3s,background .3s}
+.towns .dot span{position:absolute;left:50%;top:calc(50% + 12px);translate:-50% 0;white-space:nowrap;font-size:12px;font-weight:800;color:var(--ink);opacity:0;transition:opacity .25s;pointer-events:none;text-shadow:0 0 3px var(--surface),0 0 3px var(--surface)}
+.towns .dot:hover span,.towns .dot:focus-visible span,.towns .dot.hit span,.towns .dot.big span{opacity:1}
+.towns .dot.hit i{background:var(--acc);scale:1.9;box-shadow:0 0 0 3px var(--ink)}
+.towns .dot.hit::after{content:"";position:absolute;inset:6px;border-radius:50%;border:2px solid var(--acc);animation:tw1 1.6s ease-out infinite}
+@keyframes tw1{from{scale:.5;opacity:1}to{scale:2.2;opacity:0}}
+.towns .dot:focus-visible{outline:3px solid var(--ink);outline-offset:-6px}
+.towns .home{position:absolute;z-index:0;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:var(--deep);display:grid;place-items:center;box-shadow:0 10px 20px -8px rgba(0,0,0,.5);pointer-events:none}
+.towns .home img{width:40px;height:auto}
+.towns .dot{z-index:1}.towns .dot.me i{background:transparent;box-shadow:none}.towns .dot.me{z-index:2}.towns .dot.me span{top:auto;bottom:calc(50% + 26px)}.towns .dot.me.hit i{background:transparent;scale:1;box-shadow:none}.towns .dot.me.hit::after{inset:-8px}
+.towns .ask{position:absolute;z-index:2;left:clamp(14px,2.4vw,32px);top:clamp(14px,2.4vw,32px);width:min(440px,calc(100% - 28px));padding:clamp(18px,2vw,26px);border-radius:22px;background:color-mix(in srgb,var(--ground) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px var(--line),0 26px 40px -30px rgba(0,0,0,.5)}
+.towns h2{margin:0;font-size:clamp(30px,3.2vw,46px);font-weight:900;line-height:1;letter-spacing:-.035em;color:var(--ink)}
+.towns label{display:block;margin:16px 0 8px;font-size:14px;font-weight:700;color:var(--ink-70)}
+.towns input{width:100%;min-height:56px;padding:0 18px;border:2px solid var(--ink);border-radius:16px;background:var(--surface);color:var(--ink);font:inherit;font-size:19px;font-weight:700}
+.towns input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.towns .ans{margin:14px 0 0;min-height:52px;font-size:18px;line-height:1.4;color:var(--ink)}
+.towns .ans b{font-weight:900}
+.towns .ans small{display:block;margin-top:4px;font-size:14px;color:var(--ink-70)}
+.towns .ans.swap{animation:tw2 .35s cubic-bezier(.22,.61,.36,1)}
+@keyframes tw2{from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none}}
+.towns .count{position:absolute;right:clamp(14px,2.4vw,32px);top:clamp(14px,2.4vw,28px);padding:6px 12px;border-radius:999px;background:var(--surface);font-size:13px;font-weight:800;color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+@media (max-width:860px){.towns .map{aspect-ratio:auto;display:flex;flex-direction:column;overflow:visible;background:none;box-shadow:none}.towns .ask{position:relative;left:auto;top:auto;width:auto}.towns .field{position:relative;aspect-ratio:4/4.6;margin-top:14px;border-radius:22px;overflow:hidden;background:var(--surface);box-shadow:0 0 0 1px var(--line)}.towns .count{top:12px;right:12px}.towns .home{width:36px;height:36px;margin:-18px 0 0 -18px}.towns .home img{width:26px}.towns .dot.me span{bottom:calc(50% + 17px)}}
+.towns .dot,.towns .home{left:calc(6% + 88% * var(--fx));top:calc(6% + 88% * var(--fy))}
+@media (min-width:861px){.towns .field{position:absolute;inset:0}.towns .dot,.towns .home{left:calc(39% + 56% * var(--fx));top:calc(7% + 86% * var(--fy))}}
+@media (prefers-reduced-motion:reduce){.towns .dot.hit::after{animation:none;opacity:0}.towns .ans.swap{animation:none}}
+</style>
+<div class="map">
+ <div class="ask">
+  <h2 id="tw-h">Do you come to me?</h2>
+  <label for="tw-in">Type your town, or tap a dot</label>
+  <input id="tw-in" type="text" autocomplete="address-level2" placeholder="e.g. Roseville" list="tw-list">
+  <datalist id="tw-list"></datalist>
+  <p class="ans" aria-live="polite">We come to 29 towns around Shoreview, MN.</p>
+ </div>
+ <div class="field">
+  <svg class="ground" aria-hidden="true" preserveAspectRatio="none"></svg>
+  <span class="count" aria-hidden="true">29 towns</span>
+ </div>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), field = sec.querySelector('.field'), svg = sec.querySelector('svg.ground'), input = sec.querySelector('input'), ans = sec.querySelector('.ans'), list = sec.querySelector('datalist');
+  /* Owl's 29 towns (the site's own list); positions are approximate public coordinates, used only to place dots and measure straight-line distance */
+  var T = [['Shoreview',45.079,-93.147],['North Oaks',45.103,-93.079],['Arden Hills',45.050,-93.156],['Vadnais Heights',45.057,-93.074],['Little Canada',45.027,-93.088],['Roseville',45.006,-93.157],['Mounds View',45.105,-93.208],['New Brighton',45.066,-93.202],['Lino Lakes',45.160,-93.089],['Blaine',45.161,-93.235],['White Bear Lake',45.085,-93.010],['Maplewood',44.953,-92.995],['Fridley',45.086,-93.263],['Saint Paul',44.954,-93.090],['Minneapolis',44.978,-93.265],['Forest Lake',45.279,-92.985],['Coon Rapids',45.173,-93.303],['Oakdale',44.963,-92.965],['Stillwater',45.056,-92.806],['Woodbury',44.924,-92.959],['Maple Grove',45.073,-93.456],['Plymouth',45.011,-93.455],['Minnetonka',44.921,-93.468],['Edina',44.889,-93.350],['Eden Prairie',44.855,-93.471],['Bloomington',44.841,-93.298],['Eagan',44.804,-93.167],['Burnsville',44.768,-93.278],['Apple Valley',44.732,-93.218]];
+  RESET.towns = T.map(function(t){ return t[0]; });
+  var BIG = ['Shoreview', 'Saint Paul', 'Minneapolis', 'Stillwater', 'Maple Grove', 'Apple Valley', 'Forest Lake'];
+  var lat0 = 45.33, lat1 = 44.70, lng0 = -93.53, lng1 = -92.74;
+  /* fractions 0..1; CSS places them (desktop: right of the ask card, phone: the whole field) */
+  function pos(t){ return [((t[2] - lng0) / (lng1 - lng0)).toFixed(4), ((lat0 - t[1]) / (lat0 - lat1)).toFixed(4)]; }
+  function miles(t){ var R = 3958.8, r = Math.PI / 180, a = T[0], dl = (t[1] - a[1]) * r, dg = (t[2] - a[2]) * r, h = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[1] * r) * Math.cos(t[1] * r) * Math.sin(dg / 2) * Math.sin(dg / 2); return 2 * R * Math.asin(Math.sqrt(h)); }
+  /* the contour ground (Lando): wobbly closed rings around a few rises, drawn once */
+  (function(){ var W = 1000, H = 1000, out = '', seeds = [[300, 380, 7], [640, 300, 6], [520, 720, 6], [180, 760, 4], [860, 600, 5]], k = 1;
+    function rnd(){ k = (k * 16807) % 2147483647; return (k - 1) / 2147483646; }
+    seeds.forEach(function(s){ var ph = rnd() * 6.28, ph2 = rnd() * 6.28; for (var i = 1; i <= s[2]; i++){ var r = i * 46, d = ''; for (var a = 0; a <= 64; a++){ var t = a / 64 * 6.2832, rr = r * (1 + .16 * Math.sin(3 * t + ph) + .08 * Math.sin(5 * t + ph2 + i * .3)); d += (a ? 'L' : 'M') + (s[0] + Math.cos(t) * rr).toFixed(1) + ' ' + (s[1] + Math.sin(t) * rr * .86).toFixed(1); } out += '<path class="' + (i % 4 === 0 ? 't' : '') + '" d="' + d + 'Z"/>'; } });
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.innerHTML = out; })();
+  var home = document.createElement('span'); home.className = 'home'; var hp = pos(T[0]); home.style.setProperty('--fx', hp[0]); home.style.setProperty('--fy', hp[1]);
+  home.innerHTML = '<img src="{{A:owl-perch.webp}}" alt="">'; field.appendChild(home);
+  var dots = T.map(function(t, i){ var b = document.createElement('button'), p = pos(t), m = Math.round(miles(t)); b.type = 'button'; b.className = 'dot' + (BIG.indexOf(t[0]) > -1 ? ' big' : '') + (i ? '' : ' me'); b.style.setProperty('--fx', p[0]); b.style.setProperty('--fy', p[1]);
+    b.setAttribute('aria-label', t[0] + (i ? ', about ' + m + ' miles from our Shoreview base' : ', our home base'));
+    b.innerHTML = '<i aria-hidden="true"></i><span aria-hidden="true">' + t[0] + '</span>'; b.addEventListener('click', function(){ input.value = t[0]; answer(i); }); field.appendChild(b);
+    var o = document.createElement('option'); o.value = t[0]; list.appendChild(o); return b; });
+  function say(html){ ans.innerHTML = html; if (!OWL.reduce){ ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap'); } }
+  function answer(i){ dots.forEach(function(d, j){ d.classList.toggle('hit', j === i); }); var t = T[i]; sec.dataset.town = t[0];
+    if (i === 0) say('<b>Yes. Shoreview is home.</b><small>Our office is at 1000 County Rd E #230, Shoreview, MN 55126.</small>');
+    else say('<b>Yes, we come to ' + t[0] + '.</b><small>About ' + Math.round(miles(t)) + ' miles from our Shoreview base, as the owl flies.</small>'); }
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  input.addEventListener('input', function(){ var q = norm(input.value); if (!q){ dots.forEach(function(d){ d.classList.remove('hit'); }); sec.dataset.town = ''; say('We come to 29 towns around Shoreview, MN.'); return; }
+    var i = T.findIndex(function(t){ return norm(t[0]) === q; }); if (i < 0) i = T.findIndex(function(t){ return q.length >= 3 && norm(t[0]).indexOf(q) === 0; });
+    if (i > -1){ answer(i); return; }
+    dots.forEach(function(d){ d.classList.remove('hit'); }); sec.dataset.town = '';
+    if (q.length >= 3) say('<b>' + input.value.replace(/[<>&]/g, '') + ' isn’t on our list of 29 towns.</b><small>Call (651) 977-6027 and ask; we’ll tell you straight.</small>'); });
+})();
+</script>
+</section>

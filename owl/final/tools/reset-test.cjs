@@ -5,6 +5,34 @@ const F = 'file://' + path.resolve(__dirname, '../owl-reset.html');
 const [SEC, OUTD] = process.argv.slice(2); const OUT = path.resolve(__dirname, '..', OUTD || 'gates/reset/tmp'); fs.mkdirSync(OUT, { recursive: true });
 const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, info: info || '' }); console.log((ok ? 'PASS' : 'FAIL') + ' | ' + name + (info ? ' | ' + info : '')); };
 const EXTRA = {
+  towns: async (p) => {
+    const go = () => p.evaluate(() => document.querySelector('#towns .ask').scrollIntoView({ block: 'center', behavior: 'instant' }));
+    const ans = () => p.evaluate(() => document.querySelector('#towns .ans').textContent);
+    const hit = () => p.evaluate(() => [...document.querySelectorAll('#towns .dot')].findIndex(d => d.classList.contains('hit')));
+    await go(); await p.waitForTimeout(500);
+    rec('not pinned (the pinned budget is spent): no sticky stage, the map sits in normal flow', await p.evaluate(() => ![...document.querySelectorAll('#towns *')].some(e => getComputedStyle(e).position === 'sticky') && document.getElementById('towns').offsetHeight < innerHeight * 2.2));
+    rec('the site’s own 29 towns: 29 dot buttons, 29 suggestions, "29 towns", Shoreview marked as home with the owl', await p.evaluate(() => { const s = document.getElementById('towns'); return s.querySelectorAll('.dot').length === 29 && s.querySelectorAll('datalist option').length === 29 && /29 towns/.test(s.querySelector('.count').textContent) && !!s.querySelector('.home img') && /our home base/.test(s.querySelector('.dot.me').getAttribute('aria-label')); }));
+    rec('a contour-line ground (the Lando mechanism): drawn rings, not a picture of a map', await p.evaluate(() => document.querySelectorAll('#towns svg.ground path').length >= 20));
+    await p.fill('#tw-in', 'Roseville'); await p.waitForTimeout(300);
+    const a1 = await ans(), h1 = await hit();
+    rec('typing a whole town name answers yes, with its straight-line distance, and lights its dot', /Yes, we come to Roseville\./.test(a1) && /About \d+ miles from our Shoreview base/.test(a1) && h1 === 5, a1);
+    await p.fill('#tw-in', 'st paul'); await p.waitForTimeout(300); const a2 = await ans();
+    await p.fill('#tw-in', 'Still'); await p.waitForTimeout(300); const a3 = await ans();
+    rec('forgiving input: "st paul" finds Saint Paul; a 3+ letter start ("Still") finds Stillwater', /Saint Paul/.test(a2) && /Stillwater/.test(a3), a2 + ' / ' + a3);
+    await p.fill('#tw-in', 'Duluth'); await p.waitForTimeout(300); const a4 = await ans(), h4 = await hit();
+    rec('a town not on the list gets an honest answer and the phone number, no dot lit', /Duluth isn’t on our list of 29 towns/.test(a4) && /\(651\) 977-6027/.test(a4) && h4 === -1, a4);
+    await p.fill('#tw-in', '<img src=x>'); await p.waitForTimeout(300);
+    rec('typed text is never injected as markup', await p.evaluate(() => !document.querySelector('#towns .ans img')));
+    await p.fill('#tw-in', ''); await p.waitForTimeout(200);
+    rec('clearing the box restores the opening line', /We come to 29 towns around Shoreview, MN\./.test(await ans()));
+    await p.click('#towns .dot >> nth=18', { force: true }); await p.waitForTimeout(300);
+    rec('tapping a dot fills the box and answers (Stillwater)', await p.inputValue('#tw-in') === 'Stillwater' && /Yes, we come to Stillwater\./.test(await ans()) && await hit() === 18);
+    await p.click('#towns .dot.me', { force: true }); await p.waitForTimeout(300);
+    rec('Shoreview is home: the answer gives the real office address', /Shoreview is home/.test(await ans()) && /1000 County Rd E #230, Shoreview, MN 55126/.test(await ans()));
+    await p.focus('#towns .dot >> nth=13'); await p.keyboard.press('Enter'); await p.waitForTimeout(300);
+    rec('keyboard: Enter on a focused dot answers (Saint Paul); every dot has a spoken label with the distance', /Saint Paul/.test(await ans()) && await p.evaluate(() => [...document.querySelectorAll('#towns .dot')].slice(1).every(d => /, about \d+ miles from our Shoreview base$/.test(d.getAttribute('aria-label')))));
+    rec('every dot clears the ask card on desktop (no dot hidden under it)', await p.evaluate(() => { if (innerWidth <= 860) return true; const c = document.querySelector('#towns .ask').getBoundingClientRect(); return [...document.querySelectorAll('#towns .dot i')].every(i => { const r = i.getBoundingClientRect(); return r.right < c.left || r.left > c.right || r.bottom < c.top || r.top > c.bottom; }); }));
+  },
   people: async (p) => {
     const at = async (f, w) => { await p.evaluate(f => { const s = document.getElementById('people'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * f); }, f); await p.waitForTimeout(w || 1300); return p.evaluate(() => { const s = document.getElementById('people'); return { cv: +s.dataset.cover, nm: s.querySelector('.card .nm').textContent, cur: [...s.querySelectorAll('.dots button')].findIndex(b => b.getAttribute('aria-current') === 'true') }; }); };
     rec('a split cover on a pinned stage: three covers of two halves each, a seam, and the name card sitting on the seam', await p.evaluate(() => { const s = document.getElementById('people'), st = s.querySelector('.stage'), card = s.querySelector('.card').getBoundingClientRect(), seam = s.querySelector('.seam').getBoundingClientRect(); return getComputedStyle(st).position === 'sticky' && s.querySelectorAll('.cv').length === 3 && [...s.querySelectorAll('.cv')].every(c => c.querySelectorAll('.half img').length === 2) && Math.abs((card.left + card.width / 2) - (seam.left + seam.width / 2)) < 4; }));

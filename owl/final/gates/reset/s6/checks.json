@@ -1,0 +1,137 @@
+{
+ "section": "towns",
+ "total": 26,
+ "passed": 26,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "not pinned (the pinned budget is spent): no sticky stage, the map sits in normal flow",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the site’s own 29 towns: 29 dot buttons, 29 suggestions, \"29 towns\", Shoreview marked as home with the owl",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "a contour-line ground (the Lando mechanism): drawn rings, not a picture of a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "typing a whole town name answers yes, with its straight-line distance, and lights its dot",
+   "ok": true,
+   "info": "Yes, we come to Roseville.About 5 miles from our Shoreview base, as the owl flies."
+  },
+  {
+   "name": "forgiving input: \"st paul\" finds Saint Paul; a 3+ letter start (\"Still\") finds Stillwater",
+   "ok": true,
+   "info": "Yes, we come to Saint Paul.About 9 miles from our Shoreview base, as the owl flies. / Yes, we come to Stillwater.About 17 miles from our Shoreview base, as the owl flies."
+  },
+  {
+   "name": "a town not on the list gets an honest answer and the phone number, no dot lit",
+   "ok": true,
+   "info": "Duluth isn’t on our list of 29 towns.Call (651) 977-6027 and ask; we’ll tell you straight."
+  },
+  {
+   "name": "typed text is never injected as markup",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "clearing the box restores the opening line",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "tapping a dot fills the box and answers (Stillwater)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "Shoreview is home: the answer gives the real office address",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "keyboard: Enter on a focused dot answers (Saint Paul); every dot has a spoken label with the distance",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "every dot clears the ask card on desktop (no dot hidden under it)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
