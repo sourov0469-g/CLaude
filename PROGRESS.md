@@ -1383,8 +1383,9 @@ Every text element is paired with the nearest painted background behind it, as r
 | # | Section | Version | Reference | Gate | Score | Status |
 |---|---|---|---|---|---|---|
 | 1 | Hero | **N, "The cover story"** (`?hero=n`) | Ever, verified craft (magazine narrative: the hero as a magazine cover; Rob Roy's finished siding as the cover photo, the locked facts as cover lines that link to their sections, the cover turning away like a page on scroll) | GATE-NEW-Hero-N.md | 8.67 PASS | Accepted by Muse |
-| 2 | Services | **N, "Built trade by trade"** (`?services=n`) | Apple AirPods Pro (the pinned assembly: a drawn house built trade by trade as you scroll, most documented first, each count landing as a numeral event with its published band) | GATE-NEW-Services-N.md | 8.55 PASS | Built and gated; waiting for Muse's accept |
+| 2 | Services | **N, "Built trade by trade"** (`?services=n`) | Apple AirPods Pro (the pinned assembly: a drawn house built trade by trade as you scroll, most documented first, each count landing as a numeral event with its published band) | GATE-NEW-Services-N.md | 8.55 PASS | Accepted by Muse |
+| 3 | Visualiser | **N, "Torn between two"** (`?vis=n`) | MERSI (the split cover: one drawn house split by a movable seam, a ColorPlus colour on each half under the same Arctic White trim; two rails moving in opposite directions; the label on the seam names the pair) | GATE-NEW-Visualiser-N.md | 8.54 PASS | Built and gated; waiting for Muse |
 
 **Flagged for the owner (pre-existing, not changed):** in a desktop browser narrowed to 320–390 px, the default Visualiser's chip row widens the page by 34–104 px (phones are unaffected). See GATE-NEW-Hero-N.md.
 
-**Next, after the accept:** Visualiser N.
+**Next, after the accept:** Windows N.
