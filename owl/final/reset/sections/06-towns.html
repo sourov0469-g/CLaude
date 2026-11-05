@@ -68,7 +68,9 @@
     b.innerHTML = '<i aria-hidden="true"></i><span aria-hidden="true">' + t[0] + '</span>'; b.addEventListener('click', function(){ input.value = t[0]; answer(i); }); field.appendChild(b);
     var o = document.createElement('option'); o.value = t[0]; list.appendChild(o); return b; });
   function say(html){ ans.innerHTML = html; if (!OWL.reduce){ ans.classList.remove('swap'); void ans.offsetWidth; ans.classList.add('swap'); } }
-  function answer(i){ dots.forEach(function(d, j){ d.classList.toggle('hit', j === i); }); var t = T[i]; sec.dataset.town = t[0];
+  /* the town is shared with the call panel (section 7), like the case from section 2 */
+  function share(n){ try { sessionStorage.setItem('owlTown', n); } catch (e){} document.dispatchEvent(new CustomEvent('owl:town', { detail: n })); }
+  function answer(i){ dots.forEach(function(d, j){ d.classList.toggle('hit', j === i); }); var t = T[i]; sec.dataset.town = t[0]; share(t[0]);
     if (i === 0) say('<b>Yes. Shoreview is home.</b><small>Our office is at 1000 County Rd E #230, Shoreview, MN 55126.</small>');
     else say('<b>Yes, we come to ' + t[0] + '.</b><small>About ' + Math.round(miles(t)) + ' miles from our Shoreview base, as the owl flies.</small>'); }
   function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }

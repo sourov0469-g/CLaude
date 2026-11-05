@@ -1,0 +1,117 @@
+{
+ "section": "call",
+ "total": 22,
+ "passed": 22,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "today’s hours, live in Shoreview time from the stated Mon–Sat 08:00–18:00: open Wed 10:20; opens today at 08:00 (Wed 06:00); tomorrow (Wed 19:00); Monday (Sat 19:00 and Sunday noon)",
+   "ok": true,
+   "info": "Open nowUntil 18:00 today, Shoreview time / Closed nowWe open today at 08:00, Shoreview time / Closed nowWe open tomorrow at 08:00, Shoreview time / Closed nowWe open Monday at 08:00, Shoreview time / Closed nowWe open Monday at 08:00, Shoreview time"
+  },
+  {
+   "name": "the week strip: seven days, Mon–Sat 8–6, Sunday closed, today marked with a now line",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "not pinned, and the call pill steps aside here (the number is the call)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the Longbow end card: one number set as type, a real tel link, at least 120 px on desktop",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "with nothing chosen: \"Tell us what’s going on.\" and the note says \"Not chosen yet\" twice",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the end is written from your own choices: \"After a storm\" picked in section 2 and Stillwater typed in section 6 reach the headline, the note and the email",
+   "ok": true,
+   "info": "mailto:info@owlroofing.com?subject=Roof help: After a storm&body=Hello Owl Roofing,\n\nWhat’"
+  },
+  {
+   "name": "the honest email note, word for word: \"Your email app should open with these details. Send it from there, or call (651) 977-6027.\"",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the closing line carries only locked facts: Owl Roofing LLC, the Shoreview address, licence #BC809662, info@owlroofing.com, We Give a Hoot",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
