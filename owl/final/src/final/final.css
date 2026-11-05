@@ -1,0 +1,7 @@
+/* final page: the ORIGINAL Owl colours (cream, ink, amber) are the palette. Compatibility tokens let ported sections use them. */
+:root{
+  --deep:var(--ink);--deep-2:#2A2131;--on-deep:var(--cream);--on-deep-70:rgba(241,239,230,.78);--on-deep-50:rgba(241,239,230,.62);
+  --acc:var(--amber);--acc-deep:var(--amber);--on-acc:var(--ink);--wash:#E8E3D6;--ground:var(--cream);--surface:var(--paper);
+  --call:var(--amber);--on-call:var(--ink);
+}
+.pastlink{display:none}

@@ -67,3 +67,7 @@
 - **Towns** `final/GATE-FIX-TOWNS.md`: V1 Contour finder (repaired: drawn home, zoom around Shoreview, pill clearance), V2 Distance rings (default: true bearing and distance, the ring in the answer), V3 From above. Checks 30/30/29. The page-wide media report now reads "no repeats".
 - **Call** `final/GATE-FIX-CALL.md`: V1 End card (default; the Shoreview clock in words, copper line), V2 Two doors, V3 Winter house. Checks 28/26/26. All seven sections are now in versions: hero 4, every other section 3 (22 in all).
 - **Whole page** `final/GATE-FIX-PAGE.md`: 22 versions, the bests by default (all seven re-run on the final build: 184/184); every version loaded and hashed: 28 distinct files, none shared between sections; the later-sections audit re-run (desktop and iPhone): no errors, no masked numbers, no invisible text; the past homepage unchanged (10/10).
+
+## FINAL HOMEPAGE (owner's final build order 2026-11-05: one final version per section, original palette, no switcher, no maps)
+- **Scaffold:** `build_final.py` + `src/final/` (template, sections `NN-name.html`, final.css compat tokens, final.js Blob video helper); the 22-version build frozen as `final/past/owl-roofing-PAST-2026-11-05-fix-22-versions.html`; checks in `final/tools/final-test.cjs` + `tools/final-checks/`.
+- **1 Hero** `final/GATE-FINAL-HERO.md`: OLD Hero V2 unchanged, not pinned (decision and reasoning in the gate). 19/19.

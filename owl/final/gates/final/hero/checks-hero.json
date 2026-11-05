@@ -1,0 +1,102 @@
+{
+ "section": "hero",
+ "pass": 19,
+ "total": 19,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "headline \"We Give a Hoot About Your Roof\"",
+   "ok": true,
+   "info": "We Give a Hoot About Your Roof"
+  },
+  {
+   "name": "two actions: book and services",
+   "ok": true,
+   "info": "#book,#services"
+  },
+  {
+   "name": "trust row carries only locked facts",
+   "ok": true,
+   "info": "5.0 · 90+ reviews GAF Systems Plus Certified Founded 2025"
+  },
+  {
+   "name": "the living owl (WebGL mesh) is mounted",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the canvas has a size",
+   "ok": true,
+   "info": "980x636"
+  },
+  {
+   "name": "the depth planes follow the pointer",
+   "ok": true,
+   "info": "0.322"
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 954 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 692 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 847 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
