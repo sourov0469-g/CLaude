@@ -33,7 +33,7 @@ Old A: one Andersen single-hung drawn from parts, a sun slider, a lifting sash a
 | Element | kinds list, brands | ⟦S1444⟧ one choice at a time (radio groups with arrow keys); ⟦S1454⟧ serial-position: single hung first, picture last; ⟦S1494⟧ plain labels |
 | Motion | sash, lock, tilt, light | ⟦S1436⟧ animation-principles: springs with overshoot (follow-through), a ground-up sky mix, anticipation (the lock turns first); ⟦S0060⟧ animate; ⟦S0062⟧ animation-performance: only the small dynamic SVG group is redrawn, only while something moves; ⟦S0400⟧ accessible-animation: reduced-motion snap |
 | Element | controls | ⟦S0054⟧ fixing-accessibility: real buttons and ranges, `aria-pressed`/`aria-checked`, `aria-valuetext` on the time, a live region announcing each change, 3 px focus rings; ⟦S1441⟧ fitts-law: every target ≥ 44 px (measured), the Open button the largest |
-| Site | weight | ⟦S0231⟧ web-performance: no image; 8 KB of CSS and 28 KB of JS for the section |
+| Site | weight | ⟦S0231⟧ web-performance: no image; 11 KB of CSS and 37 KB of JS (unminified) for the section |
 
 ## 4. Evidence
 
