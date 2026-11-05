@@ -1,0 +1,123 @@
+/* WINDOWS N — The window issue (Ever, verified craft: the magazine narrative). Eight published answers, a plate beside each, a page that turns. */
+.wnN{padding:110px var(--gut) 100px}
+.wnN .wnhd{max-width:1320px;margin:0 auto 34px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(28px,4vw,64px);align-items:end}
+.wnN .wnhd .sec-p{max-width:50ch;margin:0}
+.wnN .wnstage{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(220px,270px) minmax(0,1fr);gap:clamp(18px,2.4vw,34px);align-items:start;
+  border-radius:24px;background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3;padding:clamp(16px,2.2vw,30px)}
+/* contents */
+.wnN .wntoc{position:relative}
+.wnN .wnmast{margin:0 0 14px;padding:0 4px 14px;border-bottom:2px solid var(--ink);display:flex;flex-direction:column;gap:4px}
+.wnN .wnmast b{font:800 22px/1.05 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.wnN .wnmast span{font:600 13px/1.3 var(--text);color:var(--ink-3)} /* the lock stays as written: no text-transform */
+.wnN .wntoc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.wnN .wnc{all:unset;box-sizing:border-box;width:100%;min-height:48px;padding:8px 10px;border-radius:12px;cursor:pointer;display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:8px;align-items:baseline;
+  color:var(--ink-2);transition:background-color .2s,color .2s}
+.wnN .wnc b{grid-row:1/3;font:800 13px/1.4 var(--display);color:var(--ink-3)}
+.wnN .wnc span{font:700 14px/1.3 var(--text);color:var(--ink)}
+.wnN .wnc i{font:500 12.5px/1.35 var(--text);font-style:normal;color:var(--ink-3)}
+.wnN .wnc:hover{background:rgba(14,59,44,.05)}
+.wnN .wnc[aria-current="true"]{background:#FFFFFF;box-shadow:0 0 0 1px #E1E9E3,0 4px 14px rgba(10,22,17,.06)}
+.wnN .wnc[aria-current="true"] b{color:var(--green)}
+.wnN .wnc:focus-visible{outline:3px solid #B5DB6E;outline-offset:-3px}
+/* the spread */
+.wnN .wnbook{scroll-margin-top:84px;position:relative;display:grid;grid-template-columns:1fr 1fr;perspective:3400px;border-radius:6px;outline:none;touch-action:pan-y;
+  box-shadow:0 1px 0 rgba(10,22,17,.06),0 22px 50px -18px rgba(10,22,17,.28)}
+.wnN .wnbook:focus-visible{box-shadow:0 0 0 3px #FFFFFF,0 0 0 6px #B5DB6E,0 22px 50px -18px rgba(10,22,17,.28)}
+.wnN .wnpg{position:relative;min-height:clamp(560px,46vw,660px);background:#FFFFFF;overflow:hidden}
+.wnN .wnpL{border-radius:6px 0 0 6px}.wnN .wnpR{border-radius:0 6px 6px 0}
+.wnN .wnspine{position:absolute;left:50%;top:0;bottom:0;width:44px;margin-left:-22px;pointer-events:none;z-index:3;
+  background:linear-gradient(90deg,rgba(10,22,17,0) 0,rgba(10,22,17,.10) 46%,rgba(10,22,17,.16) 50%,rgba(255,255,255,.18) 52%,rgba(10,22,17,0) 100%)}
+.wnN .wnplate{position:absolute;inset:0;margin:0;display:flex;flex-direction:column}
+.wnN .wnimg{position:relative;flex:1;min-height:0;background:#E4EAE5}
+.wnN .wnimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.wnN .wnplate figcaption{flex:none;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px;row-gap:2px;padding:14px 20px 16px;font:500 13px/1.4 var(--text);color:var(--ink-2)}
+.wnN .wnpl{font:700 11px/1.4 var(--text);letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.wnN .wnplate figcaption b{font:700 14px/1.35 var(--text);color:var(--ink)}
+.wnN .wnplate figcaption a{margin-left:auto;font:700 13px/1.4 var(--text);color:var(--green);text-underline-offset:3px}
+.wnN .wnplate figcaption a:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px;border-radius:4px}
+.wnN .wnart{position:absolute;inset:0;padding:clamp(26px,3vw,44px) clamp(26px,3.2vw,48px) 54px;display:flex;flex-direction:column}
+.wnN .wnrun{margin:0 0 18px;display:flex;align-items:baseline;gap:8px;padding-bottom:10px;border-bottom:1px solid #E1E9E3;font:700 11px/1.4 var(--text);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.wnN .wnrun span{margin-right:auto}
+.wnN .wnrun b{color:var(--green)}
+.wnN .wnq{margin:0;font:800 clamp(22px,2.1vw,30px)/1.12 var(--display);letter-spacing:-.02em;color:var(--ink);text-wrap:balance}
+.wnN .wnpq{margin:20px 0 18px;padding:0 0 0 16px;border-left:4px solid #B5DB6E}
+.wnN .wnpq p{margin:0;font:600 clamp(17px,1.5vw,21px)/1.3 var(--display);color:var(--ink-2)}
+.wnN .wnpq b{font-weight:800;color:var(--green);white-space:nowrap}
+.wnN .wnlive{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wnN .wna{margin:0;font:400 15.5px/1.62 var(--text);color:var(--ink-2);max-width:56ch}
+.wnN .wndc{float:left;font:800 50px/.86 var(--display);letter-spacing:-.02em;color:var(--green);margin:5px 8px 0 0}
+.wnN .wnfol{position:absolute;left:clamp(26px,3.2vw,48px);right:clamp(26px,3.2vw,48px);bottom:18px;margin:0;text-align:right;font:700 12px/1 var(--text);letter-spacing:.1em;color:var(--ink-3)}
+/* the leaf: the turning page, front and back */
+.wnN .wnleaf{position:absolute;top:0;bottom:0;width:50%;z-index:4;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.45,.05,.2,1)}
+.wnN .wnleaf.wnfw{left:50%;transform-origin:0 50%}
+.wnN .wnleaf.wnbw{left:0;transform-origin:100% 50%}
+.wnN .wnleaf.wnfw.wngo{transform:rotateY(-180deg)}
+.wnN .wnleaf.wnbw.wngo{transform:rotateY(180deg)}
+.wnN .wnface{position:absolute;inset:0;background:#FFFFFF;overflow:hidden;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.wnN .wnback{transform:rotateY(180deg)}
+.wnN .wnface::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s ease}
+.wnN .wnfw .wnfront::after{background:linear-gradient(90deg,rgba(10,22,17,.22),rgba(10,22,17,0) 60%)}
+.wnN .wnbw .wnfront::after{background:linear-gradient(270deg,rgba(10,22,17,.22),rgba(10,22,17,0) 60%)}
+.wnN .wnleaf.wngo .wnfront::after{opacity:1}
+/* below the spread */
+.wnN .wnbar{max-width:1320px;margin:24px auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px}
+.wnN .wnnav{display:flex;align-items:center;gap:12px}
+.wnN .wnb{all:unset;box-sizing:border-box;min-height:48px;padding:0 18px;border-radius:999px;display:inline-flex;align-items:center;cursor:pointer;white-space:nowrap;
+  font:700 14px/1 var(--text);color:var(--green);background:rgba(14,59,44,.07)}
+.wnN .wnb:hover{background:rgba(14,59,44,.12)}
+.wnN .wnb:disabled{opacity:.4;cursor:default;background:rgba(14,59,44,.05)}
+.wnN .wnb:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px}
+.wnN .wnpos{min-width:92px;text-align:center;font:600 14px/1 var(--text);color:var(--ink-2)}
+.wnN .wnpos b{color:var(--ink)}
+.wnN .wncta{display:flex;align-items:center;gap:16px}
+.wnN .wncta p{margin:0;max-width:40ch;font:500 13px/1.45 var(--text);color:var(--ink-3)}
+/* contents become a strip above the spread */
+@media (max-width:1180px){
+  .wnN .wnstage{grid-template-columns:minmax(0,1fr)}
+  .wnN .wnmast{flex-direction:row;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;padding-bottom:10px}
+  .wnN .wntoc ol{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:6px;padding:2px 2px 6px;scroll-snap-type:x proximity}
+  .wnN .wntoc ol::-webkit-scrollbar{display:none}
+  .wnN .wntoc li{flex:none;scroll-snap-align:start}
+  .wnN .wnc{width:auto;grid-template-columns:auto auto;align-items:center;padding:8px 14px}
+  .wnN .wnc b{grid-row:auto}.wnN .wnc i{display:none}
+  .wnN .wnc span{white-space:nowrap}
+}
+@media (max-width:1000px){
+  .wnN .wnhd{grid-template-columns:minmax(0,1fr);row-gap:14px}
+}
+/* one page at a time: the plate above its article */
+@media (max-width:900px){
+  .wnN .wnbook{grid-template-columns:minmax(0,1fr);perspective:none}
+  .wnN .wnspine{display:none}
+  .wnN .wnpg{min-height:0}
+  .wnN .wnpL{border-radius:6px 6px 0 0}.wnN .wnpR{border-radius:0 0 6px 6px}
+  .wnN .wnplate,.wnN .wnart{position:relative;inset:auto}
+  .wnN .wnimg{flex:none;aspect-ratio:4/3}
+  .wnN .wnart{padding:22px 22px 52px}
+  .wnN .wnfol{left:22px;right:22px}
+  .wnN.wnsf .wnpg{animation:wnInF .45s cubic-bezier(.22,1,.36,1)}
+  .wnN.wnsb .wnpg{animation:wnInB .45s cubic-bezier(.22,1,.36,1)}
+}
+@keyframes wnInF{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes wnInB{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@media (max-width:760px){
+  .wnN{padding:80px var(--gut) 72px}
+  .wnN .wnhd{margin-bottom:24px}
+  .wnN .wnstage{padding:10px;border-radius:18px}
+  .wnN .wnmast{flex-direction:column;gap:2px}
+  .wnN .wnimg{aspect-ratio:1/1}
+  .wnN .wnplate figcaption{padding:12px 16px 14px}
+  .wnN .wnplate figcaption a{margin-left:0;flex-basis:100%}
+  .wnN .wnart{padding:20px 18px 50px}
+  .wnN .wnfol{left:18px;right:18px}
+  .wnN .wna{font-size:15px}
+  .wnN .wnbar{flex-direction:column;align-items:stretch}
+  .wnN .wnnav{justify-content:space-between}
+  .wnN .wnb{padding:0 14px}
+  .wnN .wnpos{min-width:0}
+  .wnN .wncta{flex-direction:column;align-items:flex-start;gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .wnN .wnleaf,.wnN .wnface::after{transition:none!important}
+  .wnN .wnpg{animation:none!important}
+}
