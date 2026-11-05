@@ -4,6 +4,7 @@ import html, json, os, re, sys, base64
 HERE = os.path.dirname(os.path.abspath(__file__)); SITE = os.path.join(HERE, '..', 'site'); WORK = os.path.join(HERE, '..', '..', 'work')
 sys.path.insert(0, SITE)
 from build import fonts, I, HEADER, MBAR, HEAD_JS, LEAD, SUB
+import parts_services
 SRC = lambda f: open(os.path.join(HERE, 'src', f)).read()
 CONTACT = '#booking'   # internal route; becomes the Contact page when the inner pages are built (after Muse approves the homepage)
 BOOKING_URL = 'https://www.austinprosiding.com/schedule-appointment'
@@ -52,11 +53,11 @@ def wall():
 
 
 def build():
-    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css')
+    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css') + SRC('serv.css')
     hdr = HEADER.replace(BOOKING_URL, CONTACT).replace('href="#work"', 'href="#area"'); mbar = MBAR.replace(BOOKING_URL, CONTACT)
-    main = hero() + wall()
-    js = SRC('hero.js') + SRC('wall.js')
-    boot = 'FHero.wire(document);FWall.wire(document);'
+    main = hero() + wall() + parts_services.services()
+    js = SRC('hero.js') + SRC('wall.js') + SRC('serv.js')
+    boot = 'FHero.wire(document);FWall.wire(document);FServ.wire(document);'
     out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">

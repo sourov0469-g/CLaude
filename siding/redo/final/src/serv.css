@@ -1,0 +1,63 @@
+/* SECTION 3 — SERVICES (Version A, "Sideways sequence", rebuilt). A pinned, sideways sequence of four scenes drawn in SVG and scrubbed by scroll
+   (siding, windows, roofing, the five other trades); every scene on its own background; a record ledger of all nine documented trades stays beside
+   the scene so the counts, bands and published sentences are visible without a click. */
+.sv{position:relative;height:540svh;background:var(--ground)}
+.sv-pin{position:sticky;top:0;height:100svh;min-height:600px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,370px);gap:18px;padding:92px var(--gut) 22px;box-sizing:border-box;background:linear-gradient(180deg,#EEF3EE,#E4ECE5)}
+.sv-bgart{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sv-bgart svg{position:absolute;inset:0;width:100%;height:100%}
+.sv-view{position:relative;z-index:1;min-width:0;border-radius:26px;overflow:hidden;box-shadow:0 1px 0 rgba(10,22,17,.06),0 30px 56px -34px rgba(10,22,17,.55);background:#0E3B2C}
+.sv-track{position:absolute;inset:0;display:flex;width:400%;transform:translate3d(var(--tx,0%),0,0);will-change:transform}
+.sv-sc{position:relative;flex:0 0 25%;height:100%;overflow:hidden}
+.sv-sc[data-i="0"]{background:radial-gradient(120% 90% at 85% 0%,#1D5A44,#0E3B2C 60%,#0A2C20)}
+.sv-sc[data-i="1"]{background:radial-gradient(90% 80% at 18% 0%,#FFF1D1 0%,#EEF3EE 55%),linear-gradient(180deg,#EEF3EE,#E1EADF);color:#0E3B2C}
+.sv-sc[data-i="2"]{background:linear-gradient(150deg,#DDEAC4 0%,#CFE0B1 40%,#A9C98A 100%);color:#0E3B2C}
+.sv-sc[data-i="3"]{background:radial-gradient(100% 80% at 50% 100%,#DDE8DE,#EDF2ED 70%);color:#0E3B2C}
+.sv-sc svg.sv-art{position:absolute;left:0;right:0;top:30%;bottom:1%;width:100%;height:69%;overflow:visible}
+.sv-sc .sv-pat{position:absolute;inset:0;pointer-events:none;opacity:.9}
+.sv-cap{position:absolute;z-index:3;left:clamp(18px,2.6vw,34px);top:clamp(16px,2.4vw,30px);right:clamp(18px,2.6vw,34px);max-width:30em}
+.sv-n{margin:0 0 6px;font:700 12px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.sv-t{margin:0 0 10px;font:800 clamp(30px,3.6vw,52px)/1 var(--display);letter-spacing:-.03em}
+.sv-p{margin:0 0 6px;font:500 clamp(14.5px,1.15vw,17px)/1.45 var(--text);max-width:36ch}
+.sv-sc[data-i="0"] .sv-cap{color:#fff}
+.sv-chip{display:inline-block;margin-top:6px;padding:6px 12px;border-radius:999px;background:#B5DB6E;color:#0E3B2C;font:800 13px/1 var(--text)}
+.sv-art text{font-family:var(--text);font-weight:700;font-size:15px}
+.sv-art [data-a]{transform-box:fill-box;will-change:transform,opacity}
+.sv-led{position:relative;z-index:1;display:flex;flex-direction:column;min-width:0;padding:16px 16px 12px;border-radius:26px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px #D9E4DB,0 24px 44px -30px rgba(10,22,17,.5)}
+.sv-h{margin:0 0 10px;font:800 clamp(24px,2.1vw,32px)/1.05 var(--display);letter-spacing:-.025em;color:var(--ink)}
+.sv-led ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;flex:1;min-height:0}
+.sv-row{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-items:center;padding:6px 10px 6px 12px;border-radius:12px;background:transparent;transition:background-color .35s ease,color .35s ease,transform .35s cubic-bezier(.2,.8,.2,1)}
+.sv-row b{grid-row:1 / span 2;font:800 clamp(22px,2.2vw,30px)/1 var(--display);letter-spacing:-.03em;min-width:2.1em;text-align:right;color:var(--ink)}
+.sv-row strong{font:700 14.5px/1.15 var(--text);color:var(--ink)}
+.sv-row small{font:500 12px/1.25 var(--text);color:var(--ink-3)}
+.sv-row[data-on]{background:#0E3B2C;transform:translateX(-6px)}
+.sv-row[data-on] b,.sv-row[data-on] strong{color:#fff}.sv-row[data-on] small{color:#CFE3D6}
+.sv-row[data-on] b{color:#B5DB6E}
+.sv-fn{margin:8px 2px 0;font:500 11.5px/1.4 var(--text);color:var(--ink-3)}
+.sv-dots{position:absolute;z-index:4;right:16px;bottom:14px;display:flex;gap:8px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.sv-dots button{width:28px;height:28px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.sv-dots button::before{content:"";width:10px;height:10px;border-radius:50%;background:#9DB0A3;transition:all .25s ease}
+.sv-dots button[aria-current="true"]::before{background:#0E3B2C;width:24px;border-radius:6px}
+.sv button{font-family:inherit}
+.sv a:focus-visible,.sv button:focus-visible{outline:3px solid #0E3B2C;outline-offset:2px;border-radius:10px}
+@media (max-width:1000px){
+  .sv{height:470svh}
+  .sv-pin{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1.12fr) minmax(0,1fr);gap:10px;padding:78px 12px calc(86px + env(safe-area-inset-bottom))}
+  .sv-view{border-radius:20px}.sv-led{border-radius:20px;padding:12px}
+  .sv-h{display:none}
+  .sv-row{padding:5px 10px}.sv-row b{font-size:24px}
+  .sv-row[data-s]:not([data-vis]){display:none}
+  .sv-fn{display:none}
+  .sv-cap{max-width:none}.sv-t{font-size:30px;margin-bottom:6px}.sv-p{font-size:13.5px}
+  .sv-sc svg.sv-art{top:34%;height:64%}
+  .sv-dots{bottom:8px}
+}
+/* reduced motion: no pin, no scrubbing: the four scenes stacked in their finished state, then the whole ledger */
+.sv-static{height:auto}
+.sv-static .sv-pin{position:relative;height:auto;min-height:0;overflow:visible;display:block;padding:80px var(--gut) 40px}
+.sv-static .sv-track{position:relative;display:block;width:auto;transform:none}
+.sv-static .sv-view{box-shadow:none;background:none;border-radius:0;overflow:visible}
+.sv-static .sv-sc{height:auto;min-height:420px;margin-bottom:18px;border-radius:22px;flex:none}
+.sv-static .sv-led{margin-top:16px}
+.sv-static .sv-dots{display:none}
+.sv-static .sv-row[data-s]:not([data-vis]){display:grid}
+@media (prefers-reduced-motion:reduce){.sv-row{transition:none}}
