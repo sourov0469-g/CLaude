@@ -1333,6 +1333,27 @@ Every text element is paired with the nearest painted background behind it, as r
 |---|---|---|---|---|---|---|
 | 1 | Hero | **M, "A house built from our jobs"** (`?hero=m`) | Quiet Cubes (modular, calm: the 43 published project photos as blocks of a house: roofing jobs the roof, siding and window jobs the walls, doors, garage doors and patios at ground level; built from the ground up) | GATE-NEW-Hero-M.md | 8.60 PASS | Accepted by Muse |
 
-| 2 | Services | **M, "One frame, every trade"** (`?services=m`) | Lusion (flow as continuity: one photo frame whose outline flows into the shape of each trade's work, a published job photo inside) | GATE-NEW-Services-M.md | 8.63 PASS | Built and gated; waiting for Muse's accept |
+| 2 | Services | **M, "One frame, every trade"** (`?services=m`) | Lusion (flow as continuity: one photo frame whose outline flows into the shape of each trade's work, a published job photo inside) | GATE-NEW-Services-M.md | 8.63 PASS | Accepted by Muse |
 
-**Next, after the accept:** Visualiser M.
+**Paused (owner's order, 2026-11-05):** AUSTIN-BACKGROUND-V2-CODE-COPY. The M pass stops here until the background gate passes and the owner has seen it. **Next, after that:** Visualiser M.
+
+## Background V2 (2026-11-05): Immersive Garden's code, copied
+
+- **Study:** the supplied package (their production bundle, relief model, textures, index and teardown) is in `siding/bgstudy-v2/background-code/`. I read the bundle myself at the indexed offsets, with no sub-agents.
+  - **BACKGROUND-CODE-STUDY.md** holds what each piece does, the full parameter table (IG value → Austin value → one-line reason), the conflicts with the old spec (the real code wins), and the asset plan with what Muse could supply.
+  - Finding: their homepage uses no bloom (the config exists, but the home view has no composer).
+- **Engine:** `src/bg2/engine.js` (bundled with Three.js r150) copies their pointer tracker, the 256² flowmap, vertex depth 5% → 100%, the six-level shader, the phantom cursor, scroll coupling at 0.25× with wrap, the fast-scroll mode and their camera.
+- **Worlds** (`?bg=`, and the switcher's Background row):
+  - **B1** tools and materials;
+  - **B2** street of roofs (**default**);
+  - **B3** material field;
+  - **IG-exact**, their code and art, at the owner's request (comparison only, never for the live site);
+  - **V1**, kept.
+  - The Austin worlds come from `bg/relief2.py`: small things with gaps between, joined by connectors, per the owner's note. They are pure white at rest, grey only, with no fluid sheen, no touch stamp, and nothing under reduced motion.
+- **Gate:** GATE-BACKGROUND-V2.md, 8.22 PASS.
+  - Rest frames: every pixel 253–255; 99.4–99.9% exactly 255.
+  - The trail fades to 5% in ≈ 0.51 s (the field itself in 1.03 s).
+  - B2 shows 9.5 houses across a screen, against V1's 3.
+  - 62,784 vertices per panel.
+  - +14.7 MB as delivered, of which 11.86 MB is the IG comparison world; B2 alone adds 1.6 MB.
+- **Status:** gated; **stopped for Muse's judgment.** Version work stays paused.
