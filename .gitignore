@@ -2,3 +2,6 @@ siding/work/raw/
 siding/work/dl/
 __pycache__/
 siding/src/.squeeze-cache/
+
+# the pre-weight-pass build, used only for measuring images (python3 build_site.py --raw)
+siding/redo/site/out/site.raw.html

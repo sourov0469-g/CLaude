@@ -691,8 +691,7 @@ def build():
     css += src('hero2.css') + src('hero3.css') + src('hero4.css') + src('hero5.css') + src('hero6.css') + src('hero7.css') + src('svck.css') + src('fx.css') + src('hf.css') + src('bx.css') + '.slot{display:contents}'
     css = css.replace('244,242,236', '255,255,255')
     film = (f'<template id="film" data-poster="{jpeg(os.path.join(HERE, "media", "f1.jpg"), 480, 70)}">'
-            f'<source type="video/webm" src="data:video/webm;base64,{b64(os.path.join(HERE, "media", "hero-1280.webm"))}">'
-            f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-1280.mp4"))}"></template>')
+            f'<source type="video/mp4" src="data:video/mp4;base64,{b64(os.path.join(HERE, "media", "hero-960.mp4"))}"></template>')
     main = (slot('hero', heroes()) + slot('services', {'a': pre['sa'], 'b': pre['sb'], 'c': pre['sc'], 'd': pre['sd'], 'e': pre['se'], 'f': pre['sf'], 'g': pre['sg'], 'h': pre['sh'], 'i': pre['si'], 'j': pre['sj'], 'k': SVK[0], 'l': pre['sl'], 'm': svcM(), 'n': pre['sn']}) + slot('vis', {'a': pre['va'], 'b': pre['vb'], 'c': pre['vc'], 'd': pre['vd'], 'e': pre['ve'], 'f': pre['vf'], 'g': pre['vg'], 'h': pre['vh'], 'i': pre['vi'], 'j': pre['vj'], 'k': pre['vk'], 'l': pre['vl'], 'm': pre['vm'], 'n': pre['vn']}) +
             slot('windows', {'a': pre['wa'], 'b': pre['wb'], 'c': pre['wc'], 'd': pre['wd'], 'e': pre['we'], 'f': pre['wf'], 'g': pre['wg'], 'h': pre['wh'], 'i': pre['wi'], 'j': pre['wj'], 'k': pre['wk'], 'l': winL(), 'm': pre['wm'], 'n': pre['wn']}) + slot('reviews', {'a': pre['ra'], 'b': pre['rb'], 'c': pre['rc'], 'd': pre['rd'], 'e': pre['re'], 'f': pre['rf'], 'g': pre['rg'], 'h': pre['rh'], 'i': pre['ri'], 'j': pre['rj'], 'k': pre['rk'], 'l': pre['rl'], 'm': pre['rm'], 'n': pre['rn']}) +
             slot('process', {'a': pre['pa'], 'b': pre['pb'], 'c': pre['pc'], 'd': pre['pd'], 'e': pre['pe'], 'f': pre['pf'], 'g': pre['pg'], 'h': pre['ph'], 'i': pre['pi'], 'j': pre['pj'], 'k': pre['pk'], 'l': procL(), 'm': pre['pm'], 'n': pre['pn']}) + slot('try', {'a': pre['qa'], 'b': pre['qb'], 'c': pre['qc'], 'd': pre['qd'], 'e': pre['qe'], 'f': pre['qf'], 'g': pre['qg'], 'h': pre['qh'], 'i': pre['qi'], 'j': pre['qj'], 'k': pre['qk'], 'l': tryL(), 'm': tryM()}) +
@@ -706,9 +705,15 @@ def build():
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main data-page="home">{main}</main>{pages}{foot}{MBAR}{film}
-{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__WINN={json.dumps(WINN)};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
+{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__WINN={json.dumps(WINN)};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};/*DDRES*/{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':
     os.makedirs(os.path.join(HERE, 'out'), exist_ok=True)
-    h = build(); open(os.path.join(HERE, 'out', 'site.html'), 'w').write(h); print('site.html', len(h) // 1024, 'KB')
+    import sys, weight
+    h = build()
+    if '--raw' in sys.argv:   # the file as it was before the weight pass: what measure_images.js measures
+        h = h.replace('/*DDRES*/', ''); open(os.path.join(HERE, 'out', 'site.raw.html'), 'w').write(h); print('site.raw.html', len(h) // 1024, 'KB')
+    else:
+        h, _st = weight.weight_pass(h, os.path.join(HERE, 'media', 'img-need.json'))
+        open(os.path.join(HERE, 'out', 'site.html'), 'w').write(h); print('site.html', len(h) // 1024, 'KB')

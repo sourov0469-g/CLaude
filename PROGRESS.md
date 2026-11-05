@@ -1403,4 +1403,20 @@ Every text element is paired with the nearest painted background behind it, as r
 
 **Owner order AUSTIN-FULL-UPGRADE-CONSULT-2026-11-05 (binding, supersedes the pass-N continuation):** the current sections overall are not working; plan an upgrade of all nine sections first (AUSTIN-UPGRADE-PLAN-2026-11-05.md), then STOP for Muse's consult reply before building.
 
-**Next:** write and commit AUSTIN-UPGRADE-PLAN-2026-11-05.md, then stop.
+**AUSTIN-UPGRADE-PLAN-2026-11-05.md: PASSED by Muse.**
+- **Agreed kinds:** H-A, S-A, V-A, W-A, R-A, P-A, T-A, A-A, B-A.
+- **Agreed order:** weight pass, Hero, Booking, Services, Visualiser, Windows, Reviews, Process, Area, Try, then the whole-page gate.
+- **V-A label (exact):** "A real Austin Pro job, recoloured on screen. Colours are approximate; see real samples at the free inspection."
+- **Retired as defaults** (kept as hidden backups): Hero K, Windows L, Try M, Area C and Area M.
+- **Page rules at every gate:** ≤ 10 screens at 1440; ≤ 1 pinned section; ≤ 6 Book buttons; each number once; each section ≤ 1.3 screens.
+- **W-A:** the deep-green band is the page's only dark band, and its gate checks contrast.
+- **Every gate:** states no sub-agents and no background tasks, and carries the scorecard, the ledger, screenshots and a NEXT PLAN.
+
+**Step 0, the weight pass (GATE-WEIGHT.md): built and gated; waiting for Muse.**
+- **File:** 22,524,871 → 12,861,428 bytes (−42.9%; target ≤ 14.5 million).
+- **How:** one film (MP4 960 × 540), right-sized photos, canvas photos recompressed at identical pixel size, exact duplicates stored once, the same photo at several sizes merged into its largest copy.
+- **Proof:** all 198 templates identical with images blanked; 255 views with 0 errors and 0 unresolved images; 10 Mbps load 19.1 s → 11.2 s.
+- **Tools added:** `weight.py`, `measure_images.js`, `wcheck.js`, `media/img-need.json`. `python3 build_site.py --raw` writes the pre-pass file.
+- **Flag:** archived film heroes cannot play in headless Chromium (no H.264 decoder).
+
+**Next, after the accept:** Hero H-A, built to the NEXT PLAN in GATE-WEIGHT.md (photo choice, where 4.9 / 474 lives, and the H1 are Muse's decisions).
