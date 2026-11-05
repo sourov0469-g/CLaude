@@ -96,3 +96,31 @@ Screenshots (`siding/redo/final/gate/`): `hero-1440x900.png`, `-1920x1080`, `-13
 ## 9. Next: Section 2, "The wall and the video"
 
 **Consult-first plan (nothing built):** the full-wall type from Hero 9 as the pinned section; at rest only the big wall text; on scroll the window in the wall opens and the video behind it grows to full screen while the wall text fades; then the paragraph and the CTA over the playing video. Open questions for Muse: (1) the **video source**: the only video on file is the firm's own hero film (`/videos/hero-test.mp4`) hosted on its old site; the plan wants it linked, not embedded, with better quality: which link may I use (the YouTube link if one exists)? Until then the window shows a poster frame and the film plays only if the link loads; (2) the wall text: I propose to keep the firm's line and replace the filler with the firm's published sentences only.
+
+## 10. Governing design reference (added at Muse's request)
+
+**Governing reference: Cowboy** (the same restraint reference the earlier Hero O gate named): one dominant subject, very little text, type that belongs to the scene. **Transfers:** a single full-frame photograph carrying the whole first screen; one short statement, one action; calm, unhurried motion. **Does not transfer:** Cowboy's product imagery, colours or copy. The *idea* is the owner's own: Hero V4, "title between sky and house" (the headline behind the house); the cut-out technique is original to this build.
+
+## 11. WEB-SKILLS ledger (as built)
+
+| Level | Element | Skill → how used |
+|---|---|---|
+| Section | Hero | ⟦S1434⟧ visual-hierarchy: the photograph and the headline are the only large things, then the one filled button; ⟦S1454⟧ serial-position: the first screen carries the promise, the action and the phone; ⟦S0220⟧ anti-slop: the firm's own line, its own subline and the job's own record only; ⟦S1435⟧ von-restorff: the lime Book button is the only saturated object on the frame |
+| Element | photograph and layers | ⟦S0985⟧ critical-images: the 1900 px original, `fetchpriority="high"`, explicit width and height, decoded before the entrance runs; ⟦S0956⟧ broken-images: real alt text on the photograph, the cut-out layer hidden from assistive tech |
+| Element | call-to-action | ⟦S1441⟧ fitts-law: the Book link and the phone are 48 px or taller, in the thumb zone on phones, clear of the phone bar; ⟦S1494⟧ ux-writing: plain labels |
+| Motion | entrance, pointer depth, scroll sink | ⟦S1436⟧ animation-principles: the headline rises from behind the house (follow-through, ease-out), the photograph settles; ⟦S0060⟧ animate; ⟦S0062⟧ animation-performance: transform and opacity only, one rAF, stopped off screen; ⟦S0400⟧ accessible-animation: reduced motion leaves the final pose, touch gets no pointer drift |
+| Site | keyboard, contrast, errors | ⟦S0054⟧ fixing-accessibility: Tab order, 3 px focus rings, 7.9:1 headline and 4.5:1+ elsewhere; ⟦S0231⟧ web-performance: 596 KB of images, no video, no library |
+
+## 12. Scorecard (D40 / U30 / C20 / Ct10), self-rated
+
+| Category | Score | Evidence |
+|---|---|---|
+| Design (40) | **7.9** | The concept lands: a headline that really passes behind a chimney and trees, a calm frame, no card, one action (`hero-1440x900`, `hero-cutout-zoom`). **Minus:** the photograph itself is overcast and ordinary, which caps the first screen; a 4:3 photo is cropped on wide screens |
+| Usability (30) | **8.7** | 99% of the headline is readable; the action and the phone are in the first screen at every size tested; keyboard, touch, reduced motion and seven screen sizes verified. **Minus:** the Book link is an in-page anchor until the Contact page exists |
+| Creativity (20) | **8.6** | A full-resolution alpha cut-out with colour unmixing, an entrance in which the headline climbs out from behind the house, depth drift between photograph and headline. **Minus:** the idea is the owner's (V4), the craft is mine |
+| Content (10) | **9.0** | The firm's own line, its own subline and the job's own record; nothing invented. **Minus:** none found |
+| **Weighted** | **8.35** | **PASS** (≥ 7.0; no category below 6.0) |
+
+Weighted = 0.4 × 7.9 + 0.3 × 8.7 + 0.2 × 8.6 + 0.1 × 9.0 = 3.16 + 2.61 + 1.72 + 0.90 = **8.39**.
+
+**On the score:** the 7.9 for Design is deliberately the lowest figure: it is the photograph, not the build, and it is the reason the gate asks Muse for a better photo. The hero photo #36 stays until Muse supplies one; a swap is one command (`tools/prep_hero.py`) and a one-line change, no rebuild.
