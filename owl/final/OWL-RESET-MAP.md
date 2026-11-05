@@ -151,3 +151,9 @@ The proof gate shows section 2 in **Night Owl and Control** (the two treatments 
 - **Five-question homeowner check per treatment,** answered from the screenshot *before* the checklist.
 - **The scorecard,** recomputed.
 - **Statements:** zero vetoes; no sub-agents or background tasks.
+
+## Addendum · owner's order of 05:15: keep every version as PAST, show the new bests
+- **"Kill" and "merge" in §A are about what the new page shows,** never about deleting. Every past version of every section stays in `owl-roofing.html` as an inert PAST record, opened with `?past` (plus `&<section>=<n>` for any version). The pre-reset file is also frozen byte for byte in `past/`.
+- **"No version factory" (top of this map)** means the new page shows one best per section, not a ladder. The past ladder is kept, not rebuilt.
+- **The new best of each section** is the default `owl-roofing.html` shows. The choice and its reasoning are in §10 of each GATE-RESET file. The whole page is gated in `GATE-RESET-HOME.md`.
+

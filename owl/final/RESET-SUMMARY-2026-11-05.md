@@ -1,6 +1,10 @@
 # Owl reset · tonight's summary (2026-11-05)
 
-**The page:** `owl/final/owl-reset.html` (one file, 4.94 MB). Build it with `cd owl/final/reset && python3 build.py`. Try the palettes with `?palette=night|control|safety|slate`, or with the "trial palette" switch in the top bar.
+**The finished homepage:** `owl/final/owl-roofing.html`. It opens on the seven new bests (Night Owl). Try the palettes with `?palette=night|control|safety|slate`, or with the "trial palette" switch in the top bar.
+
+**The past:** every past version (130 versions and 12 backups, plus the inner pages) is kept inside the same file as an inert PAST record. Open it with `?past`, or `?past&hero=12` for any section and version. A byte-for-byte frozen copy of the pre-reset file is in `owl/final/past/`. Nothing was deleted. See `GATE-RESET-HOME.md`.
+
+**Build:** `python3 owl/final/build_home.py`. The new sections alone are also kept as the workbench, `owl-reset.html`.
 
 **The journey sheets:**
 - `gates/reset/page/journey-1440.jpg`
@@ -29,7 +33,9 @@ Both use the page as a visitor would: choose "A leak", type "Roseville". There i
 | 6 | Do you come to me? | type or tap a town on a contour ground | Lando Norris (+ Bruno Simon, scoped) | 26/26 | 8.43 | `GATE-RESET-6.md` |
 | 7 | Tell us what's going on. | the number as the end card, live hours, a prefilled email | Longbow | 23/23 | 8.56 | `GATE-RESET-7.md` |
 
-**The whole-page pass:** every section's checks were re-run on the final build. The result is **155/155**, with axe at 0 violations in all four palettes for every section.
+**The whole-page pass:** every section's checks were re-run on the finished `owl-roofing.html`. The result is **155/155**, with axe at 0 violations in all four palettes for every section. The two-mode checks pass **10/10**, and past mode lays out exactly like the frozen pre-reset file.
+
+**The bests:** each gate's §10 records why its section is the new best and which past versions it stands in for.
 
 ## What makes it one page, not seven documents
 - **The page remembers you.** Your case (section 2) docks in the top bar and rewrites:

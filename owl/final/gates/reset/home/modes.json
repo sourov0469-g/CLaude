@@ -1,0 +1,52 @@
+[
+ {
+  "name": "the page he opens shows the new bests: seven reset sections in map order, no past version in the live page",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "name": "every past version is still in the file, inert: 130 versions and 12 backups inside the PAST record",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "name": "the switch: the new page links to the records",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "name": "new mode: no page or console errors",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "name": "past mode ?past lays out exactly like the frozen pre-reset file (same sections, same heights), no errors",
+  "ok": true,
+  "info": ":838,crew-video:1171,explore:1102,wise-check:864,protect:1069,services:1257,reviews:784,areas:1096,family:1128,book:894,"
+ },
+ {
+  "name": "past mode ?past&hero=12&wise=14 lays out exactly like the frozen pre-reset file (same sections, same heights), no errors",
+  "ok": true,
+  "info": ":994,crew-video:1171,explore:1102,wise-check:808,protect:1069,services:1257,reviews:784,areas:1096,family:1128,book:894,"
+ },
+ {
+  "name": "past mode ?hero=11 lays out exactly like the frozen pre-reset file (same sections, same heights), no errors",
+  "ok": true,
+  "info": ":989,crew-video:1171,explore:1102,wise-check:864,protect:1069,services:1257,reviews:784,areas:1096,family:1128,book:894,"
+ },
+ {
+  "name": "an old inner-page link (#/services) still opens the past Services page",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "name": "the past page carries a chip back to the new homepage",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "name": "the chip returns to the new homepage",
+  "ok": true,
+  "info": ""
+ }
+]

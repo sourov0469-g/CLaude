@@ -171,3 +171,18 @@ Recomputed: 8.3 × 0.40 + 8.6 × 0.30 + 8.4 × 0.20 + 8.8 × 0.10 = 3.32 + 2.58 
 - **No sub-agents and no background tasks were used.**
 - Every command ran in my main thread, in the foreground, with a time limit (the longest was 235 s).
 - Nothing was published.
+
+## 10. New best: the default the homepage shows (owner's order, 05:15)
+**The choice:** Section 2, the problem-finder as built and gated above, in **Night Owl**, is the new best. It is the version the finished homepage, `owl-roofing.html`, shows by default.
+
+**What it stands in for:** **Explore** (15 versions and 2 backups) and **Services** (9 versions and 1 backup). Nothing was deleted. Every one of those versions is kept in the same file as **PAST**, an inert record of the whole past homepage, and opens with ?past&explore=15 · ?past&services=9 (any version number works). The past page carries a chip back to the new one.
+
+**Treatments compared:** Night Owl and Owl today. Both pass; Night Owl is chosen at page level.
+
+**Why this is the best:**
+- Every past Explore version taught roofing, and every Services version listed services: both were documents to read. The new section asks the homeowner one question ("What's going on up there?") and answers with a scene for their case, naming the right service in the answer.
+- It is the first act of the page, and its choice writes the rest: section 3's first beat, section 7's headline and the prefilled email.
+- It is the only one of the candidates that took the reference's mechanism, not just its look (Quiet Cubes: the choice first, a curtain, the choice docked in the bar).
+- **One palette for the whole page.** The sky and the owl run as one world, and a palette per section would break it. Night Owl is the working default under the owner's grant (contrast and reasoning in the diagnosis §5). The other three palettes stay one switch away in the top bar.
+
+**Checks on the finished homepage:** this section's checks were re-run on `owl-roofing.html` itself, not only on the workbench page. They all pass (`checks.json` in this gate's folder).

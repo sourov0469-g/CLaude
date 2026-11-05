@@ -37,8 +37,16 @@ def resolve(t, d=0):
     t = re.sub(r'\{\{JS:([^}]+)\}\}', lambda m: resolve(read(m.group(1)), d + 1), t)
     t = re.sub(r'\{\{A:([^}]+)\}\}', lambda m: asset(m.group(1)), t)
     return t
-html = resolve(read('reset/template.html'))
-left = re.findall(r'\{\{[A-Z]+[:}][^}]*\}?\}', html)
-if left: sys.exit('unresolved: %s' % left[:5])
-open(OUT, 'w', encoding='utf-8').write(html)
-print('wrote %s (%.2f MB)' % (OUT, os.path.getsize(OUT) / 1e6))
+def build_raw():
+    html = resolve(read('reset/template.html'))
+    left = re.findall(r'\{\{[A-Z]+[:}][^}]*\}?\}', html)
+    if left: sys.exit('unresolved: %s' % left[:5])
+    return html
+if __name__ == '__main__':
+    # the reset workbench page (the new sections alone); the finished homepage is built by ../build_home.py
+    html = build_raw()
+    open(OUT, 'w', encoding='utf-8').write(html)
+    print('wrote %s (%.2f MB)' % (OUT, os.path.getsize(OUT) / 1e6))
+    sys.path.insert(0, FINAL)
+    import build_home
+    build_home.main()

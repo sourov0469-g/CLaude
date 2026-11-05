@@ -118,3 +118,18 @@ Recomputed: 8.4 × 0.40 + 8.8 × 0.30 + 7.8 × 0.20 + 9.2 × 0.10 = 3.36 + 2.64 
 - The logo is unchanged.
 - A light ground.
 - No sub-agents or background tasks; every command ran in my thread, in the foreground, with a time limit.
+
+## 10. New best: the default the homepage shows (owner's order, 05:15)
+**The choice:** Section 4, the numbers as built and gated above, in **Night Owl**, is the new best. It is the version the finished homepage, `owl-roofing.html`, shows by default.
+
+**What it stands in for:** **Reviews** (9 versions and 1 backup). Nothing was deleted. Every one of those versions is kept in the same file as **PAST**, an inert record of the whole past homepage, and opens with ?past&reviews=9 (any version number works). The past page carries a chip back to the new one.
+
+**Treatments compared:** Night Owl and Slate & Brass. Slate reads a little softer on the giant 5.0; Night Owl is chosen at page level.
+
+**Why this is the best:**
+- The past Reviews versions were star rows and badges. No review texts exist on record, so the honest strength is the numbers themselves. The new section makes each one an event.
+- It gathers the trust facts that were scattered through every past section into one place: 5.0 from 90+ reviews, the warranties, GAF Systems Plus, BBB A−, the licence, the hours and the founders.
+- Creativity is its weak spot (7.8), and that is recorded honestly. It is still a clear step past every badge row on record.
+- **One palette for the whole page.** The sky and the owl run as one world, and a palette per section would break it. Night Owl is the working default under the owner's grant (contrast and reasoning in the diagnosis §5). The other three palettes stay one switch away in the top bar.
+
+**Checks on the finished homepage:** this section's checks were re-run on `owl-roofing.html` itself, not only on the workbench page. They all pass (`checks.json` in this gate's folder).

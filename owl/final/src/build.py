@@ -62,10 +62,13 @@ def resolve(text, depth=0):
     text = re.sub(r'\{\{A:([^}]+)\}\}', lambda m: asset(m.group(1)), text)
     return text
 
-html = resolve(read('template.html'))
-left = re.findall(r'\{\{[A-Z]+:[^}]+\}\}', html)
-if left:
-    sys.exit(f'unresolved placeholders: {left[:5]}')
+def build_raw():
+    """The past homepage (every version, backups and inner pages), resolved, not yet deduplicated."""
+    html = resolve(read('template.html'))
+    left = re.findall(r'\{\{[A-Z]+:[^}]+\}\}', html)
+    if left:
+        sys.exit(f'unresolved placeholders: {left[:5]}')
+    return html
 
 def dedupe(html):
     """Store each large image that appears more than once a single time, in window.OWLA, and point the copies at it.
@@ -87,6 +90,8 @@ def dedupe(html):
     html = html.replace('<body>', '<body>' + store, 1) if '<body>' in html else re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + store, html, count=1)
     return html
 
-html = dedupe(html)
-open(OUT, 'w', encoding='utf-8').write(html)
-print(f'wrote {OUT} ({len(html.encode())/1e6:.2f} MB)')
+if __name__ == '__main__':
+    # owl-roofing.html is now the finished homepage: the new bests by default, this past homepage kept inside it as records
+    sys.path.insert(0, os.path.dirname(SRC))
+    import build_home
+    build_home.main()

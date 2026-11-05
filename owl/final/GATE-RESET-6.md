@@ -128,3 +128,17 @@ Recomputed: 8.2 × 0.40 + 8.9 × 0.30 + 8.0 × 0.20 + 8.8 × 0.10 = 3.28 + 2.67 
 - The logo is unchanged; the owl illustration is the site's own.
 - A light ground.
 - No sub-agents or background tasks; every command ran in my thread, in the foreground, with a time limit.
+
+## 10. New best: the default the homepage shows (owner's order, 05:15)
+**The choice:** Section 6, "Do you come to me?" as built and gated above, in **Night Owl**, is the new best. It is the version the finished homepage, `owl-roofing.html`, shows by default.
+
+**What it stands in for:** **Area** (9 versions and 1 backup). Nothing was deleted. Every one of those versions is kept in the same file as **PAST**, an inert record of the whole past homepage, and opens with ?past&area=9 (any version number works). The past page carries a chip back to the new one.
+
+**Treatments compared:** Night Owl and Safety. Safety's orange dot is easier to spot, and Night Owl's gold is calmer; Night Owl is chosen at page level, with Safety's strength noted.
+
+**Why this is the best:**
+- The past Area versions were the 29 towns as a list or a map to scan. The new one answers the homeowner's actual question by name: type your town, and it says yes with the distance, or says honestly that it isn't listed and gives the number.
+- It shares the town with section 7, so the end of the page already knows where you live.
+- **One palette for the whole page.** The sky and the owl run as one world, and a palette per section would break it. Night Owl is the working default under the owner's grant (contrast and reasoning in the diagnosis §5). The other three palettes stay one switch away in the top bar.
+
+**Checks on the finished homepage:** this section's checks were re-run on `owl-roofing.html` itself, not only on the workbench page. They all pass (`checks.json` in this gate's folder).

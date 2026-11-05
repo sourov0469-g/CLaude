@@ -108,3 +108,23 @@ Recomputed: 8.6 × 0.40 + 8.4 × 0.30 + 8.5 × 0.20 + 8.8 × 0.10 = 3.44 + 2.52 
 - Only locked facts.
 - The logo shape is unchanged.
 - No sub-agents or background tasks; every command ran in my thread, in the foreground, with a time limit.
+
+## 10. New best: the default the homepage shows (owner's order, 05:15)
+**The choice:** Section 5, "Who shows up? Family." as built and gated above, in **Night Owl**, is the new best. It is the version the finished homepage, `owl-roofing.html`, shows by default.
+
+**What it stands in for:** **Family** (9 versions and 1 backup). Nothing was deleted. Every one of those versions is kept in the same file as **PAST**, an inert record of the whole past homepage, and opens with ?past&family=9 (any version number works). The past page carries a chip back to the new one.
+
+**Treatments compared:** Night Owl and Owl today. Both read well because the photos dominate; Night Owl is chosen at page level.
+
+**Why this is the best:**
+- The past Family versions were photos with captions in boxes. The new one turns the same real photos into a split cover that scroll turns, chapter by chapter: the Browns, the Berglands (Noah on a ladder) and the crew.
+- It scores second highest of the night (8.54, after section 7), and it best answers "who will actually come to my house".
+- **One palette for the whole page.** The sky and the owl run as one world, and a palette per section would break it. Night Owl is the working default under the owner's grant (contrast and reasoning in the diagnosis §5). The other three palettes stay one switch away in the top bar.
+
+**Checks on the finished homepage:** this section's checks were re-run on `owl-roofing.html` itself, not only on the workbench page. They all pass (`checks.json` in this gate's folder).
+
+**One finding from the re-run, recorded honestly:**
+- **On the finished homepage, the chapter turn starts about 35 ms later** than on the workbench page. In a headless probe the scroll-to-switch time was 158–191 ms, against 137–154 ms (`tools/people-mid-probe.cjs`). The turn itself is unchanged.
+- **The check was sampling one fixed instant** (260 ms) and caught the halves just before they moved. It now watches the turn frame by frame and requires the mid-turn state, with the halves moving in opposite directions, within 0.6 s of the scroll. That state is reached at about 310 ms on both pages.
+- **The cause is not proven.** It is most likely the larger document (10.5 MB with the past records). It is not visible to the eye, and it has not been measured on a real phone.
+

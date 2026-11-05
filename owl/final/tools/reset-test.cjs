@@ -1,7 +1,7 @@
 // Reset page checks: node reset-test.cjs <sectionId> <outDir>   (sectionId e.g. finder; outDir relative to owl/final)
 const { chromium } = require('playwright'); const fs = require('fs'); const path = require('path');
 const AXE = fs.readFileSync('/tmp/claude-0/-home-user-CLaude/43c9e22a-5230-526e-a737-ae81faad601a/scratchpad/axe/node_modules/axe-core/axe.min.js', 'utf8');
-const F = 'file://' + path.resolve(__dirname, '../owl-reset.html');
+const F = 'file://' + path.resolve(__dirname, '../' + (process.env.PAGE || 'owl-roofing.html'));   // the finished homepage (NEW mode by default)
 const [SEC, OUTD] = process.argv.slice(2); const OUT = path.resolve(__dirname, '..', OUTD || 'gates/reset/tmp'); fs.mkdirSync(OUT, { recursive: true });
 const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, info: info || '' }); console.log((ok ? 'PASS' : 'FAIL') + ' | ' + name + (info ? ' | ' + info : '')); };
 const EXTRA = {
@@ -67,8 +67,14 @@ const EXTRA = {
     rec('a split cover on a pinned stage: three covers of two halves each, a seam, and the name card sitting on the seam', await p.evaluate(() => { const s = document.getElementById('people'), st = s.querySelector('.stage'), card = s.querySelector('.card').getBoundingClientRect(), seam = s.querySelector('.seam').getBoundingClientRect(); return getComputedStyle(st).position === 'sticky' && s.querySelectorAll('.cv').length === 3 && [...s.querySelectorAll('.cv')].every(c => c.querySelectorAll('.half img').length === 2) && Math.abs((card.left + card.width / 2) - (seam.left + seam.width / 2)) < 4; }));
     const a = await at(.15), b = await at(.5), c = await at(.85);
     rec('scroll turns the chapters: The Browns → The Berglands → Owl’s crew; the dots follow', /^The Browns/.test(a.nm) && /^The Berglands/.test(b.nm) && /^Owl’s crew/.test(c.nm) && a.cv === 1 && b.cv === 2 && c.cv === 3 && a.cur === 0 && c.cur === 2);
-    await at(.15); await p.evaluate(() => { const s = document.getElementById('people'); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * .5); }); await p.waitForTimeout(260);
-    rec('mid-turn: the two halves move in opposite directions across the seam (old out, new in)', await p.evaluate(() => { const on = document.querySelector('#people .cv.on'), past = document.querySelector('#people .cv.past'); if (!on || !past) return false; const ty = i => parseFloat(getComputedStyle(i).translate.split(' ')[1] || '0'); const [ol, or] = [...on.querySelectorAll('img')].map(ty), [pl, pr] = [...past.querySelectorAll('img')].map(ty); return ol > 1 && ol < 99 && or < -1 && or > -99 && pl < -1 && pr > 1; }));
+    await at(.15);
+    /* watch the turn frame by frame (not one fixed instant): it must start promptly and, mid-way, the halves must move in opposite directions */
+    const mid = await p.evaluate(() => new Promise(res => { const s = document.getElementById('people'), t0 = performance.now(); scrollTo(0, s.offsetTop + (s.offsetHeight - innerHeight) * .5);
+      (function tick(){ const on = s.querySelector('.cv.on'), past = s.querySelector('.cv.past'), ty = i => parseFloat(getComputedStyle(i).translate.split(' ')[1] || '0');
+        if (on && past){ const [ol, or] = [...on.querySelectorAll('img')].map(ty), [pl, pr] = [...past.querySelectorAll('img')].map(ty);
+          if (ol > 20 && ol < 80) return res({ ok: or < -20 && or > -80 && pl < -20 && pr > 20, ms: Math.round(performance.now() - t0), v: [ol, or, pl, pr].map(Math.round).join('/') }); }
+        if (performance.now() - t0 > 1500) return res({ ok: false, ms: -1, v: 'no mid-turn state within 1.5 s' }); requestAnimationFrame(tick); })(); }));
+    rec('mid-turn: the two halves move in opposite directions across the seam (old out, new in), reached within 0.6 s of the scroll', mid.ok && mid.ms > 0 && mid.ms < 600, mid.ms + ' ms · ' + mid.v);
     rec('real people, captioned as the site already captions them; only locked facts (founded 2025, co-founders Tim Brown and Noah Bergland, GAF Systems Plus, We Give a Hoot); no invented details', await p.evaluate(() => { const s = document.getElementById('people'), alts = [...s.querySelectorAll('img')].map(i => i.alt).join(' | '), t = s.querySelector('script').textContent; return /Tim Brown with his wife and their children/.test(alts) && /Noah Bergland with his wife and their children/.test(alts) && /Noah Bergland on a ladder at a roof edge/.test(alts) && /Founded 2025/.test(t) && /Tim Brown, co-founder/.test(t) && /Noah Bergland, co-founder/.test(t) && /GAF Systems Plus/.test(t) && /We Give a Hoot/.test(t) && !/\bvan\b|years? of experience|since 19|since 20[01]/i.test(t); }));
     await p.click('#people .dots button >> nth=1'); await p.waitForTimeout(1500);
     rec('the dots jump to a chapter (The Berglands)', await p.evaluate(() => +document.getElementById('people').dataset.cover) === 2);

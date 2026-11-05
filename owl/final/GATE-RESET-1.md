@@ -114,3 +114,18 @@ Recomputed: 8.0 × 0.40 + 8.8 × 0.30 + 7.6 × 0.20 + 8.8 × 0.10 = 3.20 + 2.64 
 - The logo is unchanged.
 - The film is a band at the top of a light page.
 - No sub-agents or background tasks; every command ran in my thread, in the foreground, with a time limit.
+
+## 10. New best: the default the homepage shows (owner's order, 05:15)
+**The choice:** Section 1, the arrival as built and gated above, in **Night Owl**, is the new best. It is the version the finished homepage, `owl-roofing.html`, shows by default.
+
+**What it stands in for:** **Hero** (15 versions and 1 backup) and **Video** (15 versions and 1 backup). Nothing was deleted. Every one of those versions is kept in the same file as **PAST**, an inert record of the whole past homepage, and opens with ?past&hero=12 · ?past&video=15 (any version number works). The past page carries a chip back to the new one.
+
+**Treatments compared:** Night Owl and Slate & Brass. The film dominates, so the palette barely shows here; Night Owl is chosen at page level.
+
+**Why this is the best:**
+- It does both past jobs in one moment. The hero said who Owl is and the video proved the crew is real; the past versions did it in two framed blocks with button pairs. The new one puts the real crew full-bleed under one line, with no skeleton.
+- The owner's verdict named "document type" and "no immersiveness". This is the page opening as a scene, not a heading block.
+- It is the same film section 3 hands to your scroll, so the page carries one film, not two.
+- **One palette for the whole page.** The sky and the owl run as one world, and a palette per section would break it. Night Owl is the working default under the owner's grant (contrast and reasoning in the diagnosis §5). The other three palettes stay one switch away in the top bar.
+
+**Checks on the finished homepage:** this section's checks were re-run on `owl-roofing.html` itself, not only on the workbench page. They all pass (`checks.json` in this gate's folder).

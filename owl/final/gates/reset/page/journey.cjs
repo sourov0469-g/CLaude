@@ -1,6 +1,6 @@
 // Whole-page journey: one frame per section in the order a visitor meets them (Night Owl), desktop and phone, using the page as a visitor would (choose a case, type a town)
 const { chromium } = require('playwright'); const path = require('path');
-const F = 'file://' + path.resolve(__dirname, '../../../owl-reset.html');
+const F = 'file://' + path.resolve(__dirname, '../../../owl-roofing.html');
 (async () => { const b = await chromium.launch(); const errs = [];
   for (const [w, h] of [[1440, 900], [390, 844]]) {
     const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1 }); const p = await ctx.newPage(); p.on('pageerror', e => errs.push(e.message));

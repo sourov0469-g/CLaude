@@ -131,3 +131,18 @@ Recomputed: 8.5 × 0.40 + 8.3 × 0.30 + 8.6 × 0.20 + 8.4 × 0.10 = 3.40 + 2.49 
 - **Colour:** a light page; the deep stage is a band.
 - **No game.**
 - **No sub-agents or background tasks:** every command ran in my thread, in the foreground, with a time limit.
+
+## 10. New best: the default the homepage shows (owner's order, 05:15)
+**The choice:** Section 3, "Here's your part: nothing." as built and gated above, in **Night Owl**, is the new best. It is the version the finished homepage, `owl-roofing.html`, shows by default.
+
+**What it stands in for:** **Wise Check** (14 versions and 1 backup) and **Protect Your Nest** (10 versions and 2 backups). Nothing was deleted. Every one of those versions is kept in the same file as **PAST**, an inert record of the whole past homepage, and opens with ?past&wise=14 · ?past&wrap=10 (any version number works). The past page carries a chip back to the new one.
+
+**Treatments compared:** Night Owl and Safety. Night Owl wins here on its own terms: gold on navy reads "relax, it's handled", while orange reads "act now" (§3).
+
+**Why this is the best:**
+- The past ladder explained two systems in two sections (24 versions between them). The new scene shows the whole job (look, wrap, roof, clean, box) as five beats of one scrubbed film, and the point is the homeowner's: "your part is nothing".
+- It keeps every Owl fact the past versions carried: Wise Check, Protect Your Nest, the magnet sweep, the project manager's walk, the aftercare box and the 10-year warranty.
+- Owl Protect 10 was not accepted by the owner; its content lives on here as beats 2 and 4.
+- **One palette for the whole page.** The sky and the owl run as one world, and a palette per section would break it. Night Owl is the working default under the owner's grant (contrast and reasoning in the diagnosis §5). The other three palettes stay one switch away in the top bar.
+
+**Checks on the finished homepage:** this section's checks were re-run on `owl-roofing.html` itself, not only on the workbench page. They all pass (`checks.json` in this gate's folder).
