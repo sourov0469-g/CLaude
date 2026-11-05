@@ -14536,6 +14536,96 @@ OWL.reg('areas','1',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="family" data-v="1">
+<section class="sec fam9" id="family" aria-labelledby="fm9-h">
+<style>
+.fam9{overflow:hidden}
+.fam9 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,60px);align-items:center}
+.fam9 .lede{margin:12px 0 18px;max-width:36ch}
+.fam9 .who{margin:0 0 20px;padding:0;list-style:none;display:grid;gap:6px;font-size:16px}
+.fam9 .act{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.fam9 .snd{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 16px 0 10px;border-radius:999px;font-weight:800;font-size:15px;background:var(--paper);box-shadow:0 3px 0 rgba(23,17,29,.1)}
+.fam9 .snd i{position:relative;width:40px;height:22px;border-radius:11px;background:#C9C0AC;transition:background .25s}
+.fam9 .snd i::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .25s}
+.fam9 .snd[aria-pressed="true"] i{background:#2E7D32}
+.fam9 .snd[aria-pressed="true"] i::after{transform:translateX(18px)}
+.fam9 .snd:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.fam9 .stage{position:relative;aspect-ratio:1;max-width:620px;width:100%;justify-self:center;border-radius:50%;background:radial-gradient(circle,#FBF6EA 0,#F1EFE6 70%)}
+.fam9 .ring{position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;margin:-15% 0 0 -15%;border-radius:50%;border:3px solid #EAA221;opacity:0;pointer-events:none}
+.fam9 .ring.go{animation:fm9r 1.8s cubic-bezier(.2,.6,.3,1) forwards}
+@keyframes fm9r{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(3.4)}}
+.fam9 .owl{position:absolute;left:50%;top:50%;width:30%;transform:translate(-50%,-56%)}
+.fam9 .owl svg{width:100%;height:auto;display:block;overflow:visible}
+.fam9 .lid{transform-box:fill-box;transform-origin:top;transform:scaleY(0);transition:transform .12s}
+.fam9 .blink .lid{transform:scaleY(1)}
+.fam9 .bk2{transform-box:fill-box;transform-origin:top;transition:transform .12s}
+.fam9 .hooting .bk2{transform:translateY(5px)}
+.fam9 .wave{position:absolute;left:34%;right:34%;top:70%;height:10%;opacity:0;transition:opacity .25s}
+.fam9 .wave path{fill:none;stroke:#EAA221;stroke-width:4;stroke-linecap:round}
+.fam9 .orb{position:absolute;width:24%;aspect-ratio:1;transform:translate(-50%,-50%) scale(var(--s,0));transition:transform .55s cubic-bezier(.3,1.6,.5,1)}
+.fam9 .orb img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 5px #FBFAF6,0 0 0 7px #EAA221,0 16px 24px -12px rgba(23,17,29,.5)}
+.fam9 .orb span{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;padding:3px 10px;border-radius:999px;background:rgba(251,250,246,.95);font-size:13px;font-weight:800}
+@media (max-width:900px){.fam9 .g{grid-template-columns:minmax(0,1fr)}.fam9 .orb{width:27%}.fam9 .orb span{font-size:12px;padding:2px 8px}}
+@media (prefers-reduced-motion:reduce){.fam9 .ring.go{animation:none}.fam9 .orb,.fam9 .lid,.fam9 .bk2{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <span class="kick">Family-owned since 2025</span>
+   <h2 class="h2" id="fm9-h" style="margin-top:12px">Give a Hoot</h2>
+   <p class="lede rv">It’s our tagline, so we built a button for it. Founded in Shoreview in 2025 by two families.</p>
+   <ul class="who"><li><b>Tim Brown</b>, co-founder</li><li><b>Noah Bergland</b>, co-founder</li></ul>
+   <div class="act"><button class="btn btn-amber hoot" type="button" data-mag data-owl="hoot">Give a Hoot</button><button class="snd" type="button" aria-pressed="true"><i aria-hidden="true"></i>Sound</button></div>
+   <p class="say" aria-live="polite" style="margin-top:14px;font-weight:700;min-height:26px"></p>
+  </div>
+  <div class="stage" data-owl="say:Hoo-hoo">
+   <span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
+   <div class="owl" aria-hidden="true"><svg viewBox="0 0 200 200">
+    <path d="M40 60L60 20 80 52M160 60L140 20 120 52" fill="#17111D"/><ellipse cx="100" cy="112" rx="72" ry="80" fill="#17111D"/><ellipse cx="100" cy="140" rx="44" ry="44" fill="#3A3540"/>
+    <circle cx="70" cy="88" r="30" fill="#F1EFE6"/><circle cx="130" cy="88" r="30" fill="#F1EFE6"/><circle cx="70" cy="88" r="14" fill="#EAA221"/><circle cx="130" cy="88" r="14" fill="#EAA221"/><circle cx="70" cy="88" r="6" fill="#17111D"/><circle cx="130" cy="88" r="6" fill="#17111D"/>
+    <rect class="lid" x="40" y="58" width="60" height="60" rx="30" fill="#17111D"/><rect class="lid" x="100" y="58" width="60" height="60" rx="30" fill="#17111D"/>
+    <path d="M90 112l10 14 10-14z" fill="#EAA221"/><path class="bk2" d="M93 125l7 8 7-8z" fill="#C7871A"/>
+   </svg></div>
+   <svg class="wave" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30H300"/></svg>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('family','1',function(root){
+  var stage = root.querySelector('.stage'), owl = root.querySelector('.owl'), rings = [].slice.call(root.querySelectorAll('.ring')), wave = root.querySelector('.wave path'), snd = root.querySelector('.snd'), say = root.querySelector('.say'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var O = [{src:OWLA["a9"], alt:'Tim Brown with his wife and their children', t:'The Browns', a:-135}, {src:OWLA["a12"], alt:'Noah Bergland with his wife and their children', t:'The Berglands', a:-45}, {src:OWLA["a7"], alt:'Owl’s crew at work on a roof', t:'The crew', a:45}, {src:OWLA["a14"], alt:'Community involvement', t:'The community', a:135}];
+  var orbs = O.map(function(o){ var d = document.createElement('div'), r = 37, x = 50 + Math.cos(o.a*Math.PI/180)*r, y = 50 + Math.sin(o.a*Math.PI/180)*r; d.className = 'orb'; d.style.left = x + '%'; d.style.top = y + '%';
+    d.innerHTML = '<img alt="' + o.alt + '" src="' + o.src + '" decoding="async"><span aria-hidden="true">' + o.t + '</span>'; stage.appendChild(d); return d; });
+  /* a soft two-note hoot, synthesized, only when the button is pressed */
+  var ac = null;
+  function tone(t0, f0, f1, dur){ var o = ac.createOscillator(), g = ac.createGain(), lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+    o.type = 'sine'; o.frequency.setValueAtTime(f0, t0); o.frequency.exponentialRampToValueAtTime(f1, t0 + dur);
+    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(.16, t0 + .06); g.gain.exponentialRampToValueAtTime(.001, t0 + dur);
+    o.connect(lp); lp.connect(g); g.connect(ac.destination); o.start(t0); o.stop(t0 + dur + .05); }
+  function sound(){ try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); var t = ac.currentTime + .02; tone(t, 400, 350, .32); tone(t + .42, 380, 300, .6); } catch (e){} }
+  function blink(){ owl.classList.add('blink'); setTimeout(function(){ owl.classList.remove('blink'); }, 140); }
+  function drawWave(){ var t0 = performance.now(), D = 1100; wave.parentNode.style.opacity = 1;
+    (function step(now){ var k = (now - t0)/D, d = 'M0 30'; for (var x = 0; x <= 300; x += 6){ var env = (k < .36 ? Math.sin(Math.min(1, k/.36)*Math.PI) : k > .38 ? Math.sin(Math.min(1, (k - .38)/.6)*Math.PI) : 0), y = 30 + Math.sin(x*.14 + now*.03)*22*Math.max(0, env)*Math.sin(x/300*Math.PI); d += 'L' + x + ' ' + y.toFixed(1); } wave.setAttribute('d', d);
+      if (k < 1) requestAnimationFrame(step); else { wave.setAttribute('d', 'M0 30H300'); wave.parentNode.style.opacity = 0; } })(t0); }
+  var shown = false;
+  function hoot(withSound){ if (withSound && snd.getAttribute('aria-pressed') === 'true') sound(); blink(); say.textContent = 'Hoo-hoo. We give a hoot.';
+    if (OWL.reduce){ orbs.forEach(function(o){ o.style.setProperty('--s', 1); }); return; }
+    owl.classList.add('hooting'); setTimeout(function(){ owl.classList.remove('hooting'); }, 300); setTimeout(function(){ owl.classList.add('hooting'); }, 420); setTimeout(function(){ owl.classList.remove('hooting'); }, 1000);
+    rings.forEach(function(r, i){ r.classList.remove('go'); void r.offsetWidth; setTimeout(function(){ r.classList.add('go'); }, i*260); });
+    drawWave();
+    if (!shown){ orbs.forEach(function(o, i){ setTimeout(function(){ o.style.setProperty('--s', 1); }, 500 + i*180); }); shown = true; }
+    else orbs.forEach(function(o, i){ o.style.setProperty('--s', 1.12); setTimeout(function(){ o.style.setProperty('--s', 1); }, 400 + i*120); }); }
+  root.querySelector('.hoot').addEventListener('click', function(){ hoot(true); });
+  snd.addEventListener('click', function(){ snd.setAttribute('aria-pressed', snd.getAttribute('aria-pressed') !== 'true'); });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ orbs.forEach(function(o){ o.style.setProperty('--s', 1); }); OWL.reveal(h2); return; }
+  var idle = 0;
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ OWL.reveal(h2); if (!shown) setTimeout(function(){ hoot(false); say.textContent = ''; }, 500); if (!idle) idle = setInterval(blink, 4200); } else if (idle){ clearInterval(idle); idle = 0; } }, {threshold:.35}); io.observe(stage);
+});
+</script>
+</section>
+
+</div>
 </div>
 </main>
 <footer class="ftr" id="contact">
