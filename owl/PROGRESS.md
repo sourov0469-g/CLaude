@@ -71,3 +71,4 @@
 ## FINAL HOMEPAGE (owner's final build order 2026-11-05: one final version per section, original palette, no switcher, no maps)
 - **Scaffold:** `build_final.py` + `src/final/` (template, sections `NN-name.html`, final.css compat tokens, final.js Blob video helper); the 22-version build frozen as `final/past/owl-roofing-PAST-2026-11-05-fix-22-versions.html`; checks in `final/tools/final-test.cjs` + `tools/final-checks/`.
 - **1 Hero** `final/GATE-FINAL-HERO.md`: OLD Hero V2 unchanged, not pinned (decision and reasoning in the gate). 19/19.
+- **2 Video** `final/GATE-FINAL-VIDEO.md`: V3 lean + light spill, V4 colour lens on a black-and-white film, V5 pieces/moments/scatter again; no strip, no YouTube button. 24/24.

@@ -1,0 +1,136 @@
+<section class="sec vid" id="crew-film" aria-labelledby="vid-h">
+<style>
+/* Video · Our Crew, Up Close. Merge of OLD Video V3 (screen leans toward the cursor, the film's colour spills into the page behind it, sheen),
+   V4 (black-and-white with a colour lens) and V5 (the film arrives in twelve pieces; scatter it again; moments to jump to). No progress strip. */
+@property --spill{syntax:'<color>';inherits:true;initial-value:#EAA221}
+.vid{--spill:#EAA221;text-align:center;overflow:hidden;transition:--spill 1.2s linear;background:radial-gradient(60% 52% at 50% 60%,color-mix(in srgb,var(--spill) 24%,transparent),transparent 72%)}
+.vid .hd{max-width:760px;margin:0 auto}
+.vid .lede{margin:14px auto 0;max-width:58ch}
+.vid .theatre{position:relative;max-width:960px;margin:clamp(28px,4vw,48px) auto 0;perspective:1400px;--rx:0deg;--ry:0deg}
+.vid .glow{position:absolute;inset:-10% -8%;width:116%;height:120%;filter:blur(48px) saturate(1.4);opacity:.6;pointer-events:none;transition:opacity .8s}
+.vid .theatre:hover .glow,.vid .theatre:focus-within .glow{opacity:.9}
+.vid .screen{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#211C1F;transform:rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 34px 60px -30px rgba(23,17,29,.65);touch-action:pan-y;outline-offset:6px}
+.vid .screen:focus-visible{outline:3px solid var(--ink)}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(.95) brightness(1.04)}
+.vid canvas.lens{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vid .ring{position:absolute;left:0;top:0;width:var(--d,200px);height:var(--d,200px);margin:calc(var(--d,200px)/-2) 0 0 calc(var(--d,200px)/-2);border-radius:50%;box-shadow:0 0 0 3px #EAA221,0 0 0 9px rgba(234,162,33,.28),0 18px 36px -10px rgba(0,0,0,.55);pointer-events:none;transform:translate(var(--x,50%),var(--y,50%))}
+.vid .ring b{position:absolute;left:50%;top:calc(100% + 14px);transform:translateX(-50%);white-space:nowrap;padding:6px 12px;border-radius:999px;background:#17111D;color:#F1EFE6;font-size:14px;font-weight:700}
+.vid .ring.up b{top:auto;bottom:calc(100% + 14px)}
+.vid .sheen{position:absolute;inset:0;background:radial-gradient(60% 50% at var(--sx,30%) var(--sy,20%),rgba(255,255,255,.16),transparent 60%);pointer-events:none;mix-blend-mode:screen}
+.vid .tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);pointer-events:none;opacity:0;transition:opacity .9s ease .1s}
+.vid .tiles.run{opacity:1}
+.vid .tiles.done{opacity:0;transition:opacity 1s ease}
+.vid .tile{position:relative;overflow:hidden;margin:-.5px;background:#2a2131;transform:translate3d(var(--x,0),var(--y,0),0) rotateX(var(--rx,0)) rotateY(var(--ry,0)) scale(var(--s,1));transition:transform 1.15s cubic-bezier(.2,1.2,.3,1);transition-delay:var(--d,0s)}
+.vid .tile canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vid .now{position:absolute;left:16px;bottom:16px;text-align:left;max-width:min(66%,420px);color:#FFFDF8;background:rgba(23,17,29,.58);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 14px;border-radius:12px;font-size:15px;line-height:1.4;pointer-events:none}
+.vid .now b{display:block;font-size:16px}
+.vid .pp{position:absolute;right:16px;bottom:16px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:var(--ink);background:radial-gradient(circle at 35% 30%,#FAD07A,#EAA221 55%,#C7871A);box-shadow:0 5px 0 #9C6614,0 12px 20px -8px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .12s,box-shadow .12s}
+.vid .pp:active{transform:translateY(4px);box-shadow:0 1px 0 #9C6614,0 4px 8px -4px rgba(0,0,0,.6)}
+.vid .pp svg{width:22px;height:22px}
+.vid .moms{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:clamp(22px,3vw,34px) auto 0;max-width:960px}
+.vid .moms button{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:6px 16px;border-radius:999px;font-weight:700;background:var(--paper);box-shadow:0 0 0 1px var(--line),0 8px 16px -12px rgba(23,17,29,.5);transition:background .2s,transform .25s cubic-bezier(.3,1.6,.5,1),box-shadow .2s}
+.vid .moms button time{font-size:14px;color:#8E5A12;font-variant-numeric:tabular-nums}
+.vid .moms button:hover{transform:translateY(-2px)}
+.vid .moms button[aria-current="true"]{background:var(--ink);color:var(--cream);box-shadow:0 10px 20px -12px rgba(23,17,29,.7)}
+.vid .moms button[aria-current="true"] time{color:var(--amber)}
+.vid .again{margin-top:18px}
+@media (hover:hover) and (pointer:fine){.vid canvas.lens{cursor:none}}
+@media (max-width:760px){.vid .ring b{font-size:12px;padding:4px 9px}.vid .now{left:10px;bottom:10px;max-width:calc(100% - 76px);padding:7px 10px;font-size:13px;border-radius:10px}.vid .now b{font-size:14px}.vid .now span{display:none}.vid .pp{width:48px;height:48px;right:12px;bottom:12px}}
+@media (prefers-reduced-motion:reduce){.vid .screen{transform:none}.vid .tiles{display:none}.vid{transition:none}}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <h2 class="h2" id="vid-h">Our Crew, Up Close</h2>
+  <p class="lede">Fifteen seconds from real Owl jobs: our own roofers, our own materials. The film is black and white until you look closer. Move the colour lens over it, or pick a moment to jump there.</p>
+ </div>
+ <div class="theatre" data-owl="say:Our crew">
+  <canvas class="glow" width="32" height="18" aria-hidden="true"></canvas>
+  <div class="screen" tabindex="0" role="group" aria-label="Owl crew film with a colour lens. Use the arrow keys to move the lens.">
+   <video poster="{{A:crew-poster.webp}}" muted loop playsinline preload="auto" aria-label="Owl Roofing's crew at work: rafters and decking, shingles carried up, a finished roof"></video>
+   <canvas class="lens" aria-hidden="true"></canvas>
+   <span class="ring" aria-hidden="true"><b></b></span>
+   <div class="tiles" aria-hidden="true"></div>
+   <div class="sheen" aria-hidden="true"></div>
+   <p class="now"><b></b><span></span></p>
+   <button class="pp" type="button" aria-label="Pause the film"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+  </div>
+ </div>
+ <ol class="moms" aria-label="Moments in the film"></ol>
+ <button class="btn btn-line again" type="button" data-mag>Scatter It Again</button>
+</div>
+<script>
+OWL.reg('video','1',function(root){
+  var M = [[0, 'Rafters', 'Two of the crew on open rafters, laying new decking.'],
+           [3.1, 'Materials', 'A bundle of GAF shingles carried up to the roof.'],
+           [6.4, 'The crew', 'One of the crew on the job, a shingle in hand.'],
+           [9.2, 'Finished roof', 'Walking a finished roof of dark architectural shingles.'],
+           [13, 'Decking', 'A sheet of OSB decking carried in for the next roof.']];
+  var sec = root.querySelector('section'), h2 = root.querySelector('h2'), v = root.querySelector('video'), th = root.querySelector('.theatre'), scr = root.querySelector('.screen'),
+      lens = root.querySelector('canvas.lens'), lg = lens.getContext('2d'), ring = root.querySelector('.ring'), tag = ring.querySelector('b'), tiles = root.querySelector('.tiles'),
+      glow = root.querySelector('canvas.glow'), gg = glow.getContext('2d', {willReadFrequently: true}), now = root.querySelector('.now'), pp = root.querySelector('.pp'), moms = root.querySelector('.moms'), again = root.querySelector('.again');
+  OWL.split(h2);
+  v.src = OWL.video('crew', OWL.media.crew); v.load();
+  var poster = new Image(); poster.src = v.getAttribute('poster') || '';
+  var C = 4, R = 3, T = [], W = 0, H = 0, D = 200, dpr = Math.min(1.5, devicePixelRatio || 1);
+  var lx = .5, ly = .5, tx = .5, ty = .5, user = 0, vis = false, cur = -1, intro = 0, introDone = false, tick = 0;
+  function src(){ return v.readyState >= 2 ? v : (poster.complete && poster.naturalWidth ? poster : null); }
+  function cover(s){ var sw = s.videoWidth || s.naturalWidth, sh = s.videoHeight || s.naturalHeight, k = Math.max(W / sw, H / sh); return [(W - sw * k) / 2, (H - sh * k) / 2, sw * k, sh * k]; }
+  function size(){ W = scr.clientWidth; H = scr.clientHeight; lens.width = Math.round(W * dpr); lens.height = Math.round(H * dpr); lg.setTransform(dpr, 0, 0, dpr, 0, 0); D = Math.max(112, Math.min(260, W * .26)); scr.style.setProperty('--d', D + 'px');
+    T.forEach(function(t){ var b = t.el.getBoundingClientRect(), k = Math.min(2, devicePixelRatio || 1); t.cv.width = Math.max(1, Math.round(W / C * k)); t.cv.height = Math.max(1, Math.round(H / R * k)); }); }
+  /* the twelve pieces */
+  for (var i = 0; i < C * R; i++){ var d = document.createElement('div'); d.className = 'tile'; var c = document.createElement('canvas'); d.appendChild(c); tiles.appendChild(d); T.push({el: d, cv: c, ctx: c.getContext('2d'), i: i}); }
+  function paintTiles(){ var s = src(); if (!s) return; var sw = s.videoWidth || s.naturalWidth, sh = s.videoHeight || s.naturalHeight;
+    T.forEach(function(t){ var cx = t.i % C, cy = Math.floor(t.i / C); t.ctx.drawImage(s, cx * sw / C, cy * sh / R, sw / C, sh / R, 0, 0, t.cv.width, t.cv.height); }); }
+  var doneT = 0;
+  function scatter(){ clearTimeout(doneT); tiles.classList.remove('done'); tiles.classList.remove('run');
+    T.forEach(function(t){ t.el.style.transitionDelay = '0s'; t.el.style.transitionDuration = '0s';
+      t.el.style.setProperty('--x', ((Math.random() - .5) * 150).toFixed(0) + '%'); t.el.style.setProperty('--y', ((Math.random() - .5) * 130).toFixed(0) + '%');
+      t.el.style.setProperty('--rx', ((Math.random() - .5) * 110).toFixed(0) + 'deg'); t.el.style.setProperty('--ry', ((Math.random() - .5) * 130).toFixed(0) + 'deg'); t.el.style.setProperty('--s', (.5 + Math.random() * .4).toFixed(2)); }); }
+  function assemble(){ intro = performance.now(); introDone = false; tiles.classList.add('run');
+    T.forEach(function(t){ var cx = t.i % C, cy = Math.floor(t.i / C); t.el.style.transitionDuration = ''; t.el.style.transitionDelay = ((cx + cy) * .08).toFixed(2) + 's';
+      ['--x', '--y', '--rx', '--ry'].forEach(function(p){ t.el.style.setProperty(p, '0'); }); t.el.style.setProperty('--s', '1'); });
+    doneT = setTimeout(function(){ tiles.classList.add('done'); introDone = true; }, 2300); }
+  function replay(){ if (OWL.reduce) return; scatter(); void tiles.offsetWidth; requestAnimationFrame(function(){ requestAnimationFrame(assemble); }); }
+  again.addEventListener('click', replay);
+  /* the moments */
+  M.forEach(function(m, j){ var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<time>0:' + ('0' + Math.floor(m[0])).slice(-2) + '</time>' + m[1];
+    b.setAttribute('aria-label', m[1] + ', ' + Math.floor(m[0]) + ' seconds: ' + m[2]);
+    b.addEventListener('click', function(){ v.currentTime = m[0]; OWL.play(v); mark(j); }); li.appendChild(b); moms.appendChild(li); });
+  function mark(j){ if (j === cur) return; cur = j; tag.textContent = M[j][1]; now.querySelector('b').textContent = M[j][1]; now.querySelector('span').textContent = M[j][2];
+    [].forEach.call(moms.querySelectorAll('button'), function(b, k){ b.setAttribute('aria-current', k === j); }); }
+  function moment(){ var t = v.currentTime || 0, j = 0; M.forEach(function(m, k){ if (t >= m[0] - .05) j = k; }); mark(j); }
+  /* the colour lens: a true-colour disc punched into the black-and-white film */
+  function paintLens(){ lg.clearRect(0, 0, W, H); var s = src(); if (!s) return; var r = cover(s), x = lx * W, y = ly * H;
+    lg.save(); lg.beginPath(); lg.arc(x, y, D / 2, 0, Math.PI * 2); lg.clip(); lg.drawImage(s, r[0], r[1], r[2], r[3]); lg.restore();
+    ring.style.setProperty('--x', x + 'px'); ring.style.setProperty('--y', y + 'px'); ring.classList.toggle('up', ly > .62); }
+  /* the light spill: the film in a 32 x 18 canvas, blurred by CSS; its average colour tints the page behind */
+  function spill(avg){ var s = src(); if (!s) return; try { gg.drawImage(s, 0, 0, 32, 18); if (avg){ var d = gg.getImageData(0, 0, 32, 18).data, r = 0, g = 0, b = 0, n = d.length / 4; for (var i = 0; i < d.length; i += 4){ r += d[i]; g += d[i + 1]; b += d[i + 2]; } sec.style.setProperty('--spill', 'rgb(' + Math.round(r / n) + ',' + Math.round(g / n) + ',' + Math.round(b / n) + ')'); } } catch (e) {} }
+  /* pointer, touch and keys move the lens; left alone, it wanders so the idea shows itself */
+  function at(e){ user = performance.now(); tx = Math.max(0, Math.min(1, e.offsetX / W)); ty = Math.max(0, Math.min(1, e.offsetY / H)); }
+  lens.addEventListener('pointermove', at); lens.addEventListener('pointerdown', at);
+  scr.addEventListener('keydown', function(e){ var d = .06, k = e.key; if (k === 'ArrowLeft') tx -= d; else if (k === 'ArrowRight') tx += d; else if (k === 'ArrowUp') ty -= d; else if (k === 'ArrowDown') ty += d; else return; e.preventDefault(); user = performance.now();
+    tx = Math.max(0, Math.min(1, tx)); ty = Math.max(0, Math.min(1, ty)); if (OWL.reduce){ lx = tx; ly = ty; paintLens(); } });
+  var pauseI = pp.innerHTML, playI = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+  function setPP(){ pp.innerHTML = v.paused ? playI : pauseI; pp.setAttribute('aria-label', v.paused ? 'Play the film' : 'Pause the film'); }
+  v.addEventListener('play', setPP); v.addEventListener('pause', setPP); pp.addEventListener('click', function(){ v.paused ? OWL.play(v) : v.pause(); });
+  size(); addEventListener('resize', function(){ size(); paintLens(); }); poster.onload = function(){ paintLens(); spill(true); }; mark(0); setPP();
+  if (OWL.reduce){ v.removeAttribute('autoplay'); v.pause(); tx = lx = .5; ty = ly = .5; paintLens(); spill(true); OWL.reveal(h2); setPP(); return; }
+  /* the screen leans toward the pointer, the sheen follows it */
+  var sx = 0, sy = 0, px = 0, py = 0;
+  if (OWL.fine){ th.addEventListener('pointermove', function(e){ var r = th.getBoundingClientRect(); px = (e.clientX - r.left) / r.width - .5; py = (e.clientY - r.top) / r.height - .5; scr.style.setProperty('--sx', ((px + .5) * 100).toFixed(1) + '%'); scr.style.setProperty('--sy', ((py + .5) * 100).toFixed(1) + '%'); });
+    th.addEventListener('pointerleave', function(){ px = py = 0; }); }
+  scatter();
+  var started = false;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis){ OWL.reveal(h2); OWL.play(v); if (!started){ started = true; requestAnimationFrame(function(){ requestAnimationFrame(assemble); }); } } else v.pause(); }, {threshold: .35}).observe(th);
+  else { vis = true; started = true; OWL.play(v); assemble(); }
+  var last = performance.now();
+  (function loop(n){ requestAnimationFrame(loop); if (!vis || document.hidden){ last = n; return; }
+    var dt = Math.min(1 / 30, (n - last) / 1000); last = n; var al = 1 - Math.pow(1 - .06, dt * 60); sx += (px - sx) * al; sy += (py - sy) * al;
+    th.style.setProperty('--ry', (sx * 5).toFixed(2) + 'deg'); th.style.setProperty('--rx', (-sy * 3.5).toFixed(2) + 'deg');
+    if (performance.now() - user > 3500){ var k = n / 1000; tx = .5 + Math.sin(k * .5) * .3; ty = .5 + Math.sin(k * .83) * .2; }
+    lx += (tx - lx) * .12; ly += (ty - ly) * .12; paintLens(); if (!introDone && started) paintTiles(); moment();
+    if ((tick++ & 3) === 0) spill((tick & 31) === 1);
+  })(last);
+});
+</script>
+</section>
