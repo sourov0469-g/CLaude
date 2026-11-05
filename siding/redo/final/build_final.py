@@ -27,12 +27,36 @@ def hero():
 <p class="fh-cap">{e(q['place'])} · {e(q['when'])} · {e(q['trades'])}</p></div><span class="fh-scroll" aria-hidden="true"><i></i></span></section>'''
 
 
+VIDEO = {'d': 'https://www.austinprosiding.com/videos/hero-test.mp4', 't': 'https://www.austinprosiding.com/videos/hero-tablet.mp4', 'm': 'https://www.austinprosiding.com/videos/hero-mobile.mp4'}   # the firm's own hero film (LINKED, never embedded); the only outside address in the file, used as a media source, not a link
+
+
+def wall():
+    """Section 2: the wall and the video (Hero V9's idea, 'type as the house', moved here by the owner). Wall type = the firm's own published line;
+    the paragraph over the film = the firm's own published sentences."""
+    e = html.escape
+    LINE = ['One free', 'inspection', 'covers every', 'trade on the', 'house.']; assert ' '.join(LINE) == 'One free inspection covers every trade on the house.'
+    F = json.load(open(os.path.join(WORK, 'data', 'faq.json'))); faq = ' '.join(a for k in F for _, a in F[k])
+    P1 = 'A project manager walks every side of the house: siding, trim, windows, roof and gutters.'; P2 = 'The inspection and estimate are free.'
+    assert P2 in faq and 'One free inspection covers every trade on the house.' in open(os.path.join(SITE, 'src', 'sec', 'svc8.js')).read()
+    assert P1 in open(os.path.join(SITE, 'src', 'sec', 'proc9.js')).read()
+    poster = 'data:image/jpeg;base64,' + b64(os.path.join(HERE, 'assets', 'wall', 'poster.jpg'))
+    lines = ' '.join(f'<span class="l">{e(t)}{"<span class=fw-win aria-hidden=true></span>" if i == 3 else ""}</span>' for i, t in enumerate(LINE))
+    sash = '<div class="fw-s %s"><i></i></div>'
+    return f'''<section class="fw" id="wall" aria-labelledby="fw-h" data-vd="{VIDEO['d']}" data-vt="{VIDEO['t']}" data-vm="{VIDEO['m']}"><div class="fw-pin" data-p0>
+<div class="fw-wall" aria-hidden="true"><svg class="fw-lamp" viewBox="0 0 120 170" focusable="false"><defs><radialGradient id="fwG" cx="50%" cy="22%" r="70%"><stop offset="0" stop-color="#FFE9B0" stop-opacity=".75"/><stop offset="1" stop-color="#FFE9B0" stop-opacity="0"/></radialGradient><linearGradient id="fwC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".5"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></linearGradient></defs><path class="fw-cone" d="M34 78 L-10 170 H130 L86 78Z" fill="url(#fwC)"/><ellipse class="fw-glow" cx="60" cy="86" rx="54" ry="46" fill="url(#fwG)"/><path d="M60 8V30C60 44 60 52 60 62" fill="none" stroke="#1C2420" stroke-width="5" stroke-linecap="round"/><rect x="46" y="2" width="28" height="9" rx="3" fill="#1C2420"/><path d="M26 82C26 62 42 54 60 54S94 62 94 82Z" fill="#242D28"/><path d="M30 80C32 66 44 59 60 59" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="82" rx="34" ry="5" fill="#FFE9B0" opacity=".9"/></svg><i class="fw-pipe"></i></div><h2 class="fw-h" id="fw-h"><span class="w">{lines}</span></h2>
+<div class="fw-vid"><video muted loop playsinline preload="none" poster="{poster}" aria-label="The firm's own film: a finished home in golden light" disablepictureinpicture></video></div>
+<div class="fw-frame" aria-hidden="true"><div class="fw-cas"></div><div class="fw-op">{sash % 'a'}{sash % 'b'}</div><div class="fw-sill"></div></div>
+<div class="fw-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14M6 13l6 6 6-6"/></svg>Scroll to open the window</div>
+<div class="fw-over"><p>{e(P1)} {e(P2)}</p><div class="fw-act"><a class="btn key" href="{CONTACT}">Book a free inspection<span class="tab">{I['cal']}</span></a><a class="callx" href="tel:+15125500000">{I['phone']}(512) 550-0000</a></div></div>
+<button type="button" class="fw-pp" data-play='{I["play"]}' data-pause='{I["pause"]}' aria-label="Pause the film" aria-pressed="false">{I['pause']}</button></div></section>'''
+
+
 def build():
-    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css')
+    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css')
     hdr = HEADER.replace(BOOKING_URL, CONTACT).replace('href="#work"', 'href="#area"'); mbar = MBAR.replace(BOOKING_URL, CONTACT)
-    main = hero()
-    js = SRC('hero.js')
-    boot = 'FHero.wire(document);'
+    main = hero() + wall()
+    js = SRC('hero.js') + SRC('wall.js')
+    boot = 'FHero.wire(document);FWall.wire(document);'
     out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
@@ -45,4 +69,4 @@ if __name__ == '__main__':
     os.makedirs(os.path.join(HERE, 'out'), exist_ok=True)
     h = build(); open(os.path.join(HERE, 'out', 'final.html'), 'w').write(h)
     ext = re.findall(r'(?:href|src|action)="(https?://[^"]+)"', h)
-    print('final.html bytes', len(h.encode()), '| external URLs:', ext)
+    print('final.html bytes', len(h.encode()), '| outside addresses (media sources only):', ext)

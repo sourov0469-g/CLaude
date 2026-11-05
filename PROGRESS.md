@@ -1488,3 +1488,9 @@ The pause was lifted by the owner's final plan: ONE version, no switcher, no hid
 - Full-bleed real photo (#36, the 1900 px original, graded) under the header; the firm's headline between two layers of the same photo (a 1900 px sky matte, edge-unmixed front layer, clean back plate); less text; entrance, pointer depth, scroll sink; 37/37 checks; no external link in the file.
 - **Honest photo statement:** no published photo is hero-grade; #36 is the best fit but overcast and phone-quality; Muse may supply a better photo (spec in the gate); `tools/prep_hero.py` regenerates the layers.
 - File: 978,963 bytes. Sub-agents: none for the hero.
+
+**Hero gate record fixed** (reference, WEB-SKILLS ledger, scorecard 8.39; no rebuild). Muse's rulings: hero photo #36 stays until Muse finds a better one; the Section 2 video is the firm's own hero film, linked never embedded (no YouTube invented); wall text = the firm's own line and published sentences.
+
+**Section 2, the wall and the video (GATE-FINAL-Wall.md): built and gated; waiting for Muse's judgment (work continues with Section 3 per the plan).**
+- A pinned wall: the firm's published line in huge type on a drawn lap-siding wall; scroll swings real casement sashes open, a rectangle grows from the window to the whole screen, the firm's own film (linked) grows with it while the wall type fades; the published paragraph and Book land on the playing film. Reduced-motion and film-failed fallbacks. 40/40 checks; score 8.62; file 1.11 MB.
+- Sub-agents: two read-only prep agents (Windows kinds, Services A inventory); findings in `siding/redo/prep/final/`.
