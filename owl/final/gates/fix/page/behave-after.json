@@ -1,0 +1,30 @@
+{
+ "desktop": {
+  "steps": 36,
+  "errors": [],
+  "invisibleTextInView": [],
+  "maskedNumbers": 0,
+  "sections": [
+   "finder",
+   "nothing",
+   "numbers",
+   "people",
+   "towns",
+   "call"
+  ]
+ },
+ "iphone": {
+  "steps": 49,
+  "errors": [],
+  "invisibleTextInView": [],
+  "maskedNumbers": 0,
+  "sections": [
+   "finder",
+   "nothing",
+   "numbers",
+   "people",
+   "towns",
+   "call"
+  ]
+ }
+}

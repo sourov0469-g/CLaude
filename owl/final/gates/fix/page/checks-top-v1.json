@@ -1,0 +1,138 @@
+{
+ "section": "top",
+ "version": 1,
+ "total": 26,
+ "passed": 26,
+ "results": [
+  {
+   "name": "the switcher shows this version: top V1",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | page-wide: no repeats"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"65b1350551\":1}"
+  },
+  {
+   "name": "Owl’s own crew film plays (from a Blob URL, the phone-safe way), labelled “Owl’s crew at work”",
+   "ok": true,
+   "info": "{\"blob\":true,\"t\":3.075328,\"w\":835,\"nw\":960,\"tag\":\"Owl’s crew at work\",\"sticky\":\"sticky\",\"h\":1.9}"
+  },
+  {
+   "name": "sharp by construction: the 960 px film is framed no wider than 960 px on a 1440 screen",
+   "ok": true,
+   "info": "835 px frame for a 960 px film"
+  },
+  {
+   "name": "a short pinned arrival (sticky stage, at most 2 screens)",
+   "ok": true,
+   "info": "1.90 screens"
+  },
+  {
+   "name": "scroll turns “Roof trouble? We’ll take it from here.” into “You call. We climb. You relax.” and back",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "only locked facts on the film: 5.0 · 90+ reviews, GAF Systems Plus, 10-year workmanship warranty",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the cue goes straight to the problem-finder",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "video 0.87x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "video 0.75x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no film loaded, the crew poster stays, the beats still turn",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

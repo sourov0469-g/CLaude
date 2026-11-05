@@ -1,0 +1,138 @@
+{
+ "section": "nothing",
+ "version": 1,
+ "total": 26,
+ "passed": 26,
+ "results": [
+  {
+   "name": "the switcher shows this version: nothing V1",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | page-wide: no repeats"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"2b9cc43391\":1}"
+  },
+  {
+   "name": "a pinned stage, 4.5 screens (shortened from 5.4)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the scrub: film time rises with scroll and falls back when you scroll up (Blob URL)",
+   "ok": true,
+   "info": "0.99 → 5.02 → 9.06 → 5.04"
+  },
+  {
+   "name": "five beats follow scroll, with the “meanwhile, you” line",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "different footage from the hero, labelled honestly: “Illustrative footage” (not “Owl’s crew film”)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "beat 1 follows the case chosen above (none chosen: “We look closely first.”)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the rail jumps to a step (Clean)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "video 1.00x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "video 0.45x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no film is loaded or scrubbed, the still stays, the beats still follow",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

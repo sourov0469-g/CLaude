@@ -1,0 +1,148 @@
+{
+ "section": "call",
+ "version": 1,
+ "total": 28,
+ "passed": 28,
+ "results": [
+  {
+   "name": "the switcher shows this version: call V1",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | page-wide: no repeats"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"52527d06aa\":1}"
+  },
+  {
+   "name": "today’s hours in Shoreview time, with the clock said in words: open Wed 10:20; closed Sat 19:00 (opens Monday); closed Wed 03:12 (opens today at 08:00)",
+   "ok": true,
+   "info": "Open nowIt’s 10:20 on Wednesday in Shoreview, MN.Until 18:00 today, Sh / Closed nowIt’s 19:00 on Saturday in Shoreview, MN.We open Monday at 08 / Closed nowIt’s 03:12 on Wednesday in Shoreview, MN.We open today at 08"
+  },
+  {
+   "name": "the number is a real tel link and the call pill steps aside here",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "your choices reach the end: the headline says “Tell us about the storm.”, the email subject is “Roof help: After a storm” with “My town: Stillwater” in the body",
+   "ok": true,
+   "info": "mailto:info@owlroofing.com?subject=Roof help: After a storm&body=Hello Owl Roofi"
+  },
+  {
+   "name": "the site’s own email note, word for word",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the closing facts: Owl Roofing LLC, the address, licence #BC809662, info@owlroofing.com, We Give a Hoot",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the number is the end card: at least 120 px on desktop, its line in the call colour",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the week strip: Mon–Sat 8–6, Sunday closed, today marked",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the owl illustration appears here and nowhere else on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "img.perch 0.09x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the number, its line and the owl are in place at once",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

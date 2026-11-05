@@ -1,0 +1,133 @@
+{
+ "section": "people",
+ "version": 2,
+ "total": 25,
+ "passed": 25,
+ "results": [
+  {
+   "name": "the switcher shows this version: people V2",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | page-wide: no repeats"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"0d6b1544dc\":1,\"837fb57d1d\":1,\"50c5463931\":1,\"66017dd38e\":1,\"273d497e23\":1}"
+  },
+  {
+   "name": "five prints of Owl’s own photos, each a real button, none wider than its photo",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "tapping the Browns’ print brings it to the front and turns it over to the names",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "dragging moves a print (and a drag is not a tap: it does not turn over)",
+   "ok": true,
+   "info": "[[574.9334106445312,483.2044372558594],[685.2005004882812,468.8966064453125,false]]"
+  },
+  {
+   "name": "keyboard: Enter turns a print over (Noah, ladder in hand)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the facts beside the table are locked ones: founded 2025 by Tim Brown and Noah Bergland, family-owned, Shoreview, GAF Systems Plus",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (5 media measured)",
+   "ok": true,
+   "info": "img 0.44x, img 0.71x, img 0.54x, img 0.66x, img 0.61x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (5 media measured)",
+   "ok": true,
+   "info": "img 0.50x, img 0.81x, img 0.62x, img 0.75x, img 0.70x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the print turns at once",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

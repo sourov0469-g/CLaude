@@ -1,0 +1,133 @@
+{
+ "section": "finder",
+ "version": 1,
+ "total": 25,
+ "passed": 25,
+ "results": [
+  {
+   "name": "the switcher shows this version: finder V1",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | page-wide: no repeats"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"43a2214f3f\":1}"
+  },
+  {
+   "name": "six cases, each pill a drawn symbol, not a photo (the dock likewise)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "choosing “After a storm” lifts the curtain onto the storm scene, docks the choice in the bar, and shares the case",
+   "ok": true,
+   "info": "{\"cas\":\"storm\",\"gone\":true,\"h\":\"Storm hit? We’ll check it properly.\",\"alt\":\"Houses under a heavy storm sky (illustrative photo)\",\"nw\":2000,\"tag\":\"Illustrative photo\",\"dock\":true,\"call\":true}"
+  },
+  {
+   "name": "the scene photo is sharp stock (2000 px), described, and tagged “Illustrative photo”; the call is the copper phone action",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the dock changes the case from anywhere (to “A leak”)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "another section can open a case here (RESET.openCase)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "img 0.46x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "img 0.55x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the choice swaps at once (no curtain animation)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
