@@ -1,0 +1,142 @@
+{
+ "section": "areas",
+ "pass": 27,
+ "total": 27,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"7776b798dd\":1}"
+  },
+  {
+   "name": "a real photograph and one search bar; no row of 29 towns, no map",
+   "ok": true,
+   "info": "{\"img\":true,\"inputs\":1,\"list29\":0,\"maps\":false}"
+  },
+  {
+   "name": "clicking the bar opens all 29 towns, nearest first (Shoreview), with distances",
+   "ok": true,
+   "info": "{\"open\":true,\"n\":29,\"first\":\"Shoreviewhome base\",\"exp\":\"true\"}"
+  },
+  {
+   "name": "hovering an option highlights it (and tells assistive tech)",
+   "ok": true,
+   "info": "{\"t\":\"North Oaksabout 4 mi\",\"sel\":\"true\",\"ad\":true}"
+  },
+  {
+   "name": "clicking an option fills the bar, answers with the distance and closes the list",
+   "ok": true,
+   "info": "{\"v\":\"North Oaks\",\"ans\":\"Yes, we come to North Oaks.About 4 miles from our Shoreview base, as the owl flies.\",\"open\":false,\"town\":\"North Oaks\"}"
+  },
+  {
+   "name": "typing \"wood\" narrows to Woodbury and answers",
+   "ok": true,
+   "info": "{\"n\":2,\"first\":\"Woodburyabout 14 mi\",\"ans\":\"Yes, we come to Woodbury.About 14 miles from our Shoreview base, as the owl flies.\"}"
+  },
+  {
+   "name": "keyboard: arrows move, Enter chooses",
+   "ok": true,
+   "info": "{\"v\":\"New Brighton\",\"open\":false}"
+  },
+  {
+   "name": "Escape closes the list",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "\"st paul\" is understood as Saint Paul",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "an unlisted town gets the honest answer and the one phone number",
+   "ok": true,
+   "info": "{\"ans\":\"Duluth isn’t on our list of 29 towns.Call (651) 977-6027 and ask; we’ll tell you straight.\",\"none\":\"No town like that on our list of 29. Call (651) 977-6027 and ask.\",\"tel\":[\"tel:+16519776027\""
+  },
+  {
+   "name": "typed text is never injected as markup",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "Shoreview gives the real address",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the clear button empties the bar and reopens the list",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "phone: tapping the bar lists 29 towns and tapping one chooses it",
+   "ok": true,
+   "info": "[29,{\"v\":\"Little Canada\",\"ans\":\"Yes, we come to Little Canada.About 5 miles from our Shoreview base, as the owl flies.\"}]"
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (1 media measured)",
+   "ok": true,
+   "info": "img.bgph 0.60x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (1 media measured)",
+   "ok": true,
+   "info": "img.bgph 0.55x"
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 828 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 800 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 721 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the bar is usable",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

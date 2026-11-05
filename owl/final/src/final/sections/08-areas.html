@@ -1,0 +1,103 @@
+<section class="towns" id="areas" aria-labelledby="tw-h">
+<style>
+/* Section 8 · Do you come to me? NEW Towns V3 "From above", rebuilt for the plan: a real photograph and just the search bar. No list of 29 towns under it, no map.
+   The search is a real combobox: focus or click opens all 29 towns (nearest first, with the distance), typing narrows them, hover or the arrow keys
+   highlight, click, tap or Enter chooses, Escape closes. */
+.towns{position:relative;padding:0 0 clamp(60px,8vh,100px)}
+.towns .hero{position:relative;min-height:84vh;min-height:84svh;display:flex;align-items:center;background:#1E2A22}
+.towns .bgph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.towns .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,18,22,.6),rgba(14,18,22,.16) 60%,rgba(14,18,22,0))}
+.towns .tag{position:absolute;right:clamp(14px,3vw,44px);bottom:16px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:700}
+.towns .tq{position:relative;z-index:3;margin:96px clamp(16px,5vw,90px) 96px;width:min(540px,calc(100% - 32px));padding:clamp(22px,2.6vw,34px);border-radius:26px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(0,0,0,.65)}
+.towns h2{margin:0;font-size:clamp(34px,3.6vw,54px);font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--ink)}
+.towns label{display:block;margin:18px 0 8px;font-size:15px;font-weight:700;color:var(--ink-70)}
+.towns .cb{position:relative}
+.towns .cb input{width:100%;min-height:60px;padding:0 54px 0 18px;border:2px solid var(--ink);border-radius:16px;background:#fff;color:var(--ink);font:inherit;font-size:20px;font-weight:700}
+.towns .cb input::placeholder{color:#6B6470;font-weight:600}
+.towns .cb input:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.towns .cb .x{position:absolute;right:6px;top:8px;width:44px;height:44px;border-radius:12px;display:none;place-items:center}
+.towns .cb .x.on{display:grid}
+.towns .cb .x:hover{background:rgba(234,162,33,.2)}
+.towns .cb .x svg{width:18px;height:18px}
+.towns .lb{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:5;max-height:min(300px,40vh);overflow-y:auto;overscroll-behavior:contain;margin:0;padding:6px;list-style:none;border-radius:16px;background:#fff;box-shadow:0 0 0 1.5px rgba(23,17,29,.14),0 26px 44px -18px rgba(23,17,29,.55)}
+.towns .lb[hidden]{display:none}
+.towns .lb li{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:6px 12px;border-radius:11px;font-size:17px;font-weight:700;cursor:pointer;color:var(--ink)}
+.towns .lb li small{flex:none;font-size:14px;font-weight:600;color:var(--ink-70)}
+.towns .lb li.act{background:var(--ink);color:var(--cream)}
+.towns .lb li.act small{color:rgba(241,239,230,.8)}
+.towns .lb li.none{cursor:default;font-weight:600;color:var(--ink-70);display:block}
+.towns .lb li.none a{font-weight:800;color:var(--ink)}
+.towns .ans{margin:16px 0 0;min-height:60px;font-size:19px;line-height:1.4;color:var(--ink)}
+.towns .ans b{font-weight:900}.towns .ans small{display:block;margin-top:4px;font-size:15px;color:var(--ink-70)}
+.towns .ans a{font-weight:800}
+@media (max-width:860px){.towns .hero{min-height:0;display:block;padding:72px 0 0;background:transparent}.towns .hero .bgph{position:relative;display:block;height:44vh}.towns .shade{display:none}.towns .tq{margin:-56px 16px 0;width:auto}.towns .tag{top:84px;bottom:auto}.towns{padding-bottom:70px}}
+@media (prefers-reduced-motion:reduce){.towns *{transition:none!important}}
+</style>
+<div class="hero">
+ <img class="bgph" src="{{A:stock/towns-above.webp}}" alt="An autumn suburb seen from above: streets, roofs and trees (illustrative photo)" width="2400" height="1348">
+ <div class="shade" aria-hidden="true"></div>
+ <span class="tag">Illustrative photo</span>
+ <div class="tq" data-owl="say:Your town?">
+  <h2 id="tw-h">Do you come to me?</h2>
+  <label for="tw-in" id="tw-l">Type or choose your town</label>
+  <div class="cb">
+   <input id="tw-in" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="tw-lb" aria-haspopup="listbox" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="e.g. Woodbury">
+   <button class="x" type="button" aria-label="Clear the town"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+   <ul class="lb" id="tw-lb" role="listbox" aria-labelledby="tw-l" hidden></ul>
+  </div>
+  <p class="ans" aria-live="polite">We come to 29 towns around Shoreview, MN.</p>
+ </div>
+</div>
+<script>
+OWL.reg('areas','1',function(root){
+  var sec = root.querySelector('section'), input = sec.querySelector('input'), ans = sec.querySelector('.ans'), lb = sec.querySelector('.lb'), clr = sec.querySelector('.x');
+  /* Owl's 29 towns (the site's own list); approximate public coordinates, used only for straight-line distance */
+  var T = [['Shoreview',45.079,-93.147],['North Oaks',45.103,-93.079],['Arden Hills',45.050,-93.156],['Vadnais Heights',45.057,-93.074],['Little Canada',45.027,-93.088],['Roseville',45.006,-93.157],['Mounds View',45.105,-93.208],['New Brighton',45.066,-93.202],['Lino Lakes',45.160,-93.089],['Blaine',45.161,-93.235],['White Bear Lake',45.085,-93.010],['Maplewood',44.953,-92.995],['Fridley',45.086,-93.263],['Saint Paul',44.954,-93.090],['Minneapolis',44.978,-93.265],['Forest Lake',45.279,-92.985],['Coon Rapids',45.173,-93.303],['Oakdale',44.963,-92.965],['Stillwater',45.056,-92.806],['Woodbury',44.924,-92.959],['Maple Grove',45.073,-93.456],['Plymouth',45.011,-93.455],['Minnetonka',44.921,-93.468],['Edina',44.889,-93.350],['Eden Prairie',44.855,-93.471],['Bloomington',44.841,-93.298],['Eagan',44.804,-93.167],['Burnsville',44.768,-93.278],['Apple Valley',44.732,-93.218]];
+  function miles(t){ var R = 3958.8, r = Math.PI / 180, a = T[0], dl = (t[1] - a[1]) * r, dg = (t[2] - a[2]) * r, h = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[1] * r) * Math.cos(t[1] * r) * Math.sin(dg / 2) * Math.sin(dg / 2); return 2 * R * Math.asin(Math.sqrt(h)); }
+  var order = T.map(function(t, i){ return i; }).sort(function(a, b){ return miles(T[a]) - miles(T[b]); });
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  function dist(i){ return i ? 'about ' + Math.round(miles(T[i])) + ' mi' : 'home base'; }
+  var shown = [], act = -1, chosen = -1;
+  function open(){ lb.hidden = false; input.setAttribute('aria-expanded', 'true'); }
+  function close(){ lb.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); act = -1; [].forEach.call(lb.children, function(li){ li.classList.remove('act'); li.removeAttribute('aria-selected'); }); }
+  function setAct(k, scroll){ act = k; [].forEach.call(lb.children, function(li, j){ var on = j === k; li.classList.toggle('act', on); if (li.getAttribute('role') === 'option'){ if (on) li.setAttribute('aria-selected', 'true'); else li.removeAttribute('aria-selected'); } if (on){ input.setAttribute('aria-activedescendant', li.id); if (scroll) li.scrollIntoView({block: 'nearest'}); } }); if (k < 0) input.removeAttribute('aria-activedescendant'); }
+  function render(q){
+    lb.textContent = ''; shown = [];
+    var starts = [], has = [];
+    order.forEach(function(i){ var n = norm(T[i][0]); if (!q) starts.push(i); else if (n.indexOf(q) === 0) starts.push(i); else if (n.indexOf(q) > 0 || n.split(' ').some(function(w){ return w.indexOf(q) === 0; })) has.push(i); });
+    shown = starts.concat(has);
+    shown.forEach(function(i, k){ var li = document.createElement('li'); li.id = 'tw-o' + i; li.setAttribute('role', 'option'); li.dataset.i = i; var a = document.createElement('span'), s = document.createElement('small'); a.textContent = T[i][0]; s.textContent = dist(i); li.appendChild(a); li.appendChild(s); lb.appendChild(li); });
+    if (!shown.length){ var li = document.createElement('li'); li.className = 'none'; li.setAttribute('role', 'presentation'); li.innerHTML = 'No town like that on our list of 29. <a href="tel:+16519776027">Call (651) 977-6027</a> and ask.'; lb.appendChild(li); }
+    act = -1; input.removeAttribute('aria-activedescendant');
+  }
+  function say(nodes){ ans.textContent = ''; nodes.forEach(function(n){ ans.appendChild(n); }); }
+  function el(tag, txt){ var e = document.createElement(tag); e.textContent = txt; return e; }
+  function share(n){ try { sessionStorage.setItem('owlTown', n); } catch (e){} OWL.town = n; document.dispatchEvent(new CustomEvent('owl:town', { detail: n })); }
+  function answer(i){ chosen = i; var t = T[i]; sec.dataset.town = t[0]; share(t[0]);
+    if (!i) say([el('b', 'Yes. Shoreview is home.'), el('small', 'Our office is at 1000 County Rd E #230, Shoreview, MN 55126.')]);
+    else say([el('b', 'Yes, we come to ' + t[0] + '.'), el('small', 'About ' + Math.round(miles(t)) + ' miles from our Shoreview base, as the owl flies.')]); }
+  function choose(i){ input.value = T[i][0]; clr.classList.add('on'); answer(i); close(); input.focus(); }
+  function reset(){ chosen = -1; sec.dataset.town = ''; say([document.createTextNode('We come to 29 towns around Shoreview, MN.')]); }
+  function exact(q){ var i = T.findIndex(function(t){ return norm(t[0]) === q; }); if (i < 0 && q.length >= 3) i = T.findIndex(function(t){ return norm(t[0]).indexOf(q) === 0; }); return i; }
+  input.addEventListener('input', function(){ var q = norm(input.value); clr.classList.toggle('on', !!input.value); render(q); open();
+    if (!q){ reset(); return; }
+    var i = exact(q); if (i > -1){ answer(i); setAct(shown.indexOf(i), true); return; }
+    chosen = -1; sec.dataset.town = '';
+    if (q.length >= 3){ var a = el('b', input.value.trim() + ' isn’t on our list of 29 towns.'); say([a, el('small', 'Call (651) 977-6027 and ask; we’ll tell you straight.')]); } else reset(); });
+  input.addEventListener('focus', function(){ if (lb.hidden){ render(norm(input.value) === (chosen > -1 ? norm(T[chosen][0]) : '') ? '' : norm(input.value)); open(); } });
+  input.addEventListener('click', function(){ if (lb.hidden){ render(chosen > -1 ? '' : norm(input.value)); open(); } });
+  input.addEventListener('keydown', function(e){ var k = e.key;
+    if (k === 'ArrowDown' || k === 'ArrowUp'){ e.preventDefault(); if (lb.hidden){ render(chosen > -1 ? '' : norm(input.value)); open(); } if (!shown.length) return; var n = act < 0 ? (k === 'ArrowDown' ? 0 : shown.length - 1) : (act + (k === 'ArrowDown' ? 1 : -1) + shown.length) % shown.length; setAct(n, true); }
+    else if (k === 'Enter'){ if (!lb.hidden && act > -1){ e.preventDefault(); choose(shown[act]); } else if (!lb.hidden && shown.length === 1){ e.preventDefault(); choose(shown[0]); } }
+    else if (k === 'Escape'){ if (!lb.hidden){ e.preventDefault(); close(); } }
+    else if (k === 'Tab'){ close(); } });
+  /* hover moves the highlight; click or tap chooses; the input keeps focus */
+  lb.addEventListener('pointerdown', function(e){ e.preventDefault(); });
+  lb.addEventListener('pointermove', function(e){ var li = e.target.closest('li[role="option"]'); if (li) setAct([].indexOf.call(lb.children, li), false); });
+  lb.addEventListener('click', function(e){ var li = e.target.closest('li[role="option"]'); if (li) choose(+li.dataset.i); });
+  document.addEventListener('pointerdown', function(e){ if (!lb.hidden && !sec.querySelector('.cb').contains(e.target)) close(); });
+  clr.addEventListener('click', function(){ input.value = ''; clr.classList.remove('on'); reset(); render(''); open(); input.focus(); });
+  render('');
+});
+</script>
+</section>

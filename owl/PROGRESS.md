@@ -77,3 +77,4 @@
 - **5 Your part: nothing** `final/GATE-FINAL-NOTHING.md`: NEW V1 Scroll film ported to the original palette; beat 1 follows what the visitor said in section 3. 21/21.
 - **6 Services** `final/GATE-FINAL-SERVICES.md`: OLD Services V8 Name Your Job; photos shown at their own pixels (floating in its own shape; on phones inside the details). 19/19.
 - **7 Reviews** `final/GATE-FINAL-REVIEWS.md`: OLD Reviews V3 water kept; card rebuilt (stars pop in, 5.0, 90+ reviews, proofs with icons, leans toward the pointer, 'Touch the water' hint). 22/22.
+- **8 Areas** `final/GATE-FINAL-AREAS.md`: NEW Towns V3 rebuilt: aerial photo + one search bar; custom combobox (hover, click, tap, arrows, Enter, Escape) listing 29 towns nearest first; no row of names, no map. 27/27.
