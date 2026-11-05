@@ -41,7 +41,7 @@
   {
    "name": "the links go to the Services, Wise Check and About pages and this page's sections (no Protect Your Nest link)",
    "ok": true,
-   "info": "#/services,#/wise-check,#ask-owl,#/about,#reviews,#areas,#book"
+   "info": "#/services,#/wise-check,#ask-owl,#/about,#reviews,#areas,#book,#/contact"
   },
   {
    "name": "the proofs and the address, hours and one phone number are exact",
@@ -106,7 +106,7 @@
   {
    "name": "a Back to top button appears after the first screen, with a ring that shows how far down you are",
    "ok": true,
-   "info": "[false,{\"on\":true,\"p\":0.2869}]"
+   "info": "[false,{\"on\":true,\"p\":0.2841}]"
   },
   {
    "name": "it takes you back to the top",
@@ -129,17 +129,17 @@
    "info": ""
   },
   {
-   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 604 px tall)",
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 648 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },
   {
-   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 975 px tall)",
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1019 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },
   {
-   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1323 px tall)",
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1367 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },

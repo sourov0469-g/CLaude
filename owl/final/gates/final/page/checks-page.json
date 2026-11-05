@@ -1,6 +1,6 @@
 {
- "pass": 24,
- "total": 24,
+ "pass": 30,
+ "total": 30,
  "results": [
   {
    "name": "eleven parts in the plan's order, one version each, no switcher",
@@ -51,6 +51,11 @@
    "name": "header \"About\" opens the about page alone, marks it current, one h1",
    "ok": true,
    "info": "{\"shown\":[\"about\"],\"cur\":\"About\",\"h1\":1,\"title\":\"About Owl Roofing · Family-owned in Shoreview\"}"
+  },
+  {
+   "name": "header \"Contact\" opens the contact page alone, marks it current, one h1",
+   "ok": true,
+   "info": "{\"shown\":[\"contact\"],\"cur\":\"Contact\",\"h1\":1,\"title\":\"Contact Owl Roofing · Shoreview, MN\"}"
   },
   {
    "name": "header \"Reviews\" lands on its home section (#reviews)",
@@ -105,12 +110,37 @@
   {
    "name": "the file holds one version per section only: no past homepage, no templates, no switcher",
    "ok": true,
-   "info": "17 parts"
+   "info": "19 parts"
   },
   {
    "name": "no form hands over to an outside email app (owner rule, 22:21): no mailto navigation in any form handler",
    "ok": true,
    "info": "0"
+  },
+  {
+   "name": "no Protect Your Nest anywhere in the file (page, section, link or line)",
+   "ok": true,
+   "info": "0 mentions"
+  },
+  {
+   "name": "no YouTube and no external embed or external link anywhere in the file",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "every link is an in-page anchor, tel: or mailto: (contact details only)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "every form in the file (4: booking, Wise Check, Contact submit through OWL.submit, 3 calls; the Ask-the-Owl box only answers in the chat) and the endpoint is left empty and marked",
+   "ok": true,
+   "info": "4/3"
+  },
+  {
+   "name": "the crew film exists in exactly one visible placement (the Video section) plus the scrubbed stock film in \"Your part: nothing\"; no film twice",
+   "ok": true,
+   "info": "{\"video\":2,\"srcs\":[\"video\",\"nothing\"]}"
   },
   {
    "name": "reduced motion: the whole page scrolls without errors",

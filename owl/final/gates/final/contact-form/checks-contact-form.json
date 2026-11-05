@@ -1,0 +1,137 @@
+{
+ "section": "contact-form",
+ "pass": 26,
+ "total": 26,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "ruled paper with a red margin and punched holes",
+   "ok": true,
+   "info": "[true,3]"
+  },
+  {
+   "name": "labels, placeholders, typed text, message and topic words are all handwriting (OwlHand loaded)",
+   "ok": true,
+   "info": "[true,\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\",\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\",\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\"]"
+  },
+  {
+   "name": "the handwriting is large enough to read (24+ px labels, 26+ px typed)",
+   "ok": true,
+   "info": "28px / 31px / 31px"
+  },
+  {
+   "name": "an empty letter is refused: \"Please add your name.\"",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "with no phone or email it asks for one",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "a malformed email is refused",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "with contact details but no message it asks for the message",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the signature writes your name; the chosen topic is circled in pen",
+   "ok": true,
+   "info": "{\"sig\":\"Maria Lopez\",\"pressed\":\"false,false,true,false,false\",\"dash\":0}"
+  },
+  {
+   "name": "on send the page itself says \"We received your message. We’ll get back to you soon.\", stamps the letter, and no email app opens",
+   "ok": true,
+   "info": "We received your message. We’ll get back to you soon."
+  },
+  {
+   "name": "the letter is taken in place with name, email, topic and the full message (two lines)",
+   "ok": true,
+   "info": "{\"name\":\"Maria Lopez\",\"email\":\"maria@example.com\",\"message\":\"Two shingles blew off in the wind.\\nCould someone come and look?\",\"topic\":\"Storm damage\"}"
+  },
+  {
+   "name": "there is no mailto anywhere in the form and the endpoint is left unset",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "phone: the paper fits and every line is wide enough to type on",
+   "ok": true,
+   "info": "{\"over\":0,\"inputs\":[282,282,282,282]}"
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 1036 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1132 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1325 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the paper is simply there",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

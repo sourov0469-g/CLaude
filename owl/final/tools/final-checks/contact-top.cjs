@@ -1,0 +1,16 @@
+module.exports = { hash: '#/contact', sharpAt: [0],
+  async extra(p, rec, c) { const S = c.SELF;
+    await p.evaluate(s => document.querySelector(s).scrollIntoView({ block: 'start', behavior: 'instant' }), S); await p.waitForTimeout(700);
+    const a = await p.evaluate(s => { const e = document.querySelector(s), t = e.textContent.replace(/\s+/g, ' '); return { page: document.querySelector('.page[data-page="contact"]').hidden, h1: e.querySelector('h1').textContent, tel: [...e.querySelectorAll('a[href^="tel:"]')].map(x => x.getAttribute('href')), mail: [...e.querySelectorAll('a[href^="mailto:"]')].map(x => x.getAttribute('href')), ext: [...e.querySelectorAll('a[href]')].map(x => x.getAttribute('href')).filter(h => !/^(tel:|mailto:|#)/.test(h)), t, cards: e.querySelectorAll('.cd').length }; }, S);
+    rec('the Contact page opens alone, with four cards and the real details', !a.page && a.cards === 4 && /\(651\) 977-6027/.test(a.t) && /info@owlroofing\.com/.test(a.t) && /Owl Roofing LLC/.test(a.t) && /1000 County Rd E #230/.test(a.t) && /Shoreview, MN 55126/.test(a.t) && /Monday to Saturday/.test(a.t) && /08:00 to 18:00/.test(a.t), a.t.slice(0, 200));
+    rec('only tel: and mailto: links for the contact details, no other external link', a.tel.every(h => h === 'tel:+16519776027') && a.mail.every(h => h === 'mailto:info@owlroofing.com') && a.ext.length === 0, JSON.stringify([a.tel, a.mail, a.ext]));
+    const w = await p.evaluate(s => ({ days: [...document.querySelectorAll(s + ' .week div')].map(d => d.dataset.d).join(), today: document.querySelectorAll(s + ' .week .today').length, status: document.querySelector(s + ' .open span').textContent }), S);
+    rec('a week strip Mon to Sun, today marked, and an honest open or closed line on Shoreview\'s clock', w.days === 'Mon,Tue,Wed,Thu,Fri,Sat,Sun' && w.today === 1 && /in Shoreview/.test(w.status), JSON.stringify(w));
+    // hours at fixed times
+    const url = p.url().split('#')[0];
+    async function at(iso) { const q = await p.context().browser().newPage(); await q.addInitScript(t => { const R = Date, fixed = new R(t).getTime(), start = R.now(); class D extends R { constructor(...a) { if (a.length) super(...a); else super(fixed + (R.now() - start)); } static now() { return fixed + (R.now() - start); } } window.Date = D; }, iso); await q.goto(url + '#/contact'); await q.waitForTimeout(700); const t = await q.evaluate(() => ({ s: document.querySelector('#contact-top .open span').textContent, today: document.querySelector('#contact-top .week .today').dataset.d })); await q.close(); return t; }
+    const wed = await at('2026-11-04T16:00:00Z'), sun = await at('2026-11-08T18:00:00Z');
+    rec('Wednesday 10 am: open, Wed marked; Sunday: closed, opens Monday at 8 am', /Open now: it is 10:00 am/.test(wed.s) && wed.today === 'Wed' && /We open Monday at 8 am/.test(sun.s) && sun.today === 'Sun', wed.s + ' / ' + sun.s);
+    await p.hover(S + ' .cp >> nth=0'); await p.waitForTimeout(200); await p.click(S + ' .cp >> nth=0'); await p.waitForTimeout(400);
+    rec('copy says "Copied" (or honestly "Select it to copy")', await p.evaluate(s => ['Copied', 'Select it to copy'].includes(document.querySelector(s + ' .cp span').textContent), S));
+    await p.screenshot({ path: c.OUT + '/contact-top.png' }); } };

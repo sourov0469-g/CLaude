@@ -1,0 +1,105 @@
+<section class="sec ct2" id="contact-form" aria-labelledby="ct2-h">
+<style>
+/* Contact · the paper form: ruled paper, a red margin line and punched holes (the Work Order paper of the booking card), a LETTER written in ink.
+   Labels, placeholders and everything the visitor types are in handwriting (Caveat, SIL OFL, loaded by the booking card's font rule). */
+.ct2{--hw:OwlHand,'Segoe Script','Bradley Hand',cursive;--pen:#1E2650;--pen-soft:#5C6488;overflow:hidden}
+.ct2 .g{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(24px,5vw,72px);align-items:start}
+.ct2 .lede{margin:14px 0 0;max-width:34ch}
+.ct2 .small{margin:18px 0 0;max-width:38ch;font-size:15px;color:var(--ink-70)}
+.ct2 .paper{position:relative;max-width:700px;width:100%;justify-self:center;padding:clamp(20px,2.6vw,32px) clamp(18px,2.6vw,34px) clamp(18px,2.4vw,28px) clamp(56px,6.4vw,78px);border-radius:10px;color:var(--pen);
+ background-color:#FFFDF7;background-image:linear-gradient(180deg,rgba(255,255,255,.5),rgba(240,232,214,.35)),repeating-linear-gradient(180deg,transparent 0 43px,rgba(95,140,180,.20) 43px 44px);background-position:0 0,0 14px;
+ box-shadow:0 1px 0 #E9E2CE,0 2px 0 #E4DCC6,0 3px 0 #DED5BD,0 50px 70px -36px rgba(23,17,29,.6),0 0 0 1px rgba(23,17,29,.07);transform:rotate(-.4deg)}
+.ct2 .paper::before{content:"";position:absolute;left:clamp(42px,4.8vw,60px);top:0;bottom:0;width:2px;background:rgba(214,98,98,.5)}
+.ct2 .holes{position:absolute;left:12px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-around;padding:36px 0}
+.ct2 .holes i{display:block;width:16px;height:16px;border-radius:50%;background:#EDE7D6;box-shadow:inset 0 2px 3px rgba(23,17,29,.28),0 1px 0 #fff}
+.ct2 .paper-h{display:flex;justify-content:space-between;gap:12px;font-family:var(--hw);font-size:24px;color:var(--pen-soft)}
+.ct2 .dear{margin:2px 0;font-family:var(--hw);font-weight:700;font-size:clamp(34px,4vw,44px);line-height:1.1}
+.ct2 .ln{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;min-height:44px;border-bottom:1px solid rgba(95,140,180,.28)}
+.ct2 .ln label,.ct2 .ln .lb{flex:none;font-family:var(--hw);font-weight:500;font-size:clamp(24px,2.4vw,28px);line-height:44px}
+.ct2 .ln input{flex:1 1 150px;min-width:0;min-height:44px;padding:0 4px;border:0;border-bottom:2px dotted rgba(30,38,80,.35);background:transparent;font-family:var(--hw);font-weight:500;font-size:clamp(26px,2.6vw,31px);line-height:44px;color:var(--pen);border-radius:0}
+.ct2 .ln input::placeholder,.ct2 textarea::placeholder{font-family:var(--hw);color:var(--pen-soft);opacity:1}
+.ct2 .ln input:focus-visible,.ct2 textarea:focus-visible{outline:none;border-bottom-color:#EAA221;box-shadow:0 3px 0 rgba(234,162,33,.35)}
+.ct2 [aria-invalid="true"]{border-bottom:2px solid #B3261E!important}
+.ct2 .topics{display:flex;flex-wrap:wrap;gap:2px 4px;margin:0}
+.ct2 .ln.tp{align-items:center;padding:6px 0}
+.ct2 .topics button{position:relative;min-height:44px;padding:0 12px;border-radius:12px;font-family:var(--hw);font-weight:500;font-size:27px;line-height:1;color:var(--pen);background:transparent}
+.ct2 .topics button svg{position:absolute;left:-6px;top:2px;width:calc(100% + 12px);height:calc(100% - 4px);overflow:visible;pointer-events:none}
+.ct2 .topics button svg ellipse{fill:none;stroke:var(--pen);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s cubic-bezier(.65,0,.35,1)}
+.ct2 .topics button[aria-pressed="true"] svg ellipse{stroke-dashoffset:0}
+.ct2 .topics button:focus-visible{outline:3px solid #EAA221;outline-offset:1px}
+.ct2 .msgl{margin:6px 0 0;font-family:var(--hw);font-weight:500;font-size:clamp(24px,2.4vw,28px);line-height:44px}
+.ct2 textarea{display:block;width:100%;min-height:176px;padding:0 4px;border:0;border-bottom:2px dotted rgba(30,38,80,.35);background:repeating-linear-gradient(180deg,transparent 0 43px,rgba(95,140,180,.28) 43px 44px);font-family:var(--hw);font-weight:500;font-size:clamp(26px,2.6vw,31px);line-height:44px;color:var(--pen);resize:vertical;border-radius:0}
+.ct2 .sign{display:flex;align-items:baseline;gap:12px;min-height:60px;margin-top:4px}
+.ct2 .sign .th{font-family:var(--hw);font-weight:500;font-size:26px}
+.ct2 .sign .sig{font-family:var(--hw);font-weight:700;font-size:38px;line-height:1.2;transform:rotate(-2deg);overflow-wrap:anywhere}
+.ct2 .sign .sig.empty{color:var(--pen-soft);opacity:.7;font-weight:500;font-size:30px}
+.ct2 .form-msg{margin:4px 0 0;font-size:15px;min-height:22px}
+.ct2 .form-msg.ok{font-size:18px;font-weight:700;color:#1F5E24}
+.ct2 .form-msg.err{color:#8F1D17}
+.ct2 .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px;margin-top:6px}
+.ct2 .stamp{position:absolute;right:20px;top:64px;padding:8px 14px;border:4px solid #2E7D32;border-radius:10px;color:#2E7D32;font-weight:900;font-size:17px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-8deg) scale(1.6);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none;background:rgba(255,253,247,.92)}
+.ct2 .stamp.on{opacity:1;transform:rotate(-8deg) scale(1)}
+@media (max-width:900px){.ct2 .g{grid-template-columns:1fr}.ct2 .paper{transform:none}}
+@media (max-width:520px){.ct2 .paper{padding-left:50px}.ct2 .holes{left:8px}.ct2 .holes i{width:13px;height:13px}.ct2 .ln input{flex-basis:100%}.ct2 .paper-h{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.ct2 .stamp,.ct2 .topics button svg ellipse{transition:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2" id="ct2-h">Write Us a Letter</h2>
+   <p class="lede rv">Tell us who you are and what you need. We will get back to you.</p>
+   <p class="small">Fill in the letter and press Send. You can leave a phone number, an email address, or both, so we know how to reach you.</p>
+  </div>
+  <div class="paper" data-owl="say:Pen and paper">
+   <span class="holes" aria-hidden="true"><i></i><i></i><i></i></span>
+   <form novalidate aria-labelledby="ct2-t" aria-describedby="ct2-m">
+    <p class="paper-h"><span id="ct2-t">Contact Owl Roofing</span><span aria-hidden="true">Shoreview, MN</span></p>
+    <p class="dear" aria-hidden="true">Dear Owl,</p>
+    <div class="ln"><label for="ct2-n">My name is</label><input id="ct2-n" data-n="name" autocomplete="name" placeholder="your name" required></div>
+    <div class="ln"><label for="ct2-p">You can call me on</label><input id="ct2-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" placeholder="your phone number"></div>
+    <div class="ln"><label for="ct2-e">or write to me at</label><input id="ct2-e" type="email" data-n="email" autocomplete="email" placeholder="your email address"></div>
+    <div class="ln tp"><span class="lb" id="ct2-tl">I am writing about</span><div class="topics" role="group" aria-labelledby="ct2-tl" data-n="topic"></div></div>
+    <label class="msgl" for="ct2-x">Here is my message:</label>
+    <textarea id="ct2-x" data-n="message" rows="4" placeholder="what would you like to tell us?" required></textarea>
+    <input type="hidden" data-n="town" id="ct2-town">
+    <div class="sign"><span class="th" aria-hidden="true">Thank you,</span><span class="sig empty" aria-hidden="true">your name</span></div>
+    <p class="form-msg" id="ct2-m" role="status" aria-live="polite"></p>
+    <div class="row"><button class="btn btn-amber" type="submit" data-mag data-owl="hoot">Send My Letter</button></div>
+    <span class="stamp" aria-hidden="true">Message received</span>
+   </form>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('contact-form','1',function(root){
+  var form = root.querySelector('form'), msg = root.querySelector('.form-msg'), stamp = root.querySelector('.stamp'), topics = root.querySelector('.topics'), sig = root.querySelector('.sig'), nameIn = root.querySelector('#ct2-n'), town = root.querySelector('#ct2-town'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  ['A Wise Check', 'A repair', 'Storm damage', 'A new roof', 'Something else'].forEach(function(t){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<svg viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="22" rx="47" ry="19" pathLength="1" transform="rotate(-2 50 22)"/></svg><span>' + t + '</span>'; b.setAttribute('aria-label', t); topics.appendChild(b); });
+  topics.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; var on = b.getAttribute('aria-pressed') !== 'true'; [].forEach.call(topics.children, function(x){ x.setAttribute('aria-pressed', x === b && on ? 'true' : 'false'); }); });
+  nameIn.addEventListener('input', function(){ var v = nameIn.value.trim(); sig.textContent = v || 'your name'; sig.classList.toggle('empty', !v); });
+  try { town.value = OWL.town || sessionStorage.getItem('owlTown') || ''; } catch (e){} document.addEventListener('owl:town', function(e){ town.value = e.detail || ''; });
+  /* the letter stays on the page: on send, the page says we received it (it never opens an email app) */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var n = form.querySelector('[data-n="name"]'), p = form.querySelector('[data-n="phone"]'), em = form.querySelector('[data-n="email"]'), m = form.querySelector('[data-n="message"]'), bad = null, why = '';
+    [n, p, em, m].forEach(function(i){ i.setAttribute('aria-invalid', 'false'); });
+    var pv = p.value.trim(), ev = em.value.trim(), phoneOk = pv.replace(/\D/g, '').length >= 7, emailOk = /^\S+@\S+\.\S+$/.test(ev);
+    if (n.value.trim().length < 2){ bad = n; why = 'Please add your name.'; }
+    else if (ev && !emailOk){ bad = em; why = 'Please check your email address.'; }
+    else if (pv && !phoneOk){ bad = p; why = 'Please check your phone number.'; }
+    else if (!phoneOk && !emailOk){ bad = p; why = 'Please add a phone number or an email address, so we can reach you.'; }
+    else if (m.value.trim().length < 2){ bad = m; why = 'Please add your message.'; }
+    if (bad){ bad.setAttribute('aria-invalid', 'true'); msg.className = 'form-msg err'; msg.textContent = why; stamp.classList.remove('on'); bad.focus(); return; }
+    var data = {}; form.querySelectorAll('[data-n]').forEach(function(i){ if (i.value) data[i.dataset.n] = i.value.trim(); }); var on = topics.querySelector('[aria-pressed="true"]'); if (on) data.topic = on.getAttribute('aria-label');
+    var go = form.querySelector('button[type="submit"]'); go.disabled = true; msg.className = 'form-msg'; msg.textContent = 'Sending…';
+    OWL.submit('contact-letter', data).then(function(r){ go.disabled = false;
+      if (r.ok){ msg.className = 'form-msg ok'; msg.textContent = OWL.OK; stamp.classList.add('on'); form.dataset.sent = '1'; }
+      else { msg.className = 'form-msg err'; msg.textContent = OWL.FAIL; stamp.classList.remove('on'); } });
+  });
+  form.addEventListener('input', function(e){ if (e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); if (form.dataset.sent){ stamp.classList.remove('on'); msg.textContent = ''; msg.className = 'form-msg'; delete form.dataset.sent; } });
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold: .3}); io.observe(form); }
+});
+</script>
+</section>

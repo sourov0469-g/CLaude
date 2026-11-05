@@ -29,6 +29,7 @@ OWL.prime = function(v){
 /* FORMS NEVER LEAVE THE PAGE (owner rule): no form opens an email app. On submit the page shows its own success message in place.
    The message is queued in this browser (localStorage "owlOutbox") and, when OWL.endpoint is set to Owl's real receiving address, is POSTed there.
    If an endpoint is set and the post fails, the visitor is told so honestly and given the phone number. */
+/* ===== CONFIGURABLE ENDPOINT: LEFT EMPTY ON PURPOSE. Set this to Owl's real receiving address at launch. Until then nothing reaches Owl. ===== */
 OWL.endpoint = '';
 OWL.OK = 'We received your message. We\u2019ll get back to you soon.';
 OWL.submit = function(kind, fields){

@@ -86,7 +86,7 @@
   {
    "name": "on send the page itself says \"We received your message. We’ll get back to you soon.\" and no email app opens",
    "ok": true,
-   "info": "{\"t\":\"We received your message. We’ll get back to you soon.\",\"cls\":\"xnote ok\",\"nav\":0,\"box\":{\"kind\":\"wise-check-message\",\"at\":\"2026-11-05T16:36:14.496Z\",\"fields\":{\"name\":\"Maria Lopez\",\"phone\":\"612 555 0142\",\"day\":\"1\",\"time\":\"0\",\"message\":\"M"
+   "info": "{\"t\":\"We received your message. We’ll get back to you soon.\",\"cls\":\"xnote ok\",\"nav\":0,\"box\":{\"kind\":\"wise-check-message\",\"at\":\"2026-11-05T19:17:47.712Z\",\"fields\":{\"name\":\"Maria Lopez\",\"phone\":\"612 555 0142\",\"day\":\"1\",\"time\":\"0\",\"message\":\"M"
   },
   {
    "name": "the call button is the one phone number",

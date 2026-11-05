@@ -61,7 +61,7 @@
   {
    "name": "the depth planes follow the pointer",
    "ok": true,
-   "info": "0.322"
+   "info": "0.339"
   },
   {
    "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (0 media measured)",

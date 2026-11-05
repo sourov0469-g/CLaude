@@ -61,7 +61,7 @@
   {
    "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (3 media measured)",
    "ok": true,
-   "info": "img 0.40x, img 0.37x, img 0.33x"
+   "info": "img 0.40x, img 0.37x, img 0.36x"
   },
   {
    "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 844 px tall)",

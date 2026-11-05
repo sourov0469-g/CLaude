@@ -32,7 +32,8 @@ def sections(footer=False):
 
 PAGES = [('services', 'Roofing Services · Owl Roofing', [('svc-hero', 'services-hero'), ('svc-steps', 'services-steps')]),
          ('wise-check', 'The Wise Check · Owl Roofing', [('wise-hero', 'wise-hero'), ('wise-parts', 'wise-parts')]),
-         ('about', 'About Owl Roofing · Family-owned in Shoreview', [('about-hero', 'about-hero'), ('about-values', 'about-values')])]
+         ('about', 'About Owl Roofing · Family-owned in Shoreview', [('about-hero', 'about-hero'), ('about-values', 'about-values')]),
+         ('contact', 'Contact Owl Roofing · Shoreview, MN', [('contact-top', 'contact-top'), ('contact-form', 'contact-form')])]
 
 def pages():
     out = []
@@ -45,7 +46,7 @@ def pages():
                 o, c = len(re.findall(r'<' + tag + r'\b', bare)), len(re.findall(r'</' + tag + r'>', bare))
                 if o != c: sys.exit('unbalanced <%s> in %s' % (tag, fn))
             inner.append('<div class="ver" data-sec="%s" data-v="1">\n%s\n</div>' % (sec, body))
-        out.append('<div class="page" data-page="%s" data-title="%s" hidden>\n%s\n{{P:ctaband.html}}\n</div>' % (name, title, '\n'.join(inner)))
+        out.append('<div class="page" data-page="%s" data-title="%s" hidden>\n%s\n%s\n</div>' % (name, title, '\n'.join(inner), '' if name == 'contact' else '{{P:ctaband.html}}'))
     return '\n'.join(out)
 
 def main():
@@ -55,6 +56,11 @@ def main():
     # the old shared form helper handed forms to the visitor's email app: removed from this file (owner rule: forms never leave the page)
     new, n = re.subn(r"OWL\.bookForm = function\(form, msg\)\{.*?\n\};\n", 'OWL.bookForm = function(){};\n', new, count=1, flags=re.S)
     if n != 1: sys.exit('old bookForm helper not found')
+    # no external embed anywhere: the old YouTube helpers are removed from this file
+    new, n1 = re.subn(r"/\* YouTube on demand.*?\*/\s*OWL\.youtube = function\(holder, id\)\{.*?\n\};\n", '', new, count=1, flags=re.S)
+    new, n2 = re.subn(r"/\* full film in a modal.*?\*/\s*OWL\.ytModal = function\(id\)\{.*?\n\};\n", '', new, count=1, flags=re.S)
+    new = new.replace('/* YouTube modal */', '/* modal */')
+    if n1 != 1 or n2 != 1: sys.exit('old youtube helpers not found')
     left = re.findall(r'\{\{[A-Z]+:[^}]+\}\}', new)
     if left: sys.exit('unresolved placeholders: %s' % left[:5])
     html = pb.dedupe(new)

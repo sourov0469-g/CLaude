@@ -21,7 +21,7 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   rec('no maps anywhere on the page: no text, class, label or image is a map', !/\bmaps?\b/i.test(txt) && mp.length === 0, mp.join('; '));
   rec('the title and the logo are the site\'s', /Owl Roofing/.test(st.title) && await p.evaluate(() => !!document.querySelector('.hdr-logo img[alt="Owl Roofing"]') && !!document.querySelector('footer img[alt="Owl Roofing"]')), st.title);
   // 3. header links: three pages, two home anchors, the book button
-  for (const [h, pg] of [['Services', 'services'], ['Wise Check', 'wise-check'], ['About', 'about']]) {
+  for (const [h, pg] of [['Services', 'services'], ['Wise Check', 'wise-check'], ['About', 'about'], ['Contact', 'contact']]) {
     await p.evaluate(() => { location.hash = '#/'; scrollTo(0, 0); }); await p.waitForTimeout(500); await p.click('.hdr-nav a:has-text("' + h + '")'); await p.waitForTimeout(900);
     const r = await p.evaluate(n => ({ shown: [...document.querySelectorAll('.page')].filter(x => !x.hidden).map(x => x.dataset.page), cur: document.querySelector('.hdr-nav a[aria-current="page"]') && document.querySelector('.hdr-nav a[aria-current="page"]').textContent, h1: document.querySelectorAll('.page:not([hidden]) h1').length, title: document.title }), pg);
     rec('header "' + h + '" opens the ' + pg + ' page alone, marks it current, one h1', r.shown.join() === pg && r.cur === h && r.h1 === 1, JSON.stringify(r)); }
@@ -38,7 +38,7 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   await p.evaluate(() => { location.hash = '#/about'; }); await p.waitForTimeout(600); await p.click('.hdr-logo'); await p.waitForTimeout(900);
   rec('the logo goes home', await p.evaluate(() => !document.querySelector('.page[data-page="home"]').hidden));
   // 4. whole-page axe
-  await p.evaluate(() => scrollTo(0, 0)); await p.addScriptTag({ content: AXE });
+  await p.evaluate(() => { location.hash = '#/'; scrollTo(0, 0); }); await p.waitForTimeout(2200); await p.addScriptTag({ content: AXE });
   const ax = await p.evaluate(async () => { const r = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] } }); return r.violations.map(v => v.id + ':' + v.nodes.length + ' ' + (v.nodes[0] && v.nodes[0].target.join(' ')).slice(0, 80)); });
   rec('axe WCAG 2.1 A/AA on the whole page: 0 violations', ax.length === 0, ax.join(' | '));
   // 5. page weight and pinned stages
@@ -59,8 +59,18 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   rec('phone: controls at least 43 px (inline text links excepted)', ptap.length === 0, ptap.join('; '));
   await p.close();
   // 8. one version only: the old records are not in this file
-  { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8'); rec('the file holds one version per section only: no past homepage, no templates, no switcher', !/id="owl-past"|<template/.test(src) && (src.match(/class="ver"/g) || []).length === 17, (src.match(/class="ver"/g) || []).length + ' parts'); }
+  { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8'); rec('the file holds one version per section only: no past homepage, no templates, no switcher', !/id="owl-past"|<template/.test(src) && (src.match(/class="ver"/g) || []).length === 19, (src.match(/class="ver"/g) || []).length + ' parts'); }
   { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8'); const forms = (src.match(/location\.href\s*=\s*[^;]*mailto|window\.open\([^)]*mailto|<form[^>]*mailto/g) || []).length; rec('no form hands over to an outside email app (owner rule, 22:21): no mailto navigation in any form handler', forms === 0, String(forms)); }
+  // final whole-site rules (Muse's last pass)
+  { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8');
+    const live = src.replace(/<style>[\s\S]*?<\/style>/g, '');
+    rec('no Protect Your Nest anywhere in the file (page, section, link or line)', !/protect[- ]your[- ]nest|\bpn-/i.test(live), (live.match(/protect[- ]your[- ]nest/gi) || []).length + ' mentions');
+    rec('no YouTube and no external embed or external link anywhere in the file', !/youtube|ehKLv5DF2TQ|<iframe|<embed/i.test(live) && !/(?<![-\w])(href|src)=["']https?:/i.test(live), '');
+    const ext = (live.match(/(?<![-\w])(?:href|src)=["'](?!#|tel:|mailto:|data:|blob:)[^"']+/g) || []).slice(0, 3); rec('every link is an in-page anchor, tel: or mailto: (contact details only)', ext.length === 0, ext.join(' | '));
+    const forms = (src.match(/<form\b/g) || []).length, subs = (src.match(/OWL\.submit\('/g) || []).length;
+    rec('every form in the file (' + forms + ': booking, Wise Check, Contact submit through OWL.submit, ' + subs + ' calls; the Ask-the-Owl box only answers in the chat) and the endpoint is left empty and marked', forms === 4 && subs === 3 && /OWL\.endpoint = ''/.test(src) && /CONFIGURABLE ENDPOINT/.test(src), forms + '/' + subs); }
+  // the film: one visible placement
+  { const q = await open(); const f = await q.evaluate(() => ({ video: document.querySelectorAll('video').length, srcs: [...document.querySelectorAll('video')].map(v => v.className || v.closest('.ver').dataset.sec) })); rec('the crew film exists in exactly one visible placement (the Video section) plus the scrubbed stock film in "Your part: nothing"; no film twice', f.video === 2 && /video/.test(f.srcs.join()) , JSON.stringify(f)); await q.close(); }
   // 9. reduced motion: whole page, no errors
   p = await open({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }); for (let y = 0; y < total; y += 1200) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(150); } rec('reduced motion: the whole page scrolls without errors', true); await p.close();
   rec('no console or page errors across every run', errs.length === 0, errs.slice(0, 3).join(' | '));
