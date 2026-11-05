@@ -4,3 +4,7 @@ body{background:var(--ground)}
 .sec{position:relative}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* shared section rules (from the earlier build's base): gutter, heading, paragraph */
+.sec{position:relative;padding:0 var(--gut)}
+.sec-h{font:800 clamp(34px,3.6vw,56px)/1.02 var(--display);letter-spacing:-.022em;color:var(--ink);max-width:16ch}
+.sec-p{margin-top:14px;max-width:46ch;font-size:18px;line-height:1.55;color:var(--ink-2)}

@@ -1,0 +1,61 @@
+/* SECTION 6 — Reviews. B: hanging tags on a dim sage ground with the kit's live-oak canopy and speech-bubble art. C: one review, read at reading pace. */
+.rvB{position:relative;overflow:hidden;background:linear-gradient(180deg,#E8EFE9,#EFF4EF 38%,#E5EDE6)}
+.rv-bg,.rc-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.rv-bg svg,.rc-bg svg{position:absolute;left:0;width:100%;will-change:transform;transform:translate3d(0,var(--py,0px),0)}
+.rv-far,.rv-near,.rc-far,.rc-near{top:-6%;height:112%}
+.rv-near,.rc-near{opacity:.5}
+.rvB .hd,.rvB .lineview{z-index:1}
+.rvB .hd::before{display:none}
+.rvB .tag{transition:opacity .4s ease,translate .5s cubic-bezier(.3,1.4,.5,1),filter .2s ease,scale .25s cubic-bezier(.3,1.5,.5,1)}
+.rvB .tag:not(.big):hover,.rvB .tag:not(.big):focus-visible{scale:1.045}
+.rvB .tag:not(.big):active{scale:.97}
+.rvB .tag.big{cursor:default;overflow:visible}
+.rvB .tag.big .st5{background:transparent;padding:0;width:118px;margin:12px auto 0;box-sizing:border-box}
+.rvB .tag.big .st5 .bg,.rvB .tag.big .st5 .fg{left:0;top:0}
+.rvB .tag.big .st5 .bg{color:rgba(255,255,255,.22)}.rvB .tag.big .st5 .fg{color:#B5DB6E}
+.rvB .tag.big b{font-variant-numeric:tabular-nums}
+.rvB .tag.big::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.rvB.in .tag.big::after{animation:rvsheen 2.2s ease .9s 1 both}
+@keyframes rvsheen{to{transform:translateX(120%)}}
+/* the reader dialog: step through the tags */
+.rvdlg .rdn{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid rgba(14,59,44,.14)}
+.rvdlg .rdn button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:12px;background:#EAF1EB;box-shadow:inset 0 0 0 1px #C9D8CC;font:800 14px/1 var(--text);color:#16191D;cursor:pointer;transition:background-color .15s ease,transform .15s ease}
+.rvdlg .rdn button:hover{background:#DDE9DF}.rvdlg .rdn button:active{transform:scale(.97)}
+.rvdlg .rdn button:focus-visible{outline:3px solid #0E3B2C;outline-offset:2px}
+.rvdlg .rdn svg{width:16px;height:16px}
+.rvdlg .rdn span{font:700 14px/1 var(--text);color:#434B54}
+/* ---- C: one review, read at reading pace ---- */
+.rc{position:relative;height:300svh;background:linear-gradient(180deg,#E5EDE6,#EDF2ED 48%,#E7EEE8)}
+.rc-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;gap:10px;padding:96px var(--gut) 26px}
+.rc-top,.rc-fig,.rc-foot{position:relative;z-index:2}
+.rc-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 28px}
+.rc-h{margin:0;font:800 clamp(28px,3.2vw,46px)/1.04 var(--display);letter-spacing:-.03em;color:var(--ink);max-width:18ch;text-wrap:balance}
+.rc-rate{margin:0;display:flex;align-items:center;gap:8px;font:600 15px/1.2 var(--text);color:var(--ink-2)}
+.rc-rate b{font:800 18px/1 var(--display);color:#0E3B2C}
+.rc-stars{display:inline-flex;gap:2px;color:#0E3B2C}.rc-stars svg{width:18px;height:18px}
+.rc-fig{margin:0 auto;align-self:center;width:100%;max-width:1160px}
+.rc-qm{position:absolute;left:-2.2vw;top:-34px;width:clamp(110px,15vw,230px);height:auto;overflow:visible;opacity:.34;z-index:0;pointer-events:none}
+.rc-qm path{stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--q,1) * 100)}
+.rc-q{margin:0;padding:0;position:relative;z-index:1}
+.rc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+.rc-vis{margin:0;font:700 clamp(24px,min(3.6vw,5.9vh),54px)/1.24 var(--display);letter-spacing:-.025em;color:var(--ink);text-wrap:pretty}
+.rc.js .w{opacity:.16}
+.w{position:relative;display:inline}
+.w.k::after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:.05em;height:.36em;background:#B5DB6E;opacity:.6;transform:scaleX(var(--u,1));transform-origin:left;z-index:-1;border-radius:2px}
+.rc.js .w.k::after{transform:scaleX(var(--u,0))}
+.rc-vis{isolation:isolate}
+.rc-by{margin-top:28px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}
+.rc-line{display:block;flex:0 0 100%;height:3px;max-width:220px;border-radius:2px;background:#0E3B2C;transform:scaleX(1);transform-origin:left}
+.rc.js .rc-by b,.rc.js .rc-by>span:last-child{opacity:var(--bo,0)}.rc.js .rc-line{transform:scaleX(var(--bl,0))}
+.rc-by b{font:800 clamp(18px,1.6vw,24px)/1.1 var(--display);color:var(--ink)}
+.rc-by>span:last-child{font:600 15px/1.2 var(--text);color:var(--ink-3)}
+.rc-foot{display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap}
+.rc-all{min-height:44px;padding:0 18px;border:0;border-radius:12px;background:#EAF1EB;box-shadow:inset 0 0 0 1px #C9D8CC;font:800 14px/1 var(--text);color:var(--ink);cursor:pointer}
+.rc-all:hover{background:#DDE9DF}.rc-all:focus-visible{outline:3px solid #0E3B2C;outline-offset:2px}
+.rc-note{margin:0;flex:1 1 260px;font:500 13.5px/1.4 var(--text);color:var(--ink-3)}
+.rc-meter{position:relative;width:74px;height:74px;flex:none;margin-left:auto}
+.rc-meter svg{width:100%;height:100%}.rc-ring{stroke-dashoffset:calc(100 - var(--r,0) * 100)}
+.rc-pc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:9px;font:800 16px/1 var(--display);color:#0E3B2C}
+.rc-meter small{position:absolute;left:0;right:0;bottom:15px;text-align:center;font:700 10px/1 var(--text);letter-spacing:.06em;text-transform:uppercase;color:#434B54}
+@media (max-width:860px){.rc-pin{padding-top:88px;padding-bottom:96px}.rc-qm{top:-40px;left:-4vw;width:clamp(90px,26vw,150px)}.rc-meter{width:60px;height:60px}.rc-pc{font-size:13px;padding-bottom:7px}.rc-meter small{bottom:11px;font-size:9px}}
+@media (prefers-reduced-motion:reduce){.rc{height:auto}.rc-pin{position:static;height:auto;min-height:0;padding-top:70px;padding-bottom:70px}.rc.js .w{opacity:1}.rc.js .w.k::after{transform:none}.rc.js .rc-by b,.rc.js .rc-by>span:last-child{opacity:1}.rc.js .rc-line{transform:none}.rc-meter,.rc-all{display:none}.rvB.in .tag.big::after{animation:none}}

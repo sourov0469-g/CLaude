@@ -5,6 +5,8 @@ HERE = os.path.dirname(os.path.abspath(__file__)); SITE = os.path.join(HERE, '..
 sys.path.insert(0, SITE)
 from build import fonts, I, HEADER, MBAR, HEAD_JS, LEAD, SUB
 import parts_services, parts_vis, parts_windows, parts_ported as PP
+import parts_reviews, parts_process, parts_area, parts_booking, parts_footer
+TAIL = [parts_reviews, parts_process, parts_area, parts_booking, parts_footer]   # the sections after Windows, in page order
 SRC = lambda f: open(os.path.join(HERE, 'src', f)).read()
 CONTACT = '#booking'   # internal route; becomes the Contact page when the inner pages are built (after Muse approves the homepage)
 BOOKING_URL = 'https://www.austinprosiding.com/schedule-appointment'
@@ -53,12 +55,14 @@ def wall():
 
 
 def build():
-    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css') + SRC('serv.css') + SRC('vis.css') + SRC('win.css') + PP.css()
+    repl = set(k for m in TAIL for k in m.REPLACES); keep = [k for k in PP.MODS if k not in repl]
+    own = lambda ext: ''.join(SRC(getattr(m, ext.upper())) for m in TAIL if os.path.exists(os.path.join(HERE, 'src', getattr(m, ext.upper()))))
+    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css') + SRC('serv.css') + SRC('vis.css') + SRC('win.css') + PP.css(keep) + own('css')
     hdr = HEADER.replace(BOOKING_URL, CONTACT).replace('href="#work"', 'href="#area"'); mbar = MBAR.replace(BOOKING_URL, CONTACT)
     S = PP.sections()
-    main = hero() + wall() + parts_services.services() + parts_vis.vis(CONTACT, I['cal']) + parts_windows.windows(CONTACT, I['cal']) + ''.join(PP.route(S[k], CONTACT) for k in ('reviewsB', 'reviewsC', 'process', 'area', 'bookC', 'bookJ', 'footer'))
-    js = PP.globals_js() + SRC('hero.js') + SRC('wall.js') + SRC('serv.js') + SRC('vis.js') + SRC('win.js') + PP.js()
-    boot = 'FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);' + PP.wires()
+    main = hero() + wall() + parts_services.services() + parts_vis.vis(CONTACT, I['cal']) + parts_windows.windows(CONTACT, I['cal']) + ''.join(m.markup(S, CONTACT, I['cal']) for m in TAIL)
+    js = PP.globals_js() + SRC('hero.js') + SRC('wall.js') + SRC('serv.js') + SRC('vis.js') + SRC('win.js') + PP.js(keep) + own('js')
+    boot = 'FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);' + PP.wires(keep) + ''.join(f'{m.GLOBAL}.wire(document);' for m in TAIL if os.path.exists(os.path.join(HERE, 'src', m.JS)))
     out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
@@ -69,6 +73,6 @@ def build():
 
 if __name__ == '__main__':
     os.makedirs(os.path.join(HERE, 'out'), exist_ok=True)
-    h = build(); open(os.path.join(HERE, 'out', 'final.html'), 'w').write(h)
+    h = build(); open(os.environ.get('OUT') or os.path.join(HERE, 'out', 'final.html'), 'w').write(h)
     ext = re.findall(r'(?:href|src|action)="(https?://[^"]+)"', h)
     print('final.html bytes', len(h.encode()), '| outside addresses (media sources only):', ext)

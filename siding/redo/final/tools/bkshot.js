@@ -1,0 +1,6 @@
+const { chromium } = require('playwright'); const D='bk/'; require('fs').mkdirSync(D,{recursive:true});
+(async () => { const b = await chromium.launch(); const W = +process.argv[2]||1440, Hh=+process.argv[3]||900; const ctx = await b.newContext({ viewport: { width: W, height: Hh } }); const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+  await p.goto('file:///home/user/CLaude/siding/redo/final/out/final.html', { waitUntil: 'load' }); await p.addStyleTag({ content: 'html{scroll-behavior:auto!important}' }); await p.waitForTimeout(500);
+  for (const q of [0.0, .2, .4, .6, .8, 1]) { await p.evaluate((q) => { const s = document.querySelector('.bk'), r = s.getBoundingClientRect(); scrollTo({ top: scrollY + r.top + q * (r.height - innerHeight), behavior: 'instant' }); }, q); await p.waitForTimeout(1500); await p.screenshot({ path: D + `c_${W}_${Math.round(q*100)}.png` }); }
+  await p.evaluate(() => { scrollTo({ top: document.querySelector('.bkr').getBoundingClientRect().top + scrollY, behavior: 'instant' }); }); await p.waitForTimeout(700); await p.screenshot({ path: D + `j_${W}_a.png` }); await p.waitForTimeout(3600); await p.screenshot({ path: D + `j_${W}_b.png` });
+  console.log(errs); await b.close(); })();

@@ -35,8 +35,9 @@ def globals_js():
             f'window.__JOBS={json.dumps(BS.AREA["cards"])};window.__AREA={{cities:{json.dumps(BS.AREA["cities"])},places:{json.dumps(BS.AREA["places"])}}};')
 
 
-def wires():
-    return ''.join(f'{o}.wire(document);' for m, o in MODS.items() if m not in ('cta',)) + 'Cta.wire(document);'
+def wires(mods=None):
+    mods = list(MODS) if mods is None else mods
+    return ''.join(f'{o}.wire(document);' for m, o in MODS.items() if m in mods and m != 'cta') + ('Cta.wire(document);' if 'cta' in mods else '')
 
 
 def route(html, contact):

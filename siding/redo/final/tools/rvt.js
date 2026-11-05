@@ -1,0 +1,50 @@
+const { chromium } = require('playwright'); const fs = require('fs');
+const F = 'file:///home/user/CLaude/siding/redo/final/out/final.html'; const R = JSON.parse(fs.readFileSync('/home/user/CLaude/siding/work/data/reviews.json'));
+const ck = []; const ok = (n, c, d) => ck.push([c ? 'PASS' : 'FAIL', n, d === undefined ? '' : d]);
+const lum = (c) => { const [r,g,b] = c.map(v => { v/=255; return v<=.03928? v/12.92 : Math.pow((v+.055)/1.055,2.4); }); return .2126*r+.7152*g+.0722*b; };
+const cr = (a,b) => { const x=lum(a),y=lum(b); return +((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(2); };
+(async () => { const b = await chromium.launch();
+  async function open(w = 1440, h = 900, extra = {}) { const ctx = await b.newContext({ viewport: { width: w, height: h }, ...extra }); const p = await ctx.newPage(); p.errs = []; p.on('pageerror', e => p.errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') p.errs.push(m.text()); }); p.ctx = ctx; await p.goto(F, { waitUntil: 'load' }); await p.addStyleTag({ content: 'html{scroll-behavior:auto!important}' }); return p; }
+  const toB = (p) => p.evaluate(() => scrollTo({ top: scrollY + document.querySelector('.rvB').getBoundingClientRect().top, behavior: 'instant' }));
+  const toC = (p, q) => p.evaluate((q) => { const s = document.querySelector('.rc'), r = s.getBoundingClientRect(); scrollTo({ top: scrollY + r.top + q * (r.height - innerHeight), behavior: 'instant' }); }, q);
+  let p = await open(); await toB(p); await p.waitForTimeout(3200);
+  const D = await p.evaluate(() => { const s = document.querySelector('.rvB'); return { tags: [...s.querySelectorAll('.tag:not(.big)')].map(t => ({ tx: t.querySelector('.tx').textContent, nm: t.querySelector('.nm') && t.querySelector('.nm').textContent })), big: s.querySelector('.tag.big').innerText.replace(/\s+/g, ' '), links: [...s.querySelectorAll('a[href]')].map(a => a.getAttribute('href')), txt: s.innerText, ids: [...document.querySelectorAll('[id]')].map(e => e.id).filter((v, i, a) => a.indexOf(v) !== i) }; });
+  const norm = (t) => t.replace(/\s+/g, ' ').trim();
+  const verb = D.tags.every(t => { const q = norm(t.tx).replace(/…$/, ''); return R.some(r => norm(r.text).includes(q) && (t.nm || '').toLowerCase() === r.name.toLowerCase()); });
+  ok('eight tags, each an exact excerpt of a published review with its own reviewer', D.tags.length === 8 && verb, D.tags.length);
+  ok('the big tag: 4.9 after the count-up, 474 Google reviews', /^4\.9 .*474 Google reviews/.test(D.big), D.big);
+  ok('no outside link; no sum; duplicate ids none', D.links.every(l => /^(#|tel:|\?)/.test(l)) && !/\b(241|330|497|361)\b/.test(D.txt) && D.ids.length === 0, JSON.stringify(D.links) + D.ids);
+  // dialog
+  await p.click('.rvB .tag:not(.big) >> nth=0'); await p.waitForTimeout(500);
+  const d1 = await p.evaluate(() => { const d = document.querySelector('.rvdlg'); return { open: !d.hidden, full: d.querySelector('.full').textContent, who: d.querySelector('b').textContent, n: d.querySelector('.rn').textContent }; });
+  const r17 = R[17]; ok('the dialog shows the whole review verbatim + the reviewer + "1 of 8"', d1.open && d1.full === r17.text && d1.who === r17.name && d1.n === '1 of 8', d1.n + ' ' + d1.who);
+  await p.click('.rvdlg .rx'); await p.waitForTimeout(400); const d2 = await p.evaluate(() => ({ n: document.querySelector('.rvdlg .rn').textContent, who: document.querySelector('.rvdlg b').textContent }));
+  await p.keyboard.press('ArrowLeft'); await p.waitForTimeout(300); const d3 = await p.evaluate(() => document.querySelector('.rvdlg .rn').textContent);
+  ok('Next, then the left arrow: steps through the tags', d2.n === '2 of 8' && d3 === '1 of 8', d2.n + d3);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(400); const d4 = await p.evaluate(() => ({ hid: document.querySelector('.rvdlg').hidden, f: document.activeElement.className })); ok('Escape closes it and focus returns to a tag', d4.hid && /tag/.test(d4.f), JSON.stringify(d4));
+  // gust
+  const g0 = await p.evaluate(() => [...document.querySelectorAll('.rvB .tag:not(.big)')].map(t => t.style.transform));
+  const gust = await p.evaluate(async () => { const v = document.querySelector('.rvB .lineview'), r = v.getBoundingClientRect(); for (let i = 0; i < 14; i++) { v.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, clientX: r.left + r.width * (.06 + i / 14 * .88), clientY: r.top + 140, pointerType: 'mouse' })); await new Promise(r => setTimeout(r, 40)); } await new Promise(r => setTimeout(r, 200)); return [...document.querySelectorAll('.rvB .tag:not(.big)')].map(t => t.style.transform); });
+  ok('a sweep of wind swings the tags (their own physics answer)', gust.some((t, i) => t !== g0[i]));
+  // C
+  await toC(p, 0.0); await p.waitForTimeout(400);
+  const C0 = await p.evaluate(() => { const s = document.querySelector('.rc'); return { n: s.querySelectorAll('blockquote').length, text: s.querySelector('.rc-sr').textContent, words: s.querySelectorAll('.w').length, marks: s.querySelectorAll('.w.k').length, by: s.querySelector('.rc-by b').textContent, src: s.querySelector('.rc-by>span:last-child').textContent, op: +s.querySelector('.w').style.opacity, id: s.id, links: [...s.querySelectorAll('a')].length, h: document.querySelector('.rc-pin').getBoundingClientRect().height, ih: innerHeight }; });
+  const r27 = R[27]; ok('Version C carries ONE review: the full verbatim text of review 27 (Megan Randolph), not cut', C0.n === 1 && C0.text === r27.text && C0.by === r27.name && C0.src === r27.source, C0.by);
+  ok('the three published phrases are marked inside the quote', C0.marks >= 8 && C0.id === 'reviews-read', C0.marks);
+  ok('at the start the words are dim', C0.op < .3, C0.op);
+  await toC(p, .45); await p.waitForTimeout(400); const C1 = await p.evaluate(() => { const w = [...document.querySelectorAll('.rc .w')].map(x => +x.style.opacity); return { lit: w.filter(o => o > .95).length, dim: w.filter(o => o < .25).length, pc: document.querySelector('.rc-pc').textContent }; });
+  ok('midway: some words read, some not yet; the ring shows the share', C1.lit > 8 && C1.dim > 8, JSON.stringify(C1));
+  await toC(p, .97); await p.waitForTimeout(400); const C2 = await p.evaluate(() => { const w = [...document.querySelectorAll('.rc .w')].map(x => +x.style.opacity); const q = document.querySelector('.rc-vis').getBoundingClientRect(), f = document.querySelector('.rc-foot').getBoundingClientRect(), by = document.querySelector('.rc-by b'); return { min: Math.min(...w), pc: document.querySelector('.rc-pc').textContent, by: +getComputedStyle(by).opacity, qb: Math.round(q.bottom), fb: Math.round(f.top), top: Math.round(q.top) }; });
+  ok('the end: every word is fully read, 100%, the reviewer appears', C2.min > .97 && C2.pc === '100%' && C2.by > .9, JSON.stringify(C2));
+  ok('at 1440×900 the whole quote fits above the footer row', C2.qb < C2.fb && C2.top > 60, JSON.stringify(C2));
+  await toC(p, .1); await p.click('.rc-all'); await p.waitForTimeout(1500); const sk = await p.evaluate(() => document.querySelector('.rc-pc').textContent); ok('"Show the whole review" jumps to the end', parseInt(sk) >= 90, sk);
+  ok('fonts Montserrat/Inter only', await p.evaluate(() => [...new Set([...document.querySelectorAll('.rvB *, .rc *')].map(e => getComputedStyle(e).fontFamily.split(',')[0].replace(/["']/g, '')))].filter(f => !/Inter|Montserrat/.test(f)).length === 0));
+  ok('contrast ≥ 4.5 (the read text, the rating line, the note, the button)', await p.evaluate(() => { const L = (c) => { const [r, g, b] = c.match(/[\d.]+/g).slice(0, 3).map(Number).map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }); return .2126 * r + .7152 * g + .0722 * b; }; const c = (a, b) => (Math.max(L(a), L(b)) + .05) / (Math.min(L(a), L(b)) + .05); return [c(getComputedStyle(document.querySelector('.rc-vis')).color, 'rgb(232,239,233)'), c(getComputedStyle(document.querySelector('.rc-rate')).color, 'rgb(232,239,233)'), c(getComputedStyle(document.querySelector('.rc-note')).color, 'rgb(232,239,233)'), c(getComputedStyle(document.querySelector('.rc-all')).color, 'rgb(234,241,235)')].every(v => v >= 4.5); }));
+  ok('page errors 0', p.errs.length === 0, p.errs.join('|')); await p.ctx.close();
+  // reduced motion
+  p = await open(1440, 900, { reducedMotion: 'reduce' }); await toC(p, 0); await p.waitForTimeout(300); const rm = await p.evaluate(() => { const s = document.querySelector('.rc'); return { pos: getComputedStyle(document.querySelector('.rc-pin')).position, h: s.getBoundingClientRect().height, op: Math.min(...[...s.querySelectorAll('.w')].map(w => +getComputedStyle(w).opacity)) }; });
+  ok('reduced motion: no pin, every word readable at once', rm.pos === 'static' && rm.op === 1, JSON.stringify(rm)); ok('reduced motion: 0 errors', p.errs.length === 0); await p.ctx.close();
+  // sizes
+  for (const [w, h] of [[1366, 768], [1024, 768], [768, 1024], [390, 844]]) { const q = await open(w, h); await toC(q, .97); await q.waitForTimeout(400); const r = await q.evaluate(() => { const qq = document.querySelector('.rc-vis').getBoundingClientRect(), f = document.querySelector('.rc-foot').getBoundingClientRect(), t = document.querySelector('.rc-top').getBoundingClientRect(); const bad = []; document.querySelectorAll('.rc button, .rvB .tag:not(.big)').forEach(e => { const r = e.getBoundingClientRect(); if (e.offsetParent && (r.height < 43.5)) bad.push(e.className + ' ' + Math.round(r.height)); }); return { fits: qq.bottom < f.top && qq.top > t.bottom - 4, qb: Math.round(qq.bottom), ft: Math.round(f.top), tb: Math.round(t.bottom), qt: Math.round(qq.top), over: document.querySelector('.rc').scrollWidth - document.querySelector('.rc').clientWidth, bad }; });
+    ok(`${w}×${h}: the whole quote fits between the heading and the footer row; no overflow; targets ≥ 44 px`, r.fits && r.over <= 0 && r.bad.length === 0, JSON.stringify(r)); await q.ctx.close(); }
+  for (const c of ck) console.log(c.join(' | ')); console.log('FAILS', ck.filter(c => c[0] === 'FAIL').length, 'of', ck.length); await b.close(); })();
