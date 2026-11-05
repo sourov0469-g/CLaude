@@ -14,7 +14,9 @@
   "label": "Problem-finder",
   "default": 1,
   "names": {
-   "1": "Curtain"
+   "1": "Curtain",
+   "2": "Point at it",
+   "3": "Two questions"
   }
  },
  "03-nothing": {

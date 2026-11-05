@@ -7,6 +7,13 @@ Owl's own media (the crew film, the family and crew photos, the logo, the owl il
 
 | Section (owner) | File | Source and credit | Shows |
 |---|---|---|---|
+| finder | `stock/finder-house.webp` | Erik Mclean, Pexels 4061594 | a white two-storey house in winter, snow on the drive |
+| finder | `stock/finder-leak.webp` | Pexels 13307118 (photographer not shown: page walled) | rain pouring over a gutter edge |
+| finder | `stock/finder-old.webp` | Pexels 4798643 (photographer not shown: page walled) | an older house and roof under a grey sky |
+| finder | `stock/finder-shingles.webp` | Pexels 5668698 (photographer not shown: page walled) | a weathered roof with damaged, lifting shingles |
+| finder | `stock/finder-stain.webp` | Pexels 30473221 (photographer not shown: page walled) | an attic under the roof, light through a roof window |
+| finder | `stock/finder-storm.webp` | Arkkrapol Anantachote, Pexels 292737 | houses under a heavy storm sky |
+| finder | `stock/finder-unsure.webp` | Keith, Pexels 9431615 | a roofer kneeling to look over a shingle roof |
 | hero | `stock/hero-nailer.webp` | Ryan Stephens, Pexels 33404248 | a roofer nailing architectural shingles |
 | hero | `stock/hero-rain.webp` | Adrien Olichon, Pexels 2663254 | rain running off a shingled roof edge |
 | hero | `stock/hero-rise.mp4` | Pexels video 17624839 (photographer not shown: the Pexels page refuses automated fetches) | top-down drone rise from a shingle roof to the whole street |

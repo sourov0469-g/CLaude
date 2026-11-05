@@ -60,4 +60,4 @@
 - **Diagnosis** `final/OWL-FIX-DIAGNOSIS-2026-11-05.md`: five repeated media mapped by content hash; later-section faults found by wheel-scrolling on desktop and an emulated iPhone (half-masked numbers, the family collage, soft stretched photos, the pill over the towns, "Closed now" read in Dhaka); Shingle Slate picked, with three muted alternates, every text pair computed AA; 22 versions planned.
 - **Infrastructure** `final/GATE-FIX-INFRA.md`: versions per section switchable in-file (Versions button, `?top=2`), the reset originals kept as in-file records, four muted palettes (amber kept as records), Blob-URL video, a stock pipeline with credits, and new checks (distinct media, sharpness).
 - **Hero** `final/GATE-FIX-HERO.md`: V1 Crew film (default, sharp now, the only place Owl's film appears), V2 Pull back, V3 Editorial split, V4 The question. Checks 26/24/24/23, all passing.
-
+- **Problem-finder** `final/GATE-FIX-FINDER.md`: V1 Curtain (default; drawn symbols replace the repeated thumbnails; six sharp stock photos), V2 Point at it (tap the house), V3 Two questions (type only). Checks 25/25 each.

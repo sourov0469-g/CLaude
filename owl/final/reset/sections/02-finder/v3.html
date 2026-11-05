@@ -1,0 +1,82 @@
+<section class="rs finder f3" id="finder" data-sky="day" aria-labelledby="f3-h">
+<style>
+/* V3 · Two questions. Type only: one question at a time, like being asked at the door (pattern: one question per screen; not
+   live-studied). The answer card names the service and what Owl does first. No photograph, so nothing here can be blurry. */
+.f3{padding:clamp(110px,14vh,170px) clamp(16px,4vw,64px) clamp(80px,10vh,120px);min-height:100vh;min-height:100svh}
+.f3 .in{max-width:980px;margin:0 auto}
+.f3 .step{margin:0 0 14px;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-70)}
+.f3 .step b{color:var(--ink)}
+.f3 .bar{height:4px;border-radius:4px;background:var(--wash);margin:0 0 34px;overflow:hidden}
+.f3 .bar i{display:block;height:100%;width:calc(var(--s,0) * 50%);background:var(--acc);transition:width .5s cubic-bezier(.16,1,.3,1)}
+.f3 h2,.f3 .qq{margin:0;font-size:clamp(36px,5vw,76px);font-weight:900;line-height:1;letter-spacing:-.045em;color:var(--ink);max-width:16ch;text-wrap:balance}
+.f3 .opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px}
+.f3 .opts button{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:72px;padding:14px 20px;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);font:inherit;font-size:18px;font-weight:800;text-align:left;cursor:pointer;transition:background .2s,border-color .2s,translate .25s cubic-bezier(.16,1,.3,1)}
+.f3 .opts button::after{content:"→";font-weight:900;color:var(--acc-text);transition:translate .25s}
+.f3 .opts button:hover{border-color:var(--acc);translate:0 -2px}.f3 .opts button:hover::after{translate:4px 0}
+.f3 .opts button:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.f3 .opts button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.f3 .opts button[aria-pressed="true"]::after{color:var(--on-acc)}
+.f3 .pane{transition:opacity .35s,translate .5s cubic-bezier(.16,1,.3,1)}
+.f3 .pane[hidden]{display:none}
+.f3 .pane.in-from{opacity:0;translate:28px 0}
+.f3 .ans{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:start;padding:clamp(22px,3vw,40px);border-radius:26px;background:var(--deep);color:var(--on-deep)}
+.f3 .ans .k{display:inline-block;margin:0 0 14px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--acc-deep);font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.f3 .ans h3{margin:0;font-size:clamp(30px,3.4vw,52px);font-weight:900;line-height:1;letter-spacing:-.035em}
+.f3 .ans p{margin:16px 0 0;font-size:18px;line-height:1.5;color:var(--on-deep-70)}
+.f3 .ans .first{padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.f3 .ans .first b{display:block;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--acc-deep)}
+.f3 .ans .first span{display:block;margin-top:8px;font-size:18px;font-weight:700;line-height:1.4;color:var(--on-deep)}
+.f3 .ans .acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:26px}
+.f3 .lnk{display:inline-grid;align-items:center;min-height:44px;padding:0 4px;border:0;background:none;font:inherit;font-weight:800;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.f3 .ans .lnk{color:var(--on-deep)}
+.f3 .back{margin-top:18px;color:var(--acc-text)}
+@media (max-width:860px){.f3 .opts{grid-template-columns:1fr}.f3 .ans{grid-template-columns:1fr}.f3{padding-top:150px}}
+@media (prefers-reduced-motion:reduce){.f3 .pane,.f3 .bar i,.f3 .opts button{transition:none}}
+</style>
+<div class="in">
+ <p class="step" aria-live="polite">Question <b class="sn">1</b> of 2</p>
+ <div class="bar" aria-hidden="true"><i></i></div>
+ <div class="pane p1">
+  <h2 id="f3-h">What are you noticing?</h2>
+  <div class="opts o1" role="group" aria-labelledby="f3-h"></div>
+ </div>
+ <div class="pane p2" hidden>
+  <p class="qq" id="f3-q2">How long has it been going on?</p>
+  <div class="opts o2" role="group" aria-labelledby="f3-q2"></div>
+  <button class="lnk back" type="button">← Change my first answer</button>
+ </div>
+ <div class="pane p3" hidden>
+  <div class="ans" aria-live="polite"></div>
+  <button class="lnk back b3" type="button">← Start again</button>
+ </div>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), o1 = sec.querySelector('.o1'), o2 = sec.querySelector('.o2'), panes = sec.querySelectorAll('.pane'), sn = sec.querySelector('.sn'), bar = sec.querySelector('.bar i'), ans = sec.querySelector('.ans');
+  var C = [
+    { k: 'leak', n: 'A leak', o: 'Water is coming in', h: 'A leak? We’ll find it and stop it.', l: 'We trace where the water gets in, fix it, and show you photos of what we found.', s: 'Roof Repair', a: 'Call about my leak', f: 'Find where the water gets in, before anything else.' },
+    { k: 'stain', n: 'A ceiling stain', o: 'A stain on a ceiling', h: 'A stain? We look above it.', l: 'Water travels before it shows, so we check the roof and the attic above the stain, then fix what’s causing it.', s: 'Wise Check + Roof Repair', a: 'Call about the stain', f: 'Go up into the attic above the stain, then onto the roof.' },
+    { k: 'shingles', n: 'Missing shingles', o: 'Shingles missing or lifting', h: 'Shingles gone? We’ll put them back.', l: 'We replace what’s missing and look over the rest while we’re up there.', s: 'Roof Repair', a: 'Call about my shingles', f: 'Replace what’s missing, and look over the rest of the roof.' },
+    { k: 'storm', n: 'After a storm', o: 'A storm just went through', h: 'Storm hit? We’ll check it properly.', l: 'Hail and wind leave marks that are easy to miss from the ground. We look closely and show you what we find.', s: 'Storm Damage Help', a: 'Call about storm damage', f: 'Look closely for hail and wind marks, with photos for you.' },
+    { k: 'old', n: 'It’s getting old', o: 'Nothing yet, it’s just old', h: 'Getting old? We’ll tell you straight.', l: 'A Wise Check shows where it stands. If it’s time, we replace it, backed by our 10-year workmanship warranty.', s: 'Wise Check · Roof Replacement', a: 'Call about my roof', f: 'A Wise Check: the roof and the attic, with photos and video.' },
+    { k: 'unsure', n: 'Not sure', o: 'I’m not sure what it is', h: 'Not sure? That’s what we’re for.', l: 'We look over the roof and attic and show you photos and video of what we saw. Then you decide.', s: 'Wise Check Inspections', a: 'Call and ask', f: 'A Wise Check, then you decide. No guessing.' }];
+  RESET.cases = C;
+  var T = [{ t: 'Today or this week', w: 'Then call today: (651) 977-6027, Mon–Sat 08:00–18:00.' }, { t: 'A while now', w: 'Then a Wise Check is the place to start.' }, { t: 'I don’t know', w: 'That’s fine. We’ll find out together.' }];
+  var pick = null, when = null;
+  function go(n){ panes.forEach(function(p, i){ var on = i === n; if (on && p.hidden && !OWL.reduce){ p.classList.add('in-from'); requestAnimationFrame(function(){ requestAnimationFrame(function(){ p.classList.remove('in-from'); }); }); } p.hidden = !on; });
+    sn.textContent = Math.min(n + 1, 2); sec.querySelector('.step').style.visibility = n === 2 ? 'hidden' : 'visible'; bar.parentNode.style.setProperty('--s', n); sec.dataset.step = n + 1;
+    var f = panes[n].querySelector(n === 2 ? 'h3' : 'button'); if (f && document.activeElement && sec.contains(document.activeElement)){ if (n === 2){ f.tabIndex = -1; } f.focus({ preventScroll: true }); } }
+  function mk(box, list, fn){ return list.map(function(x){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.textContent = x.o || x.t; b.addEventListener('click', function(){ [].forEach.call(box.children, function(o){ o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); fn(x); }); box.appendChild(b); return b; }); }
+  function answer(){ var c = pick; sec.dataset.case = c.k; RESET.setCase(c.k);
+    ans.innerHTML = '<div><p class="k">' + c.s + '</p><h3>' + c.h + '</h3><p>' + c.l + '</p><p>' + (when ? when.w : '') + '</p><div class="acts"><a class="btn btn-amber btn-call" href="tel:+16519776027" aria-label="' + c.a + ', (651) 977-6027">' + c.a + '</a>' + (document.getElementById('nothing') ? '<a class="lnk" href="#nothing">See how it goes ↓</a>' : '') + '</div></div><div class="first"><b>What we do first</b><span>' + c.f + '</span></div>';
+    OWL.buttons(ans); go(2); }
+  mk(o1, C, function(c){ pick = c; setTimeout(function(){ go(1); }, OWL.reduce ? 0 : 180); });
+  mk(o2, T, function(t){ when = t; setTimeout(answer, OWL.reduce ? 0 : 180); });
+  sec.querySelector('.p2 .back').addEventListener('click', function(){ go(0); });
+  sec.querySelector('.b3').addEventListener('click', function(){ pick = when = null; [].forEach.call(sec.querySelectorAll('.opts button'), function(b){ b.setAttribute('aria-pressed', 'false'); }); go(0); });
+  /* the hero's question can open a case here (it skips straight to the second question) */
+  RESET.openCase = function(k){ var c = C.filter(function(x){ return x.k === k; })[0]; if (!c) return; pick = c; [].forEach.call(o1.children, function(b, i){ b.setAttribute('aria-pressed', C[i] === c ? 'true' : 'false'); }); sec.dataset.case = k; RESET.setCase(k); go(1); sec.scrollIntoView({ behavior: OWL.reduce ? 'instant' : 'smooth' }); };
+  go(0);
+})();
+</script>
+</section>

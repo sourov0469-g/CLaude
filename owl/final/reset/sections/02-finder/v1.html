@@ -3,7 +3,7 @@
 .finder .box{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden}
 /* the scene: what Owl will do about YOUR case (dark, full-bleed, under the gate) */
 .finder .scene{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(24px,5vw,80px);padding:110px clamp(20px,5vw,90px) 90px;background:radial-gradient(120% 90% at 78% 40%,var(--deep-2) 0%,var(--deep) 62%);color:var(--on-deep)}
-.finder .sc-k{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--acc) 18%,transparent);color:var(--acc);font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.finder .sc-k{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--acc-deep);font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
 .finder .sc-h{margin:0;font-size:clamp(40px,5.6vw,88px);font-weight:900;line-height:.98;letter-spacing:-.04em;text-wrap:balance;max-width:12ch}
 .finder .sc-l{margin:22px 0 0;font-size:clamp(17px,1.4vw,21px);line-height:1.5;color:var(--on-deep-70);max-width:42ch}
 .finder .sc-a{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:30px}
@@ -23,16 +23,18 @@
 .finder .qs{margin:16px 0 0;font-size:18px;color:var(--ink-70)}
 .finder .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:clamp(28px,4vw,44px);max-width:1320px}
 .finder .pill{display:inline-flex;align-items:center;gap:12px;min-height:64px;padding:8px 18px 8px 8px;border:0;border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:17px;font-weight:800;cursor:pointer;box-shadow:0 0 0 1px var(--line),0 14px 26px -18px rgba(0,0,0,.45);transition:background .25s,box-shadow .25s}
-.finder .pill img{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none}
+.finder .pill .ic,.rbar .dock .ic{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--wash);color:var(--ink);flex:none}
+.finder .pill .ic svg,.rbar .dock .ic svg{width:24px;height:24px}
 @media (hover:hover) and (pointer:fine){.finder .pill:hover{box-shadow:0 0 0 2px var(--acc),0 18px 28px -18px rgba(0,0,0,.5)}}
-.finder .pill[aria-checked="true"]{background:var(--acc)}
+.finder .pill[aria-checked="true"]{background:var(--acc);color:var(--on-acc)}
+.finder .pill[aria-checked="true"] .ic,.rbar .dock button[aria-checked="true"] .ic{background:rgba(255,255,255,.18);color:var(--on-acc)}
 .finder .pill:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
 /* the dock: after the choice, the pills live in the top bar, page-wide */
 .rbar .dock{display:flex;gap:6px;margin:0 auto;padding:4px;border-radius:999px;background:color-mix(in srgb,var(--surface) 92%,transparent);box-shadow:0 0 0 1px var(--line),0 10px 20px -16px rgba(0,0,0,.5);opacity:0;translate:0 -16px;pointer-events:none;transition:opacity .45s .5s,translate .6s cubic-bezier(.16,1,.3,1) .5s}
 .rbar .dock.on{opacity:1;translate:none;pointer-events:auto}
 .rbar .dock button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;min-width:44px;padding:4px 14px 4px 4px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer}
-.rbar .dock button img{width:30px;height:30px;border-radius:50%;object-fit:cover}
-.rbar .dock button[aria-checked="true"]{background:var(--acc)}
+.rbar .dock .ic{width:32px;height:32px}.rbar .dock .ic svg{width:18px;height:18px}
+.rbar .dock button[aria-checked="true"]{background:var(--acc);color:var(--on-acc)}
 .rbar .dock button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 @media (max-width:1180px){.rbar .dock button span{display:none}.rbar .dock button{padding:4px}.rbar .dock button[aria-checked="true"] span{display:inline;padding-right:8px}}
 @media (max-width:860px){
@@ -45,7 +47,7 @@
  .finder .arch{order:-1;width:min(78%,340px)}
  .finder .pills{display:grid;grid-template-columns:1fr 1fr;width:100%}
  .finder .pill{font-size:16px;padding:6px 12px 6px 6px;gap:10px;min-height:60px;text-align:left}
- .finder .pill img{width:44px;height:44px}
+ .finder .pill .ic{width:44px;height:44px}
  .rbar .dock{position:fixed;left:12px;right:12px;top:66px;justify-content:space-between;overflow-x:auto}
 }
 @media (prefers-reduced-motion:reduce){.finder .gate,.finder .scene .txt>*,.finder .arch,.rbar .dock{transition:none}}
@@ -53,7 +55,7 @@
 <div class="box">
  <div class="scene" aria-live="polite">
   <div class="txt"><p class="sc-k"></p><h3 class="sc-h"></h3><p class="sc-l"></p>
-   <div class="sc-a"><a class="btn btn-amber sc-call" href="tel:+16519776027">Call about it</a><a class="sc-more" href="#nothing">See how it goes ↓</a></div></div>
+   <div class="sc-a"><a class="btn btn-amber btn-call sc-call" href="tel:+16519776027">Call about it</a><a class="sc-more" href="#nothing">See how it goes ↓</a></div></div>
   <div class="arch"><img alt=""><span class="ph-tag"></span></div>
  </div>
  <div class="gate">
@@ -66,15 +68,20 @@
 (function(){
   var sec = document.currentScript.closest('section'), gate = sec.querySelector('.gate'), pills = sec.querySelector('.pills'), scene = sec.querySelector('.scene');
   var C = [
-    { k: 'leak', n: 'A leak', img: '{{A:svc-repair.webp}}', tag: 'Owl’s crew', h: 'A leak? We’ll find it and stop it.', l: 'We trace where the water gets in, fix it, and show you photos of what we found.', s: 'Roof Repair', a: 'Call about my leak' },
-    { k: 'stain', n: 'A ceiling stain', img: '{{A:new-roof.webp}}', tag: 'Owl’s crew', h: 'A stain? We look above it.', l: 'Water travels before it shows, so we check the roof and the attic above the stain, then fix what’s causing it.', s: 'Wise Check + Roof Repair', a: 'Call about the stain' },
-    { k: 'shingles', n: 'Missing shingles', img: '{{A:old-roof.webp}}', tag: 'Illustrative photo', h: 'Shingles gone? We’ll put them back.', l: 'We replace what’s missing and look over the rest while we’re up there.', s: 'Roof Repair', a: 'Call about my shingles' },
-    { k: 'storm', n: 'After a storm', img: '{{A:svc-storm.webp}}', tag: 'Illustrative photo', h: 'Storm hit? We’ll check it properly.', l: 'Hail and wind leave marks that are easy to miss from the ground. We look closely and show you what we find.', s: 'Storm Damage Help', a: 'Call about storm damage' },
-    { k: 'old', n: 'It’s getting old', img: '{{A:hero-aerial.webp}}', tag: 'Illustrative photo', h: 'Getting old? We’ll tell you straight.', l: 'A Wise Check shows where it stands. If it’s time, we replace it, backed by our 10-year workmanship warranty.', s: 'Wise Check · Roof Replacement', a: 'Call about my roof' },
-    { k: 'unsure', n: 'Not sure', img: '{{A:svc-check.webp}}', tag: 'Owl’s crew', h: 'Not sure? That’s what we’re for.', l: 'We look over the roof and attic and show you photos and video of what we saw. Then you decide.', s: 'Wise Check Inspections', a: 'Call and ask' }];
+    { k: 'leak', n: 'A leak', img: '{{A:stock/finder-leak.webp}}', alt: 'Rain pouring over a gutter edge (illustrative photo)', tag: 'Illustrative photo', h: 'A leak? We’ll find it and stop it.', l: 'We trace where the water gets in, fix it, and show you photos of what we found.', s: 'Roof Repair', a: 'Call about my leak' },
+    { k: 'stain', n: 'A ceiling stain', img: '{{A:stock/finder-stain.webp}}', alt: 'An attic under the roof, where a ceiling stain is traced (illustrative photo)', tag: 'Illustrative photo', h: 'A stain? We look above it.', l: 'Water travels before it shows, so we check the roof and the attic above the stain, then fix what’s causing it.', s: 'Wise Check + Roof Repair', a: 'Call about the stain' },
+    { k: 'shingles', n: 'Missing shingles', img: '{{A:stock/finder-shingles.webp}}', alt: 'A weathered roof with damaged, lifting shingles (illustrative photo)', tag: 'Illustrative photo', h: 'Shingles gone? We’ll put them back.', l: 'We replace what’s missing and look over the rest while we’re up there.', s: 'Roof Repair', a: 'Call about my shingles' },
+    { k: 'storm', n: 'After a storm', img: '{{A:stock/finder-storm.webp}}', alt: 'Houses under a heavy storm sky (illustrative photo)', tag: 'Illustrative photo', h: 'Storm hit? We’ll check it properly.', l: 'Hail and wind leave marks that are easy to miss from the ground. We look closely and show you what we find.', s: 'Storm Damage Help', a: 'Call about storm damage' },
+    { k: 'old', n: 'It’s getting old', img: '{{A:stock/finder-old.webp}}', alt: 'An older house and roof under a grey sky (illustrative photo)', tag: 'Illustrative photo', h: 'Getting old? We’ll tell you straight.', l: 'A Wise Check shows where it stands. If it’s time, we replace it, backed by our 10-year workmanship warranty.', s: 'Wise Check · Roof Replacement', a: 'Call about my roof' },
+    { k: 'unsure', n: 'Not sure', img: '{{A:stock/finder-unsure.webp}}', alt: 'A roofer kneeling to look over a shingle roof (illustrative photo)', tag: 'Illustrative photo', h: 'Not sure? That’s what we’re for.', l: 'We look over the roof and attic and show you photos and video of what we saw. Then you decide.', s: 'Wise Check Inspections', a: 'Call and ask' }];
+  /* a drawn symbol per case for the pills and the dock: each case photo is shown once, in the scene (no repeats) */
+  var SV = function(d){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+  var ICON = { leak: SV('<path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z"/>'), stain: SV('<path d="M3 6h18"/><path d="M8 6c0 3 2 3 2 6s-3 3-3 6"/><circle cx="15" cy="13" r="3.2"/>'),
+    shingles: SV('<path d="M3 10l9-6 9 6"/><path d="M5 14h4v4H5zM10 14h4M15 14h4v4h-4"/><path d="M10 18h4"/>'), storm: SV('<path d="M7 16a4 4 0 1 1 .9-7.9A5 5 0 0 1 17.6 9 3.5 3.5 0 0 1 17 16"/><path d="M12 13l-2 4h3l-2 4"/>'),
+    old: SV('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'), unsure: SV('<path d="M9.2 9a3 3 0 1 1 4.3 2.7c-.9.4-1.5 1.2-1.5 2.2V15"/><path d="M12 18.5h.01"/>') };
   RESET.cases = C;
   function mk(c, i, small){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false'); b.tabIndex = i ? -1 : 0; b.dataset.k = c.k;
-    b.innerHTML = '<img src="' + c.img + '" alt="">' + (small ? '<span>' + c.n + '</span>' : c.n); if (!small) b.className = 'pill'; return b; }
+    b.innerHTML = '<span class="ic" aria-hidden="true">' + ICON[c.k] + '</span>' + (small ? '<span>' + c.n + '</span>' : c.n); if (!small) b.className = 'pill'; return b; }
   var gp = C.map(function(c, i){ var b = mk(c, i); pills.appendChild(b); return b; });
   var dock = document.createElement('div'); dock.className = 'dock'; dock.setAttribute('role', 'radiogroup'); dock.setAttribute('aria-label', 'Your roof problem'); dock.hidden = false;
   var dp = C.map(function(c, i){ var b = mk(c, i, true); b.setAttribute('aria-label', c.n); dock.appendChild(b); return b; });
@@ -84,7 +91,7 @@
   keys(gp); keys(dp);
   var cur = '';
   function fill(c){ scene.querySelector('.sc-k').textContent = c.s; scene.querySelector('.sc-h').textContent = c.h; scene.querySelector('.sc-l').textContent = c.l;
-    var im = scene.querySelector('.arch img'); im.src = c.img; im.alt = c.tag === 'Owl’s crew' ? 'One of Owl’s crew on a roof' : 'A roof like yours (illustrative photo)';
+    var im = scene.querySelector('.arch img'); im.src = c.img; im.alt = c.alt;
     scene.querySelector('.ph-tag').textContent = c.tag;
     var call = scene.querySelector('.sc-call'); call.setAttribute('aria-label', c.a + ', (651) 977-6027'); var w = call.querySelector('.bl');
     if (w){ w.innerHTML = ''; c.a.split('').forEach(function(ch, j){ var e = document.createElement('i'); e.textContent = ch; e.dataset.c = ch; e.style.setProperty('--i', j); w.appendChild(e); }); } else call.textContent = c.a; }

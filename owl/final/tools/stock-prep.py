@@ -9,6 +9,13 @@ FINAL = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); OUT = os.pa
 ITEMS = {
  'hero-rise':   ('hero', 'scrub', 17624839, 'pexels-17624839.mp4', 'hero-rise.mp4', 1600, {'speed': 3.0, 'crf': 31, 'g': 10}, 'Pexels video 17624839 (photographer not shown: the Pexels page refuses automated fetches)', 'top-down drone rise from a shingle roof to the whole street'),
  'nothing-drone': ('nothing', 'scrub', 4198812, 'pexels-4198812.mp4', 'nothing-drone.mp4', 1600, {'speed': 1.0, 'crf': 33, 'g': 12}, 'Pexels video 4198812 (photographer not shown: the Pexels page refuses automated fetches)', 'a drone moving in on a house mid-reroof, a roofer on the ridge'),
+ 'finder-leak':    ('finder', 'photo', 13307118, 'px-13307118.jpg', 'finder-leak.webp', 2000, {}, 'Pexels 13307118 (photographer not shown: page walled)', 'rain pouring over a gutter edge'),
+ 'finder-stain':   ('finder', 'photo', 30473221, '../cand2/px-30473221.jpg', 'finder-stain.webp', 2000, {}, 'Pexels 30473221 (photographer not shown: page walled)', 'an attic under the roof, light through a roof window'),
+ 'finder-shingles':('finder', 'photo', 5668698, 'px-5668698.jpg', 'finder-shingles.webp', 2000, {}, 'Pexels 5668698 (photographer not shown: page walled)', 'a weathered roof with damaged, lifting shingles'),
+ 'finder-storm':   ('finder', 'photo', 292737, 'px-292737.jpg', 'finder-storm.webp', 2000, {}, 'Arkkrapol Anantachote, Pexels 292737', 'houses under a heavy storm sky'),
+ 'finder-old':     ('finder', 'photo', 4798643, 'px-4798643.jpg', 'finder-old.webp', 2000, {}, 'Pexels 4798643 (photographer not shown: page walled)', 'an older house and roof under a grey sky'),
+ 'finder-unsure':  ('finder', 'photo', 9431615, 'px-9431615.jpg', 'finder-unsure.webp', 2000, {}, 'Keith, Pexels 9431615', 'a roofer kneeling to look over a shingle roof'),
+ 'finder-house':   ('finder', 'photo', 4061594, '../cand2/px-4061594.jpg', 'finder-house.webp', 2400, {}, 'Erik Mclean, Pexels 4061594', 'a white two-storey house in winter, snow on the drive'),
  'hero-nailer': ('hero', 'photo', 33404248, 'px-33404248.jpg', 'hero-nailer.webp', 2400, {}, 'Ryan Stephens, Pexels 33404248', 'a roofer nailing architectural shingles'),
  'hero-rain':   ('hero', 'photo', 2663254, 'px-2663254.jpg', 'hero-rain.webp', 2400, {}, 'Adrien Olichon, Pexels 2663254', 'rain running off a shingled roof edge'),
 }

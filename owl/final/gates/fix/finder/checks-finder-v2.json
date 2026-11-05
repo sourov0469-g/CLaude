@@ -1,0 +1,133 @@
+{
+ "section": "finder",
+ "version": 2,
+ "total": 25,
+ "passed": 25,
+ "results": [
+  {
+   "name": "the switcher shows this version: finder V2",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | elsewhere, for their own gates: 52527d06aa in towns+call"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"a4dca26deb\":1}"
+  },
+  {
+   "name": "five tap points sit on the photo (roof, vent, dormer, gutter, side roof) plus two chips; every one a real button at least 44 px",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "tapping the dormer answers the stain case (“we look above it”) and shares the case with the page",
+   "ok": true,
+   "info": "{\"cas\":\"stain\",\"h\":\"A stain? We look above it.\",\"shared\":\"stain\",\"call\":true}"
+  },
+  {
+   "name": "the chip “It’s just getting old” answers the old-roof case, naming the Wise Check and the 10-year workmanship warranty",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "keyboard: Enter on a focused tap point answers",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the stock photo is tagged “Illustrative photo”",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "img 0.32x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (1 media measured)",
+   "ok": true,
+   "info": "img 0.30x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the answer appears at once, no pulsing rings",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
