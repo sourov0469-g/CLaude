@@ -1,0 +1,107 @@
+<section class="sec rev3" id="reviews" aria-labelledby="rv3-h">
+<style>
+/* Section 7 · Ninety-Plus and Counting. OLD Reviews V3: the feather-ripple water stays exactly as the owner liked it; the CARD is rebuilt:
+   stars that fill in one by one, one huge 5.0 with "90+ reviews", the heading, three proofs with icons, one action; it leans toward the pointer with a glare;
+   the explanation of the feathers moves out of the card to a caption; a hint says "touch the water". No review is quoted or invented. */
+.rev3 .field{position:relative;border-radius:32px;background:radial-gradient(ellipse at 50% 50%,#FBF7EC 0%,#F4EFE2 60%,#EDE6D5 100%);overflow:hidden;min-height:clamp(600px,52vw,700px);display:grid;place-items:center;box-shadow:0 2px 0 rgba(255,255,255,.9) inset,0 50px 80px -46px rgba(23,17,29,.5);touch-action:pan-y;perspective:1100px}
+.rev3 canvas{position:absolute;inset:0;width:100%;height:100%}
+.rev3 .card{position:relative;z-index:2;width:min(460px,calc(100% - 40px));padding:clamp(22px,3vw,34px) clamp(20px,2.6vw,32px) clamp(22px,3vw,30px);border-radius:28px;background:rgba(251,250,246,.95);text-align:center;box-shadow:0 2px 0 #fff inset,0 34px 60px -30px rgba(23,17,29,.6),0 0 0 1px rgba(234,162,33,.4);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;overflow:hidden}
+.rev3 .card::after{content:"";position:absolute;inset:0;background:radial-gradient(260px 200px at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.7),transparent 70%);opacity:var(--go,0);pointer-events:none;transition:opacity .4s}
+.rev3 .stars{display:flex;justify-content:center;gap:6px}
+.rev3 .stars svg{width:30px;height:30px;color:var(--amber);filter:drop-shadow(0 3px 0 rgba(199,135,26,.45));transform:scale(0) rotate(-40deg)}
+.rev3 .card.in .stars svg{animation:rv3s .6s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i) * 110ms + 150ms)}
+@keyframes rv3s{from{transform:scale(0) rotate(-40deg)}to{transform:none}}
+.rev3 .big{display:block;margin:6px 0 0;font-size:clamp(88px,10vw,128px);font-weight:900;letter-spacing:-.055em;line-height:.9}
+.rev3 .cnt{display:block;margin:2px 0 0;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#7A4A0C}
+.rev3 h2{margin:16px 0 0;font-size:clamp(24px,2.3vw,30px);line-height:1.1}
+.rev3 .proof{list-style:none;display:grid;gap:0;margin:18px 0 20px;border-top:1px solid rgba(23,17,29,.1)}
+.rev3 .proof li{display:flex;align-items:center;gap:12px;min-height:46px;padding:6px 4px;border-bottom:1px solid rgba(23,17,29,.1);font-weight:700;font-size:15.5px;text-align:left}
+.rev3 .proof svg{flex:none;width:30px;height:30px;padding:5px;border-radius:9px;background:#F4EFE2;color:#17111D}
+.rev3 .card .btn{min-width:240px}
+.rev3 .hint{position:absolute;left:50%;bottom:16px;translate:-50% 0;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(23,17,29,.86);color:#F1EFE6;font-size:14.5px;font-weight:800;pointer-events:none;transition:opacity .5s}
+.rev3 .hint svg{width:20px;height:20px}
+.rev3 .hint.gone{opacity:0}
+.rev3 .cap{margin:14px auto 0;max-width:60ch;text-align:center;font-size:15px;color:var(--ink-70)}
+@media (max-width:760px){.rev3 .field{min-height:880px}.rev3 .stars svg{width:26px;height:26px}.rev3 .card .btn{min-width:0;width:100%}}
+@media (prefers-reduced-motion:reduce){.rev3 .stars svg{transform:none;animation:none!important}.rev3 .card{transform:none}.rev3 .card::after{display:none}}
+</style>
+<div class="wrap">
+ <div class="field" data-owl="say:Make a splash">
+  <canvas aria-hidden="true"></canvas>
+  <div class="card">
+   <p class="sr">Rated 5.0 from 90+ reviews.</p>
+   <div class="stars" aria-hidden="true"></div>
+   <b class="big" aria-hidden="true">5.0</b>
+   <span class="cnt" aria-hidden="true">90+ reviews</span>
+   <h2 class="h2" id="rv3-h">Ninety-Plus and Counting</h2>
+   <ul class="proof">
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>BBB A−</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>GAF Systems Plus</li>
+    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>10-year workmanship warranty</li>
+   </ul>
+   <a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a>
+  </div>
+  <span class="hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3.5 5-6 8-6 11a6 6 0 0012 0c0-3-2.5-6-6-11z"/></svg><span class="ht">Touch the water</span></span>
+ </div>
+ <p class="cap">Around the card: 90 feathers, one for each review so far, and a plus for the next one.</p>
+</div>
+<script>
+OWL.reg('reviews','1',function(root){
+  var field = root.querySelector('.field'), cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), card = root.querySelector('.card'), stars = root.querySelector('.stars'), hint = root.querySelector('.hint'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  var STAR = '<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L10 14.8l-5.2 2.8 1-5.8L1.5 7.7l5.9-.8z"/></svg>';
+  for (var s = 0; s < 5; s++){ var w = document.createElement('span'); w.innerHTML = STAR; var sv = w.firstChild; sv.style.setProperty('--i', s); stars.appendChild(sv); }
+  root.querySelector('.ht').textContent = OWL.fine ? 'Touch the water' : 'Tap the water';
+  var FS = 1, dpr = Math.min(2, devicePixelRatio || 1), W = 0, H = 0, M = [], waves = [], vis = false, lastSplash = 0, user = 0;
+  function layout(){
+    var b = field.getBoundingClientRect(); W = b.width; H = b.height; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    /* the card's resting box (not its tilted one) */
+    var cw = card.offsetWidth, ch = card.offsetHeight, cx = W/2, cy = H/2;
+    /* place exactly 91 marks (90 + the plus) on a grid that avoids the card, so every mark is always visible */
+    var cl = cx - cw/2 - 18, cr = cx + cw/2 + 18, ct = cy - ch/2 - 18, cb = cy + ch/2 + 18, cand = [];
+    for (var sp = 72; sp >= 20; sp -= 2){ cand = []; var cols = Math.floor((W - 36)/sp), rows = Math.floor((H - 36)/sp), ox = (W - (cols - 1)*sp)/2, oy = (H - (rows - 1)*sp)/2;
+      for (var r = 0; r < rows; r++) for (var q = 0; q < cols; q++){ var x = ox + q*sp + (r % 2 ? sp*.25 : -sp*.25), y = oy + r*sp; if (x < 14 || x > W - 14) continue; if (x > cl && x < cr && y > ct && y < cb) continue; if (y > H - 58 && x > W/2 - 110 && x < W/2 + 110) continue; cand.push([x, y]); }
+      if (cand.length >= 91) break; }
+    FS = Math.max(.85, Math.min(1.7, sp/38)); M = [];
+    for (var n = 0; n < 91 && cand.length; n++){ var pt = cand[Math.floor(n*cand.length/91)]; M.push({x: pt[0], y: pt[1], a: Math.atan2(pt[1] - cy, pt[0] - cx) + Math.PI/2, z: 0, v: 0, ph: n*1.7, plus: false}); }
+    M[M.length - 1].plus = true;
+    field.dataset.marks = M.filter(function(m){ return m.x > 6 && m.x < W - 6 && m.y > 6 && m.y < H - 6 && !(m.x > cl && m.x < cr && m.y > ct && m.y < cb); }).length;
+  }
+  function splash(x, y, s){ waves.push({x: x, y: y, r: 0, s: s || 1}); if (waves.length > 6) waves.shift(); }
+  function feather(m, lift){
+    var k = (1 + lift*.55)*FS, col = lift > .05 ? 'rgba(' + Math.round(23 + 211*lift) + ',' + Math.round(17 + 145*lift) + ',' + Math.round(29 + 4*lift) + ',' + (.55 + .45*lift) + ')' : 'rgba(23,17,29,.42)';
+    ctx.save(); ctx.translate(m.x, m.y - lift*10); ctx.rotate(m.a + Math.sin(m.ph)*.08 + lift*.6); ctx.scale(k, k);
+    if (m.plus){ ctx.strokeStyle = lift > .05 ? col : '#C7871A'; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-7, 0); ctx.lineTo(7, 0); ctx.moveTo(0, -7); ctx.lineTo(0, 7); ctx.stroke(); ctx.restore(); return; }
+    ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(0, -12); ctx.quadraticCurveTo(7, -3, 1.5, 10); ctx.lineTo(-1.5, 10); ctx.quadraticCurveTo(-7, -3, 0, -12); ctx.fill();
+    ctx.strokeStyle = 'rgba(251,250,246,.75)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, -10); ctx.lineTo(0, 14); ctx.stroke(); ctx.restore();
+  }
+  /* the card leans toward the pointer; a glare follows it */
+  var px = 0, py = 0, cx0 = 0, cy0 = 0;
+  function frame(t){
+    if (vis){
+      var dt = Math.min(48, t - (frame.l || t)); frame.l = t; ctx.clearRect(0, 0, W, H);
+      waves.forEach(function(w){ w.r += dt*.42; }); waves = waves.filter(function(w){ return w.r < Math.max(W, H)*1.2; });
+      if (!OWL.reduce && t - user > 3800 && t - lastSplash > 3600){ lastSplash = t; splash(W*(.15 + Math.random()*.7), H*(.15 + Math.random()*.7), .8); }
+      M.forEach(function(m){ var f = 0; waves.forEach(function(w){ var d = Math.hypot(m.x - w.x, m.y - w.y), band = Math.abs(d - w.r); if (band < 34) f += (1 - band/34)*w.s*Math.max(0, 1 - w.r/900); });
+        m.v += (f*1.6 - m.z)*.18; m.v *= .78; m.z += m.v; m.ph += dt*.0012; feather(m, Math.max(0, Math.min(1, m.z))); });
+      waves.forEach(function(w){ ctx.strokeStyle = 'rgba(234,162,33,' + (Math.max(0, .35 - w.r/1400)).toFixed(3) + ')'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(w.x, w.y, w.r, 0, Math.PI*2); ctx.stroke(); });
+      var al = 1 - Math.pow(1 - .07, dt/16.7); cx0 += (px - cx0)*al; cy0 += (py - cy0)*al;
+      card.style.setProperty('--ry', (cx0*7).toFixed(2) + 'deg'); card.style.setProperty('--rx', (-cy0*5).toFixed(2) + 'deg');
+    }
+    if (!OWL.reduce) requestAnimationFrame(frame);
+  }
+  layout(); addEventListener('resize', function(){ layout(); if (OWL.reduce) still(); });
+  function still(){ ctx.clearRect(0, 0, W, H); M.forEach(function(m){ feather(m, 0); }); }
+  function touched(){ hint.classList.add('gone'); }
+  var lp = 0;
+  field.addEventListener('pointermove', function(e){ var b = field.getBoundingClientRect(), now = performance.now(); user = now; if (now - lp > 160){ lp = now; splash(e.clientX - b.left, e.clientY - b.top, .7); touched(); }
+    if (OWL.fine && !OWL.reduce){ px = (e.clientX - b.left)/b.width - .5; py = (e.clientY - b.top)/b.height - .5; var c = card.getBoundingClientRect(); card.style.setProperty('--gx', ((e.clientX - c.left)/c.width*100).toFixed(0) + '%'); card.style.setProperty('--gy', ((e.clientY - c.top)/c.height*100).toFixed(0) + '%'); card.style.setProperty('--go', .9); } });
+  field.addEventListener('pointerleave', function(){ px = py = 0; card.style.setProperty('--go', 0); });
+  field.addEventListener('pointerdown', function(e){ var b = field.getBoundingClientRect(); user = performance.now(); splash(e.clientX - b.left, e.clientY - b.top, 1.4); touched(); });
+  if (OWL.reduce){ vis = true; still(); card.classList.add('in'); OWL.reveal(h2); return; }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(e){ vis = e[0].isIntersecting; if (vis){ layout(); OWL.reveal(h2); card.classList.add('in'); if (!frame.d){ frame.d = 1; var b = card.getBoundingClientRect(), f = field.getBoundingClientRect(); splash(b.left - f.left + b.width/2, b.top - f.top + b.height/2, 1.2); } } }).observe(field);
+  else { vis = true; card.classList.add('in'); }
+  requestAnimationFrame(frame);
+});
+</script>
+</section>
