@@ -1,0 +1,102 @@
+/* SERVICES S — Start from the problem. White page; the pale-green panels and the one filled Book button carry the colour. */
+.svS{position:relative;overflow:hidden;padding:96px var(--gut) 118px}
+/* background treatment: a drawn house elevation and soft lime light on a far layer, a gutter run, window frame and paint stroke on a near layer, a faint dot texture; the two layers drift at different speeds as the section crosses the screen (transform only) */
+.svS .svsbg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.svS .svsbg::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(14,59,44,.13) 1px,transparent 1.4px) 0 0/26px 26px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 88% 0%,#000,transparent 72%);mask-image:radial-gradient(ellipse 70% 60% at 88% 0%,#000,transparent 72%)}
+.svS .svsbg svg{position:absolute;left:0;width:100%;will-change:transform;transform:translate3d(0,var(--py,0px),0)}
+.svS .svsfar{top:-6%;height:112%}
+.svS .svsnear{top:-4%;height:108%}
+.svS .svsin{position:relative;z-index:1}
+.svS .svsin{max-width:1320px;margin:0 auto}
+.svS .svshd{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin-bottom:26px}
+.svS .svsh{margin:0;font:800 clamp(32px,3.9vw,56px)/1.04 var(--display);letter-spacing:-.03em;color:var(--ink);text-wrap:balance}
+.svS .svshint{margin:0;font:600 16px/1.4 var(--text);color:var(--ink-3)}
+.svS .svsg{display:flex;flex-direction:column;gap:14px}
+.svS .svsrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;align-items:start}
+.svS .svst{position:relative;min-width:0;border-radius:20px;overflow:hidden;background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3;transition:box-shadow .2s ease}
+.svS .svsn{margin:0;font:inherit}
+.svS .svsb{display:block;position:relative;width:100%;margin:0;padding:0;border:0;background:none;text-align:left;color:inherit;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.svS .svsph{display:block;position:relative;overflow:hidden;aspect-ratio:3/2;background:#E4EAE5}
+.svS .svsph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.svS .svsl{position:absolute;left:10px;bottom:10px;right:10px;width:fit-content;max-width:calc(100% - 20px);padding:8px 12px;border-radius:12px;background:#FFFFFF;color:var(--ink);font:700 14px/1.2 var(--text);box-shadow:0 8px 18px -10px rgba(10,22,17,.5)}
+/* typographic tile: no photo, no number; large words on the pale-green ground */
+.svS .svstype{display:flex;align-items:flex-end;padding:14px;background:linear-gradient(180deg,#EDF3EE,#DDE8DF)}
+.svS .svsw{font:800 clamp(20px,1.9vw,28px)/1.02 var(--display);letter-spacing:-.02em;color:var(--ink);text-wrap:balance;border-left:4px solid #B5DB6E;padding-left:10px}
+.svS .svsb[aria-disabled="true"]{opacity:1;filter:none;cursor:default}
+.svS .svsb:focus-visible{outline:3px solid #0E3B2C;outline-offset:-3px;border-radius:20px}
+.svS .svsp{padding:24px 26px 26px}
+.svS .svsp[hidden]{display:none}
+/* the open tile: first in the grid, full width; photo left, the firm's record right */
+.svS .svst.open{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);align-items:stretch;box-shadow:inset 0 0 0 1px #E1E9E3}
+.svS .svst.open .svsn{grid-row:1;grid-column:1;min-height:100%}
+.svS .svst.open .svsb{height:100%;cursor:default}
+.svS .svst.open .svsph{height:100%;aspect-ratio:auto;min-height:340px}
+.svS .svst.open .svsl{display:none}
+.svS .svst.open .svstype{padding:32px;align-items:flex-end}
+.svS .svst.open .svsw{font-size:clamp(34px,3.8vw,56px);border-left-width:6px;padding-left:16px}
+.svS .svst.open .svsp{grid-row:1;grid-column:2;display:flex;flex-direction:column;gap:18px;padding:34px clamp(24px,3vw,44px)}
+.svS .svsbig{margin:0;font:800 clamp(26px,2.5vw,36px)/1.05 var(--display);letter-spacing:-.025em;color:var(--ink)}
+.svS .svsstats{display:flex;flex-wrap:wrap;gap:16px 36px}
+.svS .svsstat{min-width:0}
+.svS .svslab{margin:0 0 4px;font:700 12px/1.3 var(--text);letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.svS .svsnum{margin:0;font:600 16px/1.3 var(--text);color:var(--ink-2)}
+.svS .svsnum b{font:800 clamp(34px,3.2vw,46px)/1 var(--display);letter-spacing:-.02em;color:var(--ink);margin-right:6px}
+.svS .svsband{margin:4px 0 0;font:700 15px/1.35 var(--text);color:var(--green)}
+.svS .svstxt p{margin:0 0 8px;font:500 16.5px/1.5 var(--text);color:var(--ink-2);max-width:56ch}
+.svS .svstxt p:last-child{margin-bottom:0}
+.svS .svsrec{margin:0;font:500 13px/1.45 var(--text);color:var(--ink-3)}
+.svS .svsrec a{font-weight:700;color:var(--green);text-underline-offset:3px}
+.svS .svsrec a:focus-visible{outline:3px solid #0E3B2C;outline-offset:2px;border-radius:4px}
+.svS .svsact{margin-top:auto;padding-top:4px}
+.svS .svsbook{min-height:56px}
+.svS .svsfn{margin:20px 0 0;font:500 13px/1.5 var(--text);color:var(--ink-3);max-width:90ch}
+@media (hover:hover) and (pointer:fine){
+  .svS .svst:not(.open){transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s ease}
+  .svS .svst:not(.open):hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px #CFDCD2,0 18px 30px -18px rgba(10,22,17,.45)}
+}
+@media (max-width:1100px){
+  .svS .svsg,.svS .svsrow{gap:12px}
+  .svS .svsl{font-size:13px;padding:7px 10px}
+  .svS .svst.open{grid-template-columns:minmax(0,44%) minmax(0,1fr)}
+}
+/* tablet and phone: the five other tiles become one row that scrolls sideways, so the section stays near one screen */
+@media (max-width:900px){
+  .svS{padding:60px var(--gut) 52px}
+  .svS .svshd{margin-bottom:18px}
+  .svS .svsrow{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;margin-inline:calc(var(--gut) * -1);padding:4px var(--gut) 8px;scrollbar-width:thin}
+  .svS .svsrow .svst{flex:0 0 clamp(138px,30%,210px);scroll-snap-align:start}
+  .svS .svsrow .svsph{aspect-ratio:3/2}
+  .svS .svsfn{margin-top:12px}
+}
+@media (max-width:760px){
+  .svS .svst.open{grid-template-columns:minmax(0,1fr)}
+  .svS .svst.open .svsn{grid-column:1;grid-row:1}
+  .svS .svst.open .svsph{height:auto;aspect-ratio:16/6;min-height:0}
+  .svS .svst.open .svstype{padding:18px}
+  .svS .svst.open .svsw{font-size:30px}
+  .svS .svst.open .svsp{grid-column:1;grid-row:2;padding:20px 18px 22px;gap:12px}
+  .svS .svsstats{gap:10px 26px}
+  .svS .svsnum b{font-size:34px}
+  .svS .svstxt p{font-size:15.5px}
+}
+@media (max-width:420px){
+  .svS{padding:52px var(--gut) 44px}
+  .svS .svsh{font-size:30px}
+  .svS .svshd{margin-bottom:14px}
+  .svS .svst.open .svsph{aspect-ratio:16/5}
+  .svS .svst.open .svsp{padding:16px 16px 18px;gap:10px}
+  .svS .svsbig{font-size:24px}
+  .svS .svsnum b{font-size:30px}
+  .svS .svstxt p{font-size:15px;line-height:1.45}
+  .svS .svsfn{font-size:12.5px}
+}
+@media (max-width:600px){
+  .svS .svsh{font-size:clamp(30px,9vw,40px)}
+  .svS .svsbook{width:100%}
+  .svS .svsl{left:8px;bottom:8px;font-size:12.5px;padding:6px 9px}
+}
+@media (prefers-reduced-motion:reduce){
+  .svS .svsrow{scroll-snap-type:none}
+  .svS .svst,.svS .svst:not(.open){transition:none}
+  .svS .svst:not(.open):hover{transform:none}
+}

@@ -11,6 +11,7 @@ for name,out,holes,rule in spec.GROUPS:
     m=erode(m,1)&pm                  # 1px inset: no edge halo
     m=components(m,150)
     per[name]=m; final|=m
+if hasattr(spec,'POST'): final=spec.POST(final,img.astype(int),dilate,erode)
 np.save(S+f'mask{n}.npy',final)
 print(n,'mask px',final.sum(),'pct',round(100*final.mean(),1),{k:int(v.sum()) for k,v in per.items()})
 ov=Image.fromarray(img).convert('RGB'); a=np.asarray(ov).astype(float)

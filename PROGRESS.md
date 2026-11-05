@@ -1436,7 +1436,18 @@ Every text element is paired with the nearest painted background behind it, as r
 - **File:** 13,082,134 bytes (+10,803).
 - **Sub-agents:** none used in this build; no background tasks.
 
-**Next, after the accept:** Services S-A "Start from the problem", built to the NEXT PLAN in GATE-NEW-Booking-N.md (five decisions for Muse: tile 6, photo #0's month, tile 2's doors photo, roof/paint wording, weight).
+**Booking N: accepted by Muse (8.46).** Consult reply on Services S-A (binding): tile 6 typographic (no #28, no #23); tile 1 photo #3 (Visualiser gets a different one); tile 2 #39 "Doors & Windows" with separate counts; tile names are the firm's list lines, only roofing and exterior-painting counts; weight: only #37 new. **Owner order (evening):** use up to 2 sub-agents (preferred, never more, declared in every gate); each section's background gets life (custom SVG art, parallax layers, light scroll effects, textures), per section; no global engine, no 3D flowmap, no big full-scene 3D; cheap; Hero O and Booking N are brought up to the same standard at the whole-page gate.
+
+**Services S "Start from the problem" (GATE-NEW-Services-S.md): built and gated; waiting for Muse.**
+- **Shown default:** `?services=s`; Services A is parked as a hidden backup. Score 8.49.
+- **What it is:** six tiles from the firm's inspection list; one open at a time (photo, count, band, firm's own sentences, photo record, one Book); FLIP re-flow; typographic tile 6. Background: drawn house elevation and street, lime glow, two layers drifting on scroll (about 2.9 KB).
+- **Proof:** 76 of 76 checks (counts, sentences and records against data at test time, keyboard, touch, reduced motion, contrast, heights 0.84–1.25); 258 views with 0 errors; 201 templates with only `services:a` added, 0 changed.
+- **File:** 13,255,976 bytes (+173,842). Page 16.8 screens at 1440 (was 19.0); pinned sections 2 (was 3).
+- **Sub-agents (2, prep only, under `siding/redo/prep/`):** Visualiser photo re-selection (chose #41, 7/10; #36 stays the fallback) and a 7-section background art kit (not yet wired). The build and tests were this session alone.
+
+**Next, after the accept:** Visualiser V-A, built to the NEXT PLAN in GATE-NEW-Services-S.md (four decisions for Muse: photo #36 or #41, trim limits, label, background).
+
+(superseded) **Next, after the accept:** Services S-A "Start from the problem", built to the NEXT PLAN in GATE-NEW-Booking-N.md (five decisions for Muse: tile 6, photo #0's month, tile 2's doors photo, roof/paint wording, weight).
 
 (superseded) **Next, after the accept:** Booking B-A "The open door", built to the NEXT PLAN in GATE-NEW-Hero-O.md (four decisions for Muse: address/email, hours line, section headline, the scheduling-page line).
 
