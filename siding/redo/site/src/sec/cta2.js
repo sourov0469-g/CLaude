@@ -23,7 +23,7 @@ window.Cta2 = (function () {
   const C = () => `<section class="sec ctC" id="booking" aria-labelledby="ctC-h" style="--n:${FR.length}"><div class="stage">
     <div class="txt"><h2 class="sec-h" id="ctC-h" data-split>The record, then the call.</h2><p class="sec-p">Book the free inspection online, or call. One visit covers every trade on the house.</p>
       <p class="sts" aria-live="polite"></p><div class="acts">${book()}${call}</div><p class="note">Nothing is sent from this page. Booking finishes on our scheduling page, or by phone.</p></div>
-    <div class="gate" data-solid aria-hidden="false"><div class="roll"><ol class="strip">${FR.map(([b, k, t], i) => `<li class="fr${i === FR.length - 1 ? ' last' : ''}"><div class="in"><p class="k">${k}</p><b class="${b.length > 6 ? 'sm' : ''}">${b}</b><p class="t">${t}</p></div></li>`).join('')}</ol></div>
+    <div class="gate" aria-hidden="false"><div class="roll"><ol class="strip">${FR.map(([b, k, t], i) => `<li class="fr${i === FR.length - 1 ? ' last' : ''}"><div class="in"><p class="k">${k}</p><b class="${b.length > 6 ? 'sm' : ''}">${b}</b><p class="t">${t}</p></div></li>`).join('')}</ol></div>
       <i class="lens" aria-hidden="true"></i><span class="cn" aria-hidden="true"><b>01</b>/${String(FR.length).padStart(2, '0')}</span></div></div></section>`;
 
   function wireC(root) {

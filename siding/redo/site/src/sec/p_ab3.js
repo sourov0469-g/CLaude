@@ -18,7 +18,7 @@ window.PAb3 = (function () {
     <ul class="seals">${CR.map(([a, b, full], i) => `<li style="--r:${[-6, 4, -3, 5, -4][i]}deg">${seal(a, b)}<p>${B().esc(full)}</p></li>`).join('')}</ul></section>`;
 
   const Bv = () => `<section class="sec ab3B" id="about-creds" aria-labelledby="ab3B-h">
-    <div class="plq" data-solid><h2 class="sec-h" id="ab3B-h">Credentials</h2><p class="sbp">Austin Pro Siding, Windows &amp; Roofing · since 2009</p>
+    <div class="plq"><h2 class="sec-h" id="ab3B-h">Credentials</h2><p class="sbp">Austin Pro Siding, Windows &amp; Roofing · since 2009</p>
       <ul>${CR.map(([, , full]) => `<li><span>${B().esc(full)}</span></li>`).join('')}</ul></div></section>`;
 
   const C = () => `<section class="sec ab3C" id="about-creds" aria-labelledby="ab3C-h">

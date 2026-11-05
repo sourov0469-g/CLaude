@@ -23,7 +23,7 @@ window.Cta3 = (function () {
   const fmt = (x) => (x > 12 ? x - 12 + ' pm' : x === 12 ? '12 pm' : x + ' am');
   const E = () => `<section class="sec ctE" id="booking" aria-labelledby="ctE-h">
     <div class="hd"><h2 class="sec-h" id="ctE-h" data-split>The week, at a glance.</h2><p class="sec-p">When we answer the phone, every day. Booking online is open any time; the inspection is free and one visit covers every trade.</p></div>
-    <div class="wrap"><div class="tt" data-solid>
+    <div class="wrap"><div class="tt">
         <div class="hrs2" aria-hidden="true">${[8, 12, 16, 20].map((h) => `<span style="left:${pct(h)}">${fmt(h)}</span>`).join('')}</div>
         <ol class="dys">${DAYS.map(([w, n, a, b]) => `<li><button type="button" class="dy" data-w="${w}" aria-pressed="false"><span class="dn">${n.slice(0, 3)}<i>${n.slice(3)}</i></span>
           <span class="ln"><i class="op" style="left:${pct(a)};width:calc(${pct(b)} - ${pct(a)})"><b>${fmt(a)} – ${fmt(b)}</b></i><i class="nw" hidden></i></span></button></li>`).join('')}</ol>
@@ -47,7 +47,7 @@ window.Cta3 = (function () {
   const ROWS = [['Austin Pro', 'Siding, Windows & Roofing', ''], ['Suite C70', '7801 N Lamar Blvd, Austin TX 78752', 'addr'], ['(512) 550-0000', 'Call', 'tel'], ['info@<wbr>austinprosiding.com', 'Email', 'mail'], ['Mon–Fri 8–8', 'Sat 8–6 · Sun 12–5', '']];
   const F = () => `<section class="sec ctF" id="booking" aria-labelledby="ctF-h">
     <div class="hd"><h2 class="sec-h" id="ctF-h" data-split>Come by the office.</h2><p class="sec-p">Or let us come to you: the inspection is free, and one visit covers every trade.</p></div>
-    <div class="wrap"><div class="lb" data-solid><div class="felt">
+    <div class="wrap"><div class="lb"><div class="felt">
         ${ROWS.map(([a, b], i) => `<p class="row2" style="--i:${i}"><b>${a}</b><small>${b}</small></p>`).join('')}
         <p class="sm2">Since 2009 · merged with Sanders Roofing &amp; Exteriors in 2018</p></div><i class="frm" aria-hidden="true"></i></div>
       <div class="side"><ul class="acts2">

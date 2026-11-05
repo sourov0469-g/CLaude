@@ -39,8 +39,8 @@ window.Vis7 = (function () {
   const L = () => `<section class="sec viL" id="colours" aria-labelledby="viL-h">
     <div class="vhd"><h2 class="sec-h" id="viL-h" data-split>Two ways to get a colour on the wall.</h2>
       <p class="sec-p">Painted on site in any Sherwin-Williams colour, or ColorPlus, baked on at the factory. Pick a colour and watch how it arrives.</p></div>
-    <div class="vgrid"><div class="vstage" data-solid>${wall()}</div>
-      <div class="vside" data-solid>
+    <div class="vgrid"><div class="vstage">${wall()}</div>
+      <div class="vside">
         <div class="vfin" role="radiogroup" aria-label="Finish"><button type="button" role="radio" class="vfb" data-r="sw" aria-checked="true" tabindex="0">Painted on site</button><button type="button" role="radio" class="vfb" data-r="cp" aria-checked="false" tabindex="-1">ColorPlus, factory-baked</button></div>
         <div class="vset" data-r="sw" role="radiogroup" aria-label="Sherwin-Williams swatches">${sw(SW, 'sw')}</div>
         <div class="vset" data-r="cp" role="radiogroup" aria-label="ColorPlus Austin colours" hidden>${sw(CP, 'cp')}</div>

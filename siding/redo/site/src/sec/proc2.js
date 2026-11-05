@@ -34,7 +34,7 @@ window.Proc2 = (function () {
     <div class="pline"><div class="sp" aria-hidden="true"><i class="fill"></i><svg class="bob" viewBox="0 0 30 48"><path d="M15 0V14"/><path d="M15 14L26 26L15 46L4 26Z"/></svg></div>
       ${CH().map((c, i) => `<article class="pst${i % 2 ? ' r' : ''}" data-i="${i}" aria-labelledby="pcC-${i}"><i class="nd" aria-hidden="true"></i>
         <div class="tx"><span class="num" aria-hidden="true">${c.n}</span><h3 id="pcC-${i}">${c.t}</h3><p>${c.p}</p>${figs(i)}</div>
-        <div class="art" data-solid>${DR(i)}</div></article>`).join('')}
+        <div class="art">${DR(i)}</div></article>`).join('')}
       <div class="end">${book}</div></div></section>`;
 
   function wireC(root) {

@@ -24,7 +24,7 @@ window.POw1 = (function () {
 
   const C = () => `<section class="sec ow1C" id="work-top" aria-labelledby="ow1C-h">
     <div class="hd"><p class="pkick">Our work</p><h1 class="sec-h" id="ow1C-h" data-split>Real jobs, one at a time.</h1><p class="sec-p">${LOCK}</p></div>
-    <div class="stage3" data-solid>${IDX.map((i, k) => `<figure class="big4" ${k ? 'hidden' : ''} data-k="${k}">${B().img(i)}<figcaption>${B().cap(i)}</figcaption></figure>`).join('')}</div>
+    <div class="stage3">${IDX.map((i, k) => `<figure class="big4" ${k ? 'hidden' : ''} data-k="${k}">${B().img(i)}<figcaption>${B().cap(i)}</figcaption></figure>`).join('')}</div>
     <div class="thumbs" role="radiogroup" aria-label="Choose a job">${IDX.map((i, k) => `<button type="button" role="radio" aria-checked="${!k}" tabindex="${k ? -1 : 0}" data-k="${k}" aria-label="${B().esc(B().cap(i))}">${B().img(i)}</button>`).join('')}</div></section>`;
 
   function wireC(root) { const s = root.querySelector('.ow1C'); if (!s) return; const bs = [...s.querySelectorAll('.thumbs button')], fs = [...s.querySelectorAll('.big4')];

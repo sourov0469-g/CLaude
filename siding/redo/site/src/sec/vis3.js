@@ -31,7 +31,7 @@ window.Vis3 = (function () {
       <div class="hd"><div><h2 class="sec-h" id="viE-h" data-split>Pairings to start from.</h2><p class="sec-p">Twelve body and trim pairings from the ColorPlus colours offered in Austin. Our suggestions only; the choice is yours at the free inspection.</p></div>
         <div class="flt" role="group" aria-label="Show bodies">${[['all', 'All 12'], ['light', 'Light'], ['mid', 'Mid'], ['dark', 'Dark']].map(([k, n], i) => `<button type="button" data-f="${k}" aria-pressed="${!i}">${n}</button>`).join('')}</div></div>
       <ul class="grid">${PAIRS.map(([bi, tr], i) => { const [n, h] = cp[bi] || ['', '#888']; return `<li data-tone="${tone(h)}"><button type="button" class="pr" data-i="${i}" aria-label="${n} body with ${tr[0]} trim">${house(h, tr[1])}<span class="nm"><b>${n}</b><small>Trim: ${tr[0]}</small></span></button></li>`; }).join('')}</ul>
-      <div class="big" data-solid hidden><div class="bh"></div><div class="bt"><p class="k">Pairing <b class="ix">1</b> of ${PAIRS.length}</p><h3></h3><p class="hx"></p>
+      <div class="big" hidden><div class="bh"></div><div class="bt"><p class="k">Pairing <b class="ix">1</b> of ${PAIRS.length}</p><h3></h3><p class="hx"></p>
         <div class="nav"><button type="button" class="arw" data-d="-1" aria-label="Previous pairing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><button type="button" class="arw" data-d="1" aria-label="Next pairing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><button type="button" class="cls">Back to all</button></div>${book}</div></div>
       <p class="note">ColorPlus is baked on at the factory. Screens show colour a little differently.</p></section>`; };
 
@@ -52,7 +52,7 @@ window.Vis3 = (function () {
   // warmth: (red − blue) of the published value; lightness: relative luminance. Both are computed, not judged.
   const F = () => `<section class="sec viF" id="colours" aria-labelledby="viF-h">
     <div class="hd"><h2 class="sec-h" id="viF-h" data-split>The colour map.</h2><p class="sec-p">Every colour we publish, placed by how light it is and how warm or cool it is. Choose a dot to see it on a house beside its nearest neighbours.</p></div>
-    <div class="wrap"><div class="map" data-solid><span class="ax yt" aria-hidden="true">↑ Lighter</span><span class="ax yb" aria-hidden="true">↓ Darker</span><div class="ax x" aria-hidden="true"><span>Cooler</span><span>Warmer</span></div>
+    <div class="wrap"><div class="map"><span class="ax yt" aria-hidden="true">↑ Lighter</span><span class="ax yb" aria-hidden="true">↓ Darker</span><div class="ax x" aria-hidden="true"><span>Cooler</span><span>Warmer</span></div>
         <div class="pl" role="radiogroup" aria-label="Colours"></div><p class="lgd2" aria-hidden="true"><span><i class="c"></i>ColorPlus, factory finish</span><span><i class="s"></i>Painted on site (Sherwin-Williams)</span></p></div>
       <div class="side"><div class="pick2" aria-live="polite"></div><p class="k">Nearest neighbours</p><div class="nb"></div>${book}</div></div>
     <p class="note">Positions are computed from each colour's published value. Screens show colour a little differently.</p></section>`;

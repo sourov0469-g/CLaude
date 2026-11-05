@@ -45,7 +45,7 @@ window.Svc8 = (function () {
   </svg>`;
 
   const N = () => `<section class="sec snN" id="services" aria-labelledby="snN-h">
-    <div class="snsticky" data-solid>
+    <div class="snsticky">
       <div class="sntext">
         <h2 class="sec-h" id="snN-h" data-split>Built trade by trade.</h2>
         <p class="snlead">Scroll, and the house goes together in the order of our record, most documented trade first.</p>

@@ -21,7 +21,7 @@ window.Seq4 = (function () {
   const NAMES = ['Starter strip', 'Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5'];
   const G = () => `<section class="sec sqG" id="try" aria-labelledby="sqG-h">
     <div class="hd"><h2 class="sec-h" id="sqG-h" data-split>Shingle it from the eave up.</h2><p class="sec-p">A bare roof deck. Lay the starter strip and five courses, in the order that keeps water out.</p></div>
-    <div class="wrap"><div class="stage" data-solid><svg class="rs" viewBox="0 0 800 440" aria-hidden="true">
+    <div class="wrap"><div class="stage"><svg class="rs" viewBox="0 0 800 440" aria-hidden="true">
         <rect width="800" height="440" class="sky"/><rect x="${X1}" y="40" width="${X2 - X1}" height="${EAVE - 40}" class="dk"/><g class="dkl">${deck()}</g>
         <g class="lay"></g><rect x="${X1 - 10}" y="${EAVE}" width="${X2 - X1 + 20}" height="12" class="fa"/><path d="M${X1 - 14} ${EAVE + 12}H${X2 + 14}V${EAVE + 26}Q${X2 + 14} ${EAVE + 36} ${X2} ${EAVE + 36}H${X1}Q${X1 - 14} ${EAVE + 36} ${X1 - 14} ${EAVE + 26}Z" class="gu"/>
         <g class="rain"></g></svg>
@@ -50,7 +50,7 @@ window.Seq4 = (function () {
   const STEP = 0.75, BASE = -2.25; // degrees: the left side sits low; each shim under a corner lifts that corner by 0.75°
   const H = () => `<section class="sec sqH" id="try" aria-labelledby="sqH-h">
     <div class="hd"><h2 class="sec-h" id="sqH-h" data-split>Level the window.</h2><p class="sec-p">It sits a little off. Add or pull shims under each corner until the bubble centres.</p></div>
-    <div class="wrap"><div class="stage" data-solid><svg class="ws" viewBox="0 0 640 440" aria-hidden="true">
+    <div class="wrap"><div class="stage"><svg class="ws" viewBox="0 0 640 440" aria-hidden="true">
         <rect width="640" height="440" class="wl"/>${Array.from({ length: 20 }, (_, i) => `<path d="M0 ${14 + i * 22}H640" class="lp"/>`).join('')}
         <rect x="150" y="70" width="340" height="300" class="op"/>
         <g class="wn"><g class="sm l"></g><g class="sm r"></g><g class="win"><rect x="168" y="86" width="304" height="262" rx="3" class="fr"/><rect x="186" y="104" width="268" height="108" class="gls"/><rect x="186" y="226" width="268" height="108" class="gls"/><rect x="180" y="212" width="280" height="14" class="fr2"/>

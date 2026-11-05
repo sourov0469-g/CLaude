@@ -46,14 +46,14 @@ window.Vis8 = (function () {
   const M = () => `<section class="sec viM" id="colours" aria-labelledby="viM-h">
     <div class="vmgrid"><div class="vmhd"><h2 class="sec-h" id="viM-h" data-split>Pull a colour through.</h2>
       <p class="sec-p">All 17 ColorPlus colours for Austin, lightest to darkest, on one ribbon. Pull it and the colour runs down the boards. Let go and the wall settles on a real colour.</p></div>
-    <div class="vmstage" data-solid>${house()}</div>
-    <div class="vmside" data-solid>
+    <div class="vmstage">${house()}</div>
+    <div class="vmside">
       <div class="vmread"><p class="vmn"><b>${CP[DEF][0]}</b> · ColorPlus · ${CP[DEF][1]}</p>
         <p class="vmt">Colour ${DEF + 1} of 17, lightest to darkest. Trim in Arctic White, the ColorPlus trim colour.</p></div>
       <div class="vmcta"><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>
         <p>Screens show colour a little differently; see real samples at the free inspection.</p></div>
       <span class="vmlive" aria-live="polite"></span></div>
-    <div class="vmrow" data-solid>
+    <div class="vmrow">
       <button type="button" class="vmstep" data-d="-1" aria-label="Lighter colour"><span aria-hidden="true">‹</span> Lighter</button>
       <div class="vmrib" role="slider" tabindex="0" aria-label="ColorPlus colour, lightest to darkest" aria-valuemin="1" aria-valuemax="17" aria-valuenow="${DEF + 1}" aria-valuetext="${CP[DEF][0]}, ${DEF + 1} of 17">
         <span class="vmeye" aria-hidden="true"></span><div class="vmtrack">${chips()}</div></div>

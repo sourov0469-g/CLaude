@@ -21,7 +21,7 @@ window.PSd4 = (function () {
   /* ---------- B ---------- */
   const Bv = () => `<section class="sec sd4B" id="siding-warranty" aria-labelledby="sd4B-h">
     <div class="hd"><h2 class="sec-h" id="sd4B-h" data-split>Year by year.</h2><p class="sec-p">Move the year and read what still covers the siding. Non-prorated means the James Hardie cover does not shrink as the years go by.</p></div>
-    <div class="yr" data-solid><label class="vh6" for="sd4B-r">Years after the job</label><input id="sd4B-r" type="range" min="0" max="40" value="12" aria-valuetext="Year 12">
+    <div class="yr"><label class="vh6" for="sd4B-r">Years after the job</label><input id="sd4B-r" type="range" min="0" max="40" value="12" aria-valuetext="Year 12">
       <div class="rul" aria-hidden="true">${[0, 10, 20, 30, 40].map((v) => `<span style="left:${(v / 40) * 100}%">${v ? 'Year ' + v : 'Job done'}</span>`).join('')}<i class="hw"></i><i class="lw"></i></div>
       <div class="out2" aria-live="polite"><div class="o1"><small>James Hardie siding</small><b></b><span></span></div><div class="o2"><small>Our workmanship, on labor</small><b>Covered</b><span>Lifetime warranty</span></div></div></div>
     <p class="ft6">Before all of that: <b>1–2 weeks</b> on site, including paint, by the full wall or the whole house.</p></section>`;

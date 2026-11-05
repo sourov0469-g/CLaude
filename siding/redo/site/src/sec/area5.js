@@ -16,7 +16,7 @@ window.Area5 = (function () {
   const I = () => { const all = towns(), near = all.filter((x) => x.mi <= MAXMI), far = all.filter((x) => x.mi > MAXMI);
     return `<section class="sec arI" id="area" aria-labelledby="arI-h">
     <div class="hd"><h2 class="sec-h" id="arI-h" data-split>Miles from our door.</h2><p class="sec-p">Every town where we have three or more documented projects, set out by straight-line distance from our office at 7801 N Lamar Blvd Suite C70, Austin TX 78752.</p></div>
-    <div class="rl" data-solid><div class="trk2"><i class="fill"></i>
+    <div class="rl"><div class="trk2"><i class="fill"></i>
         <span class="door" aria-hidden="true"><b>Our door</b></span>
         ${near.map((x, i) => `<span class="tn" data-mi="${x.mi.toFixed(1)}" style="left:${(x.mi / MAXMI * 100).toFixed(2)}%;--l:${i % 4}"><i></i><b>${esc(x.t)}</b><small>${Math.round(x.mi)} mi</small></span>`).join('')}
         ${[10, 20, 30, 40, 50, 60].map((m) => `<span class="tk3" style="left:${(m / MAXMI * 100).toFixed(2)}%">${m}</span>`).join('')}</div>

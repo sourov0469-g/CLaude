@@ -43,7 +43,7 @@ window.Rev7 = (function () {
     return `<section class="sec rvL" id="reviews" aria-labelledby="rvL-h">
     <div class="rlh"><h2 class="sec-h" id="rvL-h" data-split>The whole job, in their words.</h2>
       <p class="sec-p">The ${N} reviews published on our site, sentence by sentence, put in the order a job happens. Every line is quoted exactly as published.</p></div>
-    <ol class="rlst" data-solid>${rows}</ol>
+    <ol class="rlst">${rows}</ol>
     <div class="rlft"><p><b>Rated 4.9 from 474 Google reviews.</b> Each sentence sits once, at the first stage whose words it uses (for example "quote", "clean", "recommend"), so a stage's count is the number of reviews that speak to it.</p>
       <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div></section>`;
   };

@@ -32,7 +32,7 @@ window.Rev = (function () {
     return `<section class="sec rvA" id="reviews" aria-labelledby="rvA-h">
       <div class="num"><h2 class="sr" id="rvA-h">Rated 4.9 out of 5 from 474 Google reviews</h2>${monument()}
         <div class="under">${stars5(98)}<p><b>4.9</b> from <b>474</b> Google reviews</p></div></div>
-      <div class="reader" data-solid><p class="k">In their words</p>
+      <div class="reader"><p class="k">In their words</p>
         <div class="qs" aria-live="polite">${Q.map((x, i) => `<figure class="qq${i ? '' : ' on'}" ${i ? 'hidden' : ''}><blockquote><p>${esc(x.text)}${x.cut ? dots(x.text) : ''}</p></blockquote>
           <figcaption><b>${esc(x.name)}</b><span>${esc(x.src)} · ${x.trade}</span></figcaption>
           ${x.cut ? `<details><summary>Read the whole review</summary><p>${esc(x.full)}</p></details>` : ''}</figure>`).join('')}</div>
@@ -70,7 +70,7 @@ window.Rev = (function () {
     tags.splice(mid, 0, `<div class="tag big" data-i="-1"><i class="peg" aria-hidden="true"></i><b>4.9</b>${stars5(98)}<span>474 Google reviews</span></div>`);
     return `<section class="sec rvB" id="reviews" aria-labelledby="rvB-h">
       <div class="hd"><h2 class="sec-h" id="rvB-h">4.9, hung out to read.</h2><p class="sec-p">474 Google reviews, rated 4.9. A few in their own words; tap a tag to read the whole review.</p></div>
-      <div class="lineview" data-solid><div class="track"><i class="post l" aria-hidden="true"></i><i class="post r" aria-hidden="true"></i><svg class="rope" aria-hidden="true"><path/><path/></svg>${tags.join('')}</div></div>
+      <div class="lineview"><div class="track"><i class="post l" aria-hidden="true"></i><i class="post r" aria-hidden="true"></i><svg class="rope" aria-hidden="true"><path/><path/></svg>${tags.join('')}</div></div>
       <div class="dlg rvdlg" role="dialog" aria-modal="true" aria-labelledby="rvB-dn" hidden><div class="card"><button type="button" class="x" aria-label="Close">×</button>
         <p class="tr"></p><blockquote><p class="full"></p></blockquote><p class="who"><b id="rvB-dn"></b><span></span></p></div></div></section>`; };
 

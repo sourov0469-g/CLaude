@@ -19,7 +19,7 @@ window.PCt1 = (function () {
     <div class="pacts">${B().book()}</div></section>`;
 
   const Bv = () => `<section class="sec ct1B" id="contact-top" aria-labelledby="ct1B-h">
-    <div class="ccard" data-solid><div class="cl4"><p class="pkick">Contact</p><h1 class="sec-h" id="ct1B-h">Austin Pro Siding, Windows &amp; Roofing</h1><p class="stt5" aria-live="polite"></p></div>
+    <div class="ccard"><div class="cl4"><p class="pkick">Contact</p><h1 class="sec-h" id="ct1B-h">Austin Pro Siding, Windows &amp; Roofing</h1><p class="stt5" aria-live="polite"></p></div>
       <dl class="cr4"><div><dt>Phone</dt><dd><a href="tel:+15125500000">${L().phone}</a></dd></div><div><dt>Email</dt><dd><a href="mailto:${L().mail}">info@<wbr>austinprosiding.com</a></dd></div>
         <div><dt>Office</dt><dd><a href="${MAPS()}" target="_blank" rel="noopener">${L().addr}</a></dd></div><div><dt>Hours</dt><dd>${L().hours}</dd></div></dl>
       <div class="pacts">${B().book()}</div></div></section>`;

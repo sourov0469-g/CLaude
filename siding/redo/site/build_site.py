@@ -136,17 +136,17 @@ FILM = '<video class="film" muted loop playsinline preload="none" data-film aria
 def heroes():
     v1 = f'''<section class="hero v1" aria-labelledby="h1"><div class="stage" data-fx="0.2" data-fy="0.3">
 <canvas role="img" aria-label="A finished Austin Pro job in Maple Run, Austin: charcoal lap siding above brick, with a two-car garage."></canvas>
-<span class="hint" data-solid><i></i>Move across the siding</span>
-<div class="creds" data-solid><span>GAF Master Elite</span><span>James Hardie Elite Preferred</span></div>
-<div class="card" data-solid><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}</div></div></section>'''
+<span class="hint" data-ui><i></i>Move across the siding</span>
+<div class="creds" data-ui><span>GAF Master Elite</span><span>James Hardie Elite Preferred</span></div>
+<div class="card" data-ui><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}</div></div></section>'''
     v2 = f'''<section class="hero v2" aria-labelledby="h1"><div class="copy"><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}</div>
 <div class="stage" data-fx="0.5" data-fy="0.42"><canvas role="img" aria-label="A finished Austin Pro siding job in Maple Run, Austin: a two-storey house in HardiePlank lap siding with a covered patio."></canvas>
-<div class="tag" data-solid><b>177</b><small>before-and-after pairs published</small></div><span class="hint" data-solid><i></i>Move across the siding</span></div></section>'''
+<div class="tag" data-ui><b>177</b><small>before-and-after pairs published</small></div><span class="hint" data-ui><i></i>Move across the siding</span></div></section>'''
     v3 = f'<section class="hero v3" aria-labelledby="h1">{FILM}<div class="copy"><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}</div>{PP}</section>'
     v4 = f'''<section class="hero v4" aria-labelledby="h1"><div class="copy"><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}</div>
-<div class="win" data-solid><div class="glass">{FILM}<div class="mull"></div>{PP}</div><div class="sill"></div></div></section>'''
+<div class="win"><div class="glass">{FILM}<div class="mull"></div>{PP}</div><div class="sill"></div></div></section>'''
     v5 = f'''<section class="hero v5" aria-labelledby="h1"><h1 class="lead" id="h1">{LEAD}</h1>
-<div class="strip" data-solid>{FILM}{PP}</div><div class="row"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
+<div class="strip">{FILM}{PP}</div><div class="row"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
     return {'1': v1, **new_heroes(), **heroes3(), 'k': heroK(), 'l': heroL(), 'm': heroM(), 'n': heroN(), 'a2': v2, 'a3': v3, 'a4': v4, 'a5': v5}
 
 
@@ -179,20 +179,20 @@ def new_heroes():
     embedded copy (window.__HERO2) so no version duplicates an image."""
     creds = '<div class="creds2"><span>GAF Master Elite</span><span>James Hardie Elite Preferred</span><span>Andersen Certified Premier</span></div>'
     copy = lambda: f'<h1 class="lead" id="h1" data-split>{LEAD}</h1><p class="sub">{SUB}</p>{CTAS}'
-    hint = '<span class="hint2" data-solid><i></i>Move to look around</span>'
+    hint = '<span class="hint2"><i></i>Move to look around</span>'
     v2 = f'''<section class="hero h2v" aria-labelledby="h1"><div class="copy">{copy()}{creds}</div>
-<div class="hph" role="img" aria-label="{ALT['c2']}">{hint}<div class="chip" data-solid>{LAPCHIP}<div><b>Lap siding</b><small>The full wall, course by course</small></div></div></div></section>'''
+<div class="hph" role="img" aria-label="{ALT['c2']}">{hint}<div class="chip">{LAPCHIP}<div><b>Lap siding</b><small>The full wall, course by course</small></div></div></div></section>'''
     steps = ['One project manager walks every side.', 'Every trade priced on one visit.', 'Built, then walked through with you.']
     v3 = f'''<section class="hero h3v" aria-labelledby="h1"><div class="pin"><div class="copy"><h1 class="lead" id="h1" data-split>{LEAD}</h1>
 <div class="steps" aria-live="polite">{''.join(f'<p class="step{" on" if not i else ""}"><b>0{i + 1}</b>{t}</p>' for i, t in enumerate(steps))}</div><p class="sub">{SUB}</p>{CTAS}</div>
 <div class="hph" role="img" aria-label="{ALT['c1']}"><span class="rail" aria-hidden="true"></span>{hint}</div></div></section>'''
     v4 = f'''<section class="hero h4v" aria-labelledby="h1" style="--matte:url({matte_url()})"><div class="layers"><img class="back" alt="{ALT['c3']}" decoding="async">
 <h1 class="lead" id="h1"><span class="ln">The full wall or</span><span class="ln">the whole house.</span></h1><img class="front" alt="" aria-hidden="true" decoding="async"></div>
-<div class="card" data-solid><p class="sub">{SUB}</p>{CTAS}</div></section>'''
+<div class="card"><p class="sub">{SUB}</p>{CTAS}</div></section>'''
     n = 11
     courses = ''.join(f'<div class="c" style="top:{i * 100 / n:.3f}%;height:{100 / n + 0.35:.3f}%;--side:{-1 if i % 2 else 1};--d:{(n - 1 - i) * 0.07:.2f}s"><img alt="" decoding="async"></div>' for i in range(n))
     v5 = f'''<section class="hero h5v" aria-labelledby="h1"><div class="copy">{copy()}{creds}</div>
-<div class="courses" role="img" aria-label="{ALT['c2']} The photograph is hung as lap courses, the bottom course first.">{courses}<span class="tag5" data-solid>Every course, from the bottom up</span></div></section>'''
+<div class="courses" role="img" aria-label="{ALT['c2']} The photograph is hung as lap courses, the bottom course first.">{courses}<span class="tag5">Every course, from the bottom up</span></div></section>'''
     cards = [('c2', 'Lap siding'), ('c1', 'Board and batten'), ('c3', 'Board and batten with stone')]
     v6 = f'''<section class="hero h6v" aria-labelledby="h1"><div class="copy">{copy()}{creds}</div>
 <div class="stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Three siding styles. Arrow keys or the buttons change the front card.">
@@ -211,7 +211,7 @@ def heroes3():
 <dl class="nums"><div><dt data-count="431">431</dt><dd>documented siding jobs</dd></div><div><dt data-count="388">388</dt><dd>documented window jobs</dd></div><div><dt>4.9</dt><dd>{star5}from 474 Google reviews</dd></div></dl></div>
 <p class="yr" aria-hidden="true">Records <b>2018</b></p><p class="cap" aria-hidden="true"><i class="d"></i>A documented project <i class="h"></i>Our office, N Lamar</p></section>'''
     h8 = f'''<section class="hero h8v" aria-labelledby="h1"><div class="ph8"><img alt="{ALT['c1']}" decoding="async"><i class="warm" aria-hidden="true"></i></div>
-<div class="band" data-solid><i class="lap" aria-hidden="true"></i><div class="bin"><h1 class="lead" id="h1" data-split>The full wall or the whole house.</h1>
+<div class="band"><i class="lap" aria-hidden="true"></i><div class="bin"><h1 class="lead" id="h1" data-split>The full wall or the whole house.</h1>
 <div class="rt"><p class="sub">{SUB}</p>{CTAS}</div></div></div></section>'''
     import base64 as _b
     P = json.load(open(os.path.join(WORK, 'data', 'photos.json'))); j = P[0]   # the firm's own job: Maple Run, Austin
@@ -274,7 +274,7 @@ def svcM():
     return f'''<section class="sec svM" id="services" aria-labelledby="svM-h">
 <div class="smh"><h2 class="sec-h" id="svM-h" data-split>One frame, every trade.</h2><p class="sec-p">Pick a trade. The frame takes the shape of the work, with one of our own jobs inside it, and its record beside it.</p></div>
 <div class="smg"><div class="smlist" role="radiogroup" aria-label="Our trades, most documented first">{radios}</div>
-<figure class="smf" data-solid><div class="smclip" style="clip-path:{SID}">{imgs}</div></figure>
+<figure class="smf"><div class="smclip" style="clip-path:{SID}">{imgs}</div></figure>
 <div class="smp" aria-live="polite">{''.join(pan(n, t) for n, t in enumerate(T))}</div></div>
 <div class="smft"><p>Counts are documented projects from our service list; one project can include several trades. Bands are each trade's median price band, materials and labor, before discounts. Decking has no documented count and no published photo, so it is not shown.</p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
 
@@ -326,7 +326,7 @@ def heroM():
     chips = ''.join(f'<button type="button" class="mpc" data-part="{k}" aria-pressed="false">{l}</button>' for k, l in (('roof', 'Roof'), ('wall', 'Walls and windows'), ('ground', 'Doors, garage and patio')))
     return f'''<section class="hero hmv" aria-labelledby="h1">
 <div class="mcp"><p class="eye">A house built from our own jobs</p><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{ct2}</div>
-<div class="mhs"><div class="mhouse" data-solid role="group" aria-label="43 photos from our published projects, set as a house: roofing jobs as the roof, siding and window jobs as the walls, doors, garage doors and patio covers at ground level. Arrow keys move between them; Enter opens a project.">{''.join(blocks)}<i class="mground" aria-hidden="true"></i></div>
+<div class="mhs"><div class="mhouse" role="group" aria-label="43 photos from our published projects, set as a house: roofing jobs as the roof, siding and window jobs as the walls, doors, garage doors and patio covers at ground level. Arrow keys move between them; Enter opens a project.">{''.join(blocks)}<i class="mground" aria-hidden="true"></i></div>
 <div class="mpcs" role="group" aria-label="Light one part of the house">{chips}</div>
 <p class="mplate" aria-live="polite"><span class="mdef">43 photos from our published projects, each set where its work sits on a house. <span class="mdf">Point at one to read its record.</span><span class="mdt">Tap one to open its project.</span></span></p></div></section>'''
 
@@ -350,7 +350,7 @@ def heroN():
     ct2 = CTAS.split('<p class="proof"')[0]
     mast = ''.join(f'<span style="--i:{n}">{"&nbsp;" if ch == " " else ch}</span>' for n, ch in enumerate('AUSTIN PRO'))
     return f'''<section class="hero hnv" aria-labelledby="h1">
-<div class="ncover" data-solid><div class="npage">
+<div class="ncover"><div class="npage">
   <img class="nphoto" src="{src}" alt="{e(R['after']['alt'])}" decoding="async" fetchpriority="high">
   <div class="nshade" aria-hidden="true"></div>
   <header class="nmast"><p class="nname" aria-label="Austin Pro">{mast}</p>
@@ -384,7 +384,7 @@ def heroL():
                 f'<a class="ljb" href="{e(c["href"])}" target="_blank" rel="noopener">See this job on our site</a></div></div>')
     return f'''<section class="hero hlv" aria-labelledby="h1">
 <div class="lcp"><p class="eye">Eight of our jobs, in their own colours</p><h1 class="lead" id="h1">{LEAD}</h1><p class="sub">{SUB}</p>{ct2}</div>
-<div class="lbd" data-solid role="group" aria-label="Eight of our documented jobs, newest first, each shown by the colour of the work. Arrow keys move between jobs; Enter shows the photo.">{''.join(field(n, i) for n, i in enumerate(order))}</div>
+<div class="lbd" role="group" aria-label="Eight of our documented jobs, newest first, each shown by the colour of the work. Arrow keys move between jobs; Enter shows the photo.">{''.join(field(n, i) for n, i in enumerate(order))}</div>
 <p class="lnote">Each colour is sampled from the sunlit part of the work in that job’s photo: the siding, the shingles or the window frames. Photo colours, not paint or product names.</p></section>'''
 
 
@@ -409,7 +409,7 @@ def winL():
     return f'''<section class="sec wnL" id="windows" aria-labelledby="wnL-h">
 <div class="wlh"><div><h2 class="sec-h" id="wnL-h" data-split>Lift the sash.</h2><p class="sec-p">Four of our window jobs, before and after. Lift each sash to see the new windows go in.</p></div>
 <button type="button" class="btn light wlall" aria-pressed="false">Lift every sash</button></div>
-<div class="wlwall" data-solid>{''.join(win(i, r) for i, r in enumerate(P))}</div>
+<div class="wlwall">{''.join(win(i, r) for i, r in enumerate(P))}</div>
 <div class="wlft"><p>Four of our <b>388 documented window jobs</b>, published with before-and-after photos.</p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
 
 
@@ -456,7 +456,7 @@ def procL():
 <div class="plh"><p class="plk">Job APS-4867 · Siding & exterior painting · Village At Western Oaks, Austin</p>
 <h2 class="sec-h" id="prL-h" data-split>One job, on its calendar.</h2>
 <p class="plbig"><b>178 days</b> from first call to completion. <em>4</em> of them on site.</p></div>
-<div class="plcal" data-solid><div class="plax">{months}{gaps}{band}<i class="plline" aria-hidden="true"></i>
+<div class="plcal"><div class="plax">{months}{gaps}{band}<i class="plline" aria-hidden="true"></i>
 <div class="pltabs" role="tablist" aria-label="The five steps of this job">{tabs}</div></div>{panels}</div>
 <div class="plft"><p>Every step and date as published on the project page; the day counts are worked out from those dates.
 <a href="https://www.austinprosiding.com/recent-projects/{PR['s']}" target="_blank" rel="noopener">See this project on our site</a></p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
@@ -489,14 +489,14 @@ def tryM():
                              f'<button type="button" class="tmbtn" data-r="{side}" data-d="1" aria-label="{lab}: next photo"><span aria-hidden="true">↓</span></button></div>')
     return f'''<section class="sec tmM" id="try" aria-labelledby="tmM-h" data-jobs='{e(data)}' data-bo="{','.join(map(str, BO))}" data-ao="{','.join(map(str, AO))}">
 <div class="tmhd"><h2 class="sec-h" id="tmM-h" data-split>Match the house.</h2><p class="sec-p">Six of our jobs, cut in two: the befores on one reel, the afters on the other, shuffled. Turn the reels until a house meets itself. The roof line and the windows stay; the siding, the colour and the trim change.</p></div>
-<div class="tmstage" data-solid>
+<div class="tmstage">
   <div class="tmreel tmb" role="group" aria-roledescription="reel" aria-label="Befores reel" tabindex="0"><span class="tmtag">Before</span><div class="tmview"><div class="tmtrack">{reel('b', BO)}</div></div>{ctl('b', 'Befores reel')}</div>
   <div class="tmseam" aria-hidden="true"><span class="tmlabel"><span class="tmlt">Turn the reels to match a house</span></span></div>
   <div class="tmreel tma" role="group" aria-roledescription="reel" aria-label="Afters reel" tabindex="0"><span class="tmtag">After</span><div class="tmview"><div class="tmtrack">{reel('a', AO)}</div></div>{ctl('a', 'Afters reel')}</div>
 </div>
-<div class="tmbar" data-solid><p class="tmscore"><b class="tmn">0</b> of {len(J)} matched · <span class="tmt">0</span> turns</p>
+<div class="tmbar"><p class="tmscore"><b class="tmn">0</b> of {len(J)} matched · <span class="tmt">0</span> turns</p>
   <button type="button" class="tmhint">Show me one</button><button type="button" class="tmreset">Start again</button></div>
-<div class="tmrec" data-solid><p class="tmrecl">Line up a before and its after. Each match shows the job as we published it.</p></div>
+<div class="tmrec"><p class="tmrecl">Line up a before and its after. Each match shows the job as we published it.</p></div>
 <p class="vh tmlive" aria-live="polite"></p>
 <div class="tmft"><p>Every photo is a published before or after from one of our project pages; the price band is the published price of that trade on that job, materials and labor, before discounts, excluding tax.</p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
 
@@ -558,7 +558,7 @@ def tryL():
     pips = ''.join(f'<i data-n="{n}"></i>' for n in range(len(R)))
     return f'''<section class="sec tqL" id="try" aria-labelledby="tqL-h">
 <div class="tqh"><h2 class="sec-h" id="tqL-h" data-split>Price the job.</h2><p class="sec-p">Six of our documented jobs, each with the price band we published for it. Pick a band for each, then see the real one.</p></div>
-<div class="tqcard" data-solid><div class="tqtop"><p class="tqct">Job <b class="tqcn">1</b> of {len(R)}</p><div class="tqpips" aria-hidden="true">{pips}</div><p class="tqct">Spot on: <b class="tqok">0</b></p></div>
+<div class="tqcard"><div class="tqtop"><p class="tqct">Job <b class="tqcn">1</b> of {len(R)}</p><div class="tqpips" aria-hidden="true">{pips}</div><p class="tqct">Spot on: <b class="tqok">0</b></p></div>
 {''.join(rnd(n, j) for n, j in enumerate(R))}{end}<p class="vh tqlive" aria-live="polite"></p></div>
 <div class="tqft"><p>Each band is the published price of that trade on that job: materials and labor, before discounts, excluding tax. A documented sample of our work; your house will have its own number.</p>{CTAS.split('<p class="proof"')[0]}</div></section>'''
 
@@ -580,11 +580,11 @@ def heroK():
     arrow = lambda d: f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     data = json.dumps([{'p': P[i]['p'].replace(' At ', ' at '), 'w': P[i]['w'], 't': P[i]['t'], 'h': 'https://www.austinprosiding.com/recent-projects/' + P[i]['s']} for i in range(N)])
     return f'''<section class="hero hkv" aria-labelledby="h1" data-k=\'{html.escape(data)}\'>
-<div class="kwr"><div class="kfr" data-solid tabindex="0" role="group" aria-roledescription="carousel" aria-label="Before and after: {N} of our documented jobs. Arrow keys change the job.">
+<div class="kwr"><div class="kfr" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Before and after: {N} of our documented jobs. Arrow keys change the job.">
 <div class="kh kb"><div class="kst">{imgs('b', 'ba')}</div><span class="ktg" aria-hidden="true">Before</span></div>
 <div class="kh ka"><div class="kst">{imgs('a', 'aa')}</div><span class="ktg" aria-hidden="true">After</span></div>
 <i class="kseam" aria-hidden="true"></i></div>
-<div class="kpl" data-solid><p class="eye">Before · After</p><h1 class="lead" id="h1" data-split>{LEAD}</h1>
+<div class="kpl"><p class="eye">Before · After</p><h1 class="lead" id="h1" data-split>{LEAD}</h1>
 <div class="krec" aria-live="polite" aria-atomic="true"><span class="kr on">{rec(0)}</span></div>
 <div class="knav"><button type="button" class="kgo" data-go="-1" aria-label="Previous job">{arrow(-1)}</button><span class="kct"><b>01</b> / {N:02d}</span><button type="button" class="kgo" data-go="1" aria-label="Next job">{arrow(1)}</button></div></div></div>
 <div class="kft"><p class="sub">{SUB}</p>{ct2}<p class="ksrc">{N} of our 177 before-and-after pairs · <a class="kjob" href="{json.loads(data)[0]['h']}" target="_blank" rel="noopener">See this job on our site</a></p></div></section>'''
@@ -617,52 +617,15 @@ def svcK():
     markup = f'''<section class="sec svk" id="services" aria-labelledby="svk-h">
 <div class="hd"><p class="kk">Services · on film</p><h2 class="sec-h" id="svk-h" data-split>Every trade, shown on real jobs.</h2><p class="sec-p">Pick a trade and run its reel. Every frame is a documented Austin Pro job, with its place and month.</p></div>
 <div class="reels" role="group" aria-label="Choose a trade (documented jobs)">{reels}</div>
-<figure class="scr" data-solid><div class="scw"><img class="pj" alt="{html.escape(rec(f0[0])['alt'])}" decoding="async"><i class="flk" aria-hidden="true"></i><span class="tc" aria-hidden="true">REEL <b>01</b> · FRAME <b>01</b></span></div>
+<figure class="scr"><div class="scw"><img class="pj" alt="{html.escape(rec(f0[0])['alt'])}" decoding="async"><i class="flk" aria-hidden="true"></i><span class="tc" aria-hidden="true">REEL <b>01</b> · FRAME <b>01</b></span></div>
 <figcaption aria-live="polite"><b class="cp">{html.escape(p0['place'])}</b><span class="cw">{p0['when']} · {html.escape(p0['trades'])}</span><a class="jl" href="https://www.austinprosiding.com{p0['href']}" target="_blank" rel="noopener">See this job on our site</a><div class="nv"><button type="button" class="go" data-go="-1" aria-label="Previous frame">{ARROW(-1)}</button><button type="button" class="go" data-go="1" aria-label="Next frame">{ARROW(1)}</button></div></figcaption></figure>
-<div class="film" data-solid><p class="rl" aria-hidden="true">REEL <b>01</b> · <span class="rt">{t0.upper()}</span> · <span class="rn">{n0}</span> DOCUMENTED JOBS · <span class="rfc">{len(f0)}</span> FRAMES</p>
+<div class="film"><p class="rl" aria-hidden="true">REEL <b>01</b> · <span class="rt">{t0.upper()}</span> · <span class="rn">{n0}</span> DOCUMENTED JOBS · <span class="rfc">{len(f0)}</span> FRAMES</p>
 <ol class="strip" aria-label="Film strip: {t0}, {len(f0)} frames. Arrow keys move through the frames.">{frames}</ol><i class="gate" aria-hidden="true"></i></div>
 <div class="svft"><p class="ct" aria-live="polite"><b class="cn">{n0}</b> documented <span class="ctt">{t0.lower()}</span> jobs · <span class="cf">{len(f0)}</span> on this reel</p><div class="acts"><a class="btn key" href="{BOOK}">Book a free inspection<span class="tab">{I['cal']}</span></a><a class="callx" href="tel:+15125500000">{I['phone']}(512) 550-0000</a></div></div></section>'''
     return markup, data
 
 
 SVK = svcK()
-
-
-# ---------------------------------------------------------------- Background V2 (AUSTIN-BACKGROUND-V2-CODE-COPY-2026-11-05)
-BG2_DEFAULT = 'b2'
-BG2_LIST = [['b1', 'B1 Relief terrain'], ['b2', 'B2 Street of roofs'], ['b3', 'B3 Material field'], ['ig', 'IG exact (their code and art; comparison only)'], ['v1', 'V1 (previous background)']]
-
-
-def bg2_html():
-    """The copied Immersive Garden background engine (src/bg2/engine.bundle.js, Three.js r150) and one inert JSON block per
-    world; only the chosen world (?bg=, else BG2_DEFAULT) is decoded at run time."""
-    import base64
-    b = lambda p: base64.b64encode(open(p, 'rb').read()).decode()
-    M = os.path.join(HERE, 'media'); IGD = os.path.join(HERE, '..', '..', 'bgstudy-v2', 'background-code')
-    W = {}
-    td = os.path.join(M, 'igx', 'tex')
-    W['ig'] = {'kind': 'ig', 'plaster': [b(os.path.join(IGD, 'home', 'plaster.jpg')), 'image/jpeg'],
-               'maskNoise': [b(os.path.join(IGD, 'global', 'noises', 'mask-noise.png')), 'image/png'],
-               'att': [b(os.path.join(IGD, 'global', 'noises', 'rgb-attenuation-0_9.png')), 'image/png'],
-               'geo': b(os.path.join(M, 'igx', 'geo.bin.gz')), 'meta': json.load(open(os.path.join(M, 'igx', 'geo.json'))),
-               'tex': [b(os.path.join(td, f)) for f in sorted(os.listdir(td))]}
-    C = os.path.join(M, 'bg2', 'common')
-    common = {'plaster': [b(os.path.join(C, 'plaster.webp')), 'image/webp'], 'maskNoise': [b(os.path.join(C, 'mask.webp')), 'image/webp'], 'att': [b(os.path.join(C, 'att.webp')), 'image/webp']}
-    for w in ('b1', 'b2', 'b3'):
-        d = os.path.join(M, 'bg2', w); cfg = json.load(open(os.path.join(d, 'world.json')))
-        W[w] = {'kind': 'austin', 'depth': cfg['depth'], 'mx': cfg['mx'], 'my': cfg['my'], **common,
-                'panels': [{'h': b(os.path.join(d, f'p{k}_h.webp')), 'l': [b(os.path.join(d, f'p{k}_l{i}.webp')) for i in range(1, 6)]} for k in range(cfg['npan'])]}
-    blocks = ''.join(f'<script type="application/json" id="bgw-{k}">{json.dumps(v, separators=(",", ":"))}</script>' for k, v in W.items())
-    loader = "<script>(function(){var s=window.__BGSEL;if(s==='v1'||!window.BG2)return;var el=document.getElementById('bgw-'+s);if(!el)return;BG2.start(JSON.parse(el.textContent)).then(function(r){window.__BG2=r;},function(e){console.warn('bg2',e);});})();</script>"
-    return blocks + '<script>' + src('bg2/engine.bundle.js') + '</script>' + loader
-
-
-
-def bg_panels():
-    # the hidden world: three baked relief panels (bg/relief.py), each as two WebPs (levels 1-3; levels 4-5 + plaster grain)
-    import base64 as _b
-    f = lambda n, ab: 'data:image/webp;base64,' + _b.b64encode(open(os.path.join(HERE, 'media', 'bg', f'p{n}{ab}.webp'), 'rb').read()).decode()
-    return [{'a': f(n, 'a'), 'b': f(n, 'b')} for n in (1, 2, 3)]
 
 
 VERSIONS = {
@@ -743,7 +706,7 @@ def build():
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">
 <style>{css}</style></head><body id="top">{HEADER.replace('href="#work"', 'href="#area"')}<main data-page="home">{main}</main>{pages}{foot}{MBAR}{film}
-<script>(function(){{var s=new URLSearchParams(location.search).get('bg')||'{BG2_DEFAULT}';window.__BGSEL=s;window.__BGLIST={json.dumps(BG2_LIST)};if(s!=='v1')return;window.__BG={json.dumps(bg_panels())};{src('world.js')}}})()</script>{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__WINN={json.dumps(WINN)};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script>{bg2_html()}</body></html>'''
+{HEAD_JS}<script>window.__HERO2={json.dumps(hero2_data())};window.__SVCK={json.dumps(SVK[1])};window.__WINN={json.dumps(WINN)};window.__VERSIONS={json.dumps(VERSIONS)};window.__SLOTNAMES={json.dumps(SLOTNAMES)};window.__PAGES={json.dumps([pg for pg in PG['pages'] if PG['sections'][pg[0]]])};window.__SLOTPAGE={json.dumps(SLOTPAGE)};window.__PHOTOS={json.dumps(photos())};window.__REV={json.dumps(REV)};window.__NEAR={json.dumps(NEAR, separators=(',', ':'))};window.__WCOL={json.dumps(WCOL)};window.__JOBS={json.dumps(AREA['cards'])};window.__AREA={{cities:{json.dumps(AREA['cities'])},places:{json.dumps(AREA['places'])}}};{js}{boot}</script></body></html>'''
 
 
 if __name__ == '__main__':

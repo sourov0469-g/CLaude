@@ -72,7 +72,7 @@ window.Area3 = (function () {
   const F = () => `<section class="sec arF" id="area" aria-labelledby="arF-h">
     <div class="hd"><h2 class="sec-h" id="arF-h" data-split>The job board.</h2><p class="sec-p">Our most recent documented jobs, newest first. Filter by the work; page back through the months.</p></div>
     <div class="fl2" role="radiogroup" aria-label="Work">${FIL.map(([n], i) => `<button type="button" role="radio" aria-checked="${!i}" tabindex="${i ? -1 : 0}" data-f="${i}">${n}</button>`).join('')}</div>
-    <div class="board" data-solid><div class="bh" aria-hidden="true"><span>When</span><span>Where</span><span>Work</span></div>
+    <div class="board"><div class="bh" aria-hidden="true"><span>When</span><span>Where</span><span>Work</span></div>
       <ol class="rows" aria-live="polite">${rowsH(first())}</ol>
       <div class="bf"><button type="button" class="pg2 prev" disabled>Later</button><span class="pgn"></span><button type="button" class="pg2 next">Earlier</button></div></div>
     <p class="lk">${LOCKS}</p></section>`;

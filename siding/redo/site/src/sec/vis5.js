@@ -20,7 +20,7 @@ window.Vis5 = (function () {
       <rect class="base" width="600" height="400"/><g class="p-lap">${lap}</g><g class="p-bnb"><rect class="pnl" width="600" height="400"/>${bnb}</g><rect class="grain" width="600" height="400" filter="url(#${id}g)"/></svg>`; };
   const I = () => `<section class="sec viI" id="colours" aria-labelledby="viI-h">
     <div class="hd"><h2 class="sec-h" id="viI-h" data-split>Look closer.</h2><p class="sec-p">Profile and texture, up close. Move over the wall to look through the loupe.</p></div>
-    <div class="wrap"><div class="ws" data-solid data-p="lap" data-t="ced">${wall('viIa')}<div class="loupe" aria-hidden="true"><div class="lz">${wall('viIb')}</div></div><span class="hint">Move to look closer</span></div>
+    <div class="wrap"><div class="ws" data-p="lap" data-t="ced">${wall('viIa')}<div class="loupe" aria-hidden="true"><div class="lz">${wall('viIb')}</div></div><span class="hint">Move to look closer</span></div>
       <div class="side"><fieldset><legend>Profile</legend>${PROF.map(([k, n, d], i) => `<label><input type="radio" name="viI-p" value="${k}" ${i ? '' : 'checked'}><span><b>${n}</b><small>${d}</small></span></label>`).join('')}</fieldset>
         <fieldset><legend>Texture</legend>${TEX.map(([k, n, d], i) => `<label><input type="radio" name="viI-t" value="${k}" ${i ? '' : 'checked'}><span><b>${n}</b><small>${d}</small></span></label>`).join('')}</fieldset>
         <div class="sw" role="radiogroup" aria-label="Colour">${CP().filter((_, i) => [15, 11, 6, 3, 0, 16].includes(i)).map(([n, h], i) => `<button type="button" role="radio" aria-checked="${!i}" aria-label="${n}" data-h="${h}" style="--c:${h}"></button>`).join('')}</div>${book}</div></div></section>`;
@@ -55,7 +55,7 @@ window.Vis5 = (function () {
     <g class="tag" transform="translate(421 18)"><rect x="-34" y="-13" width="68" height="26" rx="13"/><text y="5">Yours</text></g></svg>`;
   const J = () => `<section class="sec viJ" id="colours" aria-labelledby="viJ-h">
     <div class="hd"><h2 class="sec-h" id="viJ-h" data-split>Your house, on the street.</h2><p class="sec-p">The middle house is yours. Paint it from the ColorPlus colours for Austin and see how it sits beside the neighbours.</p></div>
-    <div class="stw" data-solid>${street()}<p class="nm" aria-live="polite"><b></b><span></span></p></div>
+    <div class="stw">${street()}<p class="nm" aria-live="polite"><b></b><span></span></p></div>
     <div class="pal" role="radiogroup" aria-label="Your colour">${CP().map(([n, h], i) => `<button type="button" role="radio" aria-checked="${n === 'Evening Blue'}" aria-label="${n}" data-i="${i}" style="--c:${h}"><span>${n}</span></button>`).join('')}</div>
     <p class="note">Neighbours are drawn in other ColorPlus colours for contrast. Screens show colour a little differently.</p>${book}</section>`;
 

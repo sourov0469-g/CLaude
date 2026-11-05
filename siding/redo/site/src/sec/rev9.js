@@ -43,7 +43,7 @@ window.Rev9 = (function () {
     return `<section class="sec rnN" id="reviews" aria-labelledby="rnN-h">
     <div class="rnhd"><h2 class="sec-h" id="rnN-h" data-split>Your worry, their words.</h2>
       <p class="sec-p">Pick what worries you most about hiring a contractor. These are the homeowners, among the ${total} reviews we publish, who wrote about exactly that.</p></div>
-    <div class="rnstage" data-solid>
+    <div class="rnstage">
       <div class="rnask"><p class="rnq" id="rnN-q">What worries you most about hiring a contractor?</p>
         <div class="rnws" role="radiogroup" aria-labelledby="rnN-q">${W.map((w, i) => `<button type="button" role="radio" class="rnw" data-w="${i}" aria-checked="${!i}" tabindex="${i ? -1 : 0}"><span>${w[0]}</span><b>${w[1].length}</b></button>`).join('')}</div>
         <p class="rnct"><b class="rnn">${W[0][1].length}</b> <span>of the ${total} reviews we publish speak to it.</span></p>

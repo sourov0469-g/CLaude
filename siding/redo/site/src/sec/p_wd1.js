@@ -19,7 +19,7 @@ window.PWd1 = (function () {
     <figure class="ph3">${B().img(3)}<figcaption>${B().cap(3)}</figcaption></figure></section>`;
 
   const Bv = () => `<section class="sec wd1B" id="windows-top" aria-labelledby="wd1B-h">
-    <div class="win6" data-solid><div class="frm2"><div class="up3"><p class="pkick">Windows &amp; Doors</p><h1 class="sec-h" id="wd1B-h">Windows, measured and built to order.</h1></div>
+    <div class="win6"><div class="frm2"><div class="up3"><p class="pkick">Windows &amp; Doors</p><h1 class="sec-h" id="wd1B-h">Windows, measured and built to order.</h1></div>
       <div class="lo3"><div class="beh">${pf()}</div><div class="sash" aria-hidden="true"><i></i></div></div></div></div>
     <div class="ft7"><p>${LINE}</p><div class="pacts">${B().book()}${B().call()}</div></div></section>`;
 

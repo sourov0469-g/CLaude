@@ -35,9 +35,9 @@ window.Svc6 = (function () {
     <div class="slh"><h2 class="sec-h" id="svL-h" data-split>Built from our records.</h2>
       <p class="sec-p">Every trade we do, as cubes on one house: one cube for about every ten documented projects, set where that trade sits. Pick a trade to see its record.</p></div>
     <div class="slg">
-      <figure class="slf" data-solid><div class="slhouse" role="img" aria-label="${label}">${cells.join('')}</div>
+      <figure class="slf"><div class="slhouse" role="img" aria-label="${label}">${cells.join('')}</div>
         <figcaption class="sln">Cubes are rounded to the nearest ten. One project can include several trades, so the 165 cubes count ${fmt(TOTAL)} trade-projects, not separate projects. Where a cube sits shows where that trade sits on a house, not one real house.</figcaption></figure>
-      <div class="slside" data-solid>
+      <div class="slside">
         <div class="slr" role="radiogroup" aria-label="Show a trade's record"><button type="button" role="radio" class="slc" data-k="all" aria-checked="true" tabindex="0">All trades<small>${fmt(TOTAL)}</small></button>${T.map(chip).join('')}</div>
         <div class="slp" aria-live="polite"><p class="slk">All trades</p><p class="slbig">${fmt(TOTAL)}</p><p class="slt">documented trade-projects across ten trades, from siding (431) down to garage doors (9).</p><p class="slt slx">Decking has no documented count on our service list.</p></div>
         <div class="slcta"><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a><p>Ask about any trade at the free inspection.</p></div>

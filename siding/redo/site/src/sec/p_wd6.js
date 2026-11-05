@@ -13,11 +13,11 @@ window.PWd6 = (function () {
 
   const A = () => `<section class="sec wd6A" id="windows-book" aria-labelledby="wd6A-h">
     <h2 class="sec-h" id="wd6A-h" data-split>Book the window inspection.</h2><p class="sec-p">Every opening gets measured. The visit is free, and it covers doors and every other trade on the house.</p>
-    <div class="tape" data-solid><span class="case" aria-hidden="true"></span><div class="bl3"><a href="tel:+15125500000">${L().phone}</a><span>${L().hours}</span><a href="mailto:${L().mail}">${L().mail}</a><span>${L().addr}</span></div></div>
+    <div class="tape"><span class="case" aria-hidden="true"></span><div class="bl3"><a href="tel:+15125500000">${L().phone}</a><span>${L().hours}</span><a href="mailto:${L().mail}">${L().mail}</a><span>${L().addr}</span></div></div>
     <div class="pacts">${B().book()}${B().call()}</div></section>`;
 
   const Bv = () => `<section class="sec wd6B" id="windows-book" aria-labelledby="wd6B-h">
-    <div class="dh" data-solid><div class="us"><p class="pkick">Call</p><a class="ph4" href="tel:+15125500000">${B().PH}<span>${L().phone}</span></a><p>${L().hours}</p></div>
+    <div class="dh"><div class="us"><p class="pkick">Call</p><a class="ph4" href="tel:+15125500000">${B().PH}<span>${L().phone}</span></a><p>${L().hours}</p></div>
       <div class="ls2"><h2 class="sec-h" id="wd6B-h">Book the window inspection.</h2>${B().book('Book online')}<p>${L().addr} · <a href="mailto:${L().mail}">${L().mail}</a></p></div></div></section>`;
 
   const C = () => `<section class="sec wd6C" id="windows-book" aria-labelledby="wd6C-h">

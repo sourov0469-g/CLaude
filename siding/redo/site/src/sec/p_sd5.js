@@ -28,7 +28,7 @@ window.PSd5 = (function () {
   const Bv = () => `<section class="sec sd5B" id="siding-jobs" aria-labelledby="sd5B-h">
     <div class="hd"><h2 class="sec-h" id="sd5B-h" data-split>The siding ledger.</h2><p class="sec-p">Our latest documented siding jobs, newest first, with what else was done on the same visit.</p></div>
     <div class="tw2" role="radiogroup" aria-label="Town">${TOWNS.map((t, i) => `<button type="button" role="radio" aria-checked="${!i}" tabindex="${i ? -1 : 0}" data-t="${t}">${t}</button>`).join('')}</div>
-    <div class="ldg" data-solid><ol class="lr" aria-live="polite">${rows(recs().slice(0, 8))}</ol><div class="lf2"><button type="button" class="pv">Newer</button><span class="pg3"></span><button type="button" class="nx4">Older</button></div></div>
+    <div class="ldg"><ol class="lr" aria-live="polite">${rows(recs().slice(0, 8))}</ol><div class="lf2"><button type="button" class="pv">Newer</button><span class="pg3"></span><button type="button" class="nx4">Older</button></div></div>
     <p class="lk2">431 documented siding jobs in all · <b>886</b> documented projects since 2018 · ${B().LOCK.area}.</p></section>`;
 
   /* ---------- C ---------- */

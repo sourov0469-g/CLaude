@@ -18,7 +18,7 @@ window.Cta = (function () {
   const A = () => `<section class="sec ctA" id="booking" aria-labelledby="ctA-h"><div class="txt"><h2 class="sec-h" id="ctA-h">Write up your work order.</h2>
       <p class="sec-p">Tick what the house needs and when suits you. Then book the free inspection online or call; one visit covers every trade.</p>
       <p class="st" aria-live="polite"></p></div>
-    <div class="pad" data-solid><div class="padhd"><b>Work order</b><span>Austin Pro · free inspection</span></div>
+    <div class="pad"><div class="padhd"><b>Work order</b><span>Austin Pro · free inspection</span></div>
       <fieldset><legend>What needs doing?</legend><div class="tk">${TRADES.map((t) => `<label><input type="checkbox" value="${t}"><i>${I.tick}</i>${t}</label>`).join('')}</div></fieldset>
       <fieldset><legend>When suits you?</legend><div class="dy">${HOURS.map((r) => `<label><input type="radio" name="ctA-d" value="${r[4]}"><span>${r[4]}</span></label>`).join('')}</div></fieldset>
       <p class="sum" aria-live="polite">Nothing ticked yet.</p>
@@ -34,7 +34,7 @@ window.Cta = (function () {
 
   const B = () => `<section class="sec ctB" id="booking" aria-labelledby="ctB-h"><div class="txt"><h2 class="sec-h" id="ctB-h">Schedule your free inspection.</h2>
       <p class="sec-p">One visit, every trade on the house. Press the board.</p></div>
-    <div class="band" data-solid><i class="lb b1"></i><i class="lb b2"></i><i class="lb b3"></i><i class="lb b4"></i>
+    <div class="band"><i class="lb b1"></i><i class="lb b2"></i><i class="lb b3"></i><i class="lb b4"></i>
       <a class="press" href="${BOOK}" aria-label="Book a free inspection">${I.cal}<span>Book</span></a></div>
     <div class="info"><p class="st" aria-live="polite"></p><p class="hrs">${HOURS.map((r) => `<span>${r[4]}</span>`).join('')}</p><a class="callx" href="tel:+15125500000">${I.ph}(512) 550-0000</a></div></section>`;
   function wireB(root) { const s = root.querySelector('.ctB'); if (!s) return; const st = status(); const e = s.querySelector('.st'); e.textContent = st.t; e.classList.toggle('open', st.open);

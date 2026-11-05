@@ -18,14 +18,14 @@ window.PAb1 = (function () {
 
   const Bv = () => `<section class="sec ab1B" id="about-top" aria-labelledby="ab1B-h">
     <p class="pkick">About Austin Pro</p><h1 class="sec-h" id="ab1B-h" data-split>Two firms, one company since 2018.</h1>
-    <div class="mrg" data-solid><svg viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true"><path class="l1" d="M20 60H560C640 60 640 130 720 130H980" pathLength="1"/><path class="l2" d="M300 200H560C640 200 640 130 720 130" pathLength="1"/></svg>
+    <div class="mrg"><svg viewBox="0 0 1000 260" preserveAspectRatio="none" aria-hidden="true"><path class="l1" d="M20 60H560C640 60 640 130 720 130H980" pathLength="1"/><path class="l2" d="M300 200H560C640 200 640 130 720 130" pathLength="1"/></svg>
       <p class="n1"><b>Austin Pro</b><span>since 2009</span></p><p class="n2"><b>Sanders Roofing &amp; Exteriors</b></p><p class="n3"><b>2018</b><span>Merged</span></p></div>
     <p class="sub3">Since 2009; merged with Sanders Roofing &amp; Exteriors in 2018.</p></section>`;
 
   const X = (y) => (((y - 2009) / (2026 - 2009)) * 100).toFixed(2) + '%';
   const C = () => `<section class="sec ab1C" id="about-top" aria-labelledby="ab1C-h">
     <p class="pkick">About Austin Pro</p><h1 class="sec-h" id="ab1C-h" data-split>From 2009 to today.</h1>
-    <div class="rul2" data-solid><i class="ln7"></i>${Array.from({ length: 18 }, (_, k) => `<span class="tk6 ${k % 3 ? '' : 'mj'}" style="left:${X(2009 + k)}">${k % 3 ? '' : 2009 + k}</span>`).join('')}
+    <div class="rul2"><i class="ln7"></i>${Array.from({ length: 18 }, (_, k) => `<span class="tk6 ${k % 3 ? '' : 'mj'}" style="left:${X(2009 + k)}">${k % 3 ? '' : 2009 + k}</span>`).join('')}
       <div class="mk3" style="left:${X(2009)}"><b>2009</b><span>Austin Pro begins</span></div><div class="mk3 up4" style="left:${X(2018)}"><b>2018</b><span>Merged with Sanders Roofing &amp; Exteriors</span></div>
       <div class="mk3 now" style="left:100%"><b>Today</b><span>4.9 from 474 Google reviews</span></div></div>
     <p class="sub3">${LOCK}</p><div class="pacts">${B().book()}</div></section>`;

@@ -18,7 +18,7 @@ window.PSa4 = (function () {
     <ol class="nf">${towns().map((x, i) => `<li><span class="i3">${String(i + 1).padStart(2, '0')}</span><b>${B().esc(x.t)}</b><i aria-hidden="true"></i><span class="m5">${Math.round(x.mi)} mi</span></li>`).join('')}</ol></section>`;
 
   const Bv = () => { const near = towns().filter((x) => x.mi <= 10); return `<section class="sec sa4B" id="area-office" aria-labelledby="sa4B-h">
-    <div class="dc" data-solid><p class="pkick">The office</p><h2 class="sec-h" id="sa4B-h">7801 N Lamar Blvd, Suite C70.</h2><p class="c8">Austin TX 78752</p>
+    <div class="dc"><p class="pkick">The office</p><h2 class="sec-h" id="sa4B-h">7801 N Lamar Blvd, Suite C70.</h2><p class="c8">Austin TX 78752</p>
       <div class="pacts"><a class="btn key" href="${MAPS()}" target="_blank" rel="noopener">Directions<span class="tab">${B().CAL}</span></a>${B().call()}</div>
       <dl><div><dt>Hours</dt><dd>${L().hours}</dd></div><div><dt>Email</dt><dd><a href="mailto:${L().mail}">${L().mail}</a></dd></div><div><dt>Within 10 miles, straight line</dt><dd>${near.map((x) => B().esc(x.t)).join(', ')}</dd></div></dl></div></section>`; };
 

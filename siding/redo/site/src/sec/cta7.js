@@ -25,7 +25,7 @@ window.Cta7 = (function () {
     ['BBB', 'A+'],
   ];
   const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  const L = () => `<section class="sec bkL" id="booking" aria-labelledby="bkL-h"><div class="ltrack"><div class="lstage" data-solid>
+  const L = () => `<section class="sec bkL" id="booking" aria-labelledby="bkL-h"><div class="ltrack"><div class="lstage">
       <div class="lhd"><div><p class="lkk">Booking · everything, then one step</p><h2 class="sec-h" id="bkL-h">Everything, then one step.</h2></div>
         <p class="lcount" aria-hidden="true"><b>12</b><span>reasons on the wall</span></p></div>
       <div class="lbody">

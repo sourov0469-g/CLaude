@@ -16,7 +16,7 @@ window.Proc3 = (function () {
   /* ---------- E ---------- */
   const E = () => `<section class="sec pcE" id="process" aria-labelledby="pcE-h">
     <div class="hd"><h2 class="sec-h" id="pcE-h" data-split>Four steps. Turn the dial.</h2><p class="sec-p">Drag the handle, use the arrow keys, or choose a step.</p></div>
-    <div class="wrap"><div class="dial" data-solid><svg class="ring" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="170" class="trk"/><circle cx="200" cy="200" r="170" class="val" pathLength="1"/>
+    <div class="wrap"><div class="dial"><svg class="ring" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="170" class="trk"/><circle cx="200" cy="200" r="170" class="val" pathLength="1"/>
         ${CH().map((c, i) => { const a = (i / 4) * 2 * Math.PI - Math.PI / 2, x = 200 + 170 * Math.cos(a), y = 200 + 170 * Math.sin(a); return `<g class="tk" data-i="${i}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="22"/><text x="${x.toFixed(1)}" y="${(y + 6).toFixed(1)}">${c.n}</text></g>`; }).join('')}</svg>
         <div class="hdl" role="slider" tabindex="0" aria-label="Step" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-valuetext="${CH()[0] ? CH()[0].t : ''}"><i></i></div>
         <div class="ctr" aria-live="polite">${CH().map((c, i) => `<div class="cs" data-i="${i}" ${i ? 'hidden' : ''}><div class="dw ${i ? '' : 'in'}">${P2().DR(i)}</div><p class="k">Step ${c.n}</p><h3>${c.t}</h3></div>`).join('')}</div></div>

@@ -86,7 +86,7 @@
       root.addEventListener('pointermove', (e) => {
         if (e.pointerType !== 'mouse') return; const q = local(e);
         if (ptr.seen) { ptr.vx = (q.x - ptr.x) * 40 + ptr.vx * 0.4; ptr.vy = (q.y - ptr.y) * 40 + ptr.vy * 0.4; }
-        ptr.x = q.x; ptr.y = q.y; ptr.seen = true; ptr.in = !e.target.closest('[data-solid]'); kick();
+        ptr.x = q.x; ptr.y = q.y; ptr.seen = true; ptr.in = !e.target.closest('[data-ui]'); kick();
       });
       root.addEventListener('pointerleave', () => { ptr.in = false; ptr.seen = false; });
       root.addEventListener('pointerdown', (e) => {

@@ -15,7 +15,7 @@ window.PAb4 = (function () {
 
   const A = () => `<section class="sec ab4A" id="about-how" aria-labelledby="ab4A-h">
     <div class="hd"><h2 class="sec-h" id="ab4A-h" data-split>One visit, every trade.</h2><p class="sec-p">The free inspection: a project manager walks every side of the house. One visit covers every trade.</p></div>
-    <div class="wrap"><div class="ic3" data-solid><p class="pkick">The inspection walks</p><ul>${WALK.map((w) => `<li><i aria-hidden="true"></i>${w}</li>`).join('')}</ul><p class="hr2">Book any day: Mon–Fri 8–8 · Sat 8–6 · Sun 12–5</p></div>
+    <div class="wrap"><div class="ic3"><p class="pkick">The inspection walks</p><ul>${WALK.map((w) => `<li><i aria-hidden="true"></i>${w}</li>`).join('')}</ul><p class="hr2">Book any day: Mon–Fri 8–8 · Sat 8–6 · Sun 12–5</p></div>
       <ol class="sp5">${CH().map((c) => `<li><b>${c.n}</b><h3>${c.t}</h3><p>${c.p}</p></li>`).join('')}</ol></div></section>`;
 
   const Bv = () => `<section class="sec ab4B" id="about-how" aria-labelledby="ab4B-h">

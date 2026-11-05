@@ -11,7 +11,7 @@ window.PAb2 = (function () {
   const LOCK = '886 documented projects since 2018: 312 on the map with photos + 574 more counted.';
 
   const A = () => `<section class="sec ab2A" id="about-story" aria-labelledby="ab2A-h">
-    <div class="ltr" data-solid><p class="hd2">Austin Pro Siding, Windows &amp; Roofing<br>7801 N Lamar Blvd Suite C70, Austin TX 78752</p>
+    <div class="ltr"><p class="hd2">Austin Pro Siding, Windows &amp; Roofing<br>7801 N Lamar Blvd Suite C70, Austin TX 78752</p>
       <h2 class="sec-h" id="ab2A-h">Our story, briefly.</h2>
       <p>We have been working on Austin homes since 2009, one house at a time.</p>
       <p>In 2018 we merged with Sanders Roofing &amp; Exteriors.</p>

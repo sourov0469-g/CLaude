@@ -17,7 +17,7 @@ window.PRf4 = (function () {
 
   const Bv = () => `<section class="sec rf4B" id="roofing-words" aria-labelledby="rf4B-h">
     <div class="hd"><h2 class="sec-h" id="rf4B-h" data-split>In their words.</h2>${rating}</div>
-    <div class="one" data-solid aria-roledescription="carousel" aria-label="Roof reviews">${Q.map(([i, t], k) => `<div class="sl2" role="group" aria-roledescription="slide" aria-label="${k + 1} of ${Q.length}" ${k ? 'hidden' : ''}>${B().quote(i, t, 'pq2 big2')}</div>`).join('')}
+    <div class="one" aria-roledescription="carousel" aria-label="Roof reviews">${Q.map(([i, t], k) => `<div class="sl2" role="group" aria-roledescription="slide" aria-label="${k + 1} of ${Q.length}" ${k ? 'hidden' : ''}>${B().quote(i, t, 'pq2 big2')}</div>`).join('')}
       <div class="ctr2"><button type="button" class="pv3" aria-label="Previous review">←</button><span class="ct3" aria-live="polite">1 of ${Q.length}</span><button type="button" class="nx6" aria-label="Next review">→</button></div></div></section>`;
 
   const C = () => `<section class="sec rf4C" id="roofing-words" aria-labelledby="rf4C-h">

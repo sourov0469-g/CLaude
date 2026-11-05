@@ -17,7 +17,7 @@ window.Proc4 = (function () {
   /* ---------- G ---------- */
   const G = () => `<section class="sec pcG" id="process" aria-labelledby="pcG-h">
     <div class="hd"><h2 class="sec-h" id="pcG-h" data-split>Stamp the card.</h2><p class="sec-p">Every job runs on the same four steps. Choose one to stamp it.</p></div>
-    <div class="wrap"><div class="card4" data-solid><div class="ch4"><b>Austin Pro</b><span>Job card · Siding, Windows &amp; Roofing</span></div>
+    <div class="wrap"><div class="card4"><div class="ch4"><b>Austin Pro</b><span>Job card · Siding, Windows &amp; Roofing</span></div>
         <ol class="spots">${CH().map((c, i) => `<li><button type="button" data-i="${i}" aria-pressed="${!i}"><span class="ring">${SEAL(c.n)}</span><span class="nm"><b>${c.n}</b>${c.t}</span></button></li>`).join('')}</ol>
         <p class="hrs">Inspections: Mon–Fri 8–8 · Sat 8–6 · Sun 12–5</p></div>
       <div class="side" aria-live="polite">${CH().map((c, i) => `<div class="pg" data-i="${i}" ${i ? 'hidden' : ''}><p class="k">Step ${c.n}</p><h3>${c.t}</h3><p class="p">${c.p}</p>${figs(i)}</div>`).join('')}${book}</div></div></section>`;
@@ -36,7 +36,7 @@ window.Proc4 = (function () {
       <div class="wrap"><div class="txt"><h2 class="sec-h" id="pcH-h" data-split>The whole job, in one paragraph.</h2>
         <p class="para">It starts with a ${b(0, 'free inspection')}: a project manager walks every side of the house, and one visit covers every trade. Then a ${b(1, 'detailed proposal')}, an itemised price for the work you want and nothing else. Then the ${b(2, 'expert install')}: old material off, new boards up, trim and paint; windows measured, built to order, set and sealed. And last, the ${b(3, 'final check')}: we walk it with you, clear the punch list, leave the site clean, and the warranties start.</p>
         <p class="hrs">Book the inspection any day: Mon–Fri 8–8, Sat 8–6, Sun 12–5. Or call <a href="tel:+15125500000">(512) 550-0000</a>.</p>${book}</div>
-      <aside class="aside" data-solid aria-live="polite">${c.map((x, i) => `<div class="ap" data-i="${i}" ${i ? 'hidden' : ''}><div class="dw in">${P2().DR(i)}</div><p class="k">Step ${x.n} · ${x.t}</p>${figs(i)}</div>`).join('')}</aside></div></section>`; };
+      <aside class="aside" aria-live="polite">${c.map((x, i) => `<div class="ap" data-i="${i}" ${i ? 'hidden' : ''}><div class="dw in">${P2().DR(i)}</div><p class="k">Step ${x.n} · ${x.t}</p>${figs(i)}</div>`).join('')}</aside></div></section>`; };
 
   function wireH(root) {
     const s = root.querySelector('.pcH'); if (!s) return; const bs = [...s.querySelectorAll('.sw')], aps = [...s.querySelectorAll('.ap')];

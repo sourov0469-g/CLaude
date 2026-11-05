@@ -31,7 +31,7 @@ window.PSd2 = (function () {
   const face = (k) => `<svg viewBox="0 0 720 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="720" height="400" class="bs ${k}"/>${[0, 1, 2, 3, 4].map((i) => `<path d="M0 ${80 * i + 78}H720" class="lap"/><path d="M0 ${80 * i + 80}H720" class="lap2"/>`).join('')}${k === 'ced' ? `<g class="gr">${grain()}</g>` : ''}</svg>`;
   const Bv = () => `<section class="sec sd2B" id="siding-board" aria-labelledby="sd2B-h">
     <div class="hd"><h2 class="sec-h" id="sd2B-h" data-split>Two faces of the same board.</h2><p class="sec-p">Drag the handle to compare. Both are HardiePlank lap, 7 in to the weather.</p></div>
-    <div class="cmp" data-solid style="--x:50%"><div class="f1">${face('ced')}</div><div class="f2">${face('smo')}</div>
+    <div class="cmp" style="--x:50%"><div class="f1">${face('ced')}</div><div class="f2">${face('smo')}</div>
       <span class="lb1">Select Cedarmill</span><span class="lb2">Smooth</span>
       <div class="hn" role="slider" tabindex="0" aria-label="Compare textures" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half Cedarmill, half Smooth"><i></i></div></div>
     <div class="two3"><p><b>286 of 415</b> priced siding jobs chose Select Cedarmill, the wood-grain texture.</p><p><b>36 of 415</b> went smooth.</p></div>

@@ -14,7 +14,7 @@ window.PWd3 = (function () {
 
   const A = () => `<section class="sec wd3A" id="windows-cost" aria-labelledby="wd3A-h">
     <div class="txt"><h2 class="sec-h" id="wd3A-h" data-split>What windows cost here.</h2><p class="sec-p">Not a quote: what our own priced window jobs came to. Your own price comes from the free inspection: an itemised price for the work you want.</p><div class="pacts">${B().book()}${B().call()}</div></div>
-    <div class="stk" data-solid><p class="s1"><b>Austin Pro</b><span>Window jobs, as priced</span></p>
+    <div class="stk"><p class="s1"><b>Austin Pro</b><span>Window jobs, as priced</span></p>
       <div class="s2"><small>Median band</small><b>$10k–$15k</b><span>per window job</span></div>
       <div class="s3"><div><small>Middle half of jobs</small><b>$5k–$25k</b></div><div><small>Andersen jobs, median band</small><b>$20k–$25k</b></div></div>
       <p class="s4">${SRC} Andersen: 38 priced jobs.</p></div></section>`;
@@ -22,7 +22,7 @@ window.PWd3 = (function () {
   const X = (v) => ((v / 30) * 100).toFixed(2) + '%';
   const Bv = () => `<section class="sec wd3B" id="windows-cost" aria-labelledby="wd3B-h">
     <div class="hd"><h2 class="sec-h" id="wd3B-h" data-split>The price, across one window.</h2><p class="sec-p">${SRC} Read across the glass from $0 to $30k.</p></div>
-    <div class="pane" data-solid role="img" aria-label="A window drawn as a scale from $0 to $30k. Middle half of window jobs $5k to $25k; median band $10k to $15k."><div class="gls2">
+    <div class="pane" role="img" aria-label="A window drawn as a scale from $0 to $30k. Middle half of window jobs $5k to $25k; median band $10k to $15k."><div class="gls2">
         <i class="mh3" style="left:${X(5)};width:${X(20)}"></i><i class="md3" style="left:${X(10)};width:${X(5)}"></i><i class="an" style="left:${X(20)};width:${X(5)}"></i></div>
       <div class="tks">${[0, 5, 10, 15, 20, 25, 30].map((v) => `<span style="left:${X(v)}">$${v}k</span>`).join('')}</div></div>
     <div class="key2"><p><i class="k1"></i><b>$5k–$25k</b> middle half of window jobs</p><p><i class="k2"></i><b>$10k–$15k</b> median band</p>

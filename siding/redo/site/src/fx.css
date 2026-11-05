@@ -1,6 +1,6 @@
-/* UPGRADE LAYER (brief §2, §5): pure white ground, the world canvas behind it, reference-grade buttons, review switcher. */
-html{background:#FFFFFF}
-.world{position:fixed;inset:0;width:100%;height:100%;z-index:-1;display:block;pointer-events:none}
+/* UPGRADE LAYER (brief §2, §5): pure white ground (the background system was removed on 2026-11-05: nothing behind the page),
+   reference-grade buttons, review switcher. */
+html,body{background:#FFFFFF}
 
 /* Buttons: a lifted board that leans toward the cursor (magnetic, label travels further than the face), a light sweep
    across the face on hover, and a press that sinks the face into its edge with a fast return (S0405: 100–250 ms,

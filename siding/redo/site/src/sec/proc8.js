@@ -44,8 +44,8 @@ window.Proc8 = (function () {
     <div class="pmf" role="radiogroup" aria-label="Your job">${JOBS.map((x, i) => `<button type="button" role="radio" class="pmj" data-i="${i}" aria-checked="${!i}" tabindex="${i ? -1 : 0}">${x.t}</button>`).join('')}
       <p class="pmcount" aria-hidden="true"><b>${j.seq.length}</b> steps</p></div>
     <div class="pmgrid">
-      <ol class="pml" data-solid>${j.seq.map(card).join('')}</ol>
-      <aside class="pmside" data-solid><dl class="pmdl">${rail(j)}</dl>
+      <ol class="pml">${j.seq.map(card).join('')}</ol>
+      <aside class="pmside"><dl class="pmdl">${rail(j)}</dl>
         <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></aside>
     </div>
     <p class="pmlive" aria-live="polite"></p></section>`; };

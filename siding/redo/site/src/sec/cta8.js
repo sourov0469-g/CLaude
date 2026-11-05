@@ -27,7 +27,7 @@ window.Cta8 = (function () {
 
   const M = () => `<section class="sec bmM" id="booking" aria-labelledby="bmM-h">
     <div class="bmgrid">
-      <div class="bmstage" data-solid>
+      <div class="bmstage">
         <div class="bmturn" tabindex="0" role="group" aria-roledescription="3D drawing" aria-label="A drawn house you can turn. Use the buttons or the left and right arrow keys.">${house()}</div>
         <p class="bmside" aria-hidden="true">Front</p>
         <div class="bmctl"><button type="button" class="bmb" data-d="-1"><span aria-hidden="true">↺</span> Turn left</button>
@@ -39,7 +39,7 @@ window.Cta8 = (function () {
         <p class="sec-p">${LEAD}</p>
         <ol class="bmlist" aria-label="What the free inspection covers">${INSP.map((t, i) => `<li data-i="${i}"><i aria-hidden="true"></i><span>${t}</span><b class="vh">: not yet seen</b></li>`).join('')}</ol>
         <p class="bmdone" aria-hidden="true">That’s the free inspection. One visit covers every trade.</p>
-        <div class="bmct" data-solid>
+        <div class="bmct">
           <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>
           <a class="bmtel" href="tel:+15125500000">${TEL}(512) 550-0000</a><span class="bmst"></span>
           <p class="bmmeta">Mon–Fri 8–8 · Sat 8–6 · Sun 12–5<br>7801 N Lamar Blvd Suite C70, Austin TX 78752 · <a href="mailto:info@austinprosiding.com">info@austinprosiding.com</a></p>

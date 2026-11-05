@@ -25,7 +25,7 @@ window.Rev4 = (function () {
     const card = ([i, t]) => { const r = R()[i] || {}; return `<li><blockquote><p>“${esc(t)}”</p></blockquote><span>${esc(r.name || '')}</span></li>`; };
     return `<section class="sec rvG" id="reviews" aria-labelledby="rvG-h">
       <div class="hd"><div><h2 class="sec-h" id="rvG-h" data-split>A steady stream.</h2><p class="sec-p">${LINES.length} lines from ${R().length} published reviews, in their own words.</p></div><div class="r">${agg}<button type="button" class="pz" aria-pressed="false">Pause</button></div></div>
-      <div class="cols" data-solid>${cols.map((c, k) => `<div class="col c${k}"><ul class="run">${c.map(card).join('')}</ul><ul class="run" aria-hidden="true">${c.map(card).join('')}</ul></div>`).join('')}</div></section>`; };
+      <div class="cols">${cols.map((c, k) => `<div class="col c${k}"><ul class="run">${c.map(card).join('')}</ul><ul class="run" aria-hidden="true">${c.map(card).join('')}</ul></div>`).join('')}</div></section>`; };
 
   function wireG(root) {
     const s = root.querySelector('.rvG'); if (!s) return; const pz = s.querySelector('.pz'), cols = s.querySelector('.cols');
@@ -42,7 +42,7 @@ window.Rev4 = (function () {
   const H = () => { const L = R().map((r, i) => [i, r]).sort((a, b) => b[1].text.length - a[1].text.length).slice(0, 6);
     return `<section class="sec rvH" id="reviews" aria-labelledby="rvH-h">
       <div class="hd"><div><h2 class="sec-h" id="rvH-h" data-split>Letters from homeowners.</h2><p class="sec-p">Six of the longest reviews on our site, read whole, as written.</p></div>${agg}</div>
-      <div class="wrap"><div class="stack" data-solid aria-live="polite">${L.map(([i, r], k) => `<article class="lt" data-k="${k}" style="--k:${k}" ${k ? 'aria-hidden="true"' : ''}><p class="dear">${esc(r.source)}</p><blockquote><p>${esc(r.text)}</p></blockquote><p class="sig">${esc(r.name)}</p></article>`).join('')}</div>
+      <div class="wrap"><div class="stack" aria-live="polite">${L.map(([i, r], k) => `<article class="lt" data-k="${k}" style="--k:${k}" ${k ? 'aria-hidden="true"' : ''}><p class="dear">${esc(r.source)}</p><blockquote><p>${esc(r.text)}</p></blockquote><p class="sig">${esc(r.name)}</p></article>`).join('')}</div>
         <div class="nav"><button type="button" class="arw" data-d="-1" aria-label="Previous letter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><span class="ct"><b>1</b> of ${L.length}</span><button type="button" class="arw" data-d="1" aria-label="Next letter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></div></div>
       <p class="note">Each letter is the review exactly as published on our site; where the site cuts a review short, the letter ends there too.</p></section>`; };
 

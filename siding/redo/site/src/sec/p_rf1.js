@@ -12,7 +12,7 @@ window.PRf1 = (function () {
   const PROOF = [['241', 'shingle and metal roofs documented'], ['210', 'shingle roofs'], ['31', 'metal roofs'], ['GAF', 'Master Elite contractor']];
 
   const A = () => `<section class="sec rf1A" id="roofing-top" aria-labelledby="rf1A-h">
-    <div class="gab" data-solid><div class="tri"><p class="pkick">Roofing</p><h1 class="sec-h" id="rf1A-h">Shingle and metal roofs.</h1></div>
+    <div class="gab"><div class="tri"><p class="pkick">Roofing</p><h1 class="sec-h" id="rf1A-h">Shingle and metal roofs.</h1></div>
       <ol class="crs3">${PROOF.map(([b, s], i) => `<li style="--i:${i}"><b>${b}</b><span>${s}</span></li>`).join('')}</ol></div>
     <div class="ft10"><p>From a GAF Master Elite contractor. One free inspection covers the roof and every other trade on the house.</p><div class="pacts">${B().book()}${B().call()}</div></div></section>`;
 

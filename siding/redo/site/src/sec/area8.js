@@ -7,7 +7,7 @@ window.Area8 = (function () {
   const LOCK = '886 documented projects since 2018: 312 on the map with photos + 574 more counted.';
   const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const M = () => `<section class="sec amM" id="area" aria-labelledby="amM-h">
-    <div class="amsticky" data-solid>
+    <div class="amsticky">
       <div class="amtext">
         <h2 class="sec-h" id="amM-h" data-split>The map, filling in.</h2>
         <p class="sec-p">Scroll, and our project finder's dated records land on the map month by month, around our door at 7801 N Lamar. Each point is a job, placed near the home, never on it.</p>

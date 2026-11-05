@@ -33,12 +33,12 @@ window.Rev8 = (function () {
     return `<section class="sec rvM" id="reviews" aria-labelledby="rvM-h">
     <div class="rmhd"><h2 class="sec-h" id="rvM-h" data-split>Their before, their after.</h2>
       <p class="sec-p">Rated 4.9 from 474 Google reviews. In twelve of the reviews we publish, the homeowner tells both halves: what they had, and how it ended. Each half below is their own words, from the same review.</p></div>
-    <div class="rmcover" data-solid role="group" aria-roledescription="carousel" aria-label="Before and after, in homeowners’ words" tabindex="0">
+    <div class="rmcover" role="group" aria-roledescription="carousel" aria-label="Before and after, in homeowners’ words" tabindex="0">
       <div class="rmhalf rmb"><span class="rmtag">Before</span><div class="rmview"><div class="rmtrack">${bTrack()}</div></div></div>
       <div class="rmhalf rma"><span class="rmtag">After</span><div class="rmview"><div class="rmtrack">${aTrack()}</div></div></div>
       <div class="rmseam" aria-hidden="true"><span class="rmname"><span class="rmnm">${esc(first.name)}</span></span></div>
     </div>
-    <div class="rmbar" data-solid>
+    <div class="rmbar">
       <div class="rmnav"><button type="button" class="rmbtn" data-d="-1" aria-label="Previous review"><span aria-hidden="true">←</span></button>
         <span class="rmcount"><b>1</b> of ${N}</span>
         <button type="button" class="rmbtn" data-d="1" aria-label="Next review"><span aria-hidden="true">→</span></button>
@@ -46,9 +46,9 @@ window.Rev8 = (function () {
       <p class="rmwho"><b>${esc(first.name)}</b> · ${esc(first.source)}</p>
       <button type="button" class="rmmore" aria-expanded="false" aria-controls="rvM-full">Read the whole review</button>
     </div>
-    <div class="rmfull" id="rvM-full" data-solid hidden><p>${esc(first.text)}</p></div>
+    <div class="rmfull" id="rvM-full" hidden><p>${esc(first.text)}</p></div>
     <p class="rmlive" aria-live="polite"></p>
-    <div class="rmcta" data-solid><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>
+    <div class="rmcta"><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>
       <p>Excerpts are exact. Every review is a published Google review, 2026.</p></div>
   </section>`; };
 

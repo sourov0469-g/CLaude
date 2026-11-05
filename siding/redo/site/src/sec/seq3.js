@@ -41,7 +41,7 @@ window.Seq3 = (function () {
   }
   const E = () => `<section class="sec sqE" id="try" aria-labelledby="sqE-h">
     <div class="hd"><h2 class="sec-h" id="sqE-h" data-split>Inspect it at dusk.</h2><p class="sec-p">Six faults hide on this house, one for each line of our inspection list. Move the torch, then check a part of the house.</p></div>
-    <div class="wrap"><div class="stage" data-solid>${house()}<div class="dusk" aria-hidden="true"></div>
+    <div class="wrap"><div class="stage">${house()}<div class="dusk" aria-hidden="true"></div>
         <div class="zs">${Z.map(([n, x, y, w, h], i) => `<button type="button" class="zn" data-i="${i}" style="left:${(x / 8).toFixed(2)}%;top:${(y / 5.2).toFixed(2)}%;width:${(w / 8).toFixed(2)}%;height:${(h / 5.2).toFixed(2)}%" aria-label="Check ${n}"></button>`).join('')}</div></div>
       <div class="side"><p class="cnt"><b>0</b> of 6 found</p>
         <ul class="lst6">${LIST.map((t, i) => `<li data-l="${i}"><i>${TICK}</i><span>${t}</span></li>`).join('')}</ul>
@@ -86,7 +86,7 @@ window.Seq3 = (function () {
   }
   const F = () => `<section class="sec sqF" id="try" aria-labelledby="sqF-h">
     <div class="hd"><h2 class="sec-h" id="sqF-h" data-split>Measure the opening.</h2><p class="sec-p">Pull each tape to the far jamb: top, middle and bottom. Openings are rarely square.</p></div>
-    <div class="wrap"><div class="stage" data-solid>${opening()}</div>
+    <div class="wrap"><div class="stage">${opening()}</div>
       <div class="side"><table class="rt"><caption>Widths</caption><tbody>${ROWS.map(([n], i) => `<tr data-r="${i}"><th scope="row">${n}</th><td>—</td></tr>`).join('')}</tbody></table>
         <p class="res" aria-live="polite">Three widths to take.</p>
         <div class="acts"><button type="button" class="pb auto3">Measure it for me</button><button type="button" class="pb rs3">Start again</button></div>

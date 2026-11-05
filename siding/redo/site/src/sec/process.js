@@ -19,16 +19,16 @@ window.Proc = (function () {
   ];
   const INSP = ['Siding and trim', 'Windows and doors', 'Roof and flashing', 'Gutters', 'Paint and caulk', 'Rot and water damage'];
   function obj(k) {
-    if (k === 'insp') return `<div class="clip" data-solid><div class="clamp" aria-hidden="true"></div><p class="clh">Inspection</p>
+    if (k === 'insp') return `<div class="clip"><div class="clamp" aria-hidden="true"></div><p class="clh">Inspection</p>
       <ul>${INSP.map((x, i) => `<li><button type="button" role="checkbox" aria-checked="false" style="--d:${0.25 + i * 0.22}s"><i>${TICK}</i>${x}</button></li>`).join('')}</ul>
       <p class="hrs"><b>Book any day</b>Mon–Fri 8–8 · Sat 8–6 · Sun 12–5</p></div>${qt(0)}`;
-    if (k === 'band') return `<div class="band" data-solid><div class="seg" role="group" aria-label="Trade">${Object.keys(BANDS).map((x, i) => `<button type="button" aria-pressed="${!i}" data-b="${x}">${x[0].toUpperCase() + x.slice(1)}</button>`).join('')}</div>
+    if (k === 'band') return `<div class="band"><div class="seg" role="group" aria-label="Trade">${Object.keys(BANDS).map((x, i) => `<button type="button" aria-pressed="${!i}" data-b="${x}">${x[0].toUpperCase() + x.slice(1)}</button>`).join('')}</div>
       <div class="axis"><div class="mid"></div><div class="med"><span class="lbl"></span></div>${[0, 5, 10, 15, 20, 25, 30].map((v) => `<i style="left:${(v * 100 / 30).toFixed(2)}%"><span>$${v}k</span></i>`).join('')}</div>
       <p class="lgd"><span><i class="k1"></i>Middle half of jobs <b class="lv1"></b></span><span><i class="k2"></i>Median band <b class="lv2"></b></span></p><p class="src"></p></div>${qt(1)}`;
     if (k === 'build') { let c = ''; for (let i = 0; i < 10; i++) c += `<i class="crs" style="--i:${i}"></i>`;
-      return `<div class="bld" data-solid><div class="wallb"><span class="wrapw">HOUSE WRAP</span>${c}<i class="cb l"></i><i class="cb r"></i></div>
+      return `<div class="bld"><div class="wallb"><span class="wrapw">HOUSE WRAP</span>${c}<i class="cb l"></i><i class="cb r"></i></div>
       <div class="days"><div><b>1–2 weeks</b><span>a siding job on site, paint included</span></div><div><b>2 days</b><span>most window-only jobs</span></div></div></div>${qt(2)}`; }
-    return `<div class="fin" data-solid><ul>${['Walk the job together', 'Clear the punch list', 'Haul away the old material', 'Leave the site clean'].map((x, i) => `<li style="--d:${0.2 + i * 0.25}s"><i>${TICK}</i>${x}</li>`).join('')}</ul>
+    return `<div class="fin"><ul>${['Walk the job together', 'Clear the punch list', 'Haul away the old material', 'Leave the site clean'].map((x, i) => `<li style="--d:${0.2 + i * 0.25}s"><i>${TICK}</i>${x}</li>`).join('')}</ul>
       <div class="seal" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="pcS" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1 -148 0"/></defs><circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="100" cy="100" r="58" fill="none" stroke="currentColor" stroke-width="2"/><text font-size="15" font-weight="800" letter-spacing="3" fill="currentColor"><textPath href="#pcS">LIFETIME WORKMANSHIP · ON LABOR ·</textPath></text><text x="100" y="96" text-anchor="middle" font-size="22" font-weight="800" fill="currentColor">AUSTIN</text><text x="100" y="120" text-anchor="middle" font-size="22" font-weight="800" fill="currentColor">PRO</text></svg></div>
       <p class="war"><b>Lifetime workmanship warranty on labor</b>plus the maker's warranty: 30 years non-prorated on James Hardie siding.</p>
       <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>${qt(3)}`;
@@ -74,7 +74,7 @@ window.Proc = (function () {
       <div class="lft"><h2 class="sec-h" id="pcB-h">Four steps, start to finish.</h2>
         ${CH.map((c, i) => `<div class="cap" data-c="${i}"><span class="num">${c.n}</span><h3>${c.t}</h3><p>${c.p}</p></div>`).join('')}
         <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>
-      <div class="job" data-solid role="img" aria-label="A wall going from old siding, through house wrap, to new lap siding with trim, as you scroll.">
+      <div class="job" role="img" aria-label="A wall going from old siding, through house wrap, to new lap siding with trim, as you scroll.">
         <div class="wall2"><span class="wrapw">HOUSE WRAP</span>${old}${crs}<i class="tr l"></i><i class="tr r"></i><i class="win2"></i><span class="pm"></span></div>
         <div class="rule">${CH.map((c, i) => `<button type="button" data-g="${i}"><i></i><span>${c.t}</span></button>`).join('')}<b class="fill"></b></div></div></div></section>`; };
   function wireB(root) {

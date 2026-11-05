@@ -35,7 +35,7 @@ window.PRf3 = (function () {
   const house = (q, i) => { const h = 70 + ((i * 37) % 40), w = 60 + ((i * 23) % 30); return `<button type="button" class="hz ${MT(q) ? 'met' : ''}" data-i="${i}" style="--h:${h}px;--w:${w}px" aria-label="${when(q[2])}, ${B().esc(place(q).filter(Boolean).join(', '))}, ${kind(q)}"><i class="rfx"></i><i class="bd6"></i></button>`; };
   const C = () => { const L = recs().slice(0, 24); return `<section class="sec rf3C" id="roofing-jobs" aria-labelledby="rf3C-h">
     <div class="hd"><h2 class="sec-h" id="rf3C-h" data-split>A street of new roofs.</h2><p class="sec-p">Our 24 newest roof jobs, drawn as a street. Dark roofs are shingle; seamed roofs are metal. Choose a house.</p></div>
-    <div class="sky2" data-solid><div class="row4">${L.map(house).join('')}</div><i class="kerb"></i></div>
+    <div class="sky2"><div class="row4">${L.map(house).join('')}</div><i class="kerb"></i></div>
     <p class="rd10" aria-live="polite">Choose a house to read its record.</p></section>`; };
 
   function wireB(root) { const s = root.querySelector('.rf3B'); if (!s) return; const bs = [...s.querySelectorAll('.fl3 button')], ul = s.querySelector('.tl4'), pv = s.querySelector('.pv2'), nx = s.querySelector('.nx5'), lab = s.querySelector('.pg4 span');

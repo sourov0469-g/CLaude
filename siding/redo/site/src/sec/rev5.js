@@ -35,7 +35,7 @@ window.Rev5 = (function () {
     let marks = ''; for (let i = 0; i < total; i++) { const k = order.indexOf(i); marks += k >= 0 ? `<button type="button" class="m lit" data-r="${k}" aria-label="Open the review by ${esc((R()[k] || {}).name || '')}" style="--d:${i}"></button>` : `<i class="m" style="--d:${i}"></i>`; }
     return `<section class="sec rvJ" id="reviews" aria-labelledby="rvJ-h">
       <div class="hd"><div><h2 class="sec-h" id="rvJ-h" data-split>474 reviews. ${n} of them here.</h2><p class="sec-p">Each mark is one Google review. The ${n} lit ones are published on our site; choose one to read it.</p></div>${agg}</div>
-      <div class="wrap"><div class="grid" data-solid role="group" aria-label="${total} reviews, ${n} of them published here">${marks}</div>
+      <div class="wrap"><div class="grid" role="group" aria-label="${total} reviews, ${n} of them published here">${marks}</div>
         <figure class="op" aria-live="polite"><p class="k">Choose a lit mark</p><blockquote><p></p></blockquote><figcaption></figcaption></figure></div>
       <p class="note">The marks are not ordered by rating or date; the overall rating, 4.9 from 474, is the only figure shown.</p></section>`; };
 

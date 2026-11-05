@@ -21,7 +21,7 @@ window.Win4 = (function () {
   const G = () => { const w = W(), ms = Object.keys(w);
     return `<section class="sec wnG" id="windows" aria-labelledby="wnG-h">
       <div class="hd"><h2 class="sec-h" id="wnG-h" data-split>Frame colours, by maker.</h2><p class="sec-p">The exterior colours each maker offers, as we list them. Choose a maker, then a colour.</p></div>
-      <div class="wrap"><div class="pv" data-solid>${win()}<p class="nm" aria-live="polite"><b></b><span></span></p></div>
+      <div class="wrap"><div class="pv">${win()}<p class="nm" aria-live="polite"><b></b><span></span></p></div>
         <div class="side"><div class="mk" role="tablist" aria-label="Maker">${ms.map((m, i) => `<button type="button" role="tab" id="wnG-t${i}" aria-selected="${!i}" aria-controls="wnG-p${i}">${m}<small>${JOBS[m] ? JOBS[m] + ' priced jobs' : ''}</small></button>`).join('')}</div>
           ${ms.map((m, i) => `<div class="cl" role="tabpanel" id="wnG-p${i}" aria-labelledby="wnG-t${i}" ${i ? 'hidden' : ''}><p class="k">${w[m].length} exterior colours</p><div class="sws" role="radiogroup" aria-label="${m} frame colour">${w[m].map(([n, h], k) => `<button type="button" role="radio" aria-checked="${!k}" aria-label="${esc(n)}" data-m="${i}" data-k="${k}" style="--c:${h}"><span>${esc(n)}</span></button>`).join('')}</div></div>`).join('')}
           <p class="note">Colours as listed by each maker. Screens show colour a little differently; see the real frame samples at the free inspection.</p>${book}</div></div></section>`; };
@@ -42,7 +42,7 @@ window.Win4 = (function () {
   const H = () => `<section class="sec wnH" id="windows" aria-labelledby="wnH-h">
     <div class="hd"><h2 class="sec-h" id="wnH-h" data-split>Count your windows.</h2><p class="sec-p">A quick tally to have to hand when you book. It stays on this page; nothing is sent.</p></div>
     <div class="wrap"><ul class="rooms">${ROOMS.map((r, i) => `<li><span class="rn" id="wnH-r${i}">${r}</span><div class="stp" role="group" aria-labelledby="wnH-r${i}"><button type="button" data-d="-1" aria-label="One fewer in ${r}">−</button><output aria-live="polite" data-i="${i}">0</output><button type="button" data-d="1" aria-label="One more in ${r}">+</button></div></li>`).join('')}</ul>
-      <div class="sum" data-solid><p class="k">Your tally</p><p class="tot"><b>0</b> windows</p><div class="glyphs" aria-hidden="true"></div><p class="lst"></p>
+      <div class="sum"><p class="k">Your tally</p><p class="tot"><b>0</b> windows</p><div class="glyphs" aria-hidden="true"></div><p class="lst"></p>
         <div class="acts"><button type="button" class="btn light cp">Copy my tally</button>${book}</div><p class="ok" aria-live="polite"></p>
         <p class="sm">We measure every opening at the free inspection. Most window-only jobs take 2 days.</p></div></div></section>`;
 

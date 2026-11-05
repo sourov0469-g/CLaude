@@ -17,7 +17,7 @@ window.Win3 = (function () {
       <div class="hd"><h2 class="sec-h" id="wnE-h" data-split>376 priced window jobs, by maker.</h2><p class="sec-p">Each small window is one priced job from our records.</p></div>
       <div class="wrap"><div class="side"><div class="mk" role="group" aria-label="Show a maker">${M.map(([id, n, c]) => `<button type="button" data-m="${id}" aria-pressed="false"><i class="sw ${id}" aria-hidden="true"></i><span>${n}</span><b>${c}</b></button>`).join('')}</div>
           <dl class="fx"><div><dt>$10k–$15k</dt><dd>median band across 376 priced jobs</dd></div><div><dt>2 days</dt><dd>most window-only jobs</dd></div><div><dt>388</dt><dd>documented window jobs in all</dd></div></dl>${book}</div>
-        <div class="units" data-solid role="img" aria-label="A chart of 376 small windows: 238 NT Windows, 54 Simonton, 38 Andersen, 31 Pella, 15 other makers or not recorded.">${g}</div></div></section>`; };
+        <div class="units" role="img" aria-label="A chart of 376 small windows: 238 NT Windows, 54 Simonton, 38 Andersen, 31 Pella, 15 other makers or not recorded.">${g}</div></div></section>`; };
 
   function wireE(root) {
     const s = root.querySelector('.wnE'); if (!s) return; const units = s.querySelector('.units'), bs = [...s.querySelectorAll('.mk button')];

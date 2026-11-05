@@ -25,9 +25,9 @@ window.Seq = (function () {
   }
   const panel = (g, i) => `<article class="gm" data-g="${g.k}" aria-labelledby="sq-${i}"><div class="gtx"><span class="gn">${i + 1} / ${G.length}</span><h3 id="sq-${i}">${g.t}</h3><p class="how">${g.how}</p>
       <p class="ok" aria-live="polite"></p><div class="gacts"><button type="button" class="btn light auto">${g.btn}</button></div><p class="fact"><b>${g.fact[0]}</b>${g.fact[1]}</p></div>
-      <div class="gst" data-solid>${stage(g.k)}<span class="stamp" aria-hidden="true">Done</span></div></article>`;
+      <div class="gst">${stage(g.k)}<span class="stamp" aria-hidden="true">Done</span></div></article>`;
   const end = () => `<article class="gm end" aria-labelledby="sq-end"><div class="gtx"><h3 id="sq-end">That was the small part.</h3><p class="how">The whole house is one free inspection away: siding, windows, roofing, gutters and paint, in one visit.</p>
-      <p class="score" aria-live="polite"></p><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div><div class="gst tally" data-solid>${G.map((g) => `<div class="tl" data-t="${g.k}"><i></i><b>${g.t}</b></div>`).join('')}</div></article>`;
+      <p class="score" aria-live="polite"></p><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div><div class="gst tally">${G.map((g) => `<div class="tl" data-t="${g.k}"><i></i><b>${g.t}</b></div>`).join('')}</div></article>`;
   const head = (id) => `<div class="sqhd"><h2 class="sec-h" id="${id}">Try the job yourself.</h2><div class="sqdots" aria-hidden="true">${G.map(() => '<i></i>').join('')}<i></i></div></div>`;
 
   // A: vertical scroll drives the sideways track (pinned)

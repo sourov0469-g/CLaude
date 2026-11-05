@@ -29,7 +29,7 @@ window.Svc3 = (function () {
         <g data-k="svc-windows" transform="translate(432 224)"><rect x="-50" y="-15" width="100" height="30" rx="15"/><text y="5">Windows</text></g></g></svg>`; }
   const E = () => `<section class="sec svE" id="services" aria-labelledby="svE-h">
     <div class="hd"><h2 class="sec-h" id="svE-h" data-split>Point at the part that needs work.</h2><p class="sec-p">Three trades, one house. Pick the roof, the wall or the windows.</p></div>
-    <div class="wrap"><div class="house" data-solid>${elev()}</div>
+    <div class="wrap"><div class="house">${elev()}</div>
       <div class="side"><div class="parts" role="tablist" aria-label="Part of the house">${T().map((t, i) => `<button type="button" role="tab" id="svE-t${i}" aria-selected="${!i}" aria-controls="svE-p${i}" data-k="${t.id}">${PART[t.id] || t.name}<small>${t.name}</small></button>`).join('')}</div>
         ${T().map((t, i) => `<div class="pan${i ? '' : ' on'}" id="svE-p${i}" role="tabpanel" aria-labelledby="svE-t${i}" ${i ? 'hidden' : ''}><p class="cnt"><b>${t.n}</b> ${t.unit}</p><h3>${t.name}</h3><p class="ld">${t.lead}</p>${figs(t)}${book}</div>`).join('')}</div></div></section>`;
 

@@ -26,7 +26,7 @@ window.Area2 = (function () {
       <div class="towns" role="group" aria-label="Drive to a town">${N().towns.slice(0, 7).map(([n]) => `<button type="button" data-t="${esc(n)}">${esc(n)}</button>`).join('')}</div>
       <div class="rd" aria-live="polite"><p class="k">Passing</p><b>Our office</b><span>7801 N Lamar Blvd, Austin</span><span class="tr">Start here</span></div>
       <p class="cnt"><b>0</b> projects passed on this drive</p></div>
-    <div class="stage" data-solid tabindex="0" aria-label="Map of documented projects with a van you can drive" aria-describedby="arC-how"><canvas aria-hidden="true"></canvas>
+    <div class="stage" tabindex="0" aria-label="Map of documented projects with a van you can drive" aria-describedby="arC-how"><canvas aria-hidden="true"></canvas>
       <div class="zm" role="group" aria-label="Map view"><button type="button" data-z="1" aria-pressed="false">Whole area</button><button type="button" data-z="2.6" aria-pressed="true">Close up</button></div>
       <p class="lg" aria-hidden="true"><span><i class="d"></i>Documented project</span><span><i class="r"></i>Photos on our site</span><span><i class="h"></i>Our office</span></p></div></section>`;
 

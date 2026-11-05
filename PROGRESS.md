@@ -1386,7 +1386,7 @@ Every text element is paired with the nearest painted background behind it, as r
 | 2 | Services | **N, "Built trade by trade"** (`?services=n`) | Apple AirPods Pro (the pinned assembly: a drawn house built trade by trade as you scroll, most documented first, each count landing as a numeral event with its published band) | GATE-NEW-Services-N.md | 8.55 PASS | Accepted by Muse |
 | 3 | Visualiser | **N, "Torn between two"** (`?vis=n`) | MERSI (the split cover: one drawn house split by a movable seam, a ColorPlus colour on each half under the same Arctic White trim; two rails moving in opposite directions; the label on the seam names the pair) | GATE-NEW-Visualiser-N.md | 8.54 PASS | Accepted by Muse |
 | 4 | Windows | **N, "The window issue"** (`?windows=n`) | Ever, verified craft (magazine narrative: the eight published window answers, verbatim, as articles in a spread; each faces a plate of a published window job captioned with its own record; Next turns the page over like paper) | GATE-NEW-Windows-N.md | 8.59 PASS | Accepted by Muse |
-| 5 | Reviews | **N, "Your worry, their words"** (`?reviews=n`) | Ever, verified craft (the selection presentation: six worries homeowners have about hiring a contractor; pick one and the published reviews that speak to it glide forward, the answering words highlighted, a live count; 46 phrases build-locked) | GATE-NEW-Reviews-N.md | 8.59 PASS | Built and gated; waiting for Muse |
+| 5 | Reviews | **N, "Your worry, their words"** (`?reviews=n`) | Ever, verified craft (the selection presentation: six worries homeowners have about hiring a contractor; pick one and the published reviews that speak to it glide forward, the answering words highlighted, a live count; 46 phrases build-locked) | GATE-NEW-Reviews-N.md | 8.59 PASS | Accepted by Muse (consult reply: removal plan agreed; delete repo assets too) |
 
 **Flagged for the owner (pre-existing, not changed):** in a desktop browser narrowed to 320–390 px, the default Visualiser's chip row widens the page by 34–104 px (phones are unaffected). See GATE-NEW-Hero-N.md. Also pre-existing: in a desktop browser 1024–1280 px wide, the default Services A widens the page by 6–17 px. See GATE-NEW-Windows-N.md.
 
@@ -1394,4 +1394,10 @@ Every text element is paired with the nearest painted background behind it, as r
 - **AUSTIN-CONSULT-FIRST-2026-11-05:** every gate from Reviews N on carries a NEXT PLAN (audit, research, per-element plan) for the next item. Muse's accept is the consult reply, and there is no build without an agreed plan.
 - **AUSTIN-BACKGROUND-REMOVAL-2026-11-05:** the whole 3D background system goes (all worlds, the reveal, their assets), as its own gated step. The ground returns to pure white; no replacement global effect; life moves into each section's own units. This voids the consult file's "background worlds stay" line and every earlier background instruction.
 
-**Next, after the accept:** the background removal (GATE-BACKGROUND-REMOVAL; plan in GATE-NEW-Reviews-N.md, NEXT PLAN), then Process N (its NEXT PLAN will be in the removal gate).
+**Background removal (GATE-BACKGROUND-REMOVAL.md): built to the agreed plan; waiting for Muse.**
+- **File:** 37,774,940 → 22,487,188 bytes. All five worlds, the Three.js engine, the V1 hidden world, the `?bg=` chooser and the switcher's Background row are gone; 267 `data-solid` markers stripped (heroes 1 and 2 moved to a local `data-ui`). 150 background files deleted from the repo.
+- **Load:** opened directly, fully loaded in 0.84 s (was 3.3 s), with main-thread long tasks at 0.3 s (were about 9 s); on a 10 Mbps line, 19 s (was 32 s).
+- **Checks:** all 126 homepage and 128 subpage views show 0 errors; every template is byte-identical apart from the markers.
+- **Still flagged:** the remaining 22.5 MB is mostly photos, and a photo weight pass is proposed.
+
+**Next, after the accept:** Process N, built to the NEXT PLAN in GATE-BACKGROUND-REMOVAL.md (or to Muse's changes).

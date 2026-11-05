@@ -44,7 +44,7 @@ window.Vis = (function () {
         <div class="read" aria-live="polite"><i></i><div><b class="nm">Iron Gray</b><span>ColorPlus, factory-baked, Arctic White trim</span></div></div>
         <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>
         <p class="note">Colours drawn from the published ColorPlus values; every screen shows them a little differently.</p></div>
-      <div class="stage" data-solid><div class="fanbox" role="radiogroup" aria-label="ColorPlus colours">${fan}</div>${house()}
+      <div class="stage"><div class="fanbox" role="radiogroup" aria-label="ColorPlus colours">${fan}</div>${house()}
         <div class="slider"><label for="viA-r">Slide through all 17</label><input id="viA-r" type="range" min="0" max="${n - 1}" value="15" aria-valuetext="Iron Gray"></div></div></section>`;
   };
   function wireA(root) {
@@ -68,7 +68,7 @@ window.Vis = (function () {
     return `<section class="sec viB" id="colours" aria-labelledby="viB-h" style="--c:#575B59;--t:#E0E0D8">
       <div class="hd"><div><h2 class="sec-h" id="viB-h">Build your wall, board by board.</h2><p class="sec-p">Five choices, the same ones our project managers walk through at the free inspection.</p></div></div>
       <ol class="steps">${STEPS.map(([a, b], i) => `<li><button type="button" data-s="${i}" ${i ? '' : 'aria-current="step"'}><i>${i + 1}</i><span>${a}<small>${b}</small></span></button></li>`).join('')}</ol>
-      <div class="wallbox" data-solid role="img" aria-label="A section of wall that builds as you choose"><div class="wall"><span class="wrapword">HOUSE WRAP</span>${crs}${pnl}${bat}<i class="corner l"></i><i class="corner r"></i><div class="win"></div></div><span class="tag" aria-live="polite"></span><span class="stepcap" aria-hidden="true"></span></div>
+      <div class="wallbox" role="img" aria-label="A section of wall that builds as you choose"><div class="wall"><span class="wrapword">HOUSE WRAP</span>${crs}${pnl}${bat}<i class="corner l"></i><i class="corner r"></i><div class="win"></div></div><span class="tag" aria-live="polite"></span><span class="stepcap" aria-hidden="true"></span></div>
       <div class="opts"><div class="body"></div><div class="sum" aria-live="polite"></div>
         <div class="nav"><button class="btn light" type="button" data-nav="-1">Back</button><button class="btn" type="button" data-nav="1">Next</button></div></div></section>`;
   };

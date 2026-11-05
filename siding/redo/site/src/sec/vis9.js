@@ -29,7 +29,7 @@ window.Vis9 = (function () {
   const N = () => `<section class="sec vnN" id="colours" aria-labelledby="vnN-h">
     <div class="vnhd"><h2 class="sec-h" id="vnN-h" data-split>Torn between two?</h2>
       <p class="sec-p">Put both on the house. Choose a ColorPlus colour for each half, then drag the seam to give either one more of the wall.</p></div>
-    <div class="vnstage" data-solid>
+    <div class="vnstage">
       ${rail('a', ORD, A0)}
       <div class="vnwrap">${house()}
         <div class="vnseam" role="slider" tabindex="0" aria-label="Seam between the two colours" aria-valuemin="20" aria-valuemax="80" aria-valuenow="50" aria-valuetext="${CP[A0][0]} on the left 50% of the house, ${CP[B0][0]} on the right"><i aria-hidden="true"></i></div>
@@ -37,7 +37,7 @@ window.Vis9 = (function () {
       </div>
       ${rail('b', REV, B0)}
     </div>
-    <div class="vnbar" data-solid>
+    <div class="vnbar">
       <p class="vnread" aria-live="polite">Left: <b>${CP[A0][0]}</b>, ColorPlus. Right: <b>${CP[B0][0]}</b>, ColorPlus. Trim in Arctic White, the ColorPlus trim colour.</p>
       <button type="button" class="vnswap">Swap sides</button>
       <div class="vncta"><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a>

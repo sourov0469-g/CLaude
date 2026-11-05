@@ -49,7 +49,7 @@ window.Area4 = (function () {
   const body = (m) => m.rows.map((r) => `<tr><th scope="row"><b>${esc(r.t)}</b><small>${r.n}</small></th>${r.c.map((_, j) => cell(r, j, m.max)).join('')}</tr>`).join('');
   const H = () => { const m = matrix(); return `<section class="sec arH" id="area" aria-labelledby="arH-h">
     <div class="hd"><h2 class="sec-h" id="arH-h" data-split>Town by trade.</h2><p class="sec-p">Where we work, and what we do there. The bigger the square, the more documented projects. Sort by a trade.</p></div>
-    <div class="mtx" data-solid><table><caption class="vh2">Documented projects by town and trade</caption>
+    <div class="mtx"><table><caption class="vh2">Documented projects by town and trade</caption>
       <thead><tr><th scope="col"><button type="button" class="srt" data-j="-1" aria-pressed="true">Town</button></th>${COLS.map(([c], j) => `<th scope="col"><button type="button" class="srt" data-j="${j}" aria-pressed="false">${c}</button></th>`).join('')}</tr></thead>
       <tbody>${body(m)}</tbody></table></div>
     <p class="rdo" aria-live="polite">Choose a square to read it.</p>

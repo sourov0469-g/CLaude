@@ -27,7 +27,7 @@ window.Win9 = (function () {
   const N = () => `<section class="sec wnN" id="windows" aria-labelledby="wnN-h">
     <div class="wnhd"><h2 class="sec-h" id="wnN-h" data-split>The window issue.</h2>
       <p class="sec-p">Eight questions about replacement windows, answered in the words we publish, beside windows we have put in. Turn the pages, or open one from the contents.</p></div>
-    <div class="wnstage" data-solid>
+    <div class="wnstage">
       <nav class="wntoc" aria-label="Contents">
         <p class="wnmast"><b>The window issue</b><span>From 388 documented window jobs</span></p>
         <ol>${ART.map((t, k) => `<li><button type="button" class="wnc" data-k="${k}"${k ? '' : ' aria-current="true"'} tabindex="${k ? -1 : 0}"><b>${pad(k)}</b><span>${t[0]}</span><i>${t[1]}</i></button></li>`).join('')}</ol>

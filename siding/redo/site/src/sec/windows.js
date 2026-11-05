@@ -74,7 +74,7 @@ window.Win = (function () {
       <ul class="parts" aria-label="Parts of the window">${PARTS.map(([k, n, d]) => `<li><button type="button" data-p="${k}"><b>${n}</b><span>${d}</span></button></li>`).join('')}</ul>
       <div class="brands"><b>388</b><span>documented window jobs. Of 376 priced: NT Windows 238, Simonton 54, Andersen 38, Pella 31.</span></div>
       <a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>
-    <div class="stage" data-solid>${svgWindow()}
+    <div class="stage">${svgWindow()}
       <div class="ctrl"><div class="day"><label for="wnA-t" class="sr">Time of day</label><input id="wnA-t" type="range" min="0" max="100" value="22" aria-valuetext="9 am">
         <div class="ticks" aria-hidden="true"><span>7 am</span><span>Noon</span><span>Dusk</span><span>11 pm</span></div></div>
         <div class="tg"><button type="button" class="chipb" data-t="lift" aria-pressed="false">Lift the sash</button><button type="button" class="chipb" data-t="grille" aria-pressed="true">Grilles</button></div>
@@ -120,7 +120,7 @@ window.Win = (function () {
       <ol class="layers" aria-label="Wall layers">${LAYERS.map(([k, n, d], i) => `<li data-l="${i}"><b>${n}</b><span>${d}</span></li>`).join('')}</ol>
       <div class="acts"><button class="btn light" type="button" data-peel>Peel a layer</button><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>
       <p class="note">Andersen Certified Contractor, Premier. 38 priced Andersen jobs; median band $20k–$25k.</p></div>
-    <div class="stage" data-solid role="img" aria-label="A three-window bay projecting from a lap-sided wall; the wall around it can be peeled back to house wrap, sheathing and studs.">
+    <div class="stage" role="img" aria-label="A three-window bay projecting from a lap-sided wall; the wall around it can be peeled back to house wrap, sheathing and studs.">
       <div class="cam"><div class="world">
         <div class="wall"><i class="inside"></i>${wallPieces('studs')}${wallPieces('sheath')}${wallPieces('wrap')}${wallPieces('siding')}</div>
         <div class="bay">${unit('lf')}${unit('ct')}${unit('rf')}<i class="post pl"></i><i class="post pr"></i><i class="head"></i><i class="seat"></i><i class="brk bl"></i><i class="brk br"></i></div>

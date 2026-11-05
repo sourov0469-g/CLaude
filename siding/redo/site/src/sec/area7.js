@@ -78,7 +78,7 @@ window.Area7 = (function () {
     return `<section class="sec arL" id="area" aria-labelledby="arL-h">
       <div class="ahd"><p class="akk0">On your street · which way from our door</p><h2 class="sec-h" id="arL-h" data-split>Which way from our door?</h2>
         <p class="sec-p">Every documented project in our finder, by its direction and distance from our office on North Lamar. Most of them lie ${order[0]}, ${order[1]} and ${order[2]} of it. Pick a side of town, or your own, to see where we have worked that way.</p></div>
-      <div class="acard" data-solid>
+      <div class="acard">
         <div class="arose"><svg viewBox="0 0 520 520" role="radiogroup" aria-label="Eight directions from our office. Arrow keys turn the compass.">
           <circle class="aring" cx="${C}" cy="${C}" r="214"/><g class="atk" aria-hidden="true">${ticks}</g>${petals}<g aria-hidden="true">${labels}</g>
           <g class="andl" aria-hidden="true" transform="rotate(${A * 45} ${C} ${C})"><path class="andn" d="M${C} ${C - 92}L${C + 9} ${C}L${C - 9} ${C}Z"/><path class="ands" d="M${C} ${C + 50}L${C + 9} ${C}L${C - 9} ${C}Z"/></g>

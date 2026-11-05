@@ -35,7 +35,7 @@ window.Cta4 = (function () {
   const TOPICS = ['Siding', 'Windows', 'Roofing', 'Gutters', 'Painting', 'Doors'];
   const H = () => `<section class="sec ctH" id="booking" aria-labelledby="ctH-h">
     <div class="hd"><h2 class="sec-h" id="ctH-h" data-split>Write us a postcard.</h2><p class="sec-p">A few lines about the house. The button opens your own email app with the note filled in; nothing is sent from this page.</p></div>
-    <div class="pcd" data-solid><div class="lf"><p class="ttl">About my house</p>
+    <div class="pcd"><div class="lf"><p class="ttl">About my house</p>
         <div class="tps" role="group" aria-label="It is about">${TOPICS.map((t) => `<button type="button" class="tp2" aria-pressed="false">${t}</button>`).join('')}</div>
         <label class="vh3" for="ctH-m">Your note</label><textarea id="ctH-m" rows="6" maxlength="900" placeholder="Hello, the siding on the north side is soft near the ground, and two windows fog up in winter…"></textarea>
         <label class="ln2"><span>Street and town</span><input type="text" autocomplete="street-address" placeholder="So the inspection can be planned"></label></div>

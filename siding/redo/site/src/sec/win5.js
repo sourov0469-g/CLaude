@@ -17,7 +17,7 @@ window.Win5 = (function () {
   const I = () => { const R = window.__REV || [];
     return `<section class="sec wnI" id="windows" aria-labelledby="wnI-h">
       <div class="hd"><h2 class="sec-h" id="wnI-h" data-split>A window of words.</h2><p class="sec-p">Four things customers wrote about their new windows. Choose a pane to read it.</p></div>
-      <div class="wrap"><div class="win" data-solid><div class="panes">${Q.map(([i, t], k) => { const r = R[i] || {}; return `<button type="button" class="pane p${k}" aria-pressed="false" data-k="${k}"><span class="q">“${esc(t)}”</span><span class="who">${esc(r.name || '')}, ${esc(r.source || 'Google review')}</span></button>`; }).join('')}</div><i class="mul v" aria-hidden="true"></i><i class="mul h" aria-hidden="true"></i></div>
+      <div class="wrap"><div class="win"><div class="panes">${Q.map(([i, t], k) => { const r = R[i] || {}; return `<button type="button" class="pane p${k}" aria-pressed="false" data-k="${k}"><span class="q">“${esc(t)}”</span><span class="who">${esc(r.name || '')}, ${esc(r.source || 'Google review')}</span></button>`; }).join('')}</div><i class="mul v" aria-hidden="true"></i><i class="mul h" aria-hidden="true"></i></div>
         <div class="side"><p class="agg"><b>4.9</b> <span class="stars" aria-hidden="true">★★★★★</span> from 474 Google reviews</p><p class="sm">Excerpts, verbatim, from reviews published on our site.</p><dl class="fx"><div><dt>388</dt><dd>documented window jobs</dd></div><div><dt>2 days</dt><dd>most window-only jobs</dd></div></dl>${book}</div></div></section>`; };
 
   function wireI(root) {
@@ -33,7 +33,7 @@ window.Win5 = (function () {
     ['Trimmed', 'Our casing closes the opening to the siding, with a sill below.']];
   const J = () => `<section class="sec wnJ" id="windows" aria-labelledby="wnJ-h">
     <div class="hd"><h2 class="sec-h" id="wnJ-h" data-split>From opening to trim.</h2><p class="sec-p">How a replacement goes in, step by step. Most window-only jobs take 2 days.</p></div>
-    <div class="wrap"><div class="op" data-solid data-s="0"><svg viewBox="0 0 520 420" aria-hidden="true">
+    <div class="wrap"><div class="op" data-s="0"><svg viewBox="0 0 520 420" aria-hidden="true">
         <defs><pattern id="wnJl" width="520" height="22" patternUnits="userSpaceOnUse"><rect width="520" height="22" fill="#CDC8BE"/><path d="M0 21H520" stroke="rgba(0,0,0,.18)" stroke-width="2"/></pattern></defs>
         <rect width="520" height="420" fill="url(#wnJl)"/><rect class="hole" x="150" y="80" width="220" height="260"/>
         <g class="old"><rect x="150" y="80" width="220" height="260" fill="#8A8277"/><rect x="164" y="94" width="192" height="110" fill="#6E7F86"/><rect x="164" y="216" width="192" height="110" fill="#6E7F86"/><path d="M160 210H360" stroke="#8A8277" stroke-width="12"/><path d="M170 120l60-20M175 250l50-18" stroke="#9AA7AC" stroke-width="3"/></g>

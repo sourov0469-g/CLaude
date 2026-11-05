@@ -52,7 +52,7 @@ window.Cta5 = (function () {
   const J = () => `<section class="sec ctJ" id="booking" aria-labelledby="ctJ-h">
     <div class="hd"><h2 class="sec-h" id="ctJ-h" data-split>Here is your receipt.</h2><p class="sec-p">Everything the free inspection gets you, before you spend a cent.</p></div>
     <div class="pr"><div class="slot2" aria-hidden="true"></div>
-      <div class="rc" data-solid><ol class="rcl">${LINES.map(line).join('')}</ol>
+      <div class="rc"><ol class="rcl">${LINES.map(line).join('')}</ol>
         <div class="stub"><p>Tear here and</p><div class="two2"><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a><a class="cl3" href="tel:+15125500000">${PH}<span>(512) 550-0000</span></a></div></div></div></div>
     <button type="button" class="rp">Print it again</button></section>`;
 

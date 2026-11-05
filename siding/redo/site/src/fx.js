@@ -40,9 +40,7 @@
   const hl = (on) => { const p = new URLSearchParams(location.search); p.delete('review'); if (on) p.set('hnav', 'pages'); else p.delete('hnav'); const t = p.toString(); return '?review' + (t ? '&' + t : ''); };
   const hon = new URLSearchParams(location.search).get('hnav') === 'pages';
   const hnav = cur === 'home' && PG.length ? `<div class="row"><b>Header links</b><div class="vs"><a href="${hl(false)}" aria-current="${!hon}"><span class="n">A</span>Homepage sections</a><a href="${hl(true)}" aria-current="${hon}"><span class="n">B</span>Page views</a></div></div>` : '';
-  const bglink = (k) => { const p = new URLSearchParams(location.search); p.delete('review'); p.set('bg', k); return '?review&' + p.toString(); };
-  const bgrow = (window.__BGLIST || []).length ? `<div class="row"><b>Background</b><div class="vs">${window.__BGLIST.map(([k, n]) => `<a href="${bglink(k)}" aria-current="${window.__BGSEL === k}"><span class="n">${k.toUpperCase()}</span>${n}</a>`).join('')}</div></div>` : '';
-  el.innerHTML = `<header><div><b>Review</b> <span>every version, live in place</span></div><button type="button">Hide</button></header><div class="body">${pages}${hnav}${bgrow}${Object.keys(V).filter((slot) => document.querySelector(`.slot[data-slot="${slot}"]`)).map((slot) =>
+  el.innerHTML = `<header><div><b>Review</b> <span>every version, live in place</span></div><button type="button">Hide</button></header><div class="body">${pages}${hnav}${Object.keys(V).filter((slot) => document.querySelector(`.slot[data-slot="${slot}"]`)).map((slot) =>
     `<div class="row"><b>${NAMES[slot] || slot}</b><div class="vs">${V[slot].map(([v, label]) => `<a href="${link(slot, v)}" aria-current="${live(slot) === v}"><span class="n">${v.toUpperCase()}</span>${label}</a>`).join('')}</div></div>`).join('')}</div>`;
   document.body.append(el);
   el.querySelector('header button').addEventListener('click', (e) => { const m = el.classList.toggle('min'); e.target.textContent = m ? 'Show' : 'Hide'; });

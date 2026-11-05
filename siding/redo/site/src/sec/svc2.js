@@ -58,7 +58,7 @@ window.Svc2 = (function () {
   /* ---------- D ---------- */
   const D = () => { const P = window.__SVCP || {};
     return `<section class="sec svD" id="services" aria-labelledby="svD-h"><h2 class="sec-h" id="svD-h" data-split>Pick a trade. See a real job.</h2><span class="anc" id="siding" data-i="0"></span><span class="anc" id="roofing" data-i="2"></span>
-    <div class="split" style="--seam:52%" data-solid>
+    <div class="split" style="--seam:52%">
       <div class="side ph2" aria-live="polite">${T.map((t, i) => { const p = P[t.scene] || {}; return `<figure class="cv${i ? '' : ' on'}" data-i="${i}">${p.src ? `<img src="${p.src}" alt="${p.alt || ''}" decoding="async">` : ''}
         <figcaption><b>${p.place || ''}</b><span>${p.when || ''} · ${p.trades || ''}</span><a href="${p.href || '#'}" target="_blank" rel="noopener">See the project</a></figcaption></figure>`; }).join('')}</div>
       <div class="side tx2">${T.map((t, i) => `<div class="cv${i ? '' : ' on'}" data-i="${i}" ${i ? 'aria-hidden="true"' : ''}><p class="cnt"><b>${t.n}</b> ${t.unit}</p><h3>${t.name}</h3><p class="ld">${t.lead}</p>${figs(t)}${book}</div>`).join('')}</div>

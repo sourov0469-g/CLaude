@@ -33,7 +33,7 @@ window.Win2 = (function () {
       <ol class="pl">${PARTS.map(([n, d], i) => `<li><button type="button" data-i="${i}" aria-pressed="${!i}"><span class="no">${i + 1}</span><span class="tx"><b>${n}</b><span>${d}</span></span></button></li>`).join('')}</ol>
       <div class="ev" aria-live="polite">${EV.map(([b, n, s], i) => `<p class="e${i ? '' : ' on'}" data-i="${i}"><b ${n ? `data-n="${n}"` : ''} data-t="${b}">${b}</b><span>${s}</span></p>`).join('')}</div>
       ${book}</div>
-    <div class="view" data-solid role="img" aria-label="A single-hung window in a lap-sided wall; scrolling separates it into trim and sill, frame, lower sash, upper sash and insect screen.">
+    <div class="view" role="img" aria-label="A single-hung window in a lap-sided wall; scrolling separates it into trim and sill, frame, lower sash, upper sash and insect screen.">
       <div class="rig"><div class="obj">
         <div class="pt p0" data-i="0"><i class="wall"></i><i class="cas"></i><i class="sill"></i><span class="tg">1</span></div>
         <div class="pt p1" data-i="1"><i class="fr"></i><span class="tg">2</span></div>
@@ -83,7 +83,7 @@ window.Win2 = (function () {
       <div class="hd"><h2 class="sec-h" id="wnD-h" data-split>Window jobs, on record.</h2>
         <p class="sec-p">${J.length} window projects from the ones we publish, each with the place and month it was done. Pick a row to see it.</p>
         <div class="flt" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-f="all">All ${J.length}</button><button type="button" aria-pressed="false" data-f="1">Windows only, ${nOnly}</button><button type="button" aria-pressed="false" data-f="0">With other trades, ${J.length - nOnly}</button></div></div>
-      <div class="arc"><div class="vw" id="wnD-vw" data-solid aria-live="polite">${figs}<span class="wipe" aria-hidden="true"></span></div>
+      <div class="arc"><div class="vw" id="wnD-vw" aria-live="polite">${figs}<span class="wipe" aria-hidden="true"></span></div>
         <ol class="idx" aria-label="Window projects">${rows}</ol></div>
       <div class="sft"><p><b>388</b> documented window jobs in all. These photographs are our own, from the project pages on this site.</p>${book}</div></section>`; };
 

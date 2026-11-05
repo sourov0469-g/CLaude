@@ -14,7 +14,7 @@ window.Seq5 = (function () {
   const STUDS = [100, 220, 340, 460, 580, 700], TOL = 9, GX1 = 60, GX2 = 740;
   const I = () => `<section class="sec sqI" id="try" aria-labelledby="sqI-h">
     <div class="hd"><h2 class="sec-h" id="sqI-h" data-split>Nail it on the studs.</h2><p class="sec-p">Lap siding is nailed into the studs behind it, not just the sheathing. The studs are chalked on the wrap. Fire when the gun is over one.</p></div>
-    <div class="wrap"><div class="stage" data-solid><svg class="ns" viewBox="0 0 800 380" aria-hidden="true">
+    <div class="wrap"><div class="stage"><svg class="ns" viewBox="0 0 800 380" aria-hidden="true">
         <rect width="800" height="380" class="wr"/>${STUDS.map((x) => `<path d="M${x} 0V380" class="ck"/>`).join('')}
         <g class="old">${[0, 1, 2].map((k) => `<rect x="0" y="${268 + k * 38}" width="800" height="44" class="bd2"/>`).join('')}</g>
         <rect x="0" y="222" width="800" height="50" class="bd3"/><path d="M0 266H800" class="bdl"/>
@@ -62,7 +62,7 @@ window.Seq5 = (function () {
       <rect x="560" y="290" width="180" height="190" class="cs3"/><rect x="584" y="314" width="132" height="166" class="gl3"/><path d="M650 314V480" class="mu3"/></svg>`; }
   const J = () => `<section class="sec sqJ" id="try" aria-labelledby="sqJ-h">
     <div class="hd"><h2 class="sec-h" id="sqJ-h" data-split>Name the parts.</h2><p class="sec-p">Six words you will hear at an inspection. Drag each label onto its part, or choose a label and then a spot.</p></div>
-    <div class="wrap"><div class="stage" data-solid>${eave()}
+    <div class="wrap"><div class="stage">${eave()}
         <div class="spots">${PARTS.map(([, x, y], i) => `<button type="button" class="sp" data-i="${i}" style="left:${(x / 8).toFixed(2)}%;top:${(y / 4.8).toFixed(2)}%" aria-label="Spot ${i + 1}"><i></i></button>`).join('')}</div></div>
       <div class="side"><p class="cnt"><b>0</b> of 6 named</p>
         <div class="tray" role="group" aria-label="Labels">${ORDER.map((i) => `<button type="button" class="chip" data-i="${i}" aria-pressed="false">${PARTS[i][0]}</button>`).join('')}</div>

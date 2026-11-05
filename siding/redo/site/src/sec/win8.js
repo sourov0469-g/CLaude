@@ -48,8 +48,8 @@ window.Win8 = (function () {
       <div class="wmhd"><h2 class="sec-h" id="wnM-h" data-split>One window, four answers.</h2>
         <p class="sec-p">The questions every window buyer asks, answered from our own records. Pick one and the glass divides by the numbers: each pane is its share of the 376 priced jobs among our 388 documented window jobs.</p></div>
       <div class="wmq" role="radiogroup" aria-label="Question">${Q.map((x, i) => `<button type="button" role="radio" class="wmr" data-i="${i}" aria-checked="false" tabindex="${i ? -1 : 0}">${x.q}</button>`).join('')}</div>
-      <figure class="wmwin" data-solid aria-hidden="true"><div class="wmframe"><div class="wmglass">${panes()}</div></div><div class="wmsill"></div></figure>
-      <div class="wmans" data-solid aria-live="polite"><h3 class="wmh">Our window record, 2022–2026</h3>
+      <figure class="wmwin" aria-hidden="true"><div class="wmframe"><div class="wmglass">${panes()}</div></div><div class="wmsill"></div></figure>
+      <div class="wmans" aria-live="polite"><h3 class="wmh">Our window record, 2022–2026</h3>
         <p class="wma">376 of our 388 documented window jobs carry a price. Pick a question to see how they divide.</p><p class="wms"></p>
         <ul class="wmlist"></ul></div>
       <div class="wmcta"><a class="btn key" href="${BOOK}">Book a free inspection<span class="tab">${CAL}</span></a></div>

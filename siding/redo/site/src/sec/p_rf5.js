@@ -16,7 +16,7 @@ window.PRf5 = (function () {
     <ul class="tabs3"><li><a href="tel:+15125500000"><small>Call</small><b>${L().phone}</b></a></li><li class="k"><a href="${B().BOOK}"><small>Book online</small><b>Any time</b></a></li><li><a href="mailto:${L().mail}"><small>Email</small><b>Write to us</b></a></li></ul>${foot()}</section>`;
 
   const Bv = () => `<section class="sec rf5B" id="roofing-book" aria-labelledby="rf5B-h">
-    <div class="pcard" data-solid><div class="top"><p class="pkick">Austin Pro · Roofing</p><h2 class="sec-h" id="rf5B-h">Free roof inspection.</h2><p class="gaf">GAF Master Elite contractor</p></div>
+    <div class="pcard"><div class="top"><p class="pkick">Austin Pro · Roofing</p><h2 class="sec-h" id="rf5B-h">Free roof inspection.</h2><p class="gaf">GAF Master Elite contractor</p></div>
       <dl class="lines"><div><dt>Call</dt><dd><a href="tel:+15125500000">${L().phone}</a></dd></div><div><dt>Hours</dt><dd>${L().hours}</dd></div><div><dt>Email</dt><dd><a href="mailto:${L().mail}">${L().mail}</a></dd></div><div><dt>Office</dt><dd>${L().addr}</dd></div></dl>
       <div class="pacts">${B().book()}</div></div></section>`;
 

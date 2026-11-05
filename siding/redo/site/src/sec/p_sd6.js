@@ -24,7 +24,7 @@ window.PSd6 = (function () {
   const Bv = () => `<section class="sec sd6B" id="siding-book" aria-labelledby="sd6B-h">
     <div class="wrap"><div class="txt"><h2 class="sec-h" id="sd6B-h" data-split>One visit, every side of the house.</h2>
         <p class="sec-p">The free inspection: a project manager walks every side of the house. One visit covers every trade.</p><div class="pacts">${B().book()}${B().call()}</div>${contact()}</div>
-      <div class="card5" data-solid><p class="pkick">The inspection walks</p><ul>${COV.map((c) => `<li><button type="button" role="checkbox" aria-checked="false"><i aria-hidden="true"></i>${c}</button></li>`).join('')}</ul><p class="sm3">Tick them off as you read. Nothing here is saved or sent.</p></div></div></section>`;
+      <div class="card5"><p class="pkick">The inspection walks</p><ul>${COV.map((c) => `<li><button type="button" role="checkbox" aria-checked="false"><i aria-hidden="true"></i>${c}</button></li>`).join('')}</ul><p class="sm3">Tick them off as you read. Nothing here is saved or sent.</p></div></div></section>`;
 
   /* ---------- C ---------- */
   const C = () => `<section class="sec sd6C" id="siding-book" aria-labelledby="sd6C-h">

@@ -23,7 +23,7 @@ window.PRf2 = (function () {
   const seg = (a, b, cls, w) => { const [x1, y1] = P(a), [x2, y2] = P(b); return `<path class="${cls}" d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke-width="${w}"/>`; };
   const Bv = () => `<section class="sec rf2B" id="roofing-cost" aria-labelledby="rf2B-h">
     <div class="hd"><h2 class="sec-h" id="rf2B-h" data-split>Up the pitch.</h2><p class="sec-p">Our priced roofs, laid up the slope from $0 at the eave to $30k at the ridge. ${SRC}</p></div>
-    <div class="slp" data-solid><svg viewBox="0 0 600 300" role="img" aria-label="Price scale up a roof slope from $0 to $30k. Shingle roofs: middle half $5k to $20k, median band $10k to $15k. Metal roofs: median band $20k to $25k.">
+    <div class="slp"><svg viewBox="0 0 600 300" role="img" aria-label="Price scale up a roof slope from $0 to $30k. Shingle roofs: middle half $5k to $20k, median band $10k to $15k. Metal roofs: median band $20k to $25k.">
         <path d="M20 290L580 30" class="deck"/>${seg(0, 30, 'rail', 6)}${seg(5, 20, 'mh4', 22)}${seg(10, 15, 'md4', 22)}${seg(20, 25, 'mtl', 22)}
         ${[0, 5, 10, 15, 20, 25, 30].map((v) => { const [x, y] = P(v); return `<g class="tk5"><path d="M${x.toFixed(1)} ${(y + 16).toFixed(1)}l-6 13"/><text x="${(x - 10).toFixed(1)}" y="${(y + 44).toFixed(1)}">$${v}k</text></g>`; }).join('')}</svg>
       <div class="key3"><p><i class="a1"></i><b>$5k–$20k</b> shingle, middle half of 204 priced</p><p><i class="a2"></i><b>$10k–$15k</b> shingle median band</p><label><input type="checkbox"> Show metal: <b>$20k–$25k</b> median band (29 priced)</label></div></div></section>`;

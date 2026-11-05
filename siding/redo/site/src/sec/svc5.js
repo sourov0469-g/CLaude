@@ -20,7 +20,7 @@ window.Svc5 = (function () {
     const arc = (r, f) => { const a = f * 2 * Math.PI * 0.86, x = 180 + r * Math.sin(a), y = 180 - r * Math.cos(a); return `M180 ${180 - r} A${r} ${r} 0 ${a > Math.PI ? 1 : 0} 1 ${x.toFixed(2)} ${y.toFixed(2)}`; };
     return `<section class="sec svI" id="services" aria-labelledby="svI-h">
       <div class="hd"><h2 class="sec-h" id="svI-h" data-split>Three trades. One visit.</h2><p class="sec-p">Each ring is one trade, as long as its documented jobs. One free inspection sits at the centre of all three.</p></div>
-      <div class="wrap"><div class="rings" data-solid><svg viewBox="0 0 360 360" aria-hidden="true">${t.map((x, i) => `<g class="rg" data-i="${i}"><path class="trk" d="${arc(R[i], 1)}" pathLength="1"/><path class="val" d="${arc(R[i], x.n / max)}" pathLength="1" style="--d:${i * 0.15}s"/>
+      <div class="wrap"><div class="rings"><svg viewBox="0 0 360 360" aria-hidden="true">${t.map((x, i) => `<g class="rg" data-i="${i}"><path class="trk" d="${arc(R[i], 1)}" pathLength="1"/><path class="val" d="${arc(R[i], x.n / max)}" pathLength="1" style="--d:${i * 0.15}s"/>
             <text x="162" y="${180 - R[i] + 5}" text-anchor="end">${x.name} · ${x.n}</text></g>`).join('')}</svg>
           <div class="ctr"><p class="k">One visit</p><b>Every trade</b><span>on the house</span></div></div>
         <div class="side"><div class="pk" role="tablist" aria-label="Trade">${t.map((x, i) => `<button type="button" role="tab" id="svI-t${i}" aria-selected="${!i}" aria-controls="svI-p${i}">${x.name}<small>${x.n}</small></button>`).join('')}</div>

@@ -24,9 +24,9 @@ window.PWd4 = (function () {
 
   const Bv = () => `<section class="sec wd4B" id="windows-install" aria-labelledby="wd4B-h">
     <div class="hd"><h2 class="sec-h" id="wd4B-h" data-split>Weeks to make, days to fit.</h2><p class="sec-p">The windows are built to order first. Then, for most window-only jobs, 2 days on site.</p></div>
-    <div class="two4"><div class="cal" data-solid><p class="pkick">Measuring, ordering and installing</p><div class="grid4" aria-hidden="true">${Array.from({ length: 42 }, (_, i) => `<i style="--i:${i}"></i>`).join('')}</div>
+    <div class="two4"><div class="cal"><p class="pkick">Measuring, ordering and installing</p><div class="grid4" aria-hidden="true">${Array.from({ length: 42 }, (_, i) => `<i style="--i:${i}"></i>`).join('')}</div>
         ${B().quote(19, 'It took about 6 weeks for measuring, ordering and installing.', 'pq2 sm')}</div>
-      <div class="days" data-solid><p class="pkick">On site</p><div class="d2" aria-hidden="true"><i></i><i></i></div><p class="big3"><b>2 days</b> for most window-only jobs</p>
+      <div class="days"><p class="pkick">On site</p><div class="d2" aria-hidden="true"><i></i><i></i></div><p class="big3"><b>2 days</b> for most window-only jobs</p>
         ${B().quote(28, 'Austin pro just finished my windows in one day!', 'pq2 sm')}</div></div></section>`;
 
   const SG = [['m', 'Measure'], ['b', 'Built to order'], ['s', 'Set'], ['c', 'Sealed']];

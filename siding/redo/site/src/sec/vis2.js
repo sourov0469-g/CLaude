@@ -30,7 +30,7 @@ window.Vis2 = (function () {
       <div class="seg" role="group" aria-label="Finish"><button type="button" aria-pressed="true" data-set="cp">ColorPlus, 17 for Austin</button><button type="button" aria-pressed="false" data-set="sw">Painted on site</button></div>
       <div class="deck" role="radiogroup" aria-label="Colours" data-set="cp">${bands(CP, 'cp')}</div>
       <div class="deck" role="radiogroup" aria-label="Colours" data-set="sw" hidden>${bands(SW, 'sw')}</div></div>
-    <div class="rgt"><div class="fields" data-solid>
+    <div class="rgt"><div class="fields">
         <div class="fd a" style="--c:#575B59;--t:#fff">${houseLines()}<div class="nm"><b>Iron Gray</b><span>ColorPlus · #575B59</span></div></div>
         <div class="fd b" style="--c:#E0E0D8;--t:#16191D">${houseLines()}<div class="nm"><b>Arctic White</b><span>ColorPlus · #E0E0D8</span></div></div></div>
       <div class="act"><button type="button" class="btn light" data-cmp aria-pressed="false">Compare two</button>${book}</div>
@@ -68,7 +68,7 @@ window.Vis2 = (function () {
   const D = () => `<section class="sec viD" id="colours" aria-labelledby="viD-h" style="--c:#575B59;--tr:#E0E0D8">
     <div class="hd"><h2 class="sec-h" id="viD-h" data-split>Profile, colour, trim. Then preview.</h2>
       <ol class="stp">${STEPS.map((t, i) => `<li><button type="button" data-s="${i}" ${i ? '' : 'aria-current="step"'}><i>${i + 1}</i>${t}</button></li>`).join('')}<span class="pl" aria-hidden="true"><i></i></span></ol></div>
-    <div class="ins" data-solid>
+    <div class="ins">
       <div class="panel">
         <fieldset data-p="0"><legend>Profile</legend><div class="tiles">
           <label class="tile"><input type="radio" name="viD-p" value="lap" checked>${mini('lap')}<b>Lap, 8.25 in</b><small>301 of 415 priced jobs</small></label>

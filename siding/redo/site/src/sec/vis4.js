@@ -21,7 +21,7 @@ window.Vis4 = (function () {
   const G = () => `<section class="sec viG" id="colours" aria-labelledby="viG-h">
     <div class="hd"><h2 class="sec-h" id="viG-h" data-split>Four questions, three colours.</h2><p class="sec-p">Answer what you can. Three ColorPlus colours to start from appear as you go, each with the reason.</p></div>
     <div class="wrap"><form class="qs" onsubmit="return false">${QS.map(([k, q, o], i) => `<fieldset><legend><span class="no">${i + 1}</span>${q}</legend><div class="op">${o.map(([v, n]) => `<label><input type="radio" name="viG-${k}" value="${v}"><span>${n}</span></label>`).join('')}</div></fieldset>`).join('')}</form>
-      <div class="res" data-solid aria-live="polite"><p class="k">To start from</p><div class="cards"></div><p class="sm">A starting point, not a rule. The choice is yours at the free inspection.</p>${book}</div></div></section>`;
+      <div class="res" aria-live="polite"><p class="k">To start from</p><div class="cards"></div><p class="sm">A starting point, not a rule. The choice is yours at the free inspection.</p>${book}</div></div></section>`;
 
   function wireG(root) {
     const s = root.querySelector('.viG'); if (!s) return; const v3 = V3(), cards = s.querySelector('.cards');
@@ -54,7 +54,7 @@ window.Vis4 = (function () {
       <rect class="win" x="300" y="170" width="200" height="230"/><path class="cas" d="M290 160h220v250H290z M400 170V400 M300 285H500"/></svg>`; };
   const H = () => `<section class="sec viH" id="colours" aria-labelledby="viH-h">
     <div class="hd"><h2 class="sec-h" id="viH-h" data-split>Colour in Austin light.</h2><p class="sec-p">The same colour reads differently through the day. Choose one, then move the light.</p></div>
-    <div class="stage" data-solid data-l="mo"><div class="wv">${wall()}</div><p class="nm" aria-live="polite"><b></b><span></span></p>
+    <div class="stage" data-l="mo"><div class="wv">${wall()}</div><p class="nm" aria-live="polite"><b></b><span></span></p>
       <div class="lt" role="radiogroup" aria-label="Light">${LIGHT.map(([n, k], i) => `<button type="button" role="radio" aria-checked="${!i}" data-k="${k}">${n}</button>`).join('')}</div></div>
     <div class="chips" role="radiogroup" aria-label="Colour">${CP().map(([n, h], i) => `<button type="button" role="radio" aria-checked="${n === 'Iron Gray'}" aria-label="${n}" data-i="${i}" style="--c:${h}"></button>`).join('')}</div>
     <p class="note">A drawing, not a photograph: the light is shown as a wash over the colour. Screens show colour a little differently; see real samples at the free inspection.</p>${book}</section>`;

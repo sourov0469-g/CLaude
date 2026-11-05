@@ -16,7 +16,7 @@ window.Area = (function () {
   const A = () => `<section class="sec arA" id="area" aria-labelledby="arA-h">
     <div class="hd"><h2 class="sec-h" id="arA-h">On your street.</h2>
       <p class="sec-p">Real jobs, pinned where they happened. 886 documented projects since 2018: ${LOCK}.</p></div>
-    <div class="board" data-solid><svg class="thread" aria-hidden="true"><path/></svg><div class="cards">${D().cards.map(card).join('')}</div>
+    <div class="board"><svg class="thread" aria-hidden="true"><path/></svg><div class="cards">${D().cards.map(card).join('')}</div>
       <div class="post" role="group" aria-label="Filter by town">${signs('a')}<p class="pn">Projects documented per town</p></div></div></section>`;
 
   function wireA(root) {
@@ -61,7 +61,7 @@ window.Area = (function () {
         <ul id="arB-l" role="listbox" hidden></ul></div>
       <p class="ans" aria-live="polite"></p>
       <div class="post2" role="group" aria-label="Towns">${signs('b')}</div></div>
-    <div class="deck" data-solid>${D().cards.map(card).join('')}<p class="dhint" aria-hidden="true">Drag the top photo away</p></div></section>`;
+    <div class="deck">${D().cards.map(card).join('')}<p class="dhint" aria-hidden="true">Drag the top photo away</p></div></section>`;
 
   function wireB(root) {
     const s = root.querySelector('.arB'); if (!s) return; const d = D();

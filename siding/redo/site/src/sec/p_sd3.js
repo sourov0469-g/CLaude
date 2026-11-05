@@ -23,7 +23,7 @@ window.PSd3 = (function () {
   const Y = (v) => `${100 - (v / 30) * 100}%`;
   const Bv = () => `<section class="sec sd3B" id="siding-cost" aria-labelledby="sd3B-h">
     <div class="hd"><h2 class="sec-h" id="sd3B-h" data-split>Where siding jobs land.</h2><p class="sec-p">${SRC}</p></div>
-    <div class="wrap"><div class="col" data-solid role="img" aria-label="Scale from $0 to $30k. Middle half of jobs: $5k to $20k. Median band: $10k to $15k.">
+    <div class="wrap"><div class="col" role="img" aria-label="Scale from $0 to $30k. Middle half of jobs: $5k to $20k. Median band: $10k to $15k.">
         ${[0, 5, 10, 15, 20, 25, 30].map((v) => `<span class="tk4" style="top:${Y(v)}">$${v}k</span>`).join('')}
         <i class="mh2" style="top:${Y(20)};bottom:${(5 / 30) * 100}%"></i><i class="md2" style="top:${Y(15)};bottom:${(10 / 30) * 100}%"></i></div>
       <div class="lbls"><div class="l1"><b>$10k–$15k</b><span>Median band: the band the middle job falls in.</span></div><div class="l2"><b>$5k–$20k</b><span>Middle half of jobs: half of all priced siding jobs fell in here.</span></div>

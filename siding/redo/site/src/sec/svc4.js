@@ -20,7 +20,7 @@ window.Svc4 = (function () {
   const G = () => { const t = T(), max = 431;
     return `<section class="sec svG" id="services" aria-labelledby="svG-h">
       <div class="hd"><h2 class="sec-h" id="svG-h" data-split>The three trades, side by side.</h2><p class="sec-p">What our records show for each. Sort a column, or open a row.</p></div>
-      <div class="tbw" data-solid><table class="cmp"><caption class="sr">Siding, windows and roofing compared from the firm's documented jobs</caption>
+      <div class="tbw"><table class="cmp"><caption class="sr">Siding, windows and roofing compared from the firm's documented jobs</caption>
         <thead><tr><th scope="col">Trade</th>${COLS.map(([n, k]) => `<th scope="col" aria-sort="none"><button type="button" data-k="${k}">${n}<i aria-hidden="true"></i></button></th>`).join('')}<th scope="col">Median band</th><th scope="col">Time on site</th><th scope="col">Maker or warranty</th><th scope="col"><span class="sr">Details</span></th></tr></thead>
         ${t.map((x, i) => { const r = ROW[i]; return `<tbody class="rw" data-a="${r[0]}" data-b="${r[1]}"><tr><th scope="row"><b>${x.name}</b></th>
           <td data-l="Documented jobs"><span class="v">${r[0]}</span><span class="bar" aria-hidden="true"><i style="--w:${(r[0] / max).toFixed(3)}"></i></span></td>
