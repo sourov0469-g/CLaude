@@ -1,0 +1,45 @@
+/* HERO — the headline between sky and house. One real photograph fills the hero, under the header. The headline sits between two layers of the
+   same photograph: the back plate (the photo with the sky filled in under the house's edge) and the front (the house, chimney and trees,
+   cut out with a soft alpha). Front over back reproduces the photograph exactly; the headline shows only where there is sky. */
+.fh{position:relative;container-type:size;height:100svh;min-height:640px;max-height:1240px;overflow:hidden;background:#C8CFD2;isolation:isolate}
+.fh-stage{--sw:max(100cqw,calc(100cqh * 1.3333));--sh:calc(var(--sw) * .75);position:absolute;left:50%;top:calc((100cqh - var(--sh)) * .3);width:var(--sw);height:var(--sh);
+  transform:translate3d(calc(-50% + var(--sx,0px)),var(--sy,0px),0) scale(var(--sc,1.025));transform-origin:50% 30%;will-change:transform}
+.fh-stage img{position:absolute;left:0;top:0;width:100%;height:auto;display:block;user-select:none;-webkit-user-drag:none}
+.fh-stage .fh-front{z-index:3}
+.fh-t{position:absolute;z-index:2;left:50%;top:17%;width:min(100%,100cqw);margin:0;padding:0 2.2cqw;box-sizing:border-box;text-align:center;
+  font:800 min(8.2cqw,15.5cqh)/.97 var(--display);letter-spacing:-.035em;color:#0E3B2C;text-wrap:balance;
+  transform:translate3d(calc(-50% + var(--tx,0px)),calc(var(--ty,0px) + var(--sink,0px)),0);opacity:var(--ta,1);will-change:transform,opacity}
+.fh-t .ln{display:block}
+.fh-rise .fh-t{animation:fhRise 1.7s cubic-bezier(.16,.84,.24,1) .15s both}
+@keyframes fhRise{0%{opacity:0;transform:translate3d(-50%,calc(var(--sh) * .17),0)}35%{opacity:1}100%{opacity:var(--ta,1);transform:translate3d(calc(-50% + var(--tx,0px)),calc(var(--ty,0px) + var(--sink,0px)),0)}}
+.fh-settle .fh-stage{animation:fhSettle 2.2s cubic-bezier(.2,.8,.2,1) both}
+@keyframes fhSettle{from{--sc:1.06}to{--sc:1.025}}
+@property --sc{syntax:"<number>";inherits:true;initial-value:1.025}
+.fh-ui{position:absolute;z-index:5;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:0 var(--gut) clamp(22px,4.2cqh,44px);pointer-events:none}
+.fh-ui>*{pointer-events:auto}
+.fh-cta{display:flex;flex-direction:column;gap:14px;max-width:min(470px,100%);padding:18px 20px 18px;border-radius:22px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 rgba(10,22,17,.06),0 26px 50px -24px rgba(10,22,17,.55)}
+.fh .callx{display:inline-flex;align-items:center;gap:10px;min-height:48px;font:800 clamp(19px,1.6vw,23px)/1 var(--display);letter-spacing:-.01em;color:var(--green);text-decoration:none}
+.fh .callx svg{width:22px;height:22px;flex:none}
+.fh .callx:hover{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.fh-sub{margin:0;text-wrap:balance;font:600 16px/1.4 var(--text);color:var(--ink-2)}
+.fh-act{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
+.fh-cap{margin:0;max-width:min(380px,42%);padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font:500 12.5px/1.4 var(--text);color:var(--ink-2);text-align:right}
+.fh-scroll{position:absolute;z-index:5;left:50%;bottom:10px;width:26px;height:42px;margin-left:-13px;border-radius:14px;border:2px solid rgba(14,59,44,.55);pointer-events:none}
+.fh-scroll i{position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:#0E3B2C;animation:fhDot 1.8s ease-in-out infinite}
+@keyframes fhDot{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+.fh a:focus-visible{outline:3px solid #0E3B2C;outline-offset:3px;border-radius:12px}
+@media (max-width:900px){
+  .fh{min-height:620px}
+  .fh-ui{flex-direction:column;align-items:stretch;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+  .fh-cta{max-width:none;padding:14px 16px;gap:10px}
+  .fh-cap{display:none}
+  .fh-scroll{display:none}
+}
+@media (max-aspect-ratio:4/5){
+  .fh-t{top:12.5%;font-size:min(13.6cqw,8.4cqh);line-height:.96;padding:0 5cqw}
+  .fh-t .ln{display:inline}
+}
+@media (prefers-reduced-motion:reduce){
+  .fh-rise .fh-t,.fh-settle .fh-stage{animation:none}
+  .fh-scroll i{animation:none;opacity:1}
+}

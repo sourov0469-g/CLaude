@@ -1,0 +1,6 @@
+/* FINAL HOMEPAGE — shell. The ground is never pure white: a very light green-tinted near-white. */
+:root{--ground:#F1F5F1;--ground-2:#E8EFE9;--lime:#B5DB6E;--green:#0E3B2C}
+body{background:var(--ground)}
+.sec{position:relative}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
