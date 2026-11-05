@@ -250,7 +250,7 @@ var FOG_LBL = 'A house behind a fogged-up window. Wipe it with your finger or mo
   bks.forEach(function(b){ var k = +b.dataset.k; b.innerHTML = '<span class="win"></span>' + ICON; b.querySelector('.win').appendChild(letters(shown(k))); label(b); });
   function answer(){ var r = R[cur[0]]; reply.querySelector('small').textContent = r[0]; reply.querySelector('span').textContent = r[1]; reply.classList.remove('swap'); void reply.offsetWidth; reply.classList.add('swap'); }
   function roll(b, dir){ var k = +b.dataset.k, n = O[k].length; cur[k] = (cur[k] + dir + n) % n; var w = b.querySelector('.win'), old = w.querySelector('.ln:not(.out)'), nx = letters(shown(k));
-    label(b); sr.textContent = sentence(); root.dataset.sentence = sentence(); root.dispatchEvent(new Event('wcchange', {bubbles: true})); note.textContent = ''; if (k === 0) answer();
+    label(b); sr.textContent = sentence(); root.dataset.sentence = sentence(); if (k === 0){ OWL.case = ['leak', 'shingles', 'storm', 'old', 'unsure'][cur[0]]; document.dispatchEvent(new CustomEvent('owl:case', {detail: OWL.case})); } root.dispatchEvent(new Event('wcchange', {bubbles: true})); note.textContent = ''; if (k === 0) answer();
     if (OWL.reduce){ w.innerHTML = ''; w.appendChild(nx); return; }
     nx.classList.add('enter'); w.appendChild(nx); void nx.offsetWidth;
     old.classList.add('out'); nx.classList.remove('enter');
