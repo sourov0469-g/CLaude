@@ -1368,6 +1368,8 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | 5 | Reviews | **M, "Their before, their after"** (`?reviews=m`) | MERSI (the split cover: twelve published reviews, each split at its own seam: the homeowner's before on the left, their after on the right, halves moving in opposite directions, the name rolling on the seam; every half verbatim and build-locked) | GATE-NEW-Reviews-M.md | 8.63 PASS | Accepted by Muse |
 
-| 6 | Process | **M, "Your job, in order"** (`?process=m`) | Ever, verified craft (the selection and filtering presentation: pick siding, windows or both and the step cards re-flow into that job's published order, windows first on combined jobs; every sentence verbatim from the firm's process and FAQs) | GATE-NEW-Process-M.md | 8.56 PASS | Built and gated; waiting for Muse's accept |
+| 6 | Process | **M, "Your job, in order"** (`?process=m`) | Ever, verified craft (the selection and filtering presentation: pick siding, windows or both and the step cards re-flow into that job's published order, windows first on combined jobs; every sentence verbatim from the firm's process and FAQs) | GATE-NEW-Process-M.md | 8.56 PASS | Accepted by Muse |
 
-**Next, after the accept:** Try M.
+| 7 | Try | **M, "Match the house"** (`?try=m`) | MERSI (the split-slider as a game: six published before/after pairs on two shuffled reels; turn them until a house meets itself, and the lock shows the job's published record) | GATE-NEW-Try-M.md | 8.63 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Area M.
