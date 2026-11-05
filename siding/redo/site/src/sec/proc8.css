@@ -1,0 +1,40 @@
+/* PROCESS M — Your job, in order (Ever: the selection and filtering presentation). Pick the job; the steps re-flow. */
+.prM{padding:110px var(--gut) 100px}
+.prM .pmhd,.prM .pmf,.prM .pmgrid{max-width:1320px;margin-left:auto;margin-right:auto}
+.prM .pmhd .sec-p{max-width:56ch}
+.prM .pmf{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:30px;padding-bottom:18px;border-bottom:1px solid #E1E9E3}
+.prM .pmj{all:unset;box-sizing:border-box;min-height:48px;padding:0 20px;display:inline-flex;align-items:center;border-radius:999px;cursor:pointer;font:700 15px/1 var(--text);color:var(--green);background:rgba(14,59,44,.07);white-space:nowrap}
+.prM .pmj[aria-checked="true"]{background:var(--green);color:#FFFFFF}
+.prM .pmj:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px}
+.prM .pmcount{margin:0 0 0 auto;font:600 14px/1 var(--text);color:var(--ink-2)}
+.prM .pmcount b{font:800 22px/1 var(--display);color:var(--ink);margin-right:4px}
+.prM .pmgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,330px);gap:clamp(24px,3.5vw,52px);align-items:start;margin-top:26px}
+.prM .pml{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.prM .pmc{position:relative;display:flex;gap:14px;padding:20px 20px 18px;border-radius:18px;background:#FFFFFF;box-shadow:inset 0 0 0 1px #E1E9E3,0 14px 30px -24px rgba(10,22,17,.35)}
+.prM .pmc.pmgone{z-index:0;pointer-events:none}
+.prM .pmn{flex:none;font:800 30px/1 var(--display);color:var(--green);letter-spacing:-.02em;min-width:38px}
+.prM .pmb{display:flex;flex-direction:column;gap:6px;min-width:0}
+.prM .pmb h3{margin:2px 0 0;font:800 18px/1.25 var(--display);color:var(--ink);letter-spacing:-.01em}
+.prM .pmb p{margin:0;font:500 14.5px/1.55 var(--text);color:var(--ink-2)}
+.prM .pmb small{margin-top:2px;font:600 12px/1.3 var(--text);color:var(--ink-3)}
+.prM .pmt{align-self:flex-start;padding:4px 9px;border-radius:999px;font:700 11px/1.2 var(--text);letter-spacing:.02em;color:var(--ink-2);background:#EEF2EF}
+.prM .pmt-siding{background:#E6ECF0;color:#2F4450}
+.prM .pmt-windows{background:#E3EEF2;color:#24485A}
+.prM .pmt-both{background:#B5DB6E;color:#0A1611}
+.prM .pmside{position:sticky;top:96px;padding:22px;border-radius:20px;background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3}
+.prM .pmdl{margin:0 0 20px}
+.prM .pmr{padding:12px 0;border-bottom:1px solid #E1E9E3}
+.prM .pmr:first-child{padding-top:0}
+.prM .pmr dt{font:700 12px/1.2 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.prM .pmr dd{margin:6px 0 0;font:600 15px/1.45 var(--text);color:var(--ink)}
+.prM .pmlive{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:980px){.prM .pmgrid{grid-template-columns:1fr}.prM .pmside{position:static}}
+@media (max-width:760px){
+  .prM{padding:80px var(--gut) 72px}
+  .prM .pmf{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:calc(-1 * var(--gut));margin-right:calc(-1 * var(--gut));padding:0 var(--gut) 16px}
+  .prM .pmf::-webkit-scrollbar{display:none}
+  .prM .pmcount{display:none}
+  .prM .pml{grid-template-columns:1fr;gap:10px}
+  .prM .pmc{padding:16px}
+  .prM .pmn{font-size:24px;min-width:30px}
+}

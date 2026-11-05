@@ -1366,6 +1366,8 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | 4 | Windows | **M, "One window, four answers"** (`?windows=m`) | Lusion (flow: one window whose glass divides by the numbers into the answer to each of four buyer questions: cost, brand, frame, siding too; the published FAQ answers verbatim beside it) | GATE-NEW-Windows-M.md | 8.57 PASS | Accepted by Muse |
 
-| 5 | Reviews | **M, "Their before, their after"** (`?reviews=m`) | MERSI (the split cover: twelve published reviews, each split at its own seam: the homeowner's before on the left, their after on the right, halves moving in opposite directions, the name rolling on the seam; every half verbatim and build-locked) | GATE-NEW-Reviews-M.md | 8.63 PASS | Built and gated; waiting for Muse's accept |
+| 5 | Reviews | **M, "Their before, their after"** (`?reviews=m`) | MERSI (the split cover: twelve published reviews, each split at its own seam: the homeowner's before on the left, their after on the right, halves moving in opposite directions, the name rolling on the seam; every half verbatim and build-locked) | GATE-NEW-Reviews-M.md | 8.63 PASS | Accepted by Muse |
 
-**Next, after the accept:** Process M.
+| 6 | Process | **M, "Your job, in order"** (`?process=m`) | Ever, verified craft (the selection and filtering presentation: pick siding, windows or both and the step cards re-flow into that job's published order, windows first on combined jobs; every sentence verbatim from the firm's process and FAQs) | GATE-NEW-Process-M.md | 8.56 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Try M.
