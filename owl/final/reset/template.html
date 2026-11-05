@@ -17,7 +17,7 @@
 {{JS:src/base.js}}
 window.RESET = window.RESET || {};
 /* every video file is owned by ONE section (OWL-FIX-DIAGNOSIS §1, §4): the crew film by the hero, nothing else repeats */
-window.RESET_MEDIA = { crewloop: '{{A:crew.mp4}}', rise: '{{A:stock/hero-rise.mp4}}', drone: '{{A:stock/nothing-drone.mp4}}' };
+window.RESET_MEDIA = { crewloop: '{{A:crew.mp4}}', rise: '{{A:stock/hero-rise.mp4}}', drone: '{{A:stock/nothing-drone.mp4}}', nailer: '{{A:stock/nothing-nailer.mp4}}' };
 /* every video plays from a Blob URL decoded once from its file (iOS Safari stalls on large data: video), and is primed with a muted
    play-then-pause so a scrubbed film paints its frames on phones too */
 window.RESET.video = function(n){ var c = RESET._v || (RESET._v = {}); if (c[n]) return c[n]; var d = RESET_MEDIA[n]; if (!d) return '';

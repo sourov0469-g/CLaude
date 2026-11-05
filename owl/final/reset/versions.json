@@ -23,7 +23,9 @@
   "label": "Your part: nothing",
   "default": 1,
   "names": {
-   "1": "Scroll film"
+   "1": "Scroll film",
+   "2": "Two lists",
+   "3": "Filmstrip"
   }
  },
  "04-numbers": {

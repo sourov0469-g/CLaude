@@ -17,4 +17,7 @@ Owl's own media (the crew film, the family and crew photos, the logo, the owl il
 | hero | `stock/hero-nailer.webp` | Ryan Stephens, Pexels 33404248 | a roofer nailing architectural shingles |
 | hero | `stock/hero-rain.webp` | Adrien Olichon, Pexels 2663254 | rain running off a shingled roof edge |
 | hero | `stock/hero-rise.mp4` | Pexels video 17624839 (photographer not shown: the Pexels page refuses automated fetches) | top-down drone rise from a shingle roof to the whole street |
+| nothing | `stock/nothing-clean.webp` | Ryan Stephens, Pexels 33404981 | a crew working around a house mid-reroof, clearing the drive |
 | nothing | `stock/nothing-drone.mp4` | Pexels video 4198812 (photographer not shown: the Pexels page refuses automated fetches) | a drone moving in on a house mid-reroof, a roofer on the ridge |
+| nothing | `stock/nothing-nailer.mp4` | Pexels video 19654640 (photographer not shown: page walled) | a roofer nailing down new roof decking (6 s loop) |
+| nothing | `stock/nothing-wrap.webp` | Ryan Stephens, Pexels 34304714 | a house mid-reroof, tarps and old shingles on the lawn |

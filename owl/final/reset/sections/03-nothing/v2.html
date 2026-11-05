@@ -1,0 +1,66 @@
+<section class="rs nothing n2" id="nothing" data-sky="day" aria-labelledby="n2-h">
+<style>
+/* V2 · Two lists. Type only, in flow (no pinned stage): Owl's list ticks itself as each line passes the middle of the screen;
+   your list stays at one line. Longbow's strict rows, turned into a to-do list you don't have to do. */
+.n2{padding:clamp(110px,14vh,160px) clamp(16px,4vw,64px) clamp(90px,12vh,140px)}
+.n2 .in{max-width:1240px;margin:0 auto}
+.n2 h2{margin:0 0 clamp(36px,6vh,70px);font-size:clamp(40px,6vw,100px);font-weight:900;line-height:.95;letter-spacing:-.045em;color:var(--ink);max-width:12ch}
+.n2 h2 em{font-style:normal;color:var(--acc-text)}
+.n2 .cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:start}
+.n2 .lh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;padding-bottom:12px;border-bottom:2px solid var(--ink);font-size:15px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.n2 .lh span{font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink-70)}
+.n2 ol{list-style:none;margin:0;padding:0}
+.n2 li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;align-items:start;padding:clamp(22px,4vh,40px) 0;border-bottom:1px solid var(--line);min-height:28vh}
+.n2 .box{position:relative;width:44px;height:44px;border-radius:12px;border:2px solid var(--ink-50);margin-top:4px;transition:background .35s,border-color .35s}
+.n2 .box svg{position:absolute;inset:6px;width:28px;height:28px;stroke:var(--on-acc);stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;transition:stroke-dashoffset .45s .1s cubic-bezier(.65,0,.35,1)}
+.n2 li.done .box{background:var(--acc);border-color:var(--acc)}
+.n2 li.done .box svg{stroke-dashoffset:0}
+.n2 .step{display:block;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-70)}
+.n2 li b{display:block;margin-top:4px;font-size:clamp(26px,2.8vw,42px);font-weight:900;line-height:1.05;letter-spacing:-.03em;color:var(--ink)}
+.n2 li p{margin:10px 0 0;font-size:clamp(16px,1.25vw,19px);line-height:1.5;color:var(--ink-70);max-width:48ch}
+.n2 .yours{position:sticky;top:110px;padding:clamp(20px,2.4vw,30px);border-radius:22px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 30px 50px -40px rgba(0,0,0,.5)}
+.n2 .yours ul{list-style:none;margin:6px 0 0;padding:0}
+.n2 .yours li{display:flex;gap:14px;align-items:center;min-height:0;padding:14px 0;border:0}
+.n2 .yours .box{width:36px;height:36px;margin:0;border-radius:10px}
+.n2 .yours .w{font-size:clamp(20px,1.8vw,26px);font-weight:900;color:var(--ink);transition:opacity .3s}
+.n2 .tally{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.n2 .tally b{display:block;font-size:clamp(30px,3vw,44px);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1}
+.n2 .tally span{display:block;margin-top:4px;font-size:13px;font-weight:700;color:var(--ink-70)}
+.n2 .note{margin:16px 0 0;font-size:15px;color:var(--ink-70)}
+@media (max-width:860px){.n2 .cols{grid-template-columns:1fr}.n2 .yours{position:sticky;top:auto;bottom:86px;order:2;z-index:2;padding:14px 16px}.n2 .yours .lh{margin-bottom:0;padding-bottom:6px;font-size:12px}.n2 .yours ul{margin:0}.n2 .yours li{padding:8px 0}.n2 .tally,.n2 .note{display:none}.n2 li{min-height:0;grid-template-columns:48px minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.n2 .box,.n2 .box svg{transition:none}}
+</style>
+<div class="in">
+ <h2 id="n2-h">Here’s your part: <em>nothing.</em></h2>
+ <div class="cols">
+  <div class="owl"><p class="lh">Owl’s list <span>We do all of it</span></p><ol></ol></div>
+  <aside class="yours" aria-label="Your list"><p class="lh">Your list <span>Today</span></p>
+   <ul><li><span class="box" aria-hidden="true"></span><span class="w" aria-live="polite">Make coffee.</span></li></ul>
+   <div class="tally"><div><b class="t-owl">0 of 5</b><span>done by Owl</span></div><div><b>0</b><span>things for you to do</span></div></div>
+   <p class="note">Questions on the way? Call (651) 977-6027, Mon–Sat 08:00–18:00.</p>
+  </aside>
+ </div>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), ol = sec.querySelector('.owl ol'), w = sec.querySelector('.yours .w'), tally = sec.querySelector('.t-owl');
+  var FIRST = { leak: 'We find your leak first.', stain: 'We look above your stain first.', shingles: 'We check where the shingles went.', storm: 'We check the storm damage first.', old: 'We tell you where it stands.', unsure: 'We look closely first.' };
+  var B = [
+    { n: 'Look', b: 'We look closely first.', p: 'A Wise Check: the roof and the attic, with photos and video for you.', y: 'Make coffee.' },
+    { n: 'Wrap', b: 'We wrap your home and lawn.', p: 'Protect Your Nest: mesh from the eaves down and a tarp over the lawn.', y: 'Go to work.' },
+    { n: 'Roof', b: 'We fix it, or put on your new roof.', p: 'For a new roof: GAF materials, installed by our GAF Systems Plus certified crew.', y: 'Pick up the kids.' },
+    { n: 'Clean', b: 'We clean up, three times.', p: 'The crew, a magnet sweep for nails, then the project manager’s walk.', y: 'Make dinner.' },
+    { n: 'Box', b: 'We leave you a box.', p: 'The aftercare box, left with you when we go. Backed by our 10-year workmanship warranty.', y: 'Open the front door.' }];
+  var TICK = '<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M6 14.5l5 5L22 8"/></svg>';
+  var rows = B.map(function(x, i){ var li = document.createElement('li'); li.innerHTML = '<span class="box" aria-hidden="true">' + TICK + '</span><div><span class="step">' + (i + 1) + ' · ' + x.n + '</span><b></b><p></p></div>'; li.querySelector('b').textContent = x.b; li.querySelector('p').textContent = x.p; ol.appendChild(li); return li; });
+  function tailor(k){ rows[0].querySelector('b').textContent = FIRST[k] || B[0].b; sec.dataset.case = k || ''; }
+  tailor(RESET.case && RESET.case()); document.addEventListener('owl:case', function(e){ tailor(e.detail); });
+  var done = -1;
+  function read(){ var mid = innerHeight * .55, n = 0; rows.forEach(function(li){ var r = li.getBoundingClientRect(); if (r.top + Math.min(r.height, 160) * .5 < mid) n++; });
+    if (rows[rows.length - 1].getBoundingClientRect().top < innerHeight * .75) n = rows.length;
+    if (n === done) return; done = n; rows.forEach(function(li, i){ li.classList.toggle('done', i < n); li.setAttribute('aria-label', (i < n ? 'Done: ' : 'To do: ') + li.querySelector('b').textContent); });
+    tally.textContent = n + ' of 5'; w.textContent = B[Math.max(0, Math.min(4, n - 1))].y; sec.dataset.done = n; }
+  addEventListener('scroll', read, { passive: true }); addEventListener('resize', read); read();
+})();
+</script>
+</section>

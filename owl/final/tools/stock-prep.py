@@ -16,6 +16,9 @@ ITEMS = {
  'finder-old':     ('finder', 'photo', 4798643, 'px-4798643.jpg', 'finder-old.webp', 2000, {}, 'Pexels 4798643 (photographer not shown: page walled)', 'an older house and roof under a grey sky'),
  'finder-unsure':  ('finder', 'photo', 9431615, 'px-9431615.jpg', 'finder-unsure.webp', 2000, {}, 'Keith, Pexels 9431615', 'a roofer kneeling to look over a shingle roof'),
  'finder-house':   ('finder', 'photo', 4061594, '../cand2/px-4061594.jpg', 'finder-house.webp', 2400, {}, 'Erik Mclean, Pexels 4061594', 'a white two-storey house in winter, snow on the drive'),
+ 'nothing-nailer': ('nothing', 'loop', 19654640, 'pexels-19654640.mp4', 'nothing-nailer.mp4', 1280, {'trim': (8, 14.5), 'crf': 29, 'g': 48}, 'Pexels video 19654640 (photographer not shown: page walled)', 'a roofer nailing down new roof decking (6 s loop)'),
+ 'nothing-wrap':   ('nothing', 'photo', 34304714, 'px-34304714.jpg', 'nothing-wrap.webp', 1800, {}, 'Ryan Stephens, Pexels 34304714', 'a house mid-reroof, tarps and old shingles on the lawn'),
+ 'nothing-clean':  ('nothing', 'photo', 33404981, 'px-33404981.jpg', 'nothing-clean.webp', 1800, {}, 'Ryan Stephens, Pexels 33404981', 'a crew working around a house mid-reroof, clearing the drive'),
  'hero-nailer': ('hero', 'photo', 33404248, 'px-33404248.jpg', 'hero-nailer.webp', 2400, {}, 'Ryan Stephens, Pexels 33404248', 'a roofer nailing architectural shingles'),
  'hero-rain':   ('hero', 'photo', 2663254, 'px-2663254.jpg', 'hero-rain.webp', 2400, {}, 'Adrien Olichon, Pexels 2663254', 'rain running off a shingled roof edge'),
 }
@@ -25,7 +28,7 @@ def photo(src, dst, side):
     im.save(dst, 'WEBP', quality=72, method=6); return im.size
 def video(src, dst, width, x):
     vf = ['setpts=%s*PTS' % (1 / x.get('speed', 1)), 'scale=%d:-2:flags=lanczos' % width, 'fps=24']
-    if x.get('trim'): vf.insert(0, 'trim=%s:%s' % x['trim'])
+    if x.get('trim'): vf[0:0] = ['trim=%s:%s' % x['trim'], 'setpts=PTS-STARTPTS']
     cmd = ['ffmpeg', '-v', 'error', '-y', '-i', src, '-an', '-vf', ','.join(vf), '-c:v', 'libx264', '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-preset', 'slow', '-crf', str(x.get('crf', 28)),
            '-g', str(x.get('g', 48)), '-keyint_min', str(x.get('g', 48)), '-movflags', '+faststart', dst]
     subprocess.run(cmd, check=True)

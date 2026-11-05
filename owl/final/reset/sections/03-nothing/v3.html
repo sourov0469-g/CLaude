@@ -1,0 +1,63 @@
+<section class="rs nothing n3" id="nothing" data-sky="dusk" aria-labelledby="n3-h">
+<style>
+/* V3 · Filmstrip. Five frames slide sideways as you scroll down (MERSI: chapters turned by scroll, here as a horizontal strip).
+   Two drawn frames (the look, the box), two sharp stock photos and one short silent loop. Every frame is shown below its pixels. */
+.n3{height:420vh}
+.n3 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep);color:var(--on-deep);display:flex;flex-direction:column;justify-content:center}
+.n3 .head{position:absolute;left:clamp(18px,4.5vw,72px);right:clamp(18px,4.5vw,72px);top:clamp(90px,12vh,120px);display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.n3 h2{margin:0;font-size:clamp(34px,4.2vw,68px);font-weight:900;line-height:.95;letter-spacing:-.045em}
+.n3 h2 em{font-style:normal;color:var(--acc-deep)}
+.n3 .side{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.n3 .count{margin:0;font-size:15px;font-weight:800;color:var(--on-deep-70);white-space:nowrap}
+.n3 .count b{color:var(--on-deep);font-size:22px}
+.n3 .track{display:flex;gap:clamp(16px,2vw,28px);padding:0 clamp(18px,4.5vw,72px);margin-top:clamp(110px,14vh,150px);will-change:transform}
+.n3 .card{flex:none;width:min(66vw,820px);display:grid;grid-template-rows:auto auto;gap:16px;background:var(--deep)}
+.n3 .pic{position:relative;height:min(52vh,520px);border-radius:22px;overflow:hidden;background:var(--deep-2)}
+.n3 .pic img,.n3 .pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.n3 .tag{position:absolute;left:14px;bottom:14px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700}
+.n3 .drawn{display:grid;place-items:center;background:linear-gradient(160deg,var(--deep-2),var(--deep))}
+.n3 .drawn svg{width:min(46%,260px);height:auto;stroke:var(--acc-deep);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.n3 .cap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline}
+.n3 .cap .n{font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc-deep)}
+.n3 .cap b{display:block;font-size:clamp(22px,2.2vw,34px);font-weight:900;line-height:1.05;letter-spacing:-.025em}
+.n3 .cap p{margin:6px 0 0;font-size:16px;line-height:1.45;color:var(--on-deep-70);max-width:52ch}
+.n3 .dots{display:flex;gap:0;margin:-10px -10px 0 auto}
+.n3 .dots button{width:44px;height:44px;border:0;background:none;display:grid;place-items:center;cursor:pointer}
+.n3 .dots button i{width:12px;height:12px;border-radius:50%;border:2px solid var(--on-deep-70)}
+.n3 .dots button[aria-current="step"] i{background:var(--acc-deep);border-color:var(--acc-deep);scale:1.25}
+.n3 .dots button:focus-visible{outline:3px solid var(--acc-deep);outline-offset:-4px}
+@media (max-width:860px){.n3{height:480vh}.n3 .card{width:84vw}.n3 .pic{height:44vh}.n3 .head{top:84px;flex-direction:column;align-items:flex-start;gap:4px}.n3 .side{align-items:flex-start}.n3 .dots{margin:0 0 0 -10px}.n3 .track{margin-top:170px}.n3 .cap{grid-template-columns:1fr;gap:4px}.n3 .cap p{font-size:15px}.n3 h2{font-size:clamp(30px,9vw,40px)}}
+</style>
+<div class="stage">
+ <div class="head"><h2 id="n3-h">Here’s your part: <em>nothing.</em></h2><div class="side"><p class="count" aria-live="polite"><b class="ci">1</b> / 5 · scroll, we’ll do the rest</p><div class="dots" role="group" aria-label="Jump to a step"></div></div></div>
+ <div class="track"></div>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), track = sec.querySelector('.track'), dots = sec.querySelector('.dots'), ci = sec.querySelector('.ci');
+  var FIRST = { leak: 'We find your leak first.', stain: 'We look above your stain first.', shingles: 'We check where the shingles went.', storm: 'We check the storm damage first.', old: 'We tell you where it stands.', unsure: 'We look closely first.' };
+  var LOOK = '<svg viewBox="0 0 120 100"><path d="M10 52L60 14l50 38"/><path d="M22 44v44h76V44"/><path d="M40 88V64h20v24"/><circle cx="82" cy="34" r="12"/><path d="M90.5 42.5L102 54"/></svg>';
+  var BOX = '<svg viewBox="0 0 120 100"><path d="M18 36l42-18 42 18-42 18z"/><path d="M18 36v38l42 18 42-18V36"/><path d="M60 54v38"/><path d="M39 27l42 18"/><path d="M48 66l-14-6"/></svg>';
+  var B = [
+    { n: 'Look', b: 'We look closely first.', p: 'A Wise Check: the roof and the attic, with photos and video for you.', m: '<div class="pic drawn">' + LOOK + '</div>' },
+    { n: 'Wrap', b: 'We wrap your home and lawn.', p: 'Protect Your Nest: mesh from the eaves down and a tarp over the lawn.', m: '<div class="pic"><img src="{{A:stock/nothing-wrap.webp}}" alt="A house mid-reroof, tarps and old shingles on the lawn (illustrative photo)" width="1800" height="1200"><span class="tag">Illustrative photo</span></div>' },
+    { n: 'Roof', b: 'We fix it, or put on your new roof.', p: 'For a new roof: GAF materials, installed by our GAF Systems Plus certified crew.', m: '<div class="pic"><img class="still" src="{{A:stock/nothing-nailer-still.webp}}" alt="" width="1280" height="720"><video muted loop playsinline preload="none" aria-label="A roofer nailing down new roof decking (illustrative footage)"></video><span class="tag">Illustrative footage</span></div>' },
+    { n: 'Clean', b: 'We clean up, three times.', p: 'The crew, a magnet sweep for nails, then the project manager’s walk.', m: '<div class="pic"><img src="{{A:stock/nothing-clean.webp}}" alt="A crew working around a house mid-reroof, clearing the drive (illustrative photo)" width="1800" height="1200"><span class="tag">Illustrative photo</span></div>' },
+    { n: 'Box', b: 'We leave you a box.', p: 'The aftercare box, left with you when we go. Backed by our 10-year workmanship warranty.', m: '<div class="pic drawn">' + BOX + '</div>' }];
+  var cards = B.map(function(x, i){ var c = document.createElement('article'); c.className = 'card'; c.setAttribute('aria-label', 'Step ' + (i + 1) + ' of 5: ' + x.n); c.innerHTML = x.m + '<div class="cap"><span class="n">' + (i + 1) + ' · ' + x.n + '</span><div><b></b><p></p></div></div>'; c.querySelector('b').textContent = x.b; c.querySelector('p').textContent = x.p; track.appendChild(c); return c; });
+  var db = B.map(function(x, i){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Step ' + (i + 1) + ': ' + x.n); b.innerHTML = '<i aria-hidden="true"></i>';
+    b.addEventListener('click', function(){ var top = sec.getBoundingClientRect().top + scrollY, span = sec.offsetHeight - innerHeight; scrollTo({ top: top + span * (.1 + .8 * i / (B.length - 1)), behavior: OWL.reduce ? 'instant' : 'smooth' }); }); dots.appendChild(b); return b; });
+  function tailor(k){ cards[0].querySelector('b').textContent = FIRST[k] || B[0].b; sec.dataset.case = k || ''; }
+  tailor(RESET.case && RESET.case()); document.addEventListener('owl:case', function(e){ tailor(e.detail); });
+  var v = cards[2].querySelector('video'), still = cards[2].querySelector('.still'), loaded = false, cur = -1;
+  function read(){ var r = sec.getBoundingClientRect(), span = Math.max(1, sec.offsetHeight - innerHeight), p = Math.max(0, Math.min(1, -r.top / span));
+    var max = Math.max(0, track.scrollWidth - innerWidth), q = Math.max(0, Math.min(1, (p - .1) / .8)); track.style.transform = 'translate3d(' + (-q * max).toFixed(1) + 'px,0,0)';
+    var i = Math.min(B.length - 1, Math.round(q * (B.length - 1))); if (i !== cur){ cur = i; ci.textContent = i + 1; db.forEach(function(b, j){ if (j === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); }); sec.dataset.step = i + 1; }
+    /* the loop plays only while its frame is on screen, and never under reduced motion */
+    if (!OWL.reduce){ var cr = cards[2].getBoundingClientRect(), on = cr.left < innerWidth && cr.right > 0 && r.top < innerHeight && r.bottom > 0;
+      if (on && !loaded){ loaded = true; v.src = RESET.video('nailer'); v.addEventListener('playing', function(){ still.style.opacity = 0; }); }
+      if (loaded){ if (on && v.paused) v.play().catch(function(){}); else if (!on && !v.paused) v.pause(); } } }
+  addEventListener('scroll', read, { passive: true }); addEventListener('resize', read); read();
+})();
+</script>
+</section>

@@ -61,3 +61,4 @@
 - **Infrastructure** `final/GATE-FIX-INFRA.md`: versions per section switchable in-file (Versions button, `?top=2`), the reset originals kept as in-file records, four muted palettes (amber kept as records), Blob-URL video, a stock pipeline with credits, and new checks (distinct media, sharpness).
 - **Hero** `final/GATE-FIX-HERO.md`: V1 Crew film (default, sharp now, the only place Owl's film appears), V2 Pull back, V3 Editorial split, V4 The question. Checks 26/24/24/23, all passing.
 - **Problem-finder** `final/GATE-FIX-FINDER.md`: V1 Curtain (default; drawn symbols replace the repeated thumbnails; six sharp stock photos), V2 Point at it (tap the house), V3 Two questions (type only). Checks 25/25 each.
+- **Your part: nothing** `final/GATE-FIX-NOTHING.md`: V1 Scroll film (default; new footage owned only here, tagged illustrative; framed on phones; 4.5 screens), V2 Two lists (type only), V3 Filmstrip (sideways). Checks 26/24/24.

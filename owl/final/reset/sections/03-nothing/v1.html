@@ -1,35 +1,43 @@
 <section class="rs nothing" id="nothing" data-sky="dusk" aria-labelledby="nt-h">
 <style>
-.nothing{height:540vh}
+/* V1 · Scroll film (kept, repaired): new footage owned only by this section (the crew film stays in the hero); muted accents;
+   on phones the film sits in a 16:9 frame instead of being cropped full-screen past its pixels; 4.5 screens instead of 5.4 */
+.nothing{height:450vh}
 .nothing .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep);color:#fff}
+.nothing .film{position:absolute;inset:0}
 .nothing video,.nothing .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .nothing .tint{position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--deep) 88%,transparent) 0%,color-mix(in srgb,var(--deep) 55%,transparent) 42%,color-mix(in srgb,var(--deep) 10%,transparent) 75%),linear-gradient(0deg,color-mix(in srgb,var(--deep) 70%,transparent),transparent 40%)}
 .nothing .say{position:absolute;left:clamp(18px,4.5vw,72px);top:clamp(96px,15vh,150px);margin:0;font-size:clamp(40px,6.4vw,104px);font-weight:900;line-height:.95;letter-spacing:-.045em;max-width:9ch}
-.nothing .say em{font-style:normal;color:var(--acc)}
+.nothing .say em{font-style:normal;color:var(--acc-deep)}
 .nothing .beats{position:absolute;left:clamp(18px,4.5vw,72px);bottom:clamp(110px,16vh,170px);width:min(560px,calc(100% - 36px));min-height:150px}
 .nothing .bt{position:absolute;left:0;right:0;bottom:0;opacity:0;translate:0 30px;transition:opacity .45s,translate .6s cubic-bezier(.16,1,.3,1)}
 .nothing .bt.on{opacity:1;translate:none}
 .nothing .bt.past{opacity:0;translate:0 -30px}
-.nothing .bt .n{display:inline-block;margin-bottom:12px;padding:5px 11px;border-radius:999px;background:var(--acc);color:var(--ink);font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.nothing .bt .n{display:inline-block;margin-bottom:12px;padding:5px 11px;border-radius:999px;background:var(--acc-deep);color:var(--deep);font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
 .nothing .bt b{display:block;font-size:clamp(28px,3vw,44px);font-weight:900;line-height:1.05;letter-spacing:-.025em}
 .nothing .bt p{margin:10px 0 0;font-size:clamp(16px,1.3vw,19px);line-height:1.5;color:rgba(255,255,255,.84);max-width:44ch}
 .nothing .rail{position:absolute;right:clamp(14px,3vw,48px);top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:6px}
-.nothing .rail button{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:44px;padding:0 4px 0 12px;border:0;background:none;color:rgba(255,255,255,.6);font:inherit;font-size:15px;font-weight:800;cursor:pointer}
+.nothing .rail button{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-height:44px;padding:0 4px 0 12px;border:0;background:none;color:rgba(255,255,255,.78);text-shadow:0 1px 3px rgba(0,0,0,.6);font:inherit;font-size:15px;font-weight:800;cursor:pointer}
 .nothing .rail button i{width:12px;height:12px;border-radius:50%;border:2px solid currentColor;transition:background .3s,scale .3s}
-.nothing .rail button.on{color:#fff}.nothing .rail button.on i{background:var(--acc);border-color:var(--acc);scale:1.3}
+.nothing .rail button.on{color:#fff}.nothing .rail button.on i{background:var(--acc-deep);border-color:var(--acc-deep);scale:1.3}
 .nothing .rail button:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .nothing .you{position:absolute;right:clamp(14px,3vw,48px);bottom:clamp(96px,13vh,120px);display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:15px;font-weight:700}
 .nothing .you span.k{padding:4px 9px;border-radius:999px;background:#fff;color:var(--ink);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
 .nothing .you .w{display:inline-block;min-width:11ch;transition:opacity .3s}
-.nothing .tag{position:absolute;right:clamp(14px,3vw,48px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.35);font-size:12px;font-weight:700}
+.nothing .tag{position:absolute;right:clamp(14px,3vw,48px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.55);font-size:12px;font-weight:700}
 .nothing .bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.14)}
-.nothing .bar i{display:block;height:100%;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(var(--p,0))}
-@media (max-width:860px){.nothing .rail{top:auto;bottom:clamp(96px,13vh,120px);right:auto;left:18px;translate:none;flex-direction:row;gap:0}.nothing .rail button span{display:none}.nothing .rail button{padding:0 8px;min-width:44px;justify-content:center}.nothing .beats{bottom:calc(clamp(96px,13vh,120px) + 56px)}.nothing .you{top:252px;bottom:auto;left:18px;right:auto;font-size:13px}.nothing .tag{display:none}.nothing .say{top:150px}}
+.nothing .bar i{display:block;height:100%;width:100%;background:var(--acc-deep);transform-origin:left;transform:scaleX(var(--p,0))}
+@media (max-width:860px){
+ .nothing .film{position:absolute;left:16px;right:16px;top:76px;aspect-ratio:16/9;border-radius:16px;overflow:hidden}.nothing .tint{display:none}
+ .nothing .tag{display:block;top:86px;right:26px}
+ .nothing .say{top:calc(92px + (100vw - 32px) * .5625);font-size:clamp(34px,10vw,48px)}
+ .nothing .you{top:calc(196px + (100vw - 32px) * .5625) !important}
+ .nothing .rail{top:auto;bottom:clamp(96px,13vh,120px);right:auto;left:18px;translate:none;flex-direction:row;gap:0}.nothing .rail button span{display:none}.nothing .rail button{padding:0 8px;min-width:44px;justify-content:center}.nothing .beats{bottom:calc(clamp(96px,13vh,120px) + 56px)}.nothing .you{bottom:auto;left:18px;right:auto;font-size:13px}}
 @media (prefers-reduced-motion:reduce){.nothing .bt{transition:none}}
 </style>
 <div class="stage">
- <img class="poster" src="{{A:stock/nothing-drone-start.webp}}" alt="">
- <video muted playsinline preload="auto" aria-hidden="true"></video>
+ <div class="film"><img class="poster" src="{{A:stock/nothing-drone-start.webp}}" alt="" width="1600" height="900">
+ <video muted playsinline preload="auto" aria-hidden="true"></video></div>
  <div class="tint"></div>
  <span class="tag">Illustrative footage</span>
  <h2 class="say" id="nt-h">Here’s your part: <em>nothing.</em></h2>
