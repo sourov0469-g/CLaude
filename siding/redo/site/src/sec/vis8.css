@@ -1,0 +1,50 @@
+/* VISUALISER M — Pull a colour through (Lusion: flow, the carrying thread). One house, one ribbon of the 17 ColorPlus colours. */
+.viM{padding:110px var(--gut) 100px}
+.viM .vmgrid{display:grid;grid-template-columns:minmax(300px,.78fr) minmax(0,1.5fr);grid-template-areas:"hd st" "rd st" "rb rb";column-gap:clamp(28px,4vw,64px);max-width:1320px;margin:0 auto}
+.viM .vmhd{grid-area:hd;align-self:end}
+.viM .vmhd .sec-p{max-width:46ch}
+.viM .vmside{grid-area:rd;align-self:start;margin-top:28px;padding-top:22px;border-top:1px solid #E1E9E3}
+.viM .vmstage{grid-area:st;border-radius:24px;background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3;padding:clamp(14px,3vw,34px) clamp(10px,3vw,40px) 0}
+.viM .vmhouse{display:block;width:100%;height:auto}
+.viM .vmrow{grid-area:rb;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:clamp(8px,1.6vw,18px);margin-top:26px}
+.viM .vmrib{position:relative;height:96px;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;border-radius:16px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.viM .vmrib:active{cursor:grabbing}
+.viM .vmrib:focus-visible{outline:none}
+.viM .vmrib:focus-visible .vmeye::after{box-shadow:0 0 0 3px #FFFFFF,0 0 0 6px #B5DB6E}
+.viM .vmtrack{position:absolute;left:0;top:18px;display:flex;height:66px;will-change:transform}
+.viM .vmchip{flex:0 0 132px;height:66px;background:var(--c);display:flex;align-items:flex-end;padding:0 10px 9px;
+  box-shadow:inset 0 -5px 0 rgba(10,22,17,.12),inset 0 1px 0 rgba(255,255,255,.28)}
+.viM .vmchip span{font:600 12px/1.15 var(--text);color:var(--k);opacity:.8;transition:opacity .25s}
+.viM .vmchip.on span{opacity:1;font-weight:700}
+.viM .vmchip:first-child{border-radius:12px 0 0 12px}.viM .vmchip:last-child{border-radius:0 12px 12px 0}
+/* the eye: a fixed notch the ribbon is drawn through */
+.viM .vmeye{position:absolute;left:50%;top:0;bottom:0;width:0;z-index:2;pointer-events:none}
+.viM .vmeye::before{content:"";position:absolute;left:-9px;top:2px;border:9px solid transparent;border-top:12px solid var(--ink)}
+.viM .vmeye::after{content:"";position:absolute;left:-68px;top:14px;width:132px;height:70px;border-radius:12px;box-shadow:0 0 0 3px #FFFFFF,0 0 0 5px var(--ink)}
+.viM .vmstep{all:unset;box-sizing:border-box;min-height:48px;padding:0 16px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+  font:700 14px/1 var(--text);color:var(--green);background:rgba(14,59,44,.07);white-space:nowrap}
+.viM .vmstep span{font-size:20px;line-height:0}
+.viM .vmstep:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px}
+.viM .vmlive{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.viM .vmside{position:relative}
+.viM .vmn{margin:0;font:600 17px/1.35 var(--text);color:var(--ink-2)}
+.viM .vmn b{font:800 28px/1.15 var(--display);color:var(--ink);letter-spacing:-.01em;margin-right:4px}
+.viM .vmt{margin:8px 0 0;font:500 15px/1.55 var(--text);color:var(--ink-2)}
+.viM .vmcta{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:22px}
+.viM .vmcta p{margin:0;max-width:40ch;font:500 13px/1.45 var(--text);color:var(--ink-3)}
+@media (max-width:1000px){
+  .viM .vmgrid{grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "st" "rb" "rd"}
+  .viM .vmstage{margin-top:32px}
+}
+@media (max-width:760px){
+  .viM{padding:80px var(--gut) 72px}
+  .viM .vmstage{margin-top:28px;border-radius:18px}
+  .viM .vmrow{grid-template-columns:1fr 1fr;gap:10px}
+  .viM .vmrib{grid-column:1/-1;grid-row:1;height:86px}
+  .viM .vmtrack{top:14px;height:62px}
+  .viM .vmchip{flex-basis:104px;height:62px}
+  .viM .vmeye::after{left:-54px;top:10px;width:104px;height:66px}
+  .viM .vmstep{justify-content:center}
+  .viM .vmn b{font-size:24px}
+}

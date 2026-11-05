@@ -1356,4 +1356,12 @@ Every text element is paired with the nearest painted background behind it, as r
   - B2 shows 9.5 houses across a screen, against V1's 3.
   - 62,784 vertices per panel.
   - +14.7 MB as delivered, of which 11.86 MB is the IG comparison world; B2 alone adds 1.6 MB.
-- **Status:** gated; **stopped for Muse's judgment.** Version work stays paused.
+- **Status:** **accepted by Muse.** The M pass resumes.
+
+## New versions, pass 3 (continued)
+
+| # | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 3 | Visualiser | **M, "Pull a colour through"** (`?vis=m`) | Lusion (flow, the carrying thread: the 17 ColorPlus colours on one ribbon drawn through an eye; pull it and the colour runs down the boards, each course following the one above, always a real colour) | GATE-NEW-Visualiser-M.md | 8.57 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Windows M.
