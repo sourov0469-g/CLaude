@@ -1,0 +1,18 @@
+/* The phone menu (the bar's "Menu" button): a sheet of the page's own sections, plus phone and email. */
+.nv{position:fixed;inset:0;z-index:100000;display:flex;align-items:flex-end;justify-content:center;visibility:hidden;pointer-events:none}
+.nv.on{visibility:visible;pointer-events:auto}
+.nv-bd{position:absolute;inset:0;background:rgba(10,22,17,.5);opacity:0;transition:opacity .25s ease}.nv.on .nv-bd{opacity:1}
+.nv-sh{position:relative;width:min(100%,520px);max-height:88svh;overflow:auto;padding:18px var(--gut) calc(22px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;background:#F1F5F1;box-shadow:0 -30px 60px -30px rgba(10,22,17,.6);transform:translateY(40px);opacity:0;transition:transform .35s cubic-bezier(.2,.9,.2,1),opacity .25s ease}
+.nv.on .nv-sh{transform:none;opacity:1}
+.nv-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.nv-hd b{font:800 20px/1 var(--display);letter-spacing:-.02em;color:#16191D}
+.nv-x{width:44px;height:44px;border:0;border-radius:50%;background:#E4ECE6;color:#16191D;cursor:pointer;display:grid;place-items:center}.nv-x svg{width:20px;height:20px}
+.nv-l{list-style:none;margin:0;padding:0;display:grid}
+.nv-l a{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 4px;border-bottom:1px solid #D5E1D7;font:800 20px/1 var(--display);letter-spacing:-.02em;color:#16191D;text-decoration:none}
+.nv-l a span{font:600 13px/1 var(--text);color:#5B636B;letter-spacing:0}
+.nv-l a svg{width:20px;height:20px;color:#0E3B2C;flex:none;margin-left:10px;transition:transform .2s ease}.nv-l a:active svg{transform:translateX(4px)}
+.nv-c{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.nv-c a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:12px;font:800 15px/1 var(--text);text-decoration:none}
+.nv-c .call{background:#0E3B2C;color:#fff}.nv-c .mail{background:#B5DB6E;color:#0E3B2C}.nv-c svg{width:18px;height:18px}
+.nv a:focus-visible,.nv-x:focus-visible{outline:3px solid #0E3B2C;outline-offset:2px}
+@media (min-width:861px){.nv{display:none}}
+@media (prefers-reduced-motion:reduce){.nv-bd,.nv-sh{transition:none}}

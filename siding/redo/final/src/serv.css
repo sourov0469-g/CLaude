@@ -61,3 +61,6 @@
 .sv-static .sv-dots{display:none}
 .sv-static .sv-row[data-s]:not([data-vis]){display:grid}
 @media (prefers-reduced-motion:reduce){.sv-row{transition:none}}
+
+/* anchors for the header's Siding and Roofing links: they land on the scene that shows that trade */
+.sv{position:relative}.sv-a{position:absolute;left:0;width:1px;height:1px;top:calc((100% - 100svh) * var(--k,0));pointer-events:none}

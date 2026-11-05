@@ -1494,3 +1494,11 @@ The pause was lifted by the owner's final plan: ONE version, no switcher, no hid
 **Section 2, the wall and the video (GATE-FINAL-Wall.md): built and gated; waiting for Muse's judgment (work continues with Section 3 per the plan).**
 - A pinned wall: the firm's published line in huge type on a drawn lap-siding wall; scroll swings real casement sashes open, a rectangle grows from the window to the whole screen, the firm's own film (linked) grows with it while the wall type fades; the published paragraph and Book land on the playing film. Reduced-motion and film-failed fallbacks. 40/40 checks; score 8.62; file 1.11 MB.
 - Sub-agents: two read-only prep agents (Windows kinds, Services A inventory); findings in `siding/redo/prep/final/`.
+
+**Section 3, Services (GATE-FINAL-Services.md, 8.45), Section 4, Visualiser (GATE-FINAL-Visualiser.md, 8.57), Section 5, Windows (GATE-FINAL-Windows.md, 8.67), Section 6, Reviews (GATE-FINAL-Reviews.md, 8.49), Section 10, Booking (GATE-FINAL-Booking.md, 8.55): built, tested and gated.**
+- Visualiser: real photo #3, luminance-preserving recolour of 17 published colours, 451 siding tiles that lift and settle under the pointer, light, hold-to-compare; 25/25 checks.
+- Windows: five kinds (single hung, double hung, casement, slider, picture) drawn from geometry; open, drag, lock, tilt, screen, grilles, Low-E, the makers' published colours, a 7 am to 11 pm sun; "From inside" hardware card; 38/38 checks. Kind mechanics are general and flagged as not published by the firm.
+- Reviews: B (hanging tags, count-up, wind, steppable reader dialog) then C carrying ONE complete review (#27 Megan Randolph) lit word by word at reading pace; 23/23 checks.
+- Booking: C (the record, then the call) with phone and email in the section, copy buttons, live hours, a film gate with 886 dots (312 on the map, 574 counted); J (the receipt) prints and carries one button to contact.html (the Contact Us page, built after approval). No form, no outside route; 21/21 checks.
+- Global: the cursor companion (one ring + one spirit-level vial, off for touch and reduced motion; 14/14) and the phone menu sheet (the Menu button was dead; 5/5); header Siding/Roofing links land on the Services scenes.
+- Sub-agents (2, in parallel, briefed): Process D + Footer; Area A. Their gates are their own.

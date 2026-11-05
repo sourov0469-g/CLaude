@@ -26,6 +26,7 @@ CHIPS = [['Siding', 'Trim', 'Windows', 'Roof', 'Gutters'], ['Work you want', 'It
          ['Old material off', 'New boards up', 'Trim and paint', 'Windows set and sealed'], ['Walk the job', 'Punch list', 'Site clean', 'Warranties']]
 ENDS = [[.308, .476, .644, .812, .98], [.52, .8, .98], [.28, .56, .76, 1], [.25, .5, .75, 1]]
 HINT = ['Move the lens over the house', 'Move across the drawing', 'Move across the drawing', 'Move across the drawing']
+VB = ['38 30 244 183', '0 0 320 240', '50 28 246 185', '8 10 304 228']   # each drawing's own view box (all 4:3)
 DUR = [7.6, 6.6, 8.6, 7.4]   # seconds the drawing takes to play once
 CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 15l2 2 4-4"/></svg>'
 
@@ -53,7 +54,7 @@ def gk(k, s, e, inner, v=None, c=None, out=False, cls=''):
 
 
 def art0():
-    o = [dp('M14 208H306', 0, .05, 'l th')]
+    o = [dp('M42 208H278', 0, .05, 'l th')]
     o.append('<g data-z="siding">' + ''.join(dp(f'M74 {y}H246', .05 + i * .012, .1 + i * .012, 'l th') for i, y in enumerate(range(120, 200, 14))) + '</g>')
     o.append(dp('M72 208V106H248V208', .02, .08))
     o.append('<g data-z="roof">' + dp('M56 112L160 40L264 112', .04, .1) + '</g>')
@@ -70,18 +71,18 @@ def art0():
 
 
 def art1():
-    rows = [(70, 168), (92, 176), (114, 160), (136, 184), (158, 172)]
+    rows = [(70, 56), (92, 64), (114, 46), (136, 66), (158, 58)]
     cfg = []
     o = ['<g class="sh2" data-k="f"' + T(0, .03) + '><path d="M98 22H210L232 44V232H98Z" class="l th" transform="translate(9 7)"/></g>',
          gk('f', 0, .03, '<path class="fs" d="M88 14H206L228 36V226H88Z"/>') + dp('M88 14H206L228 36V226H88Z', 0, .05) + dp('M206 14V36H228', .03, .06, 'l th')]
     o.append(dp('M104 38H160', .02, .06, 'l tt') + gk('p', .02, .05, '<rect class="fa" x="196" y="30" width="16" height="12" rx="3"/>', c='204,36'))
     for k, (y, ln) in enumerate(rows):
-        s = .06 + k * .09; e = s + .075; cfg.append([126, 126 + ln - 20, y, s, e])
-        o.append(f'<rect class="bx" x="104" y="{y - 9}" width="12" height="12" rx="2.5"/>' + dp(f'M126 {y}h{ln - 20}', s, e) + dp(f'M126 {y + 9}h{(ln - 20) // 2}', s + .02, e, 'l th')
+        s = .06 + k * .09; e = s + .075; cfg.append([126, 126 + ln, y, s, e])
+        o.append(f'<rect class="bx" x="104" y="{y - 9}" width="12" height="12" rx="2.5"/>' + dp(f'M126 {y}h{ln}', s, e) + dp(f'M126 {y + 9}h{ln // 2}', s + .02, e, 'l th')
                  + dp(f'M200 {y}h12', s + .01, e, 'l pr') + dp(f'M106.5 {y - 3}l3.5 4 6-8', e - .005, e + .03, 'l ck'))
     o.append(dp('M104 178H212', .52, .56, 'l th'))
     o.append(gk('w', .54, .66, '<rect class="fa" x="104" y="186" width="108" height="14" rx="4"/>', c='104,193'))
-    o.append(gk('p', .66, .74, '<g transform="rotate(-11 178 206)"><rect x="140" y="194" width="76" height="26" rx="6" class="l stp"/><text x="178" y="212" text-anchor="middle" class="stt">ITEMISED</text></g>', c='178,206'))
+    o.append(gk('p', .66, .74, '<g transform="rotate(-11 178 206)"><rect x="134" y="194" width="88" height="26" rx="6" class="l stp"/><text x="178" y="212" text-anchor="middle" class="stt">ITEMISED</text></g>', c='178,206'))
     o.append(gk('x', .66, .76, '<path class="l th" d="M142 190l-8-4M216 190l8-5M178 190v-8"/>', c='178,206'))
     o.append(dp('M100 214L216 224', .82, .97, 'l th') + dp('M216 214L100 224', .84, .98, 'l th'))
     o.append('<g class="pen" data-pen><path d="M0 0L5 -3L27 -25L31 -21L9 1Z" class="pn"/><path d="M0 0L5 -3L3 1Z" class="pt"/></g>')
@@ -92,7 +93,7 @@ def art2():
     X0, X1 = 72, 248; o = []
     pat = '<defs><pattern id="prHat" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><path d="M0 0v7" stroke="#0E3B2C" stroke-opacity=".16" stroke-width="1"/></pattern></defs>'
     o.append(pat + '<rect x="72" y="40" width="176" height="168" fill="url(#prHat)" class="wrap"/>' + '<rect class="wrap2" x="72" y="40" width="176" height="168"/>')
-    o.append(dp('M14 208H306', 0, .05, 'l th'))
+    o.append(dp('M54 208H294', 0, .05, 'l th'))
     lad = dp('M268 70V208M286 70V208', 0, .06) + ''.join(dp(f'M268 {y}H286', .02 + i * .004, .07, 'l th') for i, y in enumerate(range(84, 208, 18)))
     o.append(lad)
     o.append(gk('f', .2, .3, '<rect x="172" y="88" width="60" height="62" class="hole"/>'))
@@ -175,7 +176,7 @@ def markup(S, contact, cal):
     cfg1 = art_html[1][1]; art_html[1] = art_html[1][0]
     items = ''
     for i, (n, t, p, figs) in enumerate(STEPS):
-        svg = f'<svg class="pr-art" viewBox="0 0 320 240" aria-hidden="true" focusable="false" data-i="{i}"' + (f" data-cfg='{json.dumps(cfg1)}'" if i == 1 else '') + '>' + ''.join(art_html[i]) + '</svg>'
+        svg = f'<svg class="pr-art" viewBox="{VB[i]}" aria-hidden="true" focusable="false" data-i="{i}"' + (f" data-cfg='{json.dumps(cfg1)}'" if i == 1 else '') + '>' + ''.join(art_html[i]) + '</svg>'
         chips = ''.join(f'<button type="button" class="pr-chip" data-j="{j}" data-end="{ENDS[i][j]}"><span>{e(c)}</span></button>' for j, c in enumerate(CHIPS[i]))
         pf = ''.join(f'<div><dt>{e(a)}</dt><dd>{e(b)}</dd></div>' for a, b in figs)
         items += f'''<div class="pr-item i{i}{' on' if i == 0 else ''}" data-i="{i}"><div class="pr-rs" aria-hidden="true"><i class="pr-node"><b></b></i><u class="pr-seg"><s></s><em></em></u></div>

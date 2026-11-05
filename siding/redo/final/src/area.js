@@ -16,7 +16,7 @@ window.FArea = (function () {
     s.classList.add('ar-js');
     const $ = (q, r = s) => r.querySelector(q), $$ = (q, r = s) => [...r.querySelectorAll(q)];
     const D = JSON.parse($('#ar-data').textContent);
-    const board = $('.ar-board'), svg = $('.ar-threads'), main = $('.ar-main'), shadow = $('.ar-ms'), fanG = $('.ar-fan');
+    const board = $('.ar-board'), svgs = $$('.ar-threads'), main = $('.ar-main'), shadow = $('.ar-ms'), fanG = $('.ar-fan');
     const lis = $$('.ar-c'), btns = lis.map((l) => l.querySelector('.ar-card')), signs = $$('.ar-sign'), chips = $$('.ar-chip'), read = $('.ar-read');
     const cityN = new Map(D.cities.map((c) => [c[0].toLowerCase(), c[1]])), cityName = new Map(D.cities.map((c) => [c[0].toLowerCase(), c[0]]));
     const S = { lock: null, hover: null, card: null, trade: 'all', found: null };
@@ -96,18 +96,23 @@ window.FArea = (function () {
     /* ================= the thread: a damped string through every pin ================= */
     let pts = [], order = [], pinIdx = [], pinFrac = [], forced = RM(), maxP = RM() ? 1 : 0, cards = lis.map(() => ({ k: 0, v: 0 }));
     function layout() {
-      const o = board.getBoundingClientRect(); W = o.width; H = o.height; if (!W) return; svg.setAttribute('viewBox', `0 0 ${W.toFixed(0)} ${H.toFixed(0)}`);
+      const o = board.getBoundingClientRect(); W = o.width; H = o.height; if (!W) return; svgs.forEach((v) => v.setAttribute('viewBox', `0 0 ${W.toFixed(0)} ${H.toFixed(0)}`));
       const A = lis.map((li) => Object.assign({ li }, pinPos(li, o)));
       const rows = []; [...A].sort((a, b) => a.y - b.y).forEach((a) => { const r = rows.find((r) => Math.abs(r.y - a.y) < 64); if (r) { r.a.push(a); r.y = (r.y * (r.a.length - 1) + a.y) / r.a.length; } else rows.push({ y: a.y, a: [a] }); });
-      order = []; rows.sort((a, b) => a.y - b.y).forEach((r, ri) => { r.a.sort((p, q) => p.x - q.x); if (ri % 2) r.a.reverse(); order.push(...r.a); });
+      order = []; rows.sort((a, b) => a.y - b.y).forEach((r, ri) => { r.a.sort((p, q) => p.x - q.x); if (ri % 2) r.a.reverse(); r.a.forEach((a) => (a.row = ri)); order.push(...r.a); });
       pts = []; pinIdx = [];
+      const lr = lis.map((li) => li.getBoundingClientRect()), edgeL = Math.min(...lr.map((r) => r.left)) - o.left + 4, edgeR = Math.max(...lr.map((r) => r.right)) - o.left - 4;
       const add = (x, y, fixed) => pts.push({ x, y, x0: x, y0: y, vx: 0, vy: 0, fixed });
-      const seg = (a, b, n) => { const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy), horiz = Math.abs(dx) >= Math.abs(dy) * .8; const sag = clamp(d * .09, 8, 26), bow = clamp(d * .1, 8, 24) * (((a.x + b.x) / 2) < W / 2 ? -1 : 1);
-        for (let j = 1; j <= n; j++) { const f = j / n, bump = Math.sin(Math.PI * f); add(a.x + dx * f + (horiz ? 0 : bow * bump), a.y + dy * f + (horiz ? sag * bump : 0), j === n); } };
+      const seg = (a, b, n, mode) => { const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy), sag = mode === 'run' ? clamp(d * .07, 7, 17) : mode === 'tail' ? 5 : 0;
+        for (let j = 1; j <= n; j++) { const f = j / n, bump = Math.pow(Math.sin(Math.PI * f), 2); add(a.x + dx * f, a.y + dy * f + sag * bump, mode === 'pin' || j === n && mode !== 'mid'); } };
       const first = order[0], lastP = order[order.length - 1];
-      add(first.x - 80, first.y - 34, true); seg({ x: first.x - 80, y: first.y - 34 }, first, 6); pinIdx.push(pts.length - 1);
-      for (let i = 1; i < order.length; i++) { seg(order[i - 1], order[i], 8); pinIdx.push(pts.length - 1); }
-      seg(lastP, { x: lastP.x + 90, y: lastP.y + 30 }, 6);
+      add(first.x - 80, first.y - 34, true); seg({ x: first.x - 80, y: first.y - 34 }, first, 6, 'run'); pts[pts.length - 1].fixed = true; pinIdx.push(pts.length - 1);
+      for (let i = 1; i < order.length; i++) { const a = order[i - 1], b = order[i];
+        if (a.row === b.row) seg(a, b, 8, 'run');
+        else { const right = a.x > W / 2, ox = right ? edgeR : edgeL, c1 = { x: ox, y: a.y + 16 }, c2 = { x: ox, y: b.y - 16 };
+          seg(a, c1, 4, 'mid'); pts[pts.length - 1].fixed = false; seg(c1, c2, 8, 'mid'); pts[pts.length - 1].fixed = false; seg(c2, b, 4, 'mid'); }
+        pts[pts.length - 1].fixed = true; pinIdx.push(pts.length - 1); }
+      { const dir = lastP.x < W / 2 ? -1 : 1; seg(lastP, { x: lastP.x + dir * 90, y: lastP.y + 34 }, 6, 'tail'); pts[pts.length - 1].fixed = true; }
       let tot = 0; const cum = [0]; for (let i = 1; i < pts.length; i++) { tot += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y); cum.push(tot); }
       pinFrac = pinIdx.map((i) => cum[i] / tot);
       cards.forEach((c) => { c.k = 0; c.v = 0; }); draw(); reveal(); fanGeom();
@@ -117,14 +122,19 @@ window.FArea = (function () {
       for (let i = 1; i < pts.length - 1; i++) { const m = pts[i], n = pts[i + 1]; d += `Q${m.x.toFixed(1)} ${m.y.toFixed(1)} ${((m.x + n.x) / 2).toFixed(1)} ${((m.y + n.y) / 2).toFixed(1)}`; }
       d += `L${pts[pts.length - 1].x.toFixed(1)} ${pts[pts.length - 1].y.toFixed(1)}`; main.setAttribute('d', d); shadow.setAttribute('d', d);
     }
-    function step(now) {
-      raf = 0; const dt = Math.min(2.2, ((now - last) || 16.7) / 16.7); last = now; let e = 0;
+    function sim() {
       for (let i = 1; i < pts.length - 1; i++) { const p = pts[i]; if (p.fixed) continue; const l = pts[i - 1], r = pts[i + 1];
-        let fx = ((l.x + r.x) / 2 - p.x) * .42 + (p.x0 - p.x) * .035, fy = ((l.y + r.y) / 2 - p.y) * .42 + (p.y0 - p.y) * .035;
+        let fx = (((l.x - l.x0) + (r.x - r.x0)) / 2 - (p.x - p.x0)) * .36 - (p.x - p.x0) * .03, fy = (((l.y - l.y0) + (r.y - r.y0)) / 2 - (p.y - p.y0)) * .36 - (p.y - p.y0) * .03;
         if (ptr) { const dx = p.x - ptr.x, dy = p.y - ptr.y, d = Math.hypot(dx, dy); if (d < 76) { const k = (76 - d) * .05 / (d || 1); fx += dx * k; fy += dy * k; } }
-        p.vx = (p.vx + fx * dt) * .9; p.vy = (p.vy + fy * dt) * .9; }
-      pts.forEach((p) => { if (p.fixed) return; p.x += p.vx * dt; p.y += p.vy * dt; e += Math.abs(p.vx) + Math.abs(p.vy) + Math.abs(p.x - p.x0) * .01 + Math.abs(p.y - p.y0) * .01; });
-      cards.forEach((c, i) => { c.v += (-c.k * .07 - c.v * .09) * dt; c.k += c.v * dt; e += Math.abs(c.k) * .3 + Math.abs(c.v); lis[i].style.setProperty('--k', Math.abs(c.k) < .004 ? '0' : c.k.toFixed(3)); });
+        p.fx = fx; p.fy = fy; }
+      let e = 0;
+      pts.forEach((p) => { if (p.fixed) return; p.vx = clamp((p.vx + p.fx) * .9, -30, 30); p.vy = clamp((p.vy + p.fy) * .9, -30, 30); p.x += p.vx; p.y += p.vy; e += Math.abs(p.vx) + Math.abs(p.vy) + Math.abs(p.x - p.x0) * .01 + Math.abs(p.y - p.y0) * .01; });
+      cards.forEach((c) => { c.v += -c.k * .07 - c.v * .09; c.k = clamp(c.k + c.v, -14, 14); e += Math.abs(c.k) * .3 + Math.abs(c.v); });
+      return e;
+    }
+    function step(now) {
+      raf = 0; const n = clamp(Math.round(((now - last) || 16.7) / 16.7), 1, 3); last = now; let e = 0; for (let i = 0; i < n; i++) e = sim();
+      cards.forEach((c, i) => lis[i].style.setProperty('--k', Math.abs(c.k) < .004 ? '0' : c.k.toFixed(3)));
       draw(); if (vis && (e > .08 || ptr)) raf = requestAnimationFrame(step); else cards.forEach((c, i) => { c.k = c.v = 0; lis[i].style.setProperty('--k', '0'); });
     }
     const kick = () => { if (!raf && !RM() && vis) { last = performance.now(); raf = requestAnimationFrame(step); } };
@@ -243,6 +253,7 @@ window.FArea = (function () {
     q.addEventListener('blur', () => setTimeout(closeList, 140));
     $('.ar-find').addEventListener('submit', (e) => e.preventDefault());
 
+    $$('.ar-ph img').forEach((im) => { if (im.decode) im.decode().catch(() => {}); });
     layout(); apply(); readout(); onScroll();
     s.__ar = { S, lis, signs, chips, fp, get pts() { return pts; }, get order() { return order; }, openDlg, closeDlg, layout, setLock, setTrade };
   }

@@ -27,7 +27,8 @@ def css(mods=None):
 
 
 def js(mods=None):
-    return ''.join(SEC(m + '.js') for m in (mods or MODS))
+    # the old modules carry the firm's outside booking address as a constant; it is pointed at the in-page route
+    return ''.join(SEC(m + '.js') for m in (mods or MODS)).replace(BOOK, '#booking')
 
 
 def globals_js():

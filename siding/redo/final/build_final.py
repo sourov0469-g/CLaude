@@ -57,12 +57,12 @@ def wall():
 def build():
     repl = set(k for m in TAIL for k in m.REPLACES); keep = [k for k in PP.MODS if k not in repl]
     own = lambda ext: ''.join(SRC(getattr(m, ext.upper())) for m in TAIL if os.path.exists(os.path.join(HERE, 'src', getattr(m, ext.upper()))))
-    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css') + SRC('serv.css') + SRC('vis.css') + SRC('win.css') + PP.css(keep) + own('css')
+    css = fonts() + open(os.path.join(SITE, 'src', 'frame.css')).read() + SRC('shell.css') + SRC('hero.css') + SRC('wall.css') + SRC('serv.css') + SRC('vis.css') + SRC('win.css') + PP.css(keep) + own('css') + SRC('cursor.css') + SRC('nav.css')
     hdr = HEADER.replace(BOOKING_URL, CONTACT).replace('href="#work"', 'href="#area"'); mbar = MBAR.replace(BOOKING_URL, CONTACT)
     S = PP.sections()
     main = hero() + wall() + parts_services.services() + parts_vis.vis(CONTACT, I['cal']) + parts_windows.windows(CONTACT, I['cal']) + ''.join(m.markup(S, CONTACT, I['cal']) for m in TAIL)
-    js = PP.globals_js() + SRC('hero.js') + SRC('wall.js') + SRC('serv.js') + SRC('vis.js') + SRC('win.js') + PP.js(keep) + own('js')
-    boot = 'FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);' + PP.wires(keep) + ''.join(f'{m.GLOBAL}.wire(document);' for m in TAIL if os.path.exists(os.path.join(HERE, 'src', m.JS)))
+    js = PP.globals_js() + SRC('hero.js') + SRC('wall.js') + SRC('serv.js') + SRC('vis.js') + SRC('win.js') + PP.js(keep) + own('js') + SRC('cursor.js') + SRC('nav.js')
+    boot = 'FCursor.init();FNav.init();FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);' + PP.wires(keep) + ''.join(f'{m.GLOBAL}.wire(document);' for m in TAIL if os.path.exists(os.path.join(HERE, 'src', m.JS)))
     out = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Austin Pro Siding, Windows &amp; Roofing | Austin, TX since 2009</title>
 <meta name="description" content="Siding, windows and roofing for Austin homes since 2009. One free inspection covers every trade on the house. Call (512) 550-0000.">

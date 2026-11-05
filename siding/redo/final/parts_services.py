@@ -141,5 +141,5 @@ def services():
         sc += f'<div class="sv-sc" data-i="{i}" role="group" aria-label="{e(TITLE[i])}">{pats[i]}{scenes[i]}<div class="sv-cap"><p class="sv-n">0{i + 1} / 04</p><h3 class="sv-t">{e(TITLE[i])}</h3>{ps}{chip}</div></div>'
     rows = ''.join(f'<li class="sv-row" data-s="{s}"><b>{c}</b><strong>{e(n)}</strong><small>{e(b)} ({e(p)})</small></li>' for n, c, b, p, s in LEDGER)
     dots = ''.join(f'<button type="button" data-i="{i}" aria-label="Show {e(TITLE[i])}"{" aria-current=\"true\"" if not i else ""}></button>' for i in range(4))
-    return f'''<section class="sv" id="services" aria-labelledby="sv-h"><div class="sv-pin"><div class="sv-view"><div class="sv-track">{sc}</div><div class="sv-dots" role="group" aria-label="Services scenes">{dots}</div></div>
+    return f'''<section class="sv" id="services" aria-labelledby="sv-h"><i class="sv-a" id="siding" aria-hidden="true" style="--k:.125"></i><i class="sv-a" id="roofing" aria-hidden="true" style="--k:.625"></i><div class="sv-pin"><div class="sv-view"><div class="sv-track">{sc}</div><div class="sv-dots" role="group" aria-label="Services scenes">{dots}</div></div>
 <aside class="sv-led" aria-label="The documented record, trade by trade"><h2 class="sv-h" id="sv-h">Trade by trade.</h2><ul>{rows}</ul><p class="sv-fn">{e(FOOT)}</p></aside></div></section>'''

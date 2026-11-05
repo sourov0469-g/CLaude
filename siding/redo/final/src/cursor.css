@@ -1,0 +1,19 @@
+/* The cursor: one ring that follows the pointer, and one companion, a spirit-level vial whose lime bubble slides as you move (like the tool, the bubble lags the motion).
+   Only for a fine pointer with hover. Off for touch, for reduced motion, and whenever the pointer leaves the window. */
+.cu-ring,.cu-vial{position:fixed;left:0;top:0;z-index:99999;pointer-events:none;opacity:0;will-change:transform;transition:opacity .2s ease}
+.cu-on .cu-ring,.cu-on .cu-vial{opacity:1}
+.cu-ring{width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%}
+.cu-ring i{position:absolute;inset:0;border-radius:50%;border:2px solid #0E3B2C;background:rgba(181,219,110,0);box-shadow:0 0 0 1.5px rgba(246,250,246,.85);transform:scale(.3);transition:transform .22s cubic-bezier(.3,1.5,.5,1),background-color .2s ease,border-color .2s ease}
+.cu-ring b{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#0E3B2C;box-shadow:0 0 0 1.5px rgba(246,250,246,.9);transition:transform .2s ease,opacity .2s ease}
+.cu-ring.link i{transform:scale(1);background:rgba(181,219,110,.34)}.cu-ring.link b{transform:scale(.6)}
+.cu-ring.drag i{transform:scale(1.08);background:rgba(14,59,44,.1);border-style:dashed}.cu-ring.drag b{opacity:0}
+.cu-ring.down i{transform:scale(.22)}.cu-ring.link.down i{transform:scale(.78)}.cu-ring.drag.down i{transform:scale(.9)}
+.cu-vial{width:46px;height:18px;margin:-9px 0 0 -23px;border-radius:9px;background:linear-gradient(180deg,rgba(246,250,246,.96),rgba(220,232,222,.96));box-shadow:inset 0 0 0 1.5px #0E3B2C,0 8px 14px -8px rgba(10,22,17,.55);overflow:hidden}
+.cu-vial::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;margin-left:-.75px;background:rgba(14,59,44,.35)}
+.cu-vial::after{content:"";position:absolute;left:11px;right:11px;top:3px;bottom:3px;border-left:1.5px solid rgba(14,59,44,.35);border-right:1.5px solid rgba(14,59,44,.35)}
+.cu-vial i{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E6F6BE,#B5DB6E 60%,#8FBC4A);box-shadow:0 0 0 1px rgba(14,59,44,.4)}
+.cu-ring.hide,.cu-vial.hide{opacity:0!important}
+.cu-on,.cu-on *{cursor:none!important}
+.cu-on input:not([type=range]),.cu-on textarea{cursor:text!important}
+.cu-on select,.cu-on input[type=range],.cu-on input[type=range]::-webkit-slider-thumb{cursor:pointer!important}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.cu-ring,.cu-vial{display:none!important}.cu-on,.cu-on *{cursor:auto!important}}

@@ -13,6 +13,7 @@ TOWNS = ['Austin', 'Round Rock', 'Cedar Park', 'Leander', 'Pflugerville', 'Georg
 # the pinned photos, in board order (4 columns, row by row): photos.json index, the photo-frame shape
 BOARD = [(35, 's'), (11, 'l'), (2, 'p'), (12, 'w'), (28, 'l'), (18, 'l'), (33, 'l'), (41, 'p'), (16, 's'), (34, 'l'), (22, 'p'), (15, 'l'), (27, 'l'), (36, 'l'), (30, 'w'), (20, 'l')]
 AR = {'l': '4/3', 'p': '3/4', 's': '1/1', 'w': '16/10'}
+WD = {'l': '100%', 'p': '80%', 's': '90%', 'w': '100%'}   # card width by frame shape, so a row's cards hang at similar heights
 ROT = [-3.2, 2.4, -1.6, 3.1, -2.4, 1.8, -3.0, 2.6, -1.9, 3.3, -2.7, 1.5, -3.4, 2.2, -1.4, 2.9]
 DY = [10, 0, 26, 6, 0, 22, 4, 0, 18, 6, 0, 24, 2, 14, 0, 10]
 TRADE_ORDER = ['Siding', 'Windows', 'Shingle Roofing', 'Metal Roofing', 'Exterior Painting', 'Gutters', 'Doors', 'Garage Doors', 'Patio Covers', 'Decking']
@@ -70,7 +71,7 @@ def markup(S, contact, cal):
         trs = trades_of(trades); seen += trs
         alt = f'{trades} job in {place}, Texas'
         rec = f'{place} · {when} · {trades}'
-        cards.append(f'''<li class="ar-c" data-i="{i}" data-town="{e(town)}" data-tr="{e('|'.join(trs))}" style="--r:{ROT[k]}deg;--dy:{DY[k]}px;--d:{(k * 0.37) % 2.4:.2f};--a:{0.55 + (k % 4) * 0.17:.2f}deg;--ar:{AR[shape]}"><i class="ar-pin{' g' if k % 4 == 1 else ''}" aria-hidden="true"></i>
+        cards.append(f'''<li class="ar-c" data-i="{i}" data-town="{e(town)}" data-tr="{e('|'.join(trs))}" style="--r:{ROT[k]}deg;--dy:{DY[k]}px;--d:{(k * 0.37) % 2.4:.2f};--a:{0.55 + (k % 4) * 0.17:.2f}deg;--ar:{AR[shape]};--w:{WD[shape]}"><i class="ar-pin{' g' if k % 4 == 1 else ''}" aria-hidden="true"></i>
 <button type="button" class="ar-card" tabindex="{0 if k == 0 else -1}" aria-haspopup="dialog" aria-label="{e(rec)}. Open photo" data-rec="{e(rec)}" data-place="{e(place)}" data-hood="{e(hood)}" data-when="{e(when)}" data-trades="{e(trades)}" data-alt="{e(alt)}"><span class="ar-lift"><span class="ar-sw"><span class="ar-ph"><img src="{src}" alt="" width="{w}" height="{h}" decoding="async"><span class="ar-zoom" aria-hidden="true">{PLUS}</span></span>
 <span class="ar-cap"><b>{e(hood)}</b><small>{e(sub)}</small><em>{e(trades)}</em></span></span></span></button></li>''')
     order = [t for t in TRADE_ORDER if t in seen]; assert set(seen) <= set(TRADE_ORDER), set(seen) - set(TRADE_ORDER)
@@ -88,7 +89,7 @@ def markup(S, contact, cal):
 <p class="ar-lead">Real jobs from our own project files, pinned where they happened. Pick a town to pull its threads.</p></div>
 <p class="ar-lock">{lock}</p></header>
 <div class="ar-chips" role="radiogroup" aria-label="Filter the photos by trade">{chips}</div>
-<div class="ar-board"><svg class="ar-threads" aria-hidden="true" focusable="false"><g class="ar-fan"></g><path class="ar-ms" pathLength="1000"/><path class="ar-main" pathLength="1000"/></svg>
+<div class="ar-board"><svg class="ar-threads ar-fanl" aria-hidden="true" focusable="false"><g class="ar-fan"></g></svg><svg class="ar-threads ar-mainl" aria-hidden="true" focusable="false"><path class="ar-ms" pathLength="1000"/><path class="ar-main" pathLength="1000"/></svg>
 <aside class="ar-post" aria-label="Towns and the town finder"><p class="ar-pn" id="ar-pn">Projects documented per town</p>
 <div class="ar-pole" role="group" aria-labelledby="ar-pn"><i class="ar-rod" aria-hidden="true"></i><i class="ar-finial" aria-hidden="true"></i>{signs}</div>
 <div class="ar-read" aria-live="polite" aria-atomic="true"></div>
