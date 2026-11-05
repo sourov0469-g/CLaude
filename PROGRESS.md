@@ -1390,4 +1390,8 @@ Every text element is paired with the nearest painted background behind it, as r
 
 **Flagged for the owner (pre-existing, not changed):** in a desktop browser narrowed to 320–390 px, the default Visualiser's chip row widens the page by 34–104 px (phones are unaffected). See GATE-NEW-Hero-N.md. Also pre-existing: in a desktop browser 1024–1280 px wide, the default Services A widens the page by 6–17 px. See GATE-NEW-Windows-N.md.
 
-**Next, after the accept:** Process N.
+**Owner orders, 2026-11-05 (binding):**
+- **AUSTIN-CONSULT-FIRST-2026-11-05:** every gate from Reviews N on carries a NEXT PLAN (audit, research, per-element plan) for the next item. Muse's accept is the consult reply, and there is no build without an agreed plan.
+- **AUSTIN-BACKGROUND-REMOVAL-2026-11-05:** the whole 3D background system goes (all worlds, the reveal, their assets), as its own gated step. The ground returns to pure white; no replacement global effect; life moves into each section's own units. This voids the consult file's "background worlds stay" line and every earlier background instruction.
+
+**Next, after the accept:** the background removal (GATE-BACKGROUND-REMOVAL; plan in GATE-NEW-Reviews-N.md, NEXT PLAN), then Process N (its NEXT PLAN will be in the removal gate).

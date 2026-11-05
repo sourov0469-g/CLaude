@@ -148,3 +148,71 @@ Weighted = 0.4 × 8.5 + 0.3 × 8.7 + 0.2 × 8.5 + 0.1 × 8.8 = 3.40 + 2.61 + 1.7
 - Not a configurator; nothing game-like.
 - White ground; brand accents only; Montserrat / Inter only.
 - No invented reviews, words, ratings or numbers.
+
+---
+
+## NEXT PLAN — Background removal (GATE-BACKGROUND-REMOVAL), for Muse's consult
+
+Under AUSTIN-CONSULT-FIRST-2026-11-05 and AUSTIN-BACKGROUND-REMOVAL-2026-11-05. The removal order puts this step after the Reviews N accept and before Process N, so this NEXT PLAN covers the removal. The removal gate will carry the NEXT PLAN for Process N, including that version's own creative unit in place of the global background. Nothing below has been built: only measured.
+
+### AUDIT — the background system as it stands (measured on the current `out/site.html`, 37,774,940 bytes)
+
+| Part | Where | Bytes in the file |
+|---|---|---|
+| IG-exact comparison world (their plaster, noises, geometry, 30+ textures) | `<script id="bgw-ig">` from `bg2_html()` | 11,863,018 |
+| B2 Street of Roofs (the default) | `bgw-b2` | 1,162,594 |
+| B1 Relief Terrain | `bgw-b1` | 679,518 |
+| B3 Material Field | `bgw-b3` | 551,506 |
+| V1 hidden world (three baked panels + `world.js`) and the `?bg=` selector | the inline selector script | 572,613 |
+| Engine: Three.js r150 + the copied flowmap/reveal shaders (`src/bg2/engine.bundle.js`) | inline script | 454,877 |
+| **Total background** | | **15,284,126 (40.5% of the file)** |
+
+**What it does well:** nothing the owner values. The engine itself was sound (DPR cap, pause on hidden tabs, static under reduced motion), but the owner's verdict stands on the evidence:
+- **Space:** 15.3 MB, mostly worlds that are never shown. Only one world is decoded per visit, yet all five ship.
+- **Load:** a WebGL renderer, texture decode and shader compile run at start, on top of the HTML parse.
+- **Quality:** the revealed worlds were judged poor.
+
+**Hooks the sections have into it:**
+- **`data-solid`:** 267 attributes across section markup (homepage and subpage modules), marking surfaces that block the reveal. They are inert without the background.
+  - One other reader exists: `photo-hero.js` (heroes 1 and 2) uses `[data-solid]` to keep its own photo effect off its cards.
+  - `field.js` reads it too, but is not in `site.html` (only the older `build.py` uses it).
+- **The review switcher (`fx.js`):** a "Background" row built from `window.__BGLIST` / `__BGSEL`.
+- **CSS:** `fx.css` `.world{position:fixed…}` for the canvas. (`.wnB .world` in `windows.css` is Windows B's own 3D bay and unrelated; `.sd1C .bg2` in a subpage is an unrelated photo class.)
+- **The cursor companion** lives in `nav.js` and has no reference to the background. It stays untouched.
+
+**What the file is after the background:** about 22.49 MB. Of that, about 20.35 MB is 190 embedded images (photos for the versions and subpages). The removal takes away the 40% that is background and all the WebGL start-up work. It does not make the file small, and the gate will report that plainly, with a proposal if you want a further weight pass.
+
+### RESEARCH — governing reference and mechanism
+
+- **Reference:** none. This is a removal, not a version, so no annex design reference applies.
+- **Discipline:** the brief's F18 weight rule (the weight must actually leave the file) and the owner's load test.
+- **Mechanism:** subtraction at the build, so nothing is hidden or disabled in place.
+- **What does not transfer:** no replacement global effect of any kind (the order bars it). The page's life moves into each section's own units, version by version, from Process N on.
+
+### THE PLAN — per element
+
+1. **Build (`build_site.py`):**
+   - Delete `bg2_html()`, `bg_panels()`, `BG2_DEFAULT`, `BG2_LIST` and the `?bg=` selector script (it also carries `world.js` and the V1 panels), and stop emitting the engine bundle and the five world blocks.
+   - `?bg=` and `&bg=none` become harmless no-ops.
+2. **Ground:** `html, body` set explicitly to `#FFFFFF`; no canvas anywhere. Section stages keep their own surfaces (for example `#F6F8F6` panels); deep green and lime stay as content accents only.
+3. **Review switcher (`fx.js`):** remove the Background row; the section and version rows stay as they are.
+4. **CSS (`fx.css`):** remove the `.world` canvas rule. Unrelated `.world` / `.bg2` classes in Windows B and subpage SD1 stay.
+5. **Hooks:**
+   - Strip every `data-solid` attribute from section markup (homepage and subpage modules and `build_site.py`).
+   - For heroes 1 and 2 only, the photo effect's own "not over a card" test switches to a local `data-ui` attribute (`photo-hero.js`), so their behaviour is unchanged.
+   - This touches every existing version's markup by that attribute only. The gate will prove that each template, with `data-solid` stripped from the old file, is byte-identical to the new one.
+6. **Repository assets:** delete `src/bg2/` (engine and bundle), `src/world.js`, `src/world-pictograms-retired.js`, `media/bg2/`, `media/igx/`, `media/bg/`, and the copied third-party code in `bgstudy-v2/background-code/`.
+   - Git history keeps them; the study and gate documents stay as history.
+   - `src/field.js` stays, because the older `build.py` (not `site.html`) still uses it. **Muse to confirm:** delete the repository assets too (my recommendation), or only drop them from the build.
+7. **Cursor companion:** verified independent of the background; no change. The gate will show it still runs at 1440 on a fine pointer and is absent on touch.
+
+**Proof the gate will carry:**
+- **Bytes:** before and after, plus a search of the built file for `bgw-`, `BG2`, `__BGSEL`, `THREE`, `flowmap` and `data-solid`, all expected at 0.
+- **Every view:** every homepage version view (126) and every subpage view switches and renders with 0 page errors and 0 overflow, plus the review switcher itself.
+- **Pages:** 1440 and 390 screenshots of the white page.
+- **An honest load check, before and after:**
+  - over `file://`: time to DOMContentLoaded, time to `load`, first contentful paint, total main-thread long-task time and JS heap;
+  - over a local HTTP server with throttled network: time to first paint and to fully loaded.
+- **Status:** PROGRESS and the version switcher with the background entries gone.
+
+**Why this is right:** it removes 15.3 MB and every GPU start-up cost, the owner's two complaints, without changing a single version's look or behaviour (proved per template). It also leaves the companion and every section exactly as Muse accepted them.
