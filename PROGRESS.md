@@ -1426,3 +1426,5 @@ Every text element is paired with the nearest painted background behind it, as r
 **Sub-agent use so far (honest log):**
 - Everything through GATE-WEIGHT was done by this session alone, with no sub-agents.
 - Two prep agents were started after the order (asset prep only; they write to `siding/redo/prep/` and never touch the build, the page, git or any gate): (1) Visualiser V-A: real-photo siding masks and a recolour test; (2) Services S-A: tile photo and published-figure selection.
+- **Services S-A prep: finished and checked by me.** Its photo records match `photos.json` exactly and it touched nothing outside `siding/redo/prep/services/`. Findings: tile 6 (Rot and water damage) has no honest photo, count or band; Roof is only counted as shingle (210) and metal (31), never summed; Paint is only counted as exterior painting (320); photo 0's month conflicts between its record (Feb 2026) and its link slug (`mar-26`). Result is prep only; nothing is in the build yet.
+- Visualiser V-A prep: still running.

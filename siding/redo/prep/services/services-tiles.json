@@ -1,0 +1,679 @@
+{
+ "generated_for": "Services S-A: Start from the problem",
+ "notes": {
+  "index_base": 0,
+  "crop_coords": "x,y,w,h in the 1400x1050 master (photo<N>-1400.webp)",
+  "published_footnote": "Counts are documented projects from our service list; one project can include several trades. Bands are each trade's median price band, materials and labor, before discounts.",
+  "assumption": "Tile displays <=700 css px wide on desktop, <=420 css px wide on phones; sharpness = Laplacian variance of the crop (higher is sharper)"
+ },
+ "tiles": [
+  {
+   "tile": "Siding and trim",
+   "photo": {
+    "role": "primary",
+    "index": 0,
+    "file": "/home/user/CLaude/siding/work/dl/photo0-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Maple Run, Austin",
+    "month": "Feb 2026",
+    "trades": "Siding & Exterior Painting",
+    "photos_json_alt": "Siding at a home in Maple Run, Austin, TX, by Austin Pro",
+    "href": "/recent-projects/austin-fainwood-siding-mar-26",
+    "crop_3x2": {
+     "x": 0,
+     "y": 20,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 8356.0
+    },
+    "crop_4x5_phone": {
+     "x": 100,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 9723.9
+    },
+    "already_embedded_in_built_page_px": "1400 (imgreg, live) and 1900"
+   },
+   "second": {
+    "role": "second",
+    "index": 3,
+    "file": "/home/user/CLaude/siding/work/dl/photo3-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Maple Run, Austin",
+    "month": "Jul 2026",
+    "trades": "Siding, Exterior Painting & Gutters",
+    "photos_json_alt": "Siding at a home in Maple Run, Austin, TX, by Austin Pro",
+    "href": "/recent-projects/austin-maple-run-siding-gutters-07-20-26-aps-4849",
+    "crop_3x2": {
+     "x": 0,
+     "y": 0,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 4317.1
+    },
+    "crop_4x5_phone": {
+     "x": 280,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5863.5
+    },
+    "already_embedded_in_built_page_px": "680"
+   },
+   "status": "DOCUMENTED (siding). Trim has no separate count.",
+   "allowed": [
+    {
+     "text": "431 documented siding jobs",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$10k–$15k median band (415 priced)",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "Across the 415 siding jobs we documented from 2022–2026, the middle half landed between $5,000 and $20,000, and the median fell in the $10,000–$15,000 band.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0]"
+    },
+    {
+     "text": "A siding replacement typically takes 1 to 2 weeks, including the painting process.",
+     "kind": "verbatim",
+     "source": "faq.json siding[1]"
+    },
+    {
+     "text": "James Hardie fiber cement on most of our homes, as a James Hardie Elite Preferred contractor.",
+     "kind": "verbatim",
+     "source": "faq.json siding[4]"
+    },
+    {
+     "text": "Yes. We replace soffit and fascia, which protect your roof’s edges and your home’s ventilation, usually in the same job as the siding.",
+     "kind": "verbatim",
+     "source": "faq.json siding[6] (soffit and fascia; the only trim-adjacent line in the data)"
+    },
+    {
+     "text": "One free inspection covers every trade on the house.",
+     "kind": "verbatim",
+     "source": "svc8.js CLOSE"
+    },
+    {
+     "text": "The inspection and estimate are free.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0] / windows[0] (last sentence)"
+    }
+   ],
+   "not_allowed": [
+    "Any count for \"trim\" alone, or \"trim jobs\".",
+    "Summing siding with painting or soffit/fascia.",
+    "Writing \"431 priced\" (415 are priced; 431 is documented).",
+    "The FAQ sentence \"the middle half landed between $5,000 and $20,000\" only with its full sentence and \"415 siding jobs\", never beside the 431."
+   ]
+  },
+  {
+   "tile": "Windows and doors",
+   "photo": {
+    "role": "primary",
+    "index": 39,
+    "file": "/home/user/CLaude/siding/work/dl/photo39-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Heritage Hills, Austin",
+    "month": "Nov 2025",
+    "trades": "Doors & Windows",
+    "photos_json_alt": "",
+    "href": "/recent-projects/austin-heritage-hills-doors-windows-11-25-25-aps-4587",
+    "crop_3x2": {
+     "x": 0,
+     "y": 60,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 1071.0
+    },
+    "crop_4x5_phone": {
+     "x": 280,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 1025.2
+    },
+    "already_embedded_in_built_page_px": "680"
+   },
+   "second": {
+    "role": "second",
+    "index": 40,
+    "file": "/home/user/CLaude/siding/work/dl/photo40-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Bull Creek, Austin",
+    "month": "Jun 2026",
+    "trades": "Windows & Doors",
+    "photos_json_alt": "",
+    "href": "/recent-projects/austin-bull-creek-windows-doors-06-25-26-aps-4798",
+    "crop_3x2": {
+     "x": 0,
+     "y": 80,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 3639.3
+    },
+    "crop_4x5_phone": {
+     "x": 420,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 2797.4
+    },
+    "already_embedded_in_built_page_px": "960"
+   },
+   "status": "DOCUMENTED, as two separate trades: Windows and Exterior doors. No combined count exists.",
+   "allowed": [
+    {
+     "text": "388 documented window jobs",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$10k–$15k median band (376 priced) for windows",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "109 documented exterior door projects",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$2k–$5k median band (96 priced) for exterior doors",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "Across the 376 priced window jobs we documented from 2022–2026, the middle half landed between $5,000 and $25,000, and the median fell in the $10,000–$15,000 band.",
+     "kind": "verbatim",
+     "source": "faq.json windows[0]"
+    },
+    {
+     "text": "Most of the window-only jobs in our files took two days on site.",
+     "kind": "verbatim",
+     "source": "faq.json windows[5]"
+    },
+    {
+     "text": "Often, yes. The siding was replaced on 36% of our priced window jobs.",
+     "kind": "verbatim",
+     "source": "faq.json windows[3]"
+    },
+    {
+     "text": "One free inspection covers every trade on the house.",
+     "kind": "verbatim",
+     "source": "svc8.js CLOSE"
+    },
+    {
+     "text": "The inspection and estimate are free.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0] / windows[0] (last sentence)"
+    }
+   ],
+   "not_allowed": [
+    "Adding 388 + 109 (svc8.js: counts never summed; one project can carry several trades).",
+    "One combined band for windows and doors.",
+    "Garage doors (9) belong to a different trade; do not fold them in.",
+    "Any door timeline or door FAQ sentence: none exists in the data.",
+    "Counts are documented projects from our service list; one project can include several trades. Bands are each trade's median price band, materials and labor, before discounts. (footnote wording is published; reuse only as is)"
+   ]
+  },
+  {
+   "tile": "Roof and flashing",
+   "photo": {
+    "role": "primary",
+    "index": 10,
+    "file": "/home/user/CLaude/siding/work/dl/photo10-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Fairview, Round Rock",
+    "month": "Jun 2025",
+    "trades": "Shingle Roofing",
+    "photos_json_alt": "Shingle roofing at a home in Fairview, Round Rock, TX, by Austin Pro",
+    "href": "/recent-projects/round-rock-fairview-shingle-roofing-06-18-25-aps-4477",
+    "crop_3x2": {
+     "x": 0,
+     "y": 117,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5943.4
+    },
+    "crop_4x5_phone": {
+     "x": 560,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 7857.4
+    },
+    "already_embedded_in_built_page_px": "1400 (imgreg)"
+   },
+   "second": {
+    "role": "second",
+    "index": 9,
+    "file": "/home/user/CLaude/siding/work/dl/photo9-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Pflugerville",
+    "month": "Oct 2025",
+    "trades": "Shingle Roofing",
+    "photos_json_alt": "Shingle roofing at a home in Pflugerville, TX, by Austin Pro",
+    "href": "/recent-projects/pflugerville-shingle-roofing-dec-25",
+    "crop_3x2": {
+     "x": 0,
+     "y": 0,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 4358.4
+    },
+    "crop_4x5_phone": {
+     "x": 0,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 2672.5
+    },
+    "already_embedded_in_built_page_px": "680"
+   },
+   "status": "PARTIAL. Roofing counted as shingle and metal separately. Flashing has NO count, band or sentence anywhere.",
+   "allowed": [
+    {
+     "text": "210 documented shingle roofing projects",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$10k–$15k median band (204 priced) for shingle roofing",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "31 documented metal roofing projects",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$20k–$25k median band (29 priced) for metal roofing",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "One free inspection covers every trade on the house.",
+     "kind": "verbatim",
+     "source": "svc8.js CLOSE"
+    },
+    {
+     "text": "The inspection and estimate are free.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0] / windows[0] (last sentence)"
+    }
+   ],
+   "not_allowed": [
+    "Any number for flashing, or \"flashing jobs\".",
+    "Calling 210 (or 241) \"roof and flashing\" projects.",
+    "Summing shingle and metal (241).",
+    "A roof timeline or roofing FAQ sentence: none exists in faq.json.",
+    "Saying the photo shows flashing, a roof repair, leak or storm damage: its record is only \"Shingle Roofing\"."
+   ]
+  },
+  {
+   "tile": "Gutters",
+   "photo": {
+    "role": "primary",
+    "index": 37,
+    "file": "/home/user/CLaude/siding/work/dl/photo37-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "East Oak Hill, Austin",
+    "month": "Sep 2026",
+    "trades": "Windows, Siding, Gutters & Exterior Painting",
+    "photos_json_alt": "",
+    "href": "/recent-projects/austin-east-oak-hill-windows-siding-09-14-26-aps-4813",
+    "crop_3x2": {
+     "x": 0,
+     "y": 60,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5255.0
+    },
+    "crop_4x5_phone": {
+     "x": 300,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 3764.8
+    },
+    "already_embedded_in_built_page_px": "not found (4:3 scan)"
+   },
+   "second": {
+    "role": "second",
+    "index": 1,
+    "file": "/home/user/CLaude/siding/work/dl/photo1-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Austin",
+    "month": "Sep 2026",
+    "trades": "Siding, Gutters & Exterior Painting",
+    "photos_json_alt": "Siding at a home in Austin, TX, by Austin Pro",
+    "href": "/recent-projects/austin-siding-gutters-09-14-26-aps-4906",
+    "crop_3x2": {
+     "x": 0,
+     "y": 117,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5012.9
+    },
+    "crop_4x5_phone": {
+     "x": 0,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5448.8
+    },
+    "already_embedded_in_built_page_px": "680"
+   },
+   "status": "DOCUMENTED.",
+   "allowed": [
+    {
+     "text": "121 documented gutter projects",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$2k–$5k median band (109 priced)",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "One free inspection covers every trade on the house.",
+     "kind": "verbatim",
+     "source": "svc8.js CLOSE"
+    },
+    {
+     "text": "The inspection and estimate are free.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0] / windows[0] (last sentence)"
+    }
+   ],
+   "not_allowed": [
+    "Any gutter FAQ sentence or timeline: none exists.",
+    "Claims about drainage, overflow or water damage.",
+    "Using the soffit/fascia sentence here (it is a siding-FAQ line about roof edges)."
+   ]
+  },
+  {
+   "tile": "Paint and caulk",
+   "photo": {
+    "role": "primary",
+    "index": 33,
+    "file": "/home/user/CLaude/siding/work/dl/photo33-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Georgetown",
+    "month": "Sep 2026",
+    "trades": "Siding & Exterior Painting",
+    "photos_json_alt": "",
+    "href": "/recent-projects/georgetown-siding-exterior-painting-09-09-26-aps-4913",
+    "crop_3x2": {
+     "x": 0,
+     "y": 30,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 8787.7
+    },
+    "crop_4x5_phone": {
+     "x": 360,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 8494.0
+    },
+    "already_embedded_in_built_page_px": "640x480"
+   },
+   "second": {
+    "role": "second",
+    "index": 36,
+    "file": "/home/user/CLaude/siding/work/dl/photo36-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Ashford Park, Buda",
+    "month": "Jul 2026",
+    "trades": "Siding, Shingle Roofing & Exterior Painting",
+    "photos_json_alt": "",
+    "href": "/recent-projects/buda-ashford-park-siding-shingle-roofing-07-20-26-aps-4835",
+    "crop_3x2": {
+     "x": 0,
+     "y": 117,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 3864.6
+    },
+    "crop_4x5_phone": {
+     "x": 240,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 2194.4
+    },
+    "already_embedded_in_built_page_px": "640x480"
+   },
+   "status": "PARTIAL. Only \"Exterior painting\" is counted. Caulk has NO count, band or sentence.",
+   "allowed": [
+    {
+     "text": "320 documented exterior painting projects",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "$2k–$5k median band (317 priced)",
+     "kind": "figure",
+     "source": "redo/site/src/sec/svc8.js T array"
+    },
+    {
+     "text": "We take care of both installation and painting. After the siding goes up we paint it with one of more than 1,700 Sherwin-Williams colors, with free color matching.",
+     "kind": "verbatim",
+     "source": "faq.json siding[5] (about painting new siding)"
+    },
+    {
+     "text": "One free inspection covers every trade on the house.",
+     "kind": "verbatim",
+     "source": "svc8.js CLOSE"
+    },
+    {
+     "text": "The inspection and estimate are free.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0] / windows[0] (last sentence)"
+    }
+   ],
+   "not_allowed": [
+    "Any caulk count, band or claim; the photo cannot show it either.",
+    "Saying \"320 paint and caulk projects\": the count is exterior painting only.",
+    "Implying the photo shows what was painted or how: record says only \"Siding & Exterior Painting\"."
+   ]
+  },
+  {
+   "tile": "Rot and water damage",
+   "photo": {
+    "role": "provisional placeholder (no photo qualifies)",
+    "index": 28,
+    "file": "/home/user/CLaude/siding/work/dl/photo28-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Block House Creek, Leander",
+    "month": "Sep 2026",
+    "trades": "Siding & Exterior Painting",
+    "photos_json_alt": "",
+    "href": "/recent-projects/leander-block-house-creek-siding-exterior-painting-09-29-26-aps-4915",
+    "crop_3x2": {
+     "x": 0,
+     "y": 60,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 1709.4
+    },
+    "crop_4x5_phone": {
+     "x": 300,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 1466.6
+    },
+    "already_embedded_in_built_page_px": "640x480"
+   },
+   "second": {
+    "role": "provisional second",
+    "index": 30,
+    "file": "/home/user/CLaude/siding/work/dl/photo30-1400.webp",
+    "master_px": [
+     1400,
+     1050
+    ],
+    "place": "Austin",
+    "month": "Sep 2026",
+    "trades": "Siding, Gutters & Exterior Painting",
+    "photos_json_alt": "",
+    "href": "/recent-projects/austin-siding-gutters-09-14-26-aps-4906",
+    "crop_3x2": {
+     "x": 0,
+     "y": 60,
+     "w": 1400,
+     "h": 933,
+     "ratio": "3:2",
+     "min_master_width_px_for_700css_at_1x": 700,
+     "min_master_width_px_for_700css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5250.2
+    },
+    "crop_4x5_phone": {
+     "x": 0,
+     "y": 0,
+     "w": 840,
+     "h": 1050,
+     "ratio": "4:5",
+     "min_master_width_px_for_420css_at_1x": 700,
+     "min_master_width_px_for_420css_at_2x": 1400,
+     "laplacian_variance_sharpness": 5038.1
+    },
+    "already_embedded_in_built_page_px": "680"
+   },
+   "status": "NO DATA. No count, band, FAQ sentence or photo trade record for rot or water damage. NO photo in photos.json lists it.",
+   "allowed": [
+    {
+     "text": "The line \"Rot and water damage\" as one of the six items of the free inspection list",
+     "kind": "verbatim",
+     "source": "process.js INSP / booking INSP (site code, verbatim list)"
+    },
+    {
+     "text": "One free inspection covers every trade on the house.",
+     "kind": "verbatim",
+     "source": "svc8.js CLOSE"
+    },
+    {
+     "text": "The inspection and estimate are free.",
+     "kind": "verbatim",
+     "source": "faq.json siding[0] / windows[0] (last sentence)"
+    }
+   ],
+   "not_allowed": [
+    "Any number, price band, timeline or job count.",
+    "Calling the photo a rot, moisture or water-damage repair, or describing damage in it.",
+    "Saying the firm repairs rot (the siding FAQ only says \"We replace\" and \"we don't do small patch repairs\").",
+    "Using photo 23 (door with exposed old trim) here: it reads as damage but its record says only \"Siding & Doors\"."
+   ],
+   "photo_gap": true
+  }
+ ]
+}
