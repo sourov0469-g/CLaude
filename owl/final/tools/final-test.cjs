@@ -44,7 +44,7 @@ const MEDIA = () => { const out = []; document.querySelectorAll('.ver').forEach(
     cl.querySelectorAll('a[href^="mailto:"]').forEach(a => { if (!/^mailto:info@owlroofing\.com/.test(a.getAttribute('href'))) bad.push(a.getAttribute('href')); });
     return bad; }, SELF);
   rec('facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+', facts.length === 0, facts.join('; '));
-  const maps = await p.evaluate(s => { const e = document.querySelector(s), bad = []; const t = e.textContent.replace(/\s+/g, ' ');
+  const maps = await p.evaluate(s => { const e = document.querySelector(s), bad = []; const cl0 = e.cloneNode(true); cl0.querySelectorAll('script,style').forEach(x => x.remove()); const t = cl0.textContent.replace(/\s+/g, ' ');
     e.querySelectorAll('*').forEach(n => { const k = (n.getAttribute('class') || '') + ' ' + (n.id || '') + ' ' + (n.getAttribute('aria-label') || '') + ' ' + (n.getAttribute('alt') || ''); if (/\b(map|maps|contour|cartograph)/i.test(k)) bad.push(k.trim().slice(0, 50)); });
     if (/\bmap\b/i.test(t.replace(/<script[\s\S]*?<\/script>/g, ''))) bad.push('text mentions map'); return bad; }, SELF);
   rec('no maps: nothing in this section is, or is called, a map', maps.length === 0, maps.join('; '));

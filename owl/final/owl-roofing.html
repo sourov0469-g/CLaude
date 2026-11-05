@@ -13748,6 +13748,293 @@ OWL.reg('video','1',function(root){
 </section>
 
 </div>
+<div class="ver" data-sec="wise-check" data-v="1">
+<section class="sec wc" id="wise-check" aria-labelledby="wc-h">
+<style>
+/* Section 3 · one flow, three beats: (1) OLD Wise Check V11 "Clear It Up": the image and the clearing-up effects only, (2) OLD Wise Check V13 "Pick Your Day": day, then time,
+   (3) OLD Explore V14 "Say It Your Way": tap the underlined words; the sentence and your day become an email you can send, or you can call. */
+.wc{overflow:hidden}
+.wc .ctr{max-width:1120px;margin:0 auto}
+.wc .hd{text-align:center}
+.wc .lede{margin:12px auto 0;max-width:52ch;font-size:17px}
+.wc .p2,.wc .p3{margin-top:clamp(30px,4.4vw,56px)}
+.wc .p3{text-align:center}
+.wc .lbl{margin:0 0 14px;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A4A0C;text-align:center}
+.wc .p1.done .ok{opacity:1;translate:none}
+.wc .p1 .pane:focus-visible{outline:3px solid var(--ink);outline-offset:5px}
+.wc .p1 .pane{aspect-ratio:16/6.4;margin-top:clamp(22px,3vw,34px)}
+.wc .mailcard{max-width:640px;margin:clamp(18px,2.6vw,28px) auto 0;padding:16px 20px 18px;text-align:left;border-radius:18px;background:#FFFDF7;box-shadow:0 0 0 1px rgba(23,17,29,.07),0 22px 34px -26px rgba(23,17,29,.55);font-size:16px;line-height:1.5}
+.wc .mailcard .mh{display:flex;gap:12px;margin:0;padding:4px 0;border-bottom:1px dashed rgba(23,17,29,.16);color:var(--ink-70);font-size:15px}
+.wc .mailcard .mh span{flex:none;width:64px;font-weight:700;color:#7A4A0C}
+.wc .mailcard .mh b{font-weight:600;color:#17111D;overflow-wrap:anywhere}
+.wc .mailcard .mb{margin:12px 0 0;color:#17111D}
+.wc .mailcard .mb span{display:block}
+.wc .mailcard .mb .dim{margin-top:10px;color:var(--ink-70);font-size:14px}
+@media (max-width:640px){.wc .p1 .pane{aspect-ratio:4/4.4}.wc .mailcard{padding:14px 16px}.wc .mailcard .mh span{width:56px}}
+
+.wise11{overflow:hidden}
+.wc .p1 .pane{position:relative;margin-top:clamp(22px,3vw,36px);aspect-ratio:16/7;overflow:hidden;border-radius:28px;background:#DCD6CB;box-shadow:0 36px 56px -40px rgba(23,17,29,.6),inset 0 0 0 1px rgba(23,17,29,.06);touch-action:pan-y;cursor:crosshair;user-select:none;-webkit-user-select:none}
+.wc .p1 .pane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block;pointer-events:none}
+.wc .p1 .fog{position:absolute;inset:0;width:100%;height:100%;transition:opacity .9s ease}
+.wc .p1 .fog.gone{opacity:0}
+.wc .p1 .hint{position:absolute;left:50%;top:50%;translate:-50% -50%;display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;background:rgba(23,17,29,.86);color:#F1EFE6;font-size:16px;font-weight:800;pointer-events:none;transition:opacity .35s}
+.wc .p1 .hint svg{width:22px;height:22px;animation:wc11w 1.6s ease-in-out infinite}
+@keyframes wc11w{0%,100%{translate:-5px 0;rotate:-8deg}50%{translate:5px 0;rotate:8deg}}
+.wc .p1 .hint.gone{opacity:0}
+.wc .p1 .ok{position:absolute;left:18px;top:18px;padding:7px 14px;border-radius:999px;background:rgba(255,253,247,.94);color:#17111D;font-size:14px;font-weight:800;opacity:0;translate:0 -8px;transition:opacity .4s .5s,translate .5s cubic-bezier(.3,1.4,.5,1) .5s;box-shadow:0 6px 12px -8px rgba(23,17,29,.5)}
+.wc .p1 .lab{position:absolute;right:16px;bottom:12px;padding:3px 9px;border-radius:999px;background:rgba(255,253,247,.85);font-size:12px;font-weight:700;color:#17111D}
+
+
+.wise13{overflow:hidden}
+.wc .p2 .lbl{margin:clamp(22px,3vw,34px) 0 12px;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A4A0C;text-align:center}
+.wc .p2 .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.wc .p2 .day{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:132px;padding:14px 6px;border:0;border-radius:22px;background:#FFFDF7;color:#17111D;font:inherit;cursor:pointer;box-shadow:0 1px 0 #fff inset,0 0 0 1px rgba(23,17,29,.07),0 16px 24px -20px rgba(23,17,29,.5);transition:translate .35s cubic-bezier(.3,1.4,.5,1),background .25s,box-shadow .25s}
+.wc .p2 .day b{font-size:clamp(22px,2.3vw,30px);font-weight:900;letter-spacing:-.02em;line-height:1}
+.wc .p2 .day small{font-size:14px;font-weight:700;color:var(--ink-70)}
+.wc .p2 .day .ck{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:#17111D;display:grid;place-items:center;scale:0;transition:scale .35s cubic-bezier(.3,1.6,.5,1)}
+.wc .p2 .day .ck svg{width:14px;height:14px}
+.wc .p2 .day[aria-checked="true"]{background:#EAA221;translate:0 -8px;box-shadow:0 0 0 1px rgba(23,17,29,.1),0 22px 26px -18px rgba(142,90,18,.7)}
+.wc .p2 .day[aria-checked="true"] small{color:#17111D}
+.wc .p2 .day[aria-checked="true"] .ck{scale:1}
+@media (hover:hover) and (pointer:fine){.wc .p2 .day:not([aria-checked="true"]):not(.sun):hover{background:#FBEFD3}}
+.wc .p2 .day:focus-visible,.wc .p2 .tm:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.wc .p2 .sun{background:#ECE8E0;color:#6B6470;cursor:default;box-shadow:inset 0 0 0 1px rgba(23,17,29,.06)}
+.wc .p2 .sun .owl{width:54px;height:auto;margin-bottom:2px}
+.wc .p2 .sun .z{position:absolute;top:10px;right:14px;font-size:13px;font-weight:900;color:#8E5A12;animation:wc13z 2.6s ease-in-out infinite}
+.wc .p2 .sun .z i{font-style:normal;display:inline-block}
+@keyframes wc13z{0%,100%{translate:0 0;opacity:.45}50%{translate:3px -6px;opacity:1}}
+.wc .p2 .sun.wig .owl{animation:wc13w .6s ease-in-out}
+@keyframes wc13w{0%,100%{rotate:0deg}25%{rotate:-9deg}60%{rotate:7deg}}
+.wc .p2 .times{display:flex;justify-content:center;gap:14px;margin-top:20px;flex-wrap:wrap}
+.wc .p2 .tm{display:inline-flex;align-items:center;gap:12px;min-height:64px;padding:10px 22px 10px 14px;border:0;border-radius:999px;background:#FFFDF7;color:#17111D;font:inherit;font-size:18px;font-weight:800;cursor:pointer;box-shadow:0 0 0 1px rgba(23,17,29,.08),0 12px 20px -18px rgba(23,17,29,.5);transition:background .25s,box-shadow .25s}
+.wc .p2 .tm small{display:block;font-size:14px;font-weight:700;color:var(--ink-70)}
+.wc .p2 .tm span{text-align:left;line-height:1.2}
+.wc .p2 .tm svg{width:44px;height:44px;flex:none}
+.wc .p2 .tm .sn{transition:translate .5s cubic-bezier(.3,1.4,.5,1)}
+.wc .p2 .tm[data-t="am"] .sn{translate:0 9px}
+.wc .p2 .tm[data-t="pm"] .sn{translate:0 -4px}
+.wc .p2 .tm[aria-checked="true"]{background:#EAA221;box-shadow:0 0 0 1px rgba(23,17,29,.1),0 16px 22px -16px rgba(142,90,18,.7)}
+.wc .p2 .tm[aria-checked="true"] small{color:#17111D}
+.wc .p2 .tm[data-t="am"][aria-checked="true"] .sn{translate:0 2px}
+.wc .p2 .tm[data-t="pm"][aria-checked="true"] .sn{translate:0 -10px}
+.wc .p2 .dsay{margin:0;font-size:clamp(24px,2.6vw,34px);font-weight:900;letter-spacing:-.02em;line-height:1.15;color:#17111D}
+.wc .p2 .dsay.swap{animation:wc13s .35s cubic-bezier(.22,.61,.36,1)}
+@keyframes wc13s{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
+.wc .p2 .dnote{margin:10px 0 0;min-height:22px;font-size:15px;font-weight:600;color:var(--ink-70)}
+@media (max-width:640px){
+ .wc .p2 .week{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+ .wc .p2 .day{min-height:96px;border-radius:18px;padding:10px 4px}
+ .wc .p2 .day .ck{top:6px;right:6px;width:20px;height:20px}
+ .wc .p2 .sun{grid-column:span 1}
+ .wc .p2 .sun .owl{width:40px}
+ .wc .p2 .sun small{font-size:12px}
+ .wc .p2 .times{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .wc .p2 .tm{padding:10px 12px 10px 8px;gap:8px;font-size:16px;border-radius:20px}
+ .wc .p2 .tm svg{width:36px;height:36px}
+}
+@media (prefers-reduced-motion:reduce){.wc .p2 .day,.wc .p2 .tm .sn,.wc .p2 .day .ck{transition:none}.wc .p2 .day[aria-checked="true"]{translate:none}.wc .p2 .sun .z,.wc .p2 .sun.wig .owl,.wc .p2 .dsay.swap{animation:none}}
+
+
+
+.wc .p3 .sent{margin:0;font-size:clamp(32px,4.6vw,62px);font-weight:900;letter-spacing:-.035em;line-height:1.22;color:#17111D;text-wrap:balance}
+.wc .p3 .bk{position:relative;display:inline-flex;align-items:baseline;max-width:100%;text-align:center;gap:.12em;margin:0 .04em;padding:0 .08em .02em;border:0;background:none;font:inherit;letter-spacing:inherit;color:#8E5A12;cursor:pointer;border-radius:.18em;vertical-align:baseline;min-height:44px}
+.wc .p3 .bk .win{display:inline-grid;overflow:hidden;padding-bottom:.06em;max-width:100%}
+.wc .p3 .bk .ln{grid-area:1/1;white-space:normal}
+.wc .p3 .bk .wd{display:inline-block;white-space:nowrap}
+.wc .p3 .bk .ln i{display:inline-block;font-style:normal;transition:transform .5s cubic-bezier(.16,1,.3,1) calc(var(--i) * 12ms)}
+.wc .p3 .bk .ln.enter i{transform:translateY(105%)}
+.wc .p3 .bk .ln.out i{transform:translateY(-105%)}
+.wc .p3 .bk svg{width:.32em;height:.32em;flex:none;align-self:center;margin:0 -.04em 0 .02em;color:#EAA221;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.wc .p3 .bk::after{content:"";position:absolute;left:.08em;right:.08em;bottom:.02em;height:.09em;border-radius:.05em;background:#EAA221;transform-origin:left;transform:scaleX(0);transition:transform .8s cubic-bezier(.65,0,.35,1) var(--d,0s)}
+.wc .p3 .on .bk::after{transform:scaleX(1)}
+@media (hover:hover) and (pointer:fine){.wc .p3 .bk:hover{background:rgba(234,162,33,.12)}.wc .p3 .bk:hover svg{transform:rotate(180deg)}}
+.wc .p3 .bk:active{scale:.97}
+.wc .p3 .bk:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.wc .p3 .reply{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;margin:clamp(20px,3vw,34px) auto 0;padding:14px 22px;border-radius:999px;background:var(--paper);box-shadow:0 2px 0 #fff inset,0 18px 30px -24px rgba(23,17,29,.5);font-size:18px;font-weight:700;color:#17111D}
+.wc .p3 .reply small{padding:4px 10px;border-radius:999px;background:rgba(234,162,33,.2);color:#8E5A12;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.wc .p3 .reply.swap{animation:ex14r .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes ex14r{0%{opacity:.25;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.wc .p3 .xacts{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:22px}
+.wc .p3 .xacts .btn{min-width:260px;min-height:58px;font-size:18px}
+.wc .p3 .xnote{margin:12px auto 0;max-width:52ch;min-height:22px;font-size:15px;font-weight:600;color:var(--ink-70)}
+@media (max-width:640px){.wc .p3 .sent{font-size:clamp(26px,7.6vw,38px)}.wc .p3 .xacts .btn{min-width:0;width:100%}.wc .p3 .reply{border-radius:20px}}
+@media (prefers-reduced-motion:reduce){.wc .p3 .bk .ln i,.wc .p3 .bk .win,.wc .p3 .bk svg{transition:none}.wc .p3 .bk::after{transition:none;transform:scaleX(1)}.wc .p3 .reply.swap{animation:none}}
+
+</style>
+<div class="wrap">
+ <div class="ctr">
+  <div class="hd"><h2 class="h2" id="wc-h">Clear It Up</h2>
+   <p class="lede rv">Most roofs look fine from the ground. Wipe the window to see what a Wise Check gives you: a clear picture. Then pick a day and tell us in your own words.</p></div>
+  <div class="p1">
+   <div class="pane" tabindex="0" role="button" aria-label="A house behind a fogged-up window. Wipe it with your finger or mouse, or press Enter to clear it." data-owl="say:Wipe it clear">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-asrc="a15" alt="" width="1200" height="750">
+    <canvas class="fog" aria-hidden="true"></canvas>
+    <span class="hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 013 0V10m0-1.5a1.5 1.5 0 013 0V11m0-1a1.5 1.5 0 013 0v4.5A6.5 6.5 0 0111.5 21h-.6a6 6 0 01-4.6-2.2L3.6 15.5a1.6 1.6 0 012.4-2.1L9 16V11"/></svg>Wipe here</span>
+    <span class="ok" aria-hidden="true">Clear view</span>
+    <span class="lab" aria-hidden="true">Illustrative photo</span>
+   </div>
+  </div>
+  <div class="p2">
+   <p class="lbl" id="wc-d">Which day suits you?</p>
+   <div class="week" role="radiogroup" aria-labelledby="wc-d"></div>
+   <div class="times" role="radiogroup" aria-label="Which time of day suits you?"></div>
+   <div class="end2"><p class="dsay" aria-live="polite">Any day suits me.</p><p class="dnote" aria-live="polite"></p></div>
+  </div>
+  <div class="p3">
+   <p class="lbl">Say it your way: tap the underlined words until the sentence sounds like you</p>
+   <p class="sent" data-owl="say:Tap the words">My roof <button class="bk" type="button" data-k="0" style="--d:.2s"></button> <button class="bk" type="button" data-k="1" style="--d:.45s"></button> Please <button class="bk" type="button" data-k="2" style="--d:.7s"></button></p>
+   <div class="reply" aria-live="polite"><small></small><span></span></div>
+   <div class="mailcard" aria-label="The email that will open, with your words filled in">
+    <p class="mh"><span>To</span><b>info@owlroofing.com</b></p>
+    <p class="mh"><span>Subject</span><b>Wise Check request</b></p>
+    <p class="mb"></p>
+   </div>
+   <div class="xacts"><button class="btn btn-amber mail" type="button" data-mag data-owl="hoot">Email This to Owl</button><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+   <p class="xnote" aria-live="polite"></p>
+   <p class="sr" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('wise-check','1',function(root){
+  var sec = root.querySelector('section'), h2 = root.querySelector('h2'), p1 = root.querySelector('.p1'), p2 = root.querySelector('.p2'), p3 = root.querySelector('.p3');
+  OWL.split(h2);
+  (function(root){
+var FOG_LBL = 'A house behind a fogged-up window. Wipe it with your finger or mouse, or press Enter to clear it.', CLEAR_LBL = 'The window is clear: a house seen from the street. Press Enter to fog it up again.';
+
+  /* one idea: not sure how your roof is doing? wipe the fog; a Wise Check gives you a clear picture */
+  var pane = root.querySelector('.pane'), img = pane.querySelector('img'), cv = pane.querySelector('.fog'), ctx = cv.getContext('2d'), hint = pane.querySelector('.hint');
+  var GX = 40, GY = 20, grid, hits, W = 0, H = 0, dpr = 1, R = 40, cleared = false, touched = false, last = null, active = false, ready = false;
+  function size(){ var r = pane.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); R = Math.max(30, Math.min(60, W * .055)); }
+  function fog(){
+    size(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, W, H);
+    /* a soft copy of the same photo: drawn tiny, then scaled up (works where canvas filters don't) */
+    var sw = Math.max(16, Math.round(W / 22)), sh = Math.max(10, Math.round(H / 22)), sm = document.createElement('canvas'); sm.width = sw; sm.height = sh;
+    var sc = sm.getContext('2d'), iw = img.naturalWidth || 1200, ih = img.naturalHeight || 750, k = Math.max(sw / iw, sh / ih), dw = iw * k, dh = ih * k;
+    try { sc.drawImage(img, (sw - dw) / 2, (sh - dh) * .45, dw, dh); } catch (e){}
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high'; ctx.drawImage(sm, 0, 0, W, H);
+    var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(244,242,236,.74)'); g.addColorStop(1, 'rgba(236,232,224,.66)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    /* condensation: a scatter of small beads, the same pattern every time */
+    var sd = 7; function rnd(){ sd = (sd * 9301 + 49297) % 233280; return sd / 233280; }
+    for (var i = 0, n = Math.round(W * H / 2600); i < n; i++){ var bx = rnd() * W, by = rnd() * H, br = .8 + rnd() * rnd() * 3.2; ctx.beginPath(); ctx.arc(bx, by, br, 0, 6.283); ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.fill(); ctx.beginPath(); ctx.arc(bx, by + br * .45, br * .7, 0, 3.1416); ctx.fillStyle = 'rgba(120,110,95,.18)'; ctx.fill(); }
+    grid = new Uint8Array(GX * GY); hits = 0; root.dataset.wiped = 0; cv.classList.remove('gone'); }
+  function stamp(x, y){
+    ctx.globalCompositeOperation = 'destination-out';
+    var g = ctx.createRadialGradient(x, y, R * .35, x, y, R); g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(x - R, y - R, R * 2, R * 2);
+    var cw = W / GX, ch = H / GY, r2 = (R * .8) * (R * .8);
+    for (var gy = Math.max(0, Math.floor((y - R) / ch)); gy <= Math.min(GY - 1, Math.floor((y + R) / ch)); gy++)
+      for (var gx = Math.max(0, Math.floor((x - R) / cw)); gx <= Math.min(GX - 1, Math.floor((x + R) / cw)); gx++){
+        var cx = (gx + .5) * cw - x, cy = (gy + .5) * ch - y; if (cx * cx + cy * cy <= r2 && !grid[gy * GX + gx]){ grid[gy * GX + gx] = 1; hits++; } } }
+  function line(a, b){ var dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy), n = Math.max(1, Math.ceil(d / (R / 3))); for (var i = 1; i <= n; i++) stamp(a.x + dx * i / n, a.y + dy * i / n); }
+  function check(){ root.dataset.wiped = Math.round(hits / (GX * GY) * 100); if (!cleared && hits / (GX * GY) > .5) clear(); }
+  function clear(){ if (cleared) return; cleared = true; cv.classList.add('gone'); hint.classList.add('gone'); root.classList.add('done'); pane.setAttribute('aria-label', CLEAR_LBL); root.dataset.clear = 'yes'; }
+  function reset(){ cleared = false; touched = false; root.classList.remove('done'); pane.setAttribute('aria-label', FOG_LBL); hint.classList.remove('gone'); root.dataset.clear = 'no'; fog(); }
+  function pt(e){ var r = pane.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  function wipe(e){ if (!ready || cleared) return; var p = pt(e); if (!touched){ touched = true; hint.classList.add('gone'); } if (last) line(last, p); else stamp(p.x, p.y); last = p; check(); }
+  pane.addEventListener('pointerdown', function(e){ active = true; last = null; wipe(e); });
+  pane.addEventListener('pointermove', function(e){ if (e.pointerType === 'mouse' || active) wipe(e); else last = null; });
+  ['pointerup', 'pointercancel'].forEach(function(t){ pane.addEventListener(t, function(){ active = false; last = null; }); });
+  pane.addEventListener('pointerleave', function(){ last = null; if (active) active = false; });
+  pane.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); if (cleared) reset(); else clear(); } });
+  function demo(){ if (OWL.reduce || cleared) return; var t0 = performance.now(), prev = null;
+    (function step(t){ var u = Math.min(1, (t - t0) / 1100), p = { x: W * (.3 + .4 * u), y: H * (.5 + .1 * Math.sin(u * Math.PI * 2)) };
+      if (prev) line(prev, p); else stamp(p.x, p.y); prev = p; root.dataset.wiped = Math.round(hits / (GX * GY) * 100); if (u < 1 && !cleared) requestAnimationFrame(step); })(t0); }
+  function init(){ if (ready) return; ready = true; fog(); }
+  (img.decode ? img.decode() : Promise.resolve()).catch(function(){}).then(init);
+  if (img.complete) init();
+  var ro = 'ResizeObserver' in window && new ResizeObserver(function(){ if (ready && !cleared && Math.abs(pane.getBoundingClientRect().width - W) > 2) fog(); }); if (ro) ro.observe(pane);
+  root.dataset.clear = 'no';
+  if (OWL.reduce || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); setTimeout(function(){ if (!touched) demo(); }, 500); } }, { threshold: .45 }); io.observe(pane);
+
+  })(p1);
+  (function(root){
+
+  /* one idea: pick a day that suits you, and we'll come and take a careful look */
+  var week = root.querySelector('.week'), times = root.querySelector('.times'), say = root.querySelector('.dsay'), note = root.querySelector('.dnote');
+  var D = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], T = [['am', 'Morning', '8 to 12'], ['pm', 'Afternoon', '12 to 6']], day = -1, tod = -1;
+  var CK = '<span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M2.5 7.5l3 3 6-6.5" fill="none" stroke="#FFFDF7" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+  var days = D.map(function(d, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'day'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false'); b.tabIndex = i ? -1 : 0;
+    b.setAttribute('aria-label', d + ', 8 to 6'); b.innerHTML = CK + '<b>' + d.slice(0, 3) + '</b><small>8 to 6</small>'; week.appendChild(b); b.addEventListener('click', function(){ pickDay(i); }); return b; });
+  var sun = document.createElement('button'); sun.type = 'button'; sun.className = 'day sun'; sun.setAttribute('aria-label', 'Sunday: our day off');
+  sun.innerHTML = '<span class="z" aria-hidden="true"><i>z</i><i>Z</i></span><svg class="owl" viewBox="0 0 200 180" aria-hidden="true"><path d="M38 52L52 8 82 40M162 52L148 8 118 40" fill="#17111D"/><ellipse cx="100" cy="98" rx="84" ry="78" fill="#17111D"/><circle cx="66" cy="84" r="34" fill="#F1EFE6"/><circle cx="134" cy="84" r="34" fill="#F1EFE6"/><path d="M46 82q20 16 40 0M114 82q20 16 40 0" stroke="#17111D" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M88 120l12 18 12-18z" fill="#EAA221"/></svg><b>Sun</b><small>Our day off</small>';
+  week.appendChild(sun);
+  sun.addEventListener('click', function(){ if (!OWL.reduce){ sun.classList.remove('wig'); void sun.offsetWidth; sun.classList.add('wig'); } note.textContent = 'Sunday’s our day off. Any other day works.'; });
+  var SUNS = { am: '<circle class="sn" cx="22" cy="24" r="7" fill="#EAA221"/>', pm: '<circle class="sn" cx="22" cy="20" r="7" fill="#EAA221"/>' };
+  var tms = T.map(function(t, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'tm'; b.dataset.t = t[0]; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false'); b.tabIndex = i ? -1 : 0;
+    b.setAttribute('aria-label', t[1] + ', ' + t[2]);
+    b.innerHTML = '<svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="21" fill="#F4EFE4"/>' + SUNS[t[0]] + '<path d="M5 31h34" stroke="#17111D" stroke-width="2.4" stroke-linecap="round"/><path d="M5 31h34v13H5z" fill="#F4EFE4"/></svg><span>' + t[1] + '<small>' + t[2] + '</small></span>';
+    times.appendChild(b); b.addEventListener('click', function(){ pickTime(i); }); return b; });
+  function radio(list, k){ list.forEach(function(b, i){ b.setAttribute('aria-checked', i === k ? 'true' : 'false'); b.tabIndex = i === k ? 0 : -1; }); }
+  function keys(list, get, set){ list.forEach(function(b, i){ b.addEventListener('keydown', function(e){ var m = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (!m) return; e.preventDefault(); var n = ((get() < 0 ? i : get()) + m + list.length) % list.length; set(n); list[n].focus(); }); }); }
+  function pickDay(i){ day = i; radio(days, i); update(); }
+  function pickTime(i){ tod = i; radio(tms, i); update(); }
+  keys(days, function(){ return day; }, pickDay); keys(tms, function(){ return tod; }, pickTime);
+  function when(){ var d = day > -1 ? D[day] : '', t = tod > -1 ? T[tod][1].toLowerCase() : ''; return d && t ? d + ' ' + t : d ? d : t ? 'any ' + t : ''; }
+  function update(){ var w = when();
+    say.textContent = (w ? w.charAt(0).toUpperCase() + w.slice(1) : 'Any day') + ' suits me.';
+    root.dataset.day = day; root.dataset.tod = tod; root.dispatchEvent(new Event('wcchange', {bubbles: true}));
+    note.textContent = ''; if (!OWL.reduce){ say.classList.remove('swap'); void say.offsetWidth; say.classList.add('swap'); } }
+
+  })(p2);
+  (function(root){
+
+  /* one idea: say what's wrong in your own words; Owl answers; call, or hand the sentence to your own email app */
+  var say = root.querySelector('.sent'), bks = [].slice.call(root.querySelectorAll('.bk')), reply = root.querySelector('.reply'), note = root.querySelector('.xnote'), sr = root.querySelector('.sr');
+  var O = [
+    ['is leaking', 'lost some shingles', 'took a storm hit', 'is getting old', 'just needs a look'],
+    ['and it can’t wait', 'but it can wait a little', 'and I’m not sure how bad it is'],
+    ['come and take a look', 'call me back', 'tell me straight what it needs']];
+  var R = [
+    ['Roof repair', 'We’ll find the leak and stop it.'],
+    ['Roof repair', 'We’ll put back what’s missing, and check the rest while we’re up there.'],
+    ['Storm damage help', 'We’ll find the hail and wind damage and put it right.'],
+    ['Roof replacement', 'When it’s time, we’ll replace it, backed by our 10-year workmanship warranty.'],
+    ['Wise Check', 'A Wise Check: we’ll look it over and tell you how it’s doing.']];
+  var cur = [0, 0, 0], NAMES = ['What’s happening', 'How soon', 'What you’d like'];
+  var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9l5-5 5 5M7 15l5 5 5-5"/></svg>';
+  function letters(t){ var s = document.createElement('span'), n = 0; s.className = 'ln'; t.split(' ').forEach(function(w, wi){ if (wi) s.appendChild(document.createTextNode(' ')); var wd = document.createElement('span'); wd.className = 'wd'; w.split('').forEach(function(ch){ var e = document.createElement('i'); e.textContent = ch; e.style.setProperty('--i', n++); wd.appendChild(e); }); s.appendChild(wd); }); return s; }
+  function shown(k){ return O[k][cur[k]] + (k ? '.' : ''); }
+  function sentence(){ return 'My roof ' + O[0][cur[0]] + ' ' + O[1][cur[1]] + '. Please ' + O[2][cur[2]] + '.'; }
+  function label(b){ var k = +b.dataset.k; b.setAttribute('aria-label', NAMES[k] + ': ' + O[k][cur[k]] + '. Press to change.'); }
+  bks.forEach(function(b){ var k = +b.dataset.k; b.innerHTML = '<span class="win"></span>' + ICON; b.querySelector('.win').appendChild(letters(shown(k))); label(b); });
+  function answer(){ var r = R[cur[0]]; reply.querySelector('small').textContent = r[0]; reply.querySelector('span').textContent = r[1]; reply.classList.remove('swap'); void reply.offsetWidth; reply.classList.add('swap'); }
+  function roll(b, dir){ var k = +b.dataset.k, n = O[k].length; cur[k] = (cur[k] + dir + n) % n; var w = b.querySelector('.win'), old = w.querySelector('.ln:not(.out)'), nx = letters(shown(k));
+    label(b); sr.textContent = sentence(); root.dataset.sentence = sentence(); root.dispatchEvent(new Event('wcchange', {bubbles: true})); note.textContent = ''; if (k === 0) answer();
+    if (OWL.reduce){ w.innerHTML = ''; w.appendChild(nx); return; }
+    nx.classList.add('enter'); w.appendChild(nx); void nx.offsetWidth;
+    old.classList.add('out'); nx.classList.remove('enter');
+    setTimeout(function(){ if (old.parentNode) old.remove(); }, 650 + O[k][cur[k]].length*12); }
+  bks.forEach(function(b){ b.addEventListener('click', function(){ roll(b, 1); });
+    b.addEventListener('keydown', function(e){ if (e.key === 'ArrowDown'){ e.preventDefault(); roll(b, 1); } else if (e.key === 'ArrowUp'){ e.preventDefault(); roll(b, -1); } }); });
+  answer(); root.dataset.sentence = sentence();
+  if (OWL.reduce || !('IntersectionObserver' in window)){ say.classList.add('on'); return; }
+  var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); say.classList.add('on'); } }, {threshold:.4}); io.observe(say);
+
+  })(p3);
+  /* the day, the time and the words become one email, in the visitor's own email app: nothing is sent by this page */
+  var card = p3.querySelector('.mailcard .mb'), mailBtn = p3.querySelector('.mail'), note3 = p3.querySelector('.xnote');
+  var DN = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], TN = [['Morning', '8 to 12'], ['Afternoon', '12 to 6']];
+  function compose(){
+    var d = +(p2.dataset.day || -1), t = +(p2.dataset.tod || -1), s = p3.dataset.sentence || '';
+    var day = d > -1 ? DN[d] : 'Any day, Monday to Saturday', tm = t > -1 ? TN[t][0] + ' (' + TN[t][1] + ')' : 'Any time, 8 to 6';
+    var lines = ['Hi Owl, I’d like a Wise Check.', s, 'Best day: ' + day, 'Best time: ' + tm];
+    card.textContent = '';
+    lines.forEach(function(l, i){ var e = document.createElement('span'); e.textContent = l; if (i === 1) e.style.marginTop = '8px'; if (i === 1) e.style.marginBottom = '8px'; card.appendChild(e); });
+    var dim = document.createElement('span'); dim.className = 'dim'; dim.textContent = 'Add your name, address and phone number in your email app.'; card.appendChild(dim);
+    root.dataset.mailto = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(lines[0] + '\n\n' + s + '\n\nBest day: ' + day + '\nBest time: ' + tm + '\n\nName:\nAddress:\nBest phone number:\n');
+  }
+  root.addEventListener('wcchange', function(){ note3.textContent = ''; compose(); });
+  compose();
+  mailBtn.addEventListener('click', function(){ location.href = root.dataset.mailto; note3.textContent = 'Your email app should open with your words and your day filled in. Send it from there, or call (651) 977-6027.'; });
+  if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
+  var io0 = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io0.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io0.observe(h2);
+});
+</script>
+</section>
+
+</div>
 </div>
 </main>
 <footer class="ftr" id="contact">

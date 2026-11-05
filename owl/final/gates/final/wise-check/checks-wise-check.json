@@ -1,0 +1,132 @@
+{
+ "section": "wise-check",
+ "pass": 25,
+ "total": 25,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"8af975dd53\":1}"
+  },
+  {
+   "name": "order is image/fog, then day and time, then words; no buttons or links in the first two",
+   "ok": true,
+   "info": "{\"p1btn\":0,\"p2btn\":0,\"order\":\"p1,p2,p3\"}"
+  },
+  {
+   "name": "wiping with the pointer clears the fog, and \"Clear view\" appears",
+   "ok": true,
+   "info": "{\"clear\":\"yes\",\"w\":50,\"gone\":true,\"ok\":\"1\"}"
+  },
+  {
+   "name": "keyboard: Enter toggles clear and fog",
+   "ok": true,
+   "info": "no -> yes"
+  },
+  {
+   "name": "six days Monday to Saturday, a sleeping Sunday owl, morning and afternoon",
+   "ok": true,
+   "info": "{\"days\":6,\"sun\":true,\"times\":2}"
+  },
+  {
+   "name": "the line writes itself: \"Tuesday morning suits me.\"",
+   "ok": true,
+   "info": "Tuesday morning suits me."
+  },
+  {
+   "name": "tapping Sunday answers honestly",
+   "ok": true,
+   "info": "Sunday’s our day off. Any other day works."
+  },
+  {
+   "name": "the words and the day fill the email: address, sentence, Tuesday, morning",
+   "ok": true,
+   "info": "mailto:info@owlroofing.com?subject=Wise Check request&body=Hi Owl, I’d like a Wise Check.\n\nMy roof lost some shingles and it can’t wait. Please call me back.\n\nBest day: Tuesday\nBest time: Morning (8 to 12)\n\nName:\nAddress"
+  },
+  {
+   "name": "the visible email card shows the same words and day",
+   "ok": true,
+   "info": "Hi Owl, I’d like a Wise Check.My roof lost some shingles and it can’t wait. Please call me back.Best day: TuesdayBest time: Morning (8 to 12)Add your name, addr"
+  },
+  {
+   "name": "the reply names a service",
+   "ok": true,
+   "info": "Roof repairWe’ll put back what’s missing, and check the rest while we’re up there."
+  },
+  {
+   "name": "the call button is the one phone number",
+   "ok": true,
+   "info": "tel:+16519776027"
+  },
+  {
+   "name": "no markup injection into the email card",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (1 media measured)",
+   "ok": true,
+   "info": "img 0.93x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (1 media measured)",
+   "ok": true,
+   "info": "img 0.58x"
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 2022 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1549 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1707 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: underlines drawn, fog present",
+   "ok": true,
+   "info": "{\"under\":\"matrix(1, 0, 0, 1, 0, 0)\",\"fog\":true}"
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
