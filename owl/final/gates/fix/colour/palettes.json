@@ -1,0 +1,446 @@
+{
+ "palettes": {
+  "shingle": {
+   "name": "Shingle Slate",
+   "ground": "#F4F4F1",
+   "surface": "#FBFBF9",
+   "wash": "#E7EAEB",
+   "ink": "#22282E",
+   "ink70": "#4F5861",
+   "ink50": "#7D858C",
+   "acc": "#43586A",
+   "onacc": "#FFFFFF",
+   "call": "#96622F",
+   "oncall": "#FFFFFF",
+   "deep": "#1E252C",
+   "ondeep": "#F1F2EF",
+   "ondeep70": "#B8C0C7",
+   "accdeep": "#D2A77D"
+  },
+  "navy": {
+   "name": "North Navy",
+   "ground": "#F1F3F5",
+   "surface": "#FAFBFC",
+   "wash": "#E2E7EC",
+   "ink": "#17263E",
+   "ink70": "#46546A",
+   "ink50": "#7A8698",
+   "acc": "#1E3A5F",
+   "onacc": "#FFFFFF",
+   "call": "#8C5A2E",
+   "oncall": "#FFFFFF",
+   "deep": "#132036",
+   "ondeep": "#EEF1F5",
+   "ondeep70": "#B3BDCB",
+   "accdeep": "#D6AB82"
+  },
+  "hearth": {
+   "name": "Hearth Charcoal",
+   "ground": "#F5F1EA",
+   "surface": "#FBF9F5",
+   "wash": "#E9E2D6",
+   "ink": "#2A251F",
+   "ink70": "#5A5249",
+   "ink50": "#8A8178",
+   "acc": "#4A4239",
+   "onacc": "#FFFFFF",
+   "call": "#7C5A24",
+   "oncall": "#FFFFFF",
+   "deep": "#24201B",
+   "ondeep": "#F4EFE7",
+   "ondeep70": "#C4BAAD",
+   "accdeep": "#D2B07A"
+  },
+  "stone": {
+   "name": "Storm Stone",
+   "ground": "#F3F1EC",
+   "surface": "#FAF9F6",
+   "wash": "#E5E0D6",
+   "ink": "#26282B",
+   "ink70": "#55575B",
+   "ink50": "#86878A",
+   "acc": "#47617C",
+   "onacc": "#FFFFFF",
+   "call": "#47617C",
+   "oncall": "#FFFFFF",
+   "deep": "#222529",
+   "ondeep": "#F2F1ED",
+   "ondeep70": "#BCBEC1",
+   "accdeep": "#A9BED3"
+  }
+ },
+ "pairs": {
+  "shingle": [
+   [
+    "body text",
+    "#22282E",
+    "#F4F4F1",
+    13.51,
+    "PASS"
+   ],
+   [
+    "text on cards",
+    "#22282E",
+    "#FBFBF9",
+    14.36,
+    "PASS"
+   ],
+   [
+    "text on wash panels",
+    "#22282E",
+    "#E7EAEB",
+    12.31,
+    "PASS"
+   ],
+   [
+    "secondary text",
+    "#4F5861",
+    "#F4F4F1",
+    6.57,
+    "PASS"
+   ],
+   [
+    "secondary text on cards",
+    "#4F5861",
+    "#FBFBF9",
+    6.99,
+    "PASS"
+   ],
+   [
+    "accent text / links",
+    "#43586A",
+    "#F4F4F1",
+    6.7,
+    "PASS"
+   ],
+   [
+    "text on primary buttons",
+    "#FFFFFF",
+    "#43586A",
+    7.39,
+    "PASS"
+   ],
+   [
+    "text on the call button",
+    "#FFFFFF",
+    "#96622F",
+    5.14,
+    "PASS"
+   ],
+   [
+    "call colour as text",
+    "#96622F",
+    "#F4F4F1",
+    4.67,
+    "PASS"
+   ],
+   [
+    "text on dark bands",
+    "#F1F2EF",
+    "#1E252C",
+    13.78,
+    "PASS"
+   ],
+   [
+    "secondary text on dark bands",
+    "#B8C0C7",
+    "#1E252C",
+    8.41,
+    "PASS"
+   ],
+   [
+    "accent words on dark bands",
+    "#D2A77D",
+    "#1E252C",
+    7.05,
+    "PASS"
+   ],
+   [
+    "UI lines/markers (3:1)",
+    "#7D858C",
+    "#F4F4F1",
+    3.4,
+    "PASS"
+   ]
+  ],
+  "navy": [
+   [
+    "body text",
+    "#17263E",
+    "#F1F3F5",
+    13.65,
+    "PASS"
+   ],
+   [
+    "text on cards",
+    "#17263E",
+    "#FAFBFC",
+    14.65,
+    "PASS"
+   ],
+   [
+    "text on wash panels",
+    "#17263E",
+    "#E2E7EC",
+    12.2,
+    "PASS"
+   ],
+   [
+    "secondary text",
+    "#46546A",
+    "#F1F3F5",
+    6.9,
+    "PASS"
+   ],
+   [
+    "secondary text on cards",
+    "#46546A",
+    "#FAFBFC",
+    7.41,
+    "PASS"
+   ],
+   [
+    "accent text / links",
+    "#1E3A5F",
+    "#F1F3F5",
+    10.34,
+    "PASS"
+   ],
+   [
+    "text on primary buttons",
+    "#FFFFFF",
+    "#1E3A5F",
+    11.5,
+    "PASS"
+   ],
+   [
+    "text on the call button",
+    "#FFFFFF",
+    "#8C5A2E",
+    5.81,
+    "PASS"
+   ],
+   [
+    "call colour as text",
+    "#8C5A2E",
+    "#F1F3F5",
+    5.22,
+    "PASS"
+   ],
+   [
+    "text on dark bands",
+    "#EEF1F5",
+    "#132036",
+    14.4,
+    "PASS"
+   ],
+   [
+    "secondary text on dark bands",
+    "#B3BDCB",
+    "#132036",
+    8.59,
+    "PASS"
+   ],
+   [
+    "accent words on dark bands",
+    "#D6AB82",
+    "#132036",
+    7.77,
+    "PASS"
+   ],
+   [
+    "UI lines/markers (3:1)",
+    "#7A8698",
+    "#F1F3F5",
+    3.32,
+    "PASS"
+   ]
+  ],
+  "hearth": [
+   [
+    "body text",
+    "#2A251F",
+    "#F5F1EA",
+    13.49,
+    "PASS"
+   ],
+   [
+    "text on cards",
+    "#2A251F",
+    "#FBF9F5",
+    14.44,
+    "PASS"
+   ],
+   [
+    "text on wash panels",
+    "#2A251F",
+    "#E9E2D6",
+    11.8,
+    "PASS"
+   ],
+   [
+    "secondary text",
+    "#5A5249",
+    "#F5F1EA",
+    6.81,
+    "PASS"
+   ],
+   [
+    "secondary text on cards",
+    "#5A5249",
+    "#FBF9F5",
+    7.29,
+    "PASS"
+   ],
+   [
+    "accent text / links",
+    "#4A4239",
+    "#F5F1EA",
+    8.76,
+    "PASS"
+   ],
+   [
+    "text on primary buttons",
+    "#FFFFFF",
+    "#4A4239",
+    9.86,
+    "PASS"
+   ],
+   [
+    "text on the call button",
+    "#FFFFFF",
+    "#7C5A24",
+    6.28,
+    "PASS"
+   ],
+   [
+    "call colour as text",
+    "#7C5A24",
+    "#F5F1EA",
+    5.58,
+    "PASS"
+   ],
+   [
+    "text on dark bands",
+    "#F4EFE7",
+    "#24201B",
+    14.14,
+    "PASS"
+   ],
+   [
+    "secondary text on dark bands",
+    "#C4BAAD",
+    "#24201B",
+    8.46,
+    "PASS"
+   ],
+   [
+    "accent words on dark bands",
+    "#D2B07A",
+    "#24201B",
+    7.89,
+    "PASS"
+   ],
+   [
+    "UI lines/markers (3:1)",
+    "#8A8178",
+    "#F5F1EA",
+    3.4,
+    "PASS"
+   ]
+  ],
+  "stone": [
+   [
+    "body text",
+    "#26282B",
+    "#F3F1EC",
+    13.09,
+    "PASS"
+   ],
+   [
+    "text on cards",
+    "#26282B",
+    "#FAF9F6",
+    14.04,
+    "PASS"
+   ],
+   [
+    "text on wash panels",
+    "#26282B",
+    "#E5E0D6",
+    11.24,
+    "PASS"
+   ],
+   [
+    "secondary text",
+    "#55575B",
+    "#F3F1EC",
+    6.41,
+    "PASS"
+   ],
+   [
+    "secondary text on cards",
+    "#55575B",
+    "#FAF9F6",
+    6.88,
+    "PASS"
+   ],
+   [
+    "accent text / links",
+    "#47617C",
+    "#F3F1EC",
+    5.69,
+    "PASS"
+   ],
+   [
+    "text on primary buttons",
+    "#FFFFFF",
+    "#47617C",
+    6.42,
+    "PASS"
+   ],
+   [
+    "text on the call button",
+    "#FFFFFF",
+    "#47617C",
+    6.42,
+    "PASS"
+   ],
+   [
+    "call colour as text",
+    "#47617C",
+    "#F3F1EC",
+    5.69,
+    "PASS"
+   ],
+   [
+    "text on dark bands",
+    "#F2F1ED",
+    "#222529",
+    13.62,
+    "PASS"
+   ],
+   [
+    "secondary text on dark bands",
+    "#BCBEC1",
+    "#222529",
+    8.26,
+    "PASS"
+   ],
+   [
+    "accent words on dark bands",
+    "#A9BED3",
+    "#222529",
+    8.06,
+    "PASS"
+   ],
+   [
+    "UI lines/markers (3:1)",
+    "#86878A",
+    "#F3F1EC",
+    3.18,
+    "PASS"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,272 @@
+[
+ {
+  "sec": "header",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "416af87307",
+  "bytes": 31979,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "header",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "129ed5f9c4",
+  "bytes": 48479,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "header",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "19f4352aa8",
+  "bytes": 114071,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "header",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "8bd0129172",
+  "bytes": 57971,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "header",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "8da5a22538",
+  "bytes": 139839,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "header",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "8e35ae99ae",
+  "bytes": 28487,
+  "placements": 3,
+  "where": "header:img + finder:img + people:img"
+ },
+ {
+  "sec": "top",
+  "kind": "img",
+  "cls": "poster",
+  "alt": "",
+  "hash": "cab73b29f1",
+  "bytes": 98163,
+  "placements": 2,
+  "where": "top:img + nothing:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "",
+  "bytes": 0,
+  "placements": 1,
+  "where": "finder:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "416af87307",
+  "bytes": 31979,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "129ed5f9c4",
+  "bytes": 48479,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "19f4352aa8",
+  "bytes": 114071,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "8bd0129172",
+  "bytes": 57971,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "8da5a22538",
+  "bytes": 139839,
+  "placements": 2,
+  "where": "header:img + finder:img"
+ },
+ {
+  "sec": "finder",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "8e35ae99ae",
+  "bytes": 28487,
+  "placements": 3,
+  "where": "header:img + finder:img + people:img"
+ },
+ {
+  "sec": "nothing",
+  "kind": "img",
+  "cls": "poster",
+  "alt": "",
+  "hash": "cab73b29f1",
+  "bytes": 98163,
+  "placements": 2,
+  "where": "top:img + nothing:img"
+ },
+ {
+  "sec": "people",
+  "kind": "img",
+  "cls": "",
+  "alt": "Tim Brown with his wife and their children",
+  "hash": "c46796060e",
+  "bytes": 48335,
+  "placements": 1,
+  "where": "people:img"
+ },
+ {
+  "sec": "people",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "65cd5dd7dd",
+  "bytes": 148819,
+  "placements": 1,
+  "where": "people:img"
+ },
+ {
+  "sec": "people",
+  "kind": "img",
+  "cls": "",
+  "alt": "Noah Bergland with his wife and their children",
+  "hash": "f052c6d59e",
+  "bytes": 78091,
+  "placements": 1,
+  "where": "people:img"
+ },
+ {
+  "sec": "people",
+  "kind": "img",
+  "cls": "",
+  "alt": "Noah Bergland on a ladder at a roof edge",
+  "hash": "b8dafc5aaa",
+  "bytes": 48503,
+  "placements": 1,
+  "where": "people:img"
+ },
+ {
+  "sec": "people",
+  "kind": "img",
+  "cls": "",
+  "alt": "An Owl roofer smiling on a job, crew behind him",
+  "hash": "97c54701af",
+  "bytes": 46195,
+  "placements": 1,
+  "where": "people:img"
+ },
+ {
+  "sec": "people",
+  "kind": "img",
+  "cls": "",
+  "alt": "One of Owl’s crew walking on a roof",
+  "hash": "8e35ae99ae",
+  "bytes": 28487,
+  "placements": 3,
+  "where": "header:img + finder:img + people:img"
+ },
+ {
+  "sec": "towns",
+  "kind": "img",
+  "cls": "",
+  "alt": "",
+  "hash": "b99af3d383",
+  "bytes": 185127,
+  "placements": 2,
+  "where": "towns:img + call:img"
+ },
+ {
+  "sec": "call",
+  "kind": "img",
+  "cls": "perch",
+  "alt": "",
+  "hash": "b99af3d383",
+  "bytes": 185127,
+  "placements": 2,
+  "where": "towns:img + call:img"
+ },
+ {
+  "sec": "page",
+  "kind": "img",
+  "cls": "flyer",
+  "alt": "",
+  "hash": "8d119d6d8d",
+  "bytes": 238811,
+  "placements": 1,
+  "where": "page:img"
+ },
+ {
+  "sec": "top",
+  "kind": "video",
+  "cls": "",
+  "alt": "Owl's crew at work on a roof",
+  "hash": "eacab79415",
+  "bytes": 2921018,
+  "placements": 3,
+  "where": "top:video + nothing:video"
+ },
+ {
+  "sec": "nothing",
+  "kind": "video",
+  "cls": "",
+  "alt": "",
+  "hash": "eacab79415",
+  "bytes": 2921018,
+  "placements": 3,
+  "where": "top:video + nothing:video"
+ },
+ {
+  "sec": "nothing",
+  "kind": "video",
+  "cls": "scrub (after load)",
+  "alt": "",
+  "hash": "eacab79415",
+  "bytes": 2921018,
+  "placements": 3,
+  "where": "top:video + nothing:video"
+ }
+]
