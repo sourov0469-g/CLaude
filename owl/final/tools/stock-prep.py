@@ -19,6 +19,7 @@ ITEMS = {
  'nothing-nailer': ('nothing', 'loop', 19654640, 'pexels-19654640.mp4', 'nothing-nailer.mp4', 1280, {'trim': (8, 14.5), 'crf': 29, 'g': 48}, 'Pexels video 19654640 (photographer not shown: page walled)', 'a roofer nailing down new roof decking (6 s loop)'),
  'nothing-wrap':   ('nothing', 'photo', 34304714, 'px-34304714.jpg', 'nothing-wrap.webp', 1800, {}, 'Ryan Stephens, Pexels 34304714', 'a house mid-reroof, tarps and old shingles on the lawn'),
  'nothing-clean':  ('nothing', 'photo', 33404981, 'px-33404981.jpg', 'nothing-clean.webp', 1800, {}, 'Ryan Stephens, Pexels 33404981', 'a crew working around a house mid-reroof, clearing the drive'),
+ 'numbers-street': ('numbers', 'photo', 6220207, '../cand2/px-6220207.jpg', 'numbers-street.webp', 2400, {}, 'Lalada, Pexels 6220207', 'a snowy residential street, houses and parked cars under snow'),
  'hero-nailer': ('hero', 'photo', 33404248, 'px-33404248.jpg', 'hero-nailer.webp', 2400, {}, 'Ryan Stephens, Pexels 33404248', 'a roofer nailing architectural shingles'),
  'hero-rain':   ('hero', 'photo', 2663254, 'px-2663254.jpg', 'hero-rain.webp', 2400, {}, 'Adrien Olichon, Pexels 2663254', 'rain running off a shingled roof edge'),
 }

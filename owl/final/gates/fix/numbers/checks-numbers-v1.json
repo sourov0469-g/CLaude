@@ -1,0 +1,133 @@
+{
+ "section": "numbers",
+ "version": 1,
+ "total": 25,
+ "passed": 25,
+ "results": [
+  {
+   "name": "the switcher shows this version: numbers V1",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | elsewhere, for their own gates: 52527d06aa in towns+call"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "in flow (no sticky stage)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no glyph is ever masked: no clip-path on any number",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "arrives early: a card is fully in place within 0.5 s of entering the screen",
+   "ok": true,
+   "info": "[true,true,true]"
+  },
+  {
+   "name": "every number has arrived by the end of the section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "locked facts, exact, and nothing else (no A+, Master Elite, Accredited, lifetime)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: every number is visible at once",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

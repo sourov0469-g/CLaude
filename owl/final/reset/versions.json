@@ -30,9 +30,11 @@
  },
  "04-numbers": {
   "label": "Numbers",
-  "default": 1,
+  "default": 2,
   "names": {
-   "1": "Numerals"
+   "1": "Numerals",
+   "2": "Ninety marks",
+   "3": "Spec row over a street"
   }
  },
  "05-people": {

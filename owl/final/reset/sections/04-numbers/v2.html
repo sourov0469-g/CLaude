@@ -1,0 +1,68 @@
+<section class="rs numbers m2" id="numbers" data-sky="day" aria-labelledby="m2-h">
+<style>
+/* V2 · Ninety marks. The 5.0 is built from 90 small marks, one per review (no names, no quotes), which gather into the numeral as
+   it comes into view; the facts sit beside it as a strict list. Data as an event, the upgrade named in the reset's GATE-4 (D1). */
+.m2{padding:clamp(110px,14vh,170px) clamp(18px,5vw,90px) clamp(80px,10vh,130px)}
+.m2 .in{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,72px);align-items:center}
+.m2 figure{margin:0}
+.m2 svg.marks{display:block;width:100%;height:auto;overflow:visible}
+.m2 svg .ghost{fill:var(--wash)}
+.m2 svg circle{fill:var(--acc);transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .6s}
+.m2 figcaption{margin-top:14px;font-size:clamp(17px,1.4vw,20px);font-weight:700;color:var(--ink)}
+.m2 figcaption span{display:block;margin-top:4px;font-size:15px;font-weight:600;color:var(--ink-70)}
+.m2 h2{margin:0;font-size:clamp(34px,4vw,60px);font-weight:900;line-height:1;letter-spacing:-.035em;color:var(--ink);text-wrap:balance}
+.m2 h2 em{font-style:normal;color:var(--acc-text)}
+.m2 dl{margin:28px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 18px;border-top:1px solid var(--line)}
+.m2 dt,.m2 dd{margin:0;padding:12px 0;border-bottom:1px solid var(--line)}
+.m2 dt{font-size:clamp(24px,2.4vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--ink);line-height:1.05;white-space:nowrap}
+.m2 dd{font-size:15px;font-weight:600;line-height:1.4;color:var(--ink-70);align-self:center}
+.m2 dd b{display:block;font-size:16px;font-weight:800;color:var(--ink)}
+.m2 .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;max-width:1320px;margin:clamp(48px,6vw,84px) auto 0;padding:22px 0 0;border-top:2px solid var(--ink);font-size:15px;font-weight:700;color:var(--ink)}
+.m2 .row i{font-style:normal;font-weight:600;color:var(--ink-70);font-size:13px}
+@media (max-width:900px){.m2 .in{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.m2 svg circle{transition:none}}
+</style>
+<div class="in">
+ <figure>
+  <svg class="marks" viewBox="0 0 1000 560" role="img" aria-labelledby="m2-cap"><text class="ghost" x="500" y="470" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="500" letter-spacing="-30">5.0</text><g class="dots"></g></svg>
+  <figcaption id="m2-cap">5.0 from 90+ reviews<span>The number above is drawn with 90 marks, one for each review. No names, no quotes: just the count.</span></figcaption>
+ </figure>
+ <div>
+  <h2 id="m2-h">Don’t take our word for it. <em>Count it.</em></h2>
+  <dl>
+   <dt>10-year</dt><dd><b>Workmanship warranty</b>on the work we do</dd>
+   <dt>up to 50-year</dt><dd><b>Manufacturer warranties</b>on the materials we put on</dd>
+   <dt>29</dt><dd><b>Towns we come to</b>around Shoreview, MN</dd>
+   <dt>Systems Plus</dt><dd><b>Certified by GAF</b>GAF Systems Plus certified roofers</dd>
+   <dt>A−</dt><dd><b>Better Business Bureau</b>BBB rating since February 2026</dd>
+   <dt>2025</dt><dd><b>Founded</b>by Tim Brown and Noah Bergland. Family-owned.</dd>
+  </dl>
+ </div>
+</div>
+<p class="row"><span>MN licence <i>#BC809662</i></span><span>Mon–Sat <i>08:00–18:00</i></span><span>1000 County Rd E #230 <i>Shoreview, MN 55126</i></span><span>We Give a Hoot</span></p>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), g = sec.querySelector('.dots'), svg = sec.querySelector('svg.marks'), N = 90, built = false;
+  /* sample 90 points inside the glyphs "5.0" (drawn in Inter 900 on a hidden canvas), spread evenly by farthest-point sampling */
+  function build(){ if (built) return; built = true;
+    var W = 1000, H = 560, c = document.createElement('canvas'); c.width = W; c.height = H; var x = c.getContext('2d');
+    x.font = '900 500px Inter, system-ui, sans-serif'; x.textAlign = 'center'; x.fillStyle = '#000'; try { x.letterSpacing = '-30px'; } catch (e){}
+    x.fillText('5.0', W / 2, 470); var d = x.getImageData(0, 0, W, H).data, pts = [];
+    for (var yy = 4; yy < H; yy += 7) for (var xx = 4; xx < W; xx += 7) if (d[(yy * W + xx) * 4 + 3] > 200) pts.push([xx, yy]);
+    var pick = [pts[Math.floor(pts.length / 2)]], dist = pts.map(function(p){ return Infinity; });
+    while (pick.length < N && pts.length){ var last = pick[pick.length - 1], best = -1, bi = 0;
+      for (var i = 0; i < pts.length; i++){ var dx = pts[i][0] - last[0], dy = pts[i][1] - last[1], dd = dx * dx + dy * dy; if (dd < dist[i]) dist[i] = dd; if (dist[i] > best){ best = dist[i]; bi = i; } }
+      pick.push(pts[bi]); }
+    var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    g.innerHTML = pick.map(function(p, i){ var sx = (rnd() * 1.6 - .3) * W - p[0], sy = (rnd() * 1.4 - .2) * H - p[1];
+      return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="12" style="transform:translate(' + sx.toFixed(0) + 'px,' + sy.toFixed(0) + 'px);transition-delay:' + (i * 9) + 'ms"/>'; }).join('');
+    sec.dataset.marks = pick.length;
+    if (OWL.reduce) settle(); }
+  function settle(){ [].forEach.call(g.querySelectorAll('circle'), function(c){ c.style.transform = 'none'; }); sec.classList.add('on'); sec.dataset.settled = '1'; }
+  var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  ready.then(function(){ build();
+    if (OWL.reduce || !('IntersectionObserver' in window)) return settle();
+    var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); requestAnimationFrame(function(){ requestAnimationFrame(settle); }); } }, { threshold: .25 }); io.observe(svg); });
+})();
+</script>
+</section>
