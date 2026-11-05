@@ -1,0 +1,112 @@
+{
+ "section": "top",
+ "total": 21,
+ "passed": 21,
+ "results": [
+  {
+   "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette control: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette safety: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette slate: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: the section opens with no kicker + h2 + lede and ends with no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the Scout arrival: a full-bleed sticky stage, the shortest pinned moment on the page (at most 2 screens)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "Owl’s own crew film plays muted and inline, labelled as Owl’s crew, behind the poster",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "one line at photo scale, then the second beat on scroll: \"Roof trouble? We’ll take it from here.\" gives way to \"You call. We climb. You relax.\" and back",
+   "ok": true,
+   "info": "[{\"two\":false,\"b1\":\"1\",\"b2\":\"0\",\"b2h\":\"true\",\"over\":true},{\"two\":true,\"b1\":\"0\",\"b2\":\"1\",\"b2h\":\"false\",\"over\":true}]"
+  },
+  {
+   "name": "the light top bar over the film",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "only locked facts on the film: 5.0 · 90+ reviews, GAF Systems Plus, 10-year workmanship warranty, family-owned in Shoreview, MN",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the cue goes straight to the problem-finder",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no film is loaded (the still poster of the crew stays), the beats still turn",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
