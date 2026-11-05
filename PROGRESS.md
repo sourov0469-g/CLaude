@@ -1372,6 +1372,8 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | 7 | Try | **M, "Match the house"** (`?try=m`) | MERSI (the split-slider as a game: six published before/after pairs on two shuffled reels; turn them until a house meets itself, and the lock shows the job's published record) | GATE-NEW-Try-M.md | 8.63 PASS | Accepted by Muse |
 
-| 8 | On your street | **M, "The map, filling in"** (`?area=m`) | Apple AirPods Pro (the pinned scroll; numbers as events: scrolling scrubs the finder's dated records onto a map around the office, month by month; the year rolls as the only numeral; the locked 886 = 312 + 574 line lands last) | GATE-NEW-Area-M.md | 8.54 PASS | Built and gated; waiting for Muse's accept |
+| 8 | On your street | **M, "The map, filling in"** (`?area=m`) | Apple AirPods Pro (the pinned scroll; numbers as events: scrolling scrubs the finder's dated records onto a map around the office, month by month; the year rolls as the only numeral; the locked 886 = 312 + 574 line lands last) | GATE-NEW-Area-M.md | 8.54 PASS | Accepted by Muse |
 
-**Next, after the accept:** Booking M.
+| 9 | Booking | **M, "Walk round the house"** (`?book=m`) | Ever, verified craft (3D visualisation: a CSS-3D house the visitor turns; each side lights its parts and ticks the free-inspection list, the homepage's own six items; the Book button and phone always visible) | GATE-NEW-Booking-M.md | 8.61 PASS | Built and gated; waiting for Muse's accept |
+
+**Pass 3 complete** with Booking M: an M version in all nine sections (Hero to Area M accepted). **Next, after the accept:** pass 4, Hero N.
