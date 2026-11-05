@@ -60,6 +60,7 @@ const res = []; const rec = (name, ok, info) => { res.push({ name, ok: !!ok, inf
   await p.close();
   // 8. one version only: the old records are not in this file
   { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8'); rec('the file holds one version per section only: no past homepage, no templates, no switcher', !/id="owl-past"|<template/.test(src) && (src.match(/class="ver"/g) || []).length === 17, (src.match(/class="ver"/g) || []).length + ' parts'); }
+  { const src = fs.readFileSync(path.resolve(__dirname, '../owl-roofing.html'), 'utf8'); const forms = (src.match(/location\.href\s*=\s*[^;]*mailto|window\.open\([^)]*mailto|<form[^>]*mailto/g) || []).length; rec('no form hands over to an outside email app (owner rule, 22:21): no mailto navigation in any form handler', forms === 0, String(forms)); }
   // 9. reduced motion: whole page, no errors
   p = await open({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }); for (let y = 0; y < total; y += 1200) { await p.evaluate(y => scrollTo(0, y), y); await p.waitForTimeout(150); } rec('reduced motion: the whole page scrolls without errors', true); await p.close();
   rec('no console or page errors across every run', errs.length === 0, errs.slice(0, 3).join(' | '));

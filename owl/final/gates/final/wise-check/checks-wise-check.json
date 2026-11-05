@@ -1,7 +1,7 @@
 {
  "section": "wise-check",
- "pass": 25,
- "total": 25,
+ "pass": 27,
+ "total": 27,
  "results": [
   {
    "name": "the section exists once, no version switcher on the page",
@@ -64,19 +64,29 @@
    "info": "Sunday’s our day off. Any other day works."
   },
   {
-   "name": "the words and the day fill the email: address, sentence, Tuesday, morning",
+   "name": "the words and the day fill the message: sentence, Tuesday, morning",
    "ok": true,
-   "info": "mailto:info@owlroofing.com?subject=Wise Check request&body=Hi Owl, I’d like a Wise Check.\n\nMy roof lost some shingles and it can’t wait. Please call me back.\n\nBest day: Tuesday\nBest time: Morning (8 to 12)\n\nName:\nAddress"
+   "info": "My roof lost some shingles and it can’t wait. Please call me back. | Best day: Tuesday | Best time: Morning (8 to 12)"
   },
   {
    "name": "the visible email card shows the same words and day",
    "ok": true,
-   "info": "Hi Owl, I’d like a Wise Check.My roof lost some shingles and it can’t wait. Please call me back.Best day: TuesdayBest time: Morning (8 to 12)Add your name, addr"
+   "info": "Hi Owl, I’d like a Wise Check.My roof lost some shingles and it can’t wait. Please call me back.Best day: TuesdayBest time: Morning (8 to 12)Add your name and p"
   },
   {
    "name": "the reply names a service",
    "ok": true,
    "info": "Roof repairWe’ll put back what’s missing, and check the rest while we’re up there."
+  },
+  {
+   "name": "sending with no name is refused: \"Please add your name.\"",
+   "ok": true,
+   "info": "Please add your name."
+  },
+  {
+   "name": "on send the page itself says \"We received your message. We’ll get back to you soon.\" and no email app opens",
+   "ok": true,
+   "info": "{\"t\":\"We received your message. We’ll get back to you soon.\",\"cls\":\"xnote ok\",\"nav\":0,\"box\":{\"kind\":\"wise-check-message\",\"at\":\"2026-11-05T16:36:14.496Z\",\"fields\":{\"name\":\"Maria Lopez\",\"phone\":\"612 555 0142\",\"day\":\"1\",\"time\":\"0\",\"message\":\"M"
   },
   {
    "name": "the call button is the one phone number",
@@ -99,17 +109,17 @@
    "info": "img 0.58x"
   },
   {
-   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 2022 px tall)",
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 2115 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },
   {
-   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1549 px tall)",
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1642 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },
   {
-   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1707 px tall)",
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1891 px tall)",
    "ok": true,
    "info": "overflow 0; "
   },

@@ -33,10 +33,19 @@ module.exports = { sharpAt: [0, .2, .5],
     // the words
     await p.evaluate(s => document.querySelector(s + ' .p3').scrollIntoView({ block: 'center', behavior: 'instant' }), S); await p.waitForTimeout(1200);
     const bk = await p.$$(S + ' .bk'); await bk[0].click(); await p.waitForTimeout(900); await bk[2].click(); await p.waitForTimeout(900);
-    const mt = await p.evaluate(s => ({ url: decodeURIComponent(document.querySelector(s).dataset.mailto || ''), card: document.querySelector(s + ' .mailcard .mb').textContent, reply: document.querySelector(s + ' .reply').textContent }), S);
-    rec('the words and the day fill the email: address, sentence, Tuesday, morning', /^mailto:info@owlroofing\.com\?subject=Wise Check request/.test(mt.url) && /lost some shingles/.test(mt.url) && /call me back/.test(mt.url) && /Tuesday/.test(mt.url) && /Morning/.test(mt.url), mt.url.slice(0, 220));
+    const mt = await p.evaluate(s => ({ url: document.querySelector(s).dataset.message || '', card: document.querySelector(s + ' .mailcard .mb').textContent, reply: document.querySelector(s + ' .reply').textContent }), S);
+    rec('the words and the day fill the message: sentence, Tuesday, morning', /lost some shingles/.test(mt.url) && /call me back/.test(mt.url) && /Tuesday/.test(mt.url) && /Morning/.test(mt.url), mt.url.slice(0, 220));
     rec('the visible email card shows the same words and day', /lost some shingles/.test(mt.card) && /Tuesday/.test(mt.card) && /Morning/.test(mt.card), mt.card.slice(0, 160));
     rec('the reply names a service', /Roof repair/.test(mt.reply), mt.reply);
+    // the form stays on the page
+    await p.evaluate(() => { window.__nav = 0; addEventListener('beforeunload', () => window.__nav++); });
+    await p.hover(S + ' .mail'); await p.waitForTimeout(200); await p.click(S + ' .mail'); await p.waitForTimeout(400);
+    const e1 = await p.evaluate(s => document.querySelector(s + ' .xnote').textContent, S);
+    rec('sending with no name is refused: "Please add your name."', /Please add your name/.test(e1), e1);
+    await p.fill(S + ' .who [data-n="name"]', 'Maria Lopez'); await p.fill(S + ' .who [data-n="phone"]', '612 555 0142');
+    await p.hover(S + ' .mail'); await p.waitForTimeout(200); await p.click(S + ' .mail'); await p.waitForTimeout(700);
+    const ok = await p.evaluate(s => ({ t: document.querySelector(s + ' .xnote').textContent, cls: document.querySelector(s + ' .xnote').className, nav: window.__nav, box: JSON.parse(localStorage.getItem('owlOutbox') || '[]').slice(-1)[0] }), S);
+    rec('on send the page itself says "We received your message. We\u2019ll get back to you soon." and no email app opens', ok.t === 'We received your message. We\u2019ll get back to you soon.' && /ok/.test(ok.cls) && ok.nav === 0 && ok.box && ok.box.fields.name === 'Maria Lopez', JSON.stringify(ok).slice(0, 240));
     const call = await p.evaluate(s => document.querySelector(s + ' .p3 a[href^="tel:"]').getAttribute('href'), S);
     rec('the call button is the one phone number', call === 'tel:+16519776027', call);
     await p.screenshot({ path: c.OUT + '/words.png' });

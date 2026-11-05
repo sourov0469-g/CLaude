@@ -46,3 +46,6 @@ axe 0 on the paper side (contrast of the ink and placeholders included) · facts
 ## 7. Vetoes: **zero**
 One phone number, info@owlroofing.com, licence #BC809662, Shoreview address; nothing claimed as sent; logo untouched; no maps; font credited.
 **Process:** every command I ran was foreground with a time limit, in my own thread; no Agent calls, no run_in_background calls, no task-checklist tools.
+
+## AMENDMENT (owner rule, 22:21): forms never hand over to an outside email app
+"Send My Letter" no longer opens the visitor's email app. On send the letter stays on the page, the stamp reads **"Message received"** and the page says in place: *"We received your message. We'll get back to you soon."* An incomplete letter is still refused. The name, phone, address, day, town and note are kept with the message. The caption beside the card now says "Fill in the letter and press Send. We will get back to you soon." Checks 27/27 (the mail check became "taken in place" and "no email app opens").

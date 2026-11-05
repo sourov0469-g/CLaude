@@ -46,3 +46,6 @@ axe 0 · facts lock · no maps · distinct media (hero-pines is used only here) 
 ## 7. Vetoes: **zero**
 Facts exact (the one phone number, info@owlroofing.com); stock labelled; logo untouched; no maps; no invented claims.
 **Process:** every command I ran was foreground with a time limit, in my own thread; no Agent calls, no run_in_background calls, no task-checklist tools.
+
+## AMENDMENT (owner rule, 22:21): forms never hand over to an outside email app
+The words, day and time no longer become a `mailto:`. The email card is now **"Your message to Owl"** (For / About / the words, day and time). Two required fields were added under it (**Your name**, **Best phone number**: a message with no way to reply is no use), and the button is **Send This to Owl**. On send the page itself shows, in place: *"We received your message. We'll get back to you soon."* No email app opens; an empty name or phone is refused with "Please add your name." Checks now 27/27 (adds: refusal, in-place message, no navigation).

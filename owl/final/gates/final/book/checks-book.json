@@ -69,14 +69,14 @@
    "info": "{\"sig\":\"Maria Lopez\",\"empty\":false,\"pressed\":\"false,false,true,false,false,false\",\"dash\":\"0px\"}"
   },
   {
-   "name": "the letter goes to the visitor's own email app, filled in: name, phone, address, Wednesday, town, note",
+   "name": "the letter is taken in place: name, phone, address, Wednesday, town and note are all in it",
    "ok": true,
-   "info": "mailto:info@owlroofing.com?subject=Wise Check request&body=Hi Owl, I’d like a Wise Check. /  / Name: Maria Lopez / Phone: 612 555 0142 / Address: 88 Oak Lane, Roseville / Best day: Wednesday / Town: Roseville / One more thing: Gutter looks loose too / "
+   "info": "{\"name\":\"Maria Lopez\",\"phone\":\"612 555 0142\",\"address\":\"88 Oak Lane, Roseville\",\"note\":\"Gutter looks loose too\",\"town\":\"Roseville\",\"day\":\"Wednesday\"}"
   },
   {
-   "name": "it never claims to have sent anything",
+   "name": "the page itself says \"We received your message. We’ll get back to you soon.\", stamps the letter, and no email app opens",
    "ok": true,
-   "info": "Your email app should open with your letter. Send it from there, or call (651) 977-6027."
+   "info": "We received your message. We’ll get back to you soon."
   },
   {
    "name": "\"Back to the card\" turns it again",

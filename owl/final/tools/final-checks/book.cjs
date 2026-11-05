@@ -19,21 +19,23 @@ module.exports = { sharpAt: [0],
     rec('labels, placeholders, typed text and day chips are all in handwriting (OwlHand loaded)', h.loaded && /OwlHand/.test(h.input) && /OwlHand/.test(h.label) && /OwlHand/.test(h.ph) && /OwlHand/.test(h.chip), JSON.stringify(h));
     rec('the handwriting is large enough to read (labels at least 24 px, typed text at least 26 px)', parseFloat(h.labelsize) >= 24 && parseFloat(h.inputsize) >= 26, h.labelsize + ' / ' + h.inputsize);
     await p.screenshot({ path: c.OUT + '/paper-empty.png' });
+    await p.evaluate(() => { window.__nav = 0; addEventListener('beforeunload', () => window.__nav++); });
     // invalid first
     await p.click(S + ' button[type="submit"]'); await p.waitForTimeout(300);
     const err = await p.evaluate(s => document.querySelector(s + ' .form-msg').textContent, S);
     rec('an empty letter is not handed over: "Please add your name."', /Please add your name/.test(err), err);
     // write the letter
     await p.fill(S + ' #bk3-n', 'Maria Lopez'); await p.fill(S + ' #bk3-p', '612 555 0142'); await p.fill(S + ' #bk3-a', '88 Oak Lane, Roseville'); await p.fill(S + ' #bk3-x', 'Gutter looks loose too');
-    await p.hover(S + ' .chips button:nth-child(3)'); await p.waitForTimeout(250); await p.click(S + ' .chips button:nth-child(3)'); await p.waitForTimeout(700);
+    await p.mouse.move(600,200); await frames(p); await p.hover(S + ' .chips button:nth-child(3)'); await p.waitForTimeout(450); await frames(p); await p.click(S + ' .chips button:nth-child(3)'); await p.waitForTimeout(700);
     const w = await p.evaluate(s => ({ sig: document.querySelector(s + ' .sig').textContent, empty: document.querySelector(s + ' .sig').classList.contains('empty'), pressed: [...document.querySelectorAll(s + ' .chips button')].map(b => b.getAttribute('aria-pressed')).join(','), dash: getComputedStyle(document.querySelector(s + ' .chips button[aria-pressed="true"] ellipse')).strokeDashoffset }), S);
     rec('the signature writes your name as you type it; the chosen day is circled in pen', w.sig === 'Maria Lopez' && !w.empty && w.pressed === 'false,false,true,false,false,false' && parseFloat(w.dash) === 0, JSON.stringify(w));
     await p.screenshot({ path: c.OUT + '/paper-written.png' });
     await p.evaluate(() => document.dispatchEvent(new CustomEvent('owl:town', { detail: 'Roseville' })));
     await p.hover(S + ' button[type="submit"]'); await p.waitForTimeout(250); await p.click(S + ' button[type="submit"]'); await p.waitForTimeout(500);
-    const mt = await p.evaluate(s => ({ url: decodeURIComponent(document.querySelector(s + ' form').dataset.mailto || ''), msg: document.querySelector(s + ' .form-msg').textContent, stamp: document.querySelector(s + ' .stamp').classList.contains('on') }), S);
-    rec('the letter goes to the visitor\'s own email app, filled in: name, phone, address, Wednesday, town, note', /^mailto:info@owlroofing\.com\?subject=Wise Check request/.test(mt.url) && /Name: Maria Lopez/.test(mt.url) && /Phone: 612 555 0142/.test(mt.url) && /Address: 88 Oak Lane, Roseville/.test(mt.url) && /Best day: Wednesday/.test(mt.url) && /Town: Roseville/.test(mt.url) && /One more thing: Gutter looks loose too/.test(mt.url), mt.url.replace(/\n/g, ' / ').slice(0, 260));
-    rec('it never claims to have sent anything', /should open with your letter.*Send it from there/.test(mt.msg) && !/\b(sent|submitted|thank you for)/i.test(mt.msg.replace(/Send it from there/, '')) && mt.stamp, mt.msg);
+    const mt = await p.evaluate(s => ({ box: JSON.parse(localStorage.getItem('owlOutbox') || '[]').filter(r => r.kind === 'booking-letter').slice(-1)[0], msg: document.querySelector(s + ' .form-msg').textContent, stamp: document.querySelector(s + ' .stamp').classList.contains('on'), nav: window.__nav }), S);
+    const fx = (mt.box || {}).fields || {};
+    rec('the letter is taken in place: name, phone, address, Wednesday, town and note are all in it', fx.name === 'Maria Lopez' && fx.phone === '612 555 0142' && fx.address === '88 Oak Lane, Roseville' && fx.day === 'Wednesday' && fx.town === 'Roseville' && fx.note === 'Gutter looks loose too', JSON.stringify(fx));
+    rec('the page itself says "We received your message. We\u2019ll get back to you soon.", stamps the letter, and no email app opens', mt.msg === 'We received your message. We\u2019ll get back to you soon.' && mt.stamp && mt.nav === 0, mt.msg);
     await p.screenshot({ path: c.OUT + '/paper-stamped.png' });
     // back to the card, and Escape
     await p.click(S + ' .unflip'); await p.waitForTimeout(1400); await frames(p);

@@ -618,6 +618,19 @@ OWL.prime = function(v){
     if (v.readyState >= 2) go(); else { v.addEventListener('loadeddata', go, {once: true}); v.load(); setTimeout(done, 4000); }
   });
 };
+
+/* FORMS NEVER LEAVE THE PAGE (owner rule): no form opens an email app. On submit the page shows its own success message in place.
+   The message is queued in this browser (localStorage "owlOutbox") and, when OWL.endpoint is set to Owl's real receiving address, is POSTed there.
+   If an endpoint is set and the post fails, the visitor is told so honestly and given the phone number. */
+OWL.endpoint = '';
+OWL.OK = 'We received your message. We\u2019ll get back to you soon.';
+OWL.submit = function(kind, fields){
+  var rec = {kind: kind, at: new Date().toISOString(), fields: fields};
+  try { var q = JSON.parse(localStorage.getItem('owlOutbox') || '[]'); q.push(rec); localStorage.setItem('owlOutbox', JSON.stringify(q.slice(-20))); } catch (e) {}
+  if (!OWL.endpoint) return Promise.resolve({ok: true, rec: rec});
+  return fetch(OWL.endpoint, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(rec)}).then(function(r){ return {ok: r.ok, rec: rec}; }, function(){ return {ok: false, rec: rec}; });
+};
+OWL.FAIL = 'We could not send that just now. Please call (651) 977-6027 and we will take it by phone.';
 })();
 
 </script>
@@ -991,6 +1004,14 @@ OWL.reg('video','1',function(root){
 .wc .mailcard .mb{margin:12px 0 0;color:#17111D}
 .wc .mailcard .mb span{display:block}
 .wc .mailcard .mb .dim{margin-top:10px;color:var(--ink-70);font-size:14px}
+.wc .who{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;margin:14px auto 0;text-align:left}
+.wc .who label{display:grid;gap:4px;font-weight:700;font-size:15px}
+.wc .who input{min-height:52px;padding:0 14px;border:2px solid rgba(23,17,29,.25);border-radius:14px;background:#fff;font:inherit;font-size:18px;color:var(--ink)}
+.wc .who input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wc .who input[aria-invalid="true"]{border-color:#B3261E}
+.wc .xnote.ok{font-size:18px;color:var(--ink);background:#E9F3E6;border-radius:14px;padding:12px 16px}
+.wc .xnote.err{color:#8F1D17}
+@media (max-width:640px){.wc .who{grid-template-columns:1fr}}
 @media (max-width:640px){.wc .p1 .pane{aspect-ratio:4/4.4}.wc .mailcard{padding:14px 16px}.wc .mailcard .mh span{width:56px}}
 
 .wise11{overflow:hidden}
@@ -1105,13 +1126,16 @@ OWL.reg('video','1',function(root){
    <p class="lbl">Say it your way: tap the underlined words until the sentence sounds like you</p>
    <p class="sent" data-owl="say:Tap the words">My roof <button class="bk" type="button" data-k="0" style="--d:.2s"></button> <button class="bk" type="button" data-k="1" style="--d:.45s"></button> Please <button class="bk" type="button" data-k="2" style="--d:.7s"></button></p>
    <div class="reply" aria-live="polite"><small></small><span></span></div>
-   <div class="mailcard" aria-label="The email that will open, with your words filled in">
-    <p class="mh"><span>To</span><b>info@owlroofing.com</b></p>
-    <p class="mh"><span>Subject</span><b>Wise Check request</b></p>
+   <form class="send" novalidate>
+   <div class="mailcard" aria-label="Your message to Owl, with your words filled in">
+    <p class="mh"><span>For</span><b>Owl Roofing, Shoreview</b></p>
+    <p class="mh"><span>About</span><b>A Wise Check</b></p>
     <p class="mb"></p>
    </div>
-   <div class="xacts"><button class="btn btn-amber mail" type="button" data-mag data-owl="hoot">Email This to Owl</button><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
-   <p class="xnote" aria-live="polite"></p>
+   <div class="who"><label>Your name<input data-n="name" autocomplete="name" required></label><label>Best phone number<input type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></label></div>
+   <div class="xacts"><button class="btn btn-amber mail" type="submit" data-mag data-owl="hoot">Send This to Owl</button><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+   <p class="xnote" role="status" aria-live="polite"></p>
+   </form>
    <p class="sr" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
   </div>
  </div>
@@ -1243,12 +1267,21 @@ var FOG_LBL = 'A house behind a fogged-up window. Wipe it with your finger or mo
     var lines = ['Hi Owl, I’d like a Wise Check.', s, 'Best day: ' + day, 'Best time: ' + tm];
     card.textContent = '';
     lines.forEach(function(l, i){ var e = document.createElement('span'); e.textContent = l; if (i === 1) e.style.marginTop = '8px'; if (i === 1) e.style.marginBottom = '8px'; card.appendChild(e); });
-    var dim = document.createElement('span'); dim.className = 'dim'; dim.textContent = 'Add your name, address and phone number in your email app.'; card.appendChild(dim);
-    root.dataset.mailto = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(lines[0] + '\n\n' + s + '\n\nBest day: ' + day + '\nBest time: ' + tm + '\n\nName:\nAddress:\nBest phone number:\n');
+    var dim = document.createElement('span'); dim.className = 'dim'; dim.textContent = 'Add your name and phone number below, then send it to us.'; card.appendChild(dim);
+    root.dataset.message = lines.slice(1).join(' | ');
   }
-  root.addEventListener('wcchange', function(){ note3.textContent = ''; compose(); });
+  root.addEventListener('wcchange', function(){ note3.className = 'xnote'; note3.textContent = ''; compose(); });
   compose();
-  mailBtn.addEventListener('click', function(){ location.href = root.dataset.mailto; note3.textContent = 'Your email app should open with your words and your day filled in. Send it from there, or call (651) 977-6027.'; });
+  /* the form stays on the page: on send, the page says we received it */
+  var sendForm = p3.querySelector('form.send');
+  sendForm.addEventListener('submit', function(e){
+    e.preventDefault(); var bad = null;
+    sendForm.querySelectorAll('[required]').forEach(function(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1); i.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok && !bad) bad = i; });
+    if (bad){ note3.className = 'xnote err'; note3.textContent = 'Please add your ' + bad.dataset.n + '.'; bad.focus(); return; }
+    mailBtn.disabled = true; note3.className = 'xnote'; note3.textContent = 'Sending…';
+    OWL.submit('wise-check-message', {name: sendForm.querySelector('[data-n="name"]').value.trim(), phone: sendForm.querySelector('[data-n="phone"]').value.trim(), day: p2.dataset.day, time: p2.dataset.tod, message: root.dataset.message}).then(function(r){
+      mailBtn.disabled = false; if (r.ok){ note3.className = 'xnote ok'; note3.textContent = OWL.OK; root.dataset.sent = '1'; } else { note3.className = 'xnote err'; note3.textContent = OWL.FAIL; } }); });
+  sendForm.addEventListener('input', function(e){ if (e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); });
   if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
   var io0 = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io0.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io0.observe(h2);
 });
@@ -1910,6 +1943,7 @@ OWL.reg('family','1',function(root){
 .book3 .sign .sig{font-family:var(--hw);font-weight:700;font-size:38px;line-height:1.2;color:var(--pen);transform:rotate(-2deg);overflow-wrap:anywhere}
 .book3 .sign .sig.empty{color:var(--pen-soft);opacity:.7;font-weight:500;font-size:30px}
 .book3 .form-msg{margin:4px 0 0;font-size:15px;min-height:22px}
+.book3 .form-msg.ok{font-size:17px;font-weight:700;color:#1F5E24}
 .book3 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;margin-top:6px}
 .book3 .flipb{min-height:48px;padding:0 16px;border-radius:14px;font-weight:700;background:transparent;box-shadow:0 0 0 2px rgba(23,17,29,.2);color:var(--ink)}
 .book3 .stamp{position:absolute;right:20px;top:60px;padding:8px 14px;border:4px solid #2E7D32;border-radius:10px;color:#2E7D32;font-weight:900;font-size:17px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-8deg) scale(1.6);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none;background:rgba(255,253,247,.9)}
@@ -1923,7 +1957,7 @@ OWL.reg('family','1',function(root){
   <div>
    <h2 class="h2" id="bk3-h">Take Our Card</h2>
    <p class="lede rv">One number, one email, one office in Shoreview. Call us, or turn the card over and write us a letter to book a Wise Check.</p>
-   <p class="small">Writing the letter opens your own email app with it filled in. Nothing is sent until you send it.</p>
+   <p class="small">Fill in the letter and press Send. We will get back to you soon.</p>
   </div>
   <div class="scene" data-owl="say:Turn it over">
    <div class="lift"><div class="tilt"><div class="card">
@@ -1935,7 +1969,7 @@ OWL.reg('family','1',function(root){
     </div>
     <div class="face backf" id="bk3-form" inert aria-hidden="true">
      <span class="holes" aria-hidden="true"><i></i><i></i><i></i></span>
-     <form novalidate aria-labelledby="bk3-t">
+     <form novalidate aria-labelledby="bk3-t" aria-describedby="bk3-m">
       <p class="paper-h"><span id="bk3-t">Book a Wise Check</span><span aria-hidden="true">Shoreview, MN</span></p>
       <p class="dear" aria-hidden="true">Dear Owl,</p>
       <div class="ln"><label for="bk3-n">My name is</label><input id="bk3-n" data-n="name" autocomplete="name" placeholder="your name" required></div>
@@ -1945,9 +1979,9 @@ OWL.reg('family','1',function(root){
       <div class="ln"><label for="bk3-x">One more thing</label><input id="bk3-x" data-n="note" placeholder="anything you want us to know" autocomplete="off"></div>
       <input type="hidden" data-n="town" id="bk3-town">
       <div class="sign"><span class="th" aria-hidden="true">Thank you,</span><span class="sig empty" aria-hidden="true">your name</span></div>
-      <p class="form-msg" aria-live="polite"></p>
+      <p class="form-msg" id="bk3-m" role="status" aria-live="polite"></p>
       <div class="row"><button class="flipb unflip" type="button">Back to the card</button><button class="btn btn-amber btn-sm" type="submit" data-mag data-owl="hoot">Send My Letter</button></div>
-      <span class="stamp" aria-hidden="true">Over to your email</span>
+      <span class="stamp" aria-hidden="true">Message received</span>
      </form>
     </div>
    </div></div></div>
@@ -1968,7 +2002,7 @@ OWL.reg('book','1',function(root){
   nameIn.addEventListener('input', signIt);
   /* the town chosen in the areas section goes into the letter */
   function setTown(t){ town.value = t || ''; } try { setTown(OWL.town || sessionStorage.getItem('owlTown')); } catch (e){} document.addEventListener('owl:town', function(e){ setTown(e.detail); });
-  /* the letter is handed to the visitor's own email app: nothing is sent from this page, and it never says it was */
+  /* the letter stays on the page: on send, the page says we received it (never opens an email app) */
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var bad = null; form.querySelectorAll('[required]').forEach(function(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1); i.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok && !bad) bad = i; });
@@ -1977,9 +2011,11 @@ OWL.reg('book','1',function(root){
     function line(k, v){ if (v) L.push(k + ': ' + v); }
     line('Name', form.querySelector('[data-n="name"]').value.trim()); line('Phone', form.querySelector('[data-n="phone"]').value.trim()); line('Address', form.querySelector('[data-n="address"]').value.trim());
     var on = chips.querySelector('[aria-pressed="true"]'); line('Best day', on ? on.getAttribute('aria-label') : ''); line('Town', town.value); line('One more thing', form.querySelector('[data-n="note"]').value.trim());
-    var url = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(L.join('\n') + '\n');
-    form.dataset.mailto = url; location.href = url;
-    msg.className = 'form-msg'; msg.textContent = 'Your email app should open with your letter. Send it from there, or call (651) 977-6027.'; stamp.classList.add('on');
+    var data = {}; form.querySelectorAll('[data-n]').forEach(function(i){ if (i.value) data[i.dataset.n] = i.value.trim(); }); if (on) data.day = on.getAttribute('aria-label');
+    var go = form.querySelector('button[type="submit"]'); go.disabled = true; msg.className = 'form-msg'; msg.textContent = 'Sending…';
+    OWL.submit('booking-letter', data).then(function(r){ go.disabled = false;
+      if (r.ok){ msg.className = 'form-msg ok'; msg.textContent = OWL.OK; stamp.classList.add('on'); form.dataset.sent = '1'; }
+      else { msg.className = 'form-msg err'; msg.textContent = OWL.FAIL; stamp.classList.remove('on'); } });
   });
   form.addEventListener('input', function(e){ if (e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); stamp.classList.remove('on'); });
   /* turn the card over: it lifts, turns, settles; focus follows */

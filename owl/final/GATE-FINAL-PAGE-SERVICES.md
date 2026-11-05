@@ -18,6 +18,14 @@ axe 0 · facts lock · no maps · distinct media (none) · five jobs, one select
 ## Score (Design 40 · Usability 30 · Creativity 20 · Content 10)
 8.2 / 8.5 / 8.3 / 8.7 → 3.28 + 2.55 + 1.66 + 0.87 = **8.36**
 
+## Skill ledger (WEB-SKILLS tags, each one applied and checked in this page)
+⟦S1107⟧ keyboard-navigation (tabs with roving tabindex, arrows) · ⟦S0070⟧ better-accessibility (`role=tablist/tab/tabpanel`, `aria-selected`, live card) · ⟦S1259⟧ touch-targets (tiles 84 px, steps 78 px+, round buttons 54 px) · ⟦S1434⟧ visual-hierarchy (one h1, the chosen job largest) · ⟦S1455⟧ state-machine (exactly one job and one step active at a time) · ⟦S1440⟧ feedback-patterns (the chosen tile turns amber, done steps turn amber) · ⟦S0544⟧ motion-doctrine (one easing; the lifted step tilts, nothing else moves) · ⟦S0400⟧ accessible-animation (reduced motion removes the tilts).
+
+## Governing reference, with transfers
+**Governing reference:** the WAI-ARIA Authoring Practices **Tabs** pattern (a pattern, not live-studied), and Owl's own accepted homepage pieces: **Services V8 "Name Your Job"** (five jobs named plainly) and **Nothing V1 "Scroll film"** (a job told as five ordered beats).
+**Transfers:** from Tabs: one tab stop, arrow keys, one panel shown, roving tabindex. From Name Your Job: the five jobs, in the same words and order, and the plain three-line details. From Scroll film: a numbered sequence with the current step lit, and earlier steps marked done. The shingle-course tabs are the page's own physical metaphor (a roof is laid in courses).
+
+
 ## Remaining
 D1: the page has no photographs until Owl supplies larger job photos. D2: the Protect Your Nest System is named as a step of a replacement (Owl's own fact) though it has no page of its own (see the question in GATE-FINAL-PAGES-ALL).
 

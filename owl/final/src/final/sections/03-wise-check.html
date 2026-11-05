@@ -19,6 +19,14 @@
 .wc .mailcard .mb{margin:12px 0 0;color:#17111D}
 .wc .mailcard .mb span{display:block}
 .wc .mailcard .mb .dim{margin-top:10px;color:var(--ink-70);font-size:14px}
+.wc .who{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;margin:14px auto 0;text-align:left}
+.wc .who label{display:grid;gap:4px;font-weight:700;font-size:15px}
+.wc .who input{min-height:52px;padding:0 14px;border:2px solid rgba(23,17,29,.25);border-radius:14px;background:#fff;font:inherit;font-size:18px;color:var(--ink)}
+.wc .who input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wc .who input[aria-invalid="true"]{border-color:#B3261E}
+.wc .xnote.ok{font-size:18px;color:var(--ink);background:#E9F3E6;border-radius:14px;padding:12px 16px}
+.wc .xnote.err{color:#8F1D17}
+@media (max-width:640px){.wc .who{grid-template-columns:1fr}}
 @media (max-width:640px){.wc .p1 .pane{aspect-ratio:4/4.4}.wc .mailcard{padding:14px 16px}.wc .mailcard .mh span{width:56px}}
 
 .wise11{overflow:hidden}
@@ -133,13 +141,16 @@
    <p class="lbl">Say it your way: tap the underlined words until the sentence sounds like you</p>
    <p class="sent" data-owl="say:Tap the words">My roof <button class="bk" type="button" data-k="0" style="--d:.2s"></button> <button class="bk" type="button" data-k="1" style="--d:.45s"></button> Please <button class="bk" type="button" data-k="2" style="--d:.7s"></button></p>
    <div class="reply" aria-live="polite"><small></small><span></span></div>
-   <div class="mailcard" aria-label="The email that will open, with your words filled in">
-    <p class="mh"><span>To</span><b>info@owlroofing.com</b></p>
-    <p class="mh"><span>Subject</span><b>Wise Check request</b></p>
+   <form class="send" novalidate>
+   <div class="mailcard" aria-label="Your message to Owl, with your words filled in">
+    <p class="mh"><span>For</span><b>Owl Roofing, Shoreview</b></p>
+    <p class="mh"><span>About</span><b>A Wise Check</b></p>
     <p class="mb"></p>
    </div>
-   <div class="xacts"><button class="btn btn-amber mail" type="button" data-mag data-owl="hoot">Email This to Owl</button><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
-   <p class="xnote" aria-live="polite"></p>
+   <div class="who"><label>Your name<input data-n="name" autocomplete="name" required></label><label>Best phone number<input type="tel" data-n="phone" autocomplete="tel" inputmode="tel" required></label></div>
+   <div class="xacts"><button class="btn btn-amber mail" type="submit" data-mag data-owl="hoot">Send This to Owl</button><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+   <p class="xnote" role="status" aria-live="polite"></p>
+   </form>
    <p class="sr" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
   </div>
  </div>
@@ -271,12 +282,21 @@ var FOG_LBL = 'A house behind a fogged-up window. Wipe it with your finger or mo
     var lines = ['Hi Owl, I’d like a Wise Check.', s, 'Best day: ' + day, 'Best time: ' + tm];
     card.textContent = '';
     lines.forEach(function(l, i){ var e = document.createElement('span'); e.textContent = l; if (i === 1) e.style.marginTop = '8px'; if (i === 1) e.style.marginBottom = '8px'; card.appendChild(e); });
-    var dim = document.createElement('span'); dim.className = 'dim'; dim.textContent = 'Add your name, address and phone number in your email app.'; card.appendChild(dim);
-    root.dataset.mailto = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(lines[0] + '\n\n' + s + '\n\nBest day: ' + day + '\nBest time: ' + tm + '\n\nName:\nAddress:\nBest phone number:\n');
+    var dim = document.createElement('span'); dim.className = 'dim'; dim.textContent = 'Add your name and phone number below, then send it to us.'; card.appendChild(dim);
+    root.dataset.message = lines.slice(1).join(' | ');
   }
-  root.addEventListener('wcchange', function(){ note3.textContent = ''; compose(); });
+  root.addEventListener('wcchange', function(){ note3.className = 'xnote'; note3.textContent = ''; compose(); });
   compose();
-  mailBtn.addEventListener('click', function(){ location.href = root.dataset.mailto; note3.textContent = 'Your email app should open with your words and your day filled in. Send it from there, or call (651) 977-6027.'; });
+  /* the form stays on the page: on send, the page says we received it */
+  var sendForm = p3.querySelector('form.send');
+  sendForm.addEventListener('submit', function(e){
+    e.preventDefault(); var bad = null;
+    sendForm.querySelectorAll('[required]').forEach(function(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1); i.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok && !bad) bad = i; });
+    if (bad){ note3.className = 'xnote err'; note3.textContent = 'Please add your ' + bad.dataset.n + '.'; bad.focus(); return; }
+    mailBtn.disabled = true; note3.className = 'xnote'; note3.textContent = 'Sending…';
+    OWL.submit('wise-check-message', {name: sendForm.querySelector('[data-n="name"]').value.trim(), phone: sendForm.querySelector('[data-n="phone"]').value.trim(), day: p2.dataset.day, time: p2.dataset.tod, message: root.dataset.message}).then(function(r){
+      mailBtn.disabled = false; if (r.ok){ note3.className = 'xnote ok'; note3.textContent = OWL.OK; root.dataset.sent = '1'; } else { note3.className = 'xnote err'; note3.textContent = OWL.FAIL; } }); });
+  sendForm.addEventListener('input', function(e){ if (e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); });
   if (OWL.reduce || !('IntersectionObserver' in window)){ OWL.reveal(h2); return; }
   var io0 = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io0.disconnect(); OWL.reveal(h2); } }, {threshold:.3}); io0.observe(h2);
 });

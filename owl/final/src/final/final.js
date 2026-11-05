@@ -25,4 +25,17 @@ OWL.prime = function(v){
     if (v.readyState >= 2) go(); else { v.addEventListener('loadeddata', go, {once: true}); v.load(); setTimeout(done, 4000); }
   });
 };
+
+/* FORMS NEVER LEAVE THE PAGE (owner rule): no form opens an email app. On submit the page shows its own success message in place.
+   The message is queued in this browser (localStorage "owlOutbox") and, when OWL.endpoint is set to Owl's real receiving address, is POSTed there.
+   If an endpoint is set and the post fails, the visitor is told so honestly and given the phone number. */
+OWL.endpoint = '';
+OWL.OK = 'We received your message. We\u2019ll get back to you soon.';
+OWL.submit = function(kind, fields){
+  var rec = {kind: kind, at: new Date().toISOString(), fields: fields};
+  try { var q = JSON.parse(localStorage.getItem('owlOutbox') || '[]'); q.push(rec); localStorage.setItem('owlOutbox', JSON.stringify(q.slice(-20))); } catch (e) {}
+  if (!OWL.endpoint) return Promise.resolve({ok: true, rec: rec});
+  return fetch(OWL.endpoint, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(rec)}).then(function(r){ return {ok: r.ok, rec: rec}; }, function(){ return {ok: false, rec: rec}; });
+};
+OWL.FAIL = 'We could not send that just now. Please call (651) 977-6027 and we will take it by phone.';
 })();

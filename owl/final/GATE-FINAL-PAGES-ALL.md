@@ -25,3 +25,9 @@ D1 iOS Safari is not run here. D2 forms hand over to the visitor's email app (no
 
 ## 6. Vetoes: **zero**
 **Process:** every command I ran was foreground with a time limit, in my own thread; no Agent calls, no run_in_background calls, no task-checklist tools.
+
+## AMENDMENT after Muse's judgment (PASS; three page gates asked for tags and references)
+1. **WEB-SKILLS tags and governing references added** to `GATE-FINAL-PAGE-SERVICES.md`, `-WISE-CHECK.md`, `-ABOUT.md` (a "Skill ledger" with the ⟦S####⟧ tags actually applied, and a "Governing reference, with transfers" section each; where the reference is a pattern rather than a live-studied site, the gate says so).
+2. **Forms never hand over to an outside email app (owner rule 22:21).** Both forms on the site (the Wise Check "Send This to Owl" in section 3 and the booking letter in section 10) now show an in-place success message: *"We received your message. We'll get back to you soon."* A shared helper `OWL.submit` (in `src/final/final.js`) keeps the message in the browser (`localStorage` "owlOutbox") and, **if `OWL.endpoint` is set to a real receiving address, POSTs it there**; if that post fails the page says so honestly and gives the phone number. The inner pages have no forms (only the band's Book and Call buttons). A whole-page check asserts no form handler navigates to `mailto:`.
+3. **A fact the owner must know:** this is a static file with no server, so until `OWL.endpoint` points at a real inbox or form service, a "received" message is shown but **nothing reaches Owl** (it is only stored in the visitor's own browser). To make the promise true Owl needs one receiving address; it is one line to set. Plain `mailto:` text links remain for the email address in the footer, the booking card face and one Ask-the-Owl answer (they are links, not forms); say if those should become plain text too.
+4. The Protect Your Nest page was **not** built (with the owner).

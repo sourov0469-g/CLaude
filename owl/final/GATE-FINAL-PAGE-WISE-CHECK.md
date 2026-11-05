@@ -19,6 +19,14 @@ axe 0 · facts lock · no maps · sweeps in and finds the spot; marked as an ill
 ## Score
 8.3 / 8.4 / 8.6 / 8.6 → 3.32 + 2.52 + 1.72 + 0.86 = **8.42**
 
+## Skill ledger (WEB-SKILLS tags, each one applied and checked in this page)
+⟦S0414⟧ teardown (a truthful picture: the page says it is an illustration of how a heat sensor shows moisture) · ⟦S1107⟧ keyboard-navigation (scanner and dial move with arrows, Home/End) · ⟦S1049⟧ focus-styles (visible focus on grip, knob, labels) · ⟦S0462⟧ interactive-hit-areas (labels 44 px, grip 58 px) · ⟦S0070⟧ better-accessibility (`role=slider` with `aria-valuenow`, `aria-valuetext` for the dial) · ⟦S0405⟧ micro-interaction (the sweep-in, the label popping at the warm spot) · ⟦S0544⟧ motion-doctrine (one easing curve for sweep and dial) · ⟦S0400⟧ accessible-animation (reduced motion starts the scanner already across) · ⟦S0076⟧ better-writing (Owl's own published words for the four parts).
+
+## Governing reference, with transfers
+**Governing reference:** the **before/after comparison slider** pattern (draggable divider, WAI-ARIA **Slider**; a pattern, not live-studied), and Owl's own homepage **"Clear It Up"** (wipe a fogged window to reveal) from section 3.
+**Transfers:** from the comparison slider: a divider you drag, with the revealed side showing what the eye cannot see; keyboard arrows, Home and End; the grip is a labelled slider. From Clear It Up: the reveal-by-hand idea and the honest "illustrative" label. For the dial: a rotary control built on the same Slider semantics (four stops, labels as buttons).
+
+
 ## Remaining
 D1: the still is a 640 px crop; a real Owl thermal image would replace the illustration.
 
