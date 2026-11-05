@@ -1,0 +1,81 @@
+<section class="rs towns t2" id="towns" data-sky="day" aria-labelledby="t2-h">
+<style>
+/* V2 · Distance rings. Shoreview at the centre, rings every 5 miles out to 25; each of the 29 towns sits at its true bearing and
+   straight-line distance. Type a town and its ring and dot light, with the answer. A polar chart (pattern, not live-studied). */
+.t2{padding:clamp(100px,13vh,150px) clamp(16px,4vw,64px) clamp(80px,10vh,120px)}
+.t2 .in{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,64px);align-items:center}
+.t2 h2{margin:0;font-size:clamp(36px,4.2vw,66px);font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--ink)}
+.t2 label{display:block;margin:20px 0 8px;font-size:15px;font-weight:700;color:var(--ink-70)}
+.t2 input{width:100%;min-height:56px;padding:0 18px;border:2px solid var(--ink);border-radius:16px;background:var(--surface);color:var(--ink);font:inherit;font-size:19px;font-weight:700}
+.t2 input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.t2 .ans{margin:16px 0 0;min-height:76px;font-size:19px;line-height:1.4;color:var(--ink)}
+.t2 .ans b{font-weight:900}.t2 .ans small{display:block;margin-top:4px;font-size:15px;color:var(--ink-70)}
+.t2 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:14px 0 0;padding:0;list-style:none;font-size:14px;font-weight:700;color:var(--ink-70)}
+.t2 .legend b{color:var(--ink)}
+.t2 figure{margin:0;position:relative}
+.t2 svg{display:block;width:100%;height:auto;overflow:visible}
+.t2 .ring{fill:none;stroke:var(--ink-50);stroke-width:1.2;stroke-dasharray:3 5;transition:stroke .3s,stroke-width .3s}
+.t2 .ring.lit{stroke:var(--acc);stroke-width:2.4;stroke-dasharray:none}
+.t2 .rl{font-size:13px;font-weight:800;fill:var(--ink-70);font-family:Inter,system-ui,sans-serif}
+.t2 .compass{font-size:12px;font-weight:800;fill:var(--ink-70);letter-spacing:.08em;font-family:Inter,system-ui,sans-serif}
+.t2 .hub{fill:var(--deep)}
+.t2 .hubt{fill:var(--on-deep);font-size:13px;font-weight:900;font-family:Inter,system-ui,sans-serif}
+.t2 .town{cursor:pointer}
+.t2 .town circle.d{fill:var(--ink);transition:r .3s,fill .3s}
+.t2 .town circle.h{fill:transparent}
+.t2 .town text{font-size:12px;font-weight:800;fill:var(--ink);font-family:Inter,system-ui,sans-serif;paint-order:stroke;stroke:var(--ground);stroke-width:4px;opacity:0;transition:opacity .25s;pointer-events:none}
+.t2 .town.big text,.t2 .town.hit text,.t2 .town:hover text,.t2 .town:focus text{opacity:1}
+.t2 .town.hit circle.d{fill:var(--call);r:9}
+.t2 .town:focus{outline:none}.t2 .town:focus-visible circle.h{stroke:var(--acc);stroke-width:3}
+@media (max-width:900px){.t2 .in{grid-template-columns:1fr}.t2{padding-bottom:140px}
+ .t2 .town text{font-size:21px;stroke-width:6px}.t2 .rl,.t2 .compass{font-size:20px}.t2 .hubt{font-size:20px}.t2 .town circle.d{r:9}.t2 .town circle.h{r:30}.t2 .town.hit circle.d{r:13}
+ .t2 .town:not(.big):not(.hit) text{opacity:0}}
+@media (prefers-reduced-motion:reduce){.t2 .ring,.t2 .town circle.d,.t2 .town text{transition:none}}
+</style>
+<div class="in">
+ <div>
+  <h2 id="t2-h">Do you come to me? Find your ring.</h2>
+  <label for="t2-in">Type your town</label>
+  <input id="t2-in" type="text" autocomplete="address-level2" placeholder="e.g. Roseville" list="t2-list">
+  <datalist id="t2-list"></datalist>
+  <p class="ans" aria-live="polite">We come to 29 towns around Shoreview, MN. Each dot is one, at its real distance and direction.</p>
+  <ul class="legend"><li><b>Rings</b> every 5 miles from our Shoreview office</li><li><b>Distances</b> are straight lines, as the owl flies</li></ul>
+ </div>
+ <figure><svg viewBox="-330 -330 660 660" role="group" aria-label="The 29 towns Owl comes to, around Shoreview"></svg></figure>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), svg = sec.querySelector('svg'), input = sec.querySelector('input'), ans = sec.querySelector('.ans'), list = sec.querySelector('datalist');
+  /* Owl's 29 towns (the site's own list); approximate public town-centre coordinates, used only for bearing and straight-line distance */
+  var T = [['Shoreview',45.079,-93.147],['North Oaks',45.103,-93.079],['Arden Hills',45.050,-93.156],['Vadnais Heights',45.057,-93.074],['Little Canada',45.027,-93.088],['Roseville',45.006,-93.157],['Mounds View',45.105,-93.208],['New Brighton',45.066,-93.202],['Lino Lakes',45.160,-93.089],['Blaine',45.161,-93.235],['White Bear Lake',45.085,-93.010],['Maplewood',44.953,-92.995],['Fridley',45.086,-93.263],['Saint Paul',44.954,-93.090],['Minneapolis',44.978,-93.265],['Forest Lake',45.279,-92.985],['Coon Rapids',45.173,-93.303],['Oakdale',44.963,-92.965],['Stillwater',45.056,-92.806],['Woodbury',44.924,-92.959],['Maple Grove',45.073,-93.456],['Plymouth',45.011,-93.455],['Minnetonka',44.921,-93.468],['Edina',44.889,-93.350],['Eden Prairie',44.855,-93.471],['Bloomington',44.841,-93.298],['Eagan',44.804,-93.167],['Burnsville',44.768,-93.278],['Apple Valley',44.732,-93.218]];
+  var BIG = ['Saint Paul', 'Minneapolis', 'Stillwater', 'Maple Grove', 'Apple Valley', 'Forest Lake', 'Roseville', 'Eagan'];
+  var R = 3958.8, rad = Math.PI / 180, S = T[0], K = 12;   /* K: px per mile (25 miles = 300 px) */
+  function geo(t){ var dl = (t[1] - S[1]) * rad, dg = (t[2] - S[2]) * rad, h = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(S[1] * rad) * Math.cos(t[1] * rad) * Math.sin(dg / 2) * Math.sin(dg / 2), d = 2 * R * Math.asin(Math.sqrt(h));
+    var y = Math.sin(dg) * Math.cos(t[1] * rad), x = Math.cos(S[1] * rad) * Math.sin(t[1] * rad) - Math.sin(S[1] * rad) * Math.cos(t[1] * rad) * Math.cos(dg), b = Math.atan2(y, x); return { d: d, b: b }; }
+  var NS = 'http://www.w3.org/2000/svg', out = '';
+  [5, 10, 15, 20, 25].forEach(function(m){ out += '<circle class="ring" data-m="' + m + '" r="' + (m * K) + '"/><text class="rl" x="' + (m * K * .7071 + 4) + '" y="' + (-m * K * .7071 - 4) + '">' + m + ' mi</text>'; });
+  out += '<text class="compass" x="0" y="-312" text-anchor="middle">N</text><text class="compass" x="318" y="4" text-anchor="middle">E</text><text class="compass" x="0" y="322" text-anchor="middle">S</text><text class="compass" x="-318" y="4" text-anchor="middle">W</text>';
+  out += '<circle class="hub" r="30"/><text class="hubt" y="5" text-anchor="middle">Owl</text>';
+  svg.innerHTML = out;
+  var G = T.map(function(t, i){ if (!i) return null; var g = geo(t), x = Math.sin(g.b) * g.d * K, y = -Math.cos(g.b) * g.d * K, el = document.createElementNS(NS, 'g');
+    el.setAttribute('class', 'town' + (BIG.indexOf(t[0]) > -1 ? ' big' : '')); el.setAttribute('tabindex', '0'); el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', t[0] + ', about ' + Math.round(g.d) + ' miles from our Shoreview base');
+    el.innerHTML = '<circle class="h" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="16"/><circle class="d" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6"/><text x="' + x.toFixed(1) + '" y="' + (y + (y > 0 ? 22 : -12)).toFixed(1) + '" text-anchor="middle">' + t[0] + '</text>';
+    el.addEventListener('click', function(){ input.value = t[0]; answer(i); }); el.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); input.value = t[0]; answer(i); } });
+    svg.appendChild(el); var o = document.createElement('option'); o.value = t[0]; list.appendChild(o); g.el = el; return g; });
+  var so = document.createElement('option'); so.value = 'Shoreview'; list.insertBefore(so, list.firstChild);
+  function share(n){ try { sessionStorage.setItem('owlTown', n); } catch (e){} document.dispatchEvent(new CustomEvent('owl:town', { detail: n })); }
+  function light(i){ G.forEach(function(g, j){ if (g) g.el.classList.toggle('hit', j === i); }); var ring = i > 0 ? Math.max(5, Math.ceil(G[i].d / 5) * 5) : 0;
+    [].forEach.call(svg.querySelectorAll('.ring'), function(r){ r.classList.toggle('lit', +r.dataset.m === ring); }); return ring; }
+  function answer(i){ var t = T[i]; sec.dataset.town = t[0]; share(t[0]);
+    if (!i){ light(0); ans.innerHTML = '<b>Yes. Shoreview is home.</b><small>Our office is at 1000 County Rd E #230, Shoreview, MN 55126.</small>'; return; }
+    var ring = light(i), m = Math.round(G[i].d); ans.innerHTML = '<b>Yes, we come to ' + t[0] + '.</b><small>About ' + m + ' miles from our Shoreview base, as the owl flies: inside the ' + ring + '-mile ring.</small>'; sec.dataset.ring = ring; }
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  input.addEventListener('input', function(){ var q = norm(input.value); if (!q){ light(-1); sec.dataset.town = ''; ans.innerHTML = 'We come to 29 towns around Shoreview, MN. Each dot is one, at its real distance and direction.'; return; }
+    var i = T.findIndex(function(t){ return norm(t[0]) === q; }); if (i < 0) i = T.findIndex(function(t){ return q.length >= 3 && norm(t[0]).indexOf(q) === 0; });
+    if (i > -1){ answer(i); return; }
+    light(-1); sec.dataset.town = '';
+    if (q.length >= 3) ans.innerHTML = '<b>' + input.value.replace(/[<>&]/g, '') + ' isn’t on our list of 29 towns.</b><small>Call (651) 977-6027 and ask; we’ll tell you straight.</small>'; });
+})();
+</script>
+</section>

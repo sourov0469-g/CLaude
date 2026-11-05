@@ -1,0 +1,158 @@
+{
+ "section": "towns",
+ "version": 2,
+ "total": 30,
+ "passed": 30,
+ "results": [
+  {
+   "name": "the switcher shows this version: towns V2",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | page-wide: no repeats"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "the site’s own 29 towns are offered as suggestions",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "a whole name or “st paul” answers yes, with the straight-line distance",
+   "ok": true,
+   "info": "Yes, we come to Roseville.About 5 miles from our Shoreview base, as the owl flies: inside the 10-mile ring."
+  },
+  {
+   "name": "a town not on the list gets an honest answer and the phone number",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "typed text is never injected as markup",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "Shoreview is home: the answer gives the real office address",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the town is shared with the page (the call section reads it)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "28 towns around the Shoreview hub, rings every 5 miles to 25",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "true geometry: Stillwater sits east of the hub, Maple Grove west, Forest Lake north, Apple Valley south",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the answer names the ring honestly (Apple Valley: the 25-mile ring), and that ring lights",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "keyboard: Enter on a focused town answers",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the ring and the dot light at once (no transition)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

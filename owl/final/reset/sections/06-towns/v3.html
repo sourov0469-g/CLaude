@@ -1,0 +1,64 @@
+<section class="rs towns t3" id="towns" data-sky="day" aria-labelledby="t3-h">
+<style>
+/* V3 · From above (Scout: one line on one photograph). A sharp suburb seen from above, full-bleed and tagged illustrative; one big
+   ask box with the answer; under the photograph, the 29 towns as a quiet strict row, the one you typed lit. */
+.t3{padding:0 0 clamp(70px,9vh,110px)}
+.t3 .hero{position:relative;min-height:88vh;min-height:88svh;display:flex;align-items:center;overflow:hidden;background:var(--deep)}
+.t3 .bgph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.t3 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,18,22,.62),rgba(14,18,22,.18) 60%,rgba(14,18,22,0))}
+.t3 .tag{position:absolute;right:clamp(14px,3vw,44px);bottom:16px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700}
+.t3 .ask{position:relative;z-index:2;margin:96px clamp(16px,5vw,90px);width:min(520px,calc(100% - 32px));padding:clamp(20px,2.4vw,32px);border-radius:24px;background:var(--surface);box-shadow:0 40px 70px -40px rgba(0,0,0,.6)}
+.t3 h2{margin:0;font-size:clamp(34px,3.6vw,56px);font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--ink)}
+.t3 label{display:block;margin:18px 0 8px;font-size:15px;font-weight:700;color:var(--ink-70)}
+.t3 input{width:100%;min-height:60px;padding:0 18px;border:2px solid var(--ink);border-radius:16px;background:var(--ground);color:var(--ink);font:inherit;font-size:20px;font-weight:700}
+.t3 input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.t3 .ans{margin:16px 0 0;min-height:56px;font-size:19px;line-height:1.4;color:var(--ink)}
+.t3 .ans b{font-weight:900}.t3 .ans small{display:block;margin-top:4px;font-size:15px;color:var(--ink-70)}
+.t3 .row{max-width:1320px;margin:clamp(28px,4vh,44px) auto 0;padding:0 clamp(16px,4vw,64px)}
+.t3 .row p{margin:0 0 12px;font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-70)}
+.t3 .row ul{list-style:none;margin:0;padding:16px 0 0;border-top:2px solid var(--ink);display:flex;flex-wrap:wrap;gap:6px 0}
+.t3 .row li{font-size:16px;font-weight:700;color:var(--ink-70)}
+.t3 .row li:not(:last-child)::after{content:"·";margin:0 10px;color:var(--ink-50)}
+.t3 .row li button{min-height:44px;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer}
+.t3 .row li button:hover{color:var(--ink);text-decoration:underline}
+.t3 .row li button:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:4px}
+.t3 .row li.hit button{color:var(--ink);font-weight:900;text-decoration:underline;text-decoration-color:var(--call);text-decoration-thickness:3px;text-underline-offset:5px}
+@media (max-width:860px){.t3 .hero{min-height:0;display:block;padding:72px 0 0}.t3 .hero .bgph{position:relative;display:block;height:46vh}.t3 .shade{display:none}.t3 .ask{margin:-60px 16px 0;width:auto}.t3 .tag{top:84px;bottom:auto}.t3{padding-bottom:140px}}
+</style>
+<div class="hero">
+ <img class="bgph" src="{{A:stock/towns-above.webp}}" alt="An autumn suburb seen from above: streets, roofs and trees (illustrative photo)" width="2400" height="1348">
+ <div class="shade" aria-hidden="true"></div>
+ <span class="tag">Illustrative photo</span>
+ <div class="ask">
+  <h2 id="t3-h">Do you come to me?</h2>
+  <label for="t3-in">Type your town</label>
+  <input id="t3-in" type="text" autocomplete="address-level2" placeholder="e.g. Woodbury" list="t3-list">
+  <datalist id="t3-list"></datalist>
+  <p class="ans" aria-live="polite">We come to 29 towns around Shoreview, MN.</p>
+ </div>
+</div>
+<div class="row"><p>All 29, in order of distance</p><ul></ul></div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), input = sec.querySelector('input'), ans = sec.querySelector('.ans'), list = sec.querySelector('datalist'), ul = sec.querySelector('.row ul');
+  /* Owl's 29 towns (the site's own list); approximate public coordinates, used only for straight-line distance */
+  var T = [['Shoreview',45.079,-93.147],['North Oaks',45.103,-93.079],['Arden Hills',45.050,-93.156],['Vadnais Heights',45.057,-93.074],['Little Canada',45.027,-93.088],['Roseville',45.006,-93.157],['Mounds View',45.105,-93.208],['New Brighton',45.066,-93.202],['Lino Lakes',45.160,-93.089],['Blaine',45.161,-93.235],['White Bear Lake',45.085,-93.010],['Maplewood',44.953,-92.995],['Fridley',45.086,-93.263],['Saint Paul',44.954,-93.090],['Minneapolis',44.978,-93.265],['Forest Lake',45.279,-92.985],['Coon Rapids',45.173,-93.303],['Oakdale',44.963,-92.965],['Stillwater',45.056,-92.806],['Woodbury',44.924,-92.959],['Maple Grove',45.073,-93.456],['Plymouth',45.011,-93.455],['Minnetonka',44.921,-93.468],['Edina',44.889,-93.350],['Eden Prairie',44.855,-93.471],['Bloomington',44.841,-93.298],['Eagan',44.804,-93.167],['Burnsville',44.768,-93.278],['Apple Valley',44.732,-93.218]];
+  function miles(t){ var R = 3958.8, r = Math.PI / 180, a = T[0], dl = (t[1] - a[1]) * r, dg = (t[2] - a[2]) * r, h = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[1] * r) * Math.cos(t[1] * r) * Math.sin(dg / 2) * Math.sin(dg / 2); return 2 * R * Math.asin(Math.sqrt(h)); }
+  var order = T.map(function(t, i){ return i; }).sort(function(a, b){ return miles(T[a]) - miles(T[b]); });
+  var items = []; order.forEach(function(i){ var t = T[i], li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.textContent = t[0]; b.setAttribute('aria-label', t[0] + (i ? ', about ' + Math.round(miles(t)) + ' miles from our Shoreview base' : ', our home base'));
+    b.addEventListener('click', function(){ input.value = t[0]; answer(i); input.scrollIntoView({ behavior: OWL.reduce ? 'instant' : 'smooth', block: 'center' }); }); li.appendChild(b); ul.appendChild(li); items[i] = li;
+    var o = document.createElement('option'); o.value = t[0]; list.appendChild(o); });
+  function share(n){ try { sessionStorage.setItem('owlTown', n); } catch (e){} document.dispatchEvent(new CustomEvent('owl:town', { detail: n })); }
+  function say(h){ ans.innerHTML = h; }
+  function answer(i){ items.forEach(function(li, j){ if (li) li.classList.toggle('hit', j === i); }); var t = T[i]; sec.dataset.town = t[0]; share(t[0]);
+    if (!i) say('<b>Yes. Shoreview is home.</b><small>Our office is at 1000 County Rd E #230, Shoreview, MN 55126.</small>');
+    else say('<b>Yes, we come to ' + t[0] + '.</b><small>About ' + Math.round(miles(t)) + ' miles from our Shoreview base, as the owl flies.</small>'); }
+  function norm(s){ return s.toLowerCase().replace(/^st\.?\s/, 'saint ').replace(/[^a-z ]/g, '').trim(); }
+  input.addEventListener('input', function(){ var q = norm(input.value); if (!q){ items.forEach(function(li){ if (li) li.classList.remove('hit'); }); sec.dataset.town = ''; say('We come to 29 towns around Shoreview, MN.'); return; }
+    var i = T.findIndex(function(t){ return norm(t[0]) === q; }); if (i < 0) i = T.findIndex(function(t){ return q.length >= 3 && norm(t[0]).indexOf(q) === 0; });
+    if (i > -1){ answer(i); return; }
+    items.forEach(function(li){ if (li) li.classList.remove('hit'); }); sec.dataset.town = '';
+    if (q.length >= 3) say('<b>' + input.value.replace(/[<>&]/g, '') + ' isn’t on our list of 29 towns.</b><small>Call (651) 977-6027 and ask; we’ll tell you straight.</small>'); });
+})();
+</script>
+</section>
