@@ -1,0 +1,52 @@
+/* BOOKING N — The open door (Dropbox Brand: the close, by subtraction). White ground, one coloured object, nothing else. */
+.drN{padding:110px var(--gut) 100px}
+.drN .drstage{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);column-gap:clamp(28px,5vw,88px);align-items:center;
+  padding:clamp(34px,5vw,76px) clamp(24px,5vw,80px);border-radius:28px;background:#F6F8F6;box-shadow:inset 0 0 0 1px #E1E9E3}
+.drN .drh{margin:0;font:800 clamp(34px,4.6vw,68px)/1.04 var(--display);letter-spacing:-.03em;color:var(--ink);text-wrap:balance;max-width:15ch}
+.drN .dract{margin-top:clamp(26px,3vw,40px);display:flex;flex-wrap:wrap;align-items:center;gap:16px 30px}
+.drN .drbook{min-height:64px;padding-inline:34px;font-size:18px}
+.drN .drtel{display:inline-flex;align-items:center;gap:10px;min-height:56px;font:800 clamp(22px,2.2vw,30px)/1 var(--display);letter-spacing:-.01em;color:var(--green);text-decoration:none}
+.drN .drtel svg{width:26px;height:26px;flex:none}
+.drN .drtel:hover span{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.drN .drtel:focus-visible{outline:3px solid #B5DB6E;outline-offset:4px;border-radius:8px}
+.drN .drhrs{margin:26px 0 0;font:700 17px/1.3 var(--text);color:var(--ink)}
+.drN .drnote{margin:8px 0 0;font:500 14px/1.45 var(--text);color:var(--ink-3)}
+/* the sign: the one live object. It hangs from a nail, swings once, and flips when the office opens or closes. */
+.drN .drside{display:flex;flex-direction:column;align-items:center;gap:20px}
+.drN .drsignwrap{position:relative;width:min(320px,100%);padding-top:6px}
+.drN .drnail{position:absolute;left:50%;top:0;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:#16201B;box-shadow:inset 0 -3px 0 rgba(255,255,255,.18);z-index:2}
+.drN .drcord{position:absolute;left:0;top:2px;width:100%;height:70px;z-index:1}
+.drN .drswinger{position:relative;padding-top:62px;transform-origin:50% 8px}   /* padding, not a margin: a margin would collapse through the parent and drop the cords onto the board */
+.drN .drswinger[data-s="?"]{visibility:hidden}
+.drN .drswinger.drswing{animation:drSwing 2.6s cubic-bezier(.3,.1,.3,1) both}
+.drN .drsign{position:relative;width:100%;aspect-ratio:320/190;perspective:900px}
+@keyframes drSwing{0%{transform:rotate(13deg)}16%{transform:rotate(-9.5deg)}33%{transform:rotate(6.5deg)}50%{transform:rotate(-4deg)}68%{transform:rotate(2.2deg)}84%{transform:rotate(-1deg)}100%{transform:rotate(0)}}
+.drN .drflip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.45,.05,.2,1)}
+.drN .drswinger[data-s="closed"] .drflip{transform:rotateY(180deg)}
+.drN .drface{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;-webkit-backface-visibility:hidden;backface-visibility:hidden;
+  box-shadow:0 1px 0 rgba(10,22,17,.08),0 26px 40px -22px rgba(10,22,17,.6)}
+.drN .drface small{font:700 12px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.drN .drface b{font:800 clamp(52px,6vw,76px)/1 var(--display);letter-spacing:.02em}
+.drN .drf-closed b{font-size:clamp(38px,4.3vw,56px);letter-spacing:.01em}
+.drN .drf-open{background:#0E3B2C;color:#B5DB6E;box-shadow:inset 0 0 0 5px #0E3B2C,inset 0 0 0 7px #B5DB6E,0 1px 0 rgba(10,22,17,.08),0 26px 40px -22px rgba(10,22,17,.6)}
+.drN .drf-closed{background:#FFFFFF;color:#16201B;transform:rotateY(180deg);box-shadow:inset 0 0 0 5px #FFFFFF,inset 0 0 0 7px #16201B,0 1px 0 rgba(10,22,17,.08),0 26px 40px -22px rgba(10,22,17,.6)}
+.drN .drst{margin:0;min-height:1.4em;text-align:center;font:700 16px/1.4 var(--text);color:var(--ink-2)}
+.drN .drst.open{color:var(--green)}
+@media (max-width:900px){
+  .drN .drstage{grid-template-columns:minmax(0,1fr);row-gap:30px;padding:30px 22px}
+  .drN .drh{max-width:none;font-size:clamp(32px,9.4vw,46px)}
+  .drN .drside{order:2;align-items:flex-start}
+  .drN .drsignwrap{width:min(280px,100%)}
+  .drN .drswinger{padding-top:54px}
+}
+@media (max-width:760px){
+  .drN{padding:72px var(--gut) 64px}
+  .drN .dract{flex-direction:column;align-items:stretch}
+  .drN .drbook{justify-content:center}
+  .drN .drtel{justify-content:center}
+  .drN .drst{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  .drN .drswinger.drswing{animation:none}
+  .drN .drflip{transition:none}
+}

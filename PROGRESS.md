@@ -1427,7 +1427,18 @@ Every text element is paired with the nearest painted background behind it, as r
 - **File:** 13,071,331 bytes (+209,903).
 - **Sub-agents:** none used in this build.
 
-**Next, after the accept:** Booking B-A "The open door", built to the NEXT PLAN in GATE-NEW-Hero-O.md (four decisions for Muse: address/email, hours line, section headline, the scheduling-page line).
+**Hero O: accepted by Muse (8.51).** Consult reply on Booking B-A (binding): address and email stay in the footer only; B-A carries the hours line; the H2 is the firm's own sentence; the scheduling-page line stays.
+
+**Booking N "The open door" (GATE-NEW-Booking-N.md): built and gated; waiting for Muse.**
+- **Shown default:** `?book=n`; Booking A is parked as a hidden backup. Score 8.46.
+- **What it is:** the firm's sentence as the H2, one Book button, the phone, the hours, and a hanging OPEN / CLOSED sign that follows the office in Austin time (swings once, flips live, static under reduced motion). No form, no image, no repeated number, no address or email.
+- **Proof:** 32 of 32 clock-controlled checks (locks, 8 time states, live flips both ways, keyboard, contrast, targets, reduced motion, touch); 0.82 screen at 1440 (1.09 at 390); 257 views with 0 errors; 200 templates with only `book:a` added, 0 changed; body outside the booking slot and the footer identical.
+- **File:** 13,082,134 bytes (+10,803).
+- **Sub-agents:** none used in this build; no background tasks.
+
+**Next, after the accept:** Services S-A "Start from the problem", built to the NEXT PLAN in GATE-NEW-Booking-N.md (five decisions for Muse: tile 6, photo #0's month, tile 2's doors photo, roof/paint wording, weight).
+
+(superseded) **Next, after the accept:** Booking B-A "The open door", built to the NEXT PLAN in GATE-NEW-Hero-O.md (four decisions for Muse: address/email, hours line, section headline, the scheduling-page line).
 
 **Owner order, 2026-11-05 (supersedes the no-sub-agents line for Austin only):** this Austin session may run **up to 2 sub-agents** to divide the upgrade work (prep, audit, asset work in parallel with the section being built). The plan, build order, gate standard (scorecard, skill ledger, screenshots, NEXT PLAN), weight ceiling and all fact locks stand. **Each gate states sub-agent use honestly.**
 
