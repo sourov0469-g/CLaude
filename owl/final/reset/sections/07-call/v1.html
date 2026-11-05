@@ -1,5 +1,7 @@
 <section class="rs call" id="call" data-sky="eve" data-nocall aria-labelledby="cl-h">
 <style>
+/* V1 · End card (Longbow; kept, repaired): the Shoreview clock said in words ("Closed now" read as broken from Dhaka); the number's line
+   and icon in the one warm call colour; the owl illustration now appears only here on the whole site. */
 .call{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:clamp(110px,15vh,170px) clamp(16px,4vw,64px) 0}
 .call .in{flex:1;max-width:1320px;width:100%;margin:0 auto}
 .call h2{margin:0;font-size:clamp(26px,2.8vw,40px);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:var(--ink)}
@@ -11,11 +13,11 @@
 .call .num .g b{display:inline-block;font-weight:inherit;transition:translate .9s cubic-bezier(.16,1,.3,1)}
 .call:not(.on) .num .g b{translate:0 105%}
 .call .num .g:nth-child(2) b{transition-delay:.08s}
-.call .num::after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:.07em;border-radius:99px;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;transition:transform .9s .35s cubic-bezier(.16,1,.3,1)}
+.call .num::after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:.07em;border-radius:99px;background:var(--call);transform:scaleX(0);transform-origin:0 50%;transition:transform .9s .35s cubic-bezier(.16,1,.3,1)}
 .call.on .num::after{transform:scaleX(1)}
 .call .num:hover{translate:0 -4px}.call .num:active{translate:0 2px}
 .call .num:focus-visible{outline:4px solid var(--acc);outline-offset:8px;border-radius:12px}
-.call .num .ph{width:.42em;height:.42em;align-self:center;margin-left:.06em;color:var(--acc-text)}
+.call .num .ph{width:.42em;height:.42em;align-self:center;margin-left:.06em;color:var(--call)}
 .call .num:hover .ph{animation:cl2 .5s ease 1}
 @keyframes cl2{0%,100%{rotate:0deg}20%{rotate:-14deg}40%{rotate:12deg}60%{rotate:-8deg}80%{rotate:5deg}}
 .call .perch{position:absolute;width:clamp(60px,7vw,118px);height:auto;right:-.05em;top:-.62em;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.2));transition:translate 1.3s .2s cubic-bezier(.16,1,.3,1),opacity .5s .2s,rotate 1.3s .2s cubic-bezier(.16,1,.3,1)}
@@ -23,7 +25,8 @@
 .call .row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:start;margin-top:clamp(36px,6vh,64px)}
 .call .now{margin:0 0 14px;font-size:19px;font-weight:700;color:var(--ink)}
 .call .now i{display:inline-block;width:12px;height:12px;margin-right:10px;border-radius:50%;background:var(--ink-50);vertical-align:1px}
-.call .now.open i{background:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 30%,transparent)}
+.call .now.open i{background:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 25%,transparent)}
+.call .now .clock{display:block;margin-top:2px;font-size:15px;font-weight:800;color:var(--ink)}
 .call .now small{display:block;margin-top:4px;font-size:15px;font-weight:600;color:var(--ink-70)}
 .call .week{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:520px}
 .call .week li{display:grid;grid-template-rows:auto 128px auto;gap:6px;justify-items:center;font-size:13px;font-weight:800;color:var(--ink-70)}
@@ -101,7 +104,9 @@
     else if (t.day < 6 && t.h < 8){ txt = 'Closed now'; sub = 'We open today at 08:00, Shoreview time'; }
     else if (t.day < 5){ txt = 'Closed now'; sub = 'We open tomorrow at 08:00, Shoreview time'; }
     else { txt = 'Closed now'; sub = 'We open Monday at 08:00, Shoreview time'; }
-    now.classList.toggle('open', open); now.innerHTML = '<i aria-hidden="true"></i><b>' + txt + '</b><small>' + sub + ' · Mon–Sat 08:00–18:00</small>';
+    /* say the Shoreview time in words, so someone in another time zone reads "Closed now" correctly (the owner read it from Dhaka) */
+    var hh = Math.floor(t.h), mm = Math.floor((t.h - hh) * 60), clock = 'It’s ' + (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm + ' on ' + ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][t.day] + ' in Shoreview, MN.';
+    now.classList.toggle('open', open); now.innerHTML = '<i aria-hidden="true"></i><b>' + txt + '</b><span class="clock">' + clock + '</span><small>' + sub + ' · Mon–Sat 08:00–18:00</small>';
     [].forEach.call(lis, function(l, i){ l.classList.toggle('today', i === t.day); }); var tr = lis[t.day] && lis[t.day].querySelector('.tr'); if (tr){ mark.style.setProperty('--t', (t.h / 24 * 100).toFixed(2) + '%'); tr.appendChild(mark); }
     sec.dataset.open = open ? '1' : '0'; }
   hours(); setInterval(hours, 60000);

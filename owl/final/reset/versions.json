@@ -59,7 +59,9 @@
   "label": "Call",
   "default": 1,
   "names": {
-   "1": "End card"
+   "1": "End card",
+   "2": "Two doors",
+   "3": "Winter house"
   }
  }
 }

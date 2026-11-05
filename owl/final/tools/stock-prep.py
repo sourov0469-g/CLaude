@@ -21,6 +21,7 @@ ITEMS = {
  'nothing-clean':  ('nothing', 'photo', 33404981, 'px-33404981.jpg', 'nothing-clean.webp', 1800, {}, 'Ryan Stephens, Pexels 33404981', 'a crew working around a house mid-reroof, clearing the drive'),
  'numbers-street': ('numbers', 'photo', 6220207, '../cand2/px-6220207.jpg', 'numbers-street.webp', 2400, {}, 'Lalada, Pexels 6220207', 'a snowy residential street, houses and parked cars under snow'),
  'towns-above':    ('towns', 'photo', 5580644, '../cand2/px-5580644.jpg', 'towns-above.webp', 2400, {}, 'Pexels 5580644 (photographer not shown: page walled)', 'an autumn suburb seen from above: streets, roofs and trees'),
+ 'call-house':     ('call', 'photo', 259583, '../cand2/px-259583.jpg', 'call-house.webp', 2400, {}, 'Jill Wellington, Pexels 259583', 'a white house in deep snow, frosted pines in front'),
  'hero-nailer': ('hero', 'photo', 33404248, 'px-33404248.jpg', 'hero-nailer.webp', 2400, {}, 'Ryan Stephens, Pexels 33404248', 'a roofer nailing architectural shingles'),
  'hero-rain':   ('hero', 'photo', 2663254, 'px-2663254.jpg', 'hero-rain.webp', 2400, {}, 'Adrien Olichon, Pexels 2663254', 'rain running off a shingled roof edge'),
 }

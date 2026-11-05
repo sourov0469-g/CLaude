@@ -7,6 +7,7 @@ Owl's own media (the crew film, the family and crew photos, the logo, the owl il
 
 | Section (owner) | File | Source and credit | Shows |
 |---|---|---|---|
+| call | `stock/call-house.webp` | Jill Wellington, Pexels 259583 | a white house in deep snow, frosted pines in front |
 | finder | `stock/finder-house.webp` | Erik Mclean, Pexels 4061594 | a white two-storey house in winter, snow on the drive |
 | finder | `stock/finder-leak.webp` | Pexels 13307118 (photographer not shown: page walled) | rain pouring over a gutter edge |
 | finder | `stock/finder-old.webp` | Pexels 4798643 (photographer not shown: page walled) | an older house and roof under a grey sky |

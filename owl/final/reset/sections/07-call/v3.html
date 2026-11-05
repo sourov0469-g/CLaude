@@ -1,0 +1,64 @@
+<section class="rs call c3" id="call" data-sky="eve" data-nocall data-over aria-labelledby="c3-h">
+<style>
+/* V3 · Winter house (Scout: one line on one photograph). A sharp, snow-covered house full-bleed; the number set large in white on
+   the photograph; today's hours with the Shoreview clock; the email as a quiet second way. The closing facts under it. */
+.c3{background:var(--deep)}
+.c3 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+.c3 .bgph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.c3 .shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(14,18,22,.9) 0%,rgba(14,18,22,.62) 42%,rgba(14,18,22,.1) 75%),linear-gradient(90deg,rgba(14,18,22,.45),rgba(14,18,22,0) 55%)}
+.c3 .tag{position:absolute;right:clamp(14px,3vw,44px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.55);font-size:12px;font-weight:700}
+.c3 .in{position:relative;width:100%;max-width:1320px;margin:0 auto;padding:0 clamp(18px,4vw,64px) clamp(40px,8vh,90px)}
+.c3 h2{margin:0;font-size:clamp(26px,2.6vw,40px);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.c3 .big{display:inline-block;white-space:nowrap;min-height:48px;margin:10px 0 0;font-size:clamp(58px,10vw,176px);font-weight:900;line-height:.9;letter-spacing:-.05em;color:#fff;text-decoration:none;border-bottom:.06em solid var(--call);padding-bottom:.04em}
+.c3 .big:focus-visible{outline:4px solid #fff;outline-offset:8px;border-radius:10px}
+.c3 .now{margin:22px 0 0;font-size:18px;font-weight:700}
+.c3 .now span{display:block;margin-top:4px;font-size:15px;font-weight:600;color:rgba(255,255,255,.86)}
+.c3 .acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:24px}
+.c3 .acts a.mail{display:inline-grid;align-items:center;min-height:44px;color:#fff;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.c3 .msg{margin:10px 0 0;min-height:1.4em;font-size:15px;font-weight:600;color:rgba(255,255,255,.9)}
+.c3 .end{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;padding:26px clamp(18px,4vw,64px) 34px;font-size:14px;font-weight:600;color:var(--on-deep-70)}
+.c3 .end .logo{width:92px;height:auto;--logo-ink:var(--on-deep)}
+.c3 .end a{display:inline-grid;align-items:center;min-height:44px;color:var(--on-deep);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:860px){.c3 .big{font-size:clamp(36px,11.2vw,80px)}.c3 .in{padding-bottom:40px}.c3 .tag{top:80px}}
+</style>
+<div class="hero">
+ <img class="bgph" src="{{A:stock/call-house.webp}}" alt="A white house in deep snow, frosted pines in front (illustrative photo)" width="2400" height="1600">
+ <div class="shade" aria-hidden="true"></div>
+ <span class="tag">Illustrative photo</span>
+ <div class="in">
+  <h2 id="c3-h"><span class="w">Tell us what’s going on.</span></h2>
+  <a class="big" href="tel:+16519776027" aria-label="Call Owl Roofing at (651) 977-6027">(651) 977-6027</a>
+  <p class="now" aria-live="polite"></p>
+  <div class="acts"><a class="mail" href="mailto:info@owlroofing.com">Rather write? Open my email app, filled in</a></div>
+  <p class="msg" aria-live="polite"></p>
+ </div>
+</div>
+<footer class="end">
+ <span aria-hidden="true">{{LOGO}}</span>
+ <span>Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126</span>
+ <span>MN licence #BC809662</span>
+ <a href="mailto:info@owlroofing.com">info@owlroofing.com</a>
+ <span>We Give a Hoot</span>
+</footer>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), now = sec.querySelector('.now'), w = sec.querySelector('h2 .w'), mail = sec.querySelector('.mail'), msg = sec.querySelector('.msg');
+  var LINE = { leak: 'Tell us about the leak.', stain: 'Tell us about the stain.', shingles: 'Tell us about the shingles.', storm: 'Tell us about the storm.', old: 'Tell us about your roof.', unsure: 'Tell us what you’re seeing.' };
+  function store(k){ try { return sessionStorage.getItem(k) || ''; } catch (e){ return ''; } }
+  function caseName(k){ var c = (window.RESET && RESET.cases || []).filter(function(x){ return x.k === k; })[0]; return c ? c.n : ''; }
+  function fill(){ var k = store('owlCase'), n = caseName(k), t = store('owlTown'); w.textContent = LINE[k] || 'Tell us what’s going on.'; sec.dataset.case = k;
+    var body = ['Hello Owl Roofing,', '', 'What’s going on: ' + (n || ''), 'My town: ' + (t || ''), 'My name: ', 'My phone: ', 'My address: ', 'Best time to call: '].join('\n');
+    mail.setAttribute('href', 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Roof help' + (n ? ': ' + n : '')) + '&body=' + encodeURIComponent(body)); }
+  document.addEventListener('owl:case', fill); document.addEventListener('owl:town', fill);
+  mail.addEventListener('click', function(){ msg.innerHTML = 'Your email app should open with these details. Send it from there, or call <span style="white-space:nowrap">(651) 977-6027</span>.'; });
+  var D = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], DL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  function mn(){ var d = new Date(), p = {}; try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(d).forEach(function(x){ p[x.type] = x.value; }); } catch (e){ p = { weekday: D[(d.getDay() + 6) % 7], hour: d.getHours(), minute: d.getMinutes() }; }
+    return { day: D.indexOf(p.weekday), h: +p.hour % 24 + (+p.minute) / 60 }; }
+  function hours(){ var t = mn(), open = t.day < 6 && t.h >= 8 && t.h < 18, hh = Math.floor(t.h), mm = Math.floor((t.h - hh) * 60), clock = (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+    var sub = open ? 'Until 18:00 today' : (t.day < 6 && t.h < 8) ? 'We open today at 08:00' : t.day < 5 ? 'We open tomorrow at 08:00' : 'We open Monday at 08:00';
+    now.innerHTML = (open ? 'Open now' : 'Closed now') + '<span>It’s ' + clock + ' on ' + DL[t.day] + ' in Shoreview, MN. ' + sub + '. Mon–Sat 08:00–18:00.</span>'; sec.dataset.open = open ? '1' : '0'; }
+  hours(); setInterval(hours, 60000);
+  document.addEventListener('DOMContentLoaded', fill);
+})();
+</script>
+</section>

@@ -65,3 +65,4 @@
 - **Numbers** `final/GATE-FIX-NUMBERS.md`: V1 Numerals (repaired: whole, early arrival, no masks), V2 Ninety marks (default: the 5.0 built from 90 marks), V3 Spec row over a street. Checks 25/24/24.
 - **Family** `final/GATE-FIX-PEOPLE.md`: V1 Split cover (repaired: photos framed at their own pixels, crossfade, phone layout), V2 Prints on a table (default), V3 Two names. Checks 24/25/24; sharp everywhere.
 - **Towns** `final/GATE-FIX-TOWNS.md`: V1 Contour finder (repaired: drawn home, zoom around Shoreview, pill clearance), V2 Distance rings (default: true bearing and distance, the ring in the answer), V3 From above. Checks 30/30/29. The page-wide media report now reads "no repeats".
+- **Call** `final/GATE-FIX-CALL.md`: V1 End card (default; the Shoreview clock in words, copper line), V2 Two doors, V3 Winter house. Checks 28/26/26. All seven sections are now in versions: hero 4, every other section 3 (22 in all).

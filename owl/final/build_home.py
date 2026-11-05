@@ -55,7 +55,7 @@ def main():
     # the switch: the new page's closing line links to the records; the past page carries a chip back
     end = '<span>We Give a Hoot</span>\n</footer>'
     assert end in new_body, 'closing line not found in section 7'
-    new_body = new_body.replace(end, '<span>We Give a Hoot</span>\n <a class="pastlink" href="?past">Past versions, kept as records</a>\n</footer>', 1)
+    new_body = new_body.replace(end, '<span>We Give a Hoot</span>\n <a class="pastlink" href="?past">Past versions, kept as records</a>\n</footer>')   # every version of the call section
     chip = ('<style>.pastchip{position:fixed;left:12px;bottom:12px;z-index:9999;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;'
             'border-radius:999px;background:#17111D;color:#fff;font:700 14px/1 Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 24px -10px rgba(0,0,0,.6)}'
             '.pastchip:focus-visible{outline:3px solid #EAA221;outline-offset:3px}</style>'

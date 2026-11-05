@@ -1,0 +1,77 @@
+<section class="rs call c2" id="call" data-sky="eve" data-nocall aria-labelledby="c2-h">
+<style>
+/* V2 · Two doors (Longbow frame 075: "Choose your Longbow", two cards side by side). The two ways to reach Owl as two whole cards:
+   Call us (the number, today's hours with the Shoreview clock) and Write to us (an email already filled in from your choices). */
+.c2{padding:clamp(110px,14vh,160px) clamp(16px,4vw,64px) 0}
+.c2 .in{max-width:1320px;margin:0 auto}
+.c2 h2{margin:0 0 clamp(26px,4vh,44px);font-size:clamp(38px,4.6vw,76px);font-weight:900;line-height:.95;letter-spacing:-.045em;color:var(--ink);max-width:16ch}
+.c2 h2 em{font-style:normal;color:var(--acc-text)}
+.c2 .doors{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,24px)}
+.c2 .door{display:flex;flex-direction:column;justify-content:space-between;gap:26px;min-height:min(56vh,480px);padding:clamp(22px,3vw,40px);border-radius:28px}
+.c2 .d1{background:var(--deep);color:var(--on-deep)}
+.c2 .d2{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 30px 50px -40px rgba(0,0,0,.5)}
+.c2 .door .k{margin:0;font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.c2 .d1 .k{color:var(--acc-deep)}.c2 .d2 .k{color:var(--acc-text)}
+.c2 .big{display:block;min-height:48px;margin:12px 0 0;font-size:clamp(44px,5.4vw,92px);font-weight:900;line-height:1.05;letter-spacing:-.05em;color:var(--on-deep);text-decoration:none}
+.c2 .big:focus-visible{outline:3px solid var(--acc-deep);outline-offset:6px;border-radius:10px}
+.c2 .now{margin:16px 0 0;font-size:17px;font-weight:700;color:var(--on-deep)}
+.c2 .now i{display:inline-block;width:11px;height:11px;margin-right:9px;border-radius:50%;background:var(--on-deep-70);vertical-align:1px}
+.c2 .now.open i{background:var(--acc-deep)}
+.c2 .now span{display:block;margin-top:4px;font-size:15px;font-weight:600;color:var(--on-deep-70)}
+.c2 .d2 h3{margin:12px 0 0;font-size:clamp(30px,3.2vw,52px);font-weight:900;line-height:1;letter-spacing:-.035em}
+.c2 .d2 p.l{margin:12px 0 0;font-size:16px;line-height:1.5;color:var(--ink-70);max-width:40ch}
+.c2 dl{margin:18px 0 0;display:grid;grid-template-columns:auto 1fr auto;gap:8px 14px;align-items:center;font-size:16px}
+.c2 dl > div{display:contents}
+.c2 dt{font-weight:700;color:var(--ink-70)}.c2 dd{margin:0;font-weight:800}.c2 dd.no{font-weight:600;color:var(--ink-70)}
+.c2 .chg{display:inline-grid;place-items:center;min-height:44px;min-width:44px;font-size:15px;font-weight:700;color:var(--acc-text);text-decoration:underline;text-underline-offset:3px}
+.c2 .msg{margin:10px 0 0;min-height:1.4em;font-size:15px;font-weight:600}
+.c2 .end{margin:clamp(48px,8vh,84px) calc(-1 * clamp(16px,4vw,64px)) 0;padding:26px clamp(16px,4vw,64px) 34px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;font-size:14px;font-weight:600;color:var(--ink-70)}
+.c2 .end .logo{width:92px;height:auto}
+.c2 .end a{display:inline-grid;align-items:center;min-height:44px;color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:860px){.c2 .doors{grid-template-columns:1fr}.c2 .door{min-height:0}.c2{padding-top:150px}}
+</style>
+<div class="in">
+ <h2 id="c2-h"><span class="w">Two ways to reach us.</span> <em>Pick either.</em></h2>
+ <div class="doors">
+  <div class="door d1">
+   <div><p class="k">Call us</p><a class="big" href="tel:+16519776027" aria-label="Call Owl Roofing at (651) 977-6027">(651) 977-6027</a><p class="now" aria-live="polite"></p></div>
+   <a class="btn btn-amber btn-call" href="tel:+16519776027">Call (651) 977-6027</a>
+  </div>
+  <div class="door d2">
+   <div><p class="k">Write to us</p><h3 class="hl">Tell us what’s going on.</h3><p class="l">Your email app opens with this filled in. Add your name and number and send it.</p>
+    <dl><div><dt>Your roof</dt><dd class="d-case"></dd><dd><a class="chg" href="#finder" aria-label="Change your roof problem">Change</a></dd></div><div><dt>Your town</dt><dd class="d-town"></dd><dd><a class="chg" href="#towns" aria-label="Change your town">Change</a></dd></div></dl></div>
+   <div><a class="btn btn-amber mail" href="mailto:info@owlroofing.com">Write it in my email app</a><p class="msg" aria-live="polite"></p></div>
+  </div>
+ </div>
+</div>
+<footer class="end">
+ <span aria-hidden="true">{{LOGO}}</span>
+ <span>Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126</span>
+ <span>MN licence #BC809662</span>
+ <a href="mailto:info@owlroofing.com">info@owlroofing.com</a>
+ <span>We Give a Hoot</span>
+</footer>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), now = sec.querySelector('.now'), hl = sec.querySelector('.hl'), dc = sec.querySelector('.d-case'), dt = sec.querySelector('.d-town'), mail = sec.querySelector('.mail'), msg = sec.querySelector('.msg');
+  var LINE = { leak: 'Tell us about the leak.', stain: 'Tell us about the stain.', shingles: 'Tell us about the shingles.', storm: 'Tell us about the storm.', old: 'Tell us about your roof.', unsure: 'Tell us what you’re seeing.' };
+  function store(k){ try { return sessionStorage.getItem(k) || ''; } catch (e){ return ''; } }
+  function caseName(k){ var c = (window.RESET && RESET.cases || []).filter(function(x){ return x.k === k; })[0]; return c ? c.n : ''; }
+  function fill(){ var k = store('owlCase'), n = caseName(k), t = store('owlTown'); hl.textContent = LINE[k] || 'Tell us what’s going on.';
+    dc.textContent = n || 'Not chosen yet'; dc.classList.toggle('no', !n); dt.textContent = t || 'Not chosen yet'; dt.classList.toggle('no', !t);
+    var body = ['Hello Owl Roofing,', '', 'What’s going on: ' + (n || ''), 'My town: ' + (t || ''), 'My name: ', 'My phone: ', 'My address: ', 'Best time to call: '].join('\n');
+    mail.setAttribute('href', 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Roof help' + (n ? ': ' + n : '')) + '&body=' + encodeURIComponent(body)); }
+  document.addEventListener('owl:case', fill); document.addEventListener('owl:town', fill);
+  mail.addEventListener('click', function(){ msg.innerHTML = 'Your email app should open with these details. Send it from there, or call <span style="white-space:nowrap">(651) 977-6027</span>.'; });
+  /* today's hours in Shoreview time (America/Chicago), with the Shoreview clock said in words */
+  var D = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], DL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  function mn(){ var d = new Date(), p = {}; try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(d).forEach(function(x){ p[x.type] = x.value; }); } catch (e){ p = { weekday: D[(d.getDay() + 6) % 7], hour: d.getHours(), minute: d.getMinutes() }; }
+    return { day: D.indexOf(p.weekday), h: +p.hour % 24 + (+p.minute) / 60 }; }
+  function hours(){ var t = mn(), open = t.day < 6 && t.h >= 8 && t.h < 18, hh = Math.floor(t.h), mm = Math.floor((t.h - hh) * 60), clock = (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+    var sub = open ? 'Until 18:00 today' : (t.day < 6 && t.h < 8) ? 'We open today at 08:00' : t.day < 5 ? 'We open tomorrow at 08:00' : 'We open Monday at 08:00';
+    now.classList.toggle('open', open); now.innerHTML = '<i aria-hidden="true"></i>' + (open ? 'Open now' : 'Closed now') + '<span>It’s ' + clock + ' on ' + DL[t.day] + ' in Shoreview, MN. ' + sub + '. Mon–Sat 08:00–18:00.</span>'; sec.dataset.open = open ? '1' : '0'; }
+  hours(); setInterval(hours, 60000);
+  document.addEventListener('DOMContentLoaded', function(){ fill(); OWL.buttons(sec); });
+})();
+</script>
+</section>
