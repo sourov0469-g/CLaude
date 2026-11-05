@@ -1364,6 +1364,8 @@ Every text element is paired with the nearest painted background behind it, as r
 |---|---|---|---|---|---|---|
 | 3 | Visualiser | **M, "Pull a colour through"** (`?vis=m`) | Lusion (flow, the carrying thread: the 17 ColorPlus colours on one ribbon drawn through an eye; pull it and the colour runs down the boards, each course following the one above, always a real colour) | GATE-NEW-Visualiser-M.md | 8.57 PASS | Accepted by Muse |
 
-| 4 | Windows | **M, "One window, four answers"** (`?windows=m`) | Lusion (flow: one window whose glass divides by the numbers into the answer to each of four buyer questions: cost, brand, frame, siding too; the published FAQ answers verbatim beside it) | GATE-NEW-Windows-M.md | 8.57 PASS | Built and gated; waiting for Muse's accept |
+| 4 | Windows | **M, "One window, four answers"** (`?windows=m`) | Lusion (flow: one window whose glass divides by the numbers into the answer to each of four buyer questions: cost, brand, frame, siding too; the published FAQ answers verbatim beside it) | GATE-NEW-Windows-M.md | 8.57 PASS | Accepted by Muse |
 
-**Next, after the accept:** Reviews M.
+| 5 | Reviews | **M, "Their before, their after"** (`?reviews=m`) | MERSI (the split cover: twelve published reviews, each split at its own seam: the homeowner's before on the left, their after on the right, halves moving in opposite directions, the name rolling on the seam; every half verbatim and build-locked) | GATE-NEW-Reviews-M.md | 8.63 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Process M.
