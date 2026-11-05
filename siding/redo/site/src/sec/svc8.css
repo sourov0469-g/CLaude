@@ -1,0 +1,53 @@
+/* SERVICES N — Built trade by trade (Apple AirPods Pro: the pinned assembly; numbers as events). */
+.snN{position:relative;height:260vh;padding:0 var(--gut)}
+.snN .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.snN .snsticky{position:sticky;top:0;height:100vh;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(320px,.85fr) minmax(0,1.3fr);gap:clamp(24px,4vw,64px);align-items:center;padding:86px 0 24px;box-sizing:border-box}
+.snN .snlead{margin:12px 0 0;max-width:42ch;font:500 16px/1.55 var(--text);color:var(--ink-2)}
+.snN .snnum{position:relative;height:clamp(96px,10.5vw,150px);width:3.4em;font-size:clamp(92px,10vw,142px);margin-top:18px;overflow:hidden}
+.snN .snd{position:absolute;left:0;top:0;font:800 1em/1 var(--display);letter-spacing:-.045em;color:var(--green);transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .4s}
+.snN .snd.snin{transform:translateY(100%);opacity:0}
+.snN .snd.snout{transform:translateY(-100%);opacity:0}
+.snN .sntrade{margin:4px 0 0;font:700 18px/1.3 var(--text);color:var(--ink)}
+.snN .snband{margin:6px 0 0;min-height:22px;font:500 15px/1.45 var(--text);color:var(--ink-2)}
+.snN .snclose{margin:12px 0 0;font:800 20px/1.3 var(--display);color:var(--green);opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s cubic-bezier(.22,1,.36,1)}
+.snN.sndone .snclose{opacity:1;transform:none}
+.snN .snchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.snN .snc{all:unset;box-sizing:border-box;min-height:36px;padding:0 12px;border-radius:999px;display:inline-flex;align-items:center;cursor:pointer;font:700 12.5px/1 var(--text);color:var(--green);background:rgba(14,59,44,.07)}
+.snN .snc[aria-pressed="true"]{background:var(--green);color:#FFFFFF}
+.snN .snc:focus-visible,.snN .snb:focus-visible{outline:3px solid #B5DB6E;outline-offset:2px}
+.snN .snnav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}
+.snN .snb{all:unset;box-sizing:border-box;min-height:48px;padding:0 18px;border-radius:999px;display:inline-flex;align-items:center;cursor:pointer;font:700 14px/1 var(--text);color:var(--green);background:rgba(14,59,44,.07)}
+.snN .snfig{margin:0;align-self:center}
+.snN .snhouse{display:block;width:100%;height:auto;max-height:calc(100vh - 140px)}
+.snN .snl{opacity:0;transform:translateY(16px);transform-box:fill-box;transition:opacity .55s,transform .6s cubic-bezier(.22,1,.36,1)}
+.snN .snl.on{opacity:1;transform:none}
+.snN .snl[data-s="3"]{transform:translateY(-22px)}.snN .snl[data-s="3"].on{transform:none}
+.snN .snframe{transition:opacity .6s}
+.snN .snhouse:has(.snl.on) .snframe{opacity:.35}
+.snN .snall{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.snN .snfoot{position:absolute;left:var(--gut);right:var(--gut);bottom:18px;max-width:1320px;margin:0 auto;font:500 12.5px/1.45 var(--text);color:var(--ink-3)}
+@media (max-width:900px){
+  .snN{height:240vh}
+  .snN .snsticky{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:8px;padding:74px 0 14px}
+  .snN .snfig,.snN .sntext{min-width:0}
+  .snN .snhouse{width:100%;max-height:100%}
+  .snN .snlead{display:none}
+  .snN .sntext .sec-h{font-size:clamp(28px,7vw,40px)}
+  .snN .snnum{height:62px;font-size:60px;margin-top:6px}
+  .snN .sntrade{font-size:15px}.snN .snband{font-size:13px;min-height:18px}.snN .snclose{font-size:16px;margin-top:6px}
+  .snN .snchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:10px calc(-1 * var(--gut)) 0;padding:0 var(--gut)}
+  .snN .snchips::-webkit-scrollbar{display:none}
+  .snN .snc{flex:none}
+  .snN .snnav{margin-top:8px}
+  .snN .snnav .btn{display:none}
+  .snN .snfoot{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .snN{height:auto;padding:110px var(--gut) 90px}
+  .snN .snsticky{position:static;height:auto;padding:0}
+  .snN .snl,.snN .snd,.snN .snclose{transition:none}
+  .snN .snall{position:static;width:auto;height:auto;clip:auto;max-width:1320px;margin:28px auto 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px 24px;font:500 14px/1.45 var(--text);color:var(--ink-2)}
+  .snN .snall dt{font-weight:800;color:var(--ink)}
+  .snN .snall dd{margin:0}
+  .snN .snfoot{position:static;margin-top:18px}
+}
