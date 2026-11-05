@@ -1374,6 +1374,16 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | 8 | On your street | **M, "The map, filling in"** (`?area=m`) | Apple AirPods Pro (the pinned scroll; numbers as events: scrolling scrubs the finder's dated records onto a map around the office, month by month; the year rolls as the only numeral; the locked 886 = 312 + 574 line lands last) | GATE-NEW-Area-M.md | 8.54 PASS | Accepted by Muse |
 
-| 9 | Booking | **M, "Walk round the house"** (`?book=m`) | Ever, verified craft (3D visualisation: a CSS-3D house the visitor turns; each side lights its parts and ticks the free-inspection list, the homepage's own six items; the Book button and phone always visible) | GATE-NEW-Booking-M.md | 8.61 PASS | Built and gated; waiting for Muse's accept |
+| 9 | Booking | **M, "Walk round the house"** (`?book=m`) | Ever, verified craft (3D visualisation: a CSS-3D house the visitor turns; each side lights its parts and ticks the free-inspection list, the homepage's own six items; the Book button and phone always visible) | GATE-NEW-Booking-M.md | 8.61 PASS | Accepted by Muse |
 
-**Pass 3 complete** with Booking M: an M version in all nine sections (Hero to Area M accepted). **Next, after the accept:** pass 4, Hero N.
+**Pass 3 complete:** an M version in all nine sections, all accepted by Muse.
+
+## New versions, pass 4
+
+| # | Section | Version | Reference | Gate | Score | Status |
+|---|---|---|---|---|---|---|
+| 1 | Hero | **N, "The cover story"** (`?hero=n`) | Ever, verified craft (magazine narrative: the hero as a magazine cover; Rob Roy's finished siding as the cover photo, the locked facts as cover lines that link to their sections, the cover turning away like a page on scroll) | GATE-NEW-Hero-N.md | 8.67 PASS | Built and gated; waiting for Muse's accept |
+
+**Flagged for the owner (pre-existing, not changed):** in a desktop browser narrowed to 320–390 px, the default Visualiser's chip row widens the page by 34–104 px (phones are unaffected). See GATE-NEW-Hero-N.md.
+
+**Next, after the accept:** Services N.
