@@ -1,5 +1,5 @@
 {
- "pass": 22,
+ "pass": 24,
  "total": 24,
  "results": [
   {
@@ -79,8 +79,8 @@
   },
   {
    "name": "axe WCAG 2.1 A/AA on the whole page: 0 violations",
-   "ok": false,
-   "info": "color-contrast:3 li:nth-child(2) > button[aria-current=\"false\"][type=\"button\"] > time"
+   "ok": true,
+   "info": ""
   },
   {
    "name": "only one pinned stage on the page (Your part: nothing)",
@@ -109,8 +109,8 @@
   },
   {
    "name": "no form hands over to an outside email app (owner rule, 22:21): no mailto navigation in any form handler",
-   "ok": false,
-   "info": "1"
+   "ok": true,
+   "info": "0"
   },
   {
    "name": "reduced motion: the whole page scrolls without errors",
