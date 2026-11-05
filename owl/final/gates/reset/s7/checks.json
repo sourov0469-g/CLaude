@@ -1,7 +1,7 @@
 {
  "section": "call",
- "total": 22,
- "passed": 22,
+ "total": 23,
+ "passed": 23,
  "results": [
   {
    "name": "axe WCAG 2.1 A/AA, palette night: 0 violations",
@@ -100,6 +100,11 @@
   },
   {
    "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the number, its line and the owl are in place at once",
    "ok": true,
    "info": ""
   },
