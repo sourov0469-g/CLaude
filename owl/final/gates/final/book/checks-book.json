@@ -1,0 +1,142 @@
+{
+ "section": "book",
+ "pass": 27,
+ "total": 27,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "the front: the one number, hours, email, office, licence; the back is inert while hidden",
+   "ok": true,
+   "info": " We Give a Hoot (651) 977-6027 HoursMon–Sat 8:00–18:00Emailinfo@owlroofing.comOffice1000 County Rd E #230, Shoreview, MN 55126LicenceMinnesota #BC809662 Call NowBook a Wise Check "
+  },
+  {
+   "name": "the card turns: the paper is live, the front inert, focus lands on the first line",
+   "ok": true,
+   "info": "{\"backInert\":false,\"frontInert\":true,\"focus\":\"bk3-n\",\"exp\":\"true\"}"
+  },
+  {
+   "name": "the paper is ruled with a red margin and punched holes",
+   "ok": true,
+   "info": "[true,\"2px\",3]"
+  },
+  {
+   "name": "labels, placeholders, typed text and day chips are all in handwriting (OwlHand loaded)",
+   "ok": true,
+   "info": "{\"loaded\":true,\"input\":\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\",\"label\":\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\",\"ph\":\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\",\"chip\":\"OwlHand, \\\"Segoe Script\\\", \\\"Bradley Hand\\\", cursive\",\"bg\":true,\"margin\":\"2px\",\"holes\":3,\"labelsize\":\"28px\",\"inputsize\":\"31px\",\"colors\":[\"rgb(30, 38, 80)\",\"rgb(92, 100, 136)\"]}"
+  },
+  {
+   "name": "the handwriting is large enough to read (labels at least 24 px, typed text at least 26 px)",
+   "ok": true,
+   "info": "28px / 31px"
+  },
+  {
+   "name": "an empty letter is not handed over: \"Please add your name.\"",
+   "ok": true,
+   "info": "Please add your name."
+  },
+  {
+   "name": "the signature writes your name as you type it; the chosen day is circled in pen",
+   "ok": true,
+   "info": "{\"sig\":\"Maria Lopez\",\"empty\":false,\"pressed\":\"false,false,true,false,false,false\",\"dash\":\"0px\"}"
+  },
+  {
+   "name": "the letter goes to the visitor's own email app, filled in: name, phone, address, Wednesday, town, note",
+   "ok": true,
+   "info": "mailto:info@owlroofing.com?subject=Wise Check request&body=Hi Owl, I’d like a Wise Check. /  / Name: Maria Lopez / Phone: 612 555 0142 / Address: 88 Oak Lane, Roseville / Best day: Wednesday / Town: Roseville / One more thing: Gutter looks loose too / "
+  },
+  {
+   "name": "it never claims to have sent anything",
+   "ok": true,
+   "info": "Your email app should open with your letter. Send it from there, or call (651) 977-6027."
+  },
+  {
+   "name": "\"Back to the card\" turns it again",
+   "ok": true,
+   "info": "{\"backInert\":true,\"frontInert\":false}"
+  },
+  {
+   "name": "Escape turns the card back",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the card leans toward the pointer",
+   "ok": true,
+   "info": "3.50deg"
+  },
+  {
+   "name": "phone: the paper fits, every line is wide enough to type on",
+   "ok": true,
+   "info": "{\"w\":350,\"over\":0,\"inputs\":[282,282,282,282]}"
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 801 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 904 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1179 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the card turns without animation",
+   "ok": true,
+   "info": "1e-05s"
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

@@ -1,0 +1,149 @@
+<section class="sec book3" id="book" aria-labelledby="bk3-h">
+<style>
+/* Section 10 · Take Our Card. OLD Booking V3's 3D card, rebuilt: a business card with real thickness that lifts as it turns over; on the back the form is a sheet of
+   ruled PAPER (the paper treatment of OLD Booking V6 "Work Order": ruled lines, a red margin line, punched holes) and a LETTER: "Dear Owl, my name is ..." written in ink.
+   The labels, the placeholders and everything the visitor types are in handwriting (Caveat, SIL OFL: used only on this paper). */
+@font-face{font-family:OwlHand;font-weight:500;font-style:normal;font-display:swap;src:url({{A:caveat-500.woff2}}) format('woff2')}
+@font-face{font-family:OwlHand;font-weight:700;font-style:normal;font-display:swap;src:url({{A:caveat-700.woff2}}) format('woff2')}
+.book3{overflow:hidden;--hw:OwlHand,'Segoe Script','Bradley Hand',cursive;--pen:#1E2650;--pen-soft:#5C6488}
+.book3 .g{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:center}
+.book3 .lede{margin:14px 0 0;max-width:36ch}
+.book3 .small{margin:18px 0 0;max-width:38ch;font-size:15px;color:var(--ink-70)}
+.book3 .scene{justify-self:center;width:100%;max-width:640px}
+.book3 .lift{perspective:1700px}
+.book3 .tilt{transform-style:preserve-3d}
+.book3 .tilt{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out}
+.book3 .lift.turning{animation:b3lift .95s cubic-bezier(.4,0,.2,1)}
+@keyframes b3lift{0%,100%{transform:translateY(0) scale(1)}45%{transform:translateY(-10px) scale(1.04)}}
+.book3 .card{position:relative;display:grid;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.2,.8,.2,1);transform:rotateY(var(--flip,0deg))}
+.book3 .card.back{--flip:180deg}
+.book3 .face{grid-area:1/1;position:relative;border-radius:24px;padding:clamp(22px,3vw,36px);backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
+ box-shadow:0 1px 0 #E9E2CE,0 2px 0 #E4DCC6,0 3px 0 #DED5BD,0 4px 0 #D8CEB4,0 50px 70px -36px rgba(23,17,29,.6),0 0 0 1px rgba(23,17,29,.07)}
+.book3 .front{background:linear-gradient(135deg,#FFFDF7,#F3EEE1 60%,#EBE3CF);min-height:420px;display:flex;flex-direction:column}
+.book3 .front::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(23,17,29,.035) 1px,transparent 1.4px);background-size:7px 7px;pointer-events:none}
+.book3 .front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.75),rgba(255,255,255,0) 42%);pointer-events:none;mix-blend-mode:soft-light}
+.book3 .front .top{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.book3 .front .top img{height:44px;width:auto}
+.book3 .front .top span{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#7A4A0C}
+.book3 .tel{position:relative;display:block;margin:auto 0 8px;padding-top:26px;font-size:clamp(38px,5vw,64px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
+.book3 .tel:hover{color:#7A4A0C}
+.book3 .tel:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:8px}
+.book3 .meta{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 22px;font-size:15px;color:var(--ink-70);margin-bottom:22px}
+.book3 .meta a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600}
+.book3 .meta b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.book3 .acts{position:relative;display:flex;flex-wrap:wrap;gap:10px}
+/* the paper */
+.book3 .backf{transform:rotateY(180deg);background:#FFFDF7;padding:clamp(20px,2.6vw,30px) clamp(18px,2.6vw,32px) clamp(18px,2.4vw,26px) clamp(54px,6.4vw,76px);
+ background-image:linear-gradient(180deg,rgba(255,255,255,.5),rgba(240,232,214,.35)),repeating-linear-gradient(180deg,transparent 0 43px,rgba(95,140,180,.20) 43px 44px);background-position:0 0,0 14px;color:var(--pen)}
+.book3 .backf::before{content:"";position:absolute;left:clamp(40px,4.8vw,58px);top:0;bottom:0;width:2px;background:rgba(214,98,98,.5)}
+.book3 .holes{position:absolute;left:12px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-around;padding:36px 0}
+.book3 .holes i{display:block;width:16px;height:16px;border-radius:50%;background:#EDE7D6;box-shadow:inset 0 2px 3px rgba(23,17,29,.28),0 1px 0 #fff}
+.book3 .paper-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--hw);font-size:24px;font-weight:500;color:var(--pen-soft)}
+.book3 .dear{margin:2px 0 2px;font-family:var(--hw);font-weight:700;font-size:clamp(34px,4vw,44px);line-height:1.1;color:var(--pen)}
+.book3 .ln{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;min-height:44px;border-bottom:1px solid rgba(95,140,180,.28)}
+.book3 .ln label,.book3 .ln .lb{flex:none;font-family:var(--hw);font-weight:500;font-size:clamp(24px,2.4vw,28px);line-height:44px;color:var(--pen)}
+.book3 .ln input{flex:1 1 150px;min-width:0;min-height:44px;padding:0 4px;border:0;background:transparent;font-family:var(--hw);font-weight:500;font-size:clamp(26px,2.6vw,31px);line-height:44px;color:var(--pen);border-radius:0;border-bottom:2px dotted rgba(30,38,80,.35)}
+.book3 .ln input::placeholder{font-family:var(--hw);color:var(--pen-soft);opacity:1}
+.book3 .ln input:focus-visible{outline:none;border-bottom:2px solid #EAA221;box-shadow:0 3px 0 rgba(234,162,33,.35)}
+.book3 .ln input[aria-invalid="true"]{border-bottom:2px solid #B3261E}
+.book3 .ln.days{align-items:center;padding:6px 0}
+.book3 .chips{display:flex;flex-wrap:wrap;gap:2px 4px;margin:0}
+.book3 .chips button{position:relative;min-width:50px;min-height:44px;padding:0 10px;border-radius:12px;font-family:var(--hw);font-weight:500;font-size:27px;line-height:1;color:var(--pen);background:transparent;box-shadow:none}
+.book3 .chips button svg{position:absolute;left:-6px;right:-6px;top:2px;bottom:2px;width:calc(100% + 12px);height:calc(100% - 4px);overflow:visible;pointer-events:none}
+.book3 .chips button svg ellipse{fill:none;stroke:var(--pen);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s cubic-bezier(.65,0,.35,1)}
+.book3 .chips button[aria-pressed="true"] svg ellipse{stroke-dashoffset:0}
+.book3 .chips button:focus-visible{outline:3px solid #EAA221;outline-offset:1px}
+.book3 .sign{display:flex;align-items:baseline;gap:12px;min-height:60px;margin-top:2px}
+.book3 .sign .th{font-family:var(--hw);font-weight:500;font-size:26px}
+.book3 .sign .sig{font-family:var(--hw);font-weight:700;font-size:38px;line-height:1.2;color:var(--pen);transform:rotate(-2deg);overflow-wrap:anywhere}
+.book3 .sign .sig.empty{color:var(--pen-soft);opacity:.7;font-weight:500;font-size:30px}
+.book3 .form-msg{margin:4px 0 0;font-size:15px;min-height:22px}
+.book3 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;margin-top:6px}
+.book3 .flipb{min-height:48px;padding:0 16px;border-radius:14px;font-weight:700;background:transparent;box-shadow:0 0 0 2px rgba(23,17,29,.2);color:var(--ink)}
+.book3 .stamp{position:absolute;right:20px;top:60px;padding:8px 14px;border:4px solid #2E7D32;border-radius:10px;color:#2E7D32;font-weight:900;font-size:17px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-8deg) scale(1.6);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none;background:rgba(255,253,247,.9)}
+.book3 .stamp.on{opacity:1;transform:rotate(-8deg) scale(1)}
+@media (max-width:900px){.book3 .g{grid-template-columns:1fr}.book3 .meta{grid-template-columns:1fr}}
+@media (max-width:520px){.book3 .backf{padding-left:50px}.book3 .holes{left:8px}.book3 .holes i{width:13px;height:13px}.book3 .ln input{flex-basis:100%}.book3 .paper-h{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.book3 .card,.book3 .stamp,.book3 .chips button svg ellipse{transition:none}.book3 .lift.turning{animation:none}}
+</style>
+<div class="wrap">
+ <div class="g">
+  <div>
+   <h2 class="h2" id="bk3-h">Take Our Card</h2>
+   <p class="lede rv">One number, one email, one office in Shoreview. Call us, or turn the card over and write us a letter to book a Wise Check.</p>
+   <p class="small">Writing the letter opens your own email app with it filled in. Nothing is sent until you send it.</p>
+  </div>
+  <div class="scene" data-owl="say:Turn it over">
+   <div class="lift"><div class="tilt"><div class="card">
+    <div class="face front">
+     <div class="top"><img src="{{A:logo.svg}}" alt="Owl Roofing" width="140" height="44"><span>We Give a Hoot</span></div>
+     <a class="tel" href="tel:+16519776027">(651) 977-6027</a>
+     <div class="meta"><div><b>Hours</b>Mon–Sat 8:00–18:00</div><div><b>Email</b><a href="mailto:info@owlroofing.com">info@owlroofing.com</a></div><div><b>Office</b>1000 County Rd E #230, Shoreview, MN 55126</div><div><b>Licence</b>Minnesota #BC809662</div></div>
+     <div class="acts"><a class="btn btn-amber btn-sm" href="tel:+16519776027" data-mag data-owl="hoot">Call Now</a><button class="btn btn-line btn-sm flip" type="button" aria-controls="bk3-form" data-mag>Book a Wise Check</button></div>
+    </div>
+    <div class="face backf" id="bk3-form" inert aria-hidden="true">
+     <span class="holes" aria-hidden="true"><i></i><i></i><i></i></span>
+     <form novalidate aria-labelledby="bk3-t">
+      <p class="paper-h"><span id="bk3-t">Book a Wise Check</span><span aria-hidden="true">Shoreview, MN</span></p>
+      <p class="dear" aria-hidden="true">Dear Owl,</p>
+      <div class="ln"><label for="bk3-n">My name is</label><input id="bk3-n" data-n="name" autocomplete="name" placeholder="your name" required></div>
+      <div class="ln"><label for="bk3-p">You can reach me on</label><input id="bk3-p" type="tel" data-n="phone" autocomplete="tel" inputmode="tel" placeholder="your phone number" required></div>
+      <div class="ln"><label for="bk3-a">My roof is at</label><input id="bk3-a" data-n="address" autocomplete="street-address" placeholder="your address" required></div>
+      <div class="ln days"><span class="lb" id="bk3-d">The best day for a Wise Check is</span><div class="chips" role="group" aria-labelledby="bk3-d" data-n="Preferred day"></div></div>
+      <div class="ln"><label for="bk3-x">One more thing</label><input id="bk3-x" data-n="note" placeholder="anything you want us to know" autocomplete="off"></div>
+      <input type="hidden" data-n="town" id="bk3-town">
+      <div class="sign"><span class="th" aria-hidden="true">Thank you,</span><span class="sig empty" aria-hidden="true">your name</span></div>
+      <p class="form-msg" aria-live="polite"></p>
+      <div class="row"><button class="flipb unflip" type="button">Back to the card</button><button class="btn btn-amber btn-sm" type="submit" data-mag data-owl="hoot">Send My Letter</button></div>
+      <span class="stamp" aria-hidden="true">Over to your email</span>
+     </form>
+    </div>
+   </div></div></div>
+  </div>
+ </div>
+</div>
+<script>
+OWL.reg('book','1',function(root){
+  var card = root.querySelector('.card'), tilt = root.querySelector('.tilt'), lift = root.querySelector('.lift'), scene = root.querySelector('.scene'), front = root.querySelector('.front'), back = root.querySelector('.backf'), flip = root.querySelector('.flip'), unflip = root.querySelector('.unflip'), h2 = root.querySelector('h2'),
+      form = root.querySelector('form'), msg = root.querySelector('.form-msg'), stamp = root.querySelector('.stamp'), chips = root.querySelector('.chips'), sig = root.querySelector('.sig'), nameIn = root.querySelector('#bk3-n'), town = root.querySelector('#bk3-town');
+  OWL.split(h2);
+  /* the day: a hand-drawn circle goes round the chosen one */
+  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(d, i){ var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][i]);
+    b.innerHTML = '<svg viewBox="0 0 60 44" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="30" cy="22" rx="27" ry="18" pathLength="1" transform="rotate(-4 30 22)"/></svg><span aria-hidden="true">' + d + '</span>'; chips.appendChild(b); });
+  chips.addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return; var on = b.getAttribute('aria-pressed') !== 'true'; [].forEach.call(chips.children, function(x){ x.setAttribute('aria-pressed', x === b && on ? 'true' : 'false'); }); });
+  /* the signature is the name, written out as you type it */
+  function signIt(){ var v = nameIn.value.trim(); sig.textContent = v || 'your name'; sig.classList.toggle('empty', !v); }
+  nameIn.addEventListener('input', signIt);
+  /* the town chosen in the areas section goes into the letter */
+  function setTown(t){ town.value = t || ''; } try { setTown(OWL.town || sessionStorage.getItem('owlTown')); } catch (e){} document.addEventListener('owl:town', function(e){ setTown(e.detail); });
+  /* the letter is handed to the visitor's own email app: nothing is sent from this page, and it never says it was */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var bad = null; form.querySelectorAll('[required]').forEach(function(i){ var ok = i.value.trim().length > (i.type === 'tel' ? 6 : 1); i.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (!ok && !bad) bad = i; });
+    if (bad){ msg.className = 'form-msg err'; msg.textContent = 'Please add your ' + bad.dataset.n + '.'; stamp.classList.remove('on'); bad.focus(); return; }
+    var L = ['Hi Owl, I’d like a Wise Check.', ''];
+    function line(k, v){ if (v) L.push(k + ': ' + v); }
+    line('Name', form.querySelector('[data-n="name"]').value.trim()); line('Phone', form.querySelector('[data-n="phone"]').value.trim()); line('Address', form.querySelector('[data-n="address"]').value.trim());
+    var on = chips.querySelector('[aria-pressed="true"]'); line('Best day', on ? on.getAttribute('aria-label') : ''); line('Town', town.value); line('One more thing', form.querySelector('[data-n="note"]').value.trim());
+    var url = 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Wise Check request') + '&body=' + encodeURIComponent(L.join('\n') + '\n');
+    form.dataset.mailto = url; location.href = url;
+    msg.className = 'form-msg'; msg.textContent = 'Your email app should open with your letter. Send it from there, or call (651) 977-6027.'; stamp.classList.add('on');
+  });
+  form.addEventListener('input', function(e){ if (e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); stamp.classList.remove('on'); });
+  /* turn the card over: it lifts, turns, settles; focus follows */
+  function turn(toBack){ lift.classList.remove('turning'); void lift.offsetWidth; if (!OWL.reduce){ lift.classList.add('turning'); setTimeout(function(){ lift.classList.remove('turning'); }, 1000); }
+    card.classList.toggle('back', toBack); back.inert = !toBack; back.setAttribute('aria-hidden', !toBack); front.inert = toBack; front.setAttribute('aria-hidden', toBack); flip.setAttribute('aria-expanded', toBack);
+    setTimeout(function(){ (toBack ? nameIn : flip).focus({preventScroll: true}); }, OWL.reduce ? 0 : 500); }
+  flip.addEventListener('click', function(){ turn(true); }); unflip.addEventListener('click', function(){ turn(false); });
+  flip.setAttribute('aria-expanded', 'false');
+  root.addEventListener('keydown', function(e){ if (e.key === 'Escape' && card.classList.contains('back')) turn(false); });
+  if (OWL.fine && !OWL.reduce){
+    scene.addEventListener('pointermove', function(e){ var b = scene.getBoundingClientRect(), x = (e.clientX - b.left)/b.width - .5, y = (e.clientY - b.top)/b.height - .5;
+      tilt.style.setProperty('--ry', (x*10).toFixed(2) + 'deg'); tilt.style.setProperty('--rx', (-y*8).toFixed(2) + 'deg'); front.style.setProperty('--gx', ((x + .5)*100).toFixed(0) + '%'); front.style.setProperty('--gy', ((y + .5)*100).toFixed(0) + '%'); });
+    scene.addEventListener('pointerleave', function(){ tilt.style.setProperty('--ry', '0deg'); tilt.style.setProperty('--rx', '0deg'); });
+  }
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold: .3}); io.observe(card); }
+});
+</script>
+</section>
