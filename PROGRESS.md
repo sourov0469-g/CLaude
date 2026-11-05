@@ -1445,7 +1445,18 @@ Every text element is paired with the nearest painted background behind it, as r
 - **File:** 13,255,976 bytes (+173,842). Page 16.8 screens at 1440 (was 19.0); pinned sections 2 (was 3).
 - **Sub-agents (2, prep only, under `siding/redo/prep/`):** Visualiser photo re-selection (chose #41, 7/10; #36 stays the fallback) and a 7-section background art kit (not yet wired). The build and tests were this session alone.
 
-**Next, after the accept:** Visualiser V-A, built to the NEXT PLAN in GATE-NEW-Services-S.md (four decisions for Muse: photo #36 or #41, trim limits, label, background).
+**Services S: accepted by Muse (8.49).** Consult reply on Visualiser V-A (binding): photo #36; trim and soffit stay as shown where untraced (the Trim step recolours only traced areas); the honesty label exactly as ruled, no extra line unless the photo has brick; the kit's drawn colour-chip and roller-stroke background, kept off the photo. The Services heading stays as written.
+
+**Visualiser V "Recolour a real Austin Pro house" (GATE-NEW-Visualiser-V.md): built and gated; waiting for Muse.**
+- **Shown default:** `?vis=o`; Visualiser B is parked as a hidden backup. Score 8.66.
+- **What it is:** photo #36 with two traced masks (siding, window frames); three steps (Colour, Trim, Preview); luminance-preserving recolour on a canvas; a course-by-course sweep; side-by-side preview; sample card and one Book. Background: the kit's colour-chip and roller art, two layers.
+- **Proof:** 37 of 37 checks (label exact, 17 colours, everything outside the masks unchanged, trim, keyboard, touch, reduced motion, contrast, heights 1.12-1.29); 259 views with 0 errors; 202 templates with only `vis:b` added, 0 changed.
+- **File:** 13,405,443 bytes (+149,563). Page 16.9 screens at 1440; Book buttons 7 in the body (target 6).
+- **Sub-agents:** two prep agents for the next sections (Windows W-A crops and facts; Reviews R-A verbatim voices), prep only; the build and tests were this session alone.
+
+**Next, after the accept:** Windows W-A, built to the NEXT PLAN in GATE-NEW-Visualiser-V.md (five decisions for Muse: the six frames, the brand counts, 388, the one dark band, the order).
+
+(superseded) **Next, after the accept:** Visualiser V-A, built to the NEXT PLAN in GATE-NEW-Services-S.md (four decisions for Muse: photo #36 or #41, trim limits, label, background).
 
 (superseded) **Next, after the accept:** Services S-A "Start from the problem", built to the NEXT PLAN in GATE-NEW-Booking-N.md (five decisions for Muse: tile 6, photo #0's month, tile 2's doors photo, roof/paint wording, weight).
 
