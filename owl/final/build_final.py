@@ -17,8 +17,9 @@ def part(html, tag):
     if not m: sys.exit('no <%s> found' % tag)
     return m.group(1)
 
-def sections():
+def sections(footer=False):
     files = sorted(glob.glob(os.path.join(FINAL, 'src', 'final', 'sections', '[0-9][0-9]-*.html')))
+    files = [f for f in files if (os.path.basename(f) == '11-footer.html') == footer]
     out = []
     for f in files:
         name = re.match(r'\d+-(.+)\.html$', os.path.basename(f)).group(1)
@@ -33,7 +34,7 @@ def sections():
 def main():
     pb = load('past_build', os.path.join(FINAL, 'src', 'build.py'))
     past = pb.build_raw()
-    tpl = pb.read('final/template.html').replace('{{FINAL_SECTIONS}}', sections())
+    tpl = pb.read('final/template.html').replace('{{FINAL_SECTIONS}}', sections()).replace('{{FINAL_FOOTER}}', sections(True))
     new = pb.resolve(tpl)
     left = re.findall(r'\{\{[A-Z]+:[^}]+\}\}', new)
     if left: sys.exit('unresolved placeholders: %s' % left[:5])

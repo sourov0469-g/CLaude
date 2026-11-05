@@ -98,6 +98,8 @@ OWL.reg('areas','1',function(root){
   document.addEventListener('pointerdown', function(e){ if (!lb.hidden && !sec.querySelector('.cb').contains(e.target)) close(); });
   clr.addEventListener('click', function(){ input.value = ''; clr.classList.remove('on'); reset(); render(''); open(); input.focus(); });
   render('');
+  /* the footer's roofline hands a town to this search */
+  OWL.pickTown = function(name){ var i = T.findIndex(function(t){ return t[0] === name; }); if (i < 0) return; input.value = T[i][0]; clr.classList.add('on'); answer(i); close(); sec.querySelector('.tq').scrollIntoView({behavior: OWL.reduce ? 'instant' : 'smooth', block: 'center'}); };
 });
 </script>
 </section>

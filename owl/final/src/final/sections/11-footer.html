@@ -1,0 +1,120 @@
+<footer class="ftr" id="contact" data-owl="say:That&rsquo;s the whole nest">
+<style>
+/* Section 11 · Footer. The old footer, with life: the 29 town roofs are now a roofline you can touch (an owl hops to the roof you point at, arrow keys work, choosing one
+   puts that town in the Areas search); the columns and proofs arrive as you reach them; Shoreview's hours say honestly whether we are open right now;
+   email and address copy in one tap; and a Back to top button with a page-progress ring follows you down the page. */
+.ftr{overflow:visible}
+.ftr .rl{position:absolute;left:0;right:0;top:-62px;height:64px;pointer-events:none}
+.ftr .rl .in{position:relative;max-width:1320px;margin:0 auto;height:100%;padding:0 clamp(8px,2vw,24px);pointer-events:none}
+.ftr .roofs{display:flex;justify-content:space-between;align-items:flex-end;height:100%;pointer-events:auto}
+.ftr .rf{position:relative;flex:1 1 0;min-width:30px;height:100%;display:flex;align-items:flex-end;justify-content:center;padding:0;background:none;cursor:pointer}
+.ftr .rf svg{width:min(34px,100%);height:var(--h,26px);overflow:visible;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+.ftr .rf path{fill:#E7E0CE;stroke:#C9C0AC;stroke-width:1.6;stroke-linejoin:round;transition:fill .25s;animation:ftrwave 6s ease-in-out infinite;animation-delay:calc(var(--i)*.12s)}
+.ftr .rf.home path{fill:#F6C25F;stroke:#C7871A;animation:none}
+.ftr .rf.on svg,.ftr .rf:hover svg{transform:translateY(-8px)}
+.ftr .rf.on path,.ftr .rf:hover path{fill:#EAA221;stroke:#C7871A;animation:none}
+.ftr .rf:focus-visible{outline:3px solid var(--ink);outline-offset:-2px;border-radius:6px}
+.ftr .perch{position:absolute;left:0;bottom:0;width:36px;height:40px;pointer-events:none;transform:translateX(var(--px,0px));transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.ftr .perch svg{position:absolute;left:0;bottom:var(--py,26px);width:36px;height:36px;overflow:visible;transition:bottom .4s cubic-bezier(.3,1.5,.5,1)}
+.ftr .perch .lid{transform-origin:center;transform-box:fill-box;transform:scaleY(0);animation:ftrb 5s infinite}
+@keyframes ftrb{0%,93%,100%{transform:scaleY(0)}96%{transform:scaleY(1)}}
+.ftr .perch .tip{position:absolute;left:50%;bottom:calc(var(--py,26px) + 40px);translate:-50% 0;white-space:nowrap;padding:5px 11px;border-radius:999px;background:var(--ink);color:var(--cream);font-size:13px;font-weight:700;opacity:0;transition:opacity .2s,bottom .4s cubic-bezier(.3,1.5,.5,1)}
+.ftr .perch.say .tip{opacity:1}
+@media (max-width:1360px){.ftr .rl{overflow-x:auto;overflow-y:hidden;pointer-events:auto;scrollbar-width:none;height:84px;top:-82px;padding-top:20px}.ftr .rl::-webkit-scrollbar{display:none}.ftr .rl .in{min-width:1300px;height:64px;margin-top:0}.ftr .rf{min-width:44px}}
+/* arrival */
+.ftr .ar{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--k,0)*90ms)}
+.ftr.in .ar{opacity:1;transform:none}
+.ftr .ftr-trust span{opacity:0;transform:scale(.85);transition:opacity .4s,transform .5s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(var(--k,0)*80ms + 300ms)}
+.ftr.in .ftr-trust span{opacity:1;transform:none}
+/* hours and copy */
+.ftr .open{display:flex;align-items:flex-start;gap:8px;margin:8px 0 0!important;font-size:15px!important}
+.ftr .open i{flex:none;width:10px;height:10px;margin-top:7px;border-radius:50%;background:#9C9585}
+.ftr .open.yes i{background:#2E7D32;box-shadow:0 0 0 4px rgba(46,125,50,.18)}
+.ftr .cp{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:999px;font-size:14px;font-weight:700;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(23,17,29,.22);transition:background .2s}
+.ftr .cp:hover{background:rgba(234,162,33,.2)}
+.ftr .cp.ok{background:#2E7D32;color:#fff;box-shadow:none}
+.ftr .cp svg{width:16px;height:16px}
+.ftr .line{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px}
+.ftr-legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.ftr .up{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;font-weight:700;font-size:15px;color:var(--ink);text-decoration:none;box-shadow:inset 0 0 0 1.5px rgba(23,17,29,.22)}
+.ftr .up:hover{background:rgba(234,162,33,.2)}
+.ftr .up svg{width:16px;height:16px}
+/* the floating button */
+.totop{position:fixed;right:clamp(12px,2vw,24px);bottom:clamp(12px,2vw,24px);z-index:90;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--paper);color:var(--ink);box-shadow:0 10px 24px -10px rgba(23,17,29,.55),0 0 0 1px rgba(23,17,29,.1);opacity:0;transform:translateY(20px) scale(.8);pointer-events:none;transition:opacity .3s,transform .45s cubic-bezier(.3,1.5,.5,1)}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop svg.ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.totop svg.ring circle{fill:none;stroke-width:3.5}
+.totop svg.ring .tr{stroke:rgba(23,17,29,.12)}
+.totop svg.ring .pr{stroke:#EAA221;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--p,0))}
+.totop .ic{position:relative;width:22px;height:22px}
+.totop:hover .ic{animation:totop .6s ease}
+@keyframes totop{40%{transform:translateY(-5px)}}
+.totop:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (max-width:560px){.ftr-g{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.ftr .ar,.ftr .ftr-trust span{opacity:1;transform:none;transition:none}.ftr .rf svg,.ftr .perch,.ftr .perch svg,.totop{transition:none}.ftr .rf path,.ftr .perch .lid,.totop:hover .ic{animation:none}}
+</style>
+<div class="rl"><div class="in">
+ <div class="roofs" role="group" aria-label="Our 29 towns, nearest first. Use the left and right arrow keys, and press Enter to choose a town in the search above."></div>
+ <div class="perch" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M7 11 L11 3 L16 9 Q20 8 24 9 L29 3 L33 11 Q37 21 34 29 Q30 37 20 38 Q10 37 6 29 Q3 21 7 11Z" fill="#17111D"/><circle cx="14" cy="18" r="6" fill="#F1EFE6"/><circle cx="26" cy="18" r="6" fill="#F1EFE6"/><circle cx="14" cy="18" r="2.6" fill="#17111D"/><circle cx="26" cy="18" r="2.6" fill="#17111D"/><circle class="lid" cx="14" cy="18" r="6.2" fill="#17111D"/><circle class="lid" cx="26" cy="18" r="6.2" fill="#17111D"/><path d="M18 23 L20 27 L22 23Z" fill="#EAA221"/></svg><span class="tip"></span></div>
+</div></div>
+<div class="wrap">
+ <div class="ftr-g">
+  <div class="ftr-brand ar" style="--k:0"><img src="{{A:logo.svg}}" alt="Owl Roofing" width="130" height="53"><p class="ftr-tag">We Give a Hoot.</p><p>Family-owned, founded 2025 by Tim Brown and Noah Bergland.</p></div>
+  <nav class="ar" style="--k:1" aria-label="Footer"><b>Explore</b><a href="#services">Services</a><a href="#wise-check">Wise Check</a><a href="#ask-owl">Ask the Owl</a><a href="#family">About</a><a href="#reviews">Reviews</a><a href="#areas">Areas</a><a href="#book">Book</a></nav>
+  <div class="ar" style="--k:2"><b>Visit</b>
+   <div class="line"><p class="adr">Owl Roofing LLC<br>1000 County Rd E #230<br>Shoreview, MN 55126</p><button class="cp" type="button" data-copy="adr" aria-label="Copy the address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg><span>Copy</span></button></div>
+   <p>Mon–Sat 08:00–18:00</p><p class="open" aria-live="off"><i aria-hidden="true"></i><span></span></p></div>
+  <div class="ar" style="--k:3"><b>Talk to us</b><p><a href="tel:+16519776027">(651) 977-6027</a></p>
+   <div class="line"><p class="eml"><a href="mailto:info@owlroofing.com">info@owlroofing.com</a></p><button class="cp" type="button" data-copy="eml" aria-label="Copy the email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg><span>Copy</span></button></div></div>
+ </div>
+ <div class="ftr-trust"><span style="--k:0">GAF Systems Plus Certified</span><span style="--k:1">BBB A−</span><span style="--k:2">MN licence #BC809662</span><span style="--k:3">10-year workmanship warranty</span><span style="--k:4">5.0 · 90+ reviews</span></div>
+ <p class="ftr-legal"><span>© 2026 Owl Roofing LLC</span><a class="up" href="#top" data-owl="hoot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>Back to top</a></p>
+</div>
+<button class="totop" type="button" aria-label="Back to the top of the page"><svg class="ring" viewBox="0 0 56 56" aria-hidden="true"><circle class="tr" cx="28" cy="28" r="25"/><circle class="pr" cx="28" cy="28" r="25" pathLength="1"/></svg><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<script>
+OWL.reg('footer','1',function(root){
+  var f = root.querySelector('footer'), roofs = f.querySelector('.roofs'), perch = f.querySelector('.perch'), tip = perch.querySelector('.tip'), wrap = f.querySelector('.rl .in');
+  var T = [['Shoreview',45.079,-93.147],['North Oaks',45.103,-93.079],['Arden Hills',45.050,-93.156],['Vadnais Heights',45.057,-93.074],['Little Canada',45.027,-93.088],['Roseville',45.006,-93.157],['Mounds View',45.105,-93.208],['New Brighton',45.066,-93.202],['Lino Lakes',45.160,-93.089],['Blaine',45.161,-93.235],['White Bear Lake',45.085,-93.010],['Maplewood',44.953,-92.995],['Fridley',45.086,-93.263],['Saint Paul',44.954,-93.090],['Minneapolis',44.978,-93.265],['Forest Lake',45.279,-92.985],['Coon Rapids',45.173,-93.303],['Oakdale',44.963,-92.965],['Stillwater',45.056,-92.806],['Woodbury',44.924,-92.959],['Maple Grove',45.073,-93.456],['Plymouth',45.011,-93.455],['Minnetonka',44.921,-93.468],['Edina',44.889,-93.350],['Eden Prairie',44.855,-93.471],['Bloomington',44.841,-93.298],['Eagan',44.804,-93.167],['Burnsville',44.768,-93.278],['Apple Valley',44.732,-93.218]];
+  function miles(t){ var R = 3958.8, r = Math.PI / 180, a = T[0], dl = (t[1] - a[1]) * r, dg = (t[2] - a[2]) * r, h = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[1] * r) * Math.cos(t[1] * r) * Math.sin(dg / 2) * Math.sin(dg / 2); return 2 * R * Math.asin(Math.sqrt(h)); }
+  var order = T.map(function(t, i){ return i; }).sort(function(a, b){ return miles(T[a]) - miles(T[b]); });
+  /* the roofline: one roof for each of our 29 towns, nearest first */
+  var rfs = order.map(function(i, k){ var t = T[i], b = document.createElement('button'); b.type = 'button'; b.className = 'rf' + (i ? '' : ' home'); b.tabIndex = k ? -1 : 0; b.style.setProperty('--i', k); b.style.setProperty('--h', (20 + (k * 7 % 4) * 5 + (i ? 0 : 6)) + 'px');
+    b.setAttribute('aria-label', t[0] + (i ? ', about ' + Math.round(miles(t)) + ' miles from Shoreview. Choose this town.' : ', our home base. Choose this town.'));
+    b.innerHTML = '<svg viewBox="0 0 34 30" aria-hidden="true"><path d="M3 29 V15 L17 3 L31 15 V29 Z"/></svg>'; b.dataset.i = i; b.dataset.k = k; roofs.appendChild(b); return b; });
+  var act = -1;
+  function put(k){ act = k; rfs.forEach(function(r, j){ r.classList.toggle('on', j === k); r.tabIndex = j === k ? 0 : (k < 0 && j === 0 ? 0 : -1); });
+    if (k < 0){ perch.classList.remove('say'); return; } var r = rfs[k], rb = r.getBoundingClientRect(), wb = wrap.getBoundingClientRect(), h = parseFloat(r.style.getPropertyValue('--h')) || 26;
+    perch.style.setProperty('--px', (rb.left - wb.left + rb.width / 2 - 18) + 'px'); perch.style.setProperty('--py', (h + 2) + 'px'); var i = +r.dataset.i; tip.textContent = T[i][0] + (i ? ' · about ' + Math.round(miles(T[i])) + ' mi' : ' · home base'); perch.classList.add('say'); }
+  rfs.forEach(function(r, k){ r.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') put(k); }); r.addEventListener('focus', function(){ put(k); });
+    r.addEventListener('click', function(){ put(k); var n = T[+r.dataset.i][0]; if (OWL.pickTown) OWL.pickTown(n); });
+    r.addEventListener('keydown', function(e){ var m = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1, Home: -999, End: 999 }[e.key]; if (!m) return; e.preventDefault(); var n = Math.max(0, Math.min(rfs.length - 1, Math.abs(m) > 1 ? (m < 0 ? 0 : rfs.length - 1) : k + m)); rfs[n].focus(); }); });
+  roofs.addEventListener('pointerleave', function(){ perch.classList.remove('say'); rfs.forEach(function(r){ r.classList.remove('on'); }); act = -1; });
+  perch.style.setProperty('--px', '0px');
+  /* arrival */
+  if (OWL.reduce || !('IntersectionObserver' in window)) f.classList.add('in');
+  else new IntersectionObserver(function(e, o){ if (e[0].isIntersecting){ f.classList.add('in'); o.disconnect(); } }, {threshold: .15}).observe(f.querySelector('.ftr-g'));
+  /* Shoreview's hours, said honestly: it is Shoreview's clock, not yours */
+  var st = f.querySelector('.open'), stT = st.querySelector('span');
+  function clock(){ var parts = new Intl.DateTimeFormat('en-US', {timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false}).formatToParts(new Date()), g = {}; parts.forEach(function(p){ g[p.type] = p.value; });
+    var h = +g.hour % 24, m = +g.minute, d = g.weekday, six = d !== 'Sun', open = six && h >= 8 && h < 18;
+    var hh = ((h + 11) % 12 + 1) + ':' + ('0' + m).slice(-2) + (h < 12 ? ' am' : ' pm');
+    st.classList.toggle('yes', open);
+    if (open) stT.textContent = 'Open now: it is ' + hh + ' in Shoreview, and we close at 6 pm.';
+    else { var nxt = d === 'Sat' && h >= 18 || d === 'Sun' ? 'Monday at 8 am' : (h < 8 ? 'today at 8 am' : 'tomorrow at 8 am'); stT.textContent = 'Closed right now: it is ' + hh + ' in Shoreview. We open ' + nxt + '.'; }
+    st.dataset.open = open ? 'yes' : 'no'; }
+  clock(); setInterval(clock, 60000);
+  /* copy */
+  [].forEach.call(f.querySelectorAll('.cp'), function(b){ var k = b.dataset.copy, lab = b.querySelector('span');
+    b.addEventListener('click', function(){ var txt = k === 'eml' ? 'info@owlroofing.com' : 'Owl Roofing LLC, 1000 County Rd E #230, Shoreview, MN 55126';
+      function done(ok){ lab.textContent = ok ? 'Copied' : 'Select it to copy'; b.classList.toggle('ok', ok); b.dataset.copied = ok ? '1' : '0'; setTimeout(function(){ lab.textContent = 'Copy'; b.classList.remove('ok'); }, 1800); }
+      function fallback(){ var ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;left:-999px;top:0'; document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e){} ta.remove(); done(ok); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function(){ done(true); }, fallback); else fallback(); }); });
+  /* back to top: a button with a ring that fills as you read down the page */
+  var tt = f.querySelector('.totop'), ticking = 0;
+  function upd(){ ticking = 0; var d = document.documentElement, mx = d.scrollHeight - innerHeight, p = mx > 0 ? Math.min(1, scrollY / mx) : 0; tt.style.setProperty('--p', p.toFixed(4)); var lg = f.querySelector('.ftr-legal').getBoundingClientRect(); tt.classList.toggle('on', scrollY > innerHeight * 1.1 && lg.top > innerHeight - 10); }
+  addEventListener('scroll', function(){ if (!ticking){ ticking = 1; requestAnimationFrame(upd); } }, {passive: true}); upd();
+  function top(e){ if (e) e.preventDefault(); scrollTo({top: 0, behavior: OWL.reduce ? 'instant' : 'smooth'}); if (history.replaceState) history.replaceState(null, '', location.pathname + location.search); }
+  tt.addEventListener('click', top); f.querySelector('.up').addEventListener('click', top);
+});
+</script>
+</footer>

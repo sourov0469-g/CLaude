@@ -80,3 +80,4 @@
 - **8 Areas** `final/GATE-FINAL-AREAS.md`: NEW Towns V3 rebuilt: aerial photo + one search bar; custom combobox (hover, click, tap, arrows, Enter, Escape) listing 29 towns nearest first; no row of names, no map. 27/27.
 - **9 Family** `final/GATE-FINAL-FAMILY.md`: OLD Family V9 Give a Hoot (four photos around the owl); phone sizes tuned. 18/18.
 - **10 Book** `final/GATE-FINAL-BOOK.md`: OLD Booking V3 3D card (thickness, lift, own lean layer; click-through bug fixed) + Work Order paper rebuilt as a handwritten ink letter (Caveat, this form only); the Areas town and the circled day go into the email. 27/27.
+- **11 Footer** `final/GATE-FINAL-FOOTER.md`: the 29 roofs are a touchable roofline (owl hops, arrows, choose a town into Areas), back-to-top with a progress ring, honest Shoreview hours, copy buttons, arrival animation. 31/31.
