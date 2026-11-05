@@ -1420,3 +1420,9 @@ Every text element is paired with the nearest painted background behind it, as r
 - **Flag:** archived film heroes cannot play in headless Chromium (no H.264 decoder).
 
 **Next, after the accept:** Hero H-A, built to the NEXT PLAN in GATE-WEIGHT.md (photo choice, where 4.9 / 474 lives, and the H1 are Muse's decisions).
+
+**Owner order, 2026-11-05 (supersedes the no-sub-agents line for Austin only):** this Austin session may run **up to 2 sub-agents** to divide the upgrade work (prep, audit, asset work in parallel with the section being built). The plan, build order, gate standard (scorecard, skill ledger, screenshots, NEXT PLAN), weight ceiling and all fact locks stand. **Each gate states sub-agent use honestly.**
+
+**Sub-agent use so far (honest log):**
+- Everything through GATE-WEIGHT was done by this session alone, with no sub-agents.
+- Two prep agents were started after the order (asset prep only; they write to `siding/redo/prep/` and never touch the build, the page, git or any gate): (1) Visualiser V-A: real-photo siding masks and a recolour test; (2) Services S-A: tile photo and published-figure selection.
