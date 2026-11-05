@@ -1454,7 +1454,16 @@ Every text element is paired with the nearest painted background behind it, as r
 - **File:** 13,405,443 bytes (+149,563). Page 16.9 screens at 1440; Book buttons 7 in the body (target 6).
 - **Sub-agents:** two prep agents for the next sections (Windows W-A crops and facts; Reviews R-A verbatim voices), prep only; the build and tests were this session alone.
 
-**Next, after the accept:** Windows W-A, built to the NEXT PLAN in GATE-NEW-Visualiser-V.md (five decisions for Muse: the six frames, the brand counts, 388, the one dark band, the order).
+**Visualiser V: accepted by Muse (8.66).** Consult reply on Windows W-A: all five decisions agreed as recommended (six frames, FAQ brand counts "of 376 priced", 388 once in the rail, one dark band, Windows then Reviews). Build order after Windows: Reviews R-A, Process P-A, Area A-A, Try T-A, then the whole-page gate. Up to 2 sub-agents.
+
+**Windows W "Windows, close up" (GATE-NEW-Windows-W.md): built and gated; waiting for Muse.**
+- **Shown default:** `?windows=o`; Windows A is parked as a hidden backup. Score 8.53.
+- **What it is:** the page's one dark band; the facts once in a rail (388, the median band, the four brands of the 376 priced jobs, the two-days sentence); six close crops of real installed windows in a sideways archive with an index and a reflection sweep on the centred frame. Background: the kit's Windows set (light rays, sash), two layers.
+- **Proof:** 37 of 37 checks; 260 views with 0 errors; 203 templates with only `windows:a` added, 0 changed; the body outside the slot identical; one dark band in the body.
+- **File:** 13,896,693 bytes (+491,250); Book buttons in the page body: 6 (target met).
+- **Sub-agents (2, prep only):** Process P-A prep and Area A-A prep for later sections (saved as `prep/process/REPORT.md`, `prep/area/REPORT.md`); the build and tests were this session alone.
+
+(superseded) **Next, after the accept:** Windows W-A, built to the NEXT PLAN in GATE-NEW-Visualiser-V.md (five decisions for Muse: the six frames, the brand counts, 388, the one dark band, the order).
 
 (superseded) **Next, after the accept:** Visualiser V-A, built to the NEXT PLAN in GATE-NEW-Services-S.md (four decisions for Muse: photo #36 or #41, trim limits, label, background).
 
