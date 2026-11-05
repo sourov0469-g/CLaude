@@ -39,9 +39,11 @@
  },
  "05-people": {
   "label": "Family",
-  "default": 1,
+  "default": 2,
   "names": {
-   "1": "Split cover"
+   "1": "Split cover",
+   "2": "Prints on a table",
+   "3": "Two names"
   }
  },
  "06-towns": {

@@ -1,0 +1,68 @@
+<section class="rs people p2" id="people" data-sky="day" aria-labelledby="p2-h">
+<style>
+/* V2 · Prints on a table. Owl's own photos as prints at their own size (never enlarged): drag one about, or tap it to bring it
+   to the front and turn it over to the names. A physical-cards pattern (not live-studied). */
+.p2{padding:clamp(100px,13vh,150px) clamp(16px,4vw,64px) clamp(80px,10vh,120px)}
+.p2 .in{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:clamp(20px,4vw,64px);align-items:center}
+.p2 h2{margin:0;font-size:clamp(38px,4.6vw,76px);font-weight:900;line-height:.95;letter-spacing:-.045em;color:var(--ink)}
+.p2 h2 em{font-style:normal;color:var(--acc-text)}
+.p2 .lede{margin:18px 0 0;font-size:clamp(17px,1.35vw,20px);line-height:1.5;color:var(--ink-70);max-width:34ch}
+.p2 .facts{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:15px;font-weight:700;color:var(--ink)}
+.p2 .facts li::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--acc);vertical-align:1px}
+.p2 .hint{margin:22px 0 0;font-size:14px;font-weight:700;color:var(--ink-70)}
+.p2 .table{position:relative;height:min(78vh,700px);border-radius:28px;background:var(--wash);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;touch-action:pan-y}
+.p2 .print{position:absolute;left:var(--x);top:var(--y);width:var(--w);padding:0;border:0;background:none;cursor:grab;perspective:1400px;rotate:var(--r);transition:rotate .4s cubic-bezier(.16,1,.3,1),scale .3s;touch-action:none}
+.p2 .print:active{cursor:grabbing}
+.p2 .print.top{rotate:0deg;scale:1.02}
+.p2 .flip{position:relative;display:block;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.p2 .print.turned .flip{transform:rotateY(180deg)}
+.p2 .face,.p2 .back{position:relative;display:block;padding:12px 12px 44px;border-radius:6px;background:#FBFBF9;box-shadow:0 1px 2px rgba(0,0,0,.12),0 24px 40px -24px rgba(0,0,0,.5);backface-visibility:hidden}
+.p2 .face img{display:block;width:100%;height:auto;border-radius:2px;background:#E4E6E6}
+.p2 .face .cap{position:absolute;left:14px;right:14px;bottom:12px;font-size:14px;font-weight:800;color:#22282E;text-align:left;font-family:inherit}
+.p2 .back{position:absolute;inset:0;transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:22px;text-align:left;color:#22282E}
+.p2 .back b{font-size:clamp(22px,2vw,30px);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.p2 .back span{font-size:15px;font-weight:600;line-height:1.45;color:#4F5861}
+.p2 .print:focus-visible{outline:3px solid var(--acc);outline-offset:6px;border-radius:8px}
+@media (max-width:900px){.p2 .in{grid-template-columns:1fr}.p2 .table{height:620px}}
+@media (prefers-reduced-motion:reduce){.p2 .print,.p2 .flip{transition:none}}
+</style>
+<div class="in">
+ <div>
+  <h2 id="p2-h">Who shows up? <em>Family.</em></h2>
+  <p class="lede">Owl Roofing is two families, the Browns and the Berglands, and the crew they send to your roof.</p>
+  <ul class="facts"><li>Founded in 2025 by Tim Brown and Noah Bergland</li><li>Family-owned, in Shoreview, MN</li><li>GAF Systems Plus certified</li></ul>
+  <p class="hint">Tap a photo to turn it over. Drag them about if you like.</p>
+ </div>
+ <div class="table" role="group" aria-label="Photos of the Owl families and crew"></div>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), table = sec.querySelector('.table');
+  /* nw = each photo's own width: a print is never shown wider than that (on phones, at most half of it: they are 2x screens) */
+  var P = [
+    { src: '{{A:fam-crew.webp}}', nw: 900, nh: 546, alt: 'An Owl roofer smiling on a job, crew behind him', cap: 'On the job', b: 'Owl’s crew', s: 'An Owl roofer on a job, the crew behind him. GAF Systems Plus certified.', x: 46, y: 50, r: 5 },
+    { src: '{{A:svc-check.webp}}', nw: 560, nh: 373, alt: 'One of Owl’s crew walking on a roof', cap: 'On the roof', b: 'Owl’s crew', s: 'One of the crew walking a roof. We Give a Hoot, about your home, start to finish.', x: 6, y: 55, r: -6 },
+    { src: '{{A:fam-noah.webp}}', nw: 700, nh: 543, alt: 'Noah Bergland on a ladder at a roof edge', cap: 'Noah, ladder in hand', b: 'Noah Bergland', s: 'Co-founder, on the job.', x: 52, y: 6, r: 4 },
+    { src: '{{A:berglands.webp}}', nw: 558, nh: 620, alt: 'Noah Bergland with his wife and their children', cap: 'The Berglands', b: 'The Berglands', s: 'Noah Bergland, co-founder, and his family.', x: 26, y: 8, r: -3 },
+    { src: '{{A:browns.webp}}', nw: 620, nh: 471, alt: 'Tim Brown with his wife and their children', cap: 'The Browns', b: 'The Browns', s: 'Tim Brown, co-founder, and his family. Founded 2025, family-owned.', x: 3, y: 6, r: -4 }];
+  var z = 10, prints = P.map(function(p, i){ var b = document.createElement('button'); b.type = 'button'; b.className = 'print';
+    b.setAttribute('aria-label', p.alt + '. Press to turn it over.'); b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span class="flip"><span class="face"><img src="' + p.src + '" alt="" width="' + p.nw + '" height="' + p.nh + '"><span class="cap">' + p.cap + '</span></span><span class="back"><b>' + p.b + '</b><span>' + p.s + '</span></span></span>';
+    b.style.zIndex = ++z; table.appendChild(b); return b; });
+  function size(){ var tw = table.clientWidth, th = table.clientHeight, phone = innerWidth <= 900, k = phone ? .5 : 1;
+    prints.forEach(function(b, i){ var p = P[i], w = Math.min(p.nw * k, tw * (phone ? .62 : .44)); b.style.setProperty('--w', w + 'px');
+      if (!b.dataset.moved){ b.style.setProperty('--x', Math.min(p.x / 100 * tw, tw - w - 8) + 'px'); b.style.setProperty('--y', Math.min(p.y / 100 * th, th - w * p.nh / p.nw - 60) + 'px'); }
+      b.style.setProperty('--r', p.r + 'deg'); }); }
+  size(); addEventListener('resize', size);
+  function front(b){ b.style.zIndex = ++z; prints.forEach(function(o){ o.classList.toggle('top', o === b); }); }
+  prints.forEach(function(b){ var sx, sy, ox, oy, moved = false, id = null;
+    b.addEventListener('pointerdown', function(e){ id = e.pointerId; moved = false; sx = e.clientX; sy = e.clientY; ox = parseFloat(b.style.getPropertyValue('--x')); oy = parseFloat(b.style.getPropertyValue('--y')); front(b); b.setPointerCapture(id); });
+    b.addEventListener('pointermove', function(e){ if (e.pointerId !== id) return; var dx = e.clientX - sx, dy = e.clientY - sy; if (!moved && Math.hypot(dx, dy) < 6) return; moved = true; b.dataset.moved = '1';
+      var tw = table.clientWidth, th = table.clientHeight, w = b.offsetWidth, h = b.offsetHeight;
+      b.style.setProperty('--x', Math.max(-w * .3, Math.min(tw - w * .7, ox + dx)) + 'px'); b.style.setProperty('--y', Math.max(-h * .3, Math.min(th - h * .5, oy + dy)) + 'px'); });
+    b.addEventListener('pointerup', function(){ id = null; });
+    b.addEventListener('click', function(){ if (moved){ moved = false; return; } front(b); var t = !b.classList.contains('turned'); b.classList.toggle('turned', t); b.setAttribute('aria-pressed', t ? 'true' : 'false'); sec.dataset.turned = sec.querySelectorAll('.print.turned').length; });
+  });
+})();
+</script>
+</section>

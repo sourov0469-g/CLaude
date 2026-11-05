@@ -1,0 +1,128 @@
+{
+ "section": "people",
+ "version": 3,
+ "total": 24,
+ "passed": 24,
+ "results": [
+  {
+   "name": "the switcher shows this version: people V3",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | elsewhere, for their own gates: 52527d06aa in towns+call"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"273d497e23\":1,\"66017dd38e\":1,\"50c5463931\":1,\"0d6b1544dc\":1,\"837fb57d1d\":1}"
+  },
+  {
+   "name": "two names and the crew, as three buttons; Tim Brown open first",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "choosing Noah Bergland opens the Berglands and Noah on the ladder (Owl’s own photos), and closes the Browns",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "keyboard focus opens the crew",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the footer line carries only locked facts",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (5 media measured)",
+   "ok": true,
+   "info": "img.cut 0.92x, img.cut 0.50x, img 0.40x, img 0.31x, img 0.50x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (5 media measured)",
+   "ok": true,
+   "info": "img.cut 1.10x, img.cut 0.62x, img 0.49x, img 0.38x, img 0.62x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the photo opens at once",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

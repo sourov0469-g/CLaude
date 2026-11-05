@@ -1,0 +1,128 @@
+{
+ "section": "people",
+ "version": 1,
+ "total": 24,
+ "passed": 24,
+ "results": [
+  {
+   "name": "the switcher shows this version: people V1",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette shingle: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette navy: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette hearth: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA, palette stone: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027; no Master Elite, A+, Accredited, lifetime; reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no skeleton: no kicker + h2 + lede opening, no Book + Call button row",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows appears in any other section (this version with every other section's best)",
+   "ok": true,
+   "info": " | elsewhere, for their own gates: 52527d06aa in towns+call"
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{\"273d497e23\":1,\"66017dd38e\":1,\"50c5463931\":1,\"0d6b1544dc\":1,\"837fb57d1d\":1}"
+  },
+  {
+   "name": "scroll turns the chapters: The Browns → The Berglands → Owl’s crew, one at a time",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "mid-turn there is no collage: the two chapters cross-fade in place (no half slides over another)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "Owl’s own photos only, with the site’s own captions; no stock house, no invented detail",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the dots jump to a chapter (The Berglands)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its pixels (5 media measured)",
+   "ok": true,
+   "info": "img.cut 0.98x, img.cut 0.96x, img.ph 0.89x, img.ph 0.70x, img.ph 1.00x"
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its pixels (5 media measured)",
+   "ok": true,
+   "info": "img.cut 1.01x, img.cut 0.77x, img.ph 0.87x, img.ph 0.80x, img.ph 1.10x"
+  },
+  {
+   "name": "no sideways scroll at 1440",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 1440",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 768",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 768",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no sideways scroll at 390",
+   "ok": true,
+   "info": "0 px"
+  },
+  {
+   "name": "controls at least 44 px at 390",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: the chapter swaps at once",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "reduced motion: no looping animation",
+   "ok": true,
+   "info": "0 looping"
+  },
+  {
+   "name": "no page or console errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}
