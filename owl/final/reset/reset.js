@@ -9,12 +9,33 @@
   R.setCase = function(k){ R._case = k; try { sessionStorage.setItem('owlCase', k); } catch (e){} document.dispatchEvent(new CustomEvent('owl:case', { detail: k })); };
 
   /* palette switch: four labelled treatments on tokens, never a silent change */
-  var PALS = [['night', 'Night Owl'], ['control', 'Owl today'], ['safety', 'Safety'], ['slate', 'Slate & Brass']];
+  var PALS = [['shingle', 'Shingle Slate'], ['navy', 'North Navy'], ['hearth', 'Hearth Charcoal'], ['stone', 'Storm Stone']];
+  /* the amber palettes of the reset night stay reachable by address only (?palette=night): records, out of the switch */
+  var OLD = { night: 'Night Owl (record)', control: 'Owl today (record)', safety: 'Safety (record)', slate: 'Slate & Brass (record)' };
   var pal = document.querySelector('.pal');
-  function palLabel(){ var cur = root.dataset.pal || 'night', i = PALS.findIndex(function(p){ return p[0] === cur; }); if (i < 0) i = 0;
-    pal.querySelector('.pal-n').textContent = PALS[i][1]; pal.setAttribute('aria-label', 'Trial colour palette: ' + PALS[i][1] + '. Press to try the next one.'); return i; }
+  function palLabel(){ var cur = root.dataset.pal || 'shingle', i = PALS.findIndex(function(p){ return p[0] === cur; }), name = i < 0 ? (OLD[cur] || PALS[0][1]) : PALS[i][1];
+    pal.querySelector('.pal-n').textContent = name; pal.setAttribute('aria-label', 'Colour palette: ' + name + '. Press to try the next one.'); return i; }
   if (pal){ palLabel(); pal.addEventListener('click', function(){ var i = (palLabel() + 1) % PALS.length; root.dataset.pal = PALS[i][0]; palLabel();
     try { var u = new URL(location.href); u.searchParams.set('palette', PALS[i][0]); history.replaceState(null, '', u); } catch (e){} }); }
+
+  /* versions: the owner reviews by switching. One row per section, the best starred; a choice reloads to that section with it in the address */
+  var vb = document.querySelector('.vers'), vp = document.querySelector('.vpanel');
+  if (vb && vp && R.versions){
+    var rows = vp.querySelector('.vp-rows'), q = new URLSearchParams(location.search);
+    (R.order || Object.keys(R.versions)).forEach(function(sec){ var V = R.versions[sec], row = document.createElement('div'); row.className = 'vp-row';
+      row.innerHTML = '<p class="vp-l">' + V.label + '</p><div class="vp-b" role="group" aria-label="' + V.label + ' versions"></div>';
+      V.list.forEach(function(x){ var b = document.createElement('button'); b.type = 'button'; b.className = 'vp-v'; b.setAttribute('aria-pressed', x.v === V.cur ? 'true' : 'false');
+        b.innerHTML = '<b>V' + x.v + '</b> ' + x.name + (x.v === V.def ? ' <span class="vp-star" aria-label="the best, shown by default">★</span>' : '');
+        b.addEventListener('click', function(){ var u = new URL(location.href); if (x.v === V.def) u.searchParams.delete(sec); else u.searchParams.set(sec, x.v); u.hash = sec; location.href = u.toString(); if (u.pathname === location.pathname && u.search === location.search) location.reload(); });
+        row.querySelector('.vp-b').appendChild(b); });
+      rows.appendChild(row); });
+    var keep = new URL(location.href); (R.order || []).forEach(function(s){ keep.searchParams.delete(s); }); keep.hash = ''; vp.querySelector('.vp-best').setAttribute('href', keep.search || '?');
+    var changed = (R.order || []).some(function(s){ return q.has(s); }); vb.classList.toggle('mixed', changed);
+    function open(on){ vp.hidden = !on; vb.setAttribute('aria-expanded', on ? 'true' : 'false'); if (on){ var f = vp.querySelector('[aria-pressed="true"]') || vp.querySelector('button'); f && f.focus(); } else vb.focus(); }
+    vb.addEventListener('click', function(){ open(vp.hidden); });
+    vp.querySelector('.vp-x').addEventListener('click', function(){ open(false); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !vp.hidden) open(false); });
+  }
 
   /* sky, bar, call pill and the travelling owl all follow one scroll reader */
   var sky = document.querySelector('.sky'), bar = document.querySelector('.rbar'), pill = document.querySelector('.callpill'), flyer = document.querySelector('.flyer');

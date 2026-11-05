@@ -1,0 +1,113 @@
+<section class="rs call" id="call" data-sky="eve" data-nocall aria-labelledby="cl-h">
+<style>
+.call{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:clamp(110px,15vh,170px) clamp(16px,4vw,64px) 0}
+.call .in{flex:1;max-width:1320px;width:100%;margin:0 auto}
+.call h2{margin:0;font-size:clamp(26px,2.8vw,40px);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:var(--ink)}
+.call h2 .w{display:inline-block}
+.call h2.swap .w{animation:cl1 .45s cubic-bezier(.22,.61,.36,1)}
+@keyframes cl1{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+.call .num{position:relative;display:inline-flex;flex-wrap:wrap;align-items:baseline;column-gap:.22em;margin:clamp(10px,2vh,22px) 0 0;font-size:clamp(58px,9.6vw,172px);font-weight:900;letter-spacing:-.05em;line-height:.9;color:var(--ink);text-decoration:none;-webkit-tap-highlight-color:transparent;transition:translate .28s cubic-bezier(.16,1,.3,1)}
+.call .num .g{display:inline-block;clip-path:inset(0 0 0 0);}
+.call .num .g b{display:inline-block;font-weight:inherit;transition:translate .9s cubic-bezier(.16,1,.3,1)}
+.call:not(.on) .num .g b{translate:0 105%}
+.call .num .g:nth-child(2) b{transition-delay:.08s}
+.call .num::after{content:"";position:absolute;left:0;right:0;bottom:-.08em;height:.07em;border-radius:99px;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;transition:transform .9s .35s cubic-bezier(.16,1,.3,1)}
+.call.on .num::after{transform:scaleX(1)}
+.call .num:hover{translate:0 -4px}.call .num:active{translate:0 2px}
+.call .num:focus-visible{outline:4px solid var(--acc);outline-offset:8px;border-radius:12px}
+.call .num .ph{width:.42em;height:.42em;align-self:center;margin-left:.06em;color:var(--acc-text)}
+.call .num:hover .ph{animation:cl2 .5s ease 1}
+@keyframes cl2{0%,100%{rotate:0deg}20%{rotate:-14deg}40%{rotate:12deg}60%{rotate:-8deg}80%{rotate:5deg}}
+.call .perch{position:absolute;width:clamp(60px,7vw,118px);height:auto;right:-.05em;top:-.62em;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.2));transition:translate 1.3s .2s cubic-bezier(.16,1,.3,1),opacity .5s .2s,rotate 1.3s .2s cubic-bezier(.16,1,.3,1)}
+.call:not(.on) .perch{translate:-40vw -14vh;rotate:-14deg;opacity:0}
+.call .row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:start;margin-top:clamp(36px,6vh,64px)}
+.call .now{margin:0 0 14px;font-size:19px;font-weight:700;color:var(--ink)}
+.call .now i{display:inline-block;width:12px;height:12px;margin-right:10px;border-radius:50%;background:var(--ink-50);vertical-align:1px}
+.call .now.open i{background:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 30%,transparent)}
+.call .now small{display:block;margin-top:4px;font-size:15px;font-weight:600;color:var(--ink-70)}
+.call .week{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:520px}
+.call .week li{display:grid;grid-template-rows:auto 128px auto;gap:6px;justify-items:center;font-size:13px;font-weight:800;color:var(--ink-70)}
+.call .week .tr{position:relative;width:100%;max-width:56px;border-radius:10px;background:color-mix(in srgb,var(--ink) 7%,transparent);overflow:hidden}
+.call .week .bar{position:absolute;left:0;right:0;top:calc(8 / 24 * 100%);height:calc(10 / 24 * 100%);border-radius:6px;background:color-mix(in srgb,var(--ink) 22%,transparent)}
+.call .week li.today{color:var(--ink)}
+.call .week li.today .bar{background:var(--acc)}
+.call .week .mark{position:absolute;left:-2px;right:-2px;height:2px;background:var(--ink);top:var(--t)}
+.call .week .mark::before{content:"";position:absolute;left:-1px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.call .week .off{font-weight:700;color:var(--ink-70)}
+.call .note{padding:clamp(20px,2.4vw,30px);border-radius:22px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 30px 50px -36px rgba(0,0,0,.5)}
+.call .note h3{margin:0 0 4px;font-size:22px;font-weight:900;letter-spacing:-.02em;color:var(--ink)}
+.call .note > p{margin:0 0 14px;font-size:16px;color:var(--ink-70)}
+.call .note dl{margin:0 0 18px;display:grid;grid-template-columns:auto 1fr auto;gap:10px 14px;align-items:center;font-size:17px}.call .note dl > div{display:contents}
+.call .note dt{font-weight:700;color:var(--ink-70)}
+.call .note dd{margin:0;font-weight:800;color:var(--ink)}
+.call .note dd.no{font-weight:600;color:var(--ink-70)}
+.call .note .chg{display:inline-grid;place-items:center;min-height:44px;min-width:44px;padding:0 6px;font-size:15px;font-weight:700;color:var(--acc-text);text-decoration:underline;text-underline-offset:3px}
+.call .note .msg{margin:12px 0 0;min-height:1.4em;font-size:15px;font-weight:600;color:var(--ink)}
+.call .end{margin:clamp(56px,9vh,96px) calc(-1 * clamp(16px,4vw,64px)) 0;padding:28px clamp(16px,4vw,64px) 36px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:14px;font-weight:600;color:var(--ink-70)}
+.call .end .logo{width:96px;height:auto}
+.call .end a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;display:inline-grid;align-items:center;min-height:44px}
+@media (max-width:860px){.call{padding-top:150px}.call .num{font-size:clamp(52px,17vw,96px);flex-direction:column;align-items:flex-start;row-gap:.04em}.call .num .ph{display:none}.call .perch{width:70px;top:.02em;right:auto;left:3.2em}.call .row{grid-template-columns:1fr}.call .week li{grid-template-rows:auto 96px auto}}
+@media (prefers-reduced-motion:reduce){.call .num .g b,.call .num::after,.call .perch{transition:none}.call h2.swap .w,.call .num:hover .ph{animation:none}}
+</style>
+<div class="in">
+ <h2 id="cl-h"><span class="w">Tell us what’s going on.</span></h2>
+ <a class="num" href="tel:+16519776027" aria-label="Call Owl Roofing at (651) 977-6027"><span class="g" aria-hidden="true"><b>(651)</b></span><span class="g" aria-hidden="true"><b>977-6027</b></span><svg class="ph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><img class="perch" src="{{A:owl-perch.webp}}" alt=""></a>
+ <div class="row">
+  <div class="hours">
+   <p class="now" aria-live="polite"><i aria-hidden="true"></i><b>Mon–Sat 08:00–18:00</b></p>
+   <ol class="week" aria-label="Opening hours: Monday to Saturday, 08:00 to 18:00; closed Sunday"></ol>
+  </div>
+  <div class="note">
+   <h3>Rather write?</h3>
+   <p>Your email app opens with this filled in. Add your name and number and send it.</p>
+   <dl>
+    <div><dt>Your roof</dt><dd class="d-case"></dd><dd class="c"><a class="chg" href="#finder" aria-label="Change your roof problem">Change</a></dd></div>
+    <div><dt>Your town</dt><dd class="d-town"></dd><dd class="c"><a class="chg" href="#towns" aria-label="Change your town">Change</a></dd></div>
+   </dl>
+   <a class="btn btn-line mail" href="mailto:info@owlroofing.com">Write it in my email app</a>
+   <p class="msg" aria-live="polite"></p>
+  </div>
+ </div>
+</div>
+<footer class="end">
+ <span aria-hidden="true">{{LOGO}}</span>
+ <span>Owl Roofing LLC · 1000 County Rd E #230, Shoreview, MN 55126</span>
+ <span>MN licence #BC809662</span>
+ <a href="mailto:info@owlroofing.com">info@owlroofing.com</a>
+ <span>We Give a Hoot</span>
+</footer>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), h2 = sec.querySelector('h2'), w = h2.querySelector('.w'), now = sec.querySelector('.now'), week = sec.querySelector('.week'), dc = sec.querySelector('.d-case'), dt = sec.querySelector('.d-town'), mail = sec.querySelector('.mail'), msg = sec.querySelector('.msg');
+  /* the line above the number is written for the case chosen in section 2 */
+  var LINE = { leak: 'Tell us about the leak.', stain: 'Tell us about the stain.', shingles: 'Tell us about the shingles.', storm: 'Tell us about the storm.', old: 'Tell us about your roof.', unsure: 'Tell us what you’re seeing.' };
+  function store(k){ try { return sessionStorage.getItem(k) || ''; } catch (e){ return ''; } }
+  function caseName(k){ var c = (window.RESET && RESET.cases || []).filter(function(x){ return x.k === k; })[0]; return c ? c.n : ''; }
+  function fill(anim){ var k = store('owlCase'), n = caseName(k), t = store('owlTown'), line = LINE[k] || 'Tell us what’s going on.';
+    if (w.textContent !== line){ w.textContent = line; if (anim && !OWL.reduce){ h2.classList.remove('swap'); void h2.offsetWidth; h2.classList.add('swap'); } }
+    dc.textContent = n || 'Not chosen yet'; dc.classList.toggle('no', !n); dt.textContent = t || 'Not chosen yet'; dt.classList.toggle('no', !t);
+    var body = ['Hello Owl Roofing,', '', 'What’s going on: ' + (n || ''), 'My town: ' + (t || ''), 'My name: ', 'My phone: ', 'My address: ', 'Best time to call: '].join('\n');
+    mail.setAttribute('href', 'mailto:info@owlroofing.com?subject=' + encodeURIComponent('Roof help' + (n ? ': ' + n : '')) + '&body=' + encodeURIComponent(body)); }
+  document.addEventListener('owl:case', function(){ fill(true); }); document.addEventListener('owl:town', function(){ fill(true); });
+  mail.addEventListener('click', function(){ msg.innerHTML = 'Your email app should open with these details. Send it from there, or call <span style="white-space:nowrap">(651) 977-6027</span>.'; });
+  /* today's hours, in Shoreview time (America/Chicago), from the stated hours Mon–Sat 08:00–18:00 */
+  var D = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  function mn(){ var d = new Date(), p = {}; try { new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(d).forEach(function(x){ p[x.type] = x.value; }); } catch (e){ p = { weekday: D[(d.getDay() + 6) % 7], hour: d.getHours(), minute: d.getMinutes() }; }
+    return { day: D.indexOf(p.weekday), h: +p.hour % 24 + (+p.minute) / 60 }; }
+  week.innerHTML = D.map(function(d, i){ return '<li><span>' + d + '</span><span class="tr">' + (i < 6 ? '<span class="bar"></span>' : '') + '</span><span class="' + (i < 6 ? '' : 'off') + '">' + (i < 6 ? '8–6' : 'closed') + '</span></li>'; }).join('');
+  var lis = week.querySelectorAll('li'), mark = document.createElement('span'); mark.className = 'mark'; mark.setAttribute('aria-hidden', 'true');
+  function hours(){ var t = mn(), open = t.day < 6 && t.h >= 8 && t.h < 18, txt, sub;
+    if (open){ txt = 'Open now'; sub = 'Until 18:00 today, Shoreview time'; }
+    else if (t.day < 6 && t.h < 8){ txt = 'Closed now'; sub = 'We open today at 08:00, Shoreview time'; }
+    else if (t.day < 5){ txt = 'Closed now'; sub = 'We open tomorrow at 08:00, Shoreview time'; }
+    else { txt = 'Closed now'; sub = 'We open Monday at 08:00, Shoreview time'; }
+    now.classList.toggle('open', open); now.innerHTML = '<i aria-hidden="true"></i><b>' + txt + '</b><small>' + sub + ' · Mon–Sat 08:00–18:00</small>';
+    [].forEach.call(lis, function(l, i){ l.classList.toggle('today', i === t.day); }); var tr = lis[t.day] && lis[t.day].querySelector('.tr'); if (tr){ mark.style.setProperty('--t', (t.h / 24 * 100).toFixed(2) + '%'); tr.appendChild(mark); }
+    sec.dataset.open = open ? '1' : '0'; }
+  hours(); setInterval(hours, 60000);
+  document.addEventListener('DOMContentLoaded', function(){ fill(false);
+    if (OWL.reduce || !('IntersectionObserver' in window)) sec.classList.add('on');
+    else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); sec.classList.add('on'); } }, { threshold: .25 }); io.observe(sec.querySelector('.num')); } });
+})();
+</script>
+</section>

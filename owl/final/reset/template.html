@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-pal="night">
+<html lang="en" data-pal="shingle">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Owl Roofing · Shoreview, MN · We Give a Hoot</title>
 <meta name="description" content="Family-owned roofers in Shoreview, MN, founded in 2025 by Tim Brown and Noah Bergland. GAF Systems Plus Certified. 5.0 · 90+ reviews. Call (651) 977-6027.">
 <link rel="icon" href="{{A:logo.svg}}">
-<script>(function(){var p=new URLSearchParams(location.search).get('palette');if(/^(night|control|safety|slate)$/.test(p||''))document.documentElement.dataset.pal=p;})();</script>
+<script>(function(){var p=new URLSearchParams(location.search).get('palette');if(/^(shingle|navy|hearth|stone|night|control|safety|slate)$/.test(p||''))document.documentElement.dataset.pal=p;})();</script>
 <style>
 @font-face{font-family:Inter;font-weight:100 700;font-style:normal;font-display:swap;src:url({{A:inter-var.woff2}}) format('woff2')}
 @font-face{font-family:Inter;font-weight:800 900;font-style:normal;font-display:swap;src:url({{A:Inter-800.woff2}}) format('woff2')}
@@ -16,16 +16,35 @@
 <script>
 {{JS:src/base.js}}
 window.RESET = window.RESET || {};
-window.RESET_MEDIA = { crew: '{{A:crew-scrub.mp4}}', poster: '{{A:crew-poster.webp}}' };
+/* every video file is owned by ONE section (OWL-FIX-DIAGNOSIS §1, §4): the crew film by the hero, nothing else repeats */
+window.RESET_MEDIA = { crewloop: '{{A:crew.mp4}}', rise: '{{A:stock/hero-rise.mp4}}', drone: '{{A:stock/nothing-drone.mp4}}' };
+/* every video plays from a Blob URL decoded once from its file (iOS Safari stalls on large data: video), and is primed with a muted
+   play-then-pause so a scrubbed film paints its frames on phones too */
+window.RESET.video = function(n){ var c = RESET._v || (RESET._v = {}); if (c[n]) return c[n]; var d = RESET_MEDIA[n]; if (!d) return '';
+  try { var i = d.indexOf(','), type = d.slice(5, d.indexOf(';')), bin = atob(d.slice(i + 1)), a = new Uint8Array(bin.length); for (var k = 0; k < bin.length; k++) a[k] = bin.charCodeAt(k);
+    return (c[n] = URL.createObjectURL(new Blob([a], { type: type }))); } catch (e){ return (c[n] = d); } };
+window.RESET.prime = function(v){ v.muted = true; v.playsInline = true; var p = v.play(); if (p && p.then) p.then(function(){ if (v.dataset.scrub) v.pause(); }).catch(function(){}); };
 </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="sky" aria-hidden="true"></div>
 <header class="rbar"><a class="rlogo" href="#top" aria-label="Owl Roofing, back to the top">{{LOGO}}</a>
- <button class="pal" type="button" aria-label="Trial colour palette: Night Owl. Press to try the next one."><span class="pal-sw" aria-hidden="true"><i></i><i></i><i></i></span><span class="pal-n">Night Owl</span><small>trial palette</small></button></header>
+ <button class="pal" type="button" aria-label="Trial colour palette: Night Owl. Press to try the next one."><span class="pal-sw" aria-hidden="true"><i></i><i></i><i></i></span><span class="pal-n">Shingle Slate</span><small>palette</small></button>
+ <button class="vers" type="button" aria-haspopup="dialog" aria-expanded="false"><span aria-hidden="true" class="vers-i"><i></i><i></i><i></i></span>Versions</button></header>
+<div class="vpanel" role="dialog" aria-modal="false" aria-labelledby="vp-h" hidden><div class="vp-in"><p class="vp-h" id="vp-h">Versions of each section</p><p class="vp-s">The starred one is the best: the version the homepage shows. Pick another to see it in place.</p><div class="vp-rows"></div><div class="vp-foot"><a class="vp-best" href="?">Show the bests</a><button class="vp-x" type="button">Close</button></div></div></div>
 <main id="main">
 {{SECTIONS}}
+<script>/* stamp the chosen version of each section (?<id>=K, else the default, the best); the rest stay inert records */
+(function(){ var q = new URLSearchParams(location.search), R = window.RESET, by = {}, order = [];
+  [].forEach.call(document.querySelectorAll('main > template.rv'), function(t){ var s = t.dataset.sec; if (!by[s]){ by[s] = []; order.push(s); } by[s].push(t); });
+  R.versions = {}; R.order = order;
+  order.forEach(function(s){ var list = by[s], def = +list[0].dataset.def, want = +q.get(s),
+      pick = list.filter(function(t){ return +t.dataset.v === want; })[0] || list.filter(function(t){ return +t.dataset.v === def; })[0] || list[0];
+    R.versions[s] = { label: list[0].dataset.label, def: def, cur: +pick.dataset.v, list: list.map(function(t){ return { v: +t.dataset.v, name: t.dataset.name }; }) };
+    list[0].parentNode.insertBefore(pick.content.cloneNode(true), list[0]); });
+})();
+</script>
 </main>
 <a class="btn btn-amber callpill" href="tel:+16519776027" data-owl="hoot">Call (651) 977-6027</a>
 <img class="flyer" src="{{A:owl-wing.webp}}" alt="" aria-hidden="true" width="360" height="215">

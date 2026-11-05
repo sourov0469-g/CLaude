@@ -1,0 +1,60 @@
+<section class="rs arrive a2" id="top" data-sky="dawn" data-over aria-label="Owl Roofing">
+<style>
+/* V2 · Pull back. A top-down drone rise (stock, 1600 x 900) scrubbed by scroll: it starts on one shingle and your scroll lifts the
+   camera until the whole street is in frame (AirPods: a reversible scrubbed film; Scout: one line at a time). Phone: a square crop,
+   so the landscape film is never stretched past its pixels. */
+.a2{height:280vh}
+.a2 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep);color:var(--on-deep)}
+.a2 .film{position:absolute;inset:0}
+.a2 .film video,.a2 .film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.a2 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,14,18,.72) 0%,rgba(10,14,18,.35) 46%,rgba(10,14,18,0) 70%),linear-gradient(0deg,rgba(10,14,18,.55),rgba(10,14,18,0) 40%)}
+.a2 .beat{position:absolute;left:clamp(18px,4vw,64px);top:50%;width:min(620px,calc(100% - 36px));translate:0 -50%;transition:opacity .55s,translate .8s cubic-bezier(.16,1,.3,1);opacity:0;pointer-events:none}
+.a2 .beat.on{opacity:1;pointer-events:auto}
+.a2 .beat:not(.on){translate:0 calc(-50% + 30px)}
+.a2 h1,.a2 .big{margin:0;font-size:clamp(40px,5.6vw,92px);font-weight:900;line-height:.95;letter-spacing:-.045em;text-wrap:balance;color:#fff}
+.a2 em{font-style:normal;color:var(--acc-deep)}
+.a2 .sub{margin:16px 0 0;font-size:clamp(16px,1.3vw,19px);font-weight:600;color:rgba(255,255,255,.86);max-width:36ch}
+.a2 .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}
+.a2 .more{display:inline-grid;align-items:center;min-height:44px;color:#fff;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.a2 .alt{position:absolute;right:clamp(14px,3vw,44px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.5);color:#fff;font-size:12px;font-weight:700}
+.a2 .meter{position:absolute;right:clamp(16px,3vw,44px);top:50%;translate:0 -50%;display:grid;gap:10px;justify-items:end;color:#fff;padding:12px 10px;border-radius:14px;background:rgba(10,14,18,.55);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.a2 .meter span{font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.6);padding-bottom:2px;border-bottom:2px solid transparent}.a2 .meter span.on{font-weight:900;border-bottom-color:var(--acc-deep)}
+.a2 .meter i{display:block;width:2px;height:120px;background:rgba(255,255,255,.3);position:relative;justify-self:end;margin-right:4px}
+.a2 .meter i::after{content:"";position:absolute;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--acc-deep);top:calc(var(--p,0) * 100% - 4px)}
+@media (max-width:860px){
+ .a2 .film{inset:76px 16px auto 16px;aspect-ratio:1/1;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+ .a2 .shade{display:none}
+ .a2 .beat{left:16px;right:16px;width:auto;top:auto;bottom:96px;translate:none}.a2 .beat:not(.on){translate:0 20px}
+ .a2 h1,.a2 .big{font-size:clamp(34px,9.6vw,48px)}
+ .a2 .meter{display:none}.a2 .alt{top:88px;right:24px}}
+@media (prefers-reduced-motion:reduce){.a2 .beat{transition:none}}
+</style>
+<div class="stage">
+ <div class="film">
+  <img class="still" src="{{A:stock/hero-rise-start.webp}}" alt="" width="1600" height="900">
+  <video muted playsinline preload="auto" data-scrub="1" aria-label="A drone rising from a shingle roof until the whole street is in view (illustrative footage)"></video>
+ </div>
+ <div class="shade" aria-hidden="true"></div>
+ <span class="alt">Illustrative footage</span>
+ <div class="beat b1 on"><h1>From one shingle <em>to your whole street.</em></h1><p class="sub">Owl Roofing. Family-owned roofers in Shoreview, MN. Scroll, and the camera lifts.</p></div>
+ <div class="beat b2" aria-hidden="true"><p class="big">We look at the shingle <em>and the roof it belongs to.</em></p><p class="sub">A Wise Check looks over the roof and the attic, with photos and video for you.</p></div>
+ <div class="beat b3" aria-hidden="true"><p class="big">29 towns around <em>Shoreview, MN.</em></p><p class="sub">5.0 · 90+ reviews · GAF Systems Plus · 10-year workmanship warranty</p>
+  <div class="acts"><a class="btn btn-amber btn-call" href="tel:+16519776027">Call (651) 977-6027</a><a class="more" href="#finder">What’s going on up there?</a></div></div>
+ <div class="meter" aria-hidden="true"><span class="m3">Street</span><i></i><span class="m1 on">Shingle</span></div>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), v = sec.querySelector('video'), still = sec.querySelector('.still'), beats = sec.querySelectorAll('.beat'), meter = sec.querySelector('.meter i'), ms = sec.querySelectorAll('.meter span');
+  var want = 0, dur = 0, raf = 0, ready = false;
+  if (!OWL.reduce){ v.src = RESET.video('rise'); v.addEventListener('loadedmetadata', function(){ dur = v.duration; ready = true; seek(); });
+    v.addEventListener('seeked', function(){ still.style.opacity = 0; }); RESET.prime(v); }
+  function seek(){ if (!ready || raf) return; raf = requestAnimationFrame(function(){ raf = 0; var t = want * Math.max(0, dur - .05); if (Math.abs(v.currentTime - t) > 1 / 30) v.currentTime = t; }); }
+  var cur = -1;
+  function read(){ var r = sec.getBoundingClientRect(), span = Math.max(1, r.height - innerHeight), p = Math.max(0, Math.min(1, -r.top / span));
+    want = p; seek(); meter.style.setProperty('--p', (1 - p).toFixed(3));
+    var i = p < .34 ? 0 : p < .68 ? 1 : 2;
+    if (i !== cur){ cur = i; beats.forEach(function(b, j){ b.classList.toggle('on', j === i); b.setAttribute('aria-hidden', j === i ? 'false' : 'true'); }); ms[0].classList.toggle('on', i === 2); ms[1].classList.toggle('on', i === 0); sec.dataset.beat = i + 1; } }
+  addEventListener('scroll', read, { passive: true }); addEventListener('resize', read); read();
+})();
+</script>
+</section>

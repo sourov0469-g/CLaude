@@ -1,0 +1,55 @@
+{
+ "_note": "One entry per section of the new map. default = the version the homepage shows (the best, chosen in each GATE-FIX file). names = the switcher labels. b1.html in each folder is the reset original (2026-11-05, d165ff8), kept untouched as an in-file record.",
+ "01-arrival": {
+  "label": "Hero",
+  "default": 1,
+  "names": {
+   "1": "Crew film",
+   "2": "Pull back",
+   "3": "Editorial split",
+   "4": "The question"
+  }
+ },
+ "02-finder": {
+  "label": "Problem-finder",
+  "default": 1,
+  "names": {
+   "1": "Curtain"
+  }
+ },
+ "03-nothing": {
+  "label": "Your part: nothing",
+  "default": 1,
+  "names": {
+   "1": "Scroll film"
+  }
+ },
+ "04-numbers": {
+  "label": "Numbers",
+  "default": 1,
+  "names": {
+   "1": "Numerals"
+  }
+ },
+ "05-people": {
+  "label": "Family",
+  "default": 1,
+  "names": {
+   "1": "Split cover"
+  }
+ },
+ "06-towns": {
+  "label": "Towns",
+  "default": 1,
+  "names": {
+   "1": "Contour finder"
+  }
+ },
+ "07-call": {
+  "label": "Call",
+  "default": 1,
+  "names": {
+   "1": "End card"
+  }
+ }
+}

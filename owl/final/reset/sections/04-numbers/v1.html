@@ -1,0 +1,50 @@
+<section class="rs numbers" id="numbers" data-sky="day" aria-labelledby="nm-h">
+<style>
+.numbers{padding:clamp(110px,14vh,170px) clamp(18px,5vw,90px) clamp(80px,10vh,130px)}
+.numbers .top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,64px);align-items:end;max-width:1320px;margin:0 auto}
+.numbers .big{margin:0;font-size:clamp(150px,24vw,380px);font-weight:900;line-height:.8;letter-spacing:-.07em;color:var(--ink);font-variant-numeric:tabular-nums}
+.numbers .big small{display:block;margin-top:14px;font-size:clamp(18px,1.6vw,24px);font-weight:700;letter-spacing:0;color:var(--ink-70);line-height:1.3}
+.numbers .top h2{margin:0 0 clamp(10px,2vw,28px);font-size:clamp(34px,4.2vw,64px);font-weight:900;line-height:1;letter-spacing:-.035em;color:var(--ink);text-wrap:balance}
+.numbers .top h2 em{font-style:normal;color:var(--acc-text)}
+.numbers .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,56px) clamp(20px,3.4vw,52px);max-width:1320px;margin:clamp(56px,8vw,110px) auto 0}
+.numbers .n{position:relative;padding-top:18px}
+.numbers .n::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--ink);opacity:.35;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.numbers .n .e{display:block;font-size:14px;font-weight:700;color:var(--ink-70)}
+.numbers .n b{display:block;margin-top:6px;font-size:clamp(46px,5.4vw,84px);font-weight:900;line-height:.95;letter-spacing:-.045em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.numbers .n b span.u{font-size:.5em;letter-spacing:-.02em}
+.numbers .n .s{display:block;margin-top:8px;font-size:15px;line-height:1.4;color:var(--ink-70);max-width:28ch}
+.numbers .n,.numbers .big{opacity:0;translate:0 24px;transition:opacity .6s,translate .8s cubic-bezier(.16,1,.3,1)}
+.numbers .on{opacity:1;translate:none}
+.numbers .n.on::before{transform:scaleX(1)}
+.numbers .n b,.numbers .big .v{display:block;clip-path:inset(0 0 100% 0);translate:0 .25em;transition:clip-path .9s cubic-bezier(.16,1,.3,1) .15s,translate .9s cubic-bezier(.16,1,.3,1) .15s}
+.numbers .on b,.numbers .big.on .v{clip-path:inset(-.1em -.1em -.2em -.1em);translate:none}
+.numbers .n b.w{font-size:clamp(34px,3.6vw,56px);white-space:normal}
+.numbers .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;max-width:1320px;margin:clamp(56px,7vw,96px) auto 0;padding:22px 0 0;border-top:2px solid var(--ink);font-size:15px;font-weight:700;color:var(--ink)}
+.numbers .row span{display:inline-flex;gap:8px;align-items:baseline}
+.numbers .row i{font-style:normal;font-weight:600;color:var(--ink-70);font-size:13px}
+@media (max-width:860px){.numbers .top{grid-template-columns:minmax(0,1fr)}.numbers .top h2{order:-1}.numbers .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.numbers .grid{grid-template-columns:minmax(0,1fr)}.numbers .big{font-size:42vw}}
+@media (prefers-reduced-motion:reduce){.numbers .n b,.numbers .big .v{clip-path:none;translate:none;transition:none}.numbers .n,.numbers .big{opacity:1;translate:none;transition:none}.numbers .n::before{transform:none;transition:none}}
+</style>
+<div class="top">
+ <p class="big"><span class="v">5.0</span><small>from 90+ reviews</small></p>
+ <h2 id="nm-h">Don’t take our word for it. <em>Take the numbers.</em></h2>
+</div>
+<div class="grid">
+ <div class="n"><span class="e">Workmanship warranty</span><b><span class="v">10</span><span class="u">-year</span></b><span class="s">on the work we do.</span></div>
+ <div class="n"><span class="e">Manufacturer warranties</span><b><span class="u">up to </span><span class="v">50</span><span class="u">-year</span></b><span class="s">on the materials we put on.</span></div>
+ <div class="n"><span class="e">Towns we come to</span><b><span class="v">29</span></b><span class="s">around Shoreview, MN.</span></div>
+ <div class="n"><span class="e">Certified by GAF</span><b class="w">Systems Plus</b><span class="s">GAF Systems Plus certified roofers.</span></div>
+ <div class="n"><span class="e">Better Business Bureau</span><b>A−</b><span class="s">BBB rating since February 2026.</span></div>
+ <div class="n"><span class="e">Founded</span><b><span class="v">2025</span></b><span class="s">by Tim Brown and Noah Bergland. Family-owned.</span></div>
+</div>
+<p class="row"><span>MN licence <i>#BC809662</i></span><span>Mon–Sat <i>08:00–18:00</i></span><span>1000 County Rd E #230 <i>Shoreview, MN 55126</i></span><span>We Give a Hoot</span></p>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), items = [].slice.call(sec.querySelectorAll('.big, .n'));
+  if (OWL.reduce || !('IntersectionObserver' in window)){ items.forEach(function(i){ i.classList.add('on'); }); return; }
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (!e.isIntersecting) return; io.unobserve(e.target); var i = items.indexOf(e.target); setTimeout(function(){ e.target.classList.add('on'); sec.dataset.shown = sec.querySelectorAll('.on').length; }, (i % 3) * 140); }); }, { threshold: .4 });
+  items.forEach(function(i){ io.observe(i); });
+})();
+</script>
+</section>

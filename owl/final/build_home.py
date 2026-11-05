@@ -73,11 +73,23 @@ def main():
     html_open = re.search(r'<html[^>]*>', new).group(0)
     html = '<!doctype html>\n' + html_open + '\n<head>' + head + '</head>\n' + body + '\n</html>\n'
     html = past_build.dedupe(html)
+    # videos too: a film used by the past records and the new page (Owl's crew film) is stored once
+    import collections
+    vids = [u for u, n in collections.Counter(re.findall(r'data:video/[a-z0-9.+-]+;base64,[A-Za-z0-9+/=]{20000,}', html)).items() if n > 1]
+    if vids:
+        vkeys = {u: 'v%d' % i for i, u in enumerate(vids)}
+        for u, k in vkeys.items():
+            html = html.replace("'%s'" % u, 'OWLA["%s"]' % k).replace('"%s"' % u, 'OWLA["%s"]' % k)
+        vstore = '<script>window.OWLA=window.OWLA||{};' + ''.join('OWLA.%s="%s";' % (k, u) for u, k in vkeys.items()) + '</script>'
+    else:
+        vstore = ''
     # the shared image store must exist before the head's own scripts look anything up
     m = re.search(r'<script>window\.OWLA=\{.*?\};</script>', html, flags=re.S)
     if m:
         html = html[:m.start()] + html[m.end():]
-        html = html.replace('<head>', '<head>' + m.group(0), 1)
+        html = html.replace('<head>', '<head>' + m.group(0) + vstore, 1)
+    else:
+        html = html.replace('<head>', '<head>' + vstore, 1)
     open(OUT, 'w', encoding='utf-8').write(html)
     print('wrote %s (%.2f MB): NEW by default, PAST kept inside as records' % (OUT, len(html.encode()) / 1e6))
 

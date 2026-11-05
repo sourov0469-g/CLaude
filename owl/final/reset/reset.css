@@ -1,10 +1,46 @@
 /* ===== Owl reset: the world (tokens, sky, bar, call pill, travelling owl). Every colour comes from a palette token. ===== */
-:root,[data-pal="night"]{
+/* The four MUTED palettes (owner, 2026-11-05: "too bright"; research OWL-COLOUR-RESEARCH, pick in OWL-FIX-DIAGNOSIS §3).
+   Rule: desaturated grounds, ONE saturated place (the call button), every text pair AA (gates/fix/colour/palettes.json). */
+:root,[data-pal="shingle"]{
+ --ink:#22282E;--ink-70:#4F5861;--ink-50:#7D858C;--line:rgba(34,40,46,.13);
+ --acc:#43586A;--acc-hi:#4C6276;--acc-lo:#33444F;--acc-text:#43586A;--acc-wash:#E3E9EE;--on-acc:#FFFFFF;
+ --call:#96622F;--call-lo:#74491F;--on-call:#FFFFFF;
+ --ground:#F4F4F1;--surface:#FBFBF9;--wash:#E7EAEB;--deep:#1E252C;--deep-2:#2A333C;--on-deep:#F1F2EF;--on-deep-70:#B8C0C7;--acc-deep:#D2A77D;
+ --sky-a:#F4F4F1;--sky-b:#ECEFF1;--sky-c:#E6E8E8;--sky-d:#1E252C;--sky-e:#EDE7E0;
+ --logo-ink:var(--ink);--logo-acc:var(--call);--pal-name:"Shingle Slate";
+}
+[data-pal="navy"]{
+ --ink:#17263E;--ink-70:#46546A;--ink-50:#7A8698;--line:rgba(23,38,62,.13);
+ --acc:#1E3A5F;--acc-hi:#27476F;--acc-lo:#142A47;--acc-text:#1E3A5F;--acc-wash:#DCE4EE;--on-acc:#FFFFFF;
+ --call:#8C5A2E;--call-lo:#6C4320;--on-call:#FFFFFF;
+ --ground:#F1F3F5;--surface:#FAFBFC;--wash:#E2E7EC;--deep:#132036;--deep-2:#1E2F4A;--on-deep:#EEF1F5;--on-deep-70:#B3BDCB;--acc-deep:#D6AB82;
+ --sky-a:#F1F3F5;--sky-b:#E6EBF0;--sky-c:#E3E7EC;--sky-d:#132036;--sky-e:#EEE8E2;
+ --logo-ink:var(--ink);--logo-acc:var(--call);
+}
+[data-pal="hearth"]{
+ --ink:#2A251F;--ink-70:#5A5249;--ink-50:#8A8178;--line:rgba(42,37,31,.13);
+ --acc:#4A4239;--acc-hi:#554C42;--acc-lo:#38312A;--acc-text:#4A4239;--acc-wash:#EAE3D8;--on-acc:#FFFFFF;
+ --call:#7C5A24;--call-lo:#5E431A;--on-call:#FFFFFF;
+ --ground:#F5F1EA;--surface:#FBF9F5;--wash:#E9E2D6;--deep:#24201B;--deep-2:#332D26;--on-deep:#F4EFE7;--on-deep-70:#C4BAAD;--acc-deep:#D2B07A;
+ --sky-a:#F5F1EA;--sky-b:#EFEAE1;--sky-c:#ECE5DA;--sky-d:#24201B;--sky-e:#F1E6D6;
+ --logo-ink:var(--ink);--logo-acc:var(--call);
+}
+[data-pal="stone"]{
+ --ink:#26282B;--ink-70:#55575B;--ink-50:#86878A;--line:rgba(38,40,43,.13);
+ --acc:#47617C;--acc-hi:#506B87;--acc-lo:#374D63;--acc-text:#47617C;--acc-wash:#DEE4EA;--on-acc:#FFFFFF;
+ --call:#47617C;--call-lo:#374D63;--on-call:#FFFFFF;
+ --ground:#F3F1EC;--surface:#FAF9F6;--wash:#E5E0D6;--deep:#222529;--deep-2:#30343A;--on-deep:#F2F1ED;--on-deep-70:#BCBEC1;--acc-deep:#A9BED3;
+ --sky-a:#F3F1EC;--sky-b:#ECEAE5;--sky-c:#E7E3DB;--sky-d:#222529;--sky-e:#ECE6DD;
+ --logo-ink:var(--ink);--logo-acc:var(--call);
+}
+/* RECORDS: the amber trial palettes of the reset night (rejected as a default by the owner, 2026-11-05 14:00).
+   Kept, out of the switch; ?palette=night|control|safety|slate still opens them. They map the newer roles onto their own tokens. */
+[data-pal="night"],[data-pal="control"],[data-pal="safety"],[data-pal="slate"]{--on-acc:var(--ink);--call:var(--acc);--call-lo:var(--acc-lo);--on-call:var(--ink);--acc-deep:var(--acc);--wash:var(--acc-wash);--logo-ink:var(--ink);--logo-acc:var(--acc)}
+[data-pal="night"]{
  --ink:#0F1B2D;--ink-70:rgba(15,27,45,.74);--ink-50:rgba(15,27,45,.6);--line:rgba(15,27,45,.12);
  --acc:#F5B83D;--acc-hi:#FFCB61;--acc-lo:#D99A1E;--acc-text:#855A0A;--acc-wash:#FCE8BC;
  --ground:#F7F5F0;--surface:#FFFFFF;--deep:#0F1B2D;--deep-2:#1B2C47;--on-deep:#F7F5F0;--on-deep-70:rgba(247,245,240,.76);
  --sky-a:#F6EEE1;--sky-b:#E3ECF5;--sky-c:#CFDDEC;--sky-d:#1B2C47;--sky-e:#F3DDBE;
- --logo-ink:var(--ink);--logo-acc:var(--acc);--pal-name:"Night Owl";
 }
 [data-pal="control"]{
  --ink:#17111D;--ink-70:rgba(23,17,29,.72);--ink-50:rgba(23,17,29,.62);--line:rgba(23,17,29,.12);
@@ -27,8 +63,10 @@
 /* the button system (GATE-BUTTONS) keeps its behaviour; only its colours follow the palette */
 :root{--amber:var(--acc);--amber-edge:var(--acc-lo);--cream:var(--ground);--paper:var(--surface)}
 html,body{background:var(--ground);color:var(--ink)}
-.btn-amber{background:linear-gradient(180deg,var(--acc-hi) 0%,var(--acc) 55%,var(--acc-lo) 100%);color:var(--ink);box-shadow:0 var(--lift) 0 var(--acc-lo),0 calc(var(--lift) + 12px) 24px -10px color-mix(in srgb,var(--acc-lo) 70%,transparent),inset 0 1px 0 rgba(255,255,255,.55)}
-.btn-line{background:linear-gradient(to right,var(--acc-wash) 0 50%,var(--surface) 50% 100%) 100% 0/200.5% 100% no-repeat;border-color:var(--acc)}
+.btn-amber{background:linear-gradient(180deg,var(--acc-hi) 0%,var(--acc) 55%,var(--acc-lo) 100%);color:var(--on-acc);box-shadow:0 var(--lift) 0 var(--acc-lo),0 calc(var(--lift) + 12px) 24px -12px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn-line{background:linear-gradient(to right,var(--acc-wash) 0 50%,var(--surface) 50% 100%) 100% 0/200.5% 100% no-repeat;border-color:var(--acc);color:var(--ink)}
+/* the phone action: the one saturated place on the page */
+.btn-call,.btn.btn-amber.btn-call{background:var(--call);color:var(--on-call);box-shadow:0 var(--lift) 0 var(--call-lo),0 calc(var(--lift) + 12px) 24px -12px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.16)}
 .btn-deep{background:var(--deep);color:var(--on-deep);box-shadow:0 var(--lift) 0 #000,0 calc(var(--lift) + 12px) 24px -12px rgba(0,0,0,.5)}
 
 /* scroll sky: one fixed layer whose colour stops follow scroll progress (reset.js writes --p) */
@@ -44,11 +82,34 @@ html,body{background:var(--ground);color:var(--ink)}
 .rlogo .logo{width:118px;height:auto}
 .rbar.over .rlogo .logo{--logo-ink:var(--on-deep)}
 .pal{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px 6px 8px;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;font-size:14px;font-weight:800;cursor:pointer;opacity:.86}
+.pal .pal-n{white-space:nowrap}
 .pal small{font-size:11px;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:.06em}
 .pal-sw{display:inline-flex}.pal-sw i{width:14px;height:14px;border-radius:50%;margin-right:-4px;box-shadow:0 0 0 2px var(--ground)}
 .pal-sw i:nth-child(1){background:var(--deep)}.pal-sw i:nth-child(2){background:var(--acc)}.pal-sw i:nth-child(3){background:var(--ground)}
 
+/* the versions switcher (the owner's review format): a bar button and a panel */
+.vers{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;font-size:14px;font-weight:800;cursor:pointer;opacity:.86}
+.vers.mixed{background:var(--acc);border-color:var(--acc);color:var(--on-acc);opacity:1}
+.vers-i{display:inline-grid;grid-template-columns:repeat(3,4px);gap:2px}.vers-i i{width:4px;height:12px;border-radius:2px;background:currentColor}.vers-i i:nth-child(2){height:8px;align-self:end}
+.rbar .vers{margin-left:8px}.rbar .pal{margin-left:auto}
+.vpanel{position:fixed;z-index:60;top:76px;right:clamp(12px,3vw,36px);width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 100px);overflow:auto;border-radius:20px;background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 30px 60px -24px rgba(0,0,0,.45)}
+.vp-in{padding:20px 22px}
+.vp-h{margin:0;font-size:20px;font-weight:900;letter-spacing:-.015em}
+.vp-s{margin:4px 0 14px;font-size:14px;color:var(--ink-70)}
+.vp-row{padding:12px 0;border-top:1px solid var(--line)}
+.vp-l{margin:0 0 8px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-70)}
+.vp-b{display:flex;flex-wrap:wrap;gap:6px}
+.vp-v{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:var(--ground);color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.vp-v b{font-weight:900}
+.vp-v[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.vp-v:focus-visible,.vers:focus-visible,.pal:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.vp-star{color:var(--call)}.vp-v[aria-pressed="true"] .vp-star{color:var(--on-acc)}
+.vp-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.vp-best{display:inline-grid;align-items:center;min-height:44px;font-weight:800;color:var(--acc-text)}
+.vp-x{min-height:44px;padding:0 18px;border:1px solid var(--line);border-radius:12px;background:var(--ground);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+
 /* the one persistent call */
+.callpill,.btn.btn-amber.callpill{background:var(--call);color:var(--on-call);box-shadow:0 var(--lift) 0 var(--call-lo),0 calc(var(--lift) + 12px) 24px -12px rgba(0,0,0,.32)}
 .callpill{position:fixed;right:clamp(14px,2.4vw,32px);bottom:clamp(14px,2.4vw,28px);z-index:45;min-height:54px;padding:0 22px;font-size:17px;transition:transform .35s var(--ease),opacity .3s}
 .callpill.away{opacity:0;pointer-events:none;transform:translateY(16px)}
 
@@ -58,5 +119,5 @@ html,body{background:var(--ground);color:var(--ink)}
 
 .rs{position:relative}
 .skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:99;padding:8px 12px;background:var(--surface)}
-@media (max-width:640px){.rlogo .logo{width:96px}.pal small{display:none}.callpill{left:14px;right:14px;justify-content:center}.flyer{display:none}}
+@media (max-width:640px){.rlogo .logo{width:96px}.pal small{display:none}.pal .pal-n{display:none}.vers{padding:6px 12px}.vpanel{top:70px;right:12px}.callpill{left:14px;right:14px;justify-content:center}.flyer{display:none}}
 @media (prefers-reduced-motion:reduce){.sky::before,.callpill,.flyer{transition:none}}

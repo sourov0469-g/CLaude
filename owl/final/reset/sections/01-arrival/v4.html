@@ -1,0 +1,47 @@
+<section class="rs arrive a4" id="top" data-sky="dawn" data-over aria-labelledby="a4-h">
+<style>
+/* V4 · The question (Quiet Cubes: the choice is the first act). Rain running off a roof edge, full-bleed; one question and four
+   answers. Each answer opens section 2 already set to that case, so the page is written for you from the first tap. */
+.a4{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--deep);color:#fff}
+.a4 .bgph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.a4 .shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,16,20,.86) 0%,rgba(12,16,20,.55) 42%,rgba(12,16,20,.12) 75%),linear-gradient(90deg,rgba(12,16,20,.45),rgba(12,16,20,0) 60%)}
+.a4 .tag{position:absolute;right:clamp(14px,3vw,44px);top:84px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.5);font-size:12px;font-weight:700}
+.a4 .in{position:relative;width:100%;max-width:1320px;margin:0 auto;padding:0 clamp(18px,4vw,64px) clamp(56px,10vh,110px)}
+.a4 .who{margin:0 0 16px;font-size:15px;font-weight:700;color:rgba(255,255,255,.86)}
+.a4 h1{margin:0;font-size:clamp(42px,6.2vw,104px);font-weight:900;line-height:.94;letter-spacing:-.045em;max-width:11ch;text-wrap:balance}
+.a4 h1 em{font-style:normal;color:var(--acc-deep)}
+.a4 .ans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:34px 0 0;max-width:1080px}
+.a4 .ans button{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:18px;min-height:112px;padding:16px 18px;border:1px solid rgba(255,255,255,.34);border-radius:18px;background:rgba(14,18,22,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font:inherit;text-align:left;cursor:pointer;transition:background .25s,border-color .25s,translate .3s cubic-bezier(.16,1,.3,1)}
+.a4 .ans button b{font-size:clamp(18px,1.5vw,22px);font-weight:900;letter-spacing:-.015em;line-height:1.15}
+.a4 .ans button span{font-size:14px;font-weight:600;color:rgba(255,255,255,.82)}
+.a4 .ans button:hover{background:rgba(14,18,22,.78);border-color:#fff;translate:0 -3px}
+.a4 .ans button:focus-visible{outline:3px solid var(--acc-deep);outline-offset:3px}
+.a4 .or{margin:22px 0 0;font-size:16px;font-weight:600;color:rgba(255,255,255,.86)}
+.a4 .or a{display:inline-grid;align-items:center;min-height:44px;color:#fff;font-weight:900;text-decoration:underline;text-underline-offset:4px}
+@media (max-width:1000px){.a4 .ans{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.a4 .in{padding:0 16px 104px}.a4 h1{font-size:clamp(38px,11vw,56px)}.a4 .ans button{min-height:92px;padding:14px}.a4 .tag{top:80px}}
+@media (prefers-reduced-motion:reduce){.a4 .ans button{transition:none}}
+</style>
+<img class="bgph" src="{{A:stock/hero-rain.webp}}" alt="Rain running off the edge of a shingled roof (illustrative photo)" width="2400" height="1600">
+<div class="shade" aria-hidden="true"></div>
+<span class="tag">Illustrative photo</span>
+<div class="in">
+ <p class="who">Owl Roofing · family-owned roofers in Shoreview, MN</p>
+ <h1 id="a4-h">Is your roof <em>okay</em> right now?</h1>
+ <div class="ans" role="group" aria-label="Your answer">
+  <button type="button" data-k="leak"><b>No, it’s leaking.</b><span>We find the leak first.</span></button>
+  <button type="button" data-k="storm"><b>A storm just hit.</b><span>We check the damage properly.</span></button>
+  <button type="button" data-k="old"><b>It’s getting old.</b><span>We tell you straight where it stands.</span></button>
+  <button type="button" data-k="unsure"><b>I’m not sure.</b><span>That’s what a Wise Check is for.</span></button>
+ </div>
+ <p class="or">Or just call: <a href="tel:+16519776027">(651) 977-6027</a> · Mon–Sat 08:00–18:00</p>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section');
+  /* an answer opens section 2 already set to this case (the shared case of the page); if no finder is on the page, it is remembered */
+  [].forEach.call(sec.querySelectorAll('.ans button'), function(b){ b.addEventListener('click', function(){ var k = b.dataset.k; sec.dataset.answer = k;
+    if (RESET.openCase) RESET.openCase(k); else { RESET.setCase(k); var f = document.getElementById('finder'); if (f) f.scrollIntoView({ behavior: OWL.reduce ? 'instant' : 'smooth' }); } }); });
+})();
+</script>
+</section>

@@ -1,0 +1,55 @@
+<section class="rs arrive a1" id="top" data-sky="dawn" data-over aria-label="Owl Roofing">
+<style>
+/* V1 · Crew film (the owner's "fine, perfect"). Repaired: Owl's film is 960 x 540, so it is framed at no more than its own pixels
+   instead of being stretched full-bleed (the blur the owner saw); muted palette; the film lives ONLY here on the whole site. */
+.a1{height:190vh}
+.a1 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--deep);color:var(--on-deep);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(960px,58vw));align-items:center;gap:clamp(24px,4vw,64px);padding:96px clamp(18px,4vw,64px) 96px}
+.a1 .frame{position:relative;grid-column:2;aspect-ratio:16/9;width:100%;max-width:960px;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 40px 80px -40px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
+.a1 .frame video,.a1 .frame .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.a1 .tag{position:absolute;left:14px;bottom:14px;padding:5px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700}
+.a1 .words{grid-column:1;grid-row:1;position:relative;min-height:22em}
+.a1 .beat{position:absolute;left:0;right:0;top:50%;translate:0 -50%;transition:opacity .6s,translate .8s cubic-bezier(.16,1,.3,1)}
+.a1 h1,.a1 .beat p.big{margin:0;font-size:clamp(40px,5.2vw,88px);font-weight:900;line-height:.96;letter-spacing:-.045em;text-wrap:balance;color:var(--on-deep)}
+.a1 h1 em,.a1 .big em{font-style:normal;color:var(--acc-deep)}
+.a1 .sub{margin:18px 0 0;font-size:clamp(16px,1.3vw,19px);font-weight:600;color:var(--on-deep-70);max-width:34ch}
+.a1 .b2{opacity:0;translate:0 calc(-50% + 40px);pointer-events:none}
+.a1.two .b1{opacity:0;translate:0 calc(-50% - 40px);pointer-events:none}
+.a1.two .b2{opacity:1;translate:0 -50%;pointer-events:auto}
+.a1 .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.a1 .facts span{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);font-size:15px;font-weight:700;color:var(--on-deep)}
+.a1 .cue{position:absolute;left:clamp(18px,4vw,64px);bottom:26px;display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--on-deep);font-size:15px;font-weight:800;text-decoration:none}
+.a1 .cue i{width:28px;height:2px;background:currentColor;transform-origin:left;animation:a1c 1.8s ease-in-out infinite}
+@keyframes a1c{0%,100%{transform:scaleX(.3)}50%{transform:scaleX(1)}}
+.a1 .cue:focus-visible{outline:3px solid var(--acc-deep);outline-offset:4px;border-radius:6px}
+@media (max-width:860px){
+ .a1 .stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start;padding:84px 16px 90px;gap:20px}
+ .a1 .frame{grid-column:1;grid-row:1;border-radius:16px}
+ .a1 .words{grid-column:1;grid-row:2;min-height:17em}
+ .a1 .beat{top:0;translate:none}.a1 .b2{translate:0 30px}.a1.two .b1{translate:0 -30px}.a1.two .b2{translate:none}
+ .a1 h1,.a1 .beat p.big{font-size:clamp(36px,10.5vw,52px)}
+ .a1 .cue{display:none}}
+@media (prefers-reduced-motion:reduce){.a1 .beat{transition:none}.a1 .cue i{animation:none}}
+</style>
+<div class="stage">
+ <div class="frame">
+  <img class="poster" src="{{A:crew-poster.webp}}" alt="" width="960" height="540">
+  <video muted loop playsinline preload="auto" aria-label="Owl's crew at work on a roof"></video>
+  <span class="tag">Owl’s crew at work</span>
+ </div>
+ <div class="words">
+  <div class="beat b1"><h1>Roof trouble? <em>We’ll take it from here.</em></h1><p class="sub">Owl Roofing. Family-owned roofers in Shoreview, MN.</p></div>
+  <div class="beat b2" aria-hidden="true"><p class="big">You call. We climb. <em>You relax.</em></p><div class="facts"><span>5.0 · 90+ reviews</span><span>GAF Systems Plus</span><span>10-year workmanship warranty</span></div></div>
+ </div>
+ <a class="cue" href="#finder"><i aria-hidden="true"></i>What’s going on up there?</a>
+</div>
+<script>
+(function(){
+  var sec = document.currentScript.closest('section'), v = sec.querySelector('video'), b2 = sec.querySelector('.b2');
+  if (!OWL.reduce){ v.src = RESET.video('crewloop'); v.addEventListener('playing', function(){ sec.querySelector('.poster').style.opacity = 0; }); RESET.prime(v); OWL.play(v); }
+  var two = false;
+  function read(){ var r = sec.getBoundingClientRect(), p = -r.top / Math.max(1, r.height - innerHeight), t = p > .38;
+    if (t !== two){ two = t; sec.classList.toggle('two', t); b2.setAttribute('aria-hidden', t ? 'false' : 'true'); } }
+  addEventListener('scroll', read, { passive: true }); read();
+})();
+</script>
+</section>
