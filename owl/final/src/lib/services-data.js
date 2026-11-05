@@ -1,7 +1,7 @@
 /* shared service facts for the Services page (descriptions are plain, generic; numbers only from the facts lock) */
 OWL.SVC = [
  {k:'replace', n:'Roof Replacement', img:'svc-replace', d:'Tear-off to ridge cap with GAF materials, backed by our 10-year workmanship warranty.',
-  inc:['GAF materials, installed by a GAF Systems Plus Certified crew','The Protect Your Nest System: the wrap, three cleanup passes and an aftercare box','10-year workmanship warranty, plus up-to-50-year manufacturer warranties'],
+  inc:['GAF materials, installed by a GAF Systems Plus Certified crew','Your home and lawn protected while we work, three cleanup passes and an aftercare box','10-year workmanship warranty, plus up-to-50-year manufacturer warranties'],
   ico:'<path d="M6 30 L32 10 L58 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M12 30v22h40V30" fill="none" stroke="currentColor" stroke-width="4"/><path d="M24 40 h16 M32 32 v16" stroke="#EAA221" stroke-width="4" stroke-linecap="round"/>'},
  {k:'repair', n:'Roof Repair', img:'svc-repair', d:'Leaks, lifted shingles, flashing and vents, fixed before small problems spread.',
   inc:['Leaks, lifted or missing shingles','Flashing, vents and pipe boots','Small fixes before they spread'],
