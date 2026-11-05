@@ -14035,6 +14035,138 @@ var FOG_LBL = 'A house behind a fogged-up window. Wipe it with your finger or mo
 </section>
 
 </div>
+<div class="ver" data-sec="ask-owl" data-v="1">
+<section class="sec ask" id="ask-owl" aria-labelledby="ask-h">
+<style>
+/* Section 4 · Ask the Owl. OLD Wise Check V4, whole section, with the UI/UX rebuilt: one centred messenger on every screen size (the answer always appears
+   right where you asked), answers as rich cards with Owl's own icons, quick questions under the chat, a box for your own question that only answers
+   from what Owl publishes (and says so when it cannot), a way to start over, and no scrolling trap. */
+.ask{overflow:hidden}
+.ask .hd{text-align:center;max-width:640px;margin:0 auto}
+.ask .lede{margin:12px auto 0;max-width:50ch;font-size:17px}
+.ask .chat{position:relative;max-width:820px;margin:clamp(24px,3.4vw,40px) auto 0;border-radius:28px;background:linear-gradient(180deg,#FBF8EF,#F4EFE2);padding:clamp(16px,2.4vw,28px);box-shadow:0 2px 0 #fff inset,0 40px 70px -40px rgba(23,17,29,.55)}
+.ask .chat::before{content:"";position:absolute;inset:0;border-radius:inherit;background-image:radial-gradient(rgba(23,17,29,.05) 1px,transparent 1.5px);background-size:18px 18px;pointer-events:none}
+.ask .top{position:relative;display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid rgba(23,17,29,.08)}
+.ask .av{flex:none;width:48px;height:48px;border-radius:50%;background:#17111D;display:grid;place-items:center}
+.ask .av svg{width:36px;height:36px;overflow:visible}
+.ask .av .eye{transition:translate .5s cubic-bezier(.3,1.4,.5,1)}
+.ask .chat.busy .av .eye{translate:2px 0}
+.ask .av .lid{transform-origin:center;transform-box:fill-box;transform:scaleY(0);animation:askb 5s infinite}
+@keyframes askb{0%,94%,100%{transform:scaleY(0)}96%{transform:scaleY(1)}}
+.ask .top b{display:block;line-height:1.2}
+.ask .top span.sub{font-size:14px;color:var(--ink-70)}
+.ask .top .again{margin-left:auto;min-height:44px;padding:0 14px;border-radius:999px;font-weight:700;font-size:15px;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(23,17,29,.25);transition:background .2s,opacity .3s,transform .2s}
+.ask .top .again:hover{background:rgba(234,162,33,.18)}
+.ask .top .again[disabled]{opacity:.4;pointer-events:none}
+.ask .log{position:relative;display:flex;flex-direction:column;gap:12px;height:clamp(340px,44vh,430px);overflow-y:auto;overscroll-behavior:contain;padding:16px 6px 10px 2px;scroll-behavior:smooth}
+.ask .log:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.ask .m{max-width:86%;padding:12px 16px;border-radius:18px;font-size:16px;line-height:1.45;animation:askin .4s cubic-bezier(.22,.61,.36,1)}
+@keyframes askin{from{opacity:0;transform:translateY(8px) scale(.98)}}
+.ask .m.you{align-self:flex-end;background:var(--amber);border-bottom-right-radius:6px;font-weight:600;overflow-wrap:anywhere}
+.ask .m.owl{align-self:flex-start;background:#fff;border-bottom-left-radius:6px;box-shadow:0 6px 14px -10px rgba(23,17,29,.5)}
+.ask .m.owl.flash{animation:askfl 1.1s ease}
+@keyframes askfl{0%,100%{box-shadow:0 6px 14px -10px rgba(23,17,29,.5)}30%{box-shadow:0 0 0 3px #EAA221,0 6px 14px -10px rgba(23,17,29,.5)}}
+.ask .m .lead{margin:0 0 6px;font-weight:700}
+.ask .rows{display:grid;gap:8px}
+.ask .row{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center}
+.ask .row .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#F4EFE2;color:#17111D}
+.ask .row svg{width:34px;height:34px}
+.ask .row b{display:block}
+.ask .row .tx{font-size:15.5px;line-height:1.4}
+.ask .m a{font-weight:700}
+.ask .dots{display:inline-flex;gap:4px}
+.ask .dots i{width:7px;height:7px;border-radius:50%;background:#9C9585;animation:askd 1s infinite}
+.ask .dots i:nth-child(2){animation-delay:.15s}.ask .dots i:nth-child(3){animation-delay:.3s}
+@keyframes askd{50%{transform:translateY(-4px);background:#EAA221}}
+.ask .qs{position:relative;display:flex;flex-wrap:wrap;gap:8px;padding:12px 0 4px;border-top:1px solid rgba(23,17,29,.08)}
+.ask .qs button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px 6px 8px;border-radius:999px;background:var(--paper);font-weight:700;font-size:15.5px;text-align:left;box-shadow:0 0 0 1px var(--line),0 8px 16px -12px rgba(23,17,29,.5);transition:transform .2s,box-shadow .2s,opacity .3s}
+.ask .qs button::before{content:"?";flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--amber);font-weight:900}
+.ask .qs button:hover{transform:translateY(-2px)}
+.ask .qs button:active{transform:translateY(2px)}
+.ask .qs button[aria-pressed="true"]{opacity:.66}
+.ask .qs button[aria-pressed="true"]::before{content:"✓"}
+.ask form{position:relative;display:flex;gap:8px;margin-top:10px}
+.ask form input{flex:1;min-width:0;min-height:48px;padding:0 18px;border-radius:999px;border:0;background:#fff;font:inherit;font-size:16px;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(23,17,29,.2)}
+.ask form input::placeholder{color:#6B6470}
+.ask form input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.ask form button{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--amber);box-shadow:0 4px 0 var(--amber-edge);transition:transform .12s,box-shadow .12s}
+.ask form button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--amber-edge)}
+.ask form button svg{width:20px;height:20px}
+.ask .acts{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:clamp(20px,3vw,30px)}
+.ask .acts .btn{min-width:240px;min-height:56px;font-size:18px}
+@media (max-width:640px){.ask .m{max-width:94%}.ask .acts .btn{width:100%;min-width:0}.ask .top .sub{display:none}.ask .chat{display:flex;flex-direction:column}.ask .top{order:0}.ask .qs{order:1;border-top:0;border-bottom:1px solid rgba(23,17,29,.08);padding:12px 0}.ask .log{order:2;height:clamp(300px,46vh,400px)}.ask form{order:3}}
+@media (prefers-reduced-motion:reduce){.ask .m,.ask .dots i,.ask .av .lid{animation:none}.ask .log{scroll-behavior:auto}}
+</style>
+<div class="wrap">
+ <div class="hd">
+  <h2 class="h2" id="ask-h">Ask the Owl</h2>
+  <p class="lede rv">Pick a question, or type your own. The answers come only from what Owl Roofing publishes about the Wise Check, and Owl says so when it can’t answer.</p>
+ </div>
+ <div class="chat" data-owl="say:Ask away">
+  <div class="top"><span class="av" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M8 12 L12 4 L16 10 Q20 8 24 10 L28 4 L32 12 Q34 26 20 34 Q6 26 8 12Z" fill="#F1EFE6"/><g class="eye"><circle cx="15" cy="17" r="5" fill="#EAA221"/><circle cx="25" cy="17" r="5" fill="#EAA221"/><circle cx="15" cy="17" r="2" fill="#17111D"/><circle cx="25" cy="17" r="2" fill="#17111D"/></g><circle class="lid" cx="15" cy="17" r="5.2" fill="#17111D"/><circle class="lid" cx="25" cy="17" r="5.2" fill="#17111D"/><path d="M18 22 L20 26 L22 22Z" fill="#17111D"/></svg></span><div><b>Owl Roofing</b><span class="sub">Questions about the Wise Check</span></div><button class="again" type="button" disabled>Start over</button></div>
+  <div class="log" role="log" aria-live="polite" aria-label="Conversation with Owl" tabindex="0"></div>
+  <div class="qs" role="group" aria-label="Quick questions"></div>
+  <form autocomplete="off"><label class="sr" for="ask-in">Type your own question for Owl</label><input id="ask-in" type="text" maxlength="140" placeholder="Or type your own question…"><button type="submit" aria-label="Send your question"><svg viewBox="0 0 24 24" fill="none" stroke="#17111D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
+ </div>
+ <div class="acts"><a class="btn btn-amber" href="#book" data-mag data-owl="hoot">Book a Wise Check</a><a class="btn btn-line" href="tel:+16519776027" data-mag data-owl="peek">Call (651) 977-6027</a></div>
+</div>
+<script>
+OWL.reg('ask-owl','1',function(root){
+  var W = OWL.WISE || {parts: [], cases: []}, P = W.parts, C = W.cases;
+  var chat = root.querySelector('.chat'), qs = root.querySelector('.qs'), log = root.querySelector('.log'), form = root.querySelector('form'), inp = form.querySelector('input'), again = root.querySelector('.again'), h2 = root.querySelector('h2');
+  OWL.split(h2);
+  function row(it){ return '<div class="row"><span class="ic"><svg viewBox="0 0 64 64" aria-hidden="true">' + it.ico + '</svg></span><span class="tx"><b>' + it.n + '</b>' + it.t + '</span></div>'; }
+  function card(lead, items){ return '<p class="lead">' + lead + '</p><div class="rows">' + items.map(row).join('') + '</div>'; }
+  var Q = [
+    {q: 'What does a Wise Check cover?', a: function(){ return card('Four parts, in Owl’s own words:', P); }, re: /cover|includ|what.*(wise|get)|part|involve/i},
+    {q: 'Do you go into the attic?', a: function(){ return card('Yes. The attic inspection is one of the four parts.', [P[1]]); }, re: /attic|vent|airflow|insulat/i},
+    {q: 'How do you find leaks I can’t see?', a: function(){ return card('With heat-sensor leak detection.', [P[2]]); }, re: /leak|moistur|wet|stain|drip|heat|sensor|detect|water/i},
+    {q: 'Will I see what you saw?', a: function(){ return card('Yes.', [P[3]]); }, re: /photo|video|picture|see|show|document|proof|report/i},
+    {q: 'When should I book one?', a: function(){ return card('Any of these is a good time:', C); }, re: /when|book|schedul|should|storm|hail|wind|old|age/i}
+  ];
+  var EXTRA = [
+    {re: /warrant/i, a: 'Our workmanship is backed by a 10-year workmanship warranty, and the manufacturer’s warranties on the roofing system run up to 50 years.'},
+    {re: /price|cost|how much|free|quote|estimate|charge|fee|pay|afford/i, a: 'I don’t have a price to give you here, and I won’t guess. To ask about cost, call <a href="tel:+16519776027">(651) 977-6027</a> and we’ll tell you straight.'},
+    {re: /hour|open|closed|phone|call|number|reach|contact/i, a: 'We’re open Monday to Saturday, 8 to 6. Call <a href="tel:+16519776027">(651) 977-6027</a>, or write to <a href="mailto:info@owlroofing.com">info@owlroofing.com</a>.'}
+  ];
+  var FALL = 'I can only answer what Owl Roofing publishes about the Wise Check, and I don’t have an answer to that one. Call <a href="tel:+16519776027">(651) 977-6027</a> and we’ll tell you straight.';
+  var asked = {}, busy = false, T = [];
+  function later(fn, ms){ var id = setTimeout(fn, OWL.reduce ? 0 : ms); T.push(id); }
+  function bottom(){ log.scrollTop = log.scrollHeight; }
+  function bubble(cls, html, text){ var p = document.createElement('div'); p.className = 'm ' + cls; if (text != null) p.textContent = text; else p.innerHTML = html; log.appendChild(p); bottom(); return p; }
+  function greet(){ bubble('owl', '<p class="lead">Hoo’s asking?</p>Pick a question below, or type your own, and I’ll answer from what Owl Roofing publishes about the Wise Check.'); }
+  function mark(i){ var b = qs.children[i]; if (b) b.setAttribute('aria-pressed', 'true'); again.disabled = false; }
+  function reply(shownQ, html, i){
+    busy = true; chat.classList.add('busy');
+    bubble('you', null, shownQ);
+    var wait = null;
+    later(function(){ wait = bubble('owl', '<span class="dots"><i></i><i></i><i></i></span>'); wait.setAttribute('aria-hidden', 'true'); }, 250);
+    later(function(){ if (wait) wait.remove(); var a = bubble('owl', html); if (i != null) asked[i] = a; busy = false; chat.classList.remove('busy'); }, 1050);
+  }
+  function ask(i){
+    if (busy) return;
+    if (asked[i]){ asked[i].scrollIntoView({block: 'nearest'}); asked[i].classList.remove('flash'); void asked[i].offsetWidth; asked[i].classList.add('flash'); return; }
+    mark(i); reply(Q[i].q, Q[i].a(), i);
+  }
+  Q.forEach(function(q, i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = q.q; b.setAttribute('aria-pressed', 'false'); b.addEventListener('click', function(){ ask(i); }); qs.appendChild(b); });
+  form.addEventListener('submit', function(e){
+    e.preventDefault(); var t = inp.value.trim(); if (!t || busy) return; inp.value = '';
+    var k = -1; Q.forEach(function(q, i){ if (k < 0 && q.re.test(t)) k = i; });
+    var ex = null; EXTRA.forEach(function(x){ if (!ex && x.re.test(t)) ex = x; });
+    if (ex && (k < 0 || /warrant|price|cost|how much|free|quote|estimate|hour|phone/i.test(t))){ again.disabled = false; reply(t, ex.a, null); return; }
+    if (k >= 0){ if (asked[k]){ bubble('you', null, t); var a2 = bubble('owl', '<p class="lead">I answered that one above.</p>I’ve highlighted it for you.'); asked[k].scrollIntoView({block: 'nearest'}); asked[k].classList.remove('flash'); void asked[k].offsetWidth; asked[k].classList.add('flash'); return; }
+      mark(k); reply(t, Q[k].a(), k); return; }
+    again.disabled = false; reply(t, FALL, null);
+  });
+  again.addEventListener('click', function(){ T.forEach(clearTimeout); T = []; busy = false; chat.classList.remove('busy'); asked = {}; log.innerHTML = ''; [].forEach.call(qs.children, function(b){ b.setAttribute('aria-pressed', 'false'); }); again.disabled = true; greet(); });
+  greet();
+  if (OWL.reduce || !('IntersectionObserver' in window)) OWL.reveal(h2);
+  else { var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); OWL.reveal(h2); } }, {threshold: .3}); io.observe(chat); }
+});
+</script>
+</section>
+
+</div>
 </div>
 </main>
 <footer class="ftr" id="contact">

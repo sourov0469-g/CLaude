@@ -1,0 +1,132 @@
+{
+ "section": "ask-owl",
+ "pass": 25,
+ "total": 25,
+ "results": [
+  {
+   "name": "the section exists once, no version switcher on the page",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "axe WCAG 2.1 A/AA: 0 violations",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "facts lock: only (651) 977-6027, info@owlroofing.com, no Master Elite / A+ / lifetime, reviews only as 5.0 · 90+",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no maps: nothing in this section is, or is called, a map",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing this section shows is used by any other section",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "distinct media: nothing in this section is shown twice at once",
+   "ok": true,
+   "info": "{}"
+  },
+  {
+   "name": "five quick questions, a greeting, a box for your own question with a label",
+   "ok": true,
+   "info": "{\"chips\":5,\"greet\":1,\"input\":true,\"lab\":true}"
+  },
+  {
+   "name": "a question shows your words, then Owl's answer as four cards with icons",
+   "ok": true,
+   "info": "{\"you\":1,\"rows\":4,\"icons\":4,\"pressed\":\"What does a Wise Check cover?\"}"
+  },
+  {
+   "name": "asking the same question again does not duplicate it",
+   "ok": true,
+   "info": "1"
+  },
+  {
+   "name": "\"When should I book one?\" gives the four cases",
+   "ok": true,
+   "info": "8"
+  },
+  {
+   "name": "the section does not grow as answers arrive (no layout jump)",
+   "ok": true,
+   "info": "1240.984375 -> 1240.984375"
+  },
+  {
+   "name": "typed \"attic\" is answered from the published parts",
+   "ok": true,
+   "info": "Yes. The attic inspection is one of the four parts.Attic inspectionThe underside"
+  },
+  {
+   "name": "start over clears the conversation",
+   "ok": true,
+   "info": "{\"msgs\":1,\"pressed\":0,\"dis\":true}"
+  },
+  {
+   "name": "a price question is never guessed: honest answer with the one phone number",
+   "ok": true,
+   "info": "I don’t have a price to give you here, and I won’t guess. To ask about cost, call (651) 97"
+  },
+  {
+   "name": "an unknown question gets an honest \"I can only answer what we publish\"",
+   "ok": true,
+   "info": "I can only answer what Owl Roofing publishes about the Wise Check, and I don’t have an ans"
+  },
+  {
+   "name": "typed text is never injected as markup",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "every call link is the one number",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "the Book a Wise Check action is there",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 1440 (DPR 1): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "sharp at 390 (DPR 2): no image or video shown larger than its own pixels (0 media measured)",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "layout at 1440: no sideways scroll, controls at least 44 px (section is 1241 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 768: no sideways scroll, controls at least 44 px (section is 1107 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "layout at 390: no sideways scroll, controls at least 44 px (section is 1250 px tall)",
+   "ok": true,
+   "info": "overflow 0; "
+  },
+  {
+   "name": "reduced motion: the section renders, nothing needs motion",
+   "ok": true,
+   "info": ""
+  },
+  {
+   "name": "no console or page errors",
+   "ok": true,
+   "info": ""
+  }
+ ]
+}

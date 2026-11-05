@@ -73,3 +73,4 @@
 - **1 Hero** `final/GATE-FINAL-HERO.md`: OLD Hero V2 unchanged, not pinned (decision and reasoning in the gate). 19/19.
 - **2 Video** `final/GATE-FINAL-VIDEO.md`: V3 lean + light spill, V4 colour lens on a black-and-white film, V5 pieces/moments/scatter again; no strip, no YouTube button. 24/24.
 - **3 Wise Check (merge)** `final/GATE-FINAL-WISE-CHECK.md`: V11 fog (image + effects only) → V13 day then time → V14 words; all three feed one live email card; Email / Call. 25/25.
+- **4 Ask the Owl** `final/GATE-FINAL-ASK-OWL.md`: messenger rebuilt (quick questions above the chat on phones, icon answer cards, honest type box, start over, no layout jump). 25/25.

@@ -1,0 +1,41 @@
+module.exports = { sharpAt: [0],
+  async extra(p, rec, c) {
+    const S = c.SELF;
+    await p.evaluate(s => document.querySelector(s + ' .chat').scrollIntoView({ block: 'center', behavior: 'instant' }), S); await p.waitForTimeout(800);
+    const h0 = await p.evaluate(s => document.querySelector(s).getBoundingClientRect().height, S);
+    const a = await p.evaluate(s => ({ chips: document.querySelectorAll(s + ' .qs button').length, greet: document.querySelectorAll(s + ' .log .m').length, input: !!document.querySelector(s + ' form input'), lab: !!document.querySelector(s + ' label[for="ask-in"]') }), S);
+    rec('five quick questions, a greeting, a box for your own question with a label', a.chips === 5 && a.greet === 1 && a.input && a.lab, JSON.stringify(a));
+    await p.click(S + ' .qs button:nth-child(1)'); await p.waitForTimeout(1700);
+    const r1 = await p.evaluate(s => ({ you: document.querySelectorAll(s + ' .m.you').length, rows: document.querySelectorAll(s + ' .m.owl .row').length, icons: document.querySelectorAll(s + ' .m.owl .row svg').length, pressed: document.querySelector(s + ' .qs button[aria-pressed="true"]').textContent }), S);
+    rec('a question shows your words, then Owl\'s answer as four cards with icons', r1.you === 1 && r1.rows === 4 && r1.icons === 4, JSON.stringify(r1));
+    await p.screenshot({ path: c.OUT + '/q1.png' });
+    await p.click(S + ' .qs button:nth-child(1)'); await p.waitForTimeout(500);
+    const dup = await p.evaluate(s => document.querySelectorAll(s + ' .m.you').length, S);
+    rec('asking the same question again does not duplicate it', dup === 1, String(dup));
+    await p.click(S + ' .qs button:nth-child(5)'); await p.waitForTimeout(1700);
+    const r5 = await p.evaluate(s => document.querySelectorAll(s + ' .m.owl .row').length, S);
+    rec('"When should I book one?" gives the four cases', r5 === 8, String(r5));
+    const h1 = await p.evaluate(s => document.querySelector(s).getBoundingClientRect().height, S);
+    rec('the section does not grow as answers arrive (no layout jump)', Math.abs(h1 - h0) < 2, h0 + ' -> ' + h1);
+    // typed questions
+    await p.fill(S + ' form input', 'Do you check the attic?'); await p.keyboard.press('Enter'); await p.waitForTimeout(1700);
+    const t1 = await p.evaluate(s => document.querySelector(s + ' .log').lastElementChild.textContent, S);
+    rec('typed "attic" is answered from the published parts', /highlighted/.test(t1) || /attic/i.test(t1), t1.slice(0, 80));
+    await p.click(S + ' .again'); await p.waitForTimeout(400);
+    const rs = await p.evaluate(s => ({ msgs: document.querySelectorAll(s + ' .log .m').length, pressed: document.querySelectorAll(s + ' .qs [aria-pressed="true"]').length, dis: document.querySelector(s + ' .again').disabled }), S);
+    rec('start over clears the conversation', rs.msgs === 1 && rs.pressed === 0 && rs.dis, JSON.stringify(rs));
+    await p.fill(S + ' form input', 'How much does it cost?'); await p.keyboard.press('Enter'); await p.waitForTimeout(1700);
+    const t2 = await p.evaluate(s => ({ txt: document.querySelector(s + ' .log').lastElementChild.textContent, tel: [...document.querySelectorAll(s + ' .log a[href^="tel:"]')].map(a => a.getAttribute('href')) }), S);
+    rec('a price question is never guessed: honest answer with the one phone number', /won.t guess/.test(t2.txt) && t2.tel[0] === 'tel:+16519776027', t2.txt.slice(0, 90));
+    await p.fill(S + ' form input', 'what colour is the sky'); await p.keyboard.press('Enter'); await p.waitForTimeout(1700);
+    const t3 = await p.evaluate(s => document.querySelector(s + ' .log').lastElementChild.textContent, S);
+    rec('an unknown question gets an honest "I can only answer what we publish"', /only answer what Owl Roofing publishes/.test(t3), t3.slice(0, 90));
+    await p.fill(S + ' form input', '<img src=x onerror=window.__x=1> attic'); await p.keyboard.press('Enter'); await p.waitForTimeout(1700);
+    const inj = await p.evaluate(s => ({ img: document.querySelectorAll(s + ' .m.you img').length, x: !!window.__x, txt: document.querySelector(s + ' .m.you:last-of-type, ' + s + ' .m.you').textContent }), S);
+    rec('typed text is never injected as markup', inj.img === 0 && !inj.x);
+    await p.screenshot({ path: c.OUT + '/typed.png' });
+    const call = await p.evaluate(s => [...document.querySelectorAll(s + ' a[href^="tel:"]')].every(a => a.getAttribute('href') === 'tel:+16519776027'), S);
+    rec('every call link is the one number', call);
+    const cta = await p.evaluate(s => document.querySelector(s + ' .acts a[href="#book"]') !== null, S);
+    rec('the Book a Wise Check action is there', cta);
+  } };
