@@ -1,0 +1,10 @@
+const { chromium } = require('playwright'); const D = 'v/';
+(async () => { const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } }); const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
+  await p.goto('file:///home/user/CLaude/siding/redo/final/out/final.html', { waitUntil: 'load' }); await p.waitForTimeout(800);
+  await p.evaluate(() => { const y = scrollY + document.querySelector('.vz').getBoundingClientRect().top; scrollTo(0, y); }); await p.waitForTimeout(2500);
+  console.log(JSON.stringify(await p.evaluate(() => ({ ready: window.__vz && window.__vz.ready, tiles: window.__vz && window.__vz.tiles }))));
+  await p.screenshot({ path: D + 'v0.png' });
+  await p.mouse.move(700, 330); await p.waitForTimeout(150); await p.mouse.move(760, 360, { steps: 6 }); await p.waitForTimeout(500); await p.screenshot({ path: D + 'v1.png' });
+  await p.click('.vz-sw[data-i="10"]'); await p.waitForTimeout(450); await p.screenshot({ path: D + 'v2.png' }); await p.waitForTimeout(1200);
+  await p.click('.vz-lt[data-l="golden"]'); await p.mouse.move(300, 600); await p.waitForTimeout(900); await p.screenshot({ path: D + 'v3.png' });
+  console.log(JSON.stringify(errs)); await b.close(); })();
