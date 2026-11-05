@@ -1362,6 +1362,8 @@ Every text element is paired with the nearest painted background behind it, as r
 
 | # | Section | Version | Reference | Gate | Score | Status |
 |---|---|---|---|---|---|---|
-| 3 | Visualiser | **M, "Pull a colour through"** (`?vis=m`) | Lusion (flow, the carrying thread: the 17 ColorPlus colours on one ribbon drawn through an eye; pull it and the colour runs down the boards, each course following the one above, always a real colour) | GATE-NEW-Visualiser-M.md | 8.57 PASS | Built and gated; waiting for Muse's accept |
+| 3 | Visualiser | **M, "Pull a colour through"** (`?vis=m`) | Lusion (flow, the carrying thread: the 17 ColorPlus colours on one ribbon drawn through an eye; pull it and the colour runs down the boards, each course following the one above, always a real colour) | GATE-NEW-Visualiser-M.md | 8.57 PASS | Accepted by Muse |
 
-**Next, after the accept:** Windows M.
+| 4 | Windows | **M, "One window, four answers"** (`?windows=m`) | Lusion (flow: one window whose glass divides by the numbers into the answer to each of four buyer questions: cost, brand, frame, siding too; the published FAQ answers verbatim beside it) | GATE-NEW-Windows-M.md | 8.57 PASS | Built and gated; waiting for Muse's accept |
+
+**Next, after the accept:** Reviews M.
