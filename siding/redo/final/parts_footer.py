@@ -20,7 +20,7 @@ TOWNS = 'Austin, Round Rock, Cedar Park, Leander, Pflugerville, Georgetown, Buda
 ABOUT = 'Since 2009; merged with Sanders Roofing & Exteriors in 2018.'
 CREDS = ['GAF Master Elite', 'James Hardie Elite Preferred', "President's Club 2025", 'Andersen Certified Premier', 'BBB A+']
 REVIEWS = '4.9 from 474 Google reviews'
-SERVICES = [('Siding', '#services'), ('Windows', '#windows'), ('Roofing', '#services'), ('Try a colour', '#colours'), ('How a job runs', '#process')]
+SERVICES = [('Siding', '#/siding'), ('Windows', '#/windows'), ('Roofing', '#/roofing'), ('Our work', '#/our-work'), ('Try a colour', '#colours'), ('How a job runs', '#process'), ('Contact us', '#/contact')]
 
 
 def check():
@@ -132,7 +132,7 @@ def markup(S, contact, cal):
 <div class="fo-sign" aria-hidden="true"><svg viewBox="0 0 96 76" focusable="false"><g class="sw"><path class="rope" d="M30 0V20M66 0V20"/><rect class="plate" x="6" y="18" width="84" height="44" rx="9"/><rect class="plin" x="12" y="24" width="72" height="32" rx="6"/><text x="48" y="46" text-anchor="middle" class="ptx">Open</text></g></svg></div>
 <p class="fo-state" data-state><b>Open now</b><span></span></p>{hrs}<a class="fo-link fo-bk" href="{contact}"><span>Book a free inspection</span>{IC["arrow"]}</a></section>
 <section class="fo-b fo-services" aria-labelledby="fo-t3"><h3 id="fo-t3">{IC["tools"]}Services</h3><ul class="fo-ul">{sv}</ul></section>
-<section class="fo-b fo-area" aria-labelledby="fo-t4"><h3 id="fo-t4">{IC["pin"]}Area</h3><a class="fo-link" href="#area"><span>On your street</span>{IC["arrow"]}</a><p class="fo-towns">{e(TOWNS)}</p></section>
+<section class="fo-b fo-area" aria-labelledby="fo-t4"><h3 id="fo-t4">{IC["pin"]}Area</h3><a class="fo-link" href="#/our-work"><span>On your street</span>{IC["arrow"]}</a><p class="fo-towns">{e(TOWNS)}</p></section>
 <section class="fo-b fo-about" aria-labelledby="fo-t5"><h3 id="fo-t5">{IC["info"]}About</h3><p>{e(ABOUT.replace("&", "&"))}</p>
 <svg class="fo-tl" viewBox="0 0 200 44" aria-hidden="true" focusable="false"><path class="tl" d="M14 14H186" pathLength="1"/><circle class="tn" cx="14" cy="14" r="6"/><circle class="tn" cx="186" cy="14" r="6"/><text x="14" y="38" text-anchor="start">2009</text><text x="186" y="38" text-anchor="end">2018</text></svg>
 <a class="fo-link" href="#reviews"><span class="fo-stars" aria-hidden="true">{IC["star"]}</span><span>{e(REVIEWS)}</span></a></section>

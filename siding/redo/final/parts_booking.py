@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); PRE = os.path.join(HERE, '..'
 REPLACES = ['cta2', 'cta5']   # cta (base: status + footer) stays until the footer is rebuilt
 CSS = 'book.css'; JS = 'book.js'; GLOBAL = 'FBook'
 PHONE = '(512) 550-0000'; MAIL = 'info@austinprosiding.com'; ADDR = '7801 N Lamar Blvd Suite C70, Austin TX 78752'
-CONTACT_PAGE = 'contact.html'   # this site's own Contact Us page (an inner page, built after the homepage is approved)
+CONTACT_PAGE = '#/contact'   # this site's own Contact Us page (an inner page of this same file)
 STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 1.6l2.6 5.3 5.8.8-4.2 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.6 7.7l5.8-.8z"/></svg>'
 PH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'
 ML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>'
