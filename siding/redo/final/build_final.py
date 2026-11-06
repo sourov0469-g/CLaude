@@ -76,7 +76,9 @@ def build():
     body_tail = [m for m in TAIL if m is not parts_footer]
     home = hero() + wall() + parts_services.services() + parts_vis.vis(CONTACT, I['cal']) + parts_windows.windows(CONTACT, I['cal']) + ''.join(m.markup(S, CONTACT, I['cal']) for m in body_tail)
     ctx = {'contact': CONTACT, 'cal': I['cal'], 'icons': I}
-    pages = ''.join(f'<main class="pg" data-page="{m.NAME}" id="pg-{m.NAME}" hidden>{m.markup(ctx)}</main>' for m in PAGES)
+    only = [x for x in os.environ.get('PAGES_ONLY', '').split(',') if x]   # build/test one page in isolation (others become empty stubs); unset = the whole site
+    pg_markup = lambda m: m.markup(ctx) if (not only or m.NAME in only) else f'<section class="pgs"><h1>{m.TITLE}</h1></section>'
+    pages = ''.join(f'<main class="pg" data-page="{m.NAME}" id="pg-{m.NAME}" hidden>{pg_markup(m)}</main>' for m in PAGES)
     foot = parts_footer.markup(S, CONTACT, I['cal'])
     js = PP.globals_js() + SRC('hero.js') + SRC('wall.js') + SRC('serv.js') + SRC('vis.js') + SRC('win.js') + PP.js(keep) + own('js') + SRC('cursor.js') + SRC('nav.js') + SRC('router.js')
     boot = 'FCursor.init();FNav.init();FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);' + PP.wires(keep) + ''.join(f'{m.GLOBAL}.wire(document);' for m in mods if os.path.exists(os.path.join(HERE, 'src', m.JS))) + 'FRoute.init();'

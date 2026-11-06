@@ -6,3 +6,4 @@
 .menu>li>a[aria-current="page"],.menu>li>button[aria-current="page"]{background:#E4ECE6;color:var(--ink);box-shadow:inset 0 -3px 0 #B5DB6E}
 .pg-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:reduce){.pg.on{animation:none}}
+.pg input,.pg textarea,.pg button,.pg select{font-family:inherit}
