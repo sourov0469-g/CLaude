@@ -27,7 +27,7 @@ The earlier Booking H ("Write us a postcard") set normal sans text on a paper ba
 | Form | fields | ⟦S1444⟧ one thing at a time, optional fields marked by being optional, the reach choice a single radio set; ⟦S1494⟧ plain labels and plain error messages; ⟦S0054⟧ fixing-accessibility: real labels (visually hidden text + drawn ink), `aria-describedby`/`aria-invalid`, `role=alert` messages, focus to the first error, a status region for the thank-you with focus moved to it, 3 px focus rings |
 | Motion | pen, tick, stamp, bars | ⟦S1436⟧ animation-principles: the pen leans in as you write, the tick draws, the stamp lands with overshoot; ⟦S0060⟧ animate; ⟦S0062⟧ animation-performance: transform/opacity; the ink filter is static; ⟦S0400⟧ accessible-animation: reduced-motion layout |
 | Controls | targets | ⟦S1441⟧ fitts-law: every field, tick and button ≥ 44 px; Send is the largest control |
-| Site | weight | ⟦S0231⟧ web-performance: 12 KB of CSS and 11 KB of JS; no image, no library |
+| Site | weight | ⟦S0231⟧ web-performance: 15 KB of CSS and 12 KB of JS (unminified); no image, no library |
 
 ## 4. Evidence
 
