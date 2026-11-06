@@ -137,9 +137,9 @@ window.FPWork = (function () {
       dl.hidden = !pair; tb.hidden = ta.hidden = !pair; dtt.textContent = it.title; ddd.textContent = it.desc; dc.textContent = (idx + 1) + ' of ' + list.length; $('.po-dp', dlg).disabled = idx === 0; $('.po-dn', dlg).disabled = idx === list.length - 1;
       if (wo && wo._cw) wo._cw(); if (pair) { setWipe(50); if (!RM()) { setWipe(100); wo = { w: 100 }; tween(wo, 'w', 50, 900, () => setWipe(wo.w)); } } else ia.style.clipPath = 'none'; }
     const fromLi = (li) => { const im = li.querySelector('img'); const pair = li.dataset.kind === 'pair'; return pair ? { kind: 'pair', a: im.src, aa: im.alt, b: li.dataset.b, ba: li.dataset.ba, title: li.dataset.place + ' · ' + li.dataset.when, desc: 'Installed: ' + li.dataset.inst + ' · ' + li.dataset.band } : { kind: 'photo', a: im.src, aa: im.alt, title: li.dataset.place + ' · ' + li.dataset.when, desc: li.dataset.trades }; };
-    function open(items, i, from) { list = items; idx = i; opener = from; fill(); if (!dlg.open) { dlg.showModal(); document.documentElement.classList.add('po-lock'); } setTimeout(() => $('.po-dx', dlg).focus(), 0); }
+    function open(items, i, from) { list = items; idx = i; opener = from; fill(); if (!dlg.open) { dlg.showModal(); document.documentElement.classList.add('po-noscroll'); } setTimeout(() => $('.po-dx', dlg).focus(), 0); }
     function close() { if (dlg.open) dlg.close(); }
-    dlg.addEventListener('close', () => { document.documentElement.classList.remove('po-lock'); if (opener && opener.isConnected) opener.focus({ preventScroll: true }); });
+    dlg.addEventListener('close', () => { document.documentElement.classList.remove('po-noscroll'); if (opener && opener.isConnected) opener.focus({ preventScroll: true }); });
     dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); }); $('.po-dx', dlg).addEventListener('click', close);
     $('.po-dp', dlg).addEventListener('click', () => { if (idx > 0) { idx--; fill(); } }); $('.po-dn', dlg).addEventListener('click', () => { if (idx < list.length - 1) { idx++; fill(); } });
     dlg.addEventListener('keydown', (e) => {

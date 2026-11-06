@@ -44,7 +44,7 @@ window.FPRoofing = (function () {
       b += `<rect x="30" y="296" width="500" height="10" rx="3" fill="#F1F3EE"/><rect x="30" y="304" width="500" height="3" fill="#0E2A20" opacity=".16"/>`;
       s.innerHTML = b; apply(+$('#rf-lay').value);
     };
-    const apply = (n) => { n = Math.round(n); const cls = kind === 'seam' || kind === 'screw' ? '.rf-tp' : '.rf-ts'; $$(cls, s).forEach((g) => { const i = +g.dataset.i; g.classList.toggle('on', i < n); g.classList.toggle('cur', i === n - 1); }); const rg = $('#rf-lay'); rg.value = n; rg.style.setProperty('--v', n / 12 * 100 + '%'); $('#rf-lout').textContent = n + ' of 12 ' + KIND[kind][1]; rg.setAttribute('aria-valuetext', n + ' of 12 ' + KIND[kind][1] + ' laid'); };
+    const apply = (n) => { n = Math.round(n); const cls = kind === 'seam' || kind === 'screw' ? '.rf-tp' : '.rf-ts'; $$(cls, s).forEach((g) => { const i = +g.dataset.i; if (i === 12) return; g.classList.toggle('on', i < n); g.classList.toggle('cur', i === n - 1); }); const cap = $('.rf-ts[data-i="12"]', s); if (cap) cap.classList.toggle('on', n >= 12); const rg = $('#rf-lay'); rg.value = n; rg.style.setProperty('--v', n / 12 * 100 + '%'); $('#rf-lout').textContent = n + ' of 12 ' + KIND[kind][1]; rg.setAttribute('aria-valuetext', n + ' of 12 ' + KIND[kind][1] + ' laid'); };
     $('#rf-lay').addEventListener('input', (e) => apply(+e.target.value));
     radio($('.rf-seg4'), (b) => { kind = b.dataset.k; $('#rf-lread').textContent = KIND[kind][0]; $('#rf-lay').value = 12; draw(); apply(12); });
     draw(); $('#rf-lread').textContent = KIND.shingle[0];
@@ -59,7 +59,7 @@ window.FPRoofing = (function () {
   function two() {
     let cur = 'shingle'; const mh = $('#rf-mh'), md = $('#rf-md'), ax = $('#rf-axis'), pin = $('#rf-pin');
     const ticks = $$('.rf-tick li'); const show = (k) => { cur = k; const r = RAIL[k]; mh.style.left = r.mh[0] * 2 + '%'; mh.style.width = (r.mh[1] - r.mh[0]) * 2 + '%'; md.style.left = r.md[0] * 2 + '%'; md.style.width = (r.md[1] - r.md[0]) * 2 + '%';
-      $('#rf-med').textContent = r.med; $('#rf-midh').textContent = r.half; $('#rf-rf').innerHTML = r.f.map(([b, t]) => `<li><b>${b}</b>${t}</li>`).join(''); $$('.rf-bars li').forEach((l) => l.classList.toggle('dim', l.dataset.k !== k)); $$('.rf-phs').forEach((p) => { p.hidden = p.dataset.r !== k; }); $('#rf-axr') && ($('#rf-axr').textContent = ''); };
+      $('#rf-med').textContent = r.med; $('#rf-midh').textContent = r.half; $('#rf-rf').innerHTML = r.f.map(([b, t]) => `<li><b>${b}</b> ${t}</li>`).join(''); $$('.rf-bars li').forEach((l) => l.classList.toggle('dim', l.dataset.k !== k)); $$('.rf-phs').forEach((p) => { p.hidden = p.dataset.r !== k; }); $('#rf-axr') && ($('#rf-axr').textContent = ''); };
     radio($('.rf-rk').parentElement, (b) => show(b.dataset.r)); show('shingle');
     const read = (e) => { const r = ax.getBoundingClientRect(), v = clamp((e.clientX - r.left) / r.width, 0, 1) * 50, d = Math.round(v), R = RAIL[cur]; pin.style.left = v * 2 + '%'; const o = $('#rf-axr'); if (!o) return; const lab = '$' + d + 'k'; o.textContent = lab + ': ' + (d >= R.md[0] && d <= R.md[1] ? 'inside the median band' : d >= R.mh[0] && d <= R.mh[1] ? 'inside the middle half, outside the median band' : 'outside the middle half') + ' of our priced ' + R.name + ' roofing jobs (' + R.n + ').'; };
     let down = false; ax.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' || down) read(e); }); ax.addEventListener('pointerdown', (e) => { down = true; read(e); }); addEventListener('pointerup', () => { down = false; });

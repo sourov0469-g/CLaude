@@ -108,8 +108,9 @@ def markup(ctx):
 <div class="rf-in"><header class="rf-hd"><p class="rf-kick">Before and after · North Shoal Creek, Austin</p><h2 class="rf-h2" id="rf-pair-h">Laid course by course</h2>
 <p class="rf-sub">One of our roofs, shot before we started and after we finished. Move the slider and the new roof goes on from the eaves up. Price as published: the roofing portion of the job.</p></header>
 <figure class="rf-pf"><div class="rf-pst" id="rf-pst" data-cur="drag" data-p='{e(json.dumps(pair), quote=True)}'><img class="rf-im rf-pa" src="{b64('home4a-720.webp')}" alt="{e(pr['aa'])}" width="720" height="450"><div class="rf-pbf" id="rf-pbf"><img class="rf-im" src="{b64('home4b-720.webp')}" alt="{e(pr['ba'])}" width="720" height="450"></div><i class="rf-edge" id="rf-edge" aria-hidden="true"></i><span class="rf-lb rf-lbb">Before</span><span class="rf-lb rf-lba">After</span></div>
-<label class="rf-rng rf-prng"><span>New roof laid <output id="rf-pout">0%</output></span><input type="range" id="rf-prange" min="0" max="12" value="0" aria-label="How much of the new roof is laid, from the eaves up"></label>
-<figcaption class="rf-pcap"><p><b>{e(pr['p'])}</b><span>{e(pr['w'])} · {e(pr['i'])}</span></p><p class="rf-pb2"><small>{e(pr['bl'])}</small><b>{e(pr['b'])}</b></p></figcaption></figure></div></section>
+<figcaption class="rf-pside"><p class="rf-pplace"><b>{e(pr['p'])}</b><span>{e(pr['w'])} · {e(pr['i'])}</span></p><p class="rf-pb2"><small>{e(pr['bl'])}</small><b>{e(pr['b'])}</b></p>
+<label class="rf-rng rf-prng"><span>New roof laid <output id="rf-pout">0 of 12</output></span><input type="range" id="rf-prange" min="0" max="12" value="0" aria-label="How much of the new roof is laid, from the eaves up"></label>
+<p class="rf-note">Drag across the photo or use the slider. The twelve steps are for the wipe only: they are not courses counted on this roof.</p></figcaption></figure></div></section>
 
 <section class="rf-s rf-close" id="roofing-close" aria-labelledby="rf-cl-h">{bg('services-near.svg', None, 'g')}
 <div class="rf-in"><header class="rf-hd"><p class="rf-kick">One free inspection covers every trade on the house</p><h2 class="rf-h2" id="rf-cl-h">Look at your roof with us, free.</h2>

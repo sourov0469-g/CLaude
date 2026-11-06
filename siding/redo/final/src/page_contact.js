@@ -32,6 +32,7 @@ window.FPContact = (function () {
 
   function wire(root) {
     const pg = root.querySelector('#pg-contact'); if (!pg || pg.dataset.w) return; pg.dataset.w = 1;
+    if (!pg.querySelector('.pc-form')) return;   // a stub build (PAGES_ONLY) has no form
     const pad = pg.querySelector('[data-pad]'), form = pg.querySelector('.pc-form'), done = pg.querySelector('.pc-done'), fail = pg.querySelector('.pc-fail'), send = pg.querySelector('.pc-send');
     form.dataset.endpointSet = String(!!FORM_ENDPOINT);
     // static ink: labels, ticks, the greeting
