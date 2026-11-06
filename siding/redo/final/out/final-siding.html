@@ -1445,7 +1445,7 @@ html{scroll-behavior:smooth}
 .pw-sm{margin:4px 0 0;font:500 14px/1.45 var(--text);color:var(--ink-3)}
 .pw-note{margin:22px 0 0;max-width:70ch;font:500 14px/1.5 var(--text);color:var(--ink-3)}
 .pw-hd{margin-bottom:34px}
-.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pw-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .pw button,.pw input{font-family:inherit}
 .pw :focus-visible{outline:3px solid var(--pw-g);outline-offset:3px;border-radius:8px}
 .pw-btn{min-height:44px;padding:0 18px;border:0;border-radius:99px;background:var(--pw-g);color:#fff;font:700 15px/1 var(--text);cursor:pointer}.pw-btn:focus-visible{outline-color:var(--pw-g)}
@@ -1497,7 +1497,7 @@ html{scroll-behavior:smooth}
 .pw-frames{margin-top:46px}
 .pw-fbar{display:flex;gap:4px;margin-top:14px;height:74px}
 .pw-fs{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:8px 10px;min-width:0;border-radius:12px;background:var(--c);color:#fff;overflow:hidden;transition:transform .2s}
-.pw-fs:nth-child(3),.pw-fs:nth-child(4),.pw-fs:nth-child(5){color:var(--ink)}.pw-fs:hover,.pw-fs:focus-visible{transform:translateY(-4px)}
+.pw-fs:nth-child(n+2){color:var(--ink)}.pw-fs:hover,.pw-fs:focus-visible{transform:translateY(-4px)}
 .pw-fn{font:800 22px/1 var(--display)}.pw-fs em{font:600 12.5px/1.15 var(--text);font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* 3. glass */
 .pw-gg{display:grid;grid-template-columns:240px minmax(0,1fr) 320px;gap:20px;align-items:start}
@@ -1506,7 +1506,7 @@ html{scroll-behavior:smooth}
 .pw-gsvg{display:block;width:100%;height:auto}
 .pw-gctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 16px 14px;background:var(--pw-card);font:700 14px/1 var(--text)}
 .pw-gctl input{flex:1;min-width:140px;min-height:44px;accent-color:#0E3B2C;cursor:pointer}
-.pw-tg{min-height:44px;padding:0 16px;border-radius:99px;border:0;background:#EDF2ED;box-shadow:inset 0 0 0 1px var(--pw-ring);font:700 14px/1 var(--text);color:var(--ink);cursor:pointer}.pw-tg[aria-checked="true"]{background:var(--pw-g);color:#fff}.pw-tg b{color:var(--pw-l)}
+.pw-tg{min-height:44px;padding:0 16px;border-radius:99px;border:0;background:#EDF2ED;box-shadow:inset 0 0 0 1px var(--pw-ring);font:700 14px/1 var(--text);color:var(--ink);cursor:pointer}.pw-tg[aria-checked="true"]{background:var(--pw-g);color:#fff}.pw-tg b{color:#3F5A2E}.pw-tg[aria-checked="true"] b{color:var(--pw-l)}
 .pw-gcard{padding:22px;border-radius:22px;background:var(--pw-card);box-shadow:inset 0 0 0 1px var(--pw-ring)}
 .pw-gh{margin:0;font:800 22px/1.15 var(--display);letter-spacing:-.02em}.pw-gp{margin:12px 0 0;font:600 17px/1.45 var(--text)}.pw-gq{margin:10px 0 0;font:500 15px/1.5 var(--text);color:var(--ink-2)}
 /* 4. order */
@@ -1515,7 +1515,7 @@ html{scroll-behavior:smooth}
 .pw-track{grid-area:track;position:relative;height:96px;margin:0 36px;touch-action:pan-y;user-select:none}
 .pw-rail{position:absolute;left:0;right:0;top:11px;height:8px;border-radius:99px;background:#D5E1D7}.pw-fill{display:block;height:100%;width:0;border-radius:99px;background:var(--pw-g)}
 .pw-nodes{list-style:none;margin:0;padding:0}.pw-nodes li{position:absolute;top:0;transform:translateX(-50%);width:84px}
-.pw-nodes button{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;min-height:44px;padding:0;border:0;background:none;cursor:pointer;color:var(--ink-3);font:700 12.5px/1.2 var(--text);text-align:center}
+.pw-nodes button{display:flex;flex-direction:column;align-items:center;gap:13px;width:100%;min-height:44px;padding:0;border:0;background:none;cursor:pointer;color:var(--ink-3);font:700 12.5px/1.2 var(--text);text-align:center}
 .pw-nodes i{display:grid;place-items:center;width:30px;height:30px;margin-top:-1px;border-radius:50%;background:#F1F5F1;box-shadow:inset 0 0 0 3px #B9C9BD;font:800 14px/1 var(--display);font-style:normal;color:var(--ink-2);transition:background-color .25s,color .25s,box-shadow .25s}
 .pw-nodes button.past i{background:var(--pw-g);color:var(--pw-l);box-shadow:inset 0 0 0 3px var(--pw-g)}.pw-nodes button.on i{background:var(--pw-l);color:var(--pw-g);box-shadow:inset 0 0 0 3px var(--pw-g)}.pw-nodes button.on{color:var(--ink)}
 .pw-mark{position:absolute;top:-7px;width:44px;height:44px;margin-left:-22px;border-radius:50%;background:transparent;cursor:grab;touch-action:pan-y}
@@ -1568,6 +1568,140 @@ html{scroll-behavior:smooth}
 @media (max-width:640px){.pw-sec{padding:64px var(--gut)}.pw-facts{grid-template-columns:1fr 1fr}.pw-chart{padding:16px 12px 64px}.pw-bars{gap:3px;height:340px}.pw-col em{writing-mode:vertical-rl;transform:rotate(180deg);height:40px;font-size:11px}.pw-n{font-size:11px}.pw-crow{grid-template-columns:86px minmax(0,1fr) 30px 76px;gap:6px}
  .pw-srow{grid-template-columns:1fr}.pw-fbar{flex-wrap:wrap;height:auto}.pw-fs{flex:1 1 40%!important;min-height:66px}.pw-nodes li{width:62px}.pw-nodes button{font-size:11px}.pw-track{margin:0 28px}.pw-flag{font-size:11px;padding:4px 7px}.pw-close{padding:26px 20px}.pw-ocard{padding:20px}.pw-oh{font-size:24px}}
 @media (prefers-reduced-motion:reduce){.pw-rv{opacity:1;transform:none;transition:none}.pw-hook::after{animation:none}.pw-l1.in{animation:none}.pw *{transition:none!important}}
+/* PAGE — Roofing (#/roofing). Prefix rf-. Dim sage grounds, kit line-art in two parallax layers per section, drawn SVG stages in frosted cards. */
+#pg-roofing{--rfg:#0E3B2C;--rfl:#B5DB6E;--rfl2:#8CB84A;--rfline:#D5E1D7;--rfk:#4B5A52;background:var(--ground)}
+.rf-s{position:relative;overflow:hidden;padding:92px var(--gut);scroll-margin-top:0}
+.rf-s:nth-of-type(odd){background:linear-gradient(180deg,#EDF2ED,#F1F5F1 40%,#E9F0EA)}
+.rf-s:nth-of-type(even){background:linear-gradient(180deg,#E7EEE8,#EEF3EE 45%,#E4ECE6)}
+.rf-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.rf-bg svg{position:absolute;left:0;width:100%;will-change:transform;transform:translate3d(0,var(--py,0px),0)}
+.rf-far,.rf-near{top:-7%;height:114%}
+.rf-near{--pm:1.7}
+.rf-in{position:relative;z-index:1;max-width:1280px;margin:0 auto}
+.rf-hd{margin-bottom:30px;max-width:800px}
+.rf-kick{margin:0 0 10px;font:800 12.5px/1.2 var(--text);letter-spacing:.12em;text-transform:uppercase;color:#3E5A4A}
+.rf-h1{margin:0;font:800 clamp(38px,5vw,72px)/1 var(--display);letter-spacing:-.03em;color:var(--ink);text-wrap:balance;max-width:15ch}
+.rf-h1 em{font-style:normal;color:var(--rfg);background:linear-gradient(transparent 62%,rgba(181,219,110,.75) 62%,rgba(181,219,110,.75) 92%,transparent 92%);padding:0 .06em}
+.rf-h2{margin:0;font:800 clamp(30px,3.6vw,52px)/1.04 var(--display);letter-spacing:-.028em;color:var(--ink);text-wrap:balance;max-width:20ch}
+.rf-h2s{font-size:clamp(26px,2.8vw,38px)}
+.rf-h3{margin:20px 0 9px;font:800 13px/1.2 var(--text);letter-spacing:.08em;text-transform:uppercase;color:#3E4A44}
+.rf-h3:first-child{margin-top:0}
+.rf-sub,.rf-lead{margin:14px 0 0;max-width:60ch;font:400 18px/1.55 var(--text);color:var(--ink-2)}
+.rf-lead{font-size:20px;max-width:46ch;color:#2D3732}
+.rf-policy{margin:16px 0 0;font:800 17px/1.35 var(--display);color:var(--rfg);padding-left:14px;border-left:4px solid var(--rfl)}
+.rf-midm{display:none}
+.rf-note{margin:10px 0 0;font:500 14px/1.5 var(--text);color:var(--rfk);max-width:62ch}
+.rf-card{background:rgba(246,250,246,.8);border-radius:22px;box-shadow:inset 0 0 0 1px var(--rfline),0 26px 44px -34px rgba(14,59,44,.45);backdrop-filter:blur(2px)}
+.rf-stage{padding:14px;min-width:0}
+.rf-stage svg{display:block;width:100%;height:auto}
+:where(#pg-roofing) a:focus-visible,:where(#pg-roofing) button:focus-visible,:where(#pg-roofing) input:focus-visible,:where(#pg-roofing) [tabindex]:focus-visible{outline:3px solid var(--rfg);outline-offset:3px;border-radius:8px}
+/* segmented radios */
+.rf-seg2,.rf-seg3,.rf-seg4,.rf-chips,.rf-parts{display:flex;flex-wrap:wrap;gap:8px}
+.rf-seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.rf-seg2>button,.rf-seg3>button,.rf-seg4>button,.rf-chip,.rf-dc,.rf-pt,.rf-gb{font:600 15px/1.2 var(--text);color:var(--ink);min-height:48px;padding:8px 14px;border-radius:14px;border:0;cursor:pointer;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px #C4D3C7;text-align:left;transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease,color .2s}
+.rf-seg2>button{flex:1 1 160px}.rf-seg3>button{flex:1 1 150px}
+.rf-seg2>button b,.rf-seg4>button b{display:block;font:800 17px/1.1 var(--display);letter-spacing:-.01em}
+.rf-seg2>button small,.rf-seg4>button small{display:block;margin-top:3px;font:500 13px/1.2 var(--text);color:var(--rfk)}
+.rf-st b{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:rgba(14,59,44,.12);font:800 12px/1 var(--display)}
+.rf-seg2>button:hover,.rf-seg3>button:hover,.rf-seg4>button:hover,.rf-chip:hover,.rf-dc:hover,.rf-pt:hover,.rf-gb:hover{background:#fff;transform:translateY(-1px)}
+[role=radio][aria-checked=true]:is(.rf-seg2>button,.rf-seg3>button,.rf-seg4>button,.rf-chip,.rf-dc,.rf-pt,.rf-gb){background:var(--rfg);color:#fff;box-shadow:0 12px 20px -14px rgba(10,22,17,.8)}
+[role=radio][aria-checked=true] small{color:#CFE6D2!important}
+[role=radio][aria-checked=true]:focus-visible{outline-color:var(--rfg);outline-offset:3px;box-shadow:0 0 0 3px var(--rfl)}
+.rf-read{margin:14px 0 0;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px var(--rfline);font:500 16px/1.5 var(--text);color:#26302B;min-height:3.4em}
+.rf-read b{font-weight:800;color:var(--rfg)}
+.rf-readbig{font-size:17px;min-height:7.6em}
+/* range */
+.rf-rng{display:block}.rf-rng span{display:flex;justify-content:space-between;font:700 15px/1 var(--text);margin-bottom:2px}
+.rf-rng output{font:800 18px/1 var(--display);color:var(--rfg)}
+#pg-roofing input[type=range]{width:100%;height:44px;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer;touch-action:pan-y}
+#pg-roofing input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--rfg) var(--v,100%),#CBD8CE var(--v,100%))}
+#pg-roofing input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:#CBD8CE}#pg-roofing input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:var(--rfg)}
+#pg-roofing input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-11px;border-radius:50%;background:var(--rfl);border:3px solid var(--rfg);box-shadow:0 5px 12px -3px rgba(10,22,17,.6)}
+#pg-roofing input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--rfl);border:3px solid var(--rfg)}
+.rf-open{padding-top:132px}
+.rf-near{--pm:1.7}
+/* opener */
+.rf-og{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:40px;align-items:center}
+.rf-call{display:inline-flex;align-items:center;gap:10px;min-height:48px;font:800 clamp(19px,1.6vw,23px)/1 var(--display);letter-spacing:-.01em;color:var(--rfg);text-decoration:none}.rf-call svg{width:22px;height:22px;flex:none}.rf-call:hover{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.rf-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px}
+.rf-facts{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.rf-facts li{padding:9px 13px;border-radius:99px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px var(--rfline);font:500 14.5px/1.2 var(--text);color:#2D3732}.rf-facts b{font-weight:800;color:var(--ink)}
+.rf-policy{margin:16px 0 0;font:800 17px/1.35 var(--display);color:var(--rfg);padding-left:14px;border-left:4px solid var(--rfl)}
+.rf-h1{margin:0;font:800 clamp(36px,4.6vw,66px)/1.02 var(--display);letter-spacing:-.03em;color:var(--ink);text-wrap:balance;max-width:16ch}
+.rf-h1 em{font-style:normal;color:var(--rfg);background:linear-gradient(transparent 62%,rgba(181,219,110,.75) 62%,rgba(181,219,110,.75) 92%,transparent 92%);padding:0 .06em}
+.rf-lay{padding:14px 14px 18px;min-width:0}.rf-roof{display:block;width:100%;height:auto;filter:drop-shadow(0 22px 26px rgba(14,59,44,.18))}
+.rf-layc{padding:4px 10px 0}.rf-layc .rf-h3{margin:8px 0 9px}
+.rf-seg4>button{min-width:0}
+.rf-rng{display:block;margin-top:12px}.rf-prng{max-width:520px;margin:16px auto 0}
+.rf-ts{opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}.rf-ts.on{opacity:1;transform:none}
+.rf-tp{opacity:0;transform:translateX(-14px);transition:opacity .3s ease,transform .4s cubic-bezier(.2,.8,.2,1)}.rf-tp.on{opacity:1;transform:none}
+.rf-ts.cur .f,.rf-tp.cur .f{stroke:var(--rfl);stroke-width:2.4}
+/* two roofs */
+.rf-rail{padding:24px 26px 18px}.rf-railhd{display:flex;flex-wrap:wrap;gap:16px 36px;align-items:center;justify-content:space-between}
+.rf-railhd .rf-seg2{flex:1 1 380px;max-width:520px}
+.rf-rail-n{margin:0;display:flex;flex-direction:column}.rf-rail-n span{font:800 12px/1 var(--text);letter-spacing:.1em;text-transform:uppercase;color:#3E5A4A}.rf-rail-n b{font:800 clamp(34px,3.6vw,52px)/1 var(--display);letter-spacing:-.03em;color:var(--rfg);margin-top:6px}.rf-rail-n em{font:600 15px/1.3 var(--text);font-style:normal;color:var(--ink-2);margin-top:5px}
+.rf-axis{position:relative;margin:34px 6px 0;touch-action:pan-y}
+.rf-trk{position:relative;height:64px;border-radius:14px;background:repeating-linear-gradient(90deg,rgba(14,59,44,.07) 0 1px,transparent 1px 10%),rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px var(--rfline)}
+.rf-mh,.rf-md{position:absolute;top:50%;transform:translateY(-50%);border-radius:10px;transition:left .8s cubic-bezier(.2,.8,.2,1),width .8s cubic-bezier(.2,.8,.2,1)}
+.rf-mh{height:26px;background:linear-gradient(180deg,#9CBCA5,#7FA48A)}
+.rf-md{height:44px;background:linear-gradient(180deg,#1C5340,#0E3B2C);box-shadow:0 0 0 3px var(--rfl),0 10px 16px -8px rgba(10,22,17,.6)}
+.rf-pin{position:absolute;top:-10px;bottom:-10px;width:0;pointer-events:none;transition:left .15s ease}.rf-pin u{position:absolute;left:-1px;top:0;bottom:0;width:2px;background:var(--rfl2);opacity:.9;border-radius:2px}
+.rf-tick{list-style:none;margin:8px 0 0;padding:0;display:flex;justify-content:space-between;font:700 13px/1 var(--text);color:#4B5A52}
+.rf-tick li{width:0;display:flex;justify-content:center}.rf-tick li span{white-space:nowrap}
+.rf-facts2{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.rf-facts2 li{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px var(--rfline);font:500 14px/1.35 var(--text);color:#26302B}.rf-facts2 b{display:block;font:800 22px/1.1 var(--display);color:var(--rfg);margin-bottom:3px}
+.rf-brands{margin-top:26px;max-width:760px}.rf-bars{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:12px}
+.rf-bars li{display:grid;grid-template-columns:130px 1fr 44px;gap:12px;align-items:center;font:700 15px/1.2 var(--text);color:var(--ink);transition:opacity .3s}
+.rf-bars li.dim{opacity:.4}.rf-bars u{display:block;height:14px;border-radius:99px;background:rgba(14,59,44,.1);overflow:hidden;text-decoration:none}.rf-bars i{display:block;height:100%;width:var(--w);border-radius:99px;background:#5F9669;transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.7,.2,1)}.rf-seen .rf-bars i{transform:none}
+.rf-bars b{font:800 20px/1 var(--display);text-align:right;color:var(--rfg)}
+.rf-photos{margin-top:34px}.rf-phs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.rf-ph{margin:0;border-radius:18px;overflow:hidden;background:rgba(246,250,246,.8);box-shadow:inset 0 0 0 1px var(--rfline),0 22px 36px -30px rgba(14,59,44,.5);transition:transform .3s cubic-bezier(.2,.8,.2,1)}.rf-ph:hover{transform:translateY(-4px)}
+.rf-ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}.rf-ph figcaption{padding:10px 12px 12px}.rf-ph b{display:block;font:800 14.5px/1.2 var(--display);color:var(--ink)}.rf-ph span{display:block;margin-top:3px;font:500 12.5px/1.35 var(--text);color:#4B5A52}
+/* pitch */
+.rf-pg{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.9fr);gap:26px;align-items:start}.rf-ctl{min-width:0}
+.rf-seg6{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.rf-seg6>button{min-height:52px;border-radius:14px;border:0;cursor:pointer;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px #C4D3C7;font:800 18px/1 var(--display);color:var(--ink);transition:background-color .2s,transform .2s}
+.rf-seg6>button:hover{background:#fff;transform:translateY(-1px)}.rf-seg6>button[aria-checked=true]{background:var(--rfg);color:#fff;box-shadow:0 12px 20px -14px rgba(10,22,17,.8)}
+.rf-seg6>button:focus-visible{outline:3px solid var(--rfg);outline-offset:3px}.rf-seg6>button[aria-checked=true]:focus-visible{box-shadow:0 0 0 3px var(--rfl)}
+.rf-wars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.rf-wc{padding:14px 15px;border-radius:16px;background:rgba(246,250,246,.8);box-shadow:inset 0 0 0 1px var(--rfline);transition:opacity .35s,transform .35s,box-shadow .35s,background-color .35s}
+.rf-wc b{display:block;font:800 22px/1.1 var(--display);color:var(--rfg);letter-spacing:-.02em}.rf-wc span{display:block;margin-top:5px;font:400 14px/1.4 var(--text);color:var(--ink-2)}
+.rf-wc.off{opacity:.45}.rf-wc.on{background:#fff;box-shadow:inset 0 0 0 2.5px var(--rfl2),0 18px 26px -18px rgba(14,59,44,.5);transform:translateY(-3px)}
+.rf-wg,.rf-wm{grid-column:span 1}
+/* gaf */
+.rf-gg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.rf-badge{display:flex;align-items:center;gap:16px;margin-top:22px;padding:12px 16px;border-radius:18px;background:rgba(246,250,246,.8);box-shadow:inset 0 0 0 1px var(--rfline)}.rf-badge img{width:96px;height:96px;object-fit:contain;flex:none}.rf-badge span{font:500 15px/1.4 var(--text);color:var(--ink-2)}
+.rf-hund{padding:26px 28px 20px}.rf-dg{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(6px,1vw,12px);max-width:460px;margin:0 auto}
+.rf-dg i{aspect-ratio:1;border-radius:50%;background:#CBD8CE;transform:scale(0);transition:transform .45s cubic-bezier(.2,.9,.3,1.3),background-color .4s;transition-delay:calc(var(--d)*14ms)}
+.rf-seen .rf-dg i{transform:scale(.86)}.rf-seen .rf-dg i.a{background:var(--rfg);transform:scale(1.25);transition-delay:1.9s}.rf-seen .rf-dg i.h{background:linear-gradient(90deg,var(--rfg) 50%,#CBD8CE 50%);transform:scale(1.1);transition-delay:2.1s}
+.rf-hn{margin:18px 0 0;text-align:center;font:600 18px/1.35 var(--text);color:var(--ink-2)}.rf-hn b{font:800 clamp(28px,3vw,40px)/1.1 var(--display);color:var(--rfg);display:block;letter-spacing:-.02em}
+/* storm */
+.rf-stl{padding:22px 26px 24px}.rf-tl{display:block;width:100%;height:auto;touch-action:pan-y;cursor:grab}
+.rf-tl text{font-family:var(--text)}
+.rf-sbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.rf-sb{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border:0;border-radius:14px;cursor:pointer;text-align:left;font:700 14.5px/1.2 var(--text);color:var(--ink);background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px #C4D3C7;transition:background-color .2s,transform .2s}
+.rf-sb i{flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(14,59,44,.12);font:800 13px/1 var(--display);font-style:normal}
+.rf-sb:hover{background:#fff}.rf-sb[aria-checked=true]{background:var(--rfg);color:#fff;transform:translateY(-2px)}.rf-sb[aria-checked=true] i{background:var(--rfl);color:var(--ink)}.rf-sb.done i{background:var(--rfg);color:#fff}.rf-sb:focus-visible{outline:3px solid var(--rfg);outline-offset:3px}
+.rf-stc{margin-top:14px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px var(--rfline);min-height:150px}
+.rf-stk{margin:0;font:800 12px/1 var(--text);letter-spacing:.1em;text-transform:uppercase;color:#3E5A4A}.rf-sth{margin:6px 0 8px!important;font:800 22px/1.15 var(--display)!important;text-transform:none!important;letter-spacing:-.015em!important;color:var(--ink)!important}.rf-stc p{margin:0;font:400 16px/1.55 var(--text);color:var(--ink-2);max-width:78ch}
+/* pair */
+.rf-pf{margin:0;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,.7fr);gap:30px;align-items:center}.rf-pside{display:flex;flex-direction:column;gap:14px}.rf-pplace b{display:block;font:800 24px/1.15 var(--display);color:var(--ink)}.rf-pplace span{display:block;margin-top:4px;font:500 15px/1.4 var(--text);color:var(--ink-2)}.rf-pside .rf-pb2{text-align:left}.rf-pst{position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;background:#C9D6CB;box-shadow:0 30px 48px -30px rgba(14,59,44,.6);touch-action:pan-y;user-select:none;-webkit-user-select:none;--t:100%}
+.rf-im{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.rf-pbf{position:absolute;inset:0;clip-path:inset(var(--t) 0 0 0);-webkit-clip-path:inset(var(--t) 0 0 0)}
+.rf-pst .rf-pbf{clip-path:inset(0 0 var(--b,0%) 0)}
+.rf-edge{position:absolute;left:0;right:0;height:14px;margin-top:-7px;top:var(--e,100%);background:repeating-linear-gradient(90deg,rgba(255,255,255,.95) 0 22px,rgba(181,219,110,.95) 22px 28px);border-radius:3px;box-shadow:0 0 12px rgba(0,0,0,.35);opacity:0;transition:opacity .2s}.rf-pst.live .rf-edge{opacity:1}
+.rf-lb{position:absolute;top:14px;padding:6px 12px;border-radius:99px;font:800 12.5px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;background:rgba(10,22,17,.7);color:#fff;pointer-events:none}.rf-lbb{left:14px}.rf-lba{right:14px}
+.rf-pcap{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;margin-top:14px}.rf-pcap p{margin:0}.rf-pcap b{display:block;font:800 22px/1.15 var(--display);color:var(--ink)}.rf-pcap span{display:block;font:500 15px/1.4 var(--text);color:var(--ink-2);margin-top:2px}
+.rf-pb2{text-align:right}.rf-pb2 small{display:block;font:700 12px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;color:#4B5A52}.rf-pb2 b{margin-top:4px;font:800 30px/1 var(--display)!important;color:var(--rfg)!important}
+/* close */
+.rf-end{padding:34px 36px;border-radius:26px;background:linear-gradient(135deg,#0E3B2C,#14513D);color:#fff;box-shadow:0 30px 50px -30px rgba(10,22,17,.8)}.rf-endp{margin:0;font:800 clamp(19px,2.2vw,27px)/1.3 var(--display);padding-left:14px;border-left:4px solid var(--rfl);max-width:34ch}.rf-end .rf-call{color:#fff}.rf-hrs{margin:18px 0 0;font:500 14.5px/1.4 var(--text);color:#D7E8DA}
+@media (max-width:1100px){.rf-pf{grid-template-columns:minmax(0,1fr)}.rf-og,.rf-pg,.rf-gg{grid-template-columns:minmax(0,1fr)}.rf-phs{grid-template-columns:repeat(2,1fr)}.rf-facts2{grid-template-columns:repeat(2,1fr)}.rf-sbs{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){.rf-s{padding:68px var(--gut)}.rf-open{padding-top:104px}.rf-seg4{grid-template-columns:1fr 1fr}.rf-seg6{grid-template-columns:repeat(3,1fr)}.rf-wars{grid-template-columns:1fr}.rf-bars li{grid-template-columns:100px 1fr 36px}.rf-rail{padding:18px 14px 14px}.rf-end{padding:24px 20px}.rf-stl{padding:16px 14px}.rf-tl text{font-size:21px!important}.rf-roof text{font-size:15px}.rf-psvg text{font-size:17px!important}.rf-hund{padding:20px 16px 16px}.rf-tick{font-size:11px}}
+@media (prefers-reduced-motion:reduce){.rf-ts,.rf-tp,.rf-mh,.rf-md,.rf-bars i,.rf-dg i,.rf-wc,.rf-pin{transition:none!important}.rf-bars i{transform:none}.rf-dg i{transform:scale(.86)}.rf-dg i.a{background:var(--rfg);transform:scale(1.25)}.rf-dg i.h{background:linear-gradient(90deg,var(--rfg) 50%,#CBD8CE 50%);transform:scale(1.1)}}
+
+.rf-axr{margin:14px 0 0;min-height:2.6em;font:700 16px/1.4 var(--text);color:var(--rfg)}
+.rf-pside .rf-prng{margin:0;max-width:none;width:100%}.rf-pside .rf-rng span{gap:12px}
+@media (max-width:720px){.rf-nd text:nth-of-type(n+2){display:none}.rf-tl g[font-size="12.5"]{display:none}.rf-tl text{font-size:22px!important}.rf-pplace b{font-size:21px}}
 /* OUR WORK PAGE (#/our-work). Prefix po-. Dim near-white grounds, deep green #0E3B2C, lime #B5DB6E; the kit's line art behind each section on two parallax layers. No geographic drawing anywhere. */
 .po{--po-card:rgba(245,249,245,.84);--po-ring:#D5E1D7;--po-g:#0E3B2C;--po-l:#B5DB6E;--po-ry:80px;color:var(--ink)}
 .po *{box-sizing:border-box}
@@ -1654,7 +1788,7 @@ html{scroll-behavior:smooth}
 .po-card:hover{transform:translateY(-5px);box-shadow:0 30px 40px -24px rgba(10,22,17,.6)}.po-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}.po-card:hover img{transform:scale(1.04)}
 .po-bdg{position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:99px;background:rgba(181,219,110,.95);color:var(--po-g);font:800 11px/1 var(--text);letter-spacing:.07em;text-transform:uppercase}
 .po-cm{position:absolute;left:0;right:0;bottom:0;padding:34px 14px 12px;text-align:left;background:linear-gradient(180deg,transparent,rgba(10,22,17,.82));color:#fff}.po-cm b{display:block;font:800 15px/1.2 var(--display)}.po-cm em{display:block;margin-top:3px;font:500 12.5px/1.3 var(--text);font-style:normal;color:#E4EAE5}
-html.po-lock{overflow:hidden}
+html.po-noscroll{overflow:hidden}
 .po-dlg{width:min(980px,94vw);max-height:94vh;margin:auto;padding:0;border:0;border-radius:26px;background:#F1F5F1;color:var(--ink);overflow:auto;box-shadow:0 50px 100px -30px rgba(0,0,0,.7)}.po-dlg::backdrop{background:rgba(10,22,17,.78)}
 .po-dbox{padding:18px 20px 20px}.po-dhd{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}.po-dhd h3{margin:0;font:800 22px/1.15 var(--display);letter-spacing:-.02em}.po-dhd p{margin:4px 0 0;font:500 15px/1.4 var(--text);color:var(--ink-3)}
 .po-dx{flex:none;width:48px;height:48px;border:0;border-radius:50%;background:var(--po-g);color:#fff;font:700 28px/1 var(--text);cursor:pointer}.po-dx:focus-visible{outline-color:var(--po-g)}
@@ -3692,11 +3826,12 @@ window.FPWindows = (function () {
     const step = (now) => { if (dead) return; const t = clamp((now - t0) / ms, 0, 1); o[k] = lerp(from, to, ease(t)); fn(); if (t < 1) id = requestAnimationFrame(step); else { o['_c' + k] = null; done && done(); } };
     id = requestAnimationFrame(step); o['_c' + k] = () => { dead = true; cancelAnimationFrame(id); o['_c' + k] = null; }; return o['_c' + k];
   }
-  function drag(node, onMove, onStart, onEnd) {        // horizontal/any drag with pointer capture; vertical scroll is left to the browser (touch-action: pan-y on the node)
-    let on = false;
-    node.addEventListener('pointerdown', (e) => { if (e.button > 0 || e.target.closest('input,button,a')) return; on = true; try { node.setPointerCapture(e.pointerId); } catch (_) {} onStart && onStart(e); onMove(e); });
-    node.addEventListener('pointermove', (e) => { if (on) onMove(e); });
-    const up = (e) => { if (!on) return; on = false; onEnd && onEnd(e); };
+  function drag(node, onMove, onStart, onEnd, lazy) {   // drag with pointer capture; vertical scroll is left to the browser (touch-action: pan-y on the node). lazy: a press on a button only becomes a drag after 6 px, so a plain click still reaches the button
+    let on = false, pend = null;
+    const begin = (e) => { on = true; try { node.setPointerCapture(e.pointerId); } catch (_) {} onStart && onStart(e); };
+    node.addEventListener('pointerdown', (e) => { if (e.button > 0) return; const b = e.target.closest('input,button,a'); if (b && !(lazy && b.tagName === 'BUTTON')) return; if (b) { pend = { x: e.clientX, y: e.clientY }; return; } begin(e); onMove(e); });
+    node.addEventListener('pointermove', (e) => { if (pend && Math.abs(e.clientX - pend.x) > 6) { pend = null; begin(e); node._moved = true; } if (on) onMove(e); });
+    const up = (e) => { pend = null; if (!on) return; on = false; onEnd && onEnd(e); if (node._moved) setTimeout(() => { node._moved = false; }, 60); };
     node.addEventListener('pointerup', up); node.addEventListener('pointercancel', up);
   }
   function radios(box, items, label, pick, start) {    // a radiogroup of buttons, roving tabindex, arrow keys
@@ -3792,7 +3927,7 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
       swb.innerHTML = ''; const L = X.line; if (!L.cols.length || !L.cols[0][1]) { swb.hidden = !L.colnote; swb.innerHTML = L.colnote ? `<p class="pw-sm">${esc(L.colnote)}</p>` : ''; return; } swb.hidden = false;
       const lab = document.createElement('p'); lab.className = 'pw-sm'; lab.textContent = 'Published frame colors for ' + (L.k === 'nte' ? 'the Executive' : L.name) + ':'; swb.append(lab); const row = document.createElement('div'); row.className = 'pw-swr'; row.setAttribute('role', 'radiogroup'); row.setAttribute('aria-label', 'Frame color'); swb.append(row);
       const cn = document.createElement('p'); cn.className = 'pw-cn'; cn.textContent = L.cols[0][0];
-      radios(row, L.cols, (c) => `<i style="background:${c[1]}"></i><span class="vh">${esc(c[0])}</span>`, (c, i) => { X.col = c[1]; row.querySelectorAll('button').forEach((b, j) => { b.title = L.cols[j][0]; }); if (layers.finish) { const f = layers.finish.querySelector('path'); f.setAttribute('fill', c[1]); } cn.textContent = c[0]; }, 0);
+      radios(row, L.cols, (c) => `<i style="background:${c[1]}"></i><span class="pw-vh">${esc(c[0])}</span>`, (c, i) => { X.col = c[1]; row.querySelectorAll('button').forEach((b, j) => { b.title = L.cols[j][0]; }); if (layers.finish) { const f = layers.finish.querySelector('path'); f.setAttribute('fill', c[1]); } cn.textContent = c[0]; }, 0);
       swb.append(cn);
     }
     const lineBox = $('.pw-lines');
@@ -3842,7 +3977,7 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
     const steps = D.steps, svg = $('.pw-osvg'), mark = $('.pw-mark'), track = $('.pw-track'), nodes = $('.pw-nodes'), fill = $('.pw-fill'), card = { n: $('.pw-on'), h: $('.pw-oh'), p: $('.pw-op') };
     const S = { t: 0 }; let last = -1;
     nodes.innerHTML = steps.map((s, i) => `<li style="left:${i * 25}%"><button type="button" aria-label="Step ${i + 1}: ${esc(s[0])}"><i>${i + 1}</i><span>${esc(s[0])}</span></button></li>`).join('');
-    $$('button', nodes).forEach((b, i) => b.addEventListener('click', () => go(i)));
+    $$('button', nodes).forEach((b, i) => b.addEventListener('click', () => { if (track._moved) return; go(i); }));
     const unit = (x, y, w, h, k) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="#F6F8F4" stroke="#0E3B2C" stroke-width="2"/><rect x="${x + 10}" y="${y + 10}" width="${w - 20}" height="${h / 2 - 12}" fill="url(#pwOg)" stroke="#0E3B2C" stroke-opacity=".6"/><rect x="${x + 10}" y="${y + h / 2 + 2}" width="${w - 20}" height="${h / 2 - 12}" fill="url(#pwOg)" stroke="#0E3B2C" stroke-opacity=".6"/>`;
     svg.innerHTML = `<title id="pw-ot">The job, step by step</title><defs><linearGradient id="pwOg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCEBE6"/><stop offset="1" stop-color="#A9C7C0"/></linearGradient></defs>
 <rect width="640" height="400" fill="#DCE9F0"/><rect y="330" width="640" height="70" fill="#C9D8C4"/><g class="pw-sA">${wall(0, 0, 0, 640, 330, 24)}
@@ -3877,7 +4012,7 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
       if (k !== last) { last = k; card.n.textContent = 'Step ' + (k + 1) + ' of 5'; card.h.textContent = steps[k][0]; card.p.textContent = steps[k][1]; $$('button', nodes).forEach((b, i) => { b.classList.toggle('on', i === k); b.classList.toggle('past', i < k); }); }
     }
     function go(i) { tween(S, 't', clamp(i, 0, 4), 650, render); }
-    drag(track, (e) => { const r = track.getBoundingClientRect(); S.t = clamp((e.clientX - r.left) / r.width * 4, 0, 4); render(); }, () => { if (S._ct) S._ct(); }, () => go(Math.round(S.t)));
+    drag(track, (e) => { const r = track.getBoundingClientRect(); S.t = clamp((e.clientX - r.left) / r.width * 4, 0, 4); render(); }, () => { if (S._ct) S._ct(); }, () => go(Math.round(S.t)), true);
     mark.addEventListener('keydown', (e) => { const k = e.key; let n = null; const c = Math.round(S.t); if (k === 'ArrowRight' || k === 'ArrowUp') n = c + 1; else if (k === 'ArrowLeft' || k === 'ArrowDown') n = c - 1; else if (k === 'Home') n = 0; else if (k === 'End') n = 4; if (n !== null) { e.preventDefault(); go(clamp(n, 0, 4)); } });
     drag($('.pw-scene'), (e) => { const r = svg.getBoundingClientRect(); S.t = clamp(S.t0 + (e.clientX - S.x0) / r.width * -4, 0, 4); render(); }, (e) => { S.x0 = e.clientX; S.t0 = S.t; if (S._ct) S._ct(); }, () => go(Math.round(S.t)));
     render();
@@ -3912,8 +4047,8 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
     const P = D.pairs, st = $('.pw-wst'), line = $('.pw-wline'), cap = $('.pw-wcap'), pis = $$('.pw-pi', st); const S = { pos: 50, i: 0 };
     function setPos(p) { S.pos = clamp(p, 0, 100); pis.forEach((pi) => { pi.lastElementChild.style.clipPath = `inset(0 0 0 ${S.pos}%)`; }); line.style.left = S.pos + '%'; line.setAttribute('aria-valuenow', Math.round(S.pos)); $('.pw-wb').style.opacity = S.pos > 14 ? 1 : 0; $('.pw-wa').style.opacity = S.pos < 86 ? 1 : 0; }
     radios($('.pw-wtabs'), P, (p) => `<b>${esc(p.place.split(',')[0])}</b><span>${esc(p.when)}</span>`, (p, i, user) => { S.i = i; pis.forEach((pi, j) => { pi.hidden = j !== i; }); cap.innerHTML = `<b>${esc(p.place)}</b> · ${esc(p.when)} · Installed: ${esc(p.inst)} · ${esc(p.bl)}: <b>${esc(p.band)}</b>`; if (user) { setPos(50); } }, 0);
-    drag(st, (e) => { const r = st.getBoundingClientRect(); setPos((e.clientX - r.left) / r.width * 100); }, () => { if (S._ct) S._ct(); });
-    line.addEventListener('keydown', (e) => { const k = e.key, d = { ArrowLeft: -5, ArrowRight: 5, PageUp: 20, PageDown: -20 }[k]; if (k === 'Home') { e.preventDefault(); setPos(0); } else if (k === 'End') { e.preventDefault(); setPos(100); } else if (d) { e.preventDefault(); setPos(S.pos + d); } });
+    drag(st, (e) => { const r = st.getBoundingClientRect(); setPos((e.clientX - r.left) / r.width * 100); }, () => { if (S._cpos) S._cpos(); });
+    line.addEventListener('keydown', (e) => { if (S._cpos) S._cpos(); const k = e.key, d = { ArrowLeft: -5, ArrowRight: 5, PageUp: 20, PageDown: -20 }[k]; if (k === 'Home') { e.preventDefault(); setPos(0); } else if (k === 'End') { e.preventDefault(); setPos(100); } else if (d) { e.preventDefault(); setPos(S.pos + d); } });
     setPos(50); let ran = false; onShow.push(() => { if (ran || RM()) return; ran = true; });
     const io = 'IntersectionObserver' in window ? new IntersectionObserver((en) => { en.forEach((x) => { if (x.isIntersecting && !S.shown && shown) { S.shown = true; if (!RM()) { S.pos = 100; setPos(100); tween(S, 'pos', 50, 1500, () => setPos(S.pos)); } io.disconnect(); } }); }, { threshold: .5 }) : null; io && io.observe(st);
   }
@@ -3941,6 +4076,139 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
   }
   return { wire };
 })();
+/* PAGE — Roofing (#/roofing). Drawn in the browser from geometry: a roof laid course by course or panel by panel (four kinds), a price rail you can read like a ruler, a pitch you choose with the
+   published warranty rule, GAF's "fewer than 2%" as a hundred dots, a storm claim you walk along three lanes, and a new roof laid from the eaves up over a real before/after.
+   Only published numbers. Reduced motion: every state snaps, nothing runs on its own. */
+window.FPRoofing = (function () {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let P; const $ = (s, r) => (r || P).querySelector(s), $$ = (s, r) => [...(r || P).querySelectorAll(s)];
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), f1 = (v) => Math.round(v * 10) / 10;
+  const hash = (n) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  const H = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)), X = (r) => '#' + r.map((v) => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0')).join('');
+  const mix = (a, b, t) => { const A = H(a), B = H(b); return X(A.map((v, i) => v + (B[i] - v) * t)); };
+  function radio(g, cb) {
+    const bs = [...g.querySelectorAll('[role=radio]')];
+    const set = (b, focus, silent) => { bs.forEach((x) => { const on = x === b; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; }); if (focus) b.focus(); if (!silent && cb) cb(b); };
+    bs.forEach((b) => { b.addEventListener('click', () => set(b)); b.addEventListener('keydown', (e) => { let d = 0; if (e.key === 'ArrowRight' || e.key === 'ArrowDown') d = 1; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') d = -1; else return; e.preventDefault(); set(bs[(bs.indexOf(b) + d + bs.length) % bs.length], true); }); });
+    return { bs, set: (i, silent) => set(bs[i], false, silent) };
+  }
+  function tween(from, to, ms, fn, done) { if (RM) { fn(to); done && done(); return; } const t0 = performance.now(); const step = (t) => { const u = clamp((t - t0) / ms), e = 1 - Math.pow(1 - u, 3); fn(from + (to - from) * e); if (u < 1) requestAnimationFrame(step); else done && done(); }; requestAnimationFrame(step); }
+  const poly = (a, fill, ex = '') => `<polygon points="${a.map((p) => f1(p[0]) + ',' + f1(p[1])).join(' ')}" fill="${fill}" ${ex}/>`;
+
+  /* ---------- opener: lay a roof ---------- */
+  const KIND = {
+    shingle: ['Shingle roofing: laminate and designer shingles go on course by course, from the eaves up. Installing a new shingle roof usually takes 1 to 3 days, depending on the roof size, complexity and weather. Many styles and colors are available.', 'courses'],
+    seam: ['Standing seam: sleek, vertical panels with excellent durability.', 'panels'],
+    screw: ['Screw-down panels: cost-effective, with a more visible fastener system.', 'panels'],
+    mshingle: ['Metal shingles: they mimic traditional roofing styles with the benefits of metal.', 'courses'],
+  };
+  function roof() {
+    const s = $('#rf-roof'), EY = 300, RY = 90, N = 12, CH = (EY - RY) / N, xl = (y) => 40 + (EY - y) / (EY - RY) * 90, xr = (y) => 520 - (EY - y) / (EY - RY) * 90; let kind = 'shingle';
+    const deck = () => { let d = poly([[40, EY], [520, EY], [430, RY], [130, RY]], '#D9C9A5', 'stroke="#8C7648" stroke-width="1"'); for (let i = 1; i < 5; i++) d += `<path d="M${f1(xl(EY - i * 42))} ${EY - i * 42}H${f1(xr(EY - i * 42))}" stroke="#8C7648" stroke-width="1" opacity=".5"/>`; return d; };
+    const courses = (metal) => { let g = ''; for (let i = 0; i < N; i++) { const yb = EY - i * CH, yt = yb - CH, tone = metal ? mix('#8FA19B', hash(i) > .5 ? '#ffffff' : '#000000', .05 + hash(i + 4) * .07) : mix('#58625D', hash(i) > .5 ? '#ffffff' : '#000000', .04 + hash(i + 4) * .08);
+        let tabs = ''; const w = metal ? 44 : 34; for (let k = -1; k < 20; k++) { const x = 40 + k * w + (i % 2) * w / 2 + 12; if (x > xl(yt) + 4 && x < xr(yt) - 4) tabs += `<path d="M${f1(x)} ${f1(yt + 3)}V${f1(yb - 2)}" stroke="${metal ? '#42524D' : '#1F2623'}" stroke-width="${metal ? 1.6 : 1.3}" opacity=".6"/>`; }
+        g += `<g class="rf-ts" data-i="${i}">${poly([[xl(yb), yb], [xr(yb), yb], [xr(yt), yt], [xl(yt), yt]], tone, 'class="f" stroke="none"')}${tabs}<path d="M${f1(xl(yb))} ${f1(yb - .8)}H${f1(xr(yb))}" stroke="#0A120E" stroke-width="2.4" opacity=".4"/><path d="M${f1(xl(yt))} ${f1(yt + .8)}H${f1(xr(yt))}" stroke="#fff" stroke-width="1" opacity="${metal ? .45 : .16}"/></g>`; } return g; };
+    const panels = (screw) => { let g = ''; for (let i = 0; i < N; i++) { const b0 = 40 + i * 40, b1 = b0 + 40, t0 = 130 + i * 25, t1 = t0 + 25, tone = mix(screw ? '#8A9A95' : '#A7B3AE', hash(i + 2) > .5 ? '#ffffff' : '#000000', .03 + hash(i) * .05); let d = '';
+        if (screw) { for (const fr of [.3, .65]) d += `<path d="M${f1(b0 + 40 * fr)} ${EY}L${f1(t0 + 25 * fr)} ${RY}" stroke="#5E6E69" stroke-width="2.4" opacity=".55"/>`; for (let j = 1; j < 7; j++) { const y = EY - j * 30, u = (EY - y) / (EY - RY); for (const fr of [.15, .5, .85]) d += `<circle cx="${f1(b0 + 40 * fr + (t0 - b0 + (25 - 40) * fr) * u)}" cy="${y}" r="2.1" fill="#26302B"/>`; } }
+        else d = `<path d="M${b0 + 20} ${EY}L${t0 + 12.5} ${RY}" stroke="#fff" stroke-width="1.2" opacity=".28"/>`;
+        g += `<g class="rf-tp" data-i="${i}">${poly([[b0, EY], [b1, EY], [t1, RY], [t0, RY]], tone, 'class="f" stroke="none"')}${d}<path d="M${b1} ${EY}L${t1} ${RY}" stroke="${screw ? '#2E3B36' : '#E9EFEC'}" stroke-width="${screw ? 1.4 : 3.2}" opacity="${screw ? .6 : .85}"/><path d="M${b1 + 1.6} ${EY}L${t1 + 1.6} ${RY}" stroke="#0A120E" stroke-width="1.2" opacity=".28"/></g>`; } return g; };
+    const draw = () => {
+      let b = `<defs><linearGradient id="rfSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFE3F1"/><stop offset="1" stop-color="#EEF5F4"/></linearGradient><pattern id="rfLap" width="20" height="14" patternUnits="userSpaceOnUse"><path d="M0 13h20" stroke="#0E2A20" stroke-width="2" opacity=".35"/></pattern></defs><rect width="560" height="400" rx="22" fill="url(#rfSky)"/><ellipse cx="280" cy="396" rx="250" ry="12" fill="#0E3B2C" opacity=".14"/>`;
+      b += `<rect x="70" y="300" width="420" height="88" fill="#C9C3B2"/><rect x="70" y="300" width="420" height="88" fill="url(#rfLap)" opacity=".5"/><rect x="110" y="322" width="84" height="66" fill="#2B3A33"/><rect x="318" y="322" width="102" height="50" fill="#F4F6F2" stroke="#B9C3BA"/><rect x="326" y="330" width="86" height="34" fill="#CFE3F1"/><path d="M369 330v34M326 347h86" stroke="#F4F6F2" stroke-width="4"/>`;
+      b += deck();
+      b += kind === 'shingle' ? courses(false) : kind === 'mshingle' ? courses(true) : panels(kind === 'screw');
+      b += `<g class="rf-ts" data-i="12">${poly([[126, RY - 6], [434, RY - 6], [430, RY + 5], [130, RY + 5]], kind === 'shingle' ? '#2C3330' : '#5E6E69')}</g>`;
+      b += `<rect x="372" y="44" width="40" height="86" fill="#B4684B" stroke="#7C432E"/><rect x="368" y="38" width="48" height="9" fill="#8E8A80"/>`;
+      b += `<rect x="30" y="296" width="500" height="10" rx="3" fill="#F1F3EE"/><rect x="30" y="304" width="500" height="3" fill="#0E2A20" opacity=".16"/>`;
+      s.innerHTML = b; apply(+$('#rf-lay').value);
+    };
+    const apply = (n) => { n = Math.round(n); const cls = kind === 'seam' || kind === 'screw' ? '.rf-tp' : '.rf-ts'; $$(cls, s).forEach((g) => { const i = +g.dataset.i; if (i === 12) return; g.classList.toggle('on', i < n); g.classList.toggle('cur', i === n - 1); }); const cap = $('.rf-ts[data-i="12"]', s); if (cap) cap.classList.toggle('on', n >= 12); const rg = $('#rf-lay'); rg.value = n; rg.style.setProperty('--v', n / 12 * 100 + '%'); $('#rf-lout').textContent = n + ' of 12 ' + KIND[kind][1]; rg.setAttribute('aria-valuetext', n + ' of 12 ' + KIND[kind][1] + ' laid'); };
+    $('#rf-lay').addEventListener('input', (e) => apply(+e.target.value));
+    radio($('.rf-seg4'), (b) => { kind = b.dataset.k; $('#rf-lread').textContent = KIND[kind][0]; $('#rf-lay').value = 12; draw(); apply(12); });
+    draw(); $('#rf-lread').textContent = KIND.shingle[0];
+    let ran = false; const io = new IntersectionObserver((en) => { if (en[0].isIntersecting && !ran) { ran = true; if (!RM) { apply(0); setTimeout(() => tween(0, 12, 2400, apply), 350); } io.disconnect(); } }, { threshold: .35 }); io.observe(s);
+  }
+
+  /* ---------- two roofs: the price rail ---------- */
+  const RAIL = {
+    shingle: { mh: [5, 20], md: [10, 15], med: '$10k–$15k', half: 'Middle half of priced jobs: $5k–$20k', n: 204, name: 'shingle', f: [['210', 'documented shingle roofing jobs'], ['204', 'priced shingle roofing jobs, median band $10k–$15k'], ['$5k–$20k', 'where the middle half of those 204 priced jobs landed'], ['1 to 3 days', 'to install a new shingle roof, usually (our FAQ)']] },
+    metal: { mh: [15, 40], md: [20, 25], med: '$20k–$25k', half: 'Middle half of priced jobs: $15k–$40k', n: 29, name: 'metal', f: [['31', 'documented metal roofing jobs'], ['29', 'priced metal roofing jobs, median band $20k–$25k'], ['$15k–$40k', 'where the middle half of those 29 priced jobs landed'], ['Lifetime', 'Austin Pro workmanship warranty on labor; manufacturer’s warranty typically 30 to 50 years']] },
+  };
+  function two() {
+    let cur = 'shingle'; const mh = $('#rf-mh'), md = $('#rf-md'), ax = $('#rf-axis'), pin = $('#rf-pin');
+    const ticks = $$('.rf-tick li'); const show = (k) => { cur = k; const r = RAIL[k]; mh.style.left = r.mh[0] * 2 + '%'; mh.style.width = (r.mh[1] - r.mh[0]) * 2 + '%'; md.style.left = r.md[0] * 2 + '%'; md.style.width = (r.md[1] - r.md[0]) * 2 + '%';
+      $('#rf-med').textContent = r.med; $('#rf-midh').textContent = r.half; $('#rf-rf').innerHTML = r.f.map(([b, t]) => `<li><b>${b}</b> ${t}</li>`).join(''); $$('.rf-bars li').forEach((l) => l.classList.toggle('dim', l.dataset.k !== k)); $$('.rf-phs').forEach((p) => { p.hidden = p.dataset.r !== k; }); $('#rf-axr') && ($('#rf-axr').textContent = ''); };
+    radio($('.rf-rk').parentElement, (b) => show(b.dataset.r)); show('shingle');
+    const read = (e) => { const r = ax.getBoundingClientRect(), v = clamp((e.clientX - r.left) / r.width, 0, 1) * 50, d = Math.round(v), R = RAIL[cur]; pin.style.left = v * 2 + '%'; const o = $('#rf-axr'); if (!o) return; const lab = '$' + d + 'k'; o.textContent = lab + ': ' + (d >= R.md[0] && d <= R.md[1] ? 'inside the median band' : d >= R.mh[0] && d <= R.mh[1] ? 'inside the middle half, outside the median band' : 'outside the middle half') + ' of our priced ' + R.name + ' roofing jobs (' + R.n + ').'; };
+    let down = false; ax.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' || down) read(e); }); ax.addEventListener('pointerdown', (e) => { down = true; read(e); }); addEventListener('pointerup', () => { down = false; });
+  }
+
+  /* ---------- pitch ---------- */
+  function pitch() {
+    const s = $('#rf-psvg'); let p = 6, cur = 6;
+    const draw = (rise) => {
+      const HS = 180, CX = 260, WT = 214, WB = 300, apex = WT - HS * rise / 12, lx = 60, rx = 460, ey = WT + 20 * rise / 12;
+      let b = `<rect width="520" height="330" rx="20" fill="#E9F0F1"/><ellipse cx="260" cy="318" rx="220" ry="9" fill="#0E3B2C" opacity=".14"/>`;
+      b += `<rect x="80" y="${WT}" width="360" height="${WB - WT + 14}" fill="#C9C3B2"/><rect x="80" y="${WT}" width="360" height="${WB - WT + 14}" fill="url(#rfLap2)" opacity=".5"/><rect x="118" y="244" width="62" height="70" fill="#2B3A33"/><rect x="300" y="238" width="86" height="44" fill="#F4F6F2" stroke="#B9C3BA"/><rect x="307" y="245" width="72" height="30" fill="#CFE3F1"/>`;
+      b += poly([[lx, ey], [CX, apex - 2], [rx, ey], [rx, ey + 12], [CX, apex + 10], [lx, ey + 12]], '#2C3330');
+      b += `<g>${poly([[80, WT], [CX, apex + 10], [440, WT]], '#58625D', 'opacity=".001"')}</g>`;
+      // shingle courses on both slopes
+      let cs = ''; const n = 7; for (let i = 0; i < n; i++) { const u = i / n, v = (i + 1) / n; const y0 = ey + 12 - (ey + 12 - (apex + 10)) * u, y1 = ey + 12 - (ey + 12 - (apex + 10)) * v; const xa0 = lx + (CX - lx) * u, xa1 = lx + (CX - lx) * v, xb0 = rx - (rx - CX) * u, xb1 = rx - (rx - CX) * v; cs += poly([[xa0, y0], [xb0, y0], [xb1, y1], [xa1, y1]], 'none', `stroke="#0A120E" stroke-opacity=".28" stroke-width="1.6"`); }
+      b += `<g opacity=".9">${poly([[lx, ey + 12], [CX, apex + 10], [rx, ey + 12], [rx, ey], [CX, apex - 2], [lx, ey]], '#58625D')}${cs}</g><path d="M${lx} ${ey}L${CX} ${apex - 2}L${rx} ${ey}" fill="none" stroke="#1F2623" stroke-width="3" stroke-linejoin="round"/>`;
+      // rise over run triangle
+      const tx = 318, ty = 118, rl = 100, ri = rl * rise / 12; b += `<g><path d="M${tx} ${ty + 0}h${rl}v${-ri}z" fill="rgba(181,219,110,.55)" stroke="#0E3B2C" stroke-width="2.2" stroke-linejoin="round" transform="translate(0 0)"/><path d="M${tx + rl - 10} ${ty}v-10h10" fill="none" stroke="#0E3B2C" stroke-width="1.6"/><text x="${tx + rl / 2}" y="${ty + 22}" text-anchor="middle" font-size="14" font-weight="800" fill="#16191D">12 in run</text><text x="${tx + rl + 8}" y="${ty - ri / 2 + 5}" font-size="14" font-weight="800" fill="#16191D">${Math.round(rise)} in rise</text></g>`;
+      b += `<text x="30" y="40" font-size="15" font-weight="800" fill="#16191D">Pitch ${Math.round(rise * 10) / 10 === Math.round(rise) ? Math.round(rise) : f1(rise)}/12</text>`;
+      if (rise <= 3.05) b += `<g><rect x="30" y="52" width="132" height="26" rx="13" fill="#B5DB6E"/><text x="96" y="70" text-anchor="middle" font-size="13" font-weight="800" fill="#16191D">3/12 or less</text></g>`;
+      s.innerHTML = `<defs><pattern id="rfLap2" width="20" height="14" patternUnits="userSpaceOnUse"><path d="M0 13h20" stroke="#0E2A20" stroke-width="2" opacity=".35"/></pattern></defs>` + b;
+    };
+    const TXT = (n) => n <= 3 ? `${n}/12 is a 3/12 pitch or less: the published labor warranty on a shingle roof is 2 years.` : `${n}/12 is above 3/12: the published labor warranty on laminate or designer shingles is 5 years.` + (n === 8 ? ' A published job at this pitch: a steep 8/12 roof on a Fairview home in Round Rock, GAF Timberline HDZ shingles, finished in a single day with the Golden Pledge Warranty in place.' : '');
+    const set = (n) => { p = n; $('#rf-pread').textContent = TXT(n) + ' Ask at your free inspection which applies to your roof.'; $('#rf-w2').className = 'rf-wc ' + (n <= 3 ? 'on' : 'off'); $('#rf-w5').className = 'rf-wc ' + (n <= 3 ? 'off' : 'on'); tween(cur, n, 500, draw); cur = n; };
+    radio($('.rf-seg6'), (b) => set(+b.dataset.p)); draw(6); set(6);
+  }
+
+  /* ---------- a hundred dots ---------- */
+  function gaf() { const g = $('#rf-dg'); g.innerHTML = Array.from({ length: 100 }, (_, i) => `<i class="${i === 44 ? 'a' : i === 45 ? 'h' : ''}" style="--d:${(i * 7) % 100}"></i>`).join(''); }
+
+  /* ---------- the storm claim, in three lanes ---------- */
+  function storm() {
+    const s = $('#rf-tl'), D = JSON.parse($('.rf-stl').dataset.steps), LY = [62, 150, 238], LANE = [0, 1, 1, 1, 1], XS = [210, 345, 480, 615, 740]; let cur = 0;
+    let b = `<defs><marker id="rfArr" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M1 1L7 4.5L1 8" fill="none" stroke="#3E5A4A" stroke-width="1.6"/></marker></defs>`;
+    ['You', 'Austin Pro', 'Your insurer'].forEach((t, i) => { b += `<rect x="8" y="${LY[i] - 36}" width="784" height="72" rx="16" fill="${i === 1 ? 'rgba(181,219,110,.22)' : 'rgba(255,255,255,.5)'}" stroke="#D5E1D7"/><text x="22" y="${LY[i] + 5}" font-size="15" font-weight="800" fill="#16191D">${t}</text>`; });
+    const pts = XS.map((x, i) => [x, LY[LANE[i]]]); let path = `M${pts[0][0]} ${pts[0][1]}`; for (let i = 1; i < pts.length; i++) { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], mx = (x0 + x1) / 2; path += `C${mx} ${y0} ${mx} ${y1} ${x1} ${y1}`; }
+    b += `<path d="${path}" fill="none" stroke="#B9C9BD" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 9"/><path id="rfProg" d="${path}" pathLength="1" fill="none" stroke="#0E3B2C" stroke-width="5" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1" style="transition:stroke-dashoffset .7s cubic-bezier(.2,.8,.2,1)"/>`;
+    // supporting marks: you at the adjuster visit, the insurer lane at steps 3 and 4
+    b += `<g stroke="#3E5A4A" stroke-width="1.6" fill="none" stroke-dasharray="4 4"><path d="M480 ${LY[1] - 18}V${LY[0] + 14}" /><path d="M480 ${LY[1] + 18}V${LY[2] - 14}" marker-end="url(#rfArr)"/><path d="M615 ${LY[1] + 18}V${LY[2] - 14}" marker-end="url(#rfArr)"/><path d="M615 ${LY[2] - 22}V${LY[1] + 22}" /></g>`;
+    b += `<g font-size="12.5" font-weight="700" fill="#26302B"><text x="488" y="${LY[0] + 4}">you, if you’d like</text><text x="488" y="${LY[2] + 4}">your adjuster</text><text x="623" y="${LY[2] + 4}">estimate and photos</text></g>`;
+    XS.forEach((x, i) => { b += `<g class="rf-nd" data-i="${i}"><circle cx="${x}" cy="${LY[LANE[i]]}" r="17" fill="#fff" stroke="#0E3B2C" stroke-width="2.4"/><text x="${x}" y="${LY[LANE[i]] + 5}" text-anchor="middle" font-size="14" font-weight="800" fill="#16191D">${i + 1}</text>${(() => { const w = D[i][0].replace(/^Then /, '').split(' '), m = Math.ceil(w.length / 2), ls = [w.slice(0, m).join(' '), w.slice(m).join(' ')], y0 = LY[LANE[i]] + (i === 0 ? 38 : -42); return ls.map((t, k) => `<text x="${x}" y="${y0 + k * 15}" text-anchor="middle" font-size="13" font-weight="800" fill="#16191D">${t}</text>`).join(''); })()}</g>`; });
+    b += `<g id="rfTok" style="transition:transform .65s cubic-bezier(.3,1.4,.4,1);transform:translate(${XS[0]}px,${LY[0]}px)"><circle r="23" fill="#B5DB6E" stroke="#0E3B2C" stroke-width="3"/><path d="M-12 5L0 -9L12 5" fill="none" stroke="#0E3B2C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M-8 5V12H8V5" fill="none" stroke="#0E3B2C" stroke-width="2.4" stroke-linejoin="round"/></g>`;
+    s.innerHTML = b; const tok = $('#rfTok'), prog = $('#rfProg'), bs = $$('.rf-sb');
+    const go = (i, snap) => { cur = i; tok.style.transform = `translate(${XS[i]}px,${LY[LANE[i]]}px)`; prog.style.strokeDashoffset = String(1 - i / 4); bs.forEach((x, j) => { x.setAttribute('aria-checked', j === i); x.tabIndex = j === i ? 0 : -1; x.classList.toggle('done', j < i); }); $$('.rf-nd', s).forEach((n, j) => { n.querySelector('circle').setAttribute('fill', j <= i ? '#B5DB6E' : '#fff'); }); $('#rf-stk').textContent = 'Step ' + (i + 1) + ' of 5 · ' + D[i][1]; $('#rf-sth').textContent = D[i][0]; $('#rf-stp').textContent = D[i][2]; };
+    bs.forEach((x, i) => { x.addEventListener('click', () => go(i)); x.addEventListener('keydown', (e) => { const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0; if (d) { e.preventDefault(); const j = clamp(i + d, 0, 4); go(j); bs[j].focus(); } }); });
+    let drag = false; const near = (e) => { const r = s.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 800; let k = 0, m = 1e9; XS.forEach((v, i) => { if (Math.abs(v - x) < m) { m = Math.abs(v - x); k = i; } }); return k; };
+    s.addEventListener('pointerdown', (e) => { drag = true; try { s.setPointerCapture(e.pointerId); } catch (_) {} const k = near(e); if (k !== cur) go(k); }); s.addEventListener('pointermove', (e) => { if (drag) { const k = near(e); if (k !== cur) go(k); } }); const end = () => { drag = false; }; s.addEventListener('pointerup', end); s.addEventListener('pointercancel', end);
+    go(0);
+  }
+
+  /* ---------- a new roof laid from the eaves up ---------- */
+  function pair() {
+    const st = $('#rf-pst'), rg = $('#rf-prange'), out = $('#rf-pout'); const set = (n) => { n = Math.round(clamp(n, 0, 12)); const l = n / 12 * 100; st.style.setProperty('--b', l + '%'); st.style.setProperty('--e', (100 - l) + '%'); st.classList.toggle('live', n > 0 && n < 12); out.textContent = n + ' of 12'; rg.value = n; rg.style.setProperty('--v', l + '%'); rg.setAttribute('aria-valuetext', n + ' of 12 courses laid'); };
+    rg.addEventListener('input', () => set(+rg.value)); let drag = false; const xp = (e) => { const r = st.getBoundingClientRect(); return (e.clientX - r.left) / r.width * 12; };
+    st.addEventListener('pointerdown', (e) => { drag = true; try { st.setPointerCapture(e.pointerId); } catch (_) {} set(xp(e)); }); st.addEventListener('pointermove', (e) => { if (drag) set(xp(e)); }); const end = () => { drag = false; }; st.addEventListener('pointerup', end); st.addEventListener('pointercancel', end);
+    set(0); let ran = false; const io = new IntersectionObserver((en) => { if (en[0].isIntersecting && !ran) { ran = true; if (!RM) tween(0, 12, 2600, set, () => setTimeout(() => tween(12, 4, 900, set), 700)); io.disconnect(); } }, { threshold: .5 }); io.observe(st);
+  }
+
+  /* ---------- parallax + in-view ---------- */
+  function life() {
+    const secs = $$('.rf-s'), bgs = secs.map((s) => [s, s.querySelector('.rf-bg')]); let tk = false;
+    const par = () => { tk = false; if (P.hidden) return; const vh = innerHeight; bgs.forEach(([s, bg]) => { const r = s.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return; const p = clamp((r.top + r.height / 2 - vh / 2) / (vh * .9), -1, 1), a = bg.firstElementChild, z = bg.lastElementChild; a.style.setProperty('--py', (p * -26).toFixed(1) + 'px'); if (z !== a) z.style.setProperty('--py', (p * -48).toFixed(1) + 'px'); }); };
+    if (!RM) { addEventListener('scroll', () => { if (!tk) { tk = true; requestAnimationFrame(par); } }, { passive: true }); addEventListener('resize', par); document.addEventListener('fpage', par); }
+    const io = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) { x.target.classList.add('rf-seen'); io.unobserve(x.target); } }), { threshold: .12 });
+    secs.forEach((s) => (RM ? s.classList.add('rf-seen') : io.observe(s)));
+  }
+
+  function wire() { P = document.getElementById('pg-roofing'); if (!P || !P.querySelector('#rf-roof')) return; roof(); two(); pitch(); gaf(); storm(); pair(); life(); }
+  return { wire };
+})();
 /* OUR WORK PAGE (#/our-work). Prefix po-. The firm's documented-project record, drawn from its published data (data-pod on .po): a count wall (886 squares; 312 with photos + 574 more counted), a trade ledger,
    the towns as a bar list (no geographic layout), the job file APS-4867 with a drag-through timeline, a trade-filtered gallery with a before/after wipe viewer (a real <dialog>: focus trap, Esc, arrow keys,
    focus returns), and 'how to read a price band'. DOM is built in wire() while the page is hidden; anything that needs layout waits for the 'fpage' event.
@@ -3957,11 +4225,13 @@ window.FPWork = (function () {
     const step = (now) => { if (dead) return; const t = clamp((now - t0) / ms, 0, 1); o[k] = lerp(from, to, ease(t)); fn(); if (t < 1) id = requestAnimationFrame(step); else { o['_c' + k] = null; done && done(); } };
     id = requestAnimationFrame(step); o['_c' + k] = () => { dead = true; cancelAnimationFrame(id); o['_c' + k] = null; }; return o['_c' + k];
   }
-  function drag(node, onMove, onStart, onEnd) {
-    let on = false;
-    node.addEventListener('pointerdown', (e) => { if (e.button > 0 || e.target.closest('input,button,a')) return; on = true; try { node.setPointerCapture(e.pointerId); } catch (_) {} onStart && onStart(e); onMove(e); });
-    node.addEventListener('pointermove', (e) => { if (on) onMove(e); });
-    const up = (e) => { if (!on) return; on = false; onEnd && onEnd(e); }; node.addEventListener('pointerup', up); node.addEventListener('pointercancel', up);
+  function drag(node, onMove, onStart, onEnd, lazy) {   // drag with pointer capture; vertical scroll is left to the browser (touch-action: pan-y on the node). lazy: a press on a button only becomes a drag after 6 px, so a plain click still reaches the button
+    let on = false, pend = null;
+    const begin = (e) => { on = true; try { node.setPointerCapture(e.pointerId); } catch (_) {} onStart && onStart(e); };
+    node.addEventListener('pointerdown', (e) => { if (e.button > 0) return; const b = e.target.closest('input,button,a'); if (b && !(lazy && b.tagName === 'BUTTON')) return; if (b) { pend = { x: e.clientX, y: e.clientY }; return; } begin(e); onMove(e); });
+    node.addEventListener('pointermove', (e) => { if (pend && Math.abs(e.clientX - pend.x) > 6) { pend = null; begin(e); node._moved = true; } if (on) onMove(e); });
+    const up = (e) => { pend = null; if (!on) return; on = false; onEnd && onEnd(e); if (node._moved) setTimeout(() => { node._moved = false; }, 60); };
+    node.addEventListener('pointerup', up); node.addEventListener('pointercancel', up);
   }
   function radios(box, items, label, pick, start) {
     let cur = start || 0; box.innerHTML = '';
@@ -4037,7 +4307,7 @@ window.FPWork = (function () {
     const POS = [.035, .095, .43, .74, .975]; const DAY0 = .74, DAYW = .06; const S = { v: POS[0] }; let step = -1, srcs = null;
     const hotspots = [.035, .095, .43, .74, .975];
     ev.innerHTML = st.map((s, i) => `<li style="left:${POS[i] * 100}%"><button type="button" aria-label="Go to: ${esc(s[0])}, ${esc(s[1])}"><i>${i + 1}</i><span><b>${esc(s[0])}</b><em>${esc(s[1].replace('August 31 – September 3, 2026', 'Aug 31 – Sep 3').replace(', 2026', ''))}</em></span></button></li>`).join('');
-    $$('button', ev).forEach((b, i) => b.addEventListener('click', () => go(POS[i] + (i === 3 ? 0 : 0))));
+    $$('button', ev).forEach((b, i) => b.addEventListener('click', () => { if (trk._moved) return; go(POS[i]); }));
     const dayEls = [0, 1, 2, 3].map((i) => { const d = document.createElement('i'); d.style.left = ((DAY0 + i * DAYW) * 100) + '%'; d.style.width = (DAYW * 100) + '%'; d.className = 'po-dy'; d.setAttribute('aria-hidden', 'true'); d.textContent = ['Aug 31', 'Sep 1', 'Sep 2', 'Sep 3'][i]; return d; });
     const band = document.createElement('div'); band.className = 'po-onsite'; band.style.left = (DAY0 * 100) + '%'; band.style.width = (4 * DAYW * 100) + '%'; band.setAttribute('aria-hidden', 'true'); dayEls.forEach((d) => band.append(d)); $('.po-rail').after(band);
     function imgs() { if (srcs) return srcs; const li = $$('.po-gi').find((x) => x.dataset.place === 'Village at Western Oaks, Austin'); const j6 = $('.po-cp[data-i="6"] img'); if (!li) return null; srcs = { before: li.dataset.b, after: li.querySelector('img').src, mid: j6 ? j6.src : li.dataset.b, ba: li.dataset.ba, aa: li.querySelector('img').alt, ma: j6 ? j6.alt : '' }; return srcs; }
@@ -4053,14 +4323,14 @@ window.FPWork = (function () {
       }
     }
     function go(v) { tween(S, 'v', clamp(v, 0, 1), 600, render); }
-    drag(trk, (e) => { const r = trk.getBoundingClientRect(); S.v = clamp((e.clientX - r.left) / r.width, 0, 1); render(); }, () => { if (S._cv) S._cv(); });
+    drag(trk, (e) => { const r = trk.getBoundingClientRect(); S.v = clamp((e.clientX - r.left) / r.width, 0, 1); render(); }, () => { if (S._cv) S._cv(); }, null, true);
     hd.addEventListener('keydown', (e) => { const k = e.key; const cur = stepAt(S.v); let t = null; if (k === 'ArrowRight' || k === 'ArrowUp') { if (S.v >= DAY0 && S.v < .975) t = Math.min(.975, S.v + DAYW); else t = POS[Math.min(4, cur + 1)]; } else if (k === 'ArrowLeft' || k === 'ArrowDown') { if (S.v > DAY0 + .001) t = Math.max(DAY0, S.v - DAYW); else t = POS[Math.max(0, cur - 1)]; } else if (k === 'Home') t = 0; else if (k === 'End') t = 1; if (t !== null) { e.preventDefault(); if (t === POS[4] || k === 'End') t = .975; go(t); } });
     render(); onShow.push(() => { if (!srcs) { render.key = null; step = -1; render(); } });
   }
 
   /* ================= 5. the gallery and its wipe viewer ================= */
   function gallery() {
-    const chips = $('.po-chips'), lis = $$('.po-gi'), stat = $('.po-gst'), dlg = $('.po-dlg'); const names = D.tagnames; let f = 'all', list = [], idx = 0, opener = null, wipe = 50;
+    const chips = $('.po-chips'), lis = $$('.po-gi'), stat = $('.po-gst'), dlg = $('.po-dlg'); const names = D.tagnames; let f = 'all', list = [], idx = 0, opener = null, wipe = 50, wo = null;
     const count = (k) => lis.filter((li) => k === 'all' || li.dataset.tags.split(',').includes(k)).length;
     const keys = ['all'].concat(Object.keys(names).filter((k) => count(k)));
     chips.innerHTML = keys.map((k) => `<button type="button" class="po-chip" data-k="${k}" aria-pressed="${k === 'all'}">${k === 'all' ? 'All' : esc(names[k])} <small>${count(k)}</small></button>`).join('');
@@ -4072,21 +4342,22 @@ window.FPWork = (function () {
     FPWork.filter = (k, s) => { if (keys.includes(k)) apply(k, s); };
     // viewer
     const dst = $('.po-dst'), ia = $('.po-di-a'), ib = $('.po-di-b'), dl = $('.po-dl'), tb = $('.po-dtb'), ta = $('.po-dta'), dtt = $('#po-dt'), ddd = $('#po-dd'), dc = $('.po-dc');
+    const stopWipe = () => { if (wo && wo._cw) wo._cw(); };
     function setWipe(p) { wipe = clamp(p, 0, 100); ia.style.clipPath = `inset(0 0 0 ${wipe}%)`; dl.style.left = wipe + '%'; dl.setAttribute('aria-valuenow', Math.round(wipe)); tb.style.opacity = wipe > 14 ? 1 : 0; ta.style.opacity = wipe < 86 ? 1 : 0; }
     function fill() { const it = list[idx]; const pair = it.kind === 'pair'; ia.src = it.a; ia.alt = it.aa; ib.src = pair ? it.b : ''; ib.alt = pair ? it.ba : ''; dst.classList.toggle('po-single', !pair);
       dl.hidden = !pair; tb.hidden = ta.hidden = !pair; dtt.textContent = it.title; ddd.textContent = it.desc; dc.textContent = (idx + 1) + ' of ' + list.length; $('.po-dp', dlg).disabled = idx === 0; $('.po-dn', dlg).disabled = idx === list.length - 1;
-      if (pair) { setWipe(50); if (!RM()) { setWipe(100); const o = { w: 100 }; tween(o, 'w', 50, 900, () => setWipe(o.w)); } } else ia.style.clipPath = 'none'; }
+      if (wo && wo._cw) wo._cw(); if (pair) { setWipe(50); if (!RM()) { setWipe(100); wo = { w: 100 }; tween(wo, 'w', 50, 900, () => setWipe(wo.w)); } } else ia.style.clipPath = 'none'; }
     const fromLi = (li) => { const im = li.querySelector('img'); const pair = li.dataset.kind === 'pair'; return pair ? { kind: 'pair', a: im.src, aa: im.alt, b: li.dataset.b, ba: li.dataset.ba, title: li.dataset.place + ' · ' + li.dataset.when, desc: 'Installed: ' + li.dataset.inst + ' · ' + li.dataset.band } : { kind: 'photo', a: im.src, aa: im.alt, title: li.dataset.place + ' · ' + li.dataset.when, desc: li.dataset.trades }; };
-    function open(items, i, from) { list = items; idx = i; opener = from; fill(); if (!dlg.open) { dlg.showModal(); document.documentElement.classList.add('po-lock'); } setTimeout(() => $('.po-dx', dlg).focus(), 0); }
+    function open(items, i, from) { list = items; idx = i; opener = from; fill(); if (!dlg.open) { dlg.showModal(); document.documentElement.classList.add('po-noscroll'); } setTimeout(() => $('.po-dx', dlg).focus(), 0); }
     function close() { if (dlg.open) dlg.close(); }
-    dlg.addEventListener('close', () => { document.documentElement.classList.remove('po-lock'); if (opener && opener.isConnected) opener.focus({ preventScroll: true }); });
+    dlg.addEventListener('close', () => { document.documentElement.classList.remove('po-noscroll'); if (opener && opener.isConnected) opener.focus({ preventScroll: true }); });
     dlg.addEventListener('click', (e) => { if (e.target === dlg) close(); }); $('.po-dx', dlg).addEventListener('click', close);
     $('.po-dp', dlg).addEventListener('click', () => { if (idx > 0) { idx--; fill(); } }); $('.po-dn', dlg).addEventListener('click', () => { if (idx < list.length - 1) { idx++; fill(); } });
     dlg.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') { const fs = $$('button:not([disabled]),[tabindex="0"]', dlg).filter((x) => !x.hidden && x.offsetParent !== null); if (!fs.length) return; const a = fs[0], z = fs[fs.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } return; }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { if (e.target === dl) { e.preventDefault(); setWipe(wipe + (e.key === 'ArrowRight' ? 5 : -5)); return; } e.preventDefault(); if (e.key === 'ArrowLeft' && idx > 0) { idx--; fill(); } if (e.key === 'ArrowRight' && idx < list.length - 1) { idx++; fill(); } }
-      if (e.target === dl) { const d = { PageUp: 20, PageDown: -20 }[e.key]; if (e.key === 'Home') { e.preventDefault(); setWipe(0); } else if (e.key === 'End') { e.preventDefault(); setWipe(100); } else if (d) { e.preventDefault(); setWipe(wipe + d); } } });
-    drag(dst, (e) => { if (dst.classList.contains('po-single')) return; const r = dst.getBoundingClientRect(); setWipe((e.clientX - r.left) / r.width * 100); });
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { if (e.target === dl) { e.preventDefault(); stopWipe(); setWipe(wipe + (e.key === 'ArrowRight' ? 5 : -5)); return; } e.preventDefault(); if (e.key === 'ArrowLeft' && idx > 0) { idx--; fill(); } if (e.key === 'ArrowRight' && idx < list.length - 1) { idx++; fill(); } }
+      if (e.target === dl) { stopWipe(); const d = { PageUp: 20, PageDown: -20 }[e.key]; if (e.key === 'Home') { e.preventDefault(); setWipe(0); } else if (e.key === 'End') { e.preventDefault(); setWipe(100); } else if (d) { e.preventDefault(); setWipe(wipe + d); } } });
+    drag(dst, (e) => { if (dst.classList.contains('po-single')) return; const r = dst.getBoundingClientRect(); setWipe((e.clientX - r.left) / r.width * 100); }, stopWipe);
     $('.po-grid').addEventListener('click', (e) => { const b = e.target.closest('.po-card'); if (!b) return; const vis = lis.filter((li) => !li.hidden); const li = b.closest('.po-gi'); open(vis.map(fromLi), vis.indexOf(li), b); });
     // the eight job photos (same viewer)
     const cps = $$('.po-cp'); $('.po-cphl').addEventListener('click', (e) => { const b = e.target.closest('.po-cp'); if (!b) return; open(cps.map((x, i) => { const im = x.querySelector('img'); return { kind: 'photo', a: im.src, aa: im.alt, title: 'Job APS-4867 · photo ' + (i + 1) + ' of 8', desc: 'Village At Western Oaks, Austin · shot on site by the crew' }; }), cps.indexOf(b), b); });
@@ -4153,6 +4424,7 @@ window.FPContact = (function () {
 
   function wire(root) {
     const pg = root.querySelector('#pg-contact'); if (!pg || pg.dataset.w) return; pg.dataset.w = 1;
+    if (!pg.querySelector('.pc-form')) return;   // a stub build (PAGES_ONLY) has no form
     const pad = pg.querySelector('[data-pad]'), form = pg.querySelector('.pc-form'), done = pg.querySelector('.pc-done'), fail = pg.querySelector('.pc-fail'), send = pg.querySelector('.pc-send');
     form.dataset.endpointSet = String(!!FORM_ENDPOINT);
     // static ink: labels, ticks, the greeting
@@ -4310,4 +4582,4 @@ window.FRoute = (function () {
   }
   return { init, go: (h) => { location.hash = h; }, get page() { return cur; } };
 })();
-FCursor.init();FNav.init();FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);Rev.wire(document);FRev.wire(document);FProc.wire(document);FArea.wire(document);FBook.wire(document);FFoot.wire(document);FPSiding.wire(document);try{FPWindows.wire(document);}catch(_){}FPWork.wire(document);try{FPContact.wire(document);}catch(_){}FRoute.init();</script></body></html>
+FCursor.init();FNav.init();FHero.wire(document);FWall.wire(document);FServ.wire(document);FVis.wire(document);FWin.wire(document);Rev.wire(document);FRev.wire(document);FProc.wire(document);FArea.wire(document);FBook.wire(document);FFoot.wire(document);FPSiding.wire(document);try{FPWindows.wire(document);}catch(_){}FPRoofing.wire(document);FPWork.wire(document);try{FPContact.wire(document);}catch(_){}FRoute.init();</script></body></html>

@@ -1700,6 +1700,8 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){.rf-ts,.rf-tp,.rf-mh,.rf-md,.rf-bars i,.rf-dg i,.rf-wc,.rf-pin{transition:none!important}.rf-bars i{transform:none}.rf-dg i{transform:scale(.86)}.rf-dg i.a{background:var(--rfg);transform:scale(1.25)}.rf-dg i.h{background:linear-gradient(90deg,var(--rfg) 50%,#CBD8CE 50%);transform:scale(1.1)}}
 
 .rf-axr{margin:14px 0 0;min-height:2.6em;font:700 16px/1.4 var(--text);color:var(--rfg)}
+.rf-pside .rf-prng{margin:0;max-width:none;width:100%}.rf-pside .rf-rng span{gap:12px}
+@media (max-width:720px){.rf-nd text:nth-of-type(n+2){display:none}.rf-tl g[font-size="12.5"]{display:none}.rf-tl text{font-size:22px!important}.rf-pplace b{font-size:21px}}
 /* OUR WORK PAGE (#/our-work). Prefix po-. Dim near-white grounds, deep green #0E3B2C, lime #B5DB6E; the kit's line art behind each section on two parallax layers. No geographic drawing anywhere. */
 .po{--po-card:rgba(245,249,245,.84);--po-ring:#D5E1D7;--po-g:#0E3B2C;--po-l:#B5DB6E;--po-ry:80px;color:var(--ink)}
 .po *{box-sizing:border-box}
@@ -4388,6 +4390,7 @@ window.FPContact = (function () {
 
   function wire(root) {
     const pg = root.querySelector('#pg-contact'); if (!pg || pg.dataset.w) return; pg.dataset.w = 1;
+    if (!pg.querySelector('.pc-form')) return;   // a stub build (PAGES_ONLY) has no form
     const pad = pg.querySelector('[data-pad]'), form = pg.querySelector('.pc-form'), done = pg.querySelector('.pc-done'), fail = pg.querySelector('.pc-fail'), send = pg.querySelector('.pc-send');
     form.dataset.endpointSet = String(!!FORM_ENDPOINT);
     // static ink: labels, ticks, the greeting
