@@ -21,7 +21,7 @@ for i in range(4):
     for s in 'ab': tot['pg-w%d%s' % (i, s)] = enc('windows%d%s-720.webp' % (i, s), 'x%d%s' % (i, s), WP, QP)
 for i in range(8):
     tot['j%d' % i] = enc('job4867-%d-480.webp' % i, 'j%d' % i, 360, 46)
-STILLS = [0, 5, 8, 12, 16, 20, 24, 26, 33, 36, 40, 42]
+STILLS = [0, 5, 8, 12, 16, 20, 24, 26, 34, 36, 40, 42]
 for i in STILLS: tot['p%d' % i] = enc('photo%d-640.webp' % i, 'p%d' % i, 420, 42)
 pw = sum(v for k, v in tot.items() if k.startswith('pw-')); rest = sum(v for k, v in tot.items() if not k.startswith('pw-'))
 print('windows page', pw, 'bytes; our work', rest, 'bytes (x1.33 for base64:', round(pw * 1.33), round(rest * 1.33), ')')

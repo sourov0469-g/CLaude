@@ -17,11 +17,12 @@ window.FPWindows = (function () {
     const step = (now) => { if (dead) return; const t = clamp((now - t0) / ms, 0, 1); o[k] = lerp(from, to, ease(t)); fn(); if (t < 1) id = requestAnimationFrame(step); else { o['_c' + k] = null; done && done(); } };
     id = requestAnimationFrame(step); o['_c' + k] = () => { dead = true; cancelAnimationFrame(id); o['_c' + k] = null; }; return o['_c' + k];
   }
-  function drag(node, onMove, onStart, onEnd) {        // horizontal/any drag with pointer capture; vertical scroll is left to the browser (touch-action: pan-y on the node)
-    let on = false;
-    node.addEventListener('pointerdown', (e) => { if (e.button > 0 || e.target.closest('input,button,a')) return; on = true; try { node.setPointerCapture(e.pointerId); } catch (_) {} onStart && onStart(e); onMove(e); });
-    node.addEventListener('pointermove', (e) => { if (on) onMove(e); });
-    const up = (e) => { if (!on) return; on = false; onEnd && onEnd(e); };
+  function drag(node, onMove, onStart, onEnd, lazy) {   // drag with pointer capture; vertical scroll is left to the browser (touch-action: pan-y on the node). lazy: a press on a button only becomes a drag after 6 px, so a plain click still reaches the button
+    let on = false, pend = null;
+    const begin = (e) => { on = true; try { node.setPointerCapture(e.pointerId); } catch (_) {} onStart && onStart(e); };
+    node.addEventListener('pointerdown', (e) => { if (e.button > 0) return; const b = e.target.closest('input,button,a'); if (b && !(lazy && b.tagName === 'BUTTON')) return; if (b) { pend = { x: e.clientX, y: e.clientY }; return; } begin(e); onMove(e); });
+    node.addEventListener('pointermove', (e) => { if (pend && Math.abs(e.clientX - pend.x) > 6) { pend = null; begin(e); node._moved = true; } if (on) onMove(e); });
+    const up = (e) => { pend = null; if (!on) return; on = false; onEnd && onEnd(e); if (node._moved) setTimeout(() => { node._moved = false; }, 60); };
     node.addEventListener('pointerup', up); node.addEventListener('pointercancel', up);
   }
   function radios(box, items, label, pick, start) {    // a radiogroup of buttons, roving tabindex, arrow keys
@@ -74,7 +75,7 @@ ${wall(0, 0, 0, 560, 500, 26)}
   function parts() {
     const lines = D.lines, svg = $('.pw-xsvg'), range = $('#pw-pull'), out = $('.pw-out'), stage = $('.pw-stage'), list = $('.pw-plist'), swb = $('.pw-sw');
     const X = { t: 0, line: lines[0], sel: -1, col: null }; let layers = {};
-    const GAP = [46, -30], FX = 86, FY = 128, FW = 240, FH = 286, TH = 24;
+    const GAP = [62, -40], FX = 70, FY = 150, FW = 216, FH = 246, TH = 22;
     function build() {
       const L = X.line, exe = L.k === 'nte', col = X.col || '#EDE9E0'; layers = {};
       const frame = `M${FX} ${FY}h${FW}v${FH}h${-FW}ZM${FX + TH} ${FY + TH}v${FH - 2 * TH}h${FW - 2 * TH}v${-(FH - 2 * TH)}Z`;
@@ -83,11 +84,11 @@ ${wall(0, 0, 0, 560, 500, 26)}
       const pane = (id) => `<g data-l="${id}"><rect x="${gx}" y="${gy}" width="${gw}" height="${gh}" fill="url(#pwXg)" stroke="#0E3B2C" stroke-opacity=".7" stroke-width="1.5"/><path d="M${gx + 28} ${gy + gh - 8}L${gx + 98} ${gy + 8}H${gx + 126}L${gx + 56} ${gy + gh - 8}Z" fill="#fff" opacity=".34"/></g>`;
       const badge = (n, id) => `<g class="pw-bdg" data-b="${id}" data-n="${n}"><circle r="13" fill="#0E3B2C"/><text y="5" text-anchor="middle" font-size="13" font-weight="800" fill="#B5DB6E" font-family="Montserrat,sans-serif">${n}</text></g>`;
       svg.innerHTML = `<title id="pw-xt">Exploded view of the ${esc(L.maker)} ${esc(L.name)} unit</title><defs><linearGradient id="pwXg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#CFE5DF" stop-opacity=".9"/><stop offset="1" stop-color="#8FB5AE" stop-opacity=".8"/></linearGradient><linearGradient id="pwXf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".2"/></linearGradient></defs>
-<g class="pw-sh"><ellipse cx="320" cy="458" rx="210" ry="9" fill="#000" opacity=".22"/></g>
+<g class="pw-sh"><ellipse cx="300" cy="466" rx="200" ry="8" fill="#000" opacity=".22"/></g>
 ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + FW + 14}L${FX + FW + 26} ${FY + FH + 24}H${FX - 26}Z" fill="#DCE3DD" stroke="#0E3B2C" stroke-width="1.6" stroke-linejoin="round"/><path d="M${FX - 14} ${FY + FH}H${FX + FW + 14}L${FX + FW + 18} ${FY + FH + 9}H${FX - 18}Z" fill="#fff" opacity=".6"/>${badge(3, 'sill')}</g>` : ''}
 <g class="pw-lay" data-l="glassB">${exe ? pane('gb') : ''}${exe ? '' : ''}</g>
 <g class="pw-lay" data-l="glass">${pane('gf')}${badge(2, 'glass')}</g>
-<g class="pw-lay" data-l="frame"><path d="${frame}" fill="#DCE3DD" fill-rule="evenodd" stroke="#0E3B2C" stroke-width="1.8" stroke-linejoin="round"/><path d="${frame}" fill="url(#pwXf)" fill-rule="evenodd"/><path d="${mitre}" stroke="#0E3B2C" stroke-opacity=".5" fill="none"/>${badge(1, 'frame')}</g>
+<g class="pw-lay" data-l="frame"><path d="${frame}" fill="#B4C4B8" fill-rule="evenodd" stroke="#0E3B2C" stroke-width="1.8" stroke-linejoin="round"/><path d="${frame}" fill="url(#pwXf)" fill-rule="evenodd"/><path d="${mitre}" stroke="#0E3B2C" stroke-opacity=".5" fill="none"/>${badge(1, 'frame')}</g>
 <g class="pw-lay" data-l="finish"><path d="${frame}" fill="${col}" fill-opacity=".93" fill-rule="evenodd" stroke="#0E3B2C" stroke-width="1.8" stroke-linejoin="round"/><path d="${frame}" fill="url(#pwXf)" fill-rule="evenodd"/><path d="${mitre}" stroke="#0E3B2C" stroke-opacity=".45" fill="none"/>${badge(exe ? 4 : 3, 'finish')}</g>`;
       ['sill', 'glassB', 'glass', 'frame', 'finish'].forEach((k) => { const g = svg.querySelector(`[data-l="${k}"]`); if (g) layers[k] = g; });
       layers.sh = svg.querySelector('.pw-sh');
@@ -116,8 +117,9 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
     function fillSw() {
       swb.innerHTML = ''; const L = X.line; if (!L.cols.length || !L.cols[0][1]) { swb.hidden = !L.colnote; swb.innerHTML = L.colnote ? `<p class="pw-sm">${esc(L.colnote)}</p>` : ''; return; } swb.hidden = false;
       const lab = document.createElement('p'); lab.className = 'pw-sm'; lab.textContent = 'Published frame colors for ' + (L.k === 'nte' ? 'the Executive' : L.name) + ':'; swb.append(lab); const row = document.createElement('div'); row.className = 'pw-swr'; row.setAttribute('role', 'radiogroup'); row.setAttribute('aria-label', 'Frame color'); swb.append(row);
-      radios(row, L.cols, (c) => `<i style="background:${c[1]}"></i><span class="vh">${esc(c[0])}</span>`, (c, i) => { X.col = c[1]; row.querySelectorAll('button').forEach((b, j) => { b.title = L.cols[j][0]; }); if (layers.finish) { const f = layers.finish.querySelector('path'); f.setAttribute('fill', c[1]); } cn.textContent = c[0]; }, 0);
-      const cn = document.createElement('p'); cn.className = 'pw-cn'; cn.textContent = L.cols[0][0]; swb.append(cn);
+      const cn = document.createElement('p'); cn.className = 'pw-cn'; cn.textContent = L.cols[0][0];
+      radios(row, L.cols, (c) => `<i style="background:${c[1]}"></i><span class="pw-vh">${esc(c[0])}</span>`, (c, i) => { X.col = c[1]; row.querySelectorAll('button').forEach((b, j) => { b.title = L.cols[j][0]; }); if (layers.finish) { const f = layers.finish.querySelector('path'); f.setAttribute('fill', c[1]); } cn.textContent = c[0]; }, 0);
+      swb.append(cn);
     }
     const lineBox = $('.pw-lines');
     radios(lineBox, lines, (L) => `<small>${esc(L.maker)}</small><b>${esc(L.name)}</b><span>${esc(L.mat)} · ${esc(L.jobs)}</span>`, (L) => {
@@ -166,14 +168,14 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
     const steps = D.steps, svg = $('.pw-osvg'), mark = $('.pw-mark'), track = $('.pw-track'), nodes = $('.pw-nodes'), fill = $('.pw-fill'), card = { n: $('.pw-on'), h: $('.pw-oh'), p: $('.pw-op') };
     const S = { t: 0 }; let last = -1;
     nodes.innerHTML = steps.map((s, i) => `<li style="left:${i * 25}%"><button type="button" aria-label="Step ${i + 1}: ${esc(s[0])}"><i>${i + 1}</i><span>${esc(s[0])}</span></button></li>`).join('');
-    $$('button', nodes).forEach((b, i) => b.addEventListener('click', () => go(i)));
+    $$('button', nodes).forEach((b, i) => b.addEventListener('click', () => { if (track._moved) return; go(i); }));
     const unit = (x, y, w, h, k) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="#F6F8F4" stroke="#0E3B2C" stroke-width="2"/><rect x="${x + 10}" y="${y + 10}" width="${w - 20}" height="${h / 2 - 12}" fill="url(#pwOg)" stroke="#0E3B2C" stroke-opacity=".6"/><rect x="${x + 10}" y="${y + h / 2 + 2}" width="${w - 20}" height="${h / 2 - 12}" fill="url(#pwOg)" stroke="#0E3B2C" stroke-opacity=".6"/>`;
     svg.innerHTML = `<title id="pw-ot">The job, step by step</title><defs><linearGradient id="pwOg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DCEBE6"/><stop offset="1" stop-color="#A9C7C0"/></linearGradient></defs>
-<rect width="640" height="400" fill="#EAF0EA"/><g class="pw-sA">${wall(0, 60, 40, 520, 290, 24)}
+<rect width="640" height="400" fill="#DCE9F0"/><rect y="330" width="640" height="70" fill="#C9D8C4"/><g class="pw-sA">${wall(0, 0, 0, 640, 330, 24)}
 <rect x="238" y="96" width="164" height="178" fill="#D3DAD4" stroke="#0E3B2C" stroke-width="2"/><rect x="250" y="108" width="140" height="154" fill="#9DB0AC" stroke="#0E3B2C" stroke-opacity=".6"/><path d="M320 108V262M250 185H390" stroke="#0E3B2C" stroke-opacity=".5" stroke-width="3"/>
 <g transform="rotate(-6 500 230)"><rect x="440" y="140" width="116" height="156" rx="8" fill="#fff" stroke="#0E3B2C" stroke-width="2"/><rect x="480" y="132" width="36" height="16" rx="4" fill="#0E3B2C"/><path d="M458 176H538M458 198H538M458 220H520M458 242H500" stroke="#0E3B2C" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/><path d="M454 266l10 10 20-22" fill="none" stroke="#4E7F2B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
 <g class="pw-mag"><circle cx="318" cy="186" r="58" fill="#fff" fill-opacity=".25" stroke="#0E3B2C" stroke-width="5"/><path d="M360 228l40 40" stroke="#0E3B2C" stroke-width="11" stroke-linecap="round"/><path d="M360 228l40 40" stroke="#B5DB6E" stroke-width="4" stroke-linecap="round"/></g></g>
-<g class="pw-sB">${wall(0, 60, 40, 520, 290, 24)}<rect x="238" y="96" width="164" height="178" fill="#B7C8BC"/><rect x="238" y="274" width="180" height="10" fill="#DCE5DD" stroke="#0E3B2C" stroke-opacity=".5"/>
+<g class="pw-sB">${wall(0, 0, 0, 640, 330, 24)}<rect x="238" y="96" width="164" height="178" fill="#B7C8BC"/><rect x="238" y="274" width="180" height="10" fill="#DCE5DD" stroke="#0E3B2C" stroke-opacity=".5"/>
 <rect class="pw-bst" x="402" y="296" width="0" height="12" fill="#F6F1C9" stroke="#0E3B2C" stroke-opacity=".5"/><path class="pw-btk" stroke="#0E3B2C" stroke-width="1" opacity=".7"/><path class="pw-bhk" d="M0 -3V20H-8" fill="none" stroke="#0E3B2C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="402" y="284" width="82" height="48" rx="13" fill="#B5DB6E" stroke="#0E3B2C" stroke-width="2.2"/><circle cx="460" cy="308" r="8" fill="#0E3B2C"/>
 <g class="pw-bdm" opacity="0"><path d="M238 76H402M238 68v16M402 68v16" stroke="#0E3B2C" stroke-width="2"/><text x="320" y="62" text-anchor="middle" font-size="14" font-weight="800" fill="#0E3B2C" font-family="Montserrat,sans-serif">MEASURED</text></g></g>
 <g class="pw-sC"><rect x="0" y="250" width="640" height="150" fill="#D5DED6"/><path d="M40 250V150L110 190V150L180 190V150L250 190V150L320 190V250Z" fill="#C3D1C6" stroke="#0E3B2C" stroke-opacity=".6" stroke-width="2"/><rect x="60" y="200" width="22" height="30" fill="#EAF0EA" opacity=".8"/><rect x="130" y="200" width="22" height="30" fill="#EAF0EA" opacity=".8"/><rect x="200" y="200" width="22" height="30" fill="#EAF0EA" opacity=".8"/>
@@ -181,12 +183,12 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
 <g class="pw-cf"><rect class="pw-cfr" x="262" y="120" width="190" height="198" fill="none" stroke="#0E3B2C" stroke-width="12" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/><rect class="pw-cfi" x="262" y="120" width="190" height="198" fill="none" stroke="#B5DB6E" stroke-width="3" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
 <g class="pw-cg"><rect x="274" y="132" width="166" height="174" fill="url(#pwOg)" stroke="#0E3B2C" stroke-opacity=".6"/><path d="M296 296L340 140H362L318 296Z" fill="#fff" opacity=".4"/></g></g>
 <g class="pw-ctag"><rect x="458" y="86" width="150" height="54" rx="10" fill="#0E3B2C"/><text x="533" y="109" text-anchor="middle" font-size="13" font-weight="800" fill="#B5DB6E" font-family="Montserrat,sans-serif">BUILT TO ORDER</text><text x="533" y="127" text-anchor="middle" font-size="11.5" font-weight="600" fill="#E4EAE5" font-family="Inter,sans-serif">for this opening</text></g></g>
-<g class="pw-sD">${wall(0, 60, 40, 520, 290, 24)}<rect x="238" y="96" width="164" height="178" fill="#B7C8BC"/><rect x="226" y="274" width="188" height="12" fill="#DCE5DD" stroke="#0E3B2C" stroke-opacity=".5"/>
+<g class="pw-sD">${wall(0, 0, 0, 640, 330, 24)}<rect x="238" y="96" width="164" height="178" fill="#B7C8BC"/><rect x="226" y="274" width="188" height="12" fill="#DCE5DD" stroke="#0E3B2C" stroke-opacity=".5"/>
 <g class="pw-dold">${unit(238, 96, 164, 178)}<rect x="238" y="96" width="164" height="178" fill="#8C8A80" opacity=".35"/></g><g class="pw-dnew">${unit(238, 96, 164, 178)}</g>
 <path class="pw-dbd" d="M236 94H404V276H236Z" fill="none" stroke="#7FA43E" stroke-width="5" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
-<g class="pw-dday"><rect x="440" y="96" width="132" height="64" rx="12" fill="#0E3B2C"/><text x="506" y="120" text-anchor="middle" font-size="12" font-weight="800" fill="#B5DB6E" font-family="Inter,sans-serif" letter-spacing=".06em">MOST WINDOW-ONLY JOBS</text><circle cx="480" cy="142" r="9" fill="#B5DB6E"/><circle cx="506" cy="142" r="9" fill="#B5DB6E"/><text x="540" y="147" font-size="14" font-weight="800" fill="#fff" font-family="Montserrat,sans-serif">2 days</text></g>
+<g class="pw-dday"><rect x="420" y="96" width="196" height="64" rx="12" fill="#0E3B2C"/><text x="518" y="120" text-anchor="middle" font-size="12" font-weight="800" fill="#B5DB6E" font-family="Inter,sans-serif" letter-spacing=".06em">MOST WINDOW-ONLY JOBS</text><circle cx="470" cy="142" r="9" fill="#B5DB6E"/><circle cx="496" cy="142" r="9" fill="#B5DB6E"/><text x="524" y="147" font-size="14" font-weight="800" fill="#fff" font-family="Montserrat,sans-serif">2 days</text></g>
 <text class="pw-dtx" x="130" y="330" font-size="13" font-weight="800" fill="#0E3B2C" font-family="Inter,sans-serif">Old unit hauled away</text></g>
-<g class="pw-sE">${wall(0, 60, 40, 520, 290, 24)}${unit(238, 96, 164, 178)}<rect x="226" y="274" width="188" height="12" fill="#DCE5DD" stroke="#0E3B2C" stroke-opacity=".5"/><g class="pw-ok"><circle cx="500" cy="170" r="54" fill="#B5DB6E" stroke="#0E3B2C" stroke-width="3"/><path d="M474 172l18 18 34-40" fill="none" stroke="#0E3B2C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="pw-sE">${wall(0, 0, 0, 640, 330, 24)}${unit(238, 96, 164, 178)}<rect x="226" y="274" width="188" height="12" fill="#DCE5DD" stroke="#0E3B2C" stroke-opacity=".5"/><g class="pw-ok"><circle cx="500" cy="170" r="54" fill="#B5DB6E" stroke="#0E3B2C" stroke-width="3"/><path d="M474 172l18 18 34-40" fill="none" stroke="#0E3B2C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
 <g transform="rotate(5 130 240)"><rect x="82" y="168" width="108" height="140" rx="8" fill="#fff" stroke="#0E3B2C" stroke-width="2"/><rect x="120" y="160" width="32" height="15" rx="4" fill="#0E3B2C"/><text x="136" y="204" text-anchor="middle" font-size="12" font-weight="800" fill="#0E3B2C" font-family="Inter,sans-serif" letter-spacing=".05em">WARRANTY</text><path d="M98 222H174M98 240H174M98 258H150" stroke="#0E3B2C" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/></g></g>`;
     const g = (c) => svg.querySelector(c), sc = ['.pw-sA', '.pw-sB', '.pw-sC', '.pw-sD', '.pw-sE'].map(g);
     const bst = g('.pw-bst'), btk = g('.pw-btk'), bhk = g('.pw-bhk'), bdm = g('.pw-bdm'), cfr = g('.pw-cfr'), cfi = g('.pw-cfi'), cg = g('.pw-cg'), ctag = g('.pw-ctag'), dold = g('.pw-dold'), dnew = g('.pw-dnew'), dbd = g('.pw-dbd'), dday = g('.pw-dday'), dtx = g('.pw-dtx'), mag = g('.pw-mag'), ok = g('.pw-ok');
@@ -201,7 +203,7 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
       if (k !== last) { last = k; card.n.textContent = 'Step ' + (k + 1) + ' of 5'; card.h.textContent = steps[k][0]; card.p.textContent = steps[k][1]; $$('button', nodes).forEach((b, i) => { b.classList.toggle('on', i === k); b.classList.toggle('past', i < k); }); }
     }
     function go(i) { tween(S, 't', clamp(i, 0, 4), 650, render); }
-    drag(track, (e) => { const r = track.getBoundingClientRect(); S.t = clamp((e.clientX - r.left) / r.width * 4, 0, 4); render(); }, () => { if (S._ct) S._ct(); }, () => go(Math.round(S.t)));
+    drag(track, (e) => { const r = track.getBoundingClientRect(); S.t = clamp((e.clientX - r.left) / r.width * 4, 0, 4); render(); }, () => { if (S._ct) S._ct(); }, () => go(Math.round(S.t)), true);
     mark.addEventListener('keydown', (e) => { const k = e.key; let n = null; const c = Math.round(S.t); if (k === 'ArrowRight' || k === 'ArrowUp') n = c + 1; else if (k === 'ArrowLeft' || k === 'ArrowDown') n = c - 1; else if (k === 'Home') n = 0; else if (k === 'End') n = 4; if (n !== null) { e.preventDefault(); go(clamp(n, 0, 4)); } });
     drag($('.pw-scene'), (e) => { const r = svg.getBoundingClientRect(); S.t = clamp(S.t0 + (e.clientX - S.x0) / r.width * -4, 0, 4); render(); }, (e) => { S.x0 = e.clientX; S.t0 = S.t; if (S._ct) S._ct(); }, () => go(Math.round(S.t)));
     render();
@@ -211,11 +213,12 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
   function price() {
     const bars = $('.pw-bars'), read = $('.pw-read'), B = D.bands, max = Math.max(...B.map((b) => b[1])), MED = 3, COMMON = 2; const S = { i: MED, brand: 0 };
     const short = ['<2', '2–5', '5–10', '10–15', '15–20', '20–25', '25–30', '30–40', '40–50', '50–60', '75–100', '100+'];
-    bars.innerHTML = `<div class="pw-mid" style="grid-column:3/7"><span>Middle half of the jobs: $5k–$25k</span></div>` + B.map((b, i) => `<div class="pw-col" data-i="${i}"><span class="pw-n">${b[1]}</span><i class="pw-bar" style="--h:${(b[1] / max * 100).toFixed(1)}%"></i><em>${short[i]}</em></div>`).join('') + `<div class="pw-flags"></div>`;
+    bars.innerHTML = `<div class="pw-mid"><span>Middle half of the jobs: $5k–$25k</span></div>` + B.map((b, i) => `<div class="pw-col" data-i="${i}"><span class="pw-n">${b[1]}</span><i class="pw-bar" style="--h:${(b[1] / max * 100).toFixed(1)}%"></i><em>${short[i]}</em></div>`).join('') + `<div class="pw-flags"></div>`;
     const cols = $$('.pw-col', bars), flags = $('.pw-flags', bars);
     function flagsDraw() {
       const f = [[MED, 'Median band', 'pw-f1'], [COMMON, 'Most common band', 'pw-f2']]; const br = D.brands[S.brand - 1]; if (S.brand) { const bi = B.findIndex((b) => b[0] === br[2]); f.push([bi, br[0] + ' median', 'pw-f3']); }
       flags.innerHTML = f.map((x) => `<span class="pw-flag ${x[2]}" style="left:${(x[0] + .5) / B.length * 100}%">${esc(x[1])}</span>`).join('');
+      requestAnimationFrame(() => { $$('.pw-flag', flags).forEach((el, k) => { const n = cols[f[k][0]].querySelector('.pw-n'); const h = n.getBoundingClientRect().top - el.getBoundingClientRect().bottom - 4; if (h > 0) el.style.setProperty('--sh', h + 'px'); }); });
     }
     function pick(i, user) { S.i = clamp(i, 0, B.length - 1); cols.forEach((c, j) => c.classList.toggle('on', j === S.i)); const b = B[S.i]; const tags = (S.i === MED ? ' · the median band' : '') + (S.i === COMMON ? ' · the most common band' : '');
       read.innerHTML = `<b>${esc(b[0])}</b> · <b>${b[1]}</b> of 376 priced window jobs${tags}`; bars.setAttribute('aria-valuenow', S.i); bars.setAttribute('aria-valuetext', b[0] + ': ' + b[1] + ' of 376 priced window jobs' + tags); }
@@ -227,7 +230,7 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
     const cmax = Math.max(...D.cities.map((c) => c[1]));
     $('.pw-cities').innerHTML = D.cities.map((c) => `<div class="pw-crow"><span class="pw-cn">${esc(c[0])}</span><u><i style="--w:${(c[1] / cmax * 100).toFixed(1)}%"></i></u><b>${c[1]}</b><em>${esc(c[2])}</em></div>`).join('') + `<p class="pw-sm">Priced window jobs by city, with each city’s median band. Cities with fewer than five priced window jobs are left out.</p>`;
     $('.pw-srow').innerHTML = D.same.map((s) => `<div class="pw-sm1"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="#D5E1D7" stroke-width="6"/><circle class="pw-ring" cx="22" cy="22" r="18" fill="none" stroke="#0E3B2C" stroke-width="6" stroke-linecap="round" pathLength="100" stroke-dasharray="${s[1]} 100" transform="rotate(-90 22 22)"/></svg><div><b>${s[1]}%</b><span>${esc(s[0])}</span><small>${s[2]} of 376</small></div></div>`).join('');
-    pick(MED); flagsDraw();
+    pick(MED); flagsDraw(); onShow.push(flagsDraw); addEventListener('resize', () => shown && flagsDraw());
   }
 
   /* ================= 6. before/after wipe ================= */
@@ -235,8 +238,8 @@ ${exe ? `<g class="pw-lay" data-l="sill"><path d="M${FX - 14} ${FY + FH}H${FX + 
     const P = D.pairs, st = $('.pw-wst'), line = $('.pw-wline'), cap = $('.pw-wcap'), pis = $$('.pw-pi', st); const S = { pos: 50, i: 0 };
     function setPos(p) { S.pos = clamp(p, 0, 100); pis.forEach((pi) => { pi.lastElementChild.style.clipPath = `inset(0 0 0 ${S.pos}%)`; }); line.style.left = S.pos + '%'; line.setAttribute('aria-valuenow', Math.round(S.pos)); $('.pw-wb').style.opacity = S.pos > 14 ? 1 : 0; $('.pw-wa').style.opacity = S.pos < 86 ? 1 : 0; }
     radios($('.pw-wtabs'), P, (p) => `<b>${esc(p.place.split(',')[0])}</b><span>${esc(p.when)}</span>`, (p, i, user) => { S.i = i; pis.forEach((pi, j) => { pi.hidden = j !== i; }); cap.innerHTML = `<b>${esc(p.place)}</b> · ${esc(p.when)} · Installed: ${esc(p.inst)} · ${esc(p.bl)}: <b>${esc(p.band)}</b>`; if (user) { setPos(50); } }, 0);
-    drag(st, (e) => { const r = st.getBoundingClientRect(); setPos((e.clientX - r.left) / r.width * 100); }, () => { if (S._ct) S._ct(); });
-    line.addEventListener('keydown', (e) => { const k = e.key, d = { ArrowLeft: -5, ArrowRight: 5, PageUp: 20, PageDown: -20 }[k]; if (k === 'Home') { e.preventDefault(); setPos(0); } else if (k === 'End') { e.preventDefault(); setPos(100); } else if (d) { e.preventDefault(); setPos(S.pos + d); } });
+    drag(st, (e) => { const r = st.getBoundingClientRect(); setPos((e.clientX - r.left) / r.width * 100); }, () => { if (S._cpos) S._cpos(); });
+    line.addEventListener('keydown', (e) => { if (S._cpos) S._cpos(); const k = e.key, d = { ArrowLeft: -5, ArrowRight: 5, PageUp: 20, PageDown: -20 }[k]; if (k === 'Home') { e.preventDefault(); setPos(0); } else if (k === 'End') { e.preventDefault(); setPos(100); } else if (d) { e.preventDefault(); setPos(S.pos + d); } });
     setPos(50); let ran = false; onShow.push(() => { if (ran || RM()) return; ran = true; });
     const io = 'IntersectionObserver' in window ? new IntersectionObserver((en) => { en.forEach((x) => { if (x.isIntersecting && !S.shown && shown) { S.shown = true; if (!RM()) { S.pos = 100; setPos(100); tween(S, 'pos', 50, 1500, () => setPos(S.pos)); } io.disconnect(); } }); }, { threshold: .5 }) : null; io && io.observe(st);
   }

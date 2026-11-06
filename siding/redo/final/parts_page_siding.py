@@ -56,13 +56,13 @@ def markup(ctx):
     import parts_vis
     CP = parts_vis.CP
     SP = checks(CP)
-    C = ctx['contact']; cal = ctx['cal']
+    C = K.CONTACT_PAGE; cal = ctx['cal']
     art = lambda f, c, t: K.art(f, c, t)
     bg = lambda a, b, t: f'<div class="ps-bg" aria-hidden="true">{art(a, "ps-far", "psf" + t)}{art(b, "ps-near", "psn" + t)}</div>' if b else f'<div class="ps-bg" aria-hidden="true">{art(a, "ps-far", "psf" + t)}</div>'
     cta = f'<a class="btn key" href="{C}">Book a free inspection<span class="tab">{cal}</span></a><a class="callx ps-call" href="{K.PHONE_HREF}">{ctx["icons"]["phone"]}{K.PHONE}</a>'
     jump = ''.join(f'<li><a href="#{i}"><b>{e(n)}</b><small>{e(d)}</small></a></li>' for i, n, d in [('siding-lap', 'Lap siding', 'HardiePlank 8.25 in boards'), ('siding-board-batten', 'Board and batten', 'Vertical panels and battens'), ('siding-shingle-shake', 'Shingle and shake', 'Gable accents'), ('siding-trim-soffit', 'Trim and soffit', 'Corners, fascia, frieze')])
     texas = ''.join(f'<li class="ps-tx" style="--i:{i}"><svg class="ps-tic" data-ic="{i}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"></svg><b>{e(t)}</b><em>{e(k)}</em><span>{e(d)}</span></li>' for i, (t, k, d) in enumerate(TEXAS))
-    bars = ''.join(f'<button type="button" role="radio" class="ps-bar" data-i="{i}" aria-checked="false" tabindex="{0 if i == 3 else -1}" aria-label="{e(b)}: {c} of 415 priced siding jobs{", median band" if i == 3 else ""}"><i class="ps-bv" style="--h:{c / 107 * 100:.1f}%"><u>{c}</u></i><span>{e(b.replace("–", "–<wbr>"))}</span></button>' for i, (b, c) in enumerate(BANDS))
+    bars = ''.join(f'<button type="button" role="radio" class="ps-bar" data-i="{i}" aria-checked="false" tabindex="{0 if i == 3 else -1}" aria-label="{e(b)}: {c} of 415 priced siding jobs{", median band" if i == 3 else ""}"><i class="ps-bv" style="--h:{c / 107 * 100:.1f}%"><u>{c}</u></i><span>{e(b).replace("–", "–<wbr>")}</span></button>' for i, (b, c) in enumerate(BANDS))
     chips = ''.join(f'<button type="button" role="radio" class="ps-chip" data-c="{i}" aria-checked="false" tabindex="-1">{e(n)}</button>' for i, (n, _, _) in enumerate(CITIES))
     same = ''.join(f'<li class="ps-sm" style="--w:{p}%"><span>{e(n)}</span><u><i></i></u><b>{p}%</b><small>{x} of 415 siding projects</small></li>' for n, p, x in SAME)
     lev = ''.join(f'<li class="ps-lv"><svg class="ps-lic" data-l="{i}" viewBox="0 0 48 48" aria-hidden="true" focusable="false"></svg><b>{e(t)}</b><span>{e(d)}</span></li>' for i, (t, d) in enumerate(LEVERS))
@@ -89,7 +89,7 @@ def markup(ctx):
 <section class="ps-s ps-lap" id="siding-lap" aria-labelledby="ps-lap-h">{bg('try-far.svg', 'try-near.svg', 'b')}
 <div class="ps-in"><header class="ps-hd"><p class="ps-kick">Lap siding · our house standard</p><h2 class="ps-h2" id="ps-lap-h">Lap siding: HardiePlank 8.25 in boards</h2>
 <p class="ps-sub">Overlapping horizontal boards: the classic wood look, in fiber cement made to resist rot, swelling and pests. 301 of our 415 priced jobs used the 8.25 in board.</p></header>
-<div class="ps-lapg"><div class="ps-card ps-stage"><svg class="ps-lapsvg" id="ps-lapsvg" viewBox="0 0 760 520" role="img" aria-label="Lap siding drawn to scale: on the left a cut through three boards with their measurements, on the right a 12 ft wall of courses you can hang with the slider."></svg></div>
+<div class="ps-lapg"><div class="ps-card ps-stage ps-lapst"><svg class="ps-lapsvg" id="ps-lapsvg" viewBox="0 0 300 520" role="img" aria-label="Lap siding drawn to scale: a cut through three boards, with the board width, the exposure and the thickness measured."></svg><svg class="ps-lapsvg" id="ps-lapel" viewBox="268 0 480 520" role="img" aria-label="A 12 ft wall of lap siding courses, 7 inches each, that you can hang with the slider."></svg></div>
 <div class="ps-ctl"><h3 class="ps-h3">Measure the board</h3><div class="ps-seg4" role="radiogroup" aria-label="Which measurement">{dimb}</div>
 <p class="ps-read" id="ps-dimread" aria-live="polite"></p>
 <h3 class="ps-h3">Hang the courses</h3><label class="ps-rng"><span>Courses hung <output id="ps-ncour">20</output></span><input type="range" id="ps-course" min="0" max="20" value="20" aria-describedby="ps-courseh"></label>
@@ -120,7 +120,7 @@ def markup(ctx):
 <section class="ps-s ps-trim" id="siding-trim-soffit" aria-labelledby="ps-trim-h">{bg('services-far.svg', None, 'd')}
 <div class="ps-in"><header class="ps-hd"><p class="ps-kick">The edges where siding meets roof</p><h2 class="ps-h2" id="ps-trim-h">Trim and soffit: corners, fascia, frieze</h2>
 <p class="ps-sub">We replace soffit and fascia, which protect your roof’s edges and your home’s ventilation, usually in the same job as the siding.</p></header>
-<div class="ps-trg"><div class="ps-card ps-stage"><svg class="ps-trsvg" id="ps-trsvg" viewBox="0 0 640 430" role="img" aria-label="A cut through the eave of a house: wall with siding, soffit under the overhang, fascia at the roof edge and trim."></svg></div>
+<div class="ps-trg"><div class="ps-card ps-stage"><svg class="ps-trsvg" id="ps-trsvg" viewBox="0 0 640 430" role="img" aria-label="A cut through the eave of a house: wall with siding, soffit under the overhang, fascia at the roof edge and trim."></svg><p class="ps-note ps-cap">A schematic cut through the eave: roof above, the outside to the right. The green arrows are air for your home’s ventilation. The corner is a plan view.</p></div>
 <div class="ps-ctl"><h3 class="ps-h3">How far does the job go?</h3><div class="ps-seg2" role="radiogroup" aria-label="Scope"><button type="button" role="radio" class="ps-sc" data-m="full" aria-checked="true" tabindex="0"><b>Full wrap</b><small>trim, soffit, fascia</small></button><button type="button" role="radio" class="ps-sc" data-m="faces" aria-checked="false" tabindex="-1"><b>Siding faces only</b><small>edges left alone</small></button></div>
 <h3 class="ps-h3">Look at one part</h3><div class="ps-parts" role="radiogroup" aria-label="Part"><button type="button" role="radio" class="ps-pt" data-p="siding" aria-checked="false" tabindex="-1">Siding faces</button><button type="button" role="radio" class="ps-pt" data-p="soffit" aria-checked="true" tabindex="0">Soffit</button><button type="button" role="radio" class="ps-pt" data-p="fascia" aria-checked="false" tabindex="-1">Fascia</button><button type="button" role="radio" class="ps-pt" data-p="trim" aria-checked="false" tabindex="-1">Corners, trim and frieze</button></div>
 <p class="ps-read ps-readbig" id="ps-trread" aria-live="polite"></p>
@@ -144,7 +144,7 @@ def markup(ctx):
 <div class="ps-card ps-chart"><div class="ps-chtop"><div class="ps-rd" aria-live="polite"><p class="ps-rdk" id="ps-rdk">Median band</p><p class="ps-rdn"><b id="ps-rdb">$10k–$15k</b></p><p class="ps-rdc"><b id="ps-rdc">107</b> of 415 priced jobs</p><p class="ps-rdx" id="ps-rdx"></p></div>
 <div class="ps-cities"><p class="ps-note">Median band by city (priced jobs)</p><div class="ps-chips" role="radiogroup" aria-label="City">{chips}</div><p class="ps-rdcity" id="ps-rdcity" aria-live="polite"></p></div></div>
 <div class="ps-chwrap" data-cur="drag"><div class="ps-mid" aria-hidden="true"><span>Middle half of jobs: $5k–$20k</span></div><div class="ps-bars" id="ps-bars" role="radiogroup" aria-label="Price band, with the number of priced jobs">{bars}</div></div>
-<p class="ps-note">Median band $10k–$15k, also the most common. The middle half of the 415 landed between $5k and $20k. Move across the bars with the pointer, or use the arrow keys.</p></div>
+<p class="ps-note ps-midm">Shaded rows: the middle half of jobs, $5k–$20k.</p><p class="ps-note">Median band $10k–$15k, also the most common. The middle half of the 415 landed between $5k and $20k. Move across the bars with the pointer, or use the arrow keys.</p></div>
 <div class="ps-two"><div class="ps-card ps-card2"><h3 class="ps-h3">Done in the same job</h3><p class="ps-note">Of the 415 priced siding jobs, how often another trade ran on the same job.</p><ul class="ps-same">{same}</ul></div>
 <div class="ps-card ps-card2"><h3 class="ps-h3">Six things that move the price</h3><ol class="ps-levers">{lev}</ol></div></div></div></section>
 

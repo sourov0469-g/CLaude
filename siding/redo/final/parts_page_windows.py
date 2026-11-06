@@ -82,7 +82,7 @@ def img(name):
 
 
 def markup(ctx):
-    pp, COL = check(); cal = ctx['cal']; CT = ctx['contact']
+    pp, COL = check(); cal = ctx['cal']; CT = K.CONTACT_PAGE
     lines = []
     for L in LINES:
         L = dict(L); L['cols'] = [[n, h] for n, h in COL[L['cols']]] if isinstance(L['cols'], str) else [[n, None] for n in L['cols']]
@@ -106,8 +106,8 @@ def markup(ctx):
 <p class="pw-lede">Replacement windows from NT Windows, Pella, Simonton and Andersen, measured, fitted and sealed to each opening.</p>
 <div class="pw-act"><a class="btn key" href="{CT}">Book a free inspection<span class="tab">{cal}</span></a><a class="callx" href="{K.PHONE_HREF}">{ctx['icons']['phone']}{K.PHONE}</a></div>
 <dl class="pw-facts"><div><dt>388</dt><dd>documented window projects</dd></div><div><dt>376</dt><dd>of them with a priced band, 2022–2026</dd></div><div><dt>2 days</dt><dd>on site for most window-only jobs</dd></div><div><dt>Lifetime</dt><dd>workmanship warranty on labor</dd></div></dl></div>
-<figure class="pw-tape" data-cur="drag"><svg class="pw-tsvg" viewBox="0 0 560 500" role="img" aria-label="A wall opening. A tape measure pulled across it; when the tape reaches the far side the new window is set in the opening." focusable="false"></svg>
-<div class="pw-hook" role="slider" tabindex="0" aria-label="Pull the tape across the opening" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Tape not pulled yet"></div>
+<figure class="pw-tape" data-cur="drag"><div class="pw-tw"><svg class="pw-tsvg" viewBox="0 0 560 500" role="img" aria-label="A wall opening. A tape measure pulled across it; when the tape reaches the far side the new window is set in the opening." focusable="false"></svg>
+<div class="pw-hook" role="slider" tabindex="0" aria-label="Pull the tape across the opening" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Tape not pulled yet"></div></div>
 <figcaption class="pw-cap" aria-live="polite"><span class="pw-capt">Pull the tape across the opening.</span> <button type="button" class="pw-btn pw-again" hidden>Measure again</button></figcaption></figure></div></section>
 
 <section class="pw-sec pw-parts" id="pw-parts" aria-labelledby="pw-parts-h"><div class="pw-in"><header class="pw-hd"><p class="pw-eye">The unit, part by part</p><h2 class="pw-h" id="pw-parts-h">Pull a window apart.</h2>
@@ -135,10 +135,10 @@ def markup(ctx):
 
 <section class="pw-sec pw-price" id="pw-price" aria-labelledby="pw-price-h"><div class="pw-bg" aria-hidden="true">{K.art('visualiser-far.svg', 'pw-art-far', 'pwg')}</div><div class="pw-in"><header class="pw-hd"><p class="pw-eye">Real project pricing · 2022–2026</p><h2 class="pw-h" id="pw-price-h">Where 376 priced window jobs landed.</h2>
 <p class="pw-p">The windows portion of each job: materials and labor, before discounts, excluding tax. A documented sample of our work, not every job since 2009. Move across the bars.</p></header>
-<div class="pw-pgrid"><div class="pw-chart" data-cur="drag"><div class="pw-bars" role="slider" tabindex="0" aria-label="Price band" aria-valuemin="0" aria-valuemax="11"></div><p class="pw-read" aria-live="polite"></p></div>
+<div class="pw-pgrid"><div class="pw-pleft"><div class="pw-chart" data-cur="drag"><p class="pw-read" aria-live="polite"></p><div class="pw-bars" role="slider" tabindex="0" aria-label="Price band" aria-valuemin="0" aria-valuemax="11"></div></div>
+<div class="pw-same"><h3 class="pw-h3">What else got done in the same job</h3><p class="pw-sm">Share of the 376 priced window jobs where another trade ran on the same job.</p><div class="pw-srow"></div></div></div>
 <div class="pw-side"><h3 class="pw-h3">Median band, by maker</h3><p class="pw-sm">Priced window jobs, by the line actually installed. Choose one to mark its median band.</p><div class="pw-chips" role="radiogroup" aria-label="Maker"></div>
-<h3 class="pw-h3">By city</h3><div class="pw-cities"></div></div></div>
-<div class="pw-same"><h3 class="pw-h3">What else got done in the same job</h3><p class="pw-sm">Share of the 376 priced window jobs where another trade ran on the same job.</p><div class="pw-srow"></div></div></div></section>
+<h3 class="pw-h3">By city</h3><div class="pw-cities"></div></div></div></div></section>
 
 <section class="pw-sec pw-pairs" id="pw-pairs" aria-labelledby="pw-pairs-h"><div class="pw-bg" aria-hidden="true">{K.art('reviews-far.svg', 'pw-art-far', 'pwh')}</div><div class="pw-in"><header class="pw-hd"><p class="pw-eye">Before and after</p><h2 class="pw-h" id="pw-pairs-h">Same houses, new windows.</h2>
 <p class="pw-p">Four of our window jobs, each shot before we started and after we finished. Drag across the photo, or use the arrow keys.</p></header>
